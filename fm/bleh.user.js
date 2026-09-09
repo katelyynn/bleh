@@ -38833,12 +38833,14 @@ var bleh = (() => {
       name: get_language_name("pl"),
       by: [
         "zaktusii",
-        "iwas15with100k"
+        "iwas15with100k",
+        "P0kahontaz",
+        "livia09_"
       ],
-      last_updated: "2025-12-12"
+      last_updated: "2026-08-25"
     },
     pt: {
-      name: "portugu\xEAs brasileiro",
+      name: get_language_name("pt"),
       by: [
         "ArthRMH",
         "satisfeita",
@@ -38846,9 +38848,9 @@ var bleh = (() => {
         "urwq",
         "anjoskron",
         "foognocchie",
-        "Suburbanno"
+        "suburbanno"
       ],
-      last_updated: "2026-07-27"
+      last_updated: "2026-08-01"
     },
     sv: {
       name: get_language_name("sv"),
@@ -39062,6 +39064,7 @@ var bleh = (() => {
           es: "Graduado",
           sv: "Alumn",
           ru: "\u0412\u044B\u043F\u0443\u0441\u043A\u043D\u0438\u043A",
+          pl: "Absolwent",
           pt: "Formado",
           zh: "\u5F80\u5C4A\u6210\u5458",
           tr: "Mezun"
@@ -39183,6 +39186,7 @@ var bleh = (() => {
           es: "Reservado",
           it: "Riservato",
           pt: "Reservado",
+          pl: "Zarezerwowany",
           sv: "Exklusiv",
           ru: "\u0417\u0430\u0440\u0435\u0437\u0435\u0440\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
           zh: "\u4E13\u5C5E"
@@ -39205,23 +39209,29 @@ var bleh = (() => {
     },
     badge_types: {
       reserved: {
-        en: "This badge is specially reserved"
+        en: "This badge is specially reserved for {u}",
+        pt: "Este emblema \xE9 especialmente reservado para {u}",
+        pl: "Ta odznaka jest specjalnie dla Ciebie {u}"
       },
       cute: {
         en: "The creator of bleh",
-        pt: "A criadora do bleh"
+        pt: "A criadora do bleh",
+        pl: "Tw\xF3rca bleh"
       },
       sponsor: {
         en: "{u} sponsors the development of bleh",
-        pt: "{u} apoia o desenvolvimento do bleh"
+        pt: "{u} apoia o desenvolvimento do bleh",
+        pl: "{u} wspiera rozw\xF3j bleh"
       },
       contributor: {
         en: "{u} contributed to the development of bleh",
-        pt: "{u} contribuiu para o desenvolvimento do bleh"
+        pt: "{u} contribuiu para o desenvolvimento do bleh",
+        pl: "{u} przyczynili si\u0119 do rozwoju bleh"
       },
       translation: {
         en: "{u} helped in translating bleh",
-        pt: "{u} ajudou na tradu\xE7\xE3o do bleh"
+        pt: "{u} ajudou na tradu\xE7\xE3o do bleh",
+        pl: "{u} pomogli t\u0142umaczy\u0107 bleh"
       }
     },
     requires_higher_bleh_version: {
@@ -39298,7 +39308,7 @@ var bleh = (() => {
       pt: "Enviar rapidamente com {kbd}",
       sv: "Skicka snabbt med {kbd}",
       ru: "\u0411\u044B\u0441\u0442\u0440\u0430\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u043F\u043E {kbd}",
-      pl: "Wy\u015Bli szybko u\u017Cywaj\u0105c {kbd}",
+      pl: "Wy\u015Blij szybko u\u017Cywaj\u0105c {kbd}",
       zh: "\u4F7F\u7528 {kbd} \u5FEB\u901F\u53D1\u9001",
       tr: "{kbd} ile h\u0131zl\u0131ca g\xF6nder"
     },
@@ -39324,7 +39334,7 @@ var bleh = (() => {
       pt: "Falha ao enviar",
       sv: "Gick inte att skicka",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
-      pl: "B\u0142\u0105d wysy\u0142ania",
+      pl: "B\u0142\u0105d przy wysy\u0142aniu",
       zh: "\u53D1\u9001\u5931\u8D25",
       tr: "G\xF6nderilemedi"
     },
@@ -39337,7 +39347,7 @@ var bleh = (() => {
       pt: "Enviado",
       sv: "Skickat",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E",
-      pl: "Wy\u015Bli",
+      pl: "Wys\u0142ano",
       zh: "\u5DF2\u53D1\u9001",
       tr: "G\xF6nderildi"
     },
@@ -39350,7 +39360,7 @@ var bleh = (() => {
       pt: "visualizando uma mensagem",
       sv: "visar en enda hojtning",
       ru: "\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0433\u043E \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u044F",
-      pl: "wy\u015Bwiatlanie jednej wiadomo\u015Bci",
+      pl: "Wy\u015Bwietlanie jednej wiadomo\u015Bci",
       zh: "\u6B63\u5728\u67E5\u770B\u5355\u6761\u7559\u8A00",
       tr: "Tek bir yorum g\xF6r\xFCnt\xFCleniyor"
     },
@@ -39428,7 +39438,8 @@ var bleh = (() => {
       en: "Read less",
       pt: "Ler menos",
       es: "Leer menos",
-      it: "Leggi meno"
+      it: "Leggi meno",
+      pl: "Czytaj mniej"
     },
     refresh: {
       en: "Refresh",
@@ -39503,7 +39514,7 @@ var bleh = (() => {
       pt: "Definir como obsess\xE3o",
       sv: "St\xE4ll in som besatthet",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u043A\u0430\u043A \u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0441\u0442\u044C",
-      pl: "Daj jako obsesj\u0119",
+      pl: "Ustaw jako obsesj\u0119",
       tr: "Tutkunu ayarla"
     },
     obsession_first: {
@@ -39514,7 +39525,7 @@ var bleh = (() => {
       pt: "Primeiro(a) a ter esta obsess\xE3o!",
       sv: "Den f\xF6rsta personen att bli besatt av denna!",
       ru: "\u041F\u0435\u0440\u0432\u044B\u0439, \u043A\u0442\u043E \u043E\u0434\u0435\u0440\u0436\u0438\u043C \u044D\u0442\u043E\u0439 \u043F\u0435\u0441\u043D\u0435\u0439!",
-      pl: "Pierwsi do ustawienia tej obsesji!",
+      pl: "Pierwszy w ustawieniu tej obsesji!",
       zh: "\u4F60\u662F\u9996\u4F4D\u5C06\u6B64\u8BBE\u4E3A\u70ED\u64AD\u5355\u66F2\u7684\u4EBA\uFF01",
       tr: "Bu tutkuyu ilk sahiplenen!"
     },
@@ -39566,7 +39577,8 @@ var bleh = (() => {
         ru: "\u0412\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0435\u0441\u043E\u0432\u043F\u0430\u0434\u0430\u044E\u0449\u0438\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B",
         pt: "Em vez disso, mostre itens que voc\xEA n\xE3o compartilha",
         zh: "\u6539\u4E3A\u663E\u793A\u53CC\u65B9\u672A\u5171\u6709\u7684\u9879\u76EE",
-        tr: "Payla\u015Fmad\u0131\u011F\u0131n\u0131z \xF6\u011Feleri g\xF6ster"
+        tr: "Payla\u015Fmad\u0131\u011F\u0131n\u0131z \xF6\u011Feleri g\xF6ster",
+        pl: "Zamiast tego poka\u017C rzeczy, kt\xF3rych nie udost\u0119pniasz"
       }
     },
     one_page: {
@@ -39591,7 +39603,7 @@ var bleh = (() => {
       pt: "{c} p\xE1ginas",
       sv: "{c} sidor",
       ru: "{c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446",
-      pl: "{c} stron",
+      pl: "{c} strony",
       zh: "{c} \u9875",
       tr: "{c} sayfa"
     },
@@ -39628,7 +39640,7 @@ var bleh = (() => {
       pt: "Outros em destaque",
       sv: "G\xE4startister",
       ru: "\u0414\u0440\u0443\u0433\u0438\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438",
-      pl: "Inni z udzia\u0142em",
+      pl: "Inni wyst\u0119puj\u0105cy",
       zh: "\u5176\u4ED6\u5BA2\u4E32\u827A\u672F\u5BB6",
       tr: "Di\u011Fer \xF6ne \xE7\u0131kanlar"
     },
@@ -39641,7 +39653,7 @@ var bleh = (() => {
       pt: "Seus scrobbles",
       sv: "Dina skrobblingar",
       ru: "\u0412\u0430\u0448\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B",
-      pl: "Twoje scrobble",
+      pl: "Twoje scrobbles",
       zh: "\u4F60\u7684 Scrobble \u8BB0\u5F55",
       tr: "Skroplamalar\u0131n"
     },
@@ -39668,7 +39680,7 @@ var bleh = (() => {
       pt: "Reprodu\xE7\xF5es",
       sv: "Spelningar",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
-      pl: "Ods\u0142uchania",
+      pl: "Odtworzenia",
       zh: "\u64AD\u653E\u6B21\u6570",
       tr: "skroplama"
     },
@@ -39730,7 +39742,8 @@ var bleh = (() => {
       ru: "\u0411\u043B\u0438\u0437\u043A\u0438\u0435 \u0434\u0440\u0443\u0437\u044C\u044F",
       es: "Amigos cercanos",
       it: "Amici stretti",
-      tr: "Yak\u0131n arkada\u015Flar"
+      tr: "Yak\u0131n arkada\u015Flar",
+      pl: "Bliscy znajomi"
     },
     friends: {
       en: "Friends",
@@ -39764,7 +39777,8 @@ var bleh = (() => {
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "A\xF1adir amigos cercanos",
       it: "Aggiungi amici stretti",
-      tr: "Yak\u0131n arkada\u015Flara ekle"
+      tr: "Yak\u0131n arkada\u015Flara ekle",
+      pl: "Dodaj znajomych"
     },
     edit_close_friends: {
       en: "Edit close friends",
@@ -39773,7 +39787,8 @@ var bleh = (() => {
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "Editar amigos cercanos",
       it: "Modifica amici stretti",
-      tr: "Yak\u0131n arkada\u015Flar\u0131 d\xFCzenle"
+      tr: "Yak\u0131n arkada\u015Flar\u0131 d\xFCzenle",
+      pl: "Edytuj bliskich znajomych"
     },
     starred_friend: {
       name: {
@@ -39785,7 +39800,7 @@ var bleh = (() => {
         pt: "Amigo(a) favorito(a)",
         sv: "Stj\xE4rnm\xE4rkt v\xE4n",
         ru: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0434\u0440\u0443\u0433",
-        pl: "Znajomi oznaczeni jako ulubieni",
+        pl: "Ulubieni znajomi",
         zh: "\u7279\u522B\u5173\u6CE8",
         tr: "Y\u0131ld\u0131zlanm\u0131\u015F arkada\u015Flar"
       },
@@ -39797,7 +39812,7 @@ var bleh = (() => {
         pt: "Veja os scrobbles dele(a) junto aos seus o tempo todo",
         sv: "Se deras skrobblingar bredvid dina hela tiden",
         ru: "\u041F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0438\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u0432\u0430\u0448\u0438\u043C\u0438",
-        pl: "Zawsze wy\u015Bwietlaj ich scrobble \u0142\u0105cznie z twoimi",
+        pl: "Zawsze wy\u015Bwietlaj ich scrobbles \u0142\u0105cznie z twoimi",
         zh: "\u968F\u65F6\u5C06\u4ED6\u4EEC\u7684 Scrobble \u8BB0\u5F55\u4E0E\u4F60\u7684\u5E76\u5217\u663E\u793A",
         tr: "Her zaman benim skroplamalar\u0131mla g\xF6r\xFCnt\xFCle"
       },
@@ -39809,7 +39824,7 @@ var bleh = (() => {
         pt: "N\xE3o est\xE1 encontrando as op\xE7\xF5es que voc\xEA quer? Preencha sua lista de amigos nas configura\xE7\xF5es.",
         sv: "Ser du inte inst\xE4llningar du letar efter? Fyll upp din v\xE4nlista i inst\xE4llningarna.",
         ru: "\u041D\u0435 \u0432\u0438\u0434\u0438\u0442\u0435 \u043D\u0443\u0436\u043D\u044B\u0445 \u043E\u043F\u0446\u0438\u0439? \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445.",
-        pl: "Nie ma czego szukasz? Wype\u0142ni swoj\u0105 liste znajomych w ustawieniach.",
+        pl: "Nie ma czego szukasz? Wype\u0142nij swoj\u0105 list\u0119 znajomych w ustawieniach.",
         zh: "\u6CA1\u6709\u770B\u5230\u60F3\u8981\u7684\u9009\u9879\uFF1F\u8BF7\u5728\u8BBE\u7F6E\u4E2D\u5B8C\u5584\u4F60\u7684\u597D\u53CB\u5217\u8868\u3002",
         tr: "Arad\u0131\u011F\u0131n se\xE7enekleri g\xF6remiyor musun? Ayarlarda arkada\u015F listeni doldurmay\u0131 dene."
       }
@@ -39821,7 +39836,8 @@ var bleh = (() => {
       ru: "\u0411\u043B\u0438\u0437\u043A\u0438\u0435 \u0434\u0440\u0443\u0437\u044C\u044F - \u044D\u0442\u043E \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439 \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0441\u043F\u0438\u0441\u043E\u043A \u0432\u0430\u0448\u0438\u0445 \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A.",
       es: "Amigos cercanos es un sistema de bleh que te permite estar al d\xEDa con el historial de escucha de tus amigos, no afecta tu lista de seguidos.",
       it: "Gli amici stretti sono un sistema di bleh che ti permette di rimanere aggiornato sulla cronologia di ascolto dei tuoi amici, senza influenzare la tua lista di follower.",
-      tr: "Yak\u0131n arkada\u015Flar, arkada\u015Flar\u0131n\u0131n dinleme ge\xE7mi\u015Fini takipte kalman\u0131 yarayan bir bleh sistemidir. Takip ettiklerin\u2019e de\u011Fi\u015Fiklikte bulunmaz."
+      tr: "Yak\u0131n arkada\u015Flar, arkada\u015Flar\u0131n\u0131n dinleme ge\xE7mi\u015Fini takipte kalman\u0131 yarayan bir bleh sistemidir. Takip ettiklerin\u2019e de\u011Fi\u015Fiklikte bulunmaz.",
+      pl: "Bliscy znajomi to system, kt\xF3ry pozwala \u015Bledzi\u0107 histori\u0119 odtwarzania utwor\xF3w przez znajomych, ale nie ma wp\u0142ywu na list\u0119 obserwowanych."
     },
     friend_difference_min: {
       en: "bleh-only",
@@ -39830,7 +39846,8 @@ var bleh = (() => {
       ru: "\u0442\u043E\u043B\u044C\u043A\u043E \u0432 bleh",
       es: "Solo en bleh",
       it: "solo su bleh",
-      tr: "bleh\u2019e \xF6zel"
+      tr: "bleh\u2019e \xF6zel",
+      pl: "Tylko bleh"
     },
     add_as_friend: {
       en: "Add as close friend",
@@ -39839,7 +39856,8 @@ var bleh = (() => {
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "A\xF1adir como amigo cercano",
       it: "Aggiungi come amico stretto",
-      tr: "Yak\u0131n arkada\u015F olarak ekle"
+      tr: "Yak\u0131n arkada\u015F olarak ekle",
+      pl: "Dodaj jako bliskiego znajomego"
     },
     remove_friend: {
       name: {
@@ -39849,7 +39867,8 @@ var bleh = (() => {
         ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
         es: "Remover amigo cercano",
         it: "Rimuovi amico stretto",
-        tr: "Yak\u0131n arkada\u015Fl\u0131ktan \xE7\u0131kar"
+        tr: "Yak\u0131n arkada\u015Fl\u0131ktan \xE7\u0131kar",
+        pl: "Usu\u0144 bliskiego znajomego"
       },
       body: {
         en: "Continue removing {u} as a close friend? (bleh-only)",
@@ -39857,7 +39876,8 @@ var bleh = (() => {
         de: "M\xF6chtest du {u} weiterhin als engen Freund entfernen? (bleh-spezifisch)",
         ru: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0435 {u} \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439? (\u0442\u043E\u043B\u044C\u043A\u043E \u0432 bleh)",
         es: "\xBFContinuar y remover a {u} como amigo cercano? (Solo en bleh)",
-        it: "Vuoi continuare a rimuovere {u} come amico stretto? (solo su bleh)"
+        it: "Vuoi continuare a rimuovere {u} come amico stretto? (solo su bleh)",
+        pl: "Czy dalej chcesz usun\u0105\u0107 {u} z listy bliskich znajomych? (tylko \u201Ebleh\u201D)"
       }
     },
     added_as_friend: {
@@ -39867,7 +39887,8 @@ var bleh = (() => {
       ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0432 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "Amigo cercano a\xF1adido",
       it: "Amico stretto aggiunto",
-      tr: "Yak\u0131n arkada\u015F eklendi"
+      tr: "Yak\u0131n arkada\u015F eklendi",
+      pl: "Dodano jako bliskiego znajomego"
     },
     removed_friend: {
       en: "Removed close friend",
@@ -39876,7 +39897,8 @@ var bleh = (() => {
       ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u044B \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "Amigo cercano removido",
       it: "Amico stretto rimosso",
-      tr: "Yak\u0131n arkada\u015Fl\u0131ktan \xE7\u0131kar\u0131ld\u0131"
+      tr: "Yak\u0131n arkada\u015Fl\u0131ktan \xE7\u0131kar\u0131ld\u0131",
+      pl: "Usuni\u0119to bliskiego znajomego"
     },
     added_star: {
       en: "Added star status",
@@ -39930,7 +39952,7 @@ var bleh = (() => {
       pt: "vulgo",
       sv: "ocks\xE5 k\xE4nd som",
       ru: "\u043E\u043D \u0436\u0435",
-      pl: "znani r\xF3wnie\u017C jako",
+      pl: "Znani r\xF3wnie\u017C jako",
       zh: "\u53C8\u540D"
     },
     account_pronouns: {
@@ -39942,7 +39964,7 @@ var bleh = (() => {
       pt: "Pronomes",
       sv: "Pronomen",
       ru: "\u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F",
-      pl: "zaimki",
+      pl: "Zaimki",
       zh: "\u4EE3\u8BCD"
     },
     account_creation: {
@@ -39953,7 +39975,8 @@ var bleh = (() => {
       ru: "\u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430",
       es: "Fecha de creaci\xF3n de cuenta",
       it: "Data di creazione dell\u2019account",
-      ja: "\u30A2\u30AB\u30A6\u30F3\u30C8\u4F5C\u6210\u65E5"
+      ja: "\u30A2\u30AB\u30A6\u30F3\u30C8\u4F5C\u6210\u65E5",
+      pl: "Data utworzenia konta"
     },
     account_scrobbling_since_replace: {
       // copy this from last.fm 1:1 (including the space at the end if there)
@@ -40050,7 +40073,7 @@ var bleh = (() => {
       pt: "{c} scrobbles",
       sv: "{c} skrobblingar",
       ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
-      pl: "{c} odtworze\u0144",
+      pl: "{c} Scrobbles",
       zh: "{c} \u6B21\u64AD\u653E"
     },
     count_tracks: {
@@ -40060,7 +40083,8 @@ var bleh = (() => {
       de: "{c} Titel",
       ru: "{c} \u0442\u0440\u0435\u043A\u043E\u0432",
       es: "{c} temas",
-      it: "{c} tracce"
+      it: "{c} tracce",
+      pl: "{c} utwor\xF3w"
     },
     count_scrobbles: {
       en: "{c} scrobbles",
@@ -40083,6 +40107,7 @@ var bleh = (() => {
       sv: "skrobblingar",
       ru: "\u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
       zh: "\u97F3\u4E50\u8BB0\u5F55",
+      pl: "Scrobbles",
       count: {
         en: "{c} listens",
         de: "{c} Scrobbles",
@@ -40091,7 +40116,8 @@ var bleh = (() => {
         pt: "{c} scrobbles",
         sv: "{c} skrobblingar",
         ru: "{c} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
-        zh: "{c} \u6B21\u64AD\u653E"
+        zh: "{c} \u6B21\u64AD\u653E",
+        pl: "{c} Scrobbles"
       }
     },
     new_scrobble: {
@@ -40113,7 +40139,7 @@ var bleh = (() => {
       de: "Scrobble konnte nicht gesendet werden",
       sv: "Skrobblingen kunde inte skickas",
       ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B",
-      pl: "Nie uda\u0142o si\u0119 wys\u0142a\u0107 scrobbla",
+      pl: "Nie uda\u0142o si\u0119 wys\u0142a\u0107 scrobble",
       zh: "\u65E0\u6CD5\u53D1\u9001 Scrobble"
     },
     scrobble_error_codes: {
@@ -40126,7 +40152,7 @@ var bleh = (() => {
         pt: "O nome do(a) artista foi ignorado",
         sv: "Artistnamnet var ignorerad",
         ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
-        pl: "Imie artysty zignorowane",
+        pl: "Imi\u0119 artysty zignorowane",
         zh: "\u827A\u672F\u5BB6\u540D\u79F0\u88AB\u5FFD\u7565"
       },
       2: {
@@ -40148,7 +40174,7 @@ var bleh = (() => {
         pt: "O timestamp \xE9 muito antigo",
         sv: "Tidsst\xE4mpeln \xE4r f\xF6r gammal",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430 \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0441\u0442\u0430\u0440\u0430\u044F",
-        pl: "Timestamp jest za stary",
+        pl: "Timestamp jest zbyt stary",
         zh: "\u65F6\u95F4\u6233\u8FC7\u65E9"
       },
       4: {
@@ -40170,7 +40196,7 @@ var bleh = (() => {
         pt: "Limite di\xE1rio de scrobbles excedido",
         sv: "Max dagliga skrobblingar har n\xE5tts",
         ru: "\u041F\u0440\u0435\u0432\u044B\u0448\u0435\u043D \u0434\u043D\u0435\u0432\u043D\u043E\u0439 \u043B\u0438\u043C\u0438\u0442 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
-        pl: "Przekroczono dzienny limit scrobbli",
+        pl: "Przekroczono dzienny limit scrobbles",
         zh: "\u5DF2\u8D85\u51FA\u6BCF\u65E5 Scrobble \u4E0A\u9650"
       }
     },
@@ -40206,7 +40232,7 @@ var bleh = (() => {
       pt: "M\xFAltiplos artistas est\xE3o agrupados neste perfil",
       sv: "Flera artister delar denna profil",
       ru: "\u0412 \u044D\u0442\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u0441\u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439",
-      pl: "Paru artyst\xF3w ugrupowano na ten profil",
+      pl: "Wielu artyst\xF3w ugrupowano na ten profil",
       zh: "\u8BE5\u8D44\u6599\u9875\u6C47\u603B\u4E86\u591A\u4F4D\u827A\u672F\u5BB6\u7684\u4FE1\u606F"
     },
     album: {
@@ -40374,7 +40400,7 @@ var bleh = (() => {
         pt: "Quando o seu sistema indica tema escuro",
         sv: "N\xE4r ditt system rapporterar ett m\xF6rk tema",
         ru: "\u041A\u043E\u0433\u0434\u0430 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0442\u0451\u043C\u043D\u0430\u044F \u0442\u0435\u043C\u0430",
-        pl: "Jak w systemie jest wybran ciemny motyw",
+        pl: "Jak w systemie jest wybrany ciemny motyw",
         zh: "\u5F53\u7CFB\u7EDF\u5904\u4E8E\u6DF1\u8272\u4E3B\u9898\u65F6\u5E94\u7528"
       }
     },
@@ -40439,7 +40465,7 @@ var bleh = (() => {
         pt: "Cinza",
         sv: "Aska",
         ru: "\u041F\u0435\u043F\u0435\u043B",
-        pl: "Kurz",
+        pl: "Popi\xF3\u0142",
         zh: "\u70DF\u7070"
       },
       darker: {
@@ -40463,7 +40489,7 @@ var bleh = (() => {
         pt: "Vazio",
         sv: "Tomhet",
         ru: "\u041F\u0443\u0441\u0442\u043E\u0442\u0430",
-        pl: "Pr\xF3\u017Cny",
+        pl: "Otch\u0142a\u0144",
         zh: "\u865A\u7A7A"
       },
       rose_pine: {
@@ -40535,7 +40561,7 @@ var bleh = (() => {
       pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema.",
       sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system.",
       ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B.",
-      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu.",
+      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, wed\u0142ug ustawie\u0144 twojego systemu.",
       zh: "\u5C06\u6839\u636E\u7CFB\u7EDF\u8BBE\u7F6E\uFF0C\u4E3A\u60A8\u5E94\u7528 {day} \u6216 {night}\u3002"
     },
     change_schedule: {
@@ -40559,7 +40585,8 @@ var bleh = (() => {
         de: "\xC4ndere meine Akzentfarbe f\xFCr",
         es: "Cambiar mi color de acento al",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0442\u044C \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u0434\u043B\u044F",
-        it: "Cambia il colore di evidenziazione per"
+        it: "Cambia il colore di evidenziazione per",
+        pl: "Zmie\u0144 m\xF3j kolor akcentu gdy"
       },
       body: {
         en: "Temporarily override your selected accent to match artwork",
@@ -40567,7 +40594,8 @@ var bleh = (() => {
         de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, um mit dem Cover \xFCbereinzustimmen",
         es: "Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438",
-        it: "Sostituisci temporaneamente l\u2019accento selezionato per adattarlo all\u2019immagine"
+        it: "Sostituisci temporaneamente l\u2019accento selezionato per adattarlo all\u2019immagine",
+        pl: "Tymczasowo zast\u0105p wybrany akcent, aby dopasowa\u0107 go do grafiki"
       }
     },
     viewing_albums: {
@@ -40577,7 +40605,8 @@ var bleh = (() => {
       de: "Albumansicht",
       es: "Ver \xE1lbumes",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
-      it: "Visualizza album"
+      it: "Visualizza album",
+      pl: "Przegl\u0105dasz albumy"
     },
     viewing_tracks: {
       // a sub-option for change_my_colour_when
@@ -40586,7 +40615,8 @@ var bleh = (() => {
       de: "K\xFCnstleransicht",
       es: "Ver artistas",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
-      it: "Visualizza artisti"
+      it: "Visualizza artisti",
+      pl: "Przegl\u0105dasz artyst\xF3w"
     },
     viewing_artists: {
       // a sub-option for change_my_colour_when
@@ -40595,7 +40625,8 @@ var bleh = (() => {
       de: "Titelansicht",
       es: "Ver temas",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0442\u0440\u0435\u043A\u043E\u0432",
-      it: "Visualizza brani"
+      it: "Visualizza brani",
+      pl: "Przegl\u0105dasz utwory"
     },
     colourful_active: {
       // a sub-option for change_my_colour_when
@@ -40604,7 +40635,8 @@ var bleh = (() => {
       de: "Scrobbeln eines Titels",
       es: "Hacer scrobbling a un tema",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430",
-      it: "Scrobblare una traccia"
+      it: "Scrobblare una traccia",
+      pl: "Scrobblujesz utwory"
     },
     colourful_all: {
       // a sub-option for change_my_colour_when
@@ -40613,7 +40645,8 @@ var bleh = (() => {
       de: "Alle Titellisten",
       es: "Ver listas de temas",
       ru: "\u0412\u0441\u0435 \u0441\u043F\u0438\u0441\u043A\u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
-      it: "Tutte le tracklist"
+      it: "Tutte le tracklist",
+      pl: "Wszystkie listy utwor\xF3w"
     },
     configure: {
       en: "Configure",
@@ -40704,7 +40737,8 @@ var bleh = (() => {
       pt: "Geral",
       sv: "Generellt",
       ru: "\u041E\u0431\u0449\u0438\u0435",
-      zh: "\u901A\u7528"
+      zh: "\u901A\u7528",
+      pl: "Generalne"
     },
     interface: {
       en: "Interface",
@@ -40749,7 +40783,8 @@ var bleh = (() => {
       pt: "Reprodu\xE7\xE3o",
       sv: "Uppspelning",
       ru: "\u0412\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u0435",
-      zh: "\u64AD\u653E"
+      zh: "\u64AD\u653E",
+      pl: "Odtwarzanie"
     },
     profile: {
       en: "Profile",
@@ -40849,7 +40884,8 @@ var bleh = (() => {
         summer: {
           en: "Summer",
           pt: "Ver\xE3o",
-          es: "Verano"
+          es: "Verano",
+          pl: "Lato"
         },
         halloween: {
           en: "Halloween",
@@ -40907,7 +40943,7 @@ var bleh = (() => {
           pt: "Ano Novo",
           sv: "Ny\xE5r",
           ru: "\u041D\u043E\u0432\u044B\u0439 \u0433\u043E\u0434",
-          pl: "Sylwester",
+          pl: "Nowy rok",
           zh: "\u65B0\u5E74"
         }
       },
@@ -40920,7 +40956,7 @@ var bleh = (() => {
         pt: "Abrir o contador ao vivo",
         sv: "\xD6ppna live-nedr\xE4kningen",
         ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043E\u0442\u0441\u0447\u0451\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
-        pl: "Otw\xF3rz licznik aktualizaj\u0105cy si\u0119 na \u017Cywo"
+        pl: "Otw\xF3rz licznik na \u017Cywo"
       },
       live: {
         // used as a status when the timer is counting down live
@@ -40968,7 +41004,8 @@ var bleh = (() => {
           sv: "Mistel",
           pt: "Visco",
           ru: "\u041E\u043C\u0435\u043B\u0430",
-          zh: "\u69F2\u5BC4\u751F"
+          zh: "\u69F2\u5BC4\u751F",
+          pl: "Jemio\u0142a"
         },
         festival: {
           en: "Christmas Eve",
@@ -41014,7 +41051,7 @@ var bleh = (() => {
       it: "{v} termina {time}",
       ru: "{v} \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F {time}",
       pt: "{v} termina {time}",
-      pl: "{v} ko\u0144cz si\u0119 za {time}",
+      pl: "{v} ko\u0144czy si\u0119 za {time}",
       zh: "{v} \u5C06\u4E8E {time} \u540E\u7ED3\u675F"
     },
     seasonal_timeline: {
@@ -41115,7 +41152,7 @@ var bleh = (() => {
       pt: "Eventos sazonais s\xE3o realizados em seu fuso hor\xE1rio, que calculamos como {offset}",
       sv: "\xC5rstidsevenemang h\xE5lls i din tidszon, som vi r\xE4knade ut vara {offset}",
       ru: "\u0421\u0435\u0437\u043E\u043D\u043D\u044B\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \u043F\u0440\u043E\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0447\u0430\u0441\u043E\u0432\u043E\u043C\u0443 \u043F\u043E\u044F\u0441\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u044B \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u043B\u0438 \u043A\u0430\u043A {offset}",
-      pl: "Sezonowe wydarzenia odbywaj\u0105 si\u0119 w twojej strefie czasowej, kt\xF3r\u0105 liczymy jako {offset}",
+      pl: "Sezonowe wydarzenia odbywaj\u0105 si\u0119 w twojej strefie czasowej, kt\xF3r\u0105 obliczyli\u015Bmy jako {offset}",
       zh: "\u65F6\u4EE4\u6D3B\u52A8\u5C06\u6839\u636E\u60A8\u6240\u5728\u7684\u672C\u5730\u65F6\u533A\u8FD0\u884C\uFF0C\u6211\u4EEC\u6D4B\u7B97\u7684\u504F\u79FB\u91CF\u4E3A {offset}"
     },
     calculated_offset: {
@@ -41127,7 +41164,8 @@ var bleh = (() => {
       pt: "Offset calculado com base no fuso hor\xE1rio",
       sv: "F\xF6rskjutning kalkylerats fr\xE5n tidszon",
       ru: "\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0435 \u0441\u043C\u0435\u0449\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0447\u0430\u0441\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u044F\u0441\u0430",
-      zh: "\u6839\u636E\u65F6\u533A\u6D4B\u7B97\u7684\u504F\u79FB\u91CF"
+      zh: "\u6839\u636E\u65F6\u533A\u6D4B\u7B97\u7684\u504F\u79FB\u91CF",
+      pl: "Obliczone przesuni\u0119cie na podstawie strefy czasowej"
     },
     started: {
       // season start date
@@ -41165,7 +41203,7 @@ var bleh = (() => {
       pt: "Dia de t\xE9rmino",
       sv: "Slutdatum",
       ru: "\u0414\u0430\u0442\u0430 \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044F",
-      pl: "Ko\u0144czy si\u0119",
+      pl: "Data zako\u0144czenia",
       zh: "\u7ED3\u675F\u65E5\u671F"
     },
     link: {
@@ -41174,7 +41212,8 @@ var bleh = (() => {
       de: "Link",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0430",
       es: "V\xEDnculo",
-      it: "Link"
+      it: "Link",
+      pl: "Link"
     },
     create_link: {
       en: "Create link",
@@ -41182,7 +41221,8 @@ var bleh = (() => {
       de: "Link erstellen",
       es: "Crear v\xEDnculo",
       it: "Crea link",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443",
+      pl: "Stw\xF3rz link"
     },
     text: {
       en: "Text",
@@ -41238,7 +41278,7 @@ var bleh = (() => {
       pt: "Lan\xE7amentos",
       sv: "Skivsl\xE4pp",
       ru: "\u0420\u0435\u043B\u0438\u0437\u044B",
-      pl: "Polecane",
+      pl: "Wydania",
       zh: "\u53D1\u884C"
     },
     no_releases_found: {
@@ -41293,7 +41333,8 @@ var bleh = (() => {
       pt: "Adicionar {v} aos marcadores",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C {v} \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
       es: "Marcar {v}",
-      it: "Segnalibro {v}"
+      it: "Segnalibro {v}",
+      pl: "Zak\u0142adka {v}"
     },
     charts: {
       en: "Charts",
@@ -41304,19 +41345,22 @@ var bleh = (() => {
       ja: "\u30C1\u30E3\u30FC\u30C8",
       sv: "Topplistor",
       ru: "\u0427\u0430\u0440\u0442\u044B",
-      zh: "\u699C\u5355"
+      zh: "\u699C\u5355",
+      pl: "Rankingi"
     },
     charts_for: {
       // date will be directly below this text
       en: "Charts for",
       pt: "Paradas de",
-      es: "Listas del"
+      es: "Listas del",
+      pl: "Rankingi dla"
     },
     weekly_charts: {
       // dates will be directly below this text
       en: "Weekly charts",
       pt: "Paradas semanais",
-      es: "Listas semanales"
+      es: "Listas semanales",
+      pl: "Rankingi tygodniowe"
     },
     view_the_charts: {
       en: "View the charts",
@@ -41326,7 +41370,8 @@ var bleh = (() => {
       ja: "\u30C1\u30E3\u30FC\u30C8\u3092\u898B\u308B",
       pt: "Ver as paradas",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0447\u0430\u0440\u0442\u044B",
-      zh: "\u67E5\u770B\u699C\u5355"
+      zh: "\u67E5\u770B\u699C\u5355",
+      pl: "Zobacz rankingi"
     },
     welcome_back_user: {
       en: "Welcome back {user}!",
@@ -41417,12 +41462,14 @@ var bleh = (() => {
       // user = username
       en: "Hello {u}!",
       pt: "Ol\xE1 {u}!",
-      es: "\xA1Hola {u}!"
+      es: "\xA1Hola {u}!",
+      pl: "Hej {u}!"
     },
     bleh_setup_guide: {
       en: "It\u2019s nice to see you here",
       pt: "\xC9 bom ver voc\xEA por aqui",
-      es: "Es bueno verte aqu\xED"
+      es: "Es bueno verte aqu\xED",
+      pl: "Dobrze Ci\u0119 tu widzie\u0107"
     },
     import: {
       en: "Import",
@@ -41445,7 +41492,7 @@ var bleh = (() => {
       pt: "Falha na importa\xE7\xE3o",
       sv: "Importering misslyckades",
       ru: "\u0421\u0431\u043E\u0439 \u0438\u043C\u043F\u043E\u0440\u0442\u0430",
-      pl: "B\u0142\u0105d importowania",
+      pl: "B\u0142\u0105d w importowaniu",
       zh: "\u5BFC\u5165\u5931\u8D25",
       notice: {
         en: "The settings you attempted to import failed to parse, no changes were made.",
@@ -41540,7 +41587,7 @@ var bleh = (() => {
       pt: "Sua configura\xE7\xE3o vai ser permanentemente restaurada ao padr\xE3o, voc\xEA tem certeza?",
       sv: "\xC4r du s\xE4ker p\xE5 att du vill \xE5terst\xE4lla alla inst\xE4llningar? Det \xE4r permanent.",
       ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0431\u0443\u0434\u0443\u0442 \u0431\u0435\u0437\u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043D\u043E \u0441\u0431\u0440\u043E\u0448\u0435\u043D\u044B, \u0432\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?",
-      pl: "Twoje ustawienia zostan\u0105 permanentnie usuni\u0119te, czy napewno chcesz je zresetowa\u0107?",
+      pl: "Twoje ustawienia zostan\u0105 usuni\u0119te na zawsze, czy napewno chcesz je zresetowa\u0107?",
       zh: "\u8BBE\u7F6E\u5C06\u88AB\u6C38\u4E45\u91CD\u7F6E\u4E14\u4E0D\u53EF\u64A4\u9500\uFF0C\u786E\u5B9A\u8981\u7EE7\u7EED\u5417\uFF1F"
     },
     reset_item_to_default: {
@@ -41564,7 +41611,7 @@ var bleh = (() => {
       pt: "Fa\xE7a um backup",
       sv: "Skapa en backup",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E",
-      pl: "Utw\xF3rz backup",
+      pl: "Utw\xF3rz kopi\u0119 zapasow\u0105",
       zh: "\u521B\u5EFA\u5907\u4EFD"
     },
     news: {
@@ -41588,7 +41635,7 @@ var bleh = (() => {
           pt: "Lan\xE7amento principal",
           sv: "St\xF6rre utg\xE5va",
           ru: "\u041A\u0440\u0443\u043F\u043D\u044B\u0439 \u0440\u0435\u043B\u0438\u0437",
-          pl: "G\u0142owne wydanie",
+          pl: "G\u0142\xF3wne wydanie",
           zh: "\u91CD\u5927\u66F4\u65B0"
         },
         minor: {
@@ -41626,7 +41673,8 @@ var bleh = (() => {
       pt: "Padr\xE3o",
       sv: "Standard",
       ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
-      zh: "\u9ED8\u8BA4"
+      zh: "\u9ED8\u8BA4",
+      pl: "Standardowe"
     },
     avatar: {
       en: "Avatar",
@@ -41647,7 +41695,8 @@ var bleh = (() => {
       de: "Zeige dich in deinem eigenen Stil auf der Webseite",
       ru: "\u041F\u043E\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u0442\u0438\u043B\u044C \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443",
       es: "Pres\xE9ntate con tu propio estilo por todo el sitio",
-      it: "Presentati sul sito con il tuo stile personale"
+      it: "Presentati sul sito con il tuo stile personale",
+      pl: "Zaprezentuj si\u0119 na ca\u0142ej witrynie w swoim w\u0142asnym stylu"
     },
     customise: {
       en: "Customise",
@@ -41670,7 +41719,7 @@ var bleh = (() => {
       pt: "Converter",
       sv: "Konvertera",
       ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
-      pl: "Konwertuj",
+      pl: "Przekszta\u0142\u0107",
       zh: "\u8F6C\u6362"
     },
     convert_from_hex: {
@@ -41682,7 +41731,7 @@ var bleh = (() => {
       pt: "Converter cor",
       sv: "Konvertera f\xE4rg",
       ru: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442",
-      pl: "Konwertuj kolor",
+      pl: "Przekszta\u0142\u0107 kolor",
       zh: "\u989C\u8272\u8F6C\u6362"
     },
     fonts: {
@@ -41716,7 +41765,7 @@ var bleh = (() => {
       it: "Vivacit\xE0",
       ja: "\u9BAE\u3084\u304B\u3055",
       pt: "Vivacidade",
-      pl: "Nasycenie (saturation)",
+      pl: "Nasycenie",
       sv: "F\xE4rgm\xE4ttnad",
       ru: "\u041D\u0430\u0441\u044B\u0449\u0435\u043D\u043D\u043E\u0441\u0442\u044C",
       zh: "\u9C9C\u8273\u5EA6"
@@ -41728,7 +41777,7 @@ var bleh = (() => {
       it: "Luminosit\xE0",
       ja: "\u660E\u308B\u3055",
       pt: "Claridade",
-      pl: "Jasno\u015B\u0107 (lightness)",
+      pl: "Jasno\u015B\u0107",
       sv: "Ljushet",
       ru: "\u042F\u0440\u043A\u043E\u0441\u0442\u044C",
       zh: "\u4EAE\u5EA6"
@@ -41741,7 +41790,8 @@ var bleh = (() => {
       de: "Profil-Akzent global verwenden",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E",
       es: "Usar acento de perfil globalmente",
-      it: "Usa l\u2019accento del profilo globalmente"
+      it: "Usa l\u2019accento del profilo globalmente",
+      pl: "Zastosuj akcent profilu wsz\u0119dzie"
     },
     apply_global_accent: {
       // global accent: the one set in bleh settings
@@ -41751,7 +41801,8 @@ var bleh = (() => {
       de: "Aktuellen Akzent zum Profil kopieren",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
       es: "Copiar acento actual al perfil",
-      it: "Copia l\u2019accento corrente nel profilo"
+      it: "Copia l\u2019accento corrente nel profilo",
+      pl: "Kopiuj obecny akcent do profilu"
     },
     this_will_replace_your_global_accent: {
       // global accent: the one set in bleh settings
@@ -41761,7 +41812,8 @@ var bleh = (() => {
       de: "Dein globaler Akzent (der derzeit verwendete) wird hiermit ersetzt",
       ru: "\u042D\u0442\u043E \u0437\u0430\u043C\u0435\u043D\u0438\u0442 \u0432\u0430\u0448 \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 (\u0442\u043E\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441)",
       es: "Esto reemplazar\xE1 tu acento global (el que est\xE1s usando ahora mismo)",
-      it: "Questo sostituir\xE0 il tuo accento globale (quello attualmente in uso)"
+      it: "Questo sostituir\xE0 il tuo accento globale (quello attualmente in uso)",
+      pl: "To zast\u0105pi tw\xF3j akcent globalny (ten, kt\xF3rego u\u017Cywasz obecnie)"
     },
     solarium: {
       name: {
@@ -41818,7 +41870,7 @@ var bleh = (() => {
         pt: "Traz algumas cores ao mundo (ou diminui elas)",
         sv: "Skaffa lite f\xE4rg i din v\xE4rld (eller minska den)",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u043A\u0440\u0430\u0441\u043E\u043A \u0432 \u0441\u0432\u043E\u0439 \u043C\u0438\u0440 (\u0438\u043B\u0438 \u0443\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u0435 \u0438\u0445)",
-        pl: "Doadaj troche koloru do swojego \u015Bwiata (albo si\u0119 go pozb\u0105d\u017A)"
+        pl: "Dodaj troch\u0119 koloru do swojego \u015Bwiata (albo si\u0119 go pozb\u0105d\u017A)"
       }
     },
     theme_no_saturation_support: {
@@ -41843,7 +41895,7 @@ var bleh = (() => {
         sv: "Till\xE4mpa ett brus\xF6verl\xE4gg f\xF6r lite variation p\xE5 enf\xE4rgade bakgrunder",
         ru: "\u041D\u0430\u043B\u043E\u0436\u0438\u0442\u044C \u0442\u043E\u043D\u043A\u0438\u0439 \u0441\u043B\u043E\u0439 \u0448\u0443\u043C\u0430, \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0440\u0430\u0437\u043D\u043E\u043E\u0431\u0440\u0430\u0437\u0438\u044F \u043E\u0434\u043D\u043E\u0442\u043E\u043D\u043D\u044B\u043C \u0444\u043E\u043D\u0430\u043C",
         pt: "Aplica uma camada de ru\xEDdo sutil para adicionar varia\xE7\xE3o a fundos s\xF3lidos",
-        pl: "Dodaj troche szumum \u017Ceby otrzyma\u0107 nasycenie na statycznych t\u0142ach"
+        pl: "Dodaj troch\u0119 szumu, aby otrzyma\u0107 nasycenie na statycznych t\u0142ach"
       }
     },
     save: {
@@ -41943,7 +41995,7 @@ var bleh = (() => {
       pt: "Enviar",
       sv: "Skicka",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
-      pl: "Wy\u015Bli"
+      pl: "Wy\u015Blij"
     },
     done: {
       en: "Done",
@@ -42021,7 +42073,7 @@ var bleh = (() => {
         pt: "Uma configura\xE7\xE3o que voc\xEA mudou exige uma atualiza\xE7\xE3o de p\xE1gina",
         sv: "En inst\xE4llning du \xE4ndrade p\xE5 beh\xF6ver at sidan laddas om",
         ru: "\u0418\u0437\u043C\u0435\u043D\u0451\u043D\u043D\u0430\u044F \u0432\u0430\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B",
-        pl: "Jedno z ustawie\u0144 kt\xF3re zmienili\u015Bcie wymaga od\u015Bwie\u017Cenia strony"
+        pl: "Jedno z ustawie\u0144 kt\xF3re zmieni\u0142x\u015B wymaga od\u015Bwie\u017Cenia strony"
       }
     },
     new: {
@@ -42110,7 +42162,7 @@ var bleh = (() => {
       pt: "Encontre em",
       sv: "S\xF6k upp p\xE5",
       ru: "\u041D\u0430\u0439\u0442\u0438 \u043D\u0430",
-      pl: "Dost\u0119pne na"
+      pl: "Znajd\u017A na"
     },
     following: {
       en: "Following",
@@ -42164,7 +42216,8 @@ var bleh = (() => {
       de: "Folgt dir!",
       es: "\xA1Te sigue!",
       it: "Ti segue!",
-      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!"
+      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!",
+      pl: "Obserwuje Ci\u0119!"
     },
     user_follows_you: {
       en: "{u} follows you!",
@@ -42172,7 +42225,8 @@ var bleh = (() => {
       de: "{u} folgt dir!",
       es: "\xA1{u} te sigue!",
       it: "{u} ti segue!",
-      ru: "{u} \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!"
+      ru: "{u} \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!",
+      pl: "{u} Ci\u0119 obserwuje!"
     },
     website: {
       en: "Website",
@@ -42228,7 +42282,7 @@ var bleh = (() => {
       sv: "Det h\xE4r \xE4r summan r\xF6ster f\xF6r bildordning",
       ru: "\u042D\u0442\u043E \u0441\u0443\u043C\u043C\u0430 \u0433\u043E\u043B\u043E\u0441\u043E\u0432 \u0434\u043B\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0438",
       pt: "Esta \xE9 a soma dos votos para ordena\xE7\xE3o",
-      pl: "Suma g\u0142os\xF3w za zam\xF3wieniem"
+      pl: "Suma g\u0142os\xF3w za kolejno\u015Bci\u0105"
     },
     dropzone: {
       en: "Drag-and-drop an image or click here",
@@ -42271,7 +42325,8 @@ var bleh = (() => {
       de: "\xC4hnliches wie {n}",
       ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}",
       es: "M\xE1s como {n}",
-      it: "Pi\xF9 simile a {n}"
+      it: "Pi\xF9 simile a {n}",
+      pl: "Wi\u0119cej jak {n}"
     },
     biography: {
       en: "Biography",
@@ -42406,18 +42461,21 @@ var bleh = (() => {
       true: {
         en: "Actively correcting this title",
         pt: "Corrigindo este t\xEDtulo ativamente",
-        es: "Corrigiendo este t\xEDtulo"
+        es: "Corrigiendo este t\xEDtulo",
+        pl: "Aktywnie poprawiam ten tytu\u0142"
       },
       false: {
         en: "Is this capitalised correctly?",
         pt: "A capitaliza\xE7\xE3o est\xE1 correta?",
-        es: "\xBFSon estas may\xFAsculas correctas?"
+        es: "\xBFSon estas may\xFAsculas correctas?",
+        pl: "Czy wielko\u015B\u0107 liter jest poprawna?"
       }
     },
     alert_of_correction: {
       en: "This title is already being corrected to \u2019{t}\u2019, are you sure you want to continue?",
       pt: "Este t\xEDtulo j\xE1 est\xE1 sendo corrigido para \u2019{t}\u2019, tem certeza de que deseja continuar?",
-      es: "Este t\xEDtulo ya est\xE1 siendo corregido a '{t}', \xBFseguro que quieres continuar?"
+      es: "Este t\xEDtulo ya est\xE1 siendo corregido a '{t}', \xBFseguro que quieres continuar?",
+      pl: "Ten tytu\u0142 jest aktualnie poprawiony do \u2019{t}\u2019, jeste\u015B pewna/y, \u017Ce chcesz kontynuowa\u0107?"
     },
     current: {
       en: "Current",
@@ -42438,7 +42496,7 @@ var bleh = (() => {
       sv: "Det h\xE4r \xE4r den originella kapitaliseringen som finns p\xE5 Last.fm",
       ru: "\u042D\u0442\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043D\u0430 Last.fm",
       pt: "Esta \xE9 a capitaliza\xE7\xE3o original presente no Last.fm",
-      pl: "To jest orginalna kapitalizacja z Last.fm"
+      pl: "To jest oryginalna wielko\u015B\u0107 liter z Last.fm"
     },
     correction: {
       en: "Correction",
@@ -42458,7 +42516,7 @@ var bleh = (() => {
       sv: "Det h\xE4r \xE4r r\xE4tt kapitalisering, som best\xE4md av artisten",
       ru: "\u042D\u0442\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0451\u043D\u043D\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
       pt: "Esta \xE9 a capitaliza\xE7\xE3o correta, conforme decidido pelo artista",
-      pl: "To jest poprawna kapitalizacja, wed\u0142ug artysty"
+      pl: "To jest poprawna wielko\u015Bc liter, wed\u0142ug artysty"
     },
     sources: {
       en: "Sources",
@@ -42479,7 +42537,7 @@ var bleh = (() => {
       sv: "Visa p\xE5litliga k\xE4llor d\xE4r man kan se att denna kapitalisering st\xE4mmer, f\xF6rutom sidor som Wikipedia, RYM, AOTY och MusicBrainz",
       ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0430\u0432\u0442\u043E\u0440\u0438\u0442\u0435\u0442\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438, \u0433\u0434\u0435 \u043F\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u044D\u0442\u043E\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044F \u0442\u0430\u043A\u0438\u0435 \u0441\u0430\u0439\u0442\u044B, \u043A\u0430\u043A Wikipedia, RYM, AOTY \u0438 MusicBrainz",
       pt: "Forne\xE7a fontes confi\xE1veis onde esta capitaliza\xE7\xE3o est\xE1 presente, excluindo sites como Wikipedia, RYM, AOTY e MusicBrainz",
-      pl: "Podaj zaufane \u017Ar\xF3d\u0142o gdzie tak jest podana kapitalizacja, poza stronami jak Wikipedia, RYM, AOTY i MusicBrainz"
+      pl: "Podaj zaufane \u017Ar\xF3d\u0142o gdzie jest tak podana wielko\u015Bc liter, poza stronami jak Wikipedia, RYM, AOTY, i MusicBrainz"
     },
     suggest: {
       en: "Suggest",
@@ -42501,7 +42559,7 @@ var bleh = (() => {
       sv: "Endast \xE4ndringar p\xE5 kapitalisering \xE4r till\xE5tet",
       ru: "\u0414\u043E\u043F\u0443\u0441\u043A\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430",
       pt: "Apenas mudan\xE7as de capitaliza\xE7\xE3o s\xE3o permitidas",
-      pl: "Tylko zmiany kapitalizacji s\u0105 dozwolone"
+      pl: "Tylko zmiany wielko\u015Bci liter s\u0105 dozwolone"
     },
     suggest_correction: {
       // suggest a correction for the above system
@@ -42513,14 +42571,15 @@ var bleh = (() => {
       pt: "Sugira uma corre\xE7\xE3o",
       sv: "F\xF6resl\xE5 en \xE4ndring",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
-      pl: "Zasugeruj poprawe"
+      pl: "Zasugeruj poprawk\u0119"
     },
     recents: {
       en: "Recents",
       pt: "Recentes",
       es: "Recientes",
       it: "Recenti",
-      ja: "\u6700\u8FD1"
+      ja: "\u6700\u8FD1",
+      pl: "Ostatnie"
     },
     recent_tracks: {
       en: "Recent Tracks",
@@ -42620,7 +42679,8 @@ var bleh = (() => {
       de: "Du und {u} sind {v} kompatibel",
       ru: "\u0412\u044B \u0438 {u} - \u0443 \u0432\u0430\u0441 {v} \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u0435",
       es: "T\xFA y {u} tienen una compatiblidad {v}",
-      it: "Tu e {u} siete {v} compatibili"
+      it: "Tu e {u} siete {v} compatibili",
+      pl: "Ty i {u} pasujecie do siebie w {v}"
     },
     taste_similarity: {
       en: "Taste similarity",
@@ -42640,7 +42700,8 @@ var bleh = (() => {
       de: "Deine Kompatibilit\xE4t mit {u} ist {r}.\nIhr h\xF6rt beide {a}.",
       ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 {u} \u0441\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 {r}.\n\u0412\u044B \u043E\u0431\u0430 \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 {a}.",
       es: "Tu compatibilidad con {u} es {r}. \nAmbos escuchan a {a}.",
-      it: "La tua compatibilit\xE0 con {u} \xE8 {r}.\nEntrambi ascoltate {a}."
+      it: "La tua compatibilit\xE0 con {u} \xE8 {r}.\nEntrambi ascoltate {a}.",
+      pl: "Twoja kompatybilno\u015B\u0107 z {u} to {r}. \nOboje s\u0142uchacie {a}"
     },
     subject: {
       // as in an email/message subject
@@ -42649,7 +42710,8 @@ var bleh = (() => {
       de: "Betreff",
       ru: "\u0422\u0435\u043C\u0430",
       es: "Asunto",
-      it: "Soggetto"
+      it: "Soggetto",
+      pl: "Temat"
     },
     message: {
       // as in a direct message
@@ -42669,7 +42731,8 @@ var bleh = (() => {
       ja: "\u30E1\u30C3\u30BB\u30FC\u30B8\u3092\u9001\u4FE1",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
       es: "Enviar mensaje",
-      it: "Invia messaggio"
+      it: "Invia messaggio",
+      pl: "Wy\u015Blij wiadomo\u015B\u0107"
     },
     join_discord: {
       en: "Join Discord",
@@ -42685,7 +42748,8 @@ var bleh = (() => {
     follow_user: {
       en: "Follow {u}",
       pt: "Seguir {u}",
-      es: "Seguir a {u}"
+      es: "Seguir a {u}",
+      pl: "Obserwuj {u}"
     },
     sponsor_details: {
       en: "Sponsor and badge details",
@@ -42761,7 +42825,7 @@ var bleh = (() => {
       pt: "Receba um emblema no seu perfil e um obrigad\xE3o da katelyn por apoiar <3",
       sv: "F\xE5 ett emblem p\xE5 din profil och ett stort tack fr\xE5n katelyn <3",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u0437\u043D\u0430\u0447\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0438 \u0431\u043E\u043B\u044C\u0448\u0443\u044E \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u043E\u0442 katelyn <3",
-      pl: "Otrzymasz odznake na profile oraz wielkie podzi\u0119kowanie od katelyn <3"
+      pl: "Otrzymasz odznak\u0119 na profilu oraz wielkie podzi\u0119kowanie od katelyn <3"
     },
     you_are_a_sponsor: {
       en: "You are a sponsor, thank you! :3",
@@ -42772,7 +42836,7 @@ var bleh = (() => {
       pt: "Voc\xEA \xE9 um apoiador, muito obrigado! :3",
       sv: "Du \xE4r en sponsor, tack s\xE5 mycket! :3",
       ru: "\u0412\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u043C, \u0441\u043F\u0430\u0441\u0438\u0431\u043E! :3",
-      pl: "Jeste\u015B sponsorem, dzi\u0119ki wielkie! :3"
+      pl: "Jeste\u015B sponsorem, wielkie dzi\u0119ki! :3"
     },
     sponsor_get_badge: {
       en: "A sponsorship gives you awesome profile perks visible to all bleh users"
@@ -42810,7 +42874,7 @@ var bleh = (() => {
       pt: "Perfil, {c} emblemas",
       sv: "Profil, {c} emblem",
       ru: "\u041F\u0440\u043E\u0444\u0438\u043B\u044C, {c} \u0437\u043D\u0430\u0447\u043A\u043E\u0432",
-      pl: "Profil, {c} odznak"
+      pl: "Profil, {c} odznaki"
     },
     current_version: {
       en: "Current version",
@@ -42833,7 +42897,8 @@ var bleh = (() => {
       ja: "\u30D0\u30FC\u30B8\u30E7\u30F3\u3092\u66F4\u65B0\u4E2D",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438",
       es: "Actualizando a versi\xF3n",
-      it: "Aggiornamento alla versione"
+      it: "Aggiornamento alla versione",
+      pl: "Aktualizacja do wersji"
     },
     manage_data: {
       en: "Manage data",
@@ -42865,7 +42930,7 @@ var bleh = (() => {
       pt: "Este \xE9 um perfil especial gerenciado pelo bleh para lidar com apoiadores",
       sv: "Detta \xE4r en speciell profil fr\xE5n bleh f\xF6r att hantera sponsorskap",
       ru: "\u042D\u0442\u043E \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u0439 bleh \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0441\u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u043C\u0438",
-      pl: "Ten specjalny profil zarz\u0105dzany przez bleh s\u0142u\u017Cy to ogarniania sponsor\xF3w"
+      pl: "Ten specjalny profil zarz\u0105dzany przez bleh s\u0142u\u017Cy do zarz\u0105dzania sponsorami"
     },
     sponsors_only: {
       en: "Sponsors only",
@@ -42908,7 +42973,7 @@ var bleh = (() => {
       pt: "Coletando os \xFAltimos {c} dias",
       sv: "Samlar de senaste {c} dagarna",
       ru: "\u0421\u0431\u043E\u0440 \u0434\u0430\u043D\u043D\u044B\u0445 \u0437\u0430 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 {c} \u0434\u043D\u0435\u0439",
-      pl: "\u0141adowanie ostatnich {c} dni"
+      pl: "Zbieranie ostatnich {c} dni"
     },
     gathering_plays: {
       en: "Gathering plays",
@@ -42975,7 +43040,7 @@ var bleh = (() => {
       pt: "Explorar na biblioteca",
       sv: "Utforska i bibliotek",
       ru: "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435",
-      pl: "Eksploruj w bibliotece"
+      pl: "Odkrywaj w bibliotece"
     },
     add_note: {
       // as in a profile note
@@ -43032,7 +43097,8 @@ var bleh = (() => {
       it: "Ascolto",
       pt: "Ouvindo",
       sv: "Lyssning",
-      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0435"
+      ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0435",
+      pl: "S\u0142uchanie"
     },
     you: {
       en: "You",
@@ -43084,7 +43150,7 @@ var bleh = (() => {
         sv: "Hur ska sidan bet\xE9 sig n\xE4r du trycker p\xE5 en profilbild",
         ru: "\u041A\u0430\u043A\u043E\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043D\u0430 \u0430\u0432\u0430\u0442\u0430\u0440",
         pt: "Qual a\xE7\xE3o deveria ser realizada quando voc\xEA clica em um avatar",
-        pl: "Co powinno si\u0119 wydarzy\u0107 jak klikniecie na awatar"
+        pl: "Co powinno si\u0119 wydarzy\u0107 podczas klikni\u0119cia na awatar"
       }
     },
     share: {
@@ -43096,13 +43162,14 @@ var bleh = (() => {
       pt: "Compartilhar",
       sv: "Dela",
       ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F",
-      pl: "Udost\u0119pni"
+      pl: "Udost\u0119pnij"
     },
     share_via_device: {
       en: "Share via device",
       pt: "Compartilhar pelo dispositivo",
       es: "Compartir mediante dispositivo",
-      it: "Condividi tramite dispositivo"
+      it: "Condividi tramite dispositivo",
+      pl: "Udost\u0119pnij za pomoc\u0105 urz\u0105dzenia"
     },
     copy: {
       en: "Copy",
@@ -43176,7 +43243,8 @@ var bleh = (() => {
       ru: "\u0412\u044B\u0440\u0435\u0437\u0430\u0442\u044C",
       es: "Cortar",
       it: "Taglia",
-      ja: "\u30AB\u30C3\u30C8"
+      ja: "\u30AB\u30C3\u30C8",
+      pl: "Wytnij"
     },
     paste: {
       en: "Paste",
@@ -43248,7 +43316,7 @@ var bleh = (() => {
       pt: "Os nomes dos \xE1lbuns e artistas n\xE3o devem ser colocados entre aspas",
       sv: "Album och artistnamn ska skrivas utan citattecken",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u043F\u0438\u0448\u0443\u0442\u0441\u044F \u0431\u0435\u0437 \u043A\u0430\u0432\u044B\u0447\u0435\u043A",
-      pl: "Nie dawaj do cytatu nazw album\xF3w oraz imion artyst\xF3w"
+      pl: "Nie u\u017Cywaj cytat\xF3w w nazwach album\xF3w oraz imionach artyst\xF3w"
     },
     wiki_standard_quotations: {
       en: "Use \u2018 \u2019 for quotations from the artist or elsewhere",
@@ -43441,7 +43509,7 @@ var bleh = (() => {
           pt: "Faixas que voc\xEA tem em loop",
           sv: "L\xE5tar du \xE4r besatt av",
           ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u044B \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 \u043D\u0430 \u043F\u043E\u0432\u0442\u043E\u0440\u0435",
-          pl: "Utwory kt\xF3rych ci\u0105gle s\u0142uchasz"
+          pl: "Utwory, kt\xF3rych ci\u0105gle s\u0142uchasz"
         },
         love: {
           en: "Tracks you love",
@@ -43451,7 +43519,7 @@ var bleh = (() => {
           pt: "Faixas que voc\xEA ama",
           sv: "L\xE5tar du \xE4lskar",
           ru: "\u0422\u0440\u0435\u043A\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u044F\u0442\u0441\u044F",
-          pl: "Twoje ukochane utwory"
+          pl: "Twoje ulubione utwory"
         },
         bookmark: {
           en: "Music you want to check out",
@@ -43493,7 +43561,7 @@ var bleh = (() => {
       pt: "Acompanhe suas atividades mais recentes localmente em seu perfil",
       sv: "H\xE5ll koll p\xE5 dina senaste aktiviteter lokalt p\xE5 din profil",
       ru: "\u041E\u0442\u0441\u043B\u0435\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u044E \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E \u0432 \u0441\u0432\u043E\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
-      pl: "\u015Aled\u017A wi\u0119kszo\u015B\u0107 swoich ostatnich aktywno\u015Bci lokalnie na swoim profilu "
+      pl: "\u015Aled\u017A swoj\u0105 ostatni\u0105 aktywno\u015B\u0107 lokalnie na swoim profilu "
     },
     activity_tracking: {
       name: {
@@ -43537,7 +43605,7 @@ var bleh = (() => {
       pt: "Hist\xF3rico de atividades limpo",
       sv: "T\xF6mde din aktivitetshistoria",
       ru: "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u0432\u0430\u0448\u0435\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043E\u0447\u0438\u0449\u0435\u043D\u0430",
-      pl: "Wyczyszczono histori\u0119 twoich aktywno\u015Bci"
+      pl: "Wyczyszczono histori\u0119 aktywno\u015Bci"
     },
     activity_settings: {
       en: "Activity settings",
@@ -43569,7 +43637,8 @@ var bleh = (() => {
       ru: "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
       es: "Tarjetas",
       it: "Carte",
-      ja: "\u30AB\u30FC\u30C9"
+      ja: "\u30AB\u30FC\u30C9",
+      pl: "Karty"
     },
     grid: {
       // as in the view mode
@@ -43720,7 +43789,7 @@ var bleh = (() => {
       pt: "Rapidez",
       sv: "Velocitet",
       ru: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C",
-      pl: "Pr\u0119dko\u015B\u0107"
+      pl: "Dynamika"
     },
     logout: {
       en: "Logout",
@@ -44102,7 +44171,7 @@ var bleh = (() => {
         pt: "Caso contr\xE1rio os convidados s\xE3o organizados de forma elegante ao lado do artista principal",
         sv: "Annars placeras g\xE4startister fint bredvid huvudartisten",
         ru: "\u0412 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0451\u043D\u043D\u044B\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u044B \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0430\u044E\u0442\u0441\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
-        pl: "W przeciwnym razie arty\u015Bci z udzia\u0142em zo zgrabnie u\u0142o\u017Ceni obok g\u0142\xF3wnego artysty"
+        pl: "W przeciwnym razie arty\u015Bci z udzia\u0142em s\u0105 zgrabnie u\u0142o\u017Ceni obok g\u0142\xF3wnego artysty"
       }
     },
     track_layout: {
@@ -44288,7 +44357,7 @@ var bleh = (() => {
       pt: "Quantidade a ser exibida",
       sv: "M\xE4ngd att visa",
       ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u044B\u0445 \u0442\u0440\u0435\u043A\u043E\u0432",
-      pl: "Ile wy\u015Bwietla\u0107 utwor\xF3w"
+      pl: "Ilo\u015B\u0107 wy\u015Bwietla\u0107 utwor\xF3w"
     },
     recent_artwork: {
       en: "Accompany tracks with artwork",
@@ -44387,7 +44456,8 @@ var bleh = (() => {
       en: "Origin",
       pt: "Origem",
       es: "Origen",
-      ja: "\u51FA\u8EAB\u56FD"
+      ja: "\u51FA\u8EAB\u56FD",
+      pl: "Pochodzenie"
     },
     display_name: {
       name: {
@@ -44410,7 +44480,7 @@ var bleh = (() => {
         sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0432\u0430\u0448 \u0440\u0435\u0430\u043B\u044C\u043D\u044B\u0439 @\u043D\u0438\u043A\u043D\u0435\u0439\u043C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0438\u0436\u0435",
         pt: "Altera seu nome em seu perfil, com seu @nome de usu\xE1rio real mostrado abaixo",
-        pl: "Zmienia twoj\u0105 nazw\u0119 na profilu, na twoj\u0105 nazw\u0119 u\u017Cytkownika widoczn\u0105 poni\u017Cej"
+        pl: "Zmienia twoj\u0105 nazw\u0119 na profilu na nazw\u0119 u\u017Cytkownika widoczn\u0105 poni\u017Cej"
       }
     },
     subtitle: {
@@ -44431,7 +44501,8 @@ var bleh = (() => {
       es: "T\xEDtulo de perfil",
       it: "Titolo del profilo",
       ja: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u30BF\u30A4\u30C8\u30EB",
-      ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+      ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+      pl: "Tytu\u0142 profilu"
     },
     pronoun_tip: {
       en: "Include pronouns at the start or end of your title to separate them visually",
@@ -44440,7 +44511,8 @@ var bleh = (() => {
       es: "Incluye pronombres al inicio o final de tu t\xEDtulo para separarlos visualmente",
       it: "Includi i pronomi all\u2019inizio o alla fine del titolo per separarli visivamente",
       ja: "\u4EE3\u540D\u8A5E\u306F\u30BF\u30A4\u30C8\u30EB\u306E\u5148\u982D\u307E\u305F\u306F\u672B\u5C3E\u306B\u914D\u7F6E\u3059\u308B\u3068\u898B\u3084\u3059\u304F\u306A\u308A\u307E\u3059",
-      ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u0432 \u043D\u0430\u0447\u0430\u043B\u0435 \u0438\u043B\u0438 \u0432 \u043A\u043E\u043D\u0446\u0435 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430, \u0447\u0442\u043E\u0431\u044B \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E \u043E\u0442\u0434\u0435\u043B\u0438\u0442\u044C \u0438\u0445"
+      ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u0432 \u043D\u0430\u0447\u0430\u043B\u0435 \u0438\u043B\u0438 \u0432 \u043A\u043E\u043D\u0446\u0435 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430, \u0447\u0442\u043E\u0431\u044B \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E \u043E\u0442\u0434\u0435\u043B\u0438\u0442\u044C \u0438\u0445",
+      pl: "Umie\u015B\u0107 zaimki na pocz\u0105tku lub na ko\u0144cu tytu\u0142u, aby wizualnie je oddzieli\u0107"
     },
     block_list: {
       en: "Block list",
@@ -44746,7 +44818,7 @@ var bleh = (() => {
         pt: "Corrigir t\xEDtulos com lotus",
         sv: "Redigera titlar med lotus",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E lotus",
-        pl: "Skorektuj tytu\u0142u za pomoc\u0105 lotus"
+        pl: "Popraw tytu\u0142 za pomoc\u0105 lotus"
       },
       body: {
         en: "Re-capitalise artists, albums, and tracks based on community contributions",
@@ -44817,7 +44889,8 @@ var bleh = (() => {
       ja: "\u524A\u9664",
       pt: "Deletar",
       sv: "Ta bort",
-      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
+      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C",
+      pl: "Usu\u0144"
     },
     deleted: {
       // the item that was deleted is placed under this text
@@ -44828,7 +44901,8 @@ var bleh = (() => {
       ja: "\u524A\u9664\u6E08\u307F",
       pt: "Deletado",
       sv: "Borttagen",
-      ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E"
+      ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E",
+      pl: "Usuni\u0119te"
     },
     search: {
       en: "Search",
@@ -44838,7 +44912,8 @@ var bleh = (() => {
       ja: "\u691C\u7D22",
       pt: "Pesquisar",
       sv: "S\xF6k",
-      ru: "\u041F\u043E\u0438\u0441\u043A"
+      ru: "\u041F\u043E\u0438\u0441\u043A",
+      pl: "Wyszukaj"
     },
     search_for_anything: {
       // used as a placeholder for the global search bar
@@ -44848,7 +44923,8 @@ var bleh = (() => {
       ru: "\u041D\u0430\u0439\u0442\u0438 \u0447\u0442\u043E \u0443\u0433\u043E\u0434\u043D\u043E",
       es: "Busca cualquier cosa",
       it: "Cerca qualsiasi cosa",
-      ja: "\u4F55\u3067\u3082\u691C\u7D22"
+      ja: "\u4F55\u3067\u3082\u691C\u7D22",
+      pl: "Wyszukaj cokolwiek"
     },
     search_guest: {
       en: "Search guest appearances",
@@ -44858,7 +44934,8 @@ var bleh = (() => {
       ja: "\u30B2\u30B9\u30C8\u53C2\u52A0\u4F5C\u54C1\u3092\u691C\u7D22",
       pt: "Pesquisar participa\xE7\xF5es especiais",
       sv: "S\xF6k g\xE4startister",
-      ru: "\u041F\u043E\u0438\u0441\u043A \u0433\u043E\u0441\u0442\u0435\u0432\u044B\u0445 \u0443\u0447\u0430\u0441\u0442\u0438\u0439"
+      ru: "\u041F\u043E\u0438\u0441\u043A \u0433\u043E\u0441\u0442\u0435\u0432\u044B\u0445 \u0443\u0447\u0430\u0441\u0442\u0438\u0439",
+      pl: "Szukaj go\u015Bcinnych wyst\u0119p\xF3w"
     },
     anything_you_can_imagine: {
       // placeholder for your about me
@@ -45065,7 +45142,7 @@ var bleh = (() => {
       pt: "Substituir",
       sv: "Ers\xE4tt",
       ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C",
-      pl: "Zamie\u0144"
+      pl: "Zmie\u0144"
     },
     view_others_library: {
       en: "View others library",
@@ -45101,15 +45178,18 @@ var bleh = (() => {
     },
     circle: {
       en: "Circular",
-      pt: "Circular"
+      pt: "Circular",
+      pl: "Okr\u0105g\u0142y"
     },
     squircle: {
       en: "Rounded",
-      pt: "Arredondado"
+      pt: "Arredondado",
+      pl: "Zaokr\u0105glony kwadrat"
     },
     square: {
       en: "Square",
-      pt: "Quadrado"
+      pt: "Quadrado",
+      pl: "Kwadratowy"
     },
     notes: {
       // profile notes
@@ -45140,7 +45220,8 @@ var bleh = (() => {
       it: "Modifica nota del profilo",
       pt: "Editar recado de perfil",
       sv: "\xC4ndra profilanteckning",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+      pl: "Edytuj notatk\u0119 profilow\u0105"
     },
     saved_note_for_user: {
       en: "Saved note for {u}",
@@ -45148,7 +45229,8 @@ var bleh = (() => {
       de: "Profilnotiz f\xFCr {u} gespeichert",
       es: "Anotaci\xF3n para {u} guardada",
       it: "Nota salvata per {u}",
-      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0434\u043B\u044F {u}",
+      pl: "Zapisano notatk\u0119 dla {u}"
     },
     cleared_note_for_user: {
       en: "Cleared note for {u}",
@@ -45156,7 +45238,8 @@ var bleh = (() => {
       de: "Profilnotiz f\xFCr {u} entfernt",
       es: "Anotaci\xF3n para {u} borrada",
       it: "Nota cancellata per {u}",
-      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0434\u043B\u044F {u}",
+      pl: "Usuni\u0119to notatk\u0119 dla {u}"
     },
     manage: {
       en: "Manage",
@@ -45164,7 +45247,8 @@ var bleh = (() => {
       de: "Verwalten",
       es: "Gestionar",
       it: "Gestisci",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
+      pl: "Zarz\u0105dzaj"
     },
     font: {
       name: {
@@ -45195,7 +45279,8 @@ var bleh = (() => {
         de: "Schriftart der Benutzeroberfl\xE4che",
         es: "Fuente de interfaz",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430",
-        it: "Interfaccia font"
+        it: "Interfaccia font",
+        pl: "Czcionka interfejsu"
       },
       body: {
         en: "Choose the font that suits you best",
@@ -45203,7 +45288,8 @@ var bleh = (() => {
         de: "W\xE4hle die Schriftart, die dir am besten gef\xE4llt",
         es: "Elige la fuente que m\xE1s te guste",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0440\u0438\u0444\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442",
-        it: "Scegli il carattere che pi\xF9 ti si addice"
+        it: "Scegli il carattere che pi\xF9 ti si addice",
+        pl: "Wybierz czcionk\u0119 kt\xF3ra najbardziej Ci si\u0119 podoba"
       },
       custom: {
         en: "Provide your own font",
@@ -45211,7 +45297,8 @@ var bleh = (() => {
         de: "Eigene Schriftart bereitstellen",
         es: "Proporciona tu propia fuente",
         ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0448\u0440\u0438\u0444\u0442",
-        it: "Fornisci il tuo font"
+        it: "Fornisci il tuo font",
+        pl: "Dodaj w\u0142asn\u0105 czcionk\u0119"
       },
       stylised: {
         en: "Stylised",
@@ -45219,7 +45306,8 @@ var bleh = (() => {
         de: "Stilisiert",
         es: "Estilizada",
         ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
-        it: "Stilizzato"
+        it: "Stilizzato",
+        pl: "Stylizowane"
       },
       simple: {
         en: "Simple",
@@ -45227,7 +45315,8 @@ var bleh = (() => {
         de: "Einfach",
         es: "Simple",
         ru: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439",
-        it: "Semplice"
+        it: "Semplice",
+        pl: "Proste"
       },
       hyperlegible: {
         en: "Accessible",
@@ -45235,13 +45324,15 @@ var bleh = (() => {
         de: "Barrierefrei",
         es: "Accesible",
         ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439",
-        it: "Accessibile"
+        it: "Accessibile",
+        pl: "Dost\u0119pno\u015B\u0107"
       }
     },
     font_serif: {
       en: "Use old-fashioned Serif font for some headings",
       pt: "Usar uma fonte serifada cl\xE1ssica em alguns cabe\xE7alhos",
-      es: "Usar fuente Serif cl\xE1sica para algunos encabezados"
+      es: "Usar fuente Serif cl\xE1sica para algunos encabezados",
+      pl: "U\u017Cyj klasycznej czcionki Serif w niekt\xF3rych nag\u0142\xF3wkach"
     },
     previewing: {
       // used as subtext for previewing a font
@@ -45250,7 +45341,8 @@ var bleh = (() => {
       de: "Vorschau: {v}",
       es: "Vista previa: {v}",
       ru: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440: {v}",
-      it: "Anteprima: {v}"
+      it: "Anteprima: {v}",
+      pl: "Podgl\u0105d: {v}"
     },
     no_font_selected: {
       en: "No font selected",
@@ -45258,7 +45350,8 @@ var bleh = (() => {
       de: "Keine Schriftart ausgew\xE4hlt",
       es: "Ninguna fuente seleccionada",
       ru: "\u0428\u0440\u0438\u0444\u0442 \u043D\u0435 \u0432\u044B\u0431\u0440\u0430\u043D",
-      it: "Nessun font selezionato"
+      it: "Nessun font selezionato",
+      pl: "Nie wybrano czcionki"
     },
     font_style: {
       en: "Font style",
@@ -45294,7 +45387,8 @@ var bleh = (() => {
         pt: "Contorno",
         de: "Umriss",
         it: "Contorno",
-        ru: "\u041E\u0431\u0432\u043E\u0434\u043A\u0430"
+        ru: "\u041E\u0431\u0432\u043E\u0434\u043A\u0430",
+        pl: "Zarys"
       },
       glow: {
         en: "Glow",
@@ -45310,6 +45404,7 @@ var bleh = (() => {
         en: "Gradient"
       },
       noph: {
+        // unused, dont translate
         en: "Blink"
       },
       post: {
@@ -45484,7 +45579,7 @@ var bleh = (() => {
         pt: 'Por padr\xE3o, a Last.fm ir\xE1 "corrigir automaticamente" alguns dos seus scrobbles para redirecionamentos (na maioria) defeituosos. Desativar essa op\xE7\xE3o n\xE3o corrige completamente o sistema, mas mant\xE9m os nomes dos artistas na sua biblioteca intactos.',
         sv: "Vanligtvis omdirigeras skrobblar till felers\xE4ttningar som \xE4r \xF6ver tio \xE5r gamla. Att avaktivera det fixar inte problemet totalt men artistnamn i ditt egna bibliotek visar r\xE4tt profil.",
         ru: '\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B "\u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u044E\u0442\u0441\u044F" \u043D\u0430 \u043D\u0435\u0432\u0435\u0440\u043D\u044B\u0435 \u0437\u0430\u043C\u0435\u043D\u044B, \u043A\u043E\u0442\u043E\u0440\u044B\u043C \u0443\u0436\u0435 \u043B\u0435\u0442 \u0434\u0435\u0441\u044F\u0442\u044C. \u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043D\u0435 \u043F\u043E\u043B\u043D\u043E\u0441\u0442\u044C\u044E \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442 \u044D\u0442\u0443 \u0441\u0438\u0441\u0442\u0435\u043C\u0443, \u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442 \u0438\u043C\u0435\u043D\u0430 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u0432\u0430\u0448\u0435\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435 \u043D\u0435\u0442\u0440\u043E\u043D\u0443\u0442\u044B\u043C\u0438.',
-        pl: "Domy\u015Blnie, scrobble b\u0119d\u0105 poprawiane na b\u0142\u0119dne zamiennik je\u015Bli s\u0105 dekad\u0119 za stare. Wy\u0142\u0105czanie tego nie do ko\u0144ca naprawia ten system ale zostawia imiona artyst\xF3w bez zmian."
+        pl: "Domy\u015Blnie, scrobble b\u0119d\u0105 poprawiane na b\u0142\u0119dne zamienniki, kt\xF3re s\u0105 b\u0142\u0119dne o dekad\u0119. Wy\u0142\u0105czanie tego nie do ko\u0144ca naprawia ten system ale zostawia imiona artyst\xF3w bez zmian."
       }
     },
     redirect_messages: {
@@ -45506,7 +45601,7 @@ var bleh = (() => {
         pt: "Essas notifica\xE7\xF5es podem permitir que voc\xEA desfa\xE7a redirecionamentos que a Last.fm imp\xF4s a voc\xEA, mas tamb\xE9m podem ser irritantes",
         sv: "Dessa notiser l\xE5ter dig \xE5ngra omdirigeringar Last.fm tvingade p\xE5 dig, men dem kan ocks\xE5 vara st\xF6rande",
         ru: "\u042D\u0442\u0438 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0442 \u0432\u0430\u043C \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 Last.fm, \u043D\u043E \u043C\u043E\u0433\u0443\u0442 \u0442\u0430\u043A\u0436\u0435 \u0440\u0430\u0437\u0434\u0440\u0430\u0436\u0430\u0442\u044C",
-        pl: "Te powiadomienia pozwalaj\u0105 ci cofa\u0107 z przekierowywa\u0144 od Last.fm, ale mog\u0105 r\xF3wnie\u017C by\u0107 irytuj\u0105ce"
+        pl: "Te powiadomienia pozwalaj\u0105 ci cofa\u0107 wymuszone przekierowania od Last.fm, ale mog\u0105 r\xF3wnie\u017C by\u0107 irytuj\u0105ce"
       }
     },
     colourful_counts: {
@@ -45572,7 +45667,8 @@ var bleh = (() => {
         it: "Questi tag sono spesso ridondanti e non possono rappresentare tutto quello che intendono",
         pt: "Essas tags costumam ser redundantes e nunca conseguem representar totalmente tudo o que se prop\xF5em",
         sv: "Dessa taggar \xE4r ofta \xF6verfl\xF6diga och g\xE4ller inte alltid f\xF6r allt dem \xE4r t\xE4nkta att t\xE4cka",
-        ru: "\u042D\u0442\u0438 \u0442\u0435\u0433\u0438 \u0447\u0430\u0441\u0442\u043E \u0438\u0437\u0431\u044B\u0442\u043E\u0447\u043D\u044B \u0438 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E \u0432\u0441\u0435\u043C\u0443 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043E\u043D\u0438 \u043F\u043E\u0434\u0440\u0430\u0437\u0443\u043C\u0435\u0432\u0430\u044E\u0442"
+        ru: "\u042D\u0442\u0438 \u0442\u0435\u0433\u0438 \u0447\u0430\u0441\u0442\u043E \u0438\u0437\u0431\u044B\u0442\u043E\u0447\u043D\u044B \u0438 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E \u0432\u0441\u0435\u043C\u0443 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043E\u043D\u0438 \u043F\u043E\u0434\u0440\u0430\u0437\u0443\u043C\u0435\u0432\u0430\u044E\u0442",
+        pl: "Te tagi s\u0105 cz\u0119sto zb\u0119dne i nie zawsze obejmuj\u0105 zakres, do kt\xF3rego s\u0105 przeznaczone"
       }
     },
     artwork_and_grids: {
@@ -45582,7 +45678,8 @@ var bleh = (() => {
       it: "Copertine e griglie",
       pt: "Capas e grades",
       sv: "Albumkonst och rutn\xE4t",
-      ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0438 \u0438 \u0441\u0435\u0442\u043A\u0438"
+      ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0438 \u0438 \u0441\u0435\u0442\u043A\u0438",
+      pl: "Ok\u0142adki albumu i siatki"
     },
     gloss: {
       name: {
@@ -45592,7 +45689,8 @@ var bleh = (() => {
         it: "Applica lucentezza alle copertine degli album",
         pt: "Aplique relevo nas capas dos \xE1lbuns",
         sv: "L\xE4gg till ett sken p\xE5 albumkonst",
-        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u043B\u044F\u043D\u0435\u0446 \u043A \u043E\u0431\u043B\u043E\u0436\u043A\u0430\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
+        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u043B\u044F\u043D\u0435\u0446 \u043A \u043E\u0431\u043B\u043E\u0436\u043A\u0430\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+        pl: "Dodaj efekt po\u0142ysku do ok\u0142adki albumu"
       },
       body: {
         en: "Add a layer of shine to album covers globally",
@@ -45601,7 +45699,8 @@ var bleh = (() => {
         it: "Aggiungi un effetto lucente a tutte le copertine degli album",
         pt: "Adicione um toque de brilho em todas as capas de \xE1lbuns",
         sv: "L\xE4gger till ett glansigt lager p\xE5 all albumkonst",
-        ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0439 \u0431\u043B\u0435\u0441\u043A\u0430 \u043D\u0430 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u043F\u043E \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443"
+        ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0439 \u0431\u043B\u0435\u0441\u043A\u0430 \u043D\u0430 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u043F\u043E \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443",
+        pl: "Dodaj efekt po\u0142ysku do wszystkich ok\u0142adek album\xF3w"
       }
     },
     grid_glow: {
@@ -45612,7 +45711,8 @@ var bleh = (() => {
         it: "Rifletti il colore tra gli elementi della griglia",
         pt: "Refletir a cor abaixo dos itens da grade",
         sv: "Reflektera f\xE4rg under rutn\xE4tsobjekt",
-        ru: "\u041E\u0442\u0440\u0430\u0436\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438"
+        ru: "\u041E\u0442\u0440\u0430\u0436\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438",
+        pl: "Dodaj efekt odbicia koloru poni\u017Cej element\xF3w siatki"
       },
       body: {
         en: "Applies a glow below grid items based on the primary colour",
@@ -45621,7 +45721,8 @@ var bleh = (() => {
         it: "Applica un effetto brillante sotto gli elementi della griglia basandosi sul colore principale",
         pt: "Aplica um brilho abaixo dos itens da grade com base na cor prim\xE1ria",
         sv: "L\xE4gger till f\xE4rg under rutn\xE4tsobjekt som \xE4r baserad p\xE5 den prim\xE4ra f\xE4rgen",
-        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u0435 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E \u0446\u0432\u0435\u0442\u0430"
+        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u0435 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E \u0446\u0432\u0435\u0442\u0430",
+        pl: "Dodaj efekt po\u0142ysku poni\u017Cej element\xF3w siatki, oparty na kolorze podstawowym"
       }
     },
     skip_to: {
@@ -45632,7 +45733,8 @@ var bleh = (() => {
       it: "Salta a",
       pt: "Ir at\xE9",
       sv: "Hoppa till",
-      ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A"
+      ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A",
+      pl: "Przeskocz do"
     },
     information: {
       en: "Information",
@@ -45641,7 +45743,8 @@ var bleh = (() => {
       it: "Informazioni",
       pt: "Informa\xE7\xE3o",
       sv: "Information",
-      ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"
+      ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F",
+      pl: "Informacja"
     },
     username: {
       name: {
@@ -45651,7 +45754,8 @@ var bleh = (() => {
         it: "Nome utente",
         pt: "Nome de usu\xE1rio",
         sv: "Anv\xE4ndarnamn",
-        ru: "\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
+        ru: "\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+        pl: "Nazwa u\u017Cytkownika"
       },
       body: {
         en: "To change your username hit the button to send an email. Having problems? {a}contact support{/a}.",
@@ -45660,7 +45764,8 @@ var bleh = (() => {
         it: "Per cambiare il tuo nome utente, premi il pulsante per inviare una email. Ci sono problemi? {a}contatta il supporto{/a}",
         pt: "Para alterar seu nome de usu\xE1rio, clique no bot\xE3o para enviar um e-mail. Est\xE1 com problemas? {a}contact support{/a}.",
         sv: "F\xF6r att \xE4ndra ditt anv\xE4ndarnamn, tryck p\xE5 knappen f\xF6r att skicka mejl. Har du ett problem? {a}Kontakta support{/a}.",
-        ru: "\u0427\u0442\u043E\u0431\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u0434\u043B\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0433\u043E \u043F\u0438\u0441\u044C\u043C\u0430. \u0412\u043E\u0437\u043D\u0438\u043A\u043B\u0438 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B? {a}\u0421\u0432\u044F\u0436\u0438\u0442\u0435\u0441\u044C \u0441\u043E \u0441\u043B\u0443\u0436\u0431\u043E\u0439 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438{/a}."
+        ru: "\u0427\u0442\u043E\u0431\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u0434\u043B\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0433\u043E \u043F\u0438\u0441\u044C\u043C\u0430. \u0412\u043E\u0437\u043D\u0438\u043A\u043B\u0438 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B? {a}\u0421\u0432\u044F\u0436\u0438\u0442\u0435\u0441\u044C \u0441\u043E \u0441\u043B\u0443\u0436\u0431\u043E\u0439 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438{/a}.",
+        pl: "Aby zmieni\u0107 swoj\u0105 nazw\u0119 u\u017Cytkownika, kliknij przycisk aby wys\u0142a\u0107 email. Masz problemy? {a}Napisz do Supportu{/a}"
       }
     },
     email: {
@@ -45670,7 +45775,8 @@ var bleh = (() => {
       it: "Email",
       pt: "E-mail",
       sv: "Mejladress",
-      ru: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430"
+      ru: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430",
+      pl: "Email"
     },
     password: {
       en: "Password",
@@ -45679,7 +45785,8 @@ var bleh = (() => {
       it: "Password",
       pt: "Senha",
       sv: "L\xF6senord",
-      ru: "\u041F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u041F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Has\u0142o"
     },
     new_password: {
       en: "New password",
@@ -45688,7 +45795,8 @@ var bleh = (() => {
       it: "Nuova password",
       pt: "Nova senha",
       sv: "Nytt l\xF6senord",
-      ru: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Nowe has\u0142o"
     },
     confirm_password: {
       en: "Confirm password",
@@ -45697,7 +45805,8 @@ var bleh = (() => {
       it: "Conferma password",
       pt: "Confirmar senha",
       sv: "Verifiera l\xF6senord",
-      ru: "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Potwierd\u017A has\u0142o"
     },
     change: {
       en: "Change",
@@ -45706,7 +45815,8 @@ var bleh = (() => {
       it: "Cambia",
       pt: "Mudar",
       sv: "\xC4ndra",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C",
+      pl: "Zmie\u0144"
     },
     marketing_emails: {
       name: {
@@ -45716,7 +45826,8 @@ var bleh = (() => {
         it: "E-mail di marketing",
         pt: "E-mails promocionais",
         sv: "Marknadsf\xF6ringsmejl",
-        ru: "\u041C\u0430\u0440\u043A\u0435\u0442\u0438\u043D\u0433\u043E\u0432\u044B\u0435 \u0440\u0430\u0441\u0441\u044B\u043B\u043A\u0438"
+        ru: "\u041C\u0430\u0440\u043A\u0435\u0442\u0438\u043D\u0433\u043E\u0432\u044B\u0435 \u0440\u0430\u0441\u0441\u044B\u043B\u043A\u0438",
+        pl: "Emaile reklamowe"
       },
       body: {
         en: "Last.fm can optionally send promotional emails from time to time",
@@ -45725,7 +45836,8 @@ var bleh = (() => {
         it: "Last.fm pu\xF2 opzionalmente inviare email promozionali ogni tanto",
         pt: "A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos",
         sv: "Last.fm kan valfritt skicka reklammejl d\xE5 och d\xE5",
-        ru: "Last.fm \u043C\u043E\u0436\u0435\u0442 \u043F\u043E \u0436\u0435\u043B\u0430\u043D\u0438\u044E \u0432\u0440\u0435\u043C\u044F \u043E\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u043D\u044B\u0435 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0435 \u043F\u0438\u0441\u044C\u043C\u0430"
+        ru: "Last.fm \u043C\u043E\u0436\u0435\u0442 \u043F\u043E \u0436\u0435\u043B\u0430\u043D\u0438\u044E \u0432\u0440\u0435\u043C\u044F \u043E\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u043D\u044B\u0435 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0435 \u043F\u0438\u0441\u044C\u043C\u0430",
+        pl: "Last.fm mo\u017Ce okazjonalnie wysy\u0142a\u0107 emaile reklamowe"
       }
     },
     email_language: {
@@ -45735,7 +45847,8 @@ var bleh = (() => {
       it: "Lingua delle email",
       pt: "Idioma dos e-mails",
       sv: "Mejlspr\xE5k",
-      ru: "\u042F\u0437\u044B\u043A \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0445 \u043F\u0438\u0441\u0435\u043C"
+      ru: "\u042F\u0437\u044B\u043A \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0445 \u043F\u0438\u0441\u0435\u043C",
+      pl: "J\u0119zyk email"
     },
     communication: {
       en: "Communication",
@@ -45744,7 +45857,8 @@ var bleh = (() => {
       it: "Comunicazione",
       pt: "Comunica\xE7\xE3o",
       sv: "Kommunikation",
-      ru: "\u041A\u043E\u043C\u043C\u0443\u043D\u0438\u043A\u0430\u0446\u0438\u044F"
+      ru: "\u041A\u043E\u043C\u043C\u0443\u043D\u0438\u043A\u0430\u0446\u0438\u044F",
+      pl: "Komunikacja"
     },
     security: {
       en: "Security",
@@ -45753,7 +45867,8 @@ var bleh = (() => {
       it: "Sicurezza",
       pt: "Seguran\xE7a",
       sv: "Sekretess",
-      ru: "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C"
+      ru: "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C",
+      pl: "Bezpiecze\u0144stwo"
     },
     logout_everywhere: {
       en: "Logout on all devices",
@@ -45762,7 +45877,8 @@ var bleh = (() => {
       it: "Disconnetti su tutti i dispositivi",
       pt: "Encerrar sess\xE3o em todos os dispositivos",
       sv: "Logga ut fr\xE5n alla enheter",
-      ru: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
+      ru: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432",
+      pl: "Wyloguj ze wszytskich urz\u0105dze\u0144"
     },
     delete_account: {
       name: {
@@ -45772,7 +45888,8 @@ var bleh = (() => {
         it: "Elimina account",
         pt: "Deletar conta",
         sv: "Ta bort konto",
-        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
+        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0430\u043A\u043A\u0430\u0443\u043D\u0442",
+        pl: "Usu\u0144 konto"
       },
       body: {
         en: "Deletion will take 14 days to complete, after this time your account will either be deleted, anonymised, or put beyond use and cannot be recovered. Once deleted, your username will no longer be available.",
@@ -45781,7 +45898,8 @@ var bleh = (() => {
         it: "L\u2019eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
         pt: "A exclus\xE3o levar\xE1 14 dias para ser conclu\xEDda. Ap\xF3s esse per\xEDodo, sua conta ser\xE1 exclu\xEDda, anonimizada ou desativada, e n\xE3o poder\xE1 ser recuperada. Depois de exclu\xEDdo, seu nome de usu\xE1rio n\xE3o estar\xE1 mais dispon\xEDvel.",
         sv: "Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller g\xF6rs oanv\xE4ndbar och kan inte f\xE5s tillbaka. N\xE4r det \xE4r borttaget kan ditt anv\xE4ndarnamn inte bli anv\xE4nt igen.",
-        ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u0441\u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E."
+        ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u0441\u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E.",
+        pl: "Usuni\u0119cie konta potrwa 14 dni, po up\u0142ywie tego czasu twoje konto zostanie usuni\u0119te, zanonimizowane lub wy\u0142\u0105czone i nie b\u0119dzie mo\u017Cna go przywr\xF3ci\u0107. Po usuni\u0119ciu, Twoja nazwa u\u017Cytkownika nie b\u0119dzie ju\u017C dost\u0119pna."
       }
     },
     delete_account_permanently: {
@@ -45791,7 +45909,8 @@ var bleh = (() => {
       it: "Elimina {u} permanentemente",
       pt: "Deletar {u} permanentemente",
       sv: "Ta bort {u} permanent",
-      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C {u} \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430"
+      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C {u} \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430",
+      pl: "Usu\u0144 {u} na sta\u0142e"
     },
     other: {
       // 'other' section in settings
@@ -45801,7 +45920,8 @@ var bleh = (() => {
       it: "Altro",
       pt: "Outro",
       sv: "Annat",
-      ru: "\u0414\u0440\u0443\u0433\u043E\u0435"
+      ru: "\u0414\u0440\u0443\u0433\u043E\u0435",
+      pl: "Inne"
     },
     applications: {
       en: "Applications",
@@ -45810,7 +45930,8 @@ var bleh = (() => {
       it: "Applicazioni",
       sv: "Applikationer",
       ru: "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F",
-      pt: "Aplica\xE7\xF5es"
+      pt: "Aplica\xE7\xF5es",
+      pl: "Aplikacje"
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
@@ -45819,7 +45940,8 @@ var bleh = (() => {
       it: "Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.",
       sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster.",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C.",
-      pt: "Conecte sua conta a servi\xE7os de terceiros para uma melhor experi\xEAncia de scrobbling. Certifique-se de que voc\xEA confia nos servi\xE7os abaixo."
+      pt: "Conecte sua conta a servi\xE7os de terceiros para uma melhor experi\xEAncia de scrobbling. Certifique-se de que voc\xEA confia nos servi\xE7os abaixo.",
+      pl: "Po\u0142\u0105cz swoje konto z us\u0142ugami innych dostawc\xF3w, aby korzysta\u0107 z funkcji scrobblingu w jeszcze lepszy spos\xF3b. Upewnij si\u0119, \u017Ce ufasz wymienionym poni\u017Cej us\u0142ugom"
     },
     connect_app: {
       en: "Connect {name}",
@@ -45828,7 +45950,8 @@ var bleh = (() => {
       it: "Connetti {name}",
       pt: "Conectar {name}",
       sv: "Anslut {name}",
-      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C {name}"
+      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C {name}",
+      pl: "Po\u0142\u0105cz {name}"
     },
     connect: {
       en: "Connect",
@@ -45837,7 +45960,8 @@ var bleh = (() => {
       it: "Connetti",
       pt: "Conectar",
       sv: "Anslut",
-      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C"
+      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C",
+      pl: "Po\u0142\u0105cz"
     },
     suggested: {
       en: "Suggested",
@@ -45846,7 +45970,8 @@ var bleh = (() => {
       it: "Suggerito",
       sv: "F\xF6reslaget",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0435",
-      pt: "Sugerido"
+      pt: "Sugerido",
+      pl: "Sugerowane"
     },
     connected: {
       en: "Connected",
@@ -45855,7 +45980,8 @@ var bleh = (() => {
       it: "Connesso",
       pt: "Conectado",
       sv: "Anslutit",
-      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
+      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E",
+      pl: "Po\u0142\u0105czono"
     },
     not_connected: {
       en: "Not connected",
@@ -45864,7 +45990,8 @@ var bleh = (() => {
       it: "Non connesso",
       pt: "N\xE3o conectado",
       sv: "Inte ansluten",
-      ru: "\u041D\u0435 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
+      ru: "\u041D\u0435 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E",
+      pl: "Nie po\u0142\u0105czono"
     },
     api: {
       name: {
@@ -45874,7 +46001,8 @@ var bleh = (() => {
         it: "Sblocca ulteriori funzionalit\xE0 dell\u2019API",
         pt: "Desbloqueie recursos adicionais da API",
         sv: "L\xE5s upp flera API-funktioner",
-        ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API"
+        ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API",
+        pl: "Odblokuj dodatkowe funkcje API"
       },
       body: {
         en: "Link your account to allow API access such as scrobbling",
@@ -45883,7 +46011,8 @@ var bleh = (() => {
         it: "Connetti il tuo account per attivare l\u2019accesso all\u2019API, ad esempio per lo scrobbling",
         pt: "Conecte sua conta para permitir o acesso \xE0 API, como o scrobbling",
         sv: "Koppla ditt konto f\xF6r att till\xE5ta API-\xE5tkomster, som att skrobbla",
-        ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430"
+        ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430",
+        pl: "Po\u0142\u0105cz swoje konto, aby umo\u017Cliwi\u0107 dost\u0119p do API, np. w celu scrobblowania"
       }
     },
     api_status: {
@@ -45893,7 +46022,8 @@ var bleh = (() => {
       it: "Stato API",
       pt: "Status da API",
       sv: "API-status",
-      ru: "\u0421\u0442\u0430\u0442\u0443\u0441 API"
+      ru: "\u0421\u0442\u0430\u0442\u0443\u0441 API",
+      pl: "Status API"
     },
     app_would_like_to_connect: {
       // app name is above
@@ -45903,7 +46033,8 @@ var bleh = (() => {
       it: "vorrebbe utilizzare il tuo account",
       pt: "gostaria de usar sua conta",
       sv: "vill anv\xE4nda ditt konto",
-      ru: "\u0445\u043E\u0447\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
+      ru: "\u0445\u043E\u0447\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u0430\u043A\u043A\u0430\u0443\u043D\u0442",
+      pl: "chce u\u017Cy\u0107 Twojego konta"
     },
     logged_in_as: {
       en: "Logged in as {user}",
@@ -45912,7 +46043,8 @@ var bleh = (() => {
       it: "Connesso come {user}",
       pt: "Conectado como {user}",
       sv: "Loggat in som {user}",
-      ru: "\u0412\u044B \u0432\u043E\u0448\u043B\u0438 \u043A\u0430\u043A {user}"
+      ru: "\u0412\u044B \u0432\u043E\u0448\u043B\u0438 \u043A\u0430\u043A {user}",
+      pl: "Zalogowano jako {user}"
     },
     not_logged_in: {
       en: "Not logged in",
@@ -45921,7 +46053,8 @@ var bleh = (() => {
       it: "Non connesso",
       pt: "N\xE3o conectado",
       sv: "Inte inloggad",
-      ru: "\u041D\u0435 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435"
+      ru: "\u041D\u0435 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435",
+      pl: "Nie zalogowano"
     },
     ensure_you_trust: {
       // API applications
@@ -45932,7 +46065,8 @@ var bleh = (() => {
       it: "Assicurati di fidarti di questa applicazione",
       pt: "Certifique-se de que voc\xEA confia neste aplicativo",
       sv: "Var s\xE4ker p\xE5 att du litar denna applikation",
-      ru: "\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u044D\u0442\u043E\u043C\u0443 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E"
+      ru: "\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u044D\u0442\u043E\u043C\u0443 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E",
+      pl: "Upewnij si\u0119, \u017Ce ufasz tej aplikacji"
     },
     has_been_connected: {
       // app name is above
@@ -45942,7 +46076,8 @@ var bleh = (() => {
       it: "\xE8 stato connesso",
       pt: "foi conectado",
       sv: "har anslutits",
-      ru: "\u0431\u044B\u043B\u043E \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
+      ru: "\u0431\u044B\u043B\u043E \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E",
+      pl: "po\u0142\u0105czono"
     },
     you_can_now_close_this_tab: {
       en: "You can now close this tab",
@@ -45951,7 +46086,8 @@ var bleh = (() => {
       it: "Puoi chiudere questa scheda",
       pt: "Voc\xEA pode fechar esta aba agora",
       sv: "Du kan nu st\xE4nga den h\xE4r fliken",
-      ru: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u044D\u0442\u0443 \u0432\u043A\u043B\u0430\u0434\u043A\u0443"
+      ru: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u044D\u0442\u0443 \u0432\u043A\u043B\u0430\u0434\u043A\u0443",
+      pl: "Mo\u017Cesz teraz zamnk\u0105\u0107 t\u0105 zak\u0142adk\u0119"
     },
     manage_applications: {
       // API applications
@@ -45962,7 +46098,8 @@ var bleh = (() => {
       it: "Gestisci applicazioni",
       pt: "Gerenciar aplica\xE7\xF5es",
       sv: "Hantera applikationer",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438",
+      pl: "Zarz\u0105dzaj aplikacjami"
     },
     markdown_profiles: {
       name: {
@@ -45972,7 +46109,8 @@ var bleh = (() => {
         it: "Usa formattazione avanzata nei profili",
         pt: "Usar formata\xE7\xE3o estilosa nos perfis",
         sv: "Anv\xE4nd snygg formatering p\xE5 profiler",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445",
+        pl: "Zastosuj \u0142adniejsze formatowanie profili"
       },
       body: {
         en: "Allows the use of line breaks, bold text, italics, and images in all \u201CAbout Me\u201D panels",
@@ -45981,7 +46119,8 @@ var bleh = (() => {
         it: "Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli \u201CInformazioni\u201D",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todos os pain\xE9is \u201CSobre mim\u201D",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla \u201COm mig\u201D-paneler",
-        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB"
+        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB",
+        pl: "Umo\u017Cliwia stosowanie znak\xF3w ko\u0144ca linii, pogrubienia, kursywy oraz obraz\xF3w w panelach \u201EO mnie\u201D"
       }
     },
     markdown_shouts: {
@@ -45992,7 +46131,8 @@ var bleh = (() => {
         it: "Usa formattazione avanzata nelle note",
         pt: "Usar formata\xE7\xE3o estilosa nas caixas de mensagens",
         sv: "Anv\xE4nd snygg formatering p\xE5 hojtningar",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u0420\u0443\u043F\u043E\u0440\u0435"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u0420\u0443\u043F\u043E\u0440\u0435",
+        pl: "Zastosuj \u0142adniejsze formatowanie w komentarzach"
       },
       body: {
         en: "Allows the use of line breaks, bold text, italics, and images in all shouts",
@@ -46001,7 +46141,8 @@ var bleh = (() => {
         it: "Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todas as caixas de mensagens",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla hojtningar",
-        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445"
+        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445",
+        pl: "Umo\u017Cliwia stosowanie znak\xF3w ko\u0144ca linii, pogrubienia, kursywy oraz obraz\xF3w w komentarzach"
       },
       preview: {
         en: "hello! **hello!** *hello!*\n[here\u2019s a link](https://katelyn.moe) HAII @evangelicgirl",
@@ -46010,7 +46151,8 @@ var bleh = (() => {
         it: "ciao! **ciao!** *ciao!*\n[questo \xE8 un link](https://katelyn.moe) CIAOO @evangelicgirl",
         pt: "oi! **ol\xE1!** *opa!*\n[aqui est\xE1 um link](https://katelyn.moe) OIEE @evangelicgirl",
         sv: "hej! **hej!** *hej!*\n[h\xE4r \xE4r en l\xE4nk](https://katelyn.moe) HEJJ @evangelicgirl",
-        ru: "\u043F\u0440\u0438\u0432\u0435\u0442! **\u043F\u0440\u0438\u0432\u0435\u0442!** *\u043F\u0440\u0438\u0432\u0435\u0442!*\n[\u0432\u043E\u0442 \u0441\u0441\u044B\u043B\u043A\u0430](https://katelyn.moe) \u041F\u0420\u0418\u0412\u0415\u0422 @evangelicgirl"
+        ru: "\u043F\u0440\u0438\u0432\u0435\u0442! **\u043F\u0440\u0438\u0432\u0435\u0442!** *\u043F\u0440\u0438\u0432\u0435\u0442!*\n[\u0432\u043E\u0442 \u0441\u0441\u044B\u043B\u043A\u0430](https://katelyn.moe) \u041F\u0420\u0418\u0412\u0415\u0422 @evangelicgirl",
+        pl: "hej! **hej!** *hej!*\n[link tutaj](https://katelyn.moe)) HEJJ @evangelicgirl"
       }
     },
     gathering_your_plays: {
@@ -46020,7 +46162,8 @@ var bleh = (() => {
       it: "Raccogliendo le tue riproduzioni di album",
       pt: "Coletando suas reprodu\xE7\xF5es de \xE1lbuns",
       sv: "Samlar dina albumspelningar",
-      ru: "\u0421\u043E\u0431\u0438\u0440\u0430\u0435\u043C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
+      ru: "\u0421\u043E\u0431\u0438\u0440\u0430\u0435\u043C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+      pl: "Zbieranie odtworze\u0144 z album\xF3w"
     },
     failed_to_find_tracks: {
       en: "You do not have any plays",
@@ -46029,7 +46172,8 @@ var bleh = (() => {
       it: "Non hai alcuna riproduzione",
       pt: "Voc\xEA n\xE3o tem nenhuma reprodu\xE7\xE3o",
       sv: "Du har inga spelningar",
-      ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+      ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
+      pl: "Nie masz \u017Cadnych odtworze\u0144"
     },
     own_plays: {
       // tracklist source menu option that enables the thing below
@@ -46039,7 +46183,8 @@ var bleh = (() => {
       it: "Riproduzioni personali",
       sv: "Egna spelningar",
       ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
-      pt: "Reprodu\xE7\xF5es pr\xF3prias"
+      pt: "Reprodu\xE7\xF5es pr\xF3prias",
+      pl: "W\u0142asne odtworzenia"
     },
     sourced_from_own_plays: {
       // tracklist from your own album plays
@@ -46050,7 +46195,8 @@ var bleh = (() => {
       ja: "\u516C\u5F0F\u30C8\u30E9\u30C3\u30AF\u30EA\u30B9\u30C8\u304C\u5229\u7528\u3067\u304D\u306A\u3044\u305F\u3081\u3001\u518D\u751F\u5C65\u6B74\u304B\u3089\u53D6\u5F97\u3057\u307E\u3057\u305F",
       pt: "Baseado nas suas pr\xF3prias reprodu\xE7\xF5es, pois a tracklist oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtas fr\xE5n dina egna spelningar f\xF6r en officiell spellista finns inte",
-      ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u043E \u0438\u0437 \u0432\u0430\u0448\u0438\u0445 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"
+      ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u043E \u0438\u0437 \u0432\u0430\u0448\u0438\u0445 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D",
+      pl: "Ta lista opiera si\u0119 na twoich w\u0142asnych odtworzeniach, poniewa\u017C nie jest dost\u0119pna \u017Cadna oficjalna lista utwor\xF3w"
     },
     submit_language: {
       name: {
@@ -46060,7 +46206,8 @@ var bleh = (() => {
         it: "Sei fluente in un linguaggio supportato?",
         pt: "Voc\xEA \xE9 fluente em algum dos idiomas suportados?",
         sv: "Talar du ett spr\xE5k som st\xF6ds flytande?",
-        ru: "\u0412\u044B \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E \u0440\u0430\u0437\u0433\u043E\u0432\u0430\u0440\u0438\u0432\u0430\u0435\u0442\u0435 \u043D\u0430 \u043E\u0434\u043D\u043E\u043C \u0438\u0437 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u044F\u0437\u044B\u043A\u043E\u0432?"
+        ru: "\u0412\u044B \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E \u0440\u0430\u0437\u0433\u043E\u0432\u0430\u0440\u0438\u0432\u0430\u0435\u0442\u0435 \u043D\u0430 \u043E\u0434\u043D\u043E\u043C \u0438\u0437 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u044F\u0437\u044B\u043A\u043E\u0432?",
+        pl: "Pos\u0142ugujesz si\u0119 biegle jednym z obs\u0142ugiwanych j\u0119zyk\xF3w?"
       },
       body: {
         en: "Translations are powered by community contributions from wonderful people like you",
@@ -46069,7 +46216,8 @@ var bleh = (() => {
         it: "Le traduzioni sono basate sulle contribuzioni di persone fantastiche come te",
         pt: "As tradu\xE7\xF5es s\xE3o feitas gra\xE7as \xE0s contribui\xE7\xF5es da comunidade de pessoas incr\xEDveis como voc\xEA",
         sv: "\xD6vers\xE4ttningar drivs av bidrag fr\xE5n underbara folk som du",
-        ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B \u043E\u0431\u0435\u0441\u043F\u0435\u0447\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u043E\u043C \u0442\u0430\u043A\u0438\u0445 \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439, \u043A\u0430\u043A \u0432\u044B"
+        ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B \u043E\u0431\u0435\u0441\u043F\u0435\u0447\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u043E\u043C \u0442\u0430\u043A\u0438\u0445 \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439, \u043A\u0430\u043A \u0432\u044B",
+        pl: "T\u0142umaczenia powstaj\u0105 dzi\u0119ki wk\u0142adowi spo\u0142eczno\u015Bci z\u0142o\u017Conej ze wspania\u0142ych os\xF3b, takich jak Ty"
       }
     },
     welcome_to_bleh: {
@@ -46080,7 +46228,8 @@ var bleh = (() => {
       it: "Benvenuto in {b}, grazie per l\u2019installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
       pt: "Bem-vindo ao {b}, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
       sv: "V\xE4lkommen till {b}, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
-      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 {b}, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043F\u0435\u0440\u0432\u0438\u0447\u043D\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
+      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 {b}, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043F\u0435\u0440\u0432\u0438\u0447\u043D\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3",
+      pl: "Witaj w {b}, dzi\u0119kuj\u0119 za instalacj\u0119!<br>Mo\u017Cesz przej\u015B\u0107 przez ten szybki kreator konfiguracji, aby rozpocz\u0105\u0107, lub przej\u015B\u0107 od razu do swojego profilu i samodzielnie wszystko sprawdzi\u0107 <3"
     },
     prev: {
       // previous
@@ -46088,7 +46237,8 @@ var bleh = (() => {
       pt: "Anterior",
       es: "Anterior",
       ru: "\u041D\u0430\u0437\u0430\u0434",
-      it: "Precedente"
+      it: "Precedente",
+      pl: "Poprzedni"
     },
     next: {
       en: "Next",
@@ -46097,7 +46247,8 @@ var bleh = (() => {
       it: "Prossimo",
       pt: "Pr\xF3ximo",
       sv: "N\xE4sta",
-      ru: "\u0414\u0430\u043B\u0435\u0435"
+      ru: "\u0414\u0430\u043B\u0435\u0435",
+      pl: "Nast\u0119pny"
     },
     choose_a_theme: {
       en: "Choose a theme that suits you best!",
@@ -46106,7 +46257,8 @@ var bleh = (() => {
       it: "Seleziona il tema che ti piace di pi\xF9!",
       pt: "Escolha o tema que mais combina com voc\xEA",
       sv: "V\xE4lj ett tema som passar dig b\xE4st!",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E!"
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E!",
+      pl: "Wybierz motyw, kt\xF3ry najbardziej Ci odpowiada"
     },
     accessibility_explain: {
       en: "Before we continue, let\u2019s assess your accessibility settings.",
@@ -46115,7 +46267,8 @@ var bleh = (() => {
       it: "Prima di continuare, valutiamo le tue impostazioni di accessibilit\xE0.",
       pt: "Antes de continuarmos, vamos acessar suas configura\xE7\xF5es de acessibilidade.",
       sv: "Innan vi forts\xE4tter ska vi kontrollera dina tillg\xE4nglighetsinst\xE4llningar.",
-      ru: "\u041F\u0440\u0435\u0436\u0434\u0435 \u0447\u0435\u043C \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C, \u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u043E\u0446\u0435\u043D\u0438\u043C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u0438."
+      ru: "\u041F\u0440\u0435\u0436\u0434\u0435 \u0447\u0435\u043C \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C, \u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u043E\u0446\u0435\u043D\u0438\u043C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u0438.",
+      pl: "Zanim przejdziemy dalej, sprawd\u017Amy Twoje ustawienia dost\u0119pno\u015Bci"
     },
     colours_explain: {
       en: "Choose a colour you like or make your own favourite.",
@@ -46124,7 +46277,8 @@ var bleh = (() => {
       it: "Seleziona un colore che ti piace o crea il tuo preferito.",
       pt: "Escolha uma cor que voc\xEA goste ou crie a sua favorita.",
       sv: "V\xE4lj en f\xE4rg du tycker om eller g\xF6r din egna favorit.",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0432\u0435\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F, \u0438\u043B\u0438 \u0441\u043E\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u0439 \u043B\u044E\u0431\u0438\u043C\u044B\u0439."
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0432\u0435\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F, \u0438\u043B\u0438 \u0441\u043E\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u0439 \u043B\u044E\u0431\u0438\u043C\u044B\u0439.",
+      pl: "Wybierz kolor kt\xF3ry Ci odpowiada albo stw\xF3rz sw\xF3j ulubiony"
     },
     music_explain: {
       en: "We offer a variety of options to help you manage your music library.",
@@ -46133,7 +46287,8 @@ var bleh = (() => {
       it: "Offriamo una variet\xE0 di opzioni per aiutarti a gestire la tua libreria musicale.",
       pt: "N\xF3s oferecemos uma variedade de op\xE7\xF5es para ajudar voc\xEA a gerenciar sua biblioteca musical.",
       sv: "Vi har massa olika inst\xE4llningar f\xF6r att hj\xE4lpa till att ordna ditt musikbibliotek.",
-      ru: "\u041C\u044B \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u043C \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E \u043E\u043F\u0446\u0438\u0439, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043C\u043E\u0447\u044C \u0432\u0430\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u0448\u0435\u0439 \u043C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u043E\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u043E\u0439."
+      ru: "\u041C\u044B \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u043C \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E \u043E\u043F\u0446\u0438\u0439, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043C\u043E\u0447\u044C \u0432\u0430\u043C \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u0448\u0435\u0439 \u043C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u043E\u0439 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u043E\u0439.",
+      pl: "Oferujemy wiele opcji, kt\xF3re pomog\u0105 Ci zarz\u0105dza\u0107 bibliotek\u0105 muzyczn\u0105."
     },
     setup_end: {
       en: "That\u2019s all for now, to configure your {b} installation in the future head to {a}the settings{/a} in your menu!",
@@ -46142,7 +46297,8 @@ var bleh = (() => {
       it: "\xC8 tutto per ora, per configurare la tua installazione di {b} in futuro vai alle {a}impostazioni{a} dal tuo menu!",
       pt: "Por enquanto isso \xE9 tudo, para configurar sua instala\xE7\xE3o do {b} futuramente, v\xE1 at\xE9 {a}nas configura\xE7\xF5es{/a} no seu menu!",
       sv: "Det var allt just nu, f\xF6r att konfigurera din {b}-installation i framtiden g\xE5 in p\xE5 {a}inst\xE4llningarna{/a} i menyn!",
-      ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0451; \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 {b} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!"
+      ru: "\u041D\u0430 \u044D\u0442\u043E\u043C \u043F\u043E\u043A\u0430 \u0432\u0441\u0451; \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 {b} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C, \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 {a}\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438{/a} \u0432 \u0432\u0430\u0448\u0435\u043C \u043C\u0435\u043D\u044E!",
+      pl: "To wszystko na teraz. Aby w przysz\u0142o\u015Bci skonfigurowa\u0107 swoj\u0105 instalacj\u0119 {b}, przejd\u017A do {a}ustawie\u0144{/a} w menu!"
     },
     seasonal_particles: {
       name: {
@@ -46152,7 +46308,8 @@ var bleh = (() => {
         it: "Mostra particelle durante specifiche stagioni",
         pt: "Mostrar particulas durante esta\xE7\xF5es selecionadas",
         sv: "Visa partiklar under vissa \xE5rstider",
-        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0451\u043D\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u044B"
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0451\u043D\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u044B",
+        pl: "Wy\u015Bwietlaj efekty w wybranych porach roku"
       },
       body: {
         en: "During colder seasons, watch pretty snowflakes fall \u22C6\u207A\u208A\u2745\u3002",
@@ -46161,7 +46318,8 @@ var bleh = (() => {
         it: "Durante le stagioni pi\xF9 fredde, guarda dei bellissimi fiocchi di neve cadere  \u22C6\u207A\u208A\u2745\u3002",
         pt: "Durante as sess\xF5es de inverno, veja flocos de neve bonitinhos caindo \u22C6\u207A\u208A\u2745\u3002",
         sv: "Under kyligare \xE5rstider, se vackra sn\xF6flingorna glida sakta ner \u22C6\u207A\u208A\u2745\u3002",
-        ru: "\u0412 \u0445\u043E\u043B\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u0433\u043E\u0434\u0430 \u043D\u0430\u0431\u043B\u044E\u0434\u0430\u0439\u0442\u0435 \u0437\u0430 \u043A\u0440\u0430\u0441\u0438\u0432\u044B\u043C\u0438 \u043F\u0430\u0434\u0430\u044E\u0449\u0438\u043C\u0438 \u0441\u043D\u0435\u0436\u0438\u043D\u043A\u0430\u043C\u0438 \u22C6\u207A\u208A\u2745\u3002"
+        ru: "\u0412 \u0445\u043E\u043B\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u0433\u043E\u0434\u0430 \u043D\u0430\u0431\u043B\u044E\u0434\u0430\u0439\u0442\u0435 \u0437\u0430 \u043A\u0440\u0430\u0441\u0438\u0432\u044B\u043C\u0438 \u043F\u0430\u0434\u0430\u044E\u0449\u0438\u043C\u0438 \u0441\u043D\u0435\u0436\u0438\u043D\u043A\u0430\u043C\u0438 \u22C6\u207A\u208A\u2745\u3002",
+        pl: "Podczas ch\u0142odnych p\xF3r roku, zobacz spadaj\u0105ce p\u0142atki \u015Bniegu \u22C6\u207A\u208A\u2745\u3002"
       }
     },
     all_particles: {
@@ -46171,7 +46329,8 @@ var bleh = (() => {
       it: "Mostra tutte le particelle",
       pt: "Mostrar todas as part\xEDculas",
       sv: "Visa fulla partiklar",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432\u0441\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432\u0441\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B",
+      pl: "Wy\u015Bwietl wszystkie efekty"
     },
     less_particles: {
       en: "Show less particles",
@@ -46180,7 +46339,8 @@ var bleh = (() => {
       it: "Mostra meno particelle",
       pt: "Mostrar menos part\xEDculas",
       sv: "Visa mindre partiklar",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043C\u0435\u043D\u044C\u0448\u0435 \u0447\u0430\u0441\u0442\u0438\u0446"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043C\u0435\u043D\u044C\u0448\u0435 \u0447\u0430\u0441\u0442\u0438\u0446",
+      pl: "Wy\u015Bwietl mniej efekt\xF3w"
     },
     no_particles: {
       en: "Disable particles",
@@ -46189,7 +46349,8 @@ var bleh = (() => {
       it: "Disattiva particelle",
       pt: "Desativar part\xEDculas",
       sv: "St\xE4ng av partiklar",
-      ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B"
+      ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B",
+      pl: "Wy\u0142\u0105cz efekty"
     },
     beware_notice: {
       en: "Beware! Only change these settings if you know what you\u2019re doing",
@@ -46198,7 +46359,8 @@ var bleh = (() => {
       it: "Attenzione! Cambia queste impostazioni solo se sai cosa stai facendo",
       pt: "Cuidado! Apenas mude estas configura\xE7\xF5es se voc\xEA sabe o que voc\xEA est\xE1 fazendo",
       sv: "Var f\xF6rsiktig! \xC4ndra bara dessa inst\xE4llningar om du vet vad du g\xF6r",
-      ru: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E! \u041C\u0435\u043D\u044F\u0439\u0442\u0435 \u044D\u0442\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0432\u044B \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435"
+      ru: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E! \u041C\u0435\u043D\u044F\u0439\u0442\u0435 \u044D\u0442\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0432\u044B \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435",
+      pl: "Uwaga! Zmieniaj te ustawienia tylko wtedy, gdy wiesz, co robisz"
     },
     intended_for_development: {
       name: {
@@ -46208,7 +46370,8 @@ var bleh = (() => {
         it: "Questa pagina \xE8 pensata per lo sviluppo",
         sv: "Denna sida \xE4r avsedd f\xF6r utveckling",
         ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u0430 \u0434\u043B\u044F \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438",
-        pt: "Esta p\xE1gina \xE9 destinada para desenvolvimento"
+        pt: "Esta p\xE1gina \xE9 destinada para desenvolvimento",
+        pl: "Ta strona jest przeznaczona do cel\xF3w programistycznych"
       },
       body: {
         en: "Be careful with options here (especially feature flags) as they can break your install.",
@@ -46217,7 +46380,8 @@ var bleh = (() => {
         it: "Fai attenzione con le opzioni qui (specialmente i feature flag) perch\xE9 possono rompere la tua installazione.",
         pt: "Tenha cuidado com as op\xE7\xF5es aqui (especialmente com os flags de recursos), pois elas podem causar problemas na sua instala\xE7\xE3o.",
         sv: "Var f\xF6rsiktig med inst\xE4llningarna h\xE4r (speciellt funktionsflaggor) eftersom dom kan f\xF6rst\xF6ra din installation.",
-        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B \u0441 \u043E\u043F\u0446\u0438\u044F\u043C\u0438 \u0437\u0434\u0435\u0441\u044C (\u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E \u0441 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439), \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u043D\u0438 \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0440\u0443\u0448\u0438\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u0443 \u0432\u0430\u0448\u0435\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438."
+        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B \u0441 \u043E\u043F\u0446\u0438\u044F\u043C\u0438 \u0437\u0434\u0435\u0441\u044C (\u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E \u0441 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439), \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u043D\u0438 \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0440\u0443\u0448\u0438\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u0443 \u0432\u0430\u0448\u0435\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438.",
+        pl: "Zachowaj ostro\u017Cno\u015B\u0107 przy korzystaniu z tych ustawie\u0144 (zw\u0142aszcza flag funkcji), poniewa\u017C mog\u0105 one spowodowa\u0107 uszkodzenie instalacji."
       }
     },
     flags: {
@@ -46228,7 +46392,8 @@ var bleh = (() => {
       it: "Flags",
       sv: "Flaggor",
       ru: "\u0424\u043B\u0430\u0433\u0438",
-      pt: "Flags"
+      pt: "Flags",
+      pl: "Flagi"
     },
     manage_feature_flags: {
       // feature flags control features (like an option)
@@ -46238,7 +46403,8 @@ var bleh = (() => {
       it: "Gestione feature flag",
       pt: "Gerenciar flags de recursos",
       sv: "Hantera funktionsflaggor",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439",
+      pl: "Zarz\u0105dzaj flagami funkcji"
     },
     development: {
       en: "Development",
@@ -46247,7 +46413,8 @@ var bleh = (() => {
       it: "Sviluppo",
       pt: "Desenvolvimento",
       sv: "Utveckling",
-      ru: "\u0420\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430"
+      ru: "\u0420\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430",
+      pl: "Rozw\xF3j"
     },
     this_section_requires_password: {
       en: "This section requires a password to view",
@@ -46256,7 +46423,8 @@ var bleh = (() => {
       it: "Questa sezione richiede una password per accedere",
       pt: "Esta se\xE7\xE3o requer uma senha para ser visualizada",
       sv: "Denna avdelning beh\xF6ver ett l\xF6senord f\xF6r att se",
-      ru: "\u0414\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430 \u044D\u0442\u043E\u0433\u043E \u0440\u0430\u0437\u0434\u0435\u043B\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u0414\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430 \u044D\u0442\u043E\u0433\u043E \u0440\u0430\u0437\u0434\u0435\u043B\u0430 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u043F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Ta sekcja wymaga has\u0142a, aby j\u0105 wy\u015Bwietli\u0107"
     },
     enter_password: {
       en: "Enter password",
@@ -46265,7 +46433,8 @@ var bleh = (() => {
       it: "Inserire password",
       pt: "Digite a senha",
       sv: "Skriv in l\xF6senord",
-      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Wpisz has\u0142o"
     },
     unlocked: {
       en: "Unlocked",
@@ -46274,7 +46443,8 @@ var bleh = (() => {
       it: "Sbloccato",
       pt: "Desbloqueado",
       sv: "Uppl\xE5st",
-      ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E"
+      ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
+      pl: "Odblokowane"
     },
     privacy: {
       en: "Privacy",
@@ -46284,7 +46454,8 @@ var bleh = (() => {
       pl: "Prywatno\u015B\u0107",
       pt: "Privacidade",
       sv: "Sekretess",
-      ru: "\u041A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C"
+      ru: "\u041A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
+      pl: "Prywatno\u015B\u0107"
     },
     recent_listening: {
       name: {
@@ -46294,7 +46465,8 @@ var bleh = (() => {
         it: "Nascondi la tua cronologia di ascolto recente",
         pt: "Ocultar seu hist\xF3rico de scrobbles recente",
         sv: "G\xF6m senaste lyssnarinformationen",
-        ru: "\u0421\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0443 \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+        ru: "\u0421\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0443 \u043D\u0435\u0434\u0430\u0432\u043D\u044E\u044E \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
+        pl: "Ukryj swoj\u0105 ostatni\u0105 histori\u0119 s\u0142uchania"
       },
       body: {
         en: "Keeps your activity more private",
@@ -46303,7 +46475,8 @@ var bleh = (() => {
         it: "Mantiene la tua attivit\xE0 pi\xF9 privata",
         pt: "Mant\xE9m sua atividade mais privada",
         sv: "H\xE5ller din aktivitet mer privat",
-        ru: "\u0414\u0430\u0451\u0442 \u0432\u0430\u0448\u0435\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043B\u0438\u0447\u043D\u043E\u0435 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u043E"
+        ru: "\u0414\u0430\u0451\u0442 \u0432\u0430\u0448\u0435\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043B\u0438\u0447\u043D\u043E\u0435 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u043E",
+        pl: "Zapewnia wi\u0119ksz\u0105 prywatno\u015B\u0107 Twojej aktywno\u015Bci"
       }
     },
     allow_messages_from: {
@@ -46313,7 +46486,8 @@ var bleh = (() => {
       it: "Consenti messaggi da",
       pt: "Permitir mensagens de",
       sv: "Till\xE5t meddelanden ifr\xE5n",
-      ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u043E\u0442"
+      ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u043E\u0442",
+      pl: "Zezw\xF3l na wiadomo\u015Bci od"
     },
     everyone: {
       en: "Everyone",
@@ -46322,7 +46496,8 @@ var bleh = (() => {
       it: "Tutti",
       pt: "Todo mundo",
       sv: "Alla",
-      ru: "\u0412\u0441\u0435"
+      ru: "\u0412\u0441\u0435",
+      pl: "Wszyscy"
     },
     following_and_neighbours: {
       en: "Following and neighbours",
@@ -46331,7 +46506,8 @@ var bleh = (() => {
       it: "Persone che segui e vicini",
       pt: "Seguindo e vizinhos",
       sv: "F\xF6ljare och grannar",
-      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u043A\u0438 \u0438 \u0441\u043E\u0441\u0435\u0434\u0438"
+      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u043A\u0438 \u0438 \u0441\u043E\u0441\u0435\u0434\u0438",
+      pl: "Obserwowani i s\u0105siedzi"
     },
     close_shouts: {
       name: {
@@ -46341,7 +46517,8 @@ var bleh = (() => {
         it: "Chiudi la mia bacheca",
         pt: "Fechar minha caixa de mensagens",
         sv: "St\xE4ng min hojtl\xE5da",
-        ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u043C\u043E\u0439 \u0420\u0443\u043F\u043E\u0440"
+        ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u043C\u043E\u0439 \u0420\u0443\u043F\u043E\u0440",
+        pl: "Zamknij moj\u0105 tablic\u0119 wiadomo\u015Bci"
       },
       body: {
         en: "Removes visibility from everyone (including you)",
@@ -46350,7 +46527,8 @@ var bleh = (() => {
         it: "Rimuove la tua bacheca per tutti (incluso te)",
         pt: "Remove a visibilidade de todos (incluindo voc\xEA)",
         sv: "Ta bort synlighet fr\xE5n alla (inkl. dig)",
-        ru: "\u0423\u0434\u0430\u043B\u044F\u0435\u0442 \u0432\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043B\u044F \u0432\u0441\u0435\u0445 (\u0432\u043A\u043B\u044E\u0447\u0430\u044F \u0432\u0430\u0441)"
+        ru: "\u0423\u0434\u0430\u043B\u044F\u0435\u0442 \u0432\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043B\u044F \u0432\u0441\u0435\u0445 (\u0432\u043A\u043B\u044E\u0447\u0430\u044F \u0432\u0430\u0441)",
+        pl: "Ukrywa to przed wszystkimi (w tym przed Tob\u0105)"
       }
     },
     error: {
@@ -46360,7 +46538,8 @@ var bleh = (() => {
       it: "Errore",
       pt: "Erro",
       sv: "Error",
-      ru: "\u041E\u0448\u0438\u0431\u043A\u0430"
+      ru: "\u041E\u0448\u0438\u0431\u043A\u0430",
+      pl: "B\u0142\u0105d"
     },
     erm: {
       // used when a page is taken down
@@ -46370,7 +46549,8 @@ var bleh = (() => {
       it: "ehm...",
       pt: "puts...",
       sv: "ehm...",
-      ru: "\u044D\u043C..."
+      ru: "\u044D\u043C...",
+      pl: "emm..."
     },
     shortcut: {
       en: "Shortcut",
@@ -46379,7 +46559,8 @@ var bleh = (() => {
       it: "Scorciatoia",
       pt: "Atalho",
       sv: "Genomv\xE4g",
-      ru: "\u042F\u0440\u043B\u044B\u043A"
+      ru: "\u042F\u0440\u043B\u044B\u043A",
+      pl: "Skr\xF3t"
     },
     last_count_days: {
       en: "Last {c} days",
@@ -46389,7 +46570,8 @@ var bleh = (() => {
       pt: "\xDAltimos {c} dias",
       ja: "\u904E\u53BB {c} \u65E5\u9593",
       sv: "Senaste {c} dagarna",
-      ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 {c} \u0434\u043D\u0435\u0439"
+      ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 {c} \u0434\u043D\u0435\u0439",
+      pl: "Ostatnie {c} dni"
     },
     all_time: {
       en: "All time",
@@ -46399,7 +46581,8 @@ var bleh = (() => {
       pt: "Todo o per\xEDodo",
       ja: "\u3059\u3079\u3066\u306E\u671F\u9593",
       sv: "All tid",
-      ru: "\u0412\u0441\u0451 \u0432\u0440\u0435\u043C\u044F"
+      ru: "\u0412\u0441\u0451 \u0432\u0440\u0435\u043C\u044F",
+      pl: "Ca\u0142y okres"
     },
     choose_a_timeframe_above: {
       en: "Choose a timeframe above",
@@ -46408,7 +46591,8 @@ var bleh = (() => {
       it: "Seleziona un intervallo sopra",
       pt: "Escolha um per\xEDodo acima",
       sv: "V\xE4lj en tidsram ovan",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B \u0432\u044B\u0448\u0435"
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B \u0432\u044B\u0448\u0435",
+      pl: "Wybierz przedia\u0142 czasowy powy\u017Cej"
     },
     failed: {
       en: "Failed",
@@ -46417,7 +46601,8 @@ var bleh = (() => {
       it: "Fallito",
       pt: "Falhou",
       sv: "Misslyckades",
-      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C"
+      ru: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C",
+      pl: "Niepowodzenie"
     },
     there_was_a_network_error: {
       en: "There was a network error",
@@ -46426,7 +46611,8 @@ var bleh = (() => {
       it: "C\u2019\xE8 stato un errore di rete",
       pt: "Ocorreu um erro de rede",
       sv: "Ett n\xE4tverksfel har intr\xE4ffat",
-      ru: "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u0441\u0435\u0442\u0438"
+      ru: "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u0441\u0435\u0442\u0438",
+      pl: "Wyst\u0105pi\u0142 b\u0142\u0105d sieci"
     },
     support: {
       en: "Support",
@@ -46435,7 +46621,8 @@ var bleh = (() => {
       it: "Supporto",
       pt: "Suporte",
       sv: "Support",
-      ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0430"
+      ru: "\u041F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0430",
+      pl: "Wsparcie"
     },
     no_plays_in_range: {
       // no plays in date range
@@ -46445,7 +46632,8 @@ var bleh = (() => {
       it: "Nessuna riproduzione in questo intervallo",
       sv: "Inga lyssningar under valda datumintervallet",
       ru: "\u041D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432 \u044D\u0442\u043E\u043C \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0435",
-      pt: "Sem reprodu\xE7\xF5es neste intervalo"
+      pt: "Sem reprodu\xE7\xF5es neste intervalo",
+      pl: "Brak odtworze\u0144 w tym przedziale czasowym"
     },
     accessible_name_colours: {
       name: {
@@ -46455,7 +46643,8 @@ var bleh = (() => {
         it: "Preferisci nomi di colori accessibili",
         pt: "Preferir nomes de cores acess\xEDveis",
         sv: "F\xF6redra l\xE4ttl\xE4sta namnf\xE4rger",
-        ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0435 \u0446\u0432\u0435\u0442\u0430 \u0438\u043C\u0435\u043D"
+        ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0435 \u0446\u0432\u0435\u0442\u0430 \u0438\u043C\u0435\u043D",
+        pl: "Preferuj bardziej czytelne kolory nazw"
       },
       body: {
         en: "Replaces badge and link-coloured names with your theme\u2019s header colour",
@@ -46464,7 +46653,8 @@ var bleh = (() => {
         it: "Sostituisce i distintivi e i nomi colorati come link con il colore di intestazione del tuo tema",
         pt: "Substitui os nomes coloridos dos emblemas e links pela cor do cabe\xE7alho do seu tema",
         sv: "Ers\xE4tter emblem och l\xE4nkf\xE4rgade namn med ditt temas rubrikf\xE4rg",
-        ru: "\u0417\u0430\u043C\u0435\u043D\u044F\u0435\u0442 \u0446\u0432\u0435\u0442\u0430 \u0438\u043C\u0451\u043D \u0437\u043D\u0430\u0447\u043A\u043E\u0432 \u0438 \u0441\u0441\u044B\u043B\u043E\u043A \u0446\u0432\u0435\u0442\u043E\u043C \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u0432\u0430\u0448\u0435\u0439 \u0442\u0435\u043C\u044B"
+        ru: "\u0417\u0430\u043C\u0435\u043D\u044F\u0435\u0442 \u0446\u0432\u0435\u0442\u0430 \u0438\u043C\u0451\u043D \u0437\u043D\u0430\u0447\u043A\u043E\u0432 \u0438 \u0441\u0441\u044B\u043B\u043E\u043A \u0446\u0432\u0435\u0442\u043E\u043C \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u0432\u0430\u0448\u0435\u0439 \u0442\u0435\u043C\u044B",
+        pl: "Zast\u0119puje nazwy w kolorze odznak i link\xF3w kolorem nag\u0142\xF3wka Twojego motywu"
       }
     },
     display_name_styles: {
@@ -46475,7 +46665,8 @@ var bleh = (() => {
         it: "Mostra gli stili del nome visualizzato",
         sv: "Se visningsnamnsstiler",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0442\u0438\u043B\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0433\u043E \u0438\u043C\u0435\u043D\u0438",
-        pt: "Mostrar estilos de nome de exibi\xE7\xE3o"
+        pt: "Mostrar estilos de nome de exibi\xE7\xE3o",
+        pl: "Poka\u017C style nazwy wy\u015Bwietlanej"
       },
       body: {
         en: "Sponsors can choose a custom font and shadow style for their profile name",
@@ -46484,7 +46675,8 @@ var bleh = (() => {
         it: "Gli sponsor possono scegliere un font e uno stile d\u2019ombra personalizzato per il loro nome profilo",
         sv: "Sponsorer kan v\xE4lja valfri typsnitt och skugga f\xF6r deras profilnamn",
         ru: "\u0421\u043F\u043E\u043D\u0441\u043E\u0440\u044B \u043C\u043E\u0433\u0443\u0442 \u0432\u044B\u0431\u0438\u0440\u0430\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439 \u0448\u0440\u0438\u0444\u0442 \u0438 \u0441\u0442\u0438\u043B\u044C \u0442\u0435\u043D\u0435\u0439 \u0434\u043B\u044F \u0438\u043C\u0435\u043D\u0438 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
-        pt: "Patrocinadores podem escolher uma fonte personalizada e estilo de sombra para o nome do perfil deles"
+        pt: "Patrocinadores podem escolher uma fonte personalizada e estilo de sombra para o nome do perfil deles",
+        pl: "Sponsorzy mog\u0105 wybra\u0107 niestandardow\u0105 czcionk\u0119 i styl cienia dla nazwy swojego profilu"
       }
     },
     underline_links: {
@@ -46495,7 +46687,8 @@ var bleh = (() => {
         it: "Sottolinea sempre i link",
         pt: "Sempre sublinhe os links",
         sv: "Ha alltid understrykta l\xE4nkar",
-        ru: "\u0412\u0441\u0435\u0433\u0434\u0430 \u043F\u043E\u0434\u0447\u0451\u0440\u043A\u0438\u0432\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0438"
+        ru: "\u0412\u0441\u0435\u0433\u0434\u0430 \u043F\u043E\u0434\u0447\u0451\u0440\u043A\u0438\u0432\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0438",
+        pl: "Zawsze podkre\u015Blaj linki"
       },
       body: {
         en: "Forces buttons, links, and other interactables to have an underline",
@@ -46504,7 +46697,8 @@ var bleh = (() => {
         it: "Forza i bottoni, i link e altri elementi interattivi ad essere sottolineati",
         pt: "For\xE7a bot\xF5es, links e outros interativos a terem um sublinhado",
         sv: "Tvingar knappar, l\xE4nkar och andra interaktiva objekt att ha understrykt text",
-        ru: "\u0412\u044B\u043D\u0443\u0436\u0434\u0430\u0435\u0442 \u043A\u043D\u043E\u043F\u043A\u0438, \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0435 \u0438\u043D\u0442\u0435\u0440\u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0438\u043C\u0435\u0442\u044C \u043F\u043E\u0434\u0447\u0451\u0440\u043A\u0438\u0432\u0430\u043D\u0438\u0435"
+        ru: "\u0412\u044B\u043D\u0443\u0436\u0434\u0430\u0435\u0442 \u043A\u043D\u043E\u043F\u043A\u0438, \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0435 \u0438\u043D\u0442\u0435\u0440\u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0438\u043C\u0435\u0442\u044C \u043F\u043E\u0434\u0447\u0451\u0440\u043A\u0438\u0432\u0430\u043D\u0438\u0435",
+        pl: "Wymusza podkre\u015Blenie przycisk\xF3w, link\xF3w i innych element\xF3w interaktywnych"
       }
     },
     theme_loading: {
@@ -46515,7 +46709,8 @@ var bleh = (() => {
         it: "Disattiva il caricamento degli stili",
         pt: "Desative o carregamento de estilos",
         sv: "Avaktivera att ladda stilar",
-        ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u0441\u0442\u0438\u043B\u0435\u0439"
+        ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u0441\u0442\u0438\u043B\u0435\u0439",
+        pl: "Wy\u0142\u0105cz \u0142adowanie styl\xF3w"
       },
       body: {
         en: "Allows you to load the stylesheet yourself during development",
@@ -46524,7 +46719,8 @@ var bleh = (() => {
         it: "Permette di caricare lo stylesheet manualmente durante lo sviluppo",
         pt: "Permite que voc\xEA mesmo carregue a folha de estilo enquanto desenvolve",
         sv: "L\xE5ter dig ladda stilschemat sj\xE4lv under utveckling",
-        ru: "\u041F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u0441\u0442\u0438\u043B\u0435\u0439 \u0432\u043E \u0432\u0440\u0435\u043C\u044F \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438"
+        ru: "\u041F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0432\u0430\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u0441\u0442\u0438\u043B\u0435\u0439 \u0432\u043E \u0432\u0440\u0435\u043C\u044F \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438",
+        pl: "Pozwala samodzielnie \u0142adowa\u0107 arkusz styl\xF3w podczas pracy nad projektem"
       }
     },
     upload: {
@@ -46534,7 +46730,8 @@ var bleh = (() => {
       it: "Carica",
       pt: "Enviar",
       sv: "Ladda upp",
-      ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"
+      ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C",
+      pl: "Prze\u015Blij"
     },
     upload_image: {
       en: "Upload image",
@@ -46543,7 +46740,8 @@ var bleh = (() => {
       it: "Carica immagine",
       sv: "Ladda upp bild",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435",
-      pt: "Enviar imagem"
+      pt: "Enviar imagem",
+      pl: "Prze\u015Blij obraz"
     },
     image_details: {
       en: "Image details",
@@ -46552,7 +46750,8 @@ var bleh = (() => {
       it: "Dettagli immagine",
       sv: "Bildinformation",
       ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043E\u0431 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0438",
-      pt: "Detalhes da imagem"
+      pt: "Detalhes da imagem",
+      pl: "Szczeg\xF3\u0142y obrazu"
     },
     title: {
       en: "Title",
@@ -46561,7 +46760,8 @@ var bleh = (() => {
       it: "Titolo",
       sv: "Titel",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
-      pt: "T\xEDtulo"
+      pt: "T\xEDtulo",
+      pl: "Tytu\u0142"
     },
     no_title: {
       en: "No title",
@@ -46570,7 +46770,8 @@ var bleh = (() => {
       it: "Senza titolo",
       sv: "Ingen titel",
       ru: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F",
-      pt: "Sem t\xEDtulo"
+      pt: "Sem t\xEDtulo",
+      pl: "Brak tytu\u0142u"
     },
     description: {
       en: "Description",
@@ -46579,7 +46780,8 @@ var bleh = (() => {
       it: "Descrizione",
       sv: "Beskrivning",
       ru: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435",
-      pt: "Descri\xE7\xE3o"
+      pt: "Descri\xE7\xE3o",
+      pl: "Opis"
     },
     no_description: {
       en: "No description",
@@ -46588,7 +46790,8 @@ var bleh = (() => {
       it: "Nessuna descrizione",
       sv: "Ingen beskrivning",
       ru: "\u0411\u0435\u0437 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u044F",
-      pt: "Sem descri\xE7\xE3o"
+      pt: "Sem descri\xE7\xE3o",
+      pl: "Brak opisu"
     },
     image: {
       en: "Image",
@@ -46596,7 +46799,8 @@ var bleh = (() => {
       de: "Bild",
       es: "Imagen",
       it: "Immagine",
-      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
+      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435",
+      pl: "Obraz"
     },
     attach_image: {
       en: "Attach image",
@@ -46604,7 +46808,8 @@ var bleh = (() => {
       de: "Bild anh\xE4ngen",
       es: "Adjuntar imagen",
       it: "Allega immagine",
-      ru: "\u041F\u0440\u0438\u043A\u0440\u0435\u043F\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
+      ru: "\u041F\u0440\u0438\u043A\u0440\u0435\u043F\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435",
+      pl: "Do\u0142\u0105cz obraz"
     },
     change_avatar: {
       en: "Change avatar",
@@ -46613,7 +46818,8 @@ var bleh = (() => {
       it: "Cambia foto profilo",
       pt: "Mudar foto de perfil",
       sv: "\xC4ndra profilbild",
-      ru: "\u0421\u043C\u0435\u043D\u0438\u0442\u044C \u0430\u0432\u0430\u0442\u0430\u0440"
+      ru: "\u0421\u043C\u0435\u043D\u0438\u0442\u044C \u0430\u0432\u0430\u0442\u0430\u0440",
+      pl: "Zmie\u0144 awatar"
     },
     crop_avatar: {
       en: "Crop avatar",
@@ -46622,7 +46828,8 @@ var bleh = (() => {
       it: "Ritaglia foto profilo",
       pt: "Recortar avatar",
       sv: "Besk\xE4r profilbild",
-      ru: "\u041E\u0431\u0440\u0435\u0437\u0430\u0442\u044C \u0430\u0432\u0430\u0442\u0430\u0440"
+      ru: "\u041E\u0431\u0440\u0435\u0437\u0430\u0442\u044C \u0430\u0432\u0430\u0442\u0430\u0440",
+      pl: "Przytnij awatar"
     },
     crop_notice: {
       en: "Use your scroll wheel to zoom in and out, click and drag to move the image.",
@@ -46631,7 +46838,8 @@ var bleh = (() => {
       it: "Usa la rotella del mouse per ingrandire o rimpicciolire, trascina e rilascia per muovere l\u2019immagine.",
       pt: "Use a scroll do seu mouse para dar zoom in e zoom out, clicar e arrastar para mover a imagem.",
       sv: "Anv\xE4nd ditt scrollhjul f\xF6r att zooma in och ut, klicka och dra f\xF6r att flytta p\xE5 bilden.",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435."
+      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435.",
+      pl: "U\u017Cyj k\xF3\u0142ka myszy, aby przybli\u017Ca\u0107 i oddala\u0107 obraz, a nast\u0119pnie kliknij i przeci\u0105gnij, aby go przesun\u0105\u0107."
     },
     crop_before_uploading: {
       en: "Crop image before uploading",
@@ -46639,7 +46847,8 @@ var bleh = (() => {
       de: "Bild vor dem Hochladen zuschneiden",
       es: "Cortar imagen antes de subir",
       ru: "\u041E\u0431\u0440\u0435\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u0434 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u043E\u0439",
-      it: "Ritaglia l\u2019immagine prima di caricarla"
+      it: "Ritaglia l\u2019immagine prima di caricarla",
+      pl: "Przytnij obraz przed przes\u0142aniem"
     },
     update_to_version: {
       en: "Update to {v}",
@@ -46648,7 +46857,8 @@ var bleh = (() => {
       it: "Aggiorna a {v}",
       pt: "Atualizar para {v}",
       sv: "Uppdatera till {v}",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u043E {v}"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u043E {v}",
+      pl: "Aktualizuj do {v}"
     },
     all: {
       // all photos
@@ -46658,7 +46868,8 @@ var bleh = (() => {
       it: "Tutte",
       pt: "Todos",
       sv: "Visa alla",
-      ru: "\u0412\u0441\u0435"
+      ru: "\u0412\u0441\u0435",
+      pl: "Wszystkie"
     },
     saved: {
       // saved/bookmarked photos
@@ -46668,7 +46879,8 @@ var bleh = (() => {
       it: "Salvate",
       pt: "Salvo",
       sv: "Sparade",
-      ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u044B\u0435"
+      ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u044B\u0435",
+      pl: "Zapisano"
     },
     remove_save: {
       en: "Remove save",
@@ -46677,7 +46889,8 @@ var bleh = (() => {
       it: "Rimuovi salvataggio",
       sv: "Ta bort bokm\xE4rkning",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u043E\u0433\u043E",
-      pt: "Remover salvamento"
+      pt: "Remover salvamento",
+      pl: "Usu\u0144 z zapisanych"
     },
     no_images_saved: {
       en: "No photos saved",
@@ -46686,7 +46899,8 @@ var bleh = (() => {
       it: "Nessuna immagine salvata",
       pt: "Nenhuma foto salva",
       sv: "Inga foton sparade",
-      ru: "\u041D\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u044B\u0445 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0439"
+      ru: "\u041D\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u044B\u0445 \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u0439",
+      pl: "Brak zapisanych zdj\u0119\u0107"
     },
     view_saved: {
       en: "View all saved photos",
@@ -46708,7 +46922,8 @@ var bleh = (() => {
       it: "Parteciper\xE0",
       pt: "Indo",
       sv: "Ska g\xE5 p\xE5",
-      ru: "\u0418\u0434\u0443"
+      ru: "\u0418\u0434\u0443",
+      pl: "Id\u0119"
     },
     interested: {
       // interested in attending an event
@@ -46720,7 +46935,8 @@ var bleh = (() => {
       it: "Interessati",
       pt: "Interessado",
       sv: "Intresserad",
-      ru: "\u0418\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0441\u044C"
+      ru: "\u0418\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0441\u044C",
+      pl: "Zainteresowany"
     },
     total: {
       // total of events attended or anything else
@@ -46730,7 +46946,8 @@ var bleh = (() => {
       it: "Totale",
       sv: "Totalt",
       ru: "\u0412\u0441\u0435\u0433\u043E",
-      pt: "Total"
+      pt: "Total",
+      pl: "\u0141\u0105cznie"
     },
     value_failed_to_load: {
       en: "{v} failed to load",
@@ -46739,7 +46956,8 @@ var bleh = (() => {
       it: "Non \xE8 stato possibile caricare {v}",
       pt: "{v} falhou ao carregar",
       sv: "{v} kunde inte laddas",
-      ru: "{v} \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"
+      ru: "{v} \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C",
+      pl: "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 {v}"
     },
     profile_does_not_have_enough_scrobbles: {
       en: "Profile does not have enough scrobbles",
@@ -46748,7 +46966,8 @@ var bleh = (() => {
       it: "Il profilo non ha abbastanza scrobbling",
       pt: "O perfil n\xE3o tem scrobbles o suficiente",
       sv: "Profilen har inte tillr\xE4ckligt med skrobblingar",
-      ru: "\u0423 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
+      ru: "\u0423 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u043D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
+      pl: "Profil nie ma wystarczaj\u0105co scrobbli"
     },
     requires_extension_value: {
       en: "Requires extension \u2018{v}\u2019",
@@ -46757,7 +46976,8 @@ var bleh = (() => {
       it: "Richiede l\u2019estensione \u2018{v}\u2019",
       pt: "Requer extens\xE3o \u2018{v}\u2019",
       sv: "Beh\xF6ver till\xE4gget \u2018{v}\u2019",
-      ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \xAB{v}\xBB"
+      ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \xAB{v}\xBB",
+      pl: "Wymaga rozszerzenia \u2018{v}\u2019"
     },
     incompatible_with_value: {
       en: "Incompatible with {v}",
@@ -46766,7 +46986,8 @@ var bleh = (() => {
       it: "Incompatibile con {v}",
       pt: "Incompat\xEDvel com {v}",
       sv: "Inkompatibelt med {v}",
-      ru: "\u041D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E \u0441 {v}"
+      ru: "\u041D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E \u0441 {v}",
+      pl: "Niekompatybilne z {v}"
     },
     incompatible_alert: {
       en: "Incompatible with current settings",
@@ -46775,7 +46996,8 @@ var bleh = (() => {
       it: "Incompatibile con la configurazione corrente",
       sv: "Inkompatibelt med nuvarande inst\xE4llningar",
       ru: "\u041D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E \u0441 \u0442\u0435\u043A\u0443\u0449\u0438\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C\u0438",
-      pt: "Incompat\xEDvel com as configura\xE7\xF5es atuais"
+      pt: "Incompat\xEDvel com as configura\xE7\xF5es atuais",
+      pl: "Niekompatybilne z bie\u017C\u0105cymi ustawieniami"
     },
     incompatible: {
       en: "Incompatible"
@@ -46796,7 +47018,8 @@ var bleh = (() => {
       it: "Modifica di massa per Last.fm",
       pt: "Edi\xE7\xE3o em massa do Last.fm",
       sv: "Last.fm bulkredigering",
-      ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 Last.fm"
+      ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 Last.fm",
+      pl: "Last.fm edycja zbiorcza"
     },
     collage: {
       en: "Collage",
@@ -46805,7 +47028,8 @@ var bleh = (() => {
       it: "Collage",
       pt: "Colagem",
       sv: "Collage",
-      ru: "\u041A\u043E\u043B\u043B\u0430\u0436"
+      ru: "\u041A\u043E\u043B\u043B\u0430\u0436",
+      pl: "Kola\u017C"
     },
     collage_redirect: {
       en: "Redirected to bleh\u2019s built-in Collage feature",
@@ -46814,7 +47038,8 @@ var bleh = (() => {
       it: "Reindirizzamento alla funzione Collage integrata in bleh",
       pt: "Redirecionando ao recurso integrado de Colagem do bleh",
       sv: "Omdirigerad till blehs egna collagefunktion",
-      ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u041A\u043E\u043B\u043B\u0430\u0436\u0430 bleh"
+      ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u0443\u044E \u0444\u0443\u043D\u043A\u0446\u0438\u044E \u041A\u043E\u043B\u043B\u0430\u0436\u0430 bleh",
+      pl: "Przekierowano do wbudowanej funkcji kola\u017Cy bleh"
     },
     your_collage_is_ready: {
       en: "Your collage is ready!",
@@ -46823,7 +47048,8 @@ var bleh = (() => {
       it: "Il tuo collage \xE8 pronto!",
       pt: "Sua colagem est\xE1 pronta!",
       sv: "Ditt collage \xE4r redo",
-      ru: "\u0412\u0430\u0448 \u043A\u043E\u043B\u043B\u0430\u0436 \u0433\u043E\u0442\u043E\u0432!"
+      ru: "\u0412\u0430\u0448 \u043A\u043E\u043B\u043B\u0430\u0436 \u0433\u043E\u0442\u043E\u0432!",
+      pl: "Tw\xF3j kola\u017C jest gotowy!"
     },
     name_failed: {
       en: "{name} failed",
@@ -46832,7 +47058,8 @@ var bleh = (() => {
       it: "{name} non riuscito",
       pt: "{name} falhou",
       sv: "{name} misslyckades",
-      ru: "{name} \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C"
+      ru: "{name} \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C",
+      pl: "{name} nie powiod\u0142o si\u0119"
     },
     select_component: {
       // the 'Select' component (like a dropdown menu)
@@ -46843,7 +47070,8 @@ var bleh = (() => {
       it: "Seleziona componente",
       pt: "Selecionar componente",
       sv: "V\xE4lj komponent",
-      ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442"
+      ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442",
+      pl: "Pole wyboru"
     },
     only_numbers_are_allowed: {
       en: "Only numbers are allowed here",
@@ -46852,7 +47080,8 @@ var bleh = (() => {
       it: "Sono consentiti solo numeri qui",
       pt: "Apenas n\xFAmeros s\xE3o permitidos aqui",
       sv: "Endast nummer \xE4r till\xE5tna h\xE4r",
-      ru: "\u0417\u0434\u0435\u0441\u044C \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u044B \u0442\u043E\u043B\u044C\u043A\u043E \u0446\u0438\u0444\u0440\u044B"
+      ru: "\u0417\u0434\u0435\u0441\u044C \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u044B \u0442\u043E\u043B\u044C\u043A\u043E \u0446\u0438\u0444\u0440\u044B",
+      pl: "Dozwolone s\u0105 tylko liczby"
     },
     keep_within_the_range: {
       // if the user wrote more text than the text box allows
@@ -46862,7 +47091,8 @@ var bleh = (() => {
       it: "Mantieniti all\u2019interno dell\u2019intervallo",
       pt: "Manter dentro do intervalo",
       sv: "H\xE5ll dig inom gr\xE4nsen",
-      ru: "\u041E\u0441\u0442\u0430\u0432\u0430\u0439\u0442\u0435\u0441\u044C \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0430"
+      ru: "\u041E\u0441\u0442\u0430\u0432\u0430\u0439\u0442\u0435\u0441\u044C \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0430",
+      pl: "Nie przekraczaj limitu"
     },
     this_field_is_required: {
       // field as in a text box
@@ -46872,7 +47102,8 @@ var bleh = (() => {
       it: "Questo campo \xE8 obbligatorio",
       pt: "Este campo \xE9 obrigat\xF3rio",
       sv: "F\xE4ltet kr\xE4vs",
-      ru: "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E"
+      ru: "\u042D\u0442\u043E \u043F\u043E\u043B\u0435 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E",
+      pl: "To pole jest wymagane"
     },
     please_dont_clone_yourself: {
       en: "Please don\u2019t clone yourself",
@@ -46881,7 +47112,8 @@ var bleh = (() => {
       it: "Per favore non clonare te stesso",
       pt: "Por favor, n\xE3o se clone",
       sv: "Sn\xE4lla, klona inte dig sj\xE4lv",
-      ru: "\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043D\u0435 \u043A\u043B\u043E\u043D\u0438\u0440\u0443\u0439\u0442\u0435 \u0441\u0435\u0431\u044F"
+      ru: "\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043D\u0435 \u043A\u043B\u043E\u043D\u0438\u0440\u0443\u0439\u0442\u0435 \u0441\u0435\u0431\u044F",
+      pl: "Prosz\u0119, nie klonuj siebie"
     },
     generate: {
       en: "Generate",
@@ -46890,7 +47122,8 @@ var bleh = (() => {
       it: "Genera",
       pt: "Gerar",
       sv: "Generera",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C",
+      pl: "Wygeneruj"
     },
     your_settings_are_invalid: {
       en: "Your settings are invalid",
@@ -46899,7 +47132,8 @@ var bleh = (() => {
       it: "Le tue impostazioni non sono valide",
       pt: "Suas configura\xE7\xF5es s\xE3o inv\xE1lidas",
       sv: "Dina inst\xE4llningar \xE4r ogiltiga",
-      ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043D\u0435\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B"
+      ru: "\u0412\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043D\u0435\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B",
+      pl: "Twoje ustawienia s\u0105 nieprawid\u0142owe"
     },
     top_type: {
       // top artists, top albums, top tracks
@@ -46909,7 +47143,8 @@ var bleh = (() => {
       it: "Top {type}",
       sv: "Topp{type}",
       ru: "\u0422\u043E\u043F-{type}",
-      pt: "Top {type}"
+      pt: "Top {type}",
+      pl: "Top {type}"
     },
     download: {
       en: "Download",
@@ -46918,7 +47153,8 @@ var bleh = (() => {
       it: "Scarica",
       pt: "Baixar",
       sv: "Ladda ned",
-      ru: "\u0421\u043A\u0430\u0447\u0430\u0442\u044C"
+      ru: "\u0421\u043A\u0430\u0447\u0430\u0442\u044C",
+      pl: "Pobierz"
     },
     downloaded: {
       // the filename is displayed below this text
@@ -46928,7 +47164,8 @@ var bleh = (() => {
       it: "Scaricato",
       pt: "Baixado",
       sv: "Nedladdat",
-      ru: "\u0421\u043A\u0430\u0447\u0430\u043D\u043E"
+      ru: "\u0421\u043A\u0430\u0447\u0430\u043D\u043E",
+      pl: "Pobrano"
     },
     are_you_sure: {
       en: "Are you sure?",
@@ -46937,7 +47174,8 @@ var bleh = (() => {
       it: "Sei sicuro?",
       pt: "Voc\xEA tem certeza?",
       sv: "\xC4r du s\xE4ker",
-      ru: "\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?"
+      ru: "\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B?",
+      pl: "Na pewno?"
     },
     this_will_require_loading_count_pages: {
       en: "This will require loading {c} pages",
@@ -46946,7 +47184,8 @@ var bleh = (() => {
       it: "Questo richieder\xE0 il caricamento di {c} pagine",
       pt: "Isso requer carregar {c} p\xE1ginas",
       sv: "Det h\xE4r kr\xE4ver att {c} sidor laddas",
-      ru: "\u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C {c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446"
+      ru: "\u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C {c} \u0441\u0442\u0440\u0430\u043D\u0438\u0446",
+      pl: "Wymaga to za\u0142adowania {c} stron"
     },
     chart_template_filename: {
       en: "{user} Collage ({timeframe}, Top {type}, {size}) - {brand} {date}",
@@ -46955,7 +47194,8 @@ var bleh = (() => {
       it: "{user} Collage ({timeframe}, Top {type}, {size}) - {brand} {date}",
       pt: "{user} Colagem ({timeframe}, Top {type}, {size}) - {brand} {date}",
       sv: "{user} Collage ({timeframe}, Topp{type}, {size}) - {brand} {date}",
-      ru: "{user} \u041A\u043E\u043B\u043B\u0430\u0436 ({timeframe}, \u0422\u043E\u043F {type}, {size}) - {brand} {date}"
+      ru: "{user} \u041A\u043E\u043B\u043B\u0430\u0436 ({timeframe}, \u0422\u043E\u043F {type}, {size}) - {brand} {date}",
+      pl: "{user} Kola\u017C ({timeframe}, Top {type}, {size}) - {brand} {date}"
     },
     waiting_for_images: {
       en: "Waiting for images",
@@ -46964,7 +47204,8 @@ var bleh = (() => {
       it: "In attesa delle immagini",
       pt: "Aguardando imagens",
       sv: "V\xE4ntar p\xE5 bilder",
-      ru: "\u041E\u0436\u0438\u0434\u0430\u043D\u0438\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439"
+      ru: "\u041E\u0436\u0438\u0434\u0430\u043D\u0438\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439",
+      pl: "Oczekiwanie na obrazy"
     },
     collage_title: {
       name: {
@@ -46974,7 +47215,8 @@ var bleh = (() => {
         it: "Titolo del collage",
         pt: "T\xEDtulo da colagem",
         sv: "Collagetitel",
-        ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043A\u043E\u043B\u043B\u0430\u0436\u0430"
+        ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043A\u043E\u043B\u043B\u0430\u0436\u0430",
+        pl: "Tytu\u0142 kola\u017Cu"
       },
       body: {
         en: "Include a subtle header showing your username and settings you used",
@@ -46983,7 +47225,8 @@ var bleh = (() => {
         it: "Includi una piccola intestazione che mostra il tuo username e le impostazioni che hai usato",
         pt: "Inclua um cabe\xE7alho discreto mostrando seu nome de usu\xE1rio e as configura\xE7\xF5es que voc\xEA usou",
         sv: "L\xE4gger till en liten rubrik som visar ditt anv\xE4ndarnamn och dina inst\xE4llningar",
-        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0441 \u0432\u0430\u0448\u0438\u043C \u0438\u043C\u0435\u043D\u0435\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C\u0438"
+        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0441 \u0432\u0430\u0448\u0438\u043C \u0438\u043C\u0435\u043D\u0435\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C\u0438",
+        pl: "Dodaj subtelny nag\u0142\xF3wek zawieraj\u0105cy Twoj\u0105 nazw\u0119 u\u017Cytkownika i u\u017Cyte ustawienia"
       }
     },
     collage_grid_text: {
@@ -46993,7 +47236,8 @@ var bleh = (() => {
       it: "Mostra i nomi sugli oggetti della griglia",
       pt: "Mostrar nomes nos itens da grade",
       sv: "Visa namn p\xE5 collageobjekt",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438",
+      pl: "Poka\u017C nazwy na elementach siatki"
     },
     collage_grid_plays: {
       en: "Show plays on grid items",
@@ -47002,7 +47246,8 @@ var bleh = (() => {
       it: "Mostra le riproduzioni sugli oggetti della griglia",
       pt: "Mostrar reprodu\xE7\xF5es nos itens da grade",
       sv: "Visa spelningar p\xE5 collageobjekt",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438",
+      pl: "Poka\u017C liczb\u0119 ods\u0142ucha\u0144 na elementach siatki"
     },
     collage_grid_gap: {
       name: {
@@ -47012,7 +47257,8 @@ var bleh = (() => {
         it: "Lascia uno spazio tra gli oggetti della griglia",
         pt: "Deixe um espa\xE7o entre os itens da grade",
         sv: "L\xE4mna rum mellan collageobjekt",
-        ru: "\u041E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u043F\u0440\u043E\u043C\u0435\u0436\u0443\u0442\u043E\u043A \u043C\u0435\u0436\u0434\u0443 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438"
+        ru: "\u041E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u043F\u0440\u043E\u043C\u0435\u0436\u0443\u0442\u043E\u043A \u043C\u0435\u0436\u0434\u0443 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438",
+        pl: "Pozostaw odst\u0119p mi\u0119dzy elementami siatki"
       },
       body: {
         en: "Includes outer and inner padding with round grid items",
@@ -47021,7 +47267,8 @@ var bleh = (() => {
         it: "Includi dello spazio interno ed esterno con gli oggetti della griglia ad angoli arrotondati",
         sv: "L\xE4gger till inre och yttre mellanrum med avrundade collageobjekt",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0430\u0435\u0442 \u0432\u043D\u0435\u0448\u043D\u0438\u0435 \u0438 \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0435 \u043E\u0442\u0441\u0442\u0443\u043F\u044B \u0441 \u043A\u0440\u0443\u0433\u043B\u044B\u043C\u0438 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438",
-        pt: "Inclui preenchimento interno e externo com itens de grade arredondados"
+        pt: "Inclui preenchimento interno e externo com itens de grade arredondados",
+        pl: "Obejmuje zewn\u0119trzne i wewn\u0119trzne odst\u0119py oraz zaokr\u0105glone elementy siatki"
       }
     },
     collage_centered: {
@@ -47032,7 +47279,8 @@ var bleh = (() => {
         it: "Centra informazioni negli oggetti della griglia",
         sv: "Centrera informationen p\xE5 collageobjekt",
         ru: "\u0426\u0435\u043D\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043D\u0430 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0445 \u0441\u0435\u0442\u043A\u0438",
-        pt: "Centralizar informa\xE7\xF5es nos itens da grade"
+        pt: "Centralizar informa\xE7\xF5es nos itens da grade",
+        pl: "Wy\u015Brodkuj informacje w elementach siatki"
       },
       body: {
         en: "Similar to the look of other collage solutions",
@@ -47041,7 +47289,8 @@ var bleh = (() => {
         it: "Simile all\u2019aspetto di altre soluzioni per collage",
         sv: "Mer lik till hur andra collagegenererare g\xF6r det",
         ru: "\u041F\u043E\u0445\u043E\u0436\u0435 \u043D\u0430 \u0434\u0440\u0443\u0433\u0438\u0435 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B \u0434\u043B\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043A\u043E\u043B\u043B\u0430\u0436\u0435\u0439",
-        pt: "Semelhante \xE0 apar\xEAncia de outras solu\xE7\xF5es de colagem"
+        pt: "Semelhante \xE0 apar\xEAncia de outras solu\xE7\xF5es de colagem",
+        pl: "Podobne wygl\u0105dem do innych narz\u0119dzi do tworzenia kola\u017Cy"
       }
     },
     organising_plays: {
@@ -47052,7 +47301,8 @@ var bleh = (() => {
       it: "Organizzando le riproduzioni",
       pt: "Organizando reprodu\xE7\xF5es",
       sv: "Organisera spelningar",
-      ru: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+      ru: "\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
+      pl: "Organizowanie ods\u0142ucha\u0144"
     },
     update_now: {
       en: "Update now",
@@ -47061,7 +47311,8 @@ var bleh = (() => {
       it: "Aggiorna ora",
       pt: "Atualizar agora",
       sv: "Uppdatera nu",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441",
+      pl: "Zaktualizuj teraz"
     },
     ignore_for_now: {
       en: "Ignore for now",
@@ -47070,7 +47321,8 @@ var bleh = (() => {
       it: "Ignora per ora",
       pt: "Ignore por agora",
       sv: "Ignorera just nu",
-      ru: "\u041D\u0430\u043F\u043E\u043C\u043D\u0438\u0442\u0435 \u043F\u043E\u0437\u0436\u0435"
+      ru: "\u041D\u0430\u043F\u043E\u043C\u043D\u0438\u0442\u0435 \u043F\u043E\u0437\u0436\u0435",
+      pl: "Ignoruj na razie"
     },
     update_styles: {
       en: "Update styles",
@@ -47079,7 +47331,8 @@ var bleh = (() => {
       it: "Aggiorna stili",
       pt: "Atualizar estilos",
       sv: "Uppdatera stiler",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0442\u0438\u043B\u0438"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0442\u0438\u043B\u0438",
+      pl: "Aktualizowanie styl\xF3w"
     },
     downloading_styles: {
       en: "Downloading styles",
@@ -47088,7 +47341,8 @@ var bleh = (() => {
       it: "Download degli stili",
       pt: "Baixando estilos",
       sv: "Laddar ner stiler",
-      ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0438\u043B\u0435\u0439"
+      ru: "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0438\u043B\u0435\u0439",
+      pl: "Pobieranie styl\xF3w"
     },
     style_warning: {
       en: "You have style loading off! If you did this by accident, you can undo this",
@@ -47097,7 +47351,8 @@ var bleh = (() => {
       it: "Hai il caricamento degli stili disattivato! Se lo hai fatto per sbaglio, lo puoi annullare",
       pt: "Voc\xEA desativou o carregamento de estilos! Se voc\xEA fez isso acidentalmente, pode desfazer essa a\xE7\xE3o",
       sv: "Du har st\xE4ngt av att stiler laddas! Om du gjorde det av misstag s\xE5 kan du \xE5terst\xE4lla det",
-      ru: "\u0423 \u0432\u0430\u0441 \u043E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0438\u043B\u0435\u0439! \u0415\u0441\u043B\u0438 \u0432\u044B \u0441\u0434\u0435\u043B\u0430\u043B\u0438 \u044D\u0442\u043E \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u044D\u0442\u043E"
+      ru: "\u0423 \u0432\u0430\u0441 \u043E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0438\u043B\u0435\u0439! \u0415\u0441\u043B\u0438 \u0432\u044B \u0441\u0434\u0435\u043B\u0430\u043B\u0438 \u044D\u0442\u043E \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u044D\u0442\u043E",
+      pl: "\u0141adowanie styl\xF3w jest wy\u0142\u0105czone! Je\u015Bli sta\u0142o si\u0119 to przypadkiem, mo\u017Cesz to cofn\u0105\u0107"
     },
     re_enable_style_loading: {
       en: "Re-enable style loading",
@@ -47106,7 +47361,8 @@ var bleh = (() => {
       it: "Ri-abilita il caricamento degli stili",
       pt: "Reativar carregamento de estilos",
       sv: "\xC5teraktivera att stiler laddas",
-      ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u0441\u0442\u0438\u043B\u0435\u0439"
+      ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0443 \u0441\u0442\u0438\u043B\u0435\u0439",
+      pl: "Ponownie w\u0142\u0105cz \u0142adowanie styl\xF3w"
     },
     made_with_love: {
       // lowercase in design
@@ -47139,7 +47395,8 @@ var bleh = (() => {
       de: "{s}{c} unterst\xFCtzen{/s}",
       ru: "{s}{c} \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439{/s}",
       es: "{s}{c} patrocinando{/s}",
-      it: "{s}{c} sostenendo{/s}"
+      it: "{s}{c} sostenendo{/s}",
+      pl: "{s}{c} wspieraj\u0105cych{/s}"
     },
     love_lower: {
       // replaces the {h} in the above sentence
@@ -47149,7 +47406,8 @@ var bleh = (() => {
       it: "amore",
       pt: "amor",
       sv: "k\xE4rlek",
-      ru: "\u043B\u044E\u0431\u043E\u0432\u044C\u044E"
+      ru: "\u043B\u044E\u0431\u043E\u0432\u044C\u044E",
+      pl: "mi\u0142o\u015Bci\u0105"
     },
     translations: {
       // lowercase in design
@@ -47159,7 +47417,8 @@ var bleh = (() => {
       it: "traduzione in {l} di {u}",
       sv: "Svensk \xF6vers\xE4ttning av {u}",
       ru: "\u043F\u0435\u0440\u0435\u0432\u043E\u0434 \u043D\u0430 {l} \u043E\u0442 {u}",
-      pt: "Tradu\xE7\xE3o em {l} por {u}"
+      pt: "Tradu\xE7\xE3o em {l} por {u}",
+      pl: "T\u0142umaczenie na {l} autorstwa {u}"
     },
     view_source: {
       en: "View source",
@@ -47168,7 +47427,8 @@ var bleh = (() => {
       it: "Visualizza sorgente",
       pt: "Ver c\xF3digo",
       sv: "Visa k\xE4lla",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u043A\u043E\u0434"
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u043A\u043E\u0434",
+      pl: "Zobacz \u017Ar\xF3d\u0142o"
     },
     report_issue: {
       en: "Report issue",
@@ -47177,7 +47437,8 @@ var bleh = (() => {
       it: "Segnala un problema",
       pt: "Relatar problema",
       sv: "Rapportera problem",
-      ru: "\u0421\u043E\u043E\u0431\u0449\u0438\u0442\u044C \u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0435"
+      ru: "\u0421\u043E\u043E\u0431\u0449\u0438\u0442\u044C \u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0435",
+      pl: "Zg\u0142o\u015B problem"
     },
     opens_your_value_settings: {
       // DE: is this used both for profile settings and bleh settings in the quick switcher? ~Myrai
@@ -47188,7 +47449,8 @@ var bleh = (() => {
       it: "Apri le tue impostazioni di {v}",
       pt: "Abra suas op\xE7\xF5es de {v}",
       sv: "\xD6ppna dina {v}-inst\xE4llningar",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 {v}"
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 {v}",
+      pl: "Otw\xF3rz ustawienia {v}"
     },
     opens_your_value: {
       // DE: depending on the word in {v}, this might be 'dein', 'deine' or the inclusive 'dein:e' ~Myrai
@@ -47202,7 +47464,8 @@ var bleh = (() => {
       it: "Apri il tuo {v}",
       pt: "Abra seu {v}",
       sv: "\xD6pnna dina {v}",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0438 {v}"
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432\u0430\u0448\u0438 {v}",
+      pl: "Otw\xF3rz swoje {v}"
     },
     opens_the_value: {
       // DE: same here, depends on context ~Myrai
@@ -47216,7 +47479,8 @@ var bleh = (() => {
       it: "Apri il {v}",
       pt: "Abra o {v}",
       sv: "\xD6ppna {v}",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C {v}"
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C {v}",
+      pl: "Otw\xF3rz {v}"
     },
     theme_picker: {
       en: "Theme picker",
@@ -47225,7 +47489,8 @@ var bleh = (() => {
       it: "Selettore dei temi",
       pt: "Seletor de temas",
       sv: "Temav\xE4ljare",
-      ru: "\u0412\u044B\u0431\u043E\u0440 \u0442\u0435\u043C\u044B"
+      ru: "\u0412\u044B\u0431\u043E\u0440 \u0442\u0435\u043C\u044B",
+      pl: "Wyb\xF3r motywu"
     },
     changes_your_theme: {
       en: "Changes your theme",
@@ -47234,7 +47499,8 @@ var bleh = (() => {
       it: "Cambia il tuo tema",
       pt: "Mude seu tema",
       sv: "\xC4ndrar ditt tema",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0443 \u0442\u0435\u043C\u0443"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0443 \u0442\u0435\u043C\u0443",
+      pl: "Zmienia motyw"
     },
     on_this_page: {
       en: "On this page",
@@ -47243,7 +47509,8 @@ var bleh = (() => {
       it: "Su questa pagina",
       pt: "Nessa p\xE1gina",
       sv: "P\xE5 denna sida",
-      ru: "\u041D\u0430 \u044D\u0442\u043E\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435"
+      ru: "\u041D\u0430 \u044D\u0442\u043E\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435",
+      pl: "Na tej stronie"
     },
     use_current_page_as_context: {
       en: "Use current page as context",
@@ -47252,7 +47519,8 @@ var bleh = (() => {
       it: "Usa la pagina corrente come contesto",
       pt: "Usar a p\xE1gina atual como contexto",
       sv: "Anv\xE4nd aktuella sidan som referens",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0443\u044E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 \u043A\u0430\u043A \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0443\u044E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 \u043A\u0430\u043A \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442",
+      pl: "U\u017Cyj bie\u017C\u0105cej strony jako kontekstu"
     },
     opens_the_value_for_type: {
       en: "Open the {v} for {t}",
@@ -47261,7 +47529,8 @@ var bleh = (() => {
       it: "Apri il {v} per {t}",
       pt: "Abra a {v} para {t}",
       sv: "\xD6pnnar {v] f\xF6r {t}",
-      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C {v} \u0434\u043B\u044F {t}"
+      ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C {v} \u0434\u043B\u044F {t}",
+      pl: "Otw\xF3rz {v} dla {t}"
     },
     quick_switcher: {
       en: "Rabbit hole",
@@ -47270,7 +47539,8 @@ var bleh = (() => {
       it: "Spostamento rapido",
       sv: "Genv\xE4gar",
       ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0430\u0442\u0435\u043B\u044C",
-      pt: "Atalho r\xE1pido"
+      pt: "Atalho r\xE1pido",
+      pl: "Szybkie prze\u0142\u0105czanie"
     },
     use_quick_switcher: {
       name: {
@@ -47280,7 +47550,8 @@ var bleh = (() => {
         it: "Attiva lo spostamento rapido",
         sv: "Aktivera snabbv\xE4xlare",
         ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0431\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0430\u0442\u0435\u043B\u044C",
-        pt: "Ativar o atalho r\xE1pido"
+        pt: "Ativar o atalho r\xE1pido",
+        pl: "W\u0142\u0105cz szybkie prze\u0142\u0105czanie"
       },
       body: {
         en: "Make full use of your keyboard to navigate exactly where you want to be",
@@ -47289,7 +47560,8 @@ var bleh = (() => {
         it: "Sfrutta la tua tastiera per navigare esattamente dove vuoi essere",
         sv: "G\xF6r full anv\xE4ndning av ditt tangentbord f\xF6r att navigera till precis vart du vill vara",
         ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0443 \u0432 \u043F\u043E\u043B\u043D\u043E\u0439 \u043C\u0435\u0440\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u0438\u043C\u0435\u043D\u043D\u043E \u0442\u0443\u0434\u0430, \u043A\u0443\u0434\u0430 \u0432\u0430\u043C \u043D\u0443\u0436\u043D\u043E",
-        pt: "Aproveite ao m\xE1ximo seu teclado para navegar exatamente onde voc\xEA deseja estar"
+        pt: "Aproveite ao m\xE1ximo seu teclado para navegar exatamente onde voc\xEA deseja estar",
+        pl: "Wykorzystaj w pe\u0142ni klawiatur\u0119, aby nawigowa\u0107 dok\u0142adnie tam, gdzie chcesz"
       }
     },
     quick_switcher_keybinds: {
@@ -47299,7 +47571,8 @@ var bleh = (() => {
       it: "Cambia associazione tasti",
       sv: "\xC4ndra tangentbordsgenv\xE4gar",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0441\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u044F \u043A\u043B\u0430\u0432\u0438\u0448",
-      pt: "Alterar atalhos"
+      pt: "Alterar atalhos",
+      pl: "Zmie\u0144 skr\xF3ty klawiszowe"
     },
     switch_placeholder: {
       en: "Quick switch to a page or action",
@@ -47308,7 +47581,8 @@ var bleh = (() => {
       it: "Spostamento rapido ad una pagina o azione",
       pt: "Alternar rapidamente para uma p\xE1gina ou a\xE7\xE3o",
       sv: "Hoppa snabbt till en sida eller annan \xE5tg\xE4rd",
-      ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u0445\u043E\u0434 \u043A \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044E"
+      ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u043F\u0435\u0440\u0435\u0445\u043E\u0434 \u043A \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044E",
+      pl: "Szybkie przej\u015Bcie do strony lub akcji"
     },
     rabbit_search: {
       // IT: we may have a problem here since the preposition in front of a name may not be the same
@@ -47319,7 +47593,8 @@ var bleh = (() => {
       it: "Inserisci il nome del {v}",
       sv: "Skriv {v}namn",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 {v}",
-      pt: "Digite o nome de {v}"
+      pt: "Digite o nome de {v}",
+      pl: "Wpisz nazw\u0119 {v}"
     },
     compares_your_taste: {
       en: "Compare your taste with {v}",
@@ -47328,7 +47603,8 @@ var bleh = (() => {
       it: "Confronta i tuoi gusti con {v}",
       pt: "Compare o seu gosto com {v}",
       sv: "J\xE4mf\xF6r musiksmak med {v}",
-      ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0432\u0430\u0448 \u0432\u043A\u0443\u0441 \u0441 {v}"
+      ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0432\u0430\u0448 \u0432\u043A\u0443\u0441 \u0441 {v}",
+      pl: "Por\xF3wnaj sw\xF3j gust z {v}"
     },
     select_an_option: {
       en: "Select an option",
@@ -47337,7 +47613,8 @@ var bleh = (() => {
       it: "Seleziona un\u2019opzione",
       pt: "Selecione uma op\xE7\xE3o",
       sv: "V\xE4lj ett alternativ",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0430\u0440\u0438\u0430\u043D\u0442"
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0430\u0440\u0438\u0430\u043D\u0442",
+      pl: "Wybierz opcj\u0119"
     },
     nothing_matches_your_search: {
       en: "Nothing matches your search",
@@ -47346,7 +47623,8 @@ var bleh = (() => {
       it: "Nessun elemento corrisponde alla tua ricerca",
       pt: "Nada corresponde \xE0 sua pesquisa",
       sv: "Inga resultat matchar din s\xF6kning",
-      ru: "\u041F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"
+      ru: "\u041F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0437\u0430\u043F\u0440\u043E\u0441\u0443 \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E",
+      pl: "Nic nie pasuje do wyszukiwania"
     },
     create_collage: {
       en: "Create collage",
@@ -47354,7 +47632,8 @@ var bleh = (() => {
       de: "Collage erstellen",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436",
       es: "Crear collage",
-      it: "Crea collage"
+      it: "Crea collage",
+      pl: "Stw\xF3rz kola\u017C"
     },
     create_a_collage: {
       en: "Create a collage of your choosing",
@@ -47363,7 +47642,8 @@ var bleh = (() => {
       it: "Crea un collage a tua scelta",
       pt: "Crie uma colagem de sua escolha",
       sv: "Skapa ett collage som du vill",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436 \u043D\u0430 \u0432\u0430\u0448 \u0432\u044B\u0431\u043E\u0440"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436 \u043D\u0430 \u0432\u0430\u0448 \u0432\u044B\u0431\u043E\u0440",
+      pl: "Stw\xF3rz dowolny kola\u017C"
     },
     search_for_music_or_user: {
       en: "Search for music or a user",
@@ -47372,7 +47652,8 @@ var bleh = (() => {
       it: "Cerca musica o un utente",
       pt: "Pesquise por m\xFAsica ou usu\xE1rio",
       sv: "S\xF6k musik eller en anv\xE4ndare",
-      ru: "\u0418\u0441\u043A\u0430\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0443 \u0438\u043B\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
+      ru: "\u0418\u0441\u043A\u0430\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0443 \u0438\u043B\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+      pl: "Wyszukaj muzyk\u0119 albo u\u017Cytkownika"
     },
     search_for_value: {
       en: "Search for {v}",
@@ -47381,7 +47662,8 @@ var bleh = (() => {
       it: "Cerca per {v}",
       pt: "Pesquise por {v}",
       sv: "S\xF6k upp {v}",
-      ru: "\u0418\u0441\u043A\u0430\u0442\u044C {v}"
+      ru: "\u0418\u0441\u043A\u0430\u0442\u044C {v}",
+      pl: "Szukaj {v}"
     },
     choose_a_search_type: {
       en: "Choose a search type",
@@ -47390,7 +47672,8 @@ var bleh = (() => {
       it: "Seleziona un tipo di ricerca",
       pt: "Escolha um tipo de pesquisa",
       sv: "V\xE4lj s\xF6ktyp",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0438\u043F \u043F\u043E\u0438\u0441\u043A\u0430"
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0438\u043F \u043F\u043E\u0438\u0441\u043A\u0430",
+      pl: "Wybierz rodzaj wyszukiwania"
     },
     finish_search: {
       en: "Finish your search",
@@ -47399,7 +47682,8 @@ var bleh = (() => {
       it: "Termina la tua ricerca",
       pt: "Finalize sua pesquisa",
       sv: "Finalisera s\xF6kning",
-      ru: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0435 \u043F\u043E\u0438\u0441\u043A"
+      ru: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0435 \u043F\u043E\u0438\u0441\u043A",
+      pl: "Doko\u0144cz swoje wyszukiwanie"
     },
     view_count_more: {
       en: "View {c} more",
@@ -47408,7 +47692,8 @@ var bleh = (() => {
       it: "Visualizza {c} altri",
       sv: "Visa {v} fler",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0435\u0449\u0435 {c}",
-      pt: "Ver mais {c}"
+      pt: "Ver mais {c}",
+      pl: "Zobacz {c} wi\u0119cej"
     },
     saved_to_bookmarks: {
       en: "Saved to bookmarks",
@@ -47417,7 +47702,8 @@ var bleh = (() => {
       it: "Salvato nei segnalibri",
       pt: "Salvo nos marcadores",
       sv: "Sparad till dina bokm\xE4rken",
-      ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043E \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438"
+      ru: "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043E \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
+      pl: "Zapisano do zak\u0142adek"
     },
     bookmark_save_msg: {
       en: "Find your bookmarks in your Home or {link}",
@@ -47426,7 +47712,8 @@ var bleh = (() => {
       it: "Trova i tuoi segnalibri nella tua Home o {link}",
       pt: "Encontre seus marcadores na sua p\xE1gina inicial ou em {link}",
       sv: "Hitta dina bokm\xE4rken p\xE5 startsidan eller {link}",
-      ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 \u043D\u0430 \u0414\u043E\u043C\u0430\u0448\u043D\u0435\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 {link}"
+      ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438 \u043D\u0430 \u0414\u043E\u043C\u0430\u0448\u043D\u0435\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0438\u043B\u0438 {link}",
+      pl: "Znajd\u017A swoje zak\u0142adki na stronie g\u0142\xF3wnej lub {link}"
     },
     go_there_now_lower: {
       // replaces {link} above
@@ -47436,7 +47723,8 @@ var bleh = (() => {
       it: "vai l\xEC ora",
       pt: "vai l\xE1 agora",
       sv: "g\xE5 dit nu",
-      ru: "\u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u0441\u0435\u0439\u0447\u0430\u0441"
+      ru: "\u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u0441\u0435\u0439\u0447\u0430\u0441",
+      pl: "przejd\u017A tam teraz"
     },
     always_remind_me: {
       en: "Always remind me",
@@ -47445,7 +47733,8 @@ var bleh = (() => {
       it: "Ricordamelo sempre",
       sv: "P\xE5minn mig alltid",
       ru: "\u041D\u0430\u043F\u043E\u043C\u0438\u043D\u0430\u0442\u044C \u0432\u0441\u0435\u0433\u0434\u0430",
-      pt: "Sempre me lembre"
+      pt: "Sempre me lembre",
+      pl: "Zawsze mi przypominaj"
     },
     never: {
       en: "Never",
@@ -47454,7 +47743,8 @@ var bleh = (() => {
       it: "Mai",
       sv: "Aldrig",
       ru: "\u041D\u0438\u043A\u043E\u0433\u0434\u0430",
-      pt: "Nunca"
+      pt: "Nunca",
+      pl: "Nigdy"
     },
     edit_scrobble: {
       en: "Edit scrobble",
@@ -47463,7 +47753,8 @@ var bleh = (() => {
       it: "Modifica scrobbling",
       pt: "Editar scrobble",
       sv: "Redigera skrobbel",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B",
+      pl: "Edytuj scrobble"
     },
     edit_scrobbles_in_bulk: {
       en: "Edit scrobbles in bulk",
@@ -47472,7 +47763,8 @@ var bleh = (() => {
       it: "Modifica scrobbling in massa",
       pt: "Editar scrobbles em massa",
       sv: "Massredigera skrobblingar",
-      ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432"
+      ru: "\u041C\u0430\u0441\u0441\u043E\u0432\u043E\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432",
+      pl: "Edytuj scrobble zbiorczo"
     },
     timeline: {
       en: "Timeline",
@@ -47481,7 +47773,8 @@ var bleh = (() => {
       it: "Cronologia",
       sv: "Tidslinje",
       ru: "\u0425\u0440\u043E\u043D\u043E\u043B\u043E\u0433\u0438\u044F",
-      pt: "Linha do tempo"
+      pt: "Linha do tempo",
+      pl: "O\u015B czasu"
     },
     view_latest: {
       en: "View latest",
@@ -47490,7 +47783,8 @@ var bleh = (() => {
       it: "Mostra i pi\xF9 recenti",
       sv: "Visa senaste",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435",
-      pt: "Ver mais recentes"
+      pt: "Ver mais recentes",
+      pl: "Wy\u015Bwietl najnowsze"
     },
     custom: {
       en: "Custom",
@@ -47499,7 +47793,8 @@ var bleh = (() => {
       it: "Personalizzato",
       sv: "Anpassad",
       ru: "\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439",
-      pt: "Personalizado"
+      pt: "Personalizado",
+      pl: "Niestandardowe"
     },
     star: {
       en: "Star",
@@ -47508,7 +47803,8 @@ var bleh = (() => {
       it: "Imposta come preferito",
       sv: "Stj\xE4rna",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0437\u0432\u0435\u0437\u0434\u043E\u0439",
-      pt: "Adicionar aos favoritos"
+      pt: "Adicionar aos favoritos",
+      pl: "Ulubione"
     },
     starred: {
       en: "Starred",
@@ -47517,7 +47813,8 @@ var bleh = (() => {
       it: "Impostato ocme preferito",
       sv: "Stj\xE4rnm\xE4rkt",
       ru: "\u041E\u0442\u043C\u0435\u0447\u0435\u043D\u043E \u0437\u0432\u0435\u0437\u0434\u043E\u0439",
-      pt: "Adicionado aos favoritos"
+      pt: "Adicionado aos favoritos",
+      pl: "Oznaczone jako ulubione"
     },
     report: {
       en: "Report",
@@ -47526,7 +47823,8 @@ var bleh = (() => {
       it: "Segnala",
       pt: "Reportar",
       sv: "Anm\xE4l",
-      ru: "\u041F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
+      ru: "\u041F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C\u0441\u044F",
+      pl: "Zg\u0142o\u015B"
     },
     auto: {
       // automatic theme
@@ -47536,7 +47834,8 @@ var bleh = (() => {
       it: "Automatico",
       sv: "Automatiskt",
       ru: "\u0410\u0432\u0442\u043E",
-      pt: "Autom\xE1tico"
+      pt: "Autom\xE1tico",
+      pl: "Automatyczny"
     },
     glass: {
       en: "Glass",
@@ -47546,7 +47845,8 @@ var bleh = (() => {
       ja: "\u30AC\u30E9\u30B9",
       sv: "Glas",
       ru: "\u0421\u0442\u0435\u043A\u043B\u043E",
-      pt: "Vidro"
+      pt: "Vidro",
+      pl: "Szk\u0142o"
     },
     high_contrast: {
       en: "Prefer high contrast",
@@ -47555,7 +47855,8 @@ var bleh = (() => {
       it: "Preferisci contrasto elevato",
       sv: "F\xF6redra h\xF6gkontrast",
       ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0432\u044B\u0441\u043E\u043A\u0443\u044E \u043A\u043E\u043D\u0442\u0440\u0430\u0441\u0442\u043D\u043E\u0441\u0442\u044C",
-      pt: "Preferir alto contraste"
+      pt: "Preferir alto contraste",
+      pl: "Preferuj wysoki kontrast"
     },
     external: {
       en: "External",
@@ -47564,7 +47865,8 @@ var bleh = (() => {
       it: "Esterno",
       sv: "Extern",
       ru: "\u0412\u043D\u0435\u0448\u043D\u0438\u0439",
-      pt: "Externo"
+      pt: "Externo",
+      pl: "Zewn\u0119trzne"
     },
     watch: {
       en: "Watch",
@@ -47573,7 +47875,8 @@ var bleh = (() => {
       it: "Guarda",
       sv: "Se",
       ru: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C",
-      pt: "Assistir"
+      pt: "Assistir",
+      pl: "Obejrzyj"
     },
     watch_video: {
       en: "Watch video",
@@ -47582,7 +47885,8 @@ var bleh = (() => {
       it: "Guarda video",
       sv: "Se video",
       ru: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0438\u0434\u0435\u043E",
-      pt: "Assistir v\xEDdeo"
+      pt: "Assistir v\xEDdeo",
+      pl: "Obejrzyj wideo"
     },
     latest_album: {
       en: "Latest album",
@@ -47591,7 +47895,8 @@ var bleh = (() => {
       it: "Ultimo ablum",
       sv: "Senaste album",
       ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0430\u043B\u044C\u0431\u043E\u043C",
-      pt: "\xDAltimo \xE1lbum"
+      pt: "\xDAltimo \xE1lbum",
+      pl: "Ostatni album"
     },
     popular_now: {
       en: "Popular now",
@@ -47600,15 +47905,18 @@ var bleh = (() => {
       it: "Popolare ora",
       sv: "Popul\xE4r just nu",
       ru: "\u041F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u043E \u0441\u0435\u0439\u0447\u0430\u0441",
-      pt: "Popular agora"
+      pt: "Popular agora",
+      pl: "Popularne teraz"
     },
     missing_artist_info: {
+      //PL: I'm changing this and the next to "Może chcesz pomóc?" which is "Maybe you want to help out?" which in my opinion sounds better than "Może możesz pomóc?" which is a more direct translation
       en: "This artist is missing key details, maybe you can help out?",
       pt: "Faltam detalhes importantes sobre este artista, talvez voc\xEA possa ajudar?",
       de: "Diesem K\xFCnstler fehlen wichtige Details, vielleicht kannst du helfen?",
       es: "A este artista le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?",
       ru: "\u041E\u0431 \u044D\u0442\u043E\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u0435 \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u043A\u043B\u044E\u0447\u0435\u0432\u043E\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438, \u043C\u043E\u0436\u0435\u0442, \u0432\u044B \u043F\u043E\u043C\u043E\u0436\u0435\u0442\u0435?",
-      it: "A quest\u2019artista mancano dettagli fondamentali, forse puoi aiutarci?"
+      it: "A quest\u2019artista mancano dettagli fondamentali, forse puoi aiutarci?",
+      pl: "Temu arty\u015Bcie brakuje wa\u017Cnych informacji. Mo\u017Ce chcesz pom\xF3c?"
     },
     missing_album_info: {
       en: "This album is missing key details, maybe you can help out?",
@@ -47616,7 +47924,8 @@ var bleh = (() => {
       es: "A este \xE1lbum le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?",
       it: "A questo album mancano dettagli chiave, forse puoi aiutare?",
       ru: "\u0412 \u044D\u0442\u043E\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u0435 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u044E\u0442 \u043A\u043B\u044E\u0447\u0435\u0432\u044B\u0435 \u0434\u0435\u0442\u0430\u043B\u0438, \u043C\u043E\u0436\u0435\u0442, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u043E\u043C\u043E\u0447\u044C?",
-      pt: "Este \xE1lbum est\xE1 faltando detalhes importantes, talvez voc\xEA possa ajudar?"
+      pt: "Este \xE1lbum est\xE1 faltando detalhes importantes, talvez voc\xEA possa ajudar?",
+      pl: "W tym albumie brakuje wa\u017Cnych informacji. Mo\u017Ce chcesz pom\xF3c?"
     },
     updates: {
       // links to the bleh updater
@@ -47626,7 +47935,8 @@ var bleh = (() => {
       it: "Aggiornamenti",
       pt: "Atualiza\xE7\xF5es",
       sv: "Uppdateringar",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Aktualizacje"
     },
     updated: {
       en: "Updated",
@@ -47636,12 +47946,14 @@ var bleh = (() => {
       pt: "Atualizado",
       sv: "Uppdaterats",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E",
+      pl: "Zaktualizowano",
       notification: {
         en: "Updated to version {v}",
         pt: "Atualizado para a vers\xE3o {v}",
         es: "Actualizado a la versi\xF3n {v}",
         it: "Aggiornato alla versione {v}",
-        ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438 {v}"
+        ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438 {v}",
+        pl: "Zaktualizowano do wersji {v}"
       }
     },
     you_are_up_to_date: {
@@ -47651,7 +47963,8 @@ var bleh = (() => {
       it: "Sei aggiornato",
       pt: "Voc\xEA est\xE1 atualizado",
       sv: "Du \xE4r p\xE5 den senaste versionen",
-      ru: "\u0423 \u0432\u0430\u0441 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0432\u0435\u0440\u0441\u0438\u044F"
+      ru: "\u0423 \u0432\u0430\u0441 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0432\u0435\u0440\u0441\u0438\u044F",
+      pl: "Jeste\u015B na bie\u017C\u0105co"
     },
     update_available_to_install: {
       en: "Update available to install",
@@ -47660,7 +47973,8 @@ var bleh = (() => {
       it: "Aggiornamento disponibile per l\u2019installazione",
       pt: "Atualiza\xE7\xE3o dispon\xEDvel para instalar",
       sv: "Ny uppdatering finns tillg\xE4nglig",
-      ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438"
+      ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438",
+      pl: "Aktualizacja dost\u0119pna do zainstalowania"
     },
     install_now: {
       // install update
@@ -47670,7 +47984,8 @@ var bleh = (() => {
       it: "Installa ora",
       pt: "Instale agora",
       sv: "Installera nu",
-      ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441"
+      ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0441\u0435\u0439\u0447\u0430\u0441",
+      pl: "Zainstaluj teraz"
     },
     check_for_updates: {
       en: "Check for updates",
@@ -47679,7 +47994,8 @@ var bleh = (() => {
       it: "Controlla aggiornamenti",
       pt: "Verificar atualiza\xE7\xF5es",
       sv: "Checka efter nya uppdateringar",
-      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Sprawd\u017A dost\u0119pno\u015B\u0107 aktualizacji"
     },
     check: {
       en: "Check",
@@ -47688,7 +48004,8 @@ var bleh = (() => {
       it: "Controlla",
       pt: "Verificar",
       sv: "Checka",
-      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C"
+      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C",
+      pl: "Sprawd\u017A"
     },
     last_checked_date: {
       en: "Last checked {d}",
@@ -47697,7 +48014,8 @@ var bleh = (() => {
       it: "Ultimo controllo {d}",
       pt: "\xDAltima verifica\xE7\xE3o {d}",
       sv: "Sist kollat {d}",
-      ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 {d}"
+      ru: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 {d}",
+      pl: "Ostatnio sprawdzono {d}"
     },
     never_checked: {
       en: "Never checked",
@@ -47706,7 +48024,8 @@ var bleh = (() => {
       it: "Mai controllato",
       pt: "Nunca verificado",
       sv: "Aldrig checkat",
-      ru: "\u041D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u044F\u043B\u043E\u0441\u044C"
+      ru: "\u041D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u044F\u043B\u043E\u0441\u044C",
+      pl: "Nigdy nie sprawdzano"
     },
     get_updates_fast: {
       name: {
@@ -47716,7 +48035,8 @@ var bleh = (() => {
         it: "Ottieni gli ultimi aggiornamenti appena sono disponibili",
         pt: "Receba as \xFAltimas atualiza\xE7\xF5es assim que estiverem dispon\xEDveis",
         sv: "Skaffa senaste uppdateringarna direkt n\xE4r det finns tillg\xE4ngligt",
-        ru: "\u041F\u043E\u043B\u0443\u0447\u0430\u0439\u0442\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F, \u043A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u043E\u043D\u0438 \u0441\u0442\u0430\u043D\u0443\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B"
+        ru: "\u041F\u043E\u043B\u0443\u0447\u0430\u0439\u0442\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F, \u043A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u043E\u043D\u0438 \u0441\u0442\u0430\u043D\u0443\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B",
+        pl: "Otrzymuj najnowsze aktualizacje, gdy tylko b\u0119d\u0105 dost\u0119pne"
       },
       body: {
         en: "Be among the first to get the latest fixes and improvements as they roll out",
@@ -47725,7 +48045,8 @@ var bleh = (() => {
         it: "Sii tra i primi ad ottenere le ultime correzioni e miglioramenti appena vengono rilasciati",
         pt: "Seja um dos primeiros a receber as \xFAltimas corre\xE7\xF5es e melhorias assim que forem lan\xE7adas",
         sv: "Bli bland dem f\xF6rsta som f\xE5r de senaste fixarna och optimeringarna s\xE5 snart som dom kommit",
-        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u0432 \u0447\u0438\u0441\u043B\u0435 \u043F\u0435\u0440\u0432\u044B\u0445, \u043A\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0438 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0440\u0435 \u0438\u0445 \u0432\u044B\u043F\u0443\u0441\u043A\u0430"
+        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u0432 \u0447\u0438\u0441\u043B\u0435 \u043F\u0435\u0440\u0432\u044B\u0445, \u043A\u0442\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0438 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0440\u0435 \u0438\u0445 \u0432\u044B\u043F\u0443\u0441\u043A\u0430",
+        pl: "B\u0105d\u017A w\u015Br\xF3d pierwszych, kt\xF3rzy otrzymuj\u0105 najnowsze poprawki i ulepszenia, gdy tylko zostan\u0105 wydane"
       }
     },
     pause_updates: {
@@ -47735,7 +48056,8 @@ var bleh = (() => {
       it: "Sospendi aggiornamenti",
       pt: "Pausar atualiza\xE7\xF5es",
       sv: "Pausa uppdateringar",
-      ru: "\u041F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Wstrzymaj aktualizacje"
     },
     pause_updates_for: {
       en: "Pause for 1 day",
@@ -47744,7 +48066,8 @@ var bleh = (() => {
       it: "Sospendi per 1 giorno",
       pt: "Pausar por 1 dia",
       sv: "Pausa i 1 dag",
-      ru: "\u041F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043D\u0430 1 \u0434\u0435\u043D\u044C"
+      ru: "\u041F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043D\u0430 1 \u0434\u0435\u043D\u044C",
+      pl: "Wstrzymaj na 1 dzie\u0144"
     },
     resume_updates: {
       en: "Resume updates",
@@ -47753,7 +48076,8 @@ var bleh = (() => {
       it: "Riprendi aggiornamenti",
       pt: "Resumir atualiza\xE7\xF5es",
       sv: "\xC5teruppta uppdateringar",
-      ru: "\u0412\u043E\u0437\u043E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u0412\u043E\u0437\u043E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Wzn\xF3w aktualizacje"
     },
     updates_paused: {
       en: "Updates paused",
@@ -47762,7 +48086,8 @@ var bleh = (() => {
       it: "Aggiornamenti sospesi",
       pt: "Atualiza\xE7\xF5es pausadas",
       sv: "Uppdateringar har pausats",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u044B"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u044B",
+      pl: "Aktualizacje wstrzymane"
     },
     paused_until_date: {
       en: "Updates continue {d}",
@@ -47771,7 +48096,8 @@ var bleh = (() => {
       it: "Gli aggiornamenti riprenderanno il {d}",
       pt: "Atualiza\xE7\xF5es continuam {d}",
       sv: "Uppdateringar forts\xE4tter {d}",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0432\u043E\u0437\u043E\u0431\u043D\u043E\u0432\u044F\u0442\u0441\u044F {d}"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0432\u043E\u0437\u043E\u0431\u043D\u043E\u0432\u044F\u0442\u0441\u044F {d}",
+      pl: "Aktualizacje zostan\u0105 wznowione {d}"
     },
     missing_updates: {
       en: "Missing updates",
@@ -47780,7 +48106,8 @@ var bleh = (() => {
       it: "Aggiornamenti mancanti",
       pt: "Atualiza\xE7\xF5es em falta",
       sv: "Saknar uppdateringar",
-      ru: "\u041F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043D\u044B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Brakuj\u0105ce aktualizacje"
     },
     you_are_running_version: {
       en: "You are running version {v}",
@@ -47789,7 +48116,8 @@ var bleh = (() => {
       it: "Stai eseguendo la versione {v}",
       pt: "Voc\xEA est\xE1 usando a vers\xE3o {v}",
       sv: "Du \xE4r p\xE5 version {v}",
-      ru: "\u0412\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044E {v}"
+      ru: "\u0412\u044B \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044E {v}",
+      pl: "Korzystasz z wersji {v}"
     },
     you_are_installing_version: {
       en: "You are installing version {v}",
@@ -47798,7 +48126,8 @@ var bleh = (() => {
       it: "Stai installando la versione {v}",
       pt: "Voc\xEA est\xE1 instalando a vers\xE3o {v}",
       sv: "Du har installerat version {v}",
-      ru: "\u0412\u044B \u0443\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044E {v}"
+      ru: "\u0412\u044B \u0443\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044E {v}",
+      pl: "Instalujesz wersj\u0119 {v}"
     },
     checked_for_updates: {
       en: "Checked for updates",
@@ -47807,12 +48136,14 @@ var bleh = (() => {
       it: "Controllato la disponibilit\xE0 di aggiornamenti",
       pt: "Verificou por atualiza\xE7\xF5es",
       sv: "Kolla efter uppdateringar",
-      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043E \u043D\u0430 \u043D\u0430\u043B\u0438\u0447\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0439"
+      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043E \u043D\u0430 \u043D\u0430\u043B\u0438\u0447\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0439",
+      pl: "Sprawdzono dost\u0119pno\u015B\u0107 aktualizacji"
     },
     failed_to_check_for_updates: {
       en: "Checking for updates failed",
       pt: "Falha ao verificar atualiza\xE7\xF5es",
-      es: "Error al comprobar actualizaciones"
+      es: "Error al comprobar actualizaciones",
+      pl: "Nie uda\u0142o si\u0119 sprawdzi\u0107 dost\u0119pno\u015Bci aktualizacji"
     },
     select_all: {
       en: "Select all",
@@ -47821,7 +48152,8 @@ var bleh = (() => {
       it: "Seleziona tutto",
       sv: "Markera alla",
       ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0441\u0435",
-      pt: "Selecionar todos"
+      pt: "Selecionar todos",
+      pl: "Zaznacz wszystko"
     },
     deselect_all: {
       en: "De-select all",
@@ -47830,7 +48162,8 @@ var bleh = (() => {
       it: "Deseleziona tutto",
       sv: "Avmarkera alla",
       ru: "\u0421\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u043E\u0440 \u0441\u043E \u0432\u0441\u0435\u0445",
-      pt: "Deselecionar todos"
+      pt: "Deselecionar todos",
+      pl: "Odznacz wszystko"
     },
     use_current_time: {
       en: "Use current time",
@@ -47839,7 +48172,8 @@ var bleh = (() => {
       it: "Usa l\u2019ora attuale",
       sv: "Anv\xE4nd nuvarande tid",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F",
-      pt: "Usar hora atual"
+      pt: "Usar hora atual",
+      pl: "U\u017Cyj bie\u017C\u0105cego czasu"
     },
     time: {
       en: "Time",
@@ -47848,7 +48182,8 @@ var bleh = (() => {
       it: "Ora",
       sv: "Tid",
       ru: "\u0412\u0440\u0435\u043C\u044F",
-      pt: "Hora"
+      pt: "Hora",
+      pl: "Czas"
     },
     missing_fields: {
       en: "Missing required fields",
@@ -47857,7 +48192,8 @@ var bleh = (() => {
       it: "Campi obbligatori mancanti",
       sv: "Saknar n\xF6dv\xE4ndiga f\xE4lt",
       ru: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u044E\u0442 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043F\u043E\u043B\u044F",
-      pt: "Faltando campos obrigat\xF3rios"
+      pt: "Faltando campos obrigat\xF3rios",
+      pl: "Brak wymaganych p\xF3l"
     },
     requires_api_in_settings: {
       en: "Requires API access in Settings",
@@ -47866,7 +48202,8 @@ var bleh = (() => {
       it: "Richiede l\u2019accesso API nelle impostazioni",
       sv: "Beh\xF6ver API-\xE5tkomst i inst\xE4llningar",
       ru: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0434\u043E\u0441\u0442\u0443\u043F \u043A API \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445",
-      pt: "Requer acesso \xE0 API nas Configura\xE7\xF5es"
+      pt: "Requer acesso \xE0 API nas Configura\xE7\xF5es",
+      pl: "Wymaga dost\u0119pu do API w Ustawieniach"
     },
     no_token_provided: {
       en: "No token provided",
@@ -47875,7 +48212,8 @@ var bleh = (() => {
       it: "Nessun token fornito",
       sv: "Ingen token har angivits",
       ru: "\u0422\u043E\u043A\u0435\u043D \u043D\u0435 \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D",
-      pt: "Nenhum token fornecido"
+      pt: "Nenhum token fornecido",
+      pl: "Brak tokenu"
     },
     example: {
       en: "e.g. {v}",
@@ -47884,7 +48222,8 @@ var bleh = (() => {
       it: "es. {v}",
       pt: "ex.: {v}",
       sv: "t.ex. {v}",
-      ru: "\u043D\u0430\u043F\u0440. {v}"
+      ru: "\u043D\u0430\u043F\u0440. {v}",
+      pl: "np. {v}"
     },
     item_is_unavailable_on_platform: {
       en: "{i} is unavailable on {p}",
@@ -47893,7 +48232,8 @@ var bleh = (() => {
       it: "{i} non \xE8 disponibile su {p}",
       pt: "{i} est\xE1 ind\xEDsponivel no {p}",
       sv: "{i} \xE4r inte tillg\xE4nglig p\xE5 {p}",
-      ru: "{i} \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u043D\u0430 {p}"
+      ru: "{i} \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u043D\u0430 {p}",
+      pl: "{i} jest niedost\u0119pny na {p}"
     },
     platforms: {
       other: {
@@ -47903,7 +48243,8 @@ var bleh = (() => {
         it: "Sconosciuto",
         pt: "Desconhecido",
         sv: "Ok\xE4nd",
-        ru: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E"
+        ru: "\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E",
+        pl: "Nieznany"
       }
     },
     reduced_motion: {
@@ -47914,7 +48255,8 @@ var bleh = (() => {
         it: "Riduci movimenti nelle animazioni",
         sv: "Minska animationr\xF6relse",
         ru: "\u0423\u043C\u0435\u043D\u044C\u0448\u0438\u0442\u044C \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0435 \u0432 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044F\u0445",
-        pt: "Reduzir movimento em anima\xE7\xF5es"
+        pt: "Reduzir movimento em anima\xE7\xF5es",
+        pl: "Ogranicz ruch w animacjach"
       },
       body: {
         en: "Decreases the intensity of animations, hover effects, and other moving parts",
@@ -47923,7 +48265,8 @@ var bleh = (() => {
         it: "Riduce l\u2019intensit\xE0 delle animazioni, degli effetti al passare del mouse e di altre parti in movimento",
         sv: "Minskar intensiteten av animationer, effekter vid hovring, och andra r\xF6rande delar",
         ru: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0438\u043D\u0442\u0435\u043D\u0441\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0439, \u044D\u0444\u0444\u0435\u043A\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438 \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0434\u0432\u0438\u0436\u0443\u0449\u0438\u0445\u0441\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432",
-        pt: "Diminui a intensidade das anima\xE7\xF5es, efeitos de hover e outras partes m\xF3veis"
+        pt: "Diminui a intensidade das anima\xE7\xF5es, efeitos de hover e outras partes m\xF3veis",
+        pl: "Zmniejsza intensywno\u015B\u0107 animacji, efekt\xF3w po najechaniu kursorem i innych ruchomych element\xF3w"
       }
     },
     banners: {
@@ -47933,7 +48276,8 @@ var bleh = (() => {
       it: "Banner",
       sv: "Banner",
       ru: "\u0411\u0430\u043D\u043D\u0435\u0440\u044B",
-      pt: "Banners"
+      pt: "Banners",
+      pl: "Banery"
     },
     view_backgrounds_on: {
       en: "View banners on",
@@ -47942,7 +48286,8 @@ var bleh = (() => {
       it: "Mostra banner su",
       sv: "Visa banners p\xE5",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0431\u0430\u043D\u043D\u0435\u0440\u044B \u043D\u0430",
-      pt: "Ver banners em"
+      pt: "Ver banners em",
+      pl: "Wy\u015Bwietlaj banery na"
     },
     own_profile: {
       // sub-option for view_backgrounds_on
@@ -47952,7 +48297,8 @@ var bleh = (() => {
       it: "Il mio profilo",
       sv: "Din egen profil",
       ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
-      pt: "Seu pr\xF3prio perfil"
+      pt: "Seu pr\xF3prio perfil",
+      pl: "Moim profilu"
     },
     other_profiles: {
       // sub-option for view_backgrounds_on
@@ -47962,7 +48308,8 @@ var bleh = (() => {
       it: "Altri profili",
       sv: "Andra profiler",
       ru: "\u0414\u0440\u0443\u0433\u0438\u0445 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445",
-      pt: "Outros perfis"
+      pt: "Outros perfis",
+      pl: "Innych profilach"
     },
     profile_avi_background: {
       name: {
@@ -47972,7 +48319,8 @@ var bleh = (() => {
         it: "Preferire l\u2019immagine dell\u2019immagine profilo per profili senza un banner",
         sv: "F\xF6redra profilbild f\xF6r profiler utan en banner",
         ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0430\u0432\u0430\u0442\u0430\u0440\u0430 \u0434\u043B\u044F \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439 \u0431\u0435\u0437 \u0431\u0430\u043D\u043D\u0435\u0440\u0430",
-        pt: "Preferir imagem do avatar para perfis sem banner"
+        pt: "Preferir imagem do avatar para perfis sem banner",
+        pl: "Preferuj awatar dla profili bez banera"
       },
       body: {
         en: "All artist-based banner images will be replaced by the user\u2019s avatar",
@@ -47981,7 +48329,8 @@ var bleh = (() => {
         it: "Tutte le immagini banner basate sugli artisti saranno sostituite dall\u2019immagine profilo dell\u2019utente",
         sv: "Alla artistbaserade bannerbilder blir ers\xE4tt av anv\xE4ndarens profilbild",
         ru: "\u0412\u0441\u0435 \u0431\u0430\u043D\u043D\u0435\u0440\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0431\u0443\u0434\u0443\u0442 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u0430\u0432\u0430\u0442\u0430\u0440\u043E\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
-        pt: "Todas as imagens de banner baseadas em artistas ser\xE3o substitu\xEDdas pelo avatar do usu\xE1rio"
+        pt: "Todas as imagens de banner baseadas em artistas ser\xE3o substitu\xEDdas pelo avatar do usu\xE1rio",
+        pl: "Wszystkie banery oparte na obrazach artyst\xF3w zostan\u0105 zast\u0105pione awatarem u\u017Cytkownika"
       }
     },
     profile_banner: {
@@ -47992,7 +48341,8 @@ var bleh = (() => {
         it: "Banner del profilo",
         sv: "Profilbanner",
         ru: "\u0411\u0430\u043D\u043D\u0435\u0440 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
-        pt: "Banner do perfil"
+        pt: "Banner do perfil",
+        pl: "Baner profilu"
       },
       body: {
         en: "Showcase an image of your choosing across your profile",
@@ -48000,7 +48350,8 @@ var bleh = (() => {
         de: "Zeige ein Bild deiner Wahl auf deinem Profil",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0432\u0430\u043C\u0438, \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
         es: "Muestra una imagen de tu elecci\xF3n en tu perfil",
-        it: "Metti in evidenza un\u2019immagine a tua scelta sul tuo profilo"
+        it: "Metti in evidenza un\u2019immagine a tua scelta sul tuo profilo",
+        pl: "Wy\u015Bwietl wybrany przez siebie obraz na swoim profilu"
       }
     },
     aspect_ratio_banner: {
@@ -48009,7 +48360,8 @@ var bleh = (() => {
       de: "Angezeigt mit einem Seitenverh\xE4ltnis von {v}, wenn die Bildschirmgr\xF6\xDFe dies unterst\xFCtzt",
       es: "Mostrado con una relaci\xF3n de aspecto de {v}, si el tama\xF1o de la pantalla lo permite",
       ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441 \u0441\u043E\u043E\u0442\u043D\u043E\u0448\u0435\u043D\u0438\u0435\u043C \u0441\u0442\u043E\u0440\u043E\u043D {v}, \u0435\u0441\u043B\u0438 \u0440\u0430\u0437\u043C\u0435\u0440 \u044D\u043A\u0440\u0430\u043D\u0430 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442",
-      it: "Visualizzato con un rapporto di aspetto di {v}, se le dimensioni dello schermo lo supportano"
+      it: "Visualizzato con un rapporto di aspetto di {v}, se le dimensioni dello schermo lo supportano",
+      pl: "Wy\u015Bwietlane w proporcjach {v}, je\u015Bli rozmiar ekranu na to pozwala"
     },
     profile_accent: {
       name: {
@@ -48020,7 +48372,8 @@ var bleh = (() => {
         it: "Accento del profilo",
         sv: "Profilaccent",
         ru: "\u0410\u043A\u0446\u0435\u043D\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
-        pt: "Toque de cor do perfil"
+        pt: "Toque de cor do perfil",
+        pl: "Akcent profilu"
       },
       body: {
         en: "Add flair to your profile visible to all users regardless of personal accent",
@@ -48029,7 +48382,8 @@ var bleh = (() => {
         it: "Aggiungi un accento al tuo profilo visibile a tutti gli utenti a prescindere dal loro accento personale",
         sv: "L\xE4gg till flair p\xE5 din profil som syns f\xF6r alla anv\xE4ndare oberoende p\xE5 egen accentf\xE4rg",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0438\u0437\u044E\u043C\u0438\u043D\u043A\u0443 \u0432 \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0432\u0438\u0434\u0438\u043C\u0443\u044E \u0432\u0441\u0435\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E \u043E\u0442 \u0438\u0445 \u043B\u0438\u0447\u043D\u043E\u0433\u043E \u0430\u043A\u0446\u0435\u043D\u0442\u0430",
-        pt: "Adicione um toque ao seu perfil vis\xEDvel para todos os usu\xE1rios, independentemente do toque de cor pessoal"
+        pt: "Adicione um toque ao seu perfil vis\xEDvel para todos os usu\xE1rios, independentemente do toque de cor pessoal",
+        pl: "Dodaj do swojego profilu wyr\xF3\u017Cnienie widoczne dla wszystkich u\u017Cytkownik\xF3w, niezale\u017Cnie od ich koloru akcentu"
       },
       reminder: {
         en: "Changed your accent, don\u2019t forget to save!",
@@ -48038,7 +48392,8 @@ var bleh = (() => {
         it: "Hai cambiato l\u2019accento, non dimenticarti di salvare!",
         sv: "\xC4ndrade din accentf\xE4rg, gl\xF6m inte att spara!",
         ru: "\u0412\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u0438 \u0430\u043A\u0446\u0435\u043D\u0442, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0435\u0433\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!",
-        pt: "Toque de cor alterado, n\xE3o se esque\xE7a de salvar!"
+        pt: "Toque de cor alterado, n\xE3o se esque\xE7a de salvar!",
+        pl: "Zmieniono akcent, nie zapomnij zapisa\u0107 zmian!"
       }
     },
     profile_font: {
@@ -48048,7 +48403,8 @@ var bleh = (() => {
         es: "Fuente del nombre de perfil",
         it: "Font del nome del profilo",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
-        pt: "Fonte do nome do perfil"
+        pt: "Fonte do nome do perfil",
+        pl: "Czcionka nazwy profilu"
       },
       body: {
         en: "Customise the font family used for your username, only visible on your profile",
@@ -48056,7 +48412,8 @@ var bleh = (() => {
         es: "Customiza la familia tipogr\xE1fica usada en tu nombre de usuario, solo visible en tu perfil",
         it: "Personalizza la famiglia di font utilizzata per il tuo nome utente, visibile solo sul tuo profilo",
         ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0441\u0435\u043C\u0435\u0439\u0441\u0442\u0432\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u0432, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u043E\u0435 \u0434\u043B\u044F \u0432\u0430\u0448\u0435\u0433\u043E \u0438\u043C\u0435\u043D\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F; \u043E\u043D\u043E \u0431\u0443\u0434\u0435\u0442 \u0432\u0438\u0434\u043D\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
-        pt: "Personalize as fontes usadas para o seu nome de usu\xE1rio, vis\xEDvel apenas no seu perfil"
+        pt: "Personalize as fontes usadas para o seu nome de usu\xE1rio, vis\xEDvel apenas no seu perfil",
+        pl: "Dostosuj rodzin\u0119 czcionek u\u017Cywan\u0105 dla swojej nazwy u\u017Cytkownika, widoczn\u0105 tylko na Twoim profilu"
       },
       reminder: {
         en: "Changed your name font, don\u2019t forget to save!",
@@ -48064,7 +48421,8 @@ var bleh = (() => {
         es: "Fuente del nombre cambiada, \xA1no te olvides de guardar!",
         it: "Hai cambiato il font del tuo nome, non dimenticarti di salvare!",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043C\u0435\u043D\u0438 \u0438\u0437\u043C\u0435\u043D\u0451\u043D, \u043D\u0435 \u0437\u0430\u0431\u0443\u0434\u044C\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C!",
-        pt: "Fonte do nome alterada, n\xE3o se esque\xE7a de salvar!"
+        pt: "Fonte do nome alterada, n\xE3o se esque\xE7a de salvar!",
+        pl: "Zmieniono czcionk\u0119 nazwy, nie zapomnij zapisa\u0107 zmian!"
       }
     },
     none: {
@@ -48075,6 +48433,7 @@ var bleh = (() => {
       sv: "Ingen",
       ru: "\u041D\u0435\u0442",
       pt: "Nenhum",
+      pl: "Brak",
       banner: {
         // no profile banner present
         en: "None",
@@ -48083,7 +48442,8 @@ var bleh = (() => {
         it: "Nessuno",
         sv: "Ingen",
         ru: "\u041D\u0435\u0442",
-        pt: "Nenhum"
+        pt: "Nenhum",
+        pl: "Brak"
       },
       starred_friend: {
         // no starred friend selected
@@ -48093,7 +48453,8 @@ var bleh = (() => {
         it: "Nessuno",
         sv: "Ingen",
         ru: "\u041D\u0435\u0442",
-        pt: "Nenhum"
+        pt: "Nenhum",
+        pl: "Brak"
       }
     },
     current_banner_value: {
@@ -48104,7 +48465,8 @@ var bleh = (() => {
       it: "Banner corrente: {v}",
       sv: "Nuvarande banner: {v}",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0431\u0430\u043D\u043D\u0435\u0440: {v}",
-      pt: "Banner atual: {v}"
+      pt: "Banner atual: {v}",
+      pl: "Obecny baner: {v}"
     },
     show_your_progress: {
       name: {
@@ -48114,7 +48476,8 @@ var bleh = (() => {
         it: "Mostra le tue riproduzioni rispetto alla settimana scorsa",
         sv: "Visa dina spelningar j\xE4mf\xF6rt med f\xF6rra veckan",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044E \u0441 \u043F\u0440\u043E\u0448\u043B\u043E\u0439 \u043D\u0435\u0434\u0435\u043B\u0435\u0439",
-        pt: "Mostre suas reprodu\xE7\xF5es em compara\xE7\xE3o com a semana passada"
+        pt: "Mostre suas reprodu\xE7\xF5es em compara\xE7\xE3o com a semana passada",
+        pl: "Poka\u017C swoje ods\u0142uchania w por\xF3wnaniu z zesz\u0142ym tygodniem"
       },
       body: {
         en: "Compares your current progress to last week\u2019s average, requires Last.fm Pro",
@@ -48123,7 +48486,8 @@ var bleh = (() => {
         it: "Compara il tuo progresso corrente rispetto alla media della settimana scorsa, richiede Last.fm Pro",
         sv: "J\xE4mf\xF6r denna veckans spelningar med f\xF6rra veckan, kr\xE4ver Last.fm Pro",
         ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0432\u0430\u0435\u0442 \u0432\u0430\u0448 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441 \u0441\u043E \u0441\u0440\u0435\u0434\u043D\u0438\u043C \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u0435\u043C \u043F\u0440\u043E\u0448\u043B\u043E\u0439 \u043D\u0435\u0434\u0435\u043B\u0438; \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F Last.fm Pro",
-        pt: "Compara seu progresso atual com a m\xE9dia da semana passada, requer Last.fm Pro"
+        pt: "Compara seu progresso atual com a m\xE9dia da semana passada, requer Last.fm Pro",
+        pl: "Por\xF3wnuje Tw\xF3j aktualny post\u0119p ze \u015Bredni\u0105 z zesz\u0142ego tygodnia, wymaga Last.fm Pro"
       }
     },
     manual: {
@@ -48133,7 +48497,8 @@ var bleh = (() => {
       it: "Manuale",
       sv: "Manuellt",
       ru: "\u0412\u0440\u0443\u0447\u043D\u0443\u044E",
-      pt: "Manual"
+      pt: "Manual",
+      pl: "R\u0119cznie"
     },
     enter_a_manual_date: {
       en: "Enter a date in the format YYYY-MM-DD",
@@ -48142,7 +48507,8 @@ var bleh = (() => {
       it: "Inserisci una data in formato YYYY-MM-DD",
       sv: "Skriv in ett datum med formatet YYYY-MM-DD",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u0442\u0443 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 \u0413\u0413\u0413\u0413-\u041C\u041C-\u0414\u0414",
-      pt: "Insira uma data no formato AAAA-MM-DD"
+      pt: "Insira uma data no formato AAAA-MM-DD",
+      pl: "Wpisz dat\u0119 w formacie RRRR-MM-DD"
     },
     minimum_value: {
       en: "Minimum: {v}",
@@ -48151,7 +48517,8 @@ var bleh = (() => {
       it: "Minimo: {v}",
       sv: "Minst: {v}",
       ru: "\u041C\u0438\u043D\u0438\u043C\u0443\u043C: {v}",
-      pt: "M\xEDnimo: {v}"
+      pt: "M\xEDnimo: {v}",
+      pl: "Minimum {v}"
     },
     maximum_value: {
       en: "Maximum: {v}",
@@ -48160,7 +48527,8 @@ var bleh = (() => {
       it: "Massimo: {v}",
       sv: "Max: {v}",
       ru: "\u041C\u0430\u043A\u0441\u0438\u043C\u0443\u043C: {v}",
-      pt: "M\xE1ximo: {v}"
+      pt: "M\xE1ximo: {v}",
+      pl: "Maksimum {v}"
     },
     manual_date: {
       en: "Type a date manually",
@@ -48169,7 +48537,8 @@ var bleh = (() => {
       it: "Inserisci una data manualmente",
       sv: "Skriv in ett datum manuellt",
       ru: "\u0412\u0432\u0435\u0441\u0442\u0438 \u0434\u0430\u0442\u0443 \u0432\u0440\u0443\u0447\u043D\u0443\u044E",
-      pt: "Digite uma data manualmente"
+      pt: "Digite uma data manualmente",
+      pl: "Wpisze dat\u0119 r\u0119cznie"
     },
     red: {
       en: "Red",
@@ -48178,7 +48547,8 @@ var bleh = (() => {
       it: "Rosso",
       pt: "Vermelho",
       sv: "R\xF6d",
-      ru: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439"
+      ru: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439",
+      pl: "Czerwony"
     },
     orange: {
       en: "Orange",
@@ -48186,7 +48556,8 @@ var bleh = (() => {
       es: "Naranja",
       it: "Arancione",
       pt: "Laranja",
-      ru: "\u041E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439"
+      ru: "\u041E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439",
+      pl: "Pomara\u0144czowy"
     },
     yellow: {
       en: "Yellow",
@@ -48195,7 +48566,8 @@ var bleh = (() => {
       it: "Giallo",
       pt: "Amarelo",
       sv: "Gul",
-      ru: "\u0416\u0435\u043B\u0442\u044B\u0439"
+      ru: "\u0416\u0435\u043B\u0442\u044B\u0439",
+      pl: "\u017B\xF3\u0142ty"
     },
     lime: {
       en: "Lime",
@@ -48203,7 +48575,8 @@ var bleh = (() => {
       es: "Lima",
       it: "Lime",
       pt: "Lima",
-      ru: "\u0421\u0430\u043B\u0430\u0442\u043E\u0432\u044B\u0439"
+      ru: "\u0421\u0430\u043B\u0430\u0442\u043E\u0432\u044B\u0439",
+      pl: "Limonkowy"
     },
     green: {
       en: "Green",
@@ -48212,7 +48585,8 @@ var bleh = (() => {
       it: "Verde",
       pt: "Verde",
       sv: "Gr\xF6n",
-      ru: "\u0417\u0435\u043B\u0435\u043D\u044B\u0439"
+      ru: "\u0417\u0435\u043B\u0435\u043D\u044B\u0439",
+      pl: "Zielony"
     },
     aqua: {
       en: "Aqua",
@@ -48221,7 +48595,8 @@ var bleh = (() => {
       it: "Turchese",
       pt: "\xC1gua",
       sv: "Turkos",
-      ru: "\u0411\u0438\u0440\u044E\u0437\u043E\u0432\u044B\u0439"
+      ru: "\u0411\u0438\u0440\u044E\u0437\u043E\u0432\u044B\u0439",
+      pl: "Turkusowy"
     },
     blue: {
       en: "Blue",
@@ -48230,7 +48605,8 @@ var bleh = (() => {
       it: "Blu",
       pt: "Azul",
       sv: "Bl\xE5",
-      ru: "\u0421\u0438\u043D\u0438\u0439"
+      ru: "\u0421\u0438\u043D\u0438\u0439",
+      pl: "Niebieski"
     },
     purple: {
       en: "Purple",
@@ -48239,7 +48615,8 @@ var bleh = (() => {
       it: "Viola",
       pt: "Roxo",
       sv: "Lila",
-      ru: "\u0424\u0438\u043E\u043B\u0435\u0442\u043E\u0432\u044B\u0439"
+      ru: "\u0424\u0438\u043E\u043B\u0435\u0442\u043E\u0432\u044B\u0439",
+      pl: "Fioletowy"
     },
     pink: {
       en: "Pink",
@@ -48248,7 +48625,8 @@ var bleh = (() => {
       it: "Rosa",
       pt: "Rosa",
       sv: "Rosa",
-      ru: "\u0420\u043E\u0437\u043E\u0432\u044B\u0439"
+      ru: "\u0420\u043E\u0437\u043E\u0432\u044B\u0439",
+      pl: "R\xF3\u017Cowy"
     },
     grey: {
       en: "Grey",
@@ -48257,7 +48635,8 @@ var bleh = (() => {
       it: "Grigio",
       pt: "Cinza",
       sv: "Gr\xE5",
-      ru: "\u0421\u0435\u0440\u044B\u0439"
+      ru: "\u0421\u0435\u0440\u044B\u0439",
+      pl: "Szary"
     },
     minis: {
       // 'Minis' is the word i eventually settled on for
@@ -48270,7 +48649,8 @@ var bleh = (() => {
       it: "Minis",
       sv: "Mini",
       ru: "\u041C\u0438\u043D\u0438",
-      pt: "Minis"
+      pt: "Minis",
+      pl: "Minis"
     },
     explore_minis: {
       en: "Explore minis",
@@ -48278,7 +48658,8 @@ var bleh = (() => {
       de: "Minis erkunden",
       ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u0443\u0439 \u043C\u0438\u043D\u0438",
       es: "Explorar minis",
-      it: "Esplora minis"
+      it: "Esplora minis",
+      pl: "Odkryj minis"
     },
     minis_description: {
       en: "Play mini-games, puzzles, and interact with tools all powered by your listening history",
@@ -48287,7 +48668,8 @@ var bleh = (() => {
       it: "Gioca a minigiochi, puzzle e interagisci con strumenti tutti basati sulla tua cronologia di riproduzione",
       sv: "Spela minispel, pussel, och interagera med verktyg som \xE4r helt baserad p\xE5 din lyssningshistorik",
       ru: "\u0418\u0433\u0440\u0430\u0439\u0442\u0435 \u0432 \u043C\u0438\u043D\u0438-\u0438\u0433\u0440\u044B, \u0440\u0435\u0448\u0430\u0439\u0442\u0435 \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u0438 \u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0439\u0442\u0435 \u0441 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u0430\u043C\u0438, \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043D\u0430 \u0432\u0430\u0448\u0435\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
-      pt: "Jogue mini-jogos, quebra-cabe\xE7as e interaja com ferramentas todas alimentadas pelo seu hist\xF3rico de reprodu\xE7\xE3o"
+      pt: "Jogue mini-jogos, quebra-cabe\xE7as e interaja com ferramentas todas alimentadas pelo seu hist\xF3rico de reprodu\xE7\xE3o",
+      pl: "Graj w minigry, rozwi\u0105zuj zagadki i korzystaj z narz\u0119dzi opartych na Twojej historii s\u0142uchania"
     },
     no_mini_found: {
       en: "No mini found for \u2018{v}\u2019",
@@ -48296,7 +48678,8 @@ var bleh = (() => {
       it: "Nessun mini trovato per \u2018{v}\u2019",
       sv: "Ingen mini hittad f\xF6r \u2018{v}\u2019",
       ru: "\u041C\u0438\u043D\u0438-\u0438\u0433\u0440\u0430 \u0434\u043B\u044F \xAB{v}\xBB \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430",
-      pt: "Nenhum mini encontrado para \u2018{v}\u2019"
+      pt: "Nenhum mini encontrado para \u2018{v}\u2019",
+      pl: "Nie znaleziono minis dla \u201E{v}\u201D"
     },
     pixel: {
       name: {
@@ -48306,7 +48689,8 @@ var bleh = (() => {
         sv: "Pixel",
         ru: "\u041F\u0438\u043A\u0441\u0435\u043B\u044C",
         de: "Pixel",
-        pt: "Pixel"
+        pt: "Pixel",
+        pl: "Piksel"
       },
       body: {
         en: "Guess the album from its pixelated artwork and clues",
@@ -48315,7 +48699,8 @@ var bleh = (() => {
         it: "Indovina l\u2019album dalla sua copertina pixellata e indizi",
         sv: "Gissa albumet fr\xE5n sin pixellerad konst och ledtr\xE5dar",
         ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u0430\u043B\u044C\u0431\u043E\u043C \u043F\u043E \u0435\u0433\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C",
-        pt: "Adivinhe o \xE1lbum a partir de sua arte pixelada e pistas"
+        pt: "Adivinhe o \xE1lbum a partir de sua arte pixelada e pistas",
+        pl: "Zgadnij album na podstawie jego pikselowej ok\u0142adki i podpowiedzi"
       }
     },
     rainbow: {
@@ -48326,7 +48711,8 @@ var bleh = (() => {
         it: "Arcobaleno",
         sv: "Rainbow",
         ru: "\u0420\u0430\u0434\u0443\u0433\u0430",
-        pt: "Arco-\xEDris"
+        pt: "Arco-\xEDris",
+        pl: "T\u0119cza"
       },
       body: {
         en: "Arrange your listening history into a swirl of colours",
@@ -48335,19 +48721,22 @@ var bleh = (() => {
         it: "Organizza la tua cronologia di riproduzione in un turbinio di colori",
         sv: "Ordna ihop din lyssningshistorik till en virvel av f\xE4rg",
         ru: "\u0420\u0430\u0437\u043B\u043E\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0443 \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432 \u0432\u0438\u0445\u0440\u0435 \u0446\u0432\u0435\u0442\u043E\u0432",
-        pt: "Organize seu hist\xF3rico de reprodu\xE7\xE3o em um redemoinho de cores"
+        pt: "Organize seu hist\xF3rico de reprodu\xE7\xE3o em um redemoinho de cores",
+        pl: "Przekszta\u0142\u0107 swoj\u0105 histori\u0119 s\u0142uchania w wir kolor\xF3w"
       }
     },
     atlas: {
       name: {
         en: "Atlas",
         pt: "Atlas",
-        es: "Atlas"
+        es: "Atlas",
+        pl: "Atlas"
       },
       body: {
         en: "Explore where the artists you love are based in the world",
         pt: "Explore onde os artistas que voc\xEA ama est\xE3o pelo mundo",
-        es: "Explora de d\xF3nde en el mundo vienen los artistas que m\xE1s amas"
+        es: "Explora de d\xF3nde en el mundo vienen los artistas que m\xE1s amas",
+        pl: "Sprawd\u017A, sk\u0105d na \u015Bwiecie pochodz\u0105 arty\u015Bci, kt\xF3rych uwielbiasz"
       }
     },
     receipt: {
@@ -48358,7 +48747,8 @@ var bleh = (() => {
         it: "Scontrino",
         sv: "Kvitto",
         ru: "\u0427\u0435\u043A",
-        pt: "Recibo"
+        pt: "Recibo",
+        pl: "Kwit"
       },
       body: {
         en: "Print out your top tracks as a receipt",
@@ -48367,7 +48757,8 @@ var bleh = (() => {
         it: "Stampa le tue canzoni pi\xF9 ascoltate come uno scontrino",
         sv: "Skriv ut dina toppl\xE5tar som ett kvitto",
         ru: "\u0420\u0430\u0441\u043F\u0435\u0447\u0430\u0442\u0430\u0439\u0442\u0435 \u0432\u0430\u0448\u0438 \u043B\u0443\u0447\u0448\u0438\u0435 \u0442\u0440\u0435\u043A\u0438 \u0432 \u0432\u0438\u0434\u0435 \u0447\u0435\u043A\u0430",
-        pt: "Mostre suas faixas mais ouvidas como um recibo"
+        pt: "Mostre suas faixas mais ouvidas como um recibo",
+        pl: "Wydrukuj swoje najcz\u0119\u015Bciej s\u0142uchane utwory w formie kwitu"
       }
     },
     collage_description: {
@@ -48377,7 +48768,8 @@ var bleh = (() => {
       it: "Genera un\u2019immagine personalizzata basata sulla tua cronologia di riproduzione e opzioni",
       sv: "Skapa en personlig bild baserad p\xE5 din lyssningshistoria och inst\xE4llningar",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u0430\u0448\u0435\u0439 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
-      pt: "Gere uma imagem personalizada com base no seu hist\xF3rico de reprodu\xE7\xE3o e op\xE7\xF5es"
+      pt: "Gere uma imagem personalizada com base no seu hist\xF3rico de reprodu\xE7\xE3o e op\xE7\xF5es",
+      pl: "Wygeneruj spersonalizowany obraz na podstawie swojej historii s\u0142uchania i wybranych opcji"
     },
     labs_cta: {
       // a period on the end looks weird cus of the link
@@ -48387,7 +48779,8 @@ var bleh = (() => {
       it: "Se stai cercando di pi\xF9, prova la {a}funzione Labs{/a} di Last.fm",
       sv: "Om du letar efter lite mer, testa Last.fm\u2019s {a}egna Labs{/a}",
       ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u0438\u0449\u0435\u0442\u0435 \u0447\u0442\u043E-\u0442\u043E \u0435\u0449\u0435, \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 {a}\u0444\u0443\u043D\u043A\u0446\u0438\u044E Labs{/a} \u043E\u0442 Last.fm",
-      pt: "Se voc\xEA est\xE1 procurando mais, experimente a {a}fun\xE7\xE3o Labs{/a} do Last.fm"
+      pt: "Se voc\xEA est\xE1 procurando mais, experimente a {a}fun\xE7\xE3o Labs{/a} do Last.fm",
+      pl: "Je\u015Bli szukasz czego\u015B wi\u0119cej, wypr\xF3buj {a}funkcj\u0119 Labs{/a} od Last.fm"
     },
     compare_description: {
       en: "Find your shared artists, albums, and tracks with another",
@@ -48396,7 +48789,8 @@ var bleh = (() => {
       it: "Trova gli artisti, album e brani che condividi con un altro utente",
       sv: "Hitta dina delade artister, album, och l\xE5tar med n\xE5n annan",
       ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u043E\u0431\u0449\u0438\u0445 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, \u0430\u043B\u044C\u0431\u043E\u043C\u044B \u0438 \u0442\u0440\u0435\u043A\u0438 \u0441 \u0434\u0440\u0443\u0433\u0438\u043C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u043C",
-      pt: "Encontre seus artistas, \xE1lbuns e faixas compartilhados com outra pessoa"
+      pt: "Encontre seus artistas, \xE1lbuns e faixas compartilhados com outra pessoa",
+      pl: "Znajd\u017A wsp\xF3lnych artyst\xF3w, albumy i utwory z innym u\u017Cytkownikiem"
     },
     enter_a_profile: {
       en: "Enter a profile",
@@ -48405,7 +48799,8 @@ var bleh = (() => {
       it: "Inserisci un profilo",
       sv: "Skriv in ett anv\xE4ndarnamn",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
-      pt: "Insira um perfil"
+      pt: "Insira um perfil",
+      pl: "Wpisz profil"
     },
     compare_with: {
       en: "Compare with",
@@ -48414,7 +48809,8 @@ var bleh = (() => {
       it: "Confronta con",
       sv: "J\xE4mf\xF6r",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441",
-      pt: "Comparar com"
+      pt: "Comparar com",
+      pl: "Por\xF3wnaj z"
     },
     value_settings: {
       en: "{v} Settings",
@@ -48423,7 +48819,8 @@ var bleh = (() => {
       it: "Impostazioni {v}",
       sv: "{v} Inst\xE4llningar",
       ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 {v}",
-      pt: "Configura\xE7\xF5es de {v}"
+      pt: "Configura\xE7\xF5es de {v}",
+      pl: "Ustawienia {v}"
     },
     suggest_title: {
       name: {
@@ -48433,7 +48830,8 @@ var bleh = (() => {
         it: "Questa pagina non sembra ufficiale",
         sv: "Denna sida ser inte ut att vara officiell",
         ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043A\u0430\u0436\u0435\u0442\u0441\u044F \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0439",
-        pt: "Esta p\xE1gina n\xE3o parece oficial"
+        pt: "Esta p\xE1gina n\xE3o parece oficial",
+        pl: "Ta strona nie wygl\u0105da na oficjaln\u0105"
       },
       body: {
         en: "Navigate to {v} instead",
@@ -48442,7 +48840,8 @@ var bleh = (() => {
         it: "Naviga a {v} piuttosto",
         sv: "Hoppa till {v} ist\xE4llet",
         ru: "\u0412\u043C\u0435\u0441\u0442\u043E \u044D\u0442\u043E\u0433\u043E \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A {v}",
-        pt: "V\xE1 para {v} em vez disso"
+        pt: "V\xE1 para {v} em vez disso",
+        pl: "Przejd\u017A zamiast tego do {v}"
       }
     },
     lyrics: {
@@ -48454,6 +48853,7 @@ var bleh = (() => {
       pt: "Letra",
       sv: "Lyrics",
       ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D",
+      pl: "Tekst",
       name: {
         // the game
         en: "Lyrics",
@@ -48462,7 +48862,8 @@ var bleh = (() => {
         it: "Testo",
         pt: "Letra",
         sv: "Lyrics",
-        ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D"
+        ru: "\u0422\u0435\u043A\u0441\u0442\u044B \u043F\u0435\u0441\u0435\u043D",
+        pl: "Tekst"
       },
       body: {
         en: "Guess the song from a random lyric",
@@ -48471,7 +48872,8 @@ var bleh = (() => {
         it: "Indovina la canzone da una riga casuale del testo",
         pt: "Adivinhe a m\xFAsica a partir de uma letra aleat\xF3ria",
         sv: "Gissa l\xE5ten fr\xE5n en slumpad l\xE5ttext",
-        ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043F\u0435\u0441\u043D\u044E \u043F\u043E \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u0439 \u0441\u0442\u0440\u043E\u0447\u043A\u0435 \u0442\u0435\u043A\u0441\u0442\u0430"
+        ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043F\u0435\u0441\u043D\u044E \u043F\u043E \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u0439 \u0441\u0442\u0440\u043E\u0447\u043A\u0435 \u0442\u0435\u043A\u0441\u0442\u0430",
+        pl: "Zgadnij utw\xF3r na podstawie losowego fragmentu tekstu"
       }
     },
     jumbled_title: {
@@ -48481,7 +48883,8 @@ var bleh = (() => {
       it: "Titolo distorto",
       pt: "T\xEDtulo embaralhado",
       sv: "Omr\xF6rd titel",
-      ru: "\u041F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"
+      ru: "\u041F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435",
+      pl: "Pomieszany tytu\u0142"
     },
     re_jumble: {
       en: "Re-jumble",
@@ -48490,7 +48893,8 @@ var bleh = (() => {
       it: "Re-distorci titolo",
       pt: "Reembaralhar",
       sv: "R\xF6r om igen",
-      ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0448\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E"
+      ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0448\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E",
+      pl: "Wymieszaj ponownie"
     },
     begin: {
       en: "Begin",
@@ -48499,7 +48903,8 @@ var bleh = (() => {
       it: "Inizia",
       pt: "Come\xE7ar",
       sv: "B\xF6rja",
-      ru: "\u041D\u0430\u0447\u0430\u0442\u044C"
+      ru: "\u041D\u0430\u0447\u0430\u0442\u044C",
+      pl: "Rozpocznij"
     },
     jumbled_guess: {
       en: "Guess the album name with the pixelated cover, jumbled title, and hints!",
@@ -48508,7 +48913,8 @@ var bleh = (() => {
       it: "Indovina il nome dell\u2019album con la cover pixellata, il titolo distorto, e indizi!",
       pt: "Adivinhe o nome do \xE1lbum com a capa pixelada, t\xEDtulo embaralhado e dicas!",
       sv: "Gissa albumtiteln med pixellerad konst, omr\xF6rd titel, och ledtr\xE5dar!",
-      ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043F\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E, \u043F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u043C\u0443 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C!"
+      ru: "\u0423\u0433\u0430\u0434\u0430\u0439\u0442\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043F\u043E \u043F\u0438\u043A\u0441\u0435\u043B\u044C\u043D\u043E\u043C\u0443 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044E, \u043F\u0435\u0440\u0435\u043F\u0443\u0442\u0430\u043D\u043D\u043E\u043C\u0443 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E \u0438 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430\u043C!",
+      pl: "Zgadnij tytu\u0142 albumu na podstawie pikselowej ok\u0142adki, pomieszanych liter w tytule i podpowiedzi!"
     },
     add_hint: {
       en: "Add hint",
@@ -48517,7 +48923,8 @@ var bleh = (() => {
       it: "Aggiungi indizio",
       pt: "Adicionar dica",
       sv: "L\xE4gg till ledtr\xE5d",
-      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0443"
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0443",
+      pl: "Dodaj podpowied\u017A"
     },
     give_up: {
       en: "Give up",
@@ -48526,7 +48933,8 @@ var bleh = (() => {
       it: "Arrenditi",
       pt: "Desistir",
       sv: "Ge upp",
-      ru: "\u0421\u0434\u0430\u0442\u044C\u0441\u044F"
+      ru: "\u0421\u0434\u0430\u0442\u044C\u0441\u044F",
+      pl: "Poddaj si\u0119"
     },
     you_guessed_correctly: {
       en: "You guessed correctly!",
@@ -48535,7 +48943,8 @@ var bleh = (() => {
       it: "Hai indovinato!",
       pt: "Voc\xEA adivinhou corretamente!",
       sv: "Du gissade r\xE4tt!",
-      ru: "\u0412\u044B \u0443\u0433\u0430\u0434\u0430\u043B\u0438 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E!"
+      ru: "\u0412\u044B \u0443\u0433\u0430\u0434\u0430\u043B\u0438 \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E!",
+      pl: "Zgad\u0142e\u015B poprawnie!"
     },
     guess: {
       en: "Guess",
@@ -48544,7 +48953,8 @@ var bleh = (() => {
       it: "Indovina",
       pt: "Adivinhar",
       sv: "Gissa",
-      ru: "\u0423\u0433\u0430\u0434\u0430\u0442\u044C"
+      ru: "\u0423\u0433\u0430\u0434\u0430\u0442\u044C",
+      pl: "Zgadnij"
     },
     enter_a_guess: {
       en: "Enter a guess",
@@ -48553,7 +48963,8 @@ var bleh = (() => {
       it: "Inserisci la tua risposta",
       pt: "Digite um palpite",
       sv: "Skriv in en gissning",
-      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u043E\u0433\u0430\u0434\u043A\u0443"
+      ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u043E\u0433\u0430\u0434\u043A\u0443",
+      pl: "Wpisz sw\xF3j typ"
     },
     hints: {
       en: "Hints",
@@ -48563,6 +48974,7 @@ var bleh = (() => {
       pt: "Dicas",
       sv: "Ledtr\xE5dar",
       ru: "\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438",
+      pl: "Wskaz\xF3wki",
       plays: {
         en: "You have {v} plays on this album",
         de: "Du hast {v} mal einen Song von diesem Album geh\xF6rt",
@@ -48570,7 +48982,8 @@ var bleh = (() => {
         it: "Hai {v} riproduzioni di questo album",
         pt: "Voc\xEA tem {v} reprodu\xE7\xF5es neste \xE1lbum",
         sv: "Du har {v} lyssningar p\xE5 det h\xE4r albumet",
-        ru: "\u0423 \u0432\u0430\u0441 {v} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u044D\u0442\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430"
+        ru: "\u0423 \u0432\u0430\u0441 {v} \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u044D\u0442\u043E\u0433\u043E \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
+        pl: "Masz {v} odtworze\u0144 tego albumu"
       },
       release: {
         en: "Album was released on {v}",
@@ -48579,7 +48992,8 @@ var bleh = (() => {
         it: "L\u2019album \xE8 stato rilasciato il {v}",
         pt: "O \xE1lbum foi lan\xE7ado em {v}",
         sv: "Albumet sl\xE4pptes {v}",
-        ru: "\u0410\u043B\u044C\u0431\u043E\u043C \u0431\u044B\u043B \u0432\u044B\u043F\u0443\u0449\u0435\u043D {v}"
+        ru: "\u0410\u043B\u044C\u0431\u043E\u043C \u0431\u044B\u043B \u0432\u044B\u043F\u0443\u0449\u0435\u043D {v}",
+        pl: "Album zosta\u0142 wydany {v}"
       },
       tag: {
         en: "The artist is tagged with {v}",
@@ -48588,7 +49002,8 @@ var bleh = (() => {
         it: "L\u2019artista \xE8 taggato come {v}",
         pt: "O artista foi marcado com {v}",
         sv: "Artisten har taggats som {v}",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u043E\u0442\u043C\u0435\u0447\u0435\u043D \u0442\u0435\u0433\u043E\u043C {v}"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u043E\u0442\u043C\u0435\u0447\u0435\u043D \u0442\u0435\u0433\u043E\u043C {v}",
+        pl: "Artysta ma tag {v}"
       },
       born: {
         en: "The artist was born {v}",
@@ -48597,7 +49012,8 @@ var bleh = (() => {
         it: "L\u2019artista \xE8 nato il {v}",
         pt: "O artista nasceu em {v}",
         sv: "Artisten var f\xF6dd {v}",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0440\u043E\u0434\u0438\u043B\u0441\u044F {v}"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C \u0440\u043E\u0434\u0438\u043B\u0441\u044F {v}",
+        pl: "Artysta urodzi\u0142 si\u0119 {v}"
       }
     },
     reveal: {
@@ -48607,7 +49023,8 @@ var bleh = (() => {
       it: "Il nome dell\u2019album era {name} di {artist}",
       pt: "O \xE1lbum era {name} de {artist}",
       sv: "Albumet var {name} av {artist}",
-      ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u043E\u043C \u0431\u044B\u043B {name} \u043E\u0442 {artist}"
+      ru: "\u0410\u043B\u044C\u0431\u043E\u043C\u043E\u043C \u0431\u044B\u043B {name} \u043E\u0442 {artist}",
+      pl: "To by\u0142 album \u201E{name}\u201D autorstwa {artist}"
     },
     time_up: {
       en: "Time is up!",
@@ -48616,7 +49033,8 @@ var bleh = (() => {
       it: "Il tempo \xE8 scaduto",
       pt: "O tempo acabou!",
       sv: "Slut p\xE5 tid!",
-      ru: "\u0412\u0440\u0435\u043C\u044F \u0432\u044B\u0448\u043B\u043E!"
+      ru: "\u0412\u0440\u0435\u043C\u044F \u0432\u044B\u0448\u043B\u043E!",
+      pl: "Czas min\u0105\u0142!"
     },
     global: {
       en: "Global",
@@ -48625,7 +49043,8 @@ var bleh = (() => {
       it: "Globali",
       pt: "Global",
       sv: "Globalt",
-      ru: "\u0413\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439"
+      ru: "\u0413\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439",
+      pl: "Globalny"
     },
     mutuals: {
       en: "Mutuals",
@@ -48634,7 +49053,8 @@ var bleh = (() => {
       it: "Reciproci",
       pt: "Mutuais",
       sv: "\xD6msesidiga f\xF6ljare",
-      ru: "\u0412\u0437\u0430\u0438\u043C\u043D\u044B\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0438"
+      ru: "\u0412\u0437\u0430\u0438\u043C\u043D\u044B\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u043A\u0438",
+      pl: "Wzajemni obserwuj\u0105cy"
     },
     missing_component: {
       // cases when Last.fm simply doesn't provide a tasteometer or other things
@@ -48644,7 +49064,8 @@ var bleh = (() => {
       it: "Last.fm non \xE8 riuscito a caricare questo componente",
       pt: "Last.fm falhou ao carregar este componente",
       sv: "Last.fm kunde inte ladda denna komponent",
-      ru: "Last.fm \u043D\u0435 \u0441\u043C\u043E\u0433 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u044D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442"
+      ru: "Last.fm \u043D\u0435 \u0441\u043C\u043E\u0433 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u044D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442",
+      pl: "Last.fm nie uda\u0142o si\u0119 za\u0142adowa\u0107 tego elementu"
     },
     last_scrobbled_replace: {
       // dont translate this, its replaced
@@ -48688,7 +49109,8 @@ var bleh = (() => {
       it: "{u} ha commentato",
       pt: "{u} comentou",
       sv: "{u} kommenterade",
-      ru: "{u} \u043F\u0440\u043E\u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u043B\u0438"
+      ru: "{u} \u043F\u0440\u043E\u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u043B\u0438",
+      pl: "{u} skomentowa\u0142(a)"
     },
     users_commented: {
       en: "{u} and {c} others commented",
@@ -48697,7 +49119,8 @@ var bleh = (() => {
       it: "{u} e altri {c} hanno commentato",
       pt: "{u} e {c} outros comentaram",
       sv: "{u} och {c} andra kommenterade",
-      ru: "{u} \u0438 \u0435\u0449\u0435 {c} \u043F\u0440\u043E\u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u043B\u0438"
+      ru: "{u} \u0438 \u0435\u0449\u0435 {c} \u043F\u0440\u043E\u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u043B\u0438",
+      pl: "{u} i {c} innych skomentowa\u0142o"
     },
     user_replied: {
       en: "{u} replied",
@@ -48706,7 +49129,8 @@ var bleh = (() => {
       it: "{u} ha risposto",
       pt: "{u} respondeu",
       sv: "{u} svarade",
-      ru: "{u} \u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438"
+      ru: "{u} \u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438",
+      pl: "{u} odpowiedzia\u0142(a)"
     },
     users_replied: {
       en: "{u} and {c} others replied",
@@ -48715,7 +49139,8 @@ var bleh = (() => {
       it: "{u} e altri {c} hanno risposto",
       pt: "{u} e {c} outros responderam",
       sv: "{u} och {c} andra svarade",
-      ru: "{u} \u0438 \u0435\u0449\u0451 {c} \u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438"
+      ru: "{u} \u0438 \u0435\u0449\u0451 {c} \u043E\u0442\u0432\u0435\u0442\u0438\u043B\u0438",
+      pl: "{u} i {c} innych odpowiedzia\u0142o"
     },
     obsession_expired: {
       en: "Your obsession has expired",
@@ -48724,7 +49149,8 @@ var bleh = (() => {
       it: "La tua passione \xE8 scaduta",
       pt: "Sua obsess\xE3o expirou",
       sv: "Din besatthet har tagit slut",
-      ru: "\u0412\u0430\u0448\u0430 \u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0441\u0442\u044C \u0438\u0441\u0442\u0435\u043A\u043B\u0430"
+      ru: "\u0412\u0430\u0448\u0430 \u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0441\u0442\u044C \u0438\u0441\u0442\u0435\u043A\u043B\u0430",
+      pl: "Twoja obsesja wygas\u0142a"
     },
     listening_report_available: {
       // m: month name
@@ -48734,7 +49160,8 @@ var bleh = (() => {
       it: "Visualizza il tuo rapporto di ascolto di {m}",
       pt: "Ver seu relat\xF3rio de reprodu\xE7\xE3o de {m}",
       sv: "Visa din lyssningsrapport f\xF6r {m}",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0430\u0448 \u043E\u0442\u0447\u0435\u0442 \u043E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F\u0445 \u0437\u0430 {m}"
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0430\u0448 \u043E\u0442\u0447\u0435\u0442 \u043E \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F\u0445 \u0437\u0430 {m}",
+      pl: "Wy\u015Bwietl raport s\u0142uchania za {m}"
     },
     count_mutual_listeners: {
       en: "You have {c} mutual listeners",
@@ -48743,7 +49170,8 @@ var bleh = (() => {
       it: "Hai {c} ascoltatori in comune",
       pt: "Voc\xEA tem {c} ouvintes m\xFAtuos",
       sv: "Du har {c} \xF6msesidiga lyssnare",
-      ru: "\u0423 \u0432\u0430\u0441 {c} \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439"
+      ru: "\u0423 \u0432\u0430\u0441 {c} \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439",
+      pl: "Masz {c} wsp\xF3lnych s\u0142uchaczy"
     },
     no_mutual_listeners: {
       en: "You have no mutual listeners",
@@ -48752,7 +49180,8 @@ var bleh = (() => {
       it: "Non hai ascoltatori in comune",
       pt: "Voc\xEA n\xE3o tem ouvintes m\xFAtuos",
       sv: "Du har inga \xF6msesidiga lyssnare",
-      ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439"
+      ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439",
+      pl: "Nie masz wsp\xF3lnych s\u0142uchaczy"
     },
     no_mutual_listeners_explain: {
       en: "This can be due to either simply lacking mutuals who listen or the page being subject to a broken redirect.",
@@ -48761,7 +49190,8 @@ var bleh = (() => {
       it: "Questo potrebbe essere semplicemente a causa della mancanza di ascoltatori in comune o la pagina potrebbe essre sottoposta ad un reindirizzamento malfunzionante.",
       pt: "Isso pode ser devido a falta de mutuais que ou\xE7am ou a p\xE1gina estar sujeita a um redirecionamento quebrado.",
       sv: "Det kan inneb\xE4ra att du antingen inte har \xF6msesidiga f\xF6ljare som lyssnar eller att sidan har en gammal omdirigering.",
-      ru: "\u042D\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043E \u043B\u0438\u0431\u043E \u0441 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435\u043C \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439, \u043B\u0438\u0431\u043E \u0441 \u043D\u0435\u0438\u0441\u043F\u0440\u0430\u0432\u043D\u044B\u043C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B."
+      ru: "\u042D\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043E \u043B\u0438\u0431\u043E \u0441 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435\u043C \u0432\u0437\u0430\u0438\u043C\u043D\u044B\u0445 \u0441\u043B\u0443\u0448\u0430\u0442\u0435\u043B\u0435\u0439, \u043B\u0438\u0431\u043E \u0441 \u043D\u0435\u0438\u0441\u043F\u0440\u0430\u0432\u043D\u044B\u043C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B.",
+      pl: "Mo\u017Ce to wynika\u0107 po prostu z braku wsp\xF3lnych obserwuj\u0105cych, kt\xF3rzy s\u0142uchaj\u0105, albo z nieprawid\u0142owego przekierowania strony."
     },
     navigation_items: {
       name: {
@@ -48771,7 +49201,8 @@ var bleh = (() => {
         it: "Accesso rapido",
         pt: "Acesso r\xE1pido",
         sv: "Snabb\xE5tkomst",
-        ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u0434\u043E\u0441\u0442\u0443\u043F"
+        ru: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439 \u0434\u043E\u0441\u0442\u0443\u043F",
+        pl: "Szybki dost\u0119p"
       },
       body: {
         en: "Arrange your navigation menu to suit your usage best",
@@ -48780,7 +49211,8 @@ var bleh = (() => {
         it: "Riordina il tuo menu di navigazione per adattarlo meglio alle tue preferenze",
         pt: "Organize seu menu de navega\xE7\xE3o para melhor se adequar ao seu uso",
         sv: "Ordna din navigationsmeny f\xF6r att b\xE4st passa dig",
-        ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0432\u0430\u0448\u0435 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u043E\u043D\u043D\u043E\u0435 \u043C\u0435\u043D\u044E, \u0447\u0442\u043E\u0431\u044B \u043E\u043D\u043E \u043D\u0430\u0438\u043B\u0443\u0447\u0448\u0438\u043C \u043E\u0431\u0440\u0430\u0437\u043E\u043C \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u043E\u0432\u0430\u043B\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044E"
+        ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u0442\u0435 \u0432\u0430\u0448\u0435 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u043E\u043D\u043D\u043E\u0435 \u043C\u0435\u043D\u044E, \u0447\u0442\u043E\u0431\u044B \u043E\u043D\u043E \u043D\u0430\u0438\u043B\u0443\u0447\u0448\u0438\u043C \u043E\u0431\u0440\u0430\u0437\u043E\u043C \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u043E\u0432\u0430\u043B\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044E",
+        pl: "Dostosuj menu nawigacyjne do swoich potrzeb"
       }
     },
     edit_quick_access: {
@@ -48790,7 +49222,8 @@ var bleh = (() => {
       it: "Modifica accesso rapido",
       pt: "Editar acesso r\xE1pido",
       sv: "Redigera snabb\xE5tkomst",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0431\u044B\u0441\u0442\u0440\u044B\u0439 \u0434\u043E\u0441\u0442\u0443\u043F"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0431\u044B\u0441\u0442\u0440\u044B\u0439 \u0434\u043E\u0441\u0442\u0443\u043F",
+      pl: "Edytuj szybki dost\u0119p"
     },
     navigation_language: {
       en: "Show option to change language",
@@ -48799,7 +49232,8 @@ var bleh = (() => {
       it: "Mostra opzione per cambiare lingua",
       pt: "Mostrar op\xE7\xE3o para mudar idioma",
       sv: "Visa alternativet att \xE4ndra spr\xE5k",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043E\u043F\u0446\u0438\u044E \u0441\u043C\u0435\u043D\u044B \u044F\u0437\u044B\u043A\u0430"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043E\u043F\u0446\u0438\u044E \u0441\u043C\u0435\u043D\u044B \u044F\u0437\u044B\u043A\u0430",
+      pl: "Poka\u017C opcj\u0119 zmiany j\u0119zyka"
     },
     branding: {
       en: "Branding",
@@ -48808,7 +49242,8 @@ var bleh = (() => {
       it: "Branding",
       sv: "Branding",
       ru: "\u0411\u0440\u0435\u043D\u0434\u0438\u043D\u0433",
-      pt: "Branding"
+      pt: "Branding",
+      pl: "Branding"
     },
     branding_type: {
       name: {
@@ -48818,7 +49253,8 @@ var bleh = (() => {
         it: "Tipo di logo",
         pt: "Tipo de branding",
         sv: "Brandingalternativ",
-        ru: "\u0422\u0438\u043F \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430"
+        ru: "\u0422\u0438\u043F \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430",
+        pl: "Rodzaj brandingu"
       },
       body: {
         en: "Decide which branding source to use for the header",
@@ -48827,7 +49263,8 @@ var bleh = (() => {
         it: "Decidi quale sorgente di branding utilizzare per l\u2019intestazione",
         pt: "Escolha qual logo usar para o cabe\xE7alho",
         sv: "V\xE4lj vilken sorts branding f\xF6r att anv\xE4nda p\xE5 sidhuvudet",
-        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430"
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430",
+        pl: "Wybierz kt\xF3ry rodzaj brandingu chcesz u\u017Cywa\u0107 w nag\u0142\xF3wku "
       }
     },
     rain: {
@@ -48838,7 +49275,8 @@ var bleh = (() => {
         it: "Attiva pioggia",
         pt: "Ativar chuva",
         sv: "Aktivera regn",
-        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u0434\u043E\u0436\u0434\u044F"
+        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u0434\u043E\u0436\u0434\u044F",
+        pl: "Aktywuj efekt deszczu"
       },
       body: {
         en: "Immerse yourself in soothing visual rain",
@@ -48847,7 +49285,8 @@ var bleh = (() => {
         it: "Immergiti in una pioggia visuale rilassante",
         pt: "Mergulhe em uma chuva visual relaxante",
         sv: "Omsluta dig sj\xE4lv i en lugnande regneffekt",
-        ru: "\u041F\u043E\u0433\u0440\u0443\u0437\u0438\u0442\u0435\u0441\u044C \u0432 \u0443\u0441\u043F\u043E\u043A\u0430\u0438\u0432\u0430\u044E\u0449\u0438\u0439 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u043E\u0436\u0434\u044C"
+        ru: "\u041F\u043E\u0433\u0440\u0443\u0437\u0438\u0442\u0435\u0441\u044C \u0432 \u0443\u0441\u043F\u043E\u043A\u0430\u0438\u0432\u0430\u044E\u0449\u0438\u0439 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u043E\u0436\u0434\u044C",
+        pl: "Zanurz si\u0119 w koj\u0105cej wizualnej atmosferze deszczu"
       }
     },
     images: {
@@ -48857,7 +49296,8 @@ var bleh = (() => {
       it: "Immagini",
       pt: "Imagens",
       sv: "Bilder",
-      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F"
+      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F",
+      pl: "Obrazy"
     },
     static_gifs: {
       en: "Control animation of GIFs",
@@ -48866,7 +49306,8 @@ var bleh = (() => {
       it: "Controlla l\u2019animazione di GIF",
       pt: "Controlar anima\xE7\xE3o de GIFs",
       sv: "Kontrollera GIF-animation",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0435\u0439 GIF"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0435\u0439 GIF",
+      pl: "Kontroluj animacj\u0119 GIF-\xF3w"
     },
     always_animate: {
       en: "Always animate",
@@ -48875,7 +49316,8 @@ var bleh = (() => {
       it: "Anima sempre",
       pt: "Sempre animar",
       sv: "Animera alltid",
-      ru: "\u0412\u0441\u0435\u0433\u0434\u0430 \u0430\u043D\u0438\u043C\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
+      ru: "\u0412\u0441\u0435\u0433\u0434\u0430 \u0430\u043D\u0438\u043C\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      pl: "Zawsze animuj"
     },
     only_on_hover: {
       en: "Only on hover",
@@ -48884,7 +49326,8 @@ var bleh = (() => {
       it: "Solo al passaggio del mouse",
       pt: "Apenas ao passar o mouse",
       sv: "Endast under hovring",
-      ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438"
+      ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u043D\u0430\u0432\u0435\u0434\u0435\u043D\u0438\u0438",
+      pl: "Tylko po najechaniu kursorem"
     },
     static_banners: {
       en: "Prevent animations in profile banners",
@@ -48893,7 +49336,8 @@ var bleh = (() => {
       it: "Blocca animazioni nei banner del profilo",
       pt: "Impedir anima\xE7\xF5es em banners de perfil",
       sv: "St\xE4ng av animationer i profilbanners",
-      ru: "\u041F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E \u0432 \u0431\u0430\u043D\u043D\u0435\u0440\u0430\u0445 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+      ru: "\u041F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E \u0432 \u0431\u0430\u043D\u043D\u0435\u0440\u0430\u0445 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+      pl: "Wy\u0142\u0105cz animacje w banerach profilu"
     },
     change_zoom: {
       en: "Change zoom level",
@@ -48902,7 +49346,8 @@ var bleh = (() => {
       it: "Cambia livello di zoom",
       pt: "Alterar n\xEDvel de zoom",
       sv: "\xC4ndra zoomniv\xE5",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F",
+      pl: "Zmie\u0144 poziom powi\u0119kszenia"
     },
     static_avatars: {
       en: "User avatars",
@@ -48911,7 +49356,8 @@ var bleh = (() => {
       it: "Foto profilo degli utenti",
       pt: "Avatares de usu\xE1rio",
       sv: "Anv\xE4ndarprofilbilder",
-      ru: "\u0410\u0432\u0430\u0442\u0430\u0440\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439"
+      ru: "\u0410\u0432\u0430\u0442\u0430\u0440\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439",
+      pl: "Awatary u\u017Cytkownik\xF3w"
     },
     static_music: {
       en: "Artists and albums",
@@ -48920,7 +49366,8 @@ var bleh = (() => {
       it: "Artisti e album",
       pt: "Artistas e \xE1lbuns",
       sv: "Artister och album",
-      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438 \u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u044B"
+      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0438 \u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u044B",
+      pl: "Arty\u015Bci i albumy"
     },
     apply_to: {
       en: "Apply to",
@@ -48929,7 +49376,8 @@ var bleh = (() => {
       it: "Applica a",
       pt: "Aplicar a",
       sv: "Till\xE4mpa till",
-      ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u043A"
+      ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u043A",
+      pl: "Zastosuj do"
     },
     change_images_for: {
       en: "Change images for",
@@ -48938,7 +49386,8 @@ var bleh = (() => {
       it: "Cambia immagini per",
       pt: "Alterar imagens para",
       sv: "\xC4ndra bild f\xF6r",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0434\u043B\u044F"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0434\u043B\u044F",
+      pl: "Zmie\u0144 obrazy dla"
     },
     leaving_site: {
       name: {
@@ -48948,7 +49397,8 @@ var bleh = (() => {
         it: "Non perderti",
         pt: "N\xE3o se perca",
         sv: "G\xE5 inte vilse",
-        ru: "\u041D\u0435 \u043F\u043E\u0442\u0435\u0440\u044F\u0439\u0442\u0435\u0441\u044C"
+        ru: "\u041D\u0435 \u043F\u043E\u0442\u0435\u0440\u044F\u0439\u0442\u0435\u0441\u044C",
+        pl: "Nie zgub si\u0119"
       },
       body: {
         en: "This link is taking you to the following location",
@@ -48957,7 +49407,8 @@ var bleh = (() => {
         it: "Questo link ti sta portando nella seguente posizione",
         pt: "Este link est\xE1 te levando para o seguinte local",
         sv: "L\xE4nken tar dig till den h\xE4r platsen",
-        ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u0432\u0435\u0434\u0435\u0442 \u0432\u0430\u0441 \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435"
+        ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u0432\u0435\u0434\u0435\u0442 \u0432\u0430\u0441 \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435",
+        pl: "Ten link prowadzi do nast\u0119puj\u0105cego miejsca"
       }
     },
     leaving_site_dangerous: {
@@ -48968,7 +49419,8 @@ var bleh = (() => {
         it: "Fai attenzione",
         pt: "Tenha cuidado",
         sv: "Var f\xF6rsiktig",
-        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B"
+        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B",
+        pl: "Uwa\u017Caj"
       },
       body: {
         en: "This link can open an application on your device",
@@ -48977,7 +49429,8 @@ var bleh = (() => {
         it: "Questo link pu\xF2 aprire un\u2019applicazione sul tuo dispositivo",
         pt: "Este link pode abrir um aplicativo no seu dispositivo",
         sv: "L\xE4nken kan \xF6ppna en applikation p\xE5 din enhet",
-        ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u043C\u043E\u0436\u0435\u0442 \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u0432\u0430\u0448\u0435\u043C \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0435"
+        ru: "\u042D\u0442\u0430 \u0441\u0441\u044B\u043B\u043A\u0430 \u043C\u043E\u0436\u0435\u0442 \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430 \u0432\u0430\u0448\u0435\u043C \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0435",
+        pl: "Ten link mo\u017Ce otworzy\u0107 aplikacj\u0119 na Twoim urz\u0105dzeniu"
       }
     },
     leaving_site_checkbox: {
@@ -48987,7 +49440,8 @@ var bleh = (() => {
       it: "Fidati dei link {v} in futuro",
       pt: "Confiar em links de {v} no futuro",
       sv: "Lita p\xE5 l\xE4nkar fr\xE5n {v} i framtiden",
-      ru: "\u0414\u043E\u0432\u0435\u0440\u044F\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0430\u043C {v} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C"
+      ru: "\u0414\u043E\u0432\u0435\u0440\u044F\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0430\u043C {v} \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C",
+      pl: "Ufaj linkom {v} w przysz\u0142o\u015Bci"
     },
     visit: {
       // visit site
@@ -48997,7 +49451,8 @@ var bleh = (() => {
       it: "Visita",
       pt: "Visitar",
       sv: "Bes\xF6k",
-      ru: "\u041F\u043E\u0441\u0435\u0442\u0438\u0442\u044C"
+      ru: "\u041F\u043E\u0441\u0435\u0442\u0438\u0442\u044C",
+      pl: "Odwied\u017A"
     },
     auto_correct_scrobbles: {
       name: {
@@ -49007,7 +49462,8 @@ var bleh = (() => {
         it: "Correggi automaticamente e reindirizza gli scrobbling",
         pt: "Corrigir e redirecionar scrobbles automaticamente",
         sv: "Autokorrigering och omdirigering av skrobblingar",
-        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0438 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B"
+        ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0438 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B",
+        pl: "Automatycznie poprawiaj i przekierowuj scrobble"
       },
       body: {
         en: "Changes artist names based on the legacy Last.fm redirect system pre-2015, causes many issues",
@@ -49016,7 +49472,8 @@ var bleh = (() => {
         it: "Cambia i nomi degli artisti utilizzando il sistema di reindirizzamento obsoleto di Last.fm pre-205, causa svariati problemi",
         sv: "\xC4ndrar artistnamn baserad p\xE5 Last.fms omdirigeringssystem fr\xE5n innan 2015, skapar m\xE5nga problem",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0438\u043C\u0435\u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F Last.fm \u0434\u043E 2015 \u0433\u043E\u0434\u0430, \u0447\u0442\u043E \u0432\u044B\u0437\u044B\u0432\u0430\u0435\u0442 \u043C\u043D\u043E\u0433\u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C",
-        pt: "Altera os nomes dos artistas com base no sistema legado de redirecionamento do Last.fm pr\xE9-2015, causando muitos problemas"
+        pt: "Altera os nomes dos artistas com base no sistema legado de redirecionamento do Last.fm pr\xE9-2015, causando muitos problemas",
+        pl: "Zmienia nazwy artyst\xF3w na podstawie starego systemu przekierowa\u0144 Last.fm sprzed 2015 roku, powoduj\u0105c wiele problem\xF3w"
       },
       warning: {
         en: "This setting should be turned off to ensure scrobbles are correctly stored for each artist.",
@@ -49025,7 +49482,8 @@ var bleh = (() => {
         it: "Questa impostazione dovrebbe essere disattivata per assicurarsi che gli scrobbling siano correttamente memorizzati per ciascun artista.",
         es: "Esta opci\xF3n deber\xEDa estar desactivada para garantizar que los scrobblings se almacenen correctamente para cada artista.",
         sv: "Denna inst\xE4llning ska st\xE4ngas av f\xF6r att vara s\xE4ker p\xE5 att dina skrobblingar \xE4r r\xE4tt f\xF6r alla artister.",
-        ru: "\u042D\u0442\u0443 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u043E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C, \u0447\u0442\u043E\u0431\u044B \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432 \u0434\u043B\u044F \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F."
+        ru: "\u042D\u0442\u0443 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u043E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C, \u0447\u0442\u043E\u0431\u044B \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u043E\u0432 \u0434\u043B\u044F \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F.",
+        pl: "To ustawienie powinno by\u0107 wy\u0142\u0105czone, aby zapewni\u0107 prawid\u0142owe zapisywanie scrobbli dla ka\u017Cdego artysty."
       },
       false: {
         en: "Do not apply corrections (recommended)",
@@ -49034,7 +49492,8 @@ var bleh = (() => {
         it: "Non applicare correzioni (consigliato)",
         pt: "N\xE3o aplicar corre\xE7\xF5es (recomendado)",
         sv: "Till\xE4mpa inte korrigeringar (rekommenderat)",
-        ru: "\u041D\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F (\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F)"
+        ru: "\u041D\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F (\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F)",
+        pl: "Nie stosuj poprawek (zalecane)"
       },
       true: {
         en: "Auto correct my scrobbles (legacy)",
@@ -49043,7 +49502,8 @@ var bleh = (() => {
         it: "Correggi automaticamente i miei scrobbling (obsoleto)",
         sv: "Autokorrigera mina skrobblingar (gammal)",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u043C\u043E\u0438 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B (\u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0435\u0435)",
-        pt: "Corrigir automaticamente meus scrobbles (legado)"
+        pt: "Corrigir automaticamente meus scrobbles (legado)",
+        pl: "Automatycznie poprawiaj moje scrobble (legacy)"
       }
     },
     preferred_affiliate: {
@@ -49054,7 +49514,8 @@ var bleh = (() => {
         it: "Sorgente di riproduzione preferita",
         pt: "Fonte de reprodu\xE7\xE3o preferida",
         sv: "F\xF6redragen uppspelningsk\xE4lla",
-        ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u044F"
+        ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0438\u0442\u0430\u0435\u043C\u044B\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u044F",
+        pl: "Preferowane \u017Ar\xF3d\u0142o odtwarzania"
       },
       body: {
         en: "Choose which service to use when interacting with playables across the site",
@@ -49063,7 +49524,8 @@ var bleh = (() => {
         it: "Seleziona quale servizio utilizzare all\u2019interazione con elementi riproducibili in tutto il sito",
         sv: "V\xE4lj vilken service att anv\xE4nda n\xE4r du spelar upp l\xE5tar",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0441\u0435\u0440\u0432\u0438\u0441 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0438 \u0441 \u0432\u043E\u0441\u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u043C\u044B\u043C \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u043E\u043C \u043D\u0430 \u0441\u0430\u0439\u0442\u0435",
-        pt: "Escolha qual servi\xE7o usar ao interagir com elementos reproduz\xEDveis em todo o site"
+        pt: "Escolha qual servi\xE7o usar ao interagir com elementos reproduz\xEDveis em todo o site",
+        pl: "Wybierz us\u0142ug\u0119 u\u017Cywan\u0105 do obs\u0142ugi odtwarzalnych tre\u015Bci w ca\u0142ym serwisie"
       }
     },
     timezone: {
@@ -49073,7 +49535,8 @@ var bleh = (() => {
       it: "Fuso orario",
       sv: "Tidszon",
       ru: "\u0427\u0430\u0441\u043E\u0432\u043E\u0439 \u043F\u043E\u044F\u0441",
-      pt: "Fuso hor\xE1rio"
+      pt: "Fuso hor\xE1rio",
+      pl: "Strefa czasowa"
     },
     location: {
       name: {
@@ -49083,7 +49546,8 @@ var bleh = (() => {
         it: "Posizione",
         sv: "Plats",
         ru: "\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435",
-        pt: "Localiza\xE7\xE3o"
+        pt: "Localiza\xE7\xE3o",
+        pl: "Lokalizacja"
       },
       body: {
         en: "Last.fm uses your location for event recommendations and local music data",
@@ -49092,7 +49556,8 @@ var bleh = (() => {
         it: "Last.fm usa la tua posizione per raccomandare eventi e dati di musica locali",
         sv: "Last.fm anv\xE4nder din plats f\xF6r evenemangrekommendationer och lokal musikdata",
         ru: "Last.fm \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442 \u0432\u0430\u0448\u0435 \u043C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0430\u0446\u0438\u0438 \u043C\u0435\u0440\u043E\u043F\u0440\u0438\u044F\u0442\u0438\u0439 \u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u043E \u043C\u0435\u0441\u0442\u043D\u043E\u0439 \u043C\u0443\u0437\u044B\u043A\u0435",
-        pt: "Last.fm usa sua localiza\xE7\xE3o para recomenda\xE7\xF5es de eventos e dados locais de m\xFAsica"
+        pt: "Last.fm usa sua localiza\xE7\xE3o para recomenda\xE7\xF5es de eventos e dados locais de m\xFAsica",
+        pl: "Last.fm wykorzystuje Twoj\u0105 lokalizacj\u0119 do rekomendowania wydarze\u0144 i wy\u015Bwietlania lokalnych danych muzycznych"
       }
     },
     event_radius: {
@@ -49102,7 +49567,8 @@ var bleh = (() => {
       it: "Raggio di ricerca eventi",
       pt: "Raio de busca de eventos",
       sv: "S\xF6kradie f\xF6r evenemang",
-      ru: "\u0420\u0430\u0434\u0438\u0443\u0441 \u043F\u043E\u0438\u0441\u043A\u0430 \u043C\u0435\u0440\u043E\u043F\u0440\u0438\u044F\u0442\u0438\u0439"
+      ru: "\u0420\u0430\u0434\u0438\u0443\u0441 \u043F\u043E\u0438\u0441\u043A\u0430 \u043C\u0435\u0440\u043E\u043F\u0440\u0438\u044F\u0442\u0438\u0439",
+      pl: "Promie\u0144 wyszukiwania wydarze\u0144"
     },
     you_need_to_be_logged_in: {
       en: "You need to be logged in",
@@ -49111,16 +49577,18 @@ var bleh = (() => {
       it: "Devi aver effettuato l\u2019accesso",
       pt: "Voc\xEA precisa estar logado",
       sv: "Du l\xE4r vara inloggad",
-      ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
+      ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443",
+      pl: "Musisz by\u0107 zalogowany/a"
     },
     oracle_notice: {
-      en: "You are an oracle tester",
+      en: "You are testing \u2018oracle\u2019",
       de: "Du testest gerade \u201Eoracle\u201C, eine neu gestaltete Album- und Titelseite",
       es: "Est\xE1s actualmente probando \u2018oracle\u2019, un estilo redise\xF1ado de \xE1lbumes y temas",
       it: "Stai provando \u2018oracle\u2019, una vista di album e brani ridisegnata",
       pt: "Voc\xEA est\xE1 atualmente testando \u2018oracle\u2019, um estilo redesenhado de \xE1lbuns e faixas",
       sv: "Du testar just no \u2018oracle\u2019, ett omdesignat s\xE4tt att visa album och l\xE5tsidor",
-      ru: "\u0412 \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0432\u044B \u0442\u0435\u0441\u0442\u0438\u0440\u0443\u0435\u0442\u0435 \xABoracle\xBB, \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432"
+      ru: "\u0412 \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0432\u044B \u0442\u0435\u0441\u0442\u0438\u0440\u0443\u0435\u0442\u0435 \xABoracle\xBB, \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
+      pl: "Testujesz \u2018oracle\u2019"
     },
     debug: {
       en: "Debug",
@@ -49129,7 +49597,8 @@ var bleh = (() => {
       it: "Debug",
       pt: "Debug",
       sv: "Debug",
-      ru: "\u041E\u0442\u043B\u0430\u0434\u043A\u0430"
+      ru: "\u041E\u0442\u043B\u0430\u0434\u043A\u0430",
+      pl: "Debug"
     },
     send_feedback: {
       en: "Send feedback",
@@ -49138,7 +49607,8 @@ var bleh = (() => {
       it: "Invia feedback",
       pt: "Enviar feedback",
       sv: "Skicka feedback",
-      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432"
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432",
+      pl: "Wy\u015Blij opini\u0119"
     },
     oracle_heading: {
       en: "Experimental",
@@ -49147,7 +49617,8 @@ var bleh = (() => {
       it: "Sperimentale",
       pt: "Experimental",
       sv: "Experimentalt",
-      ru: "\u042D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u043E"
+      ru: "\u042D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u043E",
+      pl: "Eksperymentalny"
     },
     oracle_beta: {
       name: {
@@ -49157,7 +49628,8 @@ var bleh = (() => {
         it: "Attiva il sistema sperimentale \u2018oracle\u2019",
         pt: "Ativar o sistema experimental \u2018oracle\u2019",
         sv: "Aktivera det experimentella \u2018oracle\u2019-systemet",
-        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u0441\u0438\u0441\u0442\u0435\u043C\u0443 \xABoracle\xBB"
+        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u0441\u0438\u0441\u0442\u0435\u043C\u0443 \xABoracle\xBB",
+        pl: "W\u0142\u0105cz eksperymentalny system \u2018oracle\u2019 "
       },
       body: {
         en: "A redesigned album and track view sourcing data from MusicBrainz. May be released in the future or scrapped. Please send feedback from usage.",
@@ -49166,7 +49638,8 @@ var bleh = (() => {
         it: "Una vista per album e brani ridisegnata che attinge ai dati di MusicBrainz. Potrebbe essere rilasciata in futuro o scartata. Per favore inviate del feedback dall\u2019utilizzo.",
         pt: "Um estilo redesenhado de \xE1lbuns e faixas que utiliza dados do MusicBrainz. Pode ser lan\xE7ado no futuro ou descartado. Por favor, envie feedback sobre o uso.",
         sv: "Omdesignade album och l\xE5tsidor med data fr\xE5n MusicBrainz. Kan sl\xE4ppas eller skr\xE4pas i framtiden. Skicka g\xE4rna feedback fr\xE5n anv\xE4ndning.",
-        ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432, \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0449\u0438\u0439 \u0434\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 MusicBrainz. \u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u0443\u0449\u0435\u043D \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C \u0438\u043B\u0438 \u043E\u0442\u043C\u0435\u043D\u0435\u043D. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u043E\u0442\u0437\u044B\u0432\u044B \u043E\u0431 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438."
+        ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u0432\u0438\u0434 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432, \u043F\u043E\u043B\u0443\u0447\u0430\u044E\u0449\u0438\u0439 \u0434\u0430\u043D\u043D\u044B\u0435 \u0438\u0437 MusicBrainz. \u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u044B\u043F\u0443\u0449\u0435\u043D \u0432 \u0431\u0443\u0434\u0443\u0449\u0435\u043C \u0438\u043B\u0438 \u043E\u0442\u043C\u0435\u043D\u0435\u043D. \u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u043E\u0442\u0437\u044B\u0432\u044B \u043E\u0431 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438.",
+        pl: "Przeprojektowany widok album\xF3w i utwor\xF3w korzystaj\u0105cy z danych MusicBrainz. Mo\u017Ce zosta\u0107 wydany w przysz\u0142o\u015Bci lub porzucony. Podziel si\u0119 opini\u0105 na temat korzystania z tej funkcji."
       }
     },
     label: {
@@ -49176,7 +49649,8 @@ var bleh = (() => {
       it: "Etichetta",
       pt: "Gravadora",
       sv: "Skivbolag",
-      ru: "\u041B\u0435\u0439\u0431\u043B"
+      ru: "\u041B\u0435\u0439\u0431\u043B",
+      pl: "Wytw\xF3rnia"
     },
     explicit: {
       en: "Explicit",
@@ -49185,7 +49659,8 @@ var bleh = (() => {
       it: "Esplicito",
       pt: "Expl\xEDcito",
       sv: "Explicit",
-      ru: "\u041D\u0435\u0446\u0435\u043D\u0437\u0443\u0440\u043D\u044B\u0439"
+      ru: "\u041D\u0435\u0446\u0435\u043D\u0437\u0443\u0440\u043D\u044B\u0439",
+      pl: "Tre\u015Bci dla doros\u0142ych"
     },
     control_center: {
       en: "Control center",
@@ -49194,7 +49669,8 @@ var bleh = (() => {
       it: "Centro di controllo",
       pt: "Centro de controle",
       sv: "Kontrollcenter",
-      ru: "\u0426\u0435\u043D\u0442\u0440 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u0426\u0435\u043D\u0442\u0440 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Centrum sterowania"
     },
     romanise_titles: {
       en: "Romanise music titles and artist names for",
@@ -49203,7 +49679,8 @@ var bleh = (() => {
       it: "Romanizza titoli di musica e nomi di artisti per",
       pt: "Romanizar t\xEDtulos de m\xFAsicas e nomes de artistas para",
       sv: "Romanisera l\xE5ttitlar och artistnamn f\xF6r",
-      ru: "\u0420\u043E\u043C\u0430\u043D\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432 \u0438 \u0438\u043C\u0435\u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u0434\u043B\u044F"
+      ru: "\u0420\u043E\u043C\u0430\u043D\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0442\u0440\u0435\u043A\u043E\u0432 \u0438 \u0438\u043C\u0435\u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439 \u0434\u043B\u044F",
+      pl: "Romanizuj tytu\u0142y utwor\xF3w i nazwy artyst\xF3w dla"
     },
     romanise_jp: {
       en: "\u65E5\u672C\u8A9E (Japanese)",
@@ -49212,7 +49689,8 @@ var bleh = (() => {
       it: "\u65E5\u672C\u8A9E (Giapponese)",
       pt: "\u65E5\u672C\u8A9E (Japon\xEAs)",
       sv: "\u65E5\u672C\u8A9E (Japanska)",
-      ru: "\u65E5\u672C\u8A9E (\u042F\u043F\u043E\u043D\u0441\u043A\u0438\u0439)"
+      ru: "\u65E5\u672C\u8A9E (\u042F\u043F\u043E\u043D\u0441\u043A\u0438\u0439)",
+      pl: "\u65E5\u672C\u8A9E (Japo\u0144ski)"
     },
     romanise_ko: {
       en: "\uD55C\uAD6D\uC5B4 (Korean)",
@@ -49221,7 +49699,8 @@ var bleh = (() => {
       it: "\uD55C\uAD6D\uC5B4 (Coreano)",
       pt: "\uD55C\uAD6D\uC5B4 (Coreano)",
       sv: "\uD55C\uAD6D\uC5B4 (Koreanska)",
-      ru: "\uD55C\uAD6D\uC5B4 (\u041A\u043E\u0440\u0435\u0439\u0441\u043A\u0438\u0439)"
+      ru: "\uD55C\uAD6D\uC5B4 (\u041A\u043E\u0440\u0435\u0439\u0441\u043A\u0438\u0439)",
+      pl: "\uD55C\uAD6D\uC5B4 (Korea\u0144ski)"
     },
     romanise_require: {
       en: "Romanisation requires either lotus corrections or smart song tags be enabled",
@@ -49230,7 +49709,8 @@ var bleh = (() => {
       it: "La romanizzazione richiede che le correzioni lotus o i tag intelligenti per i brani siano attivati",
       pt: "A romaniza\xE7\xE3o requer que as corre\xE7\xF5es lotus ou as tags inteligentes de m\xFAsicas estejam ativas",
       sv: "Romanisation kr\xE4ver antingen att lotus eller smarta l\xE5ttaggar aktiveras",
-      ru: "\u0414\u043B\u044F \u0440\u043E\u043C\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043B\u0438\u0431\u043E lotus corrections, \u043B\u0438\u0431\u043E \u0443\u043C\u043D\u044B\u0445 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D"
+      ru: "\u0414\u043B\u044F \u0440\u043E\u043C\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043B\u0438\u0431\u043E lotus corrections, \u043B\u0438\u0431\u043E \u0443\u043C\u043D\u044B\u0445 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D",
+      pl: "Romanizacja wymaga w\u0142\u0105czenia korekt lotus lub inteligentnych tag\xF3w utwor\xF3w"
     },
     disc_number: {
       en: "Disc {n}",
@@ -49239,7 +49719,8 @@ var bleh = (() => {
       it: "Disco {n}",
       pt: "Disco {n}",
       sv: "Skiva {n}",
-      ru: "\u0414\u0438\u0441\u043A {n}"
+      ru: "\u0414\u0438\u0441\u043A {n}",
+      pl: "P\u0142yta {n}"
     },
     create_playlist: {
       en: "Create playlist",
@@ -49248,7 +49729,8 @@ var bleh = (() => {
       it: "Crea playlist",
       pt: "Criar playlist",
       sv: "Skapa spellista",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043B\u0435\u0439\u043B\u0438\u0441\u0442"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043B\u0435\u0439\u043B\u0438\u0441\u0442",
+      pl: "Utw\xF3rz playlist\u0119"
     },
     music_links: {
       name: {
@@ -49258,7 +49740,8 @@ var bleh = (() => {
         it: "Link di musica",
         pt: "Links de m\xFAsica",
         sv: "Musikl\xE4nkar",
-        ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0441\u044B\u043B\u043A\u0438"
+        ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0441\u044B\u043B\u043A\u0438",
+        pl: "Linki do muzyki"
       },
       body: {
         en: "Choose which services to display for artists, albums, and tracks",
@@ -49267,7 +49750,8 @@ var bleh = (() => {
         it: "Seleziona quali servizi mostrare per artisti, album e brani",
         pt: "Escolha quais servi\xE7os exibir para artistas, \xE1lbuns e faixas",
         sv: "V\xE4lj vilka tj\xE4nster att visa f\xF6r artister, album, och l\xE5tar",
-        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u0438\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u044B \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432"
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u0438\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u044B \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
+        pl: "Wybierz, kt\xF3re us\u0142ugi wy\u015Bwietla\u0107 dla artyst\xF3w, album\xF3w i utwor\xF3w"
       }
     },
     amount_translated: {
@@ -49278,7 +49762,8 @@ var bleh = (() => {
       it: "{c} tradotte",
       pt: "{c} traduzidos",
       sv: "{c} \xF6versatt",
-      ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043D\u043E {c}"
+      ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043D\u043E {c}",
+      pl: "{c} przet\u0142umaczonych"
     },
     missing_translated: {
       // number of strings missing
@@ -49288,7 +49773,8 @@ var bleh = (() => {
       it: "{c} mancanti",
       pt: "{c} ausentes",
       sv: "{c} saknas",
-      ru: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 {c}"
+      ru: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 {c}",
+      pl: "{c} brakuj\u0105cych"
     },
     simulate_scroll: {
       name: {
@@ -49298,7 +49784,8 @@ var bleh = (() => {
         it: "Simula scorrimento orizzontale",
         pt: "Simular rolagem horizontal",
         sv: "Simulera v\xE5gr\xE4t skrollning",
-        ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443"
+        ru: "\u0418\u043C\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u0443\u044E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0443",
+        pl: "Symuluj przewijanie w poziomie"
       },
       body: {
         en: "Only recommended for desktop devices",
@@ -49307,7 +49794,8 @@ var bleh = (() => {
         it: "Raccomandato solo per dispositivi desktop",
         pt: "Recomendado apenas para computadores de mesa",
         sv: "Rekommenderas endast f\xF6r desktop-enheter",
-        ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043D\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
+        ru: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043D\u044B\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432",
+        pl: "Zalecane tylko na komputerach"
       }
     },
     credits: {
@@ -49317,7 +49805,8 @@ var bleh = (() => {
       it: "Crediti",
       pt: "Cr\xE9ditos",
       sv: "Erk\xE4nnanden",
-      ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B"
+      ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B",
+      pl: "Autorzy"
     },
     view_credits: {
       en: "View credits",
@@ -49326,7 +49815,8 @@ var bleh = (() => {
       it: "Visualizza crediti",
       pt: "Ver cr\xE9ditos",
       sv: "Visa erk\xE4nnanden",
-      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0435\u0434\u0438\u0442\u044B"
+      ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0435\u0434\u0438\u0442\u044B",
+      pl: "Wy\u015Bwietl autor\xF3w"
     },
     credits_for_value: {
       en: "Credits for {v}",
@@ -49335,7 +49825,8 @@ var bleh = (() => {
       it: "Crediti per {v}",
       pt: "Cr\xE9ditos para {v}",
       sv: "Erk\xE4nnanden f\xF6r {v}",
-      ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}"
+      ru: "\u041A\u0440\u0435\u0434\u0438\u0442\u044B \u0434\u043B\u044F {v}",
+      pl: "Autorzy {v}"
     },
     branch: {
       // as in git branches
@@ -49346,7 +49837,8 @@ var bleh = (() => {
         it: "Seleziona branch",
         pt: "Escolha a branch",
         sv: "V\xE4lj bransh",
-        ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0435\u0442\u043A\u0443"
+        ru: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u0432\u0435\u0442\u043A\u0443",
+        pl: "Wybierz branch"
       },
       body: {
         en: "Default release branch is \u2018uwu\u2019, do not change unless you know what you\u2019re doing",
@@ -49355,7 +49847,8 @@ var bleh = (() => {
         it: "Il branch release predefinito \xE8 \u2018uwu\u2019, non cambiare questo valore se non si sa cosa si sta facendo",
         sv: "Standardbranshen \xE4r \u2018uwu\u2019, \xE4ndra inte om du inte vet vad du g\xF6r",
         ru: "\u0412\u0435\u0442\u043A\u0430 \u0432\u044B\u043F\u0443\u0441\u043A\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E - \u2018uwu\u2019, \u043D\u0435 \u043C\u0435\u043D\u044F\u0439\u0442\u0435 \u0435\u0451, \u0435\u0441\u043B\u0438 \u0442\u043E\u0447\u043D\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435",
-        pt: "A branch de lan\xE7amento padr\xE3o \xE9 \u2018uwu\u2019, n\xE3o altere a menos que voc\xEA saiba o que est\xE1 fazendo"
+        pt: "A branch de lan\xE7amento padr\xE3o \xE9 \u2018uwu\u2019, n\xE3o altere a menos que voc\xEA saiba o que est\xE1 fazendo",
+        pl: "Domy\u015Blny branch wydania to \u201Euwu\u201D. Nie zmieniaj go, je\u015Bli nie wiesz, co robisz"
       }
     },
     log_in: {
@@ -49365,7 +49858,8 @@ var bleh = (() => {
       it: "Accedi",
       pt: "Iniciar Sess\xE3o",
       sv: "Logga in",
-      ru: "\u0412\u043E\u0439\u0442\u0438"
+      ru: "\u0412\u043E\u0439\u0442\u0438",
+      pl: "Zaloguj si\u0119"
     },
     sign_up: {
       en: "Sign up",
@@ -49374,7 +49868,8 @@ var bleh = (() => {
       it: "Registrati",
       pt: "Registrar-se",
       sv: "Registrera",
-      ru: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F"
+      ru: "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F",
+      pl: "Zarejestruj si\u0119"
     },
     plot: {
       name: {
@@ -49384,7 +49879,8 @@ var bleh = (() => {
         it: "Grafico",
         sv: "Rita",
         ru: "\u0413\u0440\u0430\u0444\u0438\u043A",
-        pt: "Gr\xE1fico"
+        pt: "Gr\xE1fico",
+        pl: "Wykres"
       },
       body: {
         en: "Create graphs from user libraries",
@@ -49393,19 +49889,22 @@ var bleh = (() => {
         it: "Crea grafici dalle librerie degli utenti",
         pt: "Crie gr\xE1ficos a partir de bibliotecas de usu\xE1rios",
         sv: "Skapa diagram fr\xE5n anv\xE4ndarbibliotek",
-        ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0438\u0437 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0445 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A"
+        ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0438 \u0438\u0437 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0445 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A",
+        pl: "Tw\xF3rz wykresy na podstawie bibliotek u\u017Cytkownik\xF3w"
       }
     },
     card: {
       name: {
         en: "Card",
         pt: "Cart\xE3o",
-        es: "Tarjeta"
+        es: "Tarjeta",
+        pl: "Karta"
       },
       body: {
         en: "Get an overview of your last year, month, or week",
         pt: "Veja um resumo do seu \xFAltimo ano, m\xEAs ou semana",
-        es: "Obt\xE9n un resumen de tu \xFAltimo a\xF1o, mes, o semana"
+        es: "Obt\xE9n un resumen de tu \xFAltimo a\xF1o, mes, o semana",
+        pl: "Zobacz podsumowanie ostatniego roku, miesi\u0105ca lub tygodnia"
       }
     },
     your_recent_30_days: {
@@ -49414,7 +49913,8 @@ var bleh = (() => {
       es: "Tus \xFAltimos 30 d\xEDas",
       it: "I tuoi ultimi 30 giorni",
       pt: "Seus \xFAltimos 30 dias",
-      ru: "\u0412\u0430\u0448\u0438 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 30 \u0434\u043D\u0435\u0439"
+      ru: "\u0412\u0430\u0448\u0438 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 30 \u0434\u043D\u0435\u0439",
+      pl: "Twoje ostatnie 30 dni"
     },
     value_this_month: {
       // number of scrobbles
@@ -49423,7 +49923,8 @@ var bleh = (() => {
       es: "{v} este mes",
       it: "{v} questo mese",
       pt: "{v} este m\xEAs",
-      ru: "{v} \u044D\u0442\u043E\u0442 \u043C\u0435\u0441\u044F\u0446"
+      ru: "{v} \u044D\u0442\u043E\u0442 \u043C\u0435\u0441\u044F\u0446",
+      pl: "{v} w tym miesi\u0105cu"
     },
     value_less: {
       // 50 less than last month
@@ -49432,7 +49933,8 @@ var bleh = (() => {
       de: "{v} weniger",
       ru: "{v} \u043C\u0435\u043D\u044C\u0448\u0435",
       es: "{v} menos",
-      it: "{v} meno"
+      it: "{v} meno",
+      pl: "{v} mniej"
     },
     value_more: {
       // 50 more than last month
@@ -49441,7 +49943,8 @@ var bleh = (() => {
       de: "{v} mehr",
       ru: "{v} \u0431\u043E\u043B\u044C\u0448\u0435",
       es: "{v} m\xE1s",
-      it: "{v} in pi\xF9"
+      it: "{v} in pi\xF9",
+      pl: "{v} wi\u0119cej"
     },
     menu_replacement: {
       name: {
@@ -49450,7 +49953,8 @@ var bleh = (() => {
         es: "Reemplazar men\xFAs de clic derecho nativos del navegador",
         it: "Sostituisci i menu contestuali nativi del browser",
         pt: "Substituir menus de clique direito nativos do navegador",
-        ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u0442\u0438\u0432\u043D\u044B\u0435 \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0435 \u043C\u0435\u043D\u044E \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430"
+        ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u0442\u0438\u0432\u043D\u044B\u0435 \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0435 \u043C\u0435\u043D\u044E \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430",
+        pl: "Zast\u0105p natywne menu kontekstowe przegl\u0105darki"
       },
       body: {
         en: "Provide bleh context-specific actions when right-clicking",
@@ -49458,7 +49962,8 @@ var bleh = (() => {
         es: "Proporciona acciones espec\xEDficas de bleh al hacer clic derecho",
         it: "Fornisci azioni specifiche a bleh nei menu contestuali",
         pt: "Fornecer a\xE7\xF5es espec\xEDficas do bleh ao clicar com o bot\xE3o direito",
-        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u2011\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F bleh \u043F\u0440\u0438 \u0449\u0435\u043B\u0447\u043A\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438"
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u2011\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F bleh \u043F\u0440\u0438 \u0449\u0435\u043B\u0447\u043A\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438",
+        pl: "Dodaj kontekstowe dzia\u0142ania bleh dost\u0119pne po klikni\u0119ciu prawym przyciskiem myszy"
       }
     },
     you_have_new_badges: {
@@ -49467,7 +49972,8 @@ var bleh = (() => {
       es: "\xA1Tienes nuevos emblemas!",
       it: "Hai dei nuovi distintivi!",
       pt: "Voc\xEA tem novas ins\xEDgnias!",
-      ru: "\u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043D\u043E\u0432\u044B\u0435 \u0437\u043D\u0430\u0447\u043A\u0438!"
+      ru: "\u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043D\u043E\u0432\u044B\u0435 \u0437\u043D\u0430\u0447\u043A\u0438!",
+      pl: "Masz nowe odznaki!"
     },
     translator: {
       name: {
@@ -49476,7 +49982,8 @@ var bleh = (() => {
         es: "Mostrar herramientas de traducci\xF3n",
         it: "Mostra strumenti di traduzione",
         pt: "Mostrar ferramentas de tradu\xE7\xE3o",
-        ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0447\u0438\u043A\u0430"
+        ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0447\u0438\u043A\u0430",
+        pl: "Wy\u015Bwietl narz\u0119dzia do t\u0142umaczenia"
       },
       body: {
         en: "View expanded details on all languages for use when translating",
@@ -49484,7 +49991,8 @@ var bleh = (() => {
         es: "Ve detalles ampliados de todos los idiomas para usar al traducir",
         it: "Visualizza dettagli espansi su tutte le lingue da utilizzare durante la traduzione",
         pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir",
-        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u044B\u0445 \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u0439 \u043E \u0432\u0441\u0435\u0445 \u044F\u0437\u044B\u043A\u0430\u0445 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0435"
+        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u044B\u0445 \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u0439 \u043E \u0432\u0441\u0435\u0445 \u044F\u0437\u044B\u043A\u0430\u0445 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0435",
+        pl: "Wy\u015Bwietl szczeg\xF3\u0142owe informacje o wszystkich j\u0119zykach, aby u\u0142atwi\u0107 t\u0142umaczenie"
       }
     },
     translate: {
@@ -49493,7 +50001,8 @@ var bleh = (() => {
       es: "Traducir",
       it: "Traduci",
       pt: "Traduza",
-      ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438"
+      ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438",
+      pl: "Przet\u0142umacz"
     },
     translation_key: {
       // a key such as 'you_have_new_badges' above
@@ -49502,7 +50011,8 @@ var bleh = (() => {
       es: "Clave de traducci\xF3n",
       it: "Chiave di traduzione",
       pt: "Chave de tradu\xE7\xE3o",
-      ru: "\u041A\u043B\u044E\u0447 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0430"
+      ru: "\u041A\u043B\u044E\u0447 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0430",
+      pl: "Klucz t\u0142umaczenia"
     },
     original: {
       en: "Original",
@@ -49510,7 +50020,8 @@ var bleh = (() => {
       es: "Original",
       it: "Originale",
       pt: "Original",
-      ru: "\u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B"
+      ru: "\u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B",
+      pl: "Orygina\u0142"
     },
     user_is_listening_to: {
       // (claire) is listening to
@@ -49520,7 +50031,8 @@ var bleh = (() => {
       es: "{u} est\xE1 escuchando",
       it: "{u} sta ascoltando",
       pt: "{u} est\xE1 ouvindo",
-      ru: "{u} \u0441\u043B\u0443\u0448\u0430\u0435\u0442"
+      ru: "{u} \u0441\u043B\u0443\u0448\u0430\u0435\u0442",
+      pl: "{u} s\u0142ucha"
     },
     user_listened_time: {
       // (claire) listened (5 hours ago)
@@ -49530,7 +50042,8 @@ var bleh = (() => {
       es: "{u} escuch\xF3 {time} a",
       it: "{u} ha ascoltato {time}",
       pt: "{u} ouviu h\xE1 {time}",
-      ru: "{u} \u0441\u043B\u0443\u0448\u0430\u043B\u0438 {time}"
+      ru: "{u} \u0441\u043B\u0443\u0448\u0430\u043B\u0438 {time}",
+      pl: "{u} s\u0142ucha\u0142(a) {time}"
     },
     now_notice: {
       name: {
@@ -49539,7 +50052,8 @@ var bleh = (() => {
         it: "Questa pagina non \xE8 compatibile con bleh, ma...",
         pt: "Esta p\xE1gina n\xE3o \xE9 compat\xEDvel com bleh, mas...",
         de: "Diese Seite wird in bleh nicht richtig unterst\xFCtzt, aber...",
-        ru: "\u042D\u0442\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u0432 bleh, \u043D\u043E..."
+        ru: "\u042D\u0442\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u0432 bleh, \u043D\u043E...",
+        pl: "Ta strona nie jest w pe\u0142ni obs\u0142ugiwana przez bleh, ale..."
       },
       body: {
         en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times",
@@ -49547,7 +50061,8 @@ var bleh = (() => {
         es: "Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el men\xFA de tu perfil en cualquier momento",
         it: "Se sei un abbonato a Last.fm Pro, puoi visualizzare la tua traccia attiva corrente nel menu del tuo profilo in qualsiasi momento",
         pt: "Se voc\xEA \xE9 assinante do Last.fm Pro, voc\xEA pode ver sua faixa atual no menu de seu perfil a qualquer momento",
-        ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u043E\u043C Last.fm Pro, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0442\u0440\u0435\u043A \u0432 \u043C\u0435\u043D\u044E \u0441\u0432\u043E\u0435\u0433\u043E \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+        ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u043E\u043C Last.fm Pro, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0442\u0440\u0435\u043A \u0432 \u043C\u0435\u043D\u044E \u0441\u0432\u043E\u0435\u0433\u043E \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+        pl: "Je\u015Bli masz subskrypcj\u0119 Last.fm Pro, mo\u017Cesz w ka\u017Cdej chwili wy\u015Bwietli\u0107 aktualnie odtwarzany utw\xF3r w menu swojego profilu"
       }
     },
     current_status: {
@@ -49556,7 +50071,8 @@ var bleh = (() => {
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441",
       es: "Estado actual",
       it: "Stato corrente",
-      pt: "Estado atual"
+      pt: "Estado atual",
+      pl: "Obecny status"
     },
     status_cafe_too_many_requests: {
       en: "paused loading temporarily @w@",
@@ -49564,7 +50080,8 @@ var bleh = (() => {
       ru: "\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u043F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430 @w@",
       es: "carga temporalmente pausada @w@",
       it: "caricamento in pausa temporaneamente @w@",
-      pt: "carregamento pausada temporariamente @w@"
+      pt: "carregamento pausada temporariamente @w@",
+      pl: "\u0141adowanie tymczasowo wstrzymane @w@"
     },
     loading_status: {
       en: "loading status",
@@ -49572,7 +50089,8 @@ var bleh = (() => {
       ru: "\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u0430",
       es: "Estado de carga",
       it: "Caricamento stato",
-      pt: "Carregando status"
+      pt: "Carregando status",
+      pl: "\u0141adowanie statusu"
     },
     status_cafe: {
       // status.cafe
@@ -49582,7 +50100,8 @@ var bleh = (() => {
         ru: "\u0412\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0441\u0432\u043E\u0439 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0435\u0433\u043E \u043C\u043E\u0436\u043D\u043E \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C \u043F\u043E \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E\u043C\u0443 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0443, \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u0443\u044F \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
         es: "A\xF1ade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre m\xED",
         it: "Incorpora il tuo stato attuale nel tuo profilo, pu\xF2 essere spostato liberamente modificando la sezione su di me",
-        pt: "Insira seu status atual em seu perfil, pode ser movido livremente apenas editando seu sobre mim"
+        pt: "Insira seu status atual em seu perfil, pode ser movido livremente apenas editando seu sobre mim",
+        pl: "Umie\u015B\u0107 sw\xF3j aktualny status na profilu. Mo\u017Cesz dowolnie zmienia\u0107 jego po\u0142o\u017Cenie, edytuj\u0105c sekcj\u0119 \u201EO mnie\u201D."
       }
     },
     date_at_time: {
@@ -49592,7 +50111,8 @@ var bleh = (() => {
       ru: "{d} \u0432 {t}",
       es: "{d} a las {t}",
       it: "{d} alle {t}",
-      pt: "{d} as {t}"
+      pt: "{d} as {t}",
+      pl: "{d} o {t}"
     },
     you_sent_to: {
       // messages in your inbox
@@ -49601,7 +50121,8 @@ var bleh = (() => {
       ru: "\u0412\u044B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043B\u0438",
       es: "Has enviado a",
       it: "Hai inviato a",
-      pt: "Voc\xEA enviou para"
+      pt: "Voc\xEA enviou para",
+      pl: "Wys\u0142ane przez Ciebie do"
     },
     sent_to_you: {
       // messages in your inbox
@@ -49610,7 +50131,8 @@ var bleh = (() => {
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0430\u043C",
       es: "Te han enviado",
       it: "Ti \xE8 stato inviato",
-      pt: "Enviou para voc\xEA"
+      pt: "Enviou para voc\xEA",
+      pl: "Wys\u0142ane do Ciebie"
     },
     shoutbox_placeholder: {
       // u: username
@@ -49620,7 +50142,8 @@ var bleh = (() => {
       ru: "{u}, \u043F\u043E\u0434\u0435\u043B\u0438\u0442\u0435\u0441\u044C \u0441\u0432\u043E\u0438\u043C\u0438 \u043C\u044B\u0441\u043B\u044F\u043C\u0438 \u043E {v}...",
       es: "{u}, comparte lo que piensas sobre {v}...",
       it: "{u}, condividi i tuoi pensieri su {v}...",
-      pt: "{u}, compartilhe o que voc\xEA pensa sobre {v}..."
+      pt: "{u}, compartilhe o que voc\xEA pensa sobre {v}...",
+      pl: "{u}, podziel si\u0119 swoimi my\u015Blami na temat {v}..."
     },
     shoutbox_placeholder_user: {
       en: "{u}, leave a shout for {v}...",
@@ -49628,7 +50151,8 @@ var bleh = (() => {
       ru: "{u}, \u043E\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u0434\u043B\u044F {v}...",
       es: "{u}, deja una nota para {v}...",
       it: "{u}, lascia un commento per {v}...",
-      pt: "{u}, deixe uma nota para {v}"
+      pt: "{u}, deixe uma nota para {v}",
+      pl: "{u}, zostaw wiadomo\u015B\u0107 dla {v}..."
     },
     mention_user: {
       en: "Mention user",
@@ -49636,7 +50160,8 @@ var bleh = (() => {
       ru: "\u0423\u043F\u043E\u043C\u044F\u043D\u0443\u0442\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
       es: "Mencionar usuario",
       it: "Menziona utente",
-      pt: "Mencionar usu\xE1rio"
+      pt: "Mencionar usu\xE1rio",
+      pl: "Wspomnij u\u017Cytkownika"
     },
     quote: {
       en: "Quote",
@@ -49644,7 +50169,8 @@ var bleh = (() => {
       ru: "\u0426\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
       es: "Citar",
       it: "Citare",
-      pt: "Citar"
+      pt: "Citar",
+      pl: "Cytat"
     },
     code_block: {
       // block that surrounds code text:
@@ -49654,7 +50180,8 @@ var bleh = (() => {
       ru: "\u0411\u043B\u043E\u043A \u043A\u043E\u0434\u0430",
       es: "Bloque de c\xF3digo",
       it: "Blocco di codice",
-      pt: "Bloco de c\xF3digo"
+      pt: "Bloco de c\xF3digo",
+      pl: "Blok kodu"
     },
     numbered_list: {
       en: "Numbered list",
@@ -49662,7 +50189,8 @@ var bleh = (() => {
       ru: "\u041D\u0443\u043C\u0435\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A",
       es: "Lista enumerada",
       it: "Lista numerata",
-      pt: "Lista numerada"
+      pt: "Lista numerada",
+      pl: "Lista numerowana"
     },
     left_align: {
       en: "Left align",
@@ -49670,7 +50198,8 @@ var bleh = (() => {
       ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u043B\u0435\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
       es: "Alinear a la izquierda",
       it: "Allineamento a sinistra",
-      pt: "Alinhar \xE0 esquerda"
+      pt: "Alinhar \xE0 esquerda",
+      pl: "Wyr\xF3wnaj do lewej"
     },
     center_align: {
       en: "Center align",
@@ -49678,7 +50207,8 @@ var bleh = (() => {
       ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u0446\u0435\u043D\u0442\u0440\u0443",
       es: "Centrar",
       it: "Allineamento al centro",
-      pt: "Centralizar"
+      pt: "Centralizar",
+      pl: "Wyr\xF3wnaj do \u015Brodka"
     },
     right_align: {
       en: "Right align",
@@ -49686,7 +50216,8 @@ var bleh = (() => {
       ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
       es: "Alinear a la derecha",
       it: "Allineamento a destra",
-      pt: "Alinhar \xE0 direita"
+      pt: "Alinhar \xE0 direita",
+      pl: "Wyr\xF3wnaj do prawej"
     },
     header: {
       en: "Header",
@@ -49694,7 +50225,8 @@ var bleh = (() => {
       ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
       es: "Encabezado",
       it: "Intestazione",
-      pt: "Cabe\xE7alho"
+      pt: "Cabe\xE7alho",
+      pl: "Nag\u0142\xF3wek"
     },
     bold: {
       en: "Bold",
@@ -49702,7 +50234,8 @@ var bleh = (() => {
       ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439",
       es: "Negrita",
       it: "Grassetto",
-      pt: "Negrito"
+      pt: "Negrito",
+      pl: "Pogrubienie"
     },
     italic: {
       en: "Italic",
@@ -49710,7 +50243,8 @@ var bleh = (() => {
       ru: "\u041A\u0443\u0440\u0441\u0438\u0432",
       es: "Cursiva",
       it: "Corsivo",
-      pt: "It\xE1lico"
+      pt: "It\xE1lico",
+      pl: "Kursywa"
     },
     strikethrough: {
       en: "Strikethrough",
@@ -49718,7 +50252,8 @@ var bleh = (() => {
       ru: "\u0417\u0430\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
       es: "Tachado",
       it: "Barrato",
-      pt: "Tachado"
+      pt: "Tachado",
+      pl: "Przekre\u015Blenie"
     },
     underline: {
       en: "Underline",
@@ -49726,7 +50261,8 @@ var bleh = (() => {
       ru: "\u041F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
       es: "Subrayado",
       it: "Sottolineato",
-      pt: "Sublinhado"
+      pt: "Sublinhado",
+      pl: "Podkre\u015Blenie"
     },
     located: {
       en: "Located",
@@ -49734,7 +50270,8 @@ var bleh = (() => {
       ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D",
       es: "Ubicado",
       it: "Ubicato",
-      pt: "Localizado"
+      pt: "Localizado",
+      pl: "Lokalizacja"
     },
     date: {
       en: "Date",
@@ -49742,7 +50279,8 @@ var bleh = (() => {
       ru: "\u0414\u0430\u0442\u0430",
       es: "Fecha",
       it: "Data",
-      pt: "Data"
+      pt: "Data",
+      pl: "Data"
     },
     contact: {
       en: "Contact",
@@ -49750,7 +50288,8 @@ var bleh = (() => {
       ru: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442",
       es: "Contacto",
       it: "Contatto",
-      pt: "Contato"
+      pt: "Contato",
+      pl: "Kontakt"
     },
     show_on_map: {
       en: "Show on map",
@@ -49758,7 +50297,8 @@ var bleh = (() => {
       ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0430 \u043A\u0430\u0440\u0442\u0435",
       es: "Ver en mapa",
       it: "Mostra sulla mappa",
-      pt: "Ver em mapa"
+      pt: "Ver em mapa",
+      pl: "Wy\u015Bwietl na mapie"
     },
     added_by: {
       en: "Added by {u}",
@@ -49766,7 +50306,8 @@ var bleh = (() => {
       ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E {u}",
       es: "A\xF1adido por {u}",
       it: "Aggiunto da {u}",
-      pt: "Adicionado por {u}"
+      pt: "Adicionado por {u}",
+      pl: "Dodano przez {u}"
     },
     notice: {
       en: "Notice",
@@ -49774,7 +50315,8 @@ var bleh = (() => {
       ru: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u0435",
       es: "Noticia",
       it: "Avviso",
-      pt: "Aviso"
+      pt: "Aviso",
+      pl: "Uwaga"
     },
     send_valentine: {
       // valentines easter egg
@@ -49784,7 +50326,8 @@ var bleh = (() => {
       ru: "\u0414\u0430\u0439\u0442\u0435 \u0438\u043C \u0437\u043D\u0430\u0442\u044C",
       es: "Hazle saber",
       it: "Faglielo sapere",
-      pt: "Deixe ele(a) saber"
+      pt: "Deixe ele(a) saber",
+      pl: "Daj im zna\u0107"
     },
     valentine: {
       // valentines easter egg
@@ -49795,7 +50338,8 @@ var bleh = (() => {
       ru: "\u0442\u043E\u043C\u0443, \u043A\u043E\u0433\u043E \u044F \u043B\u044E\u0431\u043B\u044E \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E, {u} \u2661",
       es: "a la persona que m\xE1s amo, {u} \u2661",
       it: "alla persona che amo di pi\xF9, {u} \u2661",
-      pt: "para a pessoa que mais amo, {u} \u2661"
+      pt: "para a pessoa que mais amo, {u} \u2661",
+      pl: "dla osoby kt\xF3r\u0105 najbardziej kocham, {u} \u2661 "
     },
     view_details: {
       en: "View details",
@@ -49803,7 +50347,8 @@ var bleh = (() => {
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0434\u0435\u0442\u0430\u043B\u0438",
       es: "Ver detalles",
       it: "Visualizza dettagli",
-      pt: "Ver detalhes"
+      pt: "Ver detalhes",
+      pl: "Wy\u015Bwietl szczeg\xF3\u0142y"
     },
     valentine_info: {
       en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!",
@@ -49811,7 +50356,8 @@ var bleh = (() => {
       ru: "\u0412\u044B \u0432\u0438\u0434\u0438\u0442\u0435 \u044D\u0442\u043E, \u043F\u043E\u0442\u043E\u043C\u0443 \u0447\u0442\u043E {u} \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0441\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u0441\u043F\u0438\u0441\u043A\u0435 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 bleh, \u0443 \u0432\u0430\u0441 \u0432\u044B\u0441\u043E\u043A\u0430\u044F \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0438 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u0414\u0435\u043D\u044C \u0412\u043B\u044E\u0431\u043B\u0435\u043D\u043D\u044B\u0445!",
       es: "\xA1Est\xE1s viendo esto ya que {u} est\xE1 en tu lista de amigos cercanos de bleh, tienen alta compatibilidad, y es San Valent\xEDn!",
       it: "Stai vedendo questo perch\xE9 {u} \xE8 nella tua lista di amici stretti di bleh, avete un\u2019alta compatibilit\xE0, e oggi \xE8 San Valentino!",
-      pt: "Voc\xEA est\xE1 vendo isso porque {u} est\xE1 na sua lista de amigos pr\xF3ximos, voc\xEAs tem alta compatibilidade, e \xE9 Dia dos Namorados!"
+      pt: "Voc\xEA est\xE1 vendo isso porque {u} est\xE1 na sua lista de amigos pr\xF3ximos, voc\xEAs tem alta compatibilidade, e \xE9 Dia dos Namorados!",
+      pl: "Widzisz to, poniewa\u017C {u} jest na Twojej li\u015Bcie bliskich znajomych w bleh, macie wysok\u0105 zgodno\u015B\u0107, a dzi\u015B s\u0105 Walentynki!"
     },
     valentine_message_footer: {
       en: "This message\u2019s subject line indicates it was sent via bleh and {u} picked you as their valentine \u2661",
@@ -49819,7 +50365,8 @@ var bleh = (() => {
       ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u044D\u0442\u043E\u0433\u043E \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0443\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442, \u0447\u0442\u043E \u043E\u043D\u043E \u0431\u044B\u043B\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0447\u0435\u0440\u0435\u0437 bleh \u0438 {u} \u0432\u044B\u0431\u0440\u0430\u043B\u0438 \u0432\u0430\u0441 \u0441\u0432\u043E\u0438\u043C \u0432\u043B\u044E\u0431\u043B\u0435\u043D\u043D\u044B\u043C \u2661",
       es: "El asunto de este mensaje indica que fue enviado a trav\xE9s de bleh y {u} te escogi\xF3 como su San Valent\xEDn \u2661",
       it: "L\u2019oggetto di questo messaggio indica che \xE8 stato inviato tramite bleh e {u} ti ha scelto come suo San Valentino \u2661",
-      pt: "O assunto desta mensagem indica que foi enviada via bleh e {u} escolheu voc\xEA como seu parceiro no Dia dos Namorados \u2661"
+      pt: "O assunto desta mensagem indica que foi enviada via bleh e {u} escolheu voc\xEA como seu parceiro no Dia dos Namorados \u2661",
+      pl: "Temat tej wiadomo\u015Bci wskazuje, \u017Ce zosta\u0142a wys\u0142ana za po\u015Brednictwem bleh, a {u} wybra\u0142(a) Ci\u0119 na swoj\u0105 walentynk\u0119 \u2661"
     },
     got_it: {
       // used when dismissing a popup
@@ -49828,7 +50375,8 @@ var bleh = (() => {
       ru: "\u041F\u043E\u043D\u044F\u0442\u043D\u043E",
       es: "Entendido",
       it: "Capito",
-      pt: "Entendido"
+      pt: "Entendido",
+      pl: "Zrozumiano"
     },
     tip: {
       // used as a label for each tip
@@ -49837,7 +50385,8 @@ var bleh = (() => {
       ru: "\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430",
       es: "Tip",
       it: "Suggerimento",
-      pt: "Dica"
+      pt: "Dica",
+      pl: "Wskaz\xF3wka"
     },
     popup_navigation_menu: {
       // its pointing to your user menu in the top right
@@ -49847,7 +50396,8 @@ var bleh = (() => {
         ru: "\u042D\u0442\u043E \u0432\u0430\u0448 \u043D\u0430\u0432\u0438\u0433\u0430\u0442\u043E\u0440",
         es: "Este es tu navegador",
         it: "Questo \xE8 il tuo navigatore",
-        pt: "Este \xE9 seu navegador"
+        pt: "Este \xE9 seu navegador",
+        pl: "To jest Twoje menu nawigacji"
       },
       body: {
         en: "You can choose which actions to show here by right-clicking for more options",
@@ -49855,7 +50405,8 @@ var bleh = (() => {
         ru: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u044B\u0431\u0440\u0430\u0442\u044C, \u043A\u0430\u043A\u0438\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0437\u0434\u0435\u0441\u044C: \u0449\u0451\u043B\u043A\u043D\u0438\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B",
         es: "Puedes elegir cu\xE1les acciones mostrar aqu\xED haciendo clic derecho para m\xE1s opciones",
         it: "Puoi scegliere quali azioni mostrare qui facendo clic destro per pi\xF9 opzioni",
-        pt: "Voc\xEA pode escolher quais a\xE7\xF5es para mostrar aqui apenas clicando bot\xE3o direito para mais op\xE7\xF5es"
+        pt: "Voc\xEA pode escolher quais a\xE7\xF5es para mostrar aqui apenas clicando bot\xE3o direito para mais op\xE7\xF5es",
+        pl: "Kliknij prawym przyciskiem myszy, aby wybra\u0107, kt\xF3re akcje maj\u0105 by\u0107 tutaj wy\u015Bwietlane"
       }
     },
     popup_inbox: {
@@ -49865,7 +50416,8 @@ var bleh = (() => {
         ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0443 \u043F\u043E\u0447\u0442\u0443",
         es: "Encuentra tu buz\xF3n combinado",
         it: "Trova la tua casella di posta combinata",
-        pt: "Encontre sua caixa de entrada combinado"
+        pt: "Encontre sua caixa de entrada combinado",
+        pl: "Znajd\u017A wszystkie wiadomo\u015Bci w jednym miejscu"
       },
       body: {
         en: "Your notifications and messages have been organised into this handy button",
@@ -49873,7 +50425,8 @@ var bleh = (() => {
         ru: "\u0412\u0430\u0448\u0438 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0431\u044B\u043B\u0438 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u044B \u0432 \u044D\u0442\u0443 \u0443\u0434\u043E\u0431\u043D\u0443\u044E \u043A\u043D\u043E\u043F\u043A\u0443",
         es: "Tus notificaciones y mensajes han sido organizados en este \xFAtil bot\xF3n",
         it: "Le tue notifiche e messaggi sono stati organizzati in questo comodo pulsante",
-        pt: "Suas notifica\xE7\xF5es e mensagens foram organizadas neste bot\xE3o conveniente"
+        pt: "Suas notifica\xE7\xF5es e mensagens foram organizadas neste bot\xE3o conveniente",
+        pl: "Twoje powiadomienia i wiadomo\u015Bci zosta\u0142y umieszczone w tym wygodnym przycisku"
       }
     },
     popup_close_friends: {
@@ -49883,7 +50436,8 @@ var bleh = (() => {
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
         es: "A\xF1adir tu lista de amigos cercanos",
         it: "Aggiungi la tua lista di amici stretti",
-        pt: "Adicionar sua lista de amigos pr\xF3ximos"
+        pt: "Adicionar sua lista de amigos pr\xF3ximos",
+        pl: "Dodaj list\u0119 bliskich znajomych"
       },
       body: {
         en: "View their scrobbles on any artist, album, or track at any time",
@@ -49891,7 +50445,8 @@ var bleh = (() => {
         ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0439\u0442\u0435 \u0438\u0445 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B \u043D\u0430 \u043B\u044E\u0431\u043E\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435, \u0430\u043B\u044C\u0431\u043E\u043C\u0435 \u0438\u043B\u0438 \u0442\u0440\u0435\u043A\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F",
         es: "Mira sus scrobbles en cualquier artista, \xE1lbum, o tema en cualquier momento",
         it: "Vedi i loro scrobbles su qualsiasi artista, album, o traccia in qualsiasi momento",
-        pt: "Veja seus scrobbles em qualquer artista, \xE1lbum, ou faixa a qualquer momento"
+        pt: "Veja seus scrobbles em qualquer artista, \xE1lbum, ou faixa a qualquer momento",
+        pl: "Wy\u015Bwietlaj ich scrobble dowolnego artysty, albumu lub utworu w dowolnym momencie"
       }
     },
     popup_profile_name_style: {
@@ -49901,7 +50456,8 @@ var bleh = (() => {
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u0448\u0440\u0438\u0444\u0442, \u0441\u0442\u0438\u043B\u044C \u0438 \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
         es: "Elegir una fuente, estilo, y color de perfil personalizados",
         it: "Scegli un font, stile, e colore del profilo personalizzati",
-        pt: "Escolha uma fonte customizada, e uma cor de perfil"
+        pt: "Escolha uma fonte customizada, e uma cor de perfil",
+        pl: "Wybierz w\u0142asn\u0105 czcionk\u0119, styl i kolor profilu"
       },
       body: {
         en: "These are sponsor-exclusive perks as a thank you for supporting bleh",
@@ -49909,7 +50465,8 @@ var bleh = (() => {
         de: "Dies sind exklusive Vorteile f\xFCr Sponsoren als Dankesch\xF6n f\xFCr die Unterst\xFCtzung von bleh",
         ru: "\u042D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u044B\u0435 \u043F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430 \u0434\u043B\u044F \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u0432, \u043A\u0430\u043A \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u0437\u0430 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0443 bleh",
         es: "Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh",
-        it: "Questi sono vantaggi esclusivi per gli sponsor come ringraziamento per il supporto a bleh"
+        it: "Questi sono vantaggi esclusivi per gli sponsor come ringraziamento per il supporto a bleh",
+        pl: "To ekskluzywne korzy\u015Bci dla sponsor\xF3w w podzi\u0119kowaniu za wsparcie bleh"
       }
     },
     popup_markdown: {
@@ -49919,7 +50476,8 @@ var bleh = (() => {
         ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u0443\u0439\u0442\u0435 \u0442\u0435\u043A\u0441\u0442 \u0441 Markdown",
         es: "Adoptar estilo con Markdown",
         it: "Adotta lo stile con Markdown",
-        pt: "Adote o estilo com Markdown"
+        pt: "Adote o estilo com Markdown",
+        pl: "Odkryj mo\u017Cliwo\u015Bci stylizacji tekstu za pomoc\u0105 Markdown"
       },
       body: {
         en: "Format any text, embed images and links, mention users, and much more based on the scenario",
@@ -49927,7 +50485,8 @@ var bleh = (() => {
         ru: "\u0424\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u0443\u0439\u0442\u0435 \u043B\u044E\u0431\u043E\u0439 \u0442\u0435\u043A\u0441\u0442, \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0441\u0441\u044B\u043B\u043A\u0438, \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u0439\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 \u0438 \u043C\u043D\u043E\u0433\u043E\u0435 \u0434\u0440\u0443\u0433\u043E\u0435 \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u0438",
         es: "Formatea cualquier texto, a\xF1ade im\xE1genes y v\xEDnculos, menciona usuarios, y mucho m\xE1s basado en el escenario",
         it: "Formatta qualsiasi testo, incorpora immagini e link, menziona utenti, e molto altro in base allo scenario",
-        pt: "Formate qualquer texto, insira imagens, links, mencione usu\xE1rios e muito mais baseado no cen\xE1rio"
+        pt: "Formate qualquer texto, insira imagens, links, mencione usu\xE1rios e muito mais baseado no cen\xE1rio",
+        pl: "Formatuj tekst, dodawaj obrazy i linki, wspominaj u\u017Cytkownik\xF3w i korzystaj z wielu innych mo\u017Cliwo\u015Bci, zale\u017Cnie od sytuacji"
       }
     },
     popup_search: {
@@ -49937,7 +50496,8 @@ var bleh = (() => {
         ru: "\u041D\u0430\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u0443\u0440\u0441\u043E\u0440 \u0441\u044E\u0434\u0430, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0439\u0442\u0438 \u043C\u0443\u0437\u044B\u043A\u0443",
         es: "Pasar el cursor por aqu\xED para buscar m\xFAsica",
         it: "Passa il cursore qui sopra per cercare musica",
-        pt: "Passe o cursor por aqui para buscar m\xFAsica"
+        pt: "Passe o cursor por aqui para buscar m\xFAsica",
+        pl: "Najed\u017A tutaj kursorem aby wyszuka\u0107 muzyk\u0119"
       },
       body: {
         en: "Searching has never been easier to access, plus it hides away when you\u2019re scrolled up",
@@ -49945,7 +50505,8 @@ var bleh = (() => {
         ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u0431\u044B\u043B \u0442\u0430\u043A\u0438\u043C \u043F\u0440\u043E\u0441\u0442\u044B\u043C! \u041A \u0442\u043E\u043C\u0443 \u0436\u0435, \u043E\u043D \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F, \u043A\u043E\u0433\u0434\u0430 \u0432\u044B \u043F\u0440\u043E\u043A\u0440\u0443\u0447\u0438\u0432\u0430\u0435\u0442\u0435 \u0432\u0432\u0435\u0440\u0445",
         es: "Buscar nunca ha sido m\xE1s f\xE1cil, adem\xE1s se oculta cuando te desplazas hacia arriba",
         it: "Cercare non \xE8 mai stato cos\xEC facile, inoltre si nasconde quando scorri verso l\u2019alto",
-        pt: "Pesquisar nunca tinha sido mais f\xE1cil, al\xE9m de ficar oculta quando voc\xEA rolar para cima"
+        pt: "Pesquisar nunca tinha sido mais f\xE1cil, al\xE9m de ficar oculta quando voc\xEA rolar para cima",
+        pl: "Dost\u0119p do wyszukiwarki jeszcze nigdy nie by\u0142 tak \u0142atwy, a do tego chowa si\u0119, gdy przewijasz w g\xF3r\u0119"
       }
     },
     send_a_reply: {
@@ -49954,7 +50515,8 @@ var bleh = (() => {
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0432\u0435\u0442",
       es: "Enviar una respuesta",
       it: "Invia una risposta",
-      pt: "Envie uma resposta"
+      pt: "Envie uma resposta",
+      pl: "Wy\u015Blij odpowied\u017A"
     },
     are_these_results_accurate: {
       en: "Are these results accurate?",
@@ -49962,7 +50524,8 @@ var bleh = (() => {
       ru: "\u0422\u043E\u0447\u043D\u044B\u0435 \u043B\u0438 \u044D\u0442\u0438 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B?",
       es: "\xBFSon estos resultados correctos?",
       it: "Questi risultati sono accurati?",
-      pt: "Esses s\xE3o os resultados corretos?"
+      pt: "Esses s\xE3o os resultados corretos?",
+      pl: "Czy te wyniki s\u0105 poprawne?"
     },
     report_incorrect: {
       en: "Mark incorrect",
@@ -49970,7 +50533,8 @@ var bleh = (() => {
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u043A\u0430\u043A \u043D\u0435\u0432\u0435\u0440\u043D\u044B\u0439",
       es: "Marcar como incorrecto",
       it: "Segna come errato",
-      pt: "Marcar como incorreto"
+      pt: "Marcar como incorreto",
+      pl: "Oznacz jako nieprawid\u0142owe"
     },
     what_did_you_expect: {
       en: "What did you expect?",
@@ -49978,7 +50542,8 @@ var bleh = (() => {
       ru: "\u0427\u0442\u043E \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C?",
       es: "\xBFQu\xE9 esperabas?",
       it: "Cosa ti aspettavi?",
-      pt: "O que voc\xEA esperava?"
+      pt: "O que voc\xEA esperava?",
+      pl: "Czego oczekiwano?"
     },
     oracle_sources_tip_track: {
       en: "Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours",
@@ -49986,7 +50551,8 @@ var bleh = (() => {
       ru: "\u041A\u0430\u043A\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u044B \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, Dawn FM \u0432\u043C\u0435\u0441\u0442\u043E After Hours",
       es: "A qu\xE9 \xE1lbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours",
       it: "Quali albumi ti aspettavi fossero collegati, ad es. Dawn FM invece di After Hours",
-      pt: "Quais \xE1lbuns voc\xEA espera que esperava ser vinculado, p. ex, Dawn FM ao inv\xE9s de After Hours"
+      pt: "Quais \xE1lbuns voc\xEA espera que esperava ser vinculado, p. ex, Dawn FM ao inv\xE9s de After Hours",
+      pl: "Z jakimi albumami utw\xF3r powinien by\u0107 powi\u0105zany, np. Dawn FM zamiast After Hours"
     },
     oracle_sources_tip_album: {
       en: "Which copy of the album did you expect to see? Provide links and some details as to why",
@@ -49994,7 +50560,8 @@ var bleh = (() => {
       ru: "\u041A\u0430\u043A\u0443\u044E \u043A\u043E\u043F\u0438\u044E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C? \u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0438 \u043E \u0442\u043E\u043C, \u043F\u043E\u0447\u0435\u043C\u0443",
       es: "\xBFQu\xE9 copia del \xE1lbum esperabas ver? Proporciona v\xEDnculos y algunos detalles sobre el porqu\xE9",
       it: "Quale copia dell\u2019album ti aspettavi di vedere? Fornisci link e qualche dettaglio sul perch\xE9",
-      pt: "Qual c\xF3pia do \xE1lbum voc\xEA esperava ver? Provid\xEAncie links e alguns detalhes do porqu\xEA"
+      pt: "Qual c\xF3pia do \xE1lbum voc\xEA esperava ver? Provid\xEAncie links e alguns detalhes do porqu\xEA",
+      pl: "Kt\xF3re wydanie albumu spodziewano si\u0119 zobaczy\u0107? Podaj linki i kr\xF3tko wyja\u015Bnij, dlaczego."
     },
     switch: {
       // like switch places
@@ -50003,7 +50570,8 @@ var bleh = (() => {
       es: "Cambiar",
       it: "Cambia",
       pt: "Trocar",
-      ru: "\u041F\u043E\u043C\u0435\u043D\u044F\u0442\u044C \u043C\u0435\u0441\u0442\u0430\u043C\u0438"
+      ru: "\u041F\u043E\u043C\u0435\u043D\u044F\u0442\u044C \u043C\u0435\u0441\u0442\u0430\u043C\u0438",
+      pl: "Zamie\u0144"
     },
     auto_close: {
       // auto close dialog after action
@@ -50012,7 +50580,8 @@ var bleh = (() => {
       es: "Cerrar autom\xE1ticamente",
       it: "Chiusura automatica",
       pt: "Auto fechar",
-      ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438"
+      ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438",
+      pl: "Automatyczne zamykanie"
     },
     loading_conversations: {
       en: "Loading conversations",
@@ -50020,7 +50589,8 @@ var bleh = (() => {
       es: "Cargando conversaciones",
       it: "Caricamento conversazioni",
       pt: "Carregando conversas",
-      ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043C \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u044B"
+      ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043C \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u044B",
+      pl: "\u0141adowanie rozm\xF3w"
     },
     shoutbox_failed: {
       en: "There was an error loading conversations \u201C(\u30CE _ <,, )",
@@ -50028,7 +50598,8 @@ var bleh = (() => {
       es: "Hubo un error al cargar las conversaciones \u201C(\u30CE _ <,, )",
       it: "Si \xE8 verificato un errore durante il caricamento delle conversazioni \u201C(\u30CE _ <,, )",
       pt: "Ocorreu um erro carregando as conversas \u201C(\u30CE _ <,, )",
-      ru: "\u0412\u043E \u0432\u0440\u0435\u043C\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u043E\u0432 \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u201C(\u30CE _ <,, )"
+      ru: "\u0412\u043E \u0432\u0440\u0435\u043C\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u043E\u0432 \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u201C(\u30CE _ <,, )",
+      pl: "Wyst\u0105pil b\u0142\u0105d podczas \u0142adowania rozm\xF3w \u201C(\u30CE _ <,, )"
     },
     track_name: {
       en: "Track name",
@@ -50036,7 +50607,8 @@ var bleh = (() => {
       es: "Nombre del tema",
       it: "Nome della traccia",
       pt: "Nome da faixa",
-      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430"
+      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430",
+      pl: "Nazwa utworu"
     },
     artist_name: {
       en: "Artist name",
@@ -50044,7 +50616,8 @@ var bleh = (() => {
       es: "Nombre del artista",
       it: "Nome dell\u2019artista",
       pt: "Nome do artista",
-      ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F"
+      ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F",
+      pl: "Nazwa artysty"
     },
     album_name: {
       en: "Album name",
@@ -50052,7 +50625,8 @@ var bleh = (() => {
       es: "Nombre del \xE1lbum",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
       it: "Nome dell\u2019album",
-      pt: "Nome do \xE1lbum"
+      pt: "Nome do \xE1lbum",
+      pl: "Tytu\u0142 albumu"
     },
     search_for_settings: {
       en: "Search for settings",
@@ -50060,7 +50634,8 @@ var bleh = (() => {
       de: "Nach Einstellungen suchen",
       es: "Buscar opciones",
       ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
-      it: "Cerca le impostazioni"
+      it: "Cerca le impostazioni",
+      pl: "Wyszukaj ustawie\u0144"
     },
     found_value_results: {
       en: "Found {c} result(s)",
@@ -50068,7 +50643,8 @@ var bleh = (() => {
       de: "{c} Ergebnis(se) gefunden",
       es: "{c} resultados encontrados",
       ru: "\u041D\u0430\u0439\u0434\u0435\u043D\u043E \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432: {c}",
-      it: "{c} risultato(i) trovato(i)"
+      it: "{c} risultato(i) trovato(i)",
+      pl: "Znaleziono {c} wynik(\xF3w)"
     },
     translated_from_value: {
       en: "Translated from {v}",
@@ -50076,7 +50652,8 @@ var bleh = (() => {
       de: "\xDCbersetzt von {v}",
       es: "Traducido de {v}",
       ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043D\u043E \u0441 {v}",
-      it: "Tradotto da {v}"
+      it: "Tradotto da {v}",
+      pl: "Przet\u0142umaczono z {v}"
     },
     follow_guidelines: {
       en: "Keep in mind the {a}community guidelines{/a}",
@@ -50084,7 +50661,8 @@ var bleh = (() => {
       de: "Denke daran, die {a}Community-Richtlinien{/a} zu befolgen",
       es: "Ten en cuenta los {a}lineamientos de la comunidad{/a}",
       ru: "\u0423\u0447\u0438\u0442\u044B\u0432\u0430\u0439\u0442\u0435 {a}\u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430{/a}",
-      it: "Tieni a mente le {a}linee guida della community{/a}"
+      it: "Tieni a mente le {a}linee guida della community{/a}",
+      pl: "Pami\u0119taj o {a}zasadach spo\u0142eczno\u015Bci{/a}"
     },
     link_val: {
       // text 1, text 2
@@ -50117,7 +50695,8 @@ var bleh = (() => {
       de: "Gestylt mit {f}.",
       es: "Escrito con {f}",
       ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u043C {f}",
-      it: "Stilizzato con {f}."
+      it: "Stilizzato con {f}.",
+      pl: "Stylizowane za pomoc\u0105 {f}."
     },
     change_font: {
       en: "Change font",
@@ -50125,7 +50704,8 @@ var bleh = (() => {
       de: "Schriftart \xE4ndern",
       es: "Cambiar fuente",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0448\u0440\u0438\u0444\u0442",
-      it: "Cambia font"
+      it: "Cambia font",
+      pl: "Zmie\u0144 czcionk\u0119"
     },
     and_count_more: {
       // [top badge] and 3 more...
@@ -50135,7 +50715,8 @@ var bleh = (() => {
       de: "und {c} weitere",
       es: "y {c} m\xE1s",
       ru: "\u0438 \u0435\u0449\u0451 {c}",
-      it: "e {c} altri"
+      it: "e {c} altri",
+      pl: "i {c} wi\u0119cej"
     },
     scrobbling_now: {
       en: "Scrobbling now",
@@ -50143,7 +50724,8 @@ var bleh = (() => {
       de: "Wird gerade gescrobbelt",
       es: "Haciendo scrobbling ahora",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441",
-      it: "Scrobbling in corso"
+      it: "Scrobbling in corso",
+      pl: "Scrobblowane teraz"
     },
     recent_scrobble: {
       en: "Recently scrobbled",
@@ -50151,7 +50733,8 @@ var bleh = (() => {
       de: "K\xFCrzlich gescrobbelt",
       es: "Scrobbling reciente",
       ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0435\u043D\u043E",
-      it: "Scrobbled di recente"
+      it: "Scrobbled di recente",
+      pl: "Ostatnio scrobblowane"
     },
     no_tracks_found_mb: {
       en: "No tracks found, possibly a MusicBrainz error",
@@ -50159,7 +50742,8 @@ var bleh = (() => {
       de: "Keine Titel gefunden, m\xF6glicherweise ein MusicBrainz-Fehler",
       es: "Ning\xFAn tema encontrado, posiblemente un error de MusicBrainz",
       ru: "\u0422\u0440\u0435\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B, \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u043E\u0448\u0438\u0431\u043A\u0430 MusicBrainz",
-      it: "Nessuna traccia trovata, possibile errore di MusicBrainz"
+      it: "Nessuna traccia trovata, possibile errore di MusicBrainz",
+      pl: "Nie znaleziono utwor\xF3w, mo\u017Cliwy bl\u0105d MusicBrainz"
     },
     value_scrobbles_recently: {
       en: "{v} scrobbles recently",
@@ -50167,7 +50751,8 @@ var bleh = (() => {
       de: "{v} k\xFCrzliche Scrobbles",
       es: "{v} scrobblings recientes",
       ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0435\u043D\u043E: {v}",
-      it: "{v} scrobbles di recente"
+      it: "{v} scrobbles di recente",
+      pl: "{v} scrobbli w ostatnim czasie "
     },
     value_listeners_recently: {
       en: "{v} listeners recently"
@@ -50178,7 +50763,8 @@ var bleh = (() => {
       de: "Auf Tour",
       es: "De gira",
       ru: "\u0412 \u0442\u0443\u0440\u0435",
-      it: "In tour"
+      it: "In tour",
+      pl: "W trasie koncertowej"
     },
     length: {
       en: "Length",
@@ -50186,7 +50772,8 @@ var bleh = (() => {
       de: "Dauer",
       es: "Duraci\xF3n",
       ru: "\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
-      it: "Durata"
+      it: "Durata",
+      pl: "D\u0142ugo\u015B\u0107"
     },
     released: {
       en: "Released",
@@ -50194,7 +50781,8 @@ var bleh = (() => {
       de: "Ver\xF6ffentlicht am",
       es: "Lanzado",
       ru: "\u0412\u044B\u043F\u0443\u0449\u0435\u043D\u043E",
-      it: "Rilasciato"
+      it: "Rilasciato",
+      pl: "Wydano"
     },
     value_tracks_time: {
       en: "{count} tracks, {length}",
@@ -50202,7 +50790,8 @@ var bleh = (() => {
       de: "{count} Titel, {length}",
       es: "{count} temas, {length}",
       ru: "{count} \u0442\u0440\u0435\u043A\u043E\u0432, {length}",
-      it: "{count} tracce, {length}"
+      it: "{count} tracce, {length}",
+      pl: "{count} utwor\xF3w, {length}"
     },
     oracle_vocal: {
       en: "Performed by",
@@ -50210,7 +50799,8 @@ var bleh = (() => {
       de: "Aufgef\xFChrt von",
       es: "Interpretado por",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u043E",
-      it: "Eseguito da"
+      it: "Eseguito da",
+      pl: "Wykonane przez"
     },
     oracle_recording: {
       en: "Recorded by",
@@ -50218,7 +50808,8 @@ var bleh = (() => {
       de: "Aufgenommen von",
       es: "Grabado por",
       ru: "\u0417\u0430\u043F\u0438\u0441\u0430\u043D\u043E",
-      it: "Registrato da"
+      it: "Registrato da",
+      pl: "Nagrane przez"
     },
     oracle_mix: {
       en: "Produced by",
@@ -50226,7 +50817,8 @@ var bleh = (() => {
       de: "Produziert von",
       es: "Producido por",
       ru: "\u0421\u043F\u0440\u043E\u0434\u044E\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
-      it: "Prodotto da"
+      it: "Prodotto da",
+      pl: "Wyprodukowane przez"
     },
     oracle_engineer: {
       en: "Engineered by",
@@ -50234,21 +50826,24 @@ var bleh = (() => {
       de: "Technisch betreut von",
       es: "Dise\xF1ado por",
       ru: "\u0421\u0432\u0435\u0434\u0435\u043D\u043E",
-      it: "Progettato da"
+      it: "Progettato da",
+      pl: "Zrealizowane przez"
     },
     oracle_editor: {
       en: "Edited by",
       pt: "Editado por",
       de: "Redigiert von",
       es: "Editado por",
-      it: "Editato da"
+      it: "Editato da",
+      pl: "Edytowane przez"
     },
     oracle_writer: {
       en: "Written by",
       pt: "Escrito por",
       de: "Geschrieben von",
       es: "Escrito por",
-      it: "Scritto da"
+      it: "Scritto da",
+      pl: "Napisane przez"
     },
     oracle_no_credits: {
       en: 'nothing here... (\u0E51/////\u0E51 " )',
@@ -50256,7 +50851,8 @@ var bleh = (() => {
       de: 'hier gibt\u2019s nichts zu sehen... (\u0E51/////\u0E51 " )',
       es: 'Nada aqu\xED... (\u0E51/////\u0E51 " )',
       ru: '\u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435\u0442... (\u0E51/////\u0E51 " )',
-      it: 'Niente qui... (\u0E51/////\u0E51 " )'
+      it: 'Niente qui... (\u0E51/////\u0E51 " )',
+      pl: 'Nic tu nie ma... (\u0E51/////\u0E51 " )'
     },
     born: {
       en: "Born",
@@ -50264,7 +50860,8 @@ var bleh = (() => {
       de: "Geboren am",
       es: "Naci\xF3",
       ru: "\u0414\u0430\u0442\u0430 \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F",
-      it: "Nato il"
+      it: "Nato il",
+      pl: "Data urodzin"
     },
     died: {
       en: "Died",
@@ -50272,7 +50869,8 @@ var bleh = (() => {
       de: "Gestorben am",
       es: "Muri\xF3",
       ru: "\u0414\u0430\u0442\u0430 \u0441\u043C\u0435\u0440\u0442\u0438",
-      it: "Morto il"
+      it: "Morto il",
+      pl: "Data \u015Bmierci"
     },
     formed: {
       // like a group, created
@@ -50281,14 +50879,16 @@ var bleh = (() => {
       de: "Gegr\xFCndet am",
       es: "Formado",
       ru: "\u0414\u0430\u0442\u0430 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F",
-      it: "Formato"
+      it: "Formato",
+      pl: "Za\u0142o\u017Cony"
     },
     ended: {
       en: "Ended",
       pt: "Encerramento",
       de: "Beendet am",
       es: "Terminado",
-      it: "Terminato"
+      it: "Terminato",
+      pl: "Zako\u0144czono"
     },
     show_disc_image: {
       name: {
@@ -50297,7 +50897,8 @@ var bleh = (() => {
         de: "Schallplatte f\xFCr Alben und Titel anzeigen",
         es: "Mostrar disco adjunto en \xE1lbumes y temas",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0434\u0438\u0441\u043A \u0434\u043B\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
-        it: "Mostra il disco allegato per album e tracce"
+        it: "Mostra il disco allegato per album e tracce",
+        pl: "Poka\u017C p\u0142yt\u0119 dla album\xF3w i utwor\xF3w"
       },
       body: {
         en: "Add small visual flair to music pages",
@@ -50305,7 +50906,8 @@ var bleh = (() => {
         de: "F\xFCgt kleine visuelle Effekte zu Musikseiten hinzu",
         es: "A\xF1ade un peque\xF1o efecto visual a las p\xE1ginas de m\xFAsica",
         ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0435 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E\u0435 \u0443\u043A\u0440\u0430\u0448\u0435\u043D\u0438\u0435 \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043C\u0443\u0437\u044B\u043A\u0438",
-        it: "Aggiunge un piccolo effetto visivo alle pagine della musica"
+        it: "Aggiunge un piccolo effetto visivo alle pagine della musica",
+        pl: "Dodaj subtelny efekt wizualny do stron muzycznych"
       }
     },
     move_up: {
@@ -50314,7 +50916,8 @@ var bleh = (() => {
       de: "Nach oben verschieben",
       es: "Mover arriba",
       ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0432\u0432\u0435\u0440\u0445",
-      it: "Sposta in alto"
+      it: "Sposta in alto",
+      pl: "Przenie\u015B w g\xF3r\u0119"
     },
     move_down: {
       en: "Move down",
@@ -50322,7 +50925,8 @@ var bleh = (() => {
       de: "Nach unten verschieben",
       es: "Mover abajo",
       ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0432\u043D\u0438\u0437",
-      it: "Sposta in basso"
+      it: "Sposta in basso",
+      pl: "Przenie\u015B w d\xF3\u0142"
     },
     other_user: {
       // for example, in a list of users - maybe you want to add someone not listed
@@ -50331,7 +50935,8 @@ var bleh = (() => {
       de: "Anderer Benutzer",
       es: "Otro usuario",
       ru: "\u0414\u0440\u0443\u0433\u043E\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C",
-      it: "Altro utente"
+      it: "Altro utente",
+      pl: "Inni u\u017Cytkownicy"
     },
     count_bar_right: {
       en: "Text location"
@@ -50339,19 +50944,22 @@ var bleh = (() => {
     better_with_friends: {
       en: "Music is better with friends, {a}add to your close friends list{/a}",
       pt: "M\xFAsica \xE9 melhor com amigos, {a}adicione \xE0 sua lista de amigos pr\xF3ximos{/a}",
-      es: "La m\xFAsica es mejor con amigos, {a}a\xF1ade a tu lista de amigos cercanos{/a}"
+      es: "La m\xFAsica es mejor con amigos, {a}a\xF1ade a tu lista de amigos cercanos{/a}",
+      pl: "Muzyka brzmi lepiej w gronie przyjaci\xF3\u0142, {a}dodaj do listy bliskich przyjaci\xF3\u0142{/a}"
     },
     collage_cta: {
       // used to 'advertise' collages
       name: {
         en: "Create a collage",
         pt: "Criar uma colagem",
-        es: "Crear un collage"
+        es: "Crear un collage",
+        pl: "Stw\xF3rz kola\u017C"
       },
       body: {
         en: "Featuring your favourite albums in the last month",
         pt: "Com seus \xE1lbuns favoritos do \xFAltimo m\xEAs",
-        es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes"
+        es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes",
+        pl: "Twoje ulubione albumy z ostatniego miesi\u0105ca"
       }
     },
     compare_cta: {
@@ -50359,12 +50967,14 @@ var bleh = (() => {
       name: {
         en: "Compare with your friends",
         pt: "Comparar com seus amigos",
-        es: "Comparar con tus amigos"
+        es: "Comparar con tus amigos",
+        pl: "Por\xF3wnaj ze swoimi znajomymi"
       },
       body: {
         en: "Which music do you have in common?",
         pt: "Quais m\xFAsicas voc\xEAs t\xEAm em comum?",
-        es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?"
+        es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?",
+        pl: "Jaka muzyka was \u0142\u0105czy?"
       }
     },
     sponsor_cta: {
@@ -50372,208 +50982,248 @@ var bleh = (() => {
       body: {
         en: "Help out the future of bleh",
         pt: "Ajude o futuro do bleh",
-        es: "Ayuda al futuro de bleh"
+        es: "Ayuda al futuro de bleh",
+        pl: "Pom\xF3\u017C w budowaniu przysz\u0142o\u015Bci bleh"
       }
     },
     add_new_data_point: {
       en: "Add new data point",
       pt: "Adicionar novo ponto de dados",
-      es: "A\xF1adir nuevo dato"
+      es: "A\xF1adir nuevo dato",
+      pl: "Dodaj nowe dane"
     },
     presets: {
       // used in reference to timeframe presets or colour presets
       en: "Presets",
       pt: "Predefini\xE7\xF5es",
-      es: "Preajustes"
+      es: "Preajustes",
+      pl: "Presety"
     },
     existing: {
       // used as a header for existing items
       en: "Existing",
       pt: "Existentes",
-      es: "Actuales"
+      es: "Actuales",
+      pl: "Istniej\u0105ce"
     },
     history: {
       en: "History",
       pt: "Hist\xF3rico",
-      es: "Historial"
+      es: "Historial",
+      pl: "Historia"
     },
     no_data_to_display: {
       en: "No data to display",
       pt: "Nenhum dado para exibir",
-      es: "No hay datos para mostrar"
+      es: "No hay datos para mostrar",
+      pl: "Brak danych do wy\u015Bwietlenia"
     },
     add_to_graph: {
       en: "Add to graph",
       pt: "Adicionar ao gr\xE1fico",
-      es: "A\xF1adir al gr\xE1fico"
+      es: "A\xF1adir al gr\xE1fico",
+      pl: "Dodaj do wykresu"
     },
     graph_options: {
       en: "Graph options",
       pt: "Op\xE7\xF5es do gr\xE1fico",
-      es: "Opciones del gr\xE1fico"
+      es: "Opciones del gr\xE1fico",
+      pl: "Opcje wykresu"
     },
     refresh_plot_notice: {
       // once you edit the graph, it will display this tooltip as a warning
       en: "This will re-gather all data points",
       pt: "Isso coletar\xE1 novamente todos os pontos de dados",
-      es: "Esto volver\xE1 a recopilar todos los datos"
+      es: "Esto volver\xE1 a recopilar todos los datos",
+      pl: "Spowoduje to ponowne pobranie wszystkich danych"
     },
     refresh_plot_alert: {
       // this is linked to the above
       en: "The timeframe you selected does not match the current graph, you can refresh the data to fix this.",
       pt: "O per\xEDodo selecionado n\xE3o corresponde ao gr\xE1fico atual; voc\xEA pode atualizar os dados para corrigir isso.",
-      es: "El periodo que seleccionaste no coincide con el gr\xE1fico actual, puedes recargar los datos para solucionarlo"
+      es: "El periodo que seleccionaste no coincide con el gr\xE1fico actual, puedes recargar los datos para solucionarlo",
+      pl: "Wybrany przedzia\u0142 czasowy r\xF3\u017Cni si\u0119 od tego na bie\u017C\u0105cym wykresie. Od\u015Bwie\u017C dane, aby zaktualizowa\u0107 wykres."
     },
     under_construction: {
       en: "This page is under construction, please give feedback and suggestions if you have any!",
       pt: "Esta p\xE1gina est\xE1 em constru\xE7\xE3o; envie coment\xE1rios e sugest\xF5es se tiver algum!",
-      es: "Esta p\xE1gina est\xE1 en construcci\xF3n, \xA1por favor da feedback y sugerencias si tienes alguna!"
+      es: "Esta p\xE1gina est\xE1 en construcci\xF3n, \xA1por favor da feedback y sugerencias si tienes alguna!",
+      pl: "Ta strona jest w budowie, je\u015Bli masz jakie\u015B uwagi lub sugestie, podziel si\u0119 nimi z nami!"
     },
     data_source: {
       en: "Data source",
       pt: "Fonte de dados",
-      es: "Fuente de datos"
+      es: "Fuente de datos",
+      pl: "\u0179r\xF3d\u0142o danych"
     },
     data_source_explain: {
       // used in the dialog for adding a data source
       en: "Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.",
       pt: "Aqui voc\xEA pode adicionar m\xFAsica ao seu gr\xE1fico, por exemplo, um artista ou um \xE1lbum/faixa. Informar um \xE1lbum ou uma faixa \xE9 opcional, pois voc\xEA pode adicionar o artista inteiro.",
-      es: "Aqu\xED puedes a\xF1adir multimedia a tu gr\xE1fico, por ejemplo un artista o un \xE1lbum/tema. A\xF1adir un \xE1lbum o tema es opcional, ya que puedes a\xF1adir un artista entero."
+      es: "Aqu\xED puedes a\xF1adir multimedia a tu gr\xE1fico, por ejemplo un artista o un \xE1lbum/tema. A\xF1adir un \xE1lbum o tema es opcional, ya que puedes a\xF1adir un artista entero.",
+      pl: "Tutaj mo\u017Cesz doda\u0107 dane do swojego wykresu, na przyk\u0142ad artyst\u0119, album lub utw\xF3r. Dodanie albumu lub utworu jest opcjonalne \u2014 mo\u017Cesz zamiast tego doda\u0107 ca\u0142ego artyst\u0119."
     },
     artist_required: {
       en: "Artist name required",
       pt: "Nome do artista obrigat\xF3rio",
-      es: "Nombre del artista requerido"
+      es: "Nombre del artista requerido",
+      pl: "Nazwa artysty jest wymagana"
     },
     choose_either_an_album_or_track: {
       en: "Choose either an album or track only",
       pt: "Escolha apenas um \xE1lbum ou uma faixa",
-      es: "Elige solo un \xE1lbum o un tema"
+      es: "Elige solo un \xE1lbum o un tema",
+      pl: "Wybierz tylko album lub utw\xF3r"
     },
     already_exists: {
       en: "This data source already exists",
       pt: "Esta fonte de dados j\xE1 existe",
-      es: "Esta fuente de datos ya existe"
+      es: "Esta fuente de datos ya existe",
+      pl: "To \u017Ar\xF3d\u0142o danych ju\u017C istnieje"
     },
     username_required: {
       en: "Username required",
       pt: "Nome de usu\xE1rio obrigat\xF3rio",
-      es: "Nombre de usuario requerido"
+      es: "Nombre de usuario requerido",
+      pl: "Nazwa u\u017Cytkownika jest wymagana"
     },
     already_a_close_friend: {
       // user is already a friend
       en: "Already added to close friends",
       pt: "J\xE1 adicionado aos amigos pr\xF3ximos",
-      es: "Ya est\xE1 en tus amigos cercanos"
+      es: "Ya est\xE1 en tus amigos cercanos",
+      pl: "Ju\u017C jest w\u015Br\xF3d bliskich znajomych"
     },
     plot_explain: {
       // these are steps in order
       0: {
         en: "Choose a timeframe for your graph",
         pt: "Escolha um per\xEDodo para o seu gr\xE1fico",
-        es: "Elige un periodo para tu gr\xE1fico"
+        es: "Elige un periodo para tu gr\xE1fico",
+        pl: "Wybierz przedzia\u0142 czasowy dla wykresu"
       },
       1: {
         en: "Choose a data source (an artist, album, or track)",
         pt: "Escolha uma fonte de dados (um artista, \xE1lbum ou faixa)",
-        es: "Elige una fuente de datos (un artista, \xE1lbum, o tema)"
+        es: "Elige una fuente de datos (un artista, \xE1lbum, o tema)",
+        pl: "Wybierz \u017Ar\xF3d\u0142o danych (artyst\u0119, album lub utw\xF3r)"
       },
       2: {
         en: "Choose a user to add",
         pt: "Escolha um usu\xE1rio para adicionar",
-        es: "Elige un usuario a a\xF1adir"
+        es: "Elige un usuario a a\xF1adir",
+        pl: "Wybierz u\u017Cytkownika do dodania"
       },
       3: {
         en: "Add to your graph",
         pt: "Adicione ao seu gr\xE1fico",
-        es: "A\xF1ade a tu gr\xE1fico"
+        es: "A\xF1ade a tu gr\xE1fico",
+        pl: "Dodaj do swojego wykresu"
       }
     },
     how_to_plot: {
       // used to label the above steps
       en: "Explaining Plot",
       pt: "Entendendo o Gr\xE1fico",
-      es: "Explicando Plot"
+      es: "Explicando Plot",
+      pl: "Jak utworzy\u0107 wykres"
     },
     plotting_your_data: {
       // loading message
       en: "Plotting your data",
       pt: "Gerando o gr\xE1fico dos seus dados",
-      es: "Graficando tus datos"
+      es: "Graficando tus datos",
+      pl: "Tworzenie wykresu"
     },
     issues_updating: {
       // there are then links after this
       en: "Having issues updating or need support in general?",
       pt: "Est\xE1 com problemas para atualizar ou precisa de suporte em geral?",
-      es: "\xBFTienes problemas al actualizar o necesitas soporte en general?"
+      es: "\xBFTienes problemas al actualizar o necesitas soporte en general?",
+      pl: "Masz problemy z aktualizacj\u0105 lub potrzebujesz pomocy?"
     },
     hybrid_inbox: {
       name: {
         en: "Use a hybrid inbox",
         pt: "Usar uma caixa de entrada h\xEDbrida",
-        es: "Usar un buz\xF3n h\xEDbrido"
+        es: "Usar un buz\xF3n h\xEDbrido",
+        pl: "U\u017Cyj skrzynki hybrydowej"
       },
       body: {
         en: "Group your messages and notifications into a single counter",
         pt: "Agrupar suas mensagens e notifica\xE7\xF5es em um \xFAnico contador",
-        es: "Agrupa tus mensajes y notificaciones en un solo contador"
+        es: "Agrupa tus mensajes y notificaciones en un solo contador",
+        pl: "Zgrupuj swoje wiadomo\u015Bci i powiadomienia w jednym liczniku"
       }
     },
     skip_patching_lastfm_settings: {
       en: "Disable bleh visuals here",
       pt: "Desativar os elementos visuais do bleh aqui",
-      es: "Desactiva los elementos visuales de bleh aqu\xED"
+      es: "Desactiva los elementos visuales de bleh aqu\xED",
+      pl: "Wy\u0142\u0105cz elementy wizualne bleh tutaj"
     },
     you_have_disabled_bleh_visuals_for_settings: {
       en: "You have disabled bleh visuals for Last.fm settings, don\u2019t expect this to look pretty",
       pt: "Voc\xEA desativou os elementos visuais do bleh nas configura\xE7\xF5es do Last.fm; n\xE3o espere que isto fique bonito",
-      es: "Has desactivado los elementos visuales de bleh en la configuraci\xF3n de Last.fm, no esperes que se vea bonito"
+      es: "Has desactivado los elementos visuales de bleh en la configuraci\xF3n de Last.fm, no esperes que se vea bonito",
+      pl: "Wy\u0142\u0105czy\u0142e\u015B elementy wizualne \u201Ebleh\u201D w ustawieniach Last.fm; nie oczekuj, \u017Ce b\u0119dzie to wygl\u0105da\u0142o pi\u0119knie"
     },
     hide_unused_settings: {
       en: "Hide settings that have no effect",
       pt: "Ocultar configura\xE7\xF5es que n\xE3o t\xEAm efeito",
-      es: "Ocultar opciones que no tienen efecto"
+      es: "Ocultar opciones que no tienen efecto",
+      pl: "Ukryj ustawienia kt\xF3re nie dzia\u0142aj\u0105"
     },
     edit_links: {
       en: "Edit links",
       pt: "Editar links",
-      es: "Editar v\xEDnculos"
+      es: "Editar v\xEDnculos",
+      pl: "Edytuj linki"
     },
     daily: {
       en: "Daily",
-      pt: "Diariamente"
+      pt: "Diariamente",
+      pl: "Dziennie"
     },
     weekly: {
       en: "Weekly",
-      pt: "Semanalmente"
+      pt: "Semanalmente",
+      pl: "Tygodniowo"
     },
     explore: {
       en: "Explore",
-      pt: "Explorar"
+      pt: "Explorar",
+      pl: "Odkrywaj"
     },
     hot_100: {
       // b = bleh
       // idk how well this translates but like 'hot 100' is a thing
       // this is referencing, like the top 100 tracks at the moment
       en: "The {b} Hot 100",
-      pt: "As 100 mais populares do {b}"
+      pt: "As 100 mais populares do {b}",
+      pl: "Hot 100 utwor\xF3w {b}"
     },
     developer_mode: {
       name: {
         en: "Developer mode",
-        pt: "Modo de desenvolvedor"
+        pt: "Modo de desenvolvedor",
+        pl: "Tryb deweloperski"
       },
       body: {
         en: "Enable developer-specific features used for debugging purposes",
-        pt: "Ative recursos espec\xEDficos de desenvolvedor usados para fins de depura\xE7\xE3o"
+        pt: "Ative recursos espec\xEDficos de desenvolvedor usados para fins de depura\xE7\xE3o",
+        pl: "W\u0142\u0105cz okre\u015Blone funkcje dla programist\xF3w s\u0142u\u017C\u0105ce do debugowania"
       }
     },
     developer_setting_names: {
       en: "Show internal setting ids",
-      pt: "Mostrar IDs internos das configura\xE7\xF5es"
+      pt: "Mostrar IDs internos das configura\xE7\xF5es",
+      pl: "Poka\u017C wewn\u0119trzne identyfikatory ustawie\u0144"
     },
     show_scroller: {
-      en: "Show page scrollbar"
+      en: "Show page scrollbar",
+      pt: "Mostrar barra de rolagem da p\xE1gina",
+      pl: "Poka\u017C pasek przewijania strony"
     },
     badge_only_user: {
       en: "Owned by 1 person"
@@ -60341,9 +60991,9 @@ var bleh = (() => {
   }
   function patch_user_list_item(user, index3, cache2 = {}) {
     user.style.setProperty("--delay", index3 * 0.04 + "s");
-    const avatar3 = user.querySelector(".user-list-avatar");
+    const avatar4 = user.querySelector(".user-list-avatar");
     const name = user.querySelector(".user-list-link");
-    const badge = patch_avatar(avatar3, name?.textContent.trim(), "follow");
+    const badge = patch_avatar(avatar4, name?.textContent.trim(), "follow");
     if (name) style_name_from_badge(name, badge);
     const artists = user.querySelectorAll(".user-list-shared-artists a");
     artists.forEach((artist) => {
@@ -60395,7 +61045,7 @@ var bleh = (() => {
     }
     const tooltip = user.querySelector(".user-library-controls-tooltip");
     if (tooltip) tooltip.remove();
-    const img = avatar3.querySelector("img");
+    const img = avatar4.querySelector("img");
     if (!img.src.endsWith("818148bf682d429dc215c1705eb27b98.png")) {
       user.appendChild(html.node`
             <div class="user-background" style="background-image: url(${img.src.replace("/avatar70s/", "/avatar300s/")})" />
@@ -61723,8 +62373,8 @@ var bleh = (() => {
     const shout_forms = document.querySelectorAll(".shout-form:not([data-shout-form])");
     shout_forms.forEach((shout_form) => {
       shout_form.setAttribute("data-shout-form", "true");
-      const avatar3 = shout_form.querySelector(".shout-user-avatar");
-      patch_avatar(avatar3, auth.name);
+      const avatar4 = shout_form.querySelector(".shout-user-avatar");
+      patch_avatar(avatar4, auth.name);
       const send_button = shout_form.querySelector(".form-group--submit");
       shout_send(send_button);
       const help_text = shout_form.querySelector(".form-row-help-text");
@@ -77987,7 +78637,7 @@ var bleh = (() => {
     if (page.requested.page != null && page.requested.page != "1" && key == "top-listeners") {
       position2 += (parseInt(page.requested.page) - 1) * 30;
     }
-    let avatar3 = listener.querySelector(`.${key}-item-image`);
+    let avatar4 = listener.querySelector(`.${key}-item-image`);
     let name_wrap = listener.querySelector(`.${key}-item-name a`);
     let name = name_wrap.textContent;
     let track_wrap = listener.querySelector(`.${key}-track`);
@@ -78007,7 +78657,7 @@ var bleh = (() => {
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(el) => user_list_avatar = el}>
-                    ${{ html: avatar3.innerHTML }}
+                    ${{ html: avatar4.innerHTML }}
                 </span>
                 ${follow}
                 ${track_wrap ? html.node`
@@ -90788,8 +91438,8 @@ var bleh = (() => {
 		`
     );
   }
-  function render_user(name, avatar3, user, replace_page = false) {
-    if (avatar3 == "" && name != "") {
+  function render_user(name, avatar4, user, replace_page = false) {
+    if (avatar4 == "" && name != "") {
       fetch(`${root}user/${name}/tags`).then(function(response) {
         console.log("returned", response, response.text);
         return response.text();
@@ -90797,10 +91447,10 @@ var bleh = (() => {
         let doc = new DOMParser().parseFromString(dom, "text/html");
         console.log("DOC", doc);
         try {
-          avatar3 = doc.querySelector(".header-avatar-inner-wrap img").getAttribute("src");
+          avatar4 = doc.querySelector(".header-avatar-inner-wrap img").getAttribute("src");
           name = doc.querySelector(".header-title").textContent.trim();
           if (replace_page) {
-            page.avatar = avatar3;
+            page.avatar = avatar4;
             page.name = name;
           }
           if (!user) {
@@ -90808,7 +91458,7 @@ var bleh = (() => {
               ".compare-user.focus"
             );
           }
-          render(user, render_user(name, avatar3, user, replace_page));
+          render(user, render_user(name, avatar4, user, replace_page));
         } catch (e5) {
           console.error(e5);
         }
@@ -90821,7 +91471,7 @@ var bleh = (() => {
     return html`
 		<div class="avatar">
 			<img
-				src=${avatar3}
+				src=${avatar4}
 				alt=${tl2(trans.avatar_for_user).replace("{u}", name)}
 			/>
 		</div>
@@ -93127,7 +93777,7 @@ var bleh = (() => {
           });
         }
         let reset_btn;
-        let avatar3;
+        let avatar4;
         let input2;
         let submit;
         let input_container;
@@ -93145,7 +93795,7 @@ var bleh = (() => {
                     ` : ""}
                     ${text4 ? html.node`
                     <div class="heading">
-                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option2, reset_btn, avatar3)}>${tl2(trans.reset)}</button></h5>
+                        <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_text(id, input2, submit, option2, reset_btn, avatar4)}>${tl2(trans.reset)}</button></h5>
                         ${body ? html.node`<p>${body}</p>` : ""}
                     </div>
                     ` : ""}
@@ -93167,14 +93817,14 @@ var bleh = (() => {
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     ${settings_store[id].avatar ? html.node`
                     <div class="avatar-container">
-                        <div class="avatar-inner" ref=${(el) => avatar3 = el}>
+                        <div class="avatar-inner" ref=${(el) => avatar4 = el}>
                             <img src=${localStorage.getItem(`bleh_${id}_avi`) || ""} alt=${value} />
                         </div>
                     </div>
                     ` : ""}
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => input_container = el}>
                         <input type="text" maxlength=${max3} value=${value} style="--max: ${max3}px; --min: ${min3}px" ref=${(el) => input2 = el} placeholder=${placeholder} />
-                        <button class="btn primary icon" data-type="save" ref=${(el) => submit = el} onclick=${() => update_text(id, input2, submit, option2, input2.value, reset_btn, avatar3)}>${tl2(trans.save)}</button>
+                        <button class="btn primary icon" data-type="save" ref=${(el) => submit = el} onclick=${() => update_text(id, input2, submit, option2, input2.value, reset_btn, avatar4)}>${tl2(trans.save)}</button>
                     </div>
                 </div>
             `;
@@ -93871,7 +94521,7 @@ var bleh = (() => {
         </div>
     `;
   }
-  function update_text(id, input2, submit, option2, value, reset_btn, avatar3, silent = false) {
+  function update_text(id, input2, submit, option2, value, reset_btn, avatar4, silent = false) {
     if (settings_store[id].wait) {
       reset_btn.disabled = true;
       input2.disabled = true;
@@ -93895,8 +94545,8 @@ var bleh = (() => {
     }
     save_setting(id, value);
   }
-  function reset_text(id, input2, submit, option2, reset_btn, avatar3) {
-    update_text(id, input2, submit, option2, settings_store[id].default, reset_btn, avatar3, true);
+  function reset_text(id, input2, submit, option2, reset_btn, avatar4) {
+    update_text(id, input2, submit, option2, settings_store[id].default, reset_btn, avatar4, true);
     notify({
       id: "reset_setting",
       title: tl2(trans.settings),
@@ -97122,18 +97772,18 @@ var bleh = (() => {
               children: [
                 avatars && /* @__PURE__ */ jsx("div", {
                   class: "event-item-attendees",
-                  children: avatars.map((avatar3) => {
-                    const inner = avatar3?.querySelector("img");
-                    if (!avatar3 || !inner) return;
+                  children: avatars.map((avatar4) => {
+                    const inner = avatar4?.querySelector("img");
+                    if (!avatar4 || !inner) return;
                     const title2 = inner.getAttribute("title") || inner.getAttribute("alt") || "";
                     inner.removeAttribute("title");
                     if (!title2) {
-                      return avatar3;
+                      return avatar4;
                     }
-                    tippy_esm_default(avatar3, {
+                    tippy_esm_default(avatar4, {
                       content: title2
                     });
-                    return avatar3;
+                    return avatar4;
                   })
                 }),
                 attendance_count != null && /* @__PURE__ */ jsx("div", {
@@ -97724,8 +98374,8 @@ var bleh = (() => {
   }
 
   // src/components/page/header.tsx
-  function PageHeader({ type, combined, name, avatar: avatar3, children, extra }) {
-    const generic = !!avatar3;
+  function PageHeader({ type, combined, name, avatar: avatar4, children, extra }) {
+    const generic = !!avatar4;
     const label = tl2(trans[type]);
     return /* @__PURE__ */ jsx("section", {
       class: [
@@ -97733,9 +98383,9 @@ var bleh = (() => {
         `for-${type}`
       ],
       children: [
-        avatar3 && /* @__PURE__ */ jsx("div", {
+        avatar4 && /* @__PURE__ */ jsx("div", {
           class: "page-header-avatar-list",
-          children: avatar3
+          children: avatar4
         }),
         /* @__PURE__ */ jsx("div", {
           class: [
@@ -97779,6 +98429,222 @@ var bleh = (() => {
       "data-multi": String(combined),
       children
     });
+  }
+
+  // src/components/shared/avatar.tsx
+  function patch_avatar2(avatar4, name, type = "", parent = null, side = "right") {
+    if (avatar4.hasAttribute("data-bleh-avatar")) return {};
+    avatar4.setAttribute("data-bleh-avatar", "true");
+    const avatar_img = avatar4.querySelector("img");
+    if (!avatar_img) return {};
+    avatar_img.setAttribute("src", avatar_img.getAttribute("src").replace("/64s/", "/avatar70s/"));
+    avatar4.setAttribute("title", "");
+    let badges = load_badges(name);
+    let pre_existing_badge = avatar4.querySelector(".avatar-status-dot");
+    if (badges && pre_existing_badge) avatar4.removeChild(pre_existing_badge);
+    if (!parent) avatar4.classList.add("avatar-can-hoverbox");
+    else parent.classList.add("parent-can-hoverbox");
+    let pre_existing_badge_type;
+    if (pre_existing_badge) {
+      pre_existing_badge_type = pre_existing_badge.classList[1].replace("avatar-status-dot--", "user-status-");
+    }
+    if (pre_existing_badge_type == "user-follow") {
+      pre_existing_badge = null;
+      pre_existing_badge_type = null;
+    }
+    if (pre_existing_badge) {
+      const new_pre_existing = process_badge({
+        type: pre_existing_badge_type,
+        inbuilt: true
+      }, name);
+      if (pre_existing_badge_type == "user-status-subscriber") {
+        badges = [
+          new_pre_existing,
+          ...badges
+        ];
+      } else {
+        badges = [
+          ...badges,
+          new_pre_existing
+        ];
+      }
+    }
+    if (badges.length > 0) {
+      avatar4.appendChild(create_badge(badges[badges.length - 1], true));
+    }
+    const popup2 = tippy_esm_default(parent ? parent : avatar4, {
+      theme: "context-menu",
+      content: /* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx("div", {
+            class: "track-preview user-preview",
+            children: [
+              /* @__PURE__ */ jsx("div", {
+                class: "track-preview-image",
+                children: /* @__PURE__ */ jsx("div", {
+                  class: "inner-image",
+                  children: /* @__PURE__ */ jsx("img", {
+                    src: avatar_img.getAttribute("src").replace("/avatar42s/", "/avatar170s/"),
+                    alt: name
+                  })
+                })
+              }),
+              /* @__PURE__ */ jsx("div", {
+                class: "track-preview-info",
+                children: [
+                  /* @__PURE__ */ jsx("h5", {
+                    class: "track-preview-text track-preview-title",
+                    children: [
+                      /* @__PURE__ */ jsx("span", {
+                        class: "at",
+                        children: "@"
+                      }),
+                      name
+                    ]
+                  }),
+                  badges.length > 0 && /* @__PURE__ */ jsx("div", {
+                    class: "badges track-preview-badges",
+                    children: [
+                      create_badge(badges[badges.length - 1], false, true, true),
+                      badges.length > 1 && /* @__PURE__ */ jsx("div", {
+                        class: "extra-badges-text",
+                        children: tl2(trans.and_count_more, {
+                          c: badges.length - 1
+                        })
+                      })
+                    ]
+                  })
+                ]
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx("a", {
+            class: "dropdown-menu-clickable-item",
+            "data-type": "profile",
+            href: `${root}user/${name}`,
+            children: tl2(trans.profile)
+          }),
+          /* @__PURE__ */ jsx("a", {
+            class: "dropdown-menu-clickable-item",
+            "data-type": "library",
+            href: `${root}user/${name}/library`,
+            children: tl2(trans.library)
+          }),
+          /* @__PURE__ */ jsx("a", {
+            class: "dropdown-menu-clickable-item",
+            "data-type": "friends",
+            href: `${root}user/${name}/friends`,
+            children: tl2(trans.friends)
+          }),
+          /* @__PURE__ */ jsx("a", {
+            class: "dropdown-menu-clickable-item",
+            "data-type": "shouts",
+            href: `${root}user/${name}/shoutbox`,
+            children: tl2(trans.shouts)
+          })
+        ]
+      }),
+      placement: side,
+      interactive: true,
+      trigger: "click",
+      appendTo: document.body
+    });
+    register_menu(parent ? parent : avatar4, popup2);
+    control_gif_pause(avatar_img);
+    if (badges.length > 0) {
+      return badges[badges.length - 1];
+    } else {
+      return {};
+    }
+  }
+  unsafeWindow._expand_avatar = function(src) {
+    expand_avatar2(src);
+  };
+  function expand_avatar2(src, alt) {
+    dialog({
+      id: "avatar",
+      body: /* @__PURE__ */ jsx("div", {
+        class: "full-avatar-wrapper",
+        children: [
+          /* @__PURE__ */ jsx("div", {
+            class: "full-avatar",
+            children: [
+              /* @__PURE__ */ jsx("img", {
+                src,
+                alt
+              }),
+              /* @__PURE__ */ jsx("div", {
+                class: "full-avatar-buttons",
+                children: /* @__PURE__ */ jsx(Button, {
+                  chibi: true,
+                  className: "full-avatar-btn",
+                  href: src,
+                  external: true,
+                  tooltip: tl2(trans.open_new_tab),
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: icons.external
+                    }),
+                    tl2(trans.open_new_tab)
+                  ]
+                })
+              })
+            ]
+          }),
+          alt && /* @__PURE__ */ jsx("div", {
+            class: "full-avatar-alt-text",
+            children: [
+              /* @__PURE__ */ jsx("span", {
+                class: "quotation",
+                children: "\u201C"
+              }),
+              alt,
+              /* @__PURE__ */ jsx("span", {
+                class: "quotation",
+                children: "\u201D"
+              })
+            ]
+          })
+        ]
+      }),
+      type: "avatar",
+      has_overlays: false
+    });
+  }
+  function style_name_from_badge2(name, badge) {
+    if (!badge) return;
+    name.classList.add("colourful");
+    if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
+      name.style.setProperty("--hue-over", badge.hue);
+      name.style.setProperty("--sat-over", badge.sat);
+      name.style.setProperty("--lit-over", badge.lit);
+    } else if (badge.type) {
+      if (!badge.inbuilt) {
+        name.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${badge.user}`);
+      } else {
+        name.classList.add(badge.type);
+      }
+    } else {
+      name.classList.add(badge.type);
+    }
+  }
+  function avatar2(url, requested) {
+    if (url == null) return "";
+    let image2;
+    if (url.startsWith("https")) {
+      if (!/^https:\/\/lastfm(?:-img)?\.freetls\.fastly\.net\/i\/u\//.test(url)) {
+        return url;
+      }
+      const built = new URL(url);
+      const split = built.pathname.split("/");
+      image2 = split[split.length - 1];
+    }
+    const final = `https://lastfm-img.freetls.fastly.net/i/u/${requested}/${image2}`;
+    log(`created ${requested} image`, "avatar", "info", {
+      final,
+      url
+    });
+    return final;
   }
 
   // src/components/profile/streak.tsx
@@ -97957,7 +98823,7 @@ var bleh = (() => {
                       "avatar"
                     ],
                     children: /* @__PURE__ */ jsx("img", {
-                      src: avatar(page.avatar, "avatar300s"),
+                      src: avatar2(page.avatar, "avatar300s"),
                       alt: page.name
                     })
                   }),
@@ -99797,7 +100663,7 @@ var bleh = (() => {
     }
     return body;
   }
-  function save_profile_cache({ avatar: avatar3, banner, banner_orig, hue: hue4, sat, lit, aka, created, font, font_style, username: username2 } = {}, profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {}, name = page.name) {
+  function save_profile_cache({ avatar: avatar4, banner, banner_orig, hue: hue4, sat, lit, aka, created, font, font_style, username: username2 } = {}, profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {}, name = page.name) {
     const profile_cache_o = Object.keys(profile_cache);
     if (profile_cache_o.length > 400) {
       const keys4 = Reflect.ownKeys(profile_cache);
@@ -99810,7 +100676,7 @@ var bleh = (() => {
       delete profile_cache[name];
     }
     profile_cache[name] = {
-      avatar: avatar3,
+      avatar: avatar4,
       banner,
       banner_orig,
       hue: hue4,
@@ -99955,8 +100821,8 @@ var bleh = (() => {
           delete cache2.sat;
           delete cache2.lit;
         }
-        const avatar3 = doc.querySelector(".header-avatar .avatar img");
-        if (avatar3) cache2.avatar = avatar3.src;
+        const avatar4 = doc.querySelector(".header-avatar .avatar img");
+        if (avatar4) cache2.avatar = avatar4.src;
         const secondary = doc.querySelector(".header-title-secondary");
         parse_sub_text(secondary, name, cache2);
         if (will_cache) save_profile_cache(cache2, profile_cache, name);
@@ -100378,23 +101244,21 @@ var bleh = (() => {
     if (april) document.body.setAttribute("data-verified-check", "true");
   }
 
-  // src/components/shared/avatar.tsx
-  function patch_avatar(avatar3, name, type = "", parent = null, side = "right") {
-    if (avatar3.hasAttribute("data-bleh-avatar")) return {};
-    avatar3.setAttribute("data-bleh-avatar", "true");
-    const avatar_img = avatar3.querySelector("img");
+  // src/components/shared/avatar.ts
+  function patch_avatar(avatar4, name, type = "", parent = null, side = "right") {
+    if (avatar4.hasAttribute("data-bleh-avatar")) return {};
+    avatar4.setAttribute("data-bleh-avatar", "true");
+    const avatar_img = avatar4.querySelector("img");
     if (!avatar_img) return {};
     avatar_img.setAttribute("src", avatar_img.getAttribute("src").replace("/64s/", "/avatar70s/"));
-    avatar3.setAttribute("title", "");
+    avatar4.setAttribute("title", "");
     let badges = load_badges(name);
-    let pre_existing_badge = avatar3.querySelector(".avatar-status-dot");
-    if (badges && pre_existing_badge) avatar3.removeChild(pre_existing_badge);
-    if (!parent) avatar3.classList.add("avatar-can-hoverbox");
+    let pre_existing_badge = avatar4.querySelector(".avatar-status-dot");
+    if (badges && pre_existing_badge) avatar4.removeChild(pre_existing_badge);
+    if (!parent) avatar4.classList.add("avatar-can-hoverbox");
     else parent.classList.add("parent-can-hoverbox");
     let pre_existing_badge_type;
-    if (pre_existing_badge) {
-      pre_existing_badge_type = pre_existing_badge.classList[1].replace("avatar-status-dot--", "user-status-");
-    }
+    if (pre_existing_badge) pre_existing_badge_type = pre_existing_badge.classList[1].replace("avatar-status-dot--", "user-status-");
     if (pre_existing_badge_type == "user-follow") {
       pre_existing_badge = null;
       pre_existing_badge_type = null;
@@ -100416,87 +101280,48 @@ var bleh = (() => {
         ];
       }
     }
-    if (badges.length > 0) {
-      avatar3.appendChild(create_badge(badges[badges.length - 1], true));
-    }
-    const popup2 = tippy_esm_default(parent ? parent : avatar3, {
+    if (badges.length > 0) avatar4.appendChild(create_badge(badges[badges.length - 1], true));
+    let image_header;
+    const popup2 = tippy_esm_default(parent ? parent : avatar4, {
       theme: "context-menu",
-      content: /* @__PURE__ */ jsx(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx("div", {
-            class: "track-preview user-preview",
-            children: [
-              /* @__PURE__ */ jsx("div", {
-                class: "track-preview-image",
-                children: /* @__PURE__ */ jsx("div", {
-                  class: "inner-image",
-                  children: /* @__PURE__ */ jsx("img", {
-                    src: avatar_img.getAttribute("src").replace("/avatar42s/", "/avatar170s/"),
-                    alt: name
-                  })
-                })
-              }),
-              /* @__PURE__ */ jsx("div", {
-                class: "track-preview-info",
-                children: [
-                  /* @__PURE__ */ jsx("h5", {
-                    class: "track-preview-text track-preview-title",
-                    children: [
-                      /* @__PURE__ */ jsx("span", {
-                        class: "at",
-                        children: "@"
-                      }),
-                      name
-                    ]
-                  }),
-                  badges.length > 0 && /* @__PURE__ */ jsx("div", {
-                    class: "badges track-preview-badges",
-                    children: [
-                      create_badge(badges[badges.length - 1], false, true, true),
-                      badges.length > 1 && /* @__PURE__ */ jsx("div", {
-                        class: "extra-badges-text",
-                        children: tl2(trans.and_count_more, {
-                          c: badges.length - 1
-                        })
-                      })
-                    ]
-                  })
-                ]
-              })
-            ]
-          }),
-          /* @__PURE__ */ jsx("a", {
-            class: "dropdown-menu-clickable-item",
-            "data-type": "profile",
-            href: `${root}user/${name}`,
-            children: tl2(trans.profile)
-          }),
-          /* @__PURE__ */ jsx("a", {
-            class: "dropdown-menu-clickable-item",
-            "data-type": "library",
-            href: `${root}user/${name}/library`,
-            children: tl2(trans.library)
-          }),
-          /* @__PURE__ */ jsx("a", {
-            class: "dropdown-menu-clickable-item",
-            "data-type": "friends",
-            href: `${root}user/${name}/friends`,
-            children: tl2(trans.friends)
-          }),
-          /* @__PURE__ */ jsx("a", {
-            class: "dropdown-menu-clickable-item",
-            "data-type": "shouts",
-            href: `${root}user/${name}/shoutbox`,
-            children: tl2(trans.shouts)
-          })
-        ]
-      }),
+      content: html.node`
+            <div class="track-preview user-preview">
+                <div class="track-preview-image">
+                    <div class="inner-image">
+                        <img src=${avatar_img.getAttribute("src").replace("/avatar42s/", "/avatar170s/")} alt=${name}>
+                    </div>
+                </div>
+                <div class="track-preview-info">
+                    <h5 class="track-preview-text track-preview-title"><span class="at">@</span>${name}</h5>
+                    ${badges.length > 0 ? html.node`
+                        <div class="badges track-preview-badges">
+                            ${create_badge(badges[badges.length - 1], false, true, true)}
+                            ${badges.length > 1 ? html.node`<div class="extra-badges-text">${tl2(trans.and_count_more, {
+        c: badges.length - 1
+      })}</div>` : ""}
+                        </div>
+                    ` : ""}
+                </div>
+            </div>
+            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${name}">
+                ${tl2(trans.profile)}
+            </a>
+            <a class="dropdown-menu-clickable-item" data-type="library" href="${root}user/${name}/library">
+                ${tl2(trans.library)}
+            </a>
+            <a class="dropdown-menu-clickable-item" data-type="friends" href="${root}user/${name}/friends">
+                ${tl2(trans.friends)}
+            </a>
+            <a class="dropdown-menu-clickable-item" data-type="shouts" href="${root}user/${name}/shoutbox">
+                ${tl2(trans.shouts)}
+            </a>
+        `,
       placement: side,
       interactive: true,
       trigger: "click",
       appendTo: document.body
     });
-    register_menu(parent ? parent : avatar3, popup2);
+    register_menu(parent ? parent : avatar4, popup2);
     control_gif_pause(avatar_img);
     if (badges.length > 0) {
       return badges[badges.length - 1];
@@ -100507,53 +101332,34 @@ var bleh = (() => {
   unsafeWindow._expand_avatar = function(src) {
     expand_avatar(src);
   };
-  function expand_avatar(src, alt) {
+  function expand_avatar(src, alt = "") {
     dialog({
       id: "avatar",
-      body: /* @__PURE__ */ jsx("div", {
-        class: "full-avatar-wrapper",
-        children: [
-          /* @__PURE__ */ jsx("div", {
-            class: "full-avatar",
-            children: [
-              /* @__PURE__ */ jsx("img", {
-                src,
-                alt
-              }),
-              /* @__PURE__ */ jsx("div", {
-                class: "full-avatar-buttons",
-                children: /* @__PURE__ */ jsx(Button, {
-                  chibi: true,
-                  className: "full-avatar-btn",
-                  href: src,
-                  external: true,
-                  tooltip: tl2(trans.open_new_tab),
-                  children: [
-                    /* @__PURE__ */ jsx(Icon, {
-                      name: icons.external
-                    }),
-                    tl2(trans.open_new_tab)
-                  ]
-                })
-              })
-            ]
-          }),
-          alt && /* @__PURE__ */ jsx("div", {
-            class: "full-avatar-alt-text",
-            children: [
-              /* @__PURE__ */ jsx("span", {
-                class: "quotation",
-                children: "\u201C"
-              }),
-              alt,
-              /* @__PURE__ */ jsx("span", {
-                class: "quotation",
-                children: "\u201D"
-              })
-            ]
-          })
-        ]
-      }),
+      body: html.node`
+            <div class="full-avatar-wrapper">
+                <div class="full-avatar">
+                    <img src=${src} alt=${alt}>
+                    ${alt != "" ? () => {
+        const elem = html.node`
+                            <div class="alt-text">
+                                ALT
+                            </div>
+                        `;
+        tippy_esm_default(elem, {
+          content: alt
+        });
+        return elem;
+      } : ""}
+                </div>
+                <div class="modal-footer">
+                    <div class="fill"></div>
+                    <a class="btn primary open" href=${src} target="_blank">
+                        ${tl2(trans.open_new_tab)}
+                    </a>
+                    <div class="fill"></div>
+                </div>
+            </div>
+        `,
       type: "avatar",
       has_overlays: false
     });
@@ -100760,10 +101566,10 @@ var bleh = (() => {
     let entries2 = page.structure.main.querySelectorAll(".wiki-history-entry");
     entries2.forEach((entry) => {
       let author = entry.querySelector(".wiki-history-author");
-      let avatar3 = author.querySelector(".wiki-history-author-avatar");
+      let avatar4 = author.querySelector(".wiki-history-author-avatar");
       let name = author.querySelector(".link-block-target");
-      if (name && avatar3) {
-        let badge = patch_avatar(avatar3, name.textContent, "wiki");
+      if (name && avatar4) {
+        let badge = patch_avatar(avatar4, name.textContent, "wiki");
         if (badge && badge.type) {
           if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
             name.style.setProperty("--hue-over", badge.hue);
@@ -102589,7 +103395,7 @@ var bleh = (() => {
         image2.src = `https://images.weserv.nl/?url=${encodeURIComponent(image2.src)}&output=webp&n=-1`;
       }
       image2.setAttribute("loading", "lazy");
-      let func = () => expand_avatar(image2.src, image2.alt);
+      let func = () => expand_avatar2(image2.src, image2.alt);
       if (in_dialog) func = () => open(image2.src);
       const container = /* @__PURE__ */ jsx("div", {
         className: "markdown-image",
@@ -104231,7 +105037,7 @@ var bleh = (() => {
             /* @__PURE__ */ jsx("div", {
               class: "preview-image",
               style: {
-                backgroundImage: `url(${avatar(auth.avatar, "avatar300s")})`
+                backgroundImage: `url(${avatar2(auth.avatar, "avatar300s")})`
               }
             }),
             /* @__PURE__ */ jsx("div", {
@@ -109211,7 +110017,7 @@ var bleh = (() => {
       const album_name_location = useSettings.get("track_album_name_location");
       const track_layout = useSettings.get("track_layout");
       const expand_tracks = useSettings.get("expand_tracks");
-      const avi = avatar(auth.avatar, "avatar170s");
+      const avi = avatar2(auth.avatar, "avatar170s");
       track_preview.current.replaceChildren(/* @__PURE__ */ jsx("table", {
         class: "chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more",
         children: /* @__PURE__ */ jsx("tbody", {
@@ -109447,7 +110253,7 @@ var bleh = (() => {
       })
     });
   }
-  function TrackPreview({ playing, avatar: avatar3, album_name_location, track_layout, expand_tracks }) {
+  function TrackPreview({ playing, avatar: avatar4, album_name_location, track_layout, expand_tracks }) {
     let show_album_text = false;
     if (playing) {
       show_album_text = expand_tracks != "never" && track_layout == "column";
@@ -109469,7 +110275,7 @@ var bleh = (() => {
           children: /* @__PURE__ */ jsx("a", {
             class: "cover-art",
             children: /* @__PURE__ */ jsx("img", {
-              src: avatar3,
+              src: avatar4,
               loading: "lazy"
             })
           })
@@ -109567,7 +110373,7 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("span", {
           class: "avatar shout-user-avatar",
           children: /* @__PURE__ */ jsx("img", {
-            src: avatar(image2, "avatar170s"),
+            src: avatar2(image2, "avatar170s"),
             loading: "lazy"
           })
         }),
@@ -110265,7 +111071,7 @@ var bleh = (() => {
               /* @__PURE__ */ jsx("div", {
                 class: "banner-preview-avatar",
                 style: {
-                  backgroundImage: `url(${avatar(auth.avatar, "ar0")})`
+                  backgroundImage: `url(${avatar2(auth.avatar, "ar0")})`
                 }
               }),
               /* @__PURE__ */ jsx("div", {
@@ -110274,7 +111080,7 @@ var bleh = (() => {
                   !own_banners && "hide-banner"
                 ],
                 style: {
-                  backgroundImage: `url(${cache2.banner ? cache2.banner : avatar_replace ? avatar(auth.avatar, "ar0") : fallback_url})`
+                  backgroundImage: `url(${cache2.banner ? cache2.banner : avatar_replace ? avatar2(auth.avatar, "ar0") : fallback_url})`
                 }
               })
             ]
@@ -112168,8 +112974,8 @@ var bleh = (() => {
       let involved = [];
       const strongs = link.querySelectorAll("strong");
       let split = href.replace(root, "").split("/");
-      const avatar3 = notification.querySelector(".avatar");
-      avatar3.classList = "avatar";
+      const avatar4 = notification.querySelector(".avatar");
+      avatar4.classList = "avatar";
       const time4 = notification.querySelector("time");
       let is_reply = false;
       let others_included = 0;
@@ -112184,14 +112990,14 @@ var bleh = (() => {
           desc_split[1],
           context.sister
         );
-        patch_avatar(avatar3, involved[0]);
+        patch_avatar(avatar4, involved[0]);
       } else if (href.endsWith("/listening-report/month")) {
         type = "listening_report";
         involved.push(strongs[0].textContent);
-        const img = avatar3.querySelector("img");
+        const img = avatar4.querySelector("img");
         img.src = auth.avatar;
         img.alt = auth.name;
-        const label = avatar3.querySelector(".avatar-status-dot");
+        const label = avatar4.querySelector(".avatar-status-dot");
         if (auth.pro) {
           label.classList = "avatar-status-dot avatar-status-dot--subscriber";
         } else {
@@ -112199,7 +113005,7 @@ var bleh = (() => {
         }
         context.type = "profile";
         context.name = split[1];
-        patch_avatar(avatar3, split[1]);
+        patch_avatar(avatar4, split[1]);
       } else if (href.startsWith(`${root}user/`)) {
         context.type = "profile";
         context.name = split[1];
@@ -112215,7 +113021,7 @@ var bleh = (() => {
           }
           involved.push(strong.textContent);
         });
-        patch_avatar(avatar3, involved[0]);
+        patch_avatar(avatar4, involved[0]);
       } else if (href.startsWith(`${root}music/`)) {
         if (split[2].startsWith("+")) {
           context.type = "artist";
@@ -112245,7 +113051,7 @@ var bleh = (() => {
           }
           involved.push(strong.textContent);
         });
-        patch_avatar(avatar3, involved[0]);
+        patch_avatar(avatar4, involved[0]);
       } else if (href.startsWith(`${root}tag/`)) {
         context.type = "tag";
         context.name = split[1];
@@ -112259,12 +113065,12 @@ var bleh = (() => {
           }
           involved.push(strong.textContent);
         });
-        patch_avatar(avatar3, involved[0]);
+        patch_avatar(avatar4, involved[0]);
       }
       render(
         notification,
         html`
-				<div class="notification-avatar">${avatar3}</div>
+				<div class="notification-avatar">${avatar4}</div>
 				${icon({ name: icons[type] })}
 				<div class="notification-content">
 				    <div class="notification-title">
@@ -112341,8 +113147,8 @@ var bleh = (() => {
       message.classList = "notification message";
       if (active) message.classList.add("active");
       if (mini) message.classList.add("mini");
-      const avatar3 = message.querySelector(".avatar");
-      avatar3.classList = "avatar";
+      const avatar4 = message.querySelector(".avatar");
+      avatar4.classList = "avatar";
       const id = message.querySelector("input").value;
       const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
       const time4 = message.querySelector(".inbox-message-timestamp");
@@ -112358,7 +113164,7 @@ var bleh = (() => {
         }
       }
       if (valentine) message.classList.add("valentine", "colourful");
-      patch_avatar(avatar3, author);
+      patch_avatar(avatar4, author);
       let checkbox;
       render(
         message,
@@ -112388,7 +113194,7 @@ var bleh = (() => {
         })}
                 </div>
             ` : ""}
-				<div class="notification-avatar">${avatar3}</div>
+				<div class="notification-avatar">${avatar4}</div>
 				${icon({ name: !valentine ? icons.message : icons.valentine })}
 				<div class="notification-content not-main">
 				    ${sent_to ? html.node`
@@ -113682,7 +114488,7 @@ var bleh = (() => {
       const links = doc.querySelectorAll(".user-now-artist-and-album a");
       let artist = links[0];
       const album = links[1];
-      const avatar3 = doc.querySelector(".cover-art img")?.src;
+      const avatar4 = doc.querySelector(".cover-art img")?.src;
       track.removeAttribute("target");
       artist.removeAttribute("target");
       album.removeAttribute("target");
@@ -113704,7 +114510,7 @@ var bleh = (() => {
         name: track,
         artist,
         album,
-        avatar: avatar3,
+        avatar: avatar4,
         active
       };
       return page.now;
@@ -114984,11 +115790,11 @@ var bleh = (() => {
     }
     checkup_page_structure(is_subpage, album_header);
     if (ff("refreshed_music_nav")) {
-      const avatar3 = album_header.querySelector(".header-new-background-image");
+      const avatar4 = album_header.querySelector(".header-new-background-image");
       const title = album_header.querySelector(".header-new-title");
       const artist = album_header.querySelector('[itemprop="byArtist"]');
       const position2 = album_header.querySelector(".header-new-chart-position-number");
-      const avatar_img = avatar3?.getAttribute("content").replace("/ar0/", "/avatar300s/");
+      const avatar_img = avatar4?.getAttribute("content").replace("/ar0/", "/avatar300s/");
       const listeners = document.body.querySelector(".header-new-info-desktop .header-metadata-tnew-display > p > abbr");
       save_hoshino_artwork(avatar_img, page.name, page.sister, clean_number(listeners?.title));
       let page_avatar;
@@ -115019,7 +115825,7 @@ var bleh = (() => {
       header_colour(page_avatar.image, settings.hue_from_album, [
         page_avatar
       ]);
-      if (avatar3) register_background(avatar3.getAttribute("content"));
+      if (avatar4) register_background(avatar4.getAttribute("content"));
       else register_background(null);
       page.structure.container.insertBefore(redesigned_album_header, page.structure.container.firstElementChild);
       album_header.classList.add("legacy-header");
@@ -115350,12 +116156,12 @@ var bleh = (() => {
     checkup_page_structure(is_subpage, artist_header);
     const featured_items = artist_header.querySelector(".artist-header-featured-items");
     if (ff("refreshed_music_nav")) {
-      const avatar3 = artist_header.querySelector(".header-new-background-image");
+      const avatar4 = artist_header.querySelector(".header-new-background-image");
       const title = artist_header.querySelector(".header-new-title");
       const on_tour = artist_header.querySelector(".header-new-on-tour");
       const position2 = artist_header.querySelector(".header-new-chart-position-number");
       if (on_tour) page.state.on_tour = true;
-      const page_avatar = page_header_avatar(avatar3?.getAttribute("content") || "");
+      const page_avatar = page_header_avatar(avatar4?.getAttribute("content") || "");
       const redesigned_artist_header = /* @__PURE__ */ jsx(PageHeader, {
         type: "artist",
         avatar: page_avatar,
@@ -115378,7 +116184,7 @@ var bleh = (() => {
           children: tl2(trans.view_the_charts)
         }));
       }
-      if (avatar3) register_background(avatar3.getAttribute("content"));
+      if (avatar4) register_background(avatar4.getAttribute("content"));
       else register_background(null);
       page.structure.container.insertBefore(redesigned_artist_header, page.structure.container.firstElementChild);
       artist_header.classList.add("legacy-header");
@@ -115507,7 +116313,7 @@ var bleh = (() => {
             listeners: tl2(trans.latest_album),
             date: aux,
             href: `${root}music/${sanitise(page.name)}/${sanitise(clean_streaming_titles(name))}`,
-            image: avatar(image2, "300x300")
+            image: avatar2(image2, "300x300")
           }), carousel.firstElementChild);
           const existing_albums = albums.querySelectorAll(".artist-top-albums-item-wrap");
           existing_albums.forEach((existing) => {
@@ -117036,7 +117842,7 @@ var bleh = (() => {
       const sanitised = `https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1`;
       preview.current.style.setProperty("background-image", `url(${sanitised})`);
       preview.current.onclick = () => {
-        expand_avatar(sanitised);
+        expand_avatar2(sanitised);
       };
       input2.current.value = val;
     }
@@ -118061,7 +118867,7 @@ var bleh = (() => {
                       "avatar",
                       "image-uploader"
                     ],
-                    onClick: () => avatar2(),
+                    onClick: () => avatar3(),
                     children: [
                       /* @__PURE__ */ jsx("img", {
                         src: avatar_url,
@@ -118219,7 +119025,7 @@ var bleh = (() => {
       save_profile_cache(cache2, profile_cache, auth.name);
     }
   }
-  function avatar2() {
+  function avatar3() {
     page.state.avatar_changer = dialog({
       id: "edit_avatar",
       title: tl2(trans.change_avatar),
@@ -118310,7 +119116,7 @@ var bleh = (() => {
                     <button class="see-more cancel left-icon" onclick=${() => {
           if (cropper && cropper.destroy) cropper.destroy();
           cropper = null;
-          avatar2();
+          avatar3();
         }}>${tl2(trans.cancel)}</button>
                     <div class="fill"></div>
                     <button class="btn primary save" onclick=${() => {
@@ -120029,9 +120835,9 @@ var bleh = (() => {
         ".attendee-summary-user-inner-wrap"
       );
       users.forEach((user) => {
-        let avatar3 = user.querySelector(".attendee-summary-user-avatar");
+        let avatar4 = user.querySelector(".attendee-summary-user-avatar");
         let name = user.querySelector(".attendee-summary-user-link");
-        let badge = patch_avatar(avatar3, name.textContent, "event");
+        let badge = patch_avatar(avatar4, name.textContent, "event");
         if (badge) {
           style_name_from_badge(name, badge);
         }
@@ -120173,7 +120979,7 @@ var bleh = (() => {
             class: "avatar",
             ref: avi,
             children: /* @__PURE__ */ jsx("img", {
-              src: avatar(image2, "avatar170s"),
+              src: avatar2(image2, "avatar170s"),
               loading: "lazy"
             })
           })
@@ -120185,8 +120991,8 @@ var bleh = (() => {
         })
       ]
     });
-    const your_badge = patch_avatar(avi.current, name);
-    style_name_from_badge(elem, your_badge);
+    const your_badge = patch_avatar2(avi.current, name);
+    style_name_from_badge2(elem, your_badge);
     return elem;
   }
   function MessageContent({ children }) {
@@ -123738,6 +124544,9 @@ var bleh = (() => {
                 <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                     Report bug now
                 </a>
+                <a class="see-more" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js?${Math.random}" target="_blank">
+                    Check for updates
+                </a>
                 <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
                     Join Discord
                 </a>
@@ -124676,7 +125485,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-08T23:59:24.715Z"
+    built_on: "2026-09-09T00:18:30.647Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
@@ -126218,23 +127027,23 @@ chroma-js/chroma.js:
    * @license
    *
    * chroma.js - JavaScript library for color conversions
-   *
+   * 
    * Copyright (c) 2011-2017, Gregor Aisch
    * All rights reserved.
-   *
+   * 
    * Redistribution and use in source and binary forms, with or without
    * modification, are permitted provided that the following conditions are met:
-   *
+   * 
    * 1. Redistributions of source code must retain the above copyright notice, this
    *    list of conditions and the following disclaimer.
-   *
+   * 
    * 2. Redistributions in binary form must reproduce the above copyright notice,
    *    this list of conditions and the following disclaimer in the documentation
    *    and/or other materials provided with the distribution.
-   *
+   * 
    * 3. The name Gregor Aisch may not be used to endorse or promote products
    *    derived from this software without specific prior written permission.
-   *
+   * 
    * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -126249,20 +127058,20 @@ chroma-js/chroma.js:
    *)
   (**
   	ColorBrewer colors for chroma.js
-
-  	Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The
+  
+  	Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The 
   	Pennsylvania State University.
-
-  	Licensed under the Apache License, Version 2.0 (the "License");
+  
+  	Licensed under the Apache License, Version 2.0 (the "License"); 
   	you may not use this file except in compliance with the License.
-  	You may obtain a copy of the License at
+  	You may obtain a copy of the License at	
   	http://www.apache.org/licenses/LICENSE-2.0
-
+  
   	Unless required by applicable law or agreed to in writing, software distributed
   	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
   	CONDITIONS OF ANY KIND, either express or implied. See the License for the
   	specific language governing permissions and limitations under the License.
-
+  
       @preserve
    *)
 
