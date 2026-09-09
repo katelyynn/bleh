@@ -1,149 +1,149 @@
 .pixel-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--card-gap);
 
-    --artwork-padding: 10px;
-    --artwork-size: 360px;
+	--artwork-padding: 10px;
+	--artwork-size: 360px;
 
-    .pixel-info {
-        .pixel-album-name {
-            display: flex;
-            align-items: center;
-            gap: var(--item-list-gap);
+	.pixel-info {
+		.pixel-album-name {
+			display: flex;
+			align-items: center;
+			gap: var(--item-list-gap);
 
-            & > h1 {
-                font-family: "Bitcount Grid Single", var(--font);
-                font-size: 36px;
-                line-height: 42px;
-                font-weight: 400;
-                margin: unset;
-                letter-spacing: unset;
-                cursor: default;
-            }
+			& > h1 {
+				font-family: "Bitcount Grid Single", var(--font);
+				font-size: 36px;
+				line-height: 42px;
+				font-weight: 400;
+				margin: unset;
+				letter-spacing: unset;
+				cursor: default;
+			}
 
-            & > .chibi {
-                --bg: transparent;
-                --bg-hov: oklch(var(--b4) / 60%);
-                --bg-atv: oklch(var(--b4) / 80%);
-                --shadow: none;
+			& > .chibi {
+				--bg: transparent;
+				--bg-hov: oklch(var(--b4) / 60%);
+				--bg-atv: oklch(var(--b4) / 80%);
+				--shadow: none;
 
-                --col: oklch(var(--c3));
-                --mask-colour: currentColor;
-                --icon-size: 24px;
-                --button-height: 40px;
-                height: var(--button-height) !important;
-            }
-        }
-    }
+				--col: oklch(var(--c3));
+				--mask-colour: currentColor;
+				--icon-size: 24px;
+				--button-height: 40px;
+				height: var(--button-height) !important;
+			}
+		}
+	}
 }
 .pixel-artwork {
-    background: oklch(var(--b4) / 10%);
-    box-shadow: var(--group-shadow);
-    padding: var(--artwork-padding);
-    border-radius: calc(var(--item-big-radius) + 10px);
-    width: fit-content;
+	background: oklch(var(--b4) / 10%);
+	box-shadow: var(--group-shadow);
+	padding: var(--artwork-padding);
+	border-radius: calc(var(--item-big-radius) + 10px);
+	width: fit-content;
 
-    & > canvas {
-        border-radius: var(--item-big-radius);
-        width: var(--artwork-size);
-        aspect-ratio: 1 / 1;
-    }
+	& > canvas {
+		border-radius: var(--item-big-radius);
+		width: var(--artwork-size);
+		aspect-ratio: 1 / 1;
+	}
 }
 
 .pixel-time {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    & > .bleh-icon {
-        --icon-size: 14px;
-        --icon: var(--icon-16-clock);
-        margin-right: 6px;
+	& > .bleh-icon {
+		--icon-size: 14px;
+		--icon: var(--icon-16-clock);
+		margin-right: 6px;
 
-        position: relative;
-        top: -1px;
-    }
+		position: relative;
+		top: -1px;
+	}
 
-    font-family: "Bitcount Grid Single", var(--font);
-    font-size: 22px;
-    line-height: 36px;
-    font-weight: 400;
-    color: oklch(var(--c3));
+	font-family: "Bitcount Grid Single", var(--font);
+	font-size: 22px;
+	line-height: 36px;
+	font-weight: 400;
+	color: oklch(var(--c3));
 }
 
 .pixel-info {
-    text-align: center;
+	text-align: center;
 }
 
 .pixel-actions {
-    display: flex;
-    gap: var(--button-list-gap);
+	display: flex;
+	gap: var(--button-list-gap);
 
-    & > button {
-        --bg: oklch(var(--b4) / 40%);
-        --bg-hov: oklch(var(--b4) / 60%);
-        --bg-atv: oklch(var(--b4) / 80%);
-        --shadow: none;
-    }
+	& > button {
+		--bg: oklch(var(--b4) / 40%);
+		--bg-hov: oklch(var(--b4) / 60%);
+		--bg-atv: oklch(var(--b4) / 80%);
+		--shadow: none;
+	}
 }
 
 .pixel-guess {
-    display: flex;
-    gap: 10px;
-    margin: var(--card-padding) 0;
+	display: flex;
+	gap: 10px;
+	margin: var(--card-padding) 0;
 
-    &.center {
-        justify-content: center;
-    }
+	&.center {
+		justify-content: center;
+	}
 
-    --button-sides: var(--card-gap);
-    --font-size: 16px !important;
-    --button-height: 40px;
+	--button-sides: var(--card-gap);
+	--font-size: 16px !important;
+	--button-height: 40px;
 
-    width: calc((var(--artwork-padding) * 2) + var(--artwork-size));
+	width: calc((var(--artwork-padding) * 2) + var(--artwork-size));
 
-    & > .input-container {
-        flex: 1;
+	& > .input-container {
+		flex: 1;
 
-        & > input {
-            --padding: 7px var(--card-gap);
-            height: 40px;
-            font-size: 16px !important;
-        }
-    }
+		& > input {
+			--padding: 7px var(--card-gap);
+			height: 40px;
+			font-size: 16px !important;
+		}
+	}
 
-    & > button {
-        height: var(--button-height);
+	& > button {
+		height: var(--button-height);
 
-        &.guess {
-            --btn-left: var(--button-sides) !important;
-            --btn-right: var(--button-sides) !important;
-            --font-size: 0 !important;
-            --mask-colour: currentColor !important;
-            min-width: var(--button-height) !important;
-            width: var(--button-height) !important;
-            --font-size: 0;
-            --mask-size: 24px;
-            --left: 50% !important;
-            --margin-left: calc(-1 * (var(--mask-size) / 2)) !important;
-        }
-    }
+		&.guess {
+			--btn-left: var(--button-sides) !important;
+			--btn-right: var(--button-sides) !important;
+			--font-size: 0 !important;
+			--mask-colour: currentColor !important;
+			min-width: var(--button-height) !important;
+			width: var(--button-height) !important;
+			--font-size: 0;
+			--mask-size: 24px;
+			--left: 50% !important;
+			--margin-left: calc(-1 * (var(--mask-size) / 2)) !important;
+		}
+	}
 }
 
 .pixel-home {
-    margin: 70px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--card-gap);
+	margin: 70px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--card-gap);
 }
 .pixel-logo {
-    font-family: "Bitcount Grid Single", var(--font);
-    font-size: 54px;
-    line-height: 60px;
-    font-weight: 400;
-    margin: unset;
-    letter-spacing: unset;
-    cursor: default;
+	font-family: "Bitcount Grid Single", var(--font);
+	font-size: 54px;
+	line-height: 60px;
+	font-weight: 400;
+	margin: unset;
+	letter-spacing: unset;
+	cursor: default;
 }

@@ -1,172 +1,172 @@
 .date-panel {
-    order: -1;
+	order: -1;
 
-    .date-selector {
-        display: flex;
-        flex-direction: column;
+	.date-selector {
+		display: flex;
+		flex-direction: column;
 
-        .user-sidebar-header {
-            margin: unset !important;
-            color: oklch(var(--c3));
-        }
+		.user-sidebar-header {
+			margin: unset !important;
+			color: oklch(var(--c3));
+		}
 
-        .library-controls-datepicker {
-            display: flex !important;
-        }
+		.library-controls-datepicker {
+			display: flex !important;
+		}
 
-        .library-controls-datepicker > .library-date-picker {
-            display: flex;
-            justify-content: start;
-            height: 20px;
-        }
+		.library-controls-datepicker > .library-date-picker {
+			display: flex;
+			justify-content: start;
+			height: 20px;
+		}
 
-        .date-range-picker-button {
-            --bg: transparent;
-            --bg-hov: transparent;
-            --bg-atv: transparent;
-            --shadow: none;
+		.date-range-picker-button {
+			--bg: transparent;
+			--bg-hov: transparent;
+			--bg-atv: transparent;
+			--shadow: none;
 
-            --mask: var(--icon-16-dropdown);
-            --btn-top: 0;
-            --btn-left: 0;
-            --btn-right: calc(12px + 4px) !important;
-            --left: none;
-            --margin-top: -6px;
-            --mask-size: 12px;
-            --right: 0;
-            --btn-bottom: 0;
-            --force-font-weight: var(--font-weight-medium);
+			--mask: var(--icon-16-dropdown);
+			--btn-top: 0;
+			--btn-left: 0;
+			--btn-right: calc(12px + 4px) !important;
+			--left: none;
+			--margin-top: -6px;
+			--mask-size: 12px;
+			--right: 0;
+			--btn-bottom: 0;
+			--force-font-weight: var(--font-weight-medium);
 
-            font-size: 16px !important;
-            line-height: 18px !important;
+			font-size: 16px !important;
+			line-height: 18px !important;
 
-            &:after {
-                transition-property: transform !important;
-                transition-duration: var(--trans) !important;
-                transition-timing-function: var(
-                    --trans-function
-                ) !important;
-                color: oklch(var(--c3));
-            }
+			&:after {
+				transition-property: transform !important;
+				transition-duration: var(--trans) !important;
+				transition-timing-function: var(
+					--trans-function
+				) !important;
+				color: oklch(var(--c3));
+			}
 
-            &[aria-expanded="true"] {
-                &:after {
-                    transform: scaleY(-1) !important;
-                }
-            }
+			&[aria-expanded="true"] {
+				&:after {
+					transform: scaleY(-1) !important;
+				}
+			}
 
-            .date-range-picker-button-inner {
-                max-width: 340px;
+			.date-range-picker-button-inner {
+				max-width: 340px;
 
-                &.date-range-new {
-                    display: flex;
-                    overflow: unset;
-                }
-            }
+				&.date-range-new {
+					display: flex;
+					overflow: unset;
+				}
+			}
 
-            &.disclose-trigger,
-            &:before {
-                display: none;
-            }
-        }
-    }
+			&.disclose-trigger,
+			&:before {
+				display: none;
+			}
+		}
+	}
 
-    .chart-view-selector {
-        margin: var(--card-gap) auto !important;
-    }
-    .chart-axis-selector {
-        display: var(--hide-if-not-bar, flex);
-        margin: calc(-1 * (var(--card-gap) - 5px)) auto 0 !important;
-    }
+	.chart-view-selector {
+		margin: var(--card-gap) auto !important;
+	}
+	.chart-axis-selector {
+		display: var(--hide-if-not-bar, flex);
+		margin: calc(-1 * (var(--card-gap) - 5px)) auto 0 !important;
+	}
 }
 
 .date-range-picker-form {
-    gap: unset !important;
-    margin-top: var(--card-gap) !important;
-    padding-top: var(--card-gap);
-    border-top: 1px solid var(--card-border-base);
+	gap: unset !important;
+	margin-top: var(--card-gap) !important;
+	padding-top: var(--card-gap);
+	border-top: 1px solid var(--card-border-base);
 
-    & > .form-group {
-        margin: unset !important;
-    }
+	& > .form-group {
+		margin: unset !important;
+	}
 }
 .date-range-picker-form .control-label {
-    text-transform: unset;
+	text-transform: unset;
 }
 .date-range-picker-form .form-group-controls {
-    margin-top: 4px;
+	margin-top: 4px;
 }
 
 .date-range-picker-presets-wrap {
-    display: flex;
-    gap: var(--button-list-gap);
-    margin: unset;
+	display: flex;
+	gap: var(--button-list-gap);
+	margin: unset;
 
-    .date-range-picker-presets {
-        width: unset;
-        flex: 1;
-        margin: unset;
+	.date-range-picker-presets {
+		width: unset;
+		flex: 1;
+		margin: unset;
 
-        display: flex;
-        flex-direction: column;
-        gap: var(--button-list-gap);
-    }
+		display: flex;
+		flex-direction: column;
+		gap: var(--button-list-gap);
+	}
 
-    .date-range-picker-presets-2 {
-        flex: 1;
+	.date-range-picker-presets-2 {
+		flex: 1;
 
-        display: flex;
-        gap: var(--item-list-gap);
+		display: flex;
+		gap: var(--item-list-gap);
 
-        .date-range-picker-preset {
-            flex: 1;
-        }
-    }
-    .date-range-picker-presets-wide {
-        flex-direction: row;
-        flex: 1;
+		.date-range-picker-preset {
+			flex: 1;
+		}
+	}
+	.date-range-picker-presets-wide {
+		flex-direction: row;
+		flex: 1;
 
-        a {
-            text-align: center;
+		a {
+			text-align: center;
 
-            .new-badge {
-                margin-left: var(--item-list-gap);
-            }
-        }
-    }
+			.new-badge {
+				margin-left: var(--item-list-gap);
+			}
+		}
+	}
 }
 
 .date-range-picker-preset {
-    display: flex;
+	display: flex;
 }
 
 .user-sidebar-header {
-    font-size: var(--font-size) !important;
-    line-height: var(--line-height) !important;
-    font-weight: var(--font-weight-medium);
+	font-size: var(--font-size) !important;
+	line-height: var(--line-height) !important;
+	font-weight: var(--font-weight-medium);
 
-    /* last.fm has a default 150px */
-    min-width: unset;
+	/* last.fm has a default 150px */
+	min-width: unset;
 }
 .library-controls-datepicker {
-    width: unset;
-    flex: 1;
+	width: unset;
+	flex: 1;
 }
 
 .library-controls-datepicker {
-    padding: unset;
+	padding: unset;
 }
 
 .date-range-picker-button-inner {
-    font-weight: inherit !important;
-    padding: unset !important;
+	font-weight: inherit !important;
+	padding: unset !important;
 }
 .date-range-picker-button-inner:before {
-    display: none;
+	display: none;
 }
 
 /*     INPUT     */
 
 .library-date-group {
-    justify-content: space-between;
+	justify-content: space-between;
 }

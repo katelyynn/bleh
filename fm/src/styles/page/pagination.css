@@ -1,62 +1,62 @@
 .pagination {
-    margin-top: var(--card-gap);
+	margin-top: var(--card-gap);
 
-    .col-main > & {
-        margin: unset;
-    }
+	.col-main > & {
+		margin: unset;
+	}
 }
 .pagination-list {
-    cursor: default;
+	cursor: default;
 
-    display: flex;
-    justify-content: center;
-    gap: var(--button-list-gap);
+	display: flex;
+	justify-content: center;
+	gap: var(--button-list-gap);
 }
 
 .pagination-next,
 .pagination-page,
 .pagination-previous {
-    display: flex;
-    line-height: inherit;
+	display: flex;
+	line-height: inherit;
 
-    & > a {
-        height: fit-content;
-    }
+	& > a {
+		height: fit-content;
+	}
 }
 
 .pagination-page {
-    box-shadow: unset !important;
+	box-shadow: unset !important;
 
-    &.pagination-page--hide-mobile {
-        display: none;
-    }
+	&.pagination-page--hide-mobile {
+		display: none;
+	}
 }
 .pagination-page--ellipsis > span,
 .pagination-page-link {
-    --bg: transparent !important;
-    --bg-hov: oklch(var(--b4) / 40%) !important;
-    --bg-atv: oklch(var(--b4) / 60%) !important;
-    --shadow: none !important;
-    --shadow-hov: none !important;
+	--bg: transparent !important;
+	--bg-hov: oklch(var(--b4) / 40%) !important;
+	--bg-atv: oklch(var(--b4) / 60%) !important;
+	--shadow: none !important;
+	--shadow-hov: none !important;
 
-    --see-more-pad-v: 3px;
-    --see-more-pad: 8px;
+	--see-more-pad-v: 3px;
+	--see-more-pad: 8px;
 
-    --padding: var(--see-more-pad-v) var(--see-more-pad);
-    margin: calc(-1 * var(--see-more-pad-v)) 0 !important;
-    --force-font-weight: var(--font-weight-medium);
+	--padding: var(--see-more-pad-v) var(--see-more-pad);
+	margin: calc(-1 * var(--see-more-pad-v)) 0 !important;
+	--force-font-weight: var(--font-weight-medium);
 
-    &[aria-checked="true"] {
-        cursor: default;
-        --bg: oklch(var(--h4) / 20%) !important;
-        --bg-hov: oklch(var(--h4) / 40%) !important;
-        --bg-atv: oklch(var(--h4) / 60%) !important;
-        --col: oklch(var(--l3-c));
-    }
+	&[aria-checked="true"] {
+		cursor: default;
+		--bg: oklch(var(--h4) / 20%) !important;
+		--bg-hov: oklch(var(--h4) / 40%) !important;
+		--bg-atv: oklch(var(--h4) / 60%) !important;
+		--col: oklch(var(--l3-c));
+	}
 }
 
 .pagination-next,
 .pagination-previous {
-    top: 50%;
-    margin-top: -9px;
+	top: 50%;
+	margin-top: -9px;
 }

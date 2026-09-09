@@ -1,25 +1,26 @@
 .username-combo {
-    display: flex !important;
-    gap: 0 6px;
-    overflow: hidden;
+	display: flex !important;
+	gap: 0 6px;
+	overflow: hidden;
 
-    &.username-combo-vertical {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+	&.username-combo-vertical {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
 }
 
 .username-original {
-    opacity: 0.6;
-    font-size: 13px;
+	opacity: 0.6;
+	font-size: 13px;
 }
 
-.username-custom, .username-original {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.username-custom,
+.username-original {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
-    max-width: 100%;
+	max-width: 100%;
 }

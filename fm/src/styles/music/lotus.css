@@ -1,22 +1,22 @@
 .lotus {
-    --hue-over: 3;
-    --sat-over: 1.47;
-    --lit-over: 0.86;
+	--hue-over: 3;
+	--sat-over: 1.47;
+	--lit-over: 0.86;
 
-    &.lotus-name {
-        color: oklch(var(--l3-c));
-        position: relative;
-        padding-left: calc(var(--icon-size) + var(--icon-gap));
+	&.lotus-name {
+		color: oklch(var(--l3-c));
+		position: relative;
+		padding-left: calc(var(--icon-size) + var(--icon-gap));
 
-        --left: 0;
-        --mask: var(--icon-16-lotus);
+		--left: 0;
+		--mask: var(--icon-16-lotus);
 
-        &.lotus-name-small {
-            font-weight: var(--font-weight-medium);
-        }
-    }
+		&.lotus-name-small {
+			font-weight: var(--font-weight-medium);
+		}
+	}
 
-    &.dropdown-menu-clickable-item {
-        --mask: var(--icon-16-lotus);
-    }
+	&.dropdown-menu-clickable-item {
+		--mask: var(--icon-16-lotus);
+	}
 }

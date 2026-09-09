@@ -1,98 +1,98 @@
 [data-modal-id="bleh_update"],
 [data-modal-id="edit_avatar"] {
-    text-align: center;
+	text-align: center;
 
-    .forms {
-        display: flex;
-        justify-content: center;
-        gap: var(--card-gap);
-    }
+	.forms {
+		display: flex;
+		justify-content: center;
+		gap: var(--card-gap);
+	}
 
-    .upload-avatar {
-        .form-group-controls {
-            position: relative;
+	.upload-avatar {
+		.form-group-controls {
+			position: relative;
 
-            & > .btn-file {
-                &[data-has-file] {
-                    --bg: transparent !important;
-                    --bg-hov: oklch(var(--b5), 10%) !important;
-                    --bg-atv: oklch(var(--b5), 20%) !important;
-                    --col: #000;
+			& > .btn-file {
+				&[data-has-file] {
+					--bg: transparent !important;
+					--bg-hov: oklch(var(--b5), 10%) !important;
+					--bg-atv: oklch(var(--b5), 20%) !important;
+					--col: #000;
 
-                    text-shadow: 0 0 8px #fff;
+					text-shadow: 0 0 8px #fff;
 
-                    &:before {
-                        opacity: 0;
-                    }
-                }
+					&:before {
+						opacity: 0;
+					}
+				}
 
-                .btn-file {
-                    position: absolute;
-                    inset: 0;
-                    opacity: 0 !important;
-                }
-                .btn-file-label {
-                    display: none;
-                }
-            }
-        }
-    }
+				.btn-file {
+					position: absolute;
+					inset: 0;
+					opacity: 0 !important;
+				}
+				.btn-file-label {
+					display: none;
+				}
+			}
+		}
+	}
 }
 
 .image-upload-remove {
-    --mask: var(--icon-16-trash) !important;
+	--mask: var(--icon-16-trash) !important;
 
-    --col: oklch(var(--l3-c)) !important;
-    --mask-colour: color-mix(
+	--col: oklch(var(--l3-c)) !important;
+	--mask-colour: color-mix(
         in oklch,
         oklch(var(--l3-c)),
         oklch(var(--l4-c)) 40%
     );
 
-    --hue-over: var(--hue-neg);
-    --sat-over: var(--sat-neg);
-    --lit-over: var(--lit-neg);
+	--hue-over: var(--hue-neg);
+	--sat-over: var(--sat-neg);
+	--lit-over: var(--lit-neg);
 }
 
 .crop-before-uploading {
-    margin-top: var(--card-gap);
+	margin-top: var(--card-gap);
 }
 
 #avatar_saver {
-    display: none;
+	display: none;
 }
 
 [data-modal-type="update"] {
-    .forms {
-        justify-content: center;
-    }
+	.forms {
+		justify-content: center;
+	}
 
-    .subtle {
-        max-width: 240px;
-    }
+	.subtle {
+		max-width: 240px;
+	}
 }
 
 .crop {
-    width: 600px;
-    height: 600px;
-    outline: 2px solid var(--card-border-base);
-    border-radius: var(--item-big-radius);
-    overflow: hidden;
+	width: 600px;
+	height: 600px;
+	outline: 2px solid var(--card-border-base);
+	border-radius: var(--item-big-radius);
+	overflow: hidden;
 
-    & > img {
-        height: 600px;
-    }
+	& > img {
+		height: 600px;
+	}
 
-    .cropper-crop-box {
-        border-radius: var(--item-med-radius);
-        overflow: hidden;
+	.cropper-crop-box {
+		border-radius: var(--item-med-radius);
+		overflow: hidden;
 
-        & > .cropper-view-box {
-            outline: none;
-        }
+		& > .cropper-view-box {
+			outline: none;
+		}
 
-        & > [data-cropper-action] {
-            opacity: 0;
-        }
-    }
+		& > [data-cropper-action] {
+			opacity: 0;
+		}
+	}
 }

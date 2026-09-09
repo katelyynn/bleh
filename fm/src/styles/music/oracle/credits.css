@@ -1,54 +1,54 @@
 .oracle-credits {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
 
-    max-width: 400px;
+	max-width: 400px;
 }
 
 .oracle-credit-group {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .oracle-credit-group-title {
-    color: oklch(var(--c3));
-    font-weight: var(--font-weight);
+	color: oklch(var(--c3));
+	font-weight: var(--font-weight);
 }
 
 .oracle-credit-list {
-    display: flex;
-    gap: 0 6px;
-    flex-wrap: wrap;
+	display: flex;
+	gap: 0 6px;
+	flex-wrap: wrap;
 }
 
 .oracle-credit {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    line-height: 20px;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	line-height: 20px;
 
-    cursor: default;
+	cursor: default;
 
-    color: oklch(var(--c2) / 80%);
+	color: oklch(var(--c2) / 80%);
 }
 
 .oracle-info-box {
-    margin-left: 4px;
+	margin-left: 4px;
 
-    --icon-size: 14px;
-    color: oklch(var(--c3));
+	--icon-size: 14px;
+	color: oklch(var(--c3));
 
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .oracle-attributes {
-    color: oklch(var(--c3));
+	color: oklch(var(--c3));
 }
 
 .oracle-credit-link {
-    &:not(:hover) {
-        color: oklch(var(--c2));
-    }
+	&:not(:hover) {
+		color: oklch(var(--c2));
+	}
 }

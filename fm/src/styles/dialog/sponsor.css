@@ -1,65 +1,65 @@
 .support-inner {
-    padding: var(--card-padding) 0;
+	padding: var(--card-padding) 0;
 
-    & > .avatar {
-        width: 64px;
-        height: 64px;
+	& > .avatar {
+		width: 64px;
+		height: 64px;
 
-        & > img {
-            border-radius: var(--avatar-radius);
-        }
+		& > img {
+			border-radius: var(--avatar-radius);
+		}
 
-        & > .avatar-status-dot {
-            width: 18px;
-            height: 18px;
-        }
-    }
+		& > .avatar-status-dot {
+			width: 18px;
+			height: 18px;
+		}
+	}
 
-    & > h1 {
-        color: oklch(var(--c1));
-        font-size: 16px;
-        line-height: 20px;
-        font-weight: var(--font-weight-medium);
-        letter-spacing: unset;
-        margin: unset;
-        cursor: default;
+	& > h1 {
+		color: oklch(var(--c1));
+		font-size: 16px;
+		line-height: 20px;
+		font-weight: var(--font-weight-medium);
+		letter-spacing: unset;
+		margin: unset;
+		cursor: default;
 
-        &.colourful {
-            color: oklch(var(--l3-c));
-            --hue-over: var(--hue-sponsor);
-            --sat-over: var(--sat-sponsor);
-            --lit-over: var(--lit-sponsor);
-        }
-    }
+		&.colourful {
+			color: oklch(var(--l3-c));
+			--hue-over: var(--hue-sponsor);
+			--sat-over: var(--sat-sponsor);
+			--lit-over: var(--lit-sponsor);
+		}
+	}
 
-    & > p {
-        max-width: 360px;
-        text-align: center;
-        cursor: default;
-    }
+	& > p {
+		max-width: 360px;
+		text-align: center;
+		cursor: default;
+	}
 
-    & > .badges {
-        display: flex;
-        flex-direction: row-reverse;
-        gap: 4px;
-        flex-wrap: wrap;
-    }
+	& > .badges {
+		display: flex;
+		flex-direction: row-reverse;
+		gap: 4px;
+		flex-wrap: wrap;
+	}
 }
 .sponsor {
-    position: relative;
-    --hue-over: var(--hue-sponsor);
-    --sat-over: var(--sat-sponsor);
-    --lit-over: var(--lit-sponsor);
+	position: relative;
+	--hue-over: var(--hue-sponsor);
+	--sat-over: var(--sat-sponsor);
+	--lit-over: var(--lit-sponsor);
 }
 .sponsor-related {
-    --hue-over: var(--hue-sponsor);
-    --sat-over: var(--sat-sponsor);
-    --lit-over: var(--lit-sponsor);
+	--hue-over: var(--hue-sponsor);
+	--sat-over: var(--sat-sponsor);
+	--lit-over: var(--lit-sponsor);
 }
 
 .modal-vertical-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--item-list-gap);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--item-list-gap);
 }

@@ -1,126 +1,126 @@
 .loading-spinner {
-    color: oklch(var(--c3));
-    --icon: var(--icon-16-spinner);
-    animation: spinner 1.2s linear infinite;
+	color: oklch(var(--c3));
+	--icon: var(--icon-16-spinner);
+	animation: spinner 1.2s linear infinite;
 }
 
 .your-progress-component:has(.loading) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 285px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 285px;
 }
 .lazy-shoutbox.async-content-loading {
-    background-image: none !important;
-    position: relative;
-    min-height: 200px !important;
+	background-image: none !important;
+	position: relative;
+	min-height: 200px !important;
 }
 
 .library-search-results.async-content-loading,
 .data-loading,
 .loading:not(.library-fetch, .library-date-picker, .avatar),
 .lazy-shoutbox.async-content-loading {
-    color: oklch(var(--c3));
-    position: relative;
-    background-image: unset !important;
+	color: oklch(var(--c3));
+	position: relative;
+	background-image: unset !important;
 
-    &:after {
-        --left: 50%;
-        --margin-left: -8px;
-        --mask: var(--icon-16-spinner);
-        animation: spinner 1.2s linear infinite;
-    }
+	&:after {
+		--left: 50%;
+		--margin-left: -8px;
+		--mask: var(--icon-16-spinner);
+		animation: spinner 1.2s linear infinite;
+	}
 }
 .data-loading {
-    margin: unset !important;
+	margin: unset !important;
 
-    .your-progress & {
-        height: 193px !important;
-    }
+	.your-progress & {
+		height: 193px !important;
+	}
 }
 
 .library-top__placeholder,
 .library-date-picker__placeholder {
-    opacity: 0;
+	opacity: 0;
 }
 
 .placeholder-block {
-    padding: 30px 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
-    justify-content: center;
-    align-items: center;
-    margin: unset;
+	padding: 30px 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
+	justify-content: center;
+	align-items: center;
+	margin: unset;
 
-    cursor: default;
-    color: oklch(var(--c2));
+	cursor: default;
+	color: oklch(var(--c2));
 
-    user-select: none;
+	user-select: none;
 }
 .placeholder-head {
-    color: oklch(var(--c3));
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: var(--font-weight-bold);
+	color: oklch(var(--c3));
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: var(--font-weight-bold);
 }
 
 .loading-data-container {
-    padding: 30px 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
-    justify-content: center;
-    align-items: center;
+	padding: 30px 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
+	justify-content: center;
+	align-items: center;
 
-    margin-top: unset;
+	margin-top: unset;
 
-    & > p,
-    .loading-data-text {
-        color: oklch(var(--c3));
-        user-select: none;
-        cursor: default;
-    }
+	& > p,
+	.loading-data-text {
+		color: oklch(var(--c3));
+		user-select: none;
+		cursor: default;
+	}
 
-    .loading-data-text {
-        position: relative;
-        padding-left: calc(var(--icon-size) + var(--icon-gap));
-        --left: 0;
-        --mask: var(--icon-16-spinner);
+	.loading-data-text {
+		position: relative;
+		padding-left: calc(var(--icon-size) + var(--icon-gap));
+		--left: 0;
+		--mask: var(--icon-16-spinner);
 
-        &:before {
-            animation: spinner 1.2s linear infinite;
-        }
+		&:before {
+			animation: spinner 1.2s linear infinite;
+		}
 
-        &.info,
-        &.failed {
-            --mask: var(--icon-16-info);
+		&.info,
+		&.failed {
+			--mask: var(--icon-16-info);
 
-            &:before {
-                animation: none;
-            }
-        }
+			&:before {
+				animation: none;
+			}
+		}
 
-        &.error {
-            --mask: var(--icon-16-x);
+		&.error {
+			--mask: var(--icon-16-x);
 
-            &:before {
-                animation: none;
-            }
-        }
+			&:before {
+				animation: none;
+			}
+		}
 
-        &.private {
-            --mask: var(--icon-16-lock);
+		&.private {
+			--mask: var(--icon-16-lock);
 
-            &:before {
-                animation: none;
-            }
-        }
+			&:before {
+				animation: none;
+			}
+		}
 
-        &.static {
-            &:before {
-                animation: none;
-            }
-        }
-    }
+		&.static {
+			&:before {
+				animation: none;
+			}
+		}
+	}
 }

@@ -1,59 +1,59 @@
 .translation-view {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
 
-    & > table {
-        margin: unset;
-    }
+	& > table {
+		margin: unset;
+	}
 }
 
 .language-header {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+	display: flex;
+	gap: 10px;
+	align-items: center;
 
-    color: oklch(var(--c1));
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: var(--font-weight-medium);
-    cursor: default;
+	color: oklch(var(--c1));
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: var(--font-weight-medium);
+	cursor: default;
 
-    & > .flag {
-        width: 20px;
-        height: 20px;
-    }
+	& > .flag {
+		width: 20px;
+		height: 20px;
+	}
 }
 
 .language-sub {
-    display: flex;
-    gap: var(--card-gap);
+	display: flex;
+	gap: var(--card-gap);
 
-    & > .language-info {
-        display: flex;
-        align-items: center;
-        gap: var(--icon-gap);
-        color: oklch(var(--l3-c));
-        font-weight: var(--font-weight-medium);
-        cursor: default;
+	& > .language-info {
+		display: flex;
+		align-items: center;
+		gap: var(--icon-gap);
+		color: oklch(var(--l3-c));
+		font-weight: var(--font-weight-medium);
+		cursor: default;
 
-        &.translated {
-            --hue-over: var(--hue-pos);
-            --sat-over: var(--sat-pos);
-            --lit-over: var(--lit-pos);
-            --icon: var(--icon-16-check);
-        }
+		&.translated {
+			--hue-over: var(--hue-pos);
+			--sat-over: var(--sat-pos);
+			--lit-over: var(--lit-pos);
+			--icon: var(--icon-16-check);
+		}
 
-        &.missing {
-            --hue-over: var(--hue-neg);
-            --sat-over: var(--sat-neg);
-            --lit-over: var(--lit-neg);
-            --icon: var(--icon-16-x);
-            cursor: pointer;
+		&.missing {
+			--hue-over: var(--hue-neg);
+			--sat-over: var(--sat-neg);
+			--lit-over: var(--lit-neg);
+			--icon: var(--icon-16-x);
+			cursor: pointer;
 
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }

@@ -1,12 +1,12 @@
 .click-action {
-    display: flex;
-    align-items: center;
-    gap: 2px;
+	display: flex;
+	align-items: center;
+	gap: 2px;
 
-    --icon-size: 14px;
-    color: oklch(var(--c3));
+	--icon-size: 14px;
+	color: oklch(var(--c3));
 }
 
 .bleh-icon-click-action-icon {
-    color: oklch(var(--l3-c) / 80%);
+	color: oklch(var(--l3-c) / 80%);
 }

@@ -1,17 +1,17 @@
 .colour-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .colour-list-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 .colour-text {
-    width: 160px;
-    color: oklch(var(--c3));
-    cursor: default;
+	width: 160px;
+	color: oklch(var(--c3));
+	cursor: default;
 }

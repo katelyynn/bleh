@@ -1,23 +1,23 @@
 .jumpto-form {
-    display: flex;
-    justify-content: center;
-    padding-top: var(--card-gap);
+	display: flex;
+	justify-content: center;
+	padding-top: var(--card-gap);
 
-    .form-group {
-        margin: unset !important;
+	.form-group {
+		margin: unset !important;
 
-        label {
-            width: fit-content !important;
-            font-weight: var(--font-weight-medium) !important;
-        }
+		label {
+			width: fit-content !important;
+			font-weight: var(--font-weight-medium) !important;
+		}
 
-        .form-group-controls {
-            width: fit-content !important;
-            margin-right: var(--button-list-gap);
+		.form-group-controls {
+			width: fit-content !important;
+			margin-right: var(--button-list-gap);
 
-            input {
-                margin: unset;
-            }
-        }
-    }
+			input {
+				margin: unset;
+			}
+		}
+	}
 }

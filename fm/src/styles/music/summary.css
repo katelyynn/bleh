@@ -1,37 +1,37 @@
 .music-summary {
-    order: -10;
+	order: -10;
 
-    --w: 30px !important;
-    --c: 3 !important;
-    --g: 4px !important;
+	--w: 30px !important;
+	--c: 3 !important;
+	--g: 4px !important;
 
-    @media (min-width: 1250px) {
-        .summary-sep {
-            height: unset !important;
-        }
-    }
+	@media (min-width: 1250px) {
+		.summary-sep {
+			height: unset !important;
+		}
+	}
 
-    margin-bottom: unset !important;
+	margin-bottom: unset !important;
 }
 
 .summary-aside {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
 
-    flex-shrink: 0;
+	flex-shrink: 0;
 
-    @media (min-width: 981px) {
-        width: calc((var(--w) * 10) + (var(--g) * 9));
-    }
+	@media (min-width: 981px) {
+		width: calc((var(--w) * 10) + (var(--g) * 9));
+	}
 }
 
 .summary-content {
-    flex: 1;
-    overflow: hidden;
+	flex: 1;
+	overflow: hidden;
 }
 
 .subtle-like {
-    color: oklch(var(--c3));
-    cursor: default;
+	color: oklch(var(--c3));
+	cursor: default;
 }

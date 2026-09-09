@@ -1,21 +1,21 @@
 #automatic-edits {
-    ul {
-        display: flex;
-        gap: var(--button-list-gap);
+	ul {
+		display: flex;
+		gap: var(--button-list-gap);
 
-        .edit-album {
-            --mask: var(--icon-16-album);
-        }
-        .edit-track {
-            --mask: var(--icon-16-track);
-        }
-    }
+		.edit-album {
+			--mask: var(--icon-16-album);
+		}
+		.edit-track {
+			--mask: var(--icon-16-track);
+		}
+	}
 }
 .automatic-edit-table-options-container {
-    display: flex;
-    gap: var(--button-list-gap);
+	display: flex;
+	gap: var(--button-list-gap);
 
-    & > .automatic-edit-rule-table-options {
-        margin: unset !important;
-    }
+	& > .automatic-edit-rule-table-options {
+		margin: unset !important;
+	}
 }

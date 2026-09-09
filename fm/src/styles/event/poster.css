@@ -1,28 +1,28 @@
 .event-poster {
-    display: none;
+	display: none;
 }
 
 .poster-panel {
-    .event-poster-preview {
-        border-radius: var(--item-big-radius);
-    }
+	.event-poster-preview {
+		border-radius: var(--item-big-radius);
+	}
 
-    position: relative;
-    z-index: 9;
-    margin: unset;
+	position: relative;
+	z-index: 9;
+	margin: unset;
 
-    .bleh--avatar-clickable-link {
-        position: absolute;
-        inset: 0;
-        z-index: 10;
-        cursor: pointer;
-    }
+	.bleh--avatar-clickable-link {
+		position: absolute;
+		inset: 0;
+		z-index: 10;
+		cursor: pointer;
+	}
 
-    transition-property: transform;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
+	transition-property: transform;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 
-    &:active {
-        transform: scale(0.96);
-    }
+	&:active {
+		transform: scale(0.96);
+	}
 }

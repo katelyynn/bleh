@@ -1,52 +1,52 @@
 .user-top-panel {
-    padding: calc(var(--card-gap) * 2) calc(var(--card-gap) * 6);
-    background: oklch(var(--b6) / 70%);
-    padding: var(--card-gap);
-    border-radius: var(--item-med-radius);
-    border: 1px solid transparent;
-    overflow: hidden;
-    user-select: none;
+	padding: calc(var(--card-gap) * 2) calc(var(--card-gap) * 6);
+	background: oklch(var(--b6) / 70%);
+	padding: var(--card-gap);
+	border-radius: var(--item-med-radius);
+	border: 1px solid transparent;
+	overflow: hidden;
+	user-select: none;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    &[data-sponsoring="true"] {
-        background-image: linear-gradient(
-            0deg,
-            oklch(var(--h4) / 15%),
-            oklch(var(--b6))
-        );
-        --hue-over: 342;
-        --sat-over: 1.7;
-        --lit-over: 0.9;
-    }
+	&[data-sponsoring="true"] {
+		background-image: linear-gradient(
+			0deg,
+			oklch(var(--h4) / 15%),
+			oklch(var(--b6))
+		);
+		--hue-over: 342;
+		--sat-over: 1.7;
+		--lit-over: 0.9;
+	}
 
-    .user-top-avatar {
-        --w: 80px;
-        width: var(--w);
-        height: var(--w);
-        background-color: oklch(var(--b4) / 60%);
-        border-radius: var(--avatar-radius);
+	.user-top-avatar {
+		--w: 80px;
+		width: var(--w);
+		height: var(--w);
+		background-color: oklch(var(--b4) / 60%);
+		border-radius: var(--avatar-radius);
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: oklch(var(--opposite-text));
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: oklch(var(--opposite-text));
 
-        --icon: var(--icon-16-x);
-        --icon-size: 40px;
+		--icon: var(--icon-16-x);
+		--icon-size: 40px;
 
-        &.user-top-avatar-main {
-            --w: 120px;
-            box-shadow: var(--card-shadow);
+		&.user-top-avatar-main {
+			--w: 120px;
+			box-shadow: var(--card-shadow);
 
-            margin: 0 20px;
-            z-index: 5;
+			margin: 0 20px;
+			z-index: 5;
 
-            .modal-body & {
-                z-index: 10000000;
-            }
-        }
-    }
+			.modal-body & {
+				z-index: 10000000;
+			}
+		}
+	}
 }

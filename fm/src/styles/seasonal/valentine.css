@@ -1,5 +1,5 @@
 .valentine-coloured {
-    --hue-over: var(--hue-valentine);
-    --sat-over: var(--sat-valentine);
-    --lit-over: var(--lit-valentine);
+	--hue-over: var(--hue-valentine);
+	--sat-over: var(--sat-valentine);
+	--lit-over: var(--lit-valentine);
 }

@@ -1,0 +1,38 @@
+.markdown-usage {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	margin: 2px;
+}
+
+.markdown-usage-item {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	--icon-size: 14px;
+	--icon-colour: oklch(var(--l3-c));
+
+	max-width: 300px;
+}
+
+.markdown-usage-type {
+	font-weight: var(--font-weight);
+	flex-shrink: 0;
+
+	margin-right: 10px;
+}
+
+.markdown-usage-value {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	color: oklch(var(--c3));
+	text-align: right;
+	flex: 1;
+	max-width: 100px;
+}

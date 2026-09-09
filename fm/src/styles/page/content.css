@@ -1,17 +1,35 @@
 .button-container-wrapper,
 .top-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px var(--card-gap);
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 10px var(--card-gap);
 
-    & + .library-fetch,
-    & + .buffer-standard,
-    & + .alert {
-        margin-top: unset !important;
-    }
+	& + .library-fetch,
+	& + .buffer-standard,
+	& + .alert {
+		margin-top: unset !important;
+	}
 
-    &.spacing {
-        height: 33px;
-    }
+	&.spacing {
+		height: 33px;
+	}
+}
+
+.demo-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+	gap: 20px;
+}
+
+.demo-item-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.demo-item {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
 }

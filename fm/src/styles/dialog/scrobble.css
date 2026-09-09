@@ -1,5 +1,5 @@
 .btn[data-type="switch"] {
-    &:hover:before {
-        transform: scaleY(-1);
-    }
+	&:hover:before {
+		transform: scaleY(-1);
+	}
 }

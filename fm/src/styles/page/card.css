@@ -1,86 +1,94 @@
 /*     GLOBAL CARD STYLES     */
-.bleh--panel, .bleh--blank-panel,
-.col-main > section:not(.sour), .col-sidebar > section:not(.sour),
-.col-main > div.buffer-standard, /* covers weird shoutbox sections, 2026 */
-.col-main > .lazy-shoutbox,
+.bleh--panel,
+.bleh--blank-panel,
+.col-main > section:not(.sour),
+.col-sidebar > section:not(.sour),
+.col-main > div.buffer-standard,
+/* covers weird shoutbox sections, 2026 */ .col-main > .lazy-shoutbox,
 .your-progress-component,
 .primary-column,
 .album-and-lyrics-row,
 /* event lineup */ .big-artist-list,
 .panel-form {
-    background: transparent;
-    background-image: unset;
-    border-radius: unset;
-    box-shadow: unset;
-    padding: 0 var(--card-padding);
-    margin-left: unset;
-    margin-right: unset;
+	background: transparent;
+	background-image: unset;
+	border-radius: unset;
+	box-shadow: unset;
+	padding: 0 var(--card-padding);
+	margin-left: unset;
+	margin-right: unset;
 
-    position: relative;
+	position: relative;
 }
 
 .sour {
-    background: var(--card-specific-background, var(--card-background, oklch(var(--b5))));
-    border-radius: var(--card-specific-radius, var(--card-radius));
-    box-shadow: var(--card-specific-shadow, var(--card-border), var(--card-shadow));
-    padding: var(--card-padding);
+	background: var(--card-specific-background, var(--card-background,
+		oklch(var(--b5))));
+	border-radius: var(--card-specific-radius, var(--card-radius));
+	box-shadow: var(--card-specific-shadow, var(--card-border),
+		var(--card-shadow));
+	padding: var(--card-padding);
 }
 
 .section-controls {
-    margin-top: unset !important;
-    margin-right: unset !important;
+	margin-top: unset !important;
+	margin-right: unset !important;
 }
 
 .content-top-header,
 .artist-similar-sidebar {
-    margin-top: var(--force-margin-top, unset) !important;
+	margin-top: var(--force-margin-top, unset) !important;
 }
 
 .single-shout-information,
-.subpage-breadcrumb, .subpage-title,
+.subpage-breadcrumb,
+.subpage-title,
 .upper-overview-to-hide,
 .col-sidebar.masonry-right {
-    display: none !important;
+	display: none !important;
 }
 
 .top-overview-panel {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    .masonry-left {
-        float: unset;
-    }
+	.masonry-left {
+		float: unset;
+	}
 
-    & > .buffer-standard.section-with-separator {
-        display: none;
-    }
+	& > .buffer-standard.section-with-separator {
+		display: none;
+	}
 
-    & > .section {
-        margin: unset !important;
-    }
+	& > .section {
+		margin: unset !important;
+	}
 }
 
 .section-with-separator {
-    padding-bottom: unset;
+	padding-bottom: unset;
 
-    &:after {
-        display: none;
-    }
+	&:after {
+		display: none;
+	}
 }
 
-article, section, .buffer-standard, ._buffer,
+article,
+section,
+.buffer-standard,
+._buffer,
 .content-form {
-    margin-top: var(--only-card-gap, var(--card-gap));
+	margin-top: var(--only-card-gap, var(--card-gap));
 }
 
 .form-section,
 .buffer-4,
 .buffer-2 {
-    /* default 12px */
-    margin-top: var(--card-gap);
+	/* default 12px */
+	margin-top: var(--card-gap);
 }
 
 /* without pro it adds spacing to these presumably for ad spots */
 .buffer-standard.row {
-    margin-top: unset;
+	margin-top: unset;
 }

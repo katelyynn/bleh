@@ -1,9 +1,10 @@
 # simple tool to convert a markdown file with new-lines
 # into a one-line string with \n replacements
-import sys
-import os
 import json
+import os
+import sys
 from collections import OrderedDict
+
 
 def parse_markdown(md_file):
     with open(md_file, encoding="utf-8") as f:
@@ -24,7 +25,7 @@ def parse_markdown(md_file):
                     title = m.split(":", 1)[1].strip()
                 if m.lower().startswith("type:"):
                     mtype = m.split(":", 1)[1].strip()
-            body = lines[end+1:]
+            body = lines[end + 1 :]
         else:
             body = lines
     else:
@@ -44,6 +45,7 @@ def parse_markdown(md_file):
     if bio.startswith("\n"):
         bio = bio[1:]
     return bio, title, mtype
+
 
 def main():
     if len(sys.argv) != 2:
@@ -67,6 +69,7 @@ def main():
             new_data[k] = v
     with open("changelog.json", "w", encoding="utf-8") as f:
         json.dump(new_data, f, indent=4, ensure_ascii=False)
+
 
 if __name__ == "__main__":
     main()

@@ -1,95 +1,94 @@
 .similar-artists {
-    margin: unset;
+	margin: unset;
 
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
 
-    .similar-artists-item-wrap {
-        margin: unset !important;
+	.similar-artists-item-wrap {
+		margin: unset !important;
 
-        .similar-artists-item {
-            --image-size: 140px;
-            --gap: var(--card-gap);
+		.similar-artists-item {
+			--image-size: 140px;
+			--gap: var(--card-gap);
 
-            min-height: var(--image-size);
-            padding-left: calc(var(--image-size) + var(--gap));
+			min-height: var(--image-size);
+			padding-left: calc(var(--image-size) + var(--gap));
 
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
 
-            &:before,
-            &:after {
-                display: none;
-            }
+			&:before,
+			&:after {
+				display: none;
+			}
 
-            .similar-artists-item-media-top {
-                .similar-artists-item-name {
-                    font-size: 16px;
-                    line-height: 20px;
-                    font-weight: var(--font-weight-medium);
-                    color: oklch(var(--c2));
-                }
+			.similar-artists-item-media-top {
+				.similar-artists-item-name {
+					font-size: 16px;
+					line-height: 20px;
+					font-weight: var(--font-weight-medium);
+					color: oklch(var(--c2));
+				}
 
-                .similar-artists-item-aux-text {
-                    color: oklch(var(--c3));
-                }
-            }
+				.similar-artists-item-aux-text {
+					color: oklch(var(--c3));
+				}
+			}
 
-            .similar-artists-item-wiki-cta,
-            .similar-artists-item-wiki {
-                margin: unset;
-                display: none !important;
+			.similar-artists-item-wiki-cta,
+			.similar-artists-item-wiki {
+				margin: unset;
+				display: none !important;
 
-                &.visible-lg {
-                    display: flex !important;
-                }
-            }
+				&.visible-lg {
+					display: flex !important;
+				}
+			}
 
-            .media-item {
-                width: var(--image-size);
-                height: var(--image-size);
+			.media-item {
+				width: var(--image-size);
+				height: var(--image-size);
 
-                & > .avatar {
-                    border-radius: var(--item-med-radius);
-                    box-shadow: var(--interact-shadow);
-                    --mask-size: var(--cover-size-200);
+				& > .avatar {
+					border-radius: var(--item-med-radius);
+					box-shadow: var(--interact-shadow);
+					--mask-size: var(--cover-size-200);
 
-                    &:after {
-                        display: block;
-                        background-image: var(--gloss-image) !important;
-                        background-size: 100% !important;
-                        opacity: var(--gloss);
-                        mix-blend-mode: var(--gloss-mix);
-                    }
-                }
-            }
-        }
-    }
+					&:after {
+						display: block;
+						background-image: var(--gloss-image) !important;
+						background-size: 100% !important;
+						opacity: var(--gloss);
+						mix-blend-mode: var(--gloss-mix);
+					}
+				}
+			}
+		}
+	}
 }
-
 
 .artist-similar-artists-sidebar {
-    margin-top: unset;
+	margin-top: unset;
 }
 .artist-similar-sidebar {
-    /* on artist pages, different ?,
-    basically fills the remaining height in */
-    height: 100%;
+	/* on artist pages, different ?,
+	basically fills the remaining height in */
+	height: 100%;
 }
 
 .artist-similar-sidebar > h3 {
-    padding-right: calc(var(--icon-size) + var(--icon-gap));
-    position: relative;
-    width: fit-content;
-    --left: none;
-    --right: 0;
-    --mask: var(--icon-16-arrow-right);
+	padding-right: calc(var(--icon-size) + var(--icon-gap));
+	position: relative;
+	width: fit-content;
+	--left: none;
+	--right: 0;
+	--mask: var(--icon-16-arrow-right);
 }
 .artist-similar-sidebar-more {
-    top: var(--card-padding);
-    left: var(--card-padding);
-    right: var(--card-padding);
-    opacity: 0;
+	top: var(--card-padding);
+	left: var(--card-padding);
+	right: var(--card-padding);
+	opacity: 0;
 }

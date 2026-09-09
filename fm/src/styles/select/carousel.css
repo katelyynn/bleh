@@ -1,0 +1,85 @@
+.select-carousel {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.carousel-inner-value {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 100px;
+
+	&[data-direction="left"] {
+		animation: carousel_left 0.6s var(--trans-function);
+	}
+
+	&[data-direction="right"] {
+		animation: carousel_right 0.6s var(--trans-function);
+	}
+}
+
+.carousel-arrow {
+	--bg: transparent;
+	--bg-hov: oklch(var(--b2) / 20%);
+	--bg-atv: oklch(var(--b2) / 40%);
+	--shadow: none;
+
+	--font-size: 0;
+	gap: 0 !important;
+	justify-content: center;
+	--button-sides: 6px;
+	--button-verts: 8px;
+}
+
+@keyframes carousel_left {
+	from {
+		opacity: 0;
+		translate: 20px 0;
+	}
+
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+@keyframes carousel_right {
+	from {
+		opacity: 0;
+		translate: -20px 0;
+	}
+
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+.carousel-dialog {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 4px;
+	width: 310px;
+}
+
+.carousel-dialog-item {
+	--bg: transparent;
+	--bg-hov: oklch(var(--b2) / 20%);
+	--bg-atv: oklch(var(--b2) / 40%);
+	--shadow: none;
+
+	&[aria-checked] {
+		--bg: oklch(var(--f4) / 40%);
+		--bg-hov: oklch(var(--f4) / 50%);
+		--bg-atv: oklch(var(--f4) / 60%);
+		--col: oklch(var(--l3-c));
+	}
+
+	justify-content: center;
+	text-align: center;
+
+	& > .name-style {
+		font-size: calc(15px * var(--custom-font-size-multiplier, 1));
+	}
+}

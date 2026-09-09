@@ -1,19 +1,19 @@
 .player-bar-v2 {
-    font-size: var(--font-size) !important;
-    line-height: var(--line-height) !important;
-    font-weight: var(--font-weight) !important;
-    color: oklch(var(--c2)) !important;
+	font-size: var(--font-size) !important;
+	line-height: var(--line-height) !important;
+	font-weight: var(--font-weight) !important;
+	color: oklch(var(--c2)) !important;
 }
 
 .player-bar-controls-container {
-    box-shadow: var(--card-shadow) !important;
+	box-shadow: var(--card-shadow) !important;
 }
 
 .player-bar-container {
-    padding: 15px !important;
-    border-radius: var(--item-med-radius) !important;
+	padding: 15px !important;
+	border-radius: var(--item-med-radius) !important;
 }
 
 .player-bar-settings-container {
-    border-radius: var(--item-med-radius) !important;
+	border-radius: var(--item-med-radius) !important;
 }

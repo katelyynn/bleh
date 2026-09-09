@@ -1,43 +1,43 @@
 .lastfm-bulk-edit-loading {
-    background: unset;
-    height: fit-content;
-    margin-top: var(--card-gap) !important;
-    padding: var(--card-padding) 0;
+	background: unset;
+	height: fit-content;
+	margin-top: var(--card-gap) !important;
+	padding: var(--card-padding) 0;
 
-    .lastfm-bulk-edit-progress {
-        font-weight: var(--font-weight-medium);
-        color: oklch(var(--c3));
-        padding-left: calc(var(--icon-size) + var(--icon-gap));
-        position: relative;
-        --left: 0;
-        --mask: var(--icon-16-spinner);
-        cursor: default;
+	.lastfm-bulk-edit-progress {
+		font-weight: var(--font-weight-medium);
+		color: oklch(var(--c3));
+		padding-left: calc(var(--icon-size) + var(--icon-gap));
+		position: relative;
+		--left: 0;
+		--mask: var(--icon-16-spinner);
+		cursor: default;
 
-        &:before {
-            animation: spinner 1.2s linear infinite;
-        }
-    }
+		&:before {
+			animation: spinner 1.2s linear infinite;
+		}
+	}
 }
 
 .lastfm-bulk-edit-form-group-controls {
-    padding-left: unset !important;
-    gap: var(--button-list-gap);
+	padding-left: unset !important;
+	gap: var(--button-list-gap);
 
-    button {
-        position: relative;
+	button {
+		position: relative;
 
-        &#lastfm-bulk-edit-select-all {
-            --mask: var(--icon-16-select-all);
-        }
-        &#lastfm-bulk-edit-deselect-all {
-            --mask: var(--icon-16-deselect-all);
-        }
-    }
+		&#lastfm-bulk-edit-select-all {
+			--mask: var(--icon-16-select-all);
+		}
+		&#lastfm-bulk-edit-deselect-all {
+			--mask: var(--icon-16-deselect-all);
+		}
+	}
 }
 
 .lastfm-bulk-edit-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: var(--card-gap);
 }

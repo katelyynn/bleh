@@ -1,85 +1,85 @@
 .playlisting-create-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--card-gap);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: var(--card-gap);
 
-    margin: var(--card-gap) 0 0 0;
-    padding: unset;
+	margin: var(--card-gap) 0 0 0;
+	padding: unset;
 }
 
 .playlisting-create-option-wrap {
-    padding: unset;
-    margin: unset !important;
-    width: unset;
-    float: unset;
+	padding: unset;
+	margin: unset !important;
+	width: unset;
+	float: unset;
 }
 
 .playlisting-create-option {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0;
 
-    --button-verts: 50px;
-    --button-sides: 20px;
+	--button-verts: 50px;
+	--button-sides: 20px;
 
-    height: 240px;
+	height: 240px;
 }
 
 .playlisting-create-option-icon {
-    --mask-size: 24px;
+	--mask-size: 24px;
 
-    width: var(--mask-size);
-    height: var(--mask-size);
-    margin-bottom: 20px;
-    padding-top: unset;
-    --left: 0;
-    --top: 0;
-    --margin-top: 0;
+	width: var(--mask-size);
+	height: var(--mask-size);
+	margin-bottom: 20px;
+	padding-top: unset;
+	--left: 0;
+	--top: 0;
+	--margin-top: 0;
 }
 
 h2.playlisting-create-option-title {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    margin-bottom: unset !important;
-    color: oklch(var(--c2));
-    font-weight: inherit !important;
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	margin-bottom: unset !important;
+	color: oklch(var(--c2));
+	font-weight: inherit !important;
 }
 .playlisting-create-option .buffer-1 {
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: var(--font-weight);
-    color: oklch(var(--c3));
-    margin-top: unset;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: var(--font-weight);
+	color: oklch(var(--c3));
+	margin-top: unset;
 }
 
 .playlisting-create-option-icon--similar-tracks {
-    --mask: var(--icon-track);
+	--mask: var(--icon-track);
 }
 .playlisting-create-option-icon--similar-artists {
-    --mask: var(--icon-artist);
+	--mask: var(--icon-artist);
 }
 .playlisting-create-option-icon--tag {
-    --mask: var(--icon-tag);
+	--mask: var(--icon-tag);
 }
 .playlisting-create-option-icon--user-library {
-    --mask: var(--icon-library);
+	--mask: var(--icon-library);
 }
 .playlisting-create-option-icon--last-week {
-    --mask: var(--icon-listening-report-weekly);
+	--mask: var(--icon-listening-report-weekly);
 }
 .playlisting-create-option-icon--last-month {
-    --mask: var(--icon-listening-report-monthly);
+	--mask: var(--icon-listening-report-monthly);
 }
 .playlisting-create-option-icon--last-year {
-    --mask: var(--icon-listening-report-yearly);
+	--mask: var(--icon-listening-report-yearly);
 }
 .playlisting-create-option-icon--blasts-from-the-past {
-    --mask: var(--icon-history);
+	--mask: var(--icon-history);
 }
 .playlisting-create-option-icon--user-recommendations {
-    --mask: var(--icon-recommended);
+	--mask: var(--icon-recommended);
 }
 .playlisting-create-option-icon--user-mix {
-    --mask: var(--icon-user-mix);
+	--mask: var(--icon-user-mix);
 }

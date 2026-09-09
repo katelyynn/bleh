@@ -1,29 +1,29 @@
 /*     LISTENING REPORT     */
 .user-dashboard-musical-matches,
 .user-dashboard-module {
-    margin-top: unset;
+	margin-top: unset;
 }
 
 /*     PLAYBACK 2023-2024 / LISTENING REPORT V3     */
 .report-box-container--overview {
-    width: 100vw;
+	width: 100vw;
 
-    .col-sm-12 {
-        width: var(--cards-width);
-    }
+	.col-sm-12 {
+		width: var(--cards-width);
+	}
 }
 
 .share-button-row {
-    width: var(--cards-width);
-    padding-top: 24px;
-    padding-bottom: 36px;
+	width: var(--cards-width);
+	padding-top: 24px;
+	padding-bottom: 36px;
 }
 
 .top-new-item-title {
-    font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight-medium);
 }
 .did-you-know-header {
-    margin-bottom: 6px;
+	margin-bottom: 6px;
 }
 
 .listening-report-modal,
@@ -35,316 +35,308 @@
 .report-box-highlight--content,
 .listening-report-row,
 .report-box-container {
-    font-family: Barlow, var(--font) !important;
-    --font-weight: 400 !important;
-    --font-weight-medium: 700 !important;
+	font-family: Barlow, var(--font) !important;
+	--font-weight: 400 !important;
+	--font-weight-medium: 700 !important;
 }
 
 .report-summary {
-    font-family: Barlow !important;
-    --font-weight: 400 !important;
-    --font-weight-medium: 700 !important;
+	font-family: Barlow !important;
+	--font-weight: 400 !important;
+	--font-weight-medium: 700 !important;
 }
 
 .listening-report-row--category h2 {
-    margin: unset !important;
+	margin: unset !important;
 }
 
 /* new - 2024/12 */
 .mainstream-score--artist {
-    font-weight: var(--font-weight);
+	font-weight: var(--font-weight);
 
-    display: flex;
-    text-align: left;
+	display: flex;
+	text-align: left;
 }
 
 .report-headline-top {
-    height: fit-content;
-    padding-bottom: 8px;
+	height: fit-content;
+	padding-bottom: 8px;
 
-    .report-headline-top__left {
-        align-items: center;
-        height: 32px;
+	.report-headline-top__left {
+		align-items: center;
+		height: 32px;
 
-        ul {
-            display: flex;
-            gap: var(--button-list-gap);
+		ul {
+			display: flex;
+			gap: var(--button-list-gap);
 
-            li {
-                display: flex;
-            }
-        }
-    }
-    .report-headline-title {
-        display: flex;
-        align-items: center;
-    }
+			li {
+				display: flex;
+			}
+		}
+	}
+	.report-headline-title {
+		display: flex;
+		align-items: center;
+	}
 }
 .report-headline-share {
-    position: relative;
-    --left: var(--icon-half);
-    --mask: var(--icon-16-share);
-    margin: unset;
+	position: relative;
+	--left: var(--icon-half);
+	--mask: var(--icon-16-share);
+	margin: unset;
 
-    img {
-        display: none;
-    }
+	img {
+		display: none;
+	}
 }
 
 .report-box-container {
-    .listening-report-brick-head {
-        min-height: 149px !important;
-    }
+	.listening-report-brick-head {
+		min-height: 149px !important;
+	}
 
-    .header-metadata {
-        padding-left: unset;
-        margin-bottom: unset;
-        gap: unset;
-        width: unset;
-        padding-top: unset;
-    }
-    .header-metadata-item {
-        padding: unset !important;
-        background-color: unset;
-        border-radius: unset;
-        display: block;
-        gap: unset;
-        height: unset;
-        box-shadow: unset;
-        margin-left: 0;
-        margin-top: 0;
-    }
-    .header-metadata-display {
-        font-size: 40px;
-        line-height: normal;
-    }
+	.header-metadata {
+		padding-left: unset;
+		margin-bottom: unset;
+		gap: unset;
+		width: unset;
+		padding-top: unset;
+	}
+	.header-metadata-item {
+		padding: unset !important;
+		background-color: unset;
+		border-radius: unset;
+		display: block;
+		gap: unset;
+		height: unset;
+		box-shadow: unset;
+		margin-left: 0;
+		margin-top: 0;
+	}
+	.header-metadata-display {
+		font-size: 40px;
+		line-height: normal;
+	}
 }
 
 .album-grid-button,
 .report-dropdown-button {
-    --bg: oklch(var(--b7) / 20%);
-    --bg-hov: oklch(var(--b7) / 40%);
-    --bg-atv: oklch(var(--b7) / 60%);
-    --shadow: none;
-    --filter: var(--card-blur);
+	--bg: oklch(var(--b7) / 20%);
+	--bg-hov: oklch(var(--b7) / 40%);
+	--bg-atv: oklch(var(--b7) / 60%);
+	--shadow: none;
+	--filter: var(--card-blur);
 
-    --col: #fff !important;
-    --mask-colour: #fff !important;
+	--col: #fff !important;
+	--mask-colour: #fff !important;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    &.report-dropdown-button {
-        width: var(--button-height) !important;
-        height: var(--button-height) !important;
-        --font-size: 0 !important;
+	&.report-dropdown-button {
+		width: var(--button-height) !important;
+		height: var(--button-height) !important;
+		--font-size: 0 !important;
 
-        --btn-left: var(--button-sides) !important;
-        --btn-right: var(--button-sides) !important;
+		--btn-left: var(--button-sides) !important;
+		--btn-right: var(--button-sides) !important;
 
-        --mask: var(--icon-16-dots);
+		--mask: var(--icon-16-dots);
 
-        &:before {
-            --left: calc(
+		&:before {
+			--left: calc(
                 (var(--button-height) - var(--icon-size)) / 2
             ) !important;
-            --right: none !important;
-        }
-    }
+			--right: none !important;
+		}
+	}
 
-    &[id$="colors-button"] {
-        --b7: var(--b4);
-        --show-icon: none;
+	&[id$="colors-button"] {
+		--b7: var(--b4);
+		--show-icon: none;
 
-        top: 16px;
-        right: 0;
-    }
+		top: 16px;
+		right: 0;
+	}
 
-    & > img {
-        margin: unset !important;
-        width: var(--icon-size) !important;
-        height: var(--icon-size) !important;
-    }
+	& > img {
+		margin: unset !important;
+		width: var(--icon-size) !important;
+		height: var(--icon-size) !important;
+	}
 
-    &:not([id$="colors-button"]) > img {
-        display: none;
-    }
+	&:not([id$="colors-button"]) > img {
+		display: none;
+	}
 }
 
 /* fix reports */
 .report-headline-border + .page-content {
-    display: block !important;
+	display: block !important;
 }
 
 .catalogue-chart-inner .item,
 .listening-clock-stat-container {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
 }
 
 .listening-report-top-item-heading {
-    color: oklch(var(--c1));
+	color: oklch(var(--c1));
 }
-.user-dashboard-layout--version-3
-    .listening-report-top-item-wrap--version-3
-    .listening-report-top-item-heading
-    .listening-report-top-item-heading-name {
-    font-size: 22px;
+.user-dashboard-layout--version-3 .listening-report-top-item-wrap--version-3 .listening-report-top-item-heading .listening-report-top-item-heading-name {
+	font-size: 22px;
 }
 
 .listening-report-row__col,
 .listening-report-row {
-    width: var(--cards-width) !important;
+	width: var(--cards-width) !important;
 }
 .container--full-width > .listening-report-row__col {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 .listening-report-top-item-container,
 .listening-report-row--3-wide .listening-report-row__col {
-    width: calc((var(--cards-width) / 3) - 5.5px) !important;
+	width: calc((var(--cards-width) / 3) - 5.5px) !important;
 
-    @media (max-width: 980px) {
-        width: unset !important;
-    }
+	@media (max-width: 980px) {
+		width: unset !important;
+	}
 }
 .listening-report-row--2-wide .listening-report-row__col {
-    width: calc((var(--cards-width) / 2) - 5px) !important;
+	width: calc((var(--cards-width) / 2) - 5px) !important;
 
-    @media (max-width: 980px) {
-        width: unset !important;
-    }
+	@media (max-width: 980px) {
+		width: unset !important;
+	}
 }
 
-.report-box-container
-    .user-dashboard-musical-matches
-    .header-metadata-display
-    strong {
-    font-size: 18px;
-    font-weight: 700;
+.report-box-container .user-dashboard-musical-matches .header-metadata-display strong {
+	font-size: 18px;
+	font-weight: 700;
 }
 
 .report-box-container .listening-report-brick-inner {
-    margin: unset;
+	margin: unset;
 }
 
 .community-entry__avatar {
-    border-radius: var(--avatar-radius);
+	border-radius: var(--avatar-radius);
 
-    &:after {
-        display: none;
-    }
+	&:after {
+		display: none;
+	}
 }
-
 
 .listening-report-promos {
-    margin-bottom: var(--card-gap);
+	margin-bottom: var(--card-gap);
 
-    &:last-child {
-        margin: unset;
-    }
+	&:last-child {
+		margin: unset;
+	}
 }
 .promo-v3.visible-xs {
-    display: none !important;
+	display: none !important;
 }
 .promo-v3 .listening-report-promo {
-    position: relative;
-    background-image: unset !important;
-    display: flex;
-    flex-direction: column;
-    margin-top: unset;
+	position: relative;
+	background-image: unset !important;
+	display: flex;
+	flex-direction: column;
+	margin-top: unset;
 }
 .promo-v3 .listening-report-promo-title {
-    min-width: 80px;
-    color: inherit;
-    font-weight: var(--font-weight-medium) !important;
-    order: -1;
+	min-width: 80px;
+	color: inherit;
+	font-weight: var(--font-weight-medium) !important;
+	order: -1;
 }
 .promo-v3 .listening-report-promo-date {
-    margin-top: unset;
-    padding-right: unset;
+	margin-top: unset;
+	padding-right: unset;
 }
 
 .listening-report-promo-animation-container {
-    height: 32px;
-    margin-top: -7px;
-    right: 12px;
+	height: 32px;
+	margin-top: -7px;
+	right: 12px;
 
-    display: none;
+	display: none;
 }
 
 .listening-report-promo--week {
-    --mask: var(--icon-16-listening-report-weekly) !important;
+	--mask: var(--icon-16-listening-report-weekly) !important;
 }
 .listening-report-promo--month {
-    --mask: var(--icon-16-listening-report-monthly) !important;
+	--mask: var(--icon-16-listening-report-monthly) !important;
 }
 .listening-report-promo--year {
-    --mask: var(--icon-16-listening-report-yearly) !important;
+	--mask: var(--icon-16-listening-report-yearly) !important;
 }
 
 /* removes weird scrollbars */
 .listening-report-secondary-top-item-name {
-    overflow: hidden;
+	overflow: hidden;
 }
-
 
 [data-bleh--show_your_progress="false"] .your-progress-component {
-    /* while loading, this would get overrided */
-    display: none !important;
+	/* while loading, this would get overrided */
+	display: none !important;
 }
 .your-progress-chart {
-    margin-top: -7px;
+	margin-top: -7px;
 }
 .highcharts-root,
 .highcharts-background {
-    fill: transparent !important;
+	fill: transparent !important;
 }
 text:has(> .your-progress-label-position) {
-    font-family: var(--font) !important;
-    font-size: var(--font-size) !important;
-    line-height: var(--line-height) !important;
-    font-weight: var(--font-weight) !important;
-    color: oklch(var(--c2)) !important;
-    fill: oklch(var(--c2)) !important;
+	font-family: var(--font) !important;
+	font-size: var(--font-size) !important;
+	line-height: var(--line-height) !important;
+	font-weight: var(--font-weight) !important;
+	color: oklch(var(--c2)) !important;
+	fill: oklch(var(--c2)) !important;
 }
 
 .your-progress {
-    .description {
-        font-size: 13px;
-        color: oklch(var(--c3));
-        margin-top: var(--side-action-side);
-        line-height: var(--line-height);
-        cursor: default;
+	.description {
+		font-size: 13px;
+		color: oklch(var(--c3));
+		margin-top: var(--side-action-side);
+		line-height: var(--line-height);
+		cursor: default;
 
-        & > span {
-            color: oklch(var(--c2));
-            font-weight: var(--font-weight-medium);
-        }
-    }
+		& > span {
+			color: oklch(var(--c2));
+			font-weight: var(--font-weight-medium);
+		}
+	}
 
-    .highcharts-point {
-        &[fill^="rgb(2"],
-        &[fill="#d92323"] {
-            fill: oklch(var(--l3-c)) !important;
-            stroke: oklch(var(--b5)) !important;
-            width: 7px !important;
-        }
-        &[fill^="rgb(1"],
-        &[fill="#999999"] {
-            fill: oklch(var(--l4-c)) !important;
-            stroke: oklch(var(--b5)) !important;
-            width: 7px !important;
-        }
-    }
+	.highcharts-point {
+		&[fill^="rgb(2"],
+		&[fill="#d92323"] {
+			fill: oklch(var(--l3-c)) !important;
+			stroke: oklch(var(--b5)) !important;
+			width: 7px !important;
+		}
+		&[fill^="rgb(1"],
+		&[fill="#999999"] {
+			fill: oklch(var(--l4-c)) !important;
+			stroke: oklch(var(--b5)) !important;
+			width: 7px !important;
+		}
+	}
 
-    [data-analytics-label="UpsellCTA"] {
-        display: flex;
-        text-decoration: none !important;
+	[data-analytics-label="UpsellCTA"] {
+		display: flex;
+		text-decoration: none !important;
 
-        .btn-subscribe {
-            margin-top: var(--card-gap);
-        }
-    }
+		.btn-subscribe {
+			margin-top: var(--card-gap);
+		}
+	}
 }

@@ -1,92 +1,91 @@
 .artwork-and-metadata-row,
 .album-artwork-upload-cta-container {
-    display: none !important;
+	display: none !important;
 }
 .track-overview-video-column {
-    position: relative;
-    margin-bottom: var(--card-padding);
-    margin: 0 var(--card-padding) var(--card-padding);
+	position: relative;
+	margin-bottom: var(--card-padding);
+	margin: 0 var(--card-padding) var(--card-padding);
 
-    &.visible-xs {
-        display: none !important;
-    }
+	&.visible-xs {
+		display: none !important;
+	}
 }
 .video-preview,
 .video-preview-upload-cta {
-    --bg: transparent !important;
-    --bg-hov: oklch(var(--b4) / 20%) !important;
-    --bg-atv: oklch(var(--b2), 40%) !important;
-    --shadow: none !important;
-    margin-top: unset !important;
-    border-radius: var(--item-med-radius) !important;
-    overflow: hidden;
-    box-shadow: var(--shadow) !important;
-    position: relative;
+	--bg: transparent !important;
+	--bg-hov: oklch(var(--b4) / 20%) !important;
+	--bg-atv: oklch(var(--b2), 40%) !important;
+	--shadow: none !important;
+	margin-top: unset !important;
+	border-radius: var(--item-med-radius) !important;
+	overflow: hidden;
+	box-shadow: var(--shadow) !important;
+	position: relative;
 
-    &.video-preview-upload-cta {
-        --shadow: inset 0 0 0 1px var(--card-border-base) !important;
+	&.video-preview-upload-cta {
+		--shadow: inset 0 0 0 1px var(--card-border-base) !important;
 
-        &:before {
-            display: none !important;
-        }
+		&:before {
+			display: none !important;
+		}
 
-        & > .cta-link {
-            font-size: var(--font-size);
-            line-height: var(--line-height);
-            color: oklch(var(--c2)) !important;
-            font-weight: var(--font-weight-medium) !important;
-            text-decoration: var(--force-underline, none) !important;
-            --show-icon: none;
+		& > .cta-link {
+			font-size: var(--font-size);
+			line-height: var(--line-height);
+			color: oklch(var(--c2)) !important;
+			font-weight: var(--font-weight-medium) !important;
+			text-decoration: var(--force-underline, none) !important;
+			--show-icon: none;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: unset;
-        }
-    }
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: unset;
+		}
+	}
 
-    .video-preview-playlink {
-        height: unset;
-        padding: unset;
-        aspect-ratio: 16 / 9;
-    }
+	.video-preview-playlink {
+		height: unset;
+		padding: unset;
+		aspect-ratio: 16 / 9;
+	}
 
-    & > .link-block-cover-link,
-    & > .cta-link {
-        position: absolute;
-        inset: 0;
-    }
+	& > .link-block-cover-link,
+	& > .cta-link {
+		position: absolute;
+		inset: 0;
+	}
 
-    .video-preview {
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-        box-shadow: none;
-        position: static !important;
-    }
+	.video-preview {
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		box-shadow: none;
+		position: static !important;
+	}
 }
 .video-actions {
-    gap: var(--card-gap) !important;
-    margin: var(--card-gap) 0 0 0 !important;
+	gap: var(--card-gap) !important;
+	margin: var(--card-gap) 0 0 0 !important;
 }
 
 .video-preview-upload-cta.link-block {
-    font-size: 0 !important;
-    line-height: 0 !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
 }
 
 .video-preview-replace {
-    margin-top: unset;
+	margin-top: unset;
 }
 
-
 .video-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: default;
-    gap: 6px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: default;
+	gap: 6px;
 
-    font-weight: var(--font-weight-medium);
-    color: oklch(var(--c3));
-    padding: calc(var(--card-padding) * 2) var(--card-padding) !important;
+	font-weight: var(--font-weight-medium);
+	color: oklch(var(--c3));
+	padding: calc(var(--card-padding) * 2) var(--card-padding) !important;
 }

@@ -1,40 +1,53 @@
-import { log } from "@/build/log";
-import { auth } from "@/build/page";
-import { header_colour } from "../page/colour";
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-export async function register_auth() {
-    const handler = document.body.querySelector('.site-auth > .auth-link');
-    if (handler) {
-        log('found handler', 'auth', 'info', { handler });
+import { log } from '@/build/log';
+import { auth } from '@/build/page';
+import { header_colour } from '../page/colour';
 
-        const image = handler.querySelector(':scope > .auth-avatar-desktop') as HTMLImageElement;
-        if (!image) {
-            log('no image found', 'auth', 'error', { handler });
-            return;
-        }
+export function register_auth() {
+	const handler = document.body.querySelector('.site-auth > .auth-link');
+	if (handler) {
+		log('found handler', 'auth', 'info', { handler });
 
-        const previous_avatar = auth.avatar;
+		const image = handler.querySelector(
+			':scope > .auth-avatar-desktop',
+		) as HTMLImageElement;
+		if (!image) {
+			log('no image found', 'auth', 'error', { handler });
+			return;
+		}
 
-        log('found image', 'auth', 'info', { image });
+		const previous_avatar = auth.avatar;
 
-        auth.name = image.alt;
-        auth.avatar = image.src;
-        log(`registered avatar as ${auth.avatar}, name as ${auth.name}`, 'auth', 'info', { previous_avatar, handler });
+		log('found image', 'auth', 'info', { image });
 
-        if (auth.avatar != previous_avatar) {
-            image.setAttribute('crossorigin', 'anonymous');
+		auth.name = image.alt;
+		auth.avatar = image.src;
+		log(
+			`registered avatar as ${auth.avatar}, name as ${auth.name}`,
+			'auth',
+			'info',
+			{ previous_avatar, handler },
+		);
 
-            image.onload = async () => {
-                const { hue, sat, lit } = await header_colour(image);
+		if (auth.avatar != previous_avatar) {
+			image.setAttribute('crossorigin', 'anonymous');
 
-                auth.sets.hue = hue;
-                auth.sets.sat = sat;
-                auth.sets.lit = lit;
-            }
-        }
+			image.onload = async () => {
+				const { hue, sat, lit } = await header_colour(image);
 
-        return;
-    }
+				auth.sets.hue = hue;
+				auth.sets.sat = sat;
+				auth.sets.lit = lit;
+			};
+		}
 
-    log('no handler found', 'auth', 'error');
+		return;
+	}
+
+	log('no handler found', 'auth', 'error');
 }

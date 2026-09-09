@@ -1,30 +1,30 @@
 #error {
-    font-size: 16px;
-    margin-top: var(--card-gap);
-    color: oklch(var(--c3));
-    font-weight: var(--font-weight);
-    font-family: var(--font-code);
+	font-size: 16px;
+	margin-top: var(--card-gap);
+	color: oklch(var(--c3));
+	font-weight: var(--font-weight);
+	font-family: var(--font-code);
 }
 
 #marvin {
-    margin: 30px 0 calc(30px - var(--card-gap));
+	margin: 30px 0 calc(30px - var(--card-gap));
 }
 
 .grid {
-    margin-top: var(--card-gap);
-    padding-top: var(--card-gap);
-    border-top: 1px solid oklch(var(--b4));
-    margin-bottom: unset;
+	margin-top: var(--card-gap);
+	padding-top: var(--card-gap);
+	border-top: 1px solid oklch(var(--b4));
+	margin-bottom: unset;
 }
 .translation {
-    color: oklch(var(--c2));
+	color: oklch(var(--c2));
 
-    & > a {
-        font-weight: var(--font-weight);
-    }
+	& > a {
+		font-weight: var(--font-weight);
+	}
 
-    & > b {
-        font-weight: var(--font-weight);
-        color: oklch(var(--c3));
-    }
+	& > b {
+		font-weight: var(--font-weight);
+		color: oklch(var(--c3));
+	}
 }

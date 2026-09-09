@@ -1,145 +1,146 @@
 .inbox-message-view {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-padding);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-padding);
 
-    & > .inbox-message {
-        display: flex;
-        gap: var(--card-padding);
-        margin: unset;
-    }
+	& > .inbox-message {
+		display: flex;
+		gap: var(--card-padding);
+		margin: unset;
+	}
 }
 
 .inbox-message-buttons {
-    display: flex;
-    gap: var(--button-list-gap);
+	display: flex;
+	gap: var(--button-list-gap);
 
-    padding: unset !important;
-    margin: unset !important;
+	padding: unset !important;
+	margin: unset !important;
 }
 
 .inbox-message > .message-sender {
-    padding: 30px var(--card-padding);
-    background: linear-gradient(
-        180deg,
-        oklch(var(--h4) / 30%) 0%,
-        rgba(0, 0, 0, 0) 100%
-    );
+	padding: 30px var(--card-padding);
+	background: linear-gradient(
+		180deg,
+		oklch(var(--h4) / 30%) 0%,
+		rgba(0, 0, 0, 0) 100%
+	);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-    width: var(--message-sender-width);
-    height: 300px;
+	width: var(--message-sender-width);
+	height: 300px;
 
-    border-radius: var(--card-radius);
+	border-radius: var(--card-radius);
 
-    &:not(:hover) {
-        & > .message-sender-actions {
-            opacity: 0.4;
+	&:not(:hover) {
+		& > .message-sender-actions {
+			opacity: 0.4;
 
-            transition-property: opacity;
-            transition-duration: var(--trans);
-            transition-timing-function: var(--trans-function-ani);
-        }
-    }
+			transition-property: opacity;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function-ani);
+		}
+	}
 }
 .inbox-message > .message-content {
-    width: 100%;
-    max-width: var(--message-width);
+	width: 100%;
+	max-width: var(--message-width);
 }
 
 .message-reply-section {
-    position: relative;
-    padding-top: calc(var(--card-padding) + 1px);
+	position: relative;
+	padding-top: calc(var(--card-padding) + 1px);
 
-    &:before {
-        content: '';
-        position: absolute;
-        display: block;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: var(--separator);
+	&:before {
+		content: '';
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--separator);
 
-        width: calc(var(--message-sender-width) + var(--card-padding) + var(--message-width));
-    }
+		width: calc(var(--message-sender-width) + var(--card-padding) +
+			var(--message-width));
+	}
 }
 
 .inbox-message-sender-avatar {
-    width: 70px !important;
-    height: 70px !important;
-    padding: unset !important;
-    margin: unset !important;
+	width: 70px !important;
+	height: 70px !important;
+	padding: unset !important;
+	margin: unset !important;
 
-    --mask-size: var(--cover-size-70);
+	--mask-size: var(--cover-size-70);
 }
 .inbox-message-sender-name {
-    text-align: center;
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: var(--font-weight-medium);
+	text-align: center;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: var(--font-weight-medium);
 
-    margin-top: var(--card-gap);
-    margin-bottom: 4px;
+	margin-top: var(--card-gap);
+	margin-bottom: 4px;
 }
 .inbox-message-timestamp {
-    text-align: center;
-    font-size: calc(var(--font-size) - 1px);
-    line-height: var(--line-height);
-    color: oklch(var(--c3));
-    cursor: default;
+	text-align: center;
+	font-size: calc(var(--font-size) - 1px);
+	line-height: var(--line-height);
+	color: oklch(var(--c3));
+	cursor: default;
 }
 
 .message-sender-actions {
-    margin-top: var(--card-padding);
+	margin-top: var(--card-padding);
 
-    transition: none;
+	transition: none;
 }
 .message-sender-action {
-    --bg: transparent;
-    --bg-hov: oklch(var(--h3) / 20%);
-    --bg-atv: oklch(var(--h3) / 40%);
-    --shadow: none;
+	--bg: transparent;
+	--bg-hov: oklch(var(--h3) / 20%);
+	--bg-atv: oklch(var(--h3) / 40%);
+	--shadow: none;
 }
 
 .inbox-button {
-    --bg: oklch(var(--b4) / 40%);
-    --bg-hov: oklch(var(--b4) / 60%);
-    --bg-atv: oklch(var(--b4) / 80%);
-    --shadow: none;
+	--bg: oklch(var(--b4) / 40%);
+	--bg-hov: oklch(var(--b4) / 60%);
+	--bg-atv: oklch(var(--b4) / 80%);
+	--shadow: none;
 }
 
 .inbox-message-view .inbox-message {
-    height: 100%;
+	height: 100%;
 }
 
 .inbox-message-view .inbox-message-preview,
 .inbox-message-view .inbox-message-info {
-    margin: initial;
-    padding: unset;
-    float: unset;
-    width: var(--message-width);
+	margin: initial;
+	padding: unset;
+	float: unset;
+	width: var(--message-width);
 }
 .inbox-message-view .inbox-message-message blockquote {
-    background: oklch(var(--b4) / 40%);
-    border: none;
-    border-radius: var(--item-med-radius);
-    margin: 0 0 var(--card-gap) 0;
-    padding: var(--card-padding);
+	background: oklch(var(--b4) / 40%);
+	border: none;
+	border-radius: var(--item-med-radius);
+	margin: 0 0 var(--card-gap) 0;
+	padding: var(--card-padding);
 }
 .inbox-message-view .inbox-message-message blockquote cite {
-    color: oklch(var(--c3));
-    display: block;
+	color: oklch(var(--c3));
+	display: block;
 }
 
 .inbox-message-view .form-group-controls {
-    width: 600px !important;
+	width: 600px !important;
 }
 
 .inbox-table-legacy {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
