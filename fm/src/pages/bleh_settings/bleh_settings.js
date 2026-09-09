@@ -1033,9 +1033,7 @@ function confirm_reset() {
 	useSettings.rebuild();
 	load_settings();
 
-	dialog_rm({
-		id: 'reset_settings',
-	});
+	window.location.reload();
 }
 
 function activity_preview() {

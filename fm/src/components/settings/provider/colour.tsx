@@ -359,6 +359,17 @@ export function SettingColour({
 					sat: colour.sat,
 					lit: colour.lit,
 				},
+				displays: {
+					hue: colour.hue == settings_store.hue.default
+						? `var(--hue-seasonal, ${settings_store.hue.default})`
+						: String(colour.hue),
+					sat: colour.sat == settings_store.sat.default
+						? `var(--sat-seasonal, ${settings_store.sat.default})`
+						: String(colour.sat),
+					lit: colour.lit == settings_store.lit.default
+						? `var(--lit-seasonal, ${settings_store.lit.default})`
+						: String(colour.lit),
+				},
 			},
 			...seasonal,
 		];

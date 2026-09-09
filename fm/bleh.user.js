@@ -105662,6 +105662,11 @@ var bleh = (() => {
             hue: colour.hue,
             sat: colour.sat,
             lit: colour.lit
+          },
+          displays: {
+            hue: colour.hue == settings_store.hue.default ? `var(--hue-seasonal, ${settings_store.hue.default})` : String(colour.hue),
+            sat: colour.sat == settings_store.sat.default ? `var(--sat-seasonal, ${settings_store.sat.default})` : String(colour.sat),
+            lit: colour.lit == settings_store.lit.default ? `var(--lit-seasonal, ${settings_store.lit.default})` : String(colour.lit)
           }
         },
         ...seasonal2
@@ -111828,9 +111833,7 @@ var bleh = (() => {
     set_storage("bleh", JSON.stringify(settings));
     useSettings.rebuild();
     load_settings();
-    dialog_rm({
-      id: "reset_settings"
-    });
+    window.location.reload();
   }
   function theme_bubbles(func = null) {
     const theme_preview = () => html.node`
@@ -125485,7 +125488,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-09T16:14:32.053Z"
+    built_on: "2026-09-09T16:33:27.941Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
