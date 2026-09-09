@@ -21,13 +21,10 @@ import {
 	correct_item_by_artist,
 	name_includes,
 	smart_artists,
-	smart_title,
 } from '@/components/music/lotus';
-import { register_menu } from '@/components/menu';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { redirect } from '@/components/music/music';
-import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
@@ -1123,7 +1120,7 @@ export function patch_titles(search = page.structure.main) {
 									tooltip={tl(
 										trans.explore_in_library,
 									)}
-									href={`${root}user/${user}/library${
+									href={`${root}user/${user}/library/music/${redirect()}${
 										sanitise(track_artist)
 									}`}
 								>

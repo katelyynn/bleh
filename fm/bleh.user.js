@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0909
+// @version      2026.0909.1
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -79681,7 +79681,7 @@ var bleh = (() => {
                       chibi: true,
                       onClick: close_menus,
                       tooltip: tl2(trans.explore_in_library),
-                      href: `${root}user/${user}/library${sanitise(track_artist)}`,
+                      href: `${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}`,
                       children: [
                         /* @__PURE__ */ jsx(Icon, {
                           name: icons.arrow_right
@@ -125079,7 +125079,7 @@ var bleh = (() => {
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0909",
+    build: "2026.0909.1",
     sku: "yuzu",
     bio: "bleh!!! ^-^",
     author: "katelyn",
@@ -125485,7 +125485,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-09T00:24:04.274Z"
+    built_on: "2026-09-09T16:14:32.053Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
