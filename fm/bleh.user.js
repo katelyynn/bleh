@@ -49581,7 +49581,7 @@ var bleh = (() => {
       pl: "Musisz by\u0107 zalogowany/a"
     },
     oracle_notice: {
-      en: "You are testing \u2018oracle\u2019",
+      en: "You are an oracle tester",
       de: "Du testest gerade \u201Eoracle\u201C, eine neu gestaltete Album- und Titelseite",
       es: "Est\xE1s actualmente probando \u2018oracle\u2019, un estilo redise\xF1ado de \xE1lbumes y temas",
       it: "Stai provando \u2018oracle\u2019, una vista di album e brani ridisegnata",
@@ -125485,7 +125485,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-09T00:18:30.647Z"
+    built_on: "2026-09-09T00:24:04.274Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
