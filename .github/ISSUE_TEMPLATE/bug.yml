@@ -1,0 +1,77 @@
+name: "🐞 Bug Report"
+description: Report an issue with bleh
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "sorry you are having trouble >~<"
+
+  - type: textarea
+    id: explanation
+    attributes:
+      label: What happened?
+      description: Please mention what you were trying to do and what you expected to happen! (post screenshots if applicable)
+    validations:
+      required: true
+
+  - type: input
+    id: bleh-version
+    attributes:
+      label: bleh version
+      description: What version of bleh are you using?
+      placeholder: find in the top left
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: What browser are you using with bleh? (if it's not listed, chances are it's based on Chrome!)
+      options: ["Firefox", "Chrome", "Safari"]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: extension
+    attributes:
+      label: Extension
+      description: What extension are you using with bleh?
+      options: ["Violentmonkey", "Tampermonkey"]
+    validations:
+      required: true
+
+  - type: input
+    id: username
+    attributes:
+      label: Last.fm username
+      description: Enter your Last.fm username
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pro
+    attributes:
+      label: Last.fm Pro
+      description: Are you subscribed to Last.fm Pro? (some issues can be specific to Pro users!)
+      options: ["Yes", "No"]
+    validations:
+      required: true
+
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: Which language do you have selected in bleh?
+      value: English
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Checklist
+      options:
+        - label: I've searched existing issues and this hasn't been reported before
+          required: true
+        - label: I did NOT write this issue with an LLM
+          required: true

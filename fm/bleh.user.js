@@ -39208,16 +39208,20 @@ var bleh = (() => {
         en: "This badge is specially reserved"
       },
       cute: {
-        en: "The creator of bleh"
+        en: "The creator of bleh",
+        pt: "A criadora do bleh"
       },
       sponsor: {
-        en: "{u} sponsors the development of bleh"
+        en: "{u} sponsors the development of bleh",
+        pt: "{u} apoia o desenvolvimento do bleh"
       },
       contributor: {
-        en: "{u} contributed to the development of bleh"
+        en: "{u} contributed to the development of bleh",
+        pt: "{u} contribuiu para o desenvolvimento do bleh"
       },
       translation: {
-        en: "{u} helped in translating bleh"
+        en: "{u} helped in translating bleh",
+        pt: "{u} ajudou na tradu\xE7\xE3o do bleh"
       }
     },
     requires_higher_bleh_version: {
@@ -42699,7 +42703,7 @@ var bleh = (() => {
       de: "Sponsoren- und Abzeichendaten-Version {v}",
       es: "Versi\xF3n de datos de patrocinio y emblemas",
       it: "Versione dei dati di sponsor e distintivi {v}",
-      pt: "Vers\xE3o da data de apoiador e emblemas",
+      pt: "Vers\xE3o da data de apoiador e emblemas {v}",
       sv: "Sponsor-och-emblemdata, version {v}",
       ru: "\u0414\u0430\u043D\u043D\u044B\u0435 \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u0445 \u0438 \u0437\u043D\u0430\u0447\u043A\u0430\u0445, \u0432\u0435\u0440\u0441\u0438\u044F {v}",
       pl: "Dane sponsora i odznaki, wersja {v}"
@@ -50556,14 +50560,17 @@ var bleh = (() => {
     },
     developer_mode: {
       name: {
-        en: "Developer mode"
+        en: "Developer mode",
+        pt: "Modo de desenvolvedor"
       },
       body: {
-        en: "Enable developer-specific features used for debugging purposes"
+        en: "Enable developer-specific features used for debugging purposes",
+        pt: "Ative recursos espec\xEDficos de desenvolvedor usados para fins de depura\xE7\xE3o"
       }
     },
     developer_setting_names: {
-      en: "Show internal setting ids"
+      en: "Show internal setting ids",
+      pt: "Mostrar IDs internos das configura\xE7\xF5es"
     },
     show_scroller: {
       en: "Show page scrollbar"
@@ -126211,23 +126218,23 @@ chroma-js/chroma.js:
    * @license
    *
    * chroma.js - JavaScript library for color conversions
-   * 
+   *
    * Copyright (c) 2011-2017, Gregor Aisch
    * All rights reserved.
-   * 
+   *
    * Redistribution and use in source and binary forms, with or without
    * modification, are permitted provided that the following conditions are met:
-   * 
+   *
    * 1. Redistributions of source code must retain the above copyright notice, this
    *    list of conditions and the following disclaimer.
-   * 
+   *
    * 2. Redistributions in binary form must reproduce the above copyright notice,
    *    this list of conditions and the following disclaimer in the documentation
    *    and/or other materials provided with the distribution.
-   * 
+   *
    * 3. The name Gregor Aisch may not be used to endorse or promote products
    *    derived from this software without specific prior written permission.
-   * 
+   *
    * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -126242,20 +126249,20 @@ chroma-js/chroma.js:
    *)
   (**
   	ColorBrewer colors for chroma.js
-  
-  	Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The 
+
+  	Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The
   	Pennsylvania State University.
-  
-  	Licensed under the Apache License, Version 2.0 (the "License"); 
+
+  	Licensed under the Apache License, Version 2.0 (the "License");
   	you may not use this file except in compliance with the License.
-  	You may obtain a copy of the License at	
+  	You may obtain a copy of the License at
   	http://www.apache.org/licenses/LICENSE-2.0
-  
+
   	Unless required by applicable law or agreed to in writing, software distributed
   	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
   	CONDITIONS OF ANY KIND, either express or implied. See the License for the
   	specific language governing permissions and limitations under the License.
-  
+
       @preserve
    *)
 
