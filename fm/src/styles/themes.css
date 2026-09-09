@@ -985,7 +985,7 @@ u,
 	--g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
 	--s3: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
-	--s4: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
+	--s4: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
 
 	--p3: var(--s4);
 
