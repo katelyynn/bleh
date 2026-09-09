@@ -101261,7 +101261,9 @@ var bleh = (() => {
     if (!parent) avatar4.classList.add("avatar-can-hoverbox");
     else parent.classList.add("parent-can-hoverbox");
     let pre_existing_badge_type;
-    if (pre_existing_badge) pre_existing_badge_type = pre_existing_badge.classList[1].replace("avatar-status-dot--", "user-status-");
+    if (pre_existing_badge) {
+      pre_existing_badge_type = pre_existing_badge.classList[1].replace("avatar-status-dot--", "user-status-");
+    }
     if (pre_existing_badge_type == "user-follow") {
       pre_existing_badge = null;
       pre_existing_badge_type = null;
@@ -101283,7 +101285,9 @@ var bleh = (() => {
         ];
       }
     }
-    if (badges.length > 0) avatar4.appendChild(create_badge(badges[badges.length - 1], true));
+    if (badges.length > 0) {
+      avatar4.appendChild(create_badge(badges[badges.length - 1], true));
+    }
     let image_header;
     const popup2 = tippy_esm_default(parent ? parent : avatar4, {
       theme: "context-menu",
@@ -125497,7 +125501,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-09T16:41:16.778Z"
+    built_on: "2026-09-09T16:42:38.357Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

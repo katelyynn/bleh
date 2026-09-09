@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "bleh",
-	"version": "2026.909",
+	"version": "2026.909.1",
 	"description": "bleh!!! ^-^",
 	"icons": {
 		"16": "icon-16.png",
