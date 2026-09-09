@@ -12514,6 +12514,9 @@ export const trans = {
 	markdown_disabled_profile: {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
 	},
+	empty_list: {
+		en: 'This list is empty',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

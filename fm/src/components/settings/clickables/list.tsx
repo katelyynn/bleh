@@ -27,6 +27,10 @@ export function List({
 	);
 }
 
+export function EmptyListText() {
+	return <p class='empty-list-text'>{tl(trans.empty_list)}</p>;
+}
+
 interface ListItemProps {
 	icon?: string;
 	name: string;

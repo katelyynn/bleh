@@ -15,6 +15,7 @@ import { tl, translation } from '@/build/trans.ts';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { useSettings } from '@/page.ts';
 import {
+	EmptyListText,
 	List,
 	ListAdd,
 	ListCandidate,
@@ -145,20 +146,24 @@ export function SettingList({
 				/>
 				<List>
 					<List ref={inner_list}>
-						{value!.map((val, i) => (
-							<ListItem
-								icon={values[val]?.icon}
-								name={values[val] ? tl(values[val].name) : val}
-								onRemove={() => {
-									const new_list = value!.filter((item) =>
-										item != val
-									);
+						{value!.length > 0
+							? value!.map((val, i) => (
+								<ListItem
+									icon={values[val]?.icon}
+									name={values[val]
+										? tl(values[val].name)
+										: val}
+									onRemove={() => {
+										const new_list = value!.filter((item) =>
+											item != val
+										);
 
-									set(new_list);
-								}}
-								key={i}
-							/>
-						))}
+										set(new_list);
+									}}
+									key={i}
+								/>
+							))
+							: <EmptyListText />}
 					</List>
 					{!predefined
 						? (
