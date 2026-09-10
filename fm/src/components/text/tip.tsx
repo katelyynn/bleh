@@ -11,6 +11,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface CardTipProps {
 	ref?: ReturnType<typeof createRef<HTMLLabelElement>>;
+	minWidth?: boolean;
 	className?: string;
 	gap?: boolean;
 	children: ReactNode;
@@ -18,12 +19,13 @@ interface CardTipProps {
 
 export function CardTip({
 	ref,
+	minWidth,
 	className,
 	gap,
 	children,
 }: CardTipProps) {
 	return (
-		<label class={['card-tip', gap && 'gap', className]} ref={ref}>
+		<label class={['card-tip', gap && 'gap', className, minWidth && 'min-width']} ref={ref}>
 			{children}
 		</label>
 	);

@@ -115,7 +115,7 @@ export function profile_tracks() {
 						<SettingRadio bind='count_bar_style' />
 						<SettingRadio bind='count_bar_axis' />
 					</SettingGroup>
-					<CardTip>{tl(trans.bleh_settings_notice)}</CardTip>
+					<CardTip minWidth>{tl(trans.bleh_settings_notice)}</CardTip>
 				</>
 			),
 		},
