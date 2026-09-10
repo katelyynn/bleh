@@ -38850,9 +38850,9 @@ var bleh = (() => {
       name: get_language_name("pl"),
       by: [
         "zaktusii",
-        "iwas15with100k",
         "P0kahontaz",
-        "livia09_"
+        "livia09_",
+        "iwas15with100k"
       ],
       last_updated: "2026-08-25"
     },
@@ -38865,9 +38865,10 @@ var bleh = (() => {
         "urwq",
         "anjoskron",
         "foognocchie",
-        "suburbanno"
+        "suburbanno",
+        "lagb2ck"
       ],
-      last_updated: "2026-08-01"
+      last_updated: "2026-09-09"
     },
     sv: {
       name: get_language_name("sv"),
@@ -38929,6 +38930,7 @@ var bleh = (() => {
       // {brand} is bleh
       // {build} and {sku} are version numbers
       type: {
+        // Home on bleh 1234.56
         en: "{page} on {brand} {build}.{sku}",
         de: "{page} auf {brand} {build}.{sku}",
         es: "{page} en {brand} {build}.{sku}",
@@ -38941,6 +38943,7 @@ var bleh = (() => {
         tr: "{page} \u2019de {brand} {build}.{sku}"
       },
       name_type: {
+        // Friends - username on bleh 1234.56
         en: "{name} - {page} on {brand} {build}.{sku}",
         de: "{name} - {page} auf {brand} {build}.{sku}",
         es: "{name} - {page} en {brand} {build}.{sku}",
@@ -38952,6 +38955,7 @@ var bleh = (() => {
         tr: "{name} - {page} \u2019de {brand} {build}.{sku}"
       },
       name_sister_type: {
+        // Album by Artist - Albums on bleh 1234.56
         en: "{name} by {sister} - {page} on {brand} {build}.{sku}",
         de: "{name} von {sister} - {page} auf {brand} {build}.{sku}",
         es: "{name} por {sister} - {page} en {brand} {build}.{sku}",
@@ -40423,7 +40427,8 @@ var bleh = (() => {
     },
     adapt_theme: {
       // matches your theme to your system theme
-      en: "Match system settings"
+      en: "Match system settings",
+      pt: "Seguir o padr\xE3o do sistema"
     },
     theme_schedule: {
       en: "Choose which theme preference to apply based on your system theme.",
@@ -40529,19 +40534,23 @@ var bleh = (() => {
     bright: {
       // light themes
       name: {
-        en: "Bright"
+        en: "Bright",
+        pt: "Claro"
       },
       body: {
-        en: "Perfect for daylight"
+        en: "Perfect for daylight",
+        pt: "Perfeito para a luz do dia"
       }
     },
     moody: {
       // dark themes
       name: {
-        en: "Moody"
+        en: "Moody",
+        pt: "Melanc\xF3lico"
       },
       body: {
-        en: "Get cosy under the moonlight"
+        en: "Get cosy under the moonlight",
+        pt: "Aconchegue-se sob o luar"
       }
     },
     colours: {
@@ -40557,7 +40566,8 @@ var bleh = (() => {
       zh: "\u989C\u8272"
     },
     edit_colour: {
-      en: "Edit colour"
+      en: "Edit colour",
+      pt: "Editar cor"
     },
     adaptive: {
       en: "Adaptive",
@@ -42856,7 +42866,8 @@ var bleh = (() => {
       pl: "Jeste\u015B sponsorem, wielkie dzi\u0119ki! :3"
     },
     sponsor_get_badge: {
-      en: "A sponsorship gives you awesome profile perks visible to all bleh users"
+      en: "A sponsorship gives you awesome profile perks visible to all bleh users",
+      pt: "Um patroc\xEDnio oferece vantagens incr\xEDveis para o seu perfil, vis\xEDveis a todos os usu\xE1rios do bleh"
     },
     sponsor_monthly: {
       en: "If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile."
@@ -42905,7 +42916,8 @@ var bleh = (() => {
       pl: "Aktualna wersja"
     },
     badge_version: {
-      en: "Sponsor list version"
+      en: "Sponsor list version",
+      pt: "Vers\xE3o da lista de apoiadores"
     },
     updating_to_version: {
       en: "Updating to version",
@@ -44850,7 +44862,8 @@ var bleh = (() => {
       }
     },
     lotus_edit_notice: {
-      en: "This is visual-only, your scrobbles will not be actually modified."
+      en: "This is visual-only, your scrobbles will not be actually modified.",
+      pt: "Isso \xE9 apenas visual, seus scrobbles n\xE3o ser\xE3o realmente modificados"
     },
     prefer_no_redirect: {
       name: {
@@ -50956,7 +50969,8 @@ var bleh = (() => {
       pl: "Inni u\u017Cytkownicy"
     },
     count_bar_right: {
-      en: "Text location"
+      en: "Text location",
+      pt: "Posi\xE7\xE3o do texto"
     },
     better_with_friends: {
       en: "Music is better with friends, {a}add to your close friends list{/a}",
@@ -51243,76 +51257,96 @@ var bleh = (() => {
       pl: "Poka\u017C pasek przewijania strony"
     },
     badge_only_user: {
-      en: "Owned by 1 person"
+      en: "Owned by 1 person",
+      pt: "Pertence a 1 pessoa"
     },
     badge_multiple_users: {
-      en: "Owned by {c} people"
+      en: "Owned by {c} people",
+      pt: "Pertence a {c} pessoas"
     },
     miscellaneous: {
-      en: "Miscellaneous"
+      en: "Miscellaneous",
+      pt: "Diversos"
     },
     count_bar_style: {
-      en: "Bar styling"
+      en: "Bar styling",
+      pt: "Estilo da barra"
     },
     classic: {
-      en: "Classic"
+      en: "Classic",
+      pt: "Cl\xE1ssico(a)"
     },
     minimal: {
-      en: "Minimal"
+      en: "Minimal",
+      pt: "M\xEDnimo"
     },
     motion: {
-      en: "Motion"
+      en: "Motion",
+      pt: "Movimento"
     },
     track_in_top_listeners: {
-      en: "Top listened"
+      en: "Top listened",
+      pt: "Mais ouvidos"
     },
     behaviour: {
-      en: "Behaviour"
+      en: "Behaviour",
+      pt: "Comportamento"
     },
     bleh_settings_notice: {
-      en: "These settings apply to your device and are bleh-only"
+      en: "These settings apply to your device and are bleh-only",
+      pt: "Essas configura\xE7\xF5es se aplicam ao seu dispositivo e s\xE3o exclusivas do bleh"
     },
     start_streak: {
-      en: "Start a streak to see your profile update live"
+      en: "Start a streak to see your profile update live",
+      pt: "Comece uma sequ\xEAncia para ver seu perfil ser atualizado em tempo real"
     },
     streak: {
       // a streak of artists, albums, or tracks
       // on a profile
-      en: "{v}x streak"
+      en: "{v}x streak",
+      pt: "{v}x sequ\xEAncias"
     },
     streak_high: {
       // a streak of artists, albums, or tracks
       // on a profile
       // 100 or over
-      en: "{v}+ streak or higher"
+      en: "{v}+ streak or higher",
+      pt: "{v}+ sequ\xEAncia ou maior"
     },
     streak_started: {
       // v = 2 days ago etc.
-      en: "Streak started {v}"
+      en: "Streak started {v}",
+      pt: "Sequ\xEAncia come\xE7ou {v}"
     },
     the_bleh_times: {
       // newspaper title
       // i guess like the NY times?
-      en: "The {b} Times"
+      en: "The {b} Times",
+      pt: "O {b} Times"
     },
     from: {
       // timeframe
       // from date to date
-      en: "From"
+      en: "From",
+      pt: "Desde"
     },
     to: {
       // timeframe
       // from date to date
-      en: "To"
+      en: "To",
+      pt: "a"
     },
     related_setting: {
-      en: "Related setting: {v}"
+      en: "Related setting: {v}",
+      pt: "Configura\xE7\xF5es relacionadas {v}"
     },
     markdown_disabled_profile: {
-      en: "You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}"
+      en: "You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}",
+      pt: "O Markdown est\xE1 desativado. O texto pode n\xE3o ser exibido corretamente e as decora\xE7\xF5es de perfil n\xE3o funcionar\xE3o. {v}"
     },
     empty_list: {
-      en: "This list is empty"
+      en: "This list is empty",
+      pt: "Esta lista est\xE1 vazia"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -107073,7 +107107,10 @@ var bleh = (() => {
   function Language({ code, language }) {
     const date = createRef();
     const percent = createRef();
-    if (code == "fae") return;
+    if ([
+      "en",
+      "fae"
+    ].includes(code)) return;
     const row = /* @__PURE__ */ jsx("div", {
       class: "language-row",
       children: [
@@ -125601,7 +125638,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-10T02:00:23.319Z"
+    built_on: "2026-09-10T02:12:16.567Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

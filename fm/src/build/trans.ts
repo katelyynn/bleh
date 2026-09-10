@@ -28,6 +28,10 @@ export const lastfm_languages = [
 	'tr',
 	'zh',
 ];
+
+// when translating, credit your
+// last.fm username in the 'by' list
+// and update the date!!
 export const lang_info: Record<string, language> = {
 	en: {
 		name: 'English',
@@ -56,7 +60,7 @@ export const lang_info: Record<string, language> = {
 	},
 	pl: {
 		name: get_language_name('pl'),
-		by: ['zaktusii', 'iwas15with100k', 'P0kahontaz', 'livia09_'],
+		by: ['zaktusii', 'P0kahontaz', 'livia09_', 'iwas15with100k'],
 		last_updated: '2026-08-25',
 	},
 	pt: {
@@ -110,6 +114,7 @@ export interface language {
 	missing?: number;
 }
 
+// https://github.com/katelyynn/bleh/wiki/Translations
 export const trans = {
 	comma: {
 		// yes this is just a comma
@@ -133,6 +138,7 @@ export const trans = {
 		// {brand} is bleh
 		// {build} and {sku} are version numbers
 		type: {
+			// Home on bleh 1234.56
 			en: '{page} on {brand} {build}.{sku}',
 			de: '{page} auf {brand} {build}.{sku}',
 			es: '{page} en {brand} {build}.{sku}',
@@ -145,6 +151,7 @@ export const trans = {
 			tr: '{page} ’de {brand} {build}.{sku}',
 		},
 		name_type: {
+			// Friends - username on bleh 1234.56
 			en: '{name} - {page} on {brand} {build}.{sku}',
 			de: '{name} - {page} auf {brand} {build}.{sku}',
 			es: '{name} - {page} en {brand} {build}.{sku}',
@@ -156,6 +163,7 @@ export const trans = {
 			tr: '{name} - {page} ’de {brand} {build}.{sku}',
 		},
 		name_sister_type: {
+			// Album by Artist - Albums on bleh 1234.56
 			en: '{name} by {sister} - {page} on {brand} {build}.{sku}',
 			de: '{name} von {sister} - {page} auf {brand} {build}.{sku}',
 			es: '{name} por {sister} - {page} en {brand} {build}.{sku}',
@@ -12467,7 +12475,7 @@ export const trans = {
 	},
 	miscellaneous: {
 		en: 'Miscellaneous',
-		pt: 'Diversos', 
+		pt: 'Diversos',
 	},
 	count_bar_style: {
 		en: 'Bar styling',

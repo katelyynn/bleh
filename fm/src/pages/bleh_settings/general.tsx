@@ -508,7 +508,7 @@ function Language({
 	const date = createRef();
 	const percent = createRef();
 
-	if (code == 'fae') return;
+	if (['en', 'fae'].includes(code)) return;
 
 	const row = (
 		<div class='language-row'>
