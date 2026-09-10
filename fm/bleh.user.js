@@ -124775,6 +124775,7 @@ var bleh = (() => {
     return window.location.pathname.startsWith(`${root}${url}`);
   }
   function load_page(main_content) {
+    load_settings();
     if (page.state.activity_preview_timer) {
       clearInterval(page.state.activity_preview_timer);
     }
@@ -125603,7 +125604,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-10T02:50:36.037Z"
+    built_on: "2026-09-10T16:31:40.392Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

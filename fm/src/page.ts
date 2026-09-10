@@ -476,6 +476,8 @@ export function is_url(url: string) {
 }
 
 function load_page(main_content?: HTMLElement) {
+	load_settings();
+
 	if (page.state.activity_preview_timer) {
 		clearInterval(page.state.activity_preview_timer);
 	}
