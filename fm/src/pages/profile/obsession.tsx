@@ -8,7 +8,7 @@ import { avatar, patch_avatar } from '@/components/shared/avatar';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
-import { page, root } from '@/build/page';
+import { auth, page, root } from '@/build/page';
 import { sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
@@ -25,6 +25,8 @@ import { hoshino } from '@/components/music/hoshino';
 import { header_colour } from '@/components/page/colour';
 import { icon, icons } from '@/components/shared/icon';
 import { useSettings } from '@/page.ts';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
 
 export function bleh_obsession() {
 	const obsession_container = document.querySelector('.obsession-container');
@@ -355,32 +357,35 @@ export function bleh_obsession() {
 }
 
 export function obsession_list() {
-	const section_controls = page.structure.container.querySelector(
+	const section_controls = page.structure.container!.querySelector(
 		'.section-controls',
 	);
-	let buttons;
-	if (section_controls != null) {
-		section_controls.classList.add('legacy-section-controls');
-		buttons = section_controls.querySelectorAll(':is(button, a)');
 
-		const header = page.structure.container.querySelector(
-			'.content-top-header',
-		);
-		page.structure.content_top.innerHTML = `
-            <div class="content-top-inner-wrap">
-                <div class="container content-top-lower">
-                    <h1 class="content-top-header">${header.textContent.trim()}</h1>
-                </div>
-            </div>
-        `;
+	let play: HTMLButtonElement | undefined;
+
+	if (section_controls) {
+		section_controls.classList.add('legacy-section-controls');
+
+		play = section_controls.querySelector(
+			'.obsession-history-play-all',
+		) as HTMLButtonElement;
+
+		if (play) {
+			play.classList = 'blend-v2-btn radio left-icon';
+			play.setAttribute('data-type', 'play');
+		}
 	}
 
-	const count_text = page.structure.content_top
-		.querySelector('h1')
-		.textContent.trim();
+	const header = page.structure.container!.querySelector(
+		'.content-top-header',
+	);
+
+	const count_text = header
+		?.querySelector('h1')
+		?.textContent.trim() || '';
 	const chr = count_text.indexOf('(');
 
-	let count = 0;
+	let count = '0';
 	if (chr != -1) {
 		count = count_text
 			.substring(chr)
@@ -388,50 +393,39 @@ export function obsession_list() {
 			.replace(')', '');
 	}
 
-	page.structure.nav.querySelector(
-		'.secondary-nav-item--obsessions a',
-	).appendChild(html.node`
+	page.structure.nav!.querySelector(
+		'.secondary-nav-item--obsessions > a',
+	)!.appendChild(html.node`
         <div class="new-badge count-badge">${count}</div>
     `);
 
-	const new_panel = document.createElement('section');
-	new_panel.classList.add('obsessions-panel');
-
-	const wrap = document.createElement('div');
-	wrap.classList.add('view-buttons-wrapper');
-	const button_header = document.createElement('div');
-	button_header.classList.add(
-		'view-buttons',
-		'obsession-buttons',
-		'blend',
+	const new_panel = (
+		<section class='obsessions-panel'>
+			<PanelTop>
+				<PanelHead icon={icons.obsessions}>
+					{tl(trans.obsessions)}
+				</PanelHead>
+				{page.name == auth.name && (
+					<ViewButtons accompany>
+						<SeeMore
+							blend
+							icon={icons.plus}
+							iconPlacement='left'
+							href={`${root}user/${auth.name}/obsessions/set`}
+						>
+							{tl(trans.new)}
+						</SeeMore>
+					</ViewButtons>
+				)}
+				{play && (
+					<ViewButtons>
+						{play}
+					</ViewButtons>
+				)}
+			</PanelTop>
+		</section>
 	);
-
-	buttons.forEach((button) => {
-		if (button.classList.contains('btn-sm')) {
-			button.classList = [];
-			button.setAttribute('data-type', 'obsession');
-
-			tippy(button, {
-				content: button.textContent,
-			});
-
-			button.textContent = tl(trans.obsess);
-		}
-
-		button.classList.add(
-			'btn',
-			'view-item',
-			'interact-item',
-			'obsession-top-item',
-			'icon',
-		);
-
-		button_header.appendChild(button);
-	});
-	wrap.appendChild(button_header);
-	new_panel.appendChild(wrap);
-
-	page.structure.main.appendChild(new_panel);
+	page.structure.main!.appendChild(new_panel);
 
 	//
 
@@ -442,7 +436,7 @@ export function obsession_list() {
 		'obsessions-grid',
 	);
 
-	const items = page.structure.container.querySelectorAll(
+	const items = page.structure.container!.querySelectorAll(
 		'.obsession-history-item',
 	);
 	items.forEach((item) => {
@@ -536,11 +530,11 @@ export function obsession_list() {
 
 	new_panel.appendChild(grid);
 
-	const no_data = page.structure.container.querySelector(
+	const no_data = page.structure.container!.querySelector(
 		'.no-data-message--obsession-history',
 	);
 	if (no_data) wrap.after(no_data);
 
-	const pagination = page.structure.container.querySelector('.pagination');
+	const pagination = page.structure.container!.querySelector('.pagination');
 	if (pagination) new_panel.appendChild(pagination);
 }

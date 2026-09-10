@@ -61314,7 +61314,7 @@ var bleh = (() => {
     function update() {
       if (entering) {
         tip.disable();
-        wrap.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        wrap2.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
           children: [
             /* @__PURE__ */ jsx("span", {
               class: "key-bind-text",
@@ -61342,22 +61342,22 @@ var bleh = (() => {
           ]
         }));
         input2.current.focus();
-        wrap.setAttribute("data-entering", "true");
+        wrap2.setAttribute("data-entering", "true");
       } else {
         if (keymap[value]) {
           tip.enable();
         } else {
           tip.disable();
         }
-        wrap.replaceChildren(/* @__PURE__ */ jsx("span", {
+        wrap2.replaceChildren(/* @__PURE__ */ jsx("span", {
           class: "key-bind-text",
           children: label(value)
         }));
-        wrap.removeAttribute("data-entering");
+        wrap2.removeAttribute("data-entering");
         tip.setContent(tooltip(value));
       }
     }
-    const wrap = /* @__PURE__ */ jsx("kbd", {
+    const wrap2 = /* @__PURE__ */ jsx("kbd", {
       class: [
         "key-bind",
         interact && "key-bind-interactable",
@@ -61374,7 +61374,7 @@ var bleh = (() => {
         children: label(value)
       })
     });
-    const tip = tippy_esm_default(wrap, {
+    const tip = tippy_esm_default(wrap2, {
       content: tooltip(value),
       delay: [
         1200,
@@ -61382,7 +61382,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap, "key", {
+    Object.defineProperty(wrap2, "key", {
       get() {
         return value;
       },
@@ -61405,7 +61405,7 @@ var bleh = (() => {
       if (keymap[value2]) return keymap[value2];
       return value2.toUpperCase();
     }
-    return wrap;
+    return wrap2;
   }
   function KeybindList({ ref: ref2, text: text4, children }) {
     return /* @__PURE__ */ jsx("div", {
@@ -61436,7 +61436,7 @@ var bleh = (() => {
   function Input({ ref: ref2, className: className2, value = "", placeholder, name, min: min3, length, disabled, type = "text", onChange, onSubmit, saveManually = false, saveText }) {
     const input2 = createRef();
     const colour_block = createRef();
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "content-form",
         "input-container",
@@ -61525,7 +61525,7 @@ var bleh = (() => {
         if (onChange) onChange(input2.current.value);
       }
     }
-    Object.defineProperty(wrap, "value", {
+    Object.defineProperty(wrap2, "value", {
       get() {
         return value;
       },
@@ -61534,7 +61534,7 @@ var bleh = (() => {
         update();
       }
     });
-    Object.defineProperty(wrap, "disabled", {
+    Object.defineProperty(wrap2, "disabled", {
       get() {
         return disabled;
       },
@@ -61544,10 +61544,10 @@ var bleh = (() => {
       }
     });
     update();
-    wrap.focus = () => {
+    wrap2.focus = () => {
       input2.current.focus();
     };
-    return wrap;
+    return wrap2;
   }
   function InputGroup({ children }) {
     return /* @__PURE__ */ jsx("div", {
@@ -62092,7 +62092,7 @@ var bleh = (() => {
     ];
     const overlay = createRef();
     const action_lookup = {};
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "markdown-field",
         shoutbox && "mini"
@@ -62185,12 +62185,12 @@ var bleh = (() => {
         })
       ]
     });
-    Object.defineProperty(wrap, "editor", {
+    Object.defineProperty(wrap2, "editor", {
       get() {
         return elem;
       }
     });
-    Object.defineProperty(wrap, "value", {
+    Object.defineProperty(wrap2, "value", {
       get() {
         return elem.value;
       },
@@ -62284,7 +62284,7 @@ var bleh = (() => {
     }
     if (shoutbox) {
       const interval = setInterval(() => {
-        if (!wrap.isConnected) {
+        if (!wrap2.isConnected) {
           clearInterval(interval);
           return;
         }
@@ -62294,7 +62294,7 @@ var bleh = (() => {
       }, 50);
     }
     update();
-    return wrap;
+    return wrap2;
   }
   function MarkdownAction({ type, name, onClick, hide: hide3 }) {
     if (hide3) return;
@@ -62538,7 +62538,7 @@ var bleh = (() => {
       checkbox.current.checked = checked;
       elem.current.setAttribute("aria-checked", checked);
     }
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "checkbox-wrap",
         className2 && className2,
@@ -62573,7 +62573,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap, "checked", {
+    Object.defineProperty(wrap2, "checked", {
       get() {
         return checked;
       },
@@ -62582,7 +62582,7 @@ var bleh = (() => {
         update();
       }
     });
-    return wrap;
+    return wrap2;
   }
 
   // src/components/settings/provider/menu/checkbox.tsx
@@ -69040,8 +69040,8 @@ var bleh = (() => {
   }
   function buildStacks(layouts2) {
     const stacks = {};
-    for (const wrap of layouts2) {
-      const { stack, pos, stackWeight } = wrap;
+    for (const wrap2 of layouts2) {
+      const { stack, pos, stackWeight } = wrap2;
       if (!stack || !STATIC_POSITIONS.includes(pos)) {
         continue;
       }
@@ -69077,7 +69077,7 @@ var bleh = (() => {
   }
   function buildLayoutBoxes(boxes) {
     const layoutBoxes = wrapBoxes(boxes);
-    const fullSize = sortByWeight(layoutBoxes.filter((wrap) => wrap.box.fullSize), true);
+    const fullSize = sortByWeight(layoutBoxes.filter((wrap2) => wrap2.box.fullSize), true);
     const left2 = sortByWeight(filterByPosition(layoutBoxes, "left"), true);
     const right2 = sortByWeight(filterByPosition(layoutBoxes, "right"));
     const top2 = sortByWeight(filterByPosition(layoutBoxes, "top"), true);
@@ -69282,7 +69282,7 @@ var bleh = (() => {
           box.beforeLayout();
         }
       });
-      const visibleVerticalBoxCount = verticalBoxes.reduce((total, wrap) => wrap.box.options && wrap.box.options.display === false ? total : total + 1, 0) || 1;
+      const visibleVerticalBoxCount = verticalBoxes.reduce((total, wrap2) => wrap2.box.options && wrap2.box.options.display === false ? total : total + 1, 0) || 1;
       const params = Object.freeze({
         outerWidth: width,
         outerHeight: height,
@@ -89443,7 +89443,7 @@ var bleh = (() => {
     if (!value) value = values.find((v) => "value" in v)?.value;
     const button2 = createRef();
     const select2 = createRef();
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "select-wrap",
         "custom-selector",
@@ -89487,7 +89487,7 @@ var bleh = (() => {
         }
       }
     });
-    Object.defineProperty(wrap, "value", {
+    Object.defineProperty(wrap2, "value", {
       get() {
         return value;
       },
@@ -89495,7 +89495,7 @@ var bleh = (() => {
         set2(val);
       }
     });
-    Object.defineProperty(wrap, "disabled", {
+    Object.defineProperty(wrap2, "disabled", {
       get() {
         return value;
       },
@@ -89577,7 +89577,7 @@ var bleh = (() => {
       }, 300);
     }
     update(true);
-    return wrap;
+    return wrap2;
   }
   function select_text(text4) {
     if (typeof text4 == "function") {
@@ -97524,13 +97524,11 @@ var bleh = (() => {
     }, 0);
   }
 
-  // src/pages/profile/obsession.js
+  // src/pages/profile/obsession.tsx
   function bleh_obsession() {
     const obsession_container = document.querySelector(".obsession-container");
     if (!obsession_container) return;
-    page.structure.container = document.body.querySelector(
-      ".page-content:not(.obsession-container .page-content)"
-    );
+    page.structure.container = document.body.querySelector(".page-content:not(.obsession-container .page-content)");
     try {
       page.structure.row = page.structure.container.querySelector(".row");
       page.structure.main = page.structure.row.querySelector(".col-main");
@@ -97544,76 +97542,47 @@ var bleh = (() => {
     update_page();
     page.structure.container.classList.add("has-cards-view");
     page.structure.content.classList.add("cards-view", "obsession-view");
-    let background = obsession_container.querySelector(
-      ".obsession-background-inner"
-    );
+    let background = obsession_container.querySelector(".obsession-background-inner");
     background = background.style.getPropertyValue("background-image").replace('url("', "").replace('")', "");
     if (!background.endsWith("/4128a6eb29f94943c9d206c08e625904.jpg")) {
       register_background(background);
-      header_colour(
-        html.node`<img src=${avatar(background, "avatar300s")} />`,
-        true
-      );
+      header_colour(html.node`<img src=${avatar(background, "avatar300s")} />`, true);
     } else {
       register_background("");
     }
-    const track_title = obsession_container.querySelector(
-      ".obsession-meta-track"
-    );
-    const track_artist = obsession_container.querySelector(
-      ".obsession-meta-artist"
-    );
-    const scrobbles = obsession_container.querySelector(
-      ".obsession-meta-scrobbles"
-    );
+    const track_title = obsession_container.querySelector(".obsession-meta-track");
+    const track_artist = obsession_container.querySelector(".obsession-meta-artist");
+    const scrobbles = obsession_container.querySelector(".obsession-meta-scrobbles");
     const link = track_title.querySelector("a").getAttribute("href");
     const by = track_artist.querySelector(".obsession-meta-artist-by");
     track_artist.removeChild(by);
     const artist_name = track_artist.querySelector("a");
     if (artist_corrections.hasOwnProperty(artist_name.textContent)) {
       const corrected_artist = artist_corrections[artist_name.textContent];
-      log(
-        `corrected ${artist_name.textContent} as ${corrected_artist}`,
-        "lotus"
-      );
+      log(`corrected ${artist_name.textContent} as ${corrected_artist}`, "lotus");
       artist_name.textContent = corrected_artist;
     }
     artist_name.classList.add("header-new-crumb");
     if (useSettings.get("format_guest_features")) {
-      const formatted = name_includes(
-        track_title.textContent.trim(),
-        artist_name.textContent
-      );
+      const formatted = name_includes(track_title.textContent.trim(), artist_name.textContent);
       page.corrected = formatted.corrected_title;
       track_title.classList.add("smart-title");
-      render(
-        track_title,
-        smart_title(formatted.song_title, formatted.song_tags)
-      );
+      render(track_title, smart_title(formatted.song_title, formatted.song_tags));
       const song_guests = formatted.song_guests;
       page.sister_others = song_guests;
       for (const guest in song_guests) {
         track_artist.innerHTML = `${track_artist.innerHTML},`;
         const guest_element = document.createElement("a");
         guest_element.classList.add("header-new-crumb");
-        guest_element.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(song_guests[guest])}`
-        );
+        guest_element.setAttribute("href", `${root}music/${redirect()}${sanitise(song_guests[guest])}`);
         guest_element.textContent = song_guests[guest];
         track_artist.appendChild(guest_element);
       }
     } else {
       if (!track_title.hasAttribute("data-kate-processed")) {
         track_title.setAttribute("data-kate-processed", "true");
-        const corrected_title = correct_item_by_artist(
-          track_title.textContent.trim(),
-          artist_name.textContent
-        );
-        log(
-          `corrected ${track_title.textContent} by ${artist_name.textContent} as ${corrected_title}`,
-          "lotus"
-        );
+        const corrected_title = correct_item_by_artist(track_title.textContent.trim(), artist_name.textContent);
+        log(`corrected ${track_title.textContent} by ${artist_name.textContent} as ${corrected_title}`, "lotus");
         if (corrected_title != track_title.textContent) {
           page.corrected = true;
         }
@@ -97628,42 +97597,33 @@ var bleh = (() => {
                 <div class="title-container">
                     <h1 class="header-new-title page-header-title"><a href="${link}">${track_title}</a></h1>
                 </div>
-                <h2 class="page-header-artist artist-for-track">${html.node([track_artist.innerHTML])}</h2>
+                <h2 class="page-header-artist artist-for-track">${html.node([
+      track_artist.innerHTML
+    ])}</h2>
             </div>
         </section>
     `;
-    page.structure.container.insertBefore(
-      track_header,
-      page.structure.container.firstElementChild
-    );
-    const video = obsession_container.querySelector(
-      ".obsession-video-container"
-    );
+    page.structure.container.insertBefore(track_header, page.structure.container.firstElementChild);
+    const video = obsession_container.querySelector(".obsession-video-container");
     if (video) track_header.after(video);
-    const obsession_reason = obsession_container.querySelector(
-      ".obsession-reason"
-    );
+    const obsession_reason = obsession_container.querySelector(".obsession-reason");
     if (obsession_reason) {
       const obsession_reason_text = obsession_reason.textContent;
       obsession_reason.textContent = obsession_reason_text.trim().substr(1).slice(0, -1);
     }
-    const obsession_author = document.querySelector(
-      ".obsession-details-intro a"
-    ).textContent;
-    const obsession_avatar = document.querySelector(
-      ".obsession-details-intro-avatar-wrap .avatar"
-    );
+    const obsession_author = document.querySelector(".obsession-details-intro a").textContent;
+    const obsession_avatar = document.querySelector(".obsession-details-intro-avatar-wrap .avatar");
     page.name = obsession_author;
-    const date = obsession_container.querySelector(
-      ".obsession-details-date-short"
-    );
+    const date = obsession_container.querySelector(".obsession-details-date-short");
     const first = obsession_container.querySelector(".obsession-first");
     const quote = html.node`
         <section class="obsession-quote sour">
             ${first ? () => {
       const elem = html.node`
                     <div class="grid-item-icon grid-item-icon-first colourful obsession-first-icon">
-                        ${icon({ name: icons.star })}
+                        ${icon({
+        name: icons.star
+      })}
                     </div>
                     `;
       tippy_esm_default(elem, {
@@ -97688,7 +97648,9 @@ var bleh = (() => {
                 </div>
                 ${scrobbles ? html.node`
                 <div class="obsession-listens icon-mask">
-                    ${html.node([scrobbles.innerHTML])}
+                    ${html.node([
+      scrobbles.innerHTML
+    ])}
                 </div>
                 ` : ""}
                 <div class="obsession-date icon-mask">
@@ -97701,33 +97663,16 @@ var bleh = (() => {
     if (manage) {
       quote.appendChild(manage);
       const trash = quote.querySelector("button");
-      trash.classList.add(
-        "see-more",
-        "left-icon",
-        "danger-subtle",
-        "colourful"
-      );
+      trash.classList.add("see-more", "left-icon", "danger-subtle", "colourful");
       trash.setAttribute("data-type", "delete");
       trash.textContent = tl2(trans.delete);
     }
-    page.structure.main.insertBefore(
-      quote,
-      page.structure.main.firstElementChild
-    );
+    page.structure.main.insertBefore(quote, page.structure.main.firstElementChild);
     const author = quote.querySelector(".obsession-author");
-    const badge = patch_avatar(
-      obsession_avatar,
-      obsession_author,
-      "",
-      author,
-      "bottom"
-    );
+    const badge = patch_avatar(obsession_avatar, obsession_author, "", author, "bottom");
     if (badge.type) {
       author.classList.add("colourful");
-      author.classList.add(
-        `user-status--bleh-${badge.type}`,
-        `user-status--bleh-user-${obsession_author}`
-      );
+      author.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${obsession_author}`);
     }
     const related = html.node`
         <section class="obsession-related sour" />
@@ -97735,10 +97680,7 @@ var bleh = (() => {
     const other_tracks = document.body.querySelector(".other-obsessions");
     if (other_tracks) {
       const header = document.createElement("h2");
-      header.textContent = tl2(trans.others_from_profile).replace(
-        "{user}",
-        obsession_author
-      );
+      header.textContent = tl2(trans.others_from_profile).replace("{user}", obsession_author);
       related.appendChild(header);
       const see_more2 = other_tracks.nextElementSibling;
       related.appendChild(other_tracks);
@@ -97777,82 +97719,57 @@ var bleh = (() => {
     }
   }
   function obsession_list() {
-    const section_controls = page.structure.container.querySelector(
-      ".section-controls"
-    );
-    let buttons;
-    if (section_controls != null) {
+    const section_controls = page.structure.container.querySelector(".section-controls");
+    let play;
+    if (section_controls) {
       section_controls.classList.add("legacy-section-controls");
-      buttons = section_controls.querySelectorAll(":is(button, a)");
-      const header = page.structure.container.querySelector(
-        ".content-top-header"
-      );
-      page.structure.content_top.innerHTML = `
-            <div class="content-top-inner-wrap">
-                <div class="container content-top-lower">
-                    <h1 class="content-top-header">${header.textContent.trim()}</h1>
-                </div>
-            </div>
-        `;
+      play = section_controls.querySelector(".obsession-history-play-all");
+      if (play) {
+        play.classList = "blend-v2-btn radio left-icon";
+        play.setAttribute("data-type", "play");
+      }
     }
-    const count_text = page.structure.content_top.querySelector("h1").textContent.trim();
+    const header = page.structure.container.querySelector(".content-top-header");
+    const count_text = header?.querySelector("h1")?.textContent.trim() || "";
     const chr = count_text.indexOf("(");
-    let count = 0;
+    let count = "0";
     if (chr != -1) {
       count = count_text.substring(chr).replace("(", "").replace(")", "");
     }
-    page.structure.nav.querySelector(
-      ".secondary-nav-item--obsessions a"
-    ).appendChild(html.node`
+    page.structure.nav.querySelector(".secondary-nav-item--obsessions > a").appendChild(html.node`
         <div class="new-badge count-badge">${count}</div>
     `);
-    const new_panel = document.createElement("section");
-    new_panel.classList.add("obsessions-panel");
-    const wrap = document.createElement("div");
-    wrap.classList.add("view-buttons-wrapper");
-    const button_header = document.createElement("div");
-    button_header.classList.add(
-      "view-buttons",
-      "obsession-buttons",
-      "blend"
-    );
-    buttons.forEach((button2) => {
-      if (button2.classList.contains("btn-sm")) {
-        button2.classList = [];
-        button2.setAttribute("data-type", "obsession");
-        tippy_esm_default(button2, {
-          content: button2.textContent
-        });
-        button2.textContent = tl2(trans.obsess);
-      }
-      button2.classList.add(
-        "btn",
-        "view-item",
-        "interact-item",
-        "obsession-top-item",
-        "icon"
-      );
-      button_header.appendChild(button2);
+    const new_panel = /* @__PURE__ */ jsx("section", {
+      class: "obsessions-panel",
+      children: /* @__PURE__ */ jsx(PanelTop, {
+        children: [
+          /* @__PURE__ */ jsx(PanelHead, {
+            icon: icons.obsessions,
+            children: tl2(trans.obsessions)
+          }),
+          page.name == auth.name && /* @__PURE__ */ jsx(ViewButtons, {
+            accompany: true,
+            children: /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              icon: icons.plus,
+              iconPlacement: "left",
+              href: `${root}user/${auth.name}/obsessions/set`,
+              children: tl2(trans.new)
+            })
+          }),
+          play && /* @__PURE__ */ jsx(ViewButtons, {
+            children: play
+          })
+        ]
+      })
     });
-    wrap.appendChild(button_header);
-    new_panel.appendChild(wrap);
     page.structure.main.appendChild(new_panel);
     const grid = document.createElement("ol");
-    grid.classList.add(
-      "grid-items",
-      "grid-items--numbered",
-      "obsessions-grid"
-    );
-    const items = page.structure.container.querySelectorAll(
-      ".obsession-history-item"
-    );
+    grid.classList.add("grid-items", "grid-items--numbered", "obsessions-grid");
+    const items = page.structure.container.querySelectorAll(".obsession-history-item");
     items.forEach((item) => {
-      let link = item.querySelector(
-        ".obsession-history-item-heading-link"
-      );
-      let artist = item.querySelector(
-        ".obsession-history-item-artist a"
-      );
+      let link = item.querySelector(".obsession-history-item-heading-link");
+      let artist = item.querySelector(".obsession-history-item-artist a");
       const artist_link = artist.getAttribute("href");
       artist = artist.textContent.trim();
       const title = link.textContent.trim();
@@ -97871,7 +97788,9 @@ var bleh = (() => {
             <li class="grid-items-item obsessions-item ${obsession_is_first ? "first" : ""}">
                 ${obsession_is_first ? html.node`
                     <div class="grid-item-icon grid-item-icon-first colourful">
-                        ${icon({ name: icons.star })}
+                        ${icon({
+        name: icons.star
+      })}
                     </div>
                 ` : ""}
                 <div class="grid-items-cover-image">
@@ -97905,9 +97824,7 @@ var bleh = (() => {
       grid.appendChild(grid_item);
     });
     new_panel.appendChild(grid);
-    const no_data = page.structure.container.querySelector(
-      ".no-data-message--obsession-history"
-    );
+    const no_data = page.structure.container.querySelector(".no-data-message--obsession-history");
     if (no_data) wrap.after(no_data);
     const pagination = page.structure.container.querySelector(".pagination");
     if (pagination) new_panel.appendChild(pagination);
@@ -99101,7 +99018,7 @@ var bleh = (() => {
       checkbox.current.checked = checked;
       elem.current.setAttribute("aria-checked", checked);
     }
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "toggle-wrap",
         className2 && className2
@@ -99134,7 +99051,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap, "checked", {
+    Object.defineProperty(wrap2, "checked", {
       get() {
         return checked;
       },
@@ -99143,7 +99060,7 @@ var bleh = (() => {
         update();
       }
     });
-    return wrap;
+    return wrap2;
   }
 
   // src/components/settings/provider/switch.tsx
@@ -99585,7 +99502,7 @@ var bleh = (() => {
       radio2.current.checked = checked;
       elem.current.setAttribute("aria-checked", checked);
     }
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "radio-cont",
         className2 && className2
@@ -99617,7 +99534,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap, "checked", {
+    Object.defineProperty(wrap2, "checked", {
       get() {
         return checked;
       },
@@ -99626,7 +99543,7 @@ var bleh = (() => {
         update();
       }
     });
-    return wrap;
+    return wrap2;
   }
 
   // src/components/settings/provider/radio.tsx
@@ -99752,7 +99669,7 @@ var bleh = (() => {
     function update() {
       radio2.current.checked = checked;
     }
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "setting",
         "standalone"
@@ -99775,7 +99692,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap, "checked", {
+    Object.defineProperty(wrap2, "checked", {
       get() {
         return checked;
       },
@@ -99784,12 +99701,12 @@ var bleh = (() => {
         update();
       }
     });
-    Object.defineProperty(wrap, "value", {
+    Object.defineProperty(wrap2, "value", {
       get() {
         return value;
       }
     });
-    return wrap;
+    return wrap2;
   }
 
   // src/pages/profile/tracks.tsx
@@ -100298,9 +100215,9 @@ var bleh = (() => {
         new_panel.classList.add("obsessions-panel");
         page.structure.main.appendChild(new_panel);
         if (buttons.length > 0) {
-          const wrap = document.createElement("div");
-          wrap.classList.add("view-buttons-wrapper");
-          wrap.innerHTML = `<div class="info"><div class="alert alert-info">Playlists are a work in progress</div></div>`;
+          const wrap2 = document.createElement("div");
+          wrap2.classList.add("view-buttons-wrapper");
+          wrap2.innerHTML = `<div class="info"><div class="alert alert-info">Playlists are a work in progress</div></div>`;
           const button_header = html.node`
                     <div class="view-buttons playlist-home-buttons blend" />
                 `;
@@ -100318,8 +100235,8 @@ var bleh = (() => {
             button2.classList.add("btn", "view-item", "interact-item", "playlist-home-top-item", "icon");
             button_header.appendChild(button2);
           });
-          wrap.appendChild(button_header);
-          new_panel.appendChild(wrap);
+          wrap2.appendChild(button_header);
+          new_panel.appendChild(wrap2);
         }
         const playlists = page.structure.container.querySelector(".playlisting-playlists");
         if (playlists) {
@@ -105022,7 +104939,7 @@ var bleh = (() => {
       theme.theme_night = val;
       update();
     });
-    const wrap = /* @__PURE__ */ jsx(Fragment, {
+    const wrap2 = /* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(SettingGroup, {
           children: [
@@ -105114,7 +105031,7 @@ var bleh = (() => {
       });
     }
     update();
-    return wrap;
+    return wrap2;
     function set2(val) {
       theme = {
         ...theme,
@@ -105271,7 +105188,7 @@ var bleh = (() => {
     const track = createRef();
     const marker = createRef();
     const working_max = max3 - min3;
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "range",
         className2 && className2
@@ -105313,7 +105230,7 @@ var bleh = (() => {
         })
       ]
     });
-    Object.defineProperty(wrap, "value", {
+    Object.defineProperty(wrap2, "value", {
       get() {
         return value;
       },
@@ -105363,7 +105280,7 @@ var bleh = (() => {
       }
     }
     update();
-    return wrap;
+    return wrap2;
   }
 
   // src/components/settings/provider/range.tsx
@@ -105778,7 +105695,7 @@ var bleh = (() => {
       requires_flag: "colour_based_on_avatar",
       label: trans.avatar
     };
-    const wrap = /* @__PURE__ */ jsx(SettingGroup, {
+    const wrap2 = /* @__PURE__ */ jsx(SettingGroup, {
       ref: ref2,
       children: [
         /* @__PURE__ */ jsx("div", {
@@ -105909,12 +105826,12 @@ var bleh = (() => {
       }));
     }
     update();
-    wrap.update = update;
+    wrap2.update = update;
     const preview = page.state.colour_preview;
     const bg_colour = window.getComputedStyle(preview).backgroundColor;
     const final = formatHex(bg_colour);
     convert2.current.value = final;
-    return wrap;
+    return wrap2;
     function set2(value) {
       if (!value.sets) return;
       value.sets.hue = Number(value.sets.hue);
@@ -114778,7 +114695,7 @@ var bleh = (() => {
     }
   }
   function NavigationPage1({ instance, side, next, notif_count, messages_count, token }) {
-    const wrap = /* @__PURE__ */ jsx("div", {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
       class: "side-page",
       "data-page": 1,
       children: [
@@ -115020,7 +114937,7 @@ var bleh = (() => {
         })
       ]
     });
-    const simple_menu = tippy_esm_default(wrap, {
+    const simple_menu = tippy_esm_default(wrap2, {
       theme: "context-menu",
       content: /* @__PURE__ */ jsx("a", {
         class: "dropdown-menu-clickable-item",
@@ -115043,8 +114960,8 @@ var bleh = (() => {
         });
       }
     });
-    register_menu(wrap, simple_menu);
-    return wrap;
+    register_menu(wrap2, simple_menu);
+    return wrap2;
   }
   function NavigationFriends({ instance, side }) {
     const starred2 = useSettings.get("starred_friend");
@@ -115178,7 +115095,7 @@ var bleh = (() => {
     });
     const buttons = [];
     const full_theme_list = getThemes();
-    const wrap = /* @__PURE__ */ jsx(Fragment, {
+    const wrap2 = /* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(Button, {
           menu: true,
@@ -115223,7 +115140,7 @@ var bleh = (() => {
       });
     }
     update();
-    return wrap;
+    return wrap2;
   }
   function NavigationTheme({ id, item, list, onChange, uuid }) {
     let active = false;
@@ -125686,7 +125603,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-10T02:32:36.019Z"
+    built_on: "2026-09-10T02:50:36.037Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
