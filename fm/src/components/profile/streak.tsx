@@ -377,7 +377,7 @@ export function ProfileStreak({
 					{
 						v: (
 							<span class='streak-count'>
-								{Math.max(highest, HIGHEST_STREAK)
+								{Math.min(highest, HIGHEST_STREAK)
 									.toLocaleString(lang)}
 							</span>
 						),
