@@ -1,7 +1,7 @@
 {
 	"brand": "bleh",
-	"build": "2026.0909.3",
-	"sku": "yuzu",
+	"build": "2026.0910",
+	"sku": "socks",
 	"bio": "bleh!!! ^-^",
 	"author": "katelyn",
 	"url": "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -406,5 +406,5 @@
 			"date": "2026-08-29"
 		}
 	},
-	"built_on": "2026-09-10T00:12:38.193Z"
+	"built_on": "2026-09-10T01:22:11.222Z"
 }
