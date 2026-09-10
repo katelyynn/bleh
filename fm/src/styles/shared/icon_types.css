@@ -28,8 +28,21 @@
 	--mask: var(--icon-16-created);
 }
 
+[data-type="more"],
 [data-type="manage"] {
 	--mask: var(--icon-16-dots);
+}
+
+[data-type="settings"] {
+	&:before {
+		rotate: 0deg;
+	}
+
+	&[aria-expanded="true"] {
+		&:before {
+			rotate: 180deg;
+		}
+	}
 }
 
 [data-type="share"] {
@@ -111,7 +124,7 @@
 		--mask: var(--icon-16-block);
 	}
 
-	[data-toggle-button-current-state="followed"] > form > & {
+	[data-toggle-button-current-state="followed"]>form>& {
 		--mask: var(--icon-16-user);
 
 		&[data-followed="true"] {

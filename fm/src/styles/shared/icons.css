@@ -153,6 +153,7 @@
 	mask-size: var(--mask-size, var(--icon-size));
 	-webkit-mask-size: var(--mask-size, var(--icon-size));
 	transition-property: var(--transition-property,
+			rotate,
 			opacity,
 			left,
 			background,

@@ -26,6 +26,8 @@ import { avatar } from '../shared/avatar';
 import { taste_artist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
 import { useSettings } from '@/page.ts';
+import { Button } from '@/components/button/button.tsx';
+import { ReactElement } from 'jsx-dom';
 
 export function redesign_profile_header(is_own_profile, is_following) {
 	if (!auth.name) return;
@@ -81,7 +83,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 		);
 
 		if (follow_button) {
-			const follow_wrap = follow_button.parentElement;
+			const follow_wrap = follow_button.parentElement as HTMLElement;
 
 			follow_button.classList.add('btn', 'side-action', 'icon-mask');
 			//follow_button.classList.remove('toggle-button', 'header-follower-btn');
@@ -98,7 +100,12 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
 			follow_wrap.classList.add('follow-combo');
 
-			friends_button(follow_wrap);
+			const chibi_buttons = <div class='chibi-side-buttons' />;
+
+			follow_wrap.appendChild(chibi_buttons);
+
+			friends_button(chibi_buttons);
+			more_button(chibi_buttons);
 		} else {
 			// ignore list
 			profile_header.appendChild(html.node`
@@ -199,16 +206,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
 				tooltip_style: 'stack',
 			});
 		}
-	}
-
-	if (!is_own_profile && !is_sponsor_host) {
-		const manage = create_profile_top_item(profile_header, {
-			name: page.name,
-			type: 'manage',
-			beta: true,
-			action: 'button',
-		});
-		manage_user(manage);
 	}
 
 	if (!page.mobile) {
@@ -571,7 +568,7 @@ export function create_profile_top_item(
 	return side_action;
 }
 
-function friends_button(parent) {
+function friends_button(parent: ReactElement) {
 	let friend_state = settings.friends.includes(page.name);
 	let star_state = useSettings.get('starred_friend') == page.name;
 
@@ -735,4 +732,20 @@ function friends_button(parent) {
 	setTimeout(() => {
 		queue_popup('close_friends', elem);
 	}, 0);
+}
+
+function more_button(parent: ReactElement) {
+	const elem = (
+		<Button
+			className='side-action side-action-small icon-mask'
+			data-type='settings'
+			type='button'
+		>
+			{tl(trans.manage)}
+		</Button>
+	);
+
+	manage_user(elem);
+
+	parent.appendChild(elem);
 }
