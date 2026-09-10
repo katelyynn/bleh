@@ -15,6 +15,8 @@ import { settings } from '@/build/config';
 import { ReactElement } from 'jsx-dom';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 import { SymbolPresets } from '@/pages/music/presets.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { LinkTooltip } from '@/components/text/link.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -472,6 +474,8 @@ export function patch_wiki_contents(wiki_block: ReactElement) {
 
 		if (!href.startsWith(root)) {
 			if (href && is_link_external(href)) {
+				link.classList.add('links-externally', 'icon-after');
+
 				const url = new URL(href);
 				const scheme = url.protocol;
 				const hostname = url.hostname;
@@ -490,47 +494,17 @@ export function patch_wiki_contents(wiki_block: ReactElement) {
 				});
 
 				if (link.textContent != href) {
-					tippy(link, {
-						theme: 'name-sister-combo',
-						content: html.node`
-                            <span class="name">
-                                <span class="link">
-                                    ${
-							scheme != 'https:'
-								? html.node`
-                                    <span class="scheme">
-                                        ${scheme}//
-                                    </span>
-                                    `
-								: ''
-						}
-                                    ${
-							hostname
-								? html.node`
-                                    <span class="hostname">
-                                        ${hostname}
-                                    </span>
-                                    `
-								: html.node`
-                                    <span class="hostname">
-                                        ${path}
-                                    </span>
-                                    `
-						}
-                                    ${
-							path != '/' && hostname
-								? html.node`
-                                    <span class="path">
-                                        ${path}
-                                    </span>
-                                    `
-								: ''
-						}
-                                </span>
-                            </span>
-                            <span class="sister">${tl(trans.external)}</span>
-                        `,
-					});
+					hover_tooltip(
+						link,
+						<LinkTooltip
+							scheme={scheme}
+							hostname={hostname}
+							path={path}
+						/>,
+						{
+							placement: 'bottom',
+						},
+					);
 				}
 
 				return;
