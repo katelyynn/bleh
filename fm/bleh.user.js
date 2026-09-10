@@ -107151,18 +107151,27 @@ var bleh = (() => {
       ]
     });
     if (percent.current) {
-      tippy_esm_default(percent.current, {
-        content: `${tl2(trans.amount_translated, {
-          c: language.translated?.toLocaleString()
-        })}, ${tl2(trans.missing_translated, {
-          c: language.missing?.toLocaleString()
-        })}`
-      });
+      hover_tooltip(percent.current, /* @__PURE__ */ jsx(Tooltip, {
+        children: [
+          tl2(trans.amount_translated, {
+            c: /* @__PURE__ */ jsx("strong", {
+              children: language.translated?.toLocaleString()
+            })
+          }),
+          ",",
+          " ",
+          tl2(trans.missing_translated, {
+            c: /* @__PURE__ */ jsx("strong", {
+              children: language.missing?.toLocaleString()
+            })
+          })
+        ]
+      }));
     }
     if (date.current && language.last_updated != "latest") {
-      tippy_esm_default(date.current, {
-        content: DateTime.fromISO(language.last_updated).toLocaleString(DateTime.DATE_MED)
-      });
+      hover_tooltip(date.current, /* @__PURE__ */ jsx(Tooltip, {
+        children: DateTime.fromISO(language.last_updated).toLocaleString(DateTime.DATE_MED)
+      }));
     }
     return row;
   }
@@ -110973,6 +110982,7 @@ var bleh = (() => {
     const banner_preview = createRef();
     const cache2 = await load_profile_cache_externally(auth.name);
     const profile_preview = createRef();
+    const markdown_alert = createRef();
     useSettings.on("profile_header_own", render_banner_preview);
     useSettings.on("profile_header_others", render_banner_preview);
     useSettings.on("profile_avi_background", render_banner_preview);
@@ -111043,6 +111053,13 @@ var bleh = (() => {
               ],
               children: /* @__PURE__ */ jsx(ProfileSidebar, {
                 ref: profile_preview
+              })
+            }),
+            /* @__PURE__ */ jsx(Alert, {
+              type: "danger",
+              ref: markdown_alert,
+              children: tl2(trans.markdown_disabled_profile, {
+                v: ""
               })
             }),
             /* @__PURE__ */ jsx(SettingGroup, {
@@ -111232,6 +111249,7 @@ var bleh = (() => {
     }
     function render_profile_preview() {
       profile_preview.current.update();
+      markdown_alert.current.setAttribute("data-hidden", String(useSettings.get("bio_markdown")));
     }
   }
 
@@ -115137,6 +115155,7 @@ var bleh = (() => {
       ]
     });
     function update(theme) {
+      if (page.subpage.startsWith("listening-report")) return;
       if (!theme) theme = useSettings.get("theme");
       buttons.forEach((elem) => {
         elem.active = elem.id == theme;
@@ -125607,7 +125626,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-10T17:09:24.974Z"
+    built_on: "2026-09-10T21:13:52.505Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

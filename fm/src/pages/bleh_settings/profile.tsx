@@ -39,6 +39,7 @@ import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { keys } from '@/components/settings/storage.ts';
 import { status } from '@/components/dialog/status.js';
 import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
+import { Alert } from '@/components/text/alert.tsx';
 
 export async function profile() {
 	if (!auth.name) {
@@ -67,6 +68,8 @@ export async function profile() {
 	const cache = await load_profile_cache_externally(auth.name);
 
 	const profile_preview = createRef();
+
+	const markdown_alert = createRef();
 
 	useSettings.on('profile_header_own', render_banner_preview);
 	useSettings.on('profile_header_others', render_banner_preview);
@@ -120,6 +123,11 @@ export async function profile() {
 				<div class={['inner-preview', 'pad']}>
 					<ProfileSidebar ref={profile_preview} />
 				</div>
+				<Alert type='danger' ref={markdown_alert}>
+					{tl(trans.markdown_disabled_profile, {
+						v: '',
+					})}
+				</Alert>
 				<SettingGroup>
 					<SettingSwitch bind='bio_markdown' />
 				</SettingGroup>
@@ -268,5 +276,10 @@ export async function profile() {
 
 	function render_profile_preview() {
 		profile_preview.current.update();
+
+		markdown_alert.current.setAttribute(
+			'data-hidden',
+			String(useSettings.get('bio_markdown')),
+		);
 	}
 }

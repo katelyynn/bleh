@@ -48,6 +48,7 @@ import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { createRef } from 'jsx-dom';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { Button } from '@/components/button/button.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -568,25 +569,28 @@ function Language({
 	);
 
 	if (percent.current) {
-		tippy(percent.current, {
-			content: `${
-				tl(trans.amount_translated, {
-					c: language.translated?.toLocaleString(),
-				})
-			}, ${
-				tl(trans.missing_translated, {
-					c: language.missing?.toLocaleString(),
-				})
-			}`,
-		});
+		hover_tooltip(
+			percent.current,
+			<Tooltip>
+				{tl(trans.amount_translated, {
+					c: <strong>{language.translated?.toLocaleString()}</strong>,
+				})},{' '}
+				{tl(trans.missing_translated, {
+					c: <strong>{language.missing?.toLocaleString()}</strong>,
+				})}
+			</Tooltip>,
+		);
 	}
 
 	if (date.current && language.last_updated != 'latest') {
-		tippy(date.current, {
-			content: DateTime.fromISO(language.last_updated).toLocaleString(
-				DateTime.DATE_MED,
-			),
-		});
+		hover_tooltip(
+			date.current,
+			<Tooltip>
+				{DateTime.fromISO(language.last_updated).toLocaleString(
+					DateTime.DATE_MED,
+				)}
+			</Tooltip>,
+		);
 	}
 
 	return row;
