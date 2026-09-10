@@ -1376,14 +1376,14 @@ export function append_nav() {
 							html`
 								${icon({ name: formal.icon })}
 								<div class="auth-dropdown-item-row">
-								    <span
-								        class="auth-dropdown-item-left"
-								    >
+									<span
+										class="auth-dropdown-item-left"
+									>
 								        ${formal.name}
 								    </span>
-								    <span
-								        class="auth-dropdown-item-right"
-								    >
+									<span
+										class="auth-dropdown-item-right"
+									>
 								        ${count}
 								    </span>
 								</div>
@@ -1753,6 +1753,7 @@ function NavigationPage1({
 				<Button
 					menu
 					onClick={() => toggle_theme()}
+					disabled={page.subpage.startsWith('listening-report')}
 				>
 					<Icon name={icons.theme} />
 					{tl(trans.themes.name)}
@@ -1762,6 +1763,8 @@ function NavigationPage1({
 					menu
 					chibi
 					onClick={() => {
+						if (page.subpage.startsWith('listening-report')) return;
+
 						next.current!.replaceChildren(
 							<NavigationThemes
 								side={side}
@@ -1769,6 +1772,7 @@ function NavigationPage1({
 						);
 						side.current!.setAttribute('data-page', '2');
 					}}
+					disabled={page.subpage.startsWith('listening-report')}
 					tooltip={tl(trans.more)}
 				>
 					<Icon name={icons.continue} />
@@ -2079,6 +2083,8 @@ function NavigationThemes({
 	);
 
 	function update(theme?: string) {
+		if (page.subpage.startsWith('listening-report')) return;
+
 		if (!theme) theme = useSettings.get('theme') as string;
 
 		buttons.forEach((elem) => {

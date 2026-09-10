@@ -114492,14 +114492,14 @@ var bleh = (() => {
               name: formal.icon
             })}
 								<div class="auth-dropdown-item-row">
-								    <span
-								        class="auth-dropdown-item-left"
-								    >
+									<span
+										class="auth-dropdown-item-left"
+									>
 								        ${formal.name}
 								    </span>
-								    <span
-								        class="auth-dropdown-item-right"
-								    >
+									<span
+										class="auth-dropdown-item-right"
+									>
 								        ${count2}
 								    </span>
 								</div>
@@ -114794,6 +114794,7 @@ var bleh = (() => {
             /* @__PURE__ */ jsx(Button, {
               menu: true,
               onClick: () => toggle_theme(),
+              disabled: page.subpage.startsWith("listening-report"),
               children: [
                 /* @__PURE__ */ jsx(Icon, {
                   name: icons.theme
@@ -114806,11 +114807,13 @@ var bleh = (() => {
               menu: true,
               chibi: true,
               onClick: () => {
+                if (page.subpage.startsWith("listening-report")) return;
                 next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationThemes, {
                   side
                 }));
                 side.current.setAttribute("data-page", "2");
               },
+              disabled: page.subpage.startsWith("listening-report"),
               tooltip: tl2(trans.more),
               children: [
                 /* @__PURE__ */ jsx(Icon, {
@@ -125604,7 +125607,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-10T16:31:40.392Z"
+    built_on: "2026-09-10T17:09:24.974Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
