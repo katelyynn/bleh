@@ -130,6 +130,7 @@ const CspPolicies: PolicyMap = {
 		'https://*.discord.com',
 
 		'https://i.pinimg.com',
+		'https://i.ibb.co',
 	],
 	'connect-src': [
 		"'self'",

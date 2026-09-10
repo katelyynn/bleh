@@ -8,12 +8,21 @@ import { useSettings } from '@/page.ts';
 import { markdown_options } from '@/types/markdown.ts';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { dialog, dialog_rm } from '@/components/dialog/dialog.tsx';
+import {
+	dialog,
+	dialog_rm,
+	FooterFill,
+	ModalFooter,
+} from '@/components/dialog/dialog.tsx';
 import { input } from '@/components/settings/input.ts';
 import { html } from 'lighterhtml';
+import { FormInner, GenericLabel } from '@/components/form/form.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { Input } from '@/components/input/input.tsx';
+import { proxy_image } from '@/components/markdown/proxy.tsx';
 
 interface MarkdownFieldProps {
 	ref?: ReturnType<typeof createRef<MarkdownFieldElement>>;
@@ -192,57 +201,73 @@ export function MarkdownField({
 				name: tl(trans.image),
 				func: () => {
 					return new Promise((resolve) => {
-						let link;
-						let alt;
+						const preview = createRef();
+						const link = createRef();
+						const alt = createRef();
 
 						dialog({
 							id: 'link',
 							title: tl(trans.attach_image),
-							body: html.node`
-                                <div class="new-scrobble-form">
-                                    <p class="generic-label">${
-								tl(trans.link)
-							}</p>
-                                    ${link = input({
-								type: 'text',
-								placeholder: tl(trans.example, {
-									v: 'https://link.to/an_image_here',
-								}),
-								func: () => {
-									submit_link();
-								},
-								focus: true,
-							})}
-                                    <p class="generic-label">${
-								tl(trans.text)
-							}</p>
-                                    ${alt = input({
-								type: 'text',
-								func: () => {
-									submit_link();
-								},
-							})}
-                                </div>
-                                <div class="modal-footer">
-                                <button class="see-more cancel left-icon" onclick=${() => {
-								dialog_rm({ id: 'link' });
-								resolve(null);
-							}}>
-                                    ${tl(trans.cancel)}
-                                </button>
-                                <div class="fill" />
-                                <button class="btn primary continue" onclick=${() => {
-								submit_link();
-							}}>
-                                    ${tl(trans.finish)}
-                                </button>
-                                </div>
-                            `,
+							body: (
+								<>
+									<div
+										class='markdown-image-preview'
+										ref={preview}
+									/>
+									<FormInner>
+										<GenericLabel>
+											{tl(trans.link)}
+										</GenericLabel>
+										<Input
+											placeholder={tl(trans.example, {
+												v: 'https://link.to/an_image_here',
+											}) as string}
+											onChange={(v) => {
+												preview.current.style
+													.setProperty(
+														'background-image',
+														`url(${
+															proxy_image(
+																v as string,
+															)
+														})`,
+													);
+											}}
+											onSubmit={submit_link}
+											ref={link}
+										/>
+										<GenericLabel>
+											{tl(trans.text)}
+										</GenericLabel>
+										<Input
+											onSubmit={submit_link}
+											ref={alt}
+										/>
+									</FormInner>
+									<ModalFooter>
+										<SeeMore
+											icon={icons.x}
+											iconPlacement='left'
+											onClick={() => {
+												dialog_rm({ id: 'link' });
+												resolve(null);
+											}}
+										>
+											{tl(trans.cancel)}
+										</SeeMore>
+										<FooterFill />
+										<Button primary onClick={submit_link}>
+											<SaveIcon />
+											{tl(trans.finish)}
+										</Button>
+									</ModalFooter>
+								</>
+							),
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.current.value;
+							const link_text = link.current.value;
 
 							if (!link_text) return;
 
@@ -639,7 +664,7 @@ interface Action {
 	start?: string;
 	end?: string;
 	hide?: boolean;
-	func?: () => Promise<string>;
+	func?: () => Promise<string | null>;
 	elem?: MarkdownActionElement;
 }
 
