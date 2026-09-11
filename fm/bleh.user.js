@@ -62030,6 +62030,7 @@ var bleh = (() => {
                   ]
                 })
               });
+              link.current.focus();
               function submit_link() {
                 const alt_text = alt.current.value;
                 const link_text = link.current.value;
@@ -125604,7 +125605,7 @@ var bleh = (() => {
         date: "2026-01-30"
       },
       can_report_in_menu: {
-        default: false,
+        default: true,
         name: "Can report user from menu",
         date: "2026-01-30"
       },
@@ -125645,7 +125646,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-10T21:55:56.058Z"
+    built_on: "2026-09-11T15:01:19.197Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

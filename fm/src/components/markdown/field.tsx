@@ -265,6 +265,8 @@ export function MarkdownField({
 							),
 						});
 
+						link.current.focus();
+
 						function submit_link() {
 							const alt_text = alt.current.value;
 							const link_text = link.current.value;
