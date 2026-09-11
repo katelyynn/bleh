@@ -20,6 +20,7 @@ import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
 import { useSettings } from '@/page.ts';
+import { update_branding_type } from '@/components/page/navigation.tsx';
 
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
@@ -134,6 +135,8 @@ export function update_check(force = false, btn, func) {
 					next_in: next,
 					current_time: new Date(),
 				});
+
+				update_branding_type();
 
 				if (func) func(true);
 			} catch (e) {

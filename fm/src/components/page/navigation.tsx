@@ -53,7 +53,11 @@ import {
 	ButtonCombo,
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
-import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import {
 	NavWindow,
@@ -62,6 +66,11 @@ import {
 } from '@/components/menu/nav_window.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+
+const handle_update = (e: Event) => {
+	e.preventDefault();
+	prompt_for_update();
+};
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
@@ -76,6 +85,29 @@ export function update_branding_type(state = settings.branding_type) {
 				{'Last.fm'}
 			</div>,
 		);
+	}
+
+	const update_required = bool(
+		localStorage.getItem(keys.update_required) || 'false',
+	);
+
+	if (update_required) {
+		page.state.home_link.addEventListener('onclick', handle_update);
+
+		page.state.home_link.appendChild(
+			<span class='home-version'>
+				<div class='update-container'>
+					<Icon name={icons.update} />
+				</div>
+			</span>,
+		);
+
+		hover_tooltip(
+			page.state.home_link,
+			<Tooltip>{tl(trans.update_available_to_install)}</Tooltip>,
+		);
+	} else {
+		page.state.home_link.removeEventListener('onclick', handle_update);
 	}
 }
 
@@ -274,29 +306,6 @@ export function append_nav() {
 	page.state.home_link = home_link_logo.current;
 
 	update_branding_type();
-
-	const handle_update = (e: Event) => {
-		e.preventDefault();
-		prompt_for_update();
-	};
-
-	if (update_required) {
-		home_link.current.addEventListener('onclick', handle_update);
-
-		home_link.current.appendChild(
-			<span class='home-version'>
-				<div class='update-container'>
-					<Icon name={icons.update} />
-				</div>
-			</span>,
-		);
-
-		tippy(home_link.current, {
-			content: tl(trans.update_available_to_install),
-		});
-	} else {
-		home_link.current.removeEventListener('onclick', handle_update);
-	}
 
 	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 

@@ -106261,6 +106261,7 @@ var bleh = (() => {
               children: /* @__PURE__ */ jsx(SettingOptions, {
                 name: tl2(trans.change_my_colour_when.name),
                 body: tl2(trans.change_my_colour_when.body),
+                id: "setting_change_my_colour_when",
                 children: [
                   /* @__PURE__ */ jsx(SettingCheckbox, {
                     standalone: true,
@@ -106506,6 +106507,2348 @@ var bleh = (() => {
     }
   }
 
+  // src/build/seasonal.js
+  var stored_season = {
+    id: "none",
+    new_years_eve: false
+  };
+  var seasonal_events = [
+    {
+      id: "new_years",
+      start: {
+        month: 1,
+        day: 1
+      },
+      end: {
+        month: 1,
+        day: 14
+      },
+      snowflakes: {
+        state: true,
+        count: 90
+      }
+    },
+    {
+      id: "easter",
+      start: {
+        month: 4,
+        day: 2
+      },
+      end: {
+        month: 4,
+        day: 30
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "pride",
+      start: {
+        month: 6,
+        day: 1
+      },
+      end: {
+        month: 6,
+        day: 30
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "summer",
+      start: {
+        month: 7,
+        day: 1
+      },
+      end: {
+        month: 9,
+        day: 10
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "halloween",
+      start: {
+        month: 9,
+        day: 28
+      },
+      end: {
+        month: 11,
+        day: 1
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "pre_fall",
+      start: {
+        month: 11,
+        day: 1,
+        hour: 12
+      },
+      end: {
+        month: 11,
+        day: 12
+      },
+      snowflakes: {
+        state: true,
+        count: 12
+      }
+    },
+    {
+      id: "fall",
+      start: {
+        month: 11,
+        day: 13
+      },
+      end: {
+        month: 11,
+        day: 22
+      },
+      snowflakes: {
+        state: true,
+        count: 80
+      }
+    },
+    {
+      id: "christmas",
+      start: {
+        month: 11,
+        day: 23
+      },
+      end: {
+        month: 12,
+        day: 31
+      },
+      snowflakes: {
+        state: true,
+        count: 160
+      }
+    }
+  ];
+
+  // src/components/inbox/notifications.js
+  function bleh_notification_list(list, mini = false) {
+    list.classList = "notification-list";
+    if (mini) list.classList.add("mini");
+    const notifications = list.querySelectorAll(".inbox-notifications__item");
+    notifications.forEach((notification, index3) => {
+      if (mini && index3 > 4) notification.style.display = "none";
+      const link = notification.querySelector(
+        ".inbox-notifications__item-link"
+      );
+      const href = link.getAttribute("href");
+      const active = link.classList.contains(
+        "inbox-notifications__item--highlight"
+      );
+      notification.classList = "notification";
+      if (active) notification.classList.add("active");
+      if (mini) notification.classList.add("mini");
+      let type = "shoutbox";
+      const context = {
+        name: null,
+        sister: null
+      };
+      let involved = [];
+      const strongs = link.querySelectorAll("strong");
+      let split = href.replace(root, "").split("/");
+      const avatar4 = notification.querySelector(".avatar");
+      avatar4.classList = "avatar";
+      const time4 = notification.querySelector("time");
+      let is_reply = false;
+      let others_included = 0;
+      if (href.endsWith("/obsessions/set")) {
+        type = "obsession";
+        involved.push(split[1]);
+        const desc = strongs[0].textContent;
+        const desc_split = desc.split(" \u2014 ");
+        context.type = "track";
+        context.sister = correct_artist(desc_split[0]);
+        context.name = correct_item_by_artist(
+          desc_split[1],
+          context.sister
+        );
+        patch_avatar(avatar4, involved[0]);
+      } else if (href.endsWith("/listening-report/month")) {
+        type = "listening_report";
+        involved.push(strongs[0].textContent);
+        const img = avatar4.querySelector("img");
+        img.src = auth.avatar;
+        img.alt = auth.name;
+        const label = avatar4.querySelector(".avatar-status-dot");
+        if (auth.pro) {
+          label.classList = "avatar-status-dot avatar-status-dot--subscriber";
+        } else {
+          label.remove();
+        }
+        context.type = "profile";
+        context.name = split[1];
+        patch_avatar(avatar4, split[1]);
+      } else if (href.startsWith(`${root}user/`)) {
+        context.type = "profile";
+        context.name = split[1];
+        strongs.forEach((strong, index4) => {
+          if (index4 == strongs.length - 1 && strongs.length > 1) {
+            obtain_additional_info(
+              strong.previousSibling.textContent,
+              strong.nextSibling.textContent
+            );
+            return;
+          } else if (index4 == strongs.length - 1 && strongs.length == 1) {
+            obtain_additional_info(strong.nextSibling.textContent);
+          }
+          involved.push(strong.textContent);
+        });
+        patch_avatar(avatar4, involved[0]);
+      } else if (href.startsWith(`${root}music/`)) {
+        if (split[2].startsWith("+")) {
+          context.type = "artist";
+          context.name = correct_artist(desanitise(split[1]));
+        } else if (split[2] == "_") {
+          context.type = "track";
+          context.sister = correct_artist(desanitise(split[1]));
+          context.name = correct_item_by_artist(
+            desanitise(split[3]),
+            context.sister
+          );
+        } else {
+          context.type = "album";
+          context.sister = correct_artist(desanitise(split[1]));
+          context.name = correct_item_by_artist(
+            desanitise(split[2]),
+            context.sister
+          );
+        }
+        strongs.forEach((strong, index4) => {
+          if (index4 == strongs.length - 1) {
+            obtain_additional_info(
+              strong.previousSibling.textContent,
+              strong.nextSibling.textContent
+            );
+            return;
+          }
+          involved.push(strong.textContent);
+        });
+        patch_avatar(avatar4, involved[0]);
+      } else if (href.startsWith(`${root}tag/`)) {
+        context.type = "tag";
+        context.name = split[1];
+        strongs.forEach((strong, index4) => {
+          if (index4 == strongs.length - 1) {
+            obtain_additional_info(
+              strong.previousSibling.textContent,
+              strong.nextSibling.textContent
+            );
+            return;
+          }
+          involved.push(strong.textContent);
+        });
+        patch_avatar(avatar4, involved[0]);
+      }
+      render(
+        notification,
+        html`
+				<div class="notification-avatar">${avatar4}</div>
+				${icon({ name: icons[type] })}
+				<div class="notification-content">
+				    <div class="notification-title">
+				        ${type == "shoutbox" ? html.node`
+                    ${others_included == 0 ? html.node`
+                        ${is_reply ? tl2(trans.user_replied).replace(
+          "{u}",
+          involved.join(", ")
+        ) : tl2(trans.user_commented).replace(
+          "{u}",
+          involved.join(", ")
+        )}
+                    ` : html.node`
+                        ${is_reply ? tl2(trans.users_replied).replace(
+          "{u}",
+          involved.join(", ")
+        ).replace("{c}", others_included) : tl2(trans.users_commented).replace(
+          "{u}",
+          involved.join(", ")
+        ).replace("{c}", others_included)}
+                    `}
+                    ` : type == "obsession" ? tl2(trans.obsession_expired) : type == "listening_report" ? tl2(trans.listening_report_available).replace(
+          "{m}",
+          involved[0]
+        ) : ""}
+				    </div>
+				    <div class="notification-context">
+				        ${icon({ name: icons.indent })}
+				        <span
+				            class="notification-type"
+				            data-type=${context.type}
+				        >
+				            <span
+				                class="bleh-icon"
+				                style="--icon: var(--mask)"
+				            />
+				            <span
+				                >${context.sister ? `${context.name} ${tl2(trans.by)} ${context.sister}` : context.name}</span
+				            >
+				        </span>
+				    </div>
+				</div>
+				<div class="notification-time">${time4}</div>
+				<a
+				    class="link-block-cover-link"
+				    href=${link.getAttribute("href")}
+				/>
+			`
+      );
+      function obtain_additional_info(text4, backup_text = null) {
+        const match3 = text4.match(/\d+/);
+        if (match3) others_included = parseInt(match3[0]);
+        if (text4.includes(tl2(trans.notification_replied_ctx))) {
+          is_reply = true;
+        } else if (backup_text && backup_text.trim().includes(tl2(trans.notification_replied_ctx))) {
+          is_reply = true;
+        }
+      }
+    });
+  }
+
+  // src/components/inbox/messages.js
+  function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
+    list.classList = "notification-list";
+    if (mini) list.classList.add("mini");
+    const sent_to = page.subpage == "sent_overview";
+    let selected_messages = [];
+    const messages = list.querySelectorAll(".inbox-message");
+    messages.forEach((message, index3) => {
+      if (mini && index3 > 4) message.style.display = "none";
+      const link = message.querySelector(".inbox-message-preview > a");
+      const href = link.getAttribute("href");
+      const active = message.classList.contains("inbox-message--unviewed");
+      message.classList = "notification message";
+      if (active) message.classList.add("active");
+      if (mini) message.classList.add("mini");
+      const avatar4 = message.querySelector(".avatar");
+      avatar4.classList = "avatar";
+      const id = message.querySelector("input").value;
+      const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
+      const time4 = message.querySelector(".inbox-message-timestamp");
+      const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
+      const content2 = message.querySelector(".inbox-message-message > span").textContent.trim();
+      let valentine = false;
+      if (subject.endsWith("\u2661")) {
+        for (const translation in trans.valentine) {
+          if (subject == trans.valentine[translation].replace("{u}", auth.name)) {
+            valentine = true;
+            break;
+          }
+        }
+      }
+      if (valentine) message.classList.add("valentine", "colourful");
+      patch_avatar(avatar4, author);
+      let checkbox;
+      render(
+        message,
+        html`
+				${!mini ? html.node`
+                <div class="message-checkbox">
+                    ${checkbox = toggle({
+          type: "checkbox",
+          name: "message_id",
+          id,
+          data: id,
+          func: (val) => {
+            message.setAttribute("aria-checked", val);
+            if (val) {
+              selected_messages.push(message);
+            } else {
+              selected_messages = selected_messages.filter(
+                (selected_msg) => selected_msg != message
+              );
+            }
+            if (selected_messages.length > 0) {
+              delete_btn.removeAttribute("disabled");
+            } else {
+              delete_btn.setAttribute("disabled", "true");
+            }
+          }
+        })}
+                </div>
+            ` : ""}
+				<div class="notification-avatar">${avatar4}</div>
+				${icon({ name: !valentine ? icons.message : icons.valentine })}
+				<div class="notification-content not-main">
+				    ${sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.you_sent_to)}
+                        </span>
+                    </div>
+                ` : ""}
+				    <div class="notification-title">
+				        ${author}
+				    </div>
+				    ${!sent_to ? html.node`
+                    <div class="notification-context">
+                        <span class="notification-type">
+                            ${tl2(trans.sent_to_you)}
+                        </span>
+                    </div>
+                ` : ""}
+				</div>
+				<div class="message-content">
+				    <div class="message-subject">
+				        ${subject}
+				    </div>
+				    <div class="message-summary">
+				        ${content2}
+				    </div>
+				</div>
+				<div class="notification-time">${time4}</div>
+				<a
+				    class="link-block-cover-link"
+				    href=${href}
+				/>
+			`
+      );
+      checkboxes.push(checkbox);
+    });
+  }
+
+  // src/components/menu/nav_window.tsx
+  function NavWindow({ children }) {
+    return /* @__PURE__ */ jsx(Tooltip, {
+      theme: "nav-window",
+      children
+    });
+  }
+  function NavWindowHeader({ icon: icon2, name }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "window-header",
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icon2,
+          identifier: "window_header"
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "window-title",
+          children: name
+        })
+      ]
+    });
+  }
+  function NavWindowContents({ ref: ref2, className: className2, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: [
+        "window-content",
+        className2 && className2
+      ],
+      ref: ref2,
+      children
+    });
+  }
+
+  // src/components/page/navigation.tsx
+  var handle_update = (e5) => {
+    e5.preventDefault();
+    prompt_for_update();
+  };
+  function update_branding_type(state = settings.branding_type) {
+    if (state == "bleh") {
+      page.state.home_link.replaceChildren(/* @__PURE__ */ jsx("div", {
+        class: [
+          "home-logo",
+          "bleh-logo"
+        ],
+        children: version.brand
+      }));
+    } else if (state == "lastfm") {
+      page.state.home_link.replaceChildren(/* @__PURE__ */ jsx("div", {
+        class: [
+          "home-logo",
+          "lastfm-logo"
+        ],
+        children: "Last.fm"
+      }));
+    }
+    const update_required = bool(localStorage.getItem(keys3.update_required) || "false");
+    if (update_required) {
+      page.state.home_link.addEventListener("onclick", handle_update);
+      page.state.home_link.appendChild(/* @__PURE__ */ jsx("span", {
+        class: "home-version",
+        children: /* @__PURE__ */ jsx("div", {
+          class: "update-container",
+          children: /* @__PURE__ */ jsx(Icon, {
+            name: icons.update
+          })
+        })
+      }));
+      hover_tooltip(page.state.home_link, /* @__PURE__ */ jsx(Tooltip, {
+        children: tl2(trans.update_available_to_install)
+      }));
+    } else {
+      page.state.home_link.removeEventListener("onclick", handle_update);
+    }
+  }
+  function append_nav() {
+    if (settings.developer && !page.structure.indicator) {
+      const page_indicator2 = /* @__PURE__ */ jsx("div", {
+        class: "page-indicator"
+      });
+      document.documentElement.appendChild(page_indicator2);
+      page.structure.indicator = page_indicator2;
+    }
+    if (!page.structure.loader) {
+      const loader = html.node`
+            <div class="loader">
+                <div class="loader-bar">
+                    <div class="loader-bar-fill" />
+                </div>
+            </div>
+        `;
+      document.body.appendChild(loader);
+      page.structure.loader = loader;
+    }
+    if (!page.structure.style_warning) {
+      const style_warning = /* @__PURE__ */ jsx("div", {
+        class: "style-warning",
+        style: {
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          padding: "20px",
+          background: "#fff",
+          zIndex: 1e8,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "30px"
+        },
+        children: [
+          /* @__PURE__ */ jsx("strong", {
+            children: tl2(trans.style_warning)
+          }),
+          /* @__PURE__ */ jsx("button", {
+            type: "button",
+            class: "btn-primary",
+            onClick: () => {
+              useSettings.set("branch", "uwu");
+              useSettings.set("dev", false);
+              window.location.reload();
+            },
+            children: tl2(trans.re_enable_style_loading)
+          }),
+          /* @__PURE__ */ jsx("button", {
+            type: "button",
+            class: "btn-primary",
+            onClick: () => {
+              open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
+            },
+            children: tl2(trans.check_for_updates)
+          })
+        ]
+      });
+      document.body.appendChild(style_warning);
+      page.structure.style_warning = style_warning;
+    }
+    const update_required = bool(localStorage.getItem(keys3.update_required) || "false");
+    page.state.quick_access_items = {
+      home: {
+        name: tl2(trans.home),
+        icon: icons.home,
+        url: `${root}music`
+      },
+      reports: {
+        name: tl2(trans.reports),
+        icon: icons.listening_report,
+        url: `${root}user/${auth.name}/listening-report`
+      },
+      library: {
+        name: tl2(trans.library),
+        icon: icons.library,
+        url: `${root}user/${auth.name}/library`
+      },
+      shouts: {
+        name: tl2(trans.shouts),
+        icon: icons.shoutbox,
+        url: `${root}user/${auth.name}/shoutbox`
+      },
+      events: {
+        name: tl2(trans.events),
+        icon: icons.events,
+        url: `${root}user/${auth.name}/events`
+      },
+      obsessions: {
+        name: tl2(trans.obsessions),
+        icon: icons.obsessions,
+        url: `${root}user/${auth.name}/obsessions`
+      },
+      bookmarks: {
+        name: tl2(trans.bookmarks),
+        icon: icons.bookmark,
+        url: `${root}music/+bookmarks`
+      },
+      friends: {
+        name: tl2(trans.friends),
+        icon: icons.friends,
+        url: `${root}user/${auth.name}/friends`
+      },
+      notifications: {
+        name: tl2(trans.notifications),
+        icon: icons.notifications,
+        url: `${root}inbox/notifications`
+      },
+      messages: {
+        name: tl2(trans.messages),
+        icon: icons.messages,
+        url: `${root}inbox`
+      },
+      collage: {
+        name: tl2(trans.collage),
+        icon: icons.collage,
+        url: `${root}bleh/minis/collage`
+      },
+      compare: {
+        name: tl2(trans.compare),
+        icon: icons.compare,
+        url: `${root}bleh/minis/compare`
+      },
+      scrobble: {
+        name: tl2(trans.scrobble),
+        icon: icons.plus,
+        action: () => submit_scrobble()
+      }
+    };
+    const masthead = document.body.querySelector(".masthead");
+    if (!masthead) return;
+    const inner = masthead.querySelector(".masthead-inner-wrap");
+    const masthead_logo = inner.querySelector(".masthead-logo");
+    const home_link = createRef();
+    const home_link_logo = createRef();
+    const search_wrap = createRef();
+    masthead_logo.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx("a", {
+          class: "hidden-link",
+          children: "Last.fm"
+        }),
+        /* @__PURE__ */ jsx("a", {
+          class: [
+            "btn",
+            "navigation-item",
+            "home-link"
+          ],
+          href: `${root}music`,
+          ref: home_link,
+          children: /* @__PURE__ */ jsx("span", {
+            class: "home-logo-container",
+            ref: home_link_logo
+          })
+        }),
+        /* @__PURE__ */ jsx("nav", {
+          class: [
+            "navlist",
+            "navlist--more",
+            "masthead-nav",
+            "masthead-nav-top"
+          ],
+          children: /* @__PURE__ */ jsx("ul", {
+            class: "navlist-items",
+            children: [
+              /* @__PURE__ */ jsx("a", {
+                class: [
+                  "btn",
+                  "masthead-nav-control",
+                  "icon"
+                ],
+                "data-type": "charts",
+                href: `${root}charts`,
+                children: [
+                  tl2(trans.charts),
+                  ff("aihara") && new_indicator()
+                ]
+              }),
+              /* @__PURE__ */ jsx("a", {
+                class: [
+                  "btn",
+                  "masthead-nav-control",
+                  "icon"
+                ],
+                "data-type": "minis",
+                href: `${root}bleh/minis`,
+                children: tl2(trans.minis)
+              }),
+              /* @__PURE__ */ jsx("span", {
+                class: "navlist-search",
+                ref: search_wrap
+              })
+            ]
+          })
+        })
+      ]
+    }));
+    page.state.home_link = home_link_logo.current;
+    update_branding_type();
+    const last_checked = localStorage.getItem(keys3.update_checked_date) || null;
+    const link_menu = tippy_esm_default(home_link.current, {
+      theme: "context-menu",
+      content: html.node`
+            ${setting({
+        id: "branding_type",
+        func: update_branding_type,
+        in_menu: true
+      })}
+            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
+                ${last_checked ? tl2(trans.last_checked_date, {
+        d: DateTime.fromJSDate(new Date(last_checked)).toRelative()
+      }) : tl2(trans.never_checked)}
+            </a>
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [
+        0,
+        0
+      ],
+      appendTo: document.body,
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(home_link.current, link_menu);
+    const navs = inner.querySelector(".masthead-nav-wrap");
+    const search = inner.querySelector(".masthead-search-form");
+    const form = search.querySelector(".masthead-search-field");
+    form.placeholder = tl2(trans.search);
+    const submit = search.querySelector(".masthead-search-submit");
+    submit.classList.add("btn", "chibi", "icon-mask");
+    submit.setAttribute("data-type", "search");
+    search_wrap.current.replaceChildren(/* @__PURE__ */ jsx("span", {
+      class: "navlist-search-container",
+      children: search
+    }));
+    const new_auth = masthead.querySelector(".auth-dropdown-menu");
+    const links = masthead.querySelector(".masthead-nav:not(.masthead-nav-top) .navlist-items");
+    render(links, html``);
+    const auth_link = masthead.querySelector(".masthead-nav-wrap > .site-auth .auth-link");
+    if (!auth_link) {
+      render(links, html`
+				${() => {
+        const elem = html.node`
+                        <li class="masthead-nav-item">
+                            <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                                ${tl2(trans.bleh_settings)}
+                            </a>
+                        </li>
+                    `;
+        tippy_esm_default(elem, {
+          content: tl2(trans.bleh_settings)
+        });
+        return elem;
+      }}
+			`);
+      masthead.appendChild(html.node`
+            <div class="mobile-controls">
+                <a class="btn mobile-control icon" data-type="register" href="${root}join">
+                    ${tl2(trans.sign_up)}
+                </a>
+                <a class="btn mobile-control icon" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
+                    ${tl2(trans.settings)}
+                </a>
+                <a class="btn mobile-control icon" data-type="login" href="${root}login">
+                    ${tl2(trans.log_in)}
+                </a>
+            </div>
+        `);
+      return;
+    }
+    if (auth_link.hasAttribute("data-bleh")) return;
+    auth_link.setAttribute("data-bleh", "true");
+    auth_link.classList.add("icon-r");
+    const name = html.node`
+        <p class="auth-link-name">${auth.name}</p>
+    `;
+    auth_link.appendChild(name);
+    queue_popup("navigation_menu", auth_link);
+    load_profile_cache_externally(auth.name).then((cache2) => {
+      if (cache2.username) name.textContent = cache2.username;
+    });
+    const badges = load_badges(auth.name, true);
+    if (badges) {
+      auth_link.appendChild(create_badge(badges, false, false, true));
+    } else if (auth.pro) {
+      auth_link.appendChild(html.node`
+            <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>
+        `);
+    }
+    const more_button2 = /* @__PURE__ */ jsx(Button, {
+      chibi: true,
+      className: "masthead-nav-control",
+      tooltip: tl2(trans.more),
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.more
+        }),
+        tl2(trans.more)
+      ]
+    });
+    menu_tooltip(more_button2, /* @__PURE__ */ jsx(MenuContents, {
+      children: [
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          colourful: true,
+          accented: true,
+          href: `https://discord.gg/${discord}`,
+          external: true,
+          "data-type": "discord",
+          children: [
+            /* @__PURE__ */ jsx(Icon, {}),
+            tl2(trans.join_discord)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          colourful: true,
+          accented: true,
+          className: "sponsor-related",
+          onClick: () => sponsor(),
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.sponsor
+            }),
+            tl2(trans.sponsor)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          colourful: true,
+          accented: true,
+          href: "https://github.com/katelyynn/lotus/issues/new/choose",
+          external: true,
+          "data-type": "lotus",
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.lotus
+            }),
+            tl2(trans.suggest_correction)
+          ]
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "sep"
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          href: `${root}bleh/general`,
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.update
+            }),
+            tl2(trans.updates)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => news(),
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.news
+            }),
+            tl2(trans.news)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          href: "https://github.com/katelyynn/bleh/issues",
+          external: true,
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.issue
+            }),
+            tl2(trans.report_issue)
+          ]
+        })
+      ]
+    }));
+    links.appendChild(more_button2);
+    const state = page.state.seasons;
+    console.info("season", state);
+    const bleh_container = html.node`
+        <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
+            ${tl2(trans.bleh_settings)}
+        </a>
+    `;
+    if (!state.current) {
+      tippy_esm_default(bleh_container, {
+        content: tl2(trans.bleh_settings)
+      });
+    } else {
+      page.header.season_tooltip = tippy_esm_default(bleh_container, {
+        theme: "seasonal-swatch",
+        content: html.node`
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[state.current.id])}</span>
+                <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
+            `
+      });
+    }
+    links.appendChild(bleh_container);
+    page.header.season = bleh_container;
+    if (auth.pro) {
+      let render_status_container = function(status2) {
+        if (!status2) return;
+        render(status_container.current, html`
+					<div class="status">
+						<div class="status-image">
+							<img src=${status2.avatar} alt=${status2.album}>
+						</div>
+						<div class="status-info">
+							<strong class="status-text status-title">${status2.name}</strong>
+							<p class="status-text status-artist">${status2.artist}</p>
+							<p class="status-text status-album">${status2.album}</p>
+						</div>
+					</div>
+					<div class="status-time">
+					    ${status2.active ? html.node`
+                        <p class="status-text status-time-text chartlist-now-scrobbling">
+                            ${tl2(trans.scrobbling_now)}
+                        </p>
+                    ` : html.node`
+                        <p class="status-text status-time-text inactive">
+                            ${tl2(trans.recent_scrobble)}
+                        </p>
+                    `}
+					</div>
+				`);
+      };
+      const music = /* @__PURE__ */ jsx(Button, {
+        chibi: true,
+        className: "masthead-nav-control",
+        tooltip: tl2(trans.music),
+        children: [
+          /* @__PURE__ */ jsx(Icon, {
+            name: icons.now_playing
+          }),
+          tl2(trans.music)
+        ]
+      });
+      const status_container = createRef();
+      menu_tooltip(music, /* @__PURE__ */ jsx(NavWindow, {
+        children: [
+          /* @__PURE__ */ jsx(NavWindowHeader, {
+            icon: icons.now_playing,
+            name: tl2(trans.music)
+          }),
+          /* @__PURE__ */ jsx(NavWindowContents, {
+            className: "music-status",
+            ref: status_container,
+            children: /* @__PURE__ */ jsx("div", {
+              class: "loading-data-container",
+              children: /* @__PURE__ */ jsx("div", {
+                class: "loading-data-text",
+                children: tl2(trans.loading)
+              })
+            })
+          })
+        ]
+      }), {
+        onShow: () => {
+          if (page.now.name) render_status_container(page.now);
+          live_status().then((status2) => render_status_container(status2));
+        }
+      });
+      links.appendChild(music);
+    }
+    const notif_count = Number(new_auth.querySelector('[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge')?.textContent || "0");
+    const messages_count = Number(new_auth.querySelector('[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge')?.textContent || "0");
+    const count = notif_count + messages_count;
+    if (settings.hybrid_inbox) {
+      const inbox = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
+                <div class="counter" data-count=${count}>${count}</div>
+            </a>
+        `;
+      tippy_esm_default(inbox, {
+        theme: "stack",
+        content: html.node`
+                <strong>${tl2(trans.inbox)}</strong>
+                <div class="inbox-info">
+                    <div class="inbox-info-item">
+                        ${icon({
+          name: icons.notifications,
+          identifier: "inbox-tooltip"
+        })}
+                        ${notif_count}
+                    </div>
+                    <div class="inbox-sep" />
+                    <div class="inbox-info-item">
+                        ${icon({
+          name: icons.messages,
+          identifier: "inbox-tooltip"
+        })}
+                        ${messages_count}
+                    </div>
+                </div>
+            `
+      });
+      inbox.addEventListener("click", (e5) => {
+        const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
+        const new_tab = e5.button === 1 || cmd;
+        if (!new_tab) e5.preventDefault();
+      });
+      const tabbed = createRef();
+      const pages = {
+        notifications: {
+          icon: icons.notifications,
+          label: tl2(trans.notifications),
+          content: () => {
+            return /* @__PURE__ */ jsx(Fragment, {});
+          }
+        },
+        messages: {
+          icon: icons.messages,
+          label: tl2(trans.messages),
+          content: () => {
+            return /* @__PURE__ */ jsx(Fragment, {});
+          }
+        }
+      };
+      menu_tooltip(inbox, /* @__PURE__ */ jsx(NavWindow, {
+        children: /* @__PURE__ */ jsx(NavWindowContents, {
+          children: /* @__PURE__ */ jsx(Tabbed, {
+            header: /* @__PURE__ */ jsx(PanelHead, {
+              small: true,
+              icon: icons.inbox,
+              margin: false,
+              children: tl2(trans.inbox)
+            }),
+            chibi: true,
+            ref: tabbed,
+            page: useSettings.get("inbox_view"),
+            pages
+          })
+        })
+      }), {
+        onShow: () => {
+          pages.notifications.content = () => {
+            useSettings.set("inbox_view", "notifications");
+            const elem = /* @__PURE__ */ jsx("div", {
+              class: "inbox-content"
+            });
+            page.state.inbox_content = elem;
+            page.state.notifications_content = elem;
+            page.state.messages_content = elem;
+            render_inbox();
+            return elem;
+          };
+          pages.messages.content = () => {
+            useSettings.set("inbox_view", "messages");
+            const elem = /* @__PURE__ */ jsx("div", {
+              class: "inbox-content"
+            });
+            page.state.inbox_content = elem;
+            page.state.notifications_content = elem;
+            page.state.messages_content = elem;
+            render_inbox();
+            return elem;
+          };
+          tabbed.current.update();
+        }
+      });
+      links.appendChild(inbox);
+      queue_popup("inbox", inbox);
+    } else {
+      const notifications = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="notifications" href="${root}inbox/notifications">
+                <div class="counter" data-count=${notif_count}>${notif_count}</div>
+            </a>
+        `;
+      notifications.addEventListener("click", (e5) => {
+        const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
+        const new_tab = e5.button === 1 || cmd;
+        if (!new_tab) e5.preventDefault();
+      });
+      tippy_esm_default(notifications, {
+        content: tl2(trans.notifications)
+      });
+      tippy_esm_default(notifications, {
+        content: html.node`
+                <div class="window-header">
+                    ${icon({
+          name: icons.notifications,
+          identifier: "window_header"
+        })}
+                    <div class="window-title">${tl2(trans.notifications)}</div>
+                </div>
+                <div class="window-content" />
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          page.state.notifications_content = instance.popper.querySelector(".window-content");
+          render(page.state.notifications_content, html`
+						<div class="mini-notifications content-loading">
+							<div class="loading-data-container">
+								<div class="loading-data-text">
+						            ${tl2(trans.loading)}
+						        </div>
+							</div>
+						</div>
+					`);
+          if (page.notifications.list) {
+            render_notifications(page.notifications.list, true);
+          }
+          fetch_notifications().then((notifications2) => render_notifications(notifications2, true));
+        }
+      });
+      links.appendChild(notifications);
+      const messages = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="messages" href="${root}inbox">
+                <div class="counter" data-count=${messages_count}>${messages_count}</div>
+            </a>
+        `;
+      messages.addEventListener("click", (e5) => {
+        const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
+        const new_tab = e5.button === 1 || cmd;
+        if (!new_tab) e5.preventDefault();
+      });
+      tippy_esm_default(messages, {
+        content: tl2(trans.messages)
+      });
+      tippy_esm_default(messages, {
+        content: html.node`
+                <div class="window-header">
+                    ${icon({
+          name: icons.messages,
+          identifier: "window_header"
+        })}
+                    <div class="window-title">${tl2(trans.messages)}</div>
+                </div>
+                <div class="window-content" />
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          page.state.messages_content = instance.popper.querySelector(".window-content");
+          render(page.state.messages_content, html`
+						<div class="mini-notifications content-loading">
+							<div class="loading-data-container">
+								<div class="loading-data-text">
+						            ${tl2(trans.loading)}
+						        </div>
+							</div>
+						</div>
+					`);
+          if (page.messages.list) {
+            render_messages(page.messages.list, true);
+          }
+          fetch_messages().then((messages2) => render_messages(messages2, true));
+        }
+      });
+      links.appendChild(messages);
+    }
+    function render_notifications(notifications, bypass = false) {
+      if (settings.inbox_view != "notifications" && !bypass) return;
+      bleh_notification_list(notifications, true);
+      render(page.state.notifications_content, html`
+				<div class="mini-notifications">
+				    ${notifications}
+				    <p class="more-link">
+				        <a class="see-more" href="${root}inbox/notifications">${tl2(trans.read_more)}</a>
+				    </p>
+				</div>
+			`);
+    }
+    function render_messages(messages, bypass = false) {
+      if (settings.inbox_view != "messages" && !bypass) return;
+      bleh_message_list(messages, true);
+      render(page.state.messages_content, html`
+				<div class="mini-notifications">
+				    ${messages}
+				    <p class="more-link">
+				        <a class="see-more" href="${root}inbox">${tl2(trans.read_more)}</a>
+				    </p>
+				</div>
+			`);
+    }
+    function render_inbox() {
+      const view = useSettings.get("inbox_view");
+      const content2 = page.state.inbox_content;
+      log(`rendering view ${view}`, "navigation", "info", {
+        content: content2
+      });
+      if (!content2) return;
+      render(content2, html`
+				<div class="mini-notifications content-loading">
+					<div class="loading-data-container">
+						<div class="loading-data-text">
+				            ${tl2(trans.loading)}
+				        </div>
+					</div>
+				</div>
+			`);
+      if (view == "notifications") {
+        if (page.notifications.list) {
+          render_notifications(page.notifications.list);
+        }
+        fetch_notifications().then((notifications) => render_notifications(notifications));
+      } else {
+        if (page.messages.list) render_messages(page.messages.list);
+        fetch_messages().then((messages) => render_messages(messages));
+      }
+    }
+    queue_popup("search", search);
+    const token = new_auth.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    page.token = token;
+    const auth_header = createRef();
+    const auth_bg = createRef();
+    const side = createRef();
+    const next_side = createRef();
+    let auth_menu = tippy_esm_default(auth_link, {
+      theme: "auth-menu-v2",
+      placement: "top",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      appendTo: document.body,
+      onShow: (instance) => {
+        if (!auth.avatar) {
+          notify({
+            id: "auth_broken",
+            title: "Could not open navigation menu",
+            body: "Authorisation status is invalid"
+          });
+          instance.hide();
+          return;
+        }
+        page.structure.notifications.setAttribute("data-auth-open", "true");
+        const update_required2 = localStorage.getItem("bleh_update_required") || "false";
+        let page_2;
+        const current = useSettings.get("navigation_items");
+        let length = current.length;
+        if (length < 2) length = 2;
+        const show_language = settings.navigation_language == true ? 1 : 0;
+        const gap = 1;
+        const height = (length + 3 + show_language) * (28 + gap) - gap;
+        const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
+        instance.setContent(/* @__PURE__ */ jsx(Fragment, {
+          children: [
+            bool(update_required2) && /* @__PURE__ */ jsx("div", {
+              class: "update-available-banner",
+              onClick: prompt_for_update,
+              children: [
+                /* @__PURE__ */ jsx("div", {
+                  class: "update-container",
+                  children: /* @__PURE__ */ jsx(Icon, {
+                    name: icons.update
+                  })
+                }),
+                /* @__PURE__ */ jsx("span", {
+                  children: tl2(trans.update_available_to_install)
+                })
+              ]
+            }),
+            /* @__PURE__ */ jsx("div", {
+              class: "auth-menu-v2",
+              style: {
+                "--page-height": `${height}px`
+              },
+              children: [
+                /* @__PURE__ */ jsx("div", {
+                  class: [
+                    "side",
+                    "primary"
+                  ],
+                  onClick: () => {
+                    instance.hide();
+                  },
+                  children: [
+                    /* @__PURE__ */ jsx("div", {
+                      class: "auth-bg-container",
+                      ref: auth_bg,
+                      children: !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") && /* @__PURE__ */ jsx("div", {
+                        class: "bg",
+                        style: {
+                          backgroundImage: `url(${avatar(auth.avatar, "avatar170s")})`
+                        }
+                      })
+                    }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: "auth-menu-header",
+                      children: [
+                        /* @__PURE__ */ jsx("div", {
+                          class: "avatar",
+                          children: /* @__PURE__ */ jsx("img", {
+                            src: avatar(auth.avatar, "avatar170s"),
+                            alt: auth.name
+                          })
+                        }),
+                        /* @__PURE__ */ jsx("div", {
+                          class: "name",
+                          ref: auth_header,
+                          children: [
+                            /* @__PURE__ */ jsx("span", {
+                              class: "at",
+                              children: "@"
+                            }),
+                            auth.name
+                          ]
+                        }),
+                        badges ? /* @__PURE__ */ jsx("div", {
+                          class: "badges",
+                          children: create_badge(badges, false, true, true)
+                        }) : auth.pro && /* @__PURE__ */ jsx("div", {
+                          class: "badges",
+                          children: create_badge({
+                            type: "user-status-subscriber",
+                            inbuilt: true
+                          }, false, true, true)
+                        }),
+                        /* @__PURE__ */ jsx("a", {
+                          class: "link-block-cover-link",
+                          href: `${root}user/${auth.name}`,
+                          onClick: () => {
+                            instance.hide();
+                          }
+                        })
+                      ]
+                    }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: [
+                        "floating",
+                        "button-group"
+                      ],
+                      children: [
+                        /* @__PURE__ */ jsx(Button, {
+                          menu: true,
+                          chibi: true,
+                          href: `${root}settings`,
+                          onClick: () => {
+                            instance.hide();
+                          },
+                          tooltip: tl2(trans.edit_profile),
+                          children: [
+                            /* @__PURE__ */ jsx(Icon, {
+                              name: icons.edit
+                            }),
+                            tl2(trans.edit_profile)
+                          ]
+                        }),
+                        useSettings.get("starred_friend") != "" ? /* @__PURE__ */ jsx(Button, {
+                          menu: true,
+                          chibi: true,
+                          colourful: true,
+                          accented: true,
+                          className: "starred-friend",
+                          href: `${root}user/${useSettings.get("starred_friend")}`,
+                          onClick: () => {
+                            instance.hide();
+                          },
+                          tooltip: useSettings.get("starred_friend"),
+                          "data-starred": "true",
+                          children: [
+                            /* @__PURE__ */ jsx(Icon, {
+                              name: icons.starred_friend
+                            }),
+                            useSettings.get("starred_friend")
+                          ]
+                        }) : /* @__PURE__ */ jsx(Button, {
+                          menu: true,
+                          chibi: true,
+                          onClick: () => {
+                            open_starred_friend_window();
+                            instance.hide();
+                          },
+                          tooltip: tl2(trans.starred_friend.name),
+                          "data-starred": "false",
+                          children: [
+                            /* @__PURE__ */ jsx(Icon, {
+                              name: icons.plus
+                            }),
+                            tl2(trans.starred_friend.name)
+                          ]
+                        })
+                      ]
+                    })
+                  ]
+                }),
+                /* @__PURE__ */ jsx("div", {
+                  class: "side",
+                  "data-page": "1",
+                  ref: side,
+                  children: [
+                    /* @__PURE__ */ jsx(NavigationPage1, {
+                      instance,
+                      side,
+                      next: next_side,
+                      notif_count,
+                      messages_count,
+                      token
+                    }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: "side-page",
+                      "data-page": "2",
+                      ref: next_side
+                    })
+                  ]
+                })
+              ]
+            })
+          ]
+        }));
+        load_profile_cache_externally(auth.name).then((cache2) => {
+          if (cache2.banner) {
+            auth_bg.current.replaceChildren(/* @__PURE__ */ jsx("div", {
+              class: "bg",
+              style: {
+                backgroundImage: `url(${cache2.banner})`
+              }
+            }));
+          }
+          if (cache2.username) {
+            auth_header.current.textContent = cache2.username;
+          }
+        });
+      },
+      onHide(instance) {
+        page.structure.notifications.setAttribute("data-auth-open", "false");
+      }
+    });
+    const auth_drop_menu = tippy_esm_default(auth_link, {
+      theme: "context-menu",
+      content: html.node`
+            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
+                ${tl2(trans.edit_quick_access)}
+            </a>
+            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
+                ${tl2(trans.copy_username)}
+            </button>
+            <div class="sep" />
+            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [
+        0,
+        0
+      ],
+      appendTo: document.body,
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(auth_link, auth_drop_menu);
+    const container = new_auth.parentElement;
+    container.parentElement.removeChild(container);
+    auth_link.removeAttribute("aria-controls");
+    auth_link.removeAttribute("data-disclose-hover");
+    auth_link.removeAttribute("data-disclose-hover--allow-enter-open");
+    auth_link.addEventListener("click", (e5) => {
+      const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
+      const new_tab = e5.button === 1 || cmd;
+      if (!new_tab) e5.preventDefault();
+    });
+    masthead.appendChild(html.node`
+        <div class="mobile-controls">
+            ${() => {
+      const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == "inbox"} data-type="inbox">
+                        ${tl2(trans.inbox)}
+                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
+                    </a>
+                `;
+      tippy_esm_default(btn, {
+        theme: "mobile",
+        content: html.node`
+                        <div class="window-header">
+                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl2(trans.inbox)}</div>
+                        </div>
+                        ${setting({
+          id: "inbox_view",
+          func: render_inbox
+        })}
+                        <div class="window-content" />
+                    `,
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          console.info("navigation instance", instance, instance.popper);
+          page.state.inbox_content = instance.popper.querySelector(".window-content");
+          render_inbox();
+        }
+      });
+      return btn;
+    }}
+            ${() => {
+      const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == "user" && page.name == auth.name} data-menu-item="profile_mobile">
+                        <span class="avatar">
+                            <img src=${auth.avatar} alt=${auth.name}>
+                        </span>
+                        ${auth.name}
+                        ${update_required === "true" ? html.node`<div class="notification-count-badge"></div>` : ""}
+                    </a>
+                `;
+      tippy_esm_default(btn, {
+        theme: "mobile",
+        content: html.node`
+                        <div class="window-menu-items">
+                            <a class="btn window-menu-item icon-r window-menu-item-big" href="${root}user/${auth.name}">
+                                <span class="avatar window-menu-avatar">
+                                    <img src=${avatar(auth.avatar, "avatar170s")} alt=${auth.name}>
+                                </span>
+                                ${auth.name}
+                            </a>
+                            ${useSettings.get("starred_friend") != "" ? html.node`
+                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${useSettings.get("starred_friend")}">
+                                    ${icon({
+          name: "inherit"
+        })}
+                                    ${useSettings.get("starred_friend")}
+                                </a>
+                            ` : ""}
+                            <button class="btn window-menu-item icon-r" onclick=${() => {
+          news();
+        }}>
+                                ${icon({
+          name: icons.news
+        })}
+                                ${tl2(trans.news)}
+                            </button>
+                            ${settings.navigation_items.map((val) => {
+          let elem;
+          const formal = page.state.quick_access_items[val];
+          if (formal.url) {
+            elem = html.node`<a href=${formal.url} />`;
+          } else {
+            elem = html.node`<button onclick=${formal.action} />`;
+          }
+          elem.classList = "btn window-menu-item icon-r";
+          render(elem, html`
+							${icon({
+            name: formal.icon
+          })}
+							${formal.name}
+						`);
+          let count2 = 0;
+          if (val == "notifications") count2 = notif_count;
+          else if (val == "messages") count2 = messages_count;
+          if (count2) {
+            render(elem, html`
+								${icon({
+              name: formal.icon
+            })}
+								<div class="auth-dropdown-item-row">
+									<span
+										class="auth-dropdown-item-left"
+									>
+								        ${formal.name}
+								    </span>
+									<span
+										class="auth-dropdown-item-right"
+									>
+								        ${count2}
+								    </span>
+								</div>
+							`);
+          }
+          return elem;
+        })}
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == "bleh_settings"} href="${root}bleh">
+                                ${icon({
+          name: icons.bleh_settings
+        })}
+                                ${version.brand}
+                            </a>
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == "settings"} href="${root}settings">
+                                ${icon({
+          name: icons.settings
+        })}
+                                ${tl2(trans.settings)}
+                            </a>
+                            <form>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                <a class="btn window-menu-item icon-r colourful" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
+                                    ${icon({
+          name: icons.logout
+        })}
+                                    ${tl2(trans.logout)}
+                                </a>
+                            </form>
+                        </div>
+                    `,
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body
+      });
+      return btn;
+    }}
+            ${() => {
+      const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == "search"} data-menu-item="search">
+                        ${tl2(trans.search)}
+                    </a>
+                `;
+      let search_input;
+      tippy_esm_default(btn, {
+        theme: "mobile",
+        content: html.node`
+                        <div class="window-header">
+                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl2(trans.search)}</div>
+                        </div>
+                        ${() => {
+          const form2 = html.node`
+                                <form action="${root}search" method="get">
+                                    ${search_input = input({
+            name: "q",
+            func: () => {
+              form2.submit();
+            }
+          })}
+                                </form>
+                            `;
+          return form2;
+        }}
+                    `,
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow() {
+          search_input.focus();
+        }
+      });
+      return btn;
+    }}
+        </div>
+    `);
+  }
+  async function live_status() {
+    if (page.now.next_fetch && Date.now() < page.now.next_fetch) {
+      return page.now;
+    }
+    try {
+      const res = await fetch(`${root}user/${auth.name}/partial/now`);
+      if (!res.ok) {
+        log("failed to fetch", "live", "error", {
+          res
+        });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const intro = doc.querySelector(".user-now-intro");
+      let active = true;
+      if (intro.textContent.trim() === tl2(trans.last_scrobbled_replace).replace("{u}", auth.name)) {
+        active = false;
+      }
+      const track = doc.querySelector(".user-now-track a");
+      const links = doc.querySelectorAll(".user-now-artist-and-album a");
+      let artist = links[0];
+      const album = links[1];
+      const avatar4 = doc.querySelector(".cover-art img")?.src;
+      track.removeAttribute("target");
+      artist.removeAttribute("target");
+      album.removeAttribute("target");
+      let next = /* @__PURE__ */ new Date();
+      next.setMinutes(next.getMinutes() + 1);
+      if (useSettings.get("format_guest_features")) {
+        album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
+        const formatted = name_includes(track.textContent, artist.textContent);
+        track.classList.add("smart-title");
+        render(track, smart_title(formatted.song_title, formatted.song_tags));
+        artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)}</span>`;
+      } else if (useSettings.get("corrections")) {
+        album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
+        track.textContent = romanise(correct_item_by_artist(track.textContent, artist.textContent));
+        artist.textContent = romanise(correct_artist(artist.textContent));
+      }
+      page.now = {
+        next_fetch: next,
+        name: track,
+        artist,
+        album,
+        avatar: avatar4,
+        active
+      };
+      return page.now;
+    } catch (error) {
+      log("exception during fetch", "live", "error", {
+        error
+      });
+    }
+  }
+  async function fetch_notifications() {
+    if (page.notifications.next_fetch && Date.now() < page.notifications.next_fetch) {
+      return page.notifications.list;
+    }
+    try {
+      const res = await fetch(`${root}inbox/notifications`);
+      if (!res.ok) {
+        log("failed to fetch", "live", "error", {
+          res
+        });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const list = doc.querySelector(".inbox-notifications");
+      const next = /* @__PURE__ */ new Date();
+      next.setMinutes(next.getMinutes() + 2);
+      page.notifications.next_fetch = next;
+      if (list) {
+        page.notifications.list = list;
+        return list;
+      }
+    } catch (error) {
+      log("exception during fetch", "live", "error", {
+        error
+      });
+    }
+  }
+  async function fetch_messages() {
+    if (page.messages.next_fetch && Date.now() < page.messages.next_fetch) {
+      return page.messages.list;
+    }
+    try {
+      const res = await fetch(`${root}inbox`);
+      if (!res.ok) {
+        log("failed to fetch", "live", "error", {
+          res
+        });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const list = doc.querySelector(".inbox-table tbody");
+      const next = /* @__PURE__ */ new Date();
+      next.setMinutes(next.getMinutes() + 2);
+      page.messages.next_fetch = next;
+      if (list) {
+        page.messages.list = list;
+        return list;
+      }
+    } catch (error) {
+      log("exception during fetch", "live", "error", {
+        error
+      });
+    }
+  }
+  function NavigationPage1({ instance, side, next, notif_count, messages_count, token }) {
+    const wrap2 = /* @__PURE__ */ jsx("div", {
+      class: "side-page",
+      "data-page": 1,
+      children: [
+        useSettings.get("navigation_items").map((val) => {
+          let elem;
+          const formal = page.state.quick_access_items[val];
+          if (val == "friends") {
+            elem = /* @__PURE__ */ jsx(ButtonCombo, {
+              children: [
+                /* @__PURE__ */ jsx(Button, {
+                  menu: true,
+                  href: formal.url,
+                  onClick: () => instance.hide(),
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: formal.icon
+                    }),
+                    formal.name
+                  ]
+                }),
+                /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+                /* @__PURE__ */ jsx(Button, {
+                  menu: true,
+                  chibi: true,
+                  onClick: () => {
+                    next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationFriends, {
+                      instance,
+                      side
+                    }));
+                    side.current.setAttribute("data-page", "2");
+                  },
+                  tooltip: tl2(trans.more),
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: icons.continue
+                    }),
+                    tl2(trans.more)
+                  ]
+                })
+              ]
+            });
+            return elem;
+          }
+          if (formal.url) {
+            elem = /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              href: formal.url,
+              onClick: () => instance.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: formal.icon
+                }),
+                formal.name
+              ]
+            });
+          } else {
+            elem = /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              onClick: () => {
+                formal.action();
+                instance.hide();
+              },
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: formal.icon
+                }),
+                formal.name
+              ]
+            });
+          }
+          let count = 0;
+          if (val == "notifications") {
+            count = notif_count;
+          } else if (val == "messages") {
+            count = messages_count;
+          }
+          if (count > 0) {
+            elem.replaceChildren(/* @__PURE__ */ jsx("div", {
+              class: "auth-dropdown-item-row",
+              children: [
+                /* @__PURE__ */ jsx("span", {
+                  class: "auth-dropdown-item-left",
+                  children: formal.name
+                }),
+                /* @__PURE__ */ jsx("span", {
+                  class: "auth-dropdown-item-right",
+                  children: count
+                })
+              ]
+            }));
+          }
+          return elem;
+        }),
+        /* @__PURE__ */ jsx(ButtonCombo, {
+          children: [
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              onClick: () => toggle_theme(),
+              disabled: page.subpage.startsWith("listening-report"),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.theme
+                }),
+                tl2(trans.themes.name)
+              ]
+            }),
+            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              chibi: true,
+              onClick: () => {
+                if (page.subpage.startsWith("listening-report")) return;
+                next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationThemes, {
+                  side
+                }));
+                side.current.setAttribute("data-page", "2");
+              },
+              disabled: page.subpage.startsWith("listening-report"),
+              tooltip: tl2(trans.more),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.continue
+                }),
+                tl2(trans.more)
+              ]
+            })
+          ]
+        }),
+        useSettings.get("navigation_language") && /* @__PURE__ */ jsx(ButtonCombo, {
+          children: [
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              onClick: () => {
+                next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationLanguages, {
+                  instance,
+                  side
+                }));
+                side.current.setAttribute("data-page", "2");
+              },
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.language
+                }),
+                tl2(trans.language)
+              ]
+            }),
+            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              chibi: true,
+              onClick: () => {
+                next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationLanguages, {
+                  instance,
+                  side
+                }));
+                side.current.setAttribute("data-page", "2");
+              },
+              tooltip: tl2(trans.more),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.continue
+                }),
+                tl2(trans.more)
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx(ButtonCombo, {
+          children: [
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              href: `${root}bleh/minis`,
+              onClick: () => instance.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.minis
+                }),
+                tl2(trans.minis)
+              ]
+            }),
+            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              chibi: true,
+              onClick: () => {
+                news();
+                instance.hide();
+              },
+              tooltip: tl2(trans.news),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.news
+                }),
+                tl2(trans.news)
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx(ButtonCombo, {
+          children: [
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              colourful: true,
+              accented: true,
+              href: `${root}bleh`,
+              onClick: () => instance.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.bleh_settings
+                }),
+                tl2(trans.settings)
+              ]
+            }),
+            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+            /* @__PURE__ */ jsx("form", {
+              class: "chibi",
+              children: [
+                /* @__PURE__ */ jsx("input", {
+                  type: "hidden",
+                  name: "csrfmiddlewaretoken",
+                  value: token
+                }),
+                /* @__PURE__ */ jsx(Button, {
+                  className: "logout",
+                  href: `${root}logout`,
+                  colourful: true,
+                  menu: true,
+                  accented: true,
+                  chibi: true,
+                  onClick: () => instance.hide(),
+                  tooltip: tl2(trans.logout),
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: icons.logout
+                    }),
+                    tl2(trans.logout)
+                  ]
+                })
+              ]
+            })
+          ]
+        })
+      ]
+    });
+    const simple_menu = tippy_esm_default(wrap2, {
+      theme: "context-menu",
+      content: /* @__PURE__ */ jsx("a", {
+        class: "dropdown-menu-clickable-item",
+        "data-type": "quick_access",
+        href: `${root}bleh/profile?setting=navigation_items`,
+        children: tl2(trans.edit_quick_access)
+      }),
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [
+        0,
+        0
+      ],
+      appendTo: document.body,
+      onShow(instance2) {
+        instance2.popper.addEventListener("click", () => {
+          instance2.hide();
+        });
+      }
+    });
+    register_menu(wrap2, simple_menu);
+    return wrap2;
+  }
+  function NavigationFriends({ instance, side }) {
+    const starred2 = useSettings.get("starred_friend");
+    const friends2 = useSettings.get("friends").filter((friend) => friend != starred2);
+    return /* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => {
+            side.current.setAttribute("data-page", "1");
+          },
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.arrow_left
+            }),
+            tl2(trans.back)
+          ]
+        }),
+        starred2 && /* @__PURE__ */ jsx(NavigationFriend, {
+          name: starred2,
+          starred: true,
+          instance
+        }),
+        friends2.map((friend, i3) => /* @__PURE__ */ jsx(NavigationFriend, {
+          name: friend,
+          instance
+        }, i3)),
+        /* @__PURE__ */ jsx("div", {
+          class: "sep"
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => {
+            open_starred_friend_window();
+            instance.hide();
+          },
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.edit
+            }),
+            tl2(trans.edit_close_friends)
+          ]
+        })
+      ]
+    });
+  }
+  function NavigationFriend({ instance, name, starred: starred2 }) {
+    const valid = is_sponsor(name);
+    const elem = /* @__PURE__ */ jsx("a", {
+      href: `${root}user/${name}`,
+      class: [
+        "dropdown-menu-clickable-item",
+        "v2"
+      ],
+      onClick: () => {
+        instance.hide();
+      },
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.user
+        }),
+        /* @__PURE__ */ jsx("span", {
+          children: [
+            /* @__PURE__ */ jsx("span", {
+              class: "at",
+              children: "@"
+            }),
+            name
+          ]
+        }),
+        starred2 && /* @__PURE__ */ jsx("span", {
+          class: [
+            "star-icon",
+            "colourful"
+          ],
+          children: /* @__PURE__ */ jsx(Icon, {})
+        })
+      ]
+    });
+    load_profile_cache_externally(name).then((cache2) => {
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Icon, {
+            name: icons.user
+          }),
+          cache2.username && valid ? /* @__PURE__ */ jsx("span", {
+            class: "username-combo",
+            children: [
+              /* @__PURE__ */ jsx("span", {
+                class: "username-custom",
+                children: cache2.username
+              }),
+              /* @__PURE__ */ jsx("span", {
+                class: "username-original",
+                children: [
+                  /* @__PURE__ */ jsx("span", {
+                    class: "at",
+                    children: "@"
+                  }),
+                  name
+                ]
+              })
+            ]
+          }) : /* @__PURE__ */ jsx("span", {
+            children: [
+              /* @__PURE__ */ jsx("span", {
+                class: "at",
+                children: "@"
+              }),
+              name
+            ]
+          }),
+          starred2 && /* @__PURE__ */ jsx("span", {
+            class: [
+              "star-icon",
+              "colourful"
+            ],
+            children: /* @__PURE__ */ jsx(Icon, {
+              name: icons.star
+            })
+          })
+        ]
+      }));
+    });
+    return elem;
+  }
+  function NavigationThemes({ side }) {
+    const uuid = crypto.randomUUID();
+    useSettings.on("theme", (val) => {
+      update(val);
+    });
+    const buttons = [];
+    const full_theme_list = getThemes();
+    const wrap2 = /* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => {
+            side.current.setAttribute("data-page", "1");
+          },
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.arrow_left
+            }),
+            tl2(trans.back)
+          ]
+        }),
+        light_themes.map((id) => {
+          const theme = full_theme_list[id];
+          if (!theme) return;
+          return /* @__PURE__ */ jsx(NavigationTheme, {
+            id,
+            item: theme,
+            list: buttons,
+            onChange: update,
+            uuid
+          });
+        }),
+        dark_themes.map((id) => {
+          const theme = full_theme_list[id];
+          if (!theme) return;
+          return /* @__PURE__ */ jsx(NavigationTheme, {
+            id,
+            item: theme,
+            list: buttons,
+            onChange: update,
+            uuid
+          });
+        })
+      ]
+    });
+    function update(theme) {
+      if (page.subpage.startsWith("listening-report")) return;
+      if (!theme) theme = useSettings.get("theme");
+      buttons.forEach((elem) => {
+        elem.active = elem.id == theme;
+      });
+    }
+    update();
+    return wrap2;
+  }
+  function NavigationTheme({ id, item, list, onChange, uuid }) {
+    let active = false;
+    const elem = /* @__PURE__ */ jsx("button", {
+      type: "button",
+      class: [
+        "dropdown-menu-clickable-item",
+        "v2",
+        "flex-button"
+      ],
+      onClick: () => {
+        useSettings.set("theme_schedule", false, uuid);
+        useSettings.set("theme", id, uuid);
+        onChange(id);
+      },
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: item.icon
+        }),
+        tl2(item.name)
+      ]
+    });
+    list.push(elem);
+    Object.defineProperty(elem, "id", {
+      get() {
+        return id;
+      }
+    });
+    Object.defineProperty(elem, "active", {
+      set(val) {
+        active = val;
+        update();
+      }
+    });
+    function update() {
+      elem.setAttribute("aria-selected", String(active));
+    }
+    return elem;
+  }
+  function NavigationLanguages({ instance, side }) {
+    const languages = lastfm_languages.filter((l2) => l2 != lang);
+    return /* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx("button", {
+          type: "button",
+          class: "dropdown-menu-clickable-item",
+          "data-type": "back",
+          onClick: () => {
+            side.current.setAttribute("data-page", "1");
+          },
+          children: tl2(trans.back)
+        }),
+        /* @__PURE__ */ jsx(NavigationLanguage, {
+          code: lang,
+          active: true,
+          onChange: () => {
+            instance.hide();
+          }
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "sep"
+        }),
+        languages.map((code, i3) => /* @__PURE__ */ jsx(NavigationLanguage, {
+          code,
+          onChange: () => {
+            if (code == "fae") {
+              useSettings.set("language", "fae");
+              window.location.reload();
+            }
+            instance.hide();
+          }
+        }, i3))
+      ]
+    });
+  }
+  function NavigationLanguage({ code, onChange, active }) {
+    const button1 = /* @__PURE__ */ jsx("button", {
+      name: code,
+      type: "submit",
+      class: [
+        "dropdown-menu-clickable-item",
+        "v2",
+        "flex-button"
+      ],
+      onClick: onChange,
+      "aria-selected": active,
+      children: /* @__PURE__ */ jsx("div", {
+        class: "auth-dropdown-item-row",
+        children: [
+          /* @__PURE__ */ jsx("span", {
+            class: "auth-dropdown-item-left",
+            children: [
+              /* @__PURE__ */ jsx(Flag, {
+                code: (convert_lang_to_country[code] || code).toUpperCase(),
+                className: "small-flag"
+              }),
+              get_language_name(code)
+            ]
+          }),
+          code in lang_info && /* @__PURE__ */ jsx("span", {
+            class: "auth-dropdown-item-right",
+            children: /* @__PURE__ */ jsx("div", {
+              class: "bleh-icon checkmark"
+            })
+          })
+        ]
+      })
+    });
+    if (active || code == "fae") return button1;
+    const form = createRef();
+    return /* @__PURE__ */ jsx("form", {
+      action: "/i18n/setlang/",
+      method: "post",
+      ref: form,
+      onSubmit: async (e5) => {
+        e5.preventDefault();
+        useSettings.set("language", "unset");
+        const data2 = new FormData(form.current);
+        await fetch(form.current.action, {
+          method: "POST",
+          body: data2
+        }).then((res) => {
+          window.location.href = res.url;
+        });
+      },
+      children: [
+        /* @__PURE__ */ jsx("input", {
+          type: "hidden",
+          name: "language",
+          value: code
+        }),
+        button1
+      ]
+    });
+  }
+
   // src/components/page/style.tsx
   function append_style() {
     document.documentElement.classList.add("florence-supports-loading");
@@ -106579,6 +108922,7 @@ var bleh = (() => {
           next_in: next,
           current_time: /* @__PURE__ */ new Date()
         });
+        update_branding_type();
         if (func) func(true);
       } catch (e5) {
         log("error parsing", "update", "error", {
@@ -110318,6 +112662,14 @@ var bleh = (() => {
                   bind: "track_album_name_location"
                 })
               ]
+            }),
+            /* @__PURE__ */ jsx(CardTip, {
+              children: tl2(trans.related_setting, {
+                v: /* @__PURE__ */ jsx("a", {
+                  href: `${root}bleh/visual?setting=change_my_colour_when`,
+                  children: tl2(trans.change_my_colour_when.name)
+                })
+              })
             })
           ]
         }),
@@ -111554,7 +113906,7 @@ var bleh = (() => {
             `}
 			</div>
 			<section class="side-actions">
-			    <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings17()}>
+			    <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings18()}>
 			        ${tl2(trans.import)}
 			    </button>
 			    <button class="btn side-action icon-mask" data-type="export" onclick=${() => export_settings()}>
@@ -111960,7 +114312,7 @@ var bleh = (() => {
     );
     compile_settings();
   }
-  function import_settings17() {
+  function import_settings18() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -113011,131 +115363,6 @@ var bleh = (() => {
     set_storage("bwaa_recent_activity", JSON.stringify(recent_activity_list));
   }
 
-  // src/build/seasonal.js
-  var stored_season = {
-    id: "none",
-    new_years_eve: false
-  };
-  var seasonal_events = [
-    {
-      id: "new_years",
-      start: {
-        month: 1,
-        day: 1
-      },
-      end: {
-        month: 1,
-        day: 14
-      },
-      snowflakes: {
-        state: true,
-        count: 90
-      }
-    },
-    {
-      id: "easter",
-      start: {
-        month: 4,
-        day: 2
-      },
-      end: {
-        month: 4,
-        day: 30
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "pride",
-      start: {
-        month: 6,
-        day: 1
-      },
-      end: {
-        month: 6,
-        day: 30
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "summer",
-      start: {
-        month: 7,
-        day: 1
-      },
-      end: {
-        month: 9,
-        day: 10
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "halloween",
-      start: {
-        month: 9,
-        day: 28
-      },
-      end: {
-        month: 11,
-        day: 1
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "pre_fall",
-      start: {
-        month: 11,
-        day: 1,
-        hour: 12
-      },
-      end: {
-        month: 11,
-        day: 12
-      },
-      snowflakes: {
-        state: true,
-        count: 12
-      }
-    },
-    {
-      id: "fall",
-      start: {
-        month: 11,
-        day: 13
-      },
-      end: {
-        month: 11,
-        day: 22
-      },
-      snowflakes: {
-        state: true,
-        count: 80
-      }
-    },
-    {
-      id: "christmas",
-      start: {
-        month: 11,
-        day: 23
-      },
-      end: {
-        month: 12,
-        day: 31
-      },
-      snowflakes: {
-        state: true,
-        count: 160
-      }
-    }
-  ];
-
   // src/components/dialog/nag_bar.js
   function nag_bar() {
     const nags = page.structure.wrapper.querySelectorAll(".nag-bar");
@@ -113155,2222 +115382,6 @@ var bleh = (() => {
         return;
       }
       active_nag.parentElement.removeChild(active_nag);
-    });
-  }
-
-  // src/components/inbox/notifications.js
-  function bleh_notification_list(list, mini = false) {
-    list.classList = "notification-list";
-    if (mini) list.classList.add("mini");
-    const notifications = list.querySelectorAll(".inbox-notifications__item");
-    notifications.forEach((notification, index3) => {
-      if (mini && index3 > 4) notification.style.display = "none";
-      const link = notification.querySelector(
-        ".inbox-notifications__item-link"
-      );
-      const href = link.getAttribute("href");
-      const active = link.classList.contains(
-        "inbox-notifications__item--highlight"
-      );
-      notification.classList = "notification";
-      if (active) notification.classList.add("active");
-      if (mini) notification.classList.add("mini");
-      let type = "shoutbox";
-      const context = {
-        name: null,
-        sister: null
-      };
-      let involved = [];
-      const strongs = link.querySelectorAll("strong");
-      let split = href.replace(root, "").split("/");
-      const avatar4 = notification.querySelector(".avatar");
-      avatar4.classList = "avatar";
-      const time4 = notification.querySelector("time");
-      let is_reply = false;
-      let others_included = 0;
-      if (href.endsWith("/obsessions/set")) {
-        type = "obsession";
-        involved.push(split[1]);
-        const desc = strongs[0].textContent;
-        const desc_split = desc.split(" \u2014 ");
-        context.type = "track";
-        context.sister = correct_artist(desc_split[0]);
-        context.name = correct_item_by_artist(
-          desc_split[1],
-          context.sister
-        );
-        patch_avatar(avatar4, involved[0]);
-      } else if (href.endsWith("/listening-report/month")) {
-        type = "listening_report";
-        involved.push(strongs[0].textContent);
-        const img = avatar4.querySelector("img");
-        img.src = auth.avatar;
-        img.alt = auth.name;
-        const label = avatar4.querySelector(".avatar-status-dot");
-        if (auth.pro) {
-          label.classList = "avatar-status-dot avatar-status-dot--subscriber";
-        } else {
-          label.remove();
-        }
-        context.type = "profile";
-        context.name = split[1];
-        patch_avatar(avatar4, split[1]);
-      } else if (href.startsWith(`${root}user/`)) {
-        context.type = "profile";
-        context.name = split[1];
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1 && strongs.length > 1) {
-            obtain_additional_info(
-              strong.previousSibling.textContent,
-              strong.nextSibling.textContent
-            );
-            return;
-          } else if (index4 == strongs.length - 1 && strongs.length == 1) {
-            obtain_additional_info(strong.nextSibling.textContent);
-          }
-          involved.push(strong.textContent);
-        });
-        patch_avatar(avatar4, involved[0]);
-      } else if (href.startsWith(`${root}music/`)) {
-        if (split[2].startsWith("+")) {
-          context.type = "artist";
-          context.name = correct_artist(desanitise(split[1]));
-        } else if (split[2] == "_") {
-          context.type = "track";
-          context.sister = correct_artist(desanitise(split[1]));
-          context.name = correct_item_by_artist(
-            desanitise(split[3]),
-            context.sister
-          );
-        } else {
-          context.type = "album";
-          context.sister = correct_artist(desanitise(split[1]));
-          context.name = correct_item_by_artist(
-            desanitise(split[2]),
-            context.sister
-          );
-        }
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1) {
-            obtain_additional_info(
-              strong.previousSibling.textContent,
-              strong.nextSibling.textContent
-            );
-            return;
-          }
-          involved.push(strong.textContent);
-        });
-        patch_avatar(avatar4, involved[0]);
-      } else if (href.startsWith(`${root}tag/`)) {
-        context.type = "tag";
-        context.name = split[1];
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1) {
-            obtain_additional_info(
-              strong.previousSibling.textContent,
-              strong.nextSibling.textContent
-            );
-            return;
-          }
-          involved.push(strong.textContent);
-        });
-        patch_avatar(avatar4, involved[0]);
-      }
-      render(
-        notification,
-        html`
-				<div class="notification-avatar">${avatar4}</div>
-				${icon({ name: icons[type] })}
-				<div class="notification-content">
-				    <div class="notification-title">
-				        ${type == "shoutbox" ? html.node`
-                    ${others_included == 0 ? html.node`
-                        ${is_reply ? tl2(trans.user_replied).replace(
-          "{u}",
-          involved.join(", ")
-        ) : tl2(trans.user_commented).replace(
-          "{u}",
-          involved.join(", ")
-        )}
-                    ` : html.node`
-                        ${is_reply ? tl2(trans.users_replied).replace(
-          "{u}",
-          involved.join(", ")
-        ).replace("{c}", others_included) : tl2(trans.users_commented).replace(
-          "{u}",
-          involved.join(", ")
-        ).replace("{c}", others_included)}
-                    `}
-                    ` : type == "obsession" ? tl2(trans.obsession_expired) : type == "listening_report" ? tl2(trans.listening_report_available).replace(
-          "{m}",
-          involved[0]
-        ) : ""}
-				    </div>
-				    <div class="notification-context">
-				        ${icon({ name: icons.indent })}
-				        <span
-				            class="notification-type"
-				            data-type=${context.type}
-				        >
-				            <span
-				                class="bleh-icon"
-				                style="--icon: var(--mask)"
-				            />
-				            <span
-				                >${context.sister ? `${context.name} ${tl2(trans.by)} ${context.sister}` : context.name}</span
-				            >
-				        </span>
-				    </div>
-				</div>
-				<div class="notification-time">${time4}</div>
-				<a
-				    class="link-block-cover-link"
-				    href=${link.getAttribute("href")}
-				/>
-			`
-      );
-      function obtain_additional_info(text4, backup_text = null) {
-        const match3 = text4.match(/\d+/);
-        if (match3) others_included = parseInt(match3[0]);
-        if (text4.includes(tl2(trans.notification_replied_ctx))) {
-          is_reply = true;
-        } else if (backup_text && backup_text.trim().includes(tl2(trans.notification_replied_ctx))) {
-          is_reply = true;
-        }
-      }
-    });
-  }
-
-  // src/components/inbox/messages.js
-  function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
-    list.classList = "notification-list";
-    if (mini) list.classList.add("mini");
-    const sent_to = page.subpage == "sent_overview";
-    let selected_messages = [];
-    const messages = list.querySelectorAll(".inbox-message");
-    messages.forEach((message, index3) => {
-      if (mini && index3 > 4) message.style.display = "none";
-      const link = message.querySelector(".inbox-message-preview > a");
-      const href = link.getAttribute("href");
-      const active = message.classList.contains("inbox-message--unviewed");
-      message.classList = "notification message";
-      if (active) message.classList.add("active");
-      if (mini) message.classList.add("mini");
-      const avatar4 = message.querySelector(".avatar");
-      avatar4.classList = "avatar";
-      const id = message.querySelector("input").value;
-      const author = message.querySelector(".inbox-message-sender-name").textContent.trim();
-      const time4 = message.querySelector(".inbox-message-timestamp");
-      const subject = message.querySelector(".inbox-message-subject > span").textContent.trim();
-      const content2 = message.querySelector(".inbox-message-message > span").textContent.trim();
-      let valentine = false;
-      if (subject.endsWith("\u2661")) {
-        for (const translation in trans.valentine) {
-          if (subject == trans.valentine[translation].replace("{u}", auth.name)) {
-            valentine = true;
-            break;
-          }
-        }
-      }
-      if (valentine) message.classList.add("valentine", "colourful");
-      patch_avatar(avatar4, author);
-      let checkbox;
-      render(
-        message,
-        html`
-				${!mini ? html.node`
-                <div class="message-checkbox">
-                    ${checkbox = toggle({
-          type: "checkbox",
-          name: "message_id",
-          id,
-          data: id,
-          func: (val) => {
-            message.setAttribute("aria-checked", val);
-            if (val) {
-              selected_messages.push(message);
-            } else {
-              selected_messages = selected_messages.filter(
-                (selected_msg) => selected_msg != message
-              );
-            }
-            if (selected_messages.length > 0) {
-              delete_btn.removeAttribute("disabled");
-            } else {
-              delete_btn.setAttribute("disabled", "true");
-            }
-          }
-        })}
-                </div>
-            ` : ""}
-				<div class="notification-avatar">${avatar4}</div>
-				${icon({ name: !valentine ? icons.message : icons.valentine })}
-				<div class="notification-content not-main">
-				    ${sent_to ? html.node`
-                    <div class="notification-context">
-                        <span class="notification-type">
-                            ${tl2(trans.you_sent_to)}
-                        </span>
-                    </div>
-                ` : ""}
-				    <div class="notification-title">
-				        ${author}
-				    </div>
-				    ${!sent_to ? html.node`
-                    <div class="notification-context">
-                        <span class="notification-type">
-                            ${tl2(trans.sent_to_you)}
-                        </span>
-                    </div>
-                ` : ""}
-				</div>
-				<div class="message-content">
-				    <div class="message-subject">
-				        ${subject}
-				    </div>
-				    <div class="message-summary">
-				        ${content2}
-				    </div>
-				</div>
-				<div class="notification-time">${time4}</div>
-				<a
-				    class="link-block-cover-link"
-				    href=${href}
-				/>
-			`
-      );
-      checkboxes.push(checkbox);
-    });
-  }
-
-  // src/components/menu/nav_window.tsx
-  function NavWindow({ children }) {
-    return /* @__PURE__ */ jsx(Tooltip, {
-      theme: "nav-window",
-      children
-    });
-  }
-  function NavWindowHeader({ icon: icon2, name }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "window-header",
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: icon2,
-          identifier: "window_header"
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "window-title",
-          children: name
-        })
-      ]
-    });
-  }
-  function NavWindowContents({ ref: ref2, className: className2, children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: [
-        "window-content",
-        className2 && className2
-      ],
-      ref: ref2,
-      children
-    });
-  }
-
-  // src/components/page/navigation.tsx
-  function update_branding_type(state = settings.branding_type) {
-    if (state == "bleh") {
-      page.state.home_link.replaceChildren(/* @__PURE__ */ jsx("div", {
-        class: [
-          "home-logo",
-          "bleh-logo"
-        ],
-        children: version.brand
-      }));
-    } else if (state == "lastfm") {
-      page.state.home_link.replaceChildren(/* @__PURE__ */ jsx("div", {
-        class: [
-          "home-logo",
-          "lastfm-logo"
-        ],
-        children: "Last.fm"
-      }));
-    }
-  }
-  function append_nav() {
-    if (settings.developer && !page.structure.indicator) {
-      const page_indicator2 = /* @__PURE__ */ jsx("div", {
-        class: "page-indicator"
-      });
-      document.documentElement.appendChild(page_indicator2);
-      page.structure.indicator = page_indicator2;
-    }
-    if (!page.structure.loader) {
-      const loader = html.node`
-            <div class="loader">
-                <div class="loader-bar">
-                    <div class="loader-bar-fill" />
-                </div>
-            </div>
-        `;
-      document.body.appendChild(loader);
-      page.structure.loader = loader;
-    }
-    if (!page.structure.style_warning) {
-      const style_warning = /* @__PURE__ */ jsx("div", {
-        class: "style-warning",
-        style: {
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          padding: "20px",
-          background: "#fff",
-          zIndex: 1e8,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "30px"
-        },
-        children: [
-          /* @__PURE__ */ jsx("strong", {
-            children: tl2(trans.style_warning)
-          }),
-          /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: "btn-primary",
-            onClick: () => {
-              useSettings.set("branch", "uwu");
-              useSettings.set("dev", false);
-              window.location.reload();
-            },
-            children: tl2(trans.re_enable_style_loading)
-          }),
-          /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: "btn-primary",
-            onClick: () => {
-              open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
-            },
-            children: tl2(trans.check_for_updates)
-          })
-        ]
-      });
-      document.body.appendChild(style_warning);
-      page.structure.style_warning = style_warning;
-    }
-    const update_required = bool(localStorage.getItem(keys3.update_required) || "false");
-    page.state.quick_access_items = {
-      home: {
-        name: tl2(trans.home),
-        icon: icons.home,
-        url: `${root}music`
-      },
-      reports: {
-        name: tl2(trans.reports),
-        icon: icons.listening_report,
-        url: `${root}user/${auth.name}/listening-report`
-      },
-      library: {
-        name: tl2(trans.library),
-        icon: icons.library,
-        url: `${root}user/${auth.name}/library`
-      },
-      shouts: {
-        name: tl2(trans.shouts),
-        icon: icons.shoutbox,
-        url: `${root}user/${auth.name}/shoutbox`
-      },
-      events: {
-        name: tl2(trans.events),
-        icon: icons.events,
-        url: `${root}user/${auth.name}/events`
-      },
-      obsessions: {
-        name: tl2(trans.obsessions),
-        icon: icons.obsessions,
-        url: `${root}user/${auth.name}/obsessions`
-      },
-      bookmarks: {
-        name: tl2(trans.bookmarks),
-        icon: icons.bookmark,
-        url: `${root}music/+bookmarks`
-      },
-      friends: {
-        name: tl2(trans.friends),
-        icon: icons.friends,
-        url: `${root}user/${auth.name}/friends`
-      },
-      notifications: {
-        name: tl2(trans.notifications),
-        icon: icons.notifications,
-        url: `${root}inbox/notifications`
-      },
-      messages: {
-        name: tl2(trans.messages),
-        icon: icons.messages,
-        url: `${root}inbox`
-      },
-      collage: {
-        name: tl2(trans.collage),
-        icon: icons.collage,
-        url: `${root}bleh/minis/collage`
-      },
-      compare: {
-        name: tl2(trans.compare),
-        icon: icons.compare,
-        url: `${root}bleh/minis/compare`
-      },
-      scrobble: {
-        name: tl2(trans.scrobble),
-        icon: icons.plus,
-        action: () => submit_scrobble()
-      }
-    };
-    const masthead = document.body.querySelector(".masthead");
-    if (!masthead) return;
-    const inner = masthead.querySelector(".masthead-inner-wrap");
-    const masthead_logo = inner.querySelector(".masthead-logo");
-    const home_link = createRef();
-    const home_link_logo = createRef();
-    const search_wrap = createRef();
-    masthead_logo.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-      children: [
-        /* @__PURE__ */ jsx("a", {
-          class: "hidden-link",
-          children: "Last.fm"
-        }),
-        /* @__PURE__ */ jsx("a", {
-          class: [
-            "btn",
-            "navigation-item",
-            "home-link"
-          ],
-          href: `${root}music`,
-          ref: home_link,
-          children: /* @__PURE__ */ jsx("span", {
-            class: "home-logo-container",
-            ref: home_link_logo
-          })
-        }),
-        /* @__PURE__ */ jsx("nav", {
-          class: [
-            "navlist",
-            "navlist--more",
-            "masthead-nav",
-            "masthead-nav-top"
-          ],
-          children: /* @__PURE__ */ jsx("ul", {
-            class: "navlist-items",
-            children: [
-              /* @__PURE__ */ jsx("a", {
-                class: [
-                  "btn",
-                  "masthead-nav-control",
-                  "icon"
-                ],
-                "data-type": "charts",
-                href: `${root}charts`,
-                children: [
-                  tl2(trans.charts),
-                  ff("aihara") && new_indicator()
-                ]
-              }),
-              /* @__PURE__ */ jsx("a", {
-                class: [
-                  "btn",
-                  "masthead-nav-control",
-                  "icon"
-                ],
-                "data-type": "minis",
-                href: `${root}bleh/minis`,
-                children: tl2(trans.minis)
-              }),
-              /* @__PURE__ */ jsx("span", {
-                class: "navlist-search",
-                ref: search_wrap
-              })
-            ]
-          })
-        })
-      ]
-    }));
-    page.state.home_link = home_link_logo.current;
-    update_branding_type();
-    const handle_update = (e5) => {
-      e5.preventDefault();
-      prompt_for_update();
-    };
-    if (update_required) {
-      home_link.current.addEventListener("onclick", handle_update);
-      home_link.current.appendChild(/* @__PURE__ */ jsx("span", {
-        class: "home-version",
-        children: /* @__PURE__ */ jsx("div", {
-          class: "update-container",
-          children: /* @__PURE__ */ jsx(Icon, {
-            name: icons.update
-          })
-        })
-      }));
-      tippy_esm_default(home_link.current, {
-        content: tl2(trans.update_available_to_install)
-      });
-    } else {
-      home_link.current.removeEventListener("onclick", handle_update);
-    }
-    const last_checked = localStorage.getItem(keys3.update_checked_date) || null;
-    const link_menu = tippy_esm_default(home_link.current, {
-      theme: "context-menu",
-      content: html.node`
-            ${setting({
-        id: "branding_type",
-        func: update_branding_type,
-        in_menu: true
-      })}
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${last_checked ? tl2(trans.last_checked_date, {
-        d: DateTime.fromJSDate(new Date(last_checked)).toRelative()
-      }) : tl2(trans.never_checked)}
-            </a>
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(home_link.current, link_menu);
-    const navs = inner.querySelector(".masthead-nav-wrap");
-    const search = inner.querySelector(".masthead-search-form");
-    const form = search.querySelector(".masthead-search-field");
-    form.placeholder = tl2(trans.search);
-    const submit = search.querySelector(".masthead-search-submit");
-    submit.classList.add("btn", "chibi", "icon-mask");
-    submit.setAttribute("data-type", "search");
-    search_wrap.current.replaceChildren(/* @__PURE__ */ jsx("span", {
-      class: "navlist-search-container",
-      children: search
-    }));
-    const new_auth = masthead.querySelector(".auth-dropdown-menu");
-    const links = masthead.querySelector(".masthead-nav:not(.masthead-nav-top) .navlist-items");
-    render(links, html``);
-    const auth_link = masthead.querySelector(".masthead-nav-wrap > .site-auth .auth-link");
-    if (!auth_link) {
-      render(links, html`
-				${() => {
-        const elem = html.node`
-                        <li class="masthead-nav-item">
-                            <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
-                                ${tl2(trans.bleh_settings)}
-                            </a>
-                        </li>
-                    `;
-        tippy_esm_default(elem, {
-          content: tl2(trans.bleh_settings)
-        });
-        return elem;
-      }}
-			`);
-      masthead.appendChild(html.node`
-            <div class="mobile-controls">
-                <a class="btn mobile-control icon" data-type="register" href="${root}join">
-                    ${tl2(trans.sign_up)}
-                </a>
-                <a class="btn mobile-control icon" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
-                    ${tl2(trans.settings)}
-                </a>
-                <a class="btn mobile-control icon" data-type="login" href="${root}login">
-                    ${tl2(trans.log_in)}
-                </a>
-            </div>
-        `);
-      return;
-    }
-    if (auth_link.hasAttribute("data-bleh")) return;
-    auth_link.setAttribute("data-bleh", "true");
-    auth_link.classList.add("icon-r");
-    const name = html.node`
-        <p class="auth-link-name">${auth.name}</p>
-    `;
-    auth_link.appendChild(name);
-    queue_popup("navigation_menu", auth_link);
-    load_profile_cache_externally(auth.name).then((cache2) => {
-      if (cache2.username) name.textContent = cache2.username;
-    });
-    const badges = load_badges(auth.name, true);
-    if (badges) {
-      auth_link.appendChild(create_badge(badges, false, false, true));
-    } else if (auth.pro) {
-      auth_link.appendChild(html.node`
-            <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>
-        `);
-    }
-    const more_button2 = /* @__PURE__ */ jsx(Button, {
-      chibi: true,
-      className: "masthead-nav-control",
-      tooltip: tl2(trans.more),
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: icons.more
-        }),
-        tl2(trans.more)
-      ]
-    });
-    menu_tooltip(more_button2, /* @__PURE__ */ jsx(MenuContents, {
-      children: [
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          colourful: true,
-          accented: true,
-          href: `https://discord.gg/${discord}`,
-          external: true,
-          "data-type": "discord",
-          children: [
-            /* @__PURE__ */ jsx(Icon, {}),
-            tl2(trans.join_discord)
-          ]
-        }),
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          colourful: true,
-          accented: true,
-          className: "sponsor-related",
-          onClick: () => sponsor(),
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.sponsor
-            }),
-            tl2(trans.sponsor)
-          ]
-        }),
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          colourful: true,
-          accented: true,
-          href: "https://github.com/katelyynn/lotus/issues/new/choose",
-          external: true,
-          "data-type": "lotus",
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.lotus
-            }),
-            tl2(trans.suggest_correction)
-          ]
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "sep"
-        }),
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          href: `${root}bleh/general`,
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.update
-            }),
-            tl2(trans.updates)
-          ]
-        }),
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          onClick: () => news(),
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.news
-            }),
-            tl2(trans.news)
-          ]
-        }),
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          href: "https://github.com/katelyynn/bleh/issues",
-          external: true,
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.issue
-            }),
-            tl2(trans.report_issue)
-          ]
-        })
-      ]
-    }));
-    links.appendChild(more_button2);
-    const state = page.state.seasons;
-    console.info("season", state);
-    const bleh_container = html.node`
-        <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
-            ${tl2(trans.bleh_settings)}
-        </a>
-    `;
-    if (!state.current) {
-      tippy_esm_default(bleh_container, {
-        content: tl2(trans.bleh_settings)
-      });
-    } else {
-      page.header.season_tooltip = tippy_esm_default(bleh_container, {
-        theme: "seasonal-swatch",
-        content: html.node`
-                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[state.current.id])}</span>
-                <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
-            `
-      });
-    }
-    links.appendChild(bleh_container);
-    page.header.season = bleh_container;
-    if (auth.pro) {
-      let render_status_container = function(status2) {
-        if (!status2) return;
-        render(status_container.current, html`
-					<div class="status">
-						<div class="status-image">
-							<img src=${status2.avatar} alt=${status2.album}>
-						</div>
-						<div class="status-info">
-							<strong class="status-text status-title">${status2.name}</strong>
-							<p class="status-text status-artist">${status2.artist}</p>
-							<p class="status-text status-album">${status2.album}</p>
-						</div>
-					</div>
-					<div class="status-time">
-					    ${status2.active ? html.node`
-                        <p class="status-text status-time-text chartlist-now-scrobbling">
-                            ${tl2(trans.scrobbling_now)}
-                        </p>
-                    ` : html.node`
-                        <p class="status-text status-time-text inactive">
-                            ${tl2(trans.recent_scrobble)}
-                        </p>
-                    `}
-					</div>
-				`);
-      };
-      const music = /* @__PURE__ */ jsx(Button, {
-        chibi: true,
-        className: "masthead-nav-control",
-        tooltip: tl2(trans.music),
-        children: [
-          /* @__PURE__ */ jsx(Icon, {
-            name: icons.now_playing
-          }),
-          tl2(trans.music)
-        ]
-      });
-      const status_container = createRef();
-      menu_tooltip(music, /* @__PURE__ */ jsx(NavWindow, {
-        children: [
-          /* @__PURE__ */ jsx(NavWindowHeader, {
-            icon: icons.now_playing,
-            name: tl2(trans.music)
-          }),
-          /* @__PURE__ */ jsx(NavWindowContents, {
-            className: "music-status",
-            ref: status_container,
-            children: /* @__PURE__ */ jsx("div", {
-              class: "loading-data-container",
-              children: /* @__PURE__ */ jsx("div", {
-                class: "loading-data-text",
-                children: tl2(trans.loading)
-              })
-            })
-          })
-        ]
-      }), {
-        onShow: () => {
-          if (page.now.name) render_status_container(page.now);
-          live_status().then((status2) => render_status_container(status2));
-        }
-      });
-      links.appendChild(music);
-    }
-    const notif_count = Number(new_auth.querySelector('[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge')?.textContent || "0");
-    const messages_count = Number(new_auth.querySelector('[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge')?.textContent || "0");
-    const count = notif_count + messages_count;
-    if (settings.hybrid_inbox) {
-      const inbox = html.node`
-            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
-                <div class="counter" data-count=${count}>${count}</div>
-            </a>
-        `;
-      tippy_esm_default(inbox, {
-        theme: "stack",
-        content: html.node`
-                <strong>${tl2(trans.inbox)}</strong>
-                <div class="inbox-info">
-                    <div class="inbox-info-item">
-                        ${icon({
-          name: icons.notifications,
-          identifier: "inbox-tooltip"
-        })}
-                        ${notif_count}
-                    </div>
-                    <div class="inbox-sep" />
-                    <div class="inbox-info-item">
-                        ${icon({
-          name: icons.messages,
-          identifier: "inbox-tooltip"
-        })}
-                        ${messages_count}
-                    </div>
-                </div>
-            `
-      });
-      inbox.addEventListener("click", (e5) => {
-        const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
-        const new_tab = e5.button === 1 || cmd;
-        if (!new_tab) e5.preventDefault();
-      });
-      const tabbed = createRef();
-      const pages = {
-        notifications: {
-          icon: icons.notifications,
-          label: tl2(trans.notifications),
-          content: () => {
-            return /* @__PURE__ */ jsx(Fragment, {});
-          }
-        },
-        messages: {
-          icon: icons.messages,
-          label: tl2(trans.messages),
-          content: () => {
-            return /* @__PURE__ */ jsx(Fragment, {});
-          }
-        }
-      };
-      menu_tooltip(inbox, /* @__PURE__ */ jsx(NavWindow, {
-        children: /* @__PURE__ */ jsx(NavWindowContents, {
-          children: /* @__PURE__ */ jsx(Tabbed, {
-            header: /* @__PURE__ */ jsx(PanelHead, {
-              small: true,
-              icon: icons.inbox,
-              margin: false,
-              children: tl2(trans.inbox)
-            }),
-            chibi: true,
-            ref: tabbed,
-            page: useSettings.get("inbox_view"),
-            pages
-          })
-        })
-      }), {
-        onShow: () => {
-          pages.notifications.content = () => {
-            useSettings.set("inbox_view", "notifications");
-            const elem = /* @__PURE__ */ jsx("div", {
-              class: "inbox-content"
-            });
-            page.state.inbox_content = elem;
-            page.state.notifications_content = elem;
-            page.state.messages_content = elem;
-            render_inbox();
-            return elem;
-          };
-          pages.messages.content = () => {
-            useSettings.set("inbox_view", "messages");
-            const elem = /* @__PURE__ */ jsx("div", {
-              class: "inbox-content"
-            });
-            page.state.inbox_content = elem;
-            page.state.notifications_content = elem;
-            page.state.messages_content = elem;
-            render_inbox();
-            return elem;
-          };
-          tabbed.current.update();
-        }
-      });
-      links.appendChild(inbox);
-      queue_popup("inbox", inbox);
-    } else {
-      const notifications = html.node`
-            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="notifications" href="${root}inbox/notifications">
-                <div class="counter" data-count=${notif_count}>${notif_count}</div>
-            </a>
-        `;
-      notifications.addEventListener("click", (e5) => {
-        const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
-        const new_tab = e5.button === 1 || cmd;
-        if (!new_tab) e5.preventDefault();
-      });
-      tippy_esm_default(notifications, {
-        content: tl2(trans.notifications)
-      });
-      tippy_esm_default(notifications, {
-        content: html.node`
-                <div class="window-header">
-                    ${icon({
-          name: icons.notifications,
-          identifier: "window_header"
-        })}
-                    <div class="window-title">${tl2(trans.notifications)}</div>
-                </div>
-                <div class="window-content" />
-            `,
-        theme: "nav-window",
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow(instance) {
-          page.state.notifications_content = instance.popper.querySelector(".window-content");
-          render(page.state.notifications_content, html`
-						<div class="mini-notifications content-loading">
-							<div class="loading-data-container">
-								<div class="loading-data-text">
-						            ${tl2(trans.loading)}
-						        </div>
-							</div>
-						</div>
-					`);
-          if (page.notifications.list) {
-            render_notifications(page.notifications.list, true);
-          }
-          fetch_notifications().then((notifications2) => render_notifications(notifications2, true));
-        }
-      });
-      links.appendChild(notifications);
-      const messages = html.node`
-            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="messages" href="${root}inbox">
-                <div class="counter" data-count=${messages_count}>${messages_count}</div>
-            </a>
-        `;
-      messages.addEventListener("click", (e5) => {
-        const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
-        const new_tab = e5.button === 1 || cmd;
-        if (!new_tab) e5.preventDefault();
-      });
-      tippy_esm_default(messages, {
-        content: tl2(trans.messages)
-      });
-      tippy_esm_default(messages, {
-        content: html.node`
-                <div class="window-header">
-                    ${icon({
-          name: icons.messages,
-          identifier: "window_header"
-        })}
-                    <div class="window-title">${tl2(trans.messages)}</div>
-                </div>
-                <div class="window-content" />
-            `,
-        theme: "nav-window",
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow(instance) {
-          page.state.messages_content = instance.popper.querySelector(".window-content");
-          render(page.state.messages_content, html`
-						<div class="mini-notifications content-loading">
-							<div class="loading-data-container">
-								<div class="loading-data-text">
-						            ${tl2(trans.loading)}
-						        </div>
-							</div>
-						</div>
-					`);
-          if (page.messages.list) {
-            render_messages(page.messages.list, true);
-          }
-          fetch_messages().then((messages2) => render_messages(messages2, true));
-        }
-      });
-      links.appendChild(messages);
-    }
-    function render_notifications(notifications, bypass = false) {
-      if (settings.inbox_view != "notifications" && !bypass) return;
-      bleh_notification_list(notifications, true);
-      render(page.state.notifications_content, html`
-				<div class="mini-notifications">
-				    ${notifications}
-				    <p class="more-link">
-				        <a class="see-more" href="${root}inbox/notifications">${tl2(trans.read_more)}</a>
-				    </p>
-				</div>
-			`);
-    }
-    function render_messages(messages, bypass = false) {
-      if (settings.inbox_view != "messages" && !bypass) return;
-      bleh_message_list(messages, true);
-      render(page.state.messages_content, html`
-				<div class="mini-notifications">
-				    ${messages}
-				    <p class="more-link">
-				        <a class="see-more" href="${root}inbox">${tl2(trans.read_more)}</a>
-				    </p>
-				</div>
-			`);
-    }
-    function render_inbox() {
-      const view = useSettings.get("inbox_view");
-      const content2 = page.state.inbox_content;
-      log(`rendering view ${view}`, "navigation", "info", {
-        content: content2
-      });
-      if (!content2) return;
-      render(content2, html`
-				<div class="mini-notifications content-loading">
-					<div class="loading-data-container">
-						<div class="loading-data-text">
-				            ${tl2(trans.loading)}
-				        </div>
-					</div>
-				</div>
-			`);
-      if (view == "notifications") {
-        if (page.notifications.list) {
-          render_notifications(page.notifications.list);
-        }
-        fetch_notifications().then((notifications) => render_notifications(notifications));
-      } else {
-        if (page.messages.list) render_messages(page.messages.list);
-        fetch_messages().then((messages) => render_messages(messages));
-      }
-    }
-    queue_popup("search", search);
-    const token = new_auth.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    page.token = token;
-    const auth_header = createRef();
-    const auth_bg = createRef();
-    const side = createRef();
-    const next_side = createRef();
-    let auth_menu = tippy_esm_default(auth_link, {
-      theme: "auth-menu-v2",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      onShow: (instance) => {
-        if (!auth.avatar) {
-          notify({
-            id: "auth_broken",
-            title: "Could not open navigation menu",
-            body: "Authorisation status is invalid"
-          });
-          instance.hide();
-          return;
-        }
-        page.structure.notifications.setAttribute("data-auth-open", "true");
-        const update_required2 = localStorage.getItem("bleh_update_required") || "false";
-        let page_2;
-        const current = useSettings.get("navigation_items");
-        let length = current.length;
-        if (length < 2) length = 2;
-        const show_language = settings.navigation_language == true ? 1 : 0;
-        const gap = 1;
-        const height = (length + 3 + show_language) * (28 + gap) - gap;
-        const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
-        instance.setContent(/* @__PURE__ */ jsx(Fragment, {
-          children: [
-            bool(update_required2) && /* @__PURE__ */ jsx("div", {
-              class: "update-available-banner",
-              onClick: prompt_for_update,
-              children: [
-                /* @__PURE__ */ jsx("div", {
-                  class: "update-container",
-                  children: /* @__PURE__ */ jsx(Icon, {
-                    name: icons.update
-                  })
-                }),
-                /* @__PURE__ */ jsx("span", {
-                  children: tl2(trans.update_available_to_install)
-                })
-              ]
-            }),
-            /* @__PURE__ */ jsx("div", {
-              class: "auth-menu-v2",
-              style: {
-                "--page-height": `${height}px`
-              },
-              children: [
-                /* @__PURE__ */ jsx("div", {
-                  class: [
-                    "side",
-                    "primary"
-                  ],
-                  onClick: () => {
-                    instance.hide();
-                  },
-                  children: [
-                    /* @__PURE__ */ jsx("div", {
-                      class: "auth-bg-container",
-                      ref: auth_bg,
-                      children: !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") && /* @__PURE__ */ jsx("div", {
-                        class: "bg",
-                        style: {
-                          backgroundImage: `url(${avatar(auth.avatar, "avatar170s")})`
-                        }
-                      })
-                    }),
-                    /* @__PURE__ */ jsx("div", {
-                      class: "auth-menu-header",
-                      children: [
-                        /* @__PURE__ */ jsx("div", {
-                          class: "avatar",
-                          children: /* @__PURE__ */ jsx("img", {
-                            src: avatar(auth.avatar, "avatar170s"),
-                            alt: auth.name
-                          })
-                        }),
-                        /* @__PURE__ */ jsx("div", {
-                          class: "name",
-                          ref: auth_header,
-                          children: [
-                            /* @__PURE__ */ jsx("span", {
-                              class: "at",
-                              children: "@"
-                            }),
-                            auth.name
-                          ]
-                        }),
-                        badges ? /* @__PURE__ */ jsx("div", {
-                          class: "badges",
-                          children: create_badge(badges, false, true, true)
-                        }) : auth.pro && /* @__PURE__ */ jsx("div", {
-                          class: "badges",
-                          children: create_badge({
-                            type: "user-status-subscriber",
-                            inbuilt: true
-                          }, false, true, true)
-                        }),
-                        /* @__PURE__ */ jsx("a", {
-                          class: "link-block-cover-link",
-                          href: `${root}user/${auth.name}`,
-                          onClick: () => {
-                            instance.hide();
-                          }
-                        })
-                      ]
-                    }),
-                    /* @__PURE__ */ jsx("div", {
-                      class: [
-                        "floating",
-                        "button-group"
-                      ],
-                      children: [
-                        /* @__PURE__ */ jsx(Button, {
-                          menu: true,
-                          chibi: true,
-                          href: `${root}settings`,
-                          onClick: () => {
-                            instance.hide();
-                          },
-                          tooltip: tl2(trans.edit_profile),
-                          children: [
-                            /* @__PURE__ */ jsx(Icon, {
-                              name: icons.edit
-                            }),
-                            tl2(trans.edit_profile)
-                          ]
-                        }),
-                        useSettings.get("starred_friend") != "" ? /* @__PURE__ */ jsx(Button, {
-                          menu: true,
-                          chibi: true,
-                          colourful: true,
-                          accented: true,
-                          className: "starred-friend",
-                          href: `${root}user/${useSettings.get("starred_friend")}`,
-                          onClick: () => {
-                            instance.hide();
-                          },
-                          tooltip: useSettings.get("starred_friend"),
-                          "data-starred": "true",
-                          children: [
-                            /* @__PURE__ */ jsx(Icon, {
-                              name: icons.starred_friend
-                            }),
-                            useSettings.get("starred_friend")
-                          ]
-                        }) : /* @__PURE__ */ jsx(Button, {
-                          menu: true,
-                          chibi: true,
-                          onClick: () => {
-                            open_starred_friend_window();
-                            instance.hide();
-                          },
-                          tooltip: tl2(trans.starred_friend.name),
-                          "data-starred": "false",
-                          children: [
-                            /* @__PURE__ */ jsx(Icon, {
-                              name: icons.plus
-                            }),
-                            tl2(trans.starred_friend.name)
-                          ]
-                        })
-                      ]
-                    })
-                  ]
-                }),
-                /* @__PURE__ */ jsx("div", {
-                  class: "side",
-                  "data-page": "1",
-                  ref: side,
-                  children: [
-                    /* @__PURE__ */ jsx(NavigationPage1, {
-                      instance,
-                      side,
-                      next: next_side,
-                      notif_count,
-                      messages_count,
-                      token
-                    }),
-                    /* @__PURE__ */ jsx("div", {
-                      class: "side-page",
-                      "data-page": "2",
-                      ref: next_side
-                    })
-                  ]
-                })
-              ]
-            })
-          ]
-        }));
-        load_profile_cache_externally(auth.name).then((cache2) => {
-          if (cache2.banner) {
-            auth_bg.current.replaceChildren(/* @__PURE__ */ jsx("div", {
-              class: "bg",
-              style: {
-                backgroundImage: `url(${cache2.banner})`
-              }
-            }));
-          }
-          if (cache2.username) {
-            auth_header.current.textContent = cache2.username;
-          }
-        });
-      },
-      onHide(instance) {
-        page.structure.notifications.setAttribute("data-auth-open", "false");
-      }
-    });
-    const auth_drop_menu = tippy_esm_default(auth_link, {
-      theme: "context-menu",
-      content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
-                ${tl2(trans.edit_quick_access)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
-                ${tl2(trans.copy_username)}
-            </button>
-            <div class="sep" />
-            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(auth_link, auth_drop_menu);
-    const container = new_auth.parentElement;
-    container.parentElement.removeChild(container);
-    auth_link.removeAttribute("aria-controls");
-    auth_link.removeAttribute("data-disclose-hover");
-    auth_link.removeAttribute("data-disclose-hover--allow-enter-open");
-    auth_link.addEventListener("click", (e5) => {
-      const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
-      const new_tab = e5.button === 1 || cmd;
-      if (!new_tab) e5.preventDefault();
-    });
-    masthead.appendChild(html.node`
-        <div class="mobile-controls">
-            ${() => {
-      const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == "inbox"} data-type="inbox">
-                        ${tl2(trans.inbox)}
-                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
-                    </a>
-                `;
-      tippy_esm_default(btn, {
-        theme: "mobile",
-        content: html.node`
-                        <div class="window-header">
-                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl2(trans.inbox)}</div>
-                        </div>
-                        ${setting({
-          id: "inbox_view",
-          func: render_inbox
-        })}
-                        <div class="window-content" />
-                    `,
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow(instance) {
-          console.info("navigation instance", instance, instance.popper);
-          page.state.inbox_content = instance.popper.querySelector(".window-content");
-          render_inbox();
-        }
-      });
-      return btn;
-    }}
-            ${() => {
-      const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == "user" && page.name == auth.name} data-menu-item="profile_mobile">
-                        <span class="avatar">
-                            <img src=${auth.avatar} alt=${auth.name}>
-                        </span>
-                        ${auth.name}
-                        ${update_required === "true" ? html.node`<div class="notification-count-badge"></div>` : ""}
-                    </a>
-                `;
-      tippy_esm_default(btn, {
-        theme: "mobile",
-        content: html.node`
-                        <div class="window-menu-items">
-                            <a class="btn window-menu-item icon-r window-menu-item-big" href="${root}user/${auth.name}">
-                                <span class="avatar window-menu-avatar">
-                                    <img src=${avatar(auth.avatar, "avatar170s")} alt=${auth.name}>
-                                </span>
-                                ${auth.name}
-                            </a>
-                            ${useSettings.get("starred_friend") != "" ? html.node`
-                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${useSettings.get("starred_friend")}">
-                                    ${icon({
-          name: "inherit"
-        })}
-                                    ${useSettings.get("starred_friend")}
-                                </a>
-                            ` : ""}
-                            <button class="btn window-menu-item icon-r" onclick=${() => {
-          news();
-        }}>
-                                ${icon({
-          name: icons.news
-        })}
-                                ${tl2(trans.news)}
-                            </button>
-                            ${settings.navigation_items.map((val) => {
-          let elem;
-          const formal = page.state.quick_access_items[val];
-          if (formal.url) {
-            elem = html.node`<a href=${formal.url} />`;
-          } else {
-            elem = html.node`<button onclick=${formal.action} />`;
-          }
-          elem.classList = "btn window-menu-item icon-r";
-          render(elem, html`
-							${icon({
-            name: formal.icon
-          })}
-							${formal.name}
-						`);
-          let count2 = 0;
-          if (val == "notifications") count2 = notif_count;
-          else if (val == "messages") count2 = messages_count;
-          if (count2) {
-            render(elem, html`
-								${icon({
-              name: formal.icon
-            })}
-								<div class="auth-dropdown-item-row">
-									<span
-										class="auth-dropdown-item-left"
-									>
-								        ${formal.name}
-								    </span>
-									<span
-										class="auth-dropdown-item-right"
-									>
-								        ${count2}
-								    </span>
-								</div>
-							`);
-          }
-          return elem;
-        })}
-                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == "bleh_settings"} href="${root}bleh">
-                                ${icon({
-          name: icons.bleh_settings
-        })}
-                                ${version.brand}
-                            </a>
-                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == "settings"} href="${root}settings">
-                                ${icon({
-          name: icons.settings
-        })}
-                                ${tl2(trans.settings)}
-                            </a>
-                            <form>
-                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="btn window-menu-item icon-r colourful" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
-                                    ${icon({
-          name: icons.logout
-        })}
-                                    ${tl2(trans.logout)}
-                                </a>
-                            </form>
-                        </div>
-                    `,
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body
-      });
-      return btn;
-    }}
-            ${() => {
-      const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == "search"} data-menu-item="search">
-                        ${tl2(trans.search)}
-                    </a>
-                `;
-      let search_input;
-      tippy_esm_default(btn, {
-        theme: "mobile",
-        content: html.node`
-                        <div class="window-header">
-                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl2(trans.search)}</div>
-                        </div>
-                        ${() => {
-          const form2 = html.node`
-                                <form action="${root}search" method="get">
-                                    ${search_input = input({
-            name: "q",
-            func: () => {
-              form2.submit();
-            }
-          })}
-                                </form>
-                            `;
-          return form2;
-        }}
-                    `,
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow() {
-          search_input.focus();
-        }
-      });
-      return btn;
-    }}
-        </div>
-    `);
-  }
-  async function live_status() {
-    if (page.now.next_fetch && Date.now() < page.now.next_fetch) {
-      return page.now;
-    }
-    try {
-      const res = await fetch(`${root}user/${auth.name}/partial/now`);
-      if (!res.ok) {
-        log("failed to fetch", "live", "error", {
-          res
-        });
-        return;
-      }
-      const dom = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(dom, "text/html");
-      const intro = doc.querySelector(".user-now-intro");
-      let active = true;
-      if (intro.textContent.trim() === tl2(trans.last_scrobbled_replace).replace("{u}", auth.name)) {
-        active = false;
-      }
-      const track = doc.querySelector(".user-now-track a");
-      const links = doc.querySelectorAll(".user-now-artist-and-album a");
-      let artist = links[0];
-      const album = links[1];
-      const avatar4 = doc.querySelector(".cover-art img")?.src;
-      track.removeAttribute("target");
-      artist.removeAttribute("target");
-      album.removeAttribute("target");
-      let next = /* @__PURE__ */ new Date();
-      next.setMinutes(next.getMinutes() + 1);
-      if (useSettings.get("format_guest_features")) {
-        album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
-        const formatted = name_includes(track.textContent, artist.textContent);
-        track.classList.add("smart-title");
-        render(track, smart_title(formatted.song_title, formatted.song_tags));
-        artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)}</span>`;
-      } else if (useSettings.get("corrections")) {
-        album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
-        track.textContent = romanise(correct_item_by_artist(track.textContent, artist.textContent));
-        artist.textContent = romanise(correct_artist(artist.textContent));
-      }
-      page.now = {
-        next_fetch: next,
-        name: track,
-        artist,
-        album,
-        avatar: avatar4,
-        active
-      };
-      return page.now;
-    } catch (error) {
-      log("exception during fetch", "live", "error", {
-        error
-      });
-    }
-  }
-  async function fetch_notifications() {
-    if (page.notifications.next_fetch && Date.now() < page.notifications.next_fetch) {
-      return page.notifications.list;
-    }
-    try {
-      const res = await fetch(`${root}inbox/notifications`);
-      if (!res.ok) {
-        log("failed to fetch", "live", "error", {
-          res
-        });
-        return;
-      }
-      const dom = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(dom, "text/html");
-      const list = doc.querySelector(".inbox-notifications");
-      const next = /* @__PURE__ */ new Date();
-      next.setMinutes(next.getMinutes() + 2);
-      page.notifications.next_fetch = next;
-      if (list) {
-        page.notifications.list = list;
-        return list;
-      }
-    } catch (error) {
-      log("exception during fetch", "live", "error", {
-        error
-      });
-    }
-  }
-  async function fetch_messages() {
-    if (page.messages.next_fetch && Date.now() < page.messages.next_fetch) {
-      return page.messages.list;
-    }
-    try {
-      const res = await fetch(`${root}inbox`);
-      if (!res.ok) {
-        log("failed to fetch", "live", "error", {
-          res
-        });
-        return;
-      }
-      const dom = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(dom, "text/html");
-      const list = doc.querySelector(".inbox-table tbody");
-      const next = /* @__PURE__ */ new Date();
-      next.setMinutes(next.getMinutes() + 2);
-      page.messages.next_fetch = next;
-      if (list) {
-        page.messages.list = list;
-        return list;
-      }
-    } catch (error) {
-      log("exception during fetch", "live", "error", {
-        error
-      });
-    }
-  }
-  function NavigationPage1({ instance, side, next, notif_count, messages_count, token }) {
-    const wrap2 = /* @__PURE__ */ jsx("div", {
-      class: "side-page",
-      "data-page": 1,
-      children: [
-        useSettings.get("navigation_items").map((val) => {
-          let elem;
-          const formal = page.state.quick_access_items[val];
-          if (val == "friends") {
-            elem = /* @__PURE__ */ jsx(ButtonCombo, {
-              children: [
-                /* @__PURE__ */ jsx(Button, {
-                  menu: true,
-                  href: formal.url,
-                  onClick: () => instance.hide(),
-                  children: [
-                    /* @__PURE__ */ jsx(Icon, {
-                      name: formal.icon
-                    }),
-                    formal.name
-                  ]
-                }),
-                /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
-                /* @__PURE__ */ jsx(Button, {
-                  menu: true,
-                  chibi: true,
-                  onClick: () => {
-                    next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationFriends, {
-                      instance,
-                      side
-                    }));
-                    side.current.setAttribute("data-page", "2");
-                  },
-                  tooltip: tl2(trans.more),
-                  children: [
-                    /* @__PURE__ */ jsx(Icon, {
-                      name: icons.continue
-                    }),
-                    tl2(trans.more)
-                  ]
-                })
-              ]
-            });
-            return elem;
-          }
-          if (formal.url) {
-            elem = /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              href: formal.url,
-              onClick: () => instance.hide(),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: formal.icon
-                }),
-                formal.name
-              ]
-            });
-          } else {
-            elem = /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              onClick: () => {
-                formal.action();
-                instance.hide();
-              },
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: formal.icon
-                }),
-                formal.name
-              ]
-            });
-          }
-          let count = 0;
-          if (val == "notifications") {
-            count = notif_count;
-          } else if (val == "messages") {
-            count = messages_count;
-          }
-          if (count > 0) {
-            elem.replaceChildren(/* @__PURE__ */ jsx("div", {
-              class: "auth-dropdown-item-row",
-              children: [
-                /* @__PURE__ */ jsx("span", {
-                  class: "auth-dropdown-item-left",
-                  children: formal.name
-                }),
-                /* @__PURE__ */ jsx("span", {
-                  class: "auth-dropdown-item-right",
-                  children: count
-                })
-              ]
-            }));
-          }
-          return elem;
-        }),
-        /* @__PURE__ */ jsx(ButtonCombo, {
-          children: [
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              onClick: () => toggle_theme(),
-              disabled: page.subpage.startsWith("listening-report"),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.theme
-                }),
-                tl2(trans.themes.name)
-              ]
-            }),
-            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              chibi: true,
-              onClick: () => {
-                if (page.subpage.startsWith("listening-report")) return;
-                next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationThemes, {
-                  side
-                }));
-                side.current.setAttribute("data-page", "2");
-              },
-              disabled: page.subpage.startsWith("listening-report"),
-              tooltip: tl2(trans.more),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.continue
-                }),
-                tl2(trans.more)
-              ]
-            })
-          ]
-        }),
-        useSettings.get("navigation_language") && /* @__PURE__ */ jsx(ButtonCombo, {
-          children: [
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              onClick: () => {
-                next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationLanguages, {
-                  instance,
-                  side
-                }));
-                side.current.setAttribute("data-page", "2");
-              },
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.language
-                }),
-                tl2(trans.language)
-              ]
-            }),
-            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              chibi: true,
-              onClick: () => {
-                next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationLanguages, {
-                  instance,
-                  side
-                }));
-                side.current.setAttribute("data-page", "2");
-              },
-              tooltip: tl2(trans.more),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.continue
-                }),
-                tl2(trans.more)
-              ]
-            })
-          ]
-        }),
-        /* @__PURE__ */ jsx(ButtonCombo, {
-          children: [
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              href: `${root}bleh/minis`,
-              onClick: () => instance.hide(),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.minis
-                }),
-                tl2(trans.minis)
-              ]
-            }),
-            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              chibi: true,
-              onClick: () => {
-                news();
-                instance.hide();
-              },
-              tooltip: tl2(trans.news),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.news
-                }),
-                tl2(trans.news)
-              ]
-            })
-          ]
-        }),
-        /* @__PURE__ */ jsx(ButtonCombo, {
-          children: [
-            /* @__PURE__ */ jsx(Button, {
-              menu: true,
-              colourful: true,
-              accented: true,
-              href: `${root}bleh`,
-              onClick: () => instance.hide(),
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons.bleh_settings
-                }),
-                tl2(trans.settings)
-              ]
-            }),
-            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
-            /* @__PURE__ */ jsx("form", {
-              class: "chibi",
-              children: [
-                /* @__PURE__ */ jsx("input", {
-                  type: "hidden",
-                  name: "csrfmiddlewaretoken",
-                  value: token
-                }),
-                /* @__PURE__ */ jsx(Button, {
-                  className: "logout",
-                  href: `${root}logout`,
-                  colourful: true,
-                  menu: true,
-                  accented: true,
-                  chibi: true,
-                  onClick: () => instance.hide(),
-                  tooltip: tl2(trans.logout),
-                  children: [
-                    /* @__PURE__ */ jsx(Icon, {
-                      name: icons.logout
-                    }),
-                    tl2(trans.logout)
-                  ]
-                })
-              ]
-            })
-          ]
-        })
-      ]
-    });
-    const simple_menu = tippy_esm_default(wrap2, {
-      theme: "context-menu",
-      content: /* @__PURE__ */ jsx("a", {
-        class: "dropdown-menu-clickable-item",
-        "data-type": "quick_access",
-        href: `${root}bleh/profile?setting=navigation_items`,
-        children: tl2(trans.edit_quick_access)
-      }),
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance2) {
-        instance2.popper.addEventListener("click", () => {
-          instance2.hide();
-        });
-      }
-    });
-    register_menu(wrap2, simple_menu);
-    return wrap2;
-  }
-  function NavigationFriends({ instance, side }) {
-    const starred2 = useSettings.get("starred_friend");
-    const friends2 = useSettings.get("friends").filter((friend) => friend != starred2);
-    return /* @__PURE__ */ jsx(Fragment, {
-      children: [
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          onClick: () => {
-            side.current.setAttribute("data-page", "1");
-          },
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.arrow_left
-            }),
-            tl2(trans.back)
-          ]
-        }),
-        starred2 && /* @__PURE__ */ jsx(NavigationFriend, {
-          name: starred2,
-          starred: true,
-          instance
-        }),
-        friends2.map((friend, i3) => /* @__PURE__ */ jsx(NavigationFriend, {
-          name: friend,
-          instance
-        }, i3)),
-        /* @__PURE__ */ jsx("div", {
-          class: "sep"
-        }),
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          onClick: () => {
-            open_starred_friend_window();
-            instance.hide();
-          },
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.edit
-            }),
-            tl2(trans.edit_close_friends)
-          ]
-        })
-      ]
-    });
-  }
-  function NavigationFriend({ instance, name, starred: starred2 }) {
-    const valid = is_sponsor(name);
-    const elem = /* @__PURE__ */ jsx("a", {
-      href: `${root}user/${name}`,
-      class: [
-        "dropdown-menu-clickable-item",
-        "v2"
-      ],
-      onClick: () => {
-        instance.hide();
-      },
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: icons.user
-        }),
-        /* @__PURE__ */ jsx("span", {
-          children: [
-            /* @__PURE__ */ jsx("span", {
-              class: "at",
-              children: "@"
-            }),
-            name
-          ]
-        }),
-        starred2 && /* @__PURE__ */ jsx("span", {
-          class: [
-            "star-icon",
-            "colourful"
-          ],
-          children: /* @__PURE__ */ jsx(Icon, {})
-        })
-      ]
-    });
-    load_profile_cache_externally(name).then((cache2) => {
-      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx(Icon, {
-            name: icons.user
-          }),
-          cache2.username && valid ? /* @__PURE__ */ jsx("span", {
-            class: "username-combo",
-            children: [
-              /* @__PURE__ */ jsx("span", {
-                class: "username-custom",
-                children: cache2.username
-              }),
-              /* @__PURE__ */ jsx("span", {
-                class: "username-original",
-                children: [
-                  /* @__PURE__ */ jsx("span", {
-                    class: "at",
-                    children: "@"
-                  }),
-                  name
-                ]
-              })
-            ]
-          }) : /* @__PURE__ */ jsx("span", {
-            children: [
-              /* @__PURE__ */ jsx("span", {
-                class: "at",
-                children: "@"
-              }),
-              name
-            ]
-          }),
-          starred2 && /* @__PURE__ */ jsx("span", {
-            class: [
-              "star-icon",
-              "colourful"
-            ],
-            children: /* @__PURE__ */ jsx(Icon, {
-              name: icons.star
-            })
-          })
-        ]
-      }));
-    });
-    return elem;
-  }
-  function NavigationThemes({ side }) {
-    const uuid = crypto.randomUUID();
-    useSettings.on("theme", (val) => {
-      update(val);
-    });
-    const buttons = [];
-    const full_theme_list = getThemes();
-    const wrap2 = /* @__PURE__ */ jsx(Fragment, {
-      children: [
-        /* @__PURE__ */ jsx(Button, {
-          menu: true,
-          onClick: () => {
-            side.current.setAttribute("data-page", "1");
-          },
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.arrow_left
-            }),
-            tl2(trans.back)
-          ]
-        }),
-        light_themes.map((id) => {
-          const theme = full_theme_list[id];
-          if (!theme) return;
-          return /* @__PURE__ */ jsx(NavigationTheme, {
-            id,
-            item: theme,
-            list: buttons,
-            onChange: update,
-            uuid
-          });
-        }),
-        dark_themes.map((id) => {
-          const theme = full_theme_list[id];
-          if (!theme) return;
-          return /* @__PURE__ */ jsx(NavigationTheme, {
-            id,
-            item: theme,
-            list: buttons,
-            onChange: update,
-            uuid
-          });
-        })
-      ]
-    });
-    function update(theme) {
-      if (page.subpage.startsWith("listening-report")) return;
-      if (!theme) theme = useSettings.get("theme");
-      buttons.forEach((elem) => {
-        elem.active = elem.id == theme;
-      });
-    }
-    update();
-    return wrap2;
-  }
-  function NavigationTheme({ id, item, list, onChange, uuid }) {
-    let active = false;
-    const elem = /* @__PURE__ */ jsx("button", {
-      type: "button",
-      class: [
-        "dropdown-menu-clickable-item",
-        "v2",
-        "flex-button"
-      ],
-      onClick: () => {
-        useSettings.set("theme_schedule", false, uuid);
-        useSettings.set("theme", id, uuid);
-        onChange(id);
-      },
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: item.icon
-        }),
-        tl2(item.name)
-      ]
-    });
-    list.push(elem);
-    Object.defineProperty(elem, "id", {
-      get() {
-        return id;
-      }
-    });
-    Object.defineProperty(elem, "active", {
-      set(val) {
-        active = val;
-        update();
-      }
-    });
-    function update() {
-      elem.setAttribute("aria-selected", String(active));
-    }
-    return elem;
-  }
-  function NavigationLanguages({ instance, side }) {
-    const languages = lastfm_languages.filter((l2) => l2 != lang);
-    return /* @__PURE__ */ jsx(Fragment, {
-      children: [
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: "dropdown-menu-clickable-item",
-          "data-type": "back",
-          onClick: () => {
-            side.current.setAttribute("data-page", "1");
-          },
-          children: tl2(trans.back)
-        }),
-        /* @__PURE__ */ jsx(NavigationLanguage, {
-          code: lang,
-          active: true,
-          onChange: () => {
-            instance.hide();
-          }
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "sep"
-        }),
-        languages.map((code, i3) => /* @__PURE__ */ jsx(NavigationLanguage, {
-          code,
-          onChange: () => {
-            if (code == "fae") {
-              useSettings.set("language", "fae");
-              window.location.reload();
-            }
-            instance.hide();
-          }
-        }, i3))
-      ]
-    });
-  }
-  function NavigationLanguage({ code, onChange, active }) {
-    const button1 = /* @__PURE__ */ jsx("button", {
-      name: code,
-      type: "submit",
-      class: [
-        "dropdown-menu-clickable-item",
-        "v2",
-        "flex-button"
-      ],
-      onClick: onChange,
-      "aria-selected": active,
-      children: /* @__PURE__ */ jsx("div", {
-        class: "auth-dropdown-item-row",
-        children: [
-          /* @__PURE__ */ jsx("span", {
-            class: "auth-dropdown-item-left",
-            children: [
-              /* @__PURE__ */ jsx(Flag, {
-                code: (convert_lang_to_country[code] || code).toUpperCase(),
-                className: "small-flag"
-              }),
-              get_language_name(code)
-            ]
-          }),
-          code in lang_info && /* @__PURE__ */ jsx("span", {
-            class: "auth-dropdown-item-right",
-            children: /* @__PURE__ */ jsx("div", {
-              class: "bleh-icon checkmark"
-            })
-          })
-        ]
-      })
-    });
-    if (active || code == "fae") return button1;
-    const form = createRef();
-    return /* @__PURE__ */ jsx("form", {
-      action: "/i18n/setlang/",
-      method: "post",
-      ref: form,
-      onSubmit: async (e5) => {
-        e5.preventDefault();
-        useSettings.set("language", "unset");
-        const data2 = new FormData(form.current);
-        await fetch(form.current.action, {
-          method: "POST",
-          body: data2
-        }).then((res) => {
-          window.location.href = res.url;
-        });
-      },
-      children: [
-        /* @__PURE__ */ jsx("input", {
-          type: "hidden",
-          name: "language",
-          value: code
-        }),
-        button1
-      ]
     });
   }
 
@@ -125701,7 +125712,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-11T15:30:22.875Z"
+    built_on: "2026-09-11T19:17:36.104Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

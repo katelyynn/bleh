@@ -144,6 +144,17 @@ export function interface_page() {
 					<SettingRadio bind='expand_tracks' />
 					<SettingRadio bind='track_album_name_location' />
 				</SettingGroup>
+				<CardTip>
+					{tl(trans.related_setting, {
+						v: (
+							<a
+								href={`${root}bleh/visual?setting=change_my_colour_when`}
+							>
+								{tl(trans.change_my_colour_when.name)}
+							</a>
+						),
+					})}
+				</CardTip>
 			</section>
 			<section class='bleh--panel'>
 				<PanelHead icon={icons.play}>

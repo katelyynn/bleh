@@ -133,6 +133,7 @@ export function visual() {
 					<SettingOptions
 						name={tl(trans.change_my_colour_when.name)}
 						body={tl(trans.change_my_colour_when.body)}
+						id='setting_change_my_colour_when'
 					>
 						<SettingCheckbox standalone bind='hue_from_artist' />
 						<SettingCheckbox standalone bind='hue_from_album' />
