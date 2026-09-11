@@ -49,6 +49,8 @@ import { GenericUsername } from '@/components/user/name.tsx';
 import { Token } from '@/components/form/token.tsx';
 import { createRef } from 'jsx-dom';
 import { SmartTitle } from '@/components/music/smart_title.tsx';
+import { ff } from '@/components/settings/sku.ts';
+import { non_pro_edit } from '@/components/music/non_pro_edit.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -561,7 +563,8 @@ export function patch_titles(search = page.structure.main) {
 				// since we cant rely on the elements existing anymore
 				const is_own_profile = user == auth.name;
 				const can_edit = is_own_profile && !is_active &&
-					(!is_album ? !has_bar : true) && auth.pro &&
+					(!is_album ? !has_bar : true) &&
+					(auth.pro || ff('non_pro_edit')) &&
 					['user', 'overview'].includes(page.type);
 				const can_delete = is_own_profile && !is_active && !has_bar &&
 					!is_album && ['user', 'overview'].includes(page.type);
@@ -792,7 +795,7 @@ export function patch_titles(search = page.structure.main) {
 					const menu_contents = (
 						<MenuContents>
 							{track.preview}
-							{can_edit
+							{(can_edit && auth.pro)
 								? (
 									<>
 										<ButtonCombo>
@@ -948,6 +951,61 @@ export function patch_titles(search = page.structure.main) {
 												</>
 											)}
 										</ButtonCombo>
+										<div class='sep' />
+										{can_copy_scrobble && (
+											<Button
+												menu
+												onClick={() => {
+													close_menus();
+													submit_scrobble({
+														pre_track: track_title
+															.getAttribute(
+																'data-name',
+															),
+														pre_artist:
+															track_artist,
+														pre_album: alt,
+														pre_album_artist:
+															album_artist,
+														pre_timestamp:
+															timestamp,
+													});
+												}}
+											>
+												<Icon
+													name={icons.copy_scrobble}
+												/>
+												{tl(trans.copy)}
+											</Button>
+										)}
+									</>
+								)
+								: (can_edit && !auth.pro)
+								? (
+									<>
+										<Button
+											menu
+											onClick={() => {
+												close_menus();
+												non_pro_edit({
+													pre_track: track_title
+														.getAttribute(
+															'data-name',
+														),
+													pre_artist: track_artist,
+													pre_album: alt,
+													pre_album_artist:
+														album_artist,
+													timestamp: timestamp,
+												});
+											}}
+										>
+											<Icon
+												name={icons
+													.edit}
+											/>
+											{tl(trans.edit)}
+										</Button>
 										<div class='sep' />
 										{can_copy_scrobble && (
 											<Button

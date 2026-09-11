@@ -79514,6 +79514,17 @@ var bleh = (() => {
     return elem;
   }
 
+  // src/components/music/non_pro_edit.tsx
+  function non_pro_edit({ pre_track, pre_artist, pre_album, pre_album_artist, timestamp }) {
+    log("opening non-pro edit dialog", "scrobble", "info", {
+      pre_track,
+      pre_artist,
+      pre_album,
+      pre_album_artist,
+      timestamp
+    });
+  }
+
   // src/components/music/track.tsx
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
@@ -79800,7 +79811,7 @@ var bleh = (() => {
             "overview"
           ].includes(page.type) ? page.name : auth.name;
           const is_own_profile = user == auth.name;
-          const can_edit = is_own_profile && !is_active3 && (!is_album ? !has_bar : true) && auth.pro && [
+          const can_edit = is_own_profile && !is_active3 && (!is_album ? !has_bar : true) && (auth.pro || ff("non_pro_edit")) && [
             "user",
             "overview"
           ].includes(page.type);
@@ -79875,7 +79886,7 @@ var bleh = (() => {
             const menu_contents = /* @__PURE__ */ jsx(MenuContents, {
               children: [
                 track.preview,
-                can_edit ? /* @__PURE__ */ jsx(Fragment, {
+                can_edit && auth.pro ? /* @__PURE__ */ jsx(Fragment, {
                   children: [
                     /* @__PURE__ */ jsx(ButtonCombo, {
                       children: [
@@ -79991,6 +80002,50 @@ var bleh = (() => {
                             })
                           ]
                         })
+                      ]
+                    }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: "sep"
+                    }),
+                    can_copy_scrobble && /* @__PURE__ */ jsx(Button, {
+                      menu: true,
+                      onClick: () => {
+                        close_menus();
+                        submit_scrobble({
+                          pre_track: track_title.getAttribute("data-name"),
+                          pre_artist: track_artist,
+                          pre_album: alt,
+                          pre_album_artist: album_artist,
+                          pre_timestamp: timestamp
+                        });
+                      },
+                      children: [
+                        /* @__PURE__ */ jsx(Icon, {
+                          name: icons.copy_scrobble
+                        }),
+                        tl2(trans.copy)
+                      ]
+                    })
+                  ]
+                }) : can_edit && !auth.pro ? /* @__PURE__ */ jsx(Fragment, {
+                  children: [
+                    /* @__PURE__ */ jsx(Button, {
+                      menu: true,
+                      onClick: () => {
+                        close_menus();
+                        non_pro_edit({
+                          pre_track: track_title.getAttribute("data-name"),
+                          pre_artist: track_artist,
+                          pre_album: alt,
+                          pre_album_artist: album_artist,
+                          timestamp
+                        });
+                      },
+                      children: [
+                        /* @__PURE__ */ jsx(Icon, {
+                          name: icons.edit
+                        }),
+                        tl2(trans.edit)
                       ]
                     }),
                     /* @__PURE__ */ jsx("div", {
@@ -125646,7 +125701,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-11T15:01:19.197Z"
+    built_on: "2026-09-11T15:30:22.875Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
