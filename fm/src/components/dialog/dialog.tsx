@@ -112,7 +112,7 @@ export function dialog({
 		modal.setAttribute('aria-labelledby', 'modal_title');
 		modal.appendChild(
 			<div class='bleh-modal-title' id='modal_title'>
-				<PanelHead margin={false} icon={icon}>{title}</PanelHead>
+				<PanelHead top margin={false} icon={icon}>{title}</PanelHead>
 				{subtitle && <p class='bleh-modal-subtitle'>{subtitle}</p>}
 			</div>,
 		);

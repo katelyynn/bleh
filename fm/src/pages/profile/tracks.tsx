@@ -59,7 +59,7 @@ export function profile_tracks() {
 
 	panel.insertBefore(
 		<PanelTop>
-			<PanelHead icon={icons.tracks}>
+			<PanelHead top icon={icons.tracks}>
 				{tl(trans.tracks)}
 			</PanelHead>
 			<ViewButtons accompany>

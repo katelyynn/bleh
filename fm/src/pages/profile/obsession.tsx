@@ -402,7 +402,7 @@ export function obsession_list() {
 	const new_panel = (
 		<section class='obsessions-panel'>
 			<PanelTop>
-				<PanelHead icon={icons.obsessions}>
+				<PanelHead top icon={icons.obsessions}>
 					{tl(trans.obsessions)}
 				</PanelHead>
 				{page.name == auth.name && (

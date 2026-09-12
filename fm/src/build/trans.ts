@@ -12565,6 +12565,14 @@ export const trans = {
 		en: 'This list is empty',
 		pt: 'Esta lista está vazia',
 	},
+	on: {
+		// switch state
+		en: 'On',
+	},
+	off: {
+		// switch state
+		en: 'Off',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

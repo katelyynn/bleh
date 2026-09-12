@@ -50,7 +50,7 @@ export function profile_summary(
 
 	const panel = (
 		<ProfileSummary>
-			<PanelTop>
+			<PanelTop margin={false}>
 				<ProfileSummaryTitle ref={title}>
 					{tl(trans.value_scrobbles_recently, { v: 0 })}
 				</ProfileSummaryTitle>

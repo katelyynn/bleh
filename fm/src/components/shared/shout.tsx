@@ -470,7 +470,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 		panel.insertBefore(
 			<PanelTop>
-				<PanelHead icon={icons.shoutbox}>
+				<PanelHead top icon={icons.shoutbox}>
 					{tl(trans.shouts)}
 				</PanelHead>
 				<ViewButtons accompany>
@@ -524,7 +524,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 		panel.insertBefore(
 			<PanelTop>
-				<PanelHead icon={icons.shoutbox}>
+				<PanelHead top icon={icons.shoutbox}>
 					{tl(trans.shouts)}
 				</PanelHead>
 				{select_btn && (
@@ -553,7 +553,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 		candidate.replaceWith(
 			<PanelTop>
-				<PanelHead icon={icons.shoutbox}>
+				<PanelHead top icon={icons.shoutbox}>
 					{tl(trans.shouts)}
 				</PanelHead>
 				<ViewButtons>

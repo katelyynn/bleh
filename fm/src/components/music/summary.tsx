@@ -37,7 +37,7 @@ export function music_summary(
 
 	const panel = html.node`
         <section class="profile-summary music-summary">
-            <div class="top-container">
+            <div class="top-container no-margin">
                 <h2 class="summary-title">
                     ${tl(trans.about)}
                     ${

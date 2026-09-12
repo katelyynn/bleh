@@ -7,6 +7,7 @@
 import { ReactNode } from 'jsx-dom';
 import type { ClassNames, createRef } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
+import { useSettings } from '@/page.ts';
 
 interface SeeMoreProps {
 	ref?: ReturnType<typeof createRef>;
@@ -95,14 +96,30 @@ export function SeeMoreContainer({
 	);
 }
 
+interface PanelTopProps {
+	margin?: boolean;
+	children: ReactNode;
+}
+
 export function PanelTop({
+	margin,
 	children,
-}: WithChildren) {
-	return (
-		<div class='top-container'>
+}: PanelTopProps) {
+	const elem = (
+		<div class={['top-container', !margin && 'no-margin']}>
 			{children}
 		</div>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 interface ViewButtonsProps {

@@ -242,7 +242,7 @@ export function bleh_artists() {
 
 			top.replaceWith(
 				<PanelTop>
-					<PanelHead icon={icons.tracks}>
+					<PanelHead top icon={icons.tracks}>
 						{tl(trans.tracks)}
 					</PanelHead>
 					{select_btn && (
@@ -302,7 +302,7 @@ export function bleh_artists() {
 
 			top.replaceWith(
 				<PanelTop>
-					<PanelHead icon={icons.albums}>
+					<PanelHead top icon={icons.albums}>
 						{tl(trans.albums)}
 					</PanelHead>
 					{select_btn && (
@@ -683,9 +683,12 @@ function bleh_listeners() {
 		render(
 			friends_panel,
 			html`
-				<a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth
-					.name}/library/music/${redirect()}${sanitise(page.name)}">
-				    <span><span class="at">@</span>${auth.name}</span>
+				<a class="btn side-action icon-mask" data-type="profile"
+					href="${root}user/${auth
+						.name}/library/music/${redirect()}${sanitise(
+							page.name,
+						)}">
+					<span><span class="at">@</span>${auth.name}</span>
 				</a>
 				${useSettings.get('starred_friend') != ''
 					? html.node`

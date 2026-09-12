@@ -62,7 +62,7 @@ export function profile_recents() {
 
 	panel.insertBefore(
 		<PanelTop>
-			<PanelHead icon={icons.recent}>
+			<PanelHead top icon={icons.recent}>
 				{tl(trans.recents)}
 			</PanelHead>
 			{ff('yuzu') && (

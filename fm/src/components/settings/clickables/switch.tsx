@@ -5,6 +5,8 @@
  */
 
 import { createRef } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
+import { tl, trans } from '@/build/trans.ts';
 
 interface SwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -23,10 +25,16 @@ export function Switch({
 }: SwitchProps) {
 	const checkbox = createRef();
 	const elem = createRef();
+	const label = createRef();
 
 	function update() {
 		checkbox.current.checked = checked;
 		elem.current.setAttribute('aria-checked', checked);
+		elem.current.setAttribute(
+			'data-theme',
+			useSettings.get('theme') as string,
+		);
+		label.current.replaceChildren(checked ? tl(trans.on) : tl(trans.off));
 	}
 
 	const wrap = (
@@ -49,6 +57,7 @@ export function Switch({
 				}}
 			>
 				<div class='dot' />
+				<label class='switch-label' ref={label} />
 			</button>
 		</div>
 	);
@@ -64,6 +73,8 @@ export function Switch({
 			update();
 		},
 	});
+
+	useSettings.on('theme', update);
 
 	return wrap;
 }

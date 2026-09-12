@@ -535,6 +535,21 @@ hr {
 	.bleh--panel>& {
 		margin-bottom: unset;
 	}
+
+	&.is-top {
+		margin: unset;
+	}
+
+	&[data-theme="nier"] {
+		color: oklch(var(--b5));
+		--icon-colour: oklch(var(--b5));
+
+		/* in a top container */
+		&:not(.is-top) {
+			background: oklch(0.4128 0.0151 91.68);
+			padding: 6px 8px;
+		}
+	}
 }
 
 .goth {

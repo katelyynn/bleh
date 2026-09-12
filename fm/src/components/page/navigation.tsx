@@ -705,7 +705,12 @@ export function append_nav() {
 				<NavWindowContents>
 					<Tabbed
 						header={
-							<PanelHead small icon={icons.inbox} margin={false}>
+							<PanelHead
+								top
+								small
+								icon={icons.inbox}
+								margin={false}
+							>
 								{tl(trans.inbox)}
 							</PanelHead>
 						}

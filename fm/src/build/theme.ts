@@ -48,19 +48,16 @@ export function getThemes(): Record<string, theme> {
 			name: trans.themes.rose_pine,
 			type: 'dark',
 			external: true,
-			new_release: true,
 		},
 		rose_pine_dawn: {
 			name: trans.themes.rose_pine_dawn,
 			type: 'light',
 			external: true,
-			new_release: true,
 		},
 		kanagawa_dragon: {
 			name: trans.themes.kanagawa_dragon,
 			type: 'dark',
 			external: true,
-			new_release: true,
 		},
 		kanagawa: {
 			name: trans.themes.kanagawa,
@@ -68,11 +65,17 @@ export function getThemes(): Record<string, theme> {
 			external: true,
 			new_release: true,
 		},
+		nier: {
+			name: 'NieR',
+			type: 'light',
+			external: true,
+			new_release: true
+		}
 	};
 }
 
 // this lets you choose which themes to expose to the user-facing screens
-export const light_themes = ['light', 'ink', 'rose_pine_dawn'];
+export const light_themes = ['light', 'ink', 'rose_pine_dawn', 'nier'];
 export const dark_themes = [
 	'dark',
 	'darker',
@@ -88,4 +91,5 @@ export const saturation_themes_unsupported = [
 	'rose_pine_dawn',
 	'kanagawa_dragon',
 	'kanagawa',
+	'nier'
 ];
