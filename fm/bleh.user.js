@@ -50539,6 +50539,14 @@ var bleh = (() => {
         pl: "Dost\u0119p do wyszukiwarki jeszcze nigdy nie by\u0142 tak \u0142atwy, a do tego chowa si\u0119, gdy przewijasz w g\xF3r\u0119"
       }
     },
+    popup_bulk_edit: {
+      title: {
+        en: "Bulk Edit has been detected!"
+      },
+      body: {
+        en: "You can find it neatly packed into this button now"
+      }
+    },
     send_a_reply: {
       en: "Send a reply",
       de: "Schicke eine Antwort",
@@ -54802,7 +54810,7 @@ var bleh = (() => {
       const { keyframes, options } = animation_for_preset(this.config.enterAnimation);
       const animation = this.element.animate(keyframes, options);
       this.current_animation = animation;
-      if (this.onShow) this.onShow();
+      if (this.onShow) this.onShow(this.element);
     }
     hide() {
       log("hiding", "tooltip");
@@ -61823,6 +61831,123 @@ var bleh = (() => {
     return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&output=webp&n=-1`;
   }
 
+  // src/components/dialog/popup.tsx
+  var popup_queue = [];
+  function queue_popup(key, host, prefer = "top") {
+    if (!host || !host.offsetParent) {
+      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", {
+        key,
+        host
+      });
+      return;
+    }
+    if (useSettings.get("popups_seen").includes(key)) {
+      log(`skipped adding ${key} as popup has previously been dismissed`, "popup", "info", {
+        key,
+        host
+      });
+      return;
+    }
+    popup_queue.push({
+      key,
+      host,
+      prefer
+    });
+    check_queue();
+  }
+  function clear_popup_queue() {
+    popup_queue = [];
+  }
+  function check_queue() {
+    const first = popup_queue[0];
+    if (!first) return;
+    if (first.visible) return;
+    popup(first);
+  }
+  function popup(instance) {
+    const key = instance.key;
+    const host = instance.host;
+    const prefer = instance.prefer;
+    const title = tl2(trans[`popup_${key}`]?.title);
+    const body = tl2(trans[`popup_${key}`]?.body);
+    if ([
+      title,
+      body
+    ].includes(translation_fallback)) {
+      log(`popup_${key} not found in translations`, "popup", "error", {
+        title,
+        body,
+        key,
+        host
+      });
+      notify({
+        id: "popup_not_found",
+        title: tl2(trans.value_failed_to_load, {
+          v: `${key} (popup)`
+        }),
+        body: `Missing title and/or body for translation key popup_${key}`,
+        type: "error"
+      });
+      popup_queue = popup_queue.filter((i3) => i3.key != key);
+      check_queue();
+      return;
+    }
+    log(`registered for ${key}`, "popup", "info", {
+      title,
+      body,
+      key,
+      host
+    });
+    instance.visible = true;
+    const elem = /* @__PURE__ */ jsx(Tooltip, {
+      theme: "popup",
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "popup-content",
+          children: [
+            /* @__PURE__ */ jsx("small", {
+              class: "popup-sub",
+              children: tl2(trans.tip)
+            }),
+            /* @__PURE__ */ jsx("strong", {
+              class: "popup-title",
+              children: title
+            }),
+            /* @__PURE__ */ jsx("p", {
+              class: "popup-body",
+              children: body
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "popup-action",
+          children: /* @__PURE__ */ jsx(SeeMore, {
+            onClick: () => {
+              popup_queue = popup_queue.filter((i3) => i3.key != key);
+              useSettings.append("popups_seen", key);
+              tooltip.hide();
+              check_queue();
+            },
+            children: tl2(trans.got_it)
+          })
+        })
+      ]
+    });
+    const tooltip = new TooltipInstance(host, elem, {
+      placement: prefer,
+      middleware: [
+        flip3(),
+        inline2(),
+        shift2({
+          crossAxis: true,
+          padding: 6
+        }),
+        offset4(10)
+      ]
+    });
+    tooltip.show();
+  }
+
   // src/components/markdown/field.tsx
   function MarkdownField({ ref: ref2, elem, focus, onChange, shoutbox, options = {} }) {
     elem.classList.add("modern-input");
@@ -62295,6 +62420,9 @@ var bleh = (() => {
       }, 50);
     }
     update();
+    setTimeout(() => {
+      queue_popup("markdown", wrap2);
+    }, 0);
     return wrap2;
   }
   function MarkdownAction({ type, name, onClick, hide: hide3 }) {
@@ -80251,8 +80379,17 @@ var bleh = (() => {
                 })
               ]
             });
-            const menu2 = menu_tooltip(more_button2, menu_contents);
-            const ctx_menu = context_menu_tooltip(track, menu_contents);
+            const menu_props = {
+              onShow: (element) => {
+                return;
+                const bulk_edit_host = element.querySelector(".bulk-edit-host");
+                if (bulk_edit_host) {
+                  queue_popup("bulk_edit", bulk_edit_host);
+                }
+              }
+            };
+            const menu2 = menu_tooltip(more_button2, menu_contents, menu_props);
+            const ctx_menu = context_menu_tooltip(track, menu_contents, menu_props);
             function close_menus() {
               if (menu2.is_mounted) menu2.hide();
               if (ctx_menu.is_mounted) ctx_menu.hide();
@@ -80342,7 +80479,7 @@ var bleh = (() => {
   }
   function BulkEditButton({ chibi, button: button2, onClick }) {
     if (!button2.classList.contains("chibi")) {
-      button2.classList = `dropdown-menu-clickable-item ${chibi && "chibi"} v2`;
+      button2.classList = `dropdown-menu-clickable-item ${chibi && "chibi"} v2 bulk-edit-host`;
       button2.addEventListener("click", onClick);
       button2.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
         children: [
@@ -96945,112 +97082,6 @@ var bleh = (() => {
   }
   function report_user(user = page.name) {
     open("https://support.last.fm/u/lastfmsupport/summary", "targetWindow", "popup=true,width=1000,height=700");
-  }
-
-  // src/components/dialog/popup.ts
-  var popup_queue = [];
-  function queue_popup(key, host, prefer = "top") {
-    if (!host || !host.offsetParent) {
-      log(`skipped adding ${key} as the host is not accessible (probably intentional)`, "popup", "info", {
-        key,
-        host
-      });
-      return;
-    }
-    if (useSettings.get("popups_seen").includes(key)) {
-      log(`skipped adding ${key} as popup has previously been dismissed`, "popup", "info", {
-        key,
-        host
-      });
-      return;
-    }
-    popup_queue.push({
-      key,
-      host,
-      prefer
-    });
-    check_queue();
-  }
-  function clear_popup_queue() {
-    popup_queue = [];
-  }
-  function check_queue() {
-    const first = popup_queue[0];
-    if (!first) return;
-    if (first.visible) return;
-    popup(first);
-  }
-  function popup(instance) {
-    const key = instance.key;
-    const host = instance.host;
-    const prefer = instance.prefer;
-    const title = tl2(trans[`popup_${key}`]?.title);
-    const body = tl2(trans[`popup_${key}`]?.body);
-    if ([
-      title,
-      body
-    ].includes(translation_fallback)) {
-      log(`popup_${key} not found in translations`, "popup", "error", {
-        title,
-        body,
-        key,
-        host
-      });
-      notify({
-        id: "popup_not_found",
-        title: tl2(trans.value_failed_to_load, {
-          v: `${key} (popup)`
-        }),
-        body: `Missing title and/or body for translation key popup_${key}`,
-        type: "error"
-      });
-      popup_queue = popup_queue.filter((i3) => i3.key != key);
-      check_queue();
-      return;
-    }
-    log(`registered for ${key}`, "popup", "info", {
-      title,
-      body,
-      key,
-      host
-    });
-    instance.visible = true;
-    const tooltip = tippy_esm_default(host, {
-      theme: "popup",
-      content: html.node`
-            <div class="popup-content">
-                <small class="popup-sub">${tl2(trans.tip)}</small>
-                <strong class="popup-title">${title}</strong>
-                <p class="popup-body">${body}</p>
-            </div>
-            <div class="popup-action">
-                <button class="see-more" onclick=${() => {
-        popup_queue = popup_queue.filter((i3) => i3.key != key);
-        tooltip.hide();
-        useSettings.append("popups_seen", key);
-        setTimeout(() => {
-          tooltip.destroy();
-        }, 500);
-        check_queue();
-      }}>
-                    ${tl2(trans.got_it)}
-                </button>
-            </div>
-        `,
-      interactive: true,
-      hideOnClick: false,
-      appendTo: document.body,
-      aria: {
-        expanded: false
-      },
-      trigger: "manual",
-      zIndex: 998,
-      placement: prefer
-    });
-    tooltip.show();
-    host.scrollIntoView({
-      block: "center"
-    });
   }
 
   // src/components/profile/taste.ts
@@ -125712,7 +125743,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-11T19:17:36.104Z"
+    built_on: "2026-09-12T18:34:13.921Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

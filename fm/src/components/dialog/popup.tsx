@@ -10,10 +10,25 @@ import { tl, trans, translation_fallback } from '@/build/trans';
 import { notify } from './notify';
 import { log } from '@/build/log';
 import { useSettings } from '@/page.ts';
+import { Tooltip, TooltipInstance } from '@/components/shared/tooltips.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import {
+	flip,
+	inline,
+	offset as offsetMiddleware,
+	shift as shiftMiddleware,
+} from '@floating-ui/dom';
 
-export let popup_queue = [];
+type popup_queue = {
+	key: string;
+	host: HTMLElement;
+	prefer?: string;
+	visible?: boolean;
+}[];
 
-export function queue_popup(key, host, prefer = 'top') {
+export let popup_queue: popup_queue = [];
+
+export function queue_popup(key: string, host: HTMLElement, prefer = 'top') {
 	if (!host || !host.offsetParent) {
 		log(
 			`skipped adding ${key} as the host is not accessible (probably intentional)`,
@@ -84,45 +99,45 @@ function popup(instance) {
 
 	instance.visible = true;
 
-	const tooltip = tippy(host, {
-		theme: 'popup',
-		content: html.node`
-            <div class="popup-content">
-                <small class="popup-sub">${tl(trans.tip)}</small>
-                <strong class="popup-title">${title}</strong>
-                <p class="popup-body">${body}</p>
-            </div>
-            <div class="popup-action">
-                <button class="see-more" onclick=${() => {
-			popup_queue = popup_queue.filter((i) => i.key != key);
-			tooltip.hide();
+	const elem = (
+		<Tooltip theme='popup'>
+			<div class='popup-content'>
+				<small class='popup-sub'>{tl(trans.tip)}</small>
+				<strong class='popup-title'>{title}</strong>
+				<p class='popup-body'>{body}</p>
+			</div>
+			<div class='popup-action'>
+				<SeeMore
+					onClick={() => {
+						popup_queue = popup_queue.filter((i) => i.key != key);
+						useSettings.append('popups_seen', key);
 
-			useSettings.append('popups_seen', key);
+						tooltip.hide();
+						check_queue();
+					}}
+				>
+					{tl(trans.got_it)}
+				</SeeMore>
+			</div>
+		</Tooltip>
+	);
 
-			setTimeout(() => {
-				tooltip.destroy();
-			}, 500);
-
-			check_queue();
-		}}>
-                    ${tl(trans.got_it)}
-                </button>
-            </div>
-        `,
-		interactive: true,
-		hideOnClick: false,
-		appendTo: document.body,
-		aria: {
-			expanded: false,
-		},
-		trigger: 'manual',
-		zIndex: 998,
+	const tooltip = new TooltipInstance(host, elem, {
 		placement: prefer,
+		middleware: [
+			flip(),
+			inline(),
+			shiftMiddleware({
+				crossAxis: true,
+				padding: 6,
+			}),
+			offsetMiddleware(10),
+		],
 	});
 
 	tooltip.show();
 
-	host.scrollIntoView({
-		block: 'center',
-	});
+	//host.scrollIntoView({
+	//	block: 'center',
+	//});
 }

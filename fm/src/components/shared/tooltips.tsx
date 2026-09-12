@@ -27,7 +27,7 @@ type TooltipConfig = Partial<
 		exitAnimation: AnimationPreset;
 		ariaEnabled: boolean;
 		onShowing: () => void;
-		onShow: () => void;
+		onShow: (element: ReactElement) => void;
 		onHide: () => void;
 		delay: [number, number];
 	}
@@ -90,7 +90,7 @@ export class TooltipInstance<
 	private uuid = crypto.randomUUID();
 
 	public onShowing: (() => void) | null = null;
-	public onShow: (() => void) | null = null;
+	public onShow: ((element: ReactElement) => void) | null = null;
 	public onHide: (() => void) | null = null;
 
 	public constructor(
@@ -151,7 +151,7 @@ export class TooltipInstance<
 
 		this.current_animation = animation;
 
-		if (this.onShow) this.onShow();
+		if (this.onShow) this.onShow(this.element);
 	}
 
 	public hide() {

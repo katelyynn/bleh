@@ -11748,6 +11748,14 @@ export const trans = {
 			pl: 'Dostęp do wyszukiwarki jeszcze nigdy nie był tak łatwy, a do tego chowa się, gdy przewijasz w górę',
 		},
 	},
+	popup_bulk_edit: {
+		title: {
+			en: 'Bulk Edit has been detected!',
+		},
+		body: {
+			en: 'You can find it neatly packed into this button now',
+		},
+	},
 	send_a_reply: {
 		en: 'Send a reply',
 		de: 'Schicke eine Antwort',

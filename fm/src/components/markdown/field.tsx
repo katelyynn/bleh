@@ -23,6 +23,7 @@ import { FormInner, GenericLabel } from '@/components/form/form.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { proxy_image } from '@/components/markdown/proxy.tsx';
+import { queue_popup } from '@/components/dialog/popup.tsx';
 
 interface MarkdownFieldProps {
 	ref?: ReturnType<typeof createRef<MarkdownFieldElement>>;
@@ -656,6 +657,10 @@ export function MarkdownField({
 	}
 
 	update();
+
+	setTimeout(() => {
+		queue_popup('markdown', wrap);
+	}, 0);
 
 	return wrap;
 }
