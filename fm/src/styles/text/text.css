@@ -541,7 +541,7 @@ hr {
 	}
 
 	&[data-theme="nier"] {
-		color: oklch(var(--b5));
+		color: oklch(var(--b5)) !important;
 		--icon-colour: oklch(var(--b5));
 
 		/* in a top container */
