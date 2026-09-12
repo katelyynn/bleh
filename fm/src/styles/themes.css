@@ -809,7 +809,7 @@ body,
 		--card-border-base: oklch(0.6609 0.0287 107.16 / 0) !important;
 		--card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
 
-		--menu-border: oklch(0.78 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue));
+		--menu-border: transparent;
 
 		--normal-shadow: 0 0 transparent;
 		--interact-shadow: 0 0 transparent;
@@ -843,6 +843,9 @@ body,
 		--setting: oklch(0.7897 0.0371 95.51);
 		--setting-hover: oklch(0.5023 0.0189 95.43);
 
+		--menu-item-hov: oklch(0.7897 0.0371 95.51);
+		--menu-item-atv: oklch(0.7897 0.0371 95.51);
+
 		--lastfm-logo-filter: none;
 
 		--textarea: oklch(var(--b6) / 30%);
@@ -858,19 +861,26 @@ body,
 		--header-disc-filter: brightness(0.9);
 
 		--card-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
+		--menu-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
+		--overlay-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
 
-		--view-buttons: oklch(var(--b6) / 10%);
-		--view-buttons-hov: oklch(var(--b4) / 40%);
-		--view-buttons-atv: oklch(var(--b4) / 60%);
+		--view-buttons: oklch(var(--b6));
+		--view-buttons-hov: oklch(var(--b5) / 60%);
+		--view-buttons-atv: oklch(var(--b5) / 80%);
 
 		--menu-bg: var(--b5);
 		--menu-opacity: 94%;
 
-		--button-radius: 0px;
-		--radius-xs: 0px;
-		--radius-s: 0px;
-		--radius-m: 0px;
-		--radius-l: 0px;
+		--button-radius: 0;
+		--input-radius: 0;
+		--radius-xs: 0;
+		--radius-s: 0;
+		--radius-m: 0;
+		--radius-l: 0;
+
+		--item-small-radius: 0;
+		--item-med-radius: 0;
+		--item-big-radius: 0;
 	}
 	&[data-bleh--theme="rose_pine"] {
 		--b2: 0.4299 0.0392 290.42; /* highlight high */

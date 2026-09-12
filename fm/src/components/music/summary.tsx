@@ -15,6 +15,7 @@ import { DateTime } from 'luxon';
 import { sanitise } from '@/build/tools';
 import { hover_tooltip } from '@/components/shared/tooltips.tsx';
 import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
+import { useSettings } from '@/page.ts';
 
 export interface music_stat {
 	text?: string;
@@ -37,7 +38,9 @@ export function music_summary(
 
 	const panel = html.node`
         <section class="profile-summary music-summary">
-            <div class="top-container no-margin">
+            <div class="top-container no-margin" data-theme=${
+		useSettings.get('theme')
+	}>
                 <h2 class="summary-title">
                     ${tl(trans.about)}
                     ${
