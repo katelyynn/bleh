@@ -1,6 +1,7 @@
 .custom-selector select {
 	display: none;
 }
+
 .select-button {
 	display: flex;
 	align-items: center;
@@ -59,6 +60,7 @@
 		--shadow: none;
 	}
 }
+
 .select-item {
 	display: flex;
 	align-items: center;
@@ -70,6 +72,7 @@
 	--bg: transparent;
 	--bg-hov: oklch(var(--b2) / 20%);
 	--bg-atv: oklch(var(--b2) / 40%);
+	--col: inherit;
 	--shadow: none;
 
 	&:before {
@@ -162,9 +165,12 @@
 .dropdown-menu-clickable-button-js-only::after {
 	--mask: var(--icon-16-dropdown);
 	opacity: unset !important;
-	--top: 15px; /* 50% breaks if theres form-row-help-text below it eg. time zone selector */
-	z-index: 20; /* stay above dropdown if active */
+	--top: 15px;
+	/* 50% breaks if theres form-row-help-text below it eg. time zone selector */
+	z-index: 20;
+	/* stay above dropdown if active */
 }
+
 .content-form select {
 	background-image: none !important;
 }

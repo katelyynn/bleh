@@ -102,7 +102,7 @@ interface PanelTopProps {
 }
 
 export function PanelTop({
-	margin,
+	margin = true,
 	children,
 }: PanelTopProps) {
 	const elem = (

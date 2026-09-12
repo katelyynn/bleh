@@ -62,14 +62,10 @@
 	position: relative;
 
 	display: flex;
-	background: var(--setting);
 	gap: 4px var(--card-gap);
 	user-select: none;
 	flex-wrap: wrap;
 	touch-action: manipulation;
-
-	--col: var(--setting-name);
-	--col-alt: var(--setting-alt);
 
 	&.v {
 		flex-direction: column;
@@ -94,8 +90,12 @@
 	}
 
 	&:not(.standalone) {
+		background: var(--setting);
 		padding: var(--setting-group-padding);
 		margin: calc(-1 * var(--setting-group-padding)) !important;
+
+		--col: var(--setting-name);
+		--col-alt: var(--setting-alt);
 	}
 
 	border-radius: var(--setting-item-radius, none);
@@ -108,7 +108,7 @@
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
-	&:is([data-type="toggle"], [data-type="checkbox"]):not([aria-disabled="true"], [disabled="true"], .standalone):hover {
+	&:not([aria-disabled="true"], [disabled="true"], .standalone):hover {
 		background: var(--setting-hover);
 		transition: none;
 
@@ -935,7 +935,7 @@
 	position: relative;
 	width: 16px;
 	height: 16px;
-	--radius: 4px;
+	--radius: var(--radius-xs);
 	--padding: 0;
 
 	/* 2026-09-01: last.fm changes */
@@ -1031,7 +1031,7 @@
 .setting-icon {
 	display: flex;
 	align-items: center;
-	color: oklch(var(--c2) / 80%);
+	color: var(--col-alt);
 	--icon-size: 16px;
 	margin-right: calc(-1 * (var(--card-gap) - 10px));
 	max-height: 22px;

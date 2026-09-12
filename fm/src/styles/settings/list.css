@@ -17,25 +17,26 @@
 	text-align: left;
 
 	&:not(.current) {
-		color: oklch(var(--c3));
+		color: var(--col-alt, oklch(var(--c3)));
 	}
 
 	--bg: oklch(var(--b2) / 40%);
 	--bg-hov: oklch(var(--b2) / 50%);
 	--bg-atv: oklch(var(--b2) / 60%);
 	--shadow: var(--normal-shadow);
+	color: var(--col, oklch(var(--c2)));
 
 	--button-height: 22px;
 	--button-sides: 6px;
 	--button-verts: 2px;
 	--radius: var(--radius-s);
 
-	& > .info {
+	&>.info {
 		flex: 1;
 		margin-right: 4px;
 	}
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon: var(--mask);
 		--icon-size: 16px;
 	}
@@ -44,7 +45,7 @@
 		--icon-size: 14px;
 	}
 
-	&.current + .setting-list-item:not(.current) {
+	&.current+.setting-list-item:not(.current) {
 		margin-left: var(--card-gap);
 	}
 
@@ -63,7 +64,7 @@
 	align-items: center;
 	padding: 2px;
 	background: oklch(var(--b2) / 30%);
-	border-radius: 4px;
+	border-radius: var(--radius-xs);
 	margin-right: 2px;
 }
 
@@ -72,12 +73,13 @@
 	--bg-hov: oklch(var(--b2) / 30%);
 	--bg-atv: oklch(var(--b2) / 40%);
 	--shadow: none;
+	--col: inherit;
 
 	--button-height: 16px;
 	--button-sides: 0;
 	height: var(--button-height);
 	--icon-size: 12px !important;
-	--radius: 4px;
+	--radius: var(--radius-xs);
 
 	&.big {
 		--button-height: 22px;

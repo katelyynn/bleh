@@ -29,6 +29,10 @@
 		--icon-colour: oklch(var(--b5));
 		padding: 6px 8px;
 	}
+
+	&>h2 {
+		margin: unset !important;
+	}
 }
 
 .demo-grid {
