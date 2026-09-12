@@ -55078,10 +55078,12 @@ var bleh = (() => {
   }
   function flag_candidates(country, data2) {
     let candidate = "";
-    if (data2["iso-3166-1-codes"]) {
-      candidate = data2["iso-3166-1-codes"][0];
-    } else if (data2["iso-3166-2-codes"]) {
-      candidate = data2["iso-3166-2-codes"][0];
+    if (data2) {
+      if (data2["iso-3166-1-codes"]) {
+        candidate = data2["iso-3166-1-codes"][0];
+      } else if (data2["iso-3166-2-codes"]) {
+        candidate = data2["iso-3166-2-codes"][0];
+      }
     }
     if (candidate.startsWith("GB-")) {
       return candidate;
@@ -125743,7 +125745,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-12T18:34:13.921Z"
+    built_on: "2026-09-12T19:20:48.306Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
