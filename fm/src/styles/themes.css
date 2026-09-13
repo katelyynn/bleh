@@ -806,16 +806,16 @@ body,
 		--menu-opacity: 94%;
 	}
 	&[data-bleh--theme="nier"] {
-		--b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
+		--b2: 0.9376 0.0407 97.83;
 		--b3: 0.8976 0.0407 97.83;
-		--b4: 0.85 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
+		--b4: 0.7976 0.0377 97.83;
 		--b5: 0.8576 0.0407 97.83;
 		--b6: 0.8197 0.0356 99.94;
 		--b8: 0.8876 0.0407 97.83;
 		--b7: var(--b5);
 		--b9: 0.84 0 0;
 
-		--tooltip: 0.92 calc(var(--sat) * 0.07 * var(--sat-bg, 1)) var(--hue);
+		--tooltip: 0.9376 0.0407 97.83;
 
 		--separator-base: oklch(var(--b5));
 		--separator-height: 6px;
