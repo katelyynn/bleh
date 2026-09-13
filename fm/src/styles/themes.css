@@ -508,6 +508,20 @@ body,
 	--chart-button-hov: oklch(var(--b4) / 60%);
 	--chart-button-atv: oklch(var(--b4) / 80%);
 
+	--toolbar-tab: transparent;
+	--toolbar-tab-hover: oklch(var(--b2) / 20%);
+	--toolbar-tab-hover-colour: var(--toolbar-tab-colour);
+	--toolbar-tab-active: oklch(var(--b2) / 40%);
+	--toolbar-tab-colour: oklch(var(--c2));
+	--toolbar-tab-icon: oklch(var(--l2-c-theme-switch));
+	--toolbar-tab-hover-icon: var(--toolbar-tab-icon);
+
+	--navigation-item: transparent;
+	--navigation-item-hover: oklch(var(--b4) / 40%);
+	--navigation-item-hover-colour: var(--toolbar-tab-colour);
+	--navigation-item-active: oklch(var(--b4) / 60%);
+	--navigation-item-colour: oklch(var(--c2));
+
 	&[data-bleh--theme="darker"] {
 		/* any additional highlights */
 		--b2: 0.37 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
@@ -797,7 +811,7 @@ body,
 		--b4: 0.85 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
 		--b5: 0.8576 0.0407 97.83;
 		--b6: 0.8197 0.0356 99.94;
-		--b8: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
+		--b8: 0.8876 0.0407 97.83;
 		--b7: var(--b5);
 		--b9: 0.84 0 0;
 
@@ -813,9 +827,7 @@ body,
 
 		--normal-shadow: 0 0 transparent;
 		--interact-shadow: 0 0 transparent;
-		--input-shadow:
-			inset 0 0 0 1px oklch(var(--b2) / 20%),
-            inset 0 1px 2px 1px oklch(var(--b6) / 0.4);
+		--input-shadow: 0 0 transparent;
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
@@ -830,13 +842,13 @@ body,
 		--toolbar-border: oklch(0.4128 0.0151 91.68);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
-		--nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
-		--header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
+		--nav-filter-shadow: unset;
+		--header-filter-shadow: unset;
 
 		--card-blur-bg: oklch(0.8476 0.0407 97.83 / var(--solarium-opacity, 73%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
-		--banner-overlay: oklch(var(--b5) / 30%);
+		--banner-overlay: oklch(var(--b5) / 70%);
 		--banner-mix: lighten;
 
 		--setting-group: transparent;
@@ -848,11 +860,11 @@ body,
 
 		--lastfm-logo-filter: none;
 
-		--textarea: oklch(var(--b6) / 30%);
-		--textarea-hov: oklch(var(--b6) / 60%);
+		--textarea: oklch(var(--b6) / 90%);
+		--textarea-hov: var(--textarea);
 
-		--background-overlay: oklch(var(--b5) / 50%);
-		--background-mix-mode: plus-lighter;
+		--background-overlay: oklch(var(--b6) / 50%);
+		--background-mix-mode: screen;
 
 		--card-overlay-filter: invert(0.4);
 		--card-overlay-opacity: 0.2;
@@ -868,7 +880,7 @@ body,
 		--view-buttons-hov: oklch(var(--b5) / 60%);
 		--view-buttons-atv: oklch(var(--b5) / 80%);
 
-		--menu-bg: var(--b5);
+		--menu-bg: var(--b8);
 		--menu-opacity: 94%;
 
 		--button-radius: 0;
@@ -881,6 +893,17 @@ body,
 		--item-small-radius: 0;
 		--item-med-radius: 0;
 		--item-big-radius: 0;
+
+		--toolbar-tab: oklch(0.7397 0.0341 95.51);
+		--toolbar-tab-hover: oklch(0.4128 0.0151 91.68);
+		--toolbar-tab-hover-colour: oklch(var(--b5));
+		--toolbar-tab-active: var(--toolbar-tab-hover);
+		--toolbar-tab-hover-icon: oklch(var(--b5));
+
+		--navigation-item: oklch(0.7397 0.0341 95.51);
+		--navigation-item-hover: oklch(0.4128 0.0151 91.68);
+		--navigation-item-hover-colour: oklch(var(--b5));
+		--navigation-item-active: var(--navigation-item-hover);
 	}
 	&[data-bleh--theme="rose_pine"] {
 		--b2: 0.4299 0.0392 290.42; /* highlight high */
@@ -1164,6 +1187,12 @@ u,
 	--setting-alt: oklch(var(--c3));
 	--setting-alt-hover: var(--setting-alt);
 
+	--toolbar-tab-selected: oklch(var(--h4) / 10%);
+	--toolbar-tab-selected-hover: oklch(var(--h4) / 20%);
+	--toolbar-tab-selected-active: oklch(var(--h4) / 30%);
+	--toolbar-tab-selected-colour: oklch(var(--l3-c));
+	--toolbar-tab-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+
 	&[data-bleh--theme="oled"],
 	body[data-bleh--theme="oled"] &:not(.theme-preview) {
 		--c1: 0.98 0 var(--hue);
@@ -1424,7 +1453,7 @@ u,
 
 		--h3-s: var(--hue), 50%, 70%;
 
-		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.1) var(--hue);
 
 		/* l2-c in dark modes, l4-c in light modes */
 		--l2-c-theme-switch: var(--l3-c);
@@ -1497,6 +1526,12 @@ u,
 		--setting-name-hover: oklch(var(--b5));
 		--setting-alt: oklch(var(--c2) / 80%);
 		--setting-alt-hover: oklch(var(--b5) / 80%);
+
+		--toolbar-tab-selected: oklch(0.4128 0.0151 91.68);
+		--toolbar-tab-selected-hover: var(--toolbar-tab-selected);
+		--toolbar-tab-selected-active: var(--toolbar-tab-selected);
+		--toolbar-tab-selected-colour: oklch(var(--b5));
+		--toolbar-tab-selected-icon: oklch(var(--b5));
 	}
 	&[data-bleh--theme="rose_pine"],
 	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {

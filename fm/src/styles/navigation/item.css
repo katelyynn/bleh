@@ -39,18 +39,23 @@
 .navigation-item,
 .auth-link,
 .masthead-nav-control {
-	--bg: transparent !important;
-	--bg-hov: oklch(var(--b4) / 40%) !important;
-	--bg-atv: oklch(var(--b4) / 60%) !important;
+	--bg: var(--navigation-item) !important;
+	--bg-hov: var(--navigation-item-hover) !important;
+	--bg-atv: var(--navigation-item-active) !important;
 	--shadow: none !important;
 	--shadow-hov: none !important;
-	--col: oklch(var(--c2)) !important;
+	--col: var(--navigation-item-colour) !important;
 	height: var(--button-height) !important;
 	display: flex;
 	align-items: center;
 
 	&:after {
 		display: none !important;
+	}
+
+	&:hover,
+	&:active {
+		--col: var(--navigation-item-hover-colour) !important;
 	}
 }
 
@@ -97,7 +102,7 @@
 .inbox-item {
 	position: relative;
 
-	& > .counter {
+	&>.counter {
 		position: absolute;
 		top: 4px;
 		right: 4px;
@@ -130,17 +135,17 @@
 	gap: var(--item-list-gap);
 	margin-top: 4px;
 
-	& > .inbox-info-item {
+	&>.inbox-info-item {
 		display: flex;
 		align-items: center;
 		gap: var(--icon-gap);
 
-		& > .bleh-icon-inbox-tooltip {
+		&>.bleh-icon-inbox-tooltip {
 			--icon-size: 14px;
 		}
 	}
 
-	& > .inbox-sep {
+	&>.inbox-sep {
 		display: block;
 		width: 3px;
 		height: 3px;
@@ -224,7 +229,7 @@
 	text-decoration: var(--force-underline, none) !important;
 	--mask: var(--icon-16-arrow-down) !important;
 
-	& > p {
+	&>p {
 		margin: unset;
 	}
 
