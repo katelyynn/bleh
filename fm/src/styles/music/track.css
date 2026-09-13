@@ -115,7 +115,7 @@
 	&[data-theme="nier"] {
 		margin: unset !important;
 
-		--bg: oklch(0.7397 0.0341 95.51);
+		--bg: oklch(0.7697 0.0361 95.51);
 		--bg-hov: oklch(0.4128 0.0151 91.68);
 
 		&:hover {
