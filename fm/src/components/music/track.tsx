@@ -158,6 +158,17 @@ export function patch_titles(search = page.structure.main) {
 			}
 			track[symbol] = true;
 
+			function update() {
+				track.setAttribute(
+					'data-theme',
+					useSettings.get('theme') as string,
+				);
+			}
+
+			useSettings.on('theme', update);
+
+			update();
+
 			const track_title = track.querySelector(
 				'.chartlist-name a:not(.offset-section-anchor)',
 			);
