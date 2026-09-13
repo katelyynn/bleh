@@ -65,6 +65,7 @@ export function SettingSelect({
 	}
 
 	const reset = createRef();
+	const select = createRef();
 
 	const store = get_from_store(bind);
 
@@ -132,6 +133,7 @@ export function SettingSelect({
 					onChange={set}
 					name={id}
 					inSettings
+					ref={select}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
@@ -148,6 +150,9 @@ export function SettingSelect({
 			class='setting'
 			data-type='select'
 			id={`setting_${bind}`}
+			onClick={() => {
+				select.current?.open();
+			}}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}

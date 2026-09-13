@@ -860,7 +860,7 @@ body,
 
 		--lastfm-logo-filter: none;
 
-		--textarea: oklch(var(--b6) / 90%);
+		--textarea: oklch(0.7697 0.0356 99.94);
 		--textarea-hov: var(--textarea);
 
 		--background-overlay: oklch(var(--b6) / 50%);
@@ -1194,6 +1194,13 @@ u,
 	--toolbar-tab-selected-active: oklch(var(--h4) / 30%);
 	--toolbar-tab-selected-colour: oklch(var(--l3-c));
 	--toolbar-tab-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+
+	--missing-avatar-colour: oklch(var(--c3));
+
+	--blend-item-hover: oklch(var(--l3-c));
+	--blend-item-hover-icon: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
 
 	&[data-bleh--theme="oled"],
 	body[data-bleh--theme="oled"] &:not(.theme-preview) {
@@ -1534,6 +1541,12 @@ u,
 		--toolbar-tab-selected-active: var(--toolbar-tab-selected);
 		--toolbar-tab-selected-colour: oklch(var(--b5));
 		--toolbar-tab-selected-icon: oklch(var(--b5));
+
+		--missing-avatar-colour: oklch(0.4128 0.0151 91.68);
+		--avatar-generic-background: oklch(var(--b6)) !important;
+
+		--blend-item-hover: oklch(var(--b5));
+		--blend-item-hover-icon: oklch(var(--b5) / 80%);
 	}
 	&[data-bleh--theme="rose_pine"],
 	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {

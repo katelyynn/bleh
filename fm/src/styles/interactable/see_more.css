@@ -112,21 +112,24 @@ a.inline-add-icon {
 .blend-v2 {
 	gap: var(--card-gap) !important;
 
-	.blend-v2-btn {
-		height: fit-content !important;
-
-		&:not(:hover, :focus-visible, [aria-expanded="true"]) {
-			--col: oklch(var(--c3));
-			--mask-colour: oklch(var(--c3) / 80%);
-		}
-	}
-
 	&.accompany {
 		flex: 1;
 
 		&>.notice {
 			cursor: default;
 		}
+	}
+}
+
+.blend-v2-btn {
+	height: fit-content !important;
+
+	--col: var(--blend-item-hover);
+	--mask-colour: var(--blend-item-hover-icon);
+
+	&:not(:hover, :focus-visible, [aria-expanded="true"]) {
+		--col: oklch(var(--c3));
+		--mask-colour: oklch(var(--c3) / 80%);
 	}
 }
 

@@ -23,7 +23,7 @@
 	aspect-ratio: 1 / 1;
 	background: oklch(var(--b2) / 26%);
 	--icon-size: 16px;
-	border-radius: 4px;
+	border-radius: var(--radius-xs);
 	flex-shrink: 0;
 
 	&.activity-icon-bookmark,

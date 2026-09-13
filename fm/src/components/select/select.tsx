@@ -28,6 +28,7 @@ interface SelectProps {
 type SelectElement = HTMLDivElement & {
 	value: string;
 	disabled: boolean;
+	open: () => void;
 };
 
 export function Select({
@@ -108,6 +109,10 @@ export function Select({
 			update();
 		},
 	});
+
+	wrap.open = () => {
+		menu.show();
+	};
 
 	function set(val: string) {
 		value = val;
