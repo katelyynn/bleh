@@ -88,7 +88,7 @@
 .side-action {
 	--bg: var(--side-action, transparent);
 	--bg-hov: var(--side-action-hover, var(--side-action, transparent));
-	--bg-atv: var(--side-action-active, var(--side-action-hover, var(--side-action, transparent))) --shadow: none;
+	--bg-atv: var(--side-action-active, var(--side-action-hover, var(--side-action, transparent)));
 	--col: var(--side-action-colour);
 	--mask-colour: var(--side-action-icon);
 	--shadow: none;
@@ -185,8 +185,8 @@
 		}
 	}
 
-	&:hover {
-
+	&:hover,
+	&:active {
 		--col: var(--side-action-selected-colour);
 		--mask-colour: var(--side-action-selected-icon);
 	}

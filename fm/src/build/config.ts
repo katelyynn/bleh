@@ -694,6 +694,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.grid_glow.name,
 		body: trans.grid_glow.body,
 		bubble: true,
+		incompatible: { theme: 'nier' },
 	},
 	default_avatar_action: {
 		default: 'expand',
