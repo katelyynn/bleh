@@ -89682,6 +89682,7 @@ var bleh = (() => {
     if (!value) value = values.find((v) => "value" in v)?.value;
     const button2 = createRef();
     const select2 = createRef();
+    const inner = createRef();
     const wrap2 = /* @__PURE__ */ jsx("div", {
       class: [
         "select-wrap",
@@ -89705,17 +89706,14 @@ var bleh = (() => {
         })
       ]
     });
-    const menu = tippy_esm_default(button2.current, {
+    const menu = menu_tooltip(button2.current, /* @__PURE__ */ jsx(Tooltip, {
       theme: "select-menu",
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      onShow(instance) {
+      ref: inner
+    }), {
+      onShow: (element) => {
         if (values.length > 15) {
           setTimeout(() => {
-            const focused = instance.popper.querySelector('[aria-checked="true"]');
+            const focused = element.querySelector('[aria-checked="true"]');
             if (!focused) return;
             focused.scrollIntoView({
               behavior: "instant",
@@ -89774,7 +89772,7 @@ var bleh = (() => {
       if (onChange && !initial) onChange(value);
       menu.hide();
       setTimeout(() => {
-        menu.setContent(/* @__PURE__ */ jsx(Fragment, {
+        inner.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
           children: values.map((val2, i3) => {
             if (val2.value == null) {
               if (val2.onSelect) {
@@ -125816,7 +125814,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-14T16:14:30.008Z"
+    built_on: "2026-09-14T17:36:42.977Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

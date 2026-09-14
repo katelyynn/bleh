@@ -5,7 +5,7 @@
  */
 
 import { createRef, ReactNode } from 'jsx-dom';
-import tippy, { Instance, Props } from 'tippy.js';
+import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export interface SelectOption {
 	value?: string;
@@ -45,6 +45,7 @@ export function Select({
 
 	const button = createRef();
 	const select = createRef();
+	const inner = createRef();
 
 	const wrap = (
 		<div
@@ -64,32 +65,29 @@ export function Select({
 		</div>
 	) as SelectElement;
 
-	const menu = tippy(button.current, {
-		theme: 'select-menu',
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
+	const menu = menu_tooltip(
+		button.current,
+		<Tooltip theme='select-menu' ref={inner} />,
+		{
+			onShow: (element) => {
+				if (values.length > 15) {
+					setTimeout(() => {
+						const focused = element.querySelector(
+							'[aria-checked="true"]',
+						);
+						if (!focused) return;
 
-		onShow(instance: Instance<Props>) {
-			if (values.length > 15) {
-				setTimeout(() => {
-					const focused = instance.popper.querySelector(
-						'[aria-checked="true"]',
-					);
-					if (!focused) return;
-
-					focused
-						.scrollIntoView({
-							behavior: 'instant',
-							block: 'center',
-							container: 'nearest',
-						});
-				}, 1);
-			}
+						focused
+							.scrollIntoView({
+								behavior: 'instant',
+								block: 'center',
+								container: 'nearest',
+							});
+					}, 1);
+				}
+			},
 		},
-	});
+	);
 
 	Object.defineProperty(wrap, 'value', {
 		get() {
@@ -159,7 +157,7 @@ export function Select({
 		menu.hide();
 
 		setTimeout(() => {
-			menu.setContent(
+			inner.current.replaceChildren(
 				<>
 					{values.map((val, i) => {
 						if (val.value == null) {
