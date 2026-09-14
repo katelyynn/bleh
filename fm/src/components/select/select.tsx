@@ -211,7 +211,8 @@ export function Select({
 		});
 
 		if (
-			!results.find((v) => v.value == query.toLowerCase()) && query != ''
+			!results.find((v) => v.value == query.toLowerCase()) &&
+			query != '' && allowArbitrary
 		) {
 			results = [
 				{

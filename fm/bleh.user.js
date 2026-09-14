@@ -89812,7 +89812,7 @@ var bleh = (() => {
         }
         return true;
       });
-      if (!results.find((v) => v.value == query.toLowerCase()) && query != "") {
+      if (!results.find((v) => v.value == query.toLowerCase()) && query != "" && allowArbitrary) {
         results = [
           {
             type: "arbitrary",
@@ -125981,7 +125981,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-14T22:52:00.221Z"
+    built_on: "2026-09-14T22:55:15.638Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
