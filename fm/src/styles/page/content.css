@@ -21,7 +21,7 @@
 	}
 
 	&[data-theme="nier"] {
-		background: oklch(0.4128 0.0151 91.68);
+		background: var(--nier-selected);
 		--c1: var(--b5);
 		--c3: var(--b6);
 		color: oklch(var(--b5));
