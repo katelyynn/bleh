@@ -99437,7 +99437,7 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/select.tsx
-  function SettingSelect({ ref: ref2, values, id, value, bind, icon: icon2, name, body, showLabel = true, onChange, disabled, onMouseEnter, onMouseLeave }) {
+  function SettingSelect({ ref: ref2, values, id, value, bind, icon: icon2, name, body, showLabel = true, onChange, disabled, onMouseEnter, onMouseLeave, allowArbitrary }) {
     if (bind) value = useSettings.get(bind);
     const uuid = crypto.randomUUID();
     if (bind) {
@@ -99500,6 +99500,7 @@ var bleh = (() => {
             onChange: set2,
             name: id,
             inSettings: true,
+            allowArbitrary,
             ref: select2
           }),
           Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
@@ -113485,6 +113486,7 @@ var bleh = (() => {
   // src/components/settings/provider/starred_friend.tsx
   function StarredFriend() {
     const elem = /* @__PURE__ */ jsx(SettingSelect, {
+      allowArbitrary: true,
       icon: icons.starred_friend,
       bind: "starred_friend",
       values: set_list(),
@@ -125981,7 +125983,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-14T22:55:15.638Z"
+    built_on: "2026-09-14T22:56:10.049Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

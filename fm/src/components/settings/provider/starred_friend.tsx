@@ -13,6 +13,7 @@ import { icons } from '@/components/shared/icon.tsx';
 export function StarredFriend() {
 	const elem = (
 		<SettingSelect
+			allowArbitrary
 			icon={icons.starred_friend}
 			bind='starred_friend'
 			values={set_list()}
