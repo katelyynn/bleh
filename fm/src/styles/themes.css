@@ -71,8 +71,10 @@ body {
 	--icon-half: 9px;
 	--icon-gap: 4px;
 
+	--side-action-padding: 2px 0;
 	--side-action-height: 36px;
 	--side-action-side: 10px;
+	--side-action-gap: 1px;
 
 	--follow-button-size: 32px;
 
@@ -894,6 +896,23 @@ body,
 		--item-med-radius: 0;
 		--item-big-radius: 0;
 
+		--side-action-bg: transparent;
+		--side-action-padding: 0;
+		--side-action-margin: 0 var(--card-padding);
+		--side-action-sep: transparent;
+		--side-action-sep-height: 0;
+		--side-action-gap: 6px;
+
+		--side-action: oklch(0.7697 0.0361 95.51) !important;
+		--side-action-icon: oklch(var(--c2) / 80%) !important;
+		--side-action-hover: var(--side-action-selected) !important;
+		--side-action-hover-colour: var(--side-action-selected-colour) !important;
+		--side-action-hover-icon: var(--side-action-selected-icon) !important;
+
+		--side-action-selected: oklch(0.4128 0.0151 91.68) !important;
+		--side-action-selected-colour: oklch(var(--b5)) !important;
+		--side-action-selected-icon: oklch(var(--b5) / 80%) !important;
+
 		--toolbar-tab: oklch(0.7397 0.0341 95.51);
 		--toolbar-tab-hover: oklch(0.4128 0.0151 91.68);
 		--toolbar-tab-hover-colour: oklch(var(--b5));
@@ -1183,6 +1202,8 @@ u,
 	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
 	--side-action-bg: oklch(var(--k4) / 5%);
+	--side-action-sep: oklch(var(--b2) / 30%);
+	--side-action-sep-height: 1px;
 
 	--setting-name: oklch(var(--c2));
 	--setting-name-hover: var(--setting-name);
@@ -1201,6 +1222,19 @@ u,
 	--blend-item-hover-icon: color-mix(in oklch,
 			oklch(var(--l3-c)),
 			oklch(var(--l4-c)) 30%);
+
+	--side-action-colour: oklch(var(--c2));
+	--side-action-icon: oklch(var(--l2-c-theme-switch));
+
+	--side-action-hover-colour: var(--side-action-colour);
+	--side-action-hover-icon: var(--side-action-icon);
+
+	--side-action-selected: var(--side-action);
+	--side-action-selected-hover: var(--side-action-selected);
+	--side-action-selected-active: var(--side-action-selected);
+
+	--side-action-selected-colour: oklch(var(--l3-c));
+	--side-action-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
 
 	&[data-bleh--theme="oled"],
 	body[data-bleh--theme="oled"] &:not(.theme-preview) {
@@ -1547,6 +1581,19 @@ u,
 
 		--blend-item-hover: oklch(var(--b5));
 		--blend-item-hover-icon: oklch(var(--b5) / 80%);
+
+		--side-action-colour: oklch(var(--c2));
+		--side-action-icon: oklch(var(--l2-c-theme-switch));
+
+		--side-action-hover-colour: var(--side-action-colour);
+		--side-action-hover-icon: var(--side-action-icon);
+
+		--side-action-selected: var(--side-action);
+		--side-action-selected-hover: var(--side-action-selected);
+		--side-action-selected-active: var(--side-action-selected);
+
+		--side-action-selected-colour: oklch(var(--l3-c));
+		--side-action-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
 	}
 	&[data-bleh--theme="rose_pine"],
 	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {

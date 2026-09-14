@@ -5,7 +5,7 @@
 .side-actions {
 	display: flex;
 	flex-direction: column;
-	gap: 1px;
+	gap: var(--side-action-gap);
 	/*margin: 0 calc(var(--card-padding) - (var(--inner) + var(--button-sides))) !important;
 
 	--inner: 6px;
@@ -14,10 +14,10 @@
 	padding: var(--inner) !important;
 	border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
-	margin: 0 calc(-1 * var(--button-sides)) !important;
+	margin: var(--side-action-margin) !important;
 	background-color: var(--side-action-bg) !important;
 	border-radius: var(--item-med-radius) !important;
-	padding: 2px 0 !important;
+	padding: var(--side-action-padding) !important;
 	overflow: hidden;
 
 	position: relative;
@@ -47,10 +47,10 @@
 	}
 
 	&:is(section) {
-		margin: 0 calc(var(--card-padding) - var(--side-action-side)) 0 !important;
+		margin: var(--side-action-margin, 0 calc(var(--card-padding) - var(--side-action-side)) 0) !important;
 
 		&:first-child {
-			margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--side-action-side)) 0 !important;
+			margin: var(--side-action-margin, calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--side-action-side)) 0) !important;
 		}
 	}
 
@@ -86,12 +86,11 @@
 }
 
 .side-action {
-	--bg: transparent;
-	--bg-hov: transparent;
-	--bg-atv: transparent;
-	--shadow: none;
-	--col: oklch(var(--c2));
-	--mask-colour: oklch(var(--l2-c-theme-switch));
+	--bg: var(--side-action, transparent);
+	--bg-hov: var(--side-action-hover, var(--side-action, transparent));
+	--bg-atv: var(--side-action-active, var(--side-action-hover, var(--side-action, transparent))) --shadow: none;
+	--col: var(--side-action-colour);
+	--mask-colour: var(--side-action-icon);
 	border-radius: unset !important;
 	overflow: unset;
 	text-overflow: ellipsis;
@@ -160,10 +159,10 @@
 		top: unset !important;
 		left: calc(var(--button-sides) + var(--icon-size) + 6px) !important;
 		right: var(--button-sides) !important;
-		bottom: -1px !important;
+		bottom: calc(-1 * var(--side-action-sep-height)) !important;
 		width: unset !important;
-		height: 1px !important;
-		background: oklch(var(--b2) / 30%) !important;
+		height: var(--side-action-sep-height) !important;
+		background: var(--side-action-sep) !important;
 		border: none !important;
 	}
 
@@ -186,8 +185,9 @@
 	}
 
 	&:hover {
-		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+
+		--col: var(--side-action-selected-colour);
+		--mask-colour: var(--side-action-selected-icon);
 	}
 }
 
@@ -200,7 +200,7 @@
 
 	position: relative;
 	--last-child-sep: none;
-	margin-bottom: 1px;
+	margin-bottom: var(--side-action-sep-height);
 	padding-right: var(--button-sides);
 
 	gap: 10px !important;
@@ -212,10 +212,10 @@
 		top: none !important;
 		left: calc(var(--button-sides) + var(--icon-size) + 6px) !important;
 		right: var(--button-sides) !important;
-		bottom: -1px !important;
+		bottom: calc(-1 * var(--side-action-sep-height)) !important;
 		width: unset !important;
-		height: 1px !important;
-		background: oklch(var(--b2) / 40%) !important;
+		height: var(--side-action-sep-height) !important;
+		background: var(--side-action-sep) !important;
 	}
 }
 
@@ -250,8 +250,11 @@
 [data-toggle-button-current-state="bookmarked"]>form>.header-new-bookmark-button,
 .side-action[data-is-shortcut="true"],
 [data-toggle-button-current-state="followed"]>form>.side-action[data-type="follow"] {
-	--col: oklch(var(--l3-c));
-	--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+	--bg: var(--side-action-selected, var(--side-action));
+	--bg-hov: var(--side-action-selected-hover, var(--side-action-selected, var(--side-action)));
+	--bg-atv: var(--side-action-selected-active, var(--side-action-selected-hover, var(--side-action-selected, var(--side-action))));
+	--col: var(--side-action-selected-colour);
+	--mask-colour: var(--side-action-selected-icon);
 	--force-font-weight: var(--font-weight-medium) !important;
 
 	&:before {
