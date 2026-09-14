@@ -879,7 +879,7 @@ body,
 
 		--card-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
 		--menu-shadow: 2px 2px 0 0 oklch(0.6609 0.0287 107.16);
-		--overlay-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
+		--overlay-shadow: 0 0 transparent !important;
 
 		--view-buttons: oklch(var(--b6));
 		--view-buttons-hov: oklch(var(--b5) / 60%);
@@ -937,6 +937,8 @@ body,
 		--menu-lines-vertical: 4px;
 		--menu-lines-height: 2px;
 		--menu-lines-display: block;
+
+		--modal-bg: oklch(0.5497 0.0106 99.94 / 50%);
 	}
 	&[data-bleh--theme="rose_pine"] {
 		--b2: 0.4299 0.0392 290.42; /* highlight high */

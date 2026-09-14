@@ -26,7 +26,9 @@
 		--c3: var(--b6);
 		color: oklch(var(--b5));
 		--icon-colour: oklch(var(--b5));
-		padding: 6px 8px;
+		padding: 6px var(--card-padding);
+		margin-left: calc(-1 * var(--card-padding));
+		margin-right: calc(-1 * var(--card-padding));
 	}
 
 	&>h2 {

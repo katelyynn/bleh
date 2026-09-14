@@ -11,6 +11,7 @@ import { tl, trans } from '@/build/trans';
 import { ReactElement, ReactNode } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
 import { WithChildren } from '@/types/generic.tsx';
+import { useSettings } from '@/page.ts';
 
 export function load_dialogs() {
 	const elem = (
@@ -111,7 +112,11 @@ export function dialog({
 	if (title) {
 		modal.setAttribute('aria-labelledby', 'modal_title');
 		modal.appendChild(
-			<div class='bleh-modal-title' id='modal_title'>
+			<div
+				class='bleh-modal-title'
+				id='modal_title'
+				data-theme={useSettings.get('theme')}
+			>
 				<PanelHead top margin={false} icon={icon}>{title}</PanelHead>
 				{subtitle && <p class='bleh-modal-subtitle'>{subtitle}</p>}
 			</div>,
