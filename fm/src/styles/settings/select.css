@@ -13,6 +13,10 @@
 
 	--select-arrow-icon-size: 12px;
 
+	&.with-query {
+		--col: transparent;
+	}
+
 	&:after {
 		--mask: var(--icon-16-dropdown);
 		--mask-size: var(--select-arrow-icon-size);
@@ -58,6 +62,21 @@
 		--button-sides-icon: 0;
 		--radius: 0;
 		--shadow: none;
+	}
+}
+
+.select-input {
+	appearance: none;
+	background: none;
+	color: inherit;
+	border: none;
+	--focus-outline: none;
+	position: absolute;
+	inset: var(--button-verts) calc(var(--button-sides) + 12px + 4px) var(--button-verts) var(--button-sides);
+	pointer-events: none;
+
+	&:not(.with-query) {
+		opacity: 0;
 	}
 }
 
@@ -173,6 +192,11 @@
 
 .content-form select {
 	background-image: none !important;
+}
+
+.select-wrap {
+	position: relative;
+	height: fit-content;
 }
 
 .link-select {

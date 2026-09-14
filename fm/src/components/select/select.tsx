@@ -5,6 +5,12 @@
  */
 
 import { createRef, ReactNode } from 'jsx-dom';
+import {
+	flip,
+	inline,
+	offset as offsetMiddleware,
+	shift as shiftMiddleware,
+} from '@floating-ui/dom';
 import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export interface SelectOption {
@@ -115,8 +121,27 @@ export function Select({
 
 	const menu = menu_tooltip(
 		button.current,
-		<Tooltip theme='select-menu' ref={inner} />,
+		<Tooltip
+			theme='select-menu'
+			ref={inner}
+			onPointerDown={() => {
+				setTimeout(() => {
+					if (menu.is_mounted) {
+						input.current.focus();
+					}
+				}, 0);
+			}}
+		/>,
 		{
+			middleware: [
+				flip(),
+				inline(),
+				shiftMiddleware({
+					crossAxis: true,
+					padding: 4,
+				}),
+				offsetMiddleware(2),
+			],
 			onShow: (element) => {
 				if (values.length > 15) {
 					setTimeout(() => {
@@ -142,12 +167,15 @@ export function Select({
 			onHide: () => {
 				temporary_focus = -1;
 				input.current.value = '';
+				input.current.blur();
 			},
 		},
 	);
 
 	function search() {
 		const query = input.current.value || '';
+		input.current.classList.toggle('with-query', query);
+		button.current.classList.toggle('with-query', query);
 
 		results = values.filter((val) => {
 			if (query == '') return true;
