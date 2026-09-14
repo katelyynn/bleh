@@ -89726,7 +89726,11 @@ var bleh = (() => {
               temporary_focus++;
               search();
             } else if (e5.key == "Enter") {
-              set2(results[temporary_focus].value);
+              if (results[temporary_focus].value != null) {
+                set2(results[temporary_focus].value);
+              } else if (results[temporary_focus].onSelect) {
+                results[temporary_focus].onSelect();
+              }
               temporary_focus = -1;
             }
           },
@@ -125969,7 +125973,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-14T22:32:06.184Z"
+    built_on: "2026-09-14T22:34:51.604Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

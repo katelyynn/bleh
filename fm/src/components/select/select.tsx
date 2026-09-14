@@ -99,7 +99,12 @@ export function Select({
 						temporary_focus++;
 						search();
 					} else if (e.key == 'Enter') {
-						set(results[temporary_focus].value!);
+						if (results[temporary_focus].value != null) {
+							set(results[temporary_focus].value!);
+						} else if (results[temporary_focus].onSelect) {
+							results[temporary_focus].onSelect!();
+						}
+
 						temporary_focus = -1;
 					}
 				}}
