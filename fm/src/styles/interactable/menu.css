@@ -114,6 +114,26 @@
 	/*--btn-left: calc(var(--button-sides) + 12px + 4px) !important;*/
 	--margin-top: calc(-1 * (var(--mask-size) / 2)) !important;
 	--left: calc(var(--button-sides) + 2px) !important;
+
+	&.candidate {
+		--mask: var(--icon-16-arrow-right) !important;
+
+		&:before {
+			animation: candidate 1.5s var(--trans-function) infinite !important;
+		}
+	}
+}
+
+@keyframes candidate {
+
+	from,
+	to {
+		opacity: 0;
+	}
+
+	60% {
+		opacity: 1;
+	}
 }
 
 .dropdown-menu-clickable-item {

@@ -46,6 +46,7 @@ export function Select({
 	const button = createRef();
 	const select = createRef();
 	const inner = createRef();
+	const input = createRef();
 
 	const wrap = (
 		<div
@@ -62,8 +63,55 @@ export function Select({
 				]}
 				ref={button}
 			/>
+			<input
+				class={['select-input']}
+				onInput={() => {
+					temporary_focus = -1;
+					search();
+				}}
+				onKeyDown={(e) => {
+					if (!e.key.startsWith('Arrow') && e.key != 'Enter') return;
+
+					e.preventDefault();
+
+					if (e.key.startsWith('Arrow')) {
+						if (temporary_focus < 0) find_temporary_focus();
+					}
+
+					if (
+						e.key == 'ArrowUp' &&
+						temporary_focus - 1 >= 0
+					) {
+						temporary_focus--;
+						search();
+					} else if (
+						e.key == 'ArrowDown' &&
+						temporary_focus + 1 < results.length
+					) {
+						temporary_focus++;
+						search();
+					} else if (e.key == 'Enter') {
+						set(results[temporary_focus].value!);
+						temporary_focus = -1;
+					}
+				}}
+				ref={input}
+			/>
 		</div>
 	) as SelectElement;
+
+	function find_temporary_focus() {
+		const in_results = results.findIndex((v) => v.value == value);
+
+		if (in_results >= 0) {
+			temporary_focus = in_results;
+		} else {
+			temporary_focus = 0;
+		}
+	}
+
+	let temporary_focus = 0;
+	let results: SelectOption[] = [];
 
 	const menu = menu_tooltip(
 		button.current,
@@ -85,9 +133,120 @@ export function Select({
 							});
 					}, 1);
 				}
+
+				temporary_focus = -1;
+				input.current.value = '';
+				input.current.focus();
+				search();
+			},
+			onHide: () => {
+				temporary_focus = -1;
+				input.current.value = '';
 			},
 		},
 	);
+
+	function search() {
+		const query = input.current.value || '';
+
+		results = values.filter((val) => {
+			if (query == '') return true;
+
+			if (val.value == null) return false;
+
+			if (typeof val.text == 'function') {
+				const text = (val.text() as Element).textContent
+					.trim().toLowerCase();
+				console.info('testing elem', text);
+				if (!text.includes(query)) return false;
+			} else {
+				console.info('testing', val.text);
+				if (
+					!(val.text as string).toLowerCase().includes(
+						query,
+					)
+				) {
+					return false;
+				}
+			}
+
+			return true;
+		});
+
+		if (
+			query && (temporary_focus < 0 || temporary_focus > results.length)
+		) {
+			find_temporary_focus();
+		}
+
+		console.info(
+			'testing | query:',
+			query,
+			'focus:',
+			temporary_focus,
+			'value:',
+			value,
+			results,
+		);
+
+		inner.current.replaceChildren(
+			<>
+				{results.map((val, i) => {
+					if (val.value == null) {
+						if (val.onSelect) {
+							return (
+								<button
+									type='button'
+									class={[
+										'btn',
+										'dropdown-menu-clickable-item',
+										'icon-mask',
+									]}
+									data-type={val.type}
+									onClick={() => {
+										menu.hide();
+										val.onSelect!();
+									}}
+									key={i}
+								>
+									{select_text(val.text)}
+								</button>
+							);
+						}
+
+						if (val.text == 'sep') {
+							return <div class='sep' key={i} />;
+						}
+
+						return (
+							<div class='select-header' key={i}>
+								{select_text(val.text)}
+							</div>
+						);
+					}
+
+					return (
+						<button
+							type='button'
+							class={[
+								'btn',
+								'dropdown-menu-clickable-item',
+								'select-item',
+								i == temporary_focus && 'candidate',
+							]}
+							aria-checked={temporary_focus < 0
+								? String(val.value == value)
+								: String(i == temporary_focus)}
+							onClick={() => set(val.value!)}
+							key={i}
+						>
+							{select_text(val.text)}
+						</button>
+					);
+				})}
+			</>,
+		);
+	}
 
 	Object.defineProperty(wrap, 'value', {
 		get() {
@@ -157,60 +316,7 @@ export function Select({
 		menu.hide();
 
 		setTimeout(() => {
-			inner.current.replaceChildren(
-				<>
-					{values.map((val, i) => {
-						if (val.value == null) {
-							if (val.onSelect) {
-								return (
-									<button
-										type='button'
-										class={[
-											'btn',
-											'dropdown-menu-clickable-item',
-											'icon-mask',
-										]}
-										data-type={val.type}
-										onClick={() => {
-											menu.hide();
-											val.onSelect!();
-										}}
-										key={i}
-									>
-										{select_text(val.text)}
-									</button>
-								);
-							}
-
-							if (val.text == 'sep') {
-								return <div class='sep' key={i} />;
-							}
-
-							return (
-								<div class='select-header' key={i}>
-									{select_text(val.text)}
-								</div>
-							);
-						}
-
-						return (
-							<button
-								type='button'
-								class={[
-									'btn',
-									'dropdown-menu-clickable-item',
-									'select-item',
-								]}
-								aria-checked={String(val.value == value)}
-								onClick={() => set(val.value!)}
-								key={i}
-							>
-								{select_text(val.text)}
-							</button>
-						);
-					})}
-				</>,
-			);
+			search();
 		}, 300);
 	}
 
