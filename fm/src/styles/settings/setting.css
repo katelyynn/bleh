@@ -108,7 +108,7 @@
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
-	&:not([aria-disabled="true"], [disabled="true"], .standalone):hover {
+	&:is([data-type="toggle"], [data-type="checkbox"]):not([aria-disabled="true"], [disabled="true"], .standalone):hover {
 		background: var(--setting-hover);
 		transition: none;
 

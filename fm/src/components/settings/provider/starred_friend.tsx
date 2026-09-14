@@ -16,6 +16,16 @@ export function StarredFriend() {
 			icon={icons.starred_friend}
 			bind='starred_friend'
 			values={set_list()}
+			onChange={(v: string) => {
+				if (!v) return;
+
+				const friends = useSettings.get('friends') as string[];
+				if (friends.includes(v)) {
+					return;
+				}
+
+				useSettings.append('friends', v);
+			}}
 		/>
 	);
 

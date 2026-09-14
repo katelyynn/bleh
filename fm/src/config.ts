@@ -296,7 +296,7 @@ export class Settings {
 	public append(key: string, value: setting_value) {
 		if (!Array.isArray(this.get(key))) return;
 
-		this.set(key, [...this.get(key), value]);
+		this.set(key, [...this.get(key) as setting_value[], value]);
 	}
 
 	// members can subscribe to setting changes

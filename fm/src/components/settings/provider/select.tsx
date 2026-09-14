@@ -169,9 +169,9 @@ export function SettingSelect({
 
 		if (bind) {
 			if (!received) useSettings.set(bind, val, uuid);
-		} else {
-			if (onChange) onChange(val);
 		}
+
+		if (onChange) onChange(val);
 
 		if (onMouseEnter) onMouseEnter();
 	}

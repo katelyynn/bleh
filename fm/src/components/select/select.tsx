@@ -210,7 +210,9 @@ export function Select({
 			return true;
 		});
 
-		if (!results.find((v) => v.value == value) && query != '') {
+		if (
+			!results.find((v) => v.value == query.toLowerCase()) && query != ''
+		) {
 			results = [
 				{
 					type: 'arbitrary',
