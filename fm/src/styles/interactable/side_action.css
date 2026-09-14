@@ -91,6 +91,7 @@
 	--bg-atv: var(--side-action-active, var(--side-action-hover, var(--side-action, transparent))) --shadow: none;
 	--col: var(--side-action-colour);
 	--mask-colour: var(--side-action-icon);
+	--shadow: none;
 	border-radius: unset !important;
 	overflow: unset;
 	text-overflow: ellipsis;
@@ -220,8 +221,8 @@
 }
 
 .side-action-small {
-	--bg-hov: oklch(var(--h4) / 20%);
-	--bg-atv: oklch(var(--h4) / 40%);
+	--bg-hov: oklch(var(--h4) / 20%) !important;
+	--bg-atv: oklch(var(--h4) / 40%) !important;
 	border-radius: 50px !important;
 
 	--side-action-height: 26px;
@@ -238,8 +239,8 @@
 	}
 
 	&:not([data-type="close_friends"]) {
-		--bg-hov: oklch(var(--b2) / 50%);
-		--bg-atv: oklch(var(--b2) / 70%);
+		--bg-hov: oklch(var(--b2) / 50%) !important;
+		--bg-atv: oklch(var(--b2) / 70%) !important;
 		--mask-colour: oklch(var(--c2));
 	}
 }
