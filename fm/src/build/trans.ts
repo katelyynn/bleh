@@ -2368,15 +2368,7 @@ export const trans = {
 			zh: '显示额外的时令特效',
 		},
 		body: {
-			en: 'During winter seasons this applies a coat of ice to panels, otherwise mainly gradients',
-			de: 'Während der Wintersaisons wird eine Eisschicht auf die Panels angewendet, ansonsten hauptsächlich Farbverläufe',
-			es: 'Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes',
-			it: 'Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti',
-			pt: 'Durante o inverno, isso aplica uma camada de gelo aos painéis; fora dessa época, aplica principalmente gradientes',
-			sv: 'Under vintersäsongen läggs ett lager is på paneler, annars mest bildgradienter',
-			ru: 'Отображать дополнительные сезонные эффекты',
-			pl: 'Podczas sezonu zimowego dodaje lód do paneli, w większości gradienty ',
-			zh: '冬季时会为界面披上一层冰霜质感，其他时令则主要以色彩渐变呈现',
+			en: 'Features image overlays like cobwebs and snow in certain seasons',
 		},
 	},
 	seasonal_offset: {

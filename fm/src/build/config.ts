@@ -406,6 +406,8 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.colourful_counts.name,
 		body: trans.colourful_counts.body,
+		incompatible: { theme: 'nier' },
+		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	colourful_tracks: {
 		default: true,
@@ -695,6 +697,7 @@ export const settings_store: Record<string, setting_instance> = {
 		body: trans.grid_glow.body,
 		bubble: true,
 		incompatible: { theme: 'nier' },
+		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	default_avatar_action: {
 		default: 'expand',

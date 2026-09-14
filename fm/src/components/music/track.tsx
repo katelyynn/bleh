@@ -264,7 +264,7 @@ export function patch_titles(search = page.structure.main) {
 			if (is_user) {
 				track.setAttribute('data-track-type', 'user');
 
-				if (settings.colourful_counts) {
+				if (useSettings.get('colourful_counts')) {
 					patch_artist_ranks_in_list_view(track);
 				}
 
@@ -290,7 +290,7 @@ export function patch_titles(search = page.structure.main) {
 
 				const bar = track.querySelector('.chartlist-count-bar-slug');
 				if (bar) {
-					if (settings.colourful_counts) {
+					if (useSettings.get('colourful_counts')) {
 						patch_artist_ranks_in_list_view(track);
 					}
 

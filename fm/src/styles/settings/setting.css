@@ -234,7 +234,7 @@
 		align-items: center;
 		gap: var(--card-gap);
 		flex-shrink: 0;
-		color: oklch(var(--c3));
+		color: var(--col-alt);
 
 		&.v {
 			flex-direction: column;
