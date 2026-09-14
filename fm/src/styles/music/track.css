@@ -115,8 +115,8 @@
 	&[data-theme="nier"] {
 		margin: unset !important;
 
-		--bg: oklch(0.7697 0.0361 95.51);
-		--bg-hov: oklch(0.4128 0.0151 91.68);
+		--bg: var(--nier-raised);
+		--bg-hov: var(--nier-selected);
 
 		&:hover {
 			--col: var(--b5);
@@ -447,7 +447,7 @@
 	}
 
 	&[data-theme="nier"] {
-		--bg: oklch(0.4128 0.0151 91.68) !important;
+		--bg: var(--nier-selected) !important;
 		--bg-hov: var(--bg) !important;
 		--col: var(--b5);
 		--col-alt: var(--b6);

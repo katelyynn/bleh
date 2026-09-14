@@ -22,8 +22,7 @@
 	}
 
 	&[data-animation="bleh"] {
-		transition-property: visibility, opacity, translate, transform
-			!important;
+		transition-property: visibility, opacity, translate, transform !important;
 		transition-duration: 0.22s !important;
 		transition-timing-function: var(--trans-function-ani);
 
@@ -55,12 +54,12 @@
 	&[data-theme="select-menu"],
 	&[data-theme="language-menu"],
 	&[data-theme="menu"] {
-		padding: 4px !important;
+		padding: var(--vertical-menu-padding, 4px) var(--horizontal-menu-padding, 4px) !important;
 		background-color: oklch(var(--menu-bg) / var(--solarium-opacity,
-			var(--menu-opacity))) !important;
+					var(--menu-opacity))) !important;
 		border-radius: calc(var(--item-med-radius) + 4px) !important;
 		box-shadow: var(--override-full-shadow,
-			var(--menu-shadow)) !important;
+				var(--menu-shadow)) !important;
 		border: 1px solid var(--menu-border) !important;
 		color: oklch(var(--c2));
 
@@ -80,10 +79,29 @@
 		background-repeat: repeat-x !important;
 		background-position: 0 0 !important;
 
-		& > .tippy-content {
+		&>.tippy-content {
 			display: flex;
 			flex-direction: column;
 			gap: var(--menu-gap);
+		}
+
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			display: var(--menu-lines-display, none);
+			background-color: var(--menu-lines);
+			height: var(--menu-lines-height);
+			left: var(--menu-lines-horizontal) !important;
+			right: var(--menu-lines-horizontal) !important;
+		}
+
+		&:before {
+			top: var(--menu-lines-vertical);
+		}
+
+		&:after {
+			bottom: var(--menu-lines-vertical);
 		}
 
 		&[data-theme="select-menu"] {
@@ -154,13 +172,12 @@
 	}
 
 	&[data-theme="mobile"] {
-		padding: var(--card-gap) var(--card-gap) calc(var(--card-gap) * 3)
-			!important;
+		padding: var(--card-gap) var(--card-gap) calc(var(--card-gap) * 3) !important;
 		background: oklch(var(--b5) / var(--solarium-opacity,
-			var(--menu-opacity))) !important;
+					var(--menu-opacity))) !important;
 		border-radius: var(--item-big-radius) !important;
 		box-shadow: var(--override-full-shadow,
-			var(--menu-shadow)) !important;
+				var(--menu-shadow)) !important;
 		border: 1px solid var(--menu-border) !important;
 		color: oklch(var(--c2));
 
@@ -184,10 +201,10 @@
 	&[data-theme="window"] {
 		padding: var(--card-gap) !important;
 		background-color: oklch(var(--menu-bg) / var(--solarium-opacity,
-			var(--menu-opacity))) !important;
+					var(--menu-opacity))) !important;
 		border-radius: var(--item-big-radius) !important;
 		box-shadow: var(--override-full-shadow,
-			var(--menu-shadow)) !important;
+				var(--menu-shadow)) !important;
 		border: 1px solid var(--menu-border) !important;
 		color: oklch(var(--c2));
 
@@ -211,7 +228,7 @@
 			max-width: 96vw !important;
 		}
 
-		& > .tippy-content {
+		&>.tippy-content {
 			display: flex;
 		}
 
@@ -305,7 +322,7 @@
 	}
 
 	&[data-theme="key_value"] {
-		& > .tippy-content {
+		&>.tippy-content {
 			display: flex;
 			gap: 10px;
 
@@ -326,20 +343,20 @@
 	}
 
 	&[data-theme="name-sister-combo"] {
-		& > .tippy-content {
+		&>.tippy-content {
 			display: flex;
 			flex-direction: column;
 			text-align: center;
 
-			& > .name {
+			&>.name {
 				font-weight: var(--font-weight-medium);
 
-				& > .link {
+				&>.link {
 					justify-content: center;
 				}
 			}
 
-			& > .sister {
+			&>.sister {
 				font-size: 12px;
 				margin-top: -2px;
 				color: oklch(var(--c3));
@@ -374,10 +391,10 @@
 .events-filter-location-dropdown {
 	margin: unset !important;
 	background: oklch(var(--menu-bg) / var(--solarium-opacity,
-		var(--menu-opacity))) !important;
+				var(--menu-opacity))) !important;
 	border-radius: calc(var(--input-radius) + 4px) !important;
 	box-shadow: var(--override-full-shadow,
-		var(--menu-shadow)) !important;
+			var(--menu-shadow)) !important;
 	border: 1px solid var(--menu-border) !important;
 	color: oklch(var(--c2));
 
@@ -401,7 +418,7 @@
 		display: var(--cards-overlay-display);
 
 		background-image: var(--cards-overlay-image,
-			unset), var(--cards-overlay) !important;
+				unset), var(--cards-overlay) !important;
 		background-size: 100px;
 		background-repeat: repeat-x !important;
 		background-position: 0 -60px !important;
@@ -418,7 +435,7 @@
 	&.modal-body {
 		background: oklch(var(--b5) / var(--solarium-opacity, 90%)) !important;
 		box-shadow: var(--override-full-shadow,
-			var(--overlay-shadow)) !important;
+				var(--overlay-shadow)) !important;
 		border-radius: var(--item-big-radius) !important;
 
 		backdrop-filter: var(--solarium);
@@ -429,7 +446,7 @@
 .tippy-box[data-theme="popup"] {
 	padding: 12px;
 
-	& > .tippy-content {
+	&>.tippy-content {
 		display: flex;
 		flex-direction: column;
 		gap: 6px;

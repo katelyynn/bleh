@@ -546,7 +546,7 @@ hr {
 
 		/* in a top container */
 		&:not(.is-top) {
-			background: oklch(0.4128 0.0151 91.68);
+			background: var(--nier-selected);
 			padding: 6px 8px;
 		}
 	}

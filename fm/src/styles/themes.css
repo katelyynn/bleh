@@ -819,13 +819,16 @@ body,
 
 		--tooltip: 0.9376 0.0407 97.83;
 
+		--nier-raised: oklch(0.8097 0.0371 95.51);
+		--nier-selected: oklch(0.4128 0.0151 91.68);
+
 		--separator-base: oklch(var(--b5));
 		--separator-height: 6px;
 
 		--card-border-base: oklch(0.6609 0.0287 107.16 / 0) !important;
 		--card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
 
-		--menu-border: transparent;
+		--menu-border: none;
 
 		--normal-shadow: 0 0 transparent;
 		--interact-shadow: 0 0 transparent;
@@ -854,11 +857,11 @@ body,
 		--banner-mix: lighten;
 
 		--setting-group: transparent;
-		--setting: oklch(0.7897 0.0371 95.51);
-		--setting-hover: oklch(0.5023 0.0189 95.43);
+		--setting: var(--nier-raised);
+		--setting-hover: var(--nier-selected);
 
-		--menu-item-hov: oklch(0.7897 0.0371 95.51);
-		--menu-item-atv: oklch(0.7897 0.0371 95.51);
+		--menu-item-hov: var(--nier-raised);
+		--menu-item-atv: var(--nier-raised);
 
 		--lastfm-logo-filter: none;
 
@@ -875,7 +878,7 @@ body,
 		--header-disc-filter: brightness(0.9);
 
 		--card-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
-		--menu-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
+		--menu-shadow: 2px 2px 0 0 oklch(0.6609 0.0287 107.16);
 		--overlay-shadow: 4px 4px 0 0 oklch(0.6609 0.0287 107.16);
 
 		--view-buttons: oklch(var(--b6));
@@ -903,28 +906,37 @@ body,
 		--side-action-sep-height: 0;
 		--side-action-gap: 6px;
 
-		--side-action: oklch(0.7697 0.0361 95.51) !important;
+		--side-action: var(--nier-raised) !important;
 		--side-action-icon: oklch(var(--c2) / 80%) !important;
 		--side-action-hover: var(--side-action-selected) !important;
 		--side-action-hover-colour: var(--side-action-selected-colour) !important;
 		--side-action-hover-icon: var(--side-action-selected-icon) !important;
 
-		--side-action-selected: oklch(0.4128 0.0151 91.68) !important;
+		--side-action-selected: var(--nier-selected) !important;
 		--side-action-selected-colour: oklch(var(--b5)) !important;
 		--side-action-selected-icon: oklch(var(--b5) / 80%) !important;
 
-		--toolbar-tab: oklch(0.7397 0.0341 95.51);
-		--toolbar-tab-hover: oklch(0.4128 0.0151 91.68);
+		--toolbar-tab: var(--nier-raised);
+		--toolbar-tab-hover: var(--nier-selected);
 		--toolbar-tab-hover-colour: oklch(var(--b5));
 		--toolbar-tab-active: var(--toolbar-tab-hover);
 		--toolbar-tab-hover-icon: oklch(var(--b5));
 
-		--navigation-item: oklch(0.7397 0.0341 95.51);
-		--navigation-item-hover: oklch(0.4128 0.0151 91.68);
+		--navigation-item: var(--nier-raised);
+		--navigation-item-hover: var(--nier-selected);
 		--navigation-item-hover-colour: oklch(var(--b5));
 		--navigation-item-active: var(--navigation-item-hover);
 
 		--button-outline: inset 0 0 0 1px oklch(var(--c3) / 50%);
+
+		--vertical-menu-padding: calc(var(--menu-lines-vertical) + var(--menu-lines-height) + 4px);
+		--horizontal-menu-padding: 0px;
+
+		--menu-lines: oklch(0.8191 0.0456 94.53);
+		--menu-lines-horizontal: 6px;
+		--menu-lines-vertical: 4px;
+		--menu-lines-height: 2px;
+		--menu-lines-display: block;
 	}
 	&[data-bleh--theme="rose_pine"] {
 		--b2: 0.4299 0.0392 290.42; /* highlight high */
