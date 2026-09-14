@@ -79,6 +79,10 @@
 		background-repeat: repeat-x !important;
 		background-position: 0 0 !important;
 
+		display: flex;
+		flex-direction: column;
+		gap: var(--menu-gap);
+
 		&>.tippy-content {
 			display: flex;
 			flex-direction: column;

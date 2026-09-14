@@ -65,6 +65,7 @@ const CspPolicies: PolicyMap = {
 		'https://cdnjs.cloudflare.com',
 		'https://cdn.cookielaw.org',
 		'https://google.com',
+		'https://*.google.com',
 		'https://*.gstatic.com',
 		'https://youtube.com',
 		'https://youtube-nocookie.com',
