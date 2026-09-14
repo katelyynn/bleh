@@ -89678,7 +89678,7 @@ var bleh = (() => {
   }
 
   // src/components/select/select.tsx
-  function Select({ ref: ref2, values, value, disabled, className: className2, name, onChange, inSettings }) {
+  function Select({ ref: ref2, values, value, disabled, className: className2, name, onChange, inSettings, allowArbitrary }) {
     if (!value) value = values.find((v) => "value" in v)?.value;
     const button2 = createRef();
     const select2 = createRef();
@@ -89785,6 +89785,8 @@ var bleh = (() => {
         temporary_focus = -1;
         input2.current.value = "";
         input2.current.blur();
+        input2.current.classList.remove("with-query");
+        button2.current.classList.remove("with-query");
       }
     });
     function search() {
@@ -89806,13 +89808,27 @@ var bleh = (() => {
         }
         return true;
       });
+      if (!results.find((v) => v.value == value) && query != "") {
+        results = [
+          {
+            type: "arbitrary",
+            text: query || value,
+            value: query || value,
+            onSelect: () => {
+              temporary_focus = -1;
+              input2.current.value = "";
+            }
+          },
+          ...results
+        ];
+      }
       if (query && (temporary_focus < 0 || temporary_focus > results.length)) {
         find_temporary_focus();
       }
       console.info("testing | query:", query, "focus:", temporary_focus, "value:", value, results);
       inner.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
         children: results.map((val, i3) => {
-          if (val.value == null) {
+          if (val.value == null && val.type != "arbitrary") {
             if (val.onSelect) {
               return /* @__PURE__ */ jsx("button", {
                 type: "button",
@@ -89849,7 +89865,11 @@ var bleh = (() => {
               i3 == temporary_focus && val.value != value && "candidate"
             ],
             "aria-checked": String(selected),
-            onClick: () => set2(val.value),
+            onClick: () => {
+              if (val.value == null) return;
+              if (val.onSelect) val.onSelect();
+              set2(val.value);
+            },
             children: select_text(val.text)
           }, i3);
         })
@@ -89895,9 +89915,10 @@ var bleh = (() => {
           }, i3);
         })
       }));
-      button2.current.replaceChildren("?");
-      const val = values.find((v) => v.value == value);
-      if (!val) return;
+      button2.current.replaceChildren(value);
+      const val = values.find((v) => v.value == value) || {
+        text: value
+      };
       button2.current.replaceChildren(select_text(val.text));
       select2.current.value = value;
       if (onChange && !initial) onChange(value);
@@ -123336,6 +123357,11 @@ var bleh = (() => {
               /* @__PURE__ */ jsx(DemoItem, {
                 label: "Select",
                 children: /* @__PURE__ */ jsx(Select, {
+                  onChange: (v) => {
+                    notify({
+                      title: `value is ${v}`
+                    });
+                  },
                   values: [
                     {
                       value: "hello",
@@ -123351,6 +123377,11 @@ var bleh = (() => {
               /* @__PURE__ */ jsx(DemoItem, {
                 label: "Select (with advanced stuff)",
                 children: /* @__PURE__ */ jsx(Select, {
+                  onChange: (v) => {
+                    notify({
+                      title: `value is ${v}`
+                    });
+                  },
                   values: [
                     {
                       text: "See below"
@@ -123358,6 +123389,41 @@ var bleh = (() => {
                     {
                       value: "hello",
                       text: "Hello"
+                    },
+                    {
+                      text: "sep"
+                    },
+                    {
+                      value: "world",
+                      text: "World"
+                    }
+                  ]
+                })
+              }),
+              /* @__PURE__ */ jsx(DemoItem, {
+                label: "Select (with advanced stuff and arbitrary)",
+                children: /* @__PURE__ */ jsx(Select, {
+                  allowArbitrary: true,
+                  onChange: (v) => {
+                    notify({
+                      title: `value is ${v}`
+                    });
+                  },
+                  values: [
+                    {
+                      text: "See below"
+                    },
+                    {
+                      value: "hello",
+                      text: "Hello"
+                    },
+                    {
+                      value: "hello2",
+                      text: "Hello2"
+                    },
+                    {
+                      value: "hello3",
+                      text: "Hello3"
                     },
                     {
                       text: "sep"
@@ -125903,7 +125969,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-14T21:49:17.363Z"
+    built_on: "2026-09-14T22:32:06.184Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

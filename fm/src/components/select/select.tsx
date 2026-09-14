@@ -29,6 +29,7 @@ interface SelectProps {
 	name?: string;
 	onChange?: (val: string) => void;
 	inSettings?: boolean;
+	allowArbitrary?: boolean;
 }
 
 type SelectElement = HTMLDivElement & {
@@ -46,6 +47,7 @@ export function Select({
 	name,
 	onChange,
 	inSettings,
+	allowArbitrary,
 }: SelectProps) {
 	if (!value) value = values.find((v) => 'value' in v)?.value;
 
@@ -168,6 +170,8 @@ export function Select({
 				temporary_focus = -1;
 				input.current.value = '';
 				input.current.blur();
+				input.current.classList.remove('with-query');
+				button.current.classList.remove('with-query');
 			},
 		},
 	);
@@ -201,6 +205,21 @@ export function Select({
 			return true;
 		});
 
+		if (!results.find((v) => v.value == value) && query != '') {
+			results = [
+				{
+					type: 'arbitrary',
+					text: query || value,
+					value: query || value,
+					onSelect: () => {
+						temporary_focus = -1;
+						input.current.value = '';
+					},
+				},
+				...results,
+			];
+		}
+
 		if (
 			query && (temporary_focus < 0 || temporary_focus > results.length)
 		) {
@@ -220,7 +239,7 @@ export function Select({
 		inner.current.replaceChildren(
 			<>
 				{results.map((val, i) => {
-					if (val.value == null) {
+					if (val.value == null && val.type != 'arbitrary') {
 						if (val.onSelect) {
 							return (
 								<button
@@ -266,7 +285,12 @@ export function Select({
 								'candidate',
 							]}
 							aria-checked={String(selected)}
-							onClick={() => set(val.value!)}
+							onClick={() => {
+								if (val.value == null) return;
+
+								if (val.onSelect) val.onSelect();
+								set(val.value!);
+							}}
 							key={i}
 						>
 							{select_text(val.text)}
@@ -331,10 +355,9 @@ export function Select({
 		);
 
 		// fallback
-		button.current.replaceChildren('?');
+		button.current.replaceChildren(value);
 
-		const val = values.find((v) => v.value == value);
-		if (!val) return;
+		const val = values.find((v) => v.value == value) || { text: value };
 
 		button.current.replaceChildren(select_text(val.text));
 

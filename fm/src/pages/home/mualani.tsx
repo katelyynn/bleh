@@ -408,6 +408,9 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='Select'>
 						<Select
+							onChange={(v) => {
+								notify({ title: `value is ${v}` });
+							}}
 							values={[
 								{
 									value: 'hello',
@@ -422,6 +425,9 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='Select (with advanced stuff)'>
 						<Select
+							onChange={(v) => {
+								notify({ title: `value is ${v}` });
+							}}
 							values={[
 								{
 									text: 'See below',
@@ -429,6 +435,38 @@ export function mualani() {
 								{
 									value: 'hello',
 									text: 'Hello',
+								},
+								{
+									text: 'sep',
+								},
+								{
+									value: 'world',
+									text: 'World',
+								},
+							]}
+						/>
+					</DemoItem>
+					<DemoItem label='Select (with advanced stuff and arbitrary)'>
+						<Select
+							allowArbitrary
+							onChange={(v) => {
+								notify({ title: `value is ${v}` });
+							}}
+							values={[
+								{
+									text: 'See below',
+								},
+								{
+									value: 'hello',
+									text: 'Hello',
+								},
+								{
+									value: 'hello2',
+									text: 'Hello2',
+								},
+								{
+									value: 'hello3',
+									text: 'Hello3',
 								},
 								{
 									text: 'sep',
