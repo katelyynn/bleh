@@ -151,7 +151,7 @@ export function SettingSelect({
 			data-type='select'
 			id={`setting_${bind}`}
 			onClick={() => {
-				select.current?.open();
+				//select.current?.open();
 			}}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}

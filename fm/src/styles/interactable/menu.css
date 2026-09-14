@@ -69,14 +69,20 @@
 	&.dropdown-menu-clickable-item--selected,
 	&.display-options-clickable-item--selected,
 	&.active {
-		--bg: oklch(var(--h4) / 20%) !important;
-		--bg-hov: oklch(var(--h4) / 30%) !important;
-		--bg-atv: oklch(var(--h4) / 40%) !important;
-		--col: oklch(var(--l3-c)) !important;
-		--mask-colour: color-mix(in oklch,
-				oklch(var(--l3-c)),
-				oklch(var(--l4-c)) 40%);
+		--bg: var(--menu-item-hov) !important;
+		--bg-hov: var(--bg) !important;
+		--bg-atv: var(--bg) !important;
 		--force-font-weight: var(--font-weight-medium) !important;
+
+		&:not(.candidate) {
+			--bg: oklch(var(--h4) / 20%) !important;
+			--bg-hov: oklch(var(--h4) / 30%) !important;
+			--bg-atv: oklch(var(--h4) / 40%) !important;
+			--col: oklch(var(--l3-c)) !important;
+			--mask-colour: color-mix(in oklch,
+					oklch(var(--l3-c)),
+					oklch(var(--l4-c)) 40%);
+		}
 	}
 
 	/* mobile separator */

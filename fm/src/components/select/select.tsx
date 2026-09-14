@@ -253,6 +253,8 @@ export function Select({
 						);
 					}
 
+					const selected = val.value == value || i == temporary_focus;
+
 					return (
 						<button
 							type='button'
@@ -260,11 +262,10 @@ export function Select({
 								'btn',
 								'dropdown-menu-clickable-item',
 								'select-item',
-								i == temporary_focus && 'candidate',
+								(i == temporary_focus && val.value != value) &&
+								'candidate',
 							]}
-							aria-checked={temporary_focus < 0
-								? String(val.value == value)
-								: String(i == temporary_focus)}
+							aria-checked={String(selected)}
 							onClick={() => set(val.value!)}
 							key={i}
 						>
