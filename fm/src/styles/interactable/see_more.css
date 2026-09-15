@@ -33,6 +33,7 @@
 	--right: var(--see-more-pad);
 	--show-icon: block !important;
 	cursor: pointer;
+	overflow: visible !important;
 
 	&:before {
 		mask-image: var(--mask,
@@ -69,6 +70,17 @@
 		&:after {
 			right: calc(var(--mask-size) + 4px);
 		}
+
+		/*&:not([data-type]) {
+
+			&:hover,
+			&:active,
+			&[aria-expanded="true"] {
+				&:before {
+					--right: -1px;
+				}
+			}
+			}*/
 	}
 
 	&:hover,

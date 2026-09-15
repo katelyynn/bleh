@@ -155,7 +155,7 @@
 	transition-property: var(--transition-property,
 			rotate,
 			opacity,
-			left,
+			left, right,
 			background,
 			transform) !important;
 	transition-duration: var(--trans) !important;

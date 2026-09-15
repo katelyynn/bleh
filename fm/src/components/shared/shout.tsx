@@ -158,6 +158,7 @@ export function patch_shouts() {
 					button.classList.add(
 						'btn',
 						'shout-action-button',
+						'left-icon',
 						'see-more',
 					);
 				});
@@ -179,6 +180,7 @@ export function patch_shouts() {
 				'btn',
 				'see-more',
 				'shout-action-button',
+				'left-icon',
 			);
 
 			// detect vote status
