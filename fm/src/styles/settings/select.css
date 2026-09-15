@@ -21,7 +21,8 @@
 		}
 	}
 
-	&:after {
+	&:before {
+		display: block !important;
 		--mask: var(--icon-16-dropdown);
 		--mask-size: var(--select-arrow-icon-size);
 		--margin-top: -6px;
@@ -34,24 +35,24 @@
 	}
 
 	&.blend-v2-btn {
-		&:after {
+		&:before {
 			--right: var(--see-more-pad) !important;
 		}
 	}
 
 	&:active {
-		&:after {
+		&:before {
 			transform: translateY(1px) !important;
 		}
 	}
 
 	&[aria-expanded="true"] {
-		&:after {
+		&:before {
 			transform: scaleY(-1) !important;
 		}
 
 		&:active {
-			&:after {
+			&:before {
 				transform: scaleY(-1) translateY(-1px) !important;
 			}
 		}

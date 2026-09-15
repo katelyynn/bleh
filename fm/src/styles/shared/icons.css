@@ -34,7 +34,7 @@
 .tag-icon:before,
 .breadcrumb :is(a, .breadcrumb-origin):before,
 .gallery-image-uploaded-by:before,
-.select-button:after,
+.select-button:before,
 .modal-action-button:before,
 .big-btn:before,
 .requesting:before,
@@ -164,7 +164,7 @@
 }
 
 .icon-r:before,
-.select-button:not(.link-select):after,
+.select-button:not(.link-select):before,
 .external:before,
 .open:before,
 .gallery-next .arrow,

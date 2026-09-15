@@ -233,7 +233,7 @@ select,
 			color: var(--mask-colour);
 		}
 
-		&.select-button:not(.link-select):after {
+		&.select-button:not(.link-select):before {
 			color: inherit;
 			opacity: 0.6;
 		}

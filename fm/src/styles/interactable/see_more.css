@@ -34,7 +34,6 @@
 	--show-icon: block !important;
 	cursor: pointer;
 
-	&:after,
 	&:before {
 		mask-image: var(--mask,
 				var(--icon-16-arrow-right, var(--icon-16-placeholder)));
@@ -42,7 +41,45 @@
 				var(--icon-16-arrow-right, var(--icon-16-placeholder)));
 	}
 
-	--underline: underline;
+	&:after {
+		content: '';
+		position: absolute;
+		display: block !important;
+		bottom: -2px;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--mask-colour);
+		transform: scaleX(0);
+		transform-origin: bottom left;
+		opacity: 0.6;
+
+		transition-property: transform;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function-ani);
+	}
+
+	&.left-icon {
+		&:after {
+			left: calc(var(--mask-size) + 4px);
+		}
+	}
+
+	&:not(.left-icon) {
+		&:after {
+			right: calc(var(--mask-size) + 4px);
+		}
+	}
+
+	&:hover,
+	&:active,
+	&[aria-expanded="true"] {
+		&:after {
+			transform: scaleX(1);
+		}
+	}
+
+	--underline: none;
 
 	margin: calc(-1 * var(--see-more-pad-v)) calc(-1 * var(--see-more-pad)) !important;
 	padding: var(--see-more-pad-v) var(--see-more-pad) !important;
