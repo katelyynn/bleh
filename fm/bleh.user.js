@@ -51355,6 +51355,9 @@ var bleh = (() => {
     off: {
       // switch state
       en: "Off"
+    },
+    select_arbitrary: {
+      en: "Type to add to this list"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -89795,7 +89798,7 @@ var bleh = (() => {
       }
     });
     function search() {
-      const query = input2.current.value || "";
+      const query = input2.current.value.trim() || "";
       input2.current.classList.toggle("with-query", query);
       button2.current.classList.toggle("with-query", query);
       results = values.filter((val) => {
@@ -89832,52 +89835,58 @@ var bleh = (() => {
       }
       console.info("testing | query:", query, "focus:", temporary_focus, "value:", value, results);
       inner.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: results.map((val, i3) => {
-          if (val.value == null && val.type != "arbitrary") {
-            if (val.onSelect) {
-              return /* @__PURE__ */ jsx("button", {
-                type: "button",
-                class: [
-                  "btn",
-                  "dropdown-menu-clickable-item",
-                  "icon-mask"
-                ],
-                "data-type": val.type,
-                onClick: () => {
-                  menu.hide();
-                  val.onSelect();
-                },
+        children: [
+          results.map((val, i3) => {
+            if (val.value == null && val.type != "arbitrary") {
+              if (val.onSelect) {
+                return /* @__PURE__ */ jsx("button", {
+                  type: "button",
+                  class: [
+                    "btn",
+                    "dropdown-menu-clickable-item",
+                    "icon-mask"
+                  ],
+                  "data-type": val.type,
+                  onClick: () => {
+                    menu.hide();
+                    val.onSelect();
+                  },
+                  children: select_text(val.text)
+                }, i3);
+              }
+              if (val.text == "sep") {
+                return /* @__PURE__ */ jsx("div", {
+                  class: "sep"
+                }, i3);
+              }
+              return /* @__PURE__ */ jsx("div", {
+                class: "select-header",
                 children: select_text(val.text)
               }, i3);
             }
-            if (val.text == "sep") {
-              return /* @__PURE__ */ jsx("div", {
-                class: "sep"
-              }, i3);
-            }
-            return /* @__PURE__ */ jsx("div", {
-              class: "select-header",
+            const selected = val.value == value || i3 == temporary_focus;
+            return /* @__PURE__ */ jsx("button", {
+              type: "button",
+              class: [
+                "btn",
+                "dropdown-menu-clickable-item",
+                "select-item",
+                i3 == temporary_focus && val.value != value && "candidate"
+              ],
+              "aria-checked": String(selected),
+              onClick: () => {
+                if (val.value == null) return;
+                if (val.onSelect) val.onSelect();
+                set2(val.value);
+              },
               children: select_text(val.text)
             }, i3);
-          }
-          const selected = val.value == value || i3 == temporary_focus;
-          return /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: [
-              "btn",
-              "dropdown-menu-clickable-item",
-              "select-item",
-              i3 == temporary_focus && val.value != value && "candidate"
-            ],
-            "aria-checked": String(selected),
-            onClick: () => {
-              if (val.value == null) return;
-              if (val.onSelect) val.onSelect();
-              set2(val.value);
-            },
-            children: select_text(val.text)
-          }, i3);
-        })
+          }),
+          allowArbitrary && !query && /* @__PURE__ */ jsx("div", {
+            class: "select-header",
+            children: tl2(trans.select_arbitrary)
+          })
+        ]
       }));
     }
     Object.defineProperty(wrap2, "value", {
@@ -108821,7 +108830,9 @@ var bleh = (() => {
             "star-icon",
             "colourful"
           ],
-          children: /* @__PURE__ */ jsx(Icon, {})
+          children: /* @__PURE__ */ jsx(Icon, {
+            name: icons.star
+          })
         })
       ]
     });
@@ -122849,7 +122860,20 @@ var bleh = (() => {
       ];
       if (starred2) {
         values.push({
-          text: starred2,
+          text: () => /* @__PURE__ */ jsx(Fragment, {
+            children: [
+              starred2,
+              /* @__PURE__ */ jsx("span", {
+                class: [
+                  "star-icon",
+                  "colourful"
+                ],
+                children: /* @__PURE__ */ jsx(Icon, {
+                  name: icons.star
+                })
+              })
+            ]
+          }),
           value: starred2
         });
       }
@@ -126045,7 +126069,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-15T16:59:02.353Z"
+    built_on: "2026-09-15T17:06:56.010Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

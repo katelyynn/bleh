@@ -1997,7 +1997,7 @@ function NavigationFriend({
 			</span>
 			{starred && (
 				<span class={['star-icon', 'colourful']}>
-					<Icon />
+					<Icon name={icons.star} />
 				</span>
 			)}
 		</a>

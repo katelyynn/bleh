@@ -12,6 +12,7 @@ import {
 	shift as shiftMiddleware,
 } from '@floating-ui/dom';
 import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { tl, trans } from '@/build/trans.ts';
 
 export interface SelectOption {
 	value?: string;
@@ -184,7 +185,7 @@ export function Select({
 	);
 
 	function search() {
-		const query = input.current.value || '';
+		const query = input.current.value.trim() || '';
 		input.current.classList.toggle('with-query', query);
 		button.current.classList.toggle('with-query', query);
 
@@ -307,6 +308,11 @@ export function Select({
 						</button>
 					);
 				})}
+				{(allowArbitrary && !query) && (
+					<div class='select-header'>
+						{tl(trans.select_arbitrary)}
+					</div>
+				)}
 			</>,
 		);
 	}

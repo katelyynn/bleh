@@ -1,6 +1,7 @@
 import { Select, SelectOption } from '@/components/select/select.tsx';
 import { useSettings } from '@/page.ts';
 import { auth } from '@/build/page.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface UserSelectProps {
 	value?: string;
@@ -34,7 +35,14 @@ export function UserSelect({
 
 		if (starred) {
 			values.push({
-				text: starred,
+				text: () => (
+					<>
+						{starred}
+						<span class={['star-icon', 'colourful']}>
+							<Icon name={icons.star} />
+						</span>
+					</>
+				),
 				value: starred,
 			});
 		}

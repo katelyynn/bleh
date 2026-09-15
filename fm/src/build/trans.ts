@@ -12565,6 +12565,9 @@ export const trans = {
 		// switch state
 		en: 'Off',
 	},
+	select_arbitrary: {
+		en: 'Type to add to this list',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
