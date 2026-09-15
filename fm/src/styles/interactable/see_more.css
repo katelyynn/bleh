@@ -11,6 +11,9 @@
 	--see-more-pad: 0px;
 
 	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+
 	height: fit-content;
 	background: var(--bg) !important;
 	--bg: transparent;
@@ -27,19 +30,12 @@
 	--force-font-weight: var(--font-weight-medium);
 	font-weight: var(--force-font-weight);
 	position: relative;
-	--mask-size: 12px;
-	--margin-top: calc(-1 * var(--mask-size) / 2);
-	--left: none;
-	--right: var(--see-more-pad);
-	--show-icon: block !important;
+	--icon-size: 12px;
 	cursor: pointer;
 	overflow: visible !important;
 
 	&:before {
-		mask-image: var(--mask,
-				var(--icon-16-arrow-right, var(--icon-16-placeholder)));
-		-webkit-mask-image: var(--mask,
-				var(--icon-16-arrow-right, var(--icon-16-placeholder)));
+		display: none !important;
 	}
 
 	&:after {
@@ -62,13 +58,13 @@
 
 	&.left-icon {
 		&:after {
-			left: calc(var(--mask-size) + 4px);
+			left: calc(var(--icon-size) + 4px);
 		}
 	}
 
 	&:not(.left-icon) {
 		&:after {
-			right: calc(var(--mask-size) + 4px);
+			right: calc(var(--icon-size) + 4px);
 		}
 
 		/*&:not([data-type]) {
@@ -96,7 +92,6 @@
 	margin: calc(-1 * var(--see-more-pad-v)) calc(-1 * var(--see-more-pad)) !important;
 	padding: var(--see-more-pad-v) var(--see-more-pad) !important;
 	--padding: var(--see-more-pad-v) var(--see-more-pad);
-	padding-right: calc(var(--see-more-pad) + var(--mask-size) + 4px) !important;
 
 	transition-property: rotate,
 	transform,

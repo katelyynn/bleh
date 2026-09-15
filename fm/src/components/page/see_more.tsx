@@ -5,6 +5,7 @@
  */
 
 import { page } from '@/build/page';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export function see_more() {
 	if (!page.structure.container) return;
@@ -15,13 +16,21 @@ export function see_more() {
 	links.forEach((link: HTMLLinkElement) => {
 		link.setAttribute('data-see-more', 'true');
 
-		const parent = link.parentElement;
+		const parent = link.parentElement!;
 		const classes = String(parent.classList);
 
 		link.classList.add('see-more');
 
 		if (classes == 'pagination-previous') {
 			link.classList.add('pagination-previous-link');
+			link.insertBefore(
+				<Icon name={icons.arrow_left} />,
+				link.firstChild,
+			);
+		} else {
+			link.appendChild(
+				<Icon name={icons.arrow_right} />,
+			);
 		}
 	});
 

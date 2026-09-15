@@ -8,6 +8,7 @@ import { ReactNode } from 'jsx-dom';
 import type { ClassNames, createRef } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
 import { useSettings } from '@/page.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface SeeMoreProps {
 	ref?: ReturnType<typeof createRef>;
@@ -48,11 +49,16 @@ export function SeeMore({
 				type='button'
 				class={classes}
 				onClick={onClick}
-				data-type={icon}
 				data-see-more='true'
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
 			>
+				{iconPlacement == 'left' && (
+					<Icon name={icon || icons.arrow_left} />
+				)}
 				{children}
+				{iconPlacement == 'right' && (
+					<Icon name={icon || icons.arrow_right} />
+				)}
 			</button>
 		);
 	}
@@ -63,11 +69,16 @@ export function SeeMore({
 			href={href}
 			target={external ? '_blank' : undefined}
 			onClick={onClick}
-			data-type={icon}
 			data-see-more='true'
 			ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
 		>
+			{iconPlacement == 'left' && <Icon
+				name={icon || icons.arrow_left}
+			/>}
 			{children}
+			{iconPlacement == 'right' && (
+				<Icon name={icon || icons.arrow_right} />
+			)}
 		</a>
 	);
 }
