@@ -43,6 +43,11 @@ import { LoadingData } from '@/components/loading/loading.tsx';
 import { Alert } from '@/components/text/alert.tsx';
 import { Placeholder } from '@/components/loading/placeholder.tsx';
 import { IconLabel } from '@/components/text/text.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingStub } from '@/components/settings/provider/stub.tsx';
+import { UserSelect } from '@/components/select/user.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -158,89 +163,38 @@ export function collage({ host, sidebar } = {}) {
 		</>,
 	);
 
-	let setting_group;
-	let inputter;
-	render(
-		sidebar,
-		html`
-			<h2>${tl(trans.settings)}</h2>
-			<div class="setting-group" ref=${(el) => (setting_group = el)}>
-			    <div class="setting v" data-type="text">
-			        <div class="heading">
-			            <h5>${tl(trans.profile)}</h5>
-			        </div>
-			        <div class="input-container content-form">
-			            <input
-			                type="text"
-			                class="input"
-			                ref=${(el) => (inputter = el)}
-			                placeholder=${tl(trans.enter_a_profile)}
-			                value=${page.requested.profile}
-			                onchange=${(e) => {
-				page.requested.profile = e.target.value;
-				page.name = page.requested.profile;
+	const group = createRef();
 
-				page.avatar = '';
-				if (page.name == auth.name) {
-					page.avatar = auth.avatar;
-				}
+	sidebar.replaceChildren(
+		<>
+			<PanelHead icon={icons.settings}>
+				{tl(trans.settings)}
+			</PanelHead>
+			<SettingGroup ref={group}>
+				<SettingStub name={tl(trans.profile)}>
+					<UserSelect
+						inSettings
+						value={page.requested.profile || ''}
+						onChange={(v) => {
+							page.requested.profile = v;
+							page.name = v;
 
-				render(
-					user,
-					html`
-						${render_user(
-							page.name,
-							page.avatar,
-							user,
-							true,
-						)}
-					`,
-				);
-			}}
-			            />
-			            ${() => {
-				let btn = html.node`
-                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
-					inputter.value = auth.name;
-					inputter.dispatchEvent(new Event('change'));
-				}}>${tl(trans.profile)}</button>
-                        `;
+							page.avatar = '';
 
-				tippy(btn, {
-					content: tl(trans.profile),
-				});
-
-				return btn;
-			}}
-			            ${() => {
-				let btn = html.node`
-                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${
-					useSettings.get('starred_friend') != ''
-				} onclick=${() => {
-					if (useSettings.get('starred_friend') == '') return;
-
-					inputter.value = useSettings.get('starred_friend');
-					inputter.dispatchEvent(new Event('change'));
-				}}>${tl(trans.starred_friend.name)}</button>
-                        `;
-
-				tippy(btn, {
-					content: tl(trans.starred_friend.name),
-				});
-
-				return btn;
-			}}
-			        </div>
-			    </div>
-			    ${setting({ id: 'collage_title' })}
-			    ${setting({ id: 'collage_grid_gap' })}
-			    ${setting({ id: 'collage_centered' })}
-			    ${setting({ id: 'collage_grid_text' })}
-			    ${setting({ id: 'collage_grid_plays' })}
-			</div>
-		`,
+							user.current.replaceChildren(
+								<CompareUser name={v} replacePage />,
+							);
+						}}
+					/>
+				</SettingStub>
+				<SettingSwitch bind='collage_title' />
+				<SettingSwitch bind='collage_grid_gap' />
+				<SettingSwitch bind='collage_centered' />
+				<SettingSwitch bind='collage_grid_text' />
+				<SettingSwitch bind='collage_grid_plays' />
+			</SettingGroup>
+		</>,
 	);
-	let collage_settings = setting_group.querySelectorAll(':scope > .setting');
 
 	function init_collage(bypass = false) {
 		try {
@@ -259,9 +213,7 @@ export function collage({ host, sidebar } = {}) {
 
 		type.current.disabled = false;
 		timeframe.current.disabled = false;
-		collage_settings.forEach((option) => {
-			option.setAttribute('disabled', false);
-		});
+		group.current.disabled = false;
 		submit.current.loading = false;
 	}
 
@@ -330,9 +282,7 @@ export function collage({ host, sidebar } = {}) {
 
 		type.current.disabled = true;
 		timeframe.current.disabled = true;
-		collage_settings.forEach((option) => {
-			option.setAttribute('disabled', true);
-		});
+		group.current.disabled = true;
 		submit.current.loading = true;
 
 		page.state.collage = [];
@@ -430,9 +380,7 @@ export function collage({ host, sidebar } = {}) {
 
 				type.current.disabled = false;
 				timeframe.current.disabled = false;
-				collage_settings.forEach((option) => {
-					option.setAttribute('disabled', false);
-				});
+				group.current.disabled = false;
 				submit.current.loading = false;
 
 				return;
@@ -719,9 +667,7 @@ export function collage({ host, sidebar } = {}) {
 
 					type.current.disabled = false;
 					timeframe.current.disabled = false;
-					collage_settings.forEach((option) => {
-						option.setAttribute('disabled', false);
-					});
+					group.current.disabled = false;
 					submit.current.loading = false;
 				}, 'image/png');
 			});

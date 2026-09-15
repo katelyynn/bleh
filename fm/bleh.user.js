@@ -89994,6 +89994,257 @@ var bleh = (() => {
     });
   }
 
+  // src/components/settings/group.tsx
+  function SettingGroup({ ref: ref2, minWidth, blend = false, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: [
+        "setting-group",
+        blend && "blend",
+        minWidth && "min-width"
+      ],
+      ref: ref2,
+      children
+    });
+  }
+
+  // src/components/settings/provider/stub.tsx
+  function SettingStub({ name, body, type, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "setting",
+      "data-type": type,
+      children: [
+        /* @__PURE__ */ jsx(SettingLabel, {
+          name,
+          body
+        }),
+        children
+      ]
+    });
+  }
+
+  // src/components/select/user.tsx
+  function UserSelect({ value, onChange, inSettings }) {
+    let values = [];
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "user-select"
+    });
+    function update() {
+      const starred2 = useSettings.get("starred_friend");
+      const friends2 = useSettings.get("friends").filter((friend) => friend != starred2);
+      values = [
+        {
+          text: auth.name,
+          value: auth.name
+        }
+      ];
+      if (starred2) {
+        values.push({
+          text: () => /* @__PURE__ */ jsx(Fragment, {
+            children: [
+              starred2,
+              /* @__PURE__ */ jsx("span", {
+                class: [
+                  "star-icon",
+                  "colourful"
+                ],
+                children: /* @__PURE__ */ jsx(Icon, {
+                  name: icons.star
+                })
+              })
+            ]
+          }),
+          value: starred2
+        });
+      }
+      friends2.forEach((friend) => {
+        values.push({
+          text: friend,
+          value: friend
+        });
+      });
+      elem.replaceChildren(/* @__PURE__ */ jsx(Select, {
+        value,
+        values,
+        allowArbitrary: true,
+        onChange: set2,
+        inSettings
+      }));
+    }
+    update();
+    function set2(v) {
+      value = v;
+      if (onChange) onChange(v);
+      update();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(v) {
+        set2(v);
+      }
+    });
+    useSettings.on("friends", update);
+    useSettings.on("starred_friend", update);
+    return elem;
+  }
+
+  // src/components/settings/clickables/switch.tsx
+  function Switch({ ref: ref2, name, className: className2, interact = true, checked = false }) {
+    const checkbox = createRef();
+    const elem = createRef();
+    const label = createRef();
+    function update() {
+      checkbox.current.checked = checked;
+      elem.current.setAttribute("aria-checked", checked);
+      elem.current.setAttribute("data-theme", useSettings.get("theme"));
+      label.current.replaceChildren(checked ? tl2(trans.on) : tl2(trans.off));
+    }
+    const wrap2 = /* @__PURE__ */ jsx("div", {
+      class: [
+        "toggle-wrap",
+        className2 && className2
+      ],
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx("input", {
+          type: "checkbox",
+          name,
+          ref: checkbox
+        }),
+        /* @__PURE__ */ jsx("button", {
+          type: "button",
+          class: [
+            "btn",
+            "toggle",
+            "colourful",
+            !interact && "no-interact"
+          ],
+          ref: elem,
+          onClick: () => {
+            if (!interact) return;
+            checked = !checked;
+            update();
+          },
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "dot"
+            }),
+            /* @__PURE__ */ jsx("label", {
+              class: "switch-label",
+              ref: label
+            })
+          ]
+        })
+      ]
+    });
+    update();
+    Object.defineProperty(wrap2, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    useSettings.on("theme", update);
+    return wrap2;
+  }
+
+  // src/components/settings/provider/switch.tsx
+  function SettingSwitch({ ref: ref2, id, value = false, bind, icon: icon2, name, body, onChange, disabled, onMouseEnter, onMouseLeave }) {
+    if (bind) value = useSettings.get(bind);
+    const checkbox = createRef();
+    const uuid = crypto.randomUUID();
+    if (bind) {
+      useSettings.on(bind, (val, id2) => {
+        if (id2 == uuid) return;
+        set2(val, true);
+      });
+    }
+    const store = get_from_store(bind);
+    if (store) {
+      if (!icon2) icon2 = store.icon;
+      if (store.incompatible) {
+        Object.entries(store.incompatible).forEach(([key]) => {
+          useSettings.on(key, () => {
+            update();
+          });
+        });
+      }
+    }
+    function update() {
+      disabled = false;
+      let incompatible = false;
+      let incompatible_list = {};
+      let incompatible_strings = [];
+      if (store) {
+        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
+      }
+      if (incompatible) {
+        disabled = true;
+      }
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
+            name: icon2
+          }),
+          /* @__PURE__ */ jsx(SettingLabel, {
+            name,
+            body,
+            store
+          }),
+          /* @__PURE__ */ jsx(Switch, {
+            className: "setting-inner",
+            name: id,
+            checked: value,
+            ref: checkbox
+          }),
+          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
+            list: incompatible_list,
+            strings: incompatible_strings
+          })
+        ]
+      }));
+    }
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "setting",
+      "data-type": "toggle",
+      id: `setting_${bind}`,
+      onMouseEnter,
+      onMouseLeave,
+      onClick: () => {
+        set2(!value);
+      },
+      ref: ref2
+    });
+    update();
+    function set2(val, received = false) {
+      if (value == val) return;
+      value = val;
+      checkbox.current.checked = val;
+      if (bind) {
+        if (!received) useSettings.set(bind, val, uuid);
+      } else {
+        if (onChange) onChange(val);
+      }
+      if (onMouseEnter) onMouseEnter();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      }
+    });
+    elem.update = update;
+    return elem;
+  }
+
   // src/components/minis/collage.tsx
   function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -90117,79 +90368,51 @@ var bleh = (() => {
         })
       ]
     }));
-    let setting_group;
-    let inputter2;
-    render(sidebar, html`
-			<h2>${tl2(trans.settings)}</h2>
-			<div class="setting-group" ref=${(el) => setting_group = el}>
-			    <div class="setting v" data-type="text">
-			        <div class="heading">
-			            <h5>${tl2(trans.profile)}</h5>
-			        </div>
-			        <div class="input-container content-form">
-			            <input
-			                type="text"
-			                class="input"
-			                ref=${(el) => inputter2 = el}
-			                placeholder=${tl2(trans.enter_a_profile)}
-			                value=${page.requested.profile}
-			                onchange=${(e5) => {
-      page.requested.profile = e5.target.value;
-      page.name = page.requested.profile;
-      page.avatar = "";
-      if (page.name == auth.name) {
-        page.avatar = auth.avatar;
-      }
-      render(user, html`
-						${render_user(page.name, page.avatar, user, true)}
-					`);
-    }}
-			            />
-			            ${() => {
-      let btn = html.node`
-                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
-        inputter2.value = auth.name;
-        inputter2.dispatchEvent(new Event("change"));
-      }}>${tl2(trans.profile)}</button>
-                        `;
-      tippy_esm_default(btn, {
-        content: tl2(trans.profile)
-      });
-      return btn;
-    }}
-			            ${() => {
-      let btn = html.node`
-                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${useSettings.get("starred_friend") != ""} onclick=${() => {
-        if (useSettings.get("starred_friend") == "") return;
-        inputter2.value = useSettings.get("starred_friend");
-        inputter2.dispatchEvent(new Event("change"));
-      }}>${tl2(trans.starred_friend.name)}</button>
-                        `;
-      tippy_esm_default(btn, {
-        content: tl2(trans.starred_friend.name)
-      });
-      return btn;
-    }}
-			        </div>
-			    </div>
-			    ${setting({
-      id: "collage_title"
-    })}
-			    ${setting({
-      id: "collage_grid_gap"
-    })}
-			    ${setting({
-      id: "collage_centered"
-    })}
-			    ${setting({
-      id: "collage_grid_text"
-    })}
-			    ${setting({
-      id: "collage_grid_plays"
-    })}
-			</div>
-		`);
-    let collage_settings = setting_group.querySelectorAll(":scope > .setting");
+    const group = createRef();
+    sidebar.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx(PanelHead, {
+          icon: icons.settings,
+          children: tl2(trans.settings)
+        }),
+        /* @__PURE__ */ jsx(SettingGroup, {
+          ref: group,
+          children: [
+            /* @__PURE__ */ jsx(SettingStub, {
+              name: tl2(trans.profile),
+              children: /* @__PURE__ */ jsx(UserSelect, {
+                inSettings: true,
+                value: page.requested.profile || "",
+                onChange: (v) => {
+                  page.requested.profile = v;
+                  page.name = v;
+                  page.avatar = "";
+                  user.current.replaceChildren(/* @__PURE__ */ jsx(CompareUser, {
+                    name: v,
+                    replacePage: true
+                  }));
+                }
+              })
+            }),
+            /* @__PURE__ */ jsx(SettingSwitch, {
+              bind: "collage_title"
+            }),
+            /* @__PURE__ */ jsx(SettingSwitch, {
+              bind: "collage_grid_gap"
+            }),
+            /* @__PURE__ */ jsx(SettingSwitch, {
+              bind: "collage_centered"
+            }),
+            /* @__PURE__ */ jsx(SettingSwitch, {
+              bind: "collage_grid_text"
+            }),
+            /* @__PURE__ */ jsx(SettingSwitch, {
+              bind: "collage_grid_plays"
+            })
+          ]
+        })
+      ]
+    }));
     function init_collage(bypass = false) {
       try {
         make_collage(bypass);
@@ -90205,9 +90428,7 @@ var bleh = (() => {
       console.error(e5);
       type.current.disabled = false;
       timeframe.current.disabled = false;
-      collage_settings.forEach((option2) => {
-        option2.setAttribute("disabled", false);
-      });
+      group.current.disabled = false;
       submit.current.loading = false;
     }
     function make_collage(bypass = false) {
@@ -90253,9 +90474,7 @@ var bleh = (() => {
       }
       type.current.disabled = true;
       timeframe.current.disabled = true;
-      collage_settings.forEach((option2) => {
-        option2.setAttribute("disabled", true);
-      });
+      group.current.disabled = true;
       submit.current.loading = true;
       page.state.collage = [];
       get_grid(1, pages);
@@ -90316,9 +90535,7 @@ var bleh = (() => {
           }));
           type.current.disabled = false;
           timeframe.current.disabled = false;
-          collage_settings.forEach((option2) => {
-            option2.setAttribute("disabled", false);
-          });
+          group.current.disabled = false;
           submit.current.loading = false;
           return;
         }
@@ -90506,9 +90723,7 @@ var bleh = (() => {
             }
             type.current.disabled = false;
             timeframe.current.disabled = false;
-            collage_settings.forEach((option2) => {
-              option2.setAttribute("disabled", false);
-            });
+            group.current.disabled = false;
             submit.current.loading = false;
           }, "image/png");
         });
@@ -99290,162 +99505,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/settings/clickables/switch.tsx
-  function Switch({ ref: ref2, name, className: className2, interact = true, checked = false }) {
-    const checkbox = createRef();
-    const elem = createRef();
-    const label = createRef();
-    function update() {
-      checkbox.current.checked = checked;
-      elem.current.setAttribute("aria-checked", checked);
-      elem.current.setAttribute("data-theme", useSettings.get("theme"));
-      label.current.replaceChildren(checked ? tl2(trans.on) : tl2(trans.off));
-    }
-    const wrap2 = /* @__PURE__ */ jsx("div", {
-      class: [
-        "toggle-wrap",
-        className2 && className2
-      ],
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx("input", {
-          type: "checkbox",
-          name,
-          ref: checkbox
-        }),
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: [
-            "btn",
-            "toggle",
-            "colourful",
-            !interact && "no-interact"
-          ],
-          ref: elem,
-          onClick: () => {
-            if (!interact) return;
-            checked = !checked;
-            update();
-          },
-          children: [
-            /* @__PURE__ */ jsx("div", {
-              class: "dot"
-            }),
-            /* @__PURE__ */ jsx("label", {
-              class: "switch-label",
-              ref: label
-            })
-          ]
-        })
-      ]
-    });
-    update();
-    Object.defineProperty(wrap2, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    useSettings.on("theme", update);
-    return wrap2;
-  }
-
-  // src/components/settings/provider/switch.tsx
-  function SettingSwitch({ ref: ref2, id, value = false, bind, icon: icon2, name, body, onChange, disabled, onMouseEnter, onMouseLeave }) {
-    if (bind) value = useSettings.get(bind);
-    const checkbox = createRef();
-    const uuid = crypto.randomUUID();
-    if (bind) {
-      useSettings.on(bind, (val, id2) => {
-        if (id2 == uuid) return;
-        set2(val, true);
-      });
-    }
-    const store = get_from_store(bind);
-    if (store) {
-      if (!icon2) icon2 = store.icon;
-      if (store.incompatible) {
-        Object.entries(store.incompatible).forEach(([key]) => {
-          useSettings.on(key, () => {
-            update();
-          });
-        });
-      }
-    }
-    function update() {
-      disabled = false;
-      let incompatible = false;
-      let incompatible_list = {};
-      let incompatible_strings = [];
-      if (store) {
-        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
-      }
-      if (incompatible) {
-        disabled = true;
-      }
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
-            name: icon2
-          }),
-          /* @__PURE__ */ jsx(SettingLabel, {
-            name,
-            body,
-            store
-          }),
-          /* @__PURE__ */ jsx(Switch, {
-            className: "setting-inner",
-            name: id,
-            checked: value,
-            ref: checkbox
-          }),
-          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
-            list: incompatible_list,
-            strings: incompatible_strings
-          })
-        ]
-      }));
-    }
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: "setting",
-      "data-type": "toggle",
-      id: `setting_${bind}`,
-      onMouseEnter,
-      onMouseLeave,
-      onClick: () => {
-        set2(!value);
-      },
-      ref: ref2
-    });
-    update();
-    function set2(val, received = false) {
-      if (value == val) return;
-      value = val;
-      checkbox.current.checked = val;
-      if (bind) {
-        if (!received) useSettings.set(bind, val, uuid);
-      } else {
-        if (onChange) onChange(val);
-      }
-      if (onMouseEnter) onMouseEnter();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      }
-    });
-    elem.update = update;
-    return elem;
-  }
-
   // src/components/settings/provider/select.tsx
   function SettingSelect({ ref: ref2, values, id, value, bind, icon: icon2, name, body, showLabel = true, onChange, disabled, onMouseEnter, onMouseLeave, allowArbitrary }) {
     if (bind) value = useSettings.get(bind);
@@ -99557,19 +99616,6 @@ var bleh = (() => {
     });
     elem.update = update;
     return elem;
-  }
-
-  // src/components/settings/group.tsx
-  function SettingGroup({ ref: ref2, minWidth, blend = false, children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: [
-        "setting-group",
-        blend && "blend",
-        minWidth && "min-width"
-      ],
-      ref: ref2,
-      children
-    });
   }
 
   // src/pages/profile/recents.tsx
@@ -114140,7 +114186,7 @@ var bleh = (() => {
             `}
 			</div>
 			<section class="side-actions">
-			    <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings18()}>
+			    <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings17()}>
 			        ${tl2(trans.import)}
 			    </button>
 			    <button class="btn side-action icon-mask" data-type="export" onclick=${() => export_settings()}>
@@ -114546,7 +114592,7 @@ var bleh = (() => {
     );
     compile_settings();
   }
-  function import_settings18() {
+  function import_settings17() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -122843,72 +122889,6 @@ var bleh = (() => {
     }
   }
 
-  // src/components/select/user.tsx
-  function UserSelect({ value, onChange }) {
-    let values = [];
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: "user-select"
-    });
-    function update() {
-      const starred2 = useSettings.get("starred_friend");
-      const friends2 = useSettings.get("friends").filter((friend) => friend != starred2);
-      values = [
-        {
-          text: auth.name,
-          value: auth.name
-        }
-      ];
-      if (starred2) {
-        values.push({
-          text: () => /* @__PURE__ */ jsx(Fragment, {
-            children: [
-              starred2,
-              /* @__PURE__ */ jsx("span", {
-                class: [
-                  "star-icon",
-                  "colourful"
-                ],
-                children: /* @__PURE__ */ jsx(Icon, {
-                  name: icons.star
-                })
-              })
-            ]
-          }),
-          value: starred2
-        });
-      }
-      friends2.forEach((friend) => {
-        values.push({
-          text: friend,
-          value: friend
-        });
-      });
-      elem.replaceChildren(/* @__PURE__ */ jsx(Select, {
-        value,
-        values,
-        allowArbitrary: true,
-        onChange: set2
-      }));
-    }
-    update();
-    function set2(v) {
-      value = v;
-      if (onChange) onChange(v);
-      update();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(v) {
-        set2(v);
-      }
-    });
-    useSettings.on("friends", update);
-    useSettings.on("starred_friend", update);
-    return elem;
-  }
-
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -126069,7 +126049,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-15T17:06:56.010Z"
+    built_on: "2026-09-15T17:35:47.486Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

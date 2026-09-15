@@ -6,6 +6,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 interface UserSelectProps {
 	value?: string;
 	onChange?: (v: string) => void;
+	inSettings?: boolean;
 }
 
 type UserSelectElement = HTMLDivElement & {
@@ -15,6 +16,7 @@ type UserSelectElement = HTMLDivElement & {
 export function UserSelect({
 	value,
 	onChange,
+	inSettings,
 }: UserSelectProps) {
 	let values: SelectOption[] = [];
 
@@ -60,6 +62,7 @@ export function UserSelect({
 				values={values}
 				allowArbitrary
 				onChange={set}
+				inSettings={inSettings}
 			/>,
 		);
 	}
