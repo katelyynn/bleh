@@ -550,6 +550,10 @@ hr {
 			padding: 6px var(--card-padding);
 			margin-left: calc(-1 * var(--card-padding));
 			margin-right: calc(-1 * var(--card-padding));
+
+			section:first-child>& {
+				margin-top: calc(-1 * var(--card-padding));
+			}
 		}
 	}
 }

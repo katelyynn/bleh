@@ -177,6 +177,8 @@ export function Select({
 				input.current.blur();
 				input.current.classList.remove('with-query');
 				button.current.classList.remove('with-query');
+
+				button.current.focus();
 			},
 		},
 	);
