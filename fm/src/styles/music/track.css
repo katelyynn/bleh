@@ -887,6 +887,10 @@
 		flex-direction: column;
 		gap: var(--bar-distance);
 	}
+
+	&:after {
+		display: none;
+	}
 }
 
 .chartlist-count-bar-value:after {

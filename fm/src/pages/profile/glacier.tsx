@@ -27,6 +27,7 @@ import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -1714,11 +1715,7 @@ function bleh_glacier_library_focused() {
 			return;
 		}
 
-		select_btn.classList.add(
-			'select-button',
-			'link-select',
-			'blend-v2-btn',
-		);
+		convert_to_select(select_btn);
 		select_btn.classList.remove('dropdown-menu-list-button');
 
 		header.after(html.node`

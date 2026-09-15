@@ -165,6 +165,9 @@
 		height: var(--side-action-sep-height) !important;
 		background: var(--side-action-sep) !important;
 		border: none !important;
+
+		opacity: unset !important;
+		transform: unset !important;
 	}
 
 	.listening-report-promo-date,

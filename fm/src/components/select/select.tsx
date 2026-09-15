@@ -13,6 +13,7 @@ import {
 } from '@floating-ui/dom';
 import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { tl, trans } from '@/build/trans.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export interface SelectOption {
 	value?: string;
@@ -400,4 +401,15 @@ function select_text(text: ReactNode | (() => ReactNode)) {
 	}
 
 	return text;
+}
+
+// convert normal element into a select-like
+export function convert_to_select(button: Element | null) {
+	if (!button) return;
+
+	button.classList.add('select-button', 'link-select', 'blend-v2-btn');
+
+	button.appendChild(
+		<Icon name={icons.arrow_down} identifier='select' />,
+	);
 }

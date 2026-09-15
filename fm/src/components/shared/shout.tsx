@@ -54,6 +54,7 @@ import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 type ShoutElement = HTMLDivElement & {
 	translated: boolean;
@@ -503,11 +504,9 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 		const select_btn = panel.querySelector(
 			'.dropdown-menu-clickable-button',
 		);
-		select_btn?.classList?.add(
-			'select-button',
-			'link-select',
-			'blend-v2-btn',
-		);
+
+		convert_to_select(select_btn);
+
 		select_btn?.classList?.remove(
 			'section-control',
 			'dropdown-menu-clickable-button',

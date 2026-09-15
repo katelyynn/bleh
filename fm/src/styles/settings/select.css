@@ -108,7 +108,7 @@
 	--col: inherit;
 	--shadow: none;
 
-	&:before {
+	&:after {
 		content: '';
 		position: absolute;
 		display: block;
@@ -130,14 +130,14 @@
 		transition-timing-function: var(--trans-function);
 	}
 
-	&:hover:before {
+	&:hover:after {
 		transition: none;
 	}
 
 	&:hover,
 	&:active,
 	&[aria-expanded="true"] {
-		&:before {
+		&:after {
 			opacity: 0;
 		}
 	}

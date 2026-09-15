@@ -253,6 +253,7 @@ export function mualani() {
 					<DemoItem label='SeeMore'>
 						<SeeMore>See more</SeeMore>
 						<SeeMore iconPlacement='left'>See more</SeeMore>
+						<SeeMore icon={icons.external}>See more</SeeMore>
 					</DemoItem>
 				</DemoGrid>
 			</section>

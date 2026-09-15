@@ -64,6 +64,7 @@ import {
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -220,11 +221,7 @@ export function bleh_artists() {
 			const menu = select_btn?.nextElementSibling as HTMLDivElement;
 
 			if (select_btn) {
-				select_btn.classList.add(
-					'select-button',
-					'link-select',
-					'blend-v2-btn',
-				);
+				convert_to_select(select_btn);
 				select_btn.classList.remove('dropdown-menu-clickable-button');
 			}
 
@@ -292,11 +289,7 @@ export function bleh_artists() {
 			const menu = select_btn?.nextElementSibling as HTMLDivElement;
 
 			if (select_btn) {
-				select_btn.classList.add(
-					'select-button',
-					'link-select',
-					'blend-v2-btn',
-				);
+				convert_to_select(select_btn);
 				select_btn.classList.remove('dropdown-menu-clickable-button');
 			}
 
@@ -517,11 +510,7 @@ function bleh_artist_tracks() {
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove('dropdown-menu-clickable-button');
 		}
 
@@ -565,11 +554,7 @@ function bleh_artist_albums() {
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove('dropdown-menu-clickable-button');
 		}
 

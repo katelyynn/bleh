@@ -37,6 +37,7 @@ import {
 	page_header_title,
 } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function bleh_albums() {
 	const album_header = document.body.querySelector(
@@ -239,11 +240,7 @@ function album_missing_a_tracklist() {
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove('dropdown-menu-clickable-button');
 		}
 
@@ -312,10 +309,10 @@ function album_missing_a_tracklist() {
 				html`
 					${top}
 					<div class="loading-data-container">
-					    <p class="loading-data-text failed">
+						<p class="loading-data-text failed">
 					        ${tl(trans.failed_to_find_tracks)}
 					    </p>
-					    <a class="see-more" href="${album_as_track_url}">
+						<a class="see-more" href="${album_as_track_url}">
 					        ${tl(trans.open_album_as_track)}
 					    </a>
 					</div>
@@ -358,10 +355,10 @@ function album_missing_a_tracklist() {
 						html`
 							${top}
 							<div class="loading-data-container">
-							    <p class="loading-data-text failed">
+								<p class="loading-data-text failed">
 							        ${tl(trans.failed_to_find_tracks)}
 							    </p>
-							    <a class="see-more" href=${album_as_track_url}>
+								<a class="see-more" href=${album_as_track_url}>
 							        ${tl(trans.open_album_as_track)}
 							    </a>
 							</div>

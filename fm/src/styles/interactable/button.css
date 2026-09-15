@@ -77,6 +77,7 @@ select,
 	padding: var(--padding,
 			var(--button-padding,
 				var(--btn-top) var(--btn-right) var(--btn-bottom) var(--btn-left))) !important;
+	margin: unset;
 	min-height: unset !important;
 	min-width: unset !important;
 	line-height: var(--line-height) !important;

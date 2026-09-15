@@ -7,7 +7,7 @@
 .masthead-popup-text .btn-primary,
 .more-items,
 .see-more {
-	--see-more-pad-v: 0px;
+	--see-more-pad-v: 2px;
 	--see-more-pad: 0px;
 
 	display: inline-flex;
@@ -42,7 +42,7 @@
 		content: '';
 		position: absolute;
 		display: block !important;
-		bottom: -2px;
+		bottom: 0;
 		left: 0;
 		right: 0;
 		height: 1px;
@@ -84,6 +84,18 @@
 	&[aria-expanded="true"] {
 		&:after {
 			transform: scaleX(1);
+		}
+
+		&>.bleh-icon-arrow-left {
+			translate: -2px 0;
+		}
+
+		&>.bleh-icon-arrow-right {
+			translate: 2px 0;
+		}
+
+		&>.bleh-icon-external {
+			translate: 2px -2px;
 		}
 	}
 

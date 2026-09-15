@@ -17,6 +17,7 @@ import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 import { SymbolPresets } from '@/pages/music/presets.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { LinkTooltip } from '@/components/text/link.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -472,9 +473,14 @@ export function patch_wiki_contents(wiki_block: ReactElement) {
 		let name = link.textContent.trim();
 		let sister;
 
+		link.classList.add('generic-link');
+
 		if (!href.startsWith(root)) {
 			if (href && is_link_external(href)) {
-				link.classList.add('links-externally', 'icon-after');
+				link.classList.add('link-with-icon');
+				link.appendChild(
+					<Icon name={icons.external} />,
+				);
 
 				const url = new URL(href);
 				const scheme = url.protocol;

@@ -25,6 +25,7 @@ import { select_prepare } from '@/components/settings/select.ts';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function profile_tracks() {
 	const panel = page.structure.main!.querySelector('#top-tracks');
@@ -43,11 +44,7 @@ export function profile_tracks() {
 	) as HTMLButtonElement;
 
 	if (select_btn) {
-		select_btn.classList.add(
-			'select-button',
-			'link-select',
-			'blend-v2-btn',
-		);
+		convert_to_select(select_btn);
 		select_btn.classList.remove(
 			'section-control',
 			'dropdown-menu-clickable-button',

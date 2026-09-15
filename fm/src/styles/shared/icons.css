@@ -209,6 +209,10 @@
 		background-position: center;
 		background-repeat: no-repeat;
 	}
+
+	transition-property: translate;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .bleh-icon-arrow-left,

@@ -102,6 +102,7 @@ import { LoadingData } from '@/components/loading/loading.tsx';
 import { profile_recents } from '@/pages/profile/recents.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { profile_tracks } from '@/pages/profile/tracks.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1017,11 +1018,7 @@ function profile_artists() {
             </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove(
 				'section-control',
 				'dropdown-menu-clickable-button',
@@ -1192,11 +1189,7 @@ function profile_albums() {
             </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove(
 				'section-control',
 				'dropdown-menu-clickable-button',
