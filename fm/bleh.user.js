@@ -122832,6 +122832,59 @@ var bleh = (() => {
     }
   }
 
+  // src/components/select/user.tsx
+  function UserSelect({ value, onChange }) {
+    let values = [];
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "user-select"
+    });
+    function update() {
+      const starred2 = useSettings.get("starred_friend");
+      const friends2 = useSettings.get("friends").filter((friend) => friend != starred2);
+      values = [
+        {
+          text: auth.name,
+          value: auth.name
+        }
+      ];
+      if (starred2) {
+        values.push({
+          text: starred2,
+          value: starred2
+        });
+      }
+      friends2.forEach((friend) => {
+        values.push({
+          text: friend,
+          value: friend
+        });
+      });
+      elem.replaceChildren(/* @__PURE__ */ jsx(Select, {
+        value,
+        values,
+        allowArbitrary: true,
+        onChange: set2
+      }));
+    }
+    update();
+    function set2(v) {
+      value = v;
+      if (onChange) onChange(v);
+      update();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(v) {
+        set2(v);
+      }
+    });
+    useSettings.on("friends", update);
+    useSettings.on("starred_friend", update);
+    return elem;
+  }
+
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -124230,6 +124283,14 @@ var bleh = (() => {
             children: /* @__PURE__ */ jsx(DemoItem, {
               label: "ProfileSidebar",
               children: /* @__PURE__ */ jsx(ProfileSidebar, {})
+            })
+          })
+        }),
+        /* @__PURE__ */ jsx("section", {
+          children: /* @__PURE__ */ jsx(DemoGrid, {
+            children: /* @__PURE__ */ jsx(DemoItem, {
+              label: "UserSelect",
+              children: /* @__PURE__ */ jsx(UserSelect, {})
             })
           })
         })
@@ -125984,7 +126045,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-15T01:37:34.059Z"
+    built_on: "2026-09-15T16:59:02.353Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
