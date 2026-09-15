@@ -69,6 +69,7 @@ export function Select({
 					'btn',
 					'select-button',
 					inSettings && 'select-in-settings',
+					allowArbitrary && 'arbitrary',
 				]}
 				ref={button}
 			/>

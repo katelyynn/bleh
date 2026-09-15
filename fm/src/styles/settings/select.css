@@ -14,7 +14,11 @@
 	--select-arrow-icon-size: 12px;
 
 	&.with-query {
-		--col: transparent;
+		--col: transparent !important;
+
+		&>.star-icon {
+			opacity: 0 !important;
+		}
 	}
 
 	&:after {
@@ -51,6 +55,14 @@
 				transform: scaleY(-1) translateY(-1px) !important;
 			}
 		}
+
+		&.arbitrary {
+			--col: oklch(var(--c2) / 50%);
+
+			&>.star-icon {
+				opacity: 0.5;
+			}
+		}
 	}
 
 	&[data-hide="true"] {
@@ -70,14 +82,15 @@
 	background: none;
 	color: inherit;
 	border: none;
+	padding: unset;
 	--focus-outline: none;
 	position: absolute;
 	inset: var(--button-verts) calc(var(--button-sides) + 12px + 4px) var(--button-verts) var(--button-sides);
 	pointer-events: none;
 
-	&:not(.with-query) {
-		opacity: 0;
-	}
+	/*&:not(.with-query) {
+		opacity: 0.7;
+	}*/
 }
 
 .select-item {
