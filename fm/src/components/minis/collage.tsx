@@ -328,7 +328,7 @@ export function collage({ host, sidebar } = {}) {
 						item.name = track
 							.querySelector('.chartlist-name a')
 							.textContent.trim();
-						if (type.value != 'artists') {
+						if (type.current.value != 'artists') {
 							item.sister = track
 								.querySelector('.chartlist-artist a')
 								.textContent.trim();
@@ -639,6 +639,7 @@ export function collage({ host, sidebar } = {}) {
 
 						body.current.replaceChildren(
 							<div class='collage-canvas'>
+								{collage_dom}
 								{canvas}
 								<div class='collage-canvas-actions'>
 									<Button

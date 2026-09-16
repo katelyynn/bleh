@@ -76,6 +76,10 @@
 				justify-content: center;
 				text-align: center;
 			}
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 		}
 	}
 }
@@ -422,15 +426,6 @@
 	transition-property: color;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function-ani);
-
-	&>.grid-item-text:first-child {
-		display: inline-block;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		line-clamp: 1;
-		-webkit-line-clamp: 1;
-		-webkit-box-orient: vertical;
-	}
 
 	.obesssions-item-date,
 	&.grid-item-plays,
