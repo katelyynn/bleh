@@ -412,6 +412,8 @@ export function convert_to_select(button: Element | null) {
 
 	button.classList.add('select-button', 'link-select', 'blend-v2-btn');
 
+	return;
+
 	button.appendChild(
 		<span class='select-indicator'>
 			<Icon name={icons.arrow_down} identifier='select' />

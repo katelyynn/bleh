@@ -36,7 +36,7 @@
 	--force-underline: none !important;
 
 	&:before {
-		display: none !important;
+		display: none;
 	}
 
 	&:after {
@@ -87,6 +87,14 @@
 		}
 	}
 
+	--icon-transform: 1px;
+
+	&>.bleh-icon {
+		transition-property: rotate, scale;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function-ani);
+	}
+
 	&:hover,
 	&:active,
 	&[aria-expanded="true"] {
@@ -95,27 +103,31 @@
 		}
 
 		&>.bleh-icon-arrow-up {
-			translate: 0 -2px;
+			translate: 0 calc(-1 * var(--icon-transform));
 		}
 
 		&>.bleh-icon-arrow-down {
-			translate: 0 2px;
+			translate: 0 var(--icon-transform);
 		}
 
 		&>.bleh-icon-arrow-left {
-			translate: -2px 0;
+			translate: calc(-1 * var(--icon-transform)) 0;
 		}
 
 		&>.bleh-icon-arrow-right {
-			translate: 2px 0;
+			translate: var(--icon-transform) 0;
 		}
 
 		&>.bleh-icon-external {
-			translate: 2px -2px;
+			translate: var(--icon-transform) calc(-1 * var(--icon-transform));
 		}
 
 		&>.bleh-icon-settings {
 			rotate: 180deg;
+		}
+
+		&>.bleh-icon-plus {
+			scale: 1.2;
 		}
 	}
 

@@ -161,7 +161,7 @@
 }
 
 .icon-r:before,
-.select-button:not(.link-select):before,
+.select-button:before,
 .external:before,
 .open:before,
 .gallery-next .arrow,
@@ -210,7 +210,8 @@
 	}
 
 	transition-property: translate,
-	rotate;
+	rotate,
+	scale;
 	transition-duration: 0.2s;
 	transition-timing-function: var(--trans-function-ani);
 }

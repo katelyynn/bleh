@@ -9,7 +9,7 @@
 	width: max-content;
 	position: relative;
 
-	--btn-right: calc(var(--button-sides) + 12px + 4px) !important;
+	--btn-right: calc(var(--button-sides) + var(--select-arrow-icon-size) + 4px) !important;
 
 	--select-arrow-icon-size: 12px;
 
@@ -224,13 +224,9 @@
 }
 
 .link-select {
-	&:after {
-		--right: 0 !important;
-	}
+	padding-right: calc(var(--select-arrow-icon-size) + 4px) !important;
 
-	&:not([data-type], .left-icon) {
-		&:before {
-			--show-icon: none;
-		}
+	&:before {
+		--right: 0 !important;
 	}
 }
