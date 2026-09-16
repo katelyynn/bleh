@@ -22,6 +22,7 @@
 .top-new-item-title {
 	font-weight: var(--font-weight-medium);
 }
+
 .did-you-know-header {
 	margin-bottom: 6px;
 }
@@ -75,11 +76,13 @@
 			}
 		}
 	}
+
 	.report-headline-title {
 		display: flex;
 		align-items: center;
 	}
 }
+
 .report-headline-share {
 	position: relative;
 	--left: var(--icon-half);
@@ -103,6 +106,7 @@
 		width: unset;
 		padding-top: unset;
 	}
+
 	.header-metadata-item {
 		padding: unset !important;
 		background-color: unset;
@@ -114,6 +118,7 @@
 		margin-left: 0;
 		margin-top: 0;
 	}
+
 	.header-metadata-display {
 		font-size: 40px;
 		line-height: normal;
@@ -146,9 +151,7 @@
 		--mask: var(--icon-16-dots);
 
 		&:before {
-			--left: calc(
-                (var(--button-height) - var(--icon-size)) / 2
-            ) !important;
+			--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
 			--right: none !important;
 		}
 	}
@@ -161,19 +164,19 @@
 		right: 0;
 	}
 
-	& > img {
+	&>img {
 		margin: unset !important;
 		width: var(--icon-size) !important;
 		height: var(--icon-size) !important;
 	}
 
-	&:not([id$="colors-button"]) > img {
+	&:not([id$="colors-button"])>img {
 		display: none;
 	}
 }
 
 /* fix reports */
-.report-headline-border + .page-content {
+.report-headline-border+.page-content {
 	display: block !important;
 }
 
@@ -187,6 +190,7 @@
 .listening-report-top-item-heading {
 	color: oklch(var(--c1));
 }
+
 .user-dashboard-layout--version-3 .listening-report-top-item-wrap--version-3 .listening-report-top-item-heading .listening-report-top-item-heading-name {
 	font-size: 22px;
 }
@@ -195,9 +199,11 @@
 .listening-report-row {
 	width: var(--cards-width) !important;
 }
-.container--full-width > .listening-report-row__col {
+
+.container--full-width>.listening-report-row__col {
 	margin: 0 auto;
 }
+
 .listening-report-top-item-container,
 .listening-report-row--3-wide .listening-report-row__col {
 	width: calc((var(--cards-width) / 3) - 5.5px) !important;
@@ -206,6 +212,7 @@
 		width: unset !important;
 	}
 }
+
 .listening-report-row--2-wide .listening-report-row__col {
 	width: calc((var(--cards-width) / 2) - 5px) !important;
 
@@ -238,22 +245,28 @@
 		margin: unset;
 	}
 }
+
 .promo-v3.visible-xs {
 	display: none !important;
 }
+
 .promo-v3 .listening-report-promo {
 	position: relative;
 	background-image: unset !important;
 	display: flex;
 	flex-direction: column;
 	margin-top: unset;
+	align-items: unset;
+	gap: unset;
 }
+
 .promo-v3 .listening-report-promo-title {
 	min-width: 80px;
 	color: inherit;
 	font-weight: var(--font-weight-medium) !important;
 	order: -1;
 }
+
 .promo-v3 .listening-report-promo-date {
 	margin-top: unset;
 	padding-right: unset;
@@ -270,9 +283,11 @@
 .listening-report-promo--week {
 	--mask: var(--icon-16-listening-report-weekly) !important;
 }
+
 .listening-report-promo--month {
 	--mask: var(--icon-16-listening-report-monthly) !important;
 }
+
 .listening-report-promo--year {
 	--mask: var(--icon-16-listening-report-yearly) !important;
 }
@@ -286,13 +301,16 @@
 	/* while loading, this would get overrided */
 	display: none !important;
 }
+
 .your-progress-chart {
 	margin-top: -7px;
 }
+
 .highcharts-root,
 .highcharts-background {
 	fill: transparent !important;
 }
+
 text:has(> .your-progress-label-position) {
 	font-family: var(--font) !important;
 	font-size: var(--font-size) !important;
@@ -310,19 +328,21 @@ text:has(> .your-progress-label-position) {
 		line-height: var(--line-height);
 		cursor: default;
 
-		& > span {
+		&>span {
 			color: oklch(var(--c2));
 			font-weight: var(--font-weight-medium);
 		}
 	}
 
 	.highcharts-point {
+
 		&[fill^="rgb(2"],
 		&[fill="#d92323"] {
 			fill: oklch(var(--l3-c)) !important;
 			stroke: oklch(var(--b5)) !important;
 			width: 7px !important;
 		}
+
 		&[fill^="rgb(1"],
 		&[fill="#999999"] {
 			fill: oklch(var(--l4-c)) !important;
