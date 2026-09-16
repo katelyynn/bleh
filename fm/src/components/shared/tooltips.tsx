@@ -320,7 +320,11 @@ export function menu_tooltip<
 		...config,
 	});
 
+	let cancel_close = false;
+
 	const listener: EventListener = ({ target: t }) => {
+		if (cancel_close) return;
+
 		// TODO: if you click the button (or something inside it)
 		// that triggered the menu to show,
 		// it will fire this after the clicking again check
@@ -340,7 +344,13 @@ export function menu_tooltip<
 	};
 
 	host.addEventListener('click', (e) => {
+		cancel_close = true;
 		console.info('click', e);
+
+		setTimeout(() => {
+			cancel_close = false;
+		}, 0);
+
 		// close when clicking again
 		if (tooltip.is_mounted) {
 			log('hiding due to is_mounted', 'tooltip', 'info');

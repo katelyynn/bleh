@@ -54,6 +54,7 @@ export function Select({
 	if (!value) value = values.find((v) => 'value' in v)?.value;
 
 	const button = createRef();
+	const indicator = createRef();
 	const select = createRef();
 	const inner = createRef();
 	const input = createRef();
@@ -73,7 +74,9 @@ export function Select({
 					allowArbitrary && 'arbitrary',
 				]}
 				ref={button}
-			/>
+			>
+				<span class='select-value-indicator' ref={indicator} />
+			</button>
 			<input
 				class={['select-input']}
 				onInput={() => {
@@ -373,11 +376,11 @@ export function Select({
 		);
 
 		// fallback
-		button.current.replaceChildren(value);
+		indicator.current.replaceChildren(value);
 
 		const val = values.find((v) => v.value == value) || { text: value };
 
-		button.current.replaceChildren(select_text(val.text));
+		indicator.current.replaceChildren(select_text(val.text));
 
 		select.current.value = value;
 
@@ -410,6 +413,8 @@ export function convert_to_select(button: Element | null) {
 	button.classList.add('select-button', 'link-select', 'blend-v2-btn');
 
 	button.appendChild(
-		<Icon name={icons.arrow_down} identifier='select' />,
+		<span class='select-indicator'>
+			<Icon name={icons.arrow_down} identifier='select' />
+		</span>,
 	);
 }
