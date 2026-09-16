@@ -210,7 +210,8 @@
 		background-repeat: no-repeat;
 	}
 
-	transition-property: translate;
+	transition-property: translate,
+	rotate;
 	transition-duration: 0.2s;
 	transition-timing-function: var(--trans-function-ani);
 }

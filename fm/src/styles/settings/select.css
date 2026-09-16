@@ -25,30 +25,30 @@
 		--right: var(--button-sides-icon);
 
 		transition-property: transform !important;
-		transition-duration: var(--trans) !important;
-		transition-timing-function: var(--trans-function) !important;
+		transition-duration: 0.2s !important;
+		transition-timing-function: var(--trans-function-ani);
 		color: oklch(var(--c3));
 	}
 
-	&.blend-v2-btn {
-		&:before {
-			--right: var(--see-more-pad) !important;
-		}
-	}
-
 	&:active {
-		&:before {
-			transform: translateY(1px) !important;
+
+		&:before,
+		&>.select-indicator {
+			transform: scaleY(1) translateY(1px) !important;
 		}
 	}
 
 	&[aria-expanded="true"] {
-		&:before {
-			transform: scaleY(-1) !important;
+
+		&:before,
+		&>.select-indicator {
+			transform: scaleY(-1) translateY(0) !important;
 		}
 
 		&:active {
-			&:before {
+
+			&:before,
+			&>.select-indicator {
 				transform: scaleY(-1) translateY(-1px) !important;
 			}
 		}
@@ -80,6 +80,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	transition-property: transform;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .select-input {

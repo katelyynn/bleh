@@ -93,6 +93,14 @@
 			transform: scaleX(1);
 		}
 
+		&>.bleh-icon-arrow-up {
+			translate: 0 -2px;
+		}
+
+		&>.bleh-icon-arrow-down {
+			translate: 0 2px;
+		}
+
 		&>.bleh-icon-arrow-left {
 			translate: -2px 0;
 		}
@@ -103,6 +111,10 @@
 
 		&>.bleh-icon-external {
 			translate: 2px -2px;
+		}
+
+		&>.bleh-icon-settings {
+			rotate: 180deg;
 		}
 	}
 
