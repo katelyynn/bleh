@@ -176,6 +176,10 @@ select,
 		}
 	}
 
+	&:after {
+		display: none;
+	}
+
 	/*     LOADING     */
 	/*&.btn--loading {
 	    background-image: unset;
