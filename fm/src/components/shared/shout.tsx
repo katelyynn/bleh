@@ -159,9 +159,20 @@ export function patch_shouts() {
 					button.classList.add(
 						'btn',
 						'shout-action-button',
-						'left-icon',
 						'see-more',
 					);
+
+					if (button.classList.contains('vote-button')) {
+						button.classList.add('left-icon');
+						button.insertBefore(
+							<Icon name={icons.arrow_up} />,
+							button.firstChild,
+						);
+					} else if (button.classList.contains('shout-reply')) {
+						button.appendChild(
+							<Icon name={icons.external} />,
+						);
+					}
 				});
 			});
 
@@ -177,12 +188,17 @@ export function patch_shouts() {
 			);
 
 			const more_button = shout.querySelector('.shout-more-actions');
-			more_button?.classList?.add(
-				'btn',
-				'see-more',
-				'shout-action-button',
-				'left-icon',
-			);
+			if (more_button) {
+				more_button.classList?.add(
+					'btn',
+					'see-more',
+					'shout-action-button',
+				);
+				more_button.insertBefore(
+					<Icon name={icons.settings} />,
+					more_button.firstChild,
+				);
+			}
 
 			// detect vote status
 			const form = shout.querySelector('.vote-button-toggle');

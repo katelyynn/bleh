@@ -79,6 +79,13 @@
 			}*/
 	}
 
+	&.shout-more-actions {
+		&:after {
+			left: 0;
+			right: 0;
+		}
+	}
+
 	&:hover,
 	&:active,
 	&[aria-expanded="true"] {
@@ -136,29 +143,6 @@
 
 .blend-v2-btn {
 	font-weight: var(--font-weight) !important;
-}
-
-.shout-action-button,
-.left-icon,
-.edit,
-.shout-more-replies-after,
-.shout-more-replies-before,
-.pagination-previous-link,
-.modal-body .btn-cancel.js-close,
-.btn-cancel.js-disclose-close,
-.see-more.sponsor,
-a.inline-add-icon {
-	--left: var(--see-more-pad);
-	--right: none;
-	padding-right: var(--see-more-pad) !important;
-	padding-left: calc(var(--see-more-pad) + var(--mask-size) + 4px) !important;
-
-	&:before {
-		mask-image: var(--mask,
-				var(--icon-16-plus, var(--icon-16-placeholder)));
-		-webkit-mask-image: var(--mask,
-				var(--icon-16-plus, var(--icon-16-placeholder)));
-	}
 }
 
 .pagination-previous-link {
