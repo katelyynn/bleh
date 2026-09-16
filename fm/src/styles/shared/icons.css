@@ -124,7 +124,6 @@
 /*     SET AN OBSESSION     */
 .obsession-candidate-inner .btn-sm:before,
 /*     GENERIC     */
-.music-link:after,
 .btn--loading:after,
 .more-items:before {
 	content: "";

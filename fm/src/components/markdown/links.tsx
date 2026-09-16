@@ -9,6 +9,7 @@ import { social_link } from '@/types/markdown.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { root } from '@/build/page.ts';
 import DOMPurify from 'dompurify';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 // retrieves social links if a user supplies them
 export const social_links_extension = (links: social_link[]) => [
@@ -147,6 +148,7 @@ export function social_links(body: ReactElement, links: social_link[]) {
 							style={`--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)`}
 						>
 							{label}
+							<Icon name={icons.external} />
 						</a>
 					);
 				})}
