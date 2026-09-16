@@ -33,6 +33,7 @@
 	--icon-size: 12px;
 	cursor: pointer;
 	overflow: visible !important;
+	--force-underline: none !important;
 
 	&:before {
 		display: none !important;
@@ -42,12 +43,12 @@
 		content: '';
 		position: absolute;
 		display: block !important;
-		bottom: 0;
+		bottom: 2px;
 		left: 0;
 		right: 0;
 		height: 1px;
 		background: var(--mask-colour);
-		transform: scaleX(0);
+		transform: var(--underline-scale, scaleX(0));
 		transform-origin: bottom left;
 		opacity: 0.6;
 

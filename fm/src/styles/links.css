@@ -26,10 +26,6 @@ a {
 	color: oklch(var(--l3-c));
 	text-underline-offset: var(--underline-offset);
 	cursor: pointer;
-
-	[data-bleh--underline_links="true"] & {
-		text-decoration: underline !important;
-	}
 }
 
 .bottom-card-links {
@@ -94,17 +90,18 @@ a {
 	padding: 2px 0;
 	margin: -2px 0;
 	text-decoration: none !important;
+	--force-underline: none !important;
 
 	&:after {
 		content: '';
 		position: absolute;
 		display: block;
-		bottom: 0;
+		bottom: 2px;
 		left: 0;
 		right: 0;
 		height: 1px;
 		background: var(--mask-colour);
-		transform: scaleX(0);
+		transform: var(--underline-scale, scaleX(0));
 		transform-origin: bottom left;
 		opacity: 0.6;
 

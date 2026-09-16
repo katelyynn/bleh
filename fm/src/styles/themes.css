@@ -252,6 +252,7 @@ body {
 
 	&[data-bleh--underline_links="true"] {
 		--force-underline: underline;
+		--underline-scale: scaleX(1);
 	}
 
 	--display-under-reduced-motion: unset;

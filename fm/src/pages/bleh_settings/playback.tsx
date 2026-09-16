@@ -131,7 +131,7 @@ export function playback() {
 					<SettingInfo name={tl(trans.current_version)}>
 						<p>{lotus_version_text}</p>
 						<SeeMore
-							className='update-check'
+							icon={icons.update}
 							iconPlacement='left'
 							onClick={() => lotus(true)}
 						>
@@ -215,7 +215,7 @@ export function playback() {
 							{oracle_tracks.version}
 						</p>
 						<SeeMore
-							className='update-check'
+							icon={icons.update}
 							iconPlacement='left'
 							onClick={() => oracle_data(true)}
 						>

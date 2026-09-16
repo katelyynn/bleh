@@ -43,6 +43,10 @@ export function SeeMore({
 		className && className,
 	];
 
+	if (!icon && external) {
+		icon = icons.external;
+	}
+
 	if (!href && onClick) {
 		return (
 			<button
@@ -72,9 +76,11 @@ export function SeeMore({
 			data-see-more='true'
 			ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
 		>
-			{iconPlacement == 'left' && <Icon
-				name={icon || icons.arrow_left}
-			/>}
+			{iconPlacement == 'left' && (
+				<Icon
+					name={icon || icons.arrow_left}
+				/>
+			)}
 			{children}
 			{iconPlacement == 'right' && (
 				<Icon name={icon || icons.arrow_right} />
