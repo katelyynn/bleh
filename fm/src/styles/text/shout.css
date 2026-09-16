@@ -496,3 +496,30 @@
 
 	bottom: 0 !important;
 }
+
+
+.shoutbox>.shout-list {
+
+	&:hover,
+	&:focus-within {
+		&>.shout-list-item:not(:hover, :focus-within) {
+			opacity: 0.6;
+		}
+	}
+
+	&>.shout-list-item {
+		padding-bottom: calc(6px + 1px);
+		border-bottom: 1px solid var(--shout-separator);
+
+		transition-property: opacity;
+		transition-duration: 0.3s;
+		transition-timing-function: var(--trans-function);
+		transition-delay: 0.1s;
+
+		&:hover,
+		&:focus-within {
+			transition-duration: 0s;
+			transition-delay: 0s;
+		}
+	}
+}

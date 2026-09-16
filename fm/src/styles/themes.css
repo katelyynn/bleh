@@ -507,6 +507,7 @@ body,
 	--button-outline: inset 0 0 0 1px oklch(var(--b2) / 40%);
 
 	--shout-tree: oklch(var(--b2) / 20%);
+	--shout-separator: oklch(var(--b2) / 30%);
 
 	--chart-button-hov: oklch(var(--b4) / 60%);
 	--chart-button-atv: oklch(var(--b4) / 80%);
