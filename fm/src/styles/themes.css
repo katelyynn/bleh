@@ -1798,9 +1798,10 @@ body {
 	--calendar-height: var(--calendar-size);
 	--calendar-radius: 6px;
 
-	--shout-avatar-size: 48px;
+	--shout-avatar-size: 52px;
+	--shout-avatar-action: 14px;
 	--shout-avatar-top: 4px;
-	--shout-inset: 48px;
+	--shout-inset: var(--shout-avatar-size);
 	--shout-padding: 2px;
 	--shout-outer-padding: 6px;
 	--shout-tree-size: 2px;
@@ -1853,7 +1854,7 @@ body {
 	--blur-brightness: 0.7;
 	--blur-contrast: 1;
 
-	--shout-actions-opacity: 0.45;
+	--shout-actions-opacity: 0.6;
 
 	--rain: 100% 0 0;
 

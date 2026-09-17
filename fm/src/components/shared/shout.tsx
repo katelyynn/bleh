@@ -55,6 +55,7 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 import { convert_to_select } from '@/components/select/select.tsx';
+import { ShoutAction } from '@/components/shout/action.tsx';
 
 type ShoutElement = HTMLDivElement & {
 	translated: boolean;
@@ -97,9 +98,16 @@ export function patch_shouts() {
 				</SponsorUsername>,
 			);
 
-			const shout_avatar = shout.querySelector('.shout-user-avatar');
+			const shout_avatar = shout.querySelector(
+				'.shout-user-avatar',
+			) as HTMLDivElement;
 
 			const badge = patch_avatar(shout_avatar, shout_name_text, 'shout');
+			shout.appendChild(
+				<ShoutAction name={shout_name_text} wrap={shout}>
+					{shout_avatar}
+				</ShoutAction>,
+			);
 
 			if (badge) {
 				if (badge.type && badge.type == 'avatar-status-dot--staff') {
@@ -327,9 +335,16 @@ export function patch_shouts() {
 	shout_forms.forEach((shout_form) => {
 		shout_form.setAttribute('data-shout-form', 'true');
 
-		const avatar = shout_form.querySelector('.shout-user-avatar')!;
+		const avatar = shout_form.querySelector(
+			'.shout-user-avatar',
+		) as HTMLDivElement;
 
-		patch_avatar(avatar, auth.name);
+		patch_avatar(avatar, auth.name, 'shout');
+		shout_form.appendChild(
+			<ShoutAction name={auth.name!}>
+				{avatar}
+			</ShoutAction>,
+		);
 
 		const send_button = shout_form.querySelector('.form-group--submit')!;
 		shout_send(send_button);

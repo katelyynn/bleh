@@ -279,8 +279,9 @@ select,
 		--btn-right: var(--button-sides) !important;
 		--font-size: 0 !important;
 		--mask-colour: currentColor !important;
-		min-width: var(--button-height) !important;
-		width: var(--button-height) !important;
+		--button-width: var(--button-height);
+		min-width: var(--button-width) !important;
+		width: var(--button-width) !important;
 		height: var(--button-height) !important;
 		position: relative;
 		--padding: 0 !important;
@@ -289,7 +290,7 @@ select,
 		gap: 0;
 
 		&:before {
-			--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
+			--left: calc((var(--button-width) - var(--icon-size)) / 2) !important;
 			--right: none !important;
 		}
 	}
