@@ -261,5 +261,5 @@ export function create_avatar(
 			ref={parent}
 		/>
 	);
-	outer.appendChild(new_parent);
+	outer.insertBefore(new_parent, outer.firstChild);
 }

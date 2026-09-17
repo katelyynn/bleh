@@ -226,6 +226,8 @@
 	filter: var(--header-disc-filter, brightness(0.92));
 
 	transform: rotate(var(--disc-rotate, 0deg));
+
+	order: 10;
 }
 
 .page-header-avatar {
