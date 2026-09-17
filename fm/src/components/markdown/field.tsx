@@ -660,7 +660,6 @@ export function MarkdownField({
 
 	setTimeout(() => {
 		queue_popup('markdown', wrap);
-		elem.focus();
 	}, 0);
 
 	return wrap;

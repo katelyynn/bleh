@@ -404,7 +404,7 @@
 .grid-items-item-main-text {
 	color: var(--title-colour, oklch(var(--c1)));
 	font-weight: var(--font-weight-medium);
-	margin: 0 0 -2px;
+	margin: 0 0 1px;
 	max-width: 100%;
 
 	transition-property: color;
