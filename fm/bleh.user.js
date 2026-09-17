@@ -54948,7 +54948,7 @@ var bleh = (() => {
           crossAxis: true,
           padding: 6
         }),
-        offset4(10)
+        offset4(6)
       ],
       onHide: () => {
         document.body.removeEventListener("click", listener);
@@ -63165,6 +63165,7 @@ var bleh = (() => {
         wrap2.classList.add("hovering-avatar");
       },
       onMouseLeave: () => {
+        if (menu.is_mounted) return;
         wrap2.classList.remove("hovering-avatar");
       },
       children: [
@@ -63181,7 +63182,7 @@ var bleh = (() => {
         })
       ]
     });
-    menu_tooltip(elem, /* @__PURE__ */ jsx(MenuContents, {
+    const menu = menu_tooltip(elem, /* @__PURE__ */ jsx(MenuContents, {
       children: [
         /* @__PURE__ */ jsx(Button, {
           menu: true,
@@ -63247,7 +63248,15 @@ var bleh = (() => {
           ]
         })
       ]
-    }));
+    }), {
+      onShow: () => {
+        wrap2.classList.add("hovering-avatar");
+      },
+      onHide: () => {
+        if (wrap2.matches(":hover")) return;
+        wrap2.classList.remove("hovering-avatar");
+      }
+    });
     return elem;
   }
 
@@ -126252,7 +126261,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-17T01:19:05.640Z"
+    built_on: "2026-09-17T01:25:05.407Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -311,7 +311,7 @@ export function menu_tooltip<
 				crossAxis: true,
 				padding: 6,
 			}),
-			offsetMiddleware(10),
+			offsetMiddleware(6),
 		],
 		onHide: () => {
 			document.body.removeEventListener('click', listener);

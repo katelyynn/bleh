@@ -24,6 +24,8 @@ export function ShoutAction({
 				wrap.classList.add('hovering-avatar');
 			}}
 			onMouseLeave={() => {
+				if (menu.is_mounted) return;
+
 				wrap.classList.remove('hovering-avatar');
 			}}
 		>
@@ -35,7 +37,7 @@ export function ShoutAction({
 		</div>
 	);
 
-	menu_tooltip(
+	const menu = menu_tooltip(
 		elem,
 		<MenuContents>
 			<Button menu href={`${root}user/${name}`}>
@@ -64,6 +66,16 @@ export function ShoutAction({
 				{tl(trans.obsessions)}
 			</Button>
 		</MenuContents>,
+		{
+			onShow: () => {
+				wrap.classList.add('hovering-avatar');
+			},
+			onHide: () => {
+				if (wrap.matches(':hover')) return;
+
+				wrap.classList.remove('hovering-avatar');
+			},
+		},
 	);
 
 	return elem;
