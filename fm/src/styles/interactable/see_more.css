@@ -87,8 +87,6 @@
 		}
 	}
 
-	--icon-transform: 1px;
-
 	&>.bleh-icon {
 		transition-property: rotate, scale;
 		transition-duration: 0.2s;

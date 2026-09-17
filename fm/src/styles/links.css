@@ -108,6 +108,14 @@ a {
 		transition-timing-function: var(--trans-function-ani);
 	}
 
+	&>.bleh-icon-arrow-up,
+	&>.bleh-icon-arrow-down,
+	&>.bleh-icon-arrow-left,
+	&>.bleh-icon-arrow-right,
+	&>.bleh-icon-external {
+		--icon-size: 12px;
+	}
+
 	&:hover,
 	&:active,
 	&[aria-expanded="true"] {
@@ -116,7 +124,7 @@ a {
 		}
 
 		&>.bleh-icon-external {
-			translate: 2px -2px;
+			translate: var(--icon-transform) calc(-1 * var(--icon-transform));
 		}
 	}
 
