@@ -10,8 +10,10 @@ import { SubText } from '@/components/text/sub.tsx';
 import { InfoTip } from '@/components/text/tip.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 import { PageHeaderDisc } from '@/components/music/header.tsx';
+import { Icon } from '@/components/shared/icon.tsx';
 
 interface PageHeaderProps {
+	icon?: string;
 	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home';
 	combined?: boolean;
 	name?: ReactNode;
@@ -21,6 +23,7 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({
+	icon,
 	type,
 	combined,
 	name,
@@ -39,6 +42,7 @@ export function PageHeader({
 					{['album', 'track'].includes(type) && <PageHeaderDisc />}
 				</div>
 			)}
+			{icon && <PageHeaderIcon name={icon} />}
 			<div class={['page-header-info', 'has-main-info']}>
 				<div class='main-info'>
 					{type != 'home'
@@ -103,5 +107,19 @@ export function PageHeaderArtist({
 		<h2 class={['page-header-artist', `artist-for-${type}`]}>
 			{children}
 		</h2>
+	);
+}
+
+interface PageHeaderIconProps {
+	name: string;
+}
+
+function PageHeaderIcon({
+	name,
+}: PageHeaderIconProps) {
+	return (
+		<div class='page-header-icon'>
+			<Icon name={name} />
+		</div>
 	);
 }

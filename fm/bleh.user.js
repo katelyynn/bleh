@@ -58397,6 +58397,124 @@ var bleh = (() => {
     return elem;
   }
 
+  // src/components/text/sub.tsx
+  function SubText({ children }) {
+    return /* @__PURE__ */ jsx("label", {
+      class: "sub-text",
+      children
+    });
+  }
+
+  // src/components/text/tip.tsx
+  function CardTip({ ref: ref2, minWidth, className: className2, gap, children }) {
+    return /* @__PURE__ */ jsx("label", {
+      class: [
+        "card-tip",
+        gap && "gap",
+        className2,
+        minWidth && "min-width"
+      ],
+      ref: ref2,
+      children
+    });
+  }
+  function InfoTip({ children }) {
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "info-tip",
+      children: /* @__PURE__ */ jsx(Icon, {
+        name: icons.info
+      })
+    });
+    hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+      children
+    }));
+    return elem;
+  }
+
+  // src/components/page/header.tsx
+  function PageHeader({ icon: icon2, type, combined, name, avatar: avatar4, children, extra }) {
+    const generic = !!avatar4;
+    const label = tl2(trans[type]);
+    return /* @__PURE__ */ jsx("section", {
+      class: [
+        "page-header",
+        `for-${type}`
+      ],
+      children: [
+        avatar4 && /* @__PURE__ */ jsx("div", {
+          class: "page-header-avatar-list",
+          children: [
+            avatar4,
+            [
+              "album",
+              "track"
+            ].includes(type) && /* @__PURE__ */ jsx(PageHeaderDisc, {})
+          ]
+        }),
+        icon2 && /* @__PURE__ */ jsx(PageHeaderIcon, {
+          name: icon2
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: [
+            "page-header-info",
+            "has-main-info"
+          ],
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "main-info",
+              children: [
+                type != "home" ? !combined ? /* @__PURE__ */ jsx(SubText, {
+                  children: label
+                }) : /* @__PURE__ */ jsx(SubText, {
+                  children: [
+                    tl2(trans.artists),
+                    /* @__PURE__ */ jsx(InfoTip, {
+                      children: tl2(trans.artists_tooltip)
+                    })
+                  ]
+                }) : "",
+                generic ? /* @__PURE__ */ jsx(Fragment, {
+                  children
+                }) : /* @__PURE__ */ jsx("h1", {
+                  class: [
+                    "page-header-title",
+                    "generic-page-title"
+                  ],
+                  children: name
+                })
+              ]
+            }),
+            extra
+          ]
+        })
+      ]
+    });
+  }
+  function PageHeaderTitle({ combined, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "title-container",
+      "data-multi": String(combined),
+      children
+    });
+  }
+  function PageHeaderArtist({ type = "track", children }) {
+    return /* @__PURE__ */ jsx("h2", {
+      class: [
+        "page-header-artist",
+        `artist-for-${type}`
+      ],
+      children
+    });
+  }
+  function PageHeaderIcon({ name }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "page-header-icon",
+      children: /* @__PURE__ */ jsx(Icon, {
+        name
+      })
+    });
+  }
+
   // src/pages/tag.tsx
   function bleh_tags() {
     const tag_header = document.body.querySelector(".header--tag");
@@ -58420,20 +58538,11 @@ var bleh = (() => {
       }
       const title = desanitise(split[index3]);
       page.name = title;
-      const same_page = is_same_page();
-      const redesigned_tag_header = html.node`
-            <section class="page-header for-generic ${same_page ? "same" : ""}">
-                <div class="page-header-icon">
-                    ${icon({
-        name: icons.tag
-      })}
-                </div>
-                <div class="page-header-info">
-                    <div class="sub-text">${tl2(trans.tag)}</div>
-                    <h1 class="page-header-title generic-page-title">${title}</h1>
-                </div>
-            </section>
-        `;
+      const redesigned_tag_header = /* @__PURE__ */ jsx(PageHeader, {
+        icon: icons.tag,
+        type: "tag",
+        name: title
+      });
       const background = document.body.querySelector(".header-background--has-image");
       if (background) {
         register_background(background.style.getPropertyValue("background-image").replace('url("', "").replace('")', ""));
@@ -58585,113 +58694,6 @@ var bleh = (() => {
         `);
     }
     page.structure.side.appendChild(about_artist_container);
-  }
-
-  // src/components/text/sub.tsx
-  function SubText({ children }) {
-    return /* @__PURE__ */ jsx("label", {
-      class: "sub-text",
-      children
-    });
-  }
-
-  // src/components/text/tip.tsx
-  function CardTip({ ref: ref2, minWidth, className: className2, gap, children }) {
-    return /* @__PURE__ */ jsx("label", {
-      class: [
-        "card-tip",
-        gap && "gap",
-        className2,
-        minWidth && "min-width"
-      ],
-      ref: ref2,
-      children
-    });
-  }
-  function InfoTip({ children }) {
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: "info-tip",
-      children: /* @__PURE__ */ jsx(Icon, {
-        name: icons.info
-      })
-    });
-    hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
-      children
-    }));
-    return elem;
-  }
-
-  // src/components/page/header.tsx
-  function PageHeader({ type, combined, name, avatar: avatar4, children, extra }) {
-    const generic = !!avatar4;
-    const label = tl2(trans[type]);
-    return /* @__PURE__ */ jsx("section", {
-      class: [
-        "page-header",
-        `for-${type}`
-      ],
-      children: [
-        avatar4 && /* @__PURE__ */ jsx("div", {
-          class: "page-header-avatar-list",
-          children: [
-            avatar4,
-            [
-              "album",
-              "track"
-            ].includes(type) && /* @__PURE__ */ jsx(PageHeaderDisc, {})
-          ]
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: [
-            "page-header-info",
-            "has-main-info"
-          ],
-          children: [
-            /* @__PURE__ */ jsx("div", {
-              class: "main-info",
-              children: [
-                type != "home" ? !combined ? /* @__PURE__ */ jsx(SubText, {
-                  children: label
-                }) : /* @__PURE__ */ jsx(SubText, {
-                  children: [
-                    tl2(trans.artists),
-                    /* @__PURE__ */ jsx(InfoTip, {
-                      children: tl2(trans.artists_tooltip)
-                    })
-                  ]
-                }) : "",
-                generic ? /* @__PURE__ */ jsx(Fragment, {
-                  children
-                }) : /* @__PURE__ */ jsx("h1", {
-                  class: [
-                    "page-header-title",
-                    "generic-page-title"
-                  ],
-                  children: name
-                })
-              ]
-            }),
-            extra
-          ]
-        })
-      ]
-    });
-  }
-  function PageHeaderTitle({ combined, children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "title-container",
-      "data-multi": String(combined),
-      children
-    });
-  }
-  function PageHeaderArtist({ type = "track", children }) {
-    return /* @__PURE__ */ jsx("h2", {
-      class: [
-        "page-header-artist",
-        `artist-for-${type}`
-      ],
-      children
-    });
   }
 
   // src/pages/track.tsx
@@ -126298,7 +126300,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-17T21:47:27.669Z"
+    built_on: "2026-09-17T22:02:08.377Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

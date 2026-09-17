@@ -9,24 +9,18 @@ import { gendered_pattern, page } from '@/build/page';
 import { desanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { checkup_page_structure } from '@/components/page/structure';
-import {
-	is_same_page,
-	register_background,
-	update_page,
-	useSettings,
-} from '../page';
+import { register_background, update_page, useSettings } from '../page';
 import { ff } from '@/components/settings/sku';
 import {
 	bleh_wiki,
 	bleh_wiki_editor,
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
-import { settings } from '@/build/config';
 import { page_header_title } from '@/components/music/header';
-import { html } from 'lighterhtml';
-import { icon, icons } from '@/components/shared/icon';
+import { icons } from '@/components/shared/icon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SideActions } from '@/components/side_action/side_action.tsx';
+import { PageHeader } from '@/components/page/header.tsx';
 
 export function bleh_tags() {
 	const tag_header = document.body.querySelector(
@@ -61,19 +55,15 @@ export function bleh_tags() {
 		const title = desanitise(split[index]);
 		page.name = title;
 
-		const same_page = is_same_page();
+		//const same_page = is_same_page();
 
-		const redesigned_tag_header = html.node`
-            <section class="page-header for-generic ${same_page ? 'same' : ''}">
-                <div class="page-header-icon">
-                    ${icon({ name: icons.tag })}
-                </div>
-                <div class="page-header-info">
-                    <div class="sub-text">${tl(trans.tag)}</div>
-                    <h1 class="page-header-title generic-page-title">${title}</h1>
-                </div>
-            </section>
-        `;
+		const redesigned_tag_header = (
+			<PageHeader
+				icon={icons.tag}
+				type='tag'
+				name={title}
+			/>
+		);
 
 		const background = document.body.querySelector(
 			'.header-background--has-image',
@@ -97,7 +87,7 @@ export function bleh_tags() {
 	}
 
 	if (!is_subpage) {
-		const col_main = page.structure.main.querySelector('.wiki-section');
+		const col_main = page.structure.main!.querySelector('.wiki-section');
 
 		const tags = document.createElement('div');
 		tags.classList.add('catalogue-tags');
