@@ -170,6 +170,12 @@ export function page_header_disc() {
 	return <div class='page-header-disc' />;
 }
 
+export function PageHeaderDisc() {
+	if (!useSettings.get('show_disc_image')) return;
+
+	return <div class='page-header-disc' />;
+}
+
 export function artist_title(header = document.body) {
 	const title = header.querySelector('.header-new-title') as HTMLElement;
 	title.classList.add('page-header-title');

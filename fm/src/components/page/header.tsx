@@ -9,6 +9,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { SubText } from '@/components/text/sub.tsx';
 import { InfoTip } from '@/components/text/tip.tsx';
 import { WithChildren } from '@/types/generic.tsx';
+import { PageHeaderDisc } from '@/components/music/header.tsx';
 
 interface PageHeaderProps {
 	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home';
@@ -35,6 +36,7 @@ export function PageHeader({
 			{avatar && (
 				<div class='page-header-avatar-list'>
 					{avatar}
+					{['album', 'track'].includes(type) && <PageHeaderDisc />}
 				</div>
 			)}
 			<div class={['page-header-info', 'has-main-info']}>
@@ -98,8 +100,8 @@ export function PageHeaderArtist({
 	children,
 }: PageHeaderArtistProps) {
 	return (
-		<div class={['page-header-artist', `artist-for-${type}`]}>
+		<h2 class={['page-header-artist', `artist-for-${type}`]}>
 			{children}
-		</div>
+		</h2>
 	);
 }

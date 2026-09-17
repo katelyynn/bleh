@@ -351,54 +351,6 @@
 		}
 	}
 
-	.page-header-title {
-		margin: unset;
-		font-size: calc(26px * var(--custom-font-size-multiplier, 1));
-		line-height: 40px;
-		font-weight: var(--custom-font-weight, var(--font-weight-bold));
-		letter-spacing: unset;
-		cursor: default;
-
-		color: oklch(var(--c1));
-		position: relative;
-
-		&>a {
-			color: inherit !important;
-		}
-
-		&.generic-page-title {
-			font-size: 24px;
-			line-height: 30px;
-		}
-
-		/*&.generic-page-title {
-		    font-family: var(--font-head);
-		    font-style: var(--font-style-head);
-		    font-weight: var(--font-weight-head, var(--font-weight-bold));
-		    }*/
-	}
-
-	&>.page-header-artist {
-		font-size: 18px;
-		line-height: 22px;
-		color: oklch(var(--c2) / 80%);
-		cursor: default;
-		margin: unset !important;
-
-		display: -webkit-box;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		line-clamp: 1;
-		-webkit-line-clamp: 1;
-		-webkit-box-orient: vertical;
-		position: relative;
-
-		.header-new-crumb {
-			font-size: inherit;
-			line-height: inherit;
-		}
-	}
-
 	.header-title-secondary {
 		margin-top: 6px !important;
 		flex-wrap: wrap;
@@ -415,6 +367,54 @@
 
 	.profile-top-header {
 		margin-top: var(--card-gap);
+	}
+}
+
+.page-header-title {
+	margin: unset;
+	font-size: calc(26px * var(--custom-font-size-multiplier, 1));
+	line-height: 40px;
+	font-weight: var(--custom-font-weight, var(--font-weight-bold));
+	letter-spacing: unset;
+	cursor: default;
+
+	color: oklch(var(--c1));
+	position: relative;
+
+	&>a {
+		color: inherit !important;
+	}
+
+	&.generic-page-title {
+		font-size: 24px;
+		line-height: 30px;
+	}
+
+	/*&.generic-page-title {
+		    font-family: var(--font-head);
+		    font-style: var(--font-style-head);
+		    font-weight: var(--font-weight-head, var(--font-weight-bold));
+		    }*/
+}
+
+.page-header-artist {
+	font-size: 18px;
+	line-height: 22px;
+	color: oklch(var(--c2) / 80%);
+	cursor: default;
+	margin: unset !important;
+
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	position: relative;
+
+	.header-new-crumb {
+		font-size: inherit;
+		line-height: inherit;
 	}
 }
 
