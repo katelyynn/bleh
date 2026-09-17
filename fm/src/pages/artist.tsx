@@ -38,8 +38,7 @@ import { html, render } from 'lighterhtml';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { setting } from '@/components/settings/settings';
 import { open_starred_friend_window } from '@/pages/profile/profile';
-import { artist_title, page_header_avatar } from '@/components/music/header';
-import { header_colour } from '@/components/page/colour';
+import { artist_title, PageHeaderAvatar } from '@/components/music/header';
 import { oracle_process } from '@/components/music/oracle';
 import {
 	hover_tooltip,
@@ -152,17 +151,17 @@ export function bleh_artists() {
 
 		if (on_tour) page.state.on_tour = true;
 
-		// TODO: change to tsx
-		const page_avatar = page_header_avatar(
-			avatar?.getAttribute('content') || '',
-		);
-
 		//const same_page = is_same_page();
 
 		const redesigned_artist_header = (
 			<PageHeader
 				type='artist'
-				avatar={page_avatar}
+				avatar={
+					<PageHeaderAvatar
+						url={avatar?.getAttribute('content') || ''}
+						paint={useSettings.get('hue_from_artist') as boolean}
+					/>
+				}
 				combined={page.multi}
 			>
 				<PageHeaderTitle>
@@ -175,13 +174,6 @@ export function bleh_artists() {
 		log('settings hue accent', 'dfbdfb', 'info', {
 			settings: JSON.stringify(settings),
 		});
-		header_colour(
-			page_avatar.image,
-			useSettings.get('hue_from_artist') as boolean,
-			[
-				page_avatar,
-			],
-		);
 
 		if (position) {
 			hover_tooltip(

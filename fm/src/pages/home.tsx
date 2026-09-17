@@ -20,12 +20,16 @@ import { ff } from '@/components/settings/sku';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { settings } from '@/build/config';
 import { avatar } from '@/components/shared/avatar';
-import { page_header_avatar } from '@/components/music/header';
+import {
+	page_header_avatar,
+	PageHeaderAvatar,
+} from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
 import { beta_indicator, new_indicator } from '@/components/shared/indicator';
 import { version } from '@/main';
+import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 
 export async function bleh_home() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -79,59 +83,44 @@ export async function bleh_home() {
 
 	let welcome;
 	if (auth.name) {
-		let profile_name;
-		let page_avatar;
+		const profile_name = (
+			<h1 class={['page-header-title', 'profile-name']}>
+				{cache.username || auth.name}
+			</h1>
+		);
 
-		welcome = html.node`
-            <section class="page-header for-profile ${same_page ? 'same' : ''}">
-                <div class="page-header-avatar-list">
-                    ${page_avatar = page_header_avatar(auth.avatar!)}
-                </div>
-                <div class="page-header-info has-main-info">
-                    <div class="main-info">
-                        <div class="greeting">
-                            ${tl(trans[`good_${time}_user`])}
-                        </div>
-                        <div class="title-container">
-                            <span class="page-header-title profile-name" ref=${(
-			el,
-		) => profile_name = el}>
-                                ${cache.username || auth.name}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
+		welcome = (
+			<PageHeader
+				type='home'
+				avatar={<PageHeaderAvatar url={auth.avatar!} />}
+			>
+				<div class='greeting'>
+					{tl(trans[`good_${time}_user`])}
+				</div>
+				<PageHeaderTitle>
+					{profile_name}
+				</PageHeaderTitle>
+			</PageHeader>
+		);
 
 		if (settings.display_name_styles) {
 			profile_name!.setAttribute('data-font', cache.font);
 			profile_name!.setAttribute('data-font-style', cache.font_style);
 		}
-
-		header_colour(page_avatar.image, false, [page_avatar]);
 	} else {
-		welcome = html.node`
-            <section class="page-header for-profile">
-                <div class="page-header-avatar-list">
-                    <div class="page-header-avatar">
-                        <img class="missing-avatar">
-                    </div>
-                </div>
-                <div class="page-header-info has-main-info">
-                    <div class="main-info">
-                        <div class="greeting">
-                            ${tl(trans[`good_${time}_user`])}
-                        </div>
-                        <div class="title-container">
-                            <h1 class="page-header-title">${
-			tl(trans.not_logged_in)
-		}</h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
+		welcome = (
+			<PageHeader
+				type='home'
+				avatar={<PageHeaderAvatar />}
+			>
+				<div class='greeting'>
+					{tl(trans[`good_${time}_user`])}
+				</div>
+				<PageHeaderTitle>
+					{tl(trans.not_logged_in)}
+				</PageHeaderTitle>
+			</PageHeader>
+		);
 	}
 
 	page.structure.container!.insertBefore(

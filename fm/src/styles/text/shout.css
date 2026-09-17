@@ -292,8 +292,8 @@
 		left: calc((-1 * var(--outset)) + 10px);
 		right: calc(-1 * var(--outset));
 
-		border-radius: var(--avatar-radius);
-		border: 3px solid oklch(var(--l3-c));
+		border-radius: calc(var(--avatar-radius) + 3px);
+		border: 2px solid oklch(var(--l3-c));
 
 		scale: 0.8;
 		opacity: 0;

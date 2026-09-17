@@ -22,13 +22,25 @@ import {
 import { artist_corrections, combined_artists } from '@/build/music';
 import { log } from '@/build/log';
 import { useSettings } from '@/page.ts';
+import { createRef } from 'jsx-dom';
+import { header_colour } from '@/components/page/colour.ts';
 
-interface page_header_avatar extends HTMLDivElement {
+type PageHeaderAvatarElement = HTMLDivElement & {
 	image: HTMLImageElement;
 	src: string;
+};
+
+interface PageHeaderAvatarProps {
+	ref?: ReturnType<typeof createRef<PageHeaderAvatarElement>>;
+	url?: string;
+	paint?: boolean;
 }
 
-export function page_header_avatar(url?: string): page_header_avatar {
+export function PageHeaderAvatar({
+	ref,
+	url,
+	paint = false,
+}: PageHeaderAvatarProps) {
 	const supports_gallery = ['artist', 'album'].includes(page.type);
 
 	let link = sanitise(page.name);
@@ -41,7 +53,8 @@ export function page_header_avatar(url?: string): page_header_avatar {
 		action = useSettings.get('default_avatar_action') as string;
 	}
 
-	let image: HTMLImageElement;
+	const image = createRef();
+	const glow = createRef();
 
 	const elem = (
 		<div
@@ -55,28 +68,30 @@ export function page_header_avatar(url?: string): page_header_avatar {
 					open(`${root}music/${redirect()}${link}/+images`);
 				}
 			}}
+			ref={ref}
 		>
 			{url
 				? (
 					<img
 						src={avatar(url, 'avatar300s')}
 						crossOrigin='anonymous'
-						ref={(el) => image = el}
+						ref={image}
 					/>
 				)
 				: (
 					<img
 						class={`missing-${page.type}`}
 						crossOrigin='anonymous'
-						ref={(el) => image = el}
+						ref={image}
 					/>
 				)}
+			<div class={['page-header-avatar-glow', 'colourful']} ref={glow} />
 		</div>
-	);
+	) as PageHeaderAvatarElement;
 
 	Object.defineProperty(elem, 'image', {
 		get() {
-			return image;
+			return image.current;
 		},
 	});
 
@@ -85,6 +100,11 @@ export function page_header_avatar(url?: string): page_header_avatar {
 			return url;
 		},
 	});
+
+	header_colour(image.current, paint, [
+		elem,
+		glow.current,
+	]);
 
 	const menu = tippy(elem, {
 		theme: 'context-menu',

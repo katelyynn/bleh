@@ -51,7 +51,6 @@ import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
 import { profile_reports } from './reports';
 import { toggle } from '@/components/settings/toggle';
-import { page_header_avatar } from '@/components/music/header';
 import { profile_summary } from '@/components/profile/summary';
 import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
@@ -103,6 +102,7 @@ import { profile_recents } from '@/pages/profile/recents.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { profile_tracks } from '@/pages/profile/tracks.tsx';
 import { convert_to_select } from '@/components/select/select.tsx';
+import { PageHeaderAvatar } from '@/components/music/header.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -364,16 +364,18 @@ export function bleh_profiles() {
 		page.avatar = src;
 	}
 
-	const page_avatar = page_header_avatar(
-		(profile_avatar as HTMLImageElement).src,
-	);
-
 	//const same_page = is_same_page();
 
 	const redesigned_profile_header = (
 		<PageHeader
 			type='profile'
-			avatar={!new_account ? page_avatar : profile_avatar as ReactElement}
+			avatar={!new_account
+				? (
+					<PageHeaderAvatar
+						url={(profile_avatar as HTMLImageElement).src}
+					/>
+				)
+				: profile_avatar as ReactElement}
 			extra={
 				<>
 					{sub_wrap ? sub_wrap : cache.created &&
@@ -423,10 +425,6 @@ export function bleh_profiles() {
 				);
 			} else register_background(null, 'none');
 		}
-	}
-
-	if (page_avatar) {
-		header_colour(page_avatar.image, false, [page_avatar]);
 	}
 
 	page.structure.container!.insertBefore(

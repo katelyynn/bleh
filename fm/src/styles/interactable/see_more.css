@@ -7,7 +7,7 @@
 .masthead-popup-text .btn-primary,
 .more-items,
 .see-more {
-	--see-more-pad-v: 2px;
+	--see-more-pad-v: 0px;
 	--see-more-pad: 0px;
 
 	display: inline-flex;
@@ -43,7 +43,7 @@
 		content: '';
 		position: absolute;
 		display: block !important;
-		bottom: 2px;
+		bottom: 0;
 		left: 0;
 		right: 0;
 		height: 1px;

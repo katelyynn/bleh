@@ -87,8 +87,6 @@ a {
 			oklch(var(--l4-c)) 30%);
 
 	position: relative;
-	padding: 2px 0;
-	margin: -2px 0;
 	text-decoration: none !important;
 	--force-underline: none !important;
 
@@ -96,7 +94,7 @@ a {
 		content: '';
 		position: absolute;
 		display: block;
-		bottom: 2px;
+		bottom: 0;
 		left: 0;
 		right: 0;
 		height: 1px;

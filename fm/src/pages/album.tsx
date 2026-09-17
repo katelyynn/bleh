@@ -17,7 +17,12 @@ import {
 	similar_items,
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import { is_same_page, register_background, update_page } from '@/page';
+import {
+	is_same_page,
+	register_background,
+	update_page,
+	useSettings,
+} from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
 import { bleh_tags_mini } from '@/pages/tag';
@@ -31,13 +36,13 @@ import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { save_hoshino_artwork } from '@/components/music/hoshino.js';
-import {
-	page_header_avatar,
-	page_header_disc,
-	page_header_title,
-} from '@/components/music/header';
-import { header_colour } from '@/components/page/colour';
+import { page_header_title, PageHeaderAvatar } from '@/components/music/header';
 import { convert_to_select } from '@/components/select/select.tsx';
+import {
+	PageHeader,
+	PageHeaderArtist,
+	PageHeaderTitle,
+} from '@/components/page/header.tsx';
 
 export function bleh_albums() {
 	const album_header = document.body.querySelector(
@@ -106,20 +111,24 @@ export function bleh_albums() {
 		const avatar = album_header.querySelector(
 			'.header-new-background-image',
 		);
-		const title = album_header.querySelector('.header-new-title');
-		const artist = album_header.querySelector('[itemprop="byArtist"]');
+		const title = album_header.querySelector(
+			'.header-new-title',
+		) as HTMLDivElement;
+		const artist = album_header.querySelector(
+			'[itemprop="byArtist"]',
+		) as HTMLElement;
 		const position = album_header.querySelector(
 			'.header-new-chart-position-number',
-		);
+		) as HTMLAnchorElement;
 
-		const avatar_img = avatar?.getAttribute('content').replace(
+		const avatar_img = avatar?.getAttribute('content')?.replace(
 			'/ar0/',
 			'/avatar300s/',
 		);
 
 		const listeners = document.body.querySelector(
 			'.header-new-info-desktop .header-metadata-tnew-display > p > abbr',
-		);
+		) as HTMLElement;
 
 		save_hoshino_artwork(
 			avatar_img,
@@ -132,52 +141,32 @@ export function bleh_albums() {
 
 		const same_page = is_same_page();
 
-		const redesigned_album_header = html.node`
-            <section class="page-header for-album ${same_page ? 'same' : ''}">
-                <div class="page-header-avatar-list">
-                    ${page_avatar = page_header_avatar(avatar_img)}
-                    ${page_header_disc()}
-                </div>
-                <div class="page-header-info">
-                    <div class="sub-text" ref=${(el) =>
-			page.state.header_type = el}>${tl(trans.album)}</div>
-                    <div class="title-container">
-                        ${title}
-                        ${position ? position : ''}
-                    </div>
-                    <h2 class="page-header-artist artist-for-album">${artist}</h2>
-                </div>
-                ${
-			page.suggest
-				? html.node`
-                <div class="suggest-side">
-                    <div class="cta suggest">
-                        <strong>${tl(trans.suggest_title.name)}</strong>
-                        <a class="see-more" href="${root}music/${redirect()}${
-					sanitise(page.sister)
-				}/${page.suggest}">${
-					tl(trans.suggest_title.body).replace(
-						'{v}',
-						desanitise(page.suggest, '+'),
-					)
-				}</a>
-                    </div>
-                </div>
-                `
-				: ''
-		}
-        `;
-
-		header_colour(page_avatar.image, settings.hue_from_album, [
-			page_avatar,
-		]);
+		const redesigned_album_header = (
+			<PageHeader
+				type='album'
+				avatar={
+					<PageHeaderAvatar
+						url={avatar_img}
+						paint={useSettings.get('hue_from_album') as boolean}
+					/>
+				}
+			>
+				<PageHeaderTitle>
+					{title}
+					{position}
+				</PageHeaderTitle>
+				<PageHeaderArtist type='album'>
+					{artist}
+				</PageHeaderArtist>
+			</PageHeader>
+		);
 
 		if (avatar) register_background(avatar.getAttribute('content'));
 		else register_background(null);
 
-		page.structure.container.insertBefore(
+		page.structure.container!.insertBefore(
 			redesigned_album_header,
-			page.structure.container.firstElementChild,
+			page.structure.container!.firstElementChild,
 		);
 		album_header.classList.add('legacy-header');
 	}

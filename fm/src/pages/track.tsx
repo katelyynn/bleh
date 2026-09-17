@@ -15,7 +15,12 @@ import {
 	similar_items,
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import { is_same_page, register_background, update_page } from '@/page';
+import {
+	is_same_page,
+	register_background,
+	update_page,
+	useSettings,
+} from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_tags_mini } from '@/pages/tag';
 import {
@@ -27,12 +32,14 @@ import { html, render } from 'lighterhtml';
 import { avatar } from '@/components/shared/avatar';
 import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
-import {
-	page_header_avatar,
-	page_header_disc,
-	page_header_title,
-} from '@/components/music/header';
+import { page_header_title, PageHeaderAvatar } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
+import {
+	PageHeader,
+	PageHeaderArtist,
+	PageHeaderTitle,
+} from '@/components/page/header.tsx';
+import { createRef, ReactElement, RefObject } from 'jsx-dom';
 
 export function bleh_tracks() {
 	const track_header = document.body.querySelector(
@@ -106,11 +113,15 @@ export function bleh_tracks() {
 		const artist_avatar = track_header.querySelector(
 			'.header-new-background-image',
 		);
-		const title = track_header.querySelector('.header-new-title');
-		const artist = track_header.querySelector('[itemprop="byArtist"]');
+		const title = track_header.querySelector(
+			'.header-new-title',
+		) as HTMLDivElement;
+		const artist = track_header.querySelector(
+			'[itemprop="byArtist"]',
+		) as HTMLElement;
 		const position = track_header.querySelector(
 			'.header-new-chart-position-number',
-		);
+		) as HTMLAnchorElement;
 
 		const source_album = page.structure.main?.querySelector(
 			'.source-album',
@@ -128,25 +139,28 @@ export function bleh_tracks() {
 					.getAttribute('href')
 				: '';
 
-		const same_page = is_same_page();
+		//const same_page = is_same_page();
 
-		const redesigned_track_header = html.node`
-            <section class="page-header for-track ${same_page ? 'same' : ''}">
-                <div class="page-header-avatar-list" ref=${(
-			el,
-		) => (page.state.avatar_side = el)} />
-                <div class="page-header-info">
-                    <div class="sub-text">${tl(trans.track)}</div>
-                    <div class="title-container">
-                        ${title}
-                        ${position ? position : ''}
-                    </div>
-                    <h2 class="page-header-artist artist-for-track">${artist}</h2>
-                </div>
-            </section>
-        `;
+		const page_avatar = createRef();
+
+		const redesigned_track_header = (
+			<PageHeader
+				type='track'
+				avatar={<PageHeaderAvatar ref={page_avatar} />}
+			>
+				<PageHeaderTitle>
+					{title}
+					{position}
+				</PageHeaderTitle>
+				<PageHeaderArtist type='track'>
+					{artist}
+				</PageHeaderArtist>
+			</PageHeader>
+		);
 
 		const hoshino_entry = hoshino_return(page.name, page.sister);
+
+		page.state.avatar_side = page_avatar;
 
 		if (
 			page.state.oracle_temp && page.state.oracle_temp.page &&
@@ -158,19 +172,19 @@ export function bleh_tracks() {
 			// skip
 		} else if (hoshino_entry && ff('ruby')) {
 			create_avatar(
-				page.state.avatar_side,
+				page_avatar,
 				hoshino_entry,
 				page.state.avatar_side_override,
 			);
 		} else if (album_avatar) {
 			create_avatar(
-				page.state.avatar_side,
+				page_avatar,
 				album_avatar.src.replace('300x300', 'avatar300s'),
 				page.state.avatar_side_override,
 			);
 		} else if (artist_avatar) {
 			create_avatar(
-				page.state.avatar_side,
+				page_avatar,
 				artist_avatar
 					.getAttribute('content')
 					.replace('/ar0/', '/avatar170s/'),
@@ -178,15 +192,15 @@ export function bleh_tracks() {
 			);
 		} else {
 			create_avatar(
-				page.state.avatar_side,
+				page_avatar,
 				'',
 				page.state.avatar_side_override,
 			);
 		}
 
-		page.structure.container.insertBefore(
+		page.structure.container!.insertBefore(
 			redesigned_track_header,
-			page.structure.container.firstElementChild,
+			page.structure.container!.firstElementChild,
 		);
 		track_header.classList.add('legacy-header');
 	}
@@ -218,7 +232,11 @@ export function bleh_tracks() {
 	update_page();
 }
 
-export function create_avatar(parent, src, override = 'expand') {
+export function create_avatar(
+	parent: RefObject<ReactElement>,
+	src: string,
+	override = 'expand',
+) {
 	log(`creating avatar for ${src} with override ${override}`, 'track');
 
 	let full = avatar(src, 'ar0');
@@ -234,15 +252,14 @@ export function create_avatar(parent, src, override = 'expand') {
 
 	register_background(full);
 
-	let page_avatar;
-
-	render(
-		parent,
-		html`
-			${page_avatar = page_header_avatar(src)}
-			${page_header_disc()}
-		`,
+	const outer = parent.current!.parentElement!;
+	parent.current!.remove();
+	const new_parent = (
+		<PageHeaderAvatar
+			url={src}
+			paint={useSettings.get('hue_from_track') as boolean}
+			ref={parent}
+		/>
 	);
-
-	header_colour(page_avatar.image, settings.hue_from_track, [page_avatar]);
+	outer.appendChild(new_parent);
 }

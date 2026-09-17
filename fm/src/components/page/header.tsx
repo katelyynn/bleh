@@ -11,7 +11,7 @@ import { InfoTip } from '@/components/text/tip.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
 interface PageHeaderProps {
-	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag';
+	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home';
 	combined?: boolean;
 	name?: ReactNode;
 	avatar?: ReactNode;
@@ -39,14 +39,16 @@ export function PageHeader({
 			)}
 			<div class={['page-header-info', 'has-main-info']}>
 				<div class='main-info'>
-					{!combined ? <SubText>{label}</SubText> : (
-						<SubText>
-							{tl(trans.artists)}
-							<InfoTip>
-								{tl(trans.artists_tooltip)}
-							</InfoTip>
-						</SubText>
-					)}
+					{type != 'home'
+						? !combined ? <SubText>{label}</SubText> : (
+							<SubText>
+								{tl(trans.artists)}
+								<InfoTip>
+									{tl(trans.artists_tooltip)}
+								</InfoTip>
+							</SubText>
+						)
+						: ''}
 					{generic
 						? (
 							<>
@@ -81,6 +83,22 @@ export function PageHeaderTitle({
 }: PageHeaderTitleProps) {
 	return (
 		<div class='title-container' data-multi={String(combined)}>
+			{children}
+		</div>
+	);
+}
+
+interface PageHeaderArtistProps {
+	type?: 'track' | 'album';
+	children: ReactNode;
+}
+
+export function PageHeaderArtist({
+	type = 'track',
+	children,
+}: PageHeaderArtistProps) {
+	return (
+		<div class={['page-header-artist', `artist-for-${type}`]}>
 			{children}
 		</div>
 	);
