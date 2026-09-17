@@ -341,7 +341,7 @@ export function patch_shouts() {
 
 		patch_avatar(avatar, auth.name, 'shout');
 		shout_form.appendChild(
-			<ShoutAction name={auth.name!}>
+			<ShoutAction name={auth.name!} wrap={shout_form}>
 				{avatar}
 			</ShoutAction>,
 		);

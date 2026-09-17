@@ -63589,6 +63589,7 @@ var bleh = (() => {
       patch_avatar(avatar4, auth.name, "shout");
       shout_form.appendChild(/* @__PURE__ */ jsx(ShoutAction, {
         name: auth.name,
+        wrap: shout_form,
         children: avatar4
       }));
       const send_button = shout_form.querySelector(".form-group--submit");
@@ -126277,7 +126278,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-17T03:34:45.002Z"
+    built_on: "2026-09-17T03:36:16.002Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
