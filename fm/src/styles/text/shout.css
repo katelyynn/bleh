@@ -564,7 +564,7 @@
 
 .shout-avatar-action-opener {
 	position: absolute;
-	top: calc(var(--shout-avatar-top) - 6px);
+	top: calc(var(--shout-avatar-top) - 8px);
 	left: calc(-1 * (var(--shout-avatar-size) + 3px + 10px));
 	z-index: 20;
 }
