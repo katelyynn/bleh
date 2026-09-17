@@ -58383,14 +58383,24 @@ var bleh = (() => {
     }
   }
 
+  // src/components/side_action/side_action.tsx
+  function SideActions({ children }) {
+    const elem = /* @__PURE__ */ jsx("section", {
+      class: "side-actions",
+      children
+    });
+    function update() {
+      elem.setAttribute("data-theme", useSettings.get("theme"));
+    }
+    update();
+    useSettings.on("theme", update);
+    return elem;
+  }
+
   // src/pages/tag.tsx
   function bleh_tags() {
     const tag_header = document.body.querySelector(".header--tag");
     if (!tag_header) return;
-    if (tag_header.hasAttribute("data-bwaa")) {
-      return;
-    }
-    tag_header.setAttribute("data-bwaa", "true");
     page_header_title(tag_header);
     const is_subpage = tag_header.classList.contains("header--sub-page");
     page.structure.container = document.body.querySelector(".page-content");
@@ -58439,7 +58449,8 @@ var bleh = (() => {
       tags.classList.add("catalogue-tags");
       const related = page.structure.main.querySelector(".tags-list");
       if (related) {
-        page.structure.main.removeChild(related.parentElement);
+        const parent = related.parentElement;
+        parent.remove();
         tags.appendChild(related);
         const header_tags = document.createElement("div");
         header_tags.classList.add("sub-text", "music-small-header");
@@ -58449,20 +58460,23 @@ var bleh = (() => {
         bleh_tags_mini(tags);
       }
       const bookmark_form = page.structure.side.querySelector(":scope > div");
-      const view_all_panel = document.createElement("section");
-      view_all_panel.classList.add("side-actions");
-      const button2 = bookmark_form.querySelector("button");
-      button2.classList = "btn side-action icon-mask";
-      button2.setAttribute("data-type", "bookmark");
-      view_all_panel.appendChild(bookmark_form);
-      page.structure.side.appendChild(view_all_panel);
-      const new_playlist = page.structure.side.querySelector("form");
-      const header = new_playlist.querySelector("h3");
-      new_playlist.removeChild(header);
-      const playlist_button = new_playlist.querySelector("button");
-      playlist_button.classList = "btn side-action icon-mask";
-      playlist_button.setAttribute("data-type", "playlist");
-      view_all_panel.appendChild(new_playlist);
+      const side = /* @__PURE__ */ jsx(SideActions, {});
+      if (bookmark_form) {
+        const bookmark = bookmark_form.querySelector("button");
+        bookmark.classList.add("btn", "side-action", "icon-mask");
+        bookmark.setAttribute("data-type", "bookmark");
+        side.appendChild(bookmark_form);
+      }
+      const new_playlist = page.structure.side.querySelector('form[action$="from-tag"]');
+      if (new_playlist) {
+        const head = new_playlist.querySelector("h3");
+        if (head) head.remove();
+        const playlist = new_playlist.querySelector("button");
+        playlist.classList.add("btn", "side-action", "icon-mask");
+        playlist.setAttribute("data-type", "playlist");
+        side.appendChild(playlist);
+      }
+      page.structure.side.insertBefore(side, page.structure.side.firstElementChild);
     } else {
       if (page.subpage == "wiki_overview") {
         bleh_wiki();
@@ -58476,26 +58490,23 @@ var bleh = (() => {
     update_page();
   }
   function bleh_tags_large(observer = page.structure.main) {
-    const hide_gendered = settings.gendered_tags;
     const tags = observer.querySelectorAll(".big-tags-item-wrap");
     tags.forEach((tag) => {
       const text4 = tag.querySelector(".big-tags-item-name").textContent.trim();
-      if (hide_gendered && gendered_pattern.test(text4)) {
-        tag.remove();
-      }
+      const result = tag_test(text4);
+      if (!result) tag.remove();
     });
   }
   function bleh_tags_mini(observer = page.structure.main) {
     if (!observer) return;
-    const hide_gendered = settings.gendered_tags;
+    const hide_gendered = useSettings.get("gendered_tags");
     const tags = observer.querySelectorAll(".tag");
     tags.forEach((tag) => {
       const elem = tag.firstElementChild;
       elem.classList.add("btn", "tag-item");
       const text4 = elem.textContent.trim();
-      if (hide_gendered && gendered_pattern.test(text4)) {
-        tag.remove();
-      }
+      const result = tag_test(text4);
+      if (!result) tag.remove();
     });
     const tag_user_avatar = observer.querySelector(".tags-user-avatar");
     if (!tag_user_avatar) return;
@@ -58507,6 +58518,16 @@ var bleh = (() => {
         children: tl2(trans.personal_tag)
       }));
     });
+  }
+  function tag_test(text4) {
+    const hide_gendered = useSettings.get("gendered_tags");
+    if (hide_gendered && gendered_pattern.test(text4)) {
+      return false;
+    }
+    if (text4.startsWith("wsum 91.7")) {
+      return false;
+    }
+    return true;
   }
 
   // src/components/music/about_artist.js
@@ -126277,7 +126298,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-17T16:44:06.879Z"
+    built_on: "2026-09-17T21:47:27.669Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
