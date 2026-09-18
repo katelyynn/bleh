@@ -620,7 +620,9 @@ export function calendar({
 		});
 
 		if (hide_on_change) {
-			tooltip.hide();
+			setTimeout(() => {
+				tooltip.hide();
+			}, 0);
 		}
 
 		if (func) func(`${state.year}-${pad2(state.month)}-${pad2(state.day)}`);

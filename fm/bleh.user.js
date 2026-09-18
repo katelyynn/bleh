@@ -56637,7 +56637,9 @@ var bleh = (() => {
         detail: date_object
       });
       if (hide_on_change) {
-        tooltip.hide();
+        setTimeout(() => {
+          tooltip.hide();
+        }, 0);
       }
       if (func) func(`${state.year}-${pad2(state.month)}-${pad2(state.day)}`);
     }
@@ -126066,7 +126068,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-18T04:24:46.438Z"
+    built_on: "2026-09-18T16:14:47.112Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
