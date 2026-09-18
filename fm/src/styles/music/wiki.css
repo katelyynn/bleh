@@ -8,7 +8,7 @@
 	padding: 7px var(--button-sides) !important;
 	/* tasteometer overrides with padding-left: 20px */
 	background-color: oklch(var(--b4),
-		50%);
+			50%);
 	/* would be b5, but we have a background */
 	border-radius: var(--item-med-radius);
 	display: flex;
@@ -72,8 +72,8 @@
 	}
 }
 
-.factbox-heading + :is(p, a),
-.factbox-item > ul,
+.factbox-heading+ :is(p, a),
+.factbox-item>ul,
 .catalogue-metadata-description {
 	font-size: 16px;
 	line-height: 20px;
@@ -90,11 +90,11 @@
 	}
 
 	&.address {
-		& > strong {
+		&>strong {
 			margin-bottom: 4px;
 		}
 
-		& > p {
+		&>p {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 			font-weight: var(--font-weight);
@@ -102,7 +102,7 @@
 		}
 	}
 
-	& > p {
+	&>p {
 		margin: unset;
 	}
 }
@@ -127,6 +127,7 @@
 	}
 
 	&.full-w {
+
 		&:before,
 		&:after {
 			display: none;
@@ -160,19 +161,13 @@
 				display: none !important;
 			}
 
-			.wiki-block-inner > div {
+			.wiki-block-inner>div {
 				padding-right: unset;
 
 				&:before {
 					display: none;
 				}
 			}
-		}
-
-		.sub-text {
-			flex-direction: row;
-			gap: unset;
-			justify-content: space-between;
 		}
 	}
 
@@ -208,7 +203,7 @@
 		padding: unset !important;
 	}
 
-	& + .row {
+	&+.row {
 		display: none;
 	}
 
@@ -217,11 +212,9 @@
 	}
 }
 
-.wiki-section {
-	.wiki-block {
-		font-size: 16px;
-		line-height: 22px;
-	}
+.wiki-block {
+	font-size: 16px;
+	line-height: 22px;
 }
 
 .wiki-content {
@@ -241,7 +234,7 @@
 .wiki-edit-container {
 	margin-top: unset;
 
-	.alert + & {
+	.alert+& {
 		margin-top: var(--card-gap);
 	}
 }
@@ -274,11 +267,11 @@
 .wiki-history-table {
 	--gap: 10px;
 
-	& > thead {
+	&>thead {
 		display: none;
 	}
 
-	& > tbody {
+	&>tbody {
 		display: flex;
 		flex-direction: column;
 		gap: var(--gap);
@@ -366,9 +359,7 @@
 				height: 14px;
 				--mask-size: 14px;
 				/* remove the heavy bottom shadow */
-				filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px
-					2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0
-					oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
+				filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
 			}
 		}
 	}
@@ -444,11 +435,11 @@
 		display: none;
 	}
 
-	& > .cta-copy {
+	&>.cta-copy {
 		padding: unset;
 
 		&:before,
-		& > .cta-link-wrap {
+		&>.cta-link-wrap {
 			display: none;
 		}
 	}
@@ -537,13 +528,13 @@
 
 .metadata-group.has-secondary-info {
 	&:hover {
-		& > .catalogue-metadata-description:not(.secondary-info) {
+		&>.catalogue-metadata-description:not(.secondary-info) {
 			transform: translateY(-6px);
 			opacity: 0;
 			pointer-events: none;
 		}
 
-		& > .secondary-info {
+		&>.secondary-info {
 			transform: translateY(0);
 			opacity: 1;
 		}

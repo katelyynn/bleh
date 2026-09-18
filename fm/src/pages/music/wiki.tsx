@@ -18,6 +18,8 @@ import { SymbolPresets } from '@/pages/music/presets.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { LinkTooltip } from '@/components/text/link.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { SubText } from '@/components/text/sub.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -422,27 +424,34 @@ export function patch_wiki() {
 			wiki_empty = true;
 		}
 
-		let read_more = wiki_block.querySelector('a:last-child');
-		if (read_more) {
-			read_more.classList.add('read-more', 'icon');
-			read_more.textContent = tl(trans.read_more).toLowerCase();
-		}
+		const read_more = wiki_block!.querySelector(
+			'a:last-child',
+		) as HTMLAnchorElement;
+		read_more?.remove();
 
-		wiki_col.appendChild(html.node`
-            <div class="sub-text wiki-sub-text">
-                <span class="right-links">
-                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${
-			tl(trans.edit_wiki).toLowerCase()
-		}</a></p>
-                    ${
-			(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''
-		}
-                </span>
-            </div>
-        `);
+		wiki_col.appendChild(
+			<SubText className='wiki-sub-text'>
+				<span class='right-links'>
+					<SeeMore
+						className='wiki-lower'
+						href={`${window.location.href}/+wiki/edit`}
+					>
+						{(tl(trans.edit_wiki) as string).toLowerCase()}
+					</SeeMore>
+					{(!wiki_empty && read_more) && (
+						<SeeMore
+							className='wiki-lower'
+							href={read_more.getAttribute('href')!}
+						>
+							{(tl(trans.read_more) as string).toLowerCase()}
+						</SeeMore>
+					)}
+				</span>
+			</SubText>,
+		);
 
 		if (!wiki_empty) {
-			patch_wiki_contents(wiki_block);
+			patch_wiki_contents(wiki_block!);
 		}
 	}
 }
@@ -463,7 +472,7 @@ export function can_trust_link(href) {
 	return { trusted: false, dangerous };
 }
 
-export function patch_wiki_contents(wiki_block: ReactElement) {
+export function patch_wiki_contents(wiki_block: Element) {
 	const links = wiki_block.querySelectorAll('a');
 	links.forEach((link) => {
 		let href = link.getAttribute('href');

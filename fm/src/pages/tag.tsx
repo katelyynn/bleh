@@ -21,6 +21,14 @@ import { icons } from '@/components/shared/icon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SideActions } from '@/components/side_action/side_action.tsx';
 import { PageHeader } from '@/components/page/header.tsx';
+import { SubText } from '@/components/text/sub.tsx';
+import { createRef, ReactNode } from 'jsx-dom';
+import { PanelTop } from '@/components/text/see_more.tsx';
+import {
+	ProfileSummary,
+	ProfileSummaryContent,
+	ProfileSummaryMain,
+} from '@/components/summary/summary.tsx';
 
 export function bleh_tags() {
 	const tag_header = document.body.querySelector(
@@ -87,28 +95,49 @@ export function bleh_tags() {
 	}
 
 	if (!is_subpage) {
-		const col_main = page.structure.main!.querySelector('.wiki-section');
-
-		const tags = document.createElement('div');
-		tags.classList.add('catalogue-tags');
+		const col_main = page.structure.main!.querySelector(
+			'.wiki-section',
+		) as HTMLDivElement;
 
 		const related = page.structure.main!.querySelector('.tags-list');
+		const tags = createRef();
 
 		if (related) {
 			const parent = related.parentElement!;
 			parent.remove();
-
-			tags.appendChild(related);
-
-			const header_tags = document.createElement('div');
-			header_tags.classList.add('sub-text', 'music-small-header');
-			header_tags.textContent = tl(trans.related_to);
-			col_main.appendChild(header_tags);
-
-			col_main.appendChild(tags);
-
-			bleh_tags_mini(tags);
 		}
+
+		const row = (
+			<div class='metadata-row'>
+				{related && (
+					<div class='metadata-group'>
+						<SubText className='music-small-header'>
+							{tl(trans.related_to)}
+						</SubText>
+						<div class='catalogue-tags' ref={tags}>
+							{related as ReactNode}
+						</div>
+					</div>
+				)}
+			</div>
+		);
+
+		bleh_tags_mini(tags.current);
+
+		page.structure.main!.insertBefore(
+			<ProfileSummary music>
+				<PanelTop margin={false}>
+					<h2 class='summary-title'>{tl(trans.about)}</h2>
+				</PanelTop>
+				<ProfileSummaryMain>
+					<ProfileSummaryContent>
+						{col_main}
+						{row}
+					</ProfileSummaryContent>
+				</ProfileSummaryMain>
+			</ProfileSummary>,
+			page.structure.main!.firstElementChild,
+		);
 
 		const bookmark_form = page.structure.side!.querySelector(
 			':scope > div',
