@@ -100,6 +100,7 @@ export const link_strings: Record<string, string> = {
 	'record.club': 'Record Club',
 	'rateyourmusic.com': 'RYM',
 	'albumoftheyear.org': 'AOTY',
+	'www.albumoftheyear.org': 'AOTY',
 	'mastodon.social': 'Mastodon',
 	'bsky.app': 'Bluesky',
 	'reddit.com': 'Reddit',
@@ -107,7 +108,6 @@ export const link_strings: Record<string, string> = {
 };
 
 export const icons_not_supported = [
-	'record.club',
 	'reddit.com',
 ];
 

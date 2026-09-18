@@ -756,6 +756,13 @@ export async function show_your_scrobbles() {
 				}%20${sanitise(page.name, ' ')}`}
 			/>
 		);
+		link_types.record_club = (
+			<SocialLink
+				href={`https://record.club/search?query=${
+					sanitise(page.sister, ' ')
+				}%20${sanitise(page.name, ' ')}&facet=releases`}
+			/>
+		);
 	} else {
 		if (page.type == 'album') {
 			link_types.genius = (
@@ -831,6 +838,13 @@ export async function show_your_scrobbles() {
 					}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
+			link_types.record_club = (
+				<SocialLink
+					href={`https://record.club/search?query=${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}&facet=releases`}
+				/>
+			);
 		} else {
 			link_types.genius = (
 				<SocialLink
@@ -899,6 +913,13 @@ export async function show_your_scrobbles() {
 					href={`https://rateyourmusic.com/search?searchterm=${
 						sanitise(page.name, ' ')
 					}`}
+				/>
+			);
+			link_types.record_club = (
+				<SocialLink
+					href={`https://record.club/search?query=${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}&facet=artists&entities=`}
 				/>
 			);
 
@@ -1611,6 +1632,11 @@ export function prepare_music() {
 			name: 'RYM',
 			icon: '',
 			host: 'rateyourmusic.com',
+		},
+		record_club: {
+			name: 'Record Club',
+			icon: '',
+			host: 'record.club',
 		},
 		genius: {
 			name: 'Genius',
