@@ -103,6 +103,8 @@ import { Cta } from '@/components/cta/cta.tsx';
 import { profile_tracks } from '@/pages/profile/tracks.tsx';
 import { convert_to_select } from '@/components/select/select.tsx';
 import { PageHeaderAvatar } from '@/components/music/header.tsx';
+import { SettingList } from '@/components/settings/provider/list.tsx';
+import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1421,42 +1423,30 @@ export async function checkup_friend_cache(list = settings.friends) {
 export function open_starred_friend_window(friend_func = null) {
 	dialog({
 		id: 'starred_friend',
-		title: tl(trans.close_friends),
-		body: html.node`
-            <div class="setting-group">
-                ${friends = setting({
-			id: 'friends',
-			list: settings.friends,
-			func: (val) => {
-				if (!val.includes(useSettings.get('starred_friend'))) {
-					save_setting('starred_friend', '');
-				}
+		icon: icons.friends,
+		title: tl(trans.friends),
+		body: (
+			<>
+				<SettingGroup>
+					<SettingList
+						bind='friends'
+						onChange={(val: string[]) => {
+							if (
+								!val.includes(
+									useSettings.get('starred_friend') as string,
+								)
+							) {
+								useSettings.set('starred_friend', '');
+							}
 
-				checkup_friend_cache(val);
-
-				starred.update(
-					select_prepare_list([
-						{ value: '', text: tl(trans.none) },
-						...val,
-					]),
-				);
-
-				if (friend_func) friend_func();
-			},
-		})}
-                ${starred = setting({
-			id: 'starred_friend',
-			list: select_prepare_list([
-				{ value: '', text: tl(trans.none) },
-				...settings.friends,
-			]),
-			func: () => {
-				if (friend_func) friend_func();
-			},
-		})}
-            </div>
-            <p class="card-tip">${tl(trans.friend_difference)}</p>
-        `,
+							checkup_friend_cache(val);
+						}}
+					/>
+					<StarredFriend />
+				</SettingGroup>
+				<CardTip>{tl(trans.friend_difference)}</CardTip>
+			</>
+		),
 	});
 }
 

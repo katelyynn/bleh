@@ -10,6 +10,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { root } from '@/build/page.ts';
 import DOMPurify from 'dompurify';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SocialLink } from '@/components/text/social_link.tsx';
 
 // retrieves social links if a user supplies them
 export const social_links_extension = (links: social_link[]) => [
@@ -69,47 +70,47 @@ export const social_links_extension = (links: social_link[]) => [
 	},
 ];
 
+export const link_strings: Record<string, string> = {
+	'open.spotify.com': 'Spotify',
+	'spotify.com': 'Spotify',
+	'youtube.com': 'YouTube',
+	'x.com': 'Twitter (latterly X)',
+	'twitter.com': 'Twitter',
+	'github.com': 'GitHub',
+	'discord.com': 'Discord',
+	'discord.gg': 'Discord',
+	'bandcamp.com': 'Bandcamp',
+	'soundcloud.com': 'Soundcloud',
+	'tiktok.com': 'TikTok',
+	'www.tiktok.com': 'TikTok',
+	'ko-fi.com': 'Ko-fi',
+	'patreon.com': 'Patreon',
+	'www.patreon.com': 'Patreon',
+	'twitch.tv': 'Twitch',
+	'www.twitch.tv': 'Twitch',
+	'linktr.ee': 'Linktree',
+	'carrd.co': 'Carrd',
+	'music.apple.com': 'Apple Music',
+	'music.youtube.com': 'YouTube Music',
+	'facebook.com': 'Facebook',
+	'www.discogs.com': 'Discogs',
+	'discogs.com': 'Discogs',
+	'tidal.com': 'Tidal',
+	'record.club': 'Record Club',
+	'rateyourmusic.com': 'RYM',
+	'albumoftheyear.org': 'AOTY',
+	'mastodon.social': 'Mastodon',
+	'bsky.app': 'Bluesky',
+	'reddit.com': 'Reddit',
+};
+
+export const icons_not_supported = [
+	'record.club',
+	'reddit.com',
+];
+
 export function social_links(body: ReactElement, links: social_link[]) {
 	if (links.length == 0) return;
-
-	const link_strings: Record<string, string> = {
-		'open.spotify.com': 'Spotify',
-		'spotify.com': 'Spotify',
-		'youtube.com': 'YouTube',
-		'x.com': 'Twitter (latterly X)',
-		'twitter.com': 'Twitter',
-		'github.com': 'GitHub',
-		'discord.com': 'Discord',
-		'discord.gg': 'Discord',
-		'bandcamp.com': 'Bandcamp',
-		'soundcloud.com': 'Soundcloud',
-		'tiktok.com': 'TikTok',
-		'www.tiktok.com': 'TikTok',
-		'ko-fi.com': 'Ko-fi',
-		'patreon.com': 'Patreon',
-		'www.patreon.com': 'Patreon',
-		'twitch.tv': 'Twitch',
-		'www.twitch.tv': 'Twitch',
-		'linktr.ee': 'Linktree',
-		'carrd.co': 'Carrd',
-		'music.apple.com': 'Apple Music',
-		'music.youtube.com': 'YouTube Music',
-		'facebook.com': 'Facebook',
-		'www.discogs.com': 'Discogs',
-		'discogs.com': 'Discogs',
-		'tidal.com': 'Tidal',
-		'record.club': 'Record Club',
-		'rateyourmusic.com': 'RYM',
-		'albumoftheyear.org': 'AOTY',
-		'mastodon.social': 'Mastodon',
-		'bsky.app': 'Bluesky',
-		'reddit.com': 'Reddit',
-	};
-
-	const icons_not_supported = [
-		'record.club',
-		'reddit.com',
-	];
 
 	body.appendChild(
 		<div class='social-links-container'>
@@ -118,38 +119,10 @@ export function social_links(body: ReactElement, links: social_link[]) {
 			</div>
 			<div class='music-links social-links'>
 				{links.map((link) => {
-					let label = link.host;
-
-					if (link.name) {
-						label = link.name;
-					} else if (link_strings[link.host]) {
-						label = link_strings[link.host];
-					}
-
 					return (
-						<a
-							class={[
-								'btn',
-								'music-link',
-								'social-link',
-								'colourful',
-								'icon',
-							]}
-							href={link.url}
-							target='_blank'
-							data-host={link.host}
-							data-host-unknown={String(
-								!Object.hasOwn(
-									link_strings,
-									link.host,
-								) || icons_not_supported.includes(link.host),
-							)}
-							data-path={link.path}
-							style={`--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)`}
-						>
-							{label}
-							<Icon name={icons.external} />
-						</a>
+						<SocialLink href={link.url}>
+							{link.name}
+						</SocialLink>
 					);
 				})}
 			</div>

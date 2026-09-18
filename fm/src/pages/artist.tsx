@@ -652,6 +652,9 @@ function bleh_listeners() {
 		page.structure.side!.firstElementChild,
 	);
 
+	useSettings.on('friends', render_friends);
+	useSettings.on('starred_friend', render_friends);
+
 	function render_friends() {
 		const friends = settings.friends.filter((friend) =>
 			friend != useSettings.get('starred_friend')
@@ -691,9 +694,7 @@ function bleh_listeners() {
             `
 				)}
 				<button class="btn side-action icon-mask" data-type="edit" onclick=${() =>
-					open_starred_friend_window(() => {
-						render_friends();
-					})}>
+					open_starred_friend_window()}>
 				    ${tl(trans.edit_close_friends)}
 				</button>
 				<button class="btn side-action icon-mask" data-type="add" onclick=${() =>

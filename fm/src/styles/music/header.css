@@ -38,10 +38,6 @@
 
 	--icon-size: 14px;
 
-	&:hover {
-		text-decoration: underline !important;
-	}
-
 	&:not(.resource-external-link--homepage, .social-link) {
 		--sat-user: 1;
 		--lit-user: 1;
@@ -60,6 +56,11 @@
 			background-size: 100% !important;
 			border-radius: 2px !important;
 		}
+	}
+
+	&:after {
+		display: block !important;
+		border: unset !important;
 	}
 }
 

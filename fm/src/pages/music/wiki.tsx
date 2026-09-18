@@ -20,6 +20,7 @@ import { LinkTooltip } from '@/components/text/link.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { SubText } from '@/components/text/sub.tsx';
+import { useSettings } from '@/page.ts';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -466,7 +467,7 @@ export function can_trust_link(href) {
 
 	if (!scheme || !scheme.startsWith('http')) dangerous = true;
 
-	if (settings.trusted_sites.includes(hostname)) {
+	if ((useSettings.get('trusted_sites') as string[]).includes(hostname)) {
 		return { trusted: true, dangerous };
 	}
 
@@ -495,18 +496,15 @@ export function patch_wiki_contents(wiki_block: Element) {
 				const url = new URL(href);
 				const scheme = url.protocol;
 				const hostname = url.hostname;
-				const path = url.pathname + url.search + url.hash;
-
-				let dangerous = false;
-
-				if (!scheme || !scheme.startsWith('http')) dangerous = true;
+				const path = url.pathname;
 
 				link.addEventListener('click', (e) => {
-					if (settings.trusted_sites.includes(hostname)) return;
+					const { trusted, dangerous } = can_trust_link(href);
+					if (trusted) return;
 
 					e.preventDefault();
 
-					external_url_prompt(href, dangerous);
+					external_url_prompt(href!, dangerous);
 				});
 
 				if (link.textContent != href) {
