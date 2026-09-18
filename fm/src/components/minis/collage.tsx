@@ -48,6 +48,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingStub } from '@/components/settings/provider/stub.tsx';
 import { UserSelect } from '@/components/select/user.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { CollageGridPreview } from '@/components/settings/previews/collage.tsx';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -85,6 +86,7 @@ export function collage({ host, sidebar } = {}) {
 	}
 
 	const user = createRef();
+	const grid_preview = createRef();
 
 	host.replaceChildren(
 		<>
@@ -101,6 +103,9 @@ export function collage({ host, sidebar } = {}) {
 							min={min}
 							length={max}
 							ref={width}
+							onChange={(v) => {
+								grid_preview.current.row = v;
+							}}
 						/>
 						<Icon name={icons.x} />
 						<Input
@@ -110,6 +115,9 @@ export function collage({ host, sidebar } = {}) {
 							min={min}
 							length={max}
 							ref={height}
+							onChange={(v) => {
+								grid_preview.current.col = v;
+							}}
 						/>
 					</InputGroup>
 					<Select
@@ -167,6 +175,11 @@ export function collage({ host, sidebar } = {}) {
 
 	sidebar.replaceChildren(
 		<>
+			<CollageGridPreview
+				row={width.current.value}
+				col={height.current.value}
+				ref={grid_preview}
+			/>
 			<PanelHead icon={icons.settings}>
 				{tl(trans.settings)}
 			</PanelHead>
