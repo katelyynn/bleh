@@ -238,6 +238,7 @@
 
 .recommended-goto-name {
 	color: oklch(var(--c2));
+	--mask-colour: oklch(var(--l3-c) / 60%);
 	font-weight: var(--font-weight-medium);
 	font-size: 20px;
 	line-height: 24px;
