@@ -66,6 +66,10 @@
 	background: oklch(var(--b2) / 30%);
 	border-radius: var(--radius-xs);
 	margin-right: 2px;
+
+	&[data-host] {
+		--icon: var(--mask);
+	}
 }
 
 .setting-list-item-btn {

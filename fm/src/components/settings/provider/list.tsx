@@ -49,6 +49,7 @@ export type ListOptions = Record<string, ListOption>;
 export interface ListOption {
 	icon?: string;
 	name: translation | string;
+	host?: string;
 }
 
 export function SettingList({
@@ -150,6 +151,7 @@ export function SettingList({
 							? value!.map((val, i) => (
 								<ListItem
 									icon={values[val]?.icon}
+									host={values[val]?.host}
 									name={values[val]
 										? tl(values[val].name)
 										: val}
@@ -178,6 +180,7 @@ export function SettingList({
 						: Object.entries(available).map(([val, formal], i) => (
 							<ListCandidate
 								icon={formal.icon}
+								host={formal.host}
 								name={formal.name}
 								onAdd={() => {
 									const new_list = [...value!, val];

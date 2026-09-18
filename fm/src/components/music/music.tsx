@@ -1619,7 +1619,7 @@ export function prepare_music() {
 		},
 		website: {
 			name: tl(trans.website),
-			icon: 'link',
+			icon: icons.link,
 		},
 		twitter: {
 			name: 'Twitter',

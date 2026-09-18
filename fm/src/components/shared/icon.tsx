@@ -315,7 +315,7 @@ export function MinusIcon({
 }
 
 export function icon_mask({ name }: { name?: string }) {
-	if (name == 'inherit') return '';
+	if (name == 'inherit' || name == '') return '';
 
 	return `--icon: var(--icon-16-${name})`;
 }
