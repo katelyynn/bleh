@@ -1,7 +1,7 @@
 .setting-lists {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--card-gap);
+	gap: 10px var(--card-gap);
 
 	.setting-list-sep {
 		width: 1px;

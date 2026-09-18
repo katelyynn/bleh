@@ -619,10 +619,6 @@
 	flex: 0 0 100%;
 }
 
-.setting-lists {
-	margin-top: 4px;
-}
-
 .primary-selections {
 	display: flex;
 	flex-direction: column;

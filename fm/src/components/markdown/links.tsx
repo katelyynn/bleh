@@ -96,12 +96,14 @@ export const link_strings: Record<string, string> = {
 	'www.discogs.com': 'Discogs',
 	'discogs.com': 'Discogs',
 	'tidal.com': 'Tidal',
+	'listen.tidal.com': 'Tidal',
 	'record.club': 'Record Club',
 	'rateyourmusic.com': 'RYM',
 	'albumoftheyear.org': 'AOTY',
 	'mastodon.social': 'Mastodon',
 	'bsky.app': 'Bluesky',
 	'reddit.com': 'Reddit',
+	'genius.com': 'Genius',
 };
 
 export const icons_not_supported = [

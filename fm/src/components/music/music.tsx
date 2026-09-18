@@ -33,11 +33,14 @@ import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
-import { icon, icons } from '../shared/icon';
+import { Icon, icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 import { beta_indicator } from '../shared/indicator';
 import { useSettings } from '@/page.ts';
+import { context_menu_tooltip } from '@/components/shared/tooltips.tsx';
+import { MenuContents } from '@/components/menu/menu.tsx';
+import { SocialLink } from '@/components/text/social_link.tsx';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);
@@ -660,6 +663,10 @@ export async function show_your_scrobbles() {
         </div>
     `;
 
+	const link_types: Record<string, Element | null> = {};
+
+	const music_links = useSettings.get('music_links') as string[];
+
 	if (page.type == 'track') {
 		play_on = page.structure.side.querySelector(
 			'.play-this-track-playlinks',
@@ -671,435 +678,228 @@ export async function show_your_scrobbles() {
 		play_links.forEach((item) => {
 			const link = item.querySelector(
 				'.play-this-track-playlink:not(.visible-xs)',
-			);
+			) as HTMLAnchorElement;
+			if (!link) return;
 
 			link.classList.remove('play-this-track-playlink');
-			link.classList.add('btn', 'music-link', 'colourful', 'icon');
+			link.classList.add(
+				'btn',
+				'music-link',
+				'social-link',
+				'colourful',
+				'icon',
+			);
 
-			const replace = item.querySelector('.replace-playlink');
+			const replace = item.querySelector(
+				'.replace-playlink',
+			) as HTMLAnchorElement;
 
 			if (link.classList.contains('play-this-track-playlink--youtube')) {
 				link.textContent = 'YouTube';
+				link.appendChild(<Icon name={icons.external} />);
 
-				if (!useSettings.get('music_links').includes('youtube')) return;
+				link_types.youtube = link;
 			} else if (
 				link.classList.contains('play-this-track-playlink--spotify')
 			) {
 				link.textContent = 'Spotify';
+				link.appendChild(<Icon name={icons.external} />);
 
-				if (!useSettings.get('music_links').includes('spotify')) return;
+				link_types.spotify = link;
 			} else if (
 				link.classList.contains('play-this-track-playlink--itunes')
 			) {
 				link.textContent = 'Apple';
+				link.appendChild(<Icon name={icons.external} />);
 
-				if (!useSettings.get('music_links').includes('itunes')) return;
+				link_types.itunes = link;
 			}
 
 			if (replace) {
 				replace.classList.add('dropdown-menu-clickable-item');
 				item.removeChild(replace);
 
-				let menu = tippy(link, {
-					theme: 'context-menu',
-					content: replace,
-					placement: 'right-start',
-					trigger: 'manual',
-					interactive: true,
-					interactiveBorder: 10,
-					offset: [0, 0],
-					appendTo: document.body,
-
-					onShow(instance) {
-						instance.popper.addEventListener('click', (event) => {
-							instance.hide();
-						});
-					},
-				});
-
-				register_menu(link, menu);
+				context_menu_tooltip(
+					link,
+					<MenuContents>
+						{replace}
+					</MenuContents>,
+				);
 			}
-
-			link_container.appendChild(item);
 		});
 
-		if (
-			['genius', 'tidal', 'deezer', 'qobuz'].some((service) =>
-				useSettings.get('music_links').includes(service)
-			)
-		) {
-			link_container.appendChild(html.node`
-                ${
-				useSettings.get('music_links').includes('genius')
-					? html.node`
-                    <a class="btn music-link play-this-track-playlink--genius colourful icon" href="https://genius.com/search?q=${
+		link_types.genius = (
+			<SocialLink
+				href={`https://genius.com/search?q=${sanitise(page.sister)}+${
+					sanitise(page.name)
+				}`}
+			/>
+		);
+		link_types.tidal = (
+			<SocialLink
+				href={`https://listen.tidal.com/search?q=${
+					sanitise(page.sister, ' ')
+				}%20${sanitise(page.name, ' ')}`}
+			/>
+		);
+		link_types.qobuz = (
+			<SocialLink
+				href={`https://www.qobuz.com/gb-en/search/albums/${
+					sanitise(page.name, ' ')
+				}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}`}
+			/>
+		);
+		link_types.deezer = (
+			<SocialLink
+				href={`https://www.deezer.com/search/${
+					sanitise(page.sister, ' ')
+				}%20${sanitise(page.name, ' ')}`}
+			/>
+		);
+	} else {
+		if (page.type == 'album') {
+			link_types.genius = (
+				<SocialLink
+					href={`https://genius.com/search?q=${
 						sanitise(page.sister)
-					}+${sanitise(page.name)}" target="_blank">
-                        Genius
-                    </a>
-                `
-					: ''
-			}
-                ${
-				useSettings.get('music_links').includes('tidal')
-					? html.node`
-                    <a class="btn music-link play-this-track-playlink--tidal colourful icon" href="https://listen.tidal.com/search?q=${
+					}+${sanitise(page.name)}`}
+				/>
+			);
+			link_types.tidal = (
+				<SocialLink
+					href={`https://listen.tidal.com/search?q=${
 						sanitise(page.sister, ' ')
-					} ${sanitise(page.name, ' ')}" target="_blank">
-                        Tidal
-                    </a>
-                `
-					: ''
-			}
-                ${
-				useSettings.get('music_links').includes('deezer')
-					? html.node`
-                    <a class="btn music-link play-this-track-playlink--deezer colourful icon" href="https://www.deezer.com/search/${
-						sanitise(page.sister, ' ')
-					} ${sanitise(page.name, ' ')}" target="_blank">
-                        Deezer
-                    </a>
-                `
-					: ''
-			}
-                ${
-				useSettings.get('music_links').includes('qobuz')
-					? html.node`
-                    <a class="btn music-link play-this-track-playlink--qobuz colourful icon" href="https://www.qobuz.com/gb-en/search/tracks/${
+					}%20${sanitise(page.name, ' ')}`}
+				/>
+			);
+			link_types.qobuz = (
+				<SocialLink
+					href={`https://www.qobuz.com/gb-en/search/tracks/${
 						sanitise(page.name, ' ')
 					}?ssf[s]=main_catalog&ssf[f][an]=${
 						sanitise(page.sister, ' ')
-					}" target="_blank">
-                        Qobuz
-                    </a>
-                `
-					: ''
-			}
-            `);
-		}
-	} else {
-		if (page.type == 'album') {
-			render(
-				link_container,
-				html`
-					${useSettings.get('music_links').includes('spotify')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--spotify colourful icon"
-                                href="https://open.spotify.com/search/${
-							sanitise(
-								page.sister,
-								' ',
-							)
-						} ${sanitise(page.name, ' ')}"
-                                target="_blank"
-                            >
-                                Spotify
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('itunes')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--itunes colourful icon"
-                                href="https://music.apple.com/gb/search?term=${
-							sanitise(
-								page.sister,
-								' ',
-							)
-						} ${sanitise(page.name, ' ')}"
-                                target="_blank"
-                            >
-                                Apple
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('youtube')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--youtube-music colourful icon"
-                                href="https://music.youtube.com/search?q=${
-							sanitise(
-								page.sister,
-							)
-						}+${sanitise(page.name)}"
-                                target="_blank"
-                            >
-                                YouTube
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('tidal')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--tidal colourful icon"
-                                href="https://listen.tidal.com/search?q=${
-							sanitise(
-								page.sister,
-								' ',
-							)
-						} ${sanitise(page.name, ' ')}"
-                                target="_blank"
-                            >
-                                Tidal
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('deezer')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--deezer colourful icon"
-                                href="https://www.deezer.com/search/${
-							sanitise(
-								page.sister,
-								' ',
-							)
-						} ${sanitise(page.name, ' ')}"
-                                target="_blank"
-                            >
-                                Deezer
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('discogs')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--discogs colourful icon"
-                                href="https://www.discogs.com/search?q=${
-							sanitise(
-								page.sister,
-							)
-						}+${sanitise(page.name)}&type=all"
-                                target="_blank"
-                            >
-                                Discogs
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('qobuz')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--qobuz colourful icon"
-                                href="https://www.qobuz.com/gb-en/search/albums/${
-							sanitise(page.name, ' ')
-						}?ssf[s]=main_catalog&ssf[f][an]=${
-							sanitise(page.sister, ' ')
-						}"
-                                target="_blank"
-                            >
-                                Qobuz
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('aoty')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--aoty colourful icon"
-                                href="https://www.albumoftheyear.org/search/?q=${
-							sanitise(
-								page.sister,
-							)
-						}+${sanitise(page.name)}"
-                                target="_blank"
-                            >
-                                AOTY
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('rym')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--rym colourful icon"
-                                href="https://rateyourmusic.com/search?searchterm=${
-							sanitise(
-								page.sister,
-								' ',
-							)
-						} ${sanitise(page.name, ' ')}"
-                                target="_blank"
-                            >
-                                RYM
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('genius')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--genius colourful icon"
-                                href="https://genius.com/search?q=${
-							sanitise(
-								page.sister,
-							)
-						}+${sanitise(page.name)}"
-                                target="_blank"
-                            >
-                                Genius
-                            </a>
-                    `
-						: ''}
-				`,
+					}`}
+				/>
+			);
+			link_types.deezer = (
+				<SocialLink
+					href={`https://www.deezer.com/search/${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
+				/>
+			);
+
+			link_types.spotify = (
+				<SocialLink
+					href={`https://open.spotify.com/search/${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
+				/>
+			);
+			link_types.itunes = (
+				<SocialLink
+					href={`https://music.apple.com/gb/search?term=${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
+				/>
+			);
+			link_types.youtube = (
+				<SocialLink
+					href={`https://music.youtube.com/search?q=${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
+				/>
+			);
+			link_types.discogs = (
+				<SocialLink
+					href={`https://www.discogs.com/search?q=${
+						sanitise(page.sister)
+					}+${sanitise(page.name)}`}
+				/>
+			);
+			link_types.aoty = (
+				<SocialLink
+					href={`https://www.albumoftheyear.org/search/?q=${
+						sanitise(page.sister)
+					}+${sanitise(page.name)}`}
+				/>
+			);
+			link_types.rym = (
+				<SocialLink
+					href={`https://rateyourmusic.com/search?searchterm=${
+						sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
+				/>
 			);
 		} else {
-			render(
-				link_container,
-				html`
-					${useSettings.get('music_links').includes('spotify')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--spotify colourful icon"
-                                href="https://open.spotify.com/search/${
-							sanitise(
-								page.name,
-								' ',
-							)
-						}"
-                                target="_blank"
-                            >
-                                Spotify
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('itunes')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--itunes colourful icon"
-                                href="https://music.apple.com/gb/search?term=${
-							sanitise(
-								page.name,
-								' ',
-							)
-						}"
-                                target="_blank"
-                            >
-                                Apple
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('youtube')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--youtube-music colourful icon"
-                                href="https://music.youtube.com/search?q=${
-							sanitise(
-								page.name,
-							)
-						}"
-                                target="_blank"
-                            >
-                                YouTube
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('tidal')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--tidal colourful icon"
-                                href="https://listen.tidal.com/search?q=${
-							sanitise(
-								page.name,
-								' ',
-							)
-						}"
-                                target="_blank"
-                            >
-                                Tidal
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('deezer')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--deezer colourful icon"
-                                href="https://www.deezer.com/search/${
-							sanitise(
-								page.name,
-								' ',
-							)
-						}"
-                                target="_blank"
-                            >
-                                Deezer
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('discogs')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--discogs colourful icon"
-                                href="https://www.discogs.com/search?q=${
-							sanitise(
-								page.name,
-							)
-						}&type=artist"
-                                target="_blank"
-                            >
-                                Discogs
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('qobuz')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--qobuz colourful icon"
-                                href="https://www.qobuz.com/gb-en/search/artists/${
-							sanitise(
-								page.name,
-								' ',
-							)
-						}"
-                                target="_blank"
-                            >
-                                Qobuz
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('aoty')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--aoty colourful icon"
-                                href="https://www.albumoftheyear.org/search/?q=${
-							sanitise(
-								page.name,
-							)
-						}"
-                                target="_blank"
-                            >
-                                AOTY
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('rym')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--rym colourful icon"
-                                href="https://rateyourmusic.com/search?searchterm=${
-							sanitise(
-								page.name,
-								' ',
-							)
-						}"
-                                target="_blank"
-                            >
-                                RYM
-                            </a>
-                    `
-						: ''}
-					${useSettings.get('music_links').includes('genius')
-						? html.node`
-                            <a
-                                class="btn music-link play-this-track-playlink--genius colourful icon"
-                                href="https://genius.com/search?q=${
-							sanitise(
-								page.name,
-							)
-						}"
-                                target="_blank"
-                            >
-                                Genius
-                            </a>
-                    `
-						: ''}
-				`,
+			link_types.genius = (
+				<SocialLink
+					href={`https://genius.com/search?q=${sanitise(page.name)}`}
+				/>
+			);
+			link_types.tidal = (
+				<SocialLink
+					href={`https://listen.tidal.com/search?q=${
+						sanitise(page.name, ' ')
+					}`}
+				/>
+			);
+			link_types.qobuz = (
+				<SocialLink
+					href={`https://www.qobuz.com/gb-en/search/artists/${
+						sanitise(page.name, ' ')
+					}`}
+				/>
+			);
+			link_types.deezer = (
+				<SocialLink
+					href={`https://www.deezer.com/search/${
+						sanitise(page.name, ' ')
+					}`}
+				/>
+			);
+
+			link_types.spotify = (
+				<SocialLink
+					href={`https://open.spotify.com/search/${
+						sanitise(page.name, ' ')
+					}`}
+				/>
+			);
+			link_types.itunes = (
+				<SocialLink
+					href={`https://music.apple.com/gb/search?term=${
+						sanitise(page.name, ' ')
+					}`}
+				/>
+			);
+			link_types.youtube = (
+				<SocialLink
+					href={`https://music.youtube.com/search?q=${
+						sanitise(page.name, ' ')
+					}`}
+				/>
+			);
+			link_types.discogs = (
+				<SocialLink
+					href={`https://www.discogs.com/search?q=${
+						sanitise(page.name)
+					}`}
+				/>
+			);
+			link_types.aoty = (
+				<SocialLink
+					href={`https://www.albumoftheyear.org/search/?q=${
+						sanitise(page.name)
+					}`}
+				/>
+			);
+			link_types.rym = (
+				<SocialLink
+					href={`https://rateyourmusic.com/search?searchterm=${
+						sanitise(page.name, ' ')
+					}`}
+				/>
 			);
 
 			let externals = page.structure.side.querySelector(
@@ -1121,40 +921,43 @@ export async function show_your_scrobbles() {
 					let type = link.classList[1];
 
 					if (type == 'resource-external-link--homepage') {
-						link.textContent = tl(trans.website);
+						link.textContent = tl(trans.website) as string;
+						link.appendChild(<Icon name={icons.external} />);
+
+						link_types.website = link;
 					} else if (type == 'resource-external-link--twitter') {
 						link.textContent = 'Twitter';
+						link.appendChild(<Icon name={icons.external} />);
 
-						if (
-							!useSettings.get('music_links').includes('twitter')
-						) return;
+						link_types.twitter = link;
 					} else if (type == 'resource-external-link--facebook') {
 						link.textContent = 'Facebook';
+						link.appendChild(<Icon name={icons.external} />);
 
-						if (
-							!useSettings.get('music_links').includes('facebook')
-						) return;
+						link_types.facebook = link;
 					} else if (type == 'resource-external-link--instagram') {
-						if (
-							!useSettings.get('music_links').includes(
-								'instagram',
-							)
-						) return;
-					} else if (type == 'resource-external-link--soundcloud') {
-						if (
-							!useSettings.get('music_links').includes(
-								'soundcloud',
-							)
-						) {
-							return;
-						}
-					}
+						link.appendChild(<Icon name={icons.external} />);
 
-					link_container.appendChild(link);
+						link_types.instagram = link;
+					} else if (type == 'resource-external-link--soundcloud') {
+						link.appendChild(<Icon name={icons.external} />);
+
+						link_types.soundcloud = link;
+					}
 				});
 			}
 		}
 	}
+
+	console.error(link_types);
+
+	link_container!.replaceChildren(
+		<>
+			{music_links.map((link) => {
+				if (link_types[link]) return link_types[link];
+			})}
+		</>,
+	);
 
 	if (link_container.childNodes.length > 0) col_main.appendChild(link_group);
 
@@ -1445,10 +1248,10 @@ function create_listen_item(
 					} alt="">`
 					: ''}
 				<div class="listen-item-info">
-				    <h3 class="listen-item-name">${tl(trans.following)}</h3>
-				    <p class="colourful listen-item-text icon-mask" ref=${(
-					el,
-				) => (p = el)}>
+					<h3 class="listen-item-name">${tl(trans.following)}</h3>
+					<p class="colourful listen-item-text icon-mask" ref=${(
+						el,
+					) => (p = el)}>
 				        ${tl(trans.others_count).replace('{c}', count)}
 				    </p>
 				</div>
