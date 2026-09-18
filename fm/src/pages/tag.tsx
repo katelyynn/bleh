@@ -17,7 +17,7 @@ import {
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
 import { page_header_title } from '@/components/music/header';
-import { icons } from '@/components/shared/icon';
+import { Icon, icons } from '@/components/shared/icon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SideActions } from '@/components/side_action/side_action.tsx';
 import { PageHeader } from '@/components/page/header.tsx';
@@ -26,9 +26,13 @@ import { createRef, ReactNode } from 'jsx-dom';
 import { PanelTop } from '@/components/text/see_more.tsx';
 import {
 	ProfileSummary,
+	ProfileSummaryAside,
 	ProfileSummaryContent,
 	ProfileSummaryMain,
+	ProfileSummarySeparator,
 } from '@/components/summary/summary.tsx';
+import { avatar } from '@/components/shared/avatar.ts';
+import { header_colour } from '@/components/page/colour.ts';
 
 export function bleh_tags() {
 	const tag_header = document.body.querySelector(
@@ -51,48 +55,55 @@ export function bleh_tags() {
 
 	checkup_page_structure(is_subpage, tag_header);
 
-	if (ff('refreshed_music_nav')) {
-		const split = window.location.href.split('/');
+	const split = window.location.href.split('/');
 
-		/* languages */
-		let index = 4;
-		if (split[3] != 'tag') {
-			index = 5;
-		}
-
-		const title = desanitise(split[index]);
-		page.name = title;
-
-		//const same_page = is_same_page();
-
-		const redesigned_tag_header = (
-			<PageHeader
-				icon={icons.tag}
-				type='tag'
-				name={title}
-			/>
-		);
-
-		const background = document.body.querySelector(
-			'.header-background--has-image',
-		);
-		if (background) {
-			register_background(
-				background.style.getPropertyValue('background-image').replace(
-					'url("',
-					'',
-				).replace('")', ''),
-			);
-		} else {
-			register_background();
-		}
-
-		page.structure.container.insertBefore(
-			redesigned_tag_header,
-			page.structure.container.firstElementChild,
-		);
-		tag_header.classList.add('legacy-header');
+	let index = 4;
+	if (split[3] != 'tag') {
+		index = 5;
 	}
+
+	const title = desanitise(split[index]);
+	page.name = title;
+
+	//const same_page = is_same_page();
+
+	const redesigned_tag_header = (
+		<PageHeader
+			icon={icons.tag}
+			type='tag'
+			name={title}
+		/>
+	);
+
+	const background = document.body.querySelector(
+		'.header-background--has-image',
+	);
+	if (background) {
+		register_background(
+			background.style.getPropertyValue('background-image').replace(
+				'url("',
+				'',
+			).replace('")', ''),
+		);
+	} else {
+		register_background();
+	}
+
+	page.structure.container.insertBefore(
+		redesigned_tag_header,
+		page.structure.container.firstElementChild,
+	);
+	tag_header.classList.add('legacy-header');
+
+	const recommended = tag_header.querySelector(
+		'.recommended-next-page-container',
+	) as HTMLDivElement;
+	const next_image = recommended.querySelector(
+		'.recommended-next-page-image',
+	) as HTMLImageElement;
+	const next_name = recommended.querySelector(
+		'.recommended-next-page-name',
+	) as HTMLAnchorElement;
 
 	if (!is_subpage) {
 		const col_main = page.structure.main!.querySelector(
@@ -134,6 +145,17 @@ export function bleh_tags() {
 						{col_main}
 						{row}
 					</ProfileSummaryContent>
+					{recommended && (
+						<>
+							<ProfileSummarySeparator />
+							<ProfileSummaryAside>
+								<Recommended
+									name={next_name}
+									image={next_image}
+								/>
+							</ProfileSummaryAside>
+						</>
+					)}
 				</ProfileSummaryMain>
 			</ProfileSummary>,
 			page.structure.main!.firstElementChild,
@@ -238,4 +260,55 @@ export function tag_test(text: string) {
 	}
 
 	return true;
+}
+
+interface RecommendedProps {
+	name: HTMLAnchorElement;
+	image: HTMLImageElement;
+}
+
+function Recommended({
+	name,
+	image,
+}: RecommendedProps) {
+	const name_elem = createRef();
+
+	const elem = (
+		<a
+			class={['recommended-goto', 'colourful']}
+			href={name.getAttribute('href')!}
+		>
+			<span
+				class='recommended-goto-bg'
+				style={{
+					backgroundImage: `url(${
+						avatar(
+							image.src,
+							'avatar300s',
+						)
+					})`,
+				}}
+			/>
+			<span class='recommended-goto-text'>
+				<span class='recommended-goto-label'>
+					{tl(trans.recommended)}
+				</span>
+				<span
+					class={['recommended-goto-name', 'colourful']}
+					ref={name_elem}
+				>
+					{name.textContent.trim()}
+				</span>
+			</span>
+			<Icon name={icons.arrow_right} />
+		</a>
+	);
+
+	header_colour(
+		<img src={avatar(image.src, 'avatar300s')} /> as HTMLImageElement,
+		false,
+		[elem, name_elem.current],
+	);
+
+	return elem;
 }

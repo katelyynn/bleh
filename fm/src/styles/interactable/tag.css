@@ -8,6 +8,7 @@
 	user tags are too long next to global tags */
 	flex-wrap: wrap;
 }
+
 .tags-user-avatar {
 	display: none !important;
 }
@@ -18,6 +19,7 @@
 	margin: unset;
 	max-width: unset;
 }
+
 /* apply tag styling to everything tag-related */
 .tag-item,
 .tags-add-cta,
@@ -73,7 +75,7 @@
 	}
 }
 
-.tag > a {
+.tag>a {
 	&:before {
 		content: '#' !important;
 		opacity: var(--tag-opacity);
@@ -83,6 +85,7 @@
 .tags-add-cta:before {
 	display: none;
 }
+
 .catalogue-tags .tags-view-all {
 	--font-size: 0;
 	--mask: var(--icon-16-tag);
@@ -106,4 +109,161 @@
 	--mask: var(--icon-16-plus);
 	width: unset !important;
 	height: unset !important;
+}
+
+
+.recommended-goto {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	position: relative;
+	overflow: hidden;
+
+	box-shadow: var(--subtle-shadow);
+
+	background: oklch(var(--b6) / 60%);
+	border-radius: var(--radius-m);
+	padding: 20px 15px;
+
+	--mask-colour: oklch(var(--c2));
+
+	&:after {
+		transform: unset !important;
+		bottom: unset !important;
+		top: 0;
+		width: 160px;
+		height: 80px;
+
+		opacity: 1;
+		transition: none;
+		background: unset;
+		border: 1px solid oklch(var(--c3) / 30%);
+		border-radius: var(--radius-m);
+		border-bottom: unset;
+		border-top-right-radius: unset;
+		border-bottom-right-radius: unset;
+		border-bottom-left-radius: unset;
+		border-right: unset;
+
+		--mask: linear-gradient(145deg, white, transparent 30%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+
+	&:hover {
+		&>.bleh-icon-arrow-right {
+			translate: 2px 0;
+		}
+
+		&:before {
+			translate: 120px 0;
+		}
+
+		&>.recommended-goto-bg {
+			translate: 10px 0;
+			scale: 1.03;
+		}
+
+		&>.recommended-goto-text>.recommended-goto-name {
+			color: oklch(var(--l3-c));
+
+			&:after {
+				transform: scaleX(1);
+			}
+		}
+	}
+
+	&>.bleh-icon-arrow-right {
+		--icon-size: 16px;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		display: block;
+		background: linear-gradient(90deg, transparent 20%, oklch(var(--h4)) 90%);
+
+		translate: 150px 0;
+		opacity: 0.8;
+
+		transition-property: translate;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function-ani);
+	}
+
+	scale: 1;
+
+	&:active {
+		scale: 0.98;
+	}
+
+	transition-property: scale;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
+}
+
+.recommended-goto-bg {
+	position: absolute;
+	inset: 0;
+
+	background-size: 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+
+	opacity: 0.2;
+
+	translate: 0 0;
+	scale: 1;
+
+	--mask: linear-gradient(90deg, transparent, white);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
+
+	transition-property: translate, scale;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
+}
+
+.recommended-goto-text {
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+	flex: 1;
+}
+
+.recommended-goto-label {
+	color: oklch(var(--c3));
+}
+
+.recommended-goto-name {
+	color: oklch(var(--c2));
+	font-weight: var(--font-weight-medium);
+	font-size: 20px;
+	line-height: 24px;
+	position: relative;
+
+	width: fit-content;
+
+	transition-property: color;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
+
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--mask-colour);
+		transform: var(--underline-scale, scaleX(0));
+		transform-origin: bottom left;
+		opacity: 0.6;
+
+		transition-property: transform;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function-ani);
+	}
 }
