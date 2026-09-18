@@ -435,6 +435,7 @@ export function patch_wiki() {
 					<SeeMore
 						className='wiki-lower'
 						href={`${window.location.href}/+wiki/edit`}
+						icon={icons.edit}
 					>
 						{(tl(trans.edit_wiki) as string).toLowerCase()}
 					</SeeMore>

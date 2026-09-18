@@ -196,6 +196,11 @@
 	}
 }
 
+.wiki-lower {
+	--col: oklch(var(--c3));
+	--mask-colour: oklch(var(--c3) / 80%);
+}
+
 .more-link-fullwidth {
 	box-shadow: unset;
 	margin: unset !important;
