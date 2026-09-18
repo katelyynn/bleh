@@ -21,6 +21,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { SubText } from '@/components/text/sub.tsx';
 import { useSettings } from '@/page.ts';
+import { link_strings } from '@/components/markdown/links.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -467,7 +468,10 @@ export function can_trust_link(href) {
 
 	if (!scheme || !scheme.startsWith('http')) dangerous = true;
 
-	if ((useSettings.get('trusted_sites') as string[]).includes(hostname)) {
+	if (
+		(useSettings.get('trusted_sites') as string[]).includes(hostname) ||
+		link_strings.hasOwnProperty(hostname)
+	) {
 		return { trusted: true, dangerous };
 	}
 

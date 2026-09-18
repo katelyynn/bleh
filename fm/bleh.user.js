@@ -55433,81 +55433,458 @@ var bleh = (() => {
   };
   HyperCard.register();
 
-  // src/components/settings/toggle.js
-  function toggle({
-    value = false,
-    type = "toggle",
-    name = "",
-    title = "",
-    body = "",
-    small = "",
-    disabled = false,
-    data: data2 = "",
-    func = null,
-    standalone = true,
-    id = ""
-  }) {
-    let checkbox;
-    let state;
-    const elem = html.node`
-        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
-      if (disabled) return;
-      const current = checkbox.checked;
-      if (func) func(!current);
-      checkbox.checked = !current;
-      state.setAttribute("aria-checked", !current);
-    }}>
-            <div class="heading">
-                <h5>${title}</h5>
-                ${body != "" ? html.node`<p>${body}</p>` : ""}
-                ${small != "" ? html.node`<small>${small}</small>` : ""}
-            </div>
-            ${type == "toggle" ? html.node`
-            <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} />
-                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value} type="button">
-                    <div class="dot" />
-                </button>
-            </div>
-            ` : html.node`
-            <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} disabled=${disabled} />
-                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
-                    <div class="bleh-icon" />
-                </div>
-            </div>
-            `}
-        </div>
-    `;
-    if (value) {
-      checkbox.checked = value;
+  // src/components/button/button.tsx
+  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, href, external, onClick, className: className2, children, tooltip, opens, onUpdate, ...props }) {
+    const classes = [
+      "btn",
+      "flex-button",
+      chibi && "chibi",
+      primary && "primary",
+      colourful && "colourful",
+      menu && "dropdown-menu-clickable-item v2",
+      menu && accented && "accented-menu-item",
+      opens != null && "select-button",
+      className2 && className2
+    ];
+    let elem;
+    if (!href) {
+      elem = /* @__PURE__ */ jsx("button", {
+        type,
+        class: classes,
+        onClick: handleOnClick,
+        ref: ref2,
+        ...props,
+        children
+      });
+    } else {
+      elem = /* @__PURE__ */ jsx("a", {
+        class: classes,
+        href,
+        target: external ? "_blank" : void 0,
+        onClick: handleOnClick,
+        ref: ref2,
+        ...props,
+        children
+      });
     }
-    if (data2) {
-      checkbox.setAttribute("value", data2);
+    if (tooltip) {
+      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+        children: tooltip
+      }));
     }
-    elem.check = () => {
-      if (disabled) return;
-      if (func) func(true);
-      checkbox.checked = true;
-      state.setAttribute("aria-checked", true);
+    if (opens) {
+      menu_tooltip(elem, opens);
+    }
+    function handleOnClick() {
+      if (!onClick || disabled || loading) return;
+      onClick();
+    }
+    function update() {
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      if (loading) {
+        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.spinner
+            }),
+            tl2(trans.loading)
+          ]
+        }));
+        elem.setAttribute("data-loading", "true");
+      } else {
+        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+          children
+        }));
+        elem.removeAttribute("data-loading");
+        if (onUpdate) onUpdate();
+      }
+    }
+    Object.defineProperty(elem, "disabled", {
+      get() {
+        return disabled;
+      },
+      set(val) {
+        disabled = val;
+        update();
+      }
+    });
+    Object.defineProperty(elem, "loading", {
+      get() {
+        return loading;
+      },
+      set(val) {
+        loading = val;
+        update();
+      }
+    });
+    update();
+    return elem;
+  }
+  function ButtonCombo({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "button-combo",
+      children
+    });
+  }
+  function ButtonComboSeparator() {
+    return /* @__PURE__ */ jsx("div", {
+      class: "button-combo-sep"
+    });
+  }
+  function ButtonGroup({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "button-group",
+      children
+    });
+  }
+
+  // src/components/settings/provider/reset.tsx
+  function SettingReset({ ref: ref2, value, setValue, defaultValue }) {
+    const reset = /* @__PURE__ */ jsx(Button, {
+      chibi: true,
+      className: "reset",
+      onClick: () => {
+        setValue(defaultValue);
+      },
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.reset,
+          identifier: "reset-setting"
+        }),
+        tl2(trans.reset)
+      ]
+    });
+    hover_tooltip(reset, /* @__PURE__ */ jsx(Tooltip, {
+      children: tl2(trans.reset)
+    }));
+    Object.defineProperty(reset, "value", {
+      set(val) {
+        value = val;
+        update();
+      }
+    });
+    function update() {
+      console.info("setting: inspecting if modified", String(value), String(defaultValue));
+      reset.setAttribute("data-modified", String(JSON.stringify(String(value)) != JSON.stringify(String(defaultValue))));
+    }
+    update();
+    return reset;
+  }
+
+  // src/components/settings/provider/main.tsx
+  function SettingLabel({ ref: ref2, name, body, children, sub, store, value, setValue, defaultValue, menu }) {
+    const reset = createRef();
+    if (store) {
+      if (store.title) name = tl2(store.title);
+      if (store.body) body = tl2(store.body);
+    }
+    if (!name) {
+      return /* @__PURE__ */ jsx("div", {
+        class: [
+          "heading",
+          "setting-inner"
+        ],
+        children: /* @__PURE__ */ jsx("div", {
+          class: "alert alert-error no-margin",
+          children: "No name provided"
+        })
+      });
+    }
+    let label = /* @__PURE__ */ jsx("div", {
+      class: [
+        "heading",
+        "setting-inner"
+      ],
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx("h5", {
+          class: "setting-name",
+          children: [
+            name,
+            value != void 0 && setValue != void 0 && defaultValue != void 0 && /* @__PURE__ */ jsx(SettingReset, {
+              value,
+              setValue,
+              defaultValue,
+              ref: reset
+            })
+          ]
+        }),
+        body && /* @__PURE__ */ jsx("p", {
+          class: "setting-body",
+          children: body
+        }),
+        sub && /* @__PURE__ */ jsx("p", {
+          class: "setting-sub",
+          children: sub
+        }),
+        children
+      ]
+    });
+    if (menu) {
+      label = /* @__PURE__ */ jsx("span", {
+        class: "menu-item-body",
+        ref: ref2,
+        children: /* @__PURE__ */ jsx("strong", {
+          class: "menu-item-head",
+          children: name
+        })
+      });
+    }
+    Object.defineProperty(label, "value", {
+      set(val) {
+        if (reset.current) reset.current.value = val;
+      }
+    });
+    return label;
+  }
+  function get_from_store(id) {
+    if (!id) return void 0;
+    return settings_store[id];
+  }
+  function is_incompatible(store) {
+    let incompatible = false;
+    const list = {};
+    const list_strings = [];
+    if (!store.incompatible) {
+      return {
+        incompatible,
+        list,
+        list_strings
+      };
+    }
+    Object.entries(store.incompatible).forEach(([key, val], index3) => {
+      if (Array.isArray(val)) {
+        const value = useSettings.get(key);
+        val = val;
+        if (value && val.includes(value)) {
+          incompatible = true;
+          list[key] = val;
+          if (store.incompatible_strings?.[index3]) {
+            list_strings[index3] = store.incompatible_strings[index3];
+          } else {
+            list_strings[index3] = "";
+          }
+        }
+      } else {
+        const value = useSettings.get(key);
+        if (JSON.stringify(val) == JSON.stringify(value)) {
+          incompatible = true;
+          list[key] = val;
+          if (store.incompatible_strings?.[index3]) {
+            list_strings[index3] = store.incompatible_strings[index3];
+          } else {
+            list_strings[index3] = "";
+          }
+        }
+      }
+    });
+    return {
+      incompatible,
+      list,
+      list_strings
     };
-    elem.uncheck = () => {
-      if (disabled) return;
-      if (func) func(false);
-      checkbox.checked = false;
-      state.setAttribute("aria-checked", false);
-    };
-    elem.checked = (val) => {
-      if (val == null) return checkbox.checked;
-      if (val) elem.check();
-      else elem.uncheck();
-    };
-    elem.disabled = (state2 = null) => {
-      if (state2 === null) return checkbox.getAttribute("disabled") || false;
-      if (state2 === true) checkbox.setAttribute("disabled", "true");
-      else checkbox.removeAttribute("disabled");
-      return state2;
-    };
+  }
+  function SettingIncompatibleWith({ list, strings }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "setting-incompatible-with colourful",
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.error,
+          identifier: "setting-incompatible-with"
+        }),
+        /* @__PURE__ */ jsx("strong", {
+          class: "setting-incompatible-with-text",
+          children: tl2(trans.incompatible)
+        }),
+        /* @__PURE__ */ jsx("p", {
+          class: "setting-incompatible-with-list",
+          children: Object.entries(list).map(([key, val], index3) => {
+            let title = key;
+            if (strings[index3] && strings[index3] != "") {
+              return tl2(strings[index3]);
+            }
+            if (settings_store[key]?.title) {
+              title = tl2(settings_store[key].title);
+            }
+            if (val == true) {
+              return tl2(trans.value_is_enabled, {
+                v: title
+              });
+            }
+            return tl2(trans.value_is_disabled, {
+              v: title
+            });
+          }).join(", ")
+        })
+      ]
+    });
+  }
+
+  // src/components/settings/provider/icon.tsx
+  function SettingIcon({ name }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "setting-icon",
+      children: /* @__PURE__ */ jsx(Icon, {
+        name
+      })
+    });
+  }
+
+  // src/components/settings/clickables/checkbox.tsx
+  function Checkbox({ ref: ref2, className: className2, interact = true, checked = false, menu }) {
+    const checkbox = createRef();
+    const elem = createRef();
+    function update() {
+      checkbox.current.checked = checked;
+      elem.current.setAttribute("aria-checked", checked);
+    }
+    const wrap2 = /* @__PURE__ */ jsx("div", {
+      class: [
+        "checkbox-wrap",
+        className2 && className2,
+        menu && "menu-checkbox-wrap"
+      ],
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx("input", {
+          type: "checkbox",
+          ref: checkbox
+        }),
+        /* @__PURE__ */ jsx("button", {
+          type: "button",
+          class: [
+            "btn",
+            "check-box",
+            !interact && "no-interact",
+            menu && "menu-checkbox"
+          ],
+          ref: elem,
+          onClick: () => {
+            if (!interact) {
+              return;
+            }
+            checked = !checked;
+            update();
+          },
+          children: /* @__PURE__ */ jsx("div", {
+            class: "bleh-icon"
+          })
+        })
+      ]
+    });
+    update();
+    Object.defineProperty(wrap2, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    return wrap2;
+  }
+
+  // src/components/settings/provider/checkbox.tsx
+  function SettingCheckbox({ ref: ref2, value, bind, standalone = false, icon: icon2, name, body, onChange, disabled, onMouseEnter, onMouseLeave }) {
+    if (bind) value = useSettings.get(bind);
+    const checkbox = createRef();
+    const uuid = crypto.randomUUID();
+    if (bind) {
+      useSettings.on(bind, (val, id) => {
+        if (id == uuid) return;
+        set2(val, true);
+      });
+    }
+    const store = get_from_store(bind);
+    if (store) {
+      if (!icon2) icon2 = store.icon;
+      if (store.incompatible) {
+        Object.entries(store.incompatible).forEach(([key]) => {
+          useSettings.on(key, () => {
+            update();
+          });
+        });
+      }
+    }
+    function update() {
+      disabled = false;
+      let incompatible = false;
+      let incompatible_list = {};
+      let incompatible_strings = [];
+      if (store) {
+        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
+      }
+      if (incompatible) {
+        disabled = true;
+      }
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Checkbox, {
+            className: "setting-inner",
+            checked: value,
+            ref: checkbox
+          }),
+          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
+            name: icon2
+          }),
+          /* @__PURE__ */ jsx(SettingLabel, {
+            name,
+            body,
+            store
+          }),
+          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
+            list: incompatible_list,
+            strings: incompatible_strings
+          })
+        ]
+      }));
+    }
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: [
+        "setting",
+        standalone && "standalone"
+      ],
+      "data-type": "toggle",
+      id: `setting_${bind}`,
+      onMouseEnter,
+      onMouseLeave,
+      onClick: () => {
+        set2(!value);
+      },
+      ref: ref2
+    });
+    update();
+    function set2(val, received = false) {
+      if (value == val) return;
+      value = val;
+      checkbox.current.checked = val;
+      if (bind) {
+        if (!received) useSettings.set(bind, val, uuid);
+      } else {
+        if (onChange) onChange(val);
+      }
+      if (onMouseEnter) onMouseEnter();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(val) {
+        set2(val);
+      }
+    });
+    elem.update = update;
     return elem;
   }
 
@@ -55518,7 +55895,7 @@ var bleh = (() => {
     const scheme = link.protocol;
     const hostname = link.hostname;
     const path = link.pathname + link.search + link.hash;
-    let trust_site;
+    const trust_site = createRef();
     dialog({
       id: "external_url",
       type: "leaving_site",
@@ -55572,12 +55949,13 @@ var bleh = (() => {
                   }) : ""
                 ]
               }),
-              hostname != "" ? trust_site = toggle({
-                type: "checkbox",
-                title: tl2(trans.leaving_site_checkbox, {
+              hostname != "" && /* @__PURE__ */ jsx(SettingCheckbox, {
+                name: tl2(trans.leaving_site_checkbox, {
                   v: hostname
-                })
-              }) : ""
+                }),
+                standalone: true,
+                ref: trust_site
+              })
             ]
           }),
           /* @__PURE__ */ jsx("div", {
@@ -55603,7 +55981,7 @@ var bleh = (() => {
                   "continue"
                 ],
                 onClick: () => {
-                  if (trust_site?.checked()) {
+                  if (trust_site.current.value) {
                     useSettings.append("trusted_sites", hostname);
                     log(`added ${hostname} to trusted sites`, "markdown");
                   }
@@ -57567,6 +57945,84 @@ var bleh = (() => {
       }
     });
   };
+
+  // src/components/settings/toggle.js
+  function toggle({
+    value = false,
+    type = "toggle",
+    name = "",
+    title = "",
+    body = "",
+    small = "",
+    disabled = false,
+    data: data2 = "",
+    func = null,
+    standalone = true,
+    id = ""
+  }) {
+    let checkbox;
+    let state;
+    const elem = html.node`
+        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
+      if (disabled) return;
+      const current = checkbox.checked;
+      if (func) func(!current);
+      checkbox.checked = !current;
+      state.setAttribute("aria-checked", !current);
+    }}>
+            <div class="heading">
+                <h5>${title}</h5>
+                ${body != "" ? html.node`<p>${body}</p>` : ""}
+                ${small != "" ? html.node`<small>${small}</small>` : ""}
+            </div>
+            ${type == "toggle" ? html.node`
+            <div class="toggle-wrap">
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} />
+                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value} type="button">
+                    <div class="dot" />
+                </button>
+            </div>
+            ` : html.node`
+            <div class="check">
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} disabled=${disabled} />
+                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
+                    <div class="bleh-icon" />
+                </div>
+            </div>
+            `}
+        </div>
+    `;
+    if (value) {
+      checkbox.checked = value;
+    }
+    if (data2) {
+      checkbox.setAttribute("value", data2);
+    }
+    elem.check = () => {
+      if (disabled) return;
+      if (func) func(true);
+      checkbox.checked = true;
+      state.setAttribute("aria-checked", true);
+    };
+    elem.uncheck = () => {
+      if (disabled) return;
+      if (func) func(false);
+      checkbox.checked = false;
+      state.setAttribute("aria-checked", false);
+    };
+    elem.checked = (val) => {
+      if (val == null) return checkbox.checked;
+      if (val) elem.check();
+      else elem.uncheck();
+    };
+    elem.disabled = (state2 = null) => {
+      if (state2 === null) return checkbox.getAttribute("disabled") || false;
+      if (state2 === true) checkbox.setAttribute("disabled", "true");
+      else checkbox.removeAttribute("disabled");
+      return state2;
+    };
+    return elem;
+  }
 
   // src/components/music/scrobble.ts
   function submit_scrobble({ pre_track = "", pre_album = "", pre_artist = "", pre_album_artist = "", pre_timestamp = 0, func, can_api } = {}) {
@@ -61514,115 +61970,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/button/button.tsx
-  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, href, external, onClick, className: className2, children, tooltip, opens, onUpdate, ...props }) {
-    const classes = [
-      "btn",
-      "flex-button",
-      chibi && "chibi",
-      primary && "primary",
-      colourful && "colourful",
-      menu && "dropdown-menu-clickable-item v2",
-      menu && accented && "accented-menu-item",
-      opens != null && "select-button",
-      className2 && className2
-    ];
-    let elem;
-    if (!href) {
-      elem = /* @__PURE__ */ jsx("button", {
-        type,
-        class: classes,
-        onClick: handleOnClick,
-        ref: ref2,
-        ...props,
-        children
-      });
-    } else {
-      elem = /* @__PURE__ */ jsx("a", {
-        class: classes,
-        href,
-        target: external ? "_blank" : void 0,
-        onClick: handleOnClick,
-        ref: ref2,
-        ...props,
-        children
-      });
-    }
-    if (tooltip) {
-      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
-        children: tooltip
-      }));
-    }
-    if (opens) {
-      menu_tooltip(elem, opens);
-    }
-    function handleOnClick() {
-      if (!onClick || disabled || loading) return;
-      onClick();
-    }
-    function update() {
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      if (loading) {
-        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.spinner
-            }),
-            tl2(trans.loading)
-          ]
-        }));
-        elem.setAttribute("data-loading", "true");
-      } else {
-        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-          children
-        }));
-        elem.removeAttribute("data-loading");
-        if (onUpdate) onUpdate();
-      }
-    }
-    Object.defineProperty(elem, "disabled", {
-      get() {
-        return disabled;
-      },
-      set(val) {
-        disabled = val;
-        update();
-      }
-    });
-    Object.defineProperty(elem, "loading", {
-      get() {
-        return loading;
-      },
-      set(val) {
-        loading = val;
-        update();
-      }
-    });
-    update();
-    return elem;
-  }
-  function ButtonCombo({ children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "button-combo",
-      children
-    });
-  }
-  function ButtonComboSeparator() {
-    return /* @__PURE__ */ jsx("div", {
-      class: "button-combo-sep"
-    });
-  }
-  function ButtonGroup({ children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "button-group",
-      children
-    });
-  }
-
   // src/components/shared/translate.tsx
   function TranslatedHeader({ from: from2 }) {
     return /* @__PURE__ */ jsx("div", {
@@ -62812,254 +63159,6 @@ var bleh = (() => {
       theme: "context-menu",
       children
     });
-  }
-
-  // src/components/settings/provider/reset.tsx
-  function SettingReset({ ref: ref2, value, setValue, defaultValue }) {
-    const reset = /* @__PURE__ */ jsx(Button, {
-      chibi: true,
-      className: "reset",
-      onClick: () => {
-        setValue(defaultValue);
-      },
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: icons.reset,
-          identifier: "reset-setting"
-        }),
-        tl2(trans.reset)
-      ]
-    });
-    hover_tooltip(reset, /* @__PURE__ */ jsx(Tooltip, {
-      children: tl2(trans.reset)
-    }));
-    Object.defineProperty(reset, "value", {
-      set(val) {
-        value = val;
-        update();
-      }
-    });
-    function update() {
-      console.info("setting: inspecting if modified", String(value), String(defaultValue));
-      reset.setAttribute("data-modified", String(JSON.stringify(String(value)) != JSON.stringify(String(defaultValue))));
-    }
-    update();
-    return reset;
-  }
-
-  // src/components/settings/provider/main.tsx
-  function SettingLabel({ ref: ref2, name, body, children, sub, store, value, setValue, defaultValue, menu }) {
-    const reset = createRef();
-    if (store) {
-      if (store.title) name = tl2(store.title);
-      if (store.body) body = tl2(store.body);
-    }
-    if (!name) {
-      return /* @__PURE__ */ jsx("div", {
-        class: [
-          "heading",
-          "setting-inner"
-        ],
-        children: /* @__PURE__ */ jsx("div", {
-          class: "alert alert-error no-margin",
-          children: "No name provided"
-        })
-      });
-    }
-    let label = /* @__PURE__ */ jsx("div", {
-      class: [
-        "heading",
-        "setting-inner"
-      ],
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx("h5", {
-          class: "setting-name",
-          children: [
-            name,
-            value != void 0 && setValue != void 0 && defaultValue != void 0 && /* @__PURE__ */ jsx(SettingReset, {
-              value,
-              setValue,
-              defaultValue,
-              ref: reset
-            })
-          ]
-        }),
-        body && /* @__PURE__ */ jsx("p", {
-          class: "setting-body",
-          children: body
-        }),
-        sub && /* @__PURE__ */ jsx("p", {
-          class: "setting-sub",
-          children: sub
-        }),
-        children
-      ]
-    });
-    if (menu) {
-      label = /* @__PURE__ */ jsx("span", {
-        class: "menu-item-body",
-        ref: ref2,
-        children: /* @__PURE__ */ jsx("strong", {
-          class: "menu-item-head",
-          children: name
-        })
-      });
-    }
-    Object.defineProperty(label, "value", {
-      set(val) {
-        if (reset.current) reset.current.value = val;
-      }
-    });
-    return label;
-  }
-  function get_from_store(id) {
-    if (!id) return void 0;
-    return settings_store[id];
-  }
-  function is_incompatible(store) {
-    let incompatible = false;
-    const list = {};
-    const list_strings = [];
-    if (!store.incompatible) {
-      return {
-        incompatible,
-        list,
-        list_strings
-      };
-    }
-    Object.entries(store.incompatible).forEach(([key, val], index3) => {
-      if (Array.isArray(val)) {
-        const value = useSettings.get(key);
-        val = val;
-        if (value && val.includes(value)) {
-          incompatible = true;
-          list[key] = val;
-          if (store.incompatible_strings?.[index3]) {
-            list_strings[index3] = store.incompatible_strings[index3];
-          } else {
-            list_strings[index3] = "";
-          }
-        }
-      } else {
-        const value = useSettings.get(key);
-        if (JSON.stringify(val) == JSON.stringify(value)) {
-          incompatible = true;
-          list[key] = val;
-          if (store.incompatible_strings?.[index3]) {
-            list_strings[index3] = store.incompatible_strings[index3];
-          } else {
-            list_strings[index3] = "";
-          }
-        }
-      }
-    });
-    return {
-      incompatible,
-      list,
-      list_strings
-    };
-  }
-  function SettingIncompatibleWith({ list, strings }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "setting-incompatible-with colourful",
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: icons.error,
-          identifier: "setting-incompatible-with"
-        }),
-        /* @__PURE__ */ jsx("strong", {
-          class: "setting-incompatible-with-text",
-          children: tl2(trans.incompatible)
-        }),
-        /* @__PURE__ */ jsx("p", {
-          class: "setting-incompatible-with-list",
-          children: Object.entries(list).map(([key, val], index3) => {
-            let title = key;
-            if (strings[index3] && strings[index3] != "") {
-              return tl2(strings[index3]);
-            }
-            if (settings_store[key]?.title) {
-              title = tl2(settings_store[key].title);
-            }
-            if (val == true) {
-              return tl2(trans.value_is_enabled, {
-                v: title
-              });
-            }
-            return tl2(trans.value_is_disabled, {
-              v: title
-            });
-          }).join(", ")
-        })
-      ]
-    });
-  }
-
-  // src/components/settings/provider/icon.tsx
-  function SettingIcon({ name }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "setting-icon",
-      children: /* @__PURE__ */ jsx(Icon, {
-        name
-      })
-    });
-  }
-
-  // src/components/settings/clickables/checkbox.tsx
-  function Checkbox({ ref: ref2, className: className2, interact = true, checked = false, menu }) {
-    const checkbox = createRef();
-    const elem = createRef();
-    function update() {
-      checkbox.current.checked = checked;
-      elem.current.setAttribute("aria-checked", checked);
-    }
-    const wrap2 = /* @__PURE__ */ jsx("div", {
-      class: [
-        "checkbox-wrap",
-        className2 && className2,
-        menu && "menu-checkbox-wrap"
-      ],
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx("input", {
-          type: "checkbox",
-          ref: checkbox
-        }),
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: [
-            "btn",
-            "check-box",
-            !interact && "no-interact",
-            menu && "menu-checkbox"
-          ],
-          ref: elem,
-          onClick: () => {
-            if (!interact) {
-              return;
-            }
-            checked = !checked;
-            update();
-          },
-          children: /* @__PURE__ */ jsx("div", {
-            class: "bleh-icon"
-          })
-        })
-      ]
-    });
-    update();
-    Object.defineProperty(wrap2, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    return wrap2;
   }
 
   // src/components/settings/provider/menu/checkbox.tsx
@@ -104720,383 +104819,6 @@ var bleh = (() => {
     });
   }
 
-  // src/pages/music/wiki.tsx
-  function bleh_wiki() {
-    let wiki_panel = document.createElement("section");
-    wiki_panel.classList.add("wiki-panel");
-    wiki_panel.innerHTML = page.structure.main.innerHTML;
-    page.structure.main.innerHTML = "";
-    page.structure.main.appendChild(wiki_panel);
-    page.structure.main.classList.add("not-a-panel");
-    let original_edit_button = page.structure.main.querySelector(".qa-wiki-edit");
-    let original_version_history = page.structure.main.querySelector(".wiki-history-link--desktop a");
-    let side_actions = document.createElement("section");
-    side_actions.classList.add("side-actions");
-    if (!page.mobile) {
-      page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
-    } else {
-      page.structure.main.appendChild(side_actions);
-    }
-    if (original_edit_button) {
-      let side_edit = document.createElement("a");
-      side_edit.classList.add("btn", "side-action", "icon-mask");
-      side_edit.setAttribute("href", original_edit_button.getAttribute("href"));
-      side_edit.setAttribute("data-type", "edit");
-      side_edit.textContent = tl2(trans.edit);
-      side_actions.appendChild(side_edit);
-    }
-    if (original_version_history) {
-      let side_history = document.createElement("a");
-      side_history.classList.add("btn", "side-action", "icon-mask");
-      side_history.setAttribute("href", original_version_history.getAttribute("href"));
-      side_history.setAttribute("data-type", "history");
-      side_history.textContent = tl2(trans.timeline);
-      side_actions.appendChild(side_history);
-    }
-    let wiki_author = wiki_panel.querySelector(".wiki-author");
-    if (wiki_author) {
-      let h22 = wiki_panel.querySelector("h2.text-18");
-      let sub_text = document.createElement("div");
-      sub_text.classList.add("sub-text", "space-below", "header-style");
-      sub_text.innerHTML = `
-            <div class="breadcrumb-origin prominent">
-                ${h22 ? h22.innerHTML : page.structure.container.querySelector(".content-top-header").textContent}
-            </div>
-            <div class="wiki-author-side">
-                ${wiki_author.innerHTML}
-            </div>
-        `;
-      wiki_panel.insertBefore(sub_text, wiki_panel.firstElementChild);
-      if (h22) {
-        wiki_panel.removeChild(h22);
-      }
-    }
-    let wiki = wiki_panel.querySelector(".wiki");
-    if (!wiki) return;
-    patch_wiki_contents(wiki);
-    let factbox = wiki_panel.querySelector(".factbox");
-    if (factbox) {
-      let facts = html.node`
-            <section class="facts">
-                ${factbox}
-            </section>
-        `;
-      side_actions.after(facts);
-    }
-  }
-  function bleh_wiki_history() {
-    let breadcrumb_root = page.structure.container.querySelector(".subpage-breadcrumb");
-    let breadcrumb_name = page.structure.container.querySelector(".subpage-title");
-    if (!breadcrumb_root) {
-      breadcrumb_root = page.structure.container.querySelector(".content-top-back-link");
-      breadcrumb_name = page.structure.container.querySelector(".content-top-header");
-    }
-    let sub_text = document.createElement("div");
-    sub_text.classList.add("sub-text", "space-below", "header-style");
-    sub_text.innerHTML = `
-        <div class="breadcrumb">
-            ${breadcrumb_root.querySelector("a").outerHTML}
-            <div class="breadcrumb-name prominent">
-                ${breadcrumb_name.textContent}
-            </div>
-        </div>
-    `;
-    breadcrumb_root.style.setProperty("display", "none");
-    breadcrumb_name.style.setProperty("display", "none");
-    let buffer_container = page.structure.container.querySelector(".row ~ .buffer-4");
-    if (!buffer_container) {
-      buffer_container = page.structure.container.querySelector(".wiki-history");
-    }
-    let wiki_history_table = buffer_container.querySelector(".wiki-history-table");
-    let pagination = buffer_container.querySelector(".pagination");
-    let wiki_panel = document.createElement("section");
-    wiki_panel.classList.add("wiki-history-panel");
-    wiki_panel.appendChild(sub_text);
-    wiki_panel.appendChild(wiki_history_table);
-    page.structure.main.appendChild(wiki_panel);
-    buffer_container.style.setProperty("display", "none");
-    if (pagination) {
-      wiki_panel.appendChild(pagination);
-    }
-    let side_actions = html.node`
-        <section class="side-actions">
-            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
-                ${tl2(trans.view_latest)}
-            </a>
-        </section>
-    `;
-    if (!page.mobile) {
-      page.structure.side.appendChild(side_actions);
-    } else {
-      page.structure.main.appendChild(side_actions);
-    }
-    let entries2 = page.structure.main.querySelectorAll(".wiki-history-entry");
-    entries2.forEach((entry) => {
-      let author = entry.querySelector(".wiki-history-author");
-      let avatar4 = author.querySelector(".wiki-history-author-avatar");
-      let name = author.querySelector(".link-block-target");
-      if (name && avatar4) {
-        let badge = patch_avatar(avatar4, name.textContent, "wiki");
-        if (badge && badge.type) {
-          if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
-            name.style.setProperty("--hue-over", badge.hue);
-            name.style.setProperty("--sat-over", badge.sat);
-            name.style.setProperty("--lit-over", badge.lit);
-          } else {
-            name.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${badge.user}`);
-          }
-        } else if (badge) {
-          name.classList.add(badge.type);
-        }
-      }
-    });
-  }
-  function bleh_wiki_editor() {
-    const editor = page.structure.main.querySelector(".wiki-edit-container");
-    if (editor) {
-      const form = editor.querySelector(":scope > form");
-      const body = form?.querySelector("#id_body");
-      body?.classList.add("wiki-editor-body");
-    }
-    let wiki_edit_panel = document.createElement("section");
-    wiki_edit_panel.classList.add("wiki-edit-panel");
-    wiki_edit_panel.innerHTML = page.structure.main.innerHTML;
-    page.structure.main.innerHTML = "";
-    page.structure.main.appendChild(wiki_edit_panel);
-    page.structure.main.classList.add("not-a-panel");
-    let breadcrumb_root = page.structure.container.querySelector(".subpage-breadcrumb");
-    let breadcrumb_name = page.structure.container.querySelector(".subpage-title");
-    if (!breadcrumb_name) {
-      breadcrumb_name = page.structure.content_top.querySelector(".content-top-header");
-      if (breadcrumb_name) {
-        page.structure.content_top.style.setProperty("display", "none");
-      }
-    }
-    if (!breadcrumb_root) {
-      breadcrumb_root = page.structure.container.querySelector(".content-top-back-link");
-      breadcrumb_name = page.structure.container.querySelector(".content-top-header");
-    }
-    let sub_text = document.createElement("div");
-    sub_text.classList.add("sub-text", "space-below", "header-style");
-    sub_text.innerHTML = `
-        <div class="breadcrumb">
-            ${breadcrumb_root.querySelector("a").outerHTML}
-            <div class="breadcrumb-name prominent">
-                ${breadcrumb_name.textContent}
-            </div>
-        </div>
-    `;
-    breadcrumb_root.style.setProperty("display", "none");
-    breadcrumb_name.style.setProperty("display", "none");
-    wiki_edit_panel.insertBefore(sub_text, wiki_edit_panel.firstElementChild);
-    page.structure.side.innerHTML = "";
-    const side_actions = html.node`
-        <section class="side-actions">
-            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
-                ${tl2(trans.view_latest)}
-            </a>
-        </section>
-    `;
-    if (!page.mobile) {
-      page.structure.side.appendChild(side_actions);
-    } else {
-      page.structure.main.appendChild(side_actions);
-    }
-    page.structure.side.appendChild(/* @__PURE__ */ jsx(SymbolPresets, {}));
-    page.structure.side.appendChild(html.node`
-        <section class="wiki-syntax-panel bleh--blank-panel">
-            <h3 class="text-18">${tl2(trans.fancy_syntax)}</h3>
-            <div class="syntax-listing">
-                <div class="syntax-listing-item">
-                    <div class="code-side">[artist]julie[/artist]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a href="${root}music/julie" data-link-type="artist" target="_blank">julie</a>`)
-    }}</div>
-                </div>
-                <div class="syntax-listing-item">
-                    <div class="code-side">[album artist=julie]pushing daisies[/album]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a href="${root}music/julie/pushing+daisies" data-link-type="album" target="_blank">pushing daisies</a>`)
-    }}</div>
-                </div>
-                <div class="syntax-listing-item">
-                    <div class="code-side">[track artist=julie]very little effort[/track]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a href="${root}music/julie/_/very+little+effort" data-link-type="track" target="_blank">very little effort</a>`)
-    }}</div>
-                </div>
-            </div>
-            <div class="sep"></div>
-            <div class="syntax-listing">
-                <div class="syntax-listing-item">
-                    <div class="code-side">[url]https://katelyn.moe/bleh[/url]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a href="https://katelyn.moe/bleh" target="_blank">https://katelyn.moe/bleh</a>`)
-    }}</div>
-                </div>
-                <div class="syntax-listing-item">
-                    <div class="code-side">[url=https://katelyn.moe/bleh]blehhh[/url]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a href="https://katelyn.moe/bleh" target="_blank">blehhh</a>`)
-    }}</div>
-                </div>
-            </div>
-            <div class="sep"></div>
-            <div class="syntax-listing">
-                <div class="syntax-listing-item">
-                    <div class="code-side">[tag]grunge[/tag]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a href="${root}tag/grunge" data-link-type="tag" target="_blank">grunge</a>`)
-    }}</div>
-                </div>
-                <div class="syntax-listing-item">
-                    <div class="code-side">[user]${auth.name}[/user]</div>
-                    <div class="detail-side">${{
-      html: tl2(trans.links_to).replace("{link}", `<a class="mention" href="${root}user/${auth.name}" target="_blank">@${auth.name}</a>`)
-    }}</div>
-                </div>
-            </div>
-        </section>
-    `);
-    let rules = page.structure.main.querySelector(".wiki-style-rules");
-    rules.removeAttribute("id");
-    let rules_panel = document.createElement("section");
-    rules_panel.classList.add("rules-panel");
-    rules_panel.setAttribute("id", "stylerules");
-    rules_panel.innerHTML = rules.innerHTML;
-    page.structure.side.appendChild(rules_panel);
-  }
-  function patch_wiki() {
-    if (ff("show_wiki_label")) {
-      let wiki_col = page.structure.main.querySelector(".wiki-column");
-      let wiki_empty = false;
-      if (!wiki_col) {
-        wiki_col = page.structure.main.querySelector(".wiki-section");
-      }
-      if (!wiki_col) return;
-      let wiki_block = wiki_col.querySelector(".wiki-block.visible-lg .wiki-block-inner-2");
-      if (!wiki_block) {
-        wiki_block = wiki_col.querySelector(".wiki-block-cta");
-        wiki_empty = true;
-      }
-      const read_more = wiki_block.querySelector("a:last-child");
-      read_more?.remove();
-      wiki_col.appendChild(/* @__PURE__ */ jsx(SubText, {
-        className: "wiki-sub-text",
-        children: /* @__PURE__ */ jsx("span", {
-          class: "right-links",
-          children: [
-            /* @__PURE__ */ jsx(SeeMore, {
-              className: "wiki-lower",
-              href: `${window.location.href}/+wiki/edit`,
-              icon: icons.edit,
-              children: tl2(trans.edit_wiki).toLowerCase()
-            }),
-            !wiki_empty && read_more && /* @__PURE__ */ jsx(SeeMore, {
-              className: "wiki-lower",
-              href: read_more.getAttribute("href"),
-              children: tl2(trans.read_more).toLowerCase()
-            })
-          ]
-        })
-      }));
-      if (!wiki_empty) {
-        patch_wiki_contents(wiki_block);
-      }
-    }
-  }
-  function can_trust_link(href) {
-    const url = new URL(href);
-    const scheme = url.protocol;
-    const hostname = url.hostname;
-    let dangerous = false;
-    if (!scheme || !scheme.startsWith("http")) dangerous = true;
-    if (useSettings.get("trusted_sites").includes(hostname)) {
-      return {
-        trusted: true,
-        dangerous
-      };
-    }
-    return {
-      trusted: false,
-      dangerous
-    };
-  }
-  function patch_wiki_contents(wiki_block) {
-    const links = wiki_block.querySelectorAll("a");
-    links.forEach((link) => {
-      let href = link.getAttribute("href");
-      if (!href) return;
-      let type;
-      let name = link.textContent.trim();
-      let sister;
-      link.classList.add("generic-link");
-      if (!href.startsWith(root)) {
-        if (href && is_link_external(href)) {
-          link.classList.add("link-with-icon");
-          link.appendChild(/* @__PURE__ */ jsx(Icon, {
-            name: icons.external
-          }));
-          const url = new URL(href);
-          const scheme = url.protocol;
-          const hostname = url.hostname;
-          const path = url.pathname;
-          link.addEventListener("click", (e5) => {
-            const { trusted, dangerous } = can_trust_link(href);
-            if (trusted) return;
-            e5.preventDefault();
-            external_url_prompt(href, dangerous);
-          });
-          if (link.textContent != href) {
-            hover_tooltip(link, /* @__PURE__ */ jsx(LinkTooltip, {
-              scheme,
-              hostname,
-              path
-            }), {
-              placement: "bottom"
-            });
-          }
-          return;
-        }
-      }
-      if (href.endsWith("/+wiki")) return;
-      href = href.replace(root, "").replace("music/+noredirect/", "music/").replace("music/", "");
-      if (href.startsWith("user/")) return;
-      if (href.startsWith("tag/")) {
-        type = "tag";
-      } else {
-        let split = href.split("/");
-        if (split.length == 1) {
-          type = "artist";
-        } else if (split.length == 2) {
-          type = "album";
-          name = desanitise(split[1]);
-          sister = desanitise(split[0]);
-        } else if (split.length == 3) {
-          type = "track";
-          name = desanitise(split[2]);
-          sister = desanitise(split[0]);
-        }
-      }
-      if (sister) {
-        tippy_esm_default(link, {
-          theme: "name-sister-combo",
-          content: html.node`
-                    <span class="name">${name}</span>
-                    <span class="sister">${sister}</span>
-                `
-        });
-      }
-      if (type) {
-        link.classList.add("wiki-link", "icon");
-        link.setAttribute("data-link-type", type);
-      }
-    });
-  }
-
-  // src/components/markdown/markdown.tsx
-  var import_showdown = __toESM(require_showdown());
-
   // node_modules/.deno/dompurify@3.4.15/node_modules/dompurify/dist/purify.es.mjs
   function _arrayLikeToArray(r2, a2) {
     (null == a2 || a2 > r2.length) && (a2 = r2.length);
@@ -106697,6 +106419,528 @@ var bleh = (() => {
   }
   var purify = createDOMPurify();
 
+  // src/components/text/social_link.tsx
+  function SocialLink({ href, children }) {
+    const link = new URL(href, `https://www.last.fm${root}`);
+    const host = link.hostname;
+    const path = link.pathname;
+    let label = host;
+    if (children) {
+      label = children;
+    } else if (link_strings[host]) {
+      label = link_strings[host];
+    }
+    return /* @__PURE__ */ jsx("a", {
+      class: [
+        "btn",
+        "music-link",
+        "social-link",
+        "colourful",
+        "icon"
+      ],
+      href,
+      target: "_blank",
+      "data-host": link.host,
+      "data-host-unknown": String(!Object.hasOwn(link_strings, link.host) || icons_not_supported.includes(link.host)),
+      onClick: (e5) => {
+        const { trusted, dangerous } = can_trust_link(href);
+        if (trusted) return;
+        e5.preventDefault();
+        external_url_prompt(href, dangerous);
+      },
+      "data-path": path,
+      style: `--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)`,
+      children: [
+        label,
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.external
+        })
+      ]
+    });
+  }
+
+  // src/components/markdown/links.tsx
+  var social_links_extension = (links) => [
+    {
+      type: "lang",
+      regex: /\[links\]([\s\S]*?)\[\/links\]/g,
+      replace: (_, content2) => {
+        const lines = content2.trim().split(/\n+/);
+        lines.forEach((line) => {
+          line = line.trim();
+          if (!line) return;
+          console.info("line", line, line.trim());
+          const markdown_regex = line.match(/^\[(.+?)\]\((.+?)\)$/);
+          let url;
+          let name;
+          if (markdown_regex) {
+            url = markdown_regex[2].trim();
+            name = markdown_regex[1].trim();
+          } else {
+            url = line;
+          }
+          try {
+            const link = new URL(url, `https://www.last.fm${root}`);
+            const host = link.hostname;
+            const protocol = link.protocol;
+            const path = link.pathname;
+            console.info("proto", protocol, link);
+            if (protocol != "http:" && protocol != "https:") return;
+            const final = {
+              host,
+              path,
+              url: link.href
+            };
+            if (name) {
+              final.name = purify.sanitize(name, {
+                ALLOWED_TAGS: []
+              });
+            }
+            links.push(final);
+          } catch (e5) {
+            return;
+          }
+        });
+        return "";
+      }
+    }
+  ];
+  var link_strings = {
+    "open.spotify.com": "Spotify",
+    "spotify.com": "Spotify",
+    "youtube.com": "YouTube",
+    "x.com": "Twitter (latterly X)",
+    "twitter.com": "Twitter",
+    "github.com": "GitHub",
+    "discord.com": "Discord",
+    "discord.gg": "Discord",
+    "bandcamp.com": "Bandcamp",
+    "soundcloud.com": "Soundcloud",
+    "tiktok.com": "TikTok",
+    "www.tiktok.com": "TikTok",
+    "ko-fi.com": "Ko-fi",
+    "patreon.com": "Patreon",
+    "www.patreon.com": "Patreon",
+    "twitch.tv": "Twitch",
+    "www.twitch.tv": "Twitch",
+    "linktr.ee": "Linktree",
+    "carrd.co": "Carrd",
+    "music.apple.com": "Apple Music",
+    "music.youtube.com": "YouTube Music",
+    "facebook.com": "Facebook",
+    "www.discogs.com": "Discogs",
+    "discogs.com": "Discogs",
+    "tidal.com": "Tidal",
+    "record.club": "Record Club",
+    "rateyourmusic.com": "RYM",
+    "albumoftheyear.org": "AOTY",
+    "mastodon.social": "Mastodon",
+    "bsky.app": "Bluesky",
+    "reddit.com": "Reddit"
+  };
+  var icons_not_supported = [
+    "record.club",
+    "reddit.com"
+  ];
+  function social_links(body, links) {
+    if (links.length == 0) return;
+    body.appendChild(/* @__PURE__ */ jsx("div", {
+      class: "social-links-container",
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "sub-text music-small-header",
+          children: tl2(trans.links)
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "music-links social-links",
+          children: links.map((link) => {
+            return /* @__PURE__ */ jsx(SocialLink, {
+              href: link.url,
+              children: link.name
+            });
+          })
+        })
+      ]
+    }));
+  }
+
+  // src/pages/music/wiki.tsx
+  function bleh_wiki() {
+    let wiki_panel = document.createElement("section");
+    wiki_panel.classList.add("wiki-panel");
+    wiki_panel.innerHTML = page.structure.main.innerHTML;
+    page.structure.main.innerHTML = "";
+    page.structure.main.appendChild(wiki_panel);
+    page.structure.main.classList.add("not-a-panel");
+    let original_edit_button = page.structure.main.querySelector(".qa-wiki-edit");
+    let original_version_history = page.structure.main.querySelector(".wiki-history-link--desktop a");
+    let side_actions = document.createElement("section");
+    side_actions.classList.add("side-actions");
+    if (!page.mobile) {
+      page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+    } else {
+      page.structure.main.appendChild(side_actions);
+    }
+    if (original_edit_button) {
+      let side_edit = document.createElement("a");
+      side_edit.classList.add("btn", "side-action", "icon-mask");
+      side_edit.setAttribute("href", original_edit_button.getAttribute("href"));
+      side_edit.setAttribute("data-type", "edit");
+      side_edit.textContent = tl2(trans.edit);
+      side_actions.appendChild(side_edit);
+    }
+    if (original_version_history) {
+      let side_history = document.createElement("a");
+      side_history.classList.add("btn", "side-action", "icon-mask");
+      side_history.setAttribute("href", original_version_history.getAttribute("href"));
+      side_history.setAttribute("data-type", "history");
+      side_history.textContent = tl2(trans.timeline);
+      side_actions.appendChild(side_history);
+    }
+    let wiki_author = wiki_panel.querySelector(".wiki-author");
+    if (wiki_author) {
+      let h22 = wiki_panel.querySelector("h2.text-18");
+      let sub_text = document.createElement("div");
+      sub_text.classList.add("sub-text", "space-below", "header-style");
+      sub_text.innerHTML = `
+            <div class="breadcrumb-origin prominent">
+                ${h22 ? h22.innerHTML : page.structure.container.querySelector(".content-top-header").textContent}
+            </div>
+            <div class="wiki-author-side">
+                ${wiki_author.innerHTML}
+            </div>
+        `;
+      wiki_panel.insertBefore(sub_text, wiki_panel.firstElementChild);
+      if (h22) {
+        wiki_panel.removeChild(h22);
+      }
+    }
+    let wiki = wiki_panel.querySelector(".wiki");
+    if (!wiki) return;
+    patch_wiki_contents(wiki);
+    let factbox = wiki_panel.querySelector(".factbox");
+    if (factbox) {
+      let facts = html.node`
+            <section class="facts">
+                ${factbox}
+            </section>
+        `;
+      side_actions.after(facts);
+    }
+  }
+  function bleh_wiki_history() {
+    let breadcrumb_root = page.structure.container.querySelector(".subpage-breadcrumb");
+    let breadcrumb_name = page.structure.container.querySelector(".subpage-title");
+    if (!breadcrumb_root) {
+      breadcrumb_root = page.structure.container.querySelector(".content-top-back-link");
+      breadcrumb_name = page.structure.container.querySelector(".content-top-header");
+    }
+    let sub_text = document.createElement("div");
+    sub_text.classList.add("sub-text", "space-below", "header-style");
+    sub_text.innerHTML = `
+        <div class="breadcrumb">
+            ${breadcrumb_root.querySelector("a").outerHTML}
+            <div class="breadcrumb-name prominent">
+                ${breadcrumb_name.textContent}
+            </div>
+        </div>
+    `;
+    breadcrumb_root.style.setProperty("display", "none");
+    breadcrumb_name.style.setProperty("display", "none");
+    let buffer_container = page.structure.container.querySelector(".row ~ .buffer-4");
+    if (!buffer_container) {
+      buffer_container = page.structure.container.querySelector(".wiki-history");
+    }
+    let wiki_history_table = buffer_container.querySelector(".wiki-history-table");
+    let pagination = buffer_container.querySelector(".pagination");
+    let wiki_panel = document.createElement("section");
+    wiki_panel.classList.add("wiki-history-panel");
+    wiki_panel.appendChild(sub_text);
+    wiki_panel.appendChild(wiki_history_table);
+    page.structure.main.appendChild(wiki_panel);
+    buffer_container.style.setProperty("display", "none");
+    if (pagination) {
+      wiki_panel.appendChild(pagination);
+    }
+    let side_actions = html.node`
+        <section class="side-actions">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
+                ${tl2(trans.view_latest)}
+            </a>
+        </section>
+    `;
+    if (!page.mobile) {
+      page.structure.side.appendChild(side_actions);
+    } else {
+      page.structure.main.appendChild(side_actions);
+    }
+    let entries2 = page.structure.main.querySelectorAll(".wiki-history-entry");
+    entries2.forEach((entry) => {
+      let author = entry.querySelector(".wiki-history-author");
+      let avatar4 = author.querySelector(".wiki-history-author-avatar");
+      let name = author.querySelector(".link-block-target");
+      if (name && avatar4) {
+        let badge = patch_avatar(avatar4, name.textContent, "wiki");
+        if (badge && badge.type) {
+          if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
+            name.style.setProperty("--hue-over", badge.hue);
+            name.style.setProperty("--sat-over", badge.sat);
+            name.style.setProperty("--lit-over", badge.lit);
+          } else {
+            name.classList.add(`user-status--bleh-${badge.type}`, `user-status--bleh-user-${badge.user}`);
+          }
+        } else if (badge) {
+          name.classList.add(badge.type);
+        }
+      }
+    });
+  }
+  function bleh_wiki_editor() {
+    const editor = page.structure.main.querySelector(".wiki-edit-container");
+    if (editor) {
+      const form = editor.querySelector(":scope > form");
+      const body = form?.querySelector("#id_body");
+      body?.classList.add("wiki-editor-body");
+    }
+    let wiki_edit_panel = document.createElement("section");
+    wiki_edit_panel.classList.add("wiki-edit-panel");
+    wiki_edit_panel.innerHTML = page.structure.main.innerHTML;
+    page.structure.main.innerHTML = "";
+    page.structure.main.appendChild(wiki_edit_panel);
+    page.structure.main.classList.add("not-a-panel");
+    let breadcrumb_root = page.structure.container.querySelector(".subpage-breadcrumb");
+    let breadcrumb_name = page.structure.container.querySelector(".subpage-title");
+    if (!breadcrumb_name) {
+      breadcrumb_name = page.structure.content_top.querySelector(".content-top-header");
+      if (breadcrumb_name) {
+        page.structure.content_top.style.setProperty("display", "none");
+      }
+    }
+    if (!breadcrumb_root) {
+      breadcrumb_root = page.structure.container.querySelector(".content-top-back-link");
+      breadcrumb_name = page.structure.container.querySelector(".content-top-header");
+    }
+    let sub_text = document.createElement("div");
+    sub_text.classList.add("sub-text", "space-below", "header-style");
+    sub_text.innerHTML = `
+        <div class="breadcrumb">
+            ${breadcrumb_root.querySelector("a").outerHTML}
+            <div class="breadcrumb-name prominent">
+                ${breadcrumb_name.textContent}
+            </div>
+        </div>
+    `;
+    breadcrumb_root.style.setProperty("display", "none");
+    breadcrumb_name.style.setProperty("display", "none");
+    wiki_edit_panel.insertBefore(sub_text, wiki_edit_panel.firstElementChild);
+    page.structure.side.innerHTML = "";
+    const side_actions = html.node`
+        <section class="side-actions">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
+                ${tl2(trans.view_latest)}
+            </a>
+        </section>
+    `;
+    if (!page.mobile) {
+      page.structure.side.appendChild(side_actions);
+    } else {
+      page.structure.main.appendChild(side_actions);
+    }
+    page.structure.side.appendChild(/* @__PURE__ */ jsx(SymbolPresets, {}));
+    page.structure.side.appendChild(html.node`
+        <section class="wiki-syntax-panel bleh--blank-panel">
+            <h3 class="text-18">${tl2(trans.fancy_syntax)}</h3>
+            <div class="syntax-listing">
+                <div class="syntax-listing-item">
+                    <div class="code-side">[artist]julie[/artist]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a href="${root}music/julie" data-link-type="artist" target="_blank">julie</a>`)
+    }}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[album artist=julie]pushing daisies[/album]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a href="${root}music/julie/pushing+daisies" data-link-type="album" target="_blank">pushing daisies</a>`)
+    }}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[track artist=julie]very little effort[/track]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a href="${root}music/julie/_/very+little+effort" data-link-type="track" target="_blank">very little effort</a>`)
+    }}</div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="syntax-listing">
+                <div class="syntax-listing-item">
+                    <div class="code-side">[url]https://katelyn.moe/bleh[/url]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a href="https://katelyn.moe/bleh" target="_blank">https://katelyn.moe/bleh</a>`)
+    }}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[url=https://katelyn.moe/bleh]blehhh[/url]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a href="https://katelyn.moe/bleh" target="_blank">blehhh</a>`)
+    }}</div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="syntax-listing">
+                <div class="syntax-listing-item">
+                    <div class="code-side">[tag]grunge[/tag]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a href="${root}tag/grunge" data-link-type="tag" target="_blank">grunge</a>`)
+    }}</div>
+                </div>
+                <div class="syntax-listing-item">
+                    <div class="code-side">[user]${auth.name}[/user]</div>
+                    <div class="detail-side">${{
+      html: tl2(trans.links_to).replace("{link}", `<a class="mention" href="${root}user/${auth.name}" target="_blank">@${auth.name}</a>`)
+    }}</div>
+                </div>
+            </div>
+        </section>
+    `);
+    let rules = page.structure.main.querySelector(".wiki-style-rules");
+    rules.removeAttribute("id");
+    let rules_panel = document.createElement("section");
+    rules_panel.classList.add("rules-panel");
+    rules_panel.setAttribute("id", "stylerules");
+    rules_panel.innerHTML = rules.innerHTML;
+    page.structure.side.appendChild(rules_panel);
+  }
+  function patch_wiki() {
+    if (ff("show_wiki_label")) {
+      let wiki_col = page.structure.main.querySelector(".wiki-column");
+      let wiki_empty = false;
+      if (!wiki_col) {
+        wiki_col = page.structure.main.querySelector(".wiki-section");
+      }
+      if (!wiki_col) return;
+      let wiki_block = wiki_col.querySelector(".wiki-block.visible-lg .wiki-block-inner-2");
+      if (!wiki_block) {
+        wiki_block = wiki_col.querySelector(".wiki-block-cta");
+        wiki_empty = true;
+      }
+      const read_more = wiki_block.querySelector("a:last-child");
+      read_more?.remove();
+      wiki_col.appendChild(/* @__PURE__ */ jsx(SubText, {
+        className: "wiki-sub-text",
+        children: /* @__PURE__ */ jsx("span", {
+          class: "right-links",
+          children: [
+            /* @__PURE__ */ jsx(SeeMore, {
+              className: "wiki-lower",
+              href: `${window.location.href}/+wiki/edit`,
+              icon: icons.edit,
+              children: tl2(trans.edit_wiki).toLowerCase()
+            }),
+            !wiki_empty && read_more && /* @__PURE__ */ jsx(SeeMore, {
+              className: "wiki-lower",
+              href: read_more.getAttribute("href"),
+              children: tl2(trans.read_more).toLowerCase()
+            })
+          ]
+        })
+      }));
+      if (!wiki_empty) {
+        patch_wiki_contents(wiki_block);
+      }
+    }
+  }
+  function can_trust_link(href) {
+    const url = new URL(href);
+    const scheme = url.protocol;
+    const hostname = url.hostname;
+    let dangerous = false;
+    if (!scheme || !scheme.startsWith("http")) dangerous = true;
+    if (useSettings.get("trusted_sites").includes(hostname) || link_strings.hasOwnProperty(hostname)) {
+      return {
+        trusted: true,
+        dangerous
+      };
+    }
+    return {
+      trusted: false,
+      dangerous
+    };
+  }
+  function patch_wiki_contents(wiki_block) {
+    const links = wiki_block.querySelectorAll("a");
+    links.forEach((link) => {
+      let href = link.getAttribute("href");
+      if (!href) return;
+      let type;
+      let name = link.textContent.trim();
+      let sister;
+      link.classList.add("generic-link");
+      if (!href.startsWith(root)) {
+        if (href && is_link_external(href)) {
+          link.classList.add("link-with-icon");
+          link.appendChild(/* @__PURE__ */ jsx(Icon, {
+            name: icons.external
+          }));
+          const url = new URL(href);
+          const scheme = url.protocol;
+          const hostname = url.hostname;
+          const path = url.pathname;
+          link.addEventListener("click", (e5) => {
+            const { trusted, dangerous } = can_trust_link(href);
+            if (trusted) return;
+            e5.preventDefault();
+            external_url_prompt(href, dangerous);
+          });
+          if (link.textContent != href) {
+            hover_tooltip(link, /* @__PURE__ */ jsx(LinkTooltip, {
+              scheme,
+              hostname,
+              path
+            }), {
+              placement: "bottom"
+            });
+          }
+          return;
+        }
+      }
+      if (href.endsWith("/+wiki")) return;
+      href = href.replace(root, "").replace("music/+noredirect/", "music/").replace("music/", "");
+      if (href.startsWith("user/")) return;
+      if (href.startsWith("tag/")) {
+        type = "tag";
+      } else {
+        let split = href.split("/");
+        if (split.length == 1) {
+          type = "artist";
+        } else if (split.length == 2) {
+          type = "album";
+          name = desanitise(split[1]);
+          sister = desanitise(split[0]);
+        } else if (split.length == 3) {
+          type = "track";
+          name = desanitise(split[2]);
+          sister = desanitise(split[0]);
+        }
+      }
+      if (sister) {
+        tippy_esm_default(link, {
+          theme: "name-sister-combo",
+          content: html.node`
+                    <span class="name">${name}</span>
+                    <span class="sister">${sister}</span>
+                `
+        });
+      }
+      if (type) {
+        link.classList.add("wiki-link", "icon");
+        link.setAttribute("data-link-type", type);
+      }
+    });
+  }
+
+  // src/components/markdown/markdown.tsx
+  var import_showdown = __toESM(require_showdown());
+
   // src/components/shared/text_decode.ts
   function text_decode(text4) {
     const textarea = document.createElement("textarea");
@@ -106890,151 +107134,6 @@ var bleh = (() => {
       });
       timestamp.replaceWith(new_timestamp);
     });
-  }
-
-  // src/components/text/social_link.tsx
-  function SocialLink({ href, children }) {
-    const link = new URL(href, `https://www.last.fm${root}`);
-    const host = link.hostname;
-    const path = link.pathname;
-    let label = host;
-    if (children) {
-      label = children;
-    } else if (link_strings[host]) {
-      label = link_strings[host];
-    }
-    return /* @__PURE__ */ jsx("a", {
-      class: [
-        "btn",
-        "music-link",
-        "social-link",
-        "colourful",
-        "icon"
-      ],
-      href,
-      target: "_blank",
-      "data-host": link.host,
-      "data-host-unknown": String(!Object.hasOwn(link_strings, link.host) || icons_not_supported.includes(link.host)),
-      onClick: (e5) => {
-        const { trusted, dangerous } = can_trust_link(href);
-        if (trusted) return;
-        e5.preventDefault();
-        external_url_prompt(href, dangerous);
-      },
-      "data-path": path,
-      style: `--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)`,
-      children: [
-        label,
-        /* @__PURE__ */ jsx(Icon, {
-          name: icons.external
-        })
-      ]
-    });
-  }
-
-  // src/components/markdown/links.tsx
-  var social_links_extension = (links) => [
-    {
-      type: "lang",
-      regex: /\[links\]([\s\S]*?)\[\/links\]/g,
-      replace: (_, content2) => {
-        const lines = content2.trim().split(/\n+/);
-        lines.forEach((line) => {
-          line = line.trim();
-          if (!line) return;
-          console.info("line", line, line.trim());
-          const markdown_regex = line.match(/^\[(.+?)\]\((.+?)\)$/);
-          let url;
-          let name;
-          if (markdown_regex) {
-            url = markdown_regex[2].trim();
-            name = markdown_regex[1].trim();
-          } else {
-            url = line;
-          }
-          try {
-            const link = new URL(url, `https://www.last.fm${root}`);
-            const host = link.hostname;
-            const protocol = link.protocol;
-            const path = link.pathname;
-            console.info("proto", protocol, link);
-            if (protocol != "http:" && protocol != "https:") return;
-            const final = {
-              host,
-              path,
-              url: link.href
-            };
-            if (name) {
-              final.name = purify.sanitize(name, {
-                ALLOWED_TAGS: []
-              });
-            }
-            links.push(final);
-          } catch (e5) {
-            return;
-          }
-        });
-        return "";
-      }
-    }
-  ];
-  var link_strings = {
-    "open.spotify.com": "Spotify",
-    "spotify.com": "Spotify",
-    "youtube.com": "YouTube",
-    "x.com": "Twitter (latterly X)",
-    "twitter.com": "Twitter",
-    "github.com": "GitHub",
-    "discord.com": "Discord",
-    "discord.gg": "Discord",
-    "bandcamp.com": "Bandcamp",
-    "soundcloud.com": "Soundcloud",
-    "tiktok.com": "TikTok",
-    "www.tiktok.com": "TikTok",
-    "ko-fi.com": "Ko-fi",
-    "patreon.com": "Patreon",
-    "www.patreon.com": "Patreon",
-    "twitch.tv": "Twitch",
-    "www.twitch.tv": "Twitch",
-    "linktr.ee": "Linktree",
-    "carrd.co": "Carrd",
-    "music.apple.com": "Apple Music",
-    "music.youtube.com": "YouTube Music",
-    "facebook.com": "Facebook",
-    "www.discogs.com": "Discogs",
-    "discogs.com": "Discogs",
-    "tidal.com": "Tidal",
-    "record.club": "Record Club",
-    "rateyourmusic.com": "RYM",
-    "albumoftheyear.org": "AOTY",
-    "mastodon.social": "Mastodon",
-    "bsky.app": "Bluesky",
-    "reddit.com": "Reddit"
-  };
-  var icons_not_supported = [
-    "record.club",
-    "reddit.com"
-  ];
-  function social_links(body, links) {
-    if (links.length == 0) return;
-    body.appendChild(/* @__PURE__ */ jsx("div", {
-      class: "social-links-container",
-      children: [
-        /* @__PURE__ */ jsx("div", {
-          class: "sub-text music-small-header",
-          children: tl2(trans.links)
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "music-links social-links",
-          children: links.map((link) => {
-            return /* @__PURE__ */ jsx(SocialLink, {
-              href: link.url,
-              children: link.name
-            });
-          })
-        })
-      ]
-    }));
   }
 
   // src/components/markdown/markdown.tsx
@@ -107965,104 +108064,6 @@ var bleh = (() => {
     function w() {
       e5.subpage = e5.initial.replace(e5.type, "").replace("_", "").replace("music_", "").replace("festival_", "event_"), L2.state != e5.subpage && (L2.state = e5.subpage, n2(`subpage of ${e5.subpage}`, "page"), f4 && f4());
     }
-  }
-
-  // src/components/settings/provider/checkbox.tsx
-  function SettingCheckbox({ ref: ref2, bind, standalone = false, icon: icon2, name, body, onChange, disabled, onMouseEnter, onMouseLeave }) {
-    let value = bind ? useSettings.get(bind) : true;
-    const checkbox = createRef();
-    const uuid = crypto.randomUUID();
-    if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
-        set2(val, true);
-      });
-    }
-    const store = get_from_store(bind);
-    if (store) {
-      if (!icon2) icon2 = store.icon;
-      if (store.incompatible) {
-        Object.entries(store.incompatible).forEach(([key]) => {
-          useSettings.on(key, () => {
-            update();
-          });
-        });
-      }
-    }
-    function update() {
-      disabled = false;
-      let incompatible = false;
-      let incompatible_list = {};
-      let incompatible_strings = [];
-      if (store) {
-        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
-      }
-      if (incompatible) {
-        disabled = true;
-      }
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx(Checkbox, {
-            className: "setting-inner",
-            checked: value,
-            ref: checkbox
-          }),
-          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
-            name: icon2
-          }),
-          /* @__PURE__ */ jsx(SettingLabel, {
-            name,
-            body,
-            store
-          }),
-          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
-            list: incompatible_list,
-            strings: incompatible_strings
-          })
-        ]
-      }));
-    }
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: [
-        "setting",
-        standalone && "standalone"
-      ],
-      "data-type": "toggle",
-      id: `setting_${bind}`,
-      onMouseEnter,
-      onMouseLeave,
-      onClick: () => {
-        set2(!value);
-      },
-      ref: ref2
-    });
-    update();
-    function set2(val, received = false) {
-      if (value == val) return;
-      value = val;
-      checkbox.current.checked = val;
-      if (bind) {
-        if (!received) useSettings.set(bind, val, uuid);
-      } else {
-        if (onChange) onChange(val);
-      }
-      if (onMouseEnter) onMouseEnter();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(val) {
-        set2(val);
-      }
-    });
-    elem.update = update;
-    return elem;
   }
 
   // src/components/dialog/theme_schedule.tsx
@@ -126414,7 +126415,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-18T03:46:01.003Z"
+    built_on: "2026-09-18T03:50:36.773Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

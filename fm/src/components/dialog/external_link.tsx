@@ -11,6 +11,8 @@ import { save_setting } from '@/components/settings/settings.tsx';
 import { toggle } from '@/components/settings/toggle.js';
 import { settings } from '@/build/config.ts';
 import { useSettings } from '@/page.ts';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { createRef } from 'jsx-dom';
 
 export function external_url_prompt(url: string, dangerous = false) {
 	log(
@@ -23,7 +25,7 @@ export function external_url_prompt(url: string, dangerous = false) {
 	const hostname = link.hostname;
 	const path = link.pathname + link.search + link.hash;
 
-	let trust_site: HTMLElement;
+	const trust_site = createRef();
 
 	dialog({
 		id: 'external_url',
@@ -63,16 +65,15 @@ export function external_url_prompt(url: string, dangerous = false) {
 							)
 							: ''}
 					</div>
-					{hostname != ''
-						? (
-							trust_site = toggle({
-								type: 'checkbox',
-								title: tl(trans.leaving_site_checkbox, {
-									v: hostname,
-								}),
-							})
-						)
-						: ''}
+					{hostname != '' && (
+						<SettingCheckbox
+							name={tl(trans.leaving_site_checkbox, {
+								v: hostname,
+							})}
+							standalone
+							ref={trust_site}
+						/>
+					)}
 				</div>
 				<div class='modal-footer'>
 					<button
@@ -86,7 +87,7 @@ export function external_url_prompt(url: string, dangerous = false) {
 						type='button'
 						class={['btn', 'primary', 'continue']}
 						onClick={() => {
-							if (trust_site?.checked()) {
+							if (trust_site.current.value) {
 								useSettings.append('trusted_sites', hostname);
 								log(
 									`added ${hostname} to trusted sites`,
