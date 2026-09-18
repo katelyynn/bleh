@@ -4,6 +4,10 @@
 	gap: 10px;
 }
 
+.carousel-inner {
+	cursor: pointer;
+}
+
 .carousel-inner-value {
 	display: flex;
 	justify-content: center;
@@ -17,6 +21,8 @@
 	&[data-direction="right"] {
 		animation: carousel_right 0.6s var(--trans-function);
 	}
+
+	pointer-events: none;
 }
 
 .carousel-arrow {
@@ -79,7 +85,7 @@
 	justify-content: center;
 	text-align: center;
 
-	& > .name-style {
+	&>.name-style {
 		font-size: calc(15px * var(--custom-font-size-multiplier, 1));
 	}
 }

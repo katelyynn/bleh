@@ -851,7 +851,7 @@
 	--toggle-width: 34px;
 	--toggle-height: 20px;
 	--dot-size: 14px;
-	--toggle-padding: 3px;
+	--toggle-padding: calc((var(--toggle-height) - var(--dot-size)) / 2);
 
 	&>.dot {
 		position: absolute;

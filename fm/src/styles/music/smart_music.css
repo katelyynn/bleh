@@ -21,12 +21,12 @@
 	white-space: nowrap;
 	flex-shrink: 1;
 
-	& > a {
+	&>a {
 		cursor: pointer;
 		overflow: hidden;
 	}
 
-	& > a + a {
+	&>a+a {
 		margin-left: 4px;
 	}
 }
@@ -37,7 +37,6 @@
 
 .feat {
 	display: inline;
-	margin-left: 6px;
 	color: oklch(var(--c2) / 80%);
 
 	&:is([data-tag-group="mixes"], [data-tag-group="mixes_numbers"], [data-tag-group="stems"], [data-tag-group="bonus"]) {

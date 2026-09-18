@@ -1697,17 +1697,19 @@ export function prepare_music() {
 
 	page.state.fonts = {
 		none: '',
-		uni: 'UnifrakturCook',
-		lilita: 'Lilita One',
 		single: 'Single Day',
 		cherry: 'Cherry Bomb One',
+		darum: 'Darumadrop One',
 		balsamiq: 'Balsamiq Sans',
+		sister: 'Love Ya Like A Sister',
+		lilita: 'Lilita One',
+		code: 'Google Sans Code',
+		rakkas: 'Rakkas',
 		crimson: 'Crimson Text',
 		rokkitt: 'Rokkitt',
-		code: 'Google Sans Code',
+		uni: 'UnifrakturCook',
 		zpix: 'Zpix',
 		mask: 'Expose',
-		rakkas: 'Rakkas',
 	};
 }
 

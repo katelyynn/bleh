@@ -52,6 +52,10 @@
 		transform-origin: bottom left;
 		opacity: 0.6;
 
+		width: unset !important;
+		top: unset !important;
+		margin: unset !important;
+
 		transition-property: transform;
 		transition-duration: 0.2s;
 		transition-timing-function: var(--trans-function-ani);
