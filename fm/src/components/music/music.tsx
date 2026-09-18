@@ -40,7 +40,13 @@ import { beta_indicator } from '../shared/indicator';
 import { useSettings } from '@/page.ts';
 import { context_menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
-import { SocialLink } from '@/components/text/social_link.tsx';
+import {
+	music_links_edit,
+	SocialLink,
+} from '@/components/text/social_link.tsx';
+import { SubText } from '@/components/text/sub.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { createRef, ReactNode } from 'jsx-dom';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);
@@ -597,9 +603,9 @@ export async function show_your_scrobbles() {
 	if (metadata) {
 		metadata.classList.remove('hidden-xs');
 
-		let groups = [];
+		const groups: { header: Element; value?: Element }[] = [];
 
-		let headers = metadata.querySelectorAll(
+		const headers = metadata.querySelectorAll(
 			'.catalogue-metadata-heading:not(.visible-xs)',
 		);
 		headers.forEach((item, index) => {
@@ -607,7 +613,8 @@ export async function show_your_scrobbles() {
 				header: item,
 			};
 		});
-		let values = metadata.querySelectorAll(
+
+		const values = metadata.querySelectorAll(
 			'.catalogue-metadata-description:not(.visible-xs)',
 		);
 		values.forEach((item, index) => {
@@ -616,30 +623,26 @@ export async function show_your_scrobbles() {
 			groups[index].value = item;
 		});
 
-		render(
-			metadata,
-			html`
-				${groups.map(
-					(group) =>
-						html.node`
-                <div class="metadata-group">
-                    ${group.header}
-                    ${group.value}
-                </div>
-            `,
-				)}
-			`,
+		metadata.replaceChildren(
+			<>
+				{groups.map((group) => (
+					<div class='metadata-group'>
+						{group.header as ReactNode}
+						{group.value as ReactNode}
+					</div>
+				))}
+			</>,
 		);
 	}
 
 	if (page_is_blocked) {
-		page.structure.main.insertBefore(
+		page.structure.main!.insertBefore(
 			html.node`
             <section class="cta blocked-cta">
                 <strong>${tl(trans.blocked_page)}</strong>
             </section>
         `,
-			page.structure.main.firstElementChild,
+			page.structure.main!.firstElementChild,
 		);
 
 		return;
@@ -648,24 +651,26 @@ export async function show_your_scrobbles() {
 	let play_on;
 	let play_links;
 
-	let link_container;
-	const link_group = html.node`
-        <div class="metadata-row">
-            <div class="metadata-group">
-                <div class="sub-text music-small-header">
-                    ${tl(trans.find_on)}
-                    <a class="wiki-edit-small icon" href="${root}bleh/interface?setting=music_links">
-                        ${tl(trans.edit_links)}
-                    </a>
-                </div>
-                <div class="music-links" ref=${(el) => (link_container = el)} />
-            </div>
-        </div>
-    `;
+	const link_container = createRef();
+	const link_group = (
+		<div class='metadata-row'>
+			<div class='metadata-group'>
+				<SubText className='music-small-header'>
+					{tl(trans.find_on)}
+					<SeeMore
+						className='wiki-lower'
+						icon={icons.edit}
+						onClick={music_links_edit}
+					>
+						{(tl(trans.edit_links) as string).toLowerCase()}
+					</SeeMore>
+				</SubText>
+				<div class='music-links' ref={link_container} />
+			</div>
+		</div>
+	);
 
 	const link_types: Record<string, Element | null> = {};
-
-	const music_links = useSettings.get('music_links') as string[];
 
 	if (page.type == 'track') {
 		play_on = page.structure.side.querySelector(
@@ -970,17 +975,23 @@ export async function show_your_scrobbles() {
 		}
 	}
 
-	console.error(link_types);
+	function update_links() {
+		const music_links = useSettings.get('music_links') as string[];
 
-	link_container!.replaceChildren(
-		<>
-			{music_links.map((link) => {
-				if (link_types[link]) return link_types[link];
-			})}
-		</>,
-	);
+		link_container.current.replaceChildren(
+			<>
+				{music_links.map((link) => {
+					if (link_types[link]) return link_types[link];
+				})}
+			</>,
+		);
+	}
 
-	if (link_container.childNodes.length > 0) col_main.appendChild(link_group);
+	update_links();
+
+	useSettings.on('music_links', update_links);
+
+	col_main.appendChild(link_group);
 
 	const tags = col_main.querySelector('.catalogue-tags');
 	if (tags) {

@@ -1,5 +1,5 @@
 import { ReactNode } from 'jsx-dom';
-import { root } from '@/build/page.ts';
+import { page, root } from '@/build/page.ts';
 import {
 	icons_not_supported,
 	link_strings,
@@ -7,6 +7,10 @@ import {
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 import { can_trust_link } from '@/pages/music/wiki.tsx';
+import { dialog } from '@/components/dialog/dialog.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingList } from '@/components/settings/provider/list.tsx';
+import { tl, trans } from '@/build/trans.ts';
 
 interface SocialLinkProps {
 	href: string;
@@ -62,4 +66,20 @@ export function SocialLink({
 			<Icon name={icons.external} />
 		</a>
 	);
+}
+
+export function music_links_edit() {
+	dialog({
+		id: 'music_links',
+		icon: icons.album,
+		title: tl(trans.overview),
+		body: (
+			<SettingGroup>
+				<SettingList
+					bind='music_links'
+					values={page.state.music_links}
+				/>
+			</SettingGroup>
+		),
+	});
 }
