@@ -384,6 +384,11 @@ export function MarkdownField({
 															);
 
 															update();
+															if (onChange) {
+																onChange(
+																	elem.value,
+																);
+															}
 														},
 													);
 
@@ -448,6 +453,9 @@ export function MarkdownField({
 													);
 
 													update();
+													if (onChange) {
+														onChange(elem.value);
+													}
 												}
 											}}
 										/>
@@ -535,9 +543,12 @@ export function MarkdownField({
 	function update() {
 		select();
 		// the extra string fixes an ending line break
-		let val = elem.value + '\u00a0'
+		let val = (elem.value + '\u00a0')
 			.replace(/</g, '&lt;')
 			.replace(/>/g, '&gt;');
+
+		console.error(val);
+		console.error(elem.value);
 
 		if (use_md) {
 			val = val.replace(

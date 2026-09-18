@@ -61,6 +61,7 @@
 	&:after {
 		display: block !important;
 		border: unset !important;
+		right: calc(var(--icon-size) + 4px);
 	}
 }
 

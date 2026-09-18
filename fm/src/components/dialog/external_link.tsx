@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { dialog, dialog_rm } from '@/components/dialog/dialog.tsx';
+import { dialog, dialog_rm, ModalFooter } from '@/components/dialog/dialog.tsx';
 import { log } from '@/build/log.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
@@ -13,6 +13,9 @@ import { settings } from '@/build/config.ts';
 import { useSettings } from '@/page.ts';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { createRef } from 'jsx-dom';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Button } from '@/components/button/button.tsx';
 
 export function external_url_prompt(url: string, dangerous = false) {
 	log(
@@ -75,17 +78,16 @@ export function external_url_prompt(url: string, dangerous = false) {
 						/>
 					)}
 				</div>
-				<div class='modal-footer'>
-					<button
-						type='button'
-						class={['see-more', 'cancel', 'left-icon']}
+				<ModalFooter>
+					<SeeMore
+						iconPlacement='left'
+						icon={icons.x}
 						onClick={() => dialog_rm({ id: 'external_url' })}
 					>
-						{tl(trans.back)}
-					</button>
-					<button
-						type='button'
-						class={['btn', 'primary', 'continue']}
+						{tl(trans.cancel)}
+					</SeeMore>
+					<Button
+						primary
 						onClick={() => {
 							if (trust_site.current.value) {
 								useSettings.append('trusted_sites', hostname);
@@ -100,8 +102,9 @@ export function external_url_prompt(url: string, dangerous = false) {
 						}}
 					>
 						{!dangerous ? tl(trans.visit) : tl(trans.open)}
-					</button>
-				</div>
+						<Icon name={icons.external} />
+					</Button>
+				</ModalFooter>
 			</>
 		),
 	});
