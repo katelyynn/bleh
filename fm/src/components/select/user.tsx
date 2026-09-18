@@ -6,6 +6,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 interface UserSelectProps {
 	value?: string;
 	onChange?: (v: string) => void;
+	showAuth?: boolean;
 	inSettings?: boolean;
 }
 
@@ -16,6 +17,7 @@ type UserSelectElement = HTMLDivElement & {
 export function UserSelect({
 	value,
 	onChange,
+	showAuth = true,
 	inSettings,
 }: UserSelectProps) {
 	let values: SelectOption[] = [];
@@ -28,12 +30,14 @@ export function UserSelect({
 			friend,
 		) => friend != starred);
 
-		values = [
-			{
+		values = [];
+
+		if (showAuth) {
+			values.push({
 				text: auth.name,
 				value: auth.name!,
-			},
-		];
+			});
+		}
 
 		if (starred) {
 			values.push({

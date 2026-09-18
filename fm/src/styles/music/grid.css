@@ -350,6 +350,10 @@
 
 .grid-item-text {
 	width: fit-content;
+
+	&>a {
+		color: inherit;
+	}
 }
 
 .grid-items.grid-items--fade-out {

@@ -21,16 +21,35 @@ import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.ts';
+import { createRef } from 'jsx-dom';
+import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
+import {
+	CompareSelection,
+	CompareUser,
+	CompareUsers,
+} from '@/components/minis/user.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Select } from '@/components/select/select.tsx';
+import { IconLabel } from '@/components/text/text.tsx';
+import { HybridTimeframePicker } from '@/components/date/timeframe.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Placeholder } from '@/components/loading/placeholder.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingStub } from '@/components/settings/provider/stub.tsx';
+import { UserSelect } from '@/components/select/user.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { LoadingData } from '@/components/loading/loading.tsx';
 
 export function compare({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
 
-	let pages;
-	let timeframe;
-	let type;
+	const pages = createRef();
+	const timeframe = createRef();
+	const type = createRef();
 
-	let submit;
-	let body;
+	const submit = createRef();
+	const body = createRef();
 
 	if (page.name == auth.name) {
 		page.name = '';
@@ -45,252 +64,158 @@ export function compare({ host, sidebar } = {}) {
 	const default_timeframe = page.requested.timeframe ||
 		'date_preset=LAST_90_DAYS';
 
-	let user;
-	render(
-		host,
-		html`
-			<div class="compare-header">
-				<div class="compare-users">
-					<div class="compare-user">
-						<div class="avatar">
-							<img
-								src="${avatar(auth.avatar, 'avatar170s')}"
-								alt="${tl(trans.your_avatar)}"
-							/>
-						</div>
-						<strong>${auth.name}</strong>
-					</div>
-					<div class="bleh-icon"></div>
-					<div class="compare-user focus" ref=${(el) => (user = el)}>
-			            ${render_user(page.name, page.avatar, user, true)}
-			        </div>
-				</div>
-				<div class="compare-selection">
-			        ${pages = select({
-				values: [
-					{
-						text: tl(trans.page_count),
-					},
-					{
-						value: '1',
-						text: '50 (1x)',
-					},
-					{
-						value: '2',
-						text: '100 (2x)',
-					},
-					{
-						value: '3',
-						text: '150 (3x)',
-					},
-					{
-						value: '4',
-						text: '200 (4x)',
-					},
-					{
-						value: '5',
-						text: '250 (5x)',
-					},
-					{
-						value: '6',
-						text: '300 (6x)',
-					},
-				],
-				initial: '3',
-			})}
-			        ${type = select({
-				values: [
-					{
-						text: tl(trans.item_type),
-					},
-					{
-						value: 'artists',
-						text: html`<div
-                                        class="bleh-icon"
-                                        style="--icon: var(--icon-16-artist)"
-                                    />
-                                    ${tl(trans.artists)}`,
-					},
-					{
-						value: 'albums',
-						text: html`<div
-                                        class="bleh-icon"
-                                        style="--icon: var(--icon-16-album)"
-                                    />
-                                    ${tl(trans.albums)}`,
-					},
-					{
-						value: 'tracks',
-						text: html`<div
-                                        class="bleh-icon"
-                                        style="--icon: var(--icon-16-track)"
-                                    />
-                                    ${tl(trans.tracks)}`,
-					},
-				],
-				initial: default_type,
-			})}
-			        ${timeframe = select({
-				values: [
-					{
-						text: tl(trans.timeframe),
-					},
-					{
-						value: 'date_preset=LAST_7_DAYS',
-						text: tl(trans.last_count_days).replace(
-							'{c}',
-							'7',
-						),
-					},
-					{
-						value: 'date_preset=LAST_30_DAYS',
-						text: tl(trans.last_count_days).replace(
-							'{c}',
-							'30',
-						),
-					},
-					{
-						value: 'date_preset=LAST_90_DAYS',
-						text: tl(trans.last_count_days).replace(
-							'{c}',
-							'90',
-						),
-					},
-					{
-						value: 'date_preset=LAST_180_DAYS',
-						text: tl(trans.last_count_days).replace(
-							'{c}',
-							'180',
-						),
-					},
-					{
-						value: 'date_preset=LAST_365_DAYS',
-						text: tl(trans.last_count_days).replace(
-							'{c}',
-							'365',
-						),
-					},
-					{
-						value: 'date_preset=ALL',
-						text: tl(trans.all_time),
-					},
-					{
-						value: `from=${current_year}-01-01&rangetype=year`,
-						text: current_year,
-					},
-					{
-						value: `from=${previous_year}-01-01&rangetype=year`,
-						text: previous_year,
-					},
-				],
-				initial: default_timeframe,
-			})}
-			        <button
-			            class="btn icon primary compare"
-			            ref=${(el) => (submit = el)}
-			            onclick=${() => begin_comparing()}
-			        >
-			            ${tl(trans.compare)}
-			        </button>
-			    </div>
-			</div>
-			<div
-				class="compare-body"
-				data-filled="false"
-				ref=${(el) => (body = el)}
-			>
-				<div class="placeholder-block">
-					<div class="placeholder-head">(๑>◡<๑)</div>
-					<div class="placeholder-summary">${tl(
-						trans.choose_a_timeframe_above,
-					)}</div>
-				</div>
-			</div>
-		`,
+	const user = createRef();
+
+	const candidate = useSettings.get('starred_friend') as string ||
+		(useSettings.get('friends') as string[])[0];
+
+	if (!page.requested.profile && candidate) {
+		page.name = candidate;
+		page.requested.profile = candidate;
+	}
+
+	host.replaceChildren(
+		<>
+			<CompareHeader>
+				<CompareUsers ref={user}>
+					<CompareUser name={auth.name!} />
+					<Icon />
+					<CompareUser
+						name={page.name || ''}
+						replacePage
+					/>
+				</CompareUsers>
+				<CompareSelection>
+					<Select
+						value='3'
+						values={[
+							{
+								text: tl(trans.page_count),
+							},
+							{
+								value: '1',
+								text: '50 (1x)',
+							},
+							{
+								value: '2',
+								text: '100 (2x)',
+							},
+							{
+								value: '3',
+								text: '150 (3x)',
+							},
+							{
+								value: '4',
+								text: '200 (4x)',
+							},
+							{
+								value: '5',
+								text: '250 (5x)',
+							},
+							{
+								value: '6',
+								text: '300 (6x)',
+							},
+						]}
+						ref={pages}
+					/>
+					<Select
+						value={default_type}
+						values={[
+							{
+								text: tl(trans.item_type),
+							},
+							{
+								value: 'artists',
+								text: () => (
+									<IconLabel icon={icons.artist}>
+										{tl(trans.artists)}
+									</IconLabel>
+								),
+							},
+							{
+								value: 'albums',
+								text: () => (
+									<IconLabel icon={icons.album}>
+										{tl(trans.albums)}
+									</IconLabel>
+								),
+							},
+							{
+								value: 'tracks',
+								text: () => (
+									<IconLabel icon={icons.track}>
+										{tl(trans.tracks)}
+									</IconLabel>
+								),
+							},
+						]}
+						ref={type}
+					/>
+					<HybridTimeframePicker
+						value={default_timeframe}
+						ref={timeframe}
+					/>
+					<Button primary ref={submit} onClick={begin_comparing}>
+						<Icon name={icons.compare} />
+						{tl(trans.compare)}
+					</Button>
+				</CompareSelection>
+			</CompareHeader>
+			<CompareBody ref={body} data-filled='false'>
+				<Placeholder face='(๑>◡<๑)'>
+					{tl(trans.choose_a_timeframe_above)}
+				</Placeholder>
+			</CompareBody>
+		</>,
 	);
 
-	let setting_group;
-	let input;
-	render(
-		sidebar,
-		html`
-			<h2>${tl(trans.settings)}</h2>
-			<div class="setting-group" ref=${(el) => (setting_group = el)}>
-			    <div class="setting v" data-type="text">
-			        <div class="heading">
-			            <h5>${tl(trans.compare_with)}</h5>
-			        </div>
-			        <div class="input-container content-form">
-			            <input
-			                type="text"
-			                class="input"
-			                ref=${(el) => (inputter = el)}
-			                placeholder=${tl(trans.enter_a_profile)}
-			                value=${page.requested.profile}
-			                onchange=${(e) => {
-				page.requested.profile = e.target.value;
-				page.name = page.requested.profile;
+	const group = createRef();
 
-				page.avatar = '';
-				if (page.name == auth.name) {
-					page.avatar = auth.avatar;
-				}
+	sidebar.replaceChildren(
+		<>
+			<PanelHead icon={icons.settings}>
+				{tl(trans.settings)}
+			</PanelHead>
+			<SettingGroup ref={group}>
+				<SettingStub name={tl(trans.compare_with)}>
+					<UserSelect
+						showAuth={false}
+						inSettings
+						value={page.requested.profile || ''}
+						onChange={(v) => {
+							page.requested.profile = v;
+							page.name = v;
 
-				render(
-					user,
-					html`
-						${render_user(
-							page.name,
-							page.avatar,
-							user,
-							true,
-						)}
-					`,
-				);
-			}}
-			            />
-			            ${() => {
-				let btn = html.node`
-                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${
-					useSettings.get('starred_friend') != ''
-				} onclick=${() => {
-					if (useSettings.get('starred_friend') == '') return;
+							page.avatar = '';
 
-					inputter.value = useSettings.get('starred_friend');
-					inputter.dispatchEvent(new Event('change'));
-				}}>${tl(trans.starred_friend.name)}</button>
-                        `;
-
-				tippy(btn, {
-					content: tl(trans.starred_friend.name),
-				});
-
-				return btn;
-			}}
-			        </div>
-			    </div>
-			    ${ff('inverse_compare')
-				? html.node`
-                        ${setting({ id: 'inverse_compare' })}
-                    `
-				: ''}
-			</div>
-		`,
-	);
-	const compare_settings = setting_group.querySelectorAll(
-		':scope > .setting',
+							user.current.replaceChildren(
+								<>
+									<CompareUser name={auth.name!} />
+									<Icon />
+									<CompareUser name={v} replacePage />
+								</>,
+							);
+						}}
+					/>
+				</SettingStub>
+				{ff('inverse_compare') && (
+					<SettingSwitch bind='inverse_compare' />
+				)}
+			</SettingGroup>
+		</>,
 	);
 
 	function begin_comparing(bypass = false) {
 		if (page.name == '') return;
 
-		if (parseInt(pages.value) > 3 && !bypass) {
+		if (parseInt(pages.current.value) > 3 && !bypass) {
 			const warn = notify({
 				id: 'compare_warning',
 				title: tl(trans.are_you_sure),
 				body: tl(trans.this_will_require_loading_count_pages).replace(
 					'{c}',
-					parseInt(pages.value) * 2,
+					parseInt(pages.current.value) * 2,
 				),
 				type: 'warning',
 				actions: [
@@ -321,39 +246,33 @@ export function compare({ host, sidebar } = {}) {
 			return;
 		}
 
-		pages.querySelector('button').disabled = true;
-		type.querySelector('button').disabled = true;
-		timeframe.querySelector('button').disabled = true;
-		compare_settings.forEach((option) => {
-			option.setAttribute('disabled', true);
-		});
-		submit.disabled = true;
+		pages.current.disabled = true;
+		type.current.disabled = true;
+		timeframe.current.disabled = true;
+		group.current.disabled = true;
+		submit.current.loading = true;
 
 		page.state.compare = {
 			you: [],
 			other: [],
 			shared: [],
 		};
-		get_grid(auth.name, 1, parseInt(pages.value), page.name);
+		get_grid(auth.name, 1, parseInt(pages.current.value), page.name);
 	}
 
 	function get_grid(user, current_page, page_count, next_user = null) {
-		render(
-			body,
-			html`
-				<div class="loading-data-container">
-					<div class="loading-data-text">
-				        ${tl(trans.gathering_plays_for_user_pages)
-					.replace('{u}', user)
-					.replace('{current_page}', current_page)
-					.replace('{pages}', page_count)}
-				    </div>
-				</div>
-			`,
+		body.current.replaceChildren(
+			<LoadingData>
+				{tl(trans.gathering_plays_for_user_pages, {
+					u: user,
+					current_page,
+					pages: page_count,
+				})}
+			</LoadingData>,
 		);
 
 		fetch(
-			`${root}user/${user}/library/${type.value}?format=list&${timeframe.value}&page=${current_page}&ajax=1`,
+			`${root}user/${user}/library/${type.current.value}?format=list&${timeframe.current.value}&page=${current_page}&ajax=1`,
 		)
 			.then(function (response) {
 				console.log('returned', response, response.text);
@@ -380,7 +299,7 @@ export function compare({ host, sidebar } = {}) {
 
 						item.name = track.querySelector('.chartlist-name a')
 							.textContent.trim();
-						if (type.value != 'artists') {
+						if (type.current.value != 'artists') {
 							item.sister = track.querySelector(
 								'.chartlist-artist a',
 							).textContent.trim();
@@ -408,13 +327,11 @@ export function compare({ host, sidebar } = {}) {
 				} else if (next_user) {
 					get_grid(next_user, 1, page_count);
 				} else {
-					pages.querySelector('button').disabled = false;
-					type.querySelector('button').disabled = false;
-					timeframe.querySelector('button').disabled = false;
-					compare_settings.forEach((option) => {
-						option.setAttribute('disabled', false);
-					});
-					submit.disabled = false;
+					pages.current.disabled = false;
+					type.current.disabled = false;
+					timeframe.current.disabled = false;
+					group.current.disabled = false;
+					submit.current.loading = false;
 
 					continue_comparing();
 				}
@@ -426,7 +343,7 @@ export function compare({ host, sidebar } = {}) {
 
 		page.state.compare.you.forEach((your_item) => {
 			let other_item;
-			if (type.value == 'albums') {
+			if (type.current.value == 'albums') {
 				other_item = page.state.compare.other.find(
 					(other) =>
 						your_item.name === other.name &&
@@ -458,24 +375,19 @@ export function compare({ host, sidebar } = {}) {
 
 		log('gathered shared values', 'compare', 'info', page.state.compare);
 
-		body.innerHTML = '';
+		body.current.innerHTML = '';
 
 		if (page.state.compare.shared.length == 0) {
-			render(
-				body,
-				html`
-					<div class="loading-data-container">
-						<div class="loading-data-text failed">
-					        ${tl(trans.nothing_in_common)}
-					    </div>
-					</div>
-				`,
+			body.current.replaceChildren(
+				<LoadingData type='failed'>
+					{tl(trans.nothing_in_common)}
+				</LoadingData>,
 			);
 
 			return;
 		}
 
-		if (type.value != 'tracks') {
+		if (type.current.value != 'tracks') {
 			const grid = document.createElement('ol');
 			grid.classList.add(
 				'grid-items',
@@ -485,8 +397,9 @@ export function compare({ host, sidebar } = {}) {
 
 			page.state.compare.shared.forEach((data) => {
 				let template;
-				if (type.value == 'artists') template = sanitise(data.name);
-				else {
+				if (type.current.value == 'artists') {
+					template = sanitise(data.name);
+				} else {
 					template = `${sanitise(data.sister)}/${
 						sanitise(data.name)
 					}`;
@@ -519,7 +432,7 @@ export function compare({ host, sidebar } = {}) {
                                     </a>
                                 </p>
                                 ${
-					type.value == 'albums'
+					type.current.value == 'albums'
 						? html.node`
                                 <p class="grid-items-item-aux-text">
                                     <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data.sister}">
@@ -530,7 +443,7 @@ export function compare({ host, sidebar } = {}) {
 						: ''
 				}
                                 <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
                                         <span class="avatar grid-item-avatar">
                                             <img src="${auth.avatar}" alt="${
 					tl(trans.your_avatar)
@@ -538,7 +451,7 @@ export function compare({ host, sidebar } = {}) {
                                         </span>
                                         ${data.plays.you.toLocaleString(lang)}
                                     </a>
-                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
                                         <span class="avatar grid-item-avatar">
                                             <img src="${page.avatar}" alt="${
 					tl(trans.avatar_for_user).replace('{u}', page.name)
@@ -554,7 +467,7 @@ export function compare({ host, sidebar } = {}) {
                 `);
 			});
 
-			render(body, grid);
+			body.current.replaceChildren(grid);
 
 			music_grids(grid);
 		} else {
@@ -603,7 +516,7 @@ export function compare({ host, sidebar } = {}) {
                         </td>
                         <td class="chartlist-bar with-multiple">
                             <span class="chartlist-count-bar">
-                                <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
                                     <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.you}" style="width: ${
 					(data.plays.you / max) * 100
 				}%;"></span>
@@ -616,7 +529,7 @@ export function compare({ host, sidebar } = {}) {
                                 </span>
                             </span>
                             <span class="chartlist-count-bar">
-                                <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
                                     <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.other}" style="width: ${
 					(data.plays.other / max) * 100
 				}%;"></span>
@@ -633,9 +546,9 @@ export function compare({ host, sidebar } = {}) {
                 `);
 			});
 
-			body.appendChild(table);
+			body.current.appendChild(table);
 
-			patch_titles(body);
+			patch_titles(body.current);
 		}
 	}
 }

@@ -39,7 +39,7 @@ export function CompareSelection({
 }
 
 interface CompareUserProps {
-	name: string;
+	name?: string;
 	focus?: boolean;
 	replacePage?: boolean;
 }
@@ -56,7 +56,9 @@ export function CompareUser({
 		</div>
 	);
 
-	load_profile_cache_externally().then((cache: profile_cache) => {
+	if (!name) return elem;
+
+	load_profile_cache_externally(name).then((cache: profile_cache) => {
 		elem.replaceChildren(
 			<>
 				<div class={['avatar']}>
