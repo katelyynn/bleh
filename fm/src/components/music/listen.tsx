@@ -77,13 +77,10 @@ export function ListenBoard({
 								iconPlacement='left'
 								icon={icons.plus}
 								onClick={() => {
-									if (!typing) {
-										typing = true;
-										update();
-									} else {
-										typing = false;
-										update();
-									}
+									if (typing) return;
+
+									typing = true;
+									update();
 								}}
 								ref={custom}
 							>
