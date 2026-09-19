@@ -31,6 +31,7 @@ interface SettingListProps {
 	name?: ReactNode;
 	body?: ReactNode;
 	value?: string[];
+	defaultValue?: string[];
 	values?: ListOptions;
 	predefined?: boolean;
 	onChange?: (val: string[]) => void;
@@ -60,6 +61,7 @@ export function SettingList({
 	name,
 	body,
 	value,
+	defaultValue,
 	values = {},
 	predefined,
 	onChange,
@@ -85,6 +87,7 @@ export function SettingList({
 		if (!icon) icon = store.icon;
 
 		if (store.values) values = store.values;
+		if (store.default) defaultValue = store.default as string[];
 		predefined = store.predefined || false;
 
 		if (store.incompatible) {
@@ -144,6 +147,9 @@ export function SettingList({
 					name={name}
 					body={body}
 					store={store}
+					value={value}
+					defaultValue={defaultValue}
+					setValue={(v) => set(v as string[])}
 				/>
 				<List>
 					<List ref={inner_list}>

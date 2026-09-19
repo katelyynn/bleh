@@ -82953,7 +82953,7 @@ var bleh = (() => {
   var sortable_esm_default = Sortable;
 
   // src/components/settings/provider/list.tsx
-  function SettingList({ ref: ref2, bind, standalone = false, icon: icon2, name, body, value, values = {}, predefined, onChange, disabled, onMouseEnter, onMouseLeave }) {
+  function SettingList({ ref: ref2, bind, standalone = false, icon: icon2, name, body, value, defaultValue, values = {}, predefined, onChange, disabled, onMouseEnter, onMouseLeave }) {
     if (bind) value = useSettings.get(bind);
     const uuid = crypto.randomUUID();
     if (bind) {
@@ -82966,6 +82966,7 @@ var bleh = (() => {
     if (store) {
       if (!icon2) icon2 = store.icon;
       if (store.values) values = store.values;
+      if (store.default) defaultValue = store.default;
       predefined = store.predefined || false;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
@@ -83006,7 +83007,10 @@ var bleh = (() => {
           /* @__PURE__ */ jsx(SettingLabel, {
             name,
             body,
-            store
+            store,
+            value,
+            defaultValue,
+            setValue: (v) => set2(v)
           }),
           /* @__PURE__ */ jsx(List, {
             children: [
@@ -103832,7 +103836,7 @@ var bleh = (() => {
     }
     return request_profile_cache(name, cache2, profile_cache);
   }
-  function request_profile_cache(name = page.name, cache2 = null, profile_cache = null) {
+  function request_profile_cache(name = page.name, cache2, profile_cache) {
     log(`requesting fetch of profile cache for ${name}`, "cache");
     const will_cache = !cache2 || !profile_cache;
     if (!profile_cache) {
@@ -122851,6 +122855,83 @@ var bleh = (() => {
     );
   }
 
+  // src/components/music/listen.tsx
+  function ListenBoard({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "listen-board",
+      children
+    });
+  }
+  function Listen({ image: image2, name, plays }) {
+    const bg = createRef();
+    const item_image = createRef();
+    const item_plays = createRef();
+    const elem = /* @__PURE__ */ jsx("a", {
+      class: [
+        "listen-board-item"
+      ],
+      children: [
+        /* @__PURE__ */ jsx("span", {
+          class: "listen-board-item-bg",
+          ref: bg
+        }),
+        /* @__PURE__ */ jsx("span", {
+          class: [
+            "listen-board-item-image",
+            "avatar"
+          ],
+          ref: item_image
+        }),
+        /* @__PURE__ */ jsx("span", {
+          class: "listen-board-item-info",
+          children: [
+            /* @__PURE__ */ jsx("span", {
+              class: "listen-board-item-name",
+              children: /* @__PURE__ */ jsx(SponsorUsername, {
+                children: name
+              })
+            }),
+            /* @__PURE__ */ jsx("span", {
+              class: "listen-board-item-plays",
+              ref: item_plays,
+              children: /* @__PURE__ */ jsx(Icon, {
+                name: icons.spinner
+              })
+            })
+          ]
+        })
+      ]
+    });
+    function update() {
+      if (image2) {
+        bg.current.style.setProperty("background-image", avatar(image2, "avatar300s"));
+        item_image.current.replaceChildren(/* @__PURE__ */ jsx("img", {
+          src: avatar(image2, "avatar170s")
+        }));
+      } else {
+        bg.current.style.removeProperty("background-image");
+        item_image.current.replaceChildren(/* @__PURE__ */ jsx("img", {
+          class: "missing-image"
+        }));
+      }
+      if (plays != void 0) {
+        item_plays.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+          children: tl2(trans.count_plays, {
+            c: plays.toLocaleString(lang)
+          })
+        }));
+      }
+    }
+    update();
+    if (!image2) {
+      load_profile_cache_externally(name).then((cache2) => {
+        image2 = cache2.avatar;
+        update();
+      });
+    }
+    return elem;
+  }
+
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -124263,6 +124344,33 @@ var bleh = (() => {
               children: /* @__PURE__ */ jsx(UserSelect, {})
             })
           })
+        }),
+        /* @__PURE__ */ jsx("section", {
+          children: /* @__PURE__ */ jsx(DemoGrid, {
+            children: /* @__PURE__ */ jsx(DemoItem, {
+              label: "Listen",
+              children: /* @__PURE__ */ jsx(ListenBoard, {
+                children: [
+                  /* @__PURE__ */ jsx(Listen, {
+                    name: "dressupdarling"
+                  }),
+                  /* @__PURE__ */ jsx(Listen, {
+                    name: "dressupdarling",
+                    plays: 10
+                  }),
+                  /* @__PURE__ */ jsx(Listen, {
+                    name: "dressupdarling",
+                    image: auth.avatar
+                  }),
+                  /* @__PURE__ */ jsx(Listen, {
+                    name: "dressupdarling",
+                    image: auth.avatar,
+                    plays: 10
+                  })
+                ]
+              })
+            })
+          })
         })
       ]
     }));
@@ -124639,6 +124747,11 @@ var bleh = (() => {
         link.classList.add("pagination-previous-link");
         link.insertBefore(/* @__PURE__ */ jsx(Icon, {
           name: icons.arrow_left
+        }), link.firstChild);
+      } else if (link.classList.contains("inline-add-icon")) {
+        link.classList.add("left-icon");
+        link.insertBefore(/* @__PURE__ */ jsx(Icon, {
+          name: icons.plus
         }), link.firstChild);
       } else {
         link.appendChild(/* @__PURE__ */ jsx(Icon, {
@@ -126022,7 +126135,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-18T20:44:34.974Z"
+    built_on: "2026-09-19T15:10:46.925Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

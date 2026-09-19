@@ -1,0 +1,89 @@
+import { WithChildren } from '@/types/generic.tsx';
+import { createRef } from 'jsx-dom';
+import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
+import { GenericUsername, SponsorUsername } from '@/components/user/name.tsx';
+import { is_sponsor } from '@/components/sponsor.ts';
+import { lang, tl, trans } from '@/build/trans.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { avatar } from '@/components/shared/avatar.ts';
+
+export function ListenBoard({
+	children,
+}: WithChildren) {
+	return (
+		<div class='listen-board'>
+			{children}
+		</div>
+	);
+}
+
+interface ListenProps {
+	image?: string;
+	name: string;
+	plays?: number;
+}
+
+export function Listen({
+	image,
+	name,
+	plays,
+}: ListenProps) {
+	const bg = createRef();
+	const item_image = createRef();
+	const item_plays = createRef();
+
+	const elem = (
+		<a class={['listen-board-item']}>
+			<span class='listen-board-item-bg' ref={bg} />
+			<span
+				class={['listen-board-item-image', 'avatar']}
+				ref={item_image}
+			/>
+			<span class='listen-board-item-info'>
+				<span class='listen-board-item-name'>
+					<SponsorUsername>{name}</SponsorUsername>
+				</span>
+				<span class='listen-board-item-plays' ref={item_plays}>
+					<Icon name={icons.spinner} />
+				</span>
+			</span>
+		</a>
+	);
+
+	function update() {
+		if (image) {
+			bg.current.style.setProperty(
+				'background-image',
+				avatar(image, 'avatar300s'),
+			);
+			item_image.current.replaceChildren(
+				<img src={avatar(image, 'avatar170s')} />,
+			);
+		} else {
+			bg.current.style.removeProperty('background-image');
+			item_image.current.replaceChildren(
+				<img class='missing-image' />,
+			);
+		}
+
+		if (plays != undefined) {
+			item_plays.current.replaceChildren(
+				<>
+					{tl(trans.count_plays, { c: plays.toLocaleString(lang) })}
+				</>,
+			);
+		}
+	}
+
+	update();
+
+	if (!image) {
+		load_profile_cache_externally(name).then((cache) => {
+			image = cache.avatar;
+
+			update();
+		});
+	}
+
+	return elem;
+}

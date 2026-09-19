@@ -27,6 +27,12 @@ export function see_more() {
 				<Icon name={icons.arrow_left} />,
 				link.firstChild,
 			);
+		} else if (link.classList.contains('inline-add-icon')) {
+			link.classList.add('left-icon');
+			link.insertBefore(
+				<Icon name={icons.plus} />,
+				link.firstChild,
+			);
 		} else {
 			link.appendChild(
 				<Icon name={icons.arrow_right} />,

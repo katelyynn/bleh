@@ -92,6 +92,7 @@ import { MenuContents } from '@/components/menu/menu.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
 import { UserSelect } from '@/components/select/user.tsx';
+import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1101,6 +1102,25 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='UserSelect'>
 						<UserSelect />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Listen'>
+						<ListenBoard>
+							<Listen name='dressupdarling' />
+							<Listen name='dressupdarling' plays={10} />
+							<Listen
+								name='dressupdarling'
+								image={auth.avatar!}
+							/>
+							<Listen
+								name='dressupdarling'
+								image={auth.avatar!}
+								plays={10}
+							/>
+						</ListenBoard>
 					</DemoItem>
 				</DemoGrid>
 			</section>

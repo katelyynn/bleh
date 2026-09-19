@@ -105,6 +105,7 @@ import { convert_to_select } from '@/components/select/select.tsx';
 import { PageHeaderAvatar } from '@/components/music/header.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
+import { profile_cache } from '@/types/profile.ts';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1458,7 +1459,7 @@ export async function load_profile_cache_externally(name = page.name) {
 	const profile_cache =
 		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
 		{};
-	const cache = profile_cache[name];
+	const cache: profile_cache = profile_cache[name];
 
 	if (cache) {
 		if (cache.hue || cache.sat || cache.lit) {
@@ -1531,18 +1532,18 @@ function load_profile_cache(
 
 function request_profile_cache(
 	name = page.name,
-	cache = null,
-	profile_cache = null,
-) {
+	cache?: profile_cache,
+	profile_cache?: Record<string, profile_cache>,
+): Promise<profile_cache> {
 	log(`requesting fetch of profile cache for ${name}`, 'cache');
 
 	const will_cache = !cache || !profile_cache;
 
 	if (!profile_cache) {
-		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
+		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)!) ||
 			{};
 	}
-	if (!cache) cache = profile_cache[name] || {};
+	if (!cache) cache = profile_cache![name] || {};
 
 	return new Promise((resolve, reject) => {
 		fetch(`${root}user/${name}`)
