@@ -7,12 +7,20 @@ import { lang, tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { avatar } from '@/components/shared/avatar.ts';
 import { header_colour } from '@/components/page/colour.ts';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { page, root } from '@/build/page.ts';
+import { redirect } from '@/components/music/music.tsx';
+import { sanitise } from '@/build/tools.ts';
 
 interface ListenBoardProps {
+	url?: string;
+	others?: number;
 	children: ReactNode;
 }
 
 export function ListenBoard({
+	url,
+	others,
 	children,
 }: ListenBoardProps) {
 	return (
@@ -20,6 +28,34 @@ export function ListenBoard({
 			<div class='listen-board'>
 				{children}
 			</div>
+			{(url || others) && (
+				<div class='listen-board-row'>
+					{(others && url) && (
+						<div class='left-align-row'>
+							<SeeMore
+								href={`${root}music/${url}/+listeners/you-know`}
+								iconPlacement='left'
+								icon={icons.users}
+							>
+								{tl(trans.value_you_follow, { v: others })}
+							</SeeMore>
+						</div>
+					)}
+					{url && (
+						<div class='right-align-row'>
+							<SeeMore
+								iconPlacement='left'
+								icon={icons.plus}
+								onClick={() => {
+									view_others_library(url);
+								}}
+							>
+								{tl(trans.custom)}
+							</SeeMore>
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
@@ -28,12 +64,14 @@ interface ListenProps {
 	image?: string;
 	name: string;
 	plays?: number;
+	url?: string;
 }
 
 export function Listen({
 	image,
 	name,
 	plays,
+	url,
 }: ListenProps) {
 	const bg = createRef();
 	const item_name = createRef();
@@ -115,5 +153,12 @@ export function Listen({
 		});
 	}
 
+	if (!plays && url) {
+		fetch(`${root}user/${name}/library/music/${redirect()}${url}`);
+	}
+
 	return elem;
+}
+
+function view_others_library(url: string) {
 }

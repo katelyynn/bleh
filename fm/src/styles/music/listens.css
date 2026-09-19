@@ -219,6 +219,11 @@
 	margin-right: 8px;
 }
 
+.listen-board-wrap {
+	width: 100%;
+	max-width: 400px;
+}
+
 .listen-board {
 	position: relative;
 	background: oklch(var(--b6) / 20%);
@@ -257,9 +262,22 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
+}
 
-	width: 100%;
-	max-width: 400px;
+.listen-board-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 10px;
+	margin-top: 10px;
+	padding: 0 10px;
+}
+
+.left-align-row {
+	flex: 1;
+}
+
+.right-align-row {
+	flex-shrink: 0;
 }
 
 .listen-board-item {

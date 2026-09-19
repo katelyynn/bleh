@@ -10,7 +10,7 @@ import { log } from '@/build/log.ts';
 import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';
-import { download_with_progress } from '@/build/tools';
+import { download_with_progress, sanitise } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
 import { save_setting, setting } from '@/components/settings/settings';
@@ -1133,6 +1133,18 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='Listen'>
 						<ListenBoard>
+							<Listen name='dressupdarling' plays={1000} artist />
+							<Listen name='evangelicgirl' plays={100} artist />
+							<Listen name='satisfeita' plays={10} artist />
+							<Listen name='LAST.HQ' plays={50} artist />
+							<Listen name='readandpretend' plays={10} artist />
+						</ListenBoard>
+					</DemoItem>
+					<DemoItem label='Listen'>
+						<ListenBoard
+							url={sanitise('Sabrina Carpenter')}
+							others={34}
+						>
 							<Listen name='dressupdarling' plays={1000} artist />
 							<Listen name='evangelicgirl' plays={100} artist />
 							<Listen name='satisfeita' plays={10} artist />

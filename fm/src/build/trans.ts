@@ -5077,6 +5077,10 @@ export const trans = {
 		ru: '{c} других',
 		pl: '{c} innych',
 	},
+	value_you_follow: {
+		// number of people who also listen to an artist
+		en: '{v} you follow',
+	},
 	loading_album_plays: {
 		en: 'Collecting your album plays',
 		de: 'Sammeln deiner Albumwiedergaben',
