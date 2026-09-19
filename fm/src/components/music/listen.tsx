@@ -47,6 +47,7 @@ export function Listen({
 					<Icon name={icons.spinner} />
 				</span>
 			</span>
+			<Icon name={icons.arrow_right} />
 		</a>
 	);
 
@@ -54,7 +55,7 @@ export function Listen({
 		if (image) {
 			bg.current.style.setProperty(
 				'background-image',
-				avatar(image, 'avatar300s'),
+				`url(${avatar(image, 'avatar300s')})`,
 			);
 			item_image.current.replaceChildren(
 				<img src={avatar(image, 'avatar170s')} />,

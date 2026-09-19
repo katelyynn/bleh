@@ -1122,6 +1122,20 @@ export function mualani() {
 							/>
 						</ListenBoard>
 					</DemoItem>
+					<DemoItem label='Listen'>
+						<ListenBoard>
+							<Listen name='dressupdarling' plays={1000} />
+							<Listen name='evangelicgirl' plays={100} />
+							<Listen name='satisfeita' plays={10} />
+						</ListenBoard>
+					</DemoItem>
+					<DemoItem label='Listen'>
+						<ListenBoard>
+							<Listen name='dressupdarling' plays={1000} artist />
+							<Listen name='evangelicgirl' plays={100} artist />
+							<Listen name='satisfeita' plays={10} artist />
+						</ListenBoard>
+					</DemoItem>
 				</DemoGrid>
 			</section>
 		</>,

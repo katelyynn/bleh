@@ -145,6 +145,8 @@
 		border-bottom-left-radius: unset;
 		border-right: unset;
 
+		pointer-events: none;
+
 		--mask: linear-gradient(145deg, white, transparent 30%);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
@@ -187,6 +189,8 @@
 		translate: 150px 0;
 		opacity: 0.8;
 
+		pointer-events: none;
+
 		transition-property: translate;
 		transition-duration: 0.2s;
 		transition-timing-function: var(--trans-function-ani);
@@ -215,6 +219,8 @@
 
 	translate: 0 0;
 	scale: 1;
+
+	pointer-events: none;
 
 	--mask: linear-gradient(90deg, transparent, white);
 	mask-image: var(--mask);
