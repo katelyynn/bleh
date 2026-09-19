@@ -172,11 +172,15 @@ export function bleh_profiles() {
 		delete cache.username;
 
 		if (!about_me_sidebar) {
-			page.structure.side!.insertBefore(
+			about_me_sidebar = (
 				<section class='about-me-sidebar'>
 					<h2>{tl(trans.about)}</h2>
 					<p class='subtle'>{tl(trans.no_about, { u: page.name })}</p>
-				</section>,
+				</section>
+			)
+
+			page.structure.side!.insertBefore(
+				about_me_sidebar,
 				page.structure.side!.firstElementChild,
 			);
 		} else {
