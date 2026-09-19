@@ -1,16 +1,15 @@
-import { WithChildren } from '@/types/generic.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
-import { GenericUsername, SponsorUsername } from '@/components/user/name.tsx';
-import { is_sponsor } from '@/components/sponsor.ts';
+import { SponsorUsername } from '@/components/user/name.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { avatar } from '@/components/shared/avatar.ts';
 import { header_colour } from '@/components/page/colour.ts';
 import { SeeMore } from '@/components/text/see_more.tsx';
-import { page, root } from '@/build/page.ts';
+import { root } from '@/build/page.ts';
 import { redirect } from '@/components/music/music.tsx';
-import { sanitise } from '@/build/tools.ts';
+import { clean_number } from '@/build/tools.ts';
+import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts.js';
 
 interface ListenBoardProps {
 	url?: string;
@@ -65,6 +64,7 @@ interface ListenProps {
 	name: string;
 	plays?: number;
 	url?: string;
+	artist?: boolean;
 }
 
 export function Listen({
@@ -72,6 +72,7 @@ export function Listen({
 	name,
 	plays,
 	url,
+	artist,
 }: ListenProps) {
 	const bg = createRef();
 	const item_name = createRef();
@@ -80,9 +81,14 @@ export function Listen({
 
 	let last_image = '';
 	let banner = '';
+	let last_plays = -1;
 
 	const elem = (
-		<a class={['listen-board-item', 'colourful']}>
+		<a
+			class={['listen-board-item', 'colourful']}
+			href={url &&
+				`${root}user/${name}/library/music/${redirect()}${url}`}
+		>
 			<span class='listen-board-item-bg' ref={bg} />
 			<span
 				class={['listen-board-item-image', 'avatar']}
@@ -138,6 +144,33 @@ export function Listen({
 					{tl(trans.count_plays, { c: plays.toLocaleString(lang) })}
 				</>,
 			);
+
+			if (last_plays != plays) {
+				last_plays = plays;
+
+				if (artist) {
+					item_plays.current.classList.add('colourful', 'with-rank');
+
+					const rank = parse_scrobbles_as_rank(plays);
+
+					item_plays.current.setAttribute(
+						'data-bleh--scrobble-milestone',
+						String(rank.milestone),
+					);
+					item_plays.current.style.setProperty(
+						'--hue-over',
+						String(rank.hue),
+					);
+					item_plays.current.style.setProperty(
+						'--sat-over',
+						String(rank.sat),
+					);
+					item_plays.current.style.setProperty(
+						'--lit-over',
+						String(rank.lit),
+					);
+				}
+			}
 		}
 	}
 
@@ -154,7 +187,30 @@ export function Listen({
 	}
 
 	if (!plays && url) {
-		fetch(`${root}user/${name}/library/music/${redirect()}${url}`);
+		fetch(`${root}user/${name}/library/music/${redirect()}${url}`)
+			.then((res) => {
+				return res.text();
+			})
+			.then((dom) => {
+				const doc = new DOMParser().parseFromString(dom, 'text/html');
+
+				const first_metadata_item = doc.querySelector(
+					'.metadata-item .metadata-display',
+				);
+
+				// sometimes this fails even thou they do have plays, this is just a last.fm bug
+				// i dont feel comfortable displaying 0 here as it may not be true
+				// but i guess i should?
+				if (first_metadata_item) {
+					plays = clean_number(
+						first_metadata_item.textContent.trim(),
+					);
+				} else {
+					plays = 0;
+				}
+
+				update();
+			});
 	}
 
 	return elem;

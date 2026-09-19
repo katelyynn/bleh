@@ -342,12 +342,6 @@
 		display: none;
 	}
 
-	scale: 1;
-
-	&:active {
-		scale: 0.98;
-	}
-
 	transition-property: scale;
 	transition-duration: 0.2s;
 	transition-timing-function: var(--trans-function-ani);

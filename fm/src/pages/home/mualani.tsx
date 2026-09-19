@@ -1133,10 +1133,14 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='Listen'>
 						<ListenBoard>
-							<Listen name='dressupdarling' plays={1000} artist />
-							<Listen name='evangelicgirl' plays={100} artist />
-							<Listen name='satisfeita' plays={10} artist />
-							<Listen name='LAST.HQ' plays={50} artist />
+							<Listen
+								name='dressupdarling'
+								plays={50000}
+								artist
+							/>
+							<Listen name='evangelicgirl' plays={20000} artist />
+							<Listen name='satisfeita' plays={5000} artist />
+							<Listen name='LAST.HQ' plays={500} artist />
 							<Listen name='readandpretend' plays={10} artist />
 						</ListenBoard>
 					</DemoItem>
@@ -1145,8 +1149,16 @@ export function mualani() {
 							url={sanitise('Sabrina Carpenter')}
 							others={34}
 						>
-							<Listen name='dressupdarling' plays={1000} artist />
-							<Listen name='evangelicgirl' plays={100} artist />
+							<Listen
+								name='dressupdarling'
+								artist
+								url={sanitise('Sabrina Carpenter')}
+							/>
+							<Listen
+								name='evangelicgirl'
+								artist
+								url={sanitise('Sabrina Carpenter')}
+							/>
 							<Listen name='satisfeita' plays={10} artist />
 							<Listen name='LAST.HQ' plays={50} artist />
 							<Listen name='readandpretend' plays={10} artist />
