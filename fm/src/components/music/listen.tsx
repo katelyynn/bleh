@@ -6,6 +6,7 @@ import { is_sponsor } from '@/components/sponsor.ts';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { avatar } from '@/components/shared/avatar.ts';
+import { header_colour } from '@/components/page/colour.ts';
 
 export function ListenBoard({
 	children,
@@ -29,18 +30,25 @@ export function Listen({
 	plays,
 }: ListenProps) {
 	const bg = createRef();
+	const item_name = createRef();
 	const item_image = createRef();
 	const item_plays = createRef();
 
+	let last_image = '';
+	let banner = '';
+
 	const elem = (
-		<a class={['listen-board-item']}>
+		<a class={['listen-board-item', 'colourful']}>
 			<span class='listen-board-item-bg' ref={bg} />
 			<span
 				class={['listen-board-item-image', 'avatar']}
 				ref={item_image}
 			/>
 			<span class='listen-board-item-info'>
-				<span class='listen-board-item-name'>
+				<span
+					class={['listen-board-item-name', 'colourful']}
+					ref={item_name}
+				>
 					<SponsorUsername>{name}</SponsorUsername>
 				</span>
 				<span class='listen-board-item-plays' ref={item_plays}>
@@ -55,11 +63,23 @@ export function Listen({
 		if (image) {
 			bg.current.style.setProperty(
 				'background-image',
-				`url(${avatar(image, 'avatar300s')})`,
+				`url(${banner || avatar(image, 'avatar300s')})`,
 			);
 			item_image.current.replaceChildren(
 				<img src={avatar(image, 'avatar170s')} />,
 			);
+
+			if (last_image != image) {
+				last_image = image;
+
+				header_colour(
+					(
+						<img src={avatar(image, 'avatar300s')} />
+					) as HTMLImageElement,
+					false,
+					[elem, item_name.current],
+				);
+			}
 		} else {
 			bg.current.style.removeProperty('background-image');
 			item_image.current.replaceChildren(
@@ -70,6 +90,7 @@ export function Listen({
 		if (plays != undefined) {
 			item_plays.current.replaceChildren(
 				<>
+					<Icon name={icons.play} />
 					{tl(trans.count_plays, { c: plays.toLocaleString(lang) })}
 				</>,
 			);
@@ -81,6 +102,8 @@ export function Listen({
 	if (!image) {
 		load_profile_cache_externally(name).then((cache) => {
 			image = cache.avatar;
+
+			if (cache.banner) banner = cache.banner;
 
 			update();
 		});

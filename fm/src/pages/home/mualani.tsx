@@ -1127,6 +1127,8 @@ export function mualani() {
 							<Listen name='dressupdarling' plays={1000} />
 							<Listen name='evangelicgirl' plays={100} />
 							<Listen name='satisfeita' plays={10} />
+							<Listen name='LAST.HQ' plays={10} />
+							<Listen name='readandpretend' plays={10} />
 						</ListenBoard>
 					</DemoItem>
 					<DemoItem label='Listen'>
@@ -1134,6 +1136,8 @@ export function mualani() {
 							<Listen name='dressupdarling' plays={1000} artist />
 							<Listen name='evangelicgirl' plays={100} artist />
 							<Listen name='satisfeita' plays={10} artist />
+							<Listen name='LAST.HQ' plays={50} artist />
+							<Listen name='readandpretend' plays={10} artist />
 						</ListenBoard>
 					</DemoItem>
 				</DemoGrid>

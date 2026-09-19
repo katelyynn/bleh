@@ -221,8 +221,14 @@
 
 .listen-board {
 	position: relative;
+	background: oklch(var(--b6) / 60%);
+	box-shadow: var(--group-shadow);
 	border-radius: var(--radius-s);
 	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
 
 	&:after {
 		content: '';
@@ -263,7 +269,7 @@
 	position: relative;
 	overflow: hidden;
 
-	background: oklch(var(--b6) / 60%);
+	background: oklch(var(--h4) / 10%);
 	padding: 8px 10px;
 
 	--mask-colour: oklch(var(--c2));
@@ -278,7 +284,7 @@
 		}
 
 		&>.listen-board-item-bg {
-			translate: -10px 0;
+			translate: 50px 0;
 			scale: 1.03;
 		}
 
@@ -300,10 +306,10 @@
 		position: absolute;
 		inset: 0;
 		display: block;
-		background: linear-gradient(90deg, transparent 20%, oklch(var(--h4)) 90%);
+		background: linear-gradient(90deg, transparent 50%, oklch(var(--h4)) 90%);
 
 		translate: 150px 0;
-		opacity: 0.8;
+		opacity: 0.5;
 
 		transition-property: translate;
 		transition-duration: 0.2s;
@@ -335,14 +341,14 @@
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 
-	opacity: 0.1;
+	opacity: 0.08;
 
-	translate: 0 0;
+	translate: 40px 0;
 	scale: 1;
 
 	pointer-events: none;
 
-	--mask: linear-gradient(270deg, transparent, white);
+	--mask: linear-gradient(90deg, transparent, white);
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
@@ -395,10 +401,16 @@
 }
 
 .listen-board-item-plays {
-	color: oklch(var(--c3));
 	display: flex;
 	align-items: center;
+	gap: 2px;
 	height: 18px;
+
+	--icon-size: 12px;
+	color: oklch(var(--l2-c-theme-switch));
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
 
 	&>.bleh-icon-spinner {
 		--icon-size: 12px;
