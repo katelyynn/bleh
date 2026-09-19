@@ -12572,6 +12572,10 @@ export const trans = {
 	select_arbitrary: {
 		en: 'Type to add to this list',
 	},
+	value_to_close: {
+		// keybind
+		en: '{v} to close',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

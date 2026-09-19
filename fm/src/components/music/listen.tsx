@@ -10,6 +10,7 @@ import { root } from '@/build/page.ts';
 import { redirect } from '@/components/music/music.tsx';
 import { clean_number } from '@/build/tools.ts';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts.js';
+import { Keybind } from '@/components/settings/clickables/keybind.tsx';
 
 interface ListenBoardProps {
 	url?: string;
@@ -22,9 +23,16 @@ export function ListenBoard({
 	others,
 	children,
 }: ListenBoardProps) {
-	return (
+	let typing = false;
+
+	const board = createRef();
+	const input = createRef();
+	const input_wrap = createRef();
+	const custom = createRef();
+
+	const elem = (
 		<div class='listen-board-wrap'>
-			<div class='listen-board'>
+			<div class='listen-board' ref={board}>
 				{children}
 			</div>
 			{(url || others) && (
@@ -46,8 +54,15 @@ export function ListenBoard({
 								iconPlacement='left'
 								icon={icons.plus}
 								onClick={() => {
-									view_others_library(url);
+									if (!typing) {
+										typing = true;
+										update();
+									} else {
+										typing = false;
+										update();
+									}
 								}}
+								ref={custom}
 							>
 								{tl(trans.custom)}
 							</SeeMore>
@@ -55,8 +70,56 @@ export function ListenBoard({
 					)}
 				</div>
 			)}
+			<div class='listen-board-input-wrap' ref={input_wrap}>
+				<input
+					class='listen-board-input'
+					ref={input}
+					onKeyDown={(e) => {
+						if (e.key == 'Escape') {
+							e.preventDefault();
+
+							typing = false;
+							update();
+						}
+
+						if (e.key != 'Enter') return;
+
+						e.preventDefault();
+
+						window.location.href =
+							`${root}user/${input.current.value.trim()}/library/music/${redirect()}${url}`;
+					}}
+					onBlur={() => {
+						if (typing) {
+							typing = false;
+							update();
+						}
+					}}
+				/>
+				<span class='listen-board-input-hint'>
+					{tl(trans.value_to_close, {
+						v: <Keybind value='Escape' />,
+					})}
+				</span>
+			</div>
 		</div>
 	);
+
+	function update() {
+		custom.current?.setAttribute('aria-expanded', String(typing));
+		board.current.setAttribute('data-typing', String(typing));
+		input_wrap.current.setAttribute('data-typing', String(typing));
+
+		if (typing) {
+			input.current.focus();
+		} else {
+			input.current.blur();
+		}
+	}
+
+	update();
+
+	return elem;
 }
 
 interface ListenProps {
