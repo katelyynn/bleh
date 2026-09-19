@@ -15,7 +15,7 @@ import { Keybind } from '@/components/settings/clickables/keybind.tsx';
 interface ListenBoardProps {
 	url?: string;
 	others?: number;
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 export function ListenBoard({
@@ -128,6 +128,7 @@ interface ListenProps {
 	plays?: number;
 	url?: string;
 	artist?: boolean;
+	waitForHover?: boolean;
 }
 
 export function Listen({
@@ -136,6 +137,7 @@ export function Listen({
 	plays,
 	url,
 	artist,
+	waitForHover,
 }: ListenProps) {
 	const bg = createRef();
 	const item_name = createRef();
@@ -145,6 +147,8 @@ export function Listen({
 	let last_image = '';
 	let banner = '';
 	let last_plays = -1;
+
+	let requested = false;
 
 	const elem = (
 		<a
@@ -164,9 +168,7 @@ export function Listen({
 				>
 					<SponsorUsername>{name}</SponsorUsername>
 				</span>
-				<span class='listen-board-item-plays' ref={item_plays}>
-					<Icon name={icons.spinner} />
-				</span>
+				<span class='listen-board-item-plays' ref={item_plays} />
 			</span>
 			<Icon name={icons.arrow_right} />
 		</a>
@@ -199,6 +201,8 @@ export function Listen({
 				<img class='missing-image' />,
 			);
 		}
+
+		item_plays.current.classList.remove('waiting-for-hover');
 
 		if (plays != undefined) {
 			item_plays.current.replaceChildren(
@@ -234,6 +238,20 @@ export function Listen({
 					);
 				}
 			}
+		} else {
+			if (waitForHover) {
+				item_plays.current.classList.add('waiting-for-hover');
+				item_plays.current.replaceChildren(
+					<>
+						<Icon name={icons.hover} />
+						{tl(trans.hover_to_view)}
+					</>,
+				);
+			} else {
+				item_plays.current.replaceChildren(
+					<Icon name={icons.spinner} />,
+				);
+			}
 		}
 	}
 
@@ -250,6 +268,25 @@ export function Listen({
 	}
 
 	if (!plays && url) {
+		if (!waitForHover) {
+			request();
+		} else {
+			elem.addEventListener('mouseenter', () => {
+				request();
+				waitForHover = false;
+				update();
+			}, {
+				once: true,
+			});
+		}
+	}
+
+	return elem;
+
+	function request() {
+		if (requested) return;
+		requested = true;
+
 		fetch(`${root}user/${name}/library/music/${redirect()}${url}`)
 			.then((res) => {
 				return res.text();
@@ -275,9 +312,4 @@ export function Listen({
 				update();
 			});
 	}
-
-	return elem;
-}
-
-function view_others_library(url: string) {
 }

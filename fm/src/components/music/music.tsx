@@ -47,6 +47,7 @@ import {
 import { SubText } from '@/components/text/sub.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
+import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);
@@ -255,8 +256,6 @@ export async function show_your_scrobbles() {
 	const main = summary?.querySelector('.summary-aside');
 
 	// create container
-	let listen_container = document.createElement('div');
-	listen_container.classList.add('listen-container');
 
 	const no_auth_callout = page.structure.main.querySelector(
 		'.catalogue-callout',
@@ -280,145 +279,65 @@ export async function show_your_scrobbles() {
 			page_url_split[page_url_length];
 	}
 
-	// you
-	let your_listens = {
-		name: auth.name,
-		listens: 0,
-		link: scrobble_page,
-		avi: auth.avatar,
-		katsune: katsune,
-	};
-	// check to see if you have scrobbles
-	let scrobble_button = col_main.querySelector(
+	const other_container = col_main!.querySelector(
+		'.personal-stats-item--listeners',
+	);
+	let other_count = undefined;
+	if (other_container) {
+		const avatars = other_container.querySelectorAll(
+			'.personal-stats-listener-avatar img',
+		);
+		const count = other_container.querySelector(
+			'.header-metadata-display a',
+		);
+
+		if (count != undefined) {
+			other_count = clean_number(count.textContent.trim());
+		}
+	}
+
+	let your_plays = 0;
+
+	const scrobble_button = col_main!.querySelector(
 		'.personal-stats-item--scrobbles .hidden-xs a',
 	);
 	if (scrobble_button) {
-		your_listens.listens = clean_number(scrobble_button.textContent.trim());
-	}
-	// create child for u
-	create_listen_item(listen_container, your_listens, page.type);
-
-	// profile shortcut :3
-	if (useSettings.get('starred_friend') != '') {
-		const cache = await load_profile_cache_externally(
-			useSettings.get('starred_friend'),
-		);
-
-		let shortcut_listens = {
-			name: useSettings.get('starred_friend'),
-			listens: -1,
-			link: scrobble_page,
-			avi: cache.avatar,
-			katsune: katsune,
-		};
-		// create child for them
-		const listen_item = create_listen_item(
-			listen_container,
-			shortcut_listens,
-		);
-
-		fetch(
-			`${root}user/${shortcut_listens.name}/library/music/${redirect()}${scrobble_page}`,
-		)
-			.then(function (response) {
-				console.log('returned', response, response.text);
-
-				return response.text();
-			})
-			.then(function (dom) {
-				const doc = new DOMParser().parseFromString(dom, 'text/html');
-
-				let first_metadata_item = doc.querySelector(
-					'.metadata-item .metadata-display',
-				);
-
-				let listens = 0;
-
-				// sometimes this fails even thou they do have plays, this is just a last.fm bug
-				// i dont feel comfortable displaying 0 here as it may not be true
-				// but i guess i should?
-				if (first_metadata_item) {
-					listens = clean_number(
-						first_metadata_item.textContent.trim(),
-					);
-				}
-
-				let p = listen_item.querySelector('.listen-item-text');
-				listen_item.setAttribute('data-listens', listens);
-
-				p.textContent = tl(trans.count_plays, {
-					c: listens.toLocaleString(lang),
-				});
-
-				// colourful counts
-				if (settings.colourful_counts && page.type == 'artist') {
-					let parsed_scrobble_as_rank = parse_scrobbles_as_rank(
-						listens,
-					);
-
-					listen_item.setAttribute(
-						'data-bleh--scrobble-milestone',
-						parsed_scrobble_as_rank.milestone,
-					);
-					p.style.setProperty(
-						'--hue-over',
-						parsed_scrobble_as_rank.hue,
-					);
-					p.style.setProperty(
-						'--sat-over',
-						parsed_scrobble_as_rank.sat,
-					);
-					p.style.setProperty(
-						'--lit-over',
-						parsed_scrobble_as_rank.lit,
-					);
-				}
-			});
+		your_plays = clean_number(scrobble_button.textContent.trim());
 	}
 
-	main?.appendChild(listen_container);
+	const starred = useSettings.get('starred_friend') as string;
+	const friends = (useSettings.get('friends') as string[]).filter((
+		friend,
+	) => friend != starred);
 
-	// other user
-	listen_container?.appendChild(html.node`
-        <button class="btn listen-item" data-listens="-3" onclick=${() =>
-		other_listener(scrobble_page)}>
-            ${icon({ name: icons.plus, identifier: 'listen-item' })}
-            <div class="listen-item-info">
-                <h3 class="listen-item-name not-profile">${
-		tl(trans.other_user)
-	}</h3>
-            </div>
-        </button>
-    `);
+	const is_artist = page.type == 'artist';
 
-	// other listeners
-	if (page.type == 'artist') {
-		//
-		let other_container = col_main.querySelector(
-			'.personal-stats-item--listeners',
-		);
-		if (other_container) {
-			let avatars = other_container.querySelectorAll(
-				'.personal-stats-listener-avatar img',
-			);
-			let count = other_container.querySelector(
-				'.header-metadata-display a',
-			);
-
-			let other_listeners = {
-				name: 'others',
-				listens: -2,
-				link: scrobble_page,
-				avi: avatars,
-				count: count != null
-					? clean_number(count.textContent.trim())
-					: 5,
-				katsune: katsune,
-			};
-			// create child for them
-			create_listen_item(listen_container, other_listeners, page.type);
-		}
-	}
+	main?.insertBefore(
+		<ListenBoard url={scrobble_page} others={other_count}>
+			<Listen
+				name={auth.name!}
+				plays={your_plays}
+				url={scrobble_page}
+				artist={is_artist}
+			/>
+			{starred && (
+				<Listen name={starred} url={scrobble_page} artist={is_artist} />
+			)}
+			{friends.length > 0 && (
+				<>
+					{friends.map((friend) => (
+						<Listen
+							name={friend}
+							url={scrobble_page}
+							artist={is_artist}
+							waitForHover
+						/>
+					))}
+				</>
+			)}
+		</ListenBoard>,
+		main?.firstElementChild,
+	);
 
 	// interactables on the right
 	let interact_container = document.createElement('section');

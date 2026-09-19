@@ -12576,6 +12576,10 @@ export const trans = {
 		// keybind
 		en: '{v} to close',
 	},
+	hover_to_view: {
+		// hover mouse
+		en: 'Hover to view',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

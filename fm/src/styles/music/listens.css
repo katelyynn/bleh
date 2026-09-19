@@ -484,4 +484,20 @@
 	&>.bleh-icon-spinner {
 		--icon-size: 12px;
 	}
+
+	&.waiting-for-hover {
+		animation: waiting 2s var(--trans-function-ani) infinite;
+	}
+}
+
+@keyframes waiting {
+
+	from,
+	to {
+		opacity: 0.8;
+	}
+
+	60% {
+		opacity: 0.4;
+	}
 }

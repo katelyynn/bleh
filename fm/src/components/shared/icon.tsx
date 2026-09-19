@@ -214,6 +214,7 @@ export const icons = {
 	streak: 'streak',
 	streak_empty: 'streak-empty',
 	image: 'photo',
+	hover: 'mouse',
 };
 
 interface icon {

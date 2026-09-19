@@ -1155,6 +1155,12 @@ export function mualani() {
 								url={sanitise('Sabrina Carpenter')}
 							/>
 							<Listen
+								name='dressupdarling'
+								artist
+								url={sanitise('Sabrina Carpenter')}
+								waitForHover
+							/>
+							<Listen
 								name='evangelicgirl'
 								artist
 								url={sanitise('Sabrina Carpenter')}
