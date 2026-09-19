@@ -1,5 +1,5 @@
 import { WithChildren } from '@/types/generic.tsx';
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
 import { GenericUsername, SponsorUsername } from '@/components/user/name.tsx';
 import { is_sponsor } from '@/components/sponsor.ts';
@@ -8,12 +8,18 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { avatar } from '@/components/shared/avatar.ts';
 import { header_colour } from '@/components/page/colour.ts';
 
+interface ListenBoardProps {
+	children: ReactNode;
+}
+
 export function ListenBoard({
 	children,
-}: WithChildren) {
+}: ListenBoardProps) {
 	return (
-		<div class='listen-board'>
-			{children}
+		<div class='listen-board-wrap'>
+			<div class='listen-board'>
+				{children}
+			</div>
 		</div>
 	);
 }

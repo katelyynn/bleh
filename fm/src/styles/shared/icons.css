@@ -210,7 +210,8 @@
 
 	transition-property: translate,
 	rotate,
-	scale;
+	scale,
+	opacity;
 	transition-duration: 0.2s;
 	transition-timing-function: var(--trans-function-ani);
 }

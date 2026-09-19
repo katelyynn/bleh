@@ -221,9 +221,9 @@
 
 .listen-board {
 	position: relative;
-	background: oklch(var(--b6) / 60%);
+	background: oklch(var(--b6) / 20%);
 	box-shadow: var(--group-shadow);
-	border-radius: var(--radius-s);
+	border-radius: var(--radius-m);
 	overflow: hidden;
 
 	display: flex;
@@ -269,7 +269,7 @@
 	position: relative;
 	overflow: hidden;
 
-	background: oklch(var(--h4) / 10%);
+	background: oklch(var(--k4) / 15%);
 	padding: 8px 10px;
 
 	--mask-colour: oklch(var(--c2));
@@ -277,14 +277,15 @@
 	&:hover {
 		&>.bleh-icon-arrow-right {
 			translate: 2px 0;
+			opacity: 1;
 		}
 
 		&:before {
-			translate: 120px 0;
+			translate: 110px 0;
 		}
 
 		&>.listen-board-item-bg {
-			translate: 50px 0;
+			translate: 54px 0;
 			scale: 1.03;
 		}
 
@@ -299,6 +300,7 @@
 
 	&>.bleh-icon-arrow-right {
 		--icon-size: 16px;
+		opacity: 0;
 	}
 
 	&:before {
@@ -306,10 +308,10 @@
 		position: absolute;
 		inset: 0;
 		display: block;
-		background: linear-gradient(90deg, transparent 50%, oklch(var(--h4)) 90%);
+		background: linear-gradient(90deg, transparent 50%, oklch(var(--k4)) 90%);
 
 		translate: 150px 0;
-		opacity: 0.5;
+		opacity: 0.8;
 
 		transition-property: translate;
 		transition-duration: 0.2s;
@@ -403,7 +405,7 @@
 .listen-board-item-plays {
 	display: flex;
 	align-items: center;
-	gap: 2px;
+	gap: 1px;
 	height: 18px;
 
 	--icon-size: 12px;
