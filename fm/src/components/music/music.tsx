@@ -313,7 +313,12 @@ export async function show_your_scrobbles() {
 	const is_artist = page.type == 'artist';
 
 	main?.insertBefore(
-		<ListenBoard url={scrobble_page} others={other_count}>
+		<ListenBoard
+			url={scrobble_page}
+			others={other_count}
+			extra={friends.length}
+			expanded={friends.length <= 1}
+		>
 			<Listen
 				name={auth.name!}
 				plays={your_plays}
@@ -325,9 +330,10 @@ export async function show_your_scrobbles() {
 			)}
 			{friends.length > 0 && (
 				<>
-					{friends.map((friend) => (
+					{friends.map((friend, i) => (
 						<Listen
 							name={friend}
+							index={i + 1}
 							url={scrobble_page}
 							artist={is_artist}
 							waitForHover

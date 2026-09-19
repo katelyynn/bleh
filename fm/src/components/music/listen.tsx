@@ -10,17 +10,24 @@ import { root } from '@/build/page.ts';
 import { redirect } from '@/components/music/music.tsx';
 import { clean_number } from '@/build/tools.ts';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts.js';
-import { Keybind } from '@/components/settings/clickables/keybind.tsx';
+import {
+	Keybind,
+	KeybindList,
+} from '@/components/settings/clickables/keybind.tsx';
 
 interface ListenBoardProps {
 	url?: string;
 	others?: number;
+	expanded?: boolean;
+	extra?: number;
 	children?: ReactNode;
 }
 
 export function ListenBoard({
 	url,
 	others,
+	expanded,
+	extra,
 	children,
 }: ListenBoardProps) {
 	let typing = false;
@@ -29,11 +36,27 @@ export function ListenBoard({
 	const input = createRef();
 	const input_wrap = createRef();
 	const custom = createRef();
+	const expand_hint = createRef();
 
 	const elem = (
 		<div class='listen-board-wrap'>
 			<div class='listen-board' ref={board}>
 				{children}
+				{extra && (
+					<div class='listen-board-expand-hint' ref={expand_hint}>
+						<SeeMore
+							icon={icons.arrow_down}
+							onClick={() => {
+								expanded = true;
+								update();
+							}}
+						>
+							{tl(trans.and_count_more, {
+								c: Math.max(extra - 1, 0),
+							})}
+						</SeeMore>
+					</div>
+				)}
 			</div>
 			{(url || others) && (
 				<div class='listen-board-row'>
@@ -74,6 +97,7 @@ export function ListenBoard({
 				<input
 					class='listen-board-input'
 					ref={input}
+					placeholder={tl(trans.enter_username) as string}
 					onKeyDown={(e) => {
 						if (e.key == 'Escape') {
 							e.preventDefault();
@@ -98,7 +122,11 @@ export function ListenBoard({
 				/>
 				<span class='listen-board-input-hint'>
 					{tl(trans.value_to_close, {
-						v: <Keybind value='Escape' />,
+						v: (
+							<KeybindList text>
+								<Keybind value='Escape' text />
+							</KeybindList>
+						),
 					})}
 				</span>
 			</div>
@@ -109,6 +137,9 @@ export function ListenBoard({
 		custom.current?.setAttribute('aria-expanded', String(typing));
 		board.current.setAttribute('data-typing', String(typing));
 		input_wrap.current.setAttribute('data-typing', String(typing));
+
+		board.current.setAttribute('data-expanded', String(expanded));
+		expand_hint.current?.setAttribute('data-expanded', String(expanded));
 
 		if (typing) {
 			input.current.focus();
@@ -124,6 +155,7 @@ export function ListenBoard({
 
 interface ListenProps {
 	image?: string;
+	index?: number;
 	name: string;
 	plays?: number;
 	url?: string;
@@ -133,6 +165,7 @@ interface ListenProps {
 
 export function Listen({
 	image,
+	index = 1,
 	name,
 	plays,
 	url,
@@ -287,29 +320,34 @@ export function Listen({
 		if (requested) return;
 		requested = true;
 
-		fetch(`${root}user/${name}/library/music/${redirect()}${url}`)
-			.then((res) => {
-				return res.text();
-			})
-			.then((dom) => {
-				const doc = new DOMParser().parseFromString(dom, 'text/html');
-
-				const first_metadata_item = doc.querySelector(
-					'.metadata-item .metadata-display',
-				);
-
-				// sometimes this fails even thou they do have plays, this is just a last.fm bug
-				// i dont feel comfortable displaying 0 here as it may not be true
-				// but i guess i should?
-				if (first_metadata_item) {
-					plays = clean_number(
-						first_metadata_item.textContent.trim(),
+		setTimeout(() => {
+			fetch(`${root}user/${name}/library/music/${redirect()}${url}`)
+				.then((res) => {
+					return res.text();
+				})
+				.then((dom) => {
+					const doc = new DOMParser().parseFromString(
+						dom,
+						'text/html',
 					);
-				} else {
-					plays = 0;
-				}
 
-				update();
-			});
+					const first_metadata_item = doc.querySelector(
+						'.metadata-item .metadata-display',
+					);
+
+					// sometimes this fails even thou they do have plays, this is just a last.fm bug
+					// i dont feel comfortable displaying 0 here as it may not be true
+					// but i guess i should?
+					if (first_metadata_item) {
+						plays = clean_number(
+							first_metadata_item.textContent.trim(),
+						);
+					} else {
+						plays = 0;
+					}
+
+					update();
+				});
+		}, 50 * index);
 	}
 }

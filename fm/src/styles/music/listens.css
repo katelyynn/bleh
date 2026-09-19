@@ -236,14 +236,53 @@
 	flex-direction: column;
 	gap: 1px;
 
+	max-height: 300px;
+
 	&[data-typing="true"] {
 		opacity: 0.2;
 		pointer-events: none;
 	}
 
-	transition-property: opacity;
+	&[data-expanded="false"] {
+		max-height: calc(((52px + 1px) * 3 - 1px + 24px));
+
+		&:before {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		&>:nth-child(4) {
+			--mask: linear-gradient(180deg, white, transparent 30%);
+			mask-image: var(--mask);
+			-webkit-mask-image: var(--mask);
+		}
+	}
+
+	transition-property: opacity,
+	max-height;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 1px;
+		bottom: 1px;
+		right: 1px;
+		height: 30px;
+		display: block;
+		border-radius: var(--radius-m);
+		pointer-events: none;
+
+		background: linear-gradient(180deg, transparent, oklch(var(--b5) / 50%));
+		z-index: 20;
+
+		opacity: 0;
+
+		transition-property: opacity;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
+	}
 
 	&:after {
 		content: '';
@@ -274,6 +313,31 @@
 	}
 }
 
+.listen-board-expand-hint {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 40;
+
+	display: flex;
+	justify-content: center;
+
+	height: 24px;
+
+	opacity: 0;
+	pointer-events: none;
+
+	&[data-expanded="false"] {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	transition-property: opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+}
+
 .listen-board-input-wrap {
 	position: absolute;
 	inset: 0 0 calc(18px + 10px);
@@ -297,9 +361,6 @@
 }
 
 .listen-board-input-hint {
-	display: flex;
-	align-items: center;
-	gap: 6px;
 	color: oklch(var(--c3));
 	cursor: default;
 }
@@ -341,6 +402,7 @@
 	gap: 10px;
 	position: relative;
 	overflow: hidden;
+	min-height: 52px;
 
 	background: oklch(var(--k4) / 15%);
 	padding: 8px 10px;
@@ -472,7 +534,7 @@
 .listen-board-item-plays {
 	display: flex;
 	align-items: center;
-	gap: 1px;
+	gap: 2px;
 	height: 18px;
 
 	--icon-size: 12px;
