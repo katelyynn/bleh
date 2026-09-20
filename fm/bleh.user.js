@@ -85592,48 +85592,6 @@ var bleh = (() => {
       children
     });
   }
-  function PlotBody({ ref: ref2, empty: empty2, loading, freeform, children }) {
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: [
-        "plot-body",
-        freeform && "freeform"
-      ],
-      ref: ref2,
-      children
-    });
-    function update() {
-      elem.classList.toggle("empty", empty2);
-      elem.classList.toggle("loading", loading);
-    }
-    Object.defineProperty(elem, "empty", {
-      get() {
-        return empty2;
-      },
-      set(v) {
-        empty2 = v;
-        update();
-      }
-    });
-    Object.defineProperty(elem, "loading", {
-      get() {
-        return loading;
-      },
-      set(v) {
-        loading = v;
-        update();
-      }
-    });
-    update();
-    return elem;
-  }
-  function PlotBodyMessage({ children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: [
-        "plot-body-empty-message"
-      ],
-      children
-    });
-  }
 
   // src/components/minis/user.tsx
   function CompareUsers({ ref: ref2, children }) {
@@ -95636,16 +95594,12 @@ var bleh = (() => {
             })
           ]
         }),
-        /* @__PURE__ */ jsx(PlotBody, {
-          freeform: true,
-          empty: true,
+        /* @__PURE__ */ jsx(CompareBody, {
           ref: body,
           "data-filled": "false",
-          children: /* @__PURE__ */ jsx(PlotBodyMessage, {
-            children: /* @__PURE__ */ jsx(Placeholder, {
-              face: "(\u0E51>\u25E1<\u0E51)",
-              children: tl2(trans.choose_a_timeframe_above)
-            })
+          children: /* @__PURE__ */ jsx(Placeholder, {
+            face: "(\u0E51>\u25E1<\u0E51)",
+            children: tl2(trans.choose_a_timeframe_above)
           })
         })
       ]
@@ -95710,13 +95664,9 @@ var bleh = (() => {
       }
     }
     function collage_error(e5) {
-      body.current.empty = true;
-      body.current.loading = false;
-      body.current.replaceChildren(/* @__PURE__ */ jsx(PlotBodyMessage, {
-        children: /* @__PURE__ */ jsx(Alert, {
-          type: "error",
-          children: e5 && e5.message ? e5.message : e5
-        })
+      body.current.replaceChildren(/* @__PURE__ */ jsx(Alert, {
+        type: "error",
+        children: e5 && e5.message ? e5.message : e5
       }));
       console.error(e5);
       type.current.disabled = false;
@@ -95771,8 +95721,6 @@ var bleh = (() => {
       get_grid(1, pages);
     }
     function get_grid(current_page, pages) {
-      body.current.empty = false;
-      body.current.loading = true;
       body.current.replaceChildren(/* @__PURE__ */ jsx(LoadingData, {
         children: tl2(trans.gathering_plays_for_user_pages, {
           u: page.name,
@@ -95822,8 +95770,6 @@ var bleh = (() => {
       try {
         log("gathered initial values", "collage", "info", page.state.collage);
         if (page.state.collage.length == 0) {
-          body.current.empty = false;
-          body.current.loading = true;
           body.current.replaceChildren(/* @__PURE__ */ jsx(LoadingData, {
             type: "failed",
             children: tl2(trans.no_plays_in_range)
@@ -95923,8 +95869,6 @@ var bleh = (() => {
                     ${grid}
                 </div>
             `;
-        body.current.empty = false;
-        body.current.loading = true;
         body.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
           children: [
             /* @__PURE__ */ jsx(LoadingData, {
@@ -95980,8 +95924,6 @@ var bleh = (() => {
                 brand: version.brand,
                 date: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
               });
-              body.current.empty = false;
-              body.current.loading = false;
               body.current.replaceChildren(/* @__PURE__ */ jsx("div", {
                 class: "collage-canvas",
                 children: [
@@ -126391,7 +126333,7 @@ var bleh = (() => {
         date: "2026-09-20"
       }
     },
-    built_on: "2026-09-20T02:54:26.696Z"
+    built_on: "2026-09-20T02:57:43.050Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

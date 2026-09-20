@@ -30,11 +30,7 @@ import {
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.ts';
 import { createRef } from 'jsx-dom';
-import {
-	CompareHeader,
-	PlotBody,
-	PlotBodyMessage,
-} from '@/components/minis/main.tsx';
+import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
 import {
 	CompareSelection,
 	CompareUser,
@@ -224,13 +220,11 @@ export function collage({ host, sidebar } = {}) {
 					</Button>
 				</CompareSelection>
 			</CompareHeader>
-			<PlotBody freeform empty ref={body} data-filled='false'>
-				<PlotBodyMessage>
-					<Placeholder face='(๑>◡<๑)'>
-						{tl(trans.choose_a_timeframe_above)}
-					</Placeholder>
-				</PlotBodyMessage>
-			</PlotBody>
+			<CompareBody ref={body} data-filled='false'>
+				<Placeholder face='(๑>◡<๑)'>
+					{tl(trans.choose_a_timeframe_above)}
+				</Placeholder>
+			</CompareBody>
 		</>,
 	);
 
@@ -276,12 +270,8 @@ export function collage({ host, sidebar } = {}) {
 	}
 
 	function collage_error(e) {
-		body.current.empty = true;
-		body.current.loading = false;
 		body.current.replaceChildren(
-			<PlotBodyMessage>
-				<Alert type='error'>{(e && e.message) ? e.message : e}</Alert>
-			</PlotBodyMessage>,
+			<Alert type='error'>{(e && e.message) ? e.message : e}</Alert>,
 		);
 
 		console.error(e);
@@ -365,8 +355,6 @@ export function collage({ host, sidebar } = {}) {
 	}
 
 	function get_grid(current_page, pages) {
-		body.current.empty = false;
-		body.current.loading = true;
 		body.current.replaceChildren(
 			<LoadingData>
 				{tl(trans.gathering_plays_for_user_pages, {
@@ -449,8 +437,6 @@ export function collage({ host, sidebar } = {}) {
 			);
 
 			if (page.state.collage.length == 0) {
-				body.current.empty = false;
-				body.current.loading = true;
 				body.current.replaceChildren(
 					<LoadingData type='failed'>
 						{tl(trans.no_plays_in_range)}
@@ -627,8 +613,6 @@ export function collage({ host, sidebar } = {}) {
                 </div>
             `;
 
-			body.current.empty = false;
-			body.current.loading = true;
 			body.current.replaceChildren(
 				<>
 					<LoadingData>{tl(trans.waiting_for_images)}</LoadingData>
@@ -719,8 +703,6 @@ export function collage({ host, sidebar } = {}) {
 							}-${pad2(date.getDate())}`,
 						});
 
-						body.current.empty = false;
-						body.current.loading = false;
 						body.current.replaceChildren(
 							<div class='collage-canvas'>
 								{collage_dom}
