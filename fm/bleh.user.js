@@ -34649,7 +34649,8 @@ var bleh = (() => {
     streak_empty: "streak-empty",
     image: "photo",
     hover: "mouse",
-    size: "size"
+    size: "size",
+    preview: "preview"
   };
   function icon({ name, identifier, use_mask = true }) {
     return /* @__PURE__ */ jsx("span", {
@@ -46611,6 +46612,9 @@ var bleh = (() => {
       sv: "All tid",
       ru: "\u0412\u0441\u0451 \u0432\u0440\u0435\u043C\u044F",
       pl: "Ca\u0142y okres"
+    },
+    choose_a_timeframe: {
+      en: "Choose a timeframe"
     },
     choose_a_timeframe_above: {
       en: "Choose a timeframe above",
@@ -85799,7 +85803,7 @@ var bleh = (() => {
   }
 
   // src/components/date/timeframe.tsx
-  function HybridTimeframePicker({ ref: ref2, value, disabled = false, onChange }) {
+  function HybridTimeframePicker({ ref: ref2, value, inSettings, disabled = false, onChange }) {
     if (!value) value = "date_preset=LAST_7_DAYS";
     const modal = /* @__PURE__ */ jsx(FloatingWindow, {});
     const alert2 = createRef();
@@ -85813,7 +85817,8 @@ var bleh = (() => {
         "btn",
         "flex-button",
         "select-button",
-        "timeframe-picker-button"
+        "timeframe-picker-button",
+        inSettings && "select-in-settings"
       ],
       ref: ref2
     });
@@ -95455,6 +95460,18 @@ var bleh = (() => {
     return elem;
   }
 
+  // src/components/form/footer.tsx
+  function SettingsFooter({ end: end2 = true, gap, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: [
+        "settings-footer",
+        end2 && "end",
+        gap && "gap"
+      ],
+      children
+    });
+  }
+
   // src/components/minis/collage.tsx
   function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -95462,6 +95479,7 @@ var bleh = (() => {
     const height = createRef();
     const timeframe = createRef();
     const type = createRef();
+    const downloader = createRef();
     const submit = createRef();
     const body = createRef();
     const value = 3;
@@ -95471,6 +95489,8 @@ var bleh = (() => {
     const previous_year = current_year - 1;
     const default_type = page.requested.type || "albums";
     const default_timeframe = page.requested.timeframe || "date_preset=LAST_30_DAYS";
+    let blob_url;
+    let filename;
     if (page.requested.redirect) {
       setTimeout(() => {
         notify({
@@ -95482,149 +95502,128 @@ var bleh = (() => {
         });
       }, 100);
     }
-    const user = createRef();
     const grid_preview = createRef();
+    const range = [];
+    Array.from({
+      length: 20
+    }).forEach((_, i3) => {
+      range.push({
+        value: String(i3 + 1),
+        text: String(i3 + 1)
+      });
+    });
     const grid_preview_settings = /* @__PURE__ */ jsx(InputGroup, {
       children: [
-        /* @__PURE__ */ jsx(Input, {
-          type: "number",
-          value,
-          placeholder: value,
-          min: min3,
-          length: max3,
+        /* @__PURE__ */ jsx(Select, {
+          inSettings: true,
+          value: String(value),
+          values: range,
           ref: width,
           onChange: (v) => {
-            grid_preview.current.row = v;
+            grid_preview.current.row = Number(v);
           }
         }),
         /* @__PURE__ */ jsx(Icon, {
           name: icons.x
         }),
-        /* @__PURE__ */ jsx(Input, {
-          type: "number",
-          value,
-          placeholder: value,
-          min: min3,
-          length: max3,
+        /* @__PURE__ */ jsx(Select, {
+          inSettings: true,
+          value: String(value),
+          values: range,
           ref: height,
           onChange: (v) => {
-            grid_preview.current.col = v;
+            grid_preview.current.col = Number(v);
           }
         })
       ]
     });
     host.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-      children: [
-        /* @__PURE__ */ jsx(CompareHeader, {
-          children: [
-            /* @__PURE__ */ jsx(CompareUsers, {
-              children: [
-                /* @__PURE__ */ jsx("div", {
-                  ref: user,
-                  children: /* @__PURE__ */ jsx(CompareUser, {
-                    name: page.name,
-                    replacePage: true,
-                    avatarOnly: true
-                  })
-                }),
-                /* @__PURE__ */ jsx(UserSelect, {
-                  inSettings: true,
-                  value: page.requested.profile || "",
-                  onChange: (v) => {
-                    page.requested.profile = v;
-                    page.name = v;
-                    page.avatar = "";
-                    user.current.replaceChildren(/* @__PURE__ */ jsx(CompareUser, {
-                      name: v,
-                      replacePage: true,
-                      avatarOnly: true
-                    }));
-                  }
-                })
-              ]
-            }),
-            /* @__PURE__ */ jsx(CompareSelection, {
-              children: [
-                /* @__PURE__ */ jsx(Select, {
-                  value: default_type,
-                  values: [
-                    {
-                      text: tl2(trans.item_type)
-                    },
-                    {
-                      value: "artists",
-                      text: () => /* @__PURE__ */ jsx(IconLabel, {
-                        icon: icons.artist,
-                        children: tl2(trans.artists)
-                      })
-                    },
-                    {
-                      value: "albums",
-                      text: () => /* @__PURE__ */ jsx(IconLabel, {
-                        icon: icons.album,
-                        children: tl2(trans.albums)
-                      })
-                    },
-                    {
-                      value: "tracks",
-                      text: () => /* @__PURE__ */ jsx(IconLabel, {
-                        icon: icons.track,
-                        children: tl2(trans.tracks)
-                      })
-                    }
-                  ],
-                  ref: type
-                }),
-                /* @__PURE__ */ jsx(HybridTimeframePicker, {
-                  value: default_timeframe,
-                  ref: timeframe
-                }),
-                /* @__PURE__ */ jsx(Button, {
-                  primary: true,
-                  ref: submit,
-                  onClick: init_collage,
-                  children: [
-                    /* @__PURE__ */ jsx(Icon, {
-                      name: icons.collage
-                    }),
-                    tl2(trans.generate)
-                  ]
-                })
-              ]
-            })
-          ]
-        }),
-        /* @__PURE__ */ jsx(CompareBody, {
-          ref: body,
-          "data-filled": "false",
-          children: /* @__PURE__ */ jsx(Placeholder, {
-            face: "(\u0E51>\u25E1<\u0E51)",
-            children: tl2(trans.choose_a_timeframe_above)
-          })
+      children: /* @__PURE__ */ jsx(CompareBody, {
+        ref: body,
+        "data-filled": "false",
+        children: /* @__PURE__ */ jsx(Placeholder, {
+          face: "(\u0E51>\u25E1<\u0E51)",
+          children: tl2(trans.choose_a_timeframe)
         })
-      ]
+      })
     }));
     sidebar.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(PanelHead, {
-          icon: icons.size,
-          children: tl2(trans.grid)
+          icon: icons.preview,
+          children: tl2(trans.preview)
         }),
         /* @__PURE__ */ jsx("div", {
           class: "collage-grid-preview-stack",
-          children: [
-            /* @__PURE__ */ jsx(CollageGridPreview, {
-              row: width.current.value,
-              col: height.current.value,
-              ref: grid_preview
-            }),
-            grid_preview_settings
-          ]
+          children: /* @__PURE__ */ jsx(CollageGridPreview, {
+            row: width.current.value,
+            col: height.current.value,
+            ref: grid_preview
+          })
         }),
         /* @__PURE__ */ jsx(SettingGroup, {
           children: [
+            /* @__PURE__ */ jsx(SettingStub, {
+              name: tl2(trans.profile),
+              type: "select",
+              children: /* @__PURE__ */ jsx(UserSelect, {
+                inSettings: true,
+                value: page.requested.profile || "",
+                onChange: (v) => {
+                  page.requested.profile = v;
+                  page.name = v;
+                  page.avatar = "";
+                }
+              })
+            }),
+            /* @__PURE__ */ jsx(SettingStub, {
+              name: tl2(trans.item_type),
+              type: "select",
+              children: /* @__PURE__ */ jsx(Select, {
+                inSettings: true,
+                value: default_type,
+                values: [
+                  {
+                    value: "artists",
+                    text: () => /* @__PURE__ */ jsx(IconLabel, {
+                      icon: icons.artist,
+                      children: tl2(trans.artists)
+                    })
+                  },
+                  {
+                    value: "albums",
+                    text: () => /* @__PURE__ */ jsx(IconLabel, {
+                      icon: icons.album,
+                      children: tl2(trans.albums)
+                    })
+                  },
+                  {
+                    value: "tracks",
+                    text: () => /* @__PURE__ */ jsx(IconLabel, {
+                      icon: icons.track,
+                      children: tl2(trans.tracks)
+                    })
+                  }
+                ],
+                ref: type
+              })
+            }),
+            /* @__PURE__ */ jsx(SettingStub, {
+              name: tl2(trans.timeframe),
+              type: "select",
+              children: /* @__PURE__ */ jsx(HybridTimeframePicker, {
+                inSettings: true,
+                value: default_timeframe,
+                ref: timeframe
+              })
+            }),
             ff("collage_style") && /* @__PURE__ */ jsx(SettingSelect, {
               bind: "collage_style"
+            }),
+            /* @__PURE__ */ jsx(SettingStub, {
+              name: tl2(trans.chart_size),
+              type: "select",
+              children: grid_preview_settings
             }),
             /* @__PURE__ */ jsx(SettingSwitch, {
               bind: "collage_title"
@@ -95650,6 +95649,34 @@ var bleh = (() => {
               bind: "collage_grid_plays"
             })
           ]
+        }),
+        /* @__PURE__ */ jsx(SettingsFooter, {
+          gap: true,
+          children: [
+            /* @__PURE__ */ jsx(Button, {
+              primary: true,
+              ref: downloader,
+              onClick: download_collage,
+              disabled: true,
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.download
+                }),
+                tl2(trans.download)
+              ]
+            }),
+            /* @__PURE__ */ jsx(Button, {
+              primary: true,
+              ref: submit,
+              onClick: init_collage,
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.collage
+                }),
+                tl2(trans.generate)
+              ]
+            })
+          ]
         })
       ]
     }));
@@ -95669,6 +95696,7 @@ var bleh = (() => {
         children: e5 && e5.message ? e5.message : e5
       }));
       console.error(e5);
+      downloader.current.disabled = true;
       type.current.disabled = false;
       timeframe.current.disabled = false;
       submit.current.loading = false;
@@ -95714,6 +95742,7 @@ var bleh = (() => {
         });
         return;
       }
+      downloader.current.disabled = true;
       type.current.disabled = true;
       timeframe.current.disabled = true;
       submit.current.loading = true;
@@ -95774,6 +95803,7 @@ var bleh = (() => {
             type: "failed",
             children: tl2(trans.no_plays_in_range)
           }));
+          downloader.current.disabled = true;
           type.current.disabled = false;
           timeframe.current.disabled = false;
           submit.current.loading = false;
@@ -95914,9 +95944,9 @@ var bleh = (() => {
         }).then((canvas) => {
           canvas.toBlob((blob) => {
             try {
-              const blob_url = URL.createObjectURL(blob);
+              blob_url = URL.createObjectURL(blob);
               const date = /* @__PURE__ */ new Date();
-              const filename = tl2(trans.chart_template_filename, {
+              filename = tl2(trans.chart_template_filename, {
                 timeframe: timeframe_text(timeframe.current.value),
                 user: page.name,
                 type: tl2(trans[type.current.value]),
@@ -95931,37 +95961,24 @@ var bleh = (() => {
                   canvas,
                   /* @__PURE__ */ jsx("div", {
                     class: "collage-canvas-actions",
-                    children: [
-                      /* @__PURE__ */ jsx(Button, {
-                        primary: true,
-                        onClick: () => {
-                          download(blob_url, filename);
-                        },
-                        children: [
-                          /* @__PURE__ */ jsx(Icon, {
-                            name: icons.download
-                          }),
-                          tl2(trans.download)
-                        ]
-                      }),
-                      /* @__PURE__ */ jsx(Button, {
-                        onClick: () => {
-                          open(blob_url);
-                        },
-                        children: [
-                          tl2(trans.open),
-                          /* @__PURE__ */ jsx(Icon, {
-                            name: icons.external
-                          })
-                        ]
-                      })
-                    ]
+                    children: /* @__PURE__ */ jsx(Button, {
+                      onClick: () => {
+                        open(blob_url);
+                      },
+                      children: [
+                        tl2(trans.open),
+                        /* @__PURE__ */ jsx(Icon, {
+                          name: icons.external
+                        })
+                      ]
+                    })
                   })
                 ]
               }));
             } catch (e5) {
               collage_error(e5);
             }
+            downloader.current.disabled = false;
             type.current.disabled = false;
             timeframe.current.disabled = false;
             submit.current.loading = false;
@@ -95970,6 +95987,9 @@ var bleh = (() => {
       } catch (e5) {
         collage_error(e5);
       }
+    }
+    function download_collage() {
+      download(blob_url, filename);
     }
   }
 
@@ -102400,18 +102420,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/form/footer.tsx
-  function SettingsFooter({ end: end2 = true, gap, children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: [
-        "settings-footer",
-        end2 && "end",
-        gap && "gap"
-      ],
-      children
-    });
-  }
-
   // src/pages/profile/recents.tsx
   function profile_recents() {
     const panel = page.structure.main.querySelector("#recent-tracks-section");
@@ -103065,7 +103073,7 @@ var bleh = (() => {
       delete cache2.font_style;
       delete cache2.username;
       if (!about_me_sidebar) {
-        page.structure.side.insertBefore(/* @__PURE__ */ jsx("section", {
+        about_me_sidebar = /* @__PURE__ */ jsx("section", {
           class: "about-me-sidebar",
           children: [
             /* @__PURE__ */ jsx("h2", {
@@ -103078,7 +103086,8 @@ var bleh = (() => {
               })
             })
           ]
-        }), page.structure.side.firstElementChild);
+        });
+        page.structure.side.insertBefore(about_me_sidebar, page.structure.side.firstElementChild);
       } else {
         if (settings.bio_markdown) {
           about_me_text_value = about_me_text.textContent;
@@ -126333,7 +126342,7 @@ var bleh = (() => {
         date: "2026-09-20"
       }
     },
-    built_on: "2026-09-20T02:57:43.050Z"
+    built_on: "2026-09-20T17:44:21.662Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

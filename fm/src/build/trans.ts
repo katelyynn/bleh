@@ -7818,6 +7818,9 @@ export const trans = {
 		ru: 'Всё время',
 		pl: 'Cały okres',
 	},
+	choose_a_timeframe: {
+		en: 'Choose a timeframe',
+	},
 	choose_a_timeframe_above: {
 		en: 'Choose a timeframe above',
 		de: 'Wähle oben einen Zeitraum',

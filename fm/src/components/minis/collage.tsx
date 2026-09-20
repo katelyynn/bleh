@@ -37,7 +37,7 @@ import {
 	CompareUsers,
 } from '@/components/minis/user.tsx';
 import { Input, InputGroup } from '@/components/input/input.tsx';
-import { Select } from '@/components/select/select.tsx';
+import { Select, SelectOption } from '@/components/select/select.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { Alert } from '@/components/text/alert.tsx';
@@ -51,6 +51,7 @@ import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { CollageGridPreview } from '@/components/settings/previews/collage.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { ff } from '@/components/settings/sku.ts';
+import { SettingsFooter } from '@/components/form/footer.tsx';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -61,6 +62,7 @@ export function collage({ host, sidebar } = {}) {
 	const timeframe = createRef();
 	const type = createRef();
 
+	const downloader = createRef();
 	const submit = createRef();
 	const body = createRef();
 
@@ -75,6 +77,9 @@ export function collage({ host, sidebar } = {}) {
 	const default_timeframe = page.requested.timeframe ||
 		'date_preset=LAST_30_DAYS';
 
+	let blob_url: string;
+	let filename: string;
+
 	if (page.requested.redirect) {
 		setTimeout(() => {
 			notify({
@@ -87,9 +92,8 @@ export function collage({ host, sidebar } = {}) {
 		}, 100);
 	}
 
-	const user = createRef();
 	const grid_preview = createRef();
-	const grid_preview_settings = (
+	/* const grid_preview_settings = (
 		<InputGroup>
 			<Input
 				type='number'
@@ -115,9 +119,7 @@ export function collage({ host, sidebar } = {}) {
 				}}
 			/>
 		</InputGroup>
-	);
-
-	/*
+	);*/
 
 	const range: SelectOption[] = [];
 
@@ -128,11 +130,10 @@ export function collage({ host, sidebar } = {}) {
 		});
 	});
 
-	const user = createRef();
-	const grid_preview = createRef();
 	const grid_preview_settings = (
 		<InputGroup>
 			<Select
+				inSettings
 				value={String(value)}
 				values={range}
 				ref={width}
@@ -142,6 +143,7 @@ export function collage({ host, sidebar } = {}) {
 			/>
 			<Icon name={icons.x} />
 			<Select
+				inSettings
 				value={String(value)}
 				values={range}
 				ref={height}
@@ -152,15 +154,30 @@ export function collage({ host, sidebar } = {}) {
 		</InputGroup>
 	);
 
-	*/
-
 	host.replaceChildren(
 		<>
-			<CompareHeader>
-				<CompareUsers>
-					<div ref={user}>
-						<CompareUser name={page.name} replacePage avatarOnly />
-					</div>
+			<CompareBody ref={body} data-filled='false'>
+				<Placeholder face='(๑>◡<๑)'>
+					{tl(trans.choose_a_timeframe)}
+				</Placeholder>
+			</CompareBody>
+		</>,
+	);
+
+	sidebar.replaceChildren(
+		<>
+			<PanelHead icon={icons.preview}>
+				{tl(trans.preview)}
+			</PanelHead>
+			<div class='collage-grid-preview-stack'>
+				<CollageGridPreview
+					row={width.current.value}
+					col={height.current.value}
+					ref={grid_preview}
+				/>
+			</div>
+			<SettingGroup>
+				<SettingStub name={tl(trans.profile)} type='select'>
 					<UserSelect
 						inSettings
 						value={page.requested.profile || ''}
@@ -169,20 +186,14 @@ export function collage({ host, sidebar } = {}) {
 							page.name = v;
 
 							page.avatar = '';
-
-							user.current.replaceChildren(
-								<CompareUser name={v} replacePage avatarOnly />,
-							);
 						}}
 					/>
-				</CompareUsers>
-				<CompareSelection>
+				</SettingStub>
+				<SettingStub name={tl(trans.item_type)} type='select'>
 					<Select
+						inSettings
 						value={default_type}
 						values={[
-							{
-								text: tl(trans.item_type),
-							},
 							{
 								value: 'artists',
 								text: () => (
@@ -210,39 +221,18 @@ export function collage({ host, sidebar } = {}) {
 						]}
 						ref={type}
 					/>
+				</SettingStub>
+				<SettingStub name={tl(trans.timeframe)} type='select'>
 					<HybridTimeframePicker
+						inSettings
 						value={default_timeframe}
 						ref={timeframe}
 					/>
-					<Button primary ref={submit} onClick={init_collage}>
-						<Icon name={icons.collage} />
-						{tl(trans.generate)}
-					</Button>
-				</CompareSelection>
-			</CompareHeader>
-			<CompareBody ref={body} data-filled='false'>
-				<Placeholder face='(๑>◡<๑)'>
-					{tl(trans.choose_a_timeframe_above)}
-				</Placeholder>
-			</CompareBody>
-		</>,
-	);
-
-	sidebar.replaceChildren(
-		<>
-			<PanelHead icon={icons.size}>
-				{tl(trans.grid)}
-			</PanelHead>
-			<div class='collage-grid-preview-stack'>
-				<CollageGridPreview
-					row={width.current.value}
-					col={height.current.value}
-					ref={grid_preview}
-				/>
-				{grid_preview_settings}
-			</div>
-			<SettingGroup>
+				</SettingStub>
 				{ff('collage_style') && <SettingSelect bind='collage_style' />}
+				<SettingStub name={tl(trans.chart_size)} type='select'>
+					{grid_preview_settings}
+				</SettingStub>
 				<SettingSwitch bind='collage_title' />
 				<SettingSwitch bind='collage_grid_gap' />
 			</SettingGroup>
@@ -254,6 +244,21 @@ export function collage({ host, sidebar } = {}) {
 				<SettingSwitch bind='collage_grid_text' />
 				<SettingSwitch bind='collage_grid_plays' />
 			</SettingGroup>
+			<SettingsFooter gap>
+				<Button
+					primary
+					ref={downloader}
+					onClick={download_collage}
+					disabled
+				>
+					<Icon name={icons.download} />
+					{tl(trans.download)}
+				</Button>
+				<Button primary ref={submit} onClick={init_collage}>
+					<Icon name={icons.collage} />
+					{tl(trans.generate)}
+				</Button>
+			</SettingsFooter>
 		</>,
 	);
 
@@ -276,6 +281,7 @@ export function collage({ host, sidebar } = {}) {
 
 		console.error(e);
 
+		downloader.current.disabled = true;
 		type.current.disabled = false;
 		timeframe.current.disabled = false;
 		//group.current.disabled = false;
@@ -345,6 +351,7 @@ export function collage({ host, sidebar } = {}) {
 			return;
 		}
 
+		downloader.current.disabled = true;
 		type.current.disabled = true;
 		timeframe.current.disabled = true;
 		//group.current.disabled = true;
@@ -443,6 +450,7 @@ export function collage({ host, sidebar } = {}) {
 					</LoadingData>,
 				);
 
+				downloader.current.disabled = true;
 				type.current.disabled = false;
 				timeframe.current.disabled = false;
 				//group.current.disabled = false;
@@ -687,11 +695,11 @@ export function collage({ host, sidebar } = {}) {
 			}).then((canvas) => {
 				canvas.toBlob((blob) => {
 					try {
-						const blob_url = URL.createObjectURL(blob);
+						blob_url = URL.createObjectURL(blob);
 
 						const date = new Date();
 
-						const filename = tl(trans.chart_template_filename, {
+						filename = tl(trans.chart_template_filename, {
 							timeframe: timeframe_text(timeframe.current.value),
 							user: page.name,
 							type: tl(trans[type.current.value]),
@@ -701,22 +709,13 @@ export function collage({ host, sidebar } = {}) {
 							date: `${date.getFullYear()}-${
 								pad2(date.getMonth() + 1)
 							}-${pad2(date.getDate())}`,
-						});
+						}) as string;
 
 						body.current.replaceChildren(
 							<div class='collage-canvas'>
 								{collage_dom}
 								{canvas}
 								<div class='collage-canvas-actions'>
-									<Button
-										primary
-										onClick={() => {
-											download(blob_url, filename);
-										}}
-									>
-										<Icon name={icons.download} />
-										{tl(trans.download)}
-									</Button>
 									<Button
 										onClick={() => {
 											open(blob_url);
@@ -732,6 +731,7 @@ export function collage({ host, sidebar } = {}) {
 						collage_error(e);
 					}
 
+					downloader.current.disabled = false;
 					type.current.disabled = false;
 					timeframe.current.disabled = false;
 					//group.current.disabled = false;
@@ -741,5 +741,9 @@ export function collage({ host, sidebar } = {}) {
 		} catch (e) {
 			collage_error(e);
 		}
+	}
+
+	function download_collage() {
+		download(blob_url, filename);
 	}
 }

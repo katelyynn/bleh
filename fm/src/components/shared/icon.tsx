@@ -216,6 +216,7 @@ export const icons = {
 	image: 'photo',
 	hover: 'mouse',
 	size: 'size',
+	preview: 'preview',
 };
 
 interface icon {

@@ -10,7 +10,7 @@ import { SettingLabel } from '@/components/settings/provider/main.tsx';
 interface SettingStubProps {
 	name: ReactNode;
 	body?: ReactNode;
-	type?: 'select';
+	type?: 'select' | 'input';
 	children: ReactNode;
 }
 
