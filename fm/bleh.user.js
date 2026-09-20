@@ -86311,10 +86311,11 @@ var bleh = (() => {
   }
 
   // src/components/select/user.tsx
-  function UserSelect({ value, onChange, showAuth = true, inSettings }) {
+  function UserSelect({ ref: ref2, value, onChange, showAuth = true, inSettings }) {
     let values = [];
     const elem = /* @__PURE__ */ jsx("div", {
-      class: "user-select"
+      class: "user-select",
+      ref: ref2
     });
     function update() {
       const starred = useSettings.get("starred_friend");
@@ -95482,6 +95483,7 @@ var bleh = (() => {
     const downloader = createRef();
     const submit = createRef();
     const body = createRef();
+    const user = createRef();
     const value = 3;
     const min3 = 1;
     const max3 = 20;
@@ -95547,6 +95549,8 @@ var bleh = (() => {
         })
       })
     }));
+    const group1 = createRef();
+    const group2 = createRef();
     sidebar.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(PanelHead, {
@@ -95562,6 +95566,7 @@ var bleh = (() => {
           })
         }),
         /* @__PURE__ */ jsx(SettingGroup, {
+          ref: group1,
           children: [
             /* @__PURE__ */ jsx(SettingStub, {
               name: tl2(trans.profile),
@@ -95572,8 +95577,8 @@ var bleh = (() => {
                 onChange: (v) => {
                   page.requested.profile = v;
                   page.name = v;
-                  page.avatar = "";
-                }
+                },
+                ref: user
               })
             }),
             /* @__PURE__ */ jsx(SettingStub, {
@@ -95638,6 +95643,7 @@ var bleh = (() => {
           children: tl2(trans.visual)
         }),
         /* @__PURE__ */ jsx(SettingGroup, {
+          ref: group2,
           children: [
             /* @__PURE__ */ jsx(SettingSwitch, {
               bind: "collage_centered"
@@ -95697,8 +95703,8 @@ var bleh = (() => {
       }));
       console.error(e5);
       downloader.current.disabled = true;
-      type.current.disabled = false;
-      timeframe.current.disabled = false;
+      group1.current.disabled = false;
+      group2.current.disabled = false;
       submit.current.loading = false;
     }
     function make_collage(bypass = false) {
@@ -95720,8 +95726,11 @@ var bleh = (() => {
         });
         return;
       }
-      let per_page = 50;
-      let pages = Math.ceil(width.current.value * height.current.value / per_page);
+      load_profile_cache_externally(user.current.value).then((cache2) => {
+        page.avatar = cache2.avatar || "";
+      });
+      const per_page = 50;
+      const pages = Math.ceil(width.current.value * height.current.value / per_page);
       if (pages > 4 && !bypass) {
         let warn = notify({
           id: "collage_warning",
@@ -95743,8 +95752,8 @@ var bleh = (() => {
         return;
       }
       downloader.current.disabled = true;
-      type.current.disabled = true;
-      timeframe.current.disabled = true;
+      group1.current.disabled = true;
+      group2.current.disabled = true;
       submit.current.loading = true;
       page.state.collage = [];
       get_grid(1, pages);
@@ -95804,8 +95813,8 @@ var bleh = (() => {
             children: tl2(trans.no_plays_in_range)
           }));
           downloader.current.disabled = true;
-          type.current.disabled = false;
-          timeframe.current.disabled = false;
+          group1.current.disabled = false;
+          group2.current.disabled = false;
           submit.current.loading = false;
           return;
         }
@@ -95979,8 +95988,8 @@ var bleh = (() => {
               collage_error(e5);
             }
             downloader.current.disabled = false;
-            type.current.disabled = false;
-            timeframe.current.disabled = false;
+            group1.current.disabled = false;
+            group2.current.disabled = false;
             submit.current.loading = false;
           }, "image/png");
         });
@@ -126342,7 +126351,7 @@ var bleh = (() => {
         date: "2026-09-20"
       }
     },
-    built_on: "2026-09-20T17:44:21.662Z"
+    built_on: "2026-09-20T23:45:34.249Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

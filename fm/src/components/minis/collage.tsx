@@ -52,6 +52,7 @@ import { CollageGridPreview } from '@/components/settings/previews/collage.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { ff } from '@/components/settings/sku.ts';
 import { SettingsFooter } from '@/components/form/footer.tsx';
+import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -65,6 +66,8 @@ export function collage({ host, sidebar } = {}) {
 	const downloader = createRef();
 	const submit = createRef();
 	const body = createRef();
+
+	const user = createRef();
 
 	const value = 3;
 	const min = 1;
@@ -164,6 +167,9 @@ export function collage({ host, sidebar } = {}) {
 		</>,
 	);
 
+	const group1 = createRef();
+	const group2 = createRef();
+
 	sidebar.replaceChildren(
 		<>
 			<PanelHead icon={icons.preview}>
@@ -176,7 +182,7 @@ export function collage({ host, sidebar } = {}) {
 					ref={grid_preview}
 				/>
 			</div>
-			<SettingGroup>
+			<SettingGroup ref={group1}>
 				<SettingStub name={tl(trans.profile)} type='select'>
 					<UserSelect
 						inSettings
@@ -184,9 +190,8 @@ export function collage({ host, sidebar } = {}) {
 						onChange={(v) => {
 							page.requested.profile = v;
 							page.name = v;
-
-							page.avatar = '';
 						}}
+						ref={user}
 					/>
 				</SettingStub>
 				<SettingStub name={tl(trans.item_type)} type='select'>
@@ -239,7 +244,7 @@ export function collage({ host, sidebar } = {}) {
 			<PanelHead icon={icons.visual}>
 				{tl(trans.visual)}
 			</PanelHead>
-			<SettingGroup>
+			<SettingGroup ref={group2}>
 				<SettingSwitch bind='collage_centered' />
 				<SettingSwitch bind='collage_grid_text' />
 				<SettingSwitch bind='collage_grid_plays' />
@@ -282,9 +287,8 @@ export function collage({ host, sidebar } = {}) {
 		console.error(e);
 
 		downloader.current.disabled = true;
-		type.current.disabled = false;
-		timeframe.current.disabled = false;
-		//group.current.disabled = false;
+		group1.current.disabled = false;
+		group2.current.disabled = false;
 		submit.current.loading = false;
 	}
 
@@ -322,8 +326,12 @@ export function collage({ host, sidebar } = {}) {
 			return;
 		}
 
-		let per_page = 50; // decided by last.fm
-		let pages = Math.ceil(
+		load_profile_cache_externally(user.current.value).then((cache) => {
+			page.avatar = cache.avatar || '';
+		});
+
+		const per_page = 50; // decided by last.fm
+		const pages = Math.ceil(
 			(width.current.value * height.current.value) / per_page,
 		);
 
@@ -352,9 +360,8 @@ export function collage({ host, sidebar } = {}) {
 		}
 
 		downloader.current.disabled = true;
-		type.current.disabled = true;
-		timeframe.current.disabled = true;
-		//group.current.disabled = true;
+		group1.current.disabled = true;
+		group2.current.disabled = true;
 		submit.current.loading = true;
 
 		page.state.collage = [];
@@ -451,9 +458,8 @@ export function collage({ host, sidebar } = {}) {
 				);
 
 				downloader.current.disabled = true;
-				type.current.disabled = false;
-				timeframe.current.disabled = false;
-				//group.current.disabled = false;
+				group1.current.disabled = false;
+				group2.current.disabled = false;
 				submit.current.loading = false;
 
 				return;
@@ -732,9 +738,8 @@ export function collage({ host, sidebar } = {}) {
 					}
 
 					downloader.current.disabled = false;
-					type.current.disabled = false;
-					timeframe.current.disabled = false;
-					//group.current.disabled = false;
+					group1.current.disabled = false;
+					group2.current.disabled = false;
 					submit.current.loading = false;
 				}, 'image/png');
 			});

@@ -2,8 +2,10 @@ import { Select, SelectOption } from '@/components/select/select.tsx';
 import { useSettings } from '@/page.ts';
 import { auth } from '@/build/page.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { createRef } from 'jsx-dom';
 
 interface UserSelectProps {
+	ref?: ReturnType<typeof createRef<UserSelectElement>>;
 	value?: string;
 	onChange?: (v: string) => void;
 	showAuth?: boolean;
@@ -15,6 +17,7 @@ type UserSelectElement = HTMLDivElement & {
 };
 
 export function UserSelect({
+	ref,
 	value,
 	onChange,
 	showAuth = true,
@@ -22,7 +25,7 @@ export function UserSelect({
 }: UserSelectProps) {
 	let values: SelectOption[] = [];
 
-	const elem = <div class='user-select' />;
+	const elem = <div class='user-select' ref={ref} /> as UserSelectElement;
 
 	function update() {
 		const starred = useSettings.get('starred_friend') as string;
