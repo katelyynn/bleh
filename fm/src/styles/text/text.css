@@ -550,6 +550,12 @@ hr {
 			}
 		}
 	}
+
+	&.with-margin {
+		.setting-group+& {
+			margin-top: var(--card-padding);
+		}
+	}
 }
 
 .goth {

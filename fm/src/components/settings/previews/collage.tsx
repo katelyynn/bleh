@@ -1,4 +1,5 @@
 import { createRef } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
 
 interface CollageGridPreviewProps {
 	ref?: ReturnType<typeof createRef<CollageGridPreviewElement>>;
@@ -16,6 +17,18 @@ export function CollageGridPreview({
 	row,
 	col,
 }: CollageGridPreviewProps) {
+	let grid_title = useSettings.get('collage_title') as boolean;
+	let grid_gap = useSettings.get('collage_grid_gap') as boolean;
+
+	useSettings.on('collage_title', () => {
+		grid_title = useSettings.get('collage_title') as boolean;
+		update();
+	});
+	useSettings.on('collage_grid_gap', () => {
+		grid_gap = useSettings.get('collage_grid_gap') as boolean;
+		update();
+	});
+
 	const elem = (
 		<div
 			class='collage-grid-preview'
@@ -26,7 +39,19 @@ export function CollageGridPreview({
 	function update() {
 		elem.replaceChildren(
 			<>
-				<div class='collage-grid-preview-inner'>
+				{grid_title && (
+					<div class='collage-grid-preview-title'>
+						<div class='collage-grid-preview-title-stub' />
+						<div class='collage-grid-preview-title-stub' />
+						<div class='collage-grid-preview-title-stub' />
+					</div>
+				)}
+				<div
+					class={[
+						'collage-grid-preview-inner',
+						grid_gap && 'with-gap',
+					]}
+				>
 					{Array.from({ length: row }).map(() => (
 						<>
 							{Array.from({ length: col }).map(() => (

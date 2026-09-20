@@ -156,34 +156,77 @@
 
 
 
+.collage-grid-preview-stack {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: var(--card-padding);
+}
+
 .collage-grid-preview {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 8px;
 
+	width: 100%;
 	height: 210px;
 	padding: 15px;
 	background-color: var(--inset-background);
 	box-shadow: inset 0 0 0 1px var(--separator-base), var(--inset-shadow);
 	border-radius: var(--radius-s);
-	margin-bottom: var(--card-padding);
 }
 
 .collage-grid-preview-inner {
 	display: grid;
 	grid-template-columns: repeat(var(--row), 1fr);
 	grid-template-rows: repeat(var(--col), 1fr);
-	gap: 4px;
+	--radius: 0;
 
 	width: min(100%,
 			calc((180px - (var(--col) - 1) * 4px) * var(--row) / var(--col)));
 
 	aspect-ratio: var(--row) / var(--col);
+
+	&.with-gap {
+		gap: 4px;
+
+		width: min(100%,
+				calc((180px - (var(--col) - 1) * 4px) * var(--row) / var(--col)));
+		--radius: 10%;
+	}
 }
 
 .collage-grid-preview-item {
 	min-width: 0;
 	min-height: 0;
 	background: oklch(var(--b2) / 20%);
-	border-radius: 10%;
+	border-radius: var(--radius);
+
+	&:nth-child(even) {
+		background: oklch(var(--b2) / 26%);
+	}
+}
+
+.collage-grid-preview-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+}
+
+.collage-grid-preview-title-stub {
+	display: block;
+	width: 7%;
+	height: 4px;
+	background: oklch(var(--c2));
+	border-radius: 10px;
+
+	&:first-child {
+		width: 15%;
+		margin-right: 10px;
+	}
 }

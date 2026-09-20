@@ -352,7 +352,7 @@ select,
 	flex-wrap: wrap;
 
 	&>.bleh-icon {
-		--icon-size: 14px;
+		--icon-size: 12px;
 		--icon-colour: oklch(var(--c3));
 	}
 

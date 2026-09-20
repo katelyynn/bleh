@@ -87,39 +87,57 @@ export function collage({ host, sidebar } = {}) {
 
 	const user = createRef();
 	const grid_preview = createRef();
+	const grid_preview_settings = (
+		<InputGroup>
+			<Input
+				type='number'
+				value={value}
+				placeholder={value}
+				min={min}
+				length={max}
+				ref={width}
+				onChange={(v) => {
+					grid_preview.current.row = v;
+				}}
+			/>
+			<Icon name={icons.x} />
+			<Input
+				type='number'
+				value={value}
+				placeholder={value}
+				min={min}
+				length={max}
+				ref={height}
+				onChange={(v) => {
+					grid_preview.current.col = v;
+				}}
+			/>
+		</InputGroup>
+	);
 
 	host.replaceChildren(
 		<>
 			<CompareHeader>
-				<CompareUsers ref={user}>
-					<CompareUser name={page.name} replacePage />
+				<CompareUsers>
+					<div ref={user}>
+						<CompareUser name={page.name} replacePage avatarOnly />
+					</div>
+					<UserSelect
+						inSettings
+						value={page.requested.profile || ''}
+						onChange={(v) => {
+							page.requested.profile = v;
+							page.name = v;
+
+							page.avatar = '';
+
+							user.current.replaceChildren(
+								<CompareUser name={v} replacePage avatarOnly />,
+							);
+						}}
+					/>
 				</CompareUsers>
 				<CompareSelection>
-					<InputGroup>
-						<Input
-							type='number'
-							value={value}
-							placeholder={value}
-							min={min}
-							length={max}
-							ref={width}
-							onChange={(v) => {
-								grid_preview.current.row = v;
-							}}
-						/>
-						<Icon name={icons.x} />
-						<Input
-							type='number'
-							value={value}
-							placeholder={value}
-							min={min}
-							length={max}
-							ref={height}
-							onChange={(v) => {
-								grid_preview.current.col = v;
-							}}
-						/>
-					</InputGroup>
 					<Select
 						value={default_type}
 						values={[
@@ -171,43 +189,37 @@ export function collage({ host, sidebar } = {}) {
 		</>,
 	);
 
-	const group = createRef();
-
 	sidebar.replaceChildren(
 		<>
-			<CollageGridPreview
-				row={width.current.value}
-				col={height.current.value}
-				ref={grid_preview}
-			/>
-			<PanelHead icon={icons.settings}>
-				{tl(trans.settings)}
+			<PanelHead icon={icons.size}>
+				{tl(trans.grid)}
 			</PanelHead>
-			<SettingGroup ref={group}>
-				<SettingStub name={tl(trans.profile)}>
-					<UserSelect
-						inSettings
-						value={page.requested.profile || ''}
-						onChange={(v) => {
-							page.requested.profile = v;
-							page.name = v;
-
-							page.avatar = '';
-
-							user.current.replaceChildren(
-								<CompareUser name={v} replacePage />,
-							);
-						}}
-					/>
-				</SettingStub>
+			<div class='collage-grid-preview-stack'>
+				<CollageGridPreview
+					row={width.current.value}
+					col={height.current.value}
+					ref={grid_preview}
+				/>
+				{grid_preview_settings}
+			</div>
+			<SettingGroup>
 				<SettingSwitch bind='collage_title' />
 				<SettingSwitch bind='collage_grid_gap' />
+			</SettingGroup>
+			<PanelHead icon={icons.visual}>
+				{tl(trans.visual)}
+			</PanelHead>
+			<SettingGroup>
 				<SettingSwitch bind='collage_centered' />
 				<SettingSwitch bind='collage_grid_text' />
 				<SettingSwitch bind='collage_grid_plays' />
 			</SettingGroup>
 		</>,
 	);
+
+	setTimeout(() => {
+		width.current.focus();
+	}, 0);
 
 	function init_collage(bypass = false) {
 		try {
@@ -226,7 +238,7 @@ export function collage({ host, sidebar } = {}) {
 
 		type.current.disabled = false;
 		timeframe.current.disabled = false;
-		group.current.disabled = false;
+		//group.current.disabled = false;
 		submit.current.loading = false;
 	}
 
@@ -295,7 +307,7 @@ export function collage({ host, sidebar } = {}) {
 
 		type.current.disabled = true;
 		timeframe.current.disabled = true;
-		group.current.disabled = true;
+		//group.current.disabled = true;
 		submit.current.loading = true;
 
 		page.state.collage = [];
@@ -393,7 +405,7 @@ export function collage({ host, sidebar } = {}) {
 
 				type.current.disabled = false;
 				timeframe.current.disabled = false;
-				group.current.disabled = false;
+				//group.current.disabled = false;
 				submit.current.loading = false;
 
 				return;
@@ -681,7 +693,7 @@ export function collage({ host, sidebar } = {}) {
 
 					type.current.disabled = false;
 					timeframe.current.disabled = false;
-					group.current.disabled = false;
+					//group.current.disabled = false;
 					submit.current.loading = false;
 				}, 'image/png');
 			});

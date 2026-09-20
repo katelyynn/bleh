@@ -7,7 +7,7 @@
 	border-bottom: 1px solid var(--card-border-base);
 	gap: var(--card-gap);
 
-	.alert + & {
+	.alert+& {
 		margin-top: var(--card-gap);
 	}
 
@@ -18,28 +18,24 @@
 		gap: var(--card-gap);
 		flex: 1;
 
-		& > .bleh-icon {
+		&>.bleh-icon {
 			--icon: var(--icon-16-dots);
-			background-image: linear-gradient(
-				90deg,
-				oklch(var(--b4)),
-				oklch(var(--c1)),
-				oklch(var(--b4)),
-				oklch(var(--c1)),
-				oklch(var(--b4))
-			);
+			background-image: linear-gradient(90deg,
+					oklch(var(--b4)),
+					oklch(var(--c1)),
+					oklch(var(--b4)),
+					oklch(var(--c1)),
+					oklch(var(--b4)));
 			background-size: 200% 100%;
 			animation: gradient 1.3s linear infinite;
 
 			[data-bleh--theme_type="light"] & {
-				background-image: linear-gradient(
-					90deg,
-					oklch(var(--c3)),
-					oklch(var(--b5)),
-					oklch(var(--c3)),
-					oklch(var(--b5)),
-					oklch(var(--c3))
-				);
+				background-image: linear-gradient(90deg,
+						oklch(var(--c3)),
+						oklch(var(--b5)),
+						oklch(var(--c3)),
+						oklch(var(--b5)),
+						oklch(var(--c3)));
 			}
 		}
 	}
@@ -50,7 +46,7 @@
 		flex-wrap: wrap;
 		gap: var(--button-list-gap);
 
-		& > .bleh-icon {
+		&>.bleh-icon {
 			--icon: var(--icon-16-info);
 			color: oklch(var(--c3));
 			cursor: pointer;
@@ -63,7 +59,7 @@
 		gap: var(--item-list-gap);
 		cursor: default;
 
-		& > .avatar {
+		&>.avatar {
 			width: var(--button-height);
 			height: var(--button-height);
 			--mask-size: 18px;
@@ -79,6 +75,16 @@
 	}
 }
 
+.compare-user {
+	&.avatar-only {
+		margin-right: -10px;
+
+		&>.compare-user-name {
+			display: none;
+		}
+	}
+}
+
 .compare-body {
 	overflow-y: auto;
 
@@ -90,6 +96,7 @@
 	--plot-user-pad: 0;
 	margin: calc(-1 * var(--plot-user-pad));
 }
+
 .compare-user-btn {
 	--bg: transparent;
 	--bg-hov: transparent;
@@ -105,12 +112,12 @@
 	min-width: 30px !important;
 	min-height: 30px !important;
 
-	& > .compare-user {
+	&>.compare-user {
 		cursor: pointer;
 		background: oklch(var(--b5));
 	}
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon: var(--mask);
 		transform-origin: left;
 
@@ -120,12 +127,12 @@
 	}
 
 	&:not(.add-user) {
-		& > .bleh-icon {
+		&>.bleh-icon {
 			--icon-size: 14px;
 		}
 
 		&:not(:hover) {
-			& > .bleh-icon {
+			&>.bleh-icon {
 				opacity: 0;
 				margin-left: calc(-1 * (var(--icon-size) + var(--icon-gap)));
 			}
