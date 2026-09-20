@@ -12580,6 +12580,12 @@ export const trans = {
 		// hover mouse
 		en: 'Hover to view',
 	},
+	collage_style: {
+		en: 'Collage style',
+	},
+	stack: {
+		en: 'Stack',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

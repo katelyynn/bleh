@@ -219,14 +219,14 @@
 }
 
 .collage-grid-preview-title-stub {
-	display: block;
-	width: 7%;
-	height: 4px;
+	width: 3%;
+	height: 6px;
 	background: oklch(var(--c2));
 	border-radius: 10px;
+	display: none;
 
 	&:first-child {
-		width: 15%;
-		margin-right: 10px;
+		display: block;
+		width: 25%;
 	}
 }

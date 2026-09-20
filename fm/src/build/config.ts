@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { trans, translation } from '@/build/trans';
+import { tl, trans, translation } from '@/build/trans';
 import { icons } from '@/components/shared/icon.tsx';
 import { saturation_themes_unsupported } from '@/build/theme.ts';
 import { RadioOptions } from '@/components/settings/provider/radio.tsx';
@@ -712,6 +712,21 @@ export const settings_store: Record<string, setting_instance> = {
 				name: trans.photos,
 			},
 		},
+	},
+	collage_style: {
+		default: 'grid',
+		type: 'select',
+		title: trans.collage_style,
+		values: [
+			{
+				value: 'grid',
+				text: tl(trans.grid),
+			},
+			{
+				value: 'stack',
+				text: tl(trans.stack),
+			},
+		],
 	},
 	collage_title: {
 		default: true,

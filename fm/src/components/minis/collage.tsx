@@ -30,7 +30,11 @@ import {
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.ts';
 import { createRef } from 'jsx-dom';
-import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
+import {
+	CompareHeader,
+	PlotBody,
+	PlotBodyMessage,
+} from '@/components/minis/main.tsx';
 import {
 	CompareSelection,
 	CompareUser,
@@ -49,6 +53,8 @@ import { SettingStub } from '@/components/settings/provider/stub.tsx';
 import { UserSelect } from '@/components/select/user.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { CollageGridPreview } from '@/components/settings/previews/collage.tsx';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { ff } from '@/components/settings/sku.ts';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -114,6 +120,43 @@ export function collage({ host, sidebar } = {}) {
 			/>
 		</InputGroup>
 	);
+
+	/*
+
+	const range: SelectOption[] = [];
+
+	Array.from({ length: 20 }).forEach((_, i) => {
+		range.push({
+			value: String(i + 1),
+			text: String(i + 1),
+		});
+	});
+
+	const user = createRef();
+	const grid_preview = createRef();
+	const grid_preview_settings = (
+		<InputGroup>
+			<Select
+				value={String(value)}
+				values={range}
+				ref={width}
+				onChange={(v) => {
+					grid_preview.current.row = Number(v);
+				}}
+			/>
+			<Icon name={icons.x} />
+			<Select
+				value={String(value)}
+				values={range}
+				ref={height}
+				onChange={(v) => {
+					grid_preview.current.col = Number(v);
+				}}
+			/>
+		</InputGroup>
+	);
+
+	*/
 
 	host.replaceChildren(
 		<>
@@ -181,11 +224,13 @@ export function collage({ host, sidebar } = {}) {
 					</Button>
 				</CompareSelection>
 			</CompareHeader>
-			<CompareBody ref={body} data-filled='false'>
-				<Placeholder face='(๑>◡<๑)'>
-					{tl(trans.choose_a_timeframe_above)}
-				</Placeholder>
-			</CompareBody>
+			<PlotBody freeform empty ref={body} data-filled='false'>
+				<PlotBodyMessage>
+					<Placeholder face='(๑>◡<๑)'>
+						{tl(trans.choose_a_timeframe_above)}
+					</Placeholder>
+				</PlotBodyMessage>
+			</PlotBody>
 		</>,
 	);
 
@@ -203,6 +248,7 @@ export function collage({ host, sidebar } = {}) {
 				{grid_preview_settings}
 			</div>
 			<SettingGroup>
+				{ff('collage_style') && <SettingSelect bind='collage_style' />}
 				<SettingSwitch bind='collage_title' />
 				<SettingSwitch bind='collage_grid_gap' />
 			</SettingGroup>
@@ -230,8 +276,12 @@ export function collage({ host, sidebar } = {}) {
 	}
 
 	function collage_error(e) {
+		body.current.empty = true;
+		body.current.loading = false;
 		body.current.replaceChildren(
-			<Alert type='error'>{(e && e.message) ? e.message : e}</Alert>,
+			<PlotBodyMessage>
+				<Alert type='error'>{(e && e.message) ? e.message : e}</Alert>
+			</PlotBodyMessage>,
 		);
 
 		console.error(e);
@@ -315,6 +365,8 @@ export function collage({ host, sidebar } = {}) {
 	}
 
 	function get_grid(current_page, pages) {
+		body.current.empty = false;
+		body.current.loading = true;
 		body.current.replaceChildren(
 			<LoadingData>
 				{tl(trans.gathering_plays_for_user_pages, {
@@ -397,6 +449,8 @@ export function collage({ host, sidebar } = {}) {
 			);
 
 			if (page.state.collage.length == 0) {
+				body.current.empty = false;
+				body.current.loading = true;
 				body.current.replaceChildren(
 					<LoadingData type='failed'>
 						{tl(trans.no_plays_in_range)}
@@ -572,6 +626,9 @@ export function collage({ host, sidebar } = {}) {
                     ${grid}
                 </div>
             `;
+
+			body.current.empty = false;
+			body.current.loading = true;
 			body.current.replaceChildren(
 				<>
 					<LoadingData>{tl(trans.waiting_for_images)}</LoadingData>
@@ -662,6 +719,8 @@ export function collage({ host, sidebar } = {}) {
 							}-${pad2(date.getDate())}`,
 						});
 
+						body.current.empty = false;
+						body.current.loading = false;
 						body.current.replaceChildren(
 							<div class='collage-canvas'>
 								{collage_dom}

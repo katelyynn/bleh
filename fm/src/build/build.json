@@ -404,7 +404,12 @@
 			"default": true,
 			"name": "Keep track of track/album/artist streaks on profiles",
 			"date": "2026-08-29"
+		},
+		"collage_style": {
+			"default": false,
+			"name": "Collage alternative styles",
+			"date": "2026-09-20"
 		}
 	},
-	"built_on": "2026-09-20T01:52:59.753Z"
+	"built_on": "2026-09-20T02:54:26.696Z"
 }

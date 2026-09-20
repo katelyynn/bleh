@@ -2,9 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	padding-bottom: var(--card-gap);
-	margin-bottom: var(--card-gap);
-	border-bottom: 1px solid var(--card-border-base);
+	margin-bottom: var(--card-padding);
 	gap: var(--card-gap);
 
 	.alert+& {
