@@ -14,7 +14,7 @@ import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { badge } from '@/types/badge.ts';
 
 export function load_badges(user: string, solo = false): badge[] {
-	if (!sponsor_list.version) return [];
+	if (!user || !sponsor_list.version) return [];
 
 	let badges: Partial<badge>[] = [];
 
@@ -100,7 +100,9 @@ export function get_amount_of_badge(badge: badge) {
 		.length;
 }
 
-function get_trans_contributions(user) {
+function get_trans_contributions(user: string) {
+	if (!user) return [];
+
 	return Object.entries(lang_info)
 		.filter(([code, info]) =>
 			info.by.map((name) => name.toLowerCase()).includes(
