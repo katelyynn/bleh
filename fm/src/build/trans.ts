@@ -192,7 +192,7 @@ export const trans = {
 				sv: 'Bli en sponsor för att få ett emblem!',
 				ru: 'Стань спонсором для получения значка!',
 				pl: 'Zostań sponosrem żeby otrzymać tę odznakę!',
-				zh: '成为赞助者以获得徽章！',
+				zh: '赞助即可获得专属徽章！',
 				tr: 'Rozet kazanmak için sponsor ol!',
 			},
 		},
@@ -477,7 +477,7 @@ export const trans = {
 		sv: 'Startsida',
 		ru: 'Дом',
 		pl: 'Dom',
-		zh: '概览',
+		zh: '首页',
 		tr: 'Anasayfa',
 	},
 	library: {
@@ -988,7 +988,7 @@ export const trans = {
 		sv: 'Håll koll på vad dina vänner lyssnar på',
 		ru: 'Следите за тем, что слушают ваши друзья',
 		pl: 'Sprawdź czego słuchają twoi znajomi',
-		zh: '实时关注好友的收听动态',
+		zh: '实时关注好友在听什么',
 		tr: 'Arkadaşlarının dinlediklerini takipte kal',
 	},
 	add_friends: {
@@ -1034,7 +1034,7 @@ export const trans = {
 			sv: 'Se deras skrobblingar bredvid dina hela tiden',
 			ru: 'Постоянно просматривать их прослушивания рядом с вашими',
 			pl: 'Zawsze wyświetlaj ich scrobbles łącznie z twoimi',
-			zh: '随时将他们的 Scrobble 记录与你的并列显示',
+			zh: '查看他们的 Scrobble，与你的并排显示',
 			tr: 'Her zaman benim skroplamalarımla görüntüle',
 		},
 		notice: {
@@ -1046,7 +1046,7 @@ export const trans = {
 			sv: 'Ser du inte inställningar du letar efter? Fyll upp din vänlista i inställningarna.',
 			ru: 'Не видите нужных опций? Заполните свой список друзей в настройках.',
 			pl: 'Nie ma czego szukasz? Wypełnij swoją listę znajomych w ustawieniach.',
-			zh: '没有看到想要的选项？请在设置中完善你的好友列表。',
+			zh: '没有看到想要的选项？去设置里补全好友列表吧。',
 			tr: 'Aradığın seçenekleri göremiyor musun? Ayarlarda arkadaş listeni doldurmayı dene.',
 		},
 	},
@@ -1454,7 +1454,7 @@ export const trans = {
 		sv: 'Flera artister delar denna profil',
 		ru: 'В этом профиле сгруппированы несколько исполнителей',
 		pl: 'Wielu artystów ugrupowano na ten profil',
-		zh: '该资料页汇总了多位艺术家的信息',
+		zh: '该页面汇总了多位艺术家',
 	},
 	album: {
 		en: 'Album',
@@ -1789,7 +1789,7 @@ export const trans = {
 		sv: 'Ditt föredragna tema blir antigen {day} eller {night}, beroende på ditt system.',
 		ru: 'Предпочтительная тема будет {day} или {night} в зависимости от настроек вашей системы.',
 		pl: 'Twój motyw ustawi się jako {day} albo {night}, według ustawień twojego systemu.',
-		zh: '将根据系统设置，为您应用 {day} 或 {night}。',
+		zh: '根据系统偏好自动切换 {day} 或 {night}',
 	},
 	change_schedule: {
 		en: 'Change schedule',
@@ -2000,7 +2000,7 @@ export const trans = {
 		sv: 'Smarta musiktitlar',
 		ru: 'Умные названия треков',
 		pl: 'Inteligente tytuły utworów',
-		zh: '智能音乐标题',
+		zh: '曲名智能修正',
 	},
 	playback: {
 		en: 'Playback',
@@ -2314,7 +2314,7 @@ export const trans = {
 			sv: 'Adaptera färg, ikoner, och visa partiklar beroende på årstiden',
 			ru: 'Подстраивает цвет по умолчанию и набор значков; отображает частицы в зависимости от сезона',
 			pl: 'Adaptuje domyślny kolor, ikony, oraz pokazuje efekty zależne od sezonu',
-			zh: '根据当前时令或节日，自动调整默认颜色、图标集并显示粒子动态效果',
+			zh: '根据当前时令或节日，自动更换默认颜色、图标和粒子效果',
 		},
 	},
 	particles: {
@@ -2341,7 +2341,7 @@ export const trans = {
 			sv: 'Snöpartiklarna använder en glödeffekt för estetiska själ, med lite extra datorbelastning',
 			ru: 'Снежные частицы используют эффект свечения для эстетики ценой дополнительных затрат ресурсов',
 			pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - co powoduje większe zużycie zasobów',
-			zh: '雪花粒子使用了阴影发光效果以提升视觉美感，但这会增加额外的性能开销',
+		zh: '雪花粒子使用阴影发光来增强视觉效果，但会额外消耗一些性能',
 		},
 	},
 	effects: {
@@ -2368,7 +2368,7 @@ export const trans = {
 			sv: 'Under vintersäsongen läggs ett lager is på paneler, annars mest bildgradienter',
 			ru: 'Отображать дополнительные сезонные эффекты',
 			pl: 'Podczas sezonu zimowego dodaje lód do paneli, w większości gradienty ',
-			zh: '冬季时会为界面披上一层冰霜质感，其他时令则主要以色彩渐变呈现',
+			zh: '冬季面板会覆上一层冰霜，其他季节则以渐变色为主',
 		},
 	},
 	seasonal_offset: {
@@ -2380,7 +2380,7 @@ export const trans = {
 		sv: 'Årstidsevenemang hålls i din tidszon, som vi räknade ut vara {offset}',
 		ru: 'Сезонные события проводятся по вашему часовому поясу, который мы определили как {offset}',
 		pl: 'Sezonowe wydarzenia odbywają się w twojej strefie czasowej, którą obliczyliśmy jako {offset}',
-		zh: '时令活动将根据您所在的本地时区运行，我们测算的偏移量为 {offset}',
+		zh: '时令活动会根据你的本地时区运行，测算偏移量为 {offset}',
 	},
 	calculated_offset: {
 		// timezone offset from UTC
@@ -2730,7 +2730,7 @@ export const trans = {
 			sv: 'Inställningarna du försökte importera kunde inte läsas, inga ändringar har gjorts.',
 			ru: 'Настройки, которые вы пытались импортировать, не удалось обработать. Изменения не были внесены.',
 			pl: 'Nie udało się przenieść twoich ustawień, nie doszło do żadnych zmian.',
-			zh: '您尝试导入的设置无法解析，未进行任何更改。',
+			zh: '导入的设置无法解析，未做任何更改。',
 		},
 	},
 	import_settings: {
@@ -2755,7 +2755,7 @@ export const trans = {
 		sv: 'Det här är permanent, oberoende av vart du kopierar ifrån',
 		ru: 'Это действие необратимо, будьте внимательны к источнику копирования',
 		pl: 'Importowanie jest permanentne, uważaj skąd kopiujesz',
-		zh: '此操作不可逆，请确保数据来源可靠。',
+		zh: '此操作不可逆，请确认数据来源可靠',
 	},
 	export: {
 		en: 'Export',
@@ -2815,7 +2815,7 @@ export const trans = {
 		sv: 'Är du säker på att du vill återställa alla inställningar? Det är permanent.',
 		ru: 'Ваши настройки будут безвозвратно сброшены, вы уверены?',
 		pl: 'Twoje ustawienia zostaną usunięte na zawsze, czy napewno chcesz je zresetować?',
-		zh: '设置将被永久重置且不可撤销，确定要继续吗？',
+		zh: '设置将被永久重置且无法撤销，确定要继续吗？',
 	},
 	reset_item_to_default: {
 		en: 'Reset item to default',
@@ -2851,7 +2851,7 @@ export const trans = {
 		sv: 'Nytt',
 		ru: 'Новости',
 		pl: 'Aktualności',
-		zh: '更新日志', // 不太确定
+			zh: '资讯',
 		type: {
 			major: {
 				// used for an update
@@ -2863,7 +2863,7 @@ export const trans = {
 				sv: 'Större utgåva',
 				ru: 'Крупный релиз',
 				pl: 'Główne wydanie',
-				zh: '重大更新',
+				zh: '重磅更新',
 			},
 			minor: {
 				// used for an update
@@ -2875,7 +2875,7 @@ export const trans = {
 				pt: 'Lançamento secundario',
 				ru: 'Мелкий релиз',
 				pl: 'Mała aktualizacja',
-				zh: '小幅迭代',
+				zh: '即将推出的更新',
 			},
 		},
 	},
@@ -2889,7 +2889,7 @@ export const trans = {
 		sv: 'Nytt från {user}',
 		ru: 'Новости от {user}',
 		pl: 'Aktualności od {user}',
-		zh: '来自 {user} 的消息',
+		zh: '来自 {user} 的动态',
 	},
 	default: {
 		en: 'Default',
@@ -3064,7 +3064,7 @@ export const trans = {
 			sv: 'Läg till ett genomskinligt glasliknande material till många ytor',
 			ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям',
 			pl: 'Włącz przezroczyste szkło na wielu powierzchniach',
-			zh: '为多个界面层级披上一层半透明玻璃质感。这能提升视觉深度',
+			zh: '为多个界面添加半透明玻璃质感，提升视觉层次',
 		},
 	},
 	seasonal_warning: {
