@@ -107,6 +107,7 @@ import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
+import { auth_page } from '@/pages/auth/main.tsx';
 
 export const useSettings: Settings = new Settings();
 
@@ -589,6 +590,7 @@ function load_page(main_content?: HTMLElement) {
 			bleh_home();
 		} else if (page.type == 'api') bleh_api();
 		else if (page.type == 'labs') bleh_labs();
+		else if (page.type == 'auth') auth_page();
 
 		if (
 			['user', 'events'].includes(page.type) &&

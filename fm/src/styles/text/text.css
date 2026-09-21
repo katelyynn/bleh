@@ -134,6 +134,15 @@
 	}
 }
 
+/* used for sign up */
+.text-24 {
+	color: oklch(var(--c1));
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: var(--font-weight-medium);
+	margin-bottom: var(--card-padding);
+}
+
 h4 {
 	&:not(.source-album-name, .top-header, .factbox-heading) {
 		&+p {

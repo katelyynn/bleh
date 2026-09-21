@@ -325,13 +325,23 @@
 
 /* sign in / sign up :3 */
 .auth-container {
-	margin-top: var(--card-gap);
+	margin-top: unset;
 
 	.auth-container-animation {
 		background: unset;
 	}
 
 	.auth-container-signup {
-		padding: var(--card-padding);
+		padding: unset;
 	}
+}
+
+.auth-container-animation {
+	display: none !important;
+}
+
+.already-joined {
+	border-top: 1px solid var(--separator-base);
+	margin-top: var(--card-gap);
+	padding-top: var(--card-gap);
 }
