@@ -153,22 +153,31 @@ export function Select({
 					crossAxis: true,
 					padding: 4,
 				}),
-				offsetMiddleware(2),
+				offsetMiddleware(4),
 			],
 			onShow: (element) => {
 				if (values.length > 15) {
 					setTimeout(() => {
 						const focused = element.querySelector(
 							'[aria-checked="true"]',
-						);
+						) as HTMLButtonElement;
 						if (!focused) return;
 
-						focused
-							.scrollIntoView({
-								behavior: 'instant',
-								block: 'center',
-								container: 'nearest',
-							});
+						const top = focused.offsetTop;
+						const bottom = top + focused.offsetHeight;
+
+						const padding = 100;
+
+						const visible_top = element.scrollTop + padding;
+						const visible_bottom = element.scrollTop +
+							element.clientHeight - padding;
+
+						if (top < visible_top) {
+							element.scrollTop = top - padding;
+						} else if (bottom > visible_bottom) {
+							element.scrollTop = bottom - element.clientHeight +
+								padding;
+						}
 					}, 1);
 				}
 

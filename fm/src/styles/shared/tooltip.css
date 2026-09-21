@@ -57,7 +57,7 @@
 		padding: var(--vertical-menu-padding, 4px) var(--horizontal-menu-padding, 4px) !important;
 		background-color: oklch(var(--menu-bg) / var(--solarium-opacity,
 					var(--menu-opacity))) !important;
-		border-radius: calc(var(--item-med-radius) + 4px) !important;
+		border-radius: calc(var(--menu-item-radius) + 4px) !important;
 		box-shadow: var(--override-full-shadow,
 				var(--menu-shadow)) !important;
 		border: 1px solid var(--menu-border) !important;
@@ -112,6 +112,7 @@
 			max-height: 500px;
 			overflow-x: hidden;
 			overflow-y: auto;
+			scroll-behavior: unset;
 
 			.dropdown-menu-clickable-item:not(.v2) {
 				--btn-left: calc(var(--button-sides) + var(--mask-size, 14px) + 6px) !important;
@@ -396,7 +397,7 @@
 	margin: unset !important;
 	background: oklch(var(--menu-bg) / var(--solarium-opacity,
 				var(--menu-opacity))) !important;
-	border-radius: calc(var(--input-radius) + 4px) !important;
+	border-radius: calc(var(--menu-item-radius) + 4px) !important;
 	box-shadow: var(--override-full-shadow,
 			var(--menu-shadow)) !important;
 	border: 1px solid var(--menu-border) !important;

@@ -138,3 +138,56 @@
 		}
 	}
 }
+
+
+
+.comparison-bar {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 4px;
+	width: 100%;
+}
+
+.comparison-bar-wrap {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.comparison-bar-avatar {
+	--w: 18px;
+	width: var(--w);
+	height: var(--w);
+	--mask-sizse: 14px;
+}
+
+.comparison-bars {
+	width: 100%;
+}
+
+.comparison-bar-fill {
+	display: block;
+	background: linear-gradient(90deg, oklch(var(--l2-c-theme-switch)),
+			oklch(var(--l3-c)) 20%) !important;
+	box-shadow: var(--bar-shadow), 0 2px 1px 0 oklch(var(--k4) / 60%), 0 2px 8px oklch(var(--h4) / 40%);
+	height: 3px;
+	border-radius: var(--radius-s);
+
+	&.comparison-bar-fill-flip {
+		background: linear-gradient(270deg, oklch(var(--l2-c-theme-switch)),
+				oklch(var(--l3-c)) 20%) !important;
+	}
+}
+
+.comparison-bar-value {
+	display: block;
+	color: oklch(var(--l3-c));
+	font-size: 13px;
+	font-weight: var(--font-weight-medium);
+	width: 100%;
+
+	&.comparison-bar-value-flip {
+		text-align: right;
+	}
+}

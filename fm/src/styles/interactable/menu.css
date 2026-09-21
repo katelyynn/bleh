@@ -41,7 +41,7 @@
 	--shadow: none !important;
 	--shadow-hov: none !important;
 	--col: oklch(var(--c2)) !important;
-	--radius: var(--item-med-radius);
+	--radius: var(--menu-item-radius);
 	position: relative !important;
 	min-width: 170px !important;
 	--show-icon: block;

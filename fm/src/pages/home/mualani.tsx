@@ -93,6 +93,9 @@ import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
 import { UserSelect } from '@/components/select/user.tsx';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
+import { ComparisonBars } from '@/components/minis/compare.tsx';
+import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
+import { keys } from '@/components/settings/storage.ts';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -206,6 +209,9 @@ export function mualani() {
 	const name = createRef();
 
 	const textcontent = createRef();
+
+	const c = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+	const avi = c.evangelicgirl.avatar;
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -1169,6 +1175,40 @@ export function mualani() {
 							<Listen name='LAST.HQ' plays={50} artist />
 							<Listen name='readandpretend' plays={10} artist />
 						</ListenBoard>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ComparisonBars'>
+						<ComparisonBars
+							you={{
+								avatar: auth.avatar!,
+								plays: 120,
+								link: '#',
+							}}
+							other={{
+								avatar: avi,
+								plays: 90,
+								link: '#',
+							}}
+							shared={120 + 90}
+						/>
+					</DemoItem>
+					<DemoItem label='ComparisonBars'>
+						<ComparisonBars
+							you={{
+								avatar: auth.avatar!,
+								plays: 90,
+								link: '#',
+							}}
+							other={{
+								avatar: avi,
+								plays: 120,
+								link: '#',
+							}}
+							shared={120 + 90}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>

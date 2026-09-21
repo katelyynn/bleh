@@ -1778,6 +1778,8 @@ body {
 		--max-tooltip-width: 100vw;
 	}
 
+	--menu-item-radius: 8px;
+
 	--radius-xs: 4px;
 	--radius-s: 7px;
 	--radius-m: 10px;

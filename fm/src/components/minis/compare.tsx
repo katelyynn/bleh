@@ -41,6 +41,7 @@ import { UserSelect } from '@/components/select/user.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { SettingsFooter } from '@/components/form/footer.tsx';
+import { header_colour } from '@/components/page/colour.ts';
 
 export function compare({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -342,6 +343,8 @@ export function compare({ host, sidebar } = {}) {
 	function continue_comparing() {
 		log('gathered initial values', 'compare', 'info', page.state.compare);
 
+		const inverse = useSettings.get('inverse_compare') as boolean;
+
 		page.state.compare.you.forEach((your_item) => {
 			let other_item;
 			if (type.current.value == 'albums') {
@@ -356,19 +359,49 @@ export function compare({ host, sidebar } = {}) {
 				);
 			}
 
-			if (other_item) {
+			if ((other_item && !inverse) || (!other_item && inverse)) {
 				page.state.compare.shared.push({
 					avatar: your_item.avatar,
 					name: your_item.name,
 					sister: your_item.sister ? your_item.sister : '',
 					plays: {
 						you: your_item.plays,
-						other: other_item.plays,
-						shared: your_item.plays + other_item.plays,
+						other: other_item?.plays || 0,
+						shared: your_item.plays + (other_item?.plays || 0),
 					},
 				});
 			}
 		});
+
+		if (inverse) {
+			page.state.compare.other.forEach((your_item) => {
+				let other_item;
+				if (type.current.value == 'albums') {
+					other_item = page.state.compare.you.find(
+						(other) =>
+							your_item.name === other.name &&
+							your_item.sister === other.sister,
+					);
+				} else {
+					other_item = page.state.compare.you.find(
+						(other) => your_item.name === other.name,
+					);
+				}
+
+				if (!other_item) {
+					page.state.compare.shared.push({
+						avatar: your_item.avatar,
+						name: your_item.name,
+						sister: your_item.sister ? your_item.sister : '',
+						plays: {
+							you: other_item?.plays || 0,
+							other: your_item.plays,
+							shared: your_item.plays + (other_item?.plays || 0),
+						},
+					});
+				}
+			});
+		}
 
 		page.state.compare.shared.sort(
 			(a, b) => b.plays.shared - a.plays.shared,
@@ -552,4 +585,93 @@ export function compare({ host, sidebar } = {}) {
 			patch_titles(body.current);
 		}
 	}
+}
+
+interface ComparisonBarsProps {
+	you: { avatar: string; plays: number; link: string };
+	other: { avatar: string; plays: number; link: string };
+	shared: number;
+}
+
+export function ComparisonBars({
+	you,
+	other,
+	shared,
+}: ComparisonBarsProps) {
+	return (
+		<div class='comparison-bar'>
+			<div
+				class='comparison-bar-wrap'
+				style={{ width: `${(you.plays / shared) * 100}%` }}
+			>
+				<div class={['comparison-bar-avatar', 'avatar']}>
+					<img src={you.avatar} />
+				</div>
+				<ComparisonBar
+					avatar={you.avatar}
+					plays={you.plays}
+					link={you.link}
+				/>
+			</div>
+			<div
+				class='comparison-bar-wrap'
+				style={{ width: `${(other.plays / shared) * 100}%` }}
+			>
+				<ComparisonBar
+					avatar={other.avatar}
+					plays={other.plays}
+					link={other.link}
+					flip
+				/>
+				<div class={['comparison-bar-avatar', 'avatar']}>
+					<img src={other.avatar} />
+				</div>
+			</div>
+		</div>
+	);
+}
+
+interface ComparisonBarProps {
+	avatar: string;
+	plays: number;
+	flip?: boolean;
+	link: string;
+}
+
+function ComparisonBar({
+	avatar,
+	plays,
+	flip,
+	link,
+}: ComparisonBarProps) {
+	const value = createRef();
+
+	const elem = (
+		<a class='comparison-bars' href={link}>
+			<span
+				class={[
+					'comparison-bar-value',
+					flip && 'comparison-bar-value-flip',
+				]}
+				ref={value}
+			>
+				{plays}
+			</span>
+			<span
+				class={[
+					'comparison-bar-fill',
+					'colourful',
+					'comparison-bar-you',
+					flip && 'comparison-bar-fill-flip',
+				]}
+			/>
+		</a>
+	);
+
+	header_colour(<img src={avatar} /> as HTMLImageElement, false, [
+		elem,
+		value.current,
+	]);
+
+	return elem;
 }
