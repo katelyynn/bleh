@@ -147,6 +147,9 @@
 	gap: 10px;
 	margin-top: 4px;
 	width: 100%;
+
+	z-index: 20;
+	pointer-events: auto;
 }
 
 .comparison-bar-wrap {
