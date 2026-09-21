@@ -56,6 +56,10 @@
 		pointer-events: none !important;
 		opacity: 0.5 !important;
 	}
+
+	&.with-gap {
+		margin-top: var(--card-padding);
+	}
 }
 
 .setting-inner {

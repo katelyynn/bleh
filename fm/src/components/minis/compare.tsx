@@ -40,6 +40,7 @@ import { SettingStub } from '@/components/settings/provider/stub.tsx';
 import { UserSelect } from '@/components/select/user.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
+import { SettingsFooter } from '@/components/form/footer.tsx';
 
 export function compare({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -76,22 +77,58 @@ export function compare({ host, sidebar } = {}) {
 
 	host.replaceChildren(
 		<>
-			<CompareHeader>
+			<CompareBody ref={body} data-filled='false'>
+				<Placeholder face='(๑>◡<๑)'>
+					{tl(trans.choose_a_timeframe)}
+				</Placeholder>
+			</CompareBody>
+		</>,
+	);
+
+	const group = createRef();
+
+	sidebar.replaceChildren(
+		<>
+			<PanelHead icon={icons.settings}>
+				{tl(trans.settings)}
+			</PanelHead>
+			<div class='inner-preview'>
 				<CompareUsers ref={user}>
-					<CompareUser name={auth.name!} />
+					<CompareUser name={auth.name!} avatarOnly />
 					<Icon />
 					<CompareUser
 						name={page.name || ''}
 						replacePage
 					/>
 				</CompareUsers>
-				<CompareSelection>
+			</div>
+			<SettingGroup ref={group} gap>
+				<SettingStub name={tl(trans.compare_with)} type='select'>
+					<UserSelect
+						showAuth={false}
+						inSettings
+						value={page.requested.profile || ''}
+						onChange={(v) => {
+							page.requested.profile = v;
+							page.name = v;
+
+							page.avatar = '';
+
+							user.current.replaceChildren(
+								<>
+									<CompareUser name={auth.name!} avatarOnly />
+									<Icon />
+									<CompareUser name={v} replacePage />
+								</>,
+							);
+						}}
+					/>
+				</SettingStub>
+				<SettingStub name={tl(trans.page_count)} type='select'>
 					<Select
+						inSettings
 						value='3'
 						values={[
-							{
-								text: tl(trans.page_count),
-							},
 							{
 								value: '1',
 								text: '50 (1x)',
@@ -119,7 +156,10 @@ export function compare({ host, sidebar } = {}) {
 						]}
 						ref={pages}
 					/>
+				</SettingStub>
+				<SettingStub name={tl(trans.item_type)} type='select'>
 					<Select
+						inSettings
 						value={default_type}
 						values={[
 							{
@@ -152,57 +192,24 @@ export function compare({ host, sidebar } = {}) {
 						]}
 						ref={type}
 					/>
+				</SettingStub>
+				<SettingStub name={tl(trans.timeframe)} type='select'>
 					<HybridTimeframePicker
+						inSettings
 						value={default_timeframe}
 						ref={timeframe}
-					/>
-					<Button primary ref={submit} onClick={begin_comparing}>
-						<Icon name={icons.compare} />
-						{tl(trans.compare)}
-					</Button>
-				</CompareSelection>
-			</CompareHeader>
-			<CompareBody ref={body} data-filled='false'>
-				<Placeholder face='(๑>◡<๑)'>
-					{tl(trans.choose_a_timeframe_above)}
-				</Placeholder>
-			</CompareBody>
-		</>,
-	);
-
-	const group = createRef();
-
-	sidebar.replaceChildren(
-		<>
-			<PanelHead icon={icons.settings}>
-				{tl(trans.settings)}
-			</PanelHead>
-			<SettingGroup ref={group}>
-				<SettingStub name={tl(trans.compare_with)}>
-					<UserSelect
-						showAuth={false}
-						inSettings
-						value={page.requested.profile || ''}
-						onChange={(v) => {
-							page.requested.profile = v;
-							page.name = v;
-
-							page.avatar = '';
-
-							user.current.replaceChildren(
-								<>
-									<CompareUser name={auth.name!} />
-									<Icon />
-									<CompareUser name={v} replacePage />
-								</>,
-							);
-						}}
 					/>
 				</SettingStub>
 				{ff('inverse_compare') && (
 					<SettingSwitch bind='inverse_compare' />
 				)}
 			</SettingGroup>
+			<SettingsFooter gap>
+				<Button primary ref={submit} onClick={begin_comparing}>
+					<Icon name={icons.compare} />
+					{tl(trans.compare)}
+				</Button>
+			</SettingsFooter>
 		</>,
 	);
 
@@ -246,9 +253,6 @@ export function compare({ host, sidebar } = {}) {
 			return;
 		}
 
-		pages.current.disabled = true;
-		type.current.disabled = true;
-		timeframe.current.disabled = true;
 		group.current.disabled = true;
 		submit.current.loading = true;
 
@@ -327,9 +331,6 @@ export function compare({ host, sidebar } = {}) {
 				} else if (next_user) {
 					get_grid(next_user, 1, page_count);
 				} else {
-					pages.current.disabled = false;
-					type.current.disabled = false;
-					timeframe.current.disabled = false;
 					group.current.disabled = false;
 					submit.current.loading = false;
 

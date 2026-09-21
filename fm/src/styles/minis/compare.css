@@ -9,35 +9,6 @@
 		margin-top: var(--card-gap);
 	}
 
-	.compare-users {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: var(--card-gap);
-		flex: 1;
-
-		&>.bleh-icon {
-			--icon: var(--icon-16-dots);
-			background-image: linear-gradient(90deg,
-					oklch(var(--b4)),
-					oklch(var(--c1)),
-					oklch(var(--b4)),
-					oklch(var(--c1)),
-					oklch(var(--b4)));
-			background-size: 200% 100%;
-			animation: gradient 1.3s linear infinite;
-
-			[data-bleh--theme_type="light"] & {
-				background-image: linear-gradient(90deg,
-						oklch(var(--c3)),
-						oklch(var(--b5)),
-						oklch(var(--c3)),
-						oklch(var(--b5)),
-						oklch(var(--c3)));
-			}
-		}
-	}
-
 	.compare-selection {
 		display: flex;
 		align-items: center;
@@ -50,37 +21,67 @@
 			cursor: pointer;
 		}
 	}
+}
 
-	.compare-user {
-		display: flex;
-		align-items: center;
-		gap: var(--item-list-gap);
-		cursor: default;
+.compare-users {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--card-gap);
+	flex: 1;
 
-		&>.avatar {
-			width: var(--button-height);
-			height: var(--button-height);
-			--mask-size: 18px;
+	&>.bleh-icon {
+		--icon: var(--icon-16-dots);
+		background-image: linear-gradient(90deg,
+				oklch(var(--b4)),
+				oklch(var(--c1)),
+				oklch(var(--b4)),
+				oklch(var(--c1)),
+				oklch(var(--b4)));
+		background-size: 200% 100%;
+		animation: gradient 1.3s linear infinite;
 
-			&:after {
-				padding-top: unset;
-				--left: 50%;
-				--margin-left: calc(-1 * (var(--mask-size) / 2));
-				--mask: var(--icon-16-spinner);
-				animation: spinner 1.2s linear infinite;
-			}
+		[data-bleh--theme_type="light"] & {
+			background-image: linear-gradient(90deg,
+					oklch(var(--c3)),
+					oklch(var(--b5)),
+					oklch(var(--c3)),
+					oklch(var(--b5)),
+					oklch(var(--c3)));
 		}
 	}
 }
 
 .compare-user {
-	&.avatar-only {
-		margin-right: -10px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: default;
 
+	&>.avatar {
+		width: var(--button-height);
+		height: var(--button-height);
+		--mask-size: 18px;
+
+		&:after {
+			padding-top: unset;
+			--left: 50%;
+			--margin-left: calc(-1 * (var(--mask-size) / 2));
+			--mask: var(--icon-16-spinner);
+			animation: spinner 1.2s linear infinite;
+		}
+	}
+
+	&.avatar-only {
 		&>.compare-user-name {
 			display: none;
 		}
 	}
+}
+
+.compare-user-name {
+	font-weight: var(--font-weight);
 }
 
 .compare-body {

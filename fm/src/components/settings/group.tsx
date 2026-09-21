@@ -11,6 +11,7 @@ interface SettingGroupProps {
 	minWidth?: boolean;
 	blend?: boolean;
 	disabled?: boolean;
+	gap?: boolean;
 	children?: ReactNode;
 }
 
@@ -23,11 +24,17 @@ export function SettingGroup({
 	minWidth,
 	blend = false,
 	disabled,
+	gap,
 	children,
 }: SettingGroupProps) {
 	const elem = (
 		<div
-			class={['setting-group', blend && 'blend', minWidth && 'min-width']}
+			class={[
+				'setting-group',
+				blend && 'blend',
+				minWidth && 'min-width',
+				gap && 'with-gap',
+			]}
 			ref={ref}
 		>
 			{children}
