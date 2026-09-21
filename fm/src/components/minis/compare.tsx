@@ -439,66 +439,72 @@ export function compare({ host, sidebar } = {}) {
 					}`;
 				}
 
-				grid.appendChild(html.node`
-                    <li class="compare-item grid-items-item">
-                        <div class="grid-items-cover-image js-link-block link-block">
-                            <div class="grid-items-cover-image-image ${
-					data.avatar.endsWith(
-							'/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg',
-						) ||
-						data.avatar.endsWith(
-							'/2a96cbd8b46e442fc41c2b86b821562f.jpg',
-						)
-						? 'grid-items-cover-default'
-						: ''
-				}">
-                                <img src="${
-					data.avatar.replace('/avatar70s/', '/avatar300s/').replace(
-						'/64s/',
-						'/avatar300s/',
-					)
-				}" alt="${data.name}" loading="lazy">
-                            </div>
-                            <div class="grid-items-item-details">
-                                <p class="grid-items-item-main-text">
-                                    <a class="link-block-target" href="${root}music/${redirect()}${template}" title="${data.name}">
-                                        ${data.name}
-                                    </a>
-                                </p>
-                                ${
-					type.current.value == 'albums'
-						? html.node`
-                                <p class="grid-items-item-aux-text">
-                                    <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data.sister}">
-                                        ${data.sister}
-                                    </a>
-                                </p>
-                                `
-						: ''
-				}
-                                <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
-                                        <span class="avatar grid-item-avatar">
-                                            <img src="${auth.avatar}" alt="${
-					tl(trans.your_avatar)
-				}">
-                                        </span>
-                                        ${data.plays.you.toLocaleString(lang)}
-                                    </a>
-                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
-                                        <span class="avatar grid-item-avatar">
-                                            <img src="${page.avatar}" alt="${
-					tl(trans.avatar_for_user).replace('{u}', page.name)
-				}">
-                                        </span>
-                                        ${data.plays.other.toLocaleString(lang)}
-                                    </a>
-                                </p>
-                            </div>
-                            <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${redirect()}${template}" tabindex="-1" aria-hidden="true"></a>
-                        </div>
-                    </li>
-                `);
+				grid.appendChild(
+					<li class={['grid-items-item', 'compare-item']}>
+						<div
+							class={[
+								'grid-items-cover-image',
+								'js-link-block',
+								'link-block',
+							]}
+						>
+							<div
+								class={[
+									'grid-items-cover-image-image',
+									(data.avatar.endsWith(
+										'/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg',
+									) ||
+										data.avatar.endsWith(
+											'/2a96cbd8b46e442fc41c2b86b821562f.jpg',
+										)) && 'grid-items-cover-default',
+								]}
+							>
+								<img
+									src={avatar(data.avatar, 'avatar300s')}
+									alt={data.name}
+									loading='lazy'
+								/>
+							</div>
+							<div class='grid-items-item-details'>
+								<p class='grid-items-item-main-text'>
+									<a
+										class='link-block-target'
+										href={`${root}music/${redirect()}${template}`}
+										title={data.name}
+									>
+										{data.name}
+									</a>
+								</p>
+								{type.current.value == 'albums' && (
+									<p class='grid-items-item-aux-text'>
+										<a
+											class='grid-items-item-aux-block'
+											href={`${root}music/${redirect()}${data.sister}`}
+											title={data.sister}
+										>
+											{data.sister}
+										</a>
+									</p>
+								)}
+								<ComparisonBars
+									you={{
+										avatar: auth.avatar!,
+										plays: data.plays.you,
+										link:
+											`${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.current.value}`,
+									}}
+									other={{
+										avatar: page.avatar!,
+										plays: data.plays.other,
+										link:
+											`${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.current.value}`,
+									}}
+									shared={data.plays.shared}
+								/>
+							</div>
+						</div>
+					</li>,
+				);
 			});
 
 			body.current.replaceChildren(grid);
@@ -651,11 +657,12 @@ function ComparisonBar({
 			<span
 				class={[
 					'comparison-bar-value',
+					'colourful',
 					flip && 'comparison-bar-value-flip',
 				]}
 				ref={value}
 			>
-				{plays}
+				{plays.toLocaleString(lang)}
 			</span>
 			<span
 				class={[

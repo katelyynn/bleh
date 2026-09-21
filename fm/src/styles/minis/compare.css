@@ -153,6 +153,7 @@
 	display: flex;
 	align-items: center;
 	gap: 6px;
+	min-width: 20%;
 }
 
 .comparison-bar-avatar {
@@ -164,6 +165,7 @@
 
 .comparison-bars {
 	width: 100%;
+
 }
 
 .comparison-bar-fill {
@@ -182,7 +184,7 @@
 
 .comparison-bar-value {
 	display: block;
-	color: oklch(var(--l3-c));
+	color: oklch(var(--l2-c));
 	font-size: 13px;
 	font-weight: var(--font-weight-medium);
 	width: 100%;
