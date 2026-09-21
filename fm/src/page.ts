@@ -578,8 +578,9 @@ function load_page(main_content?: HTMLElement) {
 		} else if (page.type == 'tag') bleh_tags();
 		else if (page.type == 'search') bleh_search();
 		else if (page.type == 'inbox') bleh_inbox();
-		else if (page.type == 'home') bleh_home_legacy();
-		else if (
+		else if (['home', 'anonymoushome'].includes(page.type)) {
+			bleh_home_legacy();
+		} else if (
 			page.type == 'overview' ||
 			page.type == 'recommended' ||
 			page.type == 'releases' ||

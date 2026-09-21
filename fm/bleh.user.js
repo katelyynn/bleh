@@ -119452,7 +119452,7 @@ var bleh = (() => {
       page.structure.row = page.structure.container.querySelector(".row");
       page.structure.main = page.structure.row.querySelector(".col-main");
       page.structure.side = page.structure.row.querySelector(".col-sidebar");
-    } catch (_e) {
+    } catch {
       log("unable to find elements", "page structure");
     }
     const content_top = document.body.querySelector(".content-top");
@@ -119510,24 +119510,12 @@ var bleh = (() => {
           })
         ]
       });
-      if (settings.display_name_styles) {
+      if (useSettings.get("display_name_styles")) {
         profile_name.setAttribute("data-font", cache2.font);
         profile_name.setAttribute("data-font-style", cache2.font_style);
       }
     } else {
-      welcome = /* @__PURE__ */ jsx(PageHeader, {
-        type: "home",
-        avatar: /* @__PURE__ */ jsx(PageHeaderAvatar, {}),
-        children: [
-          /* @__PURE__ */ jsx("div", {
-            class: "greeting",
-            children: tl2(trans[`good_${time4}_user`])
-          }),
-          /* @__PURE__ */ jsx(PageHeaderTitle, {
-            children: tl2(trans.not_logged_in)
-          })
-        ]
-      });
+      welcome = /* @__PURE__ */ jsx("div", {});
     }
     page.structure.container.insertBefore(welcome, page.structure.container.firstElementChild);
     let nav;
@@ -125790,8 +125778,12 @@ var bleh = (() => {
       } else if (page.type == "tag") bleh_tags();
       else if (page.type == "search") bleh_search();
       else if (page.type == "inbox") bleh_inbox();
-      else if (page.type == "home") bleh_home_legacy();
-      else if (page.type == "overview" || page.type == "recommended" || page.type == "releases" || page.type == "bookmarks" || page.type == "charts" || page.type == "settings") {
+      else if ([
+        "home",
+        "anonymoushome"
+      ].includes(page.type)) {
+        bleh_home_legacy();
+      } else if (page.type == "overview" || page.type == "recommended" || page.type == "releases" || page.type == "bookmarks" || page.type == "charts" || page.type == "settings") {
         bleh_home();
       } else if (page.type == "api") bleh_api();
       else if (page.type == "labs") bleh_labs();
@@ -126553,7 +126545,7 @@ var bleh = (() => {
         date: "2026-09-20"
       }
     },
-    built_on: "2026-09-21T17:08:54.369Z"
+    built_on: "2026-09-21T17:18:34.248Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

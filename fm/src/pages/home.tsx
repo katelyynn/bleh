@@ -12,7 +12,13 @@ import {
 	checkup_nav,
 	checkup_page_structure,
 } from '@/components/page/structure';
-import { is_same_page, is_url, register_background, update_page } from '@/page';
+import {
+	is_same_page,
+	is_url,
+	register_background,
+	update_page,
+	useSettings,
+} from '@/page';
 import { bleh_charts } from '@/pages/home/chart';
 import { bleh_native_settings } from '@/pages/lastfm_settings/lastfm_settings';
 import { html, render } from 'lighterhtml';
@@ -32,12 +38,14 @@ import { version } from '@/main';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 
 export async function bleh_home() {
-	page.structure.container = document.body.querySelector('.page-content');
+	page.structure.container = document.body.querySelector('.page-content')!;
 	try {
-		page.structure.row = page.structure.container!.querySelector('.row');
-		page.structure.main = page.structure.row!.querySelector('.col-main');
-		page.structure.side = page.structure.row!.querySelector('.col-sidebar');
-	} catch (_e) {
+		page.structure.row = page.structure.container!.querySelector('.row')!;
+		page.structure.main = page.structure.row!.querySelector('.col-main')!;
+		page.structure.side = page.structure.row!.querySelector(
+			'.col-sidebar',
+		)!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
@@ -103,24 +111,12 @@ export async function bleh_home() {
 			</PageHeader>
 		);
 
-		if (settings.display_name_styles) {
+		if (useSettings.get('display_name_styles')) {
 			profile_name!.setAttribute('data-font', cache.font);
 			profile_name!.setAttribute('data-font-style', cache.font_style);
 		}
 	} else {
-		welcome = (
-			<PageHeader
-				type='home'
-				avatar={<PageHeaderAvatar />}
-			>
-				<div class='greeting'>
-					{tl(trans[`good_${time}_user`])}
-				</div>
-				<PageHeaderTitle>
-					{tl(trans.not_logged_in)}
-				</PageHeaderTitle>
-			</PageHeader>
-		);
+		welcome = <div />;
 	}
 
 	page.structure.container!.insertBefore(
