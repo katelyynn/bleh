@@ -1,5 +1,5 @@
 {
-    version: "2026.0821",
+    version: "2026.0921",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -414,6 +414,28 @@
                 }
             ]
         },
-        "psych3dout": {}
+        "psych3dout": {},
+		"serve": {
+			sponsor: false,
+			contributor: true
+		},
+		"saschaux": {
+			"badges": [
+				{
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXZpbnlsIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiIC8+PHBhdGggZD0iTTE2IDMuOTM3YTkgOSAwIDEgMCA1IDguMDYzIiAvPjxwYXRoIGQ9Ik0xMSAxMmExIDEgMCAxIDAgMiAwYTEgMSAwIDEgMCAtMiAwIiAvPjxwYXRoIGQ9Ik0xOSA0YTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTIwIDRsLTMuNSAxMGwtMi41IDIiIC8+PC9zdmc+",
+                    name: "Melomaniac",
+                    hue: 273,
+                    sat: 0.32,
+                    lit: 0.77
+                },
+				{
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW9yYml0cyI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0xMCAxMmEyIDIgMCAxIDAgNCAwYTIgMiAwIDEgMCAtNCAwIiAvPjxwYXRoIGQ9Ik03LjYyOCA3LjYyOWMtMi43NiAuODU0IC00LjYyOCAyLjQ5MSAtNC42MjggNC4zNzFjMCAyLjc2MSA0LjAzIDUgOSA1czkgLTIuMjM5IDkgLTVzLTQuMDMgLTUgLTkgLTUiIC8+PHBhdGggZD0iTTE2LjM3MiAxNi4zNzJjLjQgLTEuMjk1IC42MjggLTIuNzg1IC42MjggLTQuMzcyYzAgLTQuOTcgLTIuMjM5IC05IC01IC05cy01IDQuMDMgLTUgOXMyLjIzOSA5IDUgOWMuNTk2IDAgMS4xNjggLS4xODggMS42OTggLS41MzMiIC8+PC9zdmc+",
+                    name: "Visionary",
+                    hue: 273,
+                    sat: 0.32,
+                    lit: 0.77
+                },
+			]
+		}
     }
 }
