@@ -263,16 +263,16 @@ export function bleh_settings() {
             `}
 			</div>
 			<section class="side-actions">
-			    <button class="btn side-action icon-mask" data-type="import" onclick=${() =>
-				import_settings()}>
+				<button class="btn side-action icon-mask" data-type="import"
+					onclick=${() => import_settings()}>
 			        ${tl(trans.import)}
 			    </button>
-			    <button class="btn side-action icon-mask" data-type="export" onclick=${() =>
-				export_settings()}>
+				<button class="btn side-action icon-mask" data-type="export"
+					onclick=${() => export_settings()}>
 			        ${tl(trans.export)}
 			    </button>
-			    <button class="btn side-action icon-mask" data-type="reset" onclick=${() =>
-				reset_settings()}>
+				<button class="btn side-action icon-mask" data-type="reset"
+					onclick=${() => reset_settings()}>
 			        ${tl(trans.reset)}
 			    </button>
 			</section>
@@ -285,13 +285,13 @@ export function bleh_settings() {
         `
 				: ''}
 			<div class="bleh--panel">
-			    <p class="card-tip">
+				<p class="card-tip">
 			        ${version.brand} ${version.build} ‘${version.sku}’
 			    </p>
-			    <p class="card-tip">
+				<p class="card-tip">
 			        florence ${florence_version}
 			    </p>
-			    <p class="card-tip">
+				<p class="card-tip">
 			        ${DateTime.fromISO(version.built_on).toLocaleString(
 				DateTime.DATETIME_MED,
 			)}
@@ -333,6 +333,7 @@ export function page_loading() {
 }
 
 export function page_error(e) {
+	console.error(e);
 	render(
 		page.structure.main,
 		html`

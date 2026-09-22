@@ -1,7 +1,6 @@
 .events-list-item-date-icon,
 .calendar-icon {
-	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4)
-		/ 40%) 60%) !important;
+	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4) / 40%) 60%) !important;
 	box-shadow: var(--group-shadow) !important;
 	color: oklch(var(--c2));
 	width: var(--calendar-width) !important;
@@ -33,7 +32,7 @@
 		background: unset !important;
 		box-shadow: unset !important;
 		padding: 0 !important;
-		font-size: 12px !important;
+		font-size: var(--font-size-sm) !important;
 		padding-top: 4px !important;
 		margin-bottom: -4px !important;
 
@@ -70,7 +69,7 @@
 	margin-top: unset;
 	margin-bottom: var(--card-gap);
 
-	.events-list-sidebar + & {
+	.events-list-sidebar+& {
 		margin-top: var(--card-gap);
 	}
 }
@@ -203,7 +202,7 @@
 	}
 
 	/* upcoming events */
-	.buffer-standard.text-bold + .buffer-standard {
+	.buffer-standard.text-bold+.buffer-standard {
 		display: none;
 	}
 }
@@ -222,7 +221,7 @@
 		display: none;
 	}
 
-	& + .events-list-sidebar {
+	&+.events-list-sidebar {
 		margin-top: unset;
 	}
 }
@@ -263,13 +262,13 @@
 	font-weight: var(--font-weight-medium) !important;
 	text-decoration: var(--force-underline, none) !important;
 
-	& > a {
+	&>a {
 		text-decoration: inherit !important;
 	}
 }
 
 .events-list-item-venue {
-	--font-size: 13px !important;
+	--font-size: calc(var(--font-size) - 1px) !important;
 	color: oklch(var(--c2) / 80%);
 	margin-top: unset !important;
 	cursor: default;
@@ -414,7 +413,7 @@
 .events-filter {
 	margin: unset;
 
-	& > button {
+	&>button {
 		&.date-picker-button {
 			--mask: var(--icon-16-calendar);
 		}

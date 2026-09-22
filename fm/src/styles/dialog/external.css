@@ -25,15 +25,15 @@
 	border-radius: var(--item-med-radius);
 	box-shadow: var(--input-shadow);
 
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 
 	min-width: 420px;
 	cursor: default;
 
 	margin-top: 10px;
 
-	& + .setting {
+	&+.setting {
 		width: 100%;
 	}
 }
@@ -48,7 +48,7 @@
 	align-items: center;
 	color: oklch(var(--c3));
 
-	& > .hostname {
+	&>.hostname {
 		color: oklch(var(--c2));
 	}
 }

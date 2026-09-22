@@ -134,6 +134,19 @@ export function patch_titles(search = page.structure.main) {
 			':scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)',
 		);
 
+		function update() {
+			const theme = useSettings.get('theme') as string;
+
+			tracklist.setAttribute(
+				'data-theme',
+				theme,
+			);
+		}
+
+		useSettings.on('theme', update);
+
+		update();
+
 		tracks.forEach((track, index) => {
 			smart_track(track, index);
 		});
@@ -159,9 +172,11 @@ export function patch_titles(search = page.structure.main) {
 			track[symbol] = true;
 
 			function update() {
+				const theme = useSettings.get('theme') as string;
+
 				track.setAttribute(
 					'data-theme',
-					useSettings.get('theme') as string,
+					theme,
 				);
 			}
 

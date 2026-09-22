@@ -23,7 +23,7 @@
 		align-items: center;
 		gap: var(--card-padding);
 
-		& > .footer-credit-text {
+		&>.footer-credit-text {
 			margin: unset;
 		}
 
@@ -88,11 +88,9 @@
 
 .footer-top,
 .footer-bottom {
-	& > .container {
-		min-width: calc(var(--cards-width) - (var(--card-padding) * 2))
-			!important;
-		max-width: calc(var(--cards-width) - (var(--card-padding) * 2))
-			!important;
+	&>.container {
+		min-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+		max-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
 		width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
 	}
 }
@@ -100,7 +98,7 @@
 .footer-heading {
 	color: oklch(var(--c3)) !important;
 	text-transform: unset !important;
-	font-size: 13px !important;
+	font-size: calc(var(--font-size) - 1px) !important;
 	line-height: var(--line-height) !important;
 	font-weight: var(--font-weight) !important;
 	padding-bottom: 2px !important;

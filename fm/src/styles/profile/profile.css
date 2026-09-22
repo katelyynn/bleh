@@ -161,7 +161,7 @@
 .buffer-3>h4 {
 	color: oklch(var(--c3));
 	text-align: center;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: var(--line-height);
 	font-weight: var(--font-weight);
 	display: none;

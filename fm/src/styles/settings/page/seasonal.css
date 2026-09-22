@@ -10,7 +10,7 @@
 	justify-content: center;
 	height: 4px;
 	background: linear-gradient(90deg, transparent, oklch(var(--b2) / 60%),
-		transparent);
+			transparent);
 	border-radius: 10px;
 }
 
@@ -72,14 +72,14 @@
 
 	&[data-season="pride"] {
 		background-image: linear-gradient(180deg, var(--graph-colour-0) 10%,
-			var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
-			var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
-			var(--graph-colour-9) 100%);
+				var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
+				var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
+				var(--graph-colour-9) 100%);
 	}
 
 	&[data-season="fall"] {
 		background-image: linear-gradient(180deg, oklch(var(--k4)) 30%,
-			oklch(var(--white)));
+				oklch(var(--white)));
 	}
 
 	z-index: 0;
@@ -109,8 +109,8 @@
 }
 
 .seasonal-name {
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	font-weight: var(--font-weight-medium);
 
 	z-index: 3;
@@ -125,9 +125,9 @@
 
 	&[data-season="pride"] {
 		background-image: linear-gradient(90deg, var(--graph-colour-0) 10%,
-			var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
-			var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
-			var(--graph-colour-9) 100%);
+				var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
+				var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
+				var(--graph-colour-9) 100%);
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -135,12 +135,12 @@
 }
 
 .seasonal-desc {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	z-index: 3;
 }
 
-.seasonal-icon > .bleh-icon,
+.seasonal-icon>.bleh-icon,
 .bleh-seasonal-icon {
 	--icon: var(--mask, var(--icon-16-season));
 

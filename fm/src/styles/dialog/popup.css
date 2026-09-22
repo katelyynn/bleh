@@ -19,5 +19,5 @@
 	display: flex;
 	justify-content: end;
 
-	--font-size: 13px;
+	--font-size: calc(var(--font-size) - 1px);
 }

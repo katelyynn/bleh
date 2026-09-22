@@ -278,7 +278,7 @@
 	z-index: 20;
 
 	&.smaller {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 	}
 
 	&>.artist>a,
@@ -319,12 +319,12 @@
 
 	&.status-album {
 		color: oklch(var(--c3));
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 	}
 }
 
 .status-time {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	margin-top: 10px;
 	color: oklch(var(--c3));
 }
@@ -346,7 +346,7 @@
 	align-items: center;
 	gap: var(--icon-gap);
 
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 
 	--icon-size: 12px;
 

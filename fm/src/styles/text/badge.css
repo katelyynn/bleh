@@ -4,7 +4,7 @@
 	align-items: center;
 
 	font-family: var(--font);
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 	background: oklch(var(--f4) / 20%);
 	color: oklch(var(--l3-c));
 	padding: 0 6px;

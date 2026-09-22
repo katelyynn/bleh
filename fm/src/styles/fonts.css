@@ -42,6 +42,9 @@ body {
 	--font-size-sm: 12px;
 	--line-height-sm: calc(var(--font-size-sm) + 4px);
 
+	--font-size-subheading: 16px;
+	--line-height-subheading: 20px;
+
 	--font-size-head: 22px;
 	--line-height-head: 17px;
 
@@ -77,6 +80,25 @@ body {
 		--font-size-head-3: 18px;
 		--line-height-head-3: 22px;
 		--font-style-head: normal;
+	}
+
+	&[data-bleh--theme="yuzu"] {
+		--font: Lucida Grande, Verdana, Tahoma,
+			var(--font-symbols), var(--font-i18n),
+			-apple-system, BlinkMacSystemFont,
+			Segoe UI Emoji, sans-serif, -system-font;
+
+		--font-size: 12px;
+		--line-height: 14px;
+
+		--font-size-sm: 10px;
+		--line-height-sm: 12px;
+
+		--font-size-subheading: 14px;
+		--line-height-subheading: 16px;
+
+		--font-weight-medium: 600;
+		--font-weight-bold: 600;
 	}
 }
 

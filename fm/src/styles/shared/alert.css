@@ -1,7 +1,7 @@
 .async-content-error-message,
 .event-status,
 .alert:not(.big-modal-alert, .form-disclaimer > .alert) {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: var(--line-height);
 	margin-top: var(--card-gap);
 	padding: 4px 10px 4px calc(10px + var(--icon-size) + var(--icon-gap)) !important;

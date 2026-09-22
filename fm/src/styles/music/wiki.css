@@ -75,8 +75,8 @@
 .factbox-heading+ :is(p, a),
 .factbox-item>ul,
 .catalogue-metadata-description {
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	font-weight: var(--font-weight-medium);
 	cursor: default;
 
@@ -506,7 +506,7 @@
 }
 
 .artist-age {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: 0;
 	color: oklch(var(--c3));
 }

@@ -188,7 +188,7 @@
 .comparison-bar-value {
 	display: block;
 	color: oklch(var(--l2-c));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	font-weight: var(--font-weight-medium);
 	width: 100%;
 

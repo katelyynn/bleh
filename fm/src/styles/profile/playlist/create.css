@@ -45,8 +45,9 @@ h2.playlisting-create-option-title {
 	color: oklch(var(--c2));
 	font-weight: inherit !important;
 }
+
 .playlisting-create-option .buffer-1 {
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 	line-height: 16px;
 	font-weight: var(--font-weight);
 	color: oklch(var(--c3));
@@ -56,30 +57,39 @@ h2.playlisting-create-option-title {
 .playlisting-create-option-icon--similar-tracks {
 	--mask: var(--icon-track);
 }
+
 .playlisting-create-option-icon--similar-artists {
 	--mask: var(--icon-artist);
 }
+
 .playlisting-create-option-icon--tag {
 	--mask: var(--icon-tag);
 }
+
 .playlisting-create-option-icon--user-library {
 	--mask: var(--icon-library);
 }
+
 .playlisting-create-option-icon--last-week {
 	--mask: var(--icon-listening-report-weekly);
 }
+
 .playlisting-create-option-icon--last-month {
 	--mask: var(--icon-listening-report-monthly);
 }
+
 .playlisting-create-option-icon--last-year {
 	--mask: var(--icon-listening-report-yearly);
 }
+
 .playlisting-create-option-icon--blasts-from-the-past {
 	--mask: var(--icon-history);
 }
+
 .playlisting-create-option-icon--user-recommendations {
 	--mask: var(--icon-recommended);
 }
+
 .playlisting-create-option-icon--user-mix {
 	--mask: var(--icon-user-mix);
 }

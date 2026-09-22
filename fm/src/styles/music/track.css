@@ -2,6 +2,7 @@
 	display: block;
 	--side-left: 12px;
 	--image-offset: 2px;
+	--track-gap: 2px;
 	line-height: var(--line-height) !important;
 
 	&:not(.chartlist--with-image) {
@@ -23,7 +24,11 @@
 	&>tbody {
 		display: flex;
 		flex-direction: column;
-		gap: 2px;
+		gap: var(--track-gap);
+	}
+
+	&[data-theme="yuzu"] {
+		--track-gap: 0px;
 	}
 }
 
@@ -42,7 +47,7 @@
 	--col-alt: var(--c3);
 	color: oklch(var(--col));
 	background-color: var(--bg);
-	padding: 8px calc(var(--side-left) + var(--love-offset, 0px)) 8px var(--side-left) !important;
+	padding: var(--track-verts) calc(var(--side-left) + var(--love-offset, 0px)) var(--track-verts) var(--side-left) !important;
 	min-height: 40px;
 	max-height: fit-content;
 	border-radius: var(--radius-m);
@@ -61,8 +66,6 @@
 	animation-fill-mode: backwards !important;
 
 	contain: layout;
-
-	--chart-cover-radius: var(--radius-xs);
 
 	/*&:nth-child(even) {
 	    --bg: var(--tracklist-odd);
@@ -104,6 +107,12 @@
 				--mask-size: var(--cover-size-50);
 			}
 		}
+
+		&[data-theme="yuzu"] {
+			&>.chartlist-image {
+				--w: 64px;
+			}
+		}
 	}
 
 	position: relative;
@@ -121,6 +130,28 @@
 		&:hover {
 			--col: var(--b5);
 			--col-alt: oklch(var(--b5));
+		}
+	}
+
+	&[data-theme="yuzu"] {
+		border-radius: unset !important;
+		margin: unset !important;
+		border-bottom: 1px solid #ccc;
+
+		--track-verts: 0px;
+		--side-left: 0px;
+
+		--artist-name-size: calc(var(--font-size) - 1px);
+		--artist-name-height: calc(var(--line-height) - 3px);
+
+		&>.chartlist-image {
+			--w: 44px;
+			width: var(--w) !important;
+			height: var(--w) !important;
+
+			&:before {
+				display: none !important;
+			}
 		}
 	}
 
@@ -169,6 +200,8 @@
 	}
 
 	&>.chartlist-artist {
+		font-size: var(--artist-name-size, var(--font-size));
+		line-height: var(--artist-name-height, var(--line-height));
 		order: 2;
 	}
 

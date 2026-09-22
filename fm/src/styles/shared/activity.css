@@ -44,7 +44,7 @@
 .activity-top {
 	display: flex;
 	flex-wrap: wrap;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 }
 

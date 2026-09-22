@@ -17,7 +17,7 @@
 	z-index: 9999;
 
 	.tooltip-sub {
-		font-size: 12px;
+		font-size: var(--font-size-sm);
 		color: oklch(var(--c3));
 	}
 
@@ -319,7 +319,7 @@
 			}
 
 			.badge-reason {
-				font-size: 12px;
+				font-size: var(--font-size-sm);
 				margin-top: -2px;
 				color: oklch(var(--c3));
 			}
@@ -362,7 +362,7 @@
 			}
 
 			&>.sister {
-				font-size: 12px;
+				font-size: var(--font-size-sm);
 				margin-top: -2px;
 				color: oklch(var(--c3));
 			}

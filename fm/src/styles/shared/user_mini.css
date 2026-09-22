@@ -21,9 +21,11 @@
 	&[data-live="true"] {
 		order: -1;
 	}
+
 	&[data-own="true"] {
 		order: -2 !important;
 	}
+
 	&[data-live="false"] {
 		opacity: 0.6;
 
@@ -33,7 +35,7 @@
 		}
 	}
 
-	& > .user-avatar {
+	&>.user-avatar {
 		--w: 40px;
 		width: var(--w);
 		height: var(--w);
@@ -52,20 +54,20 @@
 			border-radius: var(--item-med-radius);
 		}
 
-		& > img {
+		&>img {
 			width: var(--w);
 			height: var(--w);
 		}
 	}
 
-	& > .user-info {
+	&>.user-info {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
 		flex: 1;
 		overflow: hidden;
 
-		& > .user-name {
+		&>.user-name {
 			display: flex;
 			align-items: center;
 			gap: 6px;
@@ -73,17 +75,17 @@
 			cursor: default;
 			position: relative;
 
-			& > .user-name-inner {
+			&>.user-name-inner {
 				flex: 1;
 				color: oklch(var(--l3-c) / 80%);
 
-				& > strong {
+				&>strong {
 					color: oklch(var(--l3-c));
 					font-weight: var(--font-weight-medium);
 				}
 			}
 
-			& > .avatar {
+			&>.avatar {
 				display: flex;
 				width: var(--w);
 				height: var(--w);
@@ -93,7 +95,7 @@
 			margin-bottom: 4px;
 		}
 
-		& > .user-about {
+		&>.user-about {
 			display: flex;
 			align-items: center;
 			gap: 4px;
@@ -101,7 +103,7 @@
 			cursor: default;
 			font-weight: var(--font-weight-medium);
 
-			& > .bleh-icon {
+			&>.bleh-icon {
 				--icon-size: 14px;
 			}
 		}
@@ -109,7 +111,7 @@
 }
 
 .track-time {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	cursor: default;
 	flex-shrink: 0;

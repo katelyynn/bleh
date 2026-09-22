@@ -7,7 +7,7 @@
 	.calendar-header {
 		display: flex;
 
-		& > .fill {
+		&>.fill {
 			flex: 1;
 		}
 	}
@@ -16,11 +16,11 @@
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 
-		& > .date {
+		&>.date {
 			text-align: center;
 			cursor: default;
 			color: oklch(var(--c3));
-			font-size: 13px;
+			font-size: calc(var(--font-size) - 1px);
 		}
 	}
 
@@ -33,18 +33,18 @@
 		flex-direction: column;
 		gap: 10px;
 
-		& > .input-container {
+		&>.input-container {
 			width: 130px;
 
-			& > input {
+			&>input {
 				text-align: center;
 				height: 40px;
 				font-size: 16px !important;
 			}
 		}
 
-		& > p {
-			font-size: 13px;
+		&>p {
+			font-size: calc(var(--font-size) - 1px);
 			color: oklch(var(--c3));
 			cursor: default;
 		}

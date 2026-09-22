@@ -440,7 +440,7 @@ button.navlist-more {
 	@media (max-width: 980px) {
 		--button-sides-icon: var(--button-sides);
 		--padding: calc(10px + var(--icon-size) + var(--icon-gap)) var(--button-sides) 10px !important;
-		--font-size: 13px;
+		--font-size: calc(var(--font-size) - 1px);
 		justify-content: center;
 
 		--top: 10px;

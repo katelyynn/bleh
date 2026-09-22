@@ -290,7 +290,7 @@ li:first-child .more-item--delete {
 .extra-badges-text {
 	color: oklch(var(--c3));
 	cursor: default;
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 	line-height: 16px;
 	order: 100;
 }
@@ -407,7 +407,7 @@ li:first-child .more-item--delete {
 
 .menu-item-text {
 	opacity: 0.8;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	margin-top: -4px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -419,7 +419,7 @@ li:first-child .more-item--delete {
 .menu-item-description {
 	color: oklch(var(--c3));
 	cursor: default;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	line-clamp: 2;

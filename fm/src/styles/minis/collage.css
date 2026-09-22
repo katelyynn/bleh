@@ -51,8 +51,8 @@
 	margin-bottom: var(--card-gap);
 
 	strong {
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 		color: oklch(var(--c1));
 		cursor: default;
 	}
@@ -134,8 +134,8 @@
 			align-items: center;
 			gap: var(--item-list-gap);
 			cursor: default;
-			font-size: 16px;
-			line-height: 20px;
+			font-size: var(--font-size-subheading);
+			line-height: var(--line-height-subheading);
 
 			.avatar {
 				width: 32px;

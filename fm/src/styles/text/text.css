@@ -171,7 +171,7 @@ i {
 	color: oklch(var(--c3));
 
 	&:not(.btn) {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		cursor: default;
 	}
 }
@@ -329,7 +329,7 @@ pre {
 	display: inline-block;
 	margin-top: var(--card-gap);
 	font-weight: var(--font-weight) !important;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	cursor: default;
 
@@ -428,7 +428,7 @@ pre {
 
 .tip {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	width: fit-content;
 	cursor: default;
 
@@ -523,8 +523,8 @@ hr {
 	--icon-colour: oklch(var(--l3-c));
 
 	color: oklch(var(--c1));
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	margin-bottom: var(--card-gap);
 
 	&.is-small {
@@ -558,6 +558,10 @@ hr {
 				margin-top: calc(-1 * var(--card-padding));
 			}
 		}
+	}
+
+	&[data-theme="yuzu"] {
+		color: oklch(var(--l4-c)) !important;
 	}
 
 	&.with-margin {

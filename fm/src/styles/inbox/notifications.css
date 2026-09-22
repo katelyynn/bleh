@@ -11,17 +11,17 @@
 
 		position: relative;
 
-		& > .link-block-cover-link {
+		&>.link-block-cover-link {
 			position: absolute;
 			inset: 0;
 		}
 
-		& > .message-checkbox {
+		&>.message-checkbox {
 			width: 16px;
 			z-index: 3;
 
-			& > .setting {
-				& > .heading {
+			&>.setting {
+				&>.heading {
 					display: none;
 				}
 			}
@@ -39,7 +39,7 @@
 			--sat-over: var(--sat-valentine);
 			--lit-over: var(--lit-valentine);
 
-			& > .message-content > .message-subject {
+			&>.message-content>.message-subject {
 				color: oklch(var(--l3-c));
 				font-weight: var(--font-weight-medium);
 			}
@@ -50,12 +50,12 @@
 			width: 100%;
 
 			.notification-avatar {
-				& > .avatar {
+				&>.avatar {
 					width: 32px;
 					height: 32px;
 					--mask-size: var(--cover-size-32);
 
-					& > .avatar-status-dot {
+					&>.avatar-status-dot {
 						--mask-size: 14px;
 					}
 				}
@@ -70,7 +70,7 @@
 			}
 		}
 
-		& > .bleh-icon {
+		&>.bleh-icon {
 			flex-shrink: 0;
 		}
 
@@ -87,17 +87,17 @@
 			z-index: 10;
 			flex-shrink: 0;
 
-			& > .avatar {
+			&>.avatar {
 				background: oklch(var(--b5));
 				width: 42px;
 				height: 42px;
 				--mask-size: var(--cover-size-50);
 
-				& > img {
+				&>img {
 					position: static;
 				}
 
-				& > .avatar-status-dot {
+				&>.avatar-status-dot {
 					width: var(--mask-size);
 					height: var(--mask-size);
 				}
@@ -133,11 +133,11 @@
 
 				min-width: 0;
 
-				& > .bleh-icon {
+				&>.bleh-icon {
 					--icon-size: 12px;
 				}
 
-				& > .notification-type {
+				&>.notification-type {
 					display: flex;
 					align-items: center;
 					gap: 4px;
@@ -150,7 +150,7 @@
 					text-overflow: ellipsis;
 					white-space: nowrap;
 
-					& > span:last-child {
+					&>span:last-child {
 						overflow: hidden;
 						text-overflow: ellipsis;
 						white-space: nowrap;
@@ -183,7 +183,7 @@
 		.notification-time {
 			color: oklch(var(--c3));
 			font-weight: var(--font-weight);
-			font-size: 13px;
+			font-size: calc(var(--font-size) - 1px);
 
 			flex-shrink: 0;
 		}

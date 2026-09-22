@@ -43,8 +43,9 @@ h2.text-18,
 .inbox-message-view .inbox-message-subject {
 	color: oklch(var(--c1));
 	font-family: var(--font);
-	font-size: 16px;
-	line-height: 17px; /* matches button on the right */
+	font-size: var(--font-size-subheading);
+	line-height: 17px;
+	/* matches button on the right */
 	/*margin-bottom: 12px;*/
 	font-weight: var(--font-weight-medium);
 	letter-spacing: unset;
@@ -88,13 +89,15 @@ h2.text-18,
 		}
 	}
 
-	& > .new-badge {
+	&>.new-badge {
 		margin-left: 6px;
 	}
 }
+
 .user-sidebar-header {
 	min-width: 150px;
 }
+
 .user-dashboard-section-header:after {
 	display: none;
 }
@@ -105,7 +108,7 @@ h2.text-18,
 	line-height: 18px !important;
 	font-style: var(--font-style-head);
 
-	.music-section > & {
+	.music-section>& {
 		line-height: var(--line-height-head-3) !important;
 	}
 }

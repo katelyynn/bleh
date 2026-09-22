@@ -16,7 +16,7 @@
 
 .plot-header-label {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	cursor: default;
 }
 
@@ -139,7 +139,7 @@
 	display: flex;
 	align-items: center;
 	gap: 4px;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 }
 
 .plot-header-avatar {

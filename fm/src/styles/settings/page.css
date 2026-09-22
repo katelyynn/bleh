@@ -15,11 +15,12 @@
 		cursor: default;
 		color: oklch(var(--c1));
 	}
+
 	h4 {
 		color: oklch(var(--c1));
 
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 
 		&.top-header {
 			width: fit-content;
@@ -39,13 +40,14 @@
 			}
 		}
 	}
+
 	h5 {
 		margin: unset;
 		color: oklch(var(--c1));
 		font-weight: var(--font-weight-medium);
 	}
 
-	& > .alert {
+	&>.alert {
 		margin: unset !important;
 	}
 

@@ -62,7 +62,7 @@
 		}
 
 		&>strong {
-			font-size: 13px;
+			font-size: calc(var(--font-size) - 1px);
 			font-weight: var(--font-weight);
 			overflow: hidden;
 			max-width: 100%;
@@ -180,7 +180,7 @@
 			.preview-header {
 				display: block;
 				color: oklch(var(--c1));
-				font-size: 12px;
+				font-size: var(--font-size-sm);
 				line-height: 12px;
 				font-weight: var(--font-weight-bold);
 
@@ -229,7 +229,7 @@
 	top: -4px;
 	right: -5px;
 	z-index: 10;
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 	line-height: 14px;
 	font-weight: var(--font-weight-bold);
 	color: oklch(var(--b7));
@@ -334,7 +334,7 @@
 }
 
 .colour-tile-type {
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 	color: oklch(var(--c3));
 }
 

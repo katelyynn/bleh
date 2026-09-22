@@ -14,6 +14,7 @@ import {
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { useSettings } from '@/page.ts';
+import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 
 interface SettingSwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -103,14 +104,24 @@ export function SettingSwitch({
 
 		elem.replaceChildren(
 			<>
+				{useSettings.get('theme') == 'yuzu' && (
+					<Checkbox
+						className='setting-inner'
+						name={id}
+						checked={value}
+						ref={checkbox}
+					/>
+				)}
 				{icon && <SettingIcon name={icon} />}
 				<SettingLabel name={name} body={body} store={store} />
-				<Switch
-					className='setting-inner'
-					name={id}
-					checked={value}
-					ref={checkbox}
-				/>
+				{useSettings.get('theme') != 'yuzu' && (
+					<Switch
+						className='setting-inner'
+						name={id}
+						checked={value}
+						ref={checkbox}
+					/>
+				)}
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
 						list={incompatible_list}

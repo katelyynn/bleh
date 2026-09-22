@@ -314,7 +314,7 @@
 
 .diff {
 	margin-left: 4px;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	opacity: 0.7;
 }
 

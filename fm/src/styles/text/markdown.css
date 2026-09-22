@@ -84,7 +84,7 @@
 	}
 
 	del {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		color: oklch(var(--c3));
 		text-decoration: none;
 	}
@@ -163,7 +163,7 @@
 			margin-top: 2px;
 			margin-left: 12px;
 			color: oklch(var(--c2) / 80%);
-			--font-size: 13px;
+			--font-size: calc(var(--font-size) - 1px);
 			font-size: var(--font-size);
 		}
 
@@ -230,8 +230,8 @@
 	}
 
 	h5 {
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 		margin: var(--card-gap) 0 0 0;
 		cursor: default;
 
@@ -344,8 +344,8 @@ t {
 	}
 
 	h4 {
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 		color: oklch(var(--c1));
 	}
 

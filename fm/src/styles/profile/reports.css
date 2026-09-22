@@ -322,7 +322,7 @@ text:has(> .your-progress-label-position) {
 
 .your-progress {
 	.description {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		color: oklch(var(--c3));
 		margin-top: var(--side-action-side);
 		line-height: var(--line-height);

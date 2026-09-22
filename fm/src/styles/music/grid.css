@@ -378,8 +378,8 @@
 
 	&>h3 {
 		color: oklch(var(--c1));
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 	}
 
 	.grid-cta-text {

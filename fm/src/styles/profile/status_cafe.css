@@ -18,7 +18,7 @@
 .status-cafe-emoji {
 	display: inline-flex;
 	justify-content: center;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	--icon-size: 16px;
 	width: 16px;
 	margin-right: 4px;
@@ -30,7 +30,7 @@
 		animation: spinner 1s linear infinite;
 	}
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon: var(--icon-16-x);
 	}
 }
@@ -40,7 +40,7 @@
 }
 
 .status-cafe-time {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	flex-shrink: 0;
 	text-decoration: var(--hover-underline, none);

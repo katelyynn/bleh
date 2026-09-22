@@ -31,8 +31,7 @@
 
 .campfire-panel-side {
 	width: var(--cards-sidebar-width);
-	background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5)
-		/ 60%));
+	background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5) / 60%));
 	padding: var(--card-padding) 0;
 
 	z-index: 3;
@@ -84,7 +83,7 @@
 	background: linear-gradient(90deg, oklch(var(--b5)), transparent 5%,
 		transparent 95%, oklch(var(--b5)));
 
-	& > .campfire-items {
+	&>.campfire-items {
 		position: relative;
 		height: var(--w);
 		width: var(--w);
@@ -92,7 +91,7 @@
 
 		perspective: 1000px;
 
-		& > .campfire-item {
+		&>.campfire-item {
 			display: flex;
 			flex-direction: column;
 			gap: var(--card-gap);
@@ -120,7 +119,7 @@
 				display: none;
 			}
 
-			& > .campfire-item-cover {
+			&>.campfire-item-cover {
 				width: var(--w);
 				height: var(--w);
 				border-radius: inherit;
@@ -132,7 +131,7 @@
 				transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
 				transition-timing-function: var(--trans-function);
 
-				& > img {
+				&>img {
 					width: 100%;
 					--mask-size: var(--cover-size-400);
 					border-radius: inherit;
@@ -198,7 +197,7 @@
 					transform: var(--offset) scale(0.6) var(--rotate);
 				}
 
-				& > .campfire-item-cover {
+				&>.campfire-item-cover {
 					opacity: 0.6;
 					box-shadow: var(--card-shadow);
 				}
@@ -208,18 +207,20 @@
 				z-index: 30;
 			}
 
-			transition-property: transform, opacity, filter;
+			transition-property: transform,
+			opacity,
+			filter;
 			transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
 			transition-timing-function: var(--trans-function);
 		}
 	}
 
-	& > .campfire-intro {
+	&>.campfire-intro {
 		z-index: 21;
 		filter: var(--header-filter-shadow);
 	}
 
-	& > .campfire-details {
+	&>.campfire-details {
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -227,16 +228,17 @@
 		z-index: 21;
 		filter: var(--header-filter-shadow);
 
-		& > .campfire-title {
+		&>.campfire-title {
 			font-size: 20px;
 			line-height: 24px;
 			color: oklch(var(--c1));
 			font-weight: var(--font-weight-medium);
 			justify-content: center;
 		}
-		& > .campfire-artist {
-			font-size: 16px;
-			line-height: 20px;
+
+		&>.campfire-artist {
+			font-size: var(--font-size-subheading);
+			line-height: var(--line-height-subheading);
 			font-weight: var(--font-weight-medium);
 			margin-bottom: 10px;
 
@@ -245,15 +247,16 @@
 			color: oklch(var(--c3));
 			cursor: default;
 
-			& > a {
+			&>a {
 				color: oklch(var(--c2) / 80%);
 			}
 
-			& > a + a {
+			&>a+a {
 				margin-left: 4px;
 			}
 		}
-		& > .campfire-plays {
+
+		&>.campfire-plays {
 			color: oklch(var(--c3));
 			cursor: default;
 		}
@@ -265,7 +268,7 @@
 	gap: 1px;
 	margin: unset;
 
-	& > .content-panel {
+	&>.content-panel {
 		display: flex;
 		flex-direction: column;
 		gap: var(--card-padding);
@@ -274,12 +277,13 @@
 		&.content-main {
 			flex: 1;
 		}
+
 		&.content-side {
 			flex-shrink: 0;
 			width: 500px;
 		}
 
-		& > section {
+		&>section {
 			padding: 0 var(--card-padding);
 			margin: unset;
 		}
@@ -294,7 +298,7 @@
 .campfire-cta {
 	padding: var(--card-padding) calc(var(--card-padding) - 12px);
 	background: linear-gradient(180deg, oklch(var(--b5)), color-mix(in oklch,
-		oklch(var(--b4)) 40%, oklch(var(--b5))));
+				oklch(var(--b4)) 40%, oklch(var(--b5))));
 
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -329,6 +333,6 @@
 }
 
 .campfire-cta-text-sub {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 }

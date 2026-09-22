@@ -218,6 +218,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.solarium.name,
 		body: trans.solarium.body,
 		bubble: true,
+		incompatible: { theme: 'yuzu' },
 	},
 	noise: {
 		css: 'noise-opacity',
@@ -228,6 +229,7 @@ export const settings_store: Record<string, setting_instance> = {
 		step: 0.05,
 		title: trans.noise.name,
 		body: trans.noise.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	gloss: {
 		css: 'gloss',
@@ -238,6 +240,7 @@ export const settings_store: Record<string, setting_instance> = {
 		step: 0.05,
 		title: trans.gloss.name,
 		body: trans.gloss.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	gendered_tags: {
 		default: true,
@@ -600,17 +603,6 @@ export const settings_store: Record<string, setting_instance> = {
 			trans.profile_banner.name,
 		],
 	},
-	profile_shortcut: {
-		default: '',
-		type: 'text',
-		avatar: true,
-		wait: true,
-		max: 40,
-		title: trans.profile_shortcut.name,
-		body: trans.profile_shortcut.body,
-		placeholder: trans.enter_username,
-		warn_if_matches_auth: true,
-	},
 	font: {
 		css: 'custom_font',
 		default: '',
@@ -644,6 +636,7 @@ export const settings_store: Record<string, setting_instance> = {
 		tags: [
 			trans.text,
 		],
+		incompatible: { theme: 'yuzu' },
 	},
 	font_serif: {
 		default: true,
@@ -653,6 +646,7 @@ export const settings_store: Record<string, setting_instance> = {
 		tags: [
 			trans.text,
 		],
+		incompatible: { theme: 'yuzu' },
 	},
 	font_weight: {
 		css: 'custom_font_weight',
@@ -663,6 +657,7 @@ export const settings_store: Record<string, setting_instance> = {
 		type: 'range',
 		title: trans.font_weight.name,
 		body: trans.font_weight.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	font_weight_medium: {
 		css: 'custom_font_weight_medium',
@@ -673,6 +668,7 @@ export const settings_store: Record<string, setting_instance> = {
 		type: 'range',
 		title: trans.font_weight_medium.name,
 		body: trans.font_weight_medium.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	font_weight_bold: {
 		css: 'custom_font_weight_bold',
@@ -683,6 +679,7 @@ export const settings_store: Record<string, setting_instance> = {
 		type: 'range',
 		title: trans.font_weight_bold.name,
 		body: trans.font_weight_bold.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	font_emoji: {
 		default: true,
@@ -696,7 +693,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.grid_glow.name,
 		body: trans.grid_glow.body,
 		bubble: true,
-		incompatible: { theme: 'nier' },
+		incompatible: { theme: ['nier', 'yuzu'] },
 		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	default_avatar_action: {
@@ -956,33 +953,6 @@ export const settings_store: Record<string, setting_instance> = {
 		default: [],
 		type: 'list',
 	},
-	profile_hue: {
-		default: 255,
-		type: 'range',
-		min: 0,
-		max: 360,
-		step: 1,
-		title: trans.hue,
-		vertical: true,
-	},
-	profile_sat: {
-		default: 1,
-		type: 'range',
-		min: 0,
-		max: 2,
-		step: 0.01,
-		title: trans.sat,
-		vertical: true,
-	},
-	profile_lit: {
-		default: 1,
-		type: 'range',
-		min: 0,
-		max: 1.5,
-		step: 0.01,
-		title: trans.lit,
-		vertical: true,
-	},
 	friends: {
 		default: [],
 		type: 'list',
@@ -1097,6 +1067,7 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.show_disc_image.name,
 		body: trans.show_disc_image.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	count_bar_axis: {
 		type: 'radio',
@@ -1161,5 +1132,6 @@ export const settings_store: Record<string, setting_instance> = {
 				name: trans.minimal,
 			},
 		},
+		incompatible: { theme: 'yuzu' },
 	},
 };

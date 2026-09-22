@@ -86,7 +86,7 @@ select,
 	font-family: var(--font) !important;
 	font-size: var(--font-size) !important;
 	font-weight: var(--force-font-weight, var(--font-weight)) !important;
-	text-shadow: none;
+	text-shadow: var(--button-text-shadow, none);
 	border-radius: var(--radius, var(--button-radius)) !important;
 	box-shadow: var(--shadow) !important;
 	border: unset !important;
@@ -221,6 +221,8 @@ select,
 		var(--interactable-outer);
 		--shadow-hov: var(--interactable-outer),
 		var(--interactable-active-outer);
+
+		text-shadow: var(--button-text-shadow-primary, none);
 
 		[data-bleh--season="christmas"] & {
 			--hue-seasonal: 130;

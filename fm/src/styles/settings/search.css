@@ -9,6 +9,7 @@
 
 	margin: 0 calc(-1 * var(--button-sides));
 }
+
 .setting-search-result {
 	--bg: transparent;
 	--bg-hov: oklch(var(--b2) / 40%);
@@ -32,14 +33,15 @@
 	font-weight: var(--font-weight);
 	flex: 1;
 }
+
 .setting-search-result-body {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c2) / 80%);
 }
 
 .setting-search-result-context {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	flex-shrink: 0;
 }
 

@@ -521,7 +521,7 @@
 	align-items: center;
 	gap: 4px;
 
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	cursor: default;
 }
@@ -540,8 +540,8 @@
 .shout-timestamp {
 	height: fit-content;
 	color: oklch(var(--c3) / 85%) !important;
-	font-size: 12px;
-	line-height: 12px;
+	font-size: var(--font-size-sm);
+	line-height: var(--font-size-sm);
 	display: inline-flex;
 	align-items: center;
 	right: unset;

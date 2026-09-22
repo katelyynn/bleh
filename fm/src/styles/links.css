@@ -15,11 +15,6 @@
 	--mask: var(--icon-16-external);
 	--mask-size: 12px;
 	--margin-top: -7px;
-
-	&:hover,
-	&:focus-visible {
-		text-decoration: underline !important;
-	}
 }
 
 a {

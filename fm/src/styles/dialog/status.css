@@ -38,7 +38,7 @@
 		}
 
 		.status-body {
-			font-size: 13px;
+			font-size: calc(var(--font-size) - 1px);
 			color: oklch(var(--c3));
 			display: -webkit-box;
 			-webkit-line-clamp: 1;
@@ -51,7 +51,9 @@
 		opacity: 1;
 
 		animation: status 0.2s var(--trans-function);
-		transition-property: opacity, transform, filter;
+		transition-property: opacity,
+		transform,
+		filter;
 		transition-duration: 0.2s;
 		transition-timing-function: var(--trans-function);
 

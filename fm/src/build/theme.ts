@@ -8,7 +8,7 @@ import { trans, translation } from '@/build/trans.ts';
 import { icons } from '@/components/shared/icon.tsx';
 
 export interface theme {
-	name: translation;
+	name: translation | string;
 	type: 'light' | 'dark';
 	icon?: string;
 	external?: boolean;
@@ -69,13 +69,19 @@ export function getThemes(): Record<string, theme> {
 			name: 'NieR',
 			type: 'light',
 			external: true,
-			new_release: true
-		}
+			new_release: true,
+		},
+		yuzu: {
+			name: 'yuzu',
+			type: 'light',
+			external: true,
+			new_release: true,
+		},
 	};
 }
 
 // this lets you choose which themes to expose to the user-facing screens
-export const light_themes = ['light', 'ink', 'rose_pine_dawn', 'nier'];
+export const light_themes = ['light', 'ink', 'rose_pine_dawn', 'nier', 'yuzu'];
 export const dark_themes = [
 	'dark',
 	'darker',
@@ -91,5 +97,6 @@ export const saturation_themes_unsupported = [
 	'rose_pine_dawn',
 	'kanagawa_dragon',
 	'kanagawa',
-	'nier'
+	'nier',
+	'yuzu',
 ];
