@@ -1,5 +1,6 @@
 .smart-title {
 	display: inline-block;
+	gap: 0;
 	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -38,6 +39,7 @@
 .feat {
 	display: inline;
 	color: oklch(var(--c2) / 80%);
+	margin-left: 4px;
 
 	&:is([data-tag-group="mixes"], [data-tag-group="mixes_numbers"], [data-tag-group="stems"], [data-tag-group="bonus"]) {
 		color: oklch(var(--c3));

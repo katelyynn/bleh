@@ -461,6 +461,7 @@ export function patch_titles(search = page.structure.main) {
 				);
 
 				// parse tags into text
+				track_title.classList.add('smart-title');
 				track_title.replaceChildren(
 					<SmartTitle
 						title={formatted.song_title}
