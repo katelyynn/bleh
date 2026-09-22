@@ -1632,6 +1632,7 @@ export function prepare_music() {
 		rakkas: 'Rakkas',
 		crimson: 'Crimson Text',
 		rokkitt: 'Rokkitt',
+		inst: 'Instrument Serif',
 		uni: 'UnifrakturCook',
 		zpix: 'Zpix',
 		mask: 'Expose',

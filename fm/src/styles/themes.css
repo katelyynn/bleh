@@ -892,6 +892,7 @@ body,
 		--menu-bg: var(--b8);
 		--menu-opacity: 94%;
 
+		--menu-item-radius: 0;
 		--button-radius: 0;
 		--input-radius: 0;
 		--radius-xs: 0;
