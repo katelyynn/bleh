@@ -78,7 +78,7 @@ select,
 			var(--button-padding,
 				var(--btn-top) var(--btn-right) var(--btn-bottom) var(--btn-left))) !important;
 	margin: unset;
-	min-height: unset !important;
+	min-height: var(--button-height) !important;
 	min-width: unset !important;
 	line-height: var(--line-height) !important;
 	text-transform: unset !important;
@@ -217,7 +217,7 @@ select,
 		}
 
 		--shadow: var(--primary-shadow),
-		0 3px 12px oklch(var(--h4) / 32%),
+		var(--primary-glow),
 		var(--interactable-outer);
 		--shadow-hov: var(--interactable-outer),
 		var(--interactable-active-outer);

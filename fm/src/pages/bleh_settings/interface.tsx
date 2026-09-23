@@ -43,6 +43,7 @@ export function interface_page() {
 	const bar_preview = createRef();
 	const shout_preview = createRef();
 
+	useSettings.on('theme', render_track_preview);
 	useSettings.on('track_album_name_location', render_track_preview);
 	useSettings.on('track_layout', render_track_preview);
 	useSettings.on('expand_tracks', render_track_preview);
@@ -65,7 +66,10 @@ export function interface_page() {
 		const avi = avatar(auth.avatar, 'avatar170s');
 
 		track_preview.current.replaceChildren(
-			<table class='chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more'>
+			<table
+				class='chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more'
+				data-theme={useSettings.get('theme')}
+			>
 				<tbody>
 					<TrackPreview
 						playing
@@ -282,6 +286,7 @@ function TrackPreview({
 			data-has-bar='false'
 			data-show-album-text={String(show_album_text)}
 			data-album-name-location={album_name_location}
+			data-theme={useSettings.get('theme')}
 		>
 			<td class='chartlist-image'>
 				<a class='cover-art'>

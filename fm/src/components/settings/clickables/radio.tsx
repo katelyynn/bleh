@@ -5,6 +5,7 @@
  */
 
 import { createRef } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
 
 type RadioElement = HTMLDivElement & {
 	checked: boolean;
@@ -33,6 +34,10 @@ export function Radio({
 	function update() {
 		radio.current.checked = checked;
 		elem.current.setAttribute('aria-checked', checked);
+		elem.current.setAttribute(
+			'data-theme',
+			useSettings.get('theme') as string,
+		);
 	}
 
 	const wrap = (
@@ -65,6 +70,8 @@ export function Radio({
 			update();
 		},
 	});
+
+	useSettings.on('theme', update);
 
 	return wrap;
 }

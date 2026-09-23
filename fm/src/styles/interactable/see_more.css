@@ -26,9 +26,10 @@
 	--mask-colour: color-mix(in oklch,
 			oklch(var(--l3-c)),
 			oklch(var(--l4-c)) 30%);
-	font-size: inherit !important;
+	font-size: var(--see-more-font-size, inherit) !important;
 	--force-font-weight: var(--font-weight-medium);
 	font-weight: var(--force-font-weight);
+	min-height: unset !important;
 	position: relative;
 	--icon-size: 12px;
 	cursor: pointer;

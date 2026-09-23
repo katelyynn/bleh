@@ -46,10 +46,10 @@
 	min-width: 170px !important;
 	--show-icon: block;
 
-	--button-height: 28px;
-	--button-sides: 6px;
-	--btn-top: 5px;
-	--btn-bottom: 5px;
+	--button-height: var(--menu-item-height);
+	--button-sides: var(--menu-item-sides);
+	--btn-top: var(--menu-item-verts);
+	--btn-bottom: var(--menu-item-verts);
 
 	--button-sides-icon: var(--button-sides);
 	--left: var(--button-sides);

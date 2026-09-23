@@ -208,6 +208,13 @@
 		z-index: 30;
 		pointer-events: none;
 	}
+
+	&[data-theme="yuzu"] {
+		outline: none !important;
+		aspect-ratio: unset;
+		box-shadow: unset !important;
+		border-radius: unset !important;
+	}
 }
 
 .grid-items-cover-image {
@@ -222,6 +229,15 @@
 
 	&.link-block--hover {
 		--hover-underline: underline oklch(var(--c3));
+	}
+
+	&[data-theme="yuzu"] {
+		position: relative;
+		inset: unset !important;
+		height: unset;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
 	}
 }
 
@@ -290,6 +306,31 @@
 		right: 10px;
 		pointer-events: auto;
 	}
+
+	aspect-ratio: 126 / 100;
+
+	&[data-theme="yuzu"] {
+		&:after {
+			background-image: url('data:image/png;base64,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') !important;
+			opacity: 1;
+			mix-blend-mode: unset;
+		}
+
+		&>.grid-item-colour-bg {
+			display: none;
+		}
+
+		&>img {
+			position: absolute;
+			inset: 1% 0 0 2%;
+			mask-image: unset;
+			-webkit-mask-image: unset;
+			border-radius: unset;
+
+			width: 96%;
+			height: 97%;
+		}
+	}
 }
 
 .grid-item-colour-bg {
@@ -324,6 +365,18 @@
 
 	&:hover {
 		--grid-line-clamp: 3;
+	}
+
+	&[data-theme="yuzu"] {
+		position: relative;
+		inset: unset !important;
+		filter: unset;
+		padding: unset;
+
+		--col: 0.15 0 0;
+
+		--title-colour: oklch(var(--col));
+		--text-colour: oklch(var(--col));
 	}
 }
 

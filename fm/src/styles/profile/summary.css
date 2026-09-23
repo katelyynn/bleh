@@ -221,6 +221,10 @@
 		}
 	}
 
+	&:after {
+		display: none;
+	}
+
 	transition-property: filter,
 	background-color,
 	box-shadow;

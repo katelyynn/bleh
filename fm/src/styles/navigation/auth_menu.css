@@ -36,7 +36,7 @@
 
 .tippy-box[data-theme="auth-menu-v2"] {
 	padding: var(--vertical-menu-padding, 4px) var(--horizontal-menu-padding, 4px) !important;
-	border-radius: calc(var(--item-med-radius) + 4px) !important;
+	border-radius: calc(var(--menu-item-radius) + 4px) !important;
 
 	--page-width: 230px;
 

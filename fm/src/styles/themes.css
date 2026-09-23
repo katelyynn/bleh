@@ -71,6 +71,10 @@ body {
 	--icon-half: 9px;
 	--icon-gap: 4px;
 
+	--menu-item-verts: 5px;
+	--menu-item-sides: 6px;
+	--menu-item-height: 28px;
+
 	--side-action-padding: 2px 0;
 	--side-action-height: 36px;
 	--side-action-side: 10px;
@@ -746,7 +750,7 @@ body,
 	&[data-bleh--theme="yuzu"] {
 		/* any additional highlights */
 		--b2: 0.82 0 0;
-		--b3: 0.8 0 0;
+		--b3: 0.85 0 0;
 
 		/* card border */
 		--b4: 0.91 0 0;
@@ -762,12 +766,12 @@ body,
 
 		--tooltip: 0.92 0 0;
 
-		--separator-base: oklch(var(--b2) / 0.3);
+		--separator-base: oklch(1 0 0);
 
-		--card-border-base: oklch(0.87 0 0) !important;
+		--card-border-base: oklch(0.8 0 0) !important;
 		--card-border-base-highlight: oklch(0.89 0 0);
 
-		--menu-border: oklch(0.87 0 0);
+		--menu-border: oklch(0.8 0 0);
 
 		--normal-shadow:
 			inset 0 1px 0 0 oklch(0.6 0 0) /* top */,
@@ -775,7 +779,7 @@ body,
 			inset 1px 0 0 0 oklch(0.6 0 0) /* left */,
 			inset -1px 0 0 0 oklch(0.6 0 0) /* right */,
 			inset 0 2px 0 0 oklch(1 0 0) /* top inner */,
-			inset 0 -10px 8px 0 oklch(0.74 0 0) /* gradient */;
+			inset 0 -10px 8px 0 oklch(0.78 0 0 / 40%) /* gradient */;
 		--input-shadow:
 			inset 0 0 0 1px oklch(var(--b2) / 30%),
             inset 0 1px 3px oklch(0 0 0 / 2%);
@@ -783,29 +787,33 @@ body,
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
             var(--input-shadow);
 		--group-shadow:
-			inset 0 0 0 1px oklch(var(--b4) / 0.8),
-			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.04);
+			inset 0 1px 0 0 oklch(0.9 0 0) /* top */,
+			inset 0 -1px 0 0 oklch(0.8 0 0) /* bottom */,
+			inset 1px 0 0 0 oklch(0.9 0 0) /* left */,
+			inset -1px 0 0 0 oklch(0.9 0 0) /* right */,
+			inset 0 2px 0 0 oklch(1 0 0) /* top inner */,
+			0 1px 3px oklch(0 0 0 / 5%);
 
-		--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.02);
+
+		--menu-shadow: 3px 3px 4px oklch(0 0 0 / 10%);
+
+		--separator-shadow: 0 -1px 0 0 oklch(0.9 0 0);
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
-		--sidebar-border: color-mix(
-            in oklch,
-            oklch(var(--b5)),
-            oklch(var(--b4)) 42%
-        );
-		--toolbar-bg: oklch(var(--b5) / 70%);
-		--toolbar-border: oklch(var(--b4) / 65%);
+		--sidebar-border: oklch(0.9 0 0);
+		--toolbar-bg: oklch(0.94 0 0);
+		--toolbar-border: oklch(0.9 0 0);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
+		--sidebar-shadow: none;
 
-		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 73%));
-		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
+		--card-blur-bg: oklch(0.98 0 0);
+		--card-blur-bg-alt: oklch(0.94 0 0);
 
 		--menu-item-hov: oklch(var(--b4) / 60%);
 		--menu-item-atv: oklch(var(--b4) / 80%);
 
-		--nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
-		--header-filter-shadow: drop-shadow(0 3px 7px oklch(var(--b5)));
+		--nav-filter-shadow: none;
+		--header-filter-shadow: none;
 
 		--banner-overlay: oklch(var(--b5) / 40%);
 		--banner-mix: lighten;
@@ -838,6 +846,10 @@ body,
 		--menu-bg: var(--b5);
 		--menu-opacity: 94%;
 
+		--menu-item-verts: 3px;
+		--menu-item-sides: 5px;
+		--menu-item-height: 24px;
+
 		--button-outline: inset 0 0 0 1px oklch(var(--b2) / 50%);
 
 		--shout-tree: oklch(var(--b2) / 30%);
@@ -845,16 +857,26 @@ body,
 		--radius-xs: 3px;
 		--radius-m: 6px;
 
-		--button-verts: 6px;
-		--button-sides: 8px;
-		--button-radius: 6px;
+		--button-verts: 4px;
+		--button-sides: 7px;
+		--button-radius: 5px;
+		--button-height: 24px;
 
 		--card-radius: 0;
 
+		--menu-item-radius: 2px;
 		--setting-group-padding: 8px;
 		--setting-inner-gap: 12px;
 		--setting-label-height: none;
 		--chart-cover-radius: 0;
+
+		--item-big-radius: 6px;
+
+		--vertical-menu-padding: 4px;
+		--horizontal-menu-padding: 2px;
+
+		--card-padding: 10px;
+		--card-gap: 12px;
 	}
 	&[data-bleh--theme="ink"] {
 		--b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
@@ -1334,6 +1356,8 @@ u,
 
 	--white: 100% 0 0;
 
+	--primary-glow: 0 3px 12px oklch(var(--h4) / 32%);
+
 	--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 40%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
 	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
@@ -1603,9 +1627,9 @@ u,
 	}
 	&[data-bleh--theme="yuzu"],
 	body[data-bleh--theme="yuzu"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
-		--c1: 0 calc(var(--sat) * 0.06) var(--hue);
+		--c1: 0 0 0;
 		--c2: 0.15 0 0;
-		--c3: 0.55 calc(var(--sat) * 0.02) var(--hue);
+		--c3: 0.65 0 0;
 		--ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
 
 		--button-text-shadow: 0 1px 0 oklch(0.95 0 0);
@@ -1625,7 +1649,7 @@ u,
 		--h2: calc(clamp(min(0.7), var(--lit), max(1.1)) * 1.1) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 		--h3: var(--h3-lit) var(--h3-sat) var(--hue);
 		--h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.38);
-		--h3-lit: calc(clamp(min(0.85), var(--lit), max(1)) * 0.87);
+		--h3-lit: calc(clamp(min(0.85), var(--lit), max(1)) * 0.93);
 
 		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f4: calc(clamp(min(1), var(--lit), max(1.2)) * 0.96) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
@@ -1646,10 +1670,7 @@ u,
 		--badge-hov: oklch(var(--f4) / 80%);
 		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 2px 6px 0 oklch(calc(clamp(min(1), var(--lit), max(1.2)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue) / 60%) inset;
 
-		--grid-colour-shadow: var(
-            --grid-colour-shadow-override,
-            0 10px 30px oklch(var(--h4) / 30%)
-        );
+		--grid-colour-shadow: none;
 
 		--opposite-text: var(--c1);
 
@@ -1673,6 +1694,8 @@ u,
 
 		--menu-item-accent-hov: oklch(var(--h4) / 15%);
 		--menu-item-accent-atv: oklch(var(--h4) / 25%);
+
+		--primary-glow: 0 0 transparent;
 
 		--summary-block-0: oklch(calc(var(--lit) * 0.99) calc(clamp(min(0), var(--sat), max(2)) * 0.07) var(--hue));
 		--summary-block-1: oklch(calc(var(--lit) * 0.99) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue));
@@ -1702,12 +1725,12 @@ u,
 		--white: 84% 0 0;
 
 		--primary-shadow:
-			inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* top */,
-			inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.2) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* bottom */,
-			inset 1px 0 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* left */,
-			inset -1px 0 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* right */,
+			inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* top */,
+			inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.33) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* bottom */,
+			inset 1px 0 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* left */,
+			inset -1px 0 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* right */,
 			inset 0 2px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.2) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) /* top inner */,
-			inset 0 -10px 8px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / 30%) /* gradient */;
+			inset 0 -10px 8px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.54) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / 30%) /* gradient */;
 		--bar-shadow: 0 0 transparent;
 
 		--side-action-bg: oklch(var(--k4) / 15%);
@@ -2009,6 +2032,13 @@ body {
 		--header-avatar-size: 120px;
 
 		--max-tooltip-width: 100vw;
+	}
+
+	@media (min-width: 981px) {
+		&[data-bleh--theme="yuzu"] {
+			--cards-main-width: 750px;
+			--cards-sidebar-width: 330px;
+		}
 	}
 
 	--menu-item-radius: 8px;
