@@ -178,6 +178,8 @@ body,
 		--side-action-sep: transparent;
 		--side-action-sep-height: 0;
 		--side-action-gap: 6px;
+
+		--interact-shadow: 0 0 transparent;
 	}
 }
 
