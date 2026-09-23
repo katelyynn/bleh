@@ -413,17 +413,6 @@ body {
 	--font-weight-bold: var(--custom_font_weight_bold, 600);
 }
 
-/* backgrounds */
-body,
-.theme-preview {
-	--hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, var(--default-hue)))));
-	--sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, var(--default-sat)))));
-	--lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, var(--default-lit)))));
-
-	--sat: calc(var(--sat-raw) * var(--sat-multiply));
-	--lit: calc(var(--lit-raw) * var(--lit-multiply));
-}
-
 /* text */
 body,
 .alert,

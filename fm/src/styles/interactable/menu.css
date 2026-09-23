@@ -55,13 +55,17 @@
 	--left: var(--button-sides);
 	--right: none;
 
-	--icon-size: 14px;
-	--icon-width: 14px;
+	--icon-size: var(--menu-item-icon-size, 14px);
+	--icon-width: var(--menu-item-icon-size, 14px);
 	--mask-size: var(--icon-size) !important;
 
 	display: flex;
 	align-items: center;
 	gap: 6px;
+
+	&:not(.chibi) {
+		font-size: var(--menu-item-font-size, var(--font-size)) !important;
+	}
 
 	&[aria-checked="true"],
 	&[aria-selected="true"],
