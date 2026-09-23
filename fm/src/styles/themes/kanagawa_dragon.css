@@ -1,0 +1,74 @@
+body,
+.theme-preview {
+	&[data-bleh--theme="kanagawa_dragon"] {
+		--b2: 0.351 0.0037 84.58;
+		/* black 5 */
+		--b3: 0.2938 0.0015 17.25;
+		/* black 4 */
+		--b4: 0.2925 0.0022 17.42;
+		/* black 3 */
+		--b5: 0.2264 0.0059 91.62;
+		/* black 2 */
+		--b6: 0.181 0.006 106.98;
+		/* black 1 */
+		--b8: 0.1556 0.0017 17.34;
+		/* black 0 */
+
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.6),
+			0 1px 2px 0 oklch(0.0956 0.0017 17.34 / 0.3);
+
+		--separator-base: oklch(var(--b2) / 0.53);
+
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.36),
+			0 1px 2px 0 oklch(0.0556 0.0017 17.34 / 0.3);
+		--separator-shadow: 0 1px 2px 0 oklch(0.0556 0.0017 17.34 / 0.15);
+
+		--card-border-base: oklch(var(--b2) / 0.6);
+		--card-border-base-highlight: oklch(var(--b2) / 0.78);
+
+		--menu-border: oklch(var(--b2) / 0.6);
+
+		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 60%));
+		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
+
+		--toolbar-bg: oklch(0.2064 0.0039 91.62 / 60%);
+
+		--input-shadow:
+			inset 0 0 0 1px oklch(var(--b3) / 90%),
+			inset 0 1px 2px 1px oklch(var(--b6) / 80%);
+	}
+}
+
+body,
+.alert,
+.event-status,
+.big-modal-alert,
+.events-list-item-date-icon,
+.async-content-error-message,
+.avatar-status-dot,
+.label,
+.nag-bar--alert,
+.badge,
+u,
+.new-badge,
+.colourful,
+.events-list-item-attendees,
+.attendance-btn,
+.gallery-image-preferred-container {
+
+	&[data-bleh--theme="kanagawa_dragon"],
+	body[data-bleh--theme="kanagawa_dragon"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
+		--c1: 0.9255 0.0391 99.09;
+		--c2: 0.8755 0.0391 99.09;
+		--c3: 0.537 0.02 96.31;
+
+		--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.46);
+		--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.72);
+
+		--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.53) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+
+		--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.53) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / 13%);
+	}
+}

@@ -1,0 +1,122 @@
+body,
+.theme-preview {
+	&[data-bleh--theme="oled"] {
+		/* any additional highlights */
+		--b2: 0.35 calc(var(--sat) * 0.08 * var(--sat-bg, 1)) var(--hue);
+		--b3: 0.25 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+
+		/* card border */
+		--b4: 0.16 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+
+		/* card */
+		--b5: 0.04 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
+
+		/* root */
+		--b6: 0 0 0;
+		--b8: 0.17 0 0;
+		--b7: 0 0 0;
+
+		--menu-border: oklch(var(--b2) / 0.3);
+
+		--input-shadow:
+			inset 0 0 0 1px oklch(var(--b3)),
+			inset 0 1px 2px 1px oklch(var(--b6) / 80%);
+		--focused-input-shadow:
+			inset 0 0 0 1px oklch(var(--h3) / 0.4),
+			var(--input-shadow);
+		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 42%);
+
+		--separator-shadow: 0 1px 2px 0 oklch(0.03 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.4);
+
+		--sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
+		--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 38%);
+		--toolbar-bg: oklch(0.04 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue) / 50%);
+		--toolbar-border: oklch(var(--b2) / 24%);
+		--subtle-border: 1px solid oklch(var(--b2) / 35%);
+
+		--normal-shadow: none;
+
+		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
+		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
+
+		--setting-hover: oklch(var(--b2) / 16%);
+		--setting-active: oklch(var(--b2) / 30%);
+
+		--setting-group: oklch(var(--b4) / 18%);
+
+		--textarea: oklch(var(--b4) / 0.25);
+		--textarea-hov: oklch(var(--b4) / 0.35);
+
+		--side-action-hov: oklch(var(--b4) / 0.8);
+		--side-action-atv: oklch(var(--b4) / 1);
+
+		--menu-item-hov: oklch(var(--b2) / 20%);
+		--menu-item-atv: oklch(var(--b2) / 40%);
+
+		--menu-bg: 0.16 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
+		--menu-opacity: 90%;
+
+		--tracklist-odd: oklch(var(--b2) / 10%);
+		--tracklist-hover: oklch(var(--b2) / 20%);
+
+		--modal-button-hov: oklch(var(--b2) / 40%);
+		--modal-button-atv: oklch(var(--b2) / 60%);
+
+		--button-outline: inset 0 0 0 1px oklch(0.27 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
+
+		--shout-tree: oklch(var(--b2) / 55%);
+
+		--view-buttons-hov: oklch(var(--b2) / 40%);
+		--view-buttons-atv: oklch(var(--b2) / 60%);
+
+		--chart-button-hov: oklch(var(--b2) / 40%);
+		--chart-button-atv: oklch(var(--b2) / 60%);
+
+		--inset-background: oklch(var(--b2) / 10%);
+
+		--card-border-base: oklch(var(--b3) / 0.4);
+		--card-border-base-highlight: oklch(var(--b2) / 0.55);
+	}
+}
+
+body,
+.alert,
+.event-status,
+.big-modal-alert,
+.events-list-item-date-icon,
+.async-content-error-message,
+.avatar-status-dot,
+.label,
+.nag-bar--alert,
+.badge,
+u,
+.new-badge,
+.colourful,
+.events-list-item-attendees,
+.attendance-btn,
+.gallery-image-preferred-container {
+
+	&[data-bleh--theme="oled"],
+	body[data-bleh--theme="oled"] &:not(.theme-preview) {
+		--c1: 0.98 0 var(--hue);
+		--c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+		--c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+
+		--l3: calc(var(--lit) * 0.75) calc(var(--sat) * 0.5) var(--hue);
+		--l4: calc(var(--lit) * 0.45) calc(var(--sat) * 0.6) var(--hue);
+
+		--f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
+		--k4: calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.44) var(--hue);
+		--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+		--g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+
+		--shout-vote-indicator: linear-gradient(90deg,
+				transparent 20%,
+				oklch(var(--h4) / 8%));
+
+		--grid-colour-shadow: var(--grid-colour-shadow-override,
+				0 10px 30px oklch(var(--h4) / 40%));
+
+		--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
+	}
+}

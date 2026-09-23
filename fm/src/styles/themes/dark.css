@@ -1,0 +1,284 @@
+body,
+.theme-preview {
+	/* any additional highlights */
+	--b2: 0.47 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+	--b3: 0.38 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+
+	/* card border */
+	--b4: 0.35 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
+
+	/* card */
+	--b5: 0.3 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
+
+	/* root */
+	--b6: 0.26 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+	--b8: 0.33 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+	--b7: 0 0 0;
+	--b9: var(--b6);
+
+	--card-border: inset 0 0 0 1px oklch(var(--b4) / 0.6);
+	--card-border-base: oklch(var(--b3) / 0.6);
+	--card-border-base-highlight: oklch(var(--b2) / 0.55);
+
+	--menu-border: oklch(var(--b3) / 0.6);
+
+	--separator: var(--separator-base);
+	--separator-base: oklch(var(--b3) / 0.8);
+
+	--textarea: oklch(var(--b6) / 20%);
+	--textarea-hov: oklch(var(--b6) / 40%);
+
+	--banner-overlay: transparent;
+	--banner-mix: none;
+
+	--normal-shadow: 0 0 transparent;
+
+	--tooltip: var(--b2);
+
+	--input-shadow:
+		inset 0 0 0 1px oklch(var(--b3) / 70%),
+		inset 0 1px 2px 1px oklch(var(--b6) / 80%);
+	--focused-input-shadow:
+		inset 0 0 0 1px oklch(var(--h3) / 0.4),
+		var(--input-shadow);
+	--group-shadow:
+		inset 0 0 0 1px oklch(var(--b2) / 0.36),
+		0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
+
+	--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.15);
+
+	--inset-background: oklch(var(--b6) / 23%);
+	--inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
+
+	--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
+	--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 20%);
+	--sidebar-shadow: 4px 0 5px 1px oklch(var(--b6) / 80%);
+
+	--toolbar-bg: oklch(var(--b6) / 60%);
+	--toolbar-border: oklch(var(--b4) / 75%);
+	--subtle-border: 1px solid oklch(var(--b4) / 55%);
+
+	--card-blur-bg: oklch(0.3 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 60%));
+	--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
+
+	--nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));
+	--header-filter-shadow: drop-shadow(0 1px 3px oklch(var(--b6) / 80%)) drop-shadow(0 3px 10px oklch(var(--b6) / 60%));
+
+	--menu-item-hov: oklch(var(--b4) / 40%);
+	--menu-item-atv: oklch(var(--b4) / 60%);
+
+	--setting-hover: oklch(var(--b4) / 20%);
+	--setting-active: oklch(var(--b4) / 30%);
+
+	--setting-group: oklch(var(--b4) / 10%);
+
+	--lastfm-logo-filter: saturate(0%) contrast(0%) brightness(200%);
+
+	--view-buttons: oklch(var(--b6) / 70%);
+	--view-buttons-shadow: var(--group-shadow);
+	--view-buttons-hov: oklch(var(--b4) / 40%);
+	--view-buttons-atv: oklch(var(--b4) / 60%);
+
+	--side-action-hov: oklch(var(--b4) / 40%);
+	--side-action-atv: oklch(var(--b4) / 60%);
+
+	--background-overlay: oklch(var(--b6) / 44%);
+	--background-mix-mode: darken;
+
+	--card-overlay-filter: none;
+	--card-overlay-opacity: 0.16;
+	--card-overlay-mix-mode: lighten;
+
+	--card-shadow: 0 8px 35px oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
+
+	--modal-bg: oklch(var(--b6) / 0.6);
+
+	--menu-bg: var(--b6);
+	--menu-opacity: 92%;
+
+	--tracklist-odd: oklch(var(--b4) / 15%);
+	--tracklist-hover: oklch(var(--b4) / 30%);
+
+	--modal-button-hov: oklch(var(--b4) / 40%);
+	--modal-button-atv: oklch(var(--b4) / 60%);
+
+	--button-outline: inset 0 0 0 1px oklch(var(--b2) / 40%);
+
+	--shout-tree: oklch(var(--b2) / 20%);
+	--shout-separator: oklch(var(--b2) / 30%);
+
+	--chart-button-hov: oklch(var(--b4) / 60%);
+	--chart-button-atv: oklch(var(--b4) / 80%);
+
+	--toolbar-tab: transparent;
+	--toolbar-tab-hover: oklch(var(--b2) / 20%);
+	--toolbar-tab-hover-colour: var(--toolbar-tab-colour);
+	--toolbar-tab-active: oklch(var(--b2) / 40%);
+	--toolbar-tab-colour: oklch(var(--c2));
+	--toolbar-tab-icon: oklch(var(--l2-c-theme-switch));
+	--toolbar-tab-hover-icon: var(--toolbar-tab-icon);
+
+	--navigation-item: transparent;
+	--navigation-item-hover: oklch(var(--b4) / 40%);
+	--navigation-item-hover-colour: var(--toolbar-tab-colour);
+	--navigation-item-active: oklch(var(--b4) / 60%);
+	--navigation-item-colour: oklch(var(--c2));
+}
+
+body,
+.alert,
+.event-status,
+.big-modal-alert,
+.events-list-item-date-icon,
+.async-content-error-message,
+.avatar-status-dot,
+.label,
+.nag-bar--alert,
+.badge,
+u,
+.new-badge,
+.colourful,
+.events-list-item-attendees,
+.attendance-btn,
+.gallery-image-preferred-container {
+	--c1: 2 0 var(--hue);
+	--c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+	--c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+	--ov-c1: var(--c1);
+
+	--l2: calc(var(--lit) * 0.83) calc(var(--sat) * 0.5) var(--hue);
+	--l3: calc(var(--lit) * 0.7) calc(var(--sat) * 0.6) var(--hue);
+	--l4: calc(var(--lit) * 0.5) calc(var(--sat) * 0.7) var(--hue);
+
+	--l2-c: calc(var(--lit) * 0.92) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+	--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
+	--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.49) calc(clamp(min(0), var(--sat), max(2)) * 0.46) var(--hue);
+
+	--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.46);
+	--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.72);
+
+	--h2: var(--l2-c);
+	--h3: var(--h3-lit) var(--h3-sat) var(--hue);
+	--h3-s: var(--hue), 50%, 70%;
+	--h3-sat: var(--l3-c-sat);
+	--h3-lit: calc(var(--lit) * 0.7);
+	--h4: var(--l4-c);
+
+	--f4: calc(var(--lit) * 0.42) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+	--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+	--k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.38) var(--hue);
+	--g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+
+	--s3: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
+	--s4: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+
+	--p3: var(--s4);
+
+	/* l2-c in dark modes, l4-c in light modes */
+	--l2-c-theme-switch: var(--l2-c);
+	--l3-c-theme-switch: var(--l3-c);
+	--h3-theme-switch: var(--h3);
+
+	--grid-colour-shadow: var(--grid-colour-shadow-override,
+			0 10px 20px oklch(var(--h4) / 25%));
+
+	--opposite-text: var(--b6);
+
+	--avatar-generic-background: linear-gradient(180deg,
+			oklch(var(--h3) / 20%) 0%,
+			oklch(var(--b6)) 100%);
+	--avatar-generic-background: oklch(var(--b4));
+
+	--primary-shadow:
+		inset 0 0 0 1px oklch(var(--l2-c) / 10%),
+		inset 0 1px 0 1px oklch(var(--l2-c) / 15%);
+	--bar-shadow: 0 0 transparent;
+
+	--shout-vote-indicator: linear-gradient(90deg,
+			transparent 20%,
+			oklch(var(--h4) / 5%));
+
+	--glow: oklch(var(--h3) / 40%);
+
+	--badge: oklch(var(--f4) / 30%);
+	--badge-hov: oklch(var(--f4) / 50%);
+
+	--g-red: oklch(8, 62%, 80%);
+	--g-orange: oklch(24, 86%, 80%);
+	--g-yellow: oklch(44, 100%, 80%);
+	--g-green: oklch(163, 100%, 80%);
+	--g-blue: oklch(199, 79%, 80%);
+	--g-indigo: oklch(254, 46%, 80%);
+
+	--taste-glow: drop-shadow(0 0 15px oklch(var(--h4)));
+
+	--menu-item-accent-hov: oklch(var(--h4) / 12%);
+	--menu-item-accent-atv: oklch(var(--h4) / 22%);
+
+	--summary-block-0: oklch(calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.76) var(--hue) / 20%);
+	--summary-block-1: oklch(calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue) / 35%);
+	--summary-block-2: oklch(calc(var(--lit) * 0.56) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue) / 50%);
+	--summary-block-3: oklch(calc(var(--lit) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue) / 60%);
+	--summary-block-4: oklch(calc(var(--lit) * 0.67) calc(clamp(min(0), var(--sat), max(2)) * 0.56) var(--hue) / 80%);
+	--summary-block-5: oklch(calc(var(--lit) * 0.76) calc(clamp(min(0), var(--sat), max(2)) * 0.53) var(--hue) / 90%);
+	--summary-block-6: oklch(calc(var(--lit) * 0.82) calc(clamp(min(0), var(--sat), max(2)) * 0.48) var(--hue));
+	--summary-block-7: oklch(calc(var(--lit) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.43) var(--hue));
+	--summary-block-8: oklch(calc(var(--lit) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.37) var(--hue));
+	--summary-block-9: oklch(calc(var(--lit) * 1.12) calc(clamp(min(0), var(--sat), max(2)) * 0.34) var(--hue));
+
+	--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
+
+	--graph-colour-0: oklch(75% 61% 30);
+	--graph-colour-1: oklch(80% 50% 45);
+	--graph-colour-2: oklch(100% 54% 60);
+	--graph-colour-3: oklch(80% 50% 135);
+	--graph-colour-4: oklch(85% 60% 150);
+	--graph-colour-5: oklch(80% 77% 180);
+	--graph-colour-6: oklch(94% 31% 210);
+	--graph-colour-7: oklch(70% 61% 260);
+	--graph-colour-8: oklch(80% 60% 290);
+	--graph-colour-9: oklch(80% 65% 310);
+	--graph-colour-10: oklch(80% 65% 360);
+
+	--white: 100% 0 0;
+
+	--primary-glow: 0 3px 12px oklch(var(--h4) / 32%);
+
+	--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 40%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
+	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
+
+	--side-action-bg: oklch(var(--k4) / 5%);
+	--side-action-sep: oklch(var(--b2) / 30%);
+	--side-action-sep-height: 1px;
+
+	--setting-name: oklch(var(--c2));
+	--setting-name-hover: var(--setting-name);
+	--setting-alt: oklch(var(--c3));
+	--setting-alt-hover: var(--setting-alt);
+
+	--toolbar-tab-selected: oklch(var(--h4) / 10%);
+	--toolbar-tab-selected-hover: oklch(var(--h4) / 20%);
+	--toolbar-tab-selected-active: oklch(var(--h4) / 30%);
+	--toolbar-tab-selected-colour: oklch(var(--l3-c));
+	--toolbar-tab-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+
+	--missing-avatar-colour: oklch(var(--c3));
+
+	--blend-item-hover: oklch(var(--l3-c));
+	--blend-item-hover-icon: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
+
+	--side-action-colour: oklch(var(--c2));
+	--side-action-icon: oklch(var(--l2-c-theme-switch));
+
+	--side-action-hover-colour: var(--side-action-colour);
+	--side-action-hover-icon: var(--side-action-icon);
+
+	--side-action-selected: var(--side-action);
+	--side-action-selected-hover: var(--side-action-selected);
+	--side-action-selected-active: var(--side-action-selected);
+
+	--side-action-selected-colour: oklch(var(--l3-c));
+	--side-action-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+}

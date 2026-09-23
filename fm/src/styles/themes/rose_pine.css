@@ -1,0 +1,53 @@
+body,
+.theme-preview {
+	&[data-bleh--theme="rose_pine"] {
+		--b2: 0.4299 0.0392 290.42;
+		/* highlight high */
+		--b3: 0.3717 0.0358 291.1;
+		/* highlight med */
+		--b4: 0.3008 0.0423 289.23;
+		/* overlay */
+		--b5: 0.2413 0.0322 289.14;
+		/* surface */
+		--b6: 0.2134 0.0255 291.13;
+		/* base */
+		--b8: 0.2512 0.0263 287.62;
+		/* highlight low */
+
+		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 60%));
+		--separator-base: oklch(var(--b3) / 0.55);
+
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.36),
+			0 1px 2px 0 oklch(0.0512 0.0263 287.62 / 0.3);
+		--separator-shadow: 0 1px 2px 0 oklch(0.0512 0.0263 287.62 / 0.15);
+
+		--setting-group: oklch(var(--b4) / 20%);
+		--toolbar-bg: oklch(0.2213 0.0322 289.14 / 60%);
+	}
+}
+
+body,
+.alert,
+.event-status,
+.big-modal-alert,
+.events-list-item-date-icon,
+.async-content-error-message,
+.avatar-status-dot,
+.label,
+.nag-bar--alert,
+.badge,
+u,
+.new-badge,
+.colourful,
+.events-list-item-attendees,
+.attendance-btn,
+.gallery-image-preferred-container {
+
+	&[data-bleh--theme="rose_pine"],
+	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
+		--c1: 0.9488 0.0299 289.97;
+		--c2: 0.848 0.0299 289.97;
+		--c3: 0.6539 0.0444 291.23;
+	}
+}

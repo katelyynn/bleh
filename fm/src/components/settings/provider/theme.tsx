@@ -320,7 +320,7 @@ function ThemePreview({
 	return (
 		<div class='bubble'>
 			<div
-				class={['inner', 'theme-preview']}
+				class={['inner', 'theme-preview', 'colourful']}
 				data-bleh--theme={id}
 				data-bleh--theme_type={type}
 			>

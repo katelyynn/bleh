@@ -1,0 +1,295 @@
+body,
+.theme-preview {
+	&[data-bleh--theme="yuzu"] {
+		/* any additional highlights */
+		--b2: 0.82 0 0;
+		--b3: 0.85 0 0;
+
+		/* card border */
+		--b4: 0.91 0 0;
+
+		/* card */
+		--b5: 1 0 0;
+
+		/* root */
+		--b6: 0.92 0 0;
+		--b8: 1 0 0;
+		--b7: 0 0 0;
+		--b9: 1 0 0;
+
+		--tooltip: 0.92 0 0;
+
+		--separator-base: oklch(1 0 0);
+
+		--card-border-base: oklch(0.8 0 0) !important;
+		--card-border-base-highlight: oklch(0.89 0 0);
+
+		--menu-border: oklch(0.8 0 0);
+
+		--normal-shadow:
+			inset 0 1px 0 0 oklch(0.6 0 0)
+			/* top */
+			,
+			inset 0 -1px 0 0 oklch(0.4 0 0)
+			/* bottom */
+			,
+			inset 1px 0 0 0 oklch(0.6 0 0)
+			/* left */
+			,
+			inset -1px 0 0 0 oklch(0.6 0 0)
+			/* right */
+			,
+			inset 0 2px 0 0 oklch(1 0 0)
+			/* top inner */
+			,
+			inset 0 -10px 8px 0 oklch(0.78 0 0 / 40%)
+			/* gradient */
+		;
+		--input-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 30%),
+			inset 0 1px 3px oklch(0 0 0 / 2%);
+		--focused-input-shadow:
+			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
+			var(--input-shadow);
+		--group-shadow:
+			inset 0 1px 0 0 oklch(0.9 0 0)
+			/* top */
+			,
+			inset 0 -1px 0 0 oklch(0.8 0 0)
+			/* bottom */
+			,
+			inset 1px 0 0 0 oklch(0.9 0 0)
+			/* left */
+			,
+			inset -1px 0 0 0 oklch(0.9 0 0)
+			/* right */
+			,
+			inset 0 2px 0 0 oklch(1 0 0)
+			/* top inner */
+			,
+			0 1px 3px oklch(0 0 0 / 5%);
+
+
+		--menu-shadow: 3px 3px 4px oklch(0 0 0 / 10%);
+
+		--separator-shadow: 0 -1px 0 0 oklch(0.9 0 0);
+
+		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
+		--sidebar-border: oklch(0.9 0 0);
+		--toolbar-bg: oklch(0.94 0 0);
+		--toolbar-border: oklch(0.9 0 0);
+		--subtle-border: 1px solid oklch(var(--b4) / 65%);
+		--sidebar-shadow: none;
+
+		--card-blur-bg: oklch(0.98 0 0);
+		--card-blur-bg-alt: oklch(0.94 0 0);
+
+		--menu-item-hov: oklch(var(--b4) / 60%);
+		--menu-item-atv: oklch(var(--b4) / 80%);
+
+		--nav-filter-shadow: none;
+		--header-filter-shadow: none;
+
+		--banner-overlay: oklch(var(--b5) / 40%);
+		--banner-mix: lighten;
+
+		--setting-group: oklch(var(--b6) / 5%);
+
+		--lastfm-logo-filter: none;
+
+		--textarea: oklch(var(--b6) / 10%);
+		--textarea-hov: oklch(var(--b6) / 30%);
+
+		--view-buttons: oklch(var(--b6) / 25%);
+		--view-buttons-hov: oklch(var(--b4) / 60%);
+		--view-buttons-atv: oklch(var(--b4) / 80%);
+
+		--background-overlay: oklch(var(--b5));
+		--background-mix-mode: overlay;
+
+		--card-overlay-filter: invert(0.4);
+		--card-overlay-opacity: 0.2;
+		--card-overlay-mix-mode: unset;
+
+		--header-disc-filter: brightness(1.2);
+
+		--card-shadow: 0 2px 10px oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.05);
+
+		--inset-background: oklch(var(--b6) / 3%);
+		--inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
+
+		--menu-bg: var(--b5);
+		--menu-opacity: 94%;
+
+		--menu-item-verts: 3px;
+		--menu-item-sides: 5px;
+		--menu-item-height: 24px;
+
+		--button-outline: inset 0 0 0 1px oklch(var(--b2) / 50%);
+
+		--shout-tree: oklch(var(--b2) / 30%);
+
+		--radius-xs: 3px;
+		--radius-m: 6px;
+
+		--button-verts: 4px;
+		--button-sides: 7px;
+		--button-radius: 5px;
+		--button-height: 24px;
+
+		--card-radius: 0;
+
+		--menu-item-radius: 2px;
+		--setting-group-padding: 8px;
+		--setting-inner-gap: 12px;
+		--setting-label-height: none;
+		--chart-cover-radius: 0;
+
+		--item-big-radius: 6px;
+
+		--vertical-menu-padding: 4px;
+		--horizontal-menu-padding: 2px;
+
+		--card-padding: 10px;
+		--card-gap: 12px;
+	}
+}
+
+body,
+.alert,
+.event-status,
+.big-modal-alert,
+.events-list-item-date-icon,
+.async-content-error-message,
+.avatar-status-dot,
+.label,
+.nag-bar--alert,
+.badge,
+u,
+.new-badge,
+.colourful,
+.events-list-item-attendees,
+.attendance-btn,
+.gallery-image-preferred-container {
+
+	&[data-bleh--theme="yuzu"],
+	body[data-bleh--theme="yuzu"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
+		--c1: 0 0 0;
+		--c2: 0.15 0 0;
+		--c3: 0.65 0 0;
+		--ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
+
+		--button-text-shadow: 0 1px 0 oklch(0.95 0 0);
+		--button-text-shadow-primary: 0 1px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.1) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue));
+
+		--l2: calc(var(--lit) * 0.63) calc(var(--sat) * 0.4) var(--hue);
+		--l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
+		--l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
+
+		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue);
+		--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
+		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.35) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+
+		--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.33);
+		--l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.51);
+
+		--h2: calc(clamp(min(0.7), var(--lit), max(1.1)) * 1.1) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+		--h3: var(--h3-lit) var(--h3-sat) var(--hue);
+		--h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.38);
+		--h3-lit: calc(clamp(min(0.85), var(--lit), max(1)) * 0.93);
+
+		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+		--f4: calc(clamp(min(1), var(--lit), max(1.2)) * 0.96) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue);
+		--k4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.88) calc(clamp(min(0), var(--sat), max(2)) * 0.15) var(--hue);
+		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
+
+		--h3-s: var(--hue), 50%, 70%;
+
+		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 1) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue);
+
+		/* l2-c in dark modes, l4-c in light modes */
+		--l2-c-theme-switch: var(--l3-c);
+		--l3-c-theme-switch: var(--l3-c);
+		--h3-theme-switch: var(--h4);
+
+		--badge: oklch(var(--f4) / 60%);
+		--badge-hov: oklch(var(--f4) / 80%);
+		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 2px 6px 0 oklch(calc(clamp(min(1), var(--lit), max(1.2)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue) / 60%) inset;
+
+		--grid-colour-shadow: none;
+
+		--opposite-text: var(--c1);
+
+		--shout-vote-indicator: linear-gradient(90deg,
+				transparent 20%,
+				oklch(var(--h4) / 15%));
+
+		--glow: oklch(var(--h3) / 60%);
+
+		--g-red: oklch(8, 42%, 50%);
+		--g-orange: oklch(24, 66%, 50%);
+		--g-yellow: oklch(44, 80%, 50%);
+		--g-green: oklch(163, 50%, 50%);
+		--g-blue: oklch(199, 69%, 50%);
+		--g-indigo: oklch(254, 26%, 50%);
+
+		--taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
+		--glass-inset: 0 0 5px 2px oklch(var(--h4) / 60%) inset;
+
+		--menu-item-accent-hov: oklch(var(--h4) / 15%);
+		--menu-item-accent-atv: oklch(var(--h4) / 25%);
+
+		--primary-glow: 0 0 transparent;
+
+		--summary-block-0: oklch(calc(var(--lit) * 0.99) calc(clamp(min(0), var(--sat), max(2)) * 0.07) var(--hue));
+		--summary-block-1: oklch(calc(var(--lit) * 0.99) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue));
+		--summary-block-2: oklch(calc(var(--lit) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.27) var(--hue));
+		--summary-block-3: oklch(calc(var(--lit) * 0.84) calc(clamp(min(0), var(--sat), max(2)) * 0.34) var(--hue));
+		--summary-block-4: oklch(calc(var(--lit) * 0.74) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue));
+		--summary-block-5: oklch(calc(var(--lit) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.49) var(--hue));
+		--summary-block-6: oklch(calc(var(--lit) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.54) var(--hue));
+		--summary-block-7: oklch(calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.57) var(--hue));
+		--summary-block-8: oklch(calc(var(--lit) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue));
+		--summary-block-9: oklch(calc(var(--lit) * 0.2) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue));
+
+		--card-gradient: oklch(var(--h2) / 6%);
+
+		--graph-colour-0: oklch(62% 51% 30);
+		--graph-colour-1: oklch(76% 47% 45);
+		--graph-colour-2: oklch(90% 51% 60);
+		--graph-colour-3: oklch(74% 56% 135);
+		--graph-colour-4: oklch(70% 50% 150);
+		--graph-colour-5: oklch(65% 62% 185);
+		--graph-colour-6: oklch(83% 30% 210);
+		--graph-colour-7: oklch(52% 55% 260);
+		--graph-colour-8: oklch(70% 60% 290);
+		--graph-colour-9: oklch(75% 65% 310);
+		--graph-colour-10: oklch(70% 60% 360);
+
+		--white: 84% 0 0;
+
+		--primary-shadow:
+			inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))
+			/* top */
+			,
+			inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.33) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))
+			/* bottom */
+			,
+			inset 1px 0 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))
+			/* left */
+			,
+			inset -1px 0 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))
+			/* right */
+			,
+			inset 0 2px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.2) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))
+			/* top inner */
+			,
+			inset 0 -10px 8px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.54) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / 30%)
+			/* gradient */
+		;
+		--bar-shadow: 0 0 transparent;
+
+		--side-action-bg: oklch(var(--k4) / 15%);
+	}
+}
