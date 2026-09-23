@@ -257,6 +257,43 @@
 			transform: scaleY(-1) !important;
 		}
 	}
+
+	&[data-theme="yuzu"] {
+		--button-sides: 6px !important;
+		--btn-right: calc(6px + var(--mask-size) + 6px) !important;
+
+		&:before {
+			--right: 4px !important;
+		}
+
+		font-size: 11px !important;
+		color: #fff !important;
+		text-shadow: 0 1px 1px oklch(0 0 0 / 60%) !important;
+		font-weight: 600 !important;
+
+		--bg: linear-gradient(180deg,
+			oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.03) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / var(--header-opacity)),
+			oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.76) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue) / var(--header-opacity))) !important;
+		--bg-hov: var(--bg) !important;
+		--bg-atv: var(--bg) !important;
+
+		box-shadow: 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
+		inset 0 0 0 1px oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue)) !important;
+
+		&:after {
+			content: '';
+			position: absolute;
+			display: block !important;
+			top: 1px !important;
+			left: unset !important;
+			right: calc(var(--mask-size) + 6px) !important;
+			bottom: 1px !important;
+			background: linear-gradient(180deg, transparent, oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))) !important;
+			width: 1px !important;
+			height: unset !important;
+			transform: unset !important;
+		}
+	}
 }
 
 .auth-avatar-notification-count-badge {

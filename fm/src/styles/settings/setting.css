@@ -337,6 +337,8 @@
 				--col: oklch(var(--b7)) !important;
 				--mask-colour: var(--col);
 
+				--button-height: 16px;
+
 				.bleh-icon {
 					transform: scale(0);
 					transform-origin: bottom left;

@@ -161,6 +161,13 @@ export function PageHeaderAvatar({
 
 	register_menu(elem, menu);
 
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
 	return elem;
 }
 

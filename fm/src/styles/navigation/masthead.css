@@ -253,6 +253,7 @@ last.fm changes as of 2024-05-20 */
 	display: flex;
 	gap: var(--button-list-gap);
 	z-index: 20;
+	position: relative;
 
 	@media (max-width: 980px) {
 		display: none;
@@ -267,6 +268,12 @@ last.fm changes as of 2024-05-20 */
 	position: relative;
 	--search-width: 200px;
 	flex: 1;
+
+	&[data-theme="yuzu"] {
+		position: absolute;
+		top: 44px;
+		right: 0;
+	}
 }
 
 .navlist-search-container {

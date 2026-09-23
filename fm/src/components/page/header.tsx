@@ -11,6 +11,7 @@ import { InfoTip } from '@/components/text/tip.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 import { PageHeaderDisc } from '@/components/music/header.tsx';
 import { Icon } from '@/components/shared/icon.tsx';
+import { useSettings } from '@/page.ts';
 
 interface PageHeaderProps {
 	icon?: string;
@@ -34,7 +35,7 @@ export function PageHeader({
 	const generic = !!avatar;
 	const label = tl(trans[type]);
 
-	return (
+	const elem = (
 		<section class={['page-header', `for-${type}`]}>
 			{avatar && (
 				<div class='page-header-avatar-list'>
@@ -76,6 +77,15 @@ export function PageHeader({
 			</div>
 		</section>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 interface PageHeaderTitleProps {

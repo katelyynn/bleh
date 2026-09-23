@@ -73,6 +73,11 @@
 			}
 		}
 	}
+
+	&[data-theme="yuzu"] {
+		margin: 0 !important;
+		padding: 0 var(--card-padding);
+	}
 }
 
 @keyframes new_page_header {
@@ -296,6 +301,16 @@
 
 	&:active {
 		scale: 0.96;
+	}
+
+	&[data-theme="yuzu"] {
+		--page-header-avatar-radius: 0;
+		--page-header-avatar-size: 140px;
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px #ccc;
+
+		&>.page-header-avatar-glow {
+			display: none;
+		}
 	}
 }
 

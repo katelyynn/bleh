@@ -303,16 +303,6 @@ export function append_nav() {
 		</>,
 	);
 
-	function update() {
-		const theme = useSettings.get('theme') as string;
-
-		masthead?.setAttribute('data-theme', theme);
-	}
-
-	update();
-
-	useSettings.on('theme', update);
-
 	page.state.home_link = home_link_logo.current;
 
 	update_branding_type();
@@ -382,6 +372,19 @@ export function append_nav() {
 	const auth_link = masthead.querySelector(
 		'.masthead-nav-wrap > .site-auth .auth-link',
 	);
+
+	function update() {
+		const theme = useSettings.get('theme') as string;
+
+		masthead?.setAttribute('data-theme', theme);
+		auth_link?.setAttribute('data-theme', theme);
+		search_wrap.current?.setAttribute('data-theme', theme);
+	}
+
+	update();
+
+	useSettings.on('theme', update);
+
 	if (!auth_link) {
 		render(
 			links,
