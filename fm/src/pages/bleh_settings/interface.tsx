@@ -331,7 +331,7 @@ function BarPreview({
 	const val = createRef();
 
 	const elem = (
-		<div class='chartlist-count-bar'>
+		<div class={['chartlist-count-bar', 'colourful']}>
 			<a class='chartlist-count-bar-link'>
 				<span
 					class='chartlist-count-bar-slug'
@@ -340,7 +340,10 @@ function BarPreview({
 					data-stat-value={value}
 					style={{ width: `${(value / max) * 100}%` }}
 				/>
-				<span class='chartlist-count-bar-value' ref={val}>
+				<span
+					class={['chartlist-count-bar-value', 'colourful']}
+					ref={val}
+				>
 					{value.toLocaleString(lang)}
 				</span>
 			</a>

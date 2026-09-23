@@ -111869,7 +111869,10 @@ var bleh = (() => {
     const slug = createRef();
     const val = createRef();
     const elem = /* @__PURE__ */ jsx("div", {
-      class: "chartlist-count-bar",
+      class: [
+        "chartlist-count-bar",
+        "colourful"
+      ],
       children: /* @__PURE__ */ jsx("a", {
         class: "chartlist-count-bar-link",
         children: [
@@ -111883,7 +111886,10 @@ var bleh = (() => {
             }
           }),
           /* @__PURE__ */ jsx("span", {
-            class: "chartlist-count-bar-value",
+            class: [
+              "chartlist-count-bar-value",
+              "colourful"
+            ],
             ref: val,
             children: value.toLocaleString(lang)
           })
@@ -126586,7 +126592,7 @@ var bleh = (() => {
         date: "2026-09-20"
       }
     },
-    built_on: "2026-09-23T22:18:14.037Z"
+    built_on: "2026-09-23T22:21:43.736Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
