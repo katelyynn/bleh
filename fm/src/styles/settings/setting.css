@@ -948,6 +948,10 @@
 	&.menu-checkbox-wrap {
 		margin-right: 4px;
 	}
+
+	&[data-theme="yuzu"] {
+		align-items: start;
+	}
 }
 
 .check-box {
@@ -1012,12 +1016,14 @@
 	&[data-theme="yuzu"] {
 		width: 14px;
 		height: 14px;
-		--icon-size: 15px;
+		--icon-size: 20px;
+
+		--icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNpcmNsZS1jaGVjay1iaWcgcHJldmlldy1pY29uIj48cGF0aCBkPSJtOSAxMSAzIDNMMjIgNCIvPjwvc3ZnPg==');
 
 		&>.bleh-icon {
 			position: relative;
-			top: -2px;
-			right: -2px;
+			top: 0;
+			right: 0;
 		}
 	}
 }
@@ -1066,6 +1072,7 @@
 	color: var(--col-alt);
 	--icon-size: 16px;
 	margin-right: calc(-1 * (var(--card-gap) - 10px));
+	min-height: var(--setting-label-height);
 	max-height: 22px;
 }
 

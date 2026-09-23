@@ -6,8 +6,7 @@
 	align-items: end;
 	inset: 0;
 	pointer-events: none;
-	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap))
-		var(--card-gap);
+	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap)) var(--card-gap);
 	z-index: 99999999999;
 
 	transition-property: right, opacity;
@@ -28,16 +27,14 @@
 		overflow: hidden;
 
 		background: oklch(var(--b5) / var(--solarium-opacity,
-			var(--menu-opacity)));
+					var(--menu-opacity)));
 		box-shadow: var(--card-shadow);
 		padding: 12px var(--button-sides);
 		border: 1px solid var(--card-border-base);
 		border-radius: var(--button-radius);
-		--mask-colour: color-mix(
-            in oklch,
-            oklch(var(--c2)),
-            oklch(var(--c3)) 50%
-        );
+		--mask-colour: color-mix(in oklch,
+				oklch(var(--c2)),
+				oklch(var(--c3)) 50%);
 
 		backdrop-filter: var(--solarium);
 		-webkit-backdrop-filter: var(--solarium);
@@ -45,10 +42,8 @@
 		display: flex;
 		gap: var(--card-gap);
 
-		background-image: var(
-			--cards-overlay-image-subtle,
-			unset
-		) !important;
+		background-image: var(--cards-overlay-image-subtle,
+				unset) !important;
 		background-repeat: repeat-x !important;
 		background-position: 0 1px !important;
 
@@ -97,9 +92,7 @@
 		}
 
 		&.with-icon {
-			padding-left: calc(
-				var(--button-sides-icon) + var(--icon-size) + 8px
-			);
+			padding-left: calc(var(--button-sides-icon) + var(--icon-size, var(--default-icon-size)) + 8px);
 			--top: 12px;
 			--margin-top: 0;
 		}
@@ -111,6 +104,7 @@
 			font-weight: var(--font-weight-medium);
 			cursor: default;
 		}
+
 		.notification-body {
 			cursor: default;
 			max-width: 400px;
@@ -140,11 +134,9 @@
 		}
 
 		&.colourful {
-			--mask-colour: color-mix(
-                in oklch,
-                oklch(var(--l3-c)),
-                oklch(var(--l4-c)) 30%
-            );
+			--mask-colour: color-mix(in oklch,
+					oklch(var(--l3-c)),
+					oklch(var(--l4-c)) 30%);
 		}
 
 		.notification-progress {
@@ -169,6 +161,7 @@
 		}
 	}
 }
+
 .masthead-popup {
 	top: calc(52px + var(--card-gap));
 	right: var(--card-gap);
@@ -191,8 +184,8 @@
 			color: oklch(var(--c1));
 		}
 
-		p + p,
-		.masthead-popup-text + .masthead-popup-text {
+		p+p,
+		.masthead-popup-text+.masthead-popup-text {
 			margin-top: var(--card-gap);
 		}
 

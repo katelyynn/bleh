@@ -10,11 +10,13 @@ last.fm changes as of 2024-05-20 */
 	right: 0;
 	top: 0 !important;
 	background: transparent !important;
-	height: calc(20px + var(--button-height)) !important; /* macOS */
+	height: calc(20px + var(--button-height)) !important;
+	/* macOS */
 	display: flex !important;
 	justify-content: center;
 	align-items: center;
-	z-index: 9990; /* place below windows to avoid duplicates */
+	z-index: 9990;
+	/* place below windows to avoid duplicates */
 	contain: layout size;
 
 	/* v2 */
@@ -52,6 +54,38 @@ last.fm changes as of 2024-05-20 */
 		transition-property: translate, opacity;
 		transition-duration: 0.3s;
 		transition-timing-function: var(--trans-function-ani);
+	}
+
+	&[data-theme="yuzu"] {
+		position: relative;
+		inset: unset !important;
+		height: 44px !important;
+		background: linear-gradient(180deg,
+				oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / var(--header-opacity)),
+				oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.83) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue) / var(--header-opacity))) !important;
+
+		box-shadow:
+			inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
+			inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue));
+
+		margin-bottom: calc(26px + 10px) !important;
+
+		--header-opacity: 0.8;
+
+		&:before {
+			top: 44px;
+			height: 26px;
+			background: linear-gradient(180deg,
+					oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.54) var(--hue) / var(--header-opacity)),
+					oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.64) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / var(--header-opacity))) !important;
+
+			box-shadow:
+				inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.95) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
+				inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue)),
+				inset 0 -2px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue));
+
+			opacity: unset !important;
+		}
 	}
 
 	&:after {
@@ -115,10 +149,7 @@ last.fm changes as of 2024-05-20 */
 		border-right: 1px solid var(--card-border-base) !important;
 
 		&:before {
-			background: oklch(
-				var(--b6) /
-				var(--solarium-opacity, 85%)
-			) !important;
+			background: oklch(var(--b6) / var(--solarium-opacity, 85%)) !important;
 			backdrop-filter: var(--solarium) !important;
 			-webkit-backdrop-filter: var(--solarium) !important;
 
@@ -171,9 +202,7 @@ last.fm changes as of 2024-05-20 */
 
 					transition-property: opacity !important;
 					transition-duration: var(--trans) !important;
-					transition-timing-function: var(
-						--trans-function
-					) !important;
+					transition-timing-function: var(--trans-function) !important;
 				}
 
 				&[aria-checked="true"] {
@@ -193,7 +222,7 @@ last.fm changes as of 2024-05-20 */
 					margin-right: calc(-5px - 7px);
 				}
 
-				& > .avatar {
+				&>.avatar {
 					position: absolute;
 
 					--size: 18px;
@@ -215,6 +244,7 @@ last.fm changes as of 2024-05-20 */
 		}
 	}
 }
+
 .masthead-inner-wrap {
 	width: var(--cards-width) !important;
 	max-width: unset !important;

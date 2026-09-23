@@ -161,6 +161,10 @@
 		font-weight: var(--font-weight-medium);
 		letter-spacing: unset;
 		text-align: left;
+
+		&[data-theme="yuzu"] {
+			font-size: 13px;
+		}
 	}
 
 	.bleh-modal-subtitle {
@@ -179,6 +183,17 @@
 		background: var(--nier-selected);
 		color: oklch(var(--b5));
 		--c1: var(--b5);
+	}
+
+	&[data-theme="yuzu"] {
+		border-bottom: 1px solid #ccc;
+		padding-right: calc(var(--card-padding) + var(--modal-close-size) + 10px);
+		margin-left: calc(-1 * var(--card-padding));
+		margin-right: calc(-1 * var(--card-padding));
+		padding-top: 6px;
+		padding-bottom: 6px;
+		padding-left: var(--card-padding);
+		margin-top: calc(-1 * var(--card-padding));
 	}
 }
 

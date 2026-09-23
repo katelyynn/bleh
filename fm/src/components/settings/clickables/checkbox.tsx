@@ -28,11 +28,17 @@ export function Checkbox({
 	const elem = createRef();
 
 	function update() {
+		const theme = useSettings.get('theme') as string;
+
 		checkbox.current.checked = checked;
 		elem.current.setAttribute('aria-checked', checked);
 		elem.current.setAttribute(
 			'data-theme',
-			useSettings.get('theme') as string,
+			theme,
+		);
+		wrap.setAttribute(
+			'data-theme',
+			theme,
 		);
 	}
 

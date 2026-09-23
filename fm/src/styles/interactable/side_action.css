@@ -18,6 +18,7 @@
 	background-color: var(--side-action-bg) !important;
 	border-radius: var(--item-med-radius) !important;
 	padding: var(--side-action-padding) !important;
+	--button-sides: var(--side-action-side);
 	overflow: hidden;
 
 	position: relative;
@@ -95,7 +96,7 @@
 	border-radius: unset !important;
 	overflow: unset;
 	text-overflow: ellipsis;
-	--padding: 7px var(--side-action-side) 7px calc(var(--side-action-side) + var(--icon-size) + 6px);
+	--padding: var(--side-action-vert) var(--side-action-side) var(--side-action-vert) calc(var(--side-action-side) + var(--icon-size) + 6px);
 	margin: unset !important;
 	width: unset !important;
 	position: relative;
@@ -208,6 +209,7 @@
 	padding-right: var(--button-sides);
 
 	gap: 10px !important;
+	--icon-size: 14px !important;
 
 	&:after {
 		content: '';
@@ -234,7 +236,6 @@
 	width: var(--side-action-height) !important;
 	flex: unset !important;
 	--padding: 6px var(--button-sides) !important;
-	--icon-size: 14px !important;
 
 	&:before {
 		--left: 50% !important;

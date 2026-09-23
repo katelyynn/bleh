@@ -73,7 +73,7 @@ export const seasonal_events = [
 		id: 'halloween',
 		start: {
 			month: 9,
-			day: 28,
+			day: 24,
 		},
 		end: {
 			month: 11,

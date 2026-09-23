@@ -46,16 +46,16 @@ body,
 			/* gradient */
 		;
 		--input-shadow:
-			inset 0 1px 0 0 oklch(0.5 0 0)
+			inset 0 1px 0 0 oklch(0.64 0 0)
 			/* top */
 			,
-			inset 0 -1px 0 0 oklch(0.8 0 0)
+			inset 0 -1px 0 0 oklch(0.82 0 0)
 			/* bottom */
 			,
-			inset 1px 0 0 0 oklch(0.8 0 0)
+			inset 1px 0 0 0 oklch(0.82 0 0)
 			/* left */
 			,
-			inset -1px 0 0 0 oklch(0.8 0 0)
+			inset -1px 0 0 0 oklch(0.82 0 0)
 			/* right */
 			,
 			inset 0 -2px 0 0 oklch(1 0 0)
@@ -175,11 +175,24 @@ body,
 		--side-action-bg: transparent;
 		--side-action-padding: 0;
 		--side-action-margin: 0 var(--card-padding);
-		--side-action-sep: transparent;
-		--side-action-sep-height: 0;
-		--side-action-gap: 6px;
+		--side-action-sep: #ccc;
+		--side-action-sep-height: 1px;
+		--side-action-gap: 4px;
+
+		--side-action-padding: 0;
+		--side-action-height: 20px;
+		--side-action-vert: 0px;
+		--side-action-side: 0px;
 
 		--interact-shadow: 0 0 transparent;
+
+		--default-icon-size: 14px;
+		--icon-gap: 2px;
+
+		--tab-size: 36px;
+
+		--main-content-padding: none;
+		--banner-height: 0 !important;
 	}
 }
 
@@ -241,9 +254,9 @@ u,
 		--l3-c-theme-switch: var(--l3-c);
 		--h3-theme-switch: var(--h4);
 
-		--badge: oklch(var(--f4) / 60%);
-		--badge-hov: oklch(var(--f4) / 80%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 2px 6px 0 oklch(calc(clamp(min(1), var(--lit), max(1.2)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue) / 60%) inset;
+		--badge: oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue));
+		--badge-hov: var(--badge);
+		--badge-shadow: none;
 
 		--grid-colour-shadow: none;
 

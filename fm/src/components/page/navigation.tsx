@@ -303,6 +303,16 @@ export function append_nav() {
 		</>,
 	);
 
+	function update() {
+		const theme = useSettings.get('theme') as string;
+
+		masthead?.setAttribute('data-theme', theme);
+	}
+
+	update();
+
+	useSettings.on('theme', update);
+
 	page.state.home_link = home_link_logo.current;
 
 	update_branding_type();

@@ -129,11 +129,11 @@
 	mask-position: 0 0 !important;
 	left: var(--left, var(--button-sides-icon)) !important;
 	margin-top: var(--margin-top,
-			calc(-1 * (var(--mask-size, var(--icon-size)) / 2))) !important;
+			calc(-1 * (var(--mask-size, var(--icon-size, var(--default-icon-size, 18px))) / 2))) !important;
 	margin-left: var(--margin-left, unset) !important;
 	margin-right: var(--margin-right, unset) !important;
-	width: var(--mask-size, var(--icon-size)) !important;
-	height: var(--mask-size, var(--icon-size)) !important;
+	width: var(--mask-size, var(--icon-size, var(--default-icon-size, 18px))) !important;
+	height: var(--mask-size, var(--icon-size, var(--default-icon-size, 18px))) !important;
 	box-shadow: unset !important;
 	position: absolute;
 	right: var(--right, auto) !important;
@@ -145,8 +145,8 @@
 	border-radius: unset;
 	mask-image: var(--mask, var(--icon-16-placeholder));
 	-webkit-mask-image: var(--mask, var(--icon-16-placeholder));
-	mask-size: var(--mask-size, var(--icon-size));
-	-webkit-mask-size: var(--mask-size, var(--icon-size));
+	mask-size: var(--mask-size, var(--icon-size, var(--default-icon-size, 18px)));
+	-webkit-mask-size: var(--mask-size, var(--icon-size, var(--default-icon-size, 18px)));
 	transition-property: var(--transition-property,
 			rotate,
 			opacity,
@@ -177,14 +177,14 @@
 	background: var(--icon-colour, var(--mask-colour, currentColor));
 	mask-image: var(--icon, var(--icon-16-placeholder));
 	-webkit-mask-image: var(--icon, var(--icon-16-placeholder));
-	mask-size: var(--icon-size, 18px);
-	-webkit-mask-size: var(--icon-size, 18px);
+	mask-size: var(--icon-size, var(--default-icon-size, 18px));
+	-webkit-mask-size: var(--icon-size, var(--default-icon-size, 18px));
 	mask-position: center;
 	-webkit-mask-position: center;
 	mask-repeat: no-repeat;
 	-webkit-mask-repeat: no-repeat;
-	width: var(--icon-width, var(--icon-size, 18px));
-	height: var(--icon-width, var(--icon-size, 18px));
+	width: var(--icon-width, var(--icon-size, var(--default-icon-size, 18px)));
+	height: var(--icon-height, var(--icon-size, var(--default-icon-size, 18px)));
 	contain: strict;
 
 	font-size: 0 !important;
@@ -202,7 +202,7 @@
 		background: var(--icon, var(--icon-16-placeholder));
 		mask-image: unset;
 		-webkit-mask-image: unset;
-		background-size: var(--icon-size, 18px);
+		background-size: var(--icon-size, var(--default-icon-size, 18px));
 		background-position: center;
 		background-repeat: no-repeat;
 	}
@@ -242,7 +242,7 @@
 span.bleh-icon {
 	display: inline-block;
 	height: 100%;
-	min-height: var(--icon-size);
+	min-height: var(--icon-height, var(--icon-size, var(--default-icon-size, 18px)));
 }
 
 .bleh-icon-spinner {

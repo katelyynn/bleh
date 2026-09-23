@@ -1034,6 +1034,13 @@ export function register_banner(url: string | null, origin = null) {
 		}
 	}
 
+	function update() {
+		background.setAttribute('data-theme', useSettings.get('theme'));
+	}
+
+	update();
+	useSettings.on('theme', update);
+
 	banner_props();
 
 	function banner_props() {

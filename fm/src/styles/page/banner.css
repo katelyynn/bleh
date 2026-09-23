@@ -66,6 +66,21 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
+
+	&[data-theme="yuzu"] {
+		--w: 1100px;
+		height: 70px;
+
+		&:before {
+			display: none;
+		}
+
+		&>.background-inner {
+			&:before {
+				display: none;
+			}
+		}
+	}
 }
 
 .background-inner {
