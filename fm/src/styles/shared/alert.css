@@ -210,10 +210,10 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	gap: 6px;
+	gap: 4px;
 
-	--icon-size: 16px;
-	--icon-colour: oklch(var(--c3));
+	--icon-size: 14px;
+	--icon-colour: oklch(var(--l3-c) / 50%);
 }
 
 .cta-actions {

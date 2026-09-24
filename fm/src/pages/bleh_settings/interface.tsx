@@ -28,6 +28,7 @@ import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { count_bar } from '@/components/track/bar.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
+import { ShoutAction } from '@/components/shout/action.tsx';
 
 export function interface_page() {
 	if (!page.state.music_links) {
@@ -393,9 +394,10 @@ function ShoutPreview({
 	children,
 }: ShoutPreviewProps) {
 	const use_md = useSettings.get('shout_markdown');
+	const shout = createRef();
 
 	return (
-		<div class='shout icon-mask' data-kate-processed='true'>
+		<div class='shout icon-mask' data-kate-processed='true' ref={shout}>
 			<div class='shout-top'>
 				<div class='shout-basics'>
 					<h3 class='shout-user'>
@@ -405,9 +407,11 @@ function ShoutPreview({
 					</h3>
 				</div>
 			</div>
-			<span class='avatar shout-user-avatar'>
-				<img src={avatar(image, 'avatar170s')} loading='lazy' />
-			</span>
+			<ShoutAction name={name} wrap={shout.current} interact={false}>
+				<span class='avatar shout-user-avatar'>
+					<img src={avatar(image, 'avatar170s')} loading='lazy' />
+				</span>
+			</ShoutAction>
 			<div class='shout-body'>
 				{use_md ? markdown(String(children)) : children}
 			</div>

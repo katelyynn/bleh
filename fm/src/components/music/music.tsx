@@ -36,9 +36,13 @@ import { music_summary } from './summary';
 import { Icon, icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
-import { beta_indicator } from '../shared/indicator';
+import { beta_indicator, BetaIndicator } from '../shared/indicator';
 import { useSettings } from '@/page.ts';
-import { context_menu_tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	context_menu_tooltip,
+	hover_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import {
 	music_links_edit,
@@ -48,13 +52,14 @@ import { SubText } from '@/components/text/sub.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
+import { SideAction, SideActions } from '@/components/button/side.tsx';
+import { Cta } from '@/components/cta/cta.tsx';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);
 };
 
 export async function show_your_scrobbles() {
-	const katsune = ff('katsune');
 	show_numbers_on_side(page.type);
 
 	// commonly nsbm pages are stripped of all social interaction and only have three tabs,
@@ -66,24 +71,26 @@ export async function show_your_scrobbles() {
 
 	//const page_is_blocked = !page.structure.main.querySelector('#shoutbox');
 
-	let col_main = page.structure.container.querySelector(
+	let col_main = page.structure.container!.querySelector(
 		'.top-overview-panel',
-	);
-	if (!col_main) col_main = document.body.querySelector('.col-main');
+	) as HTMLDivElement;
+	if (!col_main) {
+		col_main = document.body.querySelector('.col-main') as HTMLDivElement;
+	}
 
 	if (page.type == 'track') {
 		const new_panel = document.createElement('div');
 		new_panel.classList.add('track-info-panel');
 		new_panel.innerHTML = col_main.innerHTML;
 
-		page.structure.main.insertBefore(
+		page.structure.main!.insertBefore(
 			new_panel,
-			page.structure.main.firstElementChild,
+			page.structure.main!.firstElementChild,
 		);
 
 		col_main.style.setProperty('display', 'none');
 		// make last-child
-		page.structure.row.appendChild(col_main);
+		page.structure.row!.appendChild(col_main);
 
 		console.info(col_main, new_panel);
 
@@ -93,7 +100,9 @@ export async function show_your_scrobbles() {
 
 	const page_is_blocked = page.restricted;
 
-	const summary = page.structure.main.querySelector('.music-summary');
+	const summary = page.structure.main!.querySelector(
+		'.music-summary',
+	) as HTMLDivElement;
 	const summary_info = summary?.querySelector('.summary-content');
 
 	summary_info?.appendChild(col_main);
@@ -249,18 +258,18 @@ export async function show_your_scrobbles() {
             `);
 		}
 
-		page.structure.container.insertBefore(tabs, page.structure.row);
+		page.structure.container!.insertBefore(tabs, page.structure.row!);
 		page.structure.tabs = tabs;
 	}
 
-	const main = summary?.querySelector('.summary-aside');
+	const main = summary.querySelector('.summary-aside')!;
 
 	// create container
 
-	const no_auth_callout = page.structure.main.querySelector(
+	const no_auth_callout = page.structure.main!.querySelector(
 		'.catalogue-callout',
 	);
-	if (no_auth_callout) no_auth_callout.remove();
+	no_auth_callout?.remove();
 
 	// page url
 	let page_url = window.location.pathname;
@@ -284,9 +293,9 @@ export async function show_your_scrobbles() {
 	);
 	let other_count = undefined;
 	if (other_container) {
-		const avatars = other_container.querySelectorAll(
+		/*const avatars = other_container.querySelectorAll(
 			'.personal-stats-listener-avatar img',
-		);
+		);*/
 		const count = other_container.querySelector(
 			'.header-metadata-display a',
 		);
@@ -312,7 +321,7 @@ export async function show_your_scrobbles() {
 
 	const is_artist = page.type == 'artist';
 
-	main?.insertBefore(
+	main.insertBefore(
 		<ListenBoard
 			url={scrobble_page}
 			others={other_count}
@@ -346,74 +355,61 @@ export async function show_your_scrobbles() {
 	);
 
 	// interactables on the right
-	let interact_container = document.createElement('section');
-	interact_container.classList.add('side-actions');
+	const side_actions = <SideActions />;
 
-	let text = document.body
-		.querySelector('.header-new-title')
-		.textContent.replaceAll(' ', '+')
-		.replaceAll('&', '%26');
+	const header_actions = document.body.querySelector(
+		'.header-new-actions',
+	) as HTMLDivElement;
 
-	let artist = document.body.querySelector('.header-new-crumb');
-	if (artist != undefined) {
-		text = `${text}+${
-			artist.textContent.replaceAll(' ', '+').replaceAll('&', '%26')
-		}`;
-	}
+	Array.from(header_actions.children).forEach((form) => {
+		const item = form.querySelector('a, button');
+		if (!item) return;
 
-	// temp probably
-	let header_actions = document.body.querySelector('.header-new-actions');
+		item.classList.add('btn', 'side-action', 'icon-mask');
+		const classes = item.classList;
 
-	interact_container.innerHTML = header_actions.innerHTML;
+		if (classes[0] == 'header-new-more-button') return;
 
-	let buttons = interact_container.querySelectorAll('button');
-	buttons.forEach((button) => {
-		button.classList.add('btn', 'side-action', 'icon-mask');
-
-		if (button.classList[0] == 'header-new-more-button') {
-			interact_container.removeChild(button.parentElement);
-		}
-
-		if (button.classList[1] == 'header-new-love-button') {
-			button.setAttribute('data-type', 'love');
-			button.textContent = tl(trans.love_track);
-		} else if (button.classList[1] == 'header-new-bookmark-button') {
-			button.setAttribute('data-type', 'bookmark');
-			button.textContent = tl(trans.bookmark_item, {
+		if (classes[1] == 'header-new-love-button') {
+			item.setAttribute('data-type', 'love');
+			item.textContent = tl(trans.love_track) as string;
+		} else if (classes[1] == 'header-new-bookmark-button') {
+			item.setAttribute('data-type', 'bookmark');
+			item.textContent = tl(trans.bookmark_item, {
 				v: tl(trans[`${page.type}_lower`]),
-			}, true);
+			}) as string;
 		}
-	});
-	let links = interact_container.querySelectorAll('a');
-	links.forEach((button) => {
-		button.classList.add('btn', 'side-action', 'icon-mask');
+
+		side_actions.appendChild(form);
 	});
 
 	// obsession
-	let obsession_form = header_actions.querySelector(
+	const obsession_form = header_actions!.querySelector(
 		'form[action$="obsessions"]',
 	);
 	if (obsession_form) {
-		let obsession_btn = obsession_form.querySelector('button');
+		const obsession_btn = obsession_form.querySelector(
+			'button',
+		) as HTMLButtonElement;
 		obsession_btn.classList = 'btn side-action icon-mask';
 		obsession_btn.setAttribute('data-type', 'obsession');
-		obsession_btn.textContent = tl(trans.set_obsession);
+		obsession_btn.textContent = tl(trans.set_obsession) as string;
 
-		interact_container.appendChild(obsession_form);
+		side_actions.appendChild(obsession_form);
 	}
 
 	// move it above the scrobble button
-	const play_btn = interact_container.querySelector('.header-new-playlink');
-	if (play_btn) interact_container.appendChild(play_btn);
+	const play_btn = side_actions.querySelector('.header-new-playlink');
+	if (play_btn) side_actions.appendChild(play_btn);
 
 	if (ff('submit_scrobble')) {
 		const can_api = localStorage.getItem('bleh_auth') &&
 			localStorage.getItem('bleh_auth_valid') === 'true';
 
-		const source_album = page.structure.main.querySelector(
+		const source_album = page.structure.main!.querySelector(
 			'.source-album-name',
 		);
-		const source_album_artist = page.structure.main.querySelector(
+		const source_album_artist = page.structure.main!.querySelector(
 			'.source-album-artist',
 		);
 
@@ -446,26 +442,25 @@ export async function show_your_scrobbles() {
 			};
 		}
 
-		const scrobble_btn = html.node`
-            <button class="btn side-action icon-mask" data-type="add" onclick=${() =>
-			submit_scrobble(props)}>
-                ${
-			tl(
-				trans.scrobble_value,
-				{ v: tl(trans[`${page.type}_lower`]) },
-				true,
-			)
-		}
-            </button>
-        `;
+		const scrobble_btn = (
+			<SideAction
+				type='add'
+				onClick={() => submit_scrobble(props)}
+			>
+				{tl(trans.scrobble_value, {
+					v: tl(trans[`${page.type}_lower`]),
+				})}
+			</SideAction>
+		);
 
 		if (!can_api) {
-			tippy(scrobble_btn, {
-				content: tl(trans.requires_api_in_settings),
-			});
+			hover_tooltip(
+				scrobble_btn,
+				<Tooltip>{tl(trans.requires_api_in_settings)}</Tooltip>,
+			);
 		}
 
-		interact_container.appendChild(scrobble_btn);
+		side_actions.appendChild(scrobble_btn);
 	}
 
 	if (
@@ -474,13 +469,12 @@ export async function show_your_scrobbles() {
 		settings.oracle_beta &&
 		page.type == 'track'
 	) {
-		interact_container.appendChild(html.node`
-            <button class="btn side-action icon-mask" data-type="credits" onclick=${() =>
-			oracle_credits()}>
-                ${tl(trans.view_credits)}
-                ${beta_indicator()}
-            </button>
-        `);
+		side_actions.appendChild(
+			<SideAction type='credits' onClick={oracle_credits}>
+				{tl(trans.view_credits)}
+				<BetaIndicator />
+			</SideAction>,
+		);
 	}
 
 	// search similar!
@@ -498,30 +492,30 @@ export async function show_your_scrobbles() {
 
 	if (auth.name) {
 		if (!page.mobile) {
-			page.structure.side.insertBefore(
-				interact_container,
-				page.structure.side.firstElementChild,
+			page.structure.side!.insertBefore(
+				side_actions,
+				page.structure.side!.firstElementChild,
 			);
 		} else {
-			page.structure.main.insertBefore(
-				interact_container,
-				page.structure.main.firstElementChild,
+			page.structure.main!.insertBefore(
+				side_actions,
+				page.structure.main!.firstElementChild,
 			);
 		}
 	}
 
 	// new playlist
-	const new_playlist = page.structure.side.querySelector(':scope > form');
+	const new_playlist = page.structure.side!.querySelector(':scope > form');
 	if (new_playlist) {
-		let header = new_playlist.querySelector('h3');
-		header.remove();
+		const head = new_playlist.querySelector('h3');
+		head?.remove();
 
-		let playlist_button = new_playlist.querySelector('button');
+		const playlist_button = new_playlist.querySelector('button')!;
 		playlist_button.classList = 'btn side-action icon-mask';
 		playlist_button.setAttribute('data-type', 'playlist');
-		playlist_button.textContent = tl(trans.create_playlist);
+		playlist_button.textContent = tl(trans.create_playlist) as string;
 
-		interact_container.appendChild(new_playlist);
+		side_actions.appendChild(new_playlist);
 	}
 
 	const metadata = col_main.querySelector('.metadata-column');
@@ -562,11 +556,7 @@ export async function show_your_scrobbles() {
 
 	if (page_is_blocked) {
 		page.structure.main!.insertBefore(
-			html.node`
-            <section class="cta blocked-cta">
-                <strong>${tl(trans.blocked_page)}</strong>
-            </section>
-        `,
+			<Cta className='blocked-cta' label={tl(trans.blocked_page)} />,
 			page.structure.main!.firstElementChild,
 		);
 
@@ -598,10 +588,10 @@ export async function show_your_scrobbles() {
 	const link_types: Record<string, Element | null> = {};
 
 	if (page.type == 'track') {
-		play_on = page.structure.side.querySelector(
+		play_on = page.structure.side!.querySelector(
 			'.play-this-track-playlinks',
-		);
-		play_on.parentElement.remove();
+		) as HTMLDivElement;
+		play_on.parentElement!.remove();
 
 		play_links = play_on.querySelectorAll('li');
 
@@ -853,12 +843,13 @@ export async function show_your_scrobbles() {
 				/>
 			);
 
-			let externals = page.structure.side.querySelector(
+			const externals = page.structure.side!.querySelector(
 				'.resource-external-links',
-			);
+			) as HTMLUListElement;
 			if (externals) {
-				page.structure.side.removeChild(externals.parentElement);
-				let externals_links = externals.querySelectorAll(
+				externals.parentElement!.remove();
+
+				const externals_links = externals.querySelectorAll(
 					'.resource-external-link',
 				);
 				externals_links.forEach((link) => {
@@ -929,18 +920,20 @@ export async function show_your_scrobbles() {
             </div>
         `);
 
-		const add = tags.querySelector('.tags-add');
+		const add = tags.querySelector('.tags-add') as HTMLAnchorElement;
 		if (add) {
-			tippy(add, {
-				content: tl(trans.add),
-			});
+			hover_tooltip(
+				add,
+				<Tooltip>{tl(trans.add)}</Tooltip>,
+			);
 		}
 
-		const all = tags.querySelector('.tags-view-all');
+		const all = tags.querySelector('.tags-view-all') as HTMLAnchorElement;
 		if (all) {
-			tippy(all, {
-				content: tl(trans.view_all),
-			});
+			hover_tooltip(
+				all,
+				<Tooltip>{tl(trans.view_all)}</Tooltip>,
+			);
 		}
 	}
 
@@ -974,270 +967,33 @@ export async function show_your_scrobbles() {
 	// lotus
 	if (!useSettings.get('corrections')) return;
 
-	page.structure.side.appendChild(html.node`
-        <section class="lotus cta colourful">
-            <label class="cta-label">
-                ${icon({ name: icons.lotus })}
-                <strong>${tl(trans.lotus_cta[page.corrected])}</strong>
-            </label>
-            ${
-		ff('refreshed_lotus')
-			? html.node`
-                <button class="see-more" onclick=${() =>
-				create_correction(
-					page.type,
-					page.name,
-					page.sister,
-					page.corrected,
-				)}>${tl(trans.suggest_correction)}</button>
-            `
-			: html.node`
-                <a class="see-more" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">${
-				tl(trans.suggest_correction)
-			}</a>
-            `
-	}
-        </section>
-    `);
-}
-
-function create_listen_item(
-	parent,
-	{ name, listens, link, avi, count = 0, button = false, katsune = false },
-	header_type,
-) {
-	if (!name) return;
-
-	log(
-		`creating listen item of ${name}, ${count}, ${listens}`,
-		'artist',
-		'info',
-		{ avi: avi, link: link },
+	page.structure.side!.appendChild(
+		<Cta label={tl(trans.lotus_cta[page.corrected])} icon={icons.lotus}>
+			{ff('refreshed_lotus')
+				? (
+					<SeeMore
+						onClick={() => {
+							create_correction(
+								page.type,
+								page.name,
+								page.sister,
+								page.corrected,
+							);
+						}}
+					>
+						{tl(trans.suggest_correction)}
+					</SeeMore>
+				)
+				: (
+					<SeeMore
+						href='https://github.com/katelyynn/lotus/issues/new/choose'
+						external
+					>
+						{tl(trans.suggest_correction)}
+					</SeeMore>
+				)}
+		</Cta>,
 	);
-
-	let listen_item;
-
-	if (button) listen_item = html.node`<button />`;
-	else listen_item = html.node`<a />`;
-
-	listen_item.classList.add('btn', 'listen-item');
-	listen_item.setAttribute(
-		'href',
-		`${root}user/${name}/library/music/${redirect()}${link}`,
-	);
-	listen_item.setAttribute('data-listens', listens);
-
-	let p;
-
-	if (listens > -1) {
-		const cache = JSON.parse(
-			localStorage.getItem(keys.profile_cache) || '{}',
-		);
-		const entry = cache[name];
-		const valid = is_sponsor(name);
-
-		// your listens
-		let listen_name;
-
-		render(
-			listen_item,
-			html`
-				<img class="view-item-avatar" src=${avi} alt=${name} />
-				<div class="listen-item-info">
-					<h3 class="listen-item-name" ref=${(el) =>
-						listen_name = el} />
-					<p class="colourful listen-item-text icon-mask" ref=${(
-						el,
-					) => (p = el)}>
-				        ${tl(trans.count_plays, {
-					c: listens.toLocaleString(lang),
-				})}
-				    </p>
-				</div>
-			`,
-		);
-
-		if (entry.username && valid) {
-			listen_name.classList.add('username-combo');
-			render(
-				listen_name,
-				html`
-					<span class="username-custom">${entry.username}</span>
-					<span class="username-original">
-					    <span class="at">@</span>${name}
-					</span>
-				`,
-			);
-		} else {
-			render(
-				listen_name,
-				html`
-					<span class="at">@</span>${name}
-				`,
-			);
-		}
-
-		let menu = tippy(listen_item, {
-			theme: 'context-menu',
-			content: html.node`
-                <a class="dropdown-menu-clickable-item" href="${root}user/${name}" data-menu-item="view_profile">
-                    ${tl(trans.profile)}
-                </a>
-            `,
-			placement: 'right-start',
-			trigger: 'manual',
-			interactive: true,
-			interactiveBorder: 10,
-			offset: [0, 0],
-			appendTo: document.body,
-
-			onShow(instance) {
-				instance.popper.addEventListener('click', (event) => {
-					instance.hide();
-				});
-			},
-		});
-
-		register_menu(listen_item, menu);
-	} else if (listens > -2) {
-		const cache = JSON.parse(
-			localStorage.getItem(keys.profile_cache) || '{}',
-		);
-		const entry = cache[name];
-		const valid = is_sponsor(name);
-
-		// loading listens
-		let listen_name;
-
-		render(
-			listen_item,
-			html`
-				<img class="view-item-avatar" src=${avi} alt=${name} />
-				<div class="listen-badge star colourful">
-					<div class="bleh-icon" />
-				</div>
-				<div class="listen-item-info">
-					<h3 class="listen-item-name" ref=${(el) =>
-						listen_name = el} />
-					<p class="colourful listen-item-text icon-mask" ref=${(
-						el,
-					) => (p = el)}>
-				        ${tl(trans.count_plays, { c: ' ' })}
-				    </p>
-				</div>
-			`,
-		);
-
-		if (entry.username && valid) {
-			listen_name.classList.add('username-combo');
-			render(
-				listen_name,
-				html`
-					<span class="username-custom">${entry.username}</span>
-					<span class="username-original">
-					    <span class="at">@</span>${name}
-					</span>
-				`,
-			);
-		} else {
-			render(
-				listen_name,
-				html`
-					<span class="at">@</span>${name}
-				`,
-			);
-		}
-
-		let menu = tippy(listen_item, {
-			theme: 'context-menu',
-			content: html.node`
-                <a class="dropdown-menu-clickable-item" href="${root}user/${name}" data-menu-item="view_profile">
-                    ${tl(trans.profile)}
-                </a>
-                <div class="sep"></div>
-                <button class="dropdown-menu-clickable-item" onclick=${() =>
-				open_starred_friend_window()} data-menu-item="settings">
-                    ${tl(trans.settings)}
-                </button>
-            `,
-			placement: 'right-start',
-			trigger: 'manual',
-			interactive: true,
-			interactiveBorder: 10,
-			offset: [0, 0],
-			appendTo: document.body,
-
-			onShow(instance) {
-				instance.popper.addEventListener('click', (event) => {
-					instance.hide();
-				});
-			},
-		});
-
-		register_menu(listen_item, menu);
-	} else if (listens == -3) {
-		listen_item.classList.add('listen-item-other');
-
-		listen_item.removeAttribute('href');
-		listen_item.setAttribute('onclick', `_other_listener('${link}')`);
-
-		tippy(listen_item, {
-			content: tl(trans.view_others_library),
-		});
-	} else {
-		// other listeners by clicking this link (artist)
-		render(
-			listen_item,
-			html`
-				${avi[0]
-					? html.node`<img class="view-item-avatar" src=${
-						avi[0].getAttribute('src')
-					} alt="">`
-					: ''}
-				${avi[1]
-					? html.node`<img class="view-item-avatar" src=${
-						avi[1].getAttribute('src')
-					} alt="">`
-					: ''}
-				${avi[2]
-					? html.node`<img class="view-item-avatar" src=${
-						avi[2].getAttribute('src')
-					} alt="">`
-					: ''}
-				<div class="listen-item-info">
-					<h3 class="listen-item-name">${tl(trans.following)}</h3>
-					<p class="colourful listen-item-text icon-mask" ref=${(
-						el,
-					) => (p = el)}>
-				        ${tl(trans.others_count).replace('{c}', count)}
-				    </p>
-				</div>
-			`,
-		);
-		listen_item.setAttribute(
-			'href',
-			`${window.location.pathname}/+listeners/you-know`,
-		);
-	}
-
-	// colourful counts
-	if (settings.colourful_counts && listens > -1 && header_type == 'artist') {
-		let parsed_scrobble_as_rank = parse_scrobbles_as_rank(listens);
-
-		listen_item.setAttribute(
-			'data-bleh--scrobble-milestone',
-			parsed_scrobble_as_rank.milestone,
-		);
-		p.style.setProperty('--hue-over', parsed_scrobble_as_rank.hue);
-		p.style.setProperty('--sat-over', parsed_scrobble_as_rank.sat);
-		p.style.setProperty('--lit-over', parsed_scrobble_as_rank.lit);
-	}
-
-	if (katsune) listen_item.classList.add('icon');
-
-	parent.appendChild(listen_item);
-
-	return listen_item;
 }
 
 function show_numbers_on_side(header_type) {

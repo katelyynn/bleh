@@ -50,7 +50,7 @@ import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement } from 'jsx-dom';
-import { icons } from '@/components/shared/icon.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { clean_streaming_titles } from '@/build/music.ts';
@@ -221,12 +221,15 @@ export function bleh_artists() {
 				'.section-playlink',
 			) as HTMLAnchorElement;
 			if (play) {
-				play.classList.add('blend-v2-btn', 'radio', 'left-icon');
+				play.classList.add('blend-v2-btn', 'left-icon');
 				play.classList.remove(
 					'section-playlink',
 					'hover-section-control',
 				);
-				play.setAttribute('data-type', 'play');
+				play.insertBefore(
+					<Icon name={icons.play} />,
+					play.firstChild,
+				);
 			}
 
 			top.replaceWith(

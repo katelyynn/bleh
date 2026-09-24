@@ -229,7 +229,7 @@
 	position: relative;
 	background: oklch(var(--b6) / 20%);
 	box-shadow: var(--group-shadow);
-	border-radius: var(--radius-m);
+	border-radius: var(--radius-s);
 	overflow: hidden;
 
 	display: flex;
@@ -244,7 +244,7 @@
 	}
 
 	&[data-expanded="false"] {
-		max-height: calc(((52px + 1px) * 3 - 1px + 24px));
+		max-height: calc(((48px + 1px) * 3 - 1px + 24px));
 
 		&:before {
 			opacity: 1;
@@ -260,7 +260,7 @@
 
 	transition-property: opacity,
 	max-height;
-	transition-duration: var(--trans);
+	transition-duration: 1s;
 	transition-timing-function: var(--trans-function);
 
 	&:before {
@@ -271,7 +271,7 @@
 		right: 1px;
 		height: 30px;
 		display: block;
-		border-radius: var(--radius-m);
+		border-radius: var(--radius-s);
 		pointer-events: none;
 
 		background: linear-gradient(180deg, transparent, oklch(var(--b5) / 50%));
@@ -280,7 +280,7 @@
 		opacity: 0;
 
 		transition-property: opacity;
-		transition-duration: var(--trans);
+		transition-duration: 1s;
 		transition-timing-function: var(--trans-function);
 	}
 
@@ -298,7 +298,7 @@
 		transition: none;
 		background: unset;
 		border: 1px solid oklch(var(--c3) / 30%);
-		border-radius: var(--radius-m);
+		border-radius: var(--radius-s);
 		border-bottom: unset;
 		border-top-right-radius: unset;
 		border-bottom-right-radius: unset;
@@ -342,7 +342,7 @@
 	position: absolute;
 	inset: 0 0 calc(18px + 10px);
 	box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 40%), var(--group-shadow);
-	border-radius: var(--radius-m);
+	border-radius: var(--radius-s);
 
 	display: flex;
 	flex-direction: column;
@@ -375,7 +375,7 @@
 	border: unset;
 	background: oklch(var(--b2) / 50%);
 	padding: 8px 4px;
-	border-radius: var(--radius-m);
+	border-radius: var(--radius-s);
 
 	width: 50%;
 	text-align: center;
@@ -403,10 +403,10 @@
 	gap: 10px;
 	position: relative;
 	overflow: hidden;
-	min-height: 52px;
+	min-height: 48px;
 
 	background: oklch(var(--k4) / 15%);
-	padding: 8px 10px;
+	padding: 6px 10px;
 
 	--mask-colour: oklch(var(--c2));
 

@@ -208,6 +208,7 @@ interface page {
 		};
 		indicator?: HTMLElement;
 		logs?: HTMLElement;
+		tabs?: HTMLElement;
 	};
 	requested: Record<string, string | null>;
 	header: Record<string, ReactNode>;

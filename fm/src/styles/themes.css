@@ -87,7 +87,7 @@ body {
 	--menu-item-height: 28px;
 
 	--side-action-padding: 2px 0;
-	--side-action-height: 36px;
+	--side-action-height: 32px;
 	--side-action-vert: 7px;
 	--side-action-side: 10px;
 	--side-action-gap: 1px;
@@ -494,7 +494,7 @@ body {
 	--menu-item-radius: 8px;
 
 	--radius-xs: 4px;
-	--radius-s: 7px;
+	--radius-s: 6px;
 	--radius-m: 10px;
 	--radius-l: 13px;
 	--radius-xl: 20px;
