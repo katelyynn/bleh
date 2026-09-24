@@ -7,11 +7,10 @@
 import { html, render } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { auth, page, root } from '@/build/page';
-import { clean_number, romanise, sanitise, sanitise_text } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans';
+import { auth, page } from '@/build/page';
+import { clean_number, romanise, sanitise_text } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
 import { ff } from '@/components/settings/sku';
-import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import {
 	correct_artist,
 	correct_generic_artist,
@@ -20,44 +19,23 @@ import {
 	name_includes,
 	smart_title,
 } from '@/components/music/lotus';
-import { register_menu } from '@/components/menu';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { submit_scrobble } from '@/components/music/scrobble';
-import tippy from 'tippy.js';
-import {
-	load_profile_cache_externally,
-	open_starred_friend_window,
-} from '@/pages/profile/profile';
 import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
-import { Icon, icon, icons } from '../shared/icon';
-import { keys } from '../settings/storage';
-import { is_sponsor } from '../sponsor';
-import { beta_indicator, BetaIndicator } from '../shared/indicator';
+import { icons } from '../shared/icon';
+import { BetaIndicator } from '../shared/indicator';
 import { useSettings } from '@/page.ts';
-import {
-	context_menu_tooltip,
-	hover_tooltip,
-	Tooltip,
-} from '@/components/shared/tooltips.tsx';
-import { MenuContents } from '@/components/menu/menu.tsx';
-import {
-	music_links_edit,
-	SocialLink,
-} from '@/components/text/social_link.tsx';
-import { SubText } from '@/components/text/sub.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
-import { createRef, ReactNode } from 'jsx-dom';
+import { ReactNode } from 'jsx-dom';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { SideAction, SideActions } from '@/components/button/side.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
-
-unsafeWindow._other_listener = function (id) {
-	other_listener(id);
-};
+import { create_music_links } from '@/components/music/link_types.tsx';
 
 export async function show_your_scrobbles() {
 	show_numbers_on_side(page.type);
@@ -272,9 +250,9 @@ export async function show_your_scrobbles() {
 	no_auth_callout?.remove();
 
 	// page url
-	let page_url = window.location.pathname;
-	let page_url_split = page_url.split('/');
-	let page_url_length = page_url_split.length - 1;
+	const page_url = window.location.pathname;
+	const page_url_split = page_url.split('/');
+	const page_url_length = page_url_split.length - 1;
 
 	// artist
 	let scrobble_page = page_url_split[page_url_length];
@@ -404,7 +382,7 @@ export async function show_your_scrobbles() {
 
 	if (ff('submit_scrobble')) {
 		const can_api = localStorage.getItem('bleh_auth') &&
-			localStorage.getItem('bleh_auth_valid') === 'true';
+				localStorage.getItem('bleh_auth_valid') === 'true' || false;
 
 		const source_album = page.structure.main!.querySelector(
 			'.source-album-name',
@@ -476,19 +454,6 @@ export async function show_your_scrobbles() {
 			</SideAction>,
 		);
 	}
-
-	// search similar!
-	/*let search_btn = document.createElement('a');
-    search_btn.classList.add('btn', 'side-action', 'search-similar-btn');
-    search_btn.textContent = trans_legacy.en.music.search_variations.name;
-    search_btn.href = `${root}search/${page.type}s?q=${text}`;
-    search_btn.target = '_blank';
-
-    tippy(search_btn, {
-        content: trans_legacy.en.music.search_variations.tooltip
-    });
-
-    interact_container.appendChild(search_btn);*/
 
 	if (auth.name) {
 		if (!page.mobile) {
@@ -563,351 +528,7 @@ export async function show_your_scrobbles() {
 		return;
 	}
 
-	let play_on;
-	let play_links;
-
-	const link_container = createRef();
-	const link_group = (
-		<div class='metadata-row'>
-			<div class='metadata-group'>
-				<SubText className='music-small-header'>
-					{tl(trans.find_on)}
-					<SeeMore
-						className='wiki-lower'
-						icon={icons.edit}
-						onClick={music_links_edit}
-					>
-						{(tl(trans.edit_links) as string).toLowerCase()}
-					</SeeMore>
-				</SubText>
-				<div class='music-links' ref={link_container} />
-			</div>
-		</div>
-	);
-
-	const link_types: Record<string, Element | null> = {};
-
-	if (page.type == 'track') {
-		play_on = page.structure.side!.querySelector(
-			'.play-this-track-playlinks',
-		) as HTMLDivElement;
-		play_on.parentElement!.remove();
-
-		play_links = play_on.querySelectorAll('li');
-
-		play_links.forEach((item) => {
-			const link = item.querySelector(
-				'.play-this-track-playlink:not(.visible-xs)',
-			) as HTMLAnchorElement;
-			if (!link) return;
-
-			link.classList.remove('play-this-track-playlink');
-			link.classList.add(
-				'btn',
-				'music-link',
-				'social-link',
-				'colourful',
-				'icon',
-			);
-
-			const replace = item.querySelector(
-				'.replace-playlink',
-			) as HTMLAnchorElement;
-
-			if (link.classList.contains('play-this-track-playlink--youtube')) {
-				link.textContent = 'YouTube';
-				link.appendChild(<Icon name={icons.external} />);
-
-				link_types.youtube = link;
-			} else if (
-				link.classList.contains('play-this-track-playlink--spotify')
-			) {
-				link.textContent = 'Spotify';
-				link.appendChild(<Icon name={icons.external} />);
-
-				link_types.spotify = link;
-			} else if (
-				link.classList.contains('play-this-track-playlink--itunes')
-			) {
-				link.textContent = 'Apple';
-				link.appendChild(<Icon name={icons.external} />);
-
-				link_types.itunes = link;
-			}
-
-			if (replace) {
-				replace.classList.add('dropdown-menu-clickable-item');
-				item.removeChild(replace);
-
-				context_menu_tooltip(
-					link,
-					<MenuContents>
-						{replace}
-					</MenuContents>,
-				);
-			}
-		});
-
-		link_types.genius = (
-			<SocialLink
-				href={`https://genius.com/search?q=${sanitise(page.sister)}+${
-					sanitise(page.name)
-				}`}
-			/>
-		);
-		link_types.tidal = (
-			<SocialLink
-				href={`https://listen.tidal.com/search?q=${
-					sanitise(page.sister, ' ')
-				}%20${sanitise(page.name, ' ')}`}
-			/>
-		);
-		link_types.qobuz = (
-			<SocialLink
-				href={`https://www.qobuz.com/gb-en/search/albums/${
-					sanitise(page.name, ' ')
-				}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}`}
-			/>
-		);
-		link_types.deezer = (
-			<SocialLink
-				href={`https://www.deezer.com/search/${
-					sanitise(page.sister, ' ')
-				}%20${sanitise(page.name, ' ')}`}
-			/>
-		);
-		link_types.record_club = (
-			<SocialLink
-				href={`https://record.club/search?query=${
-					sanitise(page.sister, ' ')
-				}%20${sanitise(page.name, ' ')}&facet=releases`}
-			/>
-		);
-	} else {
-		if (page.type == 'album') {
-			link_types.genius = (
-				<SocialLink
-					href={`https://genius.com/search?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
-				/>
-			);
-			link_types.tidal = (
-				<SocialLink
-					href={`https://listen.tidal.com/search?q=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
-				/>
-			);
-			link_types.qobuz = (
-				<SocialLink
-					href={`https://www.qobuz.com/gb-en/search/tracks/${
-						sanitise(page.name, ' ')
-					}?ssf[s]=main_catalog&ssf[f][an]=${
-						sanitise(page.sister, ' ')
-					}`}
-				/>
-			);
-			link_types.deezer = (
-				<SocialLink
-					href={`https://www.deezer.com/search/${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
-				/>
-			);
-
-			link_types.spotify = (
-				<SocialLink
-					href={`https://open.spotify.com/search/${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
-				/>
-			);
-			link_types.itunes = (
-				<SocialLink
-					href={`https://music.apple.com/gb/search?term=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
-				/>
-			);
-			link_types.youtube = (
-				<SocialLink
-					href={`https://music.youtube.com/search?q=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
-				/>
-			);
-			link_types.discogs = (
-				<SocialLink
-					href={`https://www.discogs.com/search?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
-				/>
-			);
-			link_types.aoty = (
-				<SocialLink
-					href={`https://www.albumoftheyear.org/search/?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
-				/>
-			);
-			link_types.rym = (
-				<SocialLink
-					href={`https://rateyourmusic.com/search?searchterm=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
-				/>
-			);
-			link_types.record_club = (
-				<SocialLink
-					href={`https://record.club/search?query=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}&facet=releases`}
-				/>
-			);
-		} else {
-			link_types.genius = (
-				<SocialLink
-					href={`https://genius.com/search?q=${sanitise(page.name)}`}
-				/>
-			);
-			link_types.tidal = (
-				<SocialLink
-					href={`https://listen.tidal.com/search?q=${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-			link_types.qobuz = (
-				<SocialLink
-					href={`https://www.qobuz.com/gb-en/search/artists/${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-			link_types.deezer = (
-				<SocialLink
-					href={`https://www.deezer.com/search/${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-
-			link_types.spotify = (
-				<SocialLink
-					href={`https://open.spotify.com/search/${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-			link_types.itunes = (
-				<SocialLink
-					href={`https://music.apple.com/gb/search?term=${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-			link_types.youtube = (
-				<SocialLink
-					href={`https://music.youtube.com/search?q=${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-			link_types.discogs = (
-				<SocialLink
-					href={`https://www.discogs.com/search?q=${
-						sanitise(page.name)
-					}`}
-				/>
-			);
-			link_types.aoty = (
-				<SocialLink
-					href={`https://www.albumoftheyear.org/search/?q=${
-						sanitise(page.name)
-					}`}
-				/>
-			);
-			link_types.rym = (
-				<SocialLink
-					href={`https://rateyourmusic.com/search?searchterm=${
-						sanitise(page.name, ' ')
-					}`}
-				/>
-			);
-			link_types.record_club = (
-				<SocialLink
-					href={`https://record.club/search?query=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}&facet=artists&entities=`}
-				/>
-			);
-
-			const externals = page.structure.side!.querySelector(
-				'.resource-external-links',
-			) as HTMLUListElement;
-			if (externals) {
-				externals.parentElement!.remove();
-
-				const externals_links = externals.querySelectorAll(
-					'.resource-external-link',
-				);
-				externals_links.forEach((link) => {
-					link.classList.add(
-						'btn',
-						'music-link',
-						'colourful',
-						'icon',
-					);
-
-					let type = link.classList[1];
-
-					if (type == 'resource-external-link--homepage') {
-						link.textContent = tl(trans.website) as string;
-						link.appendChild(<Icon name={icons.external} />);
-
-						link_types.website = link;
-					} else if (type == 'resource-external-link--twitter') {
-						link.textContent = 'Twitter';
-						link.appendChild(<Icon name={icons.external} />);
-
-						link_types.twitter = link;
-					} else if (type == 'resource-external-link--facebook') {
-						link.textContent = 'Facebook';
-						link.appendChild(<Icon name={icons.external} />);
-
-						link_types.facebook = link;
-					} else if (type == 'resource-external-link--instagram') {
-						link.appendChild(<Icon name={icons.external} />);
-
-						link_types.instagram = link;
-					} else if (type == 'resource-external-link--soundcloud') {
-						link.appendChild(<Icon name={icons.external} />);
-
-						link_types.soundcloud = link;
-					}
-				});
-			}
-		}
-	}
-
-	function update_links() {
-		const music_links = useSettings.get('music_links') as string[];
-
-		link_container.current.replaceChildren(
-			<>
-				{music_links.map((link) => {
-					if (link_types[link]) return link_types[link];
-				})}
-			</>,
-		);
-	}
-
-	update_links();
-
-	useSettings.on('music_links', update_links);
-
-	col_main.appendChild(link_group);
+	const link_group = create_music_links(col_main);
 
 	const tags = col_main.querySelector('.catalogue-tags');
 	if (tags) {
@@ -1358,6 +979,10 @@ export function prepare_music() {
 			name: 'Instagram',
 			icon: '',
 			host: 'instagram.com',
+		},
+		search: {
+			name: tl(trans.search),
+			icon: icons.search,
 		},
 	};
 

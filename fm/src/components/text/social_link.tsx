@@ -13,11 +13,13 @@ import { SettingList } from '@/components/settings/provider/list.tsx';
 import { tl, trans } from '@/build/trans.ts';
 
 interface SocialLinkProps {
+	className?: string;
 	href: string;
 	children?: ReactNode;
 }
 
 export function SocialLink({
+	className,
 	href,
 	children,
 }: SocialLinkProps) {
@@ -33,6 +35,12 @@ export function SocialLink({
 		label = link_strings[host];
 	}
 
+	const host_unknown = (!Object.hasOwn(
+		link_strings,
+		link.host,
+	) || icons_not_supported.includes(link.host)) &&
+		className != 'search-similar';
+
 	return (
 		<a
 			class={[
@@ -41,16 +49,12 @@ export function SocialLink({
 				'social-link',
 				'colourful',
 				'icon',
+				className,
 			]}
 			href={href}
 			target='_blank'
 			data-host={link.host}
-			data-host-unknown={String(
-				!Object.hasOwn(
-					link_strings,
-					link.host,
-				) || icons_not_supported.includes(link.host),
-			)}
+			data-host-unknown={String(host_unknown)}
 			onClick={(e) => {
 				const { trusted, dangerous } = can_trust_link(href);
 				if (trusted) return;

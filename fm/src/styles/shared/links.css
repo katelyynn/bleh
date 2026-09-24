@@ -291,3 +291,7 @@
 [data-host="maps.google.com"] {
 	--mask: var(--icon-16-location);
 }
+
+.search-similar {
+	--mask: var(--icon-16-search);
+}

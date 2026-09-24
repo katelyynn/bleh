@@ -36,9 +36,6 @@ export function open_profile_shortcut_window() {
 	modal.querySelector('#text-profile_shortcut').focus();
 }
 
-unsafeWindow._other_listener = function (id) {
-	other_listener(id);
-};
 export function other_listener(id) {
 	let input;
 	let submit;

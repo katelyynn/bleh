@@ -18,6 +18,16 @@ import { setting } from '../settings/settings';
 import { settings } from '@/build/config';
 import { DateTime } from 'luxon';
 
+interface submit_scrobble {
+	pre_track?: string;
+	pre_album?: string;
+	pre_artist?: string;
+	pre_album_artist?: string;
+	pre_timestamp?: number;
+	func?: () => void;
+	can_api?: boolean;
+}
+
 export function submit_scrobble({
 	pre_track = '',
 	pre_album = '',
@@ -26,10 +36,10 @@ export function submit_scrobble({
 	pre_timestamp = 0,
 	func,
 	can_api,
-} = {}) {
-	if (!can_api) {
+}: submit_scrobble) {
+	if (can_api == undefined) {
 		can_api = localStorage.getItem('bleh_auth') &&
-			localStorage.getItem('bleh_auth_valid') === 'true';
+				localStorage.getItem('bleh_auth_valid') === 'true' || false;
 	}
 
 	if (!can_api) {
