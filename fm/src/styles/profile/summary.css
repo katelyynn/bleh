@@ -22,6 +22,11 @@
 	}
 
 	overflow: hidden;
+
+	&[data-theme="yuzu"] {
+		--w: 22px;
+		--g: 2px;
+	}
 }
 
 .summary-title {
@@ -163,6 +168,15 @@
 		cursor: pointer;
 	}
 
+	&[data-theme="yuzu"] {
+		border-radius: 4px;
+		box-shadow: var(--primary-shadow);
+
+		&:before {
+			box-shadow: 0 0 2px oklch(var(--l3-c));
+		}
+	}
+
 	@media (min-width: 981px) and (max-width: 1250px) {
 
 		&:first-child,
@@ -210,7 +224,7 @@
 
 	&.empty {
 		background-color: oklch(var(--b6) / 50%);
-		box-shadow: 0 0 0 1px inset var(--separator-base);
+		box-shadow: var(--normal-shadow);
 		color: oklch(var(--c2));
 	}
 

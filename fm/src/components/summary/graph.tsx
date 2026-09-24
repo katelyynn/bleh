@@ -6,15 +6,25 @@
 
 import { CSSProperties } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
+import { useSettings } from '@/page.ts';
 
 export function GraphBlocks({
 	children,
 }: WithChildren) {
-	return (
+	const elem = (
 		<div class='graph-blocks'>
 			{children}
 		</div>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 interface GraphBlockProps {
@@ -45,6 +55,8 @@ export function GraphBlock({
 		} else {
 			elem.classList.add(`level-${level}`);
 		}
+
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
 	}
 
 	Object.defineProperty(elem, 'level', {
@@ -58,6 +70,7 @@ export function GraphBlock({
 	});
 
 	update();
+	useSettings.on('theme', update);
 
 	return elem;
 }

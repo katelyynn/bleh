@@ -150,6 +150,9 @@
 			/* gradient */
 			!important;
 		--button-height: 22px !important;
+
+		--font-size: 11px;
+		--icon-size: 14px;
 	}
 }
 
