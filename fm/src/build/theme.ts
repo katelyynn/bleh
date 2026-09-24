@@ -81,7 +81,7 @@ export function getThemes(): Record<string, theme> {
 }
 
 // this lets you choose which themes to expose to the user-facing screens
-export const light_themes = ['light', 'ink', 'rose_pine_dawn', 'nier', 'yuzu'];
+export const light_themes = ['light', 'ink', 'rose_pine_dawn'];
 export const dark_themes = [
 	'dark',
 	'darker',

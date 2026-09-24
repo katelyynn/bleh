@@ -531,6 +531,11 @@
 .chartlist-name {
 	color: oklch(var(--col));
 	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height);
+
+	&:not(.chartlist-stub) {
+		display: inline-flex !important;
+	}
 
 	@media (max-width: 980px) {
 		padding-right: unset !important;

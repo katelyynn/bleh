@@ -472,11 +472,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	@media (min-width: 2000px) {
-		--cards-main-width: 1002px;
-		--overview-bio-size: 530px;
-	}
-
 	@media (max-width: 980px) {
 		--card-padding: 15px;
 		--cards-width: 100vw;
