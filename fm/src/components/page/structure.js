@@ -10,6 +10,7 @@ import { chart_reflow } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
+import { useSettings } from '@/page.ts';
 
 export function basic_page_structure() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -268,6 +269,16 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                             </div>
                         `;
 
+						function update() {
+							toolbar.setAttribute(
+								'data-theme',
+								useSettings.get('theme'),
+							);
+						}
+
+						update();
+						useSettings.on('theme', update);
+
 						page.structure.row.insertBefore(
 							toolbar,
 							page.structure.row.firstElementChild,
@@ -389,6 +400,13 @@ export function checkup_nav() {
                 </div>
             `;
 
+			function update() {
+				toolbar.setAttribute('data-theme', useSettings.get('theme'));
+			}
+
+			update();
+			useSettings.on('theme', update);
+
 			page.structure.row.insertBefore(toolbar, page.structure.content);
 			page.structure.toolbar = toolbar;
 		} else {
@@ -408,6 +426,16 @@ export function convert_to_toolbar() {
             ${nav}
         </div>
     `;
+
+	function update() {
+		page.structure.toolbar.setAttribute(
+			'data-theme',
+			useSettings.get('theme'),
+		);
+	}
+
+	update();
+	useSettings.on('theme', update);
 
 	page.structure.row.insertBefore(
 		page.structure.toolbar,

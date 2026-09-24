@@ -55,6 +55,22 @@
 			}
 		}
 	}
+
+	&[data-theme="yuzu"] {
+		&>.home-link {
+			--bg: transparent !important;
+			--bg-hov: var(--bg) !important;
+			--bg-atv: var(--bg) !important;
+			height: 44px !important;
+			padding: unset !important;
+
+			filter: drop-shadow(0 1px 1px oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.44) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue)));
+
+			&>.home-logo-container>.home-logo {
+				background-color: #fff;
+			}
+		}
+	}
 }
 
 .masthead-logo-loading {

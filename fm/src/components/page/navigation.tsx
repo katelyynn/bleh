@@ -261,6 +261,8 @@ export function append_nav() {
 
 	const search_wrap = createRef();
 
+	const new_links = createRef();
+
 	masthead_logo.replaceChildren(
 		<>
 			<a class='hidden-link'>
@@ -280,6 +282,7 @@ export function append_nav() {
 					'masthead-nav',
 					'masthead-nav-top',
 				]}
+				ref={new_links}
 			>
 				<ul class='navlist-items'>
 					<a
@@ -377,8 +380,11 @@ export function append_nav() {
 		const theme = useSettings.get('theme') as string;
 
 		masthead?.setAttribute('data-theme', theme);
+		masthead_logo?.setAttribute('data-theme', theme);
 		auth_link?.setAttribute('data-theme', theme);
 		search_wrap.current?.setAttribute('data-theme', theme);
+		search?.setAttribute('data-theme', theme);
+		new_links.current?.setAttribute('data-theme', theme);
 	}
 
 	update();

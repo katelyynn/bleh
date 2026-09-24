@@ -486,6 +486,13 @@
 			}
 		}
 	}
+
+	&[data-theme="yuzu"] {
+		&>.page-header-title {
+			font-size: calc(16px * var(--custom-font-size-multiplier, 1));
+			line-height: 20px;
+		}
+	}
 }
 
 .dollar {

@@ -155,7 +155,7 @@ body,
 		--button-radius: 5px;
 		--button-height: 24px;
 
-		--card-radius: 0;
+		--card-radius: 3px;
 
 		--input-radius: 5px;
 		--menu-item-radius: 2px;
@@ -193,6 +193,12 @@ body,
 
 		--main-content-padding: none;
 		--banner-height: 0 !important;
+
+		--grid-item-size: 130px;
+
+		--button-click: none;
+
+		--noise-opacity: 0 !important;
 	}
 }
 

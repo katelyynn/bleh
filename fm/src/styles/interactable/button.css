@@ -151,7 +151,7 @@ select,
 	&:is(.gallery-next, .gallery-previous):active .arrow,
 	&:active {
 		background: var(--bg-atv) !important;
-		transform: scale(0.98);
+		transform: var(--button-click, scale(0.98));
 
 		background-repeat: repeat-x !important;
 		background-position: unset !important;

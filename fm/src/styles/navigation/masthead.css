@@ -86,6 +86,10 @@ last.fm changes as of 2024-05-20 */
 
 			opacity: unset !important;
 		}
+
+		&>.masthead-inner-wrap {
+			padding: unset !important;
+		}
 	}
 
 	&:after {
@@ -271,7 +275,7 @@ last.fm changes as of 2024-05-20 */
 
 	&[data-theme="yuzu"] {
 		position: absolute;
-		top: 44px;
+		top: 46px;
 		right: 0;
 	}
 }

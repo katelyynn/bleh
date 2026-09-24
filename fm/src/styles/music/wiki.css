@@ -192,11 +192,6 @@
 
 	.wiki-column {
 		width: 100%;
-
-		.wiki-block {
-			font-size: 16px;
-			line-height: 22px;
-		}
 	}
 
 	.catalogue-metadata {
@@ -212,14 +207,10 @@
 	}
 }
 
+.wiki-content,
 .wiki-block {
-	font-size: 16px;
-	line-height: 22px;
-}
-
-.wiki-content {
-	font-size: 16px;
-	line-height: 22px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 }
 
 .wiki-style-rules,
@@ -420,7 +411,7 @@
 }
 
 .wiki-block-inner-2 {
-	line-height: 20px;
+	line-height: inherit;
 }
 
 .wiki-block-cta {

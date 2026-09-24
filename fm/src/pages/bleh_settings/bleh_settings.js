@@ -243,6 +243,13 @@ export function bleh_settings() {
         </div>
     `;
 
+	function update() {
+		nav.setAttribute('data-theme', useSettings.get('theme'));
+	}
+
+	update();
+	useSettings.on('theme', update);
+
 	render(
 		page.structure.side,
 		html`

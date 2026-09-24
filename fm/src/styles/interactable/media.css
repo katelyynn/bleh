@@ -248,7 +248,7 @@
 	margin: unset;
 	padding: unset;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(var(--grid-item-size), 1fr));
 	gap: var(--card-padding-v) var(--card-gap);
 
 	&.music-recommended-artists,
@@ -257,12 +257,12 @@
 	&.similar-albums,
 	&.catalogue-overview-similar-artists,
 	&.artist-top-albums {
-		grid-template-columns: repeat(4, minmax(180px, 1fr));
+		grid-template-columns: repeat(4, minmax(var(--grid-item-size), 1fr));
 	}
 
 	&.music-more-artists,
 	&.music-releases {
-		grid-template-columns: repeat(6, minmax(180px, 1fr));
+		grid-template-columns: repeat(6, minmax(var(--grid-item-size), 1fr));
 	}
 
 	&.resource-list--release-list,
@@ -284,7 +284,7 @@
 .top-albums-carousel {
 	display: flex;
 	gap: var(--card-padding) var(--item-list-gap);
-	--item-width: 200px;
+	--item-width: var(--grid-item-size);
 
 	overflow: hidden;
 	padding: var(--card-padding);
@@ -305,7 +305,7 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	min-width: 150px;
+	min-width: var(--grid-item-size);
 
 	&>.media-item {
 		order: -1;

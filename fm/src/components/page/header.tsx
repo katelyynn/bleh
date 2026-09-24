@@ -97,11 +97,20 @@ export function PageHeaderTitle({
 	combined,
 	children,
 }: PageHeaderTitleProps) {
-	return (
+	const elem = (
 		<div class='title-container' data-multi={String(combined)}>
 			{children}
 		</div>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 interface PageHeaderArtistProps {
@@ -113,11 +122,20 @@ export function PageHeaderArtist({
 	type = 'track',
 	children,
 }: PageHeaderArtistProps) {
-	return (
+	const elem = (
 		<h2 class={['page-header-artist', `artist-for-${type}`]}>
 			{children}
 		</h2>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 interface PageHeaderIconProps {

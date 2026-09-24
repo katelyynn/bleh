@@ -118,6 +118,8 @@ body {
 	--banner-height: 280px;
 	--banner-offset: 240px;
 
+	--grid-item-size: 180px;
+
 	&[data-ff--short="true"] {
 		--banner-height: 800px;
 	}
