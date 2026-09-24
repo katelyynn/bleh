@@ -12,6 +12,7 @@ interface CtaProps {
 	label?: ReactNode;
 	className?: string;
 	colourful?: boolean;
+	first?: boolean;
 	children?: ReactNode;
 }
 
@@ -20,11 +21,19 @@ export function Cta({
 	label,
 	className,
 	colourful,
+	first,
 	children,
 }: CtaProps) {
 	if (label) {
 		return (
-			<section class={['cta', colourful && 'colourful', className]}>
+			<section
+				class={[
+					'cta',
+					colourful && 'colourful',
+					className,
+					first && 'first priority',
+				]}
+			>
 				<label class='cta-label'>
 					{icon && <Icon name={icon} />}
 					<strong>{label}</strong>

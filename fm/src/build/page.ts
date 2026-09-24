@@ -197,6 +197,7 @@ interface page {
 	structure: {
 		wrapper?: HTMLElement;
 		container?: HTMLElement;
+		content?: HTMLElement;
 		row?: HTMLElement;
 		main?: HTMLElement;
 		side?: HTMLElement;

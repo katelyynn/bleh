@@ -3,7 +3,7 @@
 	flex-direction: column;
 	gap: var(--card-gap);
 
-	--w: 30px;
+	--w: 28px;
 	--c: 3;
 	--g: 4px;
 

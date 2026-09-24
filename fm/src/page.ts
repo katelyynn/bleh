@@ -44,7 +44,7 @@ import { theme_version, version } from '@/main';
 import { append_nav, update_branding_type } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
-import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
+import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { bleh_setup } from '@/pages/bleh_setup';
 import { bleh_error } from '@/pages/error';
 import { bleh_events } from '@/pages/event';

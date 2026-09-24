@@ -24,9 +24,8 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import {
 	page_loading,
 	render_setting_page,
-} from '@/pages/bleh_settings/bleh_settings.js';
+} from '@/pages/bleh_settings/bleh_settings.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
-import { select_prepare_list } from '@/components/settings/select.ts';
 import { useSettings } from '@/page.ts';
 import {
 	checkup_friend_cache,

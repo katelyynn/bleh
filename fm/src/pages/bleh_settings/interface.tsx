@@ -22,7 +22,7 @@ import { SettingList } from '@/components/settings/provider/list.tsx';
 import {
 	page_loading,
 	render_setting_page,
-} from '@/pages/bleh_settings/bleh_settings.js';
+} from '@/pages/bleh_settings/bleh_settings.tsx';
 import { markdown } from '@/components/markdown/markdown.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';

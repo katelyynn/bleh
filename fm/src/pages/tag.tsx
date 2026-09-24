@@ -19,7 +19,7 @@ import {
 import { page_header_title } from '@/components/music/header';
 import { Icon, icons } from '@/components/shared/icon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
-import { SideActions } from '@/components/side_action/side_action.tsx';
+import { SideActions } from '@/components/button/side.tsx';
 import { PageHeader } from '@/components/page/header.tsx';
 import { SubText } from '@/components/text/sub.tsx';
 import { createRef, ReactNode } from 'jsx-dom';

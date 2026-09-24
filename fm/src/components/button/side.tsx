@@ -1,32 +1,38 @@
-/**
- * bleh, an extension for the music site Last.fm
- * Copyright (c) 2024-2026 katelyn and contributors
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 import { ReactNode } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
 
 interface SideActionsProps {
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 export function SideActions({
 	children,
 }: SideActionsProps) {
-	return (
+	const elem = (
 		<section class='side-actions'>
 			{children}
 		</section>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 interface SideActionProps {
 	type: string;
+	onClick?: () => void;
 	children: ReactNode;
 }
 
 export function SideAction({
 	type,
+	onClick,
 	children,
 }: SideActionProps) {
 	return (
@@ -34,6 +40,7 @@ export function SideAction({
 			type='button'
 			class={['btn', 'side-action', 'icon-mask']}
 			data-type={type}
+			onClick={onClick}
 		>
 			{children}
 		</button>
