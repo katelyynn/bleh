@@ -83317,7 +83317,7 @@ var bleh = (() => {
   }
 
   // src/components/music/listen.tsx
-  function ListenBoard({ url, others, expanded, extra, children }) {
+  function ListenBoard({ url, others, expanded, extra = 0, children }) {
     let typing = false;
     const board = createRef();
     const input2 = createRef();
@@ -83332,7 +83332,7 @@ var bleh = (() => {
           ref: board,
           children: [
             children,
-            extra && /* @__PURE__ */ jsx("div", {
+            extra > 0 && /* @__PURE__ */ jsx("div", {
               class: "listen-board-expand-hint",
               ref: expand_hint,
               children: /* @__PURE__ */ jsx(SeeMore, {
@@ -83988,6 +83988,7 @@ var bleh = (() => {
     const starred = useSettings.get("starred_friend");
     const friends = useSettings.get("friends").filter((friend) => friend != starred);
     const is_artist = page.type == "artist";
+    console.error(starred, friends);
     main2.insertBefore(/* @__PURE__ */ jsx(ListenBoard, {
       url: scrobble_page,
       others: other_count,
@@ -126010,7 +126011,7 @@ var bleh = (() => {
 
   // src/page.ts
   var useSettings = new Settings2();
-  var useSeasons = new Seasons();
+  var useSeasons;
   function bleh() {
     page.continue = true;
     S({
@@ -126049,6 +126050,7 @@ var bleh = (() => {
         update_check(false, null);
         load_notifications();
         load_status();
+        useSeasons = new Seasons();
         checkup_friend_cache();
         detect_mobile();
         page.platform = detect_platform();
@@ -126700,7 +126702,7 @@ var bleh = (() => {
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
-    built_on: "2026-09-25T20:45:33.297Z"
+    built_on: "2026-09-25T20:52:59.662Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

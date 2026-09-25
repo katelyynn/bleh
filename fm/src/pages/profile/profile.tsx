@@ -16,7 +16,7 @@ import { clean_number, copy, romanise, set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
-import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { dialog } from '@/components/dialog/dialog';
 import {
 	correct_artist,
 	correct_item_by_artist,

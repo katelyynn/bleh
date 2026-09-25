@@ -299,6 +299,8 @@ export async function show_your_scrobbles() {
 
 	const is_artist = page.type == 'artist';
 
+	console.error(starred, friends);
+
 	main.insertBefore(
 		<ListenBoard
 			url={scrobble_page}

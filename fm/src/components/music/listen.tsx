@@ -27,7 +27,7 @@ export function ListenBoard({
 	url,
 	others,
 	expanded,
-	extra,
+	extra = 0,
 	children,
 }: ListenBoardProps) {
 	let typing = false;
@@ -42,7 +42,7 @@ export function ListenBoard({
 		<div class='listen-board-wrap'>
 			<div class='listen-board' ref={board}>
 				{children}
-				{extra && (
+				{(extra > 0) && (
 					<div class='listen-board-expand-hint' ref={expand_hint}>
 						<SeeMore
 							icon={icons.arrow_down}

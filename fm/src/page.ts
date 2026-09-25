@@ -111,7 +111,7 @@ import { auth_page } from '@/pages/auth/main.tsx';
 import { seasonal } from '@/pages/bleh_settings/seasonal.tsx';
 
 export const useSettings: Settings = new Settings();
-export const useSeasons: Seasons = new Seasons();
+export let useSeasons: Seasons;
 
 export function bleh() {
 	page.continue = true;
@@ -171,6 +171,7 @@ export function bleh() {
 
 			load_notifications();
 			load_status();
+			useSeasons = new Seasons();
 
 			checkup_friend_cache();
 
