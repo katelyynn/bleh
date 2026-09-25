@@ -88,26 +88,6 @@ export const flags: Record<string, flag> = {
 		name: 'Refreshed auth menu',
 		date: '2025-06-07',
 	},
-	'menu_like_side_actions': {
-		enabled: true,
-		name: 'Menu-like side actions',
-		date: '2025-06-11',
-	},
-	'menu_like_side_actions_v2': {
-		enabled: false,
-		name: 'Menu-like side actions v2',
-		date: '2025-06-11',
-	},
-	'menu_like_side_actions_v3': {
-		enabled: false,
-		name: 'Menu-like side actions v3',
-		date: '2025-06-12',
-	},
-	'menu_like_side_actions_gap': {
-		enabled: false,
-		name: 'Menu-like side actions separator',
-		date: '2025-06-12',
-	},
 	'sweet': {
 		enabled: true,
 		name: 'Readable count bars',
@@ -148,10 +128,10 @@ export const flags: Record<string, flag> = {
 		name: 'Experimental redesigned tab toolbar',
 		date: '2025-07-26',
 	},
-	'unlock_minis': {
+	unlock_minis: {
 		enabled: false,
 		name: 'Unlock work-in-progress minis',
-		date: '2025-07-29',
+		date: '2099-07-29',
 	},
 	'status_in_menu': {
 		enabled: true,
@@ -171,11 +151,6 @@ export const flags: Record<string, flag> = {
 	'adaptive_theme': {
 		enabled: true,
 		name: 'Adaptive theme controls',
-		date: '2025-08-29',
-	},
-	'adaptive_colours': {
-		enabled: false,
-		name: 'Adaptive colour controls',
 		date: '2025-08-29',
 	},
 	'oracle': {

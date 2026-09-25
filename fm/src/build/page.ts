@@ -7,7 +7,7 @@
 import tippy from 'tippy.js';
 import { season } from '@/components/seasonal';
 import { DateTime } from 'luxon';
-import { ReactNode } from 'jsx-dom';
+import { ReactElement, ReactNode } from 'jsx-dom';
 // require page reload
 export const reload_pending = {
 	state: false,
@@ -222,12 +222,6 @@ interface page {
 				track: glacier_insight;
 			};
 		};
-		seasons: {
-			now: DateTime;
-			current: season | undefined;
-			prev: season | undefined;
-			next: season | undefined;
-		};
 		error: boolean;
 		on_tour?: boolean;
 		follows_user?: boolean;
@@ -235,6 +229,7 @@ interface page {
 		average?: string;
 		artists?: number;
 		loved?: number;
+		snow?: ReactElement;
 	};
 	previous?: {
 		type: string;

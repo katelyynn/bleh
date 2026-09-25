@@ -537,7 +537,6 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.enable_seasons.name,
 		body: trans.enable_seasons.body,
-		require_reload: true,
 	},
 	seasonal_particles: {
 		default: 'all',
@@ -555,7 +554,6 @@ export const settings_store: Record<string, setting_instance> = {
 				name: trans.no_particles,
 			},
 		},
-		require_reload: true,
 		incompatible: { seasonal: false },
 	},
 	seasonal_particles_fps: {

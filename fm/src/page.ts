@@ -24,7 +24,7 @@ import {
 	sponsor_url,
 	urls,
 } from '@/build/page';
-import { stored_season } from '@/build/seasonal';
+import { Seasons, stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
 import { dialog, load_dialogs } from '@/components/dialog/dialog';
 import {
@@ -61,7 +61,7 @@ import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
-import { set_season, update_season_nav } from '@/components/seasonal';
+import { update_season_nav } from '@/components/seasonal';
 import {
 	parse_shout_queue,
 	patch_shouts,
@@ -108,8 +108,10 @@ import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
 import { auth_page } from '@/pages/auth/main.tsx';
+import { seasonal } from '@/pages/bleh_settings/seasonal.tsx';
 
 export const useSettings: Settings = new Settings();
+export const useSeasons: Seasons = new Seasons();
 
 export function bleh() {
 	page.continue = true;
@@ -186,6 +188,14 @@ export function bleh() {
 			sponsors();
 
 			useSettings.on('branding_type', update_branding_type);
+			useSeasons.on(() => {
+				if (
+					page.type == 'bleh_settings' &&
+					page.state.settings_page == 'seasonal'
+				) {
+					seasonal();
+				}
+			});
 		},
 		on_mutation: main_flow,
 		on_page_change: load_page,
@@ -512,8 +522,6 @@ function load_page(main_content?: HTMLElement) {
 
 	detect_mobile();
 	page.platform = detect_platform();
-
-	set_season();
 
 	bleh_footer();
 

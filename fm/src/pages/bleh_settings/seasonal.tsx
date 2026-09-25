@@ -21,14 +21,14 @@ import { SubText } from '@/components/text/sub.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
-import { useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.ts';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 
 export function seasonal() {
 	register_skip_to([]);
 
-	const state = page.state.seasons;
+	const state = useSeasons.get();
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -136,7 +136,7 @@ export function SeasonalTimeline({
 	next,
 	now,
 }: SeasonalTimelineProps) {
-	if (!settings.seasonal || !prev || !next) return;
+	if (!useSettings.get('seasonal') || !prev || !next) return;
 
 	return (
 		<div class='seasonal-timeline-wrap'>

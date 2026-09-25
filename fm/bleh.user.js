@@ -52110,8 +52110,7 @@ var bleh = (() => {
     seasonal: {
       default: true,
       title: trans.enable_seasons.name,
-      body: trans.enable_seasons.body,
-      require_reload: true
+      body: trans.enable_seasons.body
     },
     seasonal_particles: {
       default: "all",
@@ -52129,7 +52128,6 @@ var bleh = (() => {
           name: trans.no_particles
         }
       },
-      require_reload: true,
       incompatible: {
         seasonal: false
       }
@@ -53393,26 +53391,6 @@ var bleh = (() => {
       name: "Refreshed auth menu",
       date: "2025-06-07"
     },
-    "menu_like_side_actions": {
-      enabled: true,
-      name: "Menu-like side actions",
-      date: "2025-06-11"
-    },
-    "menu_like_side_actions_v2": {
-      enabled: false,
-      name: "Menu-like side actions v2",
-      date: "2025-06-11"
-    },
-    "menu_like_side_actions_v3": {
-      enabled: false,
-      name: "Menu-like side actions v3",
-      date: "2025-06-12"
-    },
-    "menu_like_side_actions_gap": {
-      enabled: false,
-      name: "Menu-like side actions separator",
-      date: "2025-06-12"
-    },
     "sweet": {
       enabled: true,
       name: "Readable count bars",
@@ -53453,10 +53431,10 @@ var bleh = (() => {
       name: "Experimental redesigned tab toolbar",
       date: "2025-07-26"
     },
-    "unlock_minis": {
+    unlock_minis: {
       enabled: false,
       name: "Unlock work-in-progress minis",
-      date: "2025-07-29"
+      date: "2099-07-29"
     },
     "status_in_menu": {
       enabled: true,
@@ -53476,11 +53454,6 @@ var bleh = (() => {
     "adaptive_theme": {
       enabled: true,
       name: "Adaptive theme controls",
-      date: "2025-08-29"
-    },
-    "adaptive_colours": {
-      enabled: false,
-      name: "Adaptive colour controls",
       date: "2025-08-29"
     },
     "oracle": {
@@ -108246,7 +108219,7 @@ var bleh = (() => {
     }
   }
 
-  // src/build/seasonal.js
+  // src/build/seasonal.tsx
   var stored_season = {
     id: "none",
     new_years_eve: false
@@ -108370,6 +108343,227 @@ var bleh = (() => {
       }
     }
   ];
+  var Seasons = class {
+    now;
+    previous;
+    current;
+    next;
+    listeners = [];
+    constructor() {
+      log("constructing...", "season");
+      this.rebuild();
+      useSettings.on("seasonal", () => this.rebuild());
+      useSettings.on("seasonal_particles", () => this.rebuild());
+      useSettings.on("seasonal_particles_fps", () => this.rebuild());
+    }
+    rebuild() {
+      const last_season_seen = localStorage.getItem(keys3.last_season_seen) || "";
+      const state = get_season_state();
+      if (!useSettings.get("seasonal")) {
+        state.prev = void 0;
+        state.current = void 0;
+        state.next = void 0;
+      }
+      this.now = state.now;
+      this.previous = state.prev;
+      this.current = state.current;
+      this.next = state.next;
+      this.apply();
+      if (!this.current) return;
+      if (this.current.id != last_season_seen) {
+        new_season(this.current, this.now);
+      }
+    }
+    get() {
+      return {
+        now: this.now,
+        previous: this.previous,
+        current: this.current,
+        next: this.next
+      };
+    }
+    apply() {
+      apply_season(this.current);
+      this.listeners.forEach((cb) => {
+        cb({
+          now: this.now,
+          previous: this.previous,
+          current: this.current,
+          next: this.next
+        });
+      });
+    }
+    // members can subscribe to seasonal changes
+    // and receive the new value
+    on(callback2) {
+      this.listeners.push(callback2);
+    }
+  };
+  function apply_season(current) {
+    if (!current) {
+      if (page.state.snow) page.state.snow.innerHTML = "";
+      document.body.removeAttribute("data-bleh--season");
+      return;
+    }
+    log(`applying ${current.id}`, "season", "info", {
+      current
+    });
+    document.body.setAttribute("data-bleh--season", current.id);
+    if (current.snowflakes.state && useSettings.get("seasonal_particles") != "none") {
+      log("let the snow start!", "season");
+      prep_snow();
+      const snowflakes_enabled = true;
+      let snowflakes_count = current.snowflakes.count || 0;
+      if (useSettings.get("seasonal_particles") == "less" && snowflakes_count > 10) {
+        snowflakes_count *= 0.45;
+      }
+      if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
+      begin_snowflakes(snowflakes_enabled, snowflakes_count);
+    }
+  }
+  function new_season(current, now2) {
+    set_storage(keys3.last_season_seen, current.id);
+    load_chart_colours();
+    notify({
+      id: "new_season",
+      title: tl2(trans.new_season),
+      body: tl2(trans.value_for_time, {
+        v: tl2(trans.seasonal.listing[current.id]),
+        time: current.end.toRelative(now2)
+      }),
+      icon: "icon-16-season",
+      persist: true
+    });
+  }
+  function get_season_state(now2 = DateTime.local()) {
+    const year = now2.year;
+    const seasons = resolve_seasons(now2);
+    seasons.sort((a2, b) => a2.start.toMillis() - b.start.toMillis());
+    const current = seasons.find((season) => season.current) || void 0;
+    let prev;
+    let next;
+    if (current) {
+      const index3 = seasons.findIndex((season) => season.id == current.id);
+      prev = seasons[index3 - 1] || void 0;
+      next = seasons[index3 + 1] || void 0;
+      if (!prev) {
+        const last = seasons[seasons.length - 1];
+        prev = {
+          ...last,
+          start: process_date(last.start, "start", year - 1),
+          end: process_date(last.end, "end", year - 1)
+        };
+      }
+      if (!next) {
+        const first = seasons[0];
+        next = {
+          ...first,
+          start: process_date(first.start, "start", year + 1),
+          end: process_date(first.end, "end", year + 1)
+        };
+      }
+    } else {
+      next = seasons.find((season) => now2 < season.start) || void 0;
+      if (!next) {
+        const first = seasons[0];
+        next = {
+          ...first,
+          start: process_date(first.start, "start", year + 1),
+          end: process_date(first.end, "end", year + 1)
+        };
+      }
+      const index3 = seasons.findIndex((season) => season.id == next.id);
+      prev = seasons[index3 - 1] || seasons[seasons.length - 1];
+    }
+    return {
+      now: now2,
+      current,
+      prev,
+      next
+    };
+  }
+  function resolve_seasons(now2 = DateTime.local()) {
+    const year = now2.year;
+    return seasonal_events.map((season) => {
+      const start2 = process_date(season.start, "start", year);
+      const end2 = process_date(season.end, "end", year);
+      const current = now2 >= start2 && now2 <= end2;
+      return {
+        ...season,
+        start: start2,
+        end: end2,
+        current
+      };
+    });
+  }
+  function process_date(date, type, year) {
+    let hour = date.hour || 0;
+    let minute = date.minute || 0;
+    let second = date.second || 0;
+    if (type == "end" && !date.hour && !date.minute && !date.second) {
+      hour = 23;
+      minute = 59;
+      second = 59;
+    }
+    return DateTime.fromObject({
+      year,
+      month: date.month,
+      day: date.day,
+      hour,
+      minute,
+      second
+    }, {
+      zone: "local"
+    });
+  }
+  function prep_snow() {
+    if (page.state.snow) return;
+    page.state.snow = /* @__PURE__ */ jsx("div", {
+      class: "snow-container"
+    });
+    document.documentElement.appendChild(page.state.snow);
+  }
+  function begin_snowflakes(enabled, count) {
+    if (!enabled) {
+      page.state.snow.innerHTML = "";
+      return;
+    }
+    const flakes = Array.from({
+      length: count * 0.7
+    }, () => {
+      const x = (Math.random() * 100).toFixed(1);
+      const drift = (Math.random() * 40 - 10).toFixed(1);
+      const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
+      const size2 = 8 * scale;
+      const duration2 = (Math.random() * 64 + 20).toFixed(1);
+      const delay = (Math.random() * -30).toFixed(1);
+      const opacity2 = (Math.random() * 0.7 + 0.2).toFixed(1);
+      return {
+        x,
+        drift,
+        scale,
+        size: size2,
+        duration: duration2,
+        delay,
+        opacity: opacity2
+      };
+    });
+    page.state.snow.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+      children: flakes.map((flake) => /* @__PURE__ */ jsx("div", {
+        class: "snow",
+        style: {
+          width: `${flake.size}px`,
+          height: `${flake.size}px`,
+          "--x": `${flake.x}vw`,
+          "--x-end": `calc(${flake.x}vw + ${flake.drift}vw)`,
+          "--s": flake.scale,
+          animationDuration: `${flake.duration}s`,
+          animationDelay: `${flake.delay}s`,
+          opacity: flake.opacity
+        }
+      }))
+    }));
+  }
 
   // src/components/inbox/notifications.js
   function bleh_notification_list(list, mini = false) {
@@ -111361,7 +111555,7 @@ var bleh = (() => {
   // src/pages/bleh_settings/seasonal.tsx
   function seasonal() {
     register_skip_to([]);
-    const state = page.state.seasons;
+    const state = useSeasons.get();
     page.structure.main.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx("section", {
@@ -111466,7 +111660,7 @@ var bleh = (() => {
     }));
   }
   function SeasonalTimeline({ current, prev, next, now: now2 }) {
-    if (!settings.seasonal || !prev || !next) return;
+    if (!useSettings.get("seasonal") || !prev || !next) return;
     return /* @__PURE__ */ jsx("div", {
       class: "seasonal-timeline-wrap",
       children: [
@@ -121118,132 +121312,6 @@ var bleh = (() => {
   }
 
   // src/components/seasonal.ts
-  function set_season() {
-    if (!settings.seasonal) {
-      return;
-    }
-    const last_season_seen = localStorage.getItem(keys3.last_season_seen) || "";
-    const state = get_season_state();
-    page.state.seasons = state;
-    if (!state.current) return;
-    apply_season(state.current);
-    if (state.current.id != last_season_seen) {
-      new_season(state.current, state.now);
-    }
-  }
-  function apply_season(current) {
-    log(`applying ${current.id}`, "season", "info", {
-      current
-    });
-    document.body.setAttribute("data-bleh--season", current.id);
-    if (current.snowflakes.state && settings.seasonal_particles != "none") {
-      log("let the snow start!", "season");
-      prep_snow();
-      const snowflakes_enabled = true;
-      let snowflakes_count = current.snowflakes.count || 0;
-      if (settings.seasonal_particles == "less" && snowflakes_count > 10) {
-        snowflakes_count *= 0.45;
-      }
-      if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
-      begin_snowflakes(snowflakes_enabled, snowflakes_count);
-    }
-    update_season_nav();
-  }
-  function new_season(current, now2) {
-    set_storage(keys3.last_season_seen, current.id);
-    load_chart_colours();
-    notify({
-      id: "new_season",
-      title: tl2(trans.new_season),
-      body: tl2(trans.value_for_time, {
-        v: tl2(trans.seasonal.listing[current.id]),
-        time: current.end.toRelative(now2)
-      }),
-      icon: "icon-16-season",
-      persist: true
-    });
-  }
-  function get_season_state(now2 = DateTime.local()) {
-    const year = now2.year;
-    const seasons = resolve_seasons(now2);
-    seasons.sort((a2, b) => a2.start.toMillis() - b.start.toMillis());
-    const current = seasons.find((season) => season.current) || void 0;
-    let prev = void 0;
-    let next = void 0;
-    if (current) {
-      const index3 = seasons.findIndex((season) => season.id == current.id);
-      prev = seasons[index3 - 1] || void 0;
-      next = seasons[index3 + 1] || void 0;
-      if (!prev) {
-        const last = seasons[seasons.length - 1];
-        prev = {
-          ...last,
-          start: process_date(last.start, "start", year - 1),
-          end: process_date(last.end, "end", year - 1)
-        };
-      }
-      if (!next) {
-        const first = seasons[0];
-        next = {
-          ...first,
-          start: process_date(first.start, "start", year + 1),
-          end: process_date(first.end, "end", year + 1)
-        };
-      }
-    } else {
-      next = seasons.find((season) => now2 < season.start) || void 0;
-      if (!next) {
-        const first = seasons[0];
-        next = {
-          ...first,
-          start: process_date(first.start, "start", year + 1),
-          end: process_date(first.end, "end", year + 1)
-        };
-      }
-      const index3 = seasons.findIndex((season) => season.id == next.id);
-      prev = seasons[index3 - 1] || seasons[seasons.length - 1];
-    }
-    return {
-      now: now2,
-      current,
-      prev,
-      next
-    };
-  }
-  function resolve_seasons(now2 = DateTime.local()) {
-    const year = now2.year;
-    return seasonal_events.map((season) => {
-      const start2 = process_date(season.start, "start", year);
-      const end2 = process_date(season.end, "end", year);
-      const current = now2 >= start2 && now2 <= end2;
-      return {
-        ...season,
-        start: start2,
-        end: end2,
-        current
-      };
-    });
-  }
-  function process_date(date, type, year) {
-    let hour = date.hour || 0;
-    let minute = date.minute || 0;
-    let second = date.second || 0;
-    if (type == "end" && !date.hour && !date.minute && !date.second) {
-      hour = 23;
-      minute = 59;
-      second = 59;
-    }
-    return DateTime.fromObject({
-      year,
-      month: date.month,
-      day: date.day,
-      hour,
-      minute,
-      second
-    }, {
-      zone: "local"
-    });
-  }
   function update_season_nav() {
     if (!page.header.season) return;
     const state = page.state.seasons;
@@ -121251,41 +121319,6 @@ var bleh = (() => {
     page.header.season.setAttribute("data-season", state.current ? state.current.id : "none");
     page.header.season.setAttribute("data-season-active", !!state.current);
     page.header.season.textContent = state.current ? state.current.end.toRelative(state.now) : tl2(trans.bleh_settings);
-  }
-  function prep_snow() {
-    if (page.state.snow) return;
-    page.state.snow = html.node`
-        <div class="snow-container" />
-    `;
-    document.documentElement.appendChild(page.state.snow);
-  }
-  function begin_snowflakes(enabled, count) {
-    if (!enabled) return;
-    const flakes = Array.from({
-      length: count * 0.7
-    }, () => {
-      const x = (Math.random() * 100).toFixed(1);
-      const drift = (Math.random() * 40 - 10).toFixed(1);
-      const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
-      const size2 = 8 * scale;
-      const duration2 = (Math.random() * 64 + 20).toFixed(1);
-      const delay = (Math.random() * -30).toFixed(1);
-      const opacity2 = (Math.random() * 0.7 + 0.2).toFixed(1);
-      return {
-        x,
-        drift,
-        scale,
-        size: size2,
-        duration: duration2,
-        delay,
-        opacity: opacity2
-      };
-    });
-    render(page.state.snow, html`
-			${flakes.map((flake) => html.node`
-            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
-        `)}
-		`);
   }
 
   // src/components/radio/radio.js
@@ -125930,6 +125963,7 @@ var bleh = (() => {
 
   // src/page.ts
   var useSettings = new Settings2();
+  var useSeasons = new Seasons();
   function bleh() {
     page.continue = true;
     S({
@@ -125978,6 +126012,11 @@ var bleh = (() => {
         oracle_data();
         sponsors();
         useSettings.on("branding_type", update_branding_type);
+        useSeasons.on(() => {
+          if (page.type == "bleh_settings" && page.state.settings_page == "seasonal") {
+            seasonal();
+          }
+        });
       },
       on_mutation: main_flow,
       on_page_change: load_page,
@@ -126198,7 +126237,6 @@ var bleh = (() => {
     lookup_lang();
     detect_mobile();
     page.platform = detect_platform();
-    set_season();
     bleh_footer();
     remove_lastfm_styles();
     prepare_music();
@@ -126613,7 +126651,7 @@ var bleh = (() => {
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
-    built_on: "2026-09-25T03:44:46.636Z"
+    built_on: "2026-09-25T16:28:46.895Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
