@@ -149,6 +149,7 @@ export function SettingSwitch({
 	) as SettingSwitchElement;
 
 	update();
+	useSettings.on('theme', update);
 
 	function set(val: boolean, received = false) {
 		if (value == val) return;

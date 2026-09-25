@@ -377,6 +377,26 @@
 
 		--title-colour: oklch(var(--col));
 		--text-colour: oklch(var(--col));
+
+		&>.grid-items-item-main-text {
+			font-weight: bold !important;
+		}
+
+		&>.grid-items-item-aux-text {
+			font-size: 11px;
+			gap: 3px;
+
+			&>.grid-item-text {
+				font-size: 11px !important;
+			}
+
+			&>.obsession-item-date,
+			&>.grid-item-plays {
+				--mask-size: 10px !important;
+				--mask-colour: oklch(var(--c3)) !important;
+				padding-left: calc(var(--mask-size) + 1px) !important;
+			}
+		}
 	}
 }
 

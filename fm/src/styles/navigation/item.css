@@ -34,13 +34,16 @@
 				align-items: center;
 				border-radius: unset !important;
 
-				font-size: 15px !important;
+				font-size: 14px !important;
+				line-height: 20px !important;
 				--icon-size: 14px;
 				--icon-gap: 6px;
 
 				--col: #fff !important;
 				--mask-colour: #fff !important;
-				text-shadow: 0 1px 0 #000 !important;
+				text-shadow: 0 1px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.8) var(--hue) / 30%) !important;
+
+				font-weight: bold !important;
 			}
 		}
 	}
@@ -329,17 +332,19 @@
 
 		font-size: 11px !important;
 		color: #fff !important;
-		text-shadow: 0 1px 1px oklch(0 0 0 / 60%) !important;
+		text-shadow: 0 1px 1px oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.24) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / 60%) !important;
 		font-weight: 600 !important;
 
+		border-radius: 3px !important;
+
 		--bg: linear-gradient(180deg,
-			oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.03) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / var(--header-opacity)),
-			oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.76) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue) / var(--header-opacity))) !important;
+			transparent 30%,
+			oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / var(--header-opacity))) !important;
 		--bg-hov: var(--bg) !important;
 		--bg-atv: var(--bg) !important;
 
-		box-shadow: 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
-		inset 0 0 0 1px oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue)) !important;
+		box-shadow: 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
+		inset 0 0 0 1px oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.54) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)) !important;
 
 		&:after {
 			content: '';
@@ -347,10 +352,11 @@
 			display: block !important;
 			top: 1px !important;
 			left: unset !important;
-			right: calc(var(--mask-size) + 6px) !important;
+			right: calc(var(--mask-size) + 6px + 1px) !important;
 			bottom: 1px !important;
+			border-left: 1px solid oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.54) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / 80%);
 			background: linear-gradient(180deg, transparent, oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue))) !important;
-			width: 1px !important;
+			width: 2px !important;
 			height: unset !important;
 			transform: unset !important;
 		}

@@ -61,28 +61,28 @@ last.fm changes as of 2024-05-20 */
 		inset: unset !important;
 		height: 44px !important;
 		background: linear-gradient(180deg,
-				oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / var(--header-opacity)),
-				oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.83) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue) / var(--header-opacity))) !important;
+				oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.77) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue) / var(--header-opacity)),
+				oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.73) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue) / var(--header-opacity))) !important;
 
 		box-shadow:
-			inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
-			inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue));
+			inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 1.05) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue)),
+			inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue));
 
 		margin-bottom: calc(26px + 10px) !important;
 
-		--header-opacity: 0.8;
+		--header-opacity: 0.9;
 
 		&:before {
 			top: 44px;
 			height: 26px;
 			background: linear-gradient(180deg,
-					oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.54) var(--hue) / var(--header-opacity)),
-					oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.64) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / var(--header-opacity))) !important;
+					oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.66) calc(clamp(min(0), var(--sat), max(2)) * 0.54) var(--hue) / var(--header-opacity)),
+					oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / var(--header-opacity))) !important;
 
 			box-shadow:
-				inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.95) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
-				inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue)),
-				inset 0 -2px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue));
+				inset 0 1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
+				inset 0 -1px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue)),
+				inset 0 -2px 0 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue));
 
 			opacity: unset !important;
 		}
