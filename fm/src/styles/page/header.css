@@ -536,6 +536,7 @@
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
 		margin-left: 4px;
+		--mask-colour: oklch(var(--c3));
 
 		&:hover {
 			color: oklch(var(--c1));

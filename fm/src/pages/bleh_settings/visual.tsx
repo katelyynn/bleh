@@ -40,7 +40,7 @@ import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
-import { useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.ts';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export function visual() {
@@ -68,7 +68,7 @@ export function visual() {
 
 	const sat_bg = createRef();
 
-	const season = page.state.seasons?.current;
+	const season = useSeasons.get().current;
 
 	page.structure.main!.replaceChildren(
 		<>

@@ -189,17 +189,6 @@ export function bleh() {
 			sponsors();
 
 			useSettings.on('branding_type', update_branding_type);
-			useSeasons.on((v) => {
-				const last_season_seen =
-					localStorage.getItem(keys.last_season_seen) ||
-					'';
-
-				if (!v.current) return;
-
-				if (v.current.id != last_season_seen) {
-					new_season(v.current, v.now);
-				}
-			});
 		},
 		on_mutation: main_flow,
 		on_page_change: load_page,

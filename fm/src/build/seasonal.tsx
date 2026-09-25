@@ -211,6 +211,15 @@ export class Seasons {
 				next: this.next,
 			});
 		});
+
+		const last_season_seen = localStorage.getItem(keys.last_season_seen) ||
+			'';
+
+		if (!this.current) return;
+
+		if (this.current.id != last_season_seen) {
+			new_season(this.current, this.now);
+		}
 	}
 
 	// members can subscribe to seasonal changes

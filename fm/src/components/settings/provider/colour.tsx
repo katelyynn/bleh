@@ -351,6 +351,7 @@ export function SettingColour({
 
 		custom_swatches = [
 			default_colour,
+			...seasonal,
 			avatar_colour,
 			{
 				type: 'placeholder',
@@ -371,7 +372,6 @@ export function SettingColour({
 						: String(colour.lit),
 				},
 			},
-			...seasonal,
 		];
 
 		presets.current.replaceChildren(

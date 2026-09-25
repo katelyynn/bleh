@@ -79,8 +79,8 @@
 			--icon-transform: scale(1) !important;
 
 			&:after {
-				scale: 1 !important;
-				opacity: 1 !important;
+				scale: 1;
+				opacity: 1;
 			}
 		}
 	}
@@ -97,6 +97,28 @@
 		&>.swatch-inner {
 			pointer-events: none;
 		}
+	}
+
+	&:not([aria-checked="true"]) {
+		&>.swatch[data-swatch-type="season"] {
+			&:after {
+				opacity: 1;
+				scale: 1;
+				animation: season_ring 4s linear infinite;
+			}
+		}
+	}
+}
+
+@keyframes season_ring {
+
+	from,
+	to {
+		opacity: 0;
+	}
+
+	40% {
+		opacity: 0.6;
 	}
 }
 

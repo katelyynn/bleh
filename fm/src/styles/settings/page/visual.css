@@ -154,6 +154,33 @@
 
 			overflow: hidden;
 
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				height: var(--cards-overlay-height);
+				max-height: 100%;
+				display: var(--cards-overlay-display) !important;
+
+				background-image: var(--cards-overlay-image, unset),
+					var(--cards-overlay, transparent) !important;
+				background-repeat: repeat-x !important;
+				background-position: 0 -66px !important;
+				opacity: 0.9;
+
+				border-top-left-radius: 5px;
+
+				pointer-events: none;
+
+				/* fix for no-data-message overriding and stuff */
+				margin: unset;
+				width: unset;
+
+				z-index: 100;
+			}
+
 			.preview-card-main {
 				display: flex;
 				flex-direction: column;
