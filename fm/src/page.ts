@@ -24,7 +24,7 @@ import {
 	sponsor_url,
 	urls,
 } from '@/build/page';
-import { Seasons, stored_season } from '@/build/seasonal';
+import { new_season, Seasons, stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
 import { dialog, load_dialogs } from '@/components/dialog/dialog';
 import {
@@ -102,7 +102,7 @@ import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
 import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
-import { clean_storage } from './components/settings/storage';
+import { clean_storage, keys } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
@@ -188,12 +188,22 @@ export function bleh() {
 			sponsors();
 
 			useSettings.on('branding_type', update_branding_type);
-			useSeasons.on(() => {
+			useSeasons.on((v) => {
 				if (
 					page.type == 'bleh_settings' &&
 					page.state.settings_page == 'seasonal'
 				) {
 					seasonal();
+				}
+
+				const last_season_seen =
+					localStorage.getItem(keys.last_season_seen) ||
+					'';
+
+				if (!v.current) return;
+
+				if (v.current.id != last_season_seen) {
+					new_season(v.current, v.now);
 				}
 			});
 		},

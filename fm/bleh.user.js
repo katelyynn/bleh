@@ -52139,7 +52139,8 @@ var bleh = (() => {
       body: trans.seasonal_particles_fps.body,
       incompatible: {
         seasonal: false
-      }
+      },
+      bubble: true
     },
     seasonal_overlays: {
       default: true,
@@ -108357,7 +108358,6 @@ var bleh = (() => {
       useSettings.on("seasonal_particles_fps", () => this.rebuild());
     }
     rebuild() {
-      const last_season_seen = localStorage.getItem(keys3.last_season_seen) || "";
       const state = get_season_state();
       if (!useSettings.get("seasonal")) {
         state.prev = void 0;
@@ -108370,9 +108370,6 @@ var bleh = (() => {
       this.next = state.next;
       this.apply();
       if (!this.current) return;
-      if (this.current.id != last_season_seen) {
-        new_season(this.current, this.now);
-      }
     }
     get() {
       return {
@@ -108400,8 +108397,10 @@ var bleh = (() => {
     }
   };
   function apply_season(current) {
-    if (!current) {
+    if (!current || useSettings.get("seasonal_particles") == "none") {
       if (page.state.snow) page.state.snow.innerHTML = "";
+    }
+    if (!current) {
       document.body.removeAttribute("data-bleh--season");
       return;
     }
@@ -108521,7 +108520,7 @@ var bleh = (() => {
     page.state.snow = /* @__PURE__ */ jsx("div", {
       class: "snow-container"
     });
-    document.documentElement.appendChild(page.state.snow);
+    document.body.appendChild(page.state.snow);
   }
   function begin_snowflakes(enabled, count) {
     if (!enabled) {
@@ -126012,9 +126011,14 @@ var bleh = (() => {
         oracle_data();
         sponsors();
         useSettings.on("branding_type", update_branding_type);
-        useSeasons.on(() => {
+        useSeasons.on((v) => {
           if (page.type == "bleh_settings" && page.state.settings_page == "seasonal") {
             seasonal();
+          }
+          const last_season_seen = localStorage.getItem(keys3.last_season_seen) || "";
+          if (!v.current) return;
+          if (v.current.id != last_season_seen) {
+            new_season(v.current, v.now);
           }
         });
       },
@@ -126651,7 +126655,7 @@ var bleh = (() => {
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
-    built_on: "2026-09-25T16:28:46.895Z"
+    built_on: "2026-09-25T16:46:25.544Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

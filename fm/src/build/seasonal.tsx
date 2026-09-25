@@ -175,9 +175,6 @@ export class Seasons {
 	}
 
 	public rebuild() {
-		const last_season_seen = localStorage.getItem(keys.last_season_seen) ||
-			'';
-
 		const state = get_season_state();
 
 		if (!useSettings.get('seasonal')) {
@@ -194,10 +191,6 @@ export class Seasons {
 		this.apply();
 
 		if (!this.current) return;
-
-		if (this.current.id != last_season_seen) {
-			new_season(this.current, this.now);
-		}
 	}
 
 	public get() {
@@ -230,8 +223,11 @@ export class Seasons {
 }
 
 function apply_season(current?: processedSeason) {
-	if (!current) {
+	if (!current || useSettings.get('seasonal_particles') == 'none') {
 		if (page.state.snow) page.state.snow.innerHTML = '';
+	}
+
+	if (!current) {
 		document.body.removeAttribute('data-bleh--season');
 
 		return;
@@ -263,7 +259,7 @@ function apply_season(current?: processedSeason) {
 	}
 }
 
-function new_season(current: season, now: DateTime) {
+export function new_season(current: season, now: DateTime) {
 	set_storage(keys.last_season_seen, current.id);
 	load_chart_colours();
 
@@ -280,6 +276,7 @@ function new_season(current: season, now: DateTime) {
 }
 
 function get_season_state(now = DateTime.local()) {
+	//now = DateTime.fromISO('2026-12-25');
 	const year = now.year;
 
 	const seasons = resolve_seasons(now);
@@ -392,7 +389,7 @@ function prep_snow() {
 	if (page.state.snow) return;
 
 	page.state.snow = <div class='snow-container' />;
-	document.documentElement.appendChild(page.state.snow);
+	document.body.appendChild(page.state.snow);
 }
 
 // loosely based on https://app.embed.im/snow.js

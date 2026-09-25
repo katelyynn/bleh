@@ -562,6 +562,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.seasonal_particles_fps.name,
 		body: trans.seasonal_particles_fps.body,
 		incompatible: { seasonal: false },
+		bubble: true,
 	},
 	seasonal_overlays: {
 		default: true,
