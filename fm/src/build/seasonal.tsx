@@ -178,9 +178,7 @@ export class Seasons {
 		const state = get_season_state();
 
 		if (!useSettings.get('seasonal')) {
-			state.prev = undefined;
 			state.current = undefined;
-			state.next = undefined;
 		}
 
 		this.now = state.now;

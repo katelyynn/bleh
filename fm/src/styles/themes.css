@@ -79,6 +79,7 @@ body {
 	--button-radius: 9px;
 	--input-radius: 9px;
 	/*--icon-size: 18px;*/
+	--default-icon-size: 18px;
 	--icon-half: 9px;
 	--icon-gap: 4px;
 

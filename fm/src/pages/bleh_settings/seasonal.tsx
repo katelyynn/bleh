@@ -24,11 +24,89 @@ import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { useSeasons, useSettings } from '@/page.ts';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { createRef } from 'jsx-dom';
 
 export function seasonal() {
 	register_skip_to([]);
 
-	const state = useSeasons.get();
+	const timeline = createRef();
+	const current_season = createRef();
+	const started = createRef();
+	const ends_in = createRef();
+	const next_in = createRef();
+
+	function update() {
+		const state = useSeasons.get();
+
+		timeline.current.replaceChildren(
+			<SeasonalTimeline
+				current={state.current}
+				prev={state.previous}
+				next={state.next}
+				now={state.now}
+			/>,
+		);
+
+		current_season.current.children = (
+			<div
+				class={['icon-combo', 'colourful']}
+				data-season={state.current ? state.current.id : 'none'}
+			>
+				<Icon />
+				<p>
+					{tl(
+						trans.seasonal.listing[
+							state.current ? state.current.id : 'none'
+						],
+					)}
+				</p>
+			</div>
+		);
+
+		started.current.hidden = !state.current;
+		ends_in.current.hidden = !state.current;
+		next_in.current.hidden = !!state.current;
+
+		if (state.current) {
+			started.current.children = (
+				<>
+					{time_tooltip(
+						<p>
+							{state.current.start.toRelative({
+								base: state.now,
+							})}
+						</p>,
+						state.current.start,
+					)}
+				</>
+			);
+			ends_in.current.children = (
+				<>
+					{time_tooltip(
+						<p>
+							{state.current.end.toRelative({
+								base: state.now,
+							})}
+						</p>,
+						state.current.end,
+					)}
+				</>
+			);
+		} else {
+			next_in.current.children = (
+				<>
+					{time_tooltip(
+						<p>
+							{state.next!.start.toRelative({
+								base: state.now,
+							})}
+						</p>,
+						state.next!.start,
+					)}
+				</>
+			);
+		}
+	}
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -36,70 +114,16 @@ export function seasonal() {
 				<PanelHead icon={icons.seasonal}>
 					{tl(trans.seasonal_timeline)}
 				</PanelHead>
-				<SeasonalTimeline
-					current={state.current}
-					prev={state.prev}
-					next={state.next}
-					now={state.now}
-				/>
+				<div class='seasonal-timeline-wrapper' ref={timeline} />
 				<SettingGroup>
 					<SettingSwitch bind='seasonal' />
-					<SettingInfo name={tl(trans.current_season)}>
-						<div
-							class={['icon-combo', 'colourful']}
-							data-season={state.current
-								? state.current.id
-								: 'none'}
-						>
-							<Icon />
-							<p>
-								{tl(
-									trans.seasonal.listing[
-										state.current
-											? state.current.id
-											: 'none'
-									],
-								)}
-							</p>
-						</div>
-					</SettingInfo>
-					{state.current
-						? (
-							<>
-								<SettingInfo name={tl(trans.started)}>
-									{time_tooltip(
-										<p>
-											{state.current.start.toRelative({
-												base: state.now,
-											})}
-										</p>,
-										state.current.start,
-									)}
-								</SettingInfo>
-								<SettingInfo name={tl(trans.ends_in)}>
-									{time_tooltip(
-										<p>
-											{state.current.end.toRelative({
-												base: state.now,
-											})}
-										</p>,
-										state.current.end,
-									)}
-								</SettingInfo>
-							</>
-						)
-						: useSettings.get('seasonal') && (
-							<SettingInfo name={tl(trans.next_in)}>
-								{time_tooltip(
-									<p>
-										{state.next!.start.toRelative({
-											base: state.now,
-										})}
-									</p>,
-									state.next!.start,
-								)}
-							</SettingInfo>
-						)}
+					<SettingInfo
+						name={tl(trans.current_season)}
+						ref={current_season}
+					/>
+					<SettingInfo name={tl(trans.started)} ref={started} />
+					<SettingInfo name={tl(trans.ends_in)} ref={ends_in} />
+					<SettingInfo name={tl(trans.next_in)} ref={next_in} />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
@@ -121,6 +145,9 @@ export function seasonal() {
 			</section>
 		</>,
 	);
+
+	update();
+	useSeasons.on(update);
 }
 
 interface SeasonalTimelineProps {

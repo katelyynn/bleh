@@ -189,13 +189,6 @@ export function bleh() {
 
 			useSettings.on('branding_type', update_branding_type);
 			useSeasons.on((v) => {
-				if (
-					page.type == 'bleh_settings' &&
-					page.state.settings_page == 'seasonal'
-				) {
-					seasonal();
-				}
-
 				const last_season_seen =
 					localStorage.getItem(keys.last_season_seen) ||
 					'';
