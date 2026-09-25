@@ -145,7 +145,7 @@
 	&.cta {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 2px;
 		margin: unset;
 		padding: 10px var(--card-padding) !important;
 		border-radius: unset !important;

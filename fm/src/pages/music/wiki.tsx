@@ -407,55 +407,52 @@ export function bleh_wiki_editor() {
 
 // fix wiki on some devices
 export function patch_wiki() {
-	// add info notes to things
-	if (ff('show_wiki_label')) {
-		let wiki_col = page.structure.main.querySelector('.wiki-column');
-		let wiki_empty = false;
+	let wiki_col = page.structure.main.querySelector('.wiki-column');
+	let wiki_empty = false;
 
-		if (!wiki_col) {
-			wiki_col = page.structure.main.querySelector('.wiki-section');
-		}
-		if (!wiki_col) return;
+	if (!wiki_col) {
+		wiki_col = page.structure.main.querySelector('.wiki-section');
+	}
+	if (!wiki_col) return;
 
-		let wiki_block = wiki_col.querySelector(
-			'.wiki-block.visible-lg .wiki-block-inner-2',
-		);
+	let wiki_block = wiki_col.querySelector(
+		'.wiki-block.visible-lg .wiki-block-inner-2',
+	);
 
-		if (!wiki_block) {
-			wiki_block = wiki_col.querySelector('.wiki-block-cta');
-			wiki_empty = true;
-		}
+	if (!wiki_block) {
+		wiki_block = wiki_col.querySelector('.wiki-block-cta');
+		wiki_empty = true;
+	}
 
-		const read_more = wiki_block!.querySelector(
-			'a:last-child',
-		) as HTMLAnchorElement;
-		read_more?.remove();
+	const read_more = wiki_block!.querySelector(
+		'a:last-child',
+	) as HTMLAnchorElement;
+	read_more?.remove();
 
-		wiki_col.appendChild(
-			<SubText className='wiki-sub-text'>
-				<span class='right-links'>
+	wiki_col.appendChild(
+		<SubText className='wiki-sub-text'>
+			<span class='right-links'>
+				<SeeMore
+					className='wiki-lower'
+					href={`${window.location.href}/+wiki/edit`}
+					icon={icons.edit}
+				>
+					{(tl(trans.edit_wiki) as string).toLowerCase()}
+				</SeeMore>
+				{(!wiki_empty && read_more) && (
 					<SeeMore
 						className='wiki-lower'
-						href={`${window.location.href}/+wiki/edit`}
-						icon={icons.edit}
+						href={read_more.getAttribute('href')!}
 					>
-						{(tl(trans.edit_wiki) as string).toLowerCase()}
+						{(tl(trans.read_more) as string).toLowerCase()}
 					</SeeMore>
-					{(!wiki_empty && read_more) && (
-						<SeeMore
-							className='wiki-lower'
-							href={read_more.getAttribute('href')!}
-						>
-							{(tl(trans.read_more) as string).toLowerCase()}
-						</SeeMore>
-					)}
-				</span>
-			</SubText>,
-		);
+				)}
+			</span>
+		</SubText>,
+	);
 
-		if (!wiki_empty) {
-			patch_wiki_contents(wiki_block!);
-		}
+	if (!wiki_empty) {
+		patch_wiki_contents(wiki_block!);
 	}
 }
 

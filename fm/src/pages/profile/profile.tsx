@@ -177,7 +177,7 @@ export function bleh_profiles() {
 					<h2>{tl(trans.about)}</h2>
 					<p class='subtle'>{tl(trans.no_about, { u: page.name })}</p>
 				</section>
-			)
+			);
 
 			page.structure.side!.insertBefore(
 				about_me_sidebar,
@@ -578,9 +578,7 @@ export function bleh_profiles() {
 			);
 		}
 
-		if (ff('redesigned_profile_header')) {
-			redesign_profile_header(is_own_profile, is_following);
-		}
+		redesign_profile_header(is_own_profile, is_following);
 	} else {
 		load_profile_cache(page.name, cache, profile_cache);
 
@@ -845,7 +843,7 @@ function patch_profile_following() {
 		following_tab.classList.remove('secondary-nav-item-link--active');
 	}
 
-	if (ff('katsune') && page.subpage != 'neighbours') {
+	if (page.subpage != 'neighbours') {
 		const count_text = page.structure.content_top
 			.querySelector('h1')
 			.textContent.trim();

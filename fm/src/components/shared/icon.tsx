@@ -217,6 +217,7 @@ export const icons = {
 	hover: 'mouse',
 	size: 'size',
 	preview: 'preview',
+	feature_flag: 'feature-flag',
 };
 
 interface icon {

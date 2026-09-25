@@ -24,6 +24,7 @@ interface SettingSwitchProps {
 	icon?: string;
 	name?: ReactNode;
 	body?: ReactNode;
+	sub?: ReactNode;
 	onChange?: (val: boolean) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
@@ -43,6 +44,7 @@ export function SettingSwitch({
 	icon,
 	name,
 	body,
+	sub,
 	onChange,
 	disabled,
 	onMouseEnter,
@@ -113,7 +115,7 @@ export function SettingSwitch({
 					/>
 				)}
 				{icon && <SettingIcon name={icon} />}
-				<SettingLabel name={name} body={body} store={store} />
+				<SettingLabel name={name} body={body} sub={sub} store={store} />
 				{useSettings.get('theme') != 'yuzu' && (
 					<Switch
 						className='setting-inner'

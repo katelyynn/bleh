@@ -558,6 +558,14 @@
 	position: relative;
 }
 
+.chartlist-name,
+.chartlist-artist,
+.chartlist-album {
+	&>a {
+		--mask-colour: currentColor;
+	}
+}
+
 .obsession-candidate-artist,
 .chartlist-artist>a,
 .featured-item-artist,

@@ -96,6 +96,10 @@
 	--mask: var(--icon-16-layout-manage);
 }
 
+[data-type="feature_flag"] {
+	--mask: var(--icon-16-feature-flag);
+}
+
 .update-check,
 [data-type="update"] {
 	--mask: var(--icon-16-update);
@@ -1013,9 +1017,6 @@
 	--mask: var(--icon-16-season);
 }
 
-[data-bleh-page="sku"] {
-	--mask: var(--icon-plaster);
-}
 
 .gallery-image-votes,
 .vote-button {

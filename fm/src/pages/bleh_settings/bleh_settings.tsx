@@ -48,6 +48,7 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { SideAction, SideActions } from '@/components/button/side.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
+import { flags_page } from '@/pages/bleh_settings/flags.tsx';
 
 export function bleh_settings() {
 	page.name = auth.name!;
@@ -193,6 +194,7 @@ export function bleh_settings() {
 		},
 		sku: {
 			name: tl(trans.flags),
+			icon: 'feature_flag',
 			password: settings.hu_tao,
 		},
 	};
@@ -263,12 +265,12 @@ export function bleh_settings() {
 			>
 				{auth.sponsor
 					? (
-						<SeeMore onClick={sponsor_manage}>
+						<SeeMore onClick={sponsor_manage} external>
 							{tl(trans.manage_sponsor)}
 						</SeeMore>
 					)
 					: (
-						<SeeMore onClick={sponsor}>
+						<SeeMore onClick={sponsor} external>
 							{tl(trans.sponsor)}
 						</SeeMore>
 					)}
@@ -360,6 +362,8 @@ export async function render_setting_page(page_id) {
 			interface_page();
 		} else if (page_id == 'accessibility') {
 			accessibility();
+		} else if (page_id == 'sku') {
+			flags_page();
 		}
 	} catch (e) {
 		page_error(e);
@@ -424,109 +428,6 @@ export async function render_setting_page(page_id) {
 				        Forget which popups have been seen
 				    </button>
 				</section>
-			`,
-		);
-	} else if (page_id == 'sku') {
-		register_skip_to([]);
-
-		const grouped = Object.entries(version.feature_flags)
-			.sort((a, b) => b[1].date.localeCompare(a[1].date))
-			.reduce((groups, entry) => {
-				const date = entry[1].date;
-				let key = date.slice(0, 7);
-
-				if (key.startsWith('2099')) key = '2099';
-
-				if (!groups[key]) groups[key] = [];
-
-				groups[key].push(entry);
-
-				return groups;
-			}, {});
-
-		render(
-			page.structure.main,
-			html`
-				<div class="bleh--panel">
-				    <div class="panel-intro">
-				        <div class="sub-text">
-				            ${version.build}.${version.sku}
-				        </div>
-				        <h1>☆⌒(>w<)</h1>
-				    </div>
-				    <div class="sep" />
-				    <h4>${tl(trans.manage_feature_flags)}</h4>
-				    <div class="alert alert-danger">
-				        ${tl(trans.beware_notice)}
-				    </div>
-				        ${Object.entries(grouped).map(([month, flags]) => {
-					let label = new Date(`${month}-01`).toLocaleString(
-						undefined,
-						{
-							month: 'long',
-							year: 'numeric',
-						},
-					);
-					if (month.startsWith('2099')) label = tl(trans.general);
-
-					console.error(month, label, flags);
-
-					return html.node`
-                            <h4>${label}</h4>
-                            <div class="setting-group">
-                                ${
-						flags.map(([flag, details]) => {
-							let value = ff(flag);
-
-							let checkbox;
-							let state;
-
-							return html.node`
-                                        <div class="setting" data-type="toggle" onclick=${() => {
-								let current = checkbox.checked;
-
-								checkbox.checked = !current;
-								state.setAttribute('aria-checked', !current);
-
-								settings.feature_flags[flag] = !current;
-								document.body.setAttribute(
-									`data-ff--${flag}`,
-									(!current).toString(),
-								);
-								compile_settings();
-							}}>
-                                            <div class="heading">
-                                                <h5>${details.name}</h5>
-                                                ${
-								details.notice
-									? html.node`<p>${{
-										html: details.notice,
-									}}</p>`
-									: ''
-							}
-                                                <div class="info-row">
-                                                    <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag}</p>
-                                                </div>
-                                            </div>
-                                            <div class="toggle-wrap">
-                                                <input type="checkbox" ref=${(
-								el,
-							) => (checkbox =
-								el)} value=${value} checked=${value} />
-                                                <button class="btn toggle colourful" aria-checked=${value} ref=${(
-								el,
-							) => (state = el)}>
-                                                    <div class="dot" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    `;
-						})
-					}
-                            </div>
-                        `;
-				})}
-				</div>
 			`,
 		);
 	} else if (page_id == 'translate') {
