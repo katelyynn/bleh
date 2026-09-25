@@ -36,6 +36,8 @@
 	max-width: unset;
 	transition-delay: 0s !important;
 
+	--icon-size: 18px;
+
 	--bg: var(--badge);
 	--bg-hov: var(--badge-hov);
 	box-shadow: var(--badge-shadow) !important;
