@@ -367,6 +367,7 @@
 	gap: 6px;
 	color: oklch(var(--c3));
 	cursor: default;
+	display: none;
 }
 
 .listen-board-input {
