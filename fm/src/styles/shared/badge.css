@@ -23,26 +23,25 @@
 	/* */
 	background: none !important;
 	position: relative;
-	--mask-size: 16px;
 
-	--sides: 10px;
+	--sides: 8px;
 
 	--left: var(--icon-left, var(--sides));
 	--top: 50%;
 	--margin-left: none;
-	--margin-top: calc(-1 * var(--mask-size) / 2);
+	--margin-top: calc(-1 * var(--icon-size) / 2);
 	height: 26px;
-	min-width: calc(var(--mask-size) + (var(--sides) * 2));
+	min-width: calc(var(--icon-size) + (var(--sides) * 2));
 	max-width: unset;
 	transition-delay: 0s !important;
 
-	--icon-size: 18px;
+	--icon-size: 16px;
 
 	--bg: var(--badge);
 	--bg-hov: var(--badge-hov);
 	box-shadow: var(--badge-shadow) !important;
 	background-color: var(--bg) !important;
-	border-radius: var(--item-big-radius) !important;
+	border-radius: var(--radius-m) !important;
 	cursor: pointer;
 
 	backdrop-filter: var(--solarium);
@@ -59,12 +58,12 @@
 	}
 
 	&.expand {
-		padding-left: calc(var(--mask-size) + var(--sides) + 4px) !important;
+		padding-left: calc(var(--icon-size) + var(--sides) + 4px) !important;
 		padding-right: var(--sides) !important;
 	}
 
 	.auth-link>& {
-		--mask-size: 16px;
+		--icon-size: 16px;
 		--left: 0;
 		min-width: 16px;
 		height: 16px;
@@ -106,7 +105,7 @@
 		--sides: 0px;
 		height: unset;
 
-		--mask-size: 14px;
+		--icon-size: 14px;
 		min-width: 14px;
 
 		overflow: unset;
@@ -115,7 +114,7 @@
 		height: 18px;
 
 		&.expand {
-			padding-left: calc((var(--icon-left) * 2) + var(--mask-size) + 6px) !important;
+			padding-left: calc((var(--icon-left) * 2) + var(--icon-size) + 6px) !important;
 			--icon-left: 3px;
 			--mask-colour: oklch(var(--b7)) !important;
 
@@ -134,7 +133,7 @@
 
 .badge-back {
 	display: flex;
-	width: calc((var(--icon-left) * 2) + var(--mask-size));
+	width: calc((var(--icon-left) * 2) + var(--icon-size));
 	background-color: oklch(var(--h3));
 
 	position: absolute;
@@ -296,7 +295,7 @@
 	--left: 0;
 	--top: 0;
 	--margin-top: 0;
-	--mask-size: 18px;
+	--icon-size: 18px;
 	background: var(--override-bg, none) !important;
 	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
 
@@ -322,20 +321,20 @@
 .shout-user-avatar .avatar-status-dot {
 	width: 16px;
 	height: 16px;
-	--mask-size: 16px;
+	--icon-size: 16px;
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
 	width: 24px;
 	height: 24px;
-	--mask-size: 24px;
+	--icon-size: 24px;
 }
 
 .attendee-summary-user-avatar .avatar-status-dot,
 .playlisting-playlist-author-image .avatar-status-dot {
 	width: 14px;
 	height: 14px;
-	--mask-size: 14px;
+	--icon-size: 14px;
 }
 
 .shout-user-avatar:before,

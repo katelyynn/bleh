@@ -20,6 +20,10 @@ type BundleOptions = esbuild.BuildOptions & {
 	name: string;
 };
 
+const build: BuildSchema = JSON.parse(
+	await Deno.readTextFile('./src/build/build.json'),
+);
+
 async function bundle({ name, ...options }: BundleOptions) {
 	const start = Date.now();
 	console.log(
@@ -37,15 +41,6 @@ async function bundle({ name, ...options }: BundleOptions) {
 		'color:grey;font-weight:bold;',
 	);
 }
-
-const build: BuildSchema = JSON.parse(
-	await Deno.readTextFile('./src/build/build.json'),
-);
-build.built_on = new Date().toISOString();
-await Deno.writeTextFile(
-	'./src/build/build.json',
-	JSON.stringify(build, null, '\t'),
-);
 
 const JS_BANNER = `// ==UserScript==
 // @name         ${build.brand}
@@ -146,14 +141,23 @@ const extension: BundleOptions = {
 };
 
 if (Deno.args[0] == 'serve') {
-	await bundle(userscript);
-	await bundle(usercss);
+	await Promise.all([
+		bundle(usercss),
+		bundle(userscript),
+	]);
+
 	Deno.serve((req) =>
 		serveDir(req, {
 			showDirListing: true,
 		})
 	);
 } else {
+	build.built_on = new Date().toISOString();
+	await Deno.writeTextFile(
+		'./src/build/build.json',
+		JSON.stringify(build, null, '\t'),
+	);
+
 	await bundle(userscript);
 	const manifest = JSON.parse(
 		await Deno.readTextFile('./ext/manifest.json'),
