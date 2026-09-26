@@ -410,6 +410,12 @@
 	height: fit-content;
 }
 
+.collage-grid {
+	.grid-item-text:not(.grid-item-plays) {
+		width: 100% !important;
+	}
+}
+
 .grid-item-text {
 	color: inherit;
 
@@ -421,7 +427,6 @@
 		white-space: wrap;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
-		width: 100%;
 	}
 
 	&.hovered {
