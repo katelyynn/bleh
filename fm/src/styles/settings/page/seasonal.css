@@ -1,8 +1,14 @@
+.seasonal-timeline-wrapper {
+	padding: var(--card-gap) 0;
+	margin: calc(-1 * var(--card-gap)) 0;
+	overflow: hidden;
+}
+
 .seasonal-timeline-wrap {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	padding: 20px 0;
+	gap: 10px;
+	padding: 10px 0;
 }
 
 .seasonal-timeline-bar {
@@ -11,14 +17,14 @@
 	height: 4px;
 	background: linear-gradient(90deg, transparent, oklch(var(--b2) / 60%),
 			transparent);
-	border-radius: 10px;
+	border-radius: var(--radius-s);
 }
 
 .seasonal-timeline-current {
 	height: 4px;
 	width: 130px;
 	background: oklch(var(--l3-c));
-	border-radius: 10px;
+	border-radius: var(--radius-s);
 	box-shadow: 0 0 0 4px oklch(var(--b5));
 
 	&:not([data-season="none"]) {
@@ -59,8 +65,6 @@
 	background-color: oklch(var(--k4));
 	pointer-events: none;
 
-	display: none;
-
 	&:not([data-season-type="current"]),
 	&[data-season="none"] {
 		display: none;
@@ -84,7 +88,7 @@
 
 	z-index: 0;
 
-	--mask: radial-gradient(at top center, #FFFFFF, transparent 65%);
+	--mask: radial-gradient(at bottom center, #FFFFFF, transparent 60%);
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
@@ -92,8 +96,8 @@
 }
 
 .seasonal-icon {
-	--icon-size: 30px;
-	margin-bottom: 10px;
+	--icon-size: 26px;
+	margin-bottom: 2px;
 
 	--mask-colour: linear-gradient(180deg, oklch(var(--c1)), oklch(var(--c3)));
 
@@ -109,8 +113,6 @@
 }
 
 .seasonal-name {
-	font-size: var(--font-size-subheading);
-	line-height: var(--line-height-subheading);
 	font-weight: var(--font-weight-medium);
 
 	z-index: 3;
@@ -136,6 +138,7 @@
 
 .seasonal-desc {
 	font-size: calc(var(--font-size) - 1px);
+	line-height: calc(var(--line-height) - 1px);
 	color: oklch(var(--c3));
 	z-index: 3;
 }

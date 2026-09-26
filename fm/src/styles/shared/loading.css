@@ -10,6 +10,7 @@
 	align-items: center;
 	height: 285px;
 }
+
 .lazy-shoutbox.async-content-loading {
 	background-image: none !important;
 	position: relative;
@@ -31,6 +32,7 @@
 		animation: spinner 1.2s linear infinite;
 	}
 }
+
 .data-loading {
 	margin: unset !important;
 
@@ -58,6 +60,7 @@
 
 	user-select: none;
 }
+
 .placeholder-head {
 	color: oklch(var(--c3));
 	font-size: 18px;
@@ -75,7 +78,7 @@
 
 	margin-top: unset;
 
-	& > p,
+	&>p,
 	.loading-data-text {
 		color: oklch(var(--c3));
 		user-select: none;
@@ -84,6 +87,7 @@
 
 	.loading-data-text {
 		position: relative;
+		--icon-size: 16px;
 		padding-left: calc(var(--icon-size) + var(--icon-gap));
 		--left: 0;
 		--mask: var(--icon-16-spinner);

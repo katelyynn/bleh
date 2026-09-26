@@ -371,7 +371,7 @@
 	.header-title-secondary {
 		margin-top: 6px !important;
 		flex-wrap: wrap;
-		filter: var(--nav-filter-shadow);
+		filter: var(--precise-filter-shadow);
 
 		@media (max-width: 980px) {
 			justify-content: center;

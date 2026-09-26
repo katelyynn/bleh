@@ -698,34 +698,17 @@ export function append_nav() {
 
 	const count = notif_count + messages_count;
 
-	if (settings.hybrid_inbox) {
+	if (useSettings.get('hybrid_inbox')) {
 		const inbox = html.node`
             <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
                 <div class="counter" data-count=${count}>${count}</div>
             </a>
         `;
 
-		tippy(inbox, {
-			theme: 'stack',
-			content: html.node`
-                <strong>${tl(trans.inbox)}</strong>
-                <div class="inbox-info">
-                    <div class="inbox-info-item">
-                        ${
-				icon({ name: icons.notifications, identifier: 'inbox-tooltip' })
-			}
-                        ${notif_count}
-                    </div>
-                    <div class="inbox-sep" />
-                    <div class="inbox-info-item">
-                        ${
-				icon({ name: icons.messages, identifier: 'inbox-tooltip' })
-			}
-                        ${messages_count}
-                    </div>
-                </div>
-            `,
-		});
+		hover_tooltip(
+			inbox,
+			<Tooltip>{tl(trans.inbox)}</Tooltip>,
+		);
 
 		inbox.addEventListener('click', (e) => {
 			const cmd = e.getModifierState('Control') ||
@@ -741,16 +724,12 @@ export function append_nav() {
 			notifications: {
 				icon: icons.notifications,
 				label: tl(trans.notifications),
-				content: () => {
-					return <></>;
-				},
+				content: () => {},
 			},
 			messages: {
 				icon: icons.messages,
 				label: tl(trans.messages),
-				content: () => {
-					return <></>;
-				},
+				content: () => {},
 			},
 		};
 
@@ -828,9 +807,10 @@ export function append_nav() {
 			if (!new_tab) e.preventDefault();
 		});
 
-		tippy(notifications, {
-			content: tl(trans.notifications),
-		});
+		hover_tooltip(
+			notifications,
+			<Tooltip>{tl(trans.notifications)}</Tooltip>,
+		);
 
 		tippy(notifications, {
 			content: html.node`
@@ -895,9 +875,10 @@ export function append_nav() {
 			if (!new_tab) e.preventDefault();
 		});
 
-		tippy(messages, {
-			content: tl(trans.messages),
-		});
+		hover_tooltip(
+			messages,
+			<Tooltip>{tl(trans.messages)}</Tooltip>,
+		);
 
 		tippy(messages, {
 			content: html.node`

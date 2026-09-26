@@ -20,6 +20,7 @@ import {
 } from '@/components/dialog/theme_schedule.tsx';
 import { useSettings } from '@/page.ts';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -269,9 +270,13 @@ export function ThemeBubble({
 			}}
 		>
 			<ThemePreview id={id} type={source.type} />
+			{source.icon && (
+				<div class='theme-icon'>
+					<Icon name={source.icon} />
+				</div>
+			)}
 			<strong>
 				<span class='theme-name'>
-					{source.icon && <Icon name={source.icon} />}
 					{tl(source.name)}
 				</span>
 			</strong>
@@ -304,6 +309,14 @@ export function ThemeBubble({
 	}
 
 	update();
+
+	hover_tooltip(
+		bubble,
+		<Tooltip>{tl(source.name)}</Tooltip>,
+		{
+			delay: [100, 0],
+		},
+	);
 
 	return bubble;
 }

@@ -239,16 +239,30 @@
 	}
 }
 
-.theme-name {
-	display: flex;
-	align-items: center;
-	gap: 4px;
+.theme-icon {
+	position: absolute;
+	top: 2px;
+	right: 2px;
 
-	&>.bleh-icon-theme {
-		--mask-colour: currentColor;
-		height: var(--icon-size);
-		--icon-size: 14px;
-	}
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: oklch(var(--b5) / 90%);
+	--mask-colour: oklch(var(--l3-c));
+	padding: 2px;
+	border-radius: var(--radius-xl);
+
+	z-index: 10;
+}
+
+.theme-name {
+	text-align: center;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
 
 .theme-bubble-new {

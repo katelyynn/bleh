@@ -34,6 +34,7 @@ import {
 	GraphBlocks,
 } from '@/components/summary/graph.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
 
 export function profile_summary(
 	recent_tracks: Element | undefined,
@@ -52,7 +53,9 @@ export function profile_summary(
 		<ProfileSummary>
 			<PanelTop margin={false}>
 				<ProfileSummaryTitle ref={title}>
-					{tl(trans.value_scrobbles_recently, { v: 0 })}
+					<PanelHead icon={icons.play} margin={false}>
+						{tl(trans.value_scrobbles_recently, { v: 0 })}
+					</PanelHead>
 				</ProfileSummaryTitle>
 				<ProfileSummaryBlocks>
 					<ProfileSummaryBlock
@@ -208,9 +211,11 @@ export function profile_summary(
 					});
 
 					title.current.replaceChildren(
-						tl(trans.value_scrobbles_recently, {
-							v: sum.toLocaleString(lang),
-						}),
+						<PanelHead icon={icons.play} margin={false}>
+							{tl(trans.value_scrobbles_recently, {
+								v: sum.toLocaleString(lang),
+							})}
+						</PanelHead>,
 					);
 				} catch (e) {
 					throw new Error(e);
