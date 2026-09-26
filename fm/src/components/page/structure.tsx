@@ -106,6 +106,10 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
 	page.structure.row.setAttribute('data-assigned', 'true');
 
+	page.structure.row.appendChild(
+		<div class='seasonal-decoration-top' />,
+	);
+
 	if (!page.structure.main || !document.body.contains(page.structure.main)) {
 		log('page missing main, creating', 'page structure');
 		page.structure.main = html.node`

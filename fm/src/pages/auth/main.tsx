@@ -1,6 +1,6 @@
 import { page } from '@/build/page.ts';
 import { log } from '@/build/log.ts';
-import { checkup_page_structure } from '@/components/page/structure.js';
+import { checkup_page_structure } from '@/components/page/structure.tsx';
 import { register_background, update_page } from '@/page.ts';
 import { ReactNode } from 'jsx-dom';
 

@@ -34,7 +34,7 @@ import {
 import {
 	checkup_page_structure,
 	convert_to_toolbar,
-} from '@/components/page/structure.js';
+} from '@/components/page/structure.tsx';
 import { is_same_page, register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';

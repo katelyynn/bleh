@@ -166,6 +166,29 @@
 	}
 }
 
+.seasonal-decoration-top {
+	--height: 40px;
+
+	position: absolute;
+	top: calc(-1 * ((var(--height) - 10px) + 1px));
+	left: 4px;
+	right: 4px;
+	height: var(--height);
+	background-position: bottom;
+	background-size: contain;
+	background-repeat: repeat-x;
+	background-image: var(--seasonal-decoration-top, unset);
+	pointer-events: none;
+
+	--mask: linear-gradient(90deg, transparent, white 3%, white 97%, transparent);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
+
+	opacity: 0.4;
+
+	z-index: 10;
+}
+
 .content:not(.cards-view) {
 	display: flex;
 	justify-content: center;
