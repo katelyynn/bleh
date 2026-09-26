@@ -13,7 +13,7 @@ import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
-import { useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.ts';
 import { save_setting, setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.ts';
@@ -536,37 +536,73 @@ export function append_nav() {
 		</MenuContents>,
 	);
 
-	links.appendChild(more_button);
-
-	const state = page.state.seasons;
-	console.info('season', state);
+	links!.appendChild(more_button);
 
 	// configure bleh
-	const bleh_container = html.node`
-        <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
-            ${tl(trans.bleh_settings)}
-        </a>
-    `;
-	if (!state.current) {
-		tippy(bleh_container, {
-			content: tl(trans.bleh_settings),
-		});
-	} else {
-		page.header.season_tooltip = tippy(bleh_container, {
-			theme: 'seasonal-swatch',
-			content: html.node`
-                <span class="season-colour-name colourful" data-season=${stored_season.id}>${
-				tl(trans.seasonal.listing[state.current.id])
-			}</span>
-                <span class="season-exclusive">${
-				tl(trans.seasonal.notice)
-			}</span>
-            `,
-		});
-	}
-	links.appendChild(bleh_container);
+	const bleh_container = (
+		<Button chibi className='masthead-nav-control' href={`${root}bleh`} />
+	);
+	const bleh_container_tooltip = <Tooltip />;
 
-	page.header.season = bleh_container;
+	hover_tooltip(
+		bleh_container,
+		bleh_container_tooltip,
+	);
+
+	function update_bleh() {
+		const state = useSeasons.get();
+
+		bleh_container.setAttribute('data-hidden', String(!state.current));
+
+		if (!state.current) {
+			bleh_container.setAttribute('href', `${root}bleh`);
+			bleh_container.replaceChildren(
+				<>
+					<Icon name={icons.bleh_settings} />
+					{tl(trans.bleh_settings)}
+				</>,
+			);
+			bleh_container_tooltip.textContent = tl(
+				trans.bleh_settings,
+			) as string;
+		} else {
+			bleh_container.setAttribute('href', `${root}bleh/seasonal`);
+			bleh_container.replaceChildren(
+				<>
+					<Icon
+						className='bleh-seasonal-icon'
+						data-season={state.current ? state.current.id : 'none'}
+					/>
+					{tl(
+						trans.seasonal.listing[
+							state.current ? state.current.id : 'none'
+						],
+					)}
+				</>,
+			);
+			bleh_container_tooltip.replaceChildren(
+				<>
+					<div
+						class={['icon-combo', 'colourful']}
+						data-season={state.current ? state.current.id : 'none'}
+					>
+						<Icon />
+						<p>
+							{tl(
+								trans.seasonal.listing[
+									state.current ? state.current.id : 'none'
+								],
+							)}
+						</p>
+					</div>
+				</>,
+			);
+		}
+	}
+
+	update_bleh();
+	useSeasons.on(update_bleh);
+	links!.appendChild(bleh_container);
 
 	// music
 	if (auth.pro) {

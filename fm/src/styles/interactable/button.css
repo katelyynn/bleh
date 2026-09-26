@@ -296,6 +296,10 @@ select,
 			--right: none !important;
 		}
 	}
+
+	&[data-hidden="true"] {
+		display: none;
+	}
 }
 
 .js-shout-reply-cancel,

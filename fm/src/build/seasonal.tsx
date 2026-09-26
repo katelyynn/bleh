@@ -157,6 +157,8 @@ type seasonState = {
 	next?: processedSeason | undefined;
 };
 
+const SEASON_CHECK_INTERVAL = 30 * 1000;
+
 export class Seasons {
 	private now: DateTime;
 	private previous: processedSeason | undefined;
@@ -172,6 +174,10 @@ export class Seasons {
 		useSettings.on('seasonal', () => this.rebuild());
 		useSettings.on('seasonal_particles', () => this.rebuild());
 		useSettings.on('seasonal_particles_fps', () => this.rebuild());
+
+		setInterval(() => {
+			this.rebuild();
+		}, SEASON_CHECK_INTERVAL);
 	}
 
 	public rebuild() {
@@ -181,14 +187,16 @@ export class Seasons {
 			state.current = undefined;
 		}
 
+		const current = this.current;
+
 		this.now = state.now;
 		this.previous = state.prev;
 		this.current = state.current;
 		this.next = state.next;
 
-		this.apply();
+		if (this.current == current) return;
 
-		if (!this.current) return;
+		this.apply();
 	}
 
 	public get() {

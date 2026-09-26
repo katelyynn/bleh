@@ -680,7 +680,6 @@ function load_page(main_content?: HTMLElement) {
 	seasonal_colour_switch();
 
 	append_nav();
-	update_season_nav();
 
 	page_title();
 

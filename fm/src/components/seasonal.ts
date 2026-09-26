@@ -17,22 +17,3 @@ export interface season {
 		count?: number;
 	};
 }
-
-export function update_season_nav() {
-	if (!page.header.season) return;
-
-	const state = page.state.seasons;
-
-	page.header.season.setAttribute(
-		'href',
-		`${root}bleh${state.current ? '/seasonal' : ''}`,
-	);
-	page.header.season.setAttribute(
-		'data-season',
-		state.current ? state.current.id : 'none',
-	);
-	page.header.season.setAttribute('data-season-active', !!state.current);
-	page.header.season.textContent = state.current
-		? state.current.end.toRelative(state.now)
-		: tl(trans.bleh_settings);
-}
