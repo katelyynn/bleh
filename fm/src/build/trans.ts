@@ -12589,6 +12589,9 @@ export const trans = {
 	stack: {
 		en: 'Stack',
 	},
+	music_and_data: {
+		en: 'Music & Data'
+	}
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

@@ -218,6 +218,8 @@ export const icons = {
 	size: 'size',
 	preview: 'preview',
 	feature_flag: 'feature-flag',
+	wave: 'wave',
+	rose: 'rose',
 };
 
 interface icon {

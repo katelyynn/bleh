@@ -47,21 +47,25 @@ export function getThemes(): Record<string, theme> {
 		rose_pine: {
 			name: trans.themes.rose_pine,
 			type: 'dark',
+			icon: icons.rose,
 			external: true,
 		},
 		rose_pine_dawn: {
 			name: trans.themes.rose_pine_dawn,
 			type: 'light',
+			icon: icons.rose,
 			external: true,
 		},
 		kanagawa_dragon: {
 			name: trans.themes.kanagawa_dragon,
 			type: 'dark',
+			icon: icons.wave,
 			external: true,
 		},
 		kanagawa: {
 			name: trans.themes.kanagawa,
 			type: 'light',
+			icon: icons.wave,
 			external: true,
 			new_release: true,
 		},

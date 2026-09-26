@@ -142,8 +142,23 @@ export function interface_page() {
 	page.structure.main!.replaceChildren(
 		<>
 			<section class='bleh--panel'>
-				<PanelHead icon={icons.recent}>
-					{tl(trans.recents)}
+				<PanelHead icon={icons.album}>
+					{tl(trans.overview)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingList
+						bind='music_links'
+						values={page.state.music_links}
+					/>
+				</SettingGroup>
+				<SettingGroup>
+					<SettingRadio bind='default_avatar_action' />
+					<SettingSwitch bind='simulate_scroll' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.tracks}>
+					{tl(trans.tracks)}
 				</PanelHead>
 				<div class='inner-preview pad' ref={track_preview} />
 				<SettingGroup>
@@ -172,21 +187,6 @@ export function interface_page() {
 					<SettingSwitch bind='colourful_counts' />
 					<SettingRadio bind='count_bar_axis' />
 					<SettingRadio bind='count_bar_style' />
-				</SettingGroup>
-			</section>
-			<section class='bleh--panel'>
-				<PanelHead icon={icons.album}>
-					{tl(trans.overview)}
-				</PanelHead>
-				<SettingGroup>
-					<SettingList
-						bind='music_links'
-						values={page.state.music_links}
-					/>
-				</SettingGroup>
-				<SettingGroup>
-					<SettingRadio bind='default_avatar_action' />
-					<SettingSwitch bind='simulate_scroll' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
