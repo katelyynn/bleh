@@ -88023,7 +88023,8 @@ var bleh = (() => {
           }),
           type: "badge",
           colourful: true,
-          colourful_bg: true
+          colourful_bg: true,
+          has_overlays: false
         });
       },
       "data-streak-high": highest >= 15,
@@ -90376,7 +90377,8 @@ var bleh = (() => {
       body: window2,
       type: "badge",
       colourful: true,
-      colourful_bg: true
+      colourful_bg: true,
+      has_overlays: false
     });
     if (badge.icon != "" && badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
       elem.style.setProperty("--mask", `url(${badge.icon})`);

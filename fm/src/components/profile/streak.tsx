@@ -362,6 +362,7 @@ export function ProfileStreak({
 					type: 'badge',
 					colourful: true,
 					colourful_bg: true,
+					has_overlays: false,
 				});
 			}}
 			data-streak-high={highest >= 15}

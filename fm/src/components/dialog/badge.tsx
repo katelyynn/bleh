@@ -124,6 +124,7 @@ export async function present_badge(badge: badge) {
 		type: 'badge',
 		colourful: true,
 		colourful_bg: true,
+		has_overlays: false,
 	});
 
 	if (
