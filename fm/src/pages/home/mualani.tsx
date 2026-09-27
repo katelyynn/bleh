@@ -13,7 +13,7 @@ import { notify } from '@/components/dialog/notify';
 import { download_with_progress, sanitise } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
-import { save_setting, setting } from '@/components/settings/settings';
+import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
@@ -94,7 +94,6 @@ import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.t
 import { UserSelect } from '@/components/select/user.tsx';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { ComparisonBars } from '@/components/minis/compare.tsx';
-import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
 import { keys } from '@/components/settings/storage.ts';
 
 export function mualani() {

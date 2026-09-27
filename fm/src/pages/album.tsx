@@ -6,13 +6,12 @@
 
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { auth, page, root } from '@/build/page';
-import { clean_number, desanitise, sanitise } from '@/build/tools';
+import { auth, page } from '@/build/page';
+import { clean_number } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
 import {
 	bleh_music_page_charts,
-	redirect,
 	show_your_scrobbles,
 	similar_items,
 } from '@/components/music/music';

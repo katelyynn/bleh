@@ -8,7 +8,7 @@ import { page, root } from '@/build/page.ts';
 import { createRef } from 'jsx-dom';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
+import { icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { Tabbed, TabbedPage } from '@/components/tab/tabbed.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';

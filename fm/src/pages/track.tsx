@@ -7,7 +7,6 @@
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page } from '@/build/page';
-import { tl, trans } from '@/build/trans';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
 import {
 	bleh_music_page_charts,
@@ -15,12 +14,7 @@ import {
 	similar_items,
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import {
-	is_same_page,
-	register_background,
-	update_page,
-	useSettings,
-} from '@/page';
+import { register_background, update_page, useSettings } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_tags_mini } from '@/pages/tag';
 import {
@@ -28,12 +22,10 @@ import {
 	bleh_wiki_editor,
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
-import { html, render } from 'lighterhtml';
 import { avatar } from '@/components/shared/avatar';
 import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
 import { page_header_title, PageHeaderAvatar } from '@/components/music/header';
-import { header_colour } from '@/components/page/colour';
 import {
 	PageHeader,
 	PageHeaderArtist,
@@ -48,10 +40,10 @@ export function bleh_tracks() {
 
 	page.sister = track_header.querySelector(
 		'.header-new-crumb span',
-	).textContent;
+	)!.textContent;
 	page.name = document.body
-		.querySelector('[data-page-resource-name]')
-		.getAttribute('data-page-resource-name');
+		.querySelector('[data-page-resource-name]')!
+		.getAttribute('data-page-resource-name')!;
 
 	page_header_title(track_header);
 
@@ -61,7 +53,9 @@ export function bleh_tracks() {
 	if (auth.pro) {
 		// pro
 
-		page.structure.container = document.body.querySelector('.page-content');
+		page.structure.container = document.body.querySelector(
+			'.page-content',
+		)!;
 	} else {
 		// not pro
 
@@ -69,41 +63,41 @@ export function bleh_tracks() {
 			// normal, is there an ad then a container?
 			page.structure.container = document.body.querySelector(
 				'.full-bleed-ad-container + .page-content:not(.visible-xs)',
-			);
+			)!;
 
 			// death grips for some reason
 			if (!page.structure.container) {
 				page.structure.container = document.body.querySelector(
 					'.page-content',
-				);
+				)!;
 			}
 		} else {
 			page.structure.container = document.body.querySelector(
 				'.page-content',
-			);
+			)!;
 		}
 	}
-	page.structure.row = page.structure.container!.querySelector('.row');
+	page.structure.row = page.structure.container!.querySelector('.row')!;
 	try {
 		if (!is_subpage) {
 			page.structure.main = page.structure.row!.querySelector(
 				'.col-main.buffer-standard',
-			);
+			)!;
 
 			if (page.structure.main?.classList[2]) {
 				page.structure.main = page.structure.row!.querySelector(
 					'.col-main.buffer-standard:not(:first-child)',
-				);
+				)!;
 			}
 		} else {
 			page.structure.main = page.structure.row!.querySelector(
 				'.col-main',
-			);
+			)!;
 		}
 		page.structure.side = page.structure.row!.querySelector(
 			'.col-sidebar:not(.track-overview-video-column)',
-		);
-	} catch (e) {
+		)!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
@@ -132,11 +126,11 @@ export function bleh_tracks() {
 		}
 
 		page.state.avatar_side_override =
-			settings.default_avatar_action == 'expand'
+			useSettings.get('default_avatar_action') == 'expand'
 				? 'expand'
 				: source_album
-				? source_album.querySelector('.link-block-cover-link')
-					.getAttribute('href')
+				? source_album.querySelector('.link-block-cover-link')!
+					.getAttribute('href')!
 				: '';
 
 		//const same_page = is_same_page();
@@ -186,7 +180,7 @@ export function bleh_tracks() {
 			create_avatar(
 				page_avatar,
 				artist_avatar
-					.getAttribute('content')
+					.getAttribute('content')!
 					.replace('/ar0/', '/avatar170s/'),
 				page.state.avatar_side_override,
 			);
@@ -216,7 +210,7 @@ export function bleh_tracks() {
 
 		similar_items();
 	} else {
-		const btn_add = page.structure.side.querySelector('.add-button');
+		const btn_add = page.structure.side!.querySelector('.add-button');
 		if (btn_add != null) {
 			btn_add.setAttribute('data-page-subpage', page.subpage);
 		}

@@ -147,7 +147,7 @@ export function process_badge(badge: badge, user: string) {
 }
 
 export function create_badge(
-	badge = {
+	badge: badge = {
 		type: '',
 		icon: '',
 		reason: '',

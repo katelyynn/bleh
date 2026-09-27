@@ -12,9 +12,6 @@ import { tl, trans } from '@/build/trans';
 import {
 	correct_artist,
 	correct_generic_combo_no_artist,
-	correct_item_by_artist,
-	name_includes,
-	smart_title,
 } from '@/components/music/lotus';
 import {
 	bleh_music_page_charts,
@@ -49,7 +46,7 @@ import { useSettings } from '@/page.ts';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
-import { createRef, ReactElement } from 'jsx-dom';
+import { createRef } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';

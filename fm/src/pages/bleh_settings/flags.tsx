@@ -6,22 +6,11 @@
 
 import { tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
-import { auth, page, root } from '@/build/page.ts';
-import { avatar } from '@/components/shared/avatar.tsx';
+import { page } from '@/build/page.ts';
 import { useSettings } from '@/page.ts';
-import { createRef } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
-import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
-import { SettingList } from '@/components/settings/provider/list.tsx';
-import {
-	page_loading,
-	render_setting_page,
-} from '@/pages/bleh_settings/bleh_settings.tsx';
-import { SettingAction } from '@/components/settings/provider/action.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
-import { CardTip } from '@/components/text/tip.tsx';
 import { flags } from '@/build/flags.ts';
 import { SubText } from '@/components/text/sub.tsx';
 import { ff } from '@/components/settings/sku.ts';

@@ -611,10 +611,10 @@ export function ComparisonBars({
 				style={{ width: `${(you.plays / shared) * 100}%` }}
 			>
 				<div class={['comparison-bar-avatar', 'avatar']}>
-					<img src={you.avatar} />
+					<img src={avatar(you.avatar, 'avatar170s')} />
 				</div>
 				<ComparisonBar
-					avatar={you.avatar}
+					image={you.avatar}
 					plays={you.plays}
 					link={you.link}
 				/>
@@ -624,13 +624,13 @@ export function ComparisonBars({
 				style={{ width: `${(other.plays / shared) * 100}%` }}
 			>
 				<ComparisonBar
-					avatar={other.avatar}
+					image={other.avatar}
 					plays={other.plays}
 					link={other.link}
 					flip
 				/>
 				<div class={['comparison-bar-avatar', 'avatar']}>
-					<img src={other.avatar} />
+					<img src={avatar(other.avatar, 'avatar170s')} />
 				</div>
 			</div>
 		</div>
@@ -638,14 +638,14 @@ export function ComparisonBars({
 }
 
 interface ComparisonBarProps {
-	avatar: string;
+	image: string;
 	plays: number;
 	flip?: boolean;
 	link: string;
 }
 
 function ComparisonBar({
-	avatar,
+	image,
 	plays,
 	flip,
 	link,
@@ -675,10 +675,14 @@ function ComparisonBar({
 		</a>
 	);
 
-	header_colour(<img src={avatar} /> as HTMLImageElement, false, [
-		elem,
-		value.current,
-	]);
+	header_colour(
+		<img src={avatar(image, 'avatar300s')} /> as HTMLImageElement,
+		false,
+		[
+			elem,
+			value.current,
+		],
+	);
 
 	return elem;
 }

@@ -19,7 +19,6 @@ import {
 	name_includes,
 	smart_title,
 } from '@/components/music/lotus';
-import { other_listener } from '@/components/profile/profile_shortcut';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
@@ -37,7 +36,7 @@ import { SideAction, SideActions } from '@/components/button/side.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { create_music_links } from '@/components/music/link_types.tsx';
 
-export async function show_your_scrobbles() {
+export function show_your_scrobbles() {
 	show_numbers_on_side(page.type);
 
 	// commonly nsbm pages are stripped of all social interaction and only have three tabs,

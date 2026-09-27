@@ -13,24 +13,20 @@ import { tl, trans } from '@/build/trans';
 import { useSettings } from '@/page.ts';
 
 export function basic_page_structure() {
-	page.structure.container = document.body.querySelector('.page-content');
+	page.structure.container = document.body.querySelector('.page-content')!;
 	try {
-		page.structure.row = page.structure.container.querySelector('.row');
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+		page.structure.row = page.structure.container.querySelector('.row')!;
+		page.structure.main = page.structure.row.querySelector('.col-main')!;
+		page.structure.side = page.structure.row.querySelector('.col-sidebar')!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
 	checkup_page_structure();
 }
 
-/**
- * ensures general health of the page structure, fills in the global page object
- * @param {boolean} is_subpage controls if the checker should identify content_top's etc.
- * @param {Element|null} header legacy header from last.fm to extract data from
- */
-export function checkup_page_structure(is_subpage = false, header = null) {
+// ensures general health of page structure
+export function checkup_page_structure(is_subpage = false, header?: Element) {
 	if (document.body.style.getPropertyValue('--hue-album')) {
 		page.state.replaced_accent = false;
 

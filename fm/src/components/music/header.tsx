@@ -7,7 +7,6 @@
 import { page, root } from '@/build/page';
 import { html, render } from 'lighterhtml';
 import { avatar, expand_avatar } from '../shared/avatar';
-import { settings } from '@/build/config';
 import { romanise, sanitise } from '@/build/tools';
 import { redirect } from './music';
 import tippy from 'tippy.js';

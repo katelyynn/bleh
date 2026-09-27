@@ -31,7 +31,7 @@ body,
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
 		--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 38%);
 		--toolbar-bg: oklch(0.04 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue) / 50%);
-		--toolbar-border: oklch(var(--b2) / 24%);
+		--toolbar-border: linear-gradient(90deg, oklch(var(--b2) / 24%) 10%, oklch(var(--l3-c) / 25%), oklch(var(--b2) / 24%) 90%);
 		--subtle-border: 1px solid oklch(var(--b2) / 35%);
 
 		--normal-shadow: none;

@@ -7,7 +7,7 @@
 import tippy from 'tippy.js';
 import { season } from '@/components/seasonal';
 import { DateTime } from 'luxon';
-import { ReactElement, ReactNode } from 'jsx-dom';
+import { ReactElement, ReactNode, RefObject } from 'jsx-dom';
 // require page reload
 export const reload_pending = {
 	state: false,
@@ -178,6 +178,7 @@ interface page {
 	suggest: any;
 	restricted: boolean;
 	continue: boolean;
+	supports_shoutbox?: boolean;
 	now: {
 		next_fetch: Date | null;
 		name: HTMLElement | null;
@@ -230,6 +231,8 @@ interface page {
 		artists?: number;
 		loved?: number;
 		snow?: ReactElement;
+		avatar_side?: RefObject<ReactElement>;
+		avatar_side_override?: string;
 	};
 	previous?: {
 		type: string;

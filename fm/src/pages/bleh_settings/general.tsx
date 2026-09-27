@@ -14,20 +14,16 @@ import { api_key, auth, page, root } from '@/build/page';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
 import { lang_info, language, tl, trans } from '@/build/trans';
-import { setting } from '@/components/settings/settings';
 import { DateTime } from 'luxon';
 import { version } from '@/main';
 import { sponsor_list } from '@/build/sponsor';
-import { update_branding_type } from '@/components/page/navigation';
-import tippy from 'tippy.js';
 import { update_check } from '@/components/page/style';
 import { notify } from '@/components/dialog/notify';
 import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
-import { convert_lang_to_country, Flag, flag } from '@/components/shared/flag';
+import { convert_lang_to_country, Flag } from '@/components/shared/flag';
 import { start_update } from '@/components/page/style';
 import { bool } from '@/build/tools';
 import { keys } from '@/components/settings/storage';
-import { new_indicator } from '@/components/shared/indicator';
 import { discord } from '@/build/page';
 import {
 	Icon,
@@ -574,8 +570,7 @@ function Language({
 			<Tooltip>
 				{tl(trans.amount_translated, {
 					c: <strong>{language.translated?.toLocaleString()}</strong>,
-				})},{' '}
-				{tl(trans.missing_translated, {
+				})}, {tl(trans.missing_translated, {
 					c: <strong>{language.missing?.toLocaleString()}</strong>,
 				})}
 			</Tooltip>,

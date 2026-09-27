@@ -6,20 +6,13 @@
 
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { settings } from '@/build/config';
-import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
-import { SettingRange } from '@/components/settings/provider/range.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
-import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { SettingOptions } from '@/components/settings/provider/options.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { BetaIndicator } from '@/components/shared/indicator.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
-import { album_track_corrections, artist_corrections } from '@/build/music.ts';
-import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import {
 	page_loading,
@@ -35,7 +28,6 @@ import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx
 import { createRef } from 'jsx-dom';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
-import { keys } from '@/components/settings/storage.ts';
 import { status } from '@/components/dialog/status.js';
 import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
 import { Alert } from '@/components/text/alert.tsx';

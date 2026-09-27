@@ -55,7 +55,7 @@ body,
 	--sidebar-shadow: 4px 0 5px 1px oklch(var(--b6) / 80%);
 
 	--toolbar-bg: oklch(var(--b6) / 60%);
-	--toolbar-border: oklch(var(--b4) / 75%);
+	--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 75%) 10%, oklch(var(--l3-c) / 35%), oklch(var(--b4) / 75%) 90%);
 	--subtle-border: 1px solid oklch(var(--b4) / 55%);
 
 	--card-blur-bg: oklch(0.3 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 60%));

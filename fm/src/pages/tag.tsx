@@ -10,7 +10,6 @@ import { desanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { checkup_page_structure } from '@/components/page/structure';
 import { register_background, update_page, useSettings } from '../page';
-import { ff } from '@/components/settings/sku';
 import {
 	bleh_wiki,
 	bleh_wiki_editor,

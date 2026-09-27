@@ -4,15 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import {
-	get_activity_list,
-	render_activity_list,
-} from '@/components/shared/activity';
+import { get_activity_list } from '@/components/shared/activity';
 import { settings } from '@/build/config';
 import { log } from '@/build/log.ts';
 import { auth, page, root } from '@/build/page';
 import { sponsor_list } from '@/build/sponsor';
-import { clean_number, copy, romanise, set_storage } from '@/build/tools';
+import { clean_number, romanise, set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
@@ -26,76 +23,45 @@ import {
 } from '@/components/music/lotus';
 import { markdown } from '@/components/markdown/markdown';
 import { redesign_profile_header } from '@/components/profile/profile_header';
-import {
-	select,
-	select_prepare,
-	select_prepare_list,
-} from '@/components/settings/select';
+import { select, select_prepare } from '@/components/settings/select';
 import {
 	checkup_page_structure,
 	convert_to_toolbar,
 } from '@/components/page/structure.tsx';
-import { is_same_page, register_background, update_page } from '@/page';
+import { register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
-import { save_setting, setting } from '@/components/settings/settings';
-import { submit_scrobble } from '@/components/music/scrobble';
+import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
-import { avatar, style_name_from_badge } from '@/components/shared/avatar';
+import { avatar } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';
 import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
 import { profile_reports } from './reports';
-import { toggle } from '@/components/settings/toggle';
 import { profile_summary } from '@/components/profile/summary';
-import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
 import { useSettings } from '@/page.ts';
 import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { icons, SaveIcon } from '@/components/shared/icon.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
-import {
-	PanelTop,
-	SeeMore,
-	SeeMoreContainer,
-	ViewButtons,
-} from '@/components/text/see_more.tsx';
+import { SeeMore, SeeMoreContainer } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
-import {
-	hover_tooltip,
-	menu_tooltip,
-	Tooltip,
-} from '@/components/shared/tooltips.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SubTextPair } from '@/components/profile/sub.tsx';
 import {
 	AboutElement,
 	profile_about,
 	profile_bio_markdown_settings,
 } from '@/pages/profile/about.tsx';
-import {
-	FloatingWindow,
-	FloatingWindowContents,
-} from '@/components/menu/floating_window.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
-import { Tabbed, TabbedPage } from '@/components/tab/tabbed.tsx';
-import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
-import { SettingRadio } from '@/components/settings/provider/radio.tsx';
-import { Token } from '@/components/form/token.tsx';
-import { SettingSelect } from '@/components/settings/provider/select.tsx';
-import { SettingsFooter } from '@/components/form/footer.tsx';
-import { Button } from '@/components/button/button.tsx';
-import {
-	get_profile_streak,
-	ProfileStreak,
-} from '@/components/profile/streak.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { profile_recents } from '@/pages/profile/recents.tsx';
@@ -123,7 +89,9 @@ export function bleh_profiles() {
 	const profile_header = document.body.querySelector('.header--user');
 	if (!profile_header) return;
 
-	let profile_name = profile_header.querySelector('.header-title > a')!;
+	let profile_name = profile_header.querySelector(
+		'.header-title > a',
+	) as HTMLAnchorElement;
 	page.name = profile_name.textContent;
 
 	// are we on the overview page?
@@ -131,28 +99,28 @@ export function bleh_profiles() {
 
 	page.structure.container = document.body.querySelector(
 		'.page-content:not(.profile-cards-container, .report-box-container .page-content)',
-	);
+	)!;
 	try {
 		page.structure.row = page.structure.container.querySelector(
 			'.row:not(._buffer)',
-		);
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+		)!;
+		page.structure.main = page.structure.row.querySelector('.col-main')!;
+		page.structure.side = page.structure.row.querySelector('.col-sidebar')!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
 	checkup_page_structure(is_subpage, profile_header);
 
-	page.supports_shoutbox = page.structure.nav.querySelector(
+	page.supports_shoutbox = !!(page.structure.nav!.querySelector(
 		'.secondary-nav-item--shoutbox',
-	);
+	));
 
 	let new_account = false;
 
-	const profile_cache =
-		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{};
+	const profile_cache = JSON.parse(
+		localStorage.getItem(keys.profile_cache) || '{}',
+	);
 	const cache = profile_cache[page.name] || {};
 
 	let about_me_sidebar = page.structure.row!.querySelector(
@@ -612,7 +580,7 @@ export function bleh_profiles() {
 
 				const header = page.structure.container!.querySelector(
 					'.content-top-header',
-				);
+				)!;
 				page.structure.content_top!.innerHTML = `
                     <div class="content-top-inner-wrap">
                         <div class="container content-top-lower">
@@ -688,7 +656,7 @@ export function bleh_profiles() {
 				.textContent.trim();
 			const chr = count_text.indexOf('(');
 
-			let count = 0;
+			let count = '0';
 			if (chr != -1) {
 				count = count_text
 					.substring(chr)
@@ -764,7 +732,7 @@ export function create_profile_note_panel(has_note?: string) {
 
 // patch following
 function patch_profile_following() {
-	const navlist = page.structure.nav.querySelector('.navlist-items');
+	const navlist = page.structure.nav!.querySelector('.navlist-items');
 
 	let following_tab = navlist.querySelector('.secondary-nav-item--following');
 	const followers_tab = navlist.querySelector(

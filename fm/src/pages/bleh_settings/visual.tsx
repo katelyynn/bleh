@@ -4,22 +4,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { html, render } from 'lighterhtml';
 import { auth, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { save_setting, setting } from '@/components/settings/settings';
-import { update_colour_swatches } from '@/config';
+import { save_setting } from '@/components/settings/settings';
 import {
 	page_loading,
 	register_skip_to,
 	render_setting_page,
-	theme_bubbles,
 } from './bleh_settings';
-import { ff } from '@/components/settings/sku';
 import { settings } from '@/build/config';
-import { match } from '@/components/settings/dynamic_theming';
-import { dialog } from '@/components/dialog/dialog';
-import { colour_tile, colour_type } from '@/components/settings/swatch';
+import { colour_type } from '@/components/settings/swatch';
 import { header_colour } from '@/components/page/colour';
 import { avatar } from '@/components/shared/avatar';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';

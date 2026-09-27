@@ -44,7 +44,7 @@ body,
 				oklch(var(--b5)),
 				oklch(var(--b4)) 42%);
 		--toolbar-bg: oklch(var(--b5) / 70%);
-		--toolbar-border: oklch(var(--b4) / 65%);
+		--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 65%) 10%, oklch(var(--l3-c) / 25%), oklch(var(--b4) / 65%) 90%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
 		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 73%));

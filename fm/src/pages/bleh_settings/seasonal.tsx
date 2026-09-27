@@ -4,20 +4,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { html, render } from 'lighterhtml';
 import { register_skip_to } from './bleh_settings';
 import { trans } from '@/build/trans';
 import { tl } from '@/build/trans';
 import { page } from '@/build/page';
 import { DateTime } from 'luxon';
-import { setting } from '@/components/settings/settings';
-import { settings } from '@/build/config';
 import { season } from '@/components/seasonal';
 import { log } from '@/build/log';
 import { time_tooltip } from '@/components/date/time';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { SubText } from '@/components/text/sub.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
