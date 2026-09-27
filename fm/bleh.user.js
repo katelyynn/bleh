@@ -41050,6 +41050,23 @@ var bleh = (() => {
           ru: "\u0421\u043E\u0447\u0435\u043B\u044C\u043D\u0438\u043A",
           pl: "Wigilia",
           zh: "\u5E73\u5B89\u591C"
+        },
+        graves: {
+          // a nod to the Deadlock character 'Graves'
+          // https://deadlock.wiki/Graves#Typography
+          en: "Graves"
+        },
+        gloom: {
+          en: "Gloom"
+        },
+        smoke: {
+          en: "Smoke"
+        },
+        burgundy: {
+          en: "Burgundy"
+        },
+        lantern: {
+          en: "Lantern"
         }
       },
       exclusive: {
@@ -107350,6 +107367,53 @@ var bleh = (() => {
       }
     ];
     const seasonal_colours = {
+      halloween: [
+        {
+          type: "season",
+          label: trans.seasonal.presets.burgundy,
+          sets: {
+            hue: 16,
+            sat: 1.25,
+            lit: 0.58
+          }
+        },
+        {
+          type: "season",
+          label: trans.seasonal.presets.gloom,
+          sets: {
+            hue: 301,
+            sat: 1.06,
+            lit: 0.53
+          }
+        },
+        {
+          type: "season",
+          label: trans.seasonal.presets.graves,
+          sets: {
+            hue: 136,
+            sat: 1.66,
+            lit: 0.98
+          }
+        },
+        {
+          type: "season",
+          label: trans.seasonal.presets.smoke,
+          sets: {
+            hue: 221,
+            sat: 0.07,
+            lit: 0.94
+          }
+        },
+        {
+          type: "season",
+          label: trans.seasonal.presets.lantern,
+          sets: {
+            hue: 88,
+            sat: 1.67,
+            lit: 0.93
+          }
+        }
+      ],
       christmas: [
         {
           type: "season",

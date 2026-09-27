@@ -2253,6 +2253,23 @@ export const trans = {
 				pl: 'Wigilia',
 				zh: '平安夜',
 			},
+			graves: {
+				// a nod to the Deadlock character 'Graves'
+				// https://deadlock.wiki/Graves#Typography
+				en: 'Graves',
+			},
+			gloom: {
+				en: 'Gloom',
+			},
+			smoke: {
+				en: 'Smoke',
+			},
+			burgundy: {
+				en: 'Burgundy',
+			},
+			lantern: {
+				en: 'Lantern',
+			},
 		},
 		exclusive: {
 			// used as a tooltip for colours only available in certain seasons
@@ -12590,8 +12607,8 @@ export const trans = {
 		en: 'Stack',
 	},
 	music_and_data: {
-		en: 'Music & Data'
-	}
+		en: 'Music & Data',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

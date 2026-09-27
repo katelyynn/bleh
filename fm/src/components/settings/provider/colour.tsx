@@ -165,6 +165,53 @@ export function SettingColour({
 	];
 
 	const seasonal_colours: Record<string, colour[]> = {
+		halloween: [
+			{
+				type: 'season',
+				label: trans.seasonal.presets.burgundy,
+				sets: {
+					hue: 16,
+					sat: 1.25,
+					lit: 0.58,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.gloom,
+				sets: {
+					hue: 301,
+					sat: 1.06,
+					lit: 0.53,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.graves,
+				sets: {
+					hue: 136,
+					sat: 1.66,
+					lit: 0.98,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.smoke,
+				sets: {
+					hue: 221,
+					sat: 0.07,
+					lit: 0.94,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.lantern,
+				sets: {
+					hue: 88,
+					sat: 1.67,
+					lit: 0.93,
+				},
+			},
+		],
 		christmas: [
 			{
 				type: 'season',
