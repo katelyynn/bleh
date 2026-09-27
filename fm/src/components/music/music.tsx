@@ -591,7 +591,12 @@ export async function show_your_scrobbles() {
 	if (!useSettings.get('corrections')) return;
 
 	page.structure.side!.appendChild(
-		<Cta label={tl(trans.lotus_cta[page.corrected])} icon={icons.lotus}>
+		<Cta
+			className='lotus'
+			colourful
+			label={tl(trans.lotus_cta[page.corrected])}
+			icon={icons.lotus}
+		>
 			{ff('refreshed_lotus')
 				? (
 					<SeeMore

@@ -88,8 +88,8 @@ export const seasonal_events: season[] = [
 			day: 24,
 		},
 		end: {
-			month: 11,
-			day: 1,
+			month: 10,
+			day: 31,
 		},
 		snowflakes: {
 			state: false,
@@ -100,7 +100,6 @@ export const seasonal_events: season[] = [
 		start: {
 			month: 11,
 			day: 1,
-			hour: 12,
 		},
 		end: {
 			month: 11,
