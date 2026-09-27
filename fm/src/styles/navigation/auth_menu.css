@@ -276,6 +276,7 @@
 	cursor: default;
 	position: relative;
 	z-index: 20;
+	width: fit-content;
 
 	&.smaller {
 		font-size: calc(var(--font-size) - 1px);

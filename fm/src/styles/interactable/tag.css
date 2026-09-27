@@ -29,13 +29,19 @@
 	--bg-hov: oklch(var(--b4) / 40%);
 	--bg-atv: oklch(var(--b4) / 60%);
 	--col: oklch(var(--c3));
-	--shadow: inset 0 0 0 1px var(--card-border-base);
-	--padding: 5px 9px;
-	--radius: var(--item-med-radius);
-	min-width: 28px !important;
+	--shadow: inset 0 0 0 1px var(--separator-base);
+	--padding: 3px 7px;
+	--radius: var(--radius-s);
+	min-width: var(--button-height) !important;
+	--button-height: 24px;
 	width: fit-content;
 
-	--left: calc((28px - var(--icon-size)) / 2);
+	&:not(.tags-add-cta, .tags-add, .tags-view-all) {
+		font-size: calc(var(--font-size) - 1px) !important;
+	}
+
+	--left: calc((var(--button-height) - var(--icon-size)) / 2);
+	--icon-size: 14px !important;
 
 	min-height: unset;
 	margin-bottom: unset !important;

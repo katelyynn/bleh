@@ -28,6 +28,7 @@ import tippy from 'tippy.js';
 import { Chart } from '@/main';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { convert_to_select } from '@/components/select/select.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -365,6 +366,16 @@ function bleh_glacier_library_date() {
 
 	from_group.remove();
 	to_group.remove();
+
+	const cancel = picker_content.querySelector('.btn-cancel');
+	if (cancel) {
+		cancel.classList.remove('btn-cancel');
+		cancel.classList.add('see-more', 'left-icon');
+		cancel.insertBefore(
+			<Icon name={icons.x} />,
+			cancel.firstChild,
+		);
+	}
 }
 
 // can update at any time!!
