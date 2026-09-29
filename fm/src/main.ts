@@ -7,7 +7,7 @@
 import { log } from './build/log';
 import { bleh } from './page';
 
-import version2 from './build/build.json' with { type: 'json' };
+import build from './build/build.json' with { type: 'json' };
 
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-luxon';
@@ -23,10 +23,7 @@ export const fac = new FastAverageColor();
 
 export const symbol = Symbol('generic');
 
-export const version = version2;
-export const theme_version = {
-	state: '',
-};
+export const version = build;
 
 log(`starting ${version.build}.${version.sku}`, 'load');
 bleh();

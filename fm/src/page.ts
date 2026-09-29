@@ -40,7 +40,7 @@ import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.tsx';
 import { load_settings, Settings } from '@/config';
-import { theme_version, version } from '@/main';
+import { version } from '@/main';
 import { append_nav, update_branding_type } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
@@ -161,11 +161,6 @@ export function bleh() {
 			notices();
 
 			remove_lastfm_styles();
-
-			theme_version.state = getComputedStyle(document.body)
-				.getPropertyValue('--version-build')
-				.replaceAll("'", '')
-				.replaceAll('"', ''); // remove quotations
 
 			update_check(false, null);
 

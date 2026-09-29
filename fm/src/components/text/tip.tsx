@@ -13,6 +13,7 @@ interface CardTipProps {
 	ref?: ReturnType<typeof createRef<HTMLLabelElement>>;
 	minWidth?: boolean;
 	className?: string;
+	center?: boolean;
 	gap?: boolean;
 	children: ReactNode;
 }
@@ -21,11 +22,21 @@ export function CardTip({
 	ref,
 	minWidth,
 	className,
+	center,
 	gap,
 	children,
 }: CardTipProps) {
 	return (
-		<label class={['card-tip', gap && 'gap', className, minWidth && 'min-width']} ref={ref}>
+		<label
+			class={[
+				'card-tip',
+				gap && 'gap',
+				center && 'center',
+				className,
+				minWidth && 'min-width',
+			]}
+			ref={ref}
+		>
 			{children}
 		</label>
 	);

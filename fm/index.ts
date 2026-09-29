@@ -97,7 +97,7 @@ const bundle_css: esbuild.Plugin = {
 };
 
 const shared_opts: Omit<BundleOptions, 'name'> = {
-	entryPoints: ['./src/main.js'],
+	entryPoints: ['./src/main.ts'],
 	banner: { js: JS_BANNER, css: CSS_BANNER },
 	bundle: true,
 	minify: false,

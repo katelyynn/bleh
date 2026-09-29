@@ -363,6 +363,11 @@ pre {
 	&.min-width {
 		max-width: 400px;
 	}
+
+	&.center {
+		text-align: center;
+		width: 100%;
+	}
 }
 
 .card-tip-link {
