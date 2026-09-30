@@ -613,7 +613,6 @@ export function patch_titles(search = page.structure.main) {
 
 				const more_button = (
 					<Button
-						chibi
 						className='track-more-button'
 						tooltip={tl(trans.more)}
 					>

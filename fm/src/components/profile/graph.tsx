@@ -3,8 +3,19 @@ import { page, root } from '@/build/page.ts';
 import { prep_chart_colours } from '@/components/music/chart.ts';
 import { Chart } from '@/main.ts';
 import { useSettings } from '@/page.ts';
+import { GraphBlockElement } from '@/components/summary/graph.tsx';
+import { hover_tooltip } from '@/components/shared/tooltips.tsx';
+import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
+import { lang, tl, trans } from '@/build/trans';
+import { graph_block_level } from '@/components/profile/summary.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '../shared/icon';
 
-export async function collect_last_60(container: Element) {
+export async function collect_last_60(
+	container: Element,
+	graph_blocks: GraphBlockElement[],
+	title: Element,
+) {
 	const current = DateTime.now().startOf('day');
 
 	const part_1 = current.minus({ days: 30 });
@@ -12,6 +23,7 @@ export async function collect_last_60(container: Element) {
 
 	const values: number[] = [];
 	const dates: string[] = [];
+	page.state.glacier.links = [];
 
 	await collect_day_range(part_2, values, dates);
 	await collect_day_range(part_1, values, dates);
@@ -22,6 +34,46 @@ export async function collect_last_60(container: Element) {
 
 		render_graph(container, values, dates);
 	});
+
+	const slice = values.slice(-30);
+
+	let sum = 0;
+	const max = Math.max(...slice);
+	const avg = slice.reduce((sum, val) => sum + val, 0) /
+		slice.length;
+
+	slice.forEach((value, i) => {
+		const date = dates[i];
+		const link = page.state.glacier.links[i];
+
+		const elem = graph_blocks[i];
+		if (!elem) return;
+
+		elem.href = link;
+
+		hover_tooltip(
+			elem,
+			<HeatmapTooltip
+				date={date}
+				value={value.toLocaleString(lang)}
+			/>,
+		);
+
+		if (value > 0) {
+			const level = graph_block_level(value, max, avg);
+			elem.level = level;
+
+			sum += value;
+		}
+	});
+
+	title.replaceChildren(
+		<PanelHead icon={icons.play} margin={false}>
+			{tl(trans.value_scrobbles_recently, {
+				v: sum.toLocaleString(lang),
+			})}
+		</PanelHead>,
+	);
 }
 
 function render_graph(container: Element, values: number[], dates: string[]) {
@@ -117,6 +169,7 @@ async function collect_day_range(
 
 		values.push(value);
 		dates.push(date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY));
+		page.state.glacier.links.push(link);
 	});
 
 	return {

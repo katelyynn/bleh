@@ -98,7 +98,7 @@ export function profile_summary(
 								]}
 							>
 								<LoadingData>
-									{tl(trans.loading_count_days, { c: 90 })}
+									{tl(trans.loading_count_days, { c: 60 })}
 								</LoadingData>
 							</div>
 						)
@@ -137,7 +137,7 @@ export function profile_summary(
 
     */
 
-	collect_last_60(graph_container.current);
+	collect_last_60(graph_container.current, graph_blocks, title.current);
 
 	return;
 
@@ -233,7 +233,7 @@ export function profile_summary(
 	}
 }
 
-function graph_block_level(value: number, max: number, avg: number) {
+export function graph_block_level(value: number, max: number, avg: number) {
 	if (max == 0) return 0;
 
 	const normalized = value / (avg * 2);

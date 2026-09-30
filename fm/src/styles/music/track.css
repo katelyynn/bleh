@@ -957,6 +957,14 @@
 	--shadow: none !important;
 	--shadow-hov: none !important;
 	--font-size: 0;
+	gap: 0 !important;
+}
+
+.track-more-button {
+	--button-verts: 2px;
+	--button-sides: 8px;
+	min-height: unset !important;
+	--icon-size: 18px !important;
 }
 
 .chartlist-break {
