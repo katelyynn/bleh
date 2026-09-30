@@ -280,6 +280,11 @@
 	}
 }
 
+.summary-line-graph {
+	display: flex;
+	flex: 1;
+}
+
 .month-graph {
 	flex: 1;
 
@@ -295,6 +300,29 @@
 		&:before {
 			display: none !important;
 		}
+	}
+}
+
+.summary-line-axes {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: end;
+	cursor: default;
+	font-size: calc(var(--font-size) - 1px);
+	margin-left: -10px;
+
+	padding-right: 10px;
+	text-align: right;
+	color: oklch(var(--c3));
+}
+
+.summary-line-value {
+	opacity: 0.5;
+
+	&:not(.minimum) {
+		font-weight: var(--font-weight-medium);
+		opacity: 1;
 	}
 }
 

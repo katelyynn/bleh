@@ -15,6 +15,7 @@ export async function collect_last_60(
 	container: Element,
 	graph_blocks: GraphBlockElement[],
 	title: Element,
+	axes: Element,
 ) {
 	const current = DateTime.now().startOf('day');
 
@@ -28,11 +29,11 @@ export async function collect_last_60(
 	await collect_day_range(part_2, values, dates);
 	await collect_day_range(part_1, values, dates);
 
-	render_graph(container, values, dates);
+	render_graph(container, values, dates, axes);
 	useSettings.on('theme', () => {
 		if (!container || !container.isConnected) return;
 
-		render_graph(container, values, dates);
+		render_graph(container, values, dates, axes);
 	});
 
 	const slice = values.slice(-30);
@@ -79,7 +80,12 @@ export async function collect_last_60(
 	);
 }
 
-function render_graph(container: Element, values: number[], dates: string[]) {
+function render_graph(
+	container: Element,
+	values: number[],
+	dates: string[],
+	axes: Element,
+) {
 	prep_chart_colours();
 
 	const scrobble_canvas_container = container.querySelector(
@@ -130,6 +136,16 @@ function render_graph(container: Element, values: number[], dates: string[]) {
 		<div class='monthly-chart-line'>
 			{scrobble_canvas}
 		</div>,
+	);
+
+	const max = Math.max(...values);
+	const min = Math.min(...values);
+
+	axes.replaceChildren(
+		<>
+			<div class='summary-line-value'>{max}</div>
+			<div class={['summary-line-value', 'minimum']}>{min}</div>
+		</>,
 	);
 }
 

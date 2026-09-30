@@ -584,7 +584,8 @@ hr {
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	--icon-size: 16px;
-	color: oklch(var(--c3));
+	color: oklch(var(--l3-c));
+	--icon-colour: oklch(var(--c3));
 
 	&>.bleh-icon-dot {
 		margin: 0 -4px;

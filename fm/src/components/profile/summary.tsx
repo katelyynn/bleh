@@ -49,6 +49,7 @@ export function profile_summary(
 
 	const title = createRef();
 	const graph_container = createRef();
+	const axes = createRef();
 
 	const panel = (
 		<ProfileSummary>
@@ -87,37 +88,42 @@ export function profile_summary(
 					})}
 				</GraphBlocks>
 				<ProfileSummarySeparator />
-				<div class='month-graph' ref={graph_container}>
-					{page.state.scrobbles > 0
-						? (
-							<div
-								class={[
-									'scrobble-canvas-container',
-									'mini',
-									'icon-mask',
-								]}
-							>
-								<LoadingData>
-									{tl(trans.loading_count_days, { c: 60 })}
-								</LoadingData>
-							</div>
-						)
-						: auth.name && (
-							<div
-								class={[
-									'scrobble-canvas-container',
-									'mini',
-									'icon-mask',
-								]}
-							>
-								<LoadingData type='failed'>
-									{tl(
-										trans
-											.profile_does_not_have_enough_scrobbles,
-									)}
-								</LoadingData>
-							</div>
-						)}
+				<div class='summary-line-graph'>
+					<div class='summary-line-axes' ref={axes} />
+					<div class='month-graph' ref={graph_container}>
+						{page.state.scrobbles > 0
+							? (
+								<div
+									class={[
+										'scrobble-canvas-container',
+										'mini',
+										'icon-mask',
+									]}
+								>
+									<LoadingData>
+										{tl(trans.loading_count_days, {
+											c: 60,
+										})}
+									</LoadingData>
+								</div>
+							)
+							: auth.name && (
+								<div
+									class={[
+										'scrobble-canvas-container',
+										'mini',
+										'icon-mask',
+									]}
+								>
+									<LoadingData type='failed'>
+										{tl(
+											trans
+												.profile_does_not_have_enough_scrobbles,
+										)}
+									</LoadingData>
+								</div>
+							)}
+					</div>
 				</div>
 			</ProfileSummaryMain>
 		</ProfileSummary>
@@ -137,7 +143,12 @@ export function profile_summary(
 
     */
 
-	collect_last_60(graph_container.current, graph_blocks, title.current);
+	collect_last_60(
+		graph_container.current,
+		graph_blocks,
+		title.current,
+		axes.current,
+	);
 
 	return;
 

@@ -252,7 +252,7 @@ export function load_chart_colours() {
 				},
 			},
 			y: {
-				display: true,
+				display: false,
 				grid: {
 					display: false,
 				},
