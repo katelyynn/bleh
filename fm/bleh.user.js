@@ -86994,7 +86994,7 @@ var bleh = (() => {
       const url = new URL(`https://www.last.fm${link}`);
       const date = DateTime.fromISO(url.searchParams.get("from") || "");
       values.push(value);
-      dates.push(date);
+      dates.push(date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY));
     });
     return {
       values,

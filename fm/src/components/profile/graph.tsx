@@ -11,7 +11,7 @@ export async function collect_last_60(container: Element) {
 	const part_2 = current.minus({ days: 60 });
 
 	const values: number[] = [];
-	const dates: DateTime[] = [];
+	const dates: string[] = [];
 
 	await collect_day_range(part_2, values, dates);
 	await collect_day_range(part_1, values, dates);
@@ -24,7 +24,7 @@ export async function collect_last_60(container: Element) {
 	});
 }
 
-function render_graph(container: Element, values: number[], dates: DateTime[]) {
+function render_graph(container: Element, values: number[], dates: string[]) {
 	prep_chart_colours();
 
 	const scrobble_canvas_container = container.querySelector(
@@ -81,7 +81,7 @@ function render_graph(container: Element, values: number[], dates: DateTime[]) {
 async function collect_day_range(
 	start: DateTime,
 	values: number[],
-	dates: DateTime[],
+	dates: string[],
 ) {
 	const end = start.plus({ days: 30 });
 
@@ -116,7 +116,7 @@ async function collect_day_range(
 		);
 
 		values.push(value);
-		dates.push(date);
+		dates.push(date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY));
 	});
 
 	return {
