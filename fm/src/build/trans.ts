@@ -12616,6 +12616,10 @@ export const trans = {
 		// taste
 		en: 'View your compatibility',
 	},
+	insight: {
+		// used on profiles
+		en: 'Insight',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

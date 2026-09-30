@@ -8,7 +8,7 @@ import { hover_tooltip } from '@/components/shared/tooltips.tsx';
 import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
 import { lang, tl, trans } from '@/build/trans';
 import { graph_block_level } from '@/components/profile/summary.tsx';
-import { PanelHead } from '@/components/text/head.tsx';
+import { PanelHead, PanelHeadExtra } from '@/components/text/head.tsx';
 import { icons } from '../shared/icon';
 
 export async function collect_last_60(
@@ -68,10 +68,13 @@ export async function collect_last_60(
 	});
 
 	title.replaceChildren(
-		<PanelHead icon={icons.play} margin={false}>
-			{tl(trans.value_scrobbles_recently, {
-				v: sum.toLocaleString(lang),
-			})}
+		<PanelHead icon={icons.insight} margin={false}>
+			{tl(trans.insight)}
+			<PanelHeadExtra>
+				{tl(trans.value_this_month, {
+					v: sum.toLocaleString(lang),
+				})}
+			</PanelHeadExtra>
 		</PanelHead>,
 	);
 }

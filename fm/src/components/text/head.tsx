@@ -5,8 +5,9 @@
  */
 
 import { ReactNode } from 'jsx-dom';
-import { Icon } from '@/components/shared/icon.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { useSettings } from '@/page.ts';
+import { WithChildren } from '@/types/generic.tsx';
 
 interface PanelHeadProps {
 	icon?: string;
@@ -46,4 +47,15 @@ export function PanelHead({
 	useSettings.on('theme', update);
 
 	return elem;
+}
+
+export function PanelHeadExtra({
+	children,
+}: WithChildren) {
+	return (
+		<div class='panel-head-extra'>
+			<Icon name={icons.dot} />
+			{children}
+		</div>
+	);
 }

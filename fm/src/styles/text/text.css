@@ -576,6 +576,21 @@ hr {
 	}
 }
 
+.panel-head-extra {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	--icon-size: 16px;
+	color: oklch(var(--c3));
+
+	&>.bleh-icon-dot {
+		margin: 0 -4px;
+	}
+}
+
 .goth {
 	font-family: var(--font-head);
 	font-size: var(--font-size-head);

@@ -54,8 +54,8 @@ export function profile_summary(
 		<ProfileSummary>
 			<PanelTop margin={false}>
 				<ProfileSummaryTitle ref={title}>
-					<PanelHead icon={icons.play} margin={false}>
-						{tl(trans.value_scrobbles_recently, { v: 0 })}
+					<PanelHead icon={icons.insight} margin={false}>
+						{tl(trans.insight)}
 					</PanelHead>
 				</ProfileSummaryTitle>
 				<ProfileSummaryBlocks>

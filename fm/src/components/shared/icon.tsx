@@ -220,6 +220,8 @@ export const icons = {
 	feature_flag: 'feature-flag',
 	wave: 'wave',
 	rose: 'rose',
+	insight: 'insight',
+	dot: 'dot',
 };
 
 interface icon {
