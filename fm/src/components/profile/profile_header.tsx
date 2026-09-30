@@ -23,13 +23,20 @@ import { save_setting } from '@/components/settings/settings';
 import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
-import { taste_artist } from './taste';
+import { taste_artist, TasteArtist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
 import { useSettings } from '@/page.ts';
 import { Button } from '@/components/button/button.tsx';
 import { ReactElement } from 'jsx-dom';
+import { LoadingData } from '@/components/loading/loading.tsx';
+import { MenuContents } from '@/components/menu/menu.tsx';
+import { SubText } from '@/components/text/sub.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
-export function redesign_profile_header(is_own_profile, is_following) {
+export function redesign_profile_header(
+	is_own_profile: boolean,
+	is_following: boolean,
+) {
 	if (!auth.name) return;
 
 	const is_sponsor_host = page.name == sponsor_list.related.account_name;
@@ -40,7 +47,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 	// taste
 	let taste = '';
 	let taste_percentage = '';
-	let taste_artists = [];
+	const taste_artists: string[] = [];
 	let taste_formal = 'NONE';
 
 	if (!is_own_profile && !is_sponsor_host) {
@@ -58,11 +65,11 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
 			taste_formal = taste_meter.querySelector(
 				'span.tasteometer-compat-colour',
-			)?.textContent;
+			)?.textContent!;
 
 			taste_percentage = taste_meter
-				.querySelector('.tasteometer-viz')
-				.getAttribute('title');
+				.querySelector('.tasteometer-viz')!
+				.getAttribute('title')!;
 			if (taste_percentage == '99%') taste_percentage = '100%';
 		}
 	}
@@ -209,14 +216,14 @@ export function redesign_profile_header(is_own_profile, is_following) {
 	}
 
 	if (!page.mobile) {
-		page.structure.side.insertBefore(
+		page.structure.side!.insertBefore(
 			profile_header,
-			page.structure.side.firstElementChild,
+			page.structure.side!.firstElementChild,
 		);
 	} else {
-		page.structure.main.insertBefore(
+		page.structure.main!.insertBefore(
 			profile_header,
-			page.structure.main.firstElementChild,
+			page.structure.main!.firstElementChild,
 		);
 	}
 
@@ -228,175 +235,155 @@ export function redesign_profile_header(is_own_profile, is_following) {
 		auth.name
 	) {
 		if (taste == '') {
-			summary.appendChild(html.node`
-                <div class="loading-data-container">
-                    <div class="loading-data-text error">${
-				tl(trans.missing_component)
-			}</div>
-                </div>
-            `);
+			profile_header.after(
+				<LoadingData type='failed'>
+					{tl(trans.missing_component)}
+				</LoadingData>,
+			);
 
 			return;
 		}
 
 		let details_btn;
 
-		const taste_wrap = html.node`
-            <div class="taste ${
-			taste != 'super' && taste != 'very_low' ? 'icon' : ''
-		}">
-                <div class="taste-pics">
-                    <div class="taste-avatar avatar">
-                        <img src=${
-			avatar(auth.avatar, 'avatar300s')
-		} alt=${auth.name}>
-                    </div>
-                    <div class="taste-avatar avatar">
-                        <img src=${page.avatar} alt=${page.name}>
-                    </div>
-                </div>
-                <div class="span">
-                    <label class="taste-badge colourful" data-taste=${taste}>${taste_formal}</label>
-                    <div class="listen-item-info">
-                        <h3 class="listen-item-name">
-                            ${{
-			html: tl(trans.you_share_count_with, {
-				c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>`,
-			}),
-		}}
-                        </h3>
-                        <p class="listen-item-text">
-                            ${
-			taste_artists.length == 1
-				? { html: taste_artist(taste_artists[0]) }
-				: ''
-		}
-                            ${
-			taste_artists.length == 2
-				? {
-					html: tl(trans.you_share_count_with.two, {
-						artist1: taste_artist(taste_artists[0]),
-						artist2: taste_artist(taste_artists[1]),
-					}),
-				}
-				: ''
-		}
-                            ${
-			taste_artists.length == 3
-				? {
-					html: tl(trans.you_share_count_with.three, {
-						artist1: taste_artist(taste_artists[0]),
-						artist2: taste_artist(taste_artists[1]),
-						artist3: taste_artist(taste_artists[2]),
-					}),
-				}
-				: ''
-		}
-                        </p>
-                    </div>
-                </div>
-                <div class="taste-bar">
-                    <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
-                </div>
-                <div class="taste-interactions">
-                    <button class="btn icon select-button taste-details outline-btn" data-type="details" ref=${(
-			el,
-		) => details_btn = el}>${tl(trans.view_details)}</button>
-                </div>
-            </div>
-        `;
+		const taste_menu = (
+			<MenuContents>
+				<Button
+					menu
+					href={`${root}user/${auth.name}/library/music/${redirect()}${
+						sanitise(taste_artists[0])
+					}`}
+				>
+					<Icon name={icons.user} />
+					{taste_artists[0]}
+					<SubText>({tl(trans.you)})</SubText>
+				</Button>
+				<Button
+					menu
+					href={`${root}user/${page.name}/library/music/${redirect()}${
+						sanitise(taste_artists[0])
+					}`}
+				>
+					<Icon name={icons.users} />
+					{taste_artists[0]}
+					<SubText>({tl(trans.other)})</SubText>
+				</Button>
+				{taste_artists[1] && (
+					<>
+						<Button
+							menu
+							href={`${root}user/${auth.name}/library/music/${redirect()}${
+								sanitise(taste_artists[1])
+							}`}
+						>
+							<Icon name={icons.user} />
+							{taste_artists[1]}
+							<SubText>({tl(trans.you)})</SubText>
+						</Button>
+						<Button
+							menu
+							href={`${root}user/${page.name}/library/music/${redirect()}${
+								sanitise(taste_artists[1])
+							}`}
+						>
+							<Icon name={icons.users} />
+							{taste_artists[1]}
+							<SubText>({tl(trans.other)})</SubText>
+						</Button>
+					</>
+				)}
+				{taste_artists[2] && (
+					<>
+						<Button
+							menu
+							href={`${root}user/${auth.name}/library/music/${redirect()}${
+								sanitise(taste_artists[2])
+							}`}
+						>
+							<Icon name={icons.user} />
+							{taste_artists[2]}
+							<SubText>({tl(trans.you)})</SubText>
+						</Button>
+						<Button
+							menu
+							href={`${root}user/${page.name}/library/music/${redirect()}${
+								sanitise(taste_artists[2])
+							}`}
+						>
+							<Icon name={icons.users} />
+							{taste_artists[2]}
+							<SubText>({tl(trans.other)})</SubText>
+						</Button>
+					</>
+				)}
+				<div class='sep' />
+				<Button
+					menu
+					onClick={() => {
+						copy(tl(trans.generic_lastfm_compatibility_message, {
+							u: page.name,
+							r: taste_formal,
+							a: taste_artists.join(tl(trans.comma) as string),
+						}));
+					}}
+				>
+					<Icon name={icons.copy} />
+					{tl(trans.copy)}
+				</Button>
+			</MenuContents>
+		);
 
-		const other_avi = page.avatar.replace('/avatar300s/', '/avatar42s/');
-		let taste_menu;
+		const taste_wrap = (
+			<section class={['profile-taste', 'colourful']} data-taste={taste}>
+				<div class='profile-taste-top'>
+					<div class={['profile-taste-top-badges']}>
+						<div class='profile-taste-top-badge-percent'>
+							{taste_percentage}
+						</div>
+						<div class='profile-taste-top-badge-formal'>
+							{taste_formal}
+						</div>
+					</div>
+					<div class={['profile-taste-top-bar']}>
+						<div
+							class={['profile-taste-top-bar-fill']}
+							style={{ width: taste_percentage }}
+						/>
+					</div>
+				</div>
+				<div class='profile-taste-middle'>
+					<div class='profile-taste-artists'>
+						{taste_artists[0] && (
+							<TasteArtist artist={taste_artists[0]} />
+						)}
+						{taste_artists[1] && (
+							<>
+								, <TasteArtist artist={taste_artists[1]} />
+							</>
+						)}
+						{taste_artists[2] && (
+							<>
+								, <TasteArtist artist={taste_artists[2]} />
+							</>
+						)}
+					</div>
+				</div>
+				{taste_artists.length > 0 && (
+					<div class='profile-taste-lower'>
+						<Button outline opens={taste_menu}>
+							{tl(trans.view_your_compatibility)}
+						</Button>
+					</div>
+				)}
+			</section>
+		);
 
-		if (taste_artists.length > 0) {
-			taste_menu = html.node`
-                <div class="taste-menu-header colourful" data-taste=${taste}>
-                    ${taste_formal} (${taste_percentage})
-                </div>
-                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${
-				sanitise(taste_artists[0])
-			}" data-menu-item="shared-artist">
-                    <span class="menu-avatar">
-                        <img src=${other_avi} alt=${page.name}>
-                    </span>
-                    ${taste_artists[0]}
-                </a>
-                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${
-				sanitise(taste_artists[0])
-			}" data-menu-item="shared-artist">
-                    <span class="menu-avatar">
-                        <img src=${auth.avatar} alt=${auth.name}>
-                    </span>
-                    ${taste_artists[0]}
-                </a>
-                ${
-				taste_artists.length >= 2
-					? html.node`
-                <div class="sep"></div>
-                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${
-						sanitise(taste_artists[1])
-					}" data-menu-item="shared-artist">
-                    <span class="menu-avatar">
-                        <img src=${other_avi} alt=${page.name}>
-                    </span>
-                    ${taste_artists[1]}
-                </a>
-                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${
-						sanitise(taste_artists[1])
-					}" data-menu-item="shared-artist">
-                    <span class="menu-avatar">
-                        <img src=${auth.avatar} alt=${auth.name}>
-                    </span>
-                    ${taste_artists[1]}
-                </a>
-                `
-					: ''
-			}
-                ${
-				taste_artists.length >= 3
-					? html.node`
-                <div class="sep"></div>
-                <a class="dropdown-menu-clickable-item" href="${root}user/${page.name}/library/music/${redirect()}${
-						sanitise(taste_artists[2])
-					}" data-menu-item="shared-artist">
-                    <span class="menu-avatar">
-                        <img src=${other_avi} alt=${page.name}>
-                    </span>
-                    ${taste_artists[2]}
-                </a>
-                <a class="dropdown-menu-clickable-item" href="${root}user/${auth.name}/library/music/${redirect()}${
-						sanitise(taste_artists[2])
-					}" data-menu-item="shared-artist">
-                    <span class="menu-avatar">
-                        <img src=${auth.avatar} alt=${auth.name}>
-                    </span>
-                    ${taste_artists[2]}
-                </a>
-                `
-					: ''
-			}
-                <div class="sep"></div>
-                <a class="dropdown-menu-clickable-item" data-type="compare" href="${root}bleh/minis/compare?profile=${page.name}">${
-				tl(trans.compare)
-			}</a>
-                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-				copy(tl(trans.generic_lastfm_compatibility_message, {
-					u: page.name,
-					r: taste_formal,
-					a: taste_artists.join(tl(trans.comma)),
-				}));
-			}}>
-                    ${tl(trans.copy)}
-                </button>
-            `;
-		}
-
-		summary.appendChild(taste_wrap);
+		profile_header.after(taste_wrap);
 
 		const today = new Date();
 		const february = today.getMonth() == 1 && today.getDate() == 14;
 
+		// TODO
 		if (
 			ff('sandrone') && february &&
 			settings.friends.includes(page.name) &&
@@ -493,18 +480,6 @@ export function redesign_profile_header(is_own_profile, is_following) {
 					</div>
 				`,
 			);
-		}
-
-		if (taste_artists.length > 0) {
-			tippy(details_btn, {
-				theme: 'context-menu',
-				content: taste_menu,
-				trigger: 'click',
-				placement: 'bottom',
-				interactive: true,
-				interactiveBorder: 10,
-				appendTo: document.body,
-			});
 		}
 	}
 }

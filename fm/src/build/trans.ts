@@ -12612,6 +12612,10 @@ export const trans = {
 	streak_information: {
 		en: 'Streaks are calculated locally and max 100 at the moment.',
 	},
+	view_your_compatibility: {
+		// taste
+		en: 'View your compatibility',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

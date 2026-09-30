@@ -315,7 +315,7 @@
 
 	&>form>section,
 	&>div,
-	&>section:not(.side-actions, .profile-summary, .featured-item-panel) {
+	&>section:not(.side-actions, .profile-summary, .featured-item-panel, .profile-taste) {
 		margin-top: unset !important;
 	}
 

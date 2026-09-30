@@ -13,3 +13,20 @@ export function taste_artist(artist: string) {
 		sanitise(artist)
 	}">${artist}</a>`;
 }
+
+interface TasteArtistProps {
+	artist: string;
+}
+
+export function TasteArtist({
+	artist,
+}: TasteArtistProps) {
+	return (
+		<a
+			class='taste-artist'
+			href={`${root}music/${redirect()}${sanitise(artist)}`}
+		>
+			{artist}
+		</a>
+	);
+}
