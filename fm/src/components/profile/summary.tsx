@@ -35,6 +35,7 @@ import {
 } from '@/components/summary/graph.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import { collect_last_60 } from '@/components/profile/graph.tsx';
 
 export function profile_summary(
 	recent_tracks: Element | undefined,
@@ -135,6 +136,10 @@ export function profile_summary(
     }
 
     */
+
+	collect_last_60(graph_container.current);
+
+	return;
 
 	fetch_30_day();
 

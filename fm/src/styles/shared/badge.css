@@ -17,7 +17,7 @@
 	box-shadow: unset !important;
 	min-height: unset;
 	line-height: unset;
-	transition-property: background-color;
+	transition-property: background-color, scale;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 	/* */
@@ -49,7 +49,9 @@
 
 	&:hover {
 		background-color: var(--bg-hov) !important;
-		transition-duration: 0s !important;
+		transition-property: scale;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
 	}
 
 	&:not(.expand) {
@@ -60,6 +62,10 @@
 	&.expand {
 		padding-left: calc(var(--icon-size) + var(--sides) + 4px) !important;
 		padding-right: var(--sides) !important;
+
+		&:active {
+			scale: 0.97;
+		}
 	}
 
 	.auth-link>& {

@@ -110,19 +110,18 @@
 	}
 
 	.source-album-details {
-		flex: 1;
 		overflow: hidden;
 
 		.source-album-name {
 			font-weight: var(--font-weight-medium) !important;
 			margin: unset;
 			-webkit-line-clamp: 1;
-			text-decoration: var(--hover-underline, none) !important;
 
 			&>a {
 				display: flex;
 				gap: 6px;
 				color: inherit;
+				--mask-colour: currentColor;
 			}
 
 			&.oracle-loading {
@@ -144,6 +143,7 @@
 
 			&>a {
 				color: oklch(var(--c2) / 80%);
+				--mask-colour: currentColor;
 			}
 
 			&>a+a {

@@ -18,7 +18,6 @@ import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';
-import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
 import { click_indicator } from '@/components/shared/indicator';
 import { createRef, ReactNode } from 'jsx-dom';
