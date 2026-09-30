@@ -76,13 +76,36 @@
 
 .profile-taste-top-badges {
 	display: flex;
-	gap: 10px;
+	gap: 6px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row-reverse;
 	margin: 0 auto;
 	z-index: 10;
 	line-height: var(--line-height-subheading);
+
+	background-color: oklch(var(--f4) / 20%);
+	padding: 1px 6px;
+	border-radius: var(--radius-s);
+	rotate: -1deg;
+
+	animation: profile-taste-badge 6.5s var(--trans-function-ani) infinite;
+}
+
+@keyframes profile-taste-badge {
+
+	from,
+	to {
+		background-color: oklch(var(--f4) / 20%);
+		scale: 1;
+		transform: rotate(-1deg);
+	}
+
+	40% {
+		background-color: oklch(var(--f4) / 25%);
+		scale: 1.04;
+		transform: rotate(2deg);
+	}
 }
 
 .profile-taste-top-badge-formal {
@@ -92,11 +115,13 @@
 	font-weight: var(--font-weight-medium);
 
 	translate: 0 -1px;
+	rotate: 1deg;
 }
 
 .profile-taste-top-badge-percent {
 	color: oklch(var(--l3-c));
 	font-weight: var(--font-weight-medium);
+	rotate: 0deg;
 }
 
 .profile-taste-top-bar {
@@ -127,7 +152,7 @@
 .profile-taste-artists {
 	text-align: center;
 	color: oklch(var(--c3));
-	margin-top: 4px;
+	margin-top: 6px;
 	cursor: default;
 }
 
