@@ -106393,7 +106393,8 @@ var bleh = (() => {
           grid: {
             display: false
           },
-          suggestedMax: 10
+          suggestedMax: 10,
+          min: 0
         }
       },
       onClick: (e5, active, chart) => {

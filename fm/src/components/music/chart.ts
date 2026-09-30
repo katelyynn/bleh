@@ -257,6 +257,7 @@ export function load_chart_colours() {
 					display: false,
 				},
 				suggestedMax: 10,
+				min: 0,
 			},
 		},
 		onClick: (e, active, chart) => {
