@@ -304,6 +304,7 @@
 				.user-list-shared-artists,
 				.user-list-about-me:not(.has-featured-track) {
 					opacity: 0;
+					pointer-events: none;
 				}
 			}
 

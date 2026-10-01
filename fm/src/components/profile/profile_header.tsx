@@ -338,7 +338,8 @@ export function redesign_profile_header(
 				<div class='profile-taste-top'>
 					<div class={['profile-taste-top-badges']}>
 						<div class='profile-taste-top-badge-percent'>
-							{taste_percentage}
+							{taste_percentage.slice(0, -1)}
+							<span class='percent-marker'>%</span>
 						</div>
 						<div class='profile-taste-top-badge-formal'>
 							{taste_formal}

@@ -61,8 +61,8 @@
 	display: flex;
 	flex-direction: column;
 
-	padding: var(--card-padding) !important;
-	margin: calc(-1 * var(--card-padding)) 0 !important;
+	padding: calc(var(--card-padding) * 4) var(--card-padding) var(--card-padding) !important;
+	margin: calc(-1 * (var(--card-padding) * 4)) 0 calc(-1 * var(--card-padding)) !important;
 
 	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%), transparent) !important;
 }
@@ -76,7 +76,7 @@
 
 .profile-taste-top-badges {
 	display: flex;
-	gap: 6px;
+	gap: 4px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row-reverse;
@@ -85,7 +85,7 @@
 	line-height: var(--line-height-subheading);
 
 	background-color: oklch(var(--f4) / 20%);
-	padding: 1px 6px;
+	padding: 0 7px;
 	border-radius: var(--radius-s);
 	rotate: -1deg;
 
@@ -109,10 +109,11 @@
 }
 
 .profile-taste-top-badge-formal {
-	font-size: var(--font-size-subheading);
+	font-family: Crimson Text, var(--font);
+	font-size: 20px;
 
 	color: oklch(var(--l2-c-theme-switch));
-	font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight-bold);
 
 	translate: 0 -1px;
 	rotate: 1deg;
@@ -122,6 +123,12 @@
 	color: oklch(var(--l3-c));
 	font-weight: var(--font-weight-medium);
 	rotate: 0deg;
+}
+
+.percent-marker {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-sm);
+	opacity: 0.7;
 }
 
 .profile-taste-top-bar {

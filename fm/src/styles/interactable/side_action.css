@@ -23,6 +23,8 @@
 
 	position: relative;
 
+	z-index: 20;
+
 	&:after {
 		content: '';
 		position: absolute;
