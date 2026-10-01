@@ -109105,7 +109105,7 @@ var bleh = (() => {
           top: 0,
           left: 0,
           right: 0,
-          padding: "20px",
+          padding: "15px",
           background: "#fff",
           zIndex: 1e8,
           display: "flex",
@@ -109113,33 +109113,51 @@ var bleh = (() => {
           alignItems: "center",
           gap: "30px"
         },
-        children: [
-          /* @__PURE__ */ jsx("strong", {
-            children: tl2(trans.style_warning)
-          }),
-          /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: "btn-primary",
-            onClick: () => {
-              useSettings.set("branch", "uwu");
-              useSettings.set("dev", false);
-              window.location.reload();
-            },
-            children: tl2(trans.re_enable_style_loading)
-          }),
-          /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: "btn-primary",
-            onClick: () => {
-              open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
-            },
-            children: tl2(trans.check_for_updates)
-          })
-        ]
+        children: !page.disabled ? /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx("strong", {
+              children: tl2(trans.style_warning)
+            }),
+            /* @__PURE__ */ jsx("button", {
+              type: "button",
+              class: "btn-primary",
+              onClick: () => {
+                useSettings.set("branch", "uwu");
+                useSettings.set("dev", false);
+                window.location.reload();
+              },
+              children: tl2(trans.re_enable_style_loading)
+            }),
+            /* @__PURE__ */ jsx("button", {
+              type: "button",
+              class: "btn-primary",
+              onClick: () => {
+                open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
+              },
+              children: tl2(trans.check_for_updates)
+            })
+          ]
+        }) : /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx("strong", {
+              children: "This page has bleh automatically disabled."
+            }),
+            /* @__PURE__ */ jsx("button", {
+              type: "button",
+              class: "btn-primary",
+              onClick: () => {
+                window.history.back();
+                window.location.reload();
+              },
+              children: "Go back one page"
+            })
+          ]
+        })
       });
       document.body.appendChild(style_warning);
       page.structure.style_warning = style_warning;
     }
+    if (page.disabled) return;
     const update_required = bool(localStorage.getItem(keys3.update_required) || "false");
     page.state.quick_access_items = {
       home: {
@@ -110964,8 +110982,9 @@ var bleh = (() => {
     document.documentElement.classList.add("florence-supports-loading");
     const split = window.location.pathname.replace(root, "").split("/");
     const length = split.length - 1;
-    if (split[0] == "labs" && split[length] != "labs") {
+    if (split[0] == "labs" && split[length] != "labs" || split[0] == "api" && !split[length].includes("account")) {
       log("disabled loading for special interface", "style");
+      page.disabled = true;
       return;
     }
     document.documentElement.appendChild(/* @__PURE__ */ jsx("style", {
@@ -121872,7 +121891,12 @@ var bleh = (() => {
 
   // src/pages/home/api.js
   async function bleh_api() {
-    if (page.subpage == "docs") return;
+    if (page.subpage == "docs") {
+      if (!page.disabled) window.location.reload();
+      const footer = document.body.querySelector("footer.footer");
+      footer?.remove();
+      return;
+    }
     page.structure.container = document.body.querySelector(".page-content");
     try {
       page.structure.row = page.structure.container.querySelector(".row");
@@ -121995,9 +122019,9 @@ var bleh = (() => {
       }
       sponsoring = Object.keys(sponsor_list.users).length - 2;
     }
-    const bleh_website2 = "https://bleh.katelyn.moe";
+    const bleh_website2 = "https://bleh.yuzu.pet";
     const contributors = "https://github.com/katelyynn/bleh/graphs/contributors";
-    const source = "https://github.com/katelyynn/bleh";
+    const source = "https://yuzu.pet/~bleh";
     const issue = "https://github.com/katelyynn/bleh/issues/new/choose";
     footer.appendChild(/* @__PURE__ */ jsx(Fragment, {
       children: [
@@ -122118,7 +122142,12 @@ var bleh = (() => {
       "data-type": type,
       href,
       target: "_blank",
-      children
+      children: [
+        children,
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.external
+        })
+      ]
     });
   }
   function FooterDot() {

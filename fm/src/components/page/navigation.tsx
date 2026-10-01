@@ -140,7 +140,7 @@ export function append_nav() {
 					top: 0,
 					left: 0,
 					right: 0,
-					padding: '20px',
+					padding: '15px',
 					background: '#fff',
 					zIndex: 100000000,
 					display: 'flex',
@@ -149,34 +149,58 @@ export function append_nav() {
 					gap: '30px',
 				}}
 			>
-				<strong>{tl(trans.style_warning)}</strong>
-				<button
-					type='button'
-					class='btn-primary'
-					onClick={() => {
-						useSettings.set('branch', 'uwu');
-						useSettings.set('dev', false);
-						window.location.reload();
-					}}
-				>
-					{tl(trans.re_enable_style_loading)}
-				</button>
-				<button
-					type='button'
-					class='btn-primary'
-					onClick={() => {
-						open(
-							`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
-						);
-					}}
-				>
-					{tl(trans.check_for_updates)}
-				</button>
+				{!page.disabled
+					? (
+						<>
+							<strong>{tl(trans.style_warning)}</strong>
+							<button
+								type='button'
+								class='btn-primary'
+								onClick={() => {
+									useSettings.set('branch', 'uwu');
+									useSettings.set('dev', false);
+									window.location.reload();
+								}}
+							>
+								{tl(trans.re_enable_style_loading)}
+							</button>
+							<button
+								type='button'
+								class='btn-primary'
+								onClick={() => {
+									open(
+										`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
+									);
+								}}
+							>
+								{tl(trans.check_for_updates)}
+							</button>
+						</>
+					)
+					: (
+						<>
+							<strong>
+								This page has bleh automatically disabled.
+							</strong>
+							<button
+								type='button'
+								class='btn-primary'
+								onClick={() => {
+									window.history.back();
+									window.location.reload();
+								}}
+							>
+								Go back one page
+							</button>
+						</>
+					)}
 			</div>
 		);
 		document.body.appendChild(style_warning);
 		page.structure.style_warning = style_warning;
 	}
+
+	if (page.disabled) return;
 
 	const update_required = bool(
 		localStorage.getItem(keys.update_required) || 'false',

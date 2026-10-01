@@ -14,7 +14,14 @@ import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { avatar } from '@/components/shared/avatar';
 
 export async function bleh_api() {
-	if (page.subpage == 'docs') return;
+	if (page.subpage == 'docs') {
+		if (!page.disabled) window.location.reload();
+
+		const footer = document.body.querySelector('footer.footer');
+		footer?.remove();
+
+		return;
+	}
 
 	page.structure.container = document.body.querySelector('.page-content');
 	try {

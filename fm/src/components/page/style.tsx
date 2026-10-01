@@ -15,7 +15,7 @@ import { version } from '@/main';
 import { download_with_progress, set_storage } from '@/build/tools';
 import cropper_css from 'cropperjs/dist/cropper.min.css' with { type: 'text' };
 import css from '@/styles/index.css' with { type: 'text' };
-import { root } from '@/build/page';
+import { page, root } from '@/build/page';
 import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
@@ -29,8 +29,13 @@ export function append_style() {
 	const length = split.length - 1;
 
 	// style is neither fetched nor applied in these interfaces
-	if (split[0] == 'labs' && split[length] != 'labs') {
+	if (
+		(split[0] == 'labs' && split[length] != 'labs') || (
+			split[0] == 'api' && !split[length].includes('account')
+		)
+	) {
 		log('disabled loading for special interface', 'style');
+		page.disabled = true;
 		return;
 	}
 
