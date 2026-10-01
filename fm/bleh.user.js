@@ -89525,6 +89525,556 @@ var bleh = (() => {
     return elem;
   }
 
+  // src/components/range/range.tsx
+  function Range({ ref: ref2, id, className: className2, value = 0, suffix, min: min3 = 0, max: max3 = 1, step = 0.1, onInput, onChange }) {
+    const range = createRef();
+    const track = createRef();
+    const marker = createRef();
+    const working_max = max3 - min3;
+    const wrap2 = /* @__PURE__ */ jsx("div", {
+      class: [
+        "range",
+        className2 && className2
+      ],
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: [
+            "track",
+            "colourful"
+          ],
+          "data-id": id,
+          ref: track,
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "fill"
+            }),
+            /* @__PURE__ */ jsx("div", {
+              class: "nub"
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("p", {
+          class: "value-marker",
+          ref: marker
+        }),
+        /* @__PURE__ */ jsx("input", {
+          type: "range",
+          min: min3,
+          max: max3,
+          step,
+          ref: range,
+          onInput: () => {
+            set2(range.current.value, true);
+          },
+          onChange: () => {
+            set2(range.current.value, false);
+          }
+        })
+      ]
+    });
+    Object.defineProperty(wrap2, "value", {
+      get() {
+        return value;
+      },
+      set(val) {
+        set2(val);
+      }
+    });
+    function update() {
+      range.current.value = value;
+      marker.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          value,
+          suffix && /* @__PURE__ */ jsx("span", {
+            class: "suffix",
+            children: suffix
+          })
+        ]
+      }));
+      track.current.style.setProperty("--percent", `${(value - min3) / working_max * 100}%`);
+    }
+    let last = 0;
+    let timeout;
+    function set2(val, input2) {
+      val = Number(val);
+      value = val;
+      update();
+      if (input2) {
+        const now2 = performance.now();
+        const remaining = 20 - (now2 - last);
+        if (remaining <= 0) {
+          clearTimeout(timeout);
+          last = now2;
+          if (onInput) onInput(val);
+        } else {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            last = performance.now();
+            if (onInput) onInput(val);
+          }, remaining);
+        }
+        if (now2 - last >= 500) {
+          last = now2;
+          if (onInput) onInput(val);
+        }
+      } else {
+        if (onChange) onChange(val);
+      }
+    }
+    update();
+    return wrap2;
+  }
+
+  // src/components/settings/provider/range.tsx
+  function SettingRange({ ref: ref2, bind, icon: icon2, name, body, showLabel = true, value = 0, defaultValue = 0, suffix, min: min3 = 0, max: max3 = 1, step = 0.1, onChange, disabled, onMouseEnter, onMouseLeave }) {
+    if (bind) value = settings[bind];
+    const uuid = crypto.randomUUID();
+    if (bind) {
+      useSettings.on(bind, (val, id) => {
+        if (id == uuid) return;
+        set2(val, true);
+        update();
+      });
+    }
+    const range = createRef();
+    const reset = createRef();
+    const store = get_from_store(bind);
+    if (store) {
+      if (!icon2) icon2 = store.icon;
+      if (store.min) min3 = store.min;
+      if (store.max) max3 = store.max;
+      if (store.step) step = store.step;
+      if (store.suffix) suffix = store.suffix;
+      if (store.default) defaultValue = store.default;
+      if (store.incompatible) {
+        Object.entries(store.incompatible).forEach(([key]) => {
+          useSettings.on(key, () => {
+            update();
+          });
+        });
+      }
+    }
+    function update() {
+      disabled = false;
+      let incompatible = false;
+      let incompatible_list = {};
+      let incompatible_strings = [];
+      if (store) {
+        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
+      }
+      if (incompatible) {
+        disabled = true;
+      }
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
+            name: icon2
+          }),
+          showLabel && /* @__PURE__ */ jsx(SettingLabel, {
+            name,
+            body,
+            store,
+            value,
+            setValue: (val) => {
+              set2(val);
+              update();
+            },
+            defaultValue,
+            ref: reset
+          }),
+          /* @__PURE__ */ jsx(Range, {
+            className: "setting-inner",
+            id: bind,
+            value,
+            min: min3,
+            max: max3,
+            step,
+            suffix,
+            onInput: set2,
+            ref: range
+          }),
+          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
+            list: incompatible_list,
+            strings: incompatible_strings
+          })
+        ]
+      }));
+    }
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "setting",
+      "data-type": "input",
+      id: `setting_${bind}`,
+      onMouseEnter,
+      onMouseLeave,
+      ref: ref2
+    });
+    update();
+    function set2(val, received = false) {
+      if (value == val) return;
+      value = val;
+      reset.current.value = val;
+      if (bind) {
+        if (!received) useSettings.set(bind, val, uuid);
+      } else {
+        if (onChange) onChange(val);
+      }
+      if (onMouseEnter) onMouseEnter();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(val) {
+        value = val;
+        update();
+      }
+    });
+    elem.update = update;
+    return elem;
+  }
+
+  // src/pages/profile/artists.tsx
+  function profile_artists() {
+    const panel = page.structure.main.querySelector("#top-artists");
+    if (!panel) return;
+    panel.classList.remove("section-with-settings");
+    const form = panel.querySelector("#artist-chart-settings");
+    const list = panel.querySelector("#artists_range");
+    const collage_btn = createRef();
+    const settings_btn = createRef();
+    const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
+    if (select_btn) {
+      convert_to_select(select_btn);
+      select_btn.classList.remove("section-control", "dropdown-menu-clickable-button");
+    }
+    const head = panel.querySelector(":scope > h2");
+    head?.remove();
+    panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
+      children: [
+        /* @__PURE__ */ jsx(PanelHead, {
+          top: true,
+          icon: icons.artists,
+          children: tl2(trans.artists)
+        }),
+        /* @__PURE__ */ jsx(ViewButtons, {
+          accompany: true,
+          children: select_btn
+        }),
+        /* @__PURE__ */ jsx(ViewButtons, {
+          children: [
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.collage,
+              ref: collage_btn,
+              onClick: () => {
+                const btn = list.querySelector(".dropdown-menu-clickable-item--selected");
+                if (!btn) return;
+                const link = new URL("https://www.last.fm" + btn.getAttribute("href"));
+                const selected = link.searchParams.get("artists_date_preset");
+                window.location.href = `${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}`;
+              },
+              children: tl2(trans.collage)
+            }),
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.settings,
+              ref: settings_btn,
+              children: tl2(trans.settings)
+            })
+          ]
+        })
+      ]
+    }), panel.firstElementChild);
+    let pages = {
+      visual: {
+        icon: icons.visual,
+        label: tl2(trans.visual),
+        content: () => /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(SettingGroup, {
+              minWidth: true,
+              children: [
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "format_guest_features"
+                }),
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "grid_glow"
+                }),
+                /* @__PURE__ */ jsx(SettingRange, {
+                  bind: "gloss"
+                })
+              ]
+            }),
+            /* @__PURE__ */ jsx(CardTip, {
+              minWidth: true,
+              children: tl2(trans.bleh_settings_notice)
+            })
+          ]
+        })
+      }
+    };
+    if (form) {
+      let update = function(v) {
+        grid.current.setAttribute("data-hidden", String(v != "grid"));
+        chart.current.setAttribute("data-hidden", String(v != "list"));
+      };
+      if (page.token == "") {
+        page.token = get_token(form);
+      }
+      const timeframe = form.querySelector('[name="chart_range_top_artists"]');
+      const style2 = form.querySelector('[name="chart_style_top_artists"]');
+      const grid_length = form.querySelector('[name="artists_image_grid_length"]');
+      const chartlist_length = form.querySelector('[name="artists_chartlist_length"]');
+      const grid = createRef();
+      const chart = createRef();
+      form.classList = "";
+      form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Token, {
+            value: page.token
+          }),
+          /* @__PURE__ */ jsx(SettingGroup, {
+            minWidth: true,
+            children: [
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.default_timeframe),
+                values: select_prepare(timeframe),
+                value: timeframe.value,
+                id: timeframe.name
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_style),
+                values: select_prepare(style2),
+                value: style2.value,
+                id: style2.name,
+                onChange: update
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_size),
+                values: select_prepare(grid_length),
+                value: grid_length.value,
+                id: grid_length.name,
+                ref: grid
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_size),
+                values: select_prepare(chartlist_length),
+                value: chartlist_length.value,
+                id: chartlist_length.name,
+                ref: chart
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx(SettingsFooter, {
+            gap: true,
+            children: /* @__PURE__ */ jsx(Button, {
+              primary: true,
+              type: "submit",
+              children: [
+                /* @__PURE__ */ jsx(SaveIcon, {}),
+                tl2(trans.save)
+              ]
+            })
+          })
+        ]
+      }));
+      pages = {
+        behaviour: {
+          icon: icons.global,
+          label: tl2(trans.behaviour),
+          content: form
+        },
+        ...pages
+      };
+      form.remove();
+      update(style2.value);
+    }
+    menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
+      children: /* @__PURE__ */ jsx(FloatingWindowContents, {
+        children: /* @__PURE__ */ jsx(Tabbed, {
+          pages
+        })
+      })
+    }));
+    return panel;
+  }
+
+  // src/pages/profile/albums.tsx
+  function profile_albums() {
+    const panel = page.structure.main.querySelector("#top-albums");
+    if (!panel) return;
+    panel.classList.remove("section-with-settings");
+    const form = panel.querySelector("#albums-chart-settings");
+    const list = panel.querySelector("#albums_range");
+    const collage_btn = createRef();
+    const settings_btn = createRef();
+    const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
+    if (select_btn) {
+      convert_to_select(select_btn);
+      select_btn.classList.remove("section-control", "dropdown-menu-clickable-button");
+    }
+    const head = panel.querySelector(":scope > h2");
+    head?.remove();
+    panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
+      children: [
+        /* @__PURE__ */ jsx(PanelHead, {
+          top: true,
+          icon: icons.albums,
+          children: tl2(trans.albums)
+        }),
+        /* @__PURE__ */ jsx(ViewButtons, {
+          accompany: true,
+          children: select_btn
+        }),
+        /* @__PURE__ */ jsx(ViewButtons, {
+          children: [
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.collage,
+              ref: collage_btn,
+              onClick: () => {
+                const btn = list.querySelector(".dropdown-menu-clickable-item--selected");
+                if (!btn) return;
+                const link = new URL("https://www.last.fm" + btn.getAttribute("href"));
+                const selected = link.searchParams.get("albums_date_preset");
+                window.location.href = `${root}bleh/minis/collage?type=albums&timeframe=date_preset=${selected}`;
+              },
+              children: tl2(trans.collage)
+            }),
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.settings,
+              ref: settings_btn,
+              children: tl2(trans.settings)
+            })
+          ]
+        })
+      ]
+    }), panel.firstElementChild);
+    let pages = {
+      visual: {
+        icon: icons.visual,
+        label: tl2(trans.visual),
+        content: () => /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(SettingGroup, {
+              minWidth: true,
+              children: [
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "format_guest_features"
+                }),
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "grid_glow"
+                }),
+                /* @__PURE__ */ jsx(SettingRange, {
+                  bind: "gloss"
+                })
+              ]
+            }),
+            /* @__PURE__ */ jsx(CardTip, {
+              minWidth: true,
+              children: tl2(trans.bleh_settings_notice)
+            })
+          ]
+        })
+      }
+    };
+    if (form) {
+      let update = function(v) {
+        grid.current.setAttribute("data-hidden", String(v != "grid"));
+        chart.current.setAttribute("data-hidden", String(v != "list"));
+      };
+      if (page.token == "") {
+        page.token = get_token(form);
+      }
+      const timeframe = form.querySelector('[name="chart_range_top_albums"]');
+      const style2 = form.querySelector('[name="chart_style_top_albums"]');
+      const grid_length = form.querySelector('[name="albums_image_grid_length"]');
+      const chartlist_length = form.querySelector('[name="albums_chartlist_length"]');
+      const grid = createRef();
+      const chart = createRef();
+      form.classList = "";
+      form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Token, {
+            value: page.token
+          }),
+          /* @__PURE__ */ jsx(SettingGroup, {
+            minWidth: true,
+            children: [
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.default_timeframe),
+                values: select_prepare(timeframe),
+                value: timeframe.value,
+                id: timeframe.name
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_style),
+                values: select_prepare(style2),
+                value: style2.value,
+                id: style2.name,
+                onChange: update
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_size),
+                values: select_prepare(grid_length),
+                value: grid_length.value,
+                id: grid_length.name,
+                ref: grid
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_size),
+                values: select_prepare(chartlist_length),
+                value: chartlist_length.value,
+                id: chartlist_length.name,
+                ref: chart
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx(SettingsFooter, {
+            gap: true,
+            children: /* @__PURE__ */ jsx(Button, {
+              primary: true,
+              type: "submit",
+              children: [
+                /* @__PURE__ */ jsx(SaveIcon, {}),
+                tl2(trans.save)
+              ]
+            })
+          })
+        ]
+      }));
+      pages = {
+        behaviour: {
+          icon: icons.global,
+          label: tl2(trans.behaviour),
+          content: form
+        },
+        ...pages
+      };
+      form.remove();
+      update(style2.value);
+    }
+    menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
+      children: /* @__PURE__ */ jsx(FloatingWindowContents, {
+        children: /* @__PURE__ */ jsx(Tabbed, {
+          pages
+        })
+      })
+    }));
+    return panel;
+  }
+
   // src/pages/profile/profile.tsx
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -90121,257 +90671,6 @@ var bleh = (() => {
         </section>
     `;
     page.structure.side.insertBefore(panel, page.structure.side.firstElementChild);
-  }
-  function profile_artists() {
-    const panel = page.structure.main.querySelector("#top-artists");
-    if (!panel) return;
-    panel.classList.remove("section-with-settings");
-    const form = panel.querySelector("#artist-chart-settings");
-    const list = panel.querySelector("#artists_range");
-    let collage_btn;
-    const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
-    let settings_btn;
-    const head = panel.querySelector(":scope > h2");
-    if (head) head.remove();
-    panel.insertBefore(html.node`
-        <div class="top-container">
-            <h2>
-                ${tl2(trans.artists)}
-            </h2>
-            <div class="accompany view-buttons blend blend-v2">
-                ${() => {
-      convert_to_select(select_btn);
-      select_btn.classList.remove("section-control", "dropdown-menu-clickable-button");
-      return select_btn;
-    }}
-            </div>
-            <div class="view-buttons blend blend-v2">
-                <button class="left-icon blend-v2-btn" data-type="collage" ref=${(el) => collage_btn = el} onclick=${() => {
-      let btn = list.querySelector(".dropdown-menu-clickable-item--selected");
-      let link = new URL("https://www.last.fm" + btn.getAttribute("href"));
-      let selected = link.searchParams.get("artists_date_preset");
-      window.location.href = `${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}`;
-    }}>${tl2(trans.collage)}</button>
-                ${form ? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                    ${tl2(trans.settings)}
-                </button>
-                ` : ""}
-            </div>
-        </div>
-    `, panel.firstElementChild);
-    if (!form) return panel;
-    if (page.token == "") {
-      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    }
-    const timeframe = form.querySelector('[name="chart_range_top_artists"]');
-    const style2 = form.querySelector('[name="chart_style_top_artists"]');
-    const grid_length = form.querySelector('[name="artists_image_grid_length"]');
-    const chartlist_length = form.querySelector('[name="artists_chartlist_length"]');
-    let tooltip;
-    form.classList = "";
-    render(form, html`
-			<input
-				type="hidden"
-				name="csrfmiddlewaretoken"
-				value="${page.token}"
-			/>
-			<div class="setting-group blend">
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.default_timeframe)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(timeframe),
-      initial: timeframe.value,
-      name: timeframe.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_style)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(style2),
-      initial: style2.value,
-      name: style2.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="setting hide-if-artist-list" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(grid_length),
-      initial: grid_length.value,
-      name: grid_length.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="setting hide-if-artist-grid" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(chartlist_length),
-      initial: chartlist_length.value,
-      name: chartlist_length.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="settings-footer">
-					<button type="submit" class="btn-primary save" onclick=${() => {
-      tooltip.hide();
-    }}>
-			            ${tl2(trans.save)}
-			        </button>
-				</div>
-			</div>
-		`);
-    tooltip = tippy_esm_default(settings_btn, {
-      theme: "window",
-      content: form,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      hideOnClick: "toggle",
-      onClickOutside(instance) {
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
-          return;
-        }
-        instance.hide();
-      }
-    });
-    return panel;
-  }
-  function profile_albums() {
-    const panel = page.structure.main.querySelector("#top-albums");
-    if (!panel) return;
-    panel.classList.remove("section-with-settings");
-    const form = panel.querySelector("#albums-chart-settings");
-    const list = panel.querySelector("#albums_range");
-    let collage_btn;
-    const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
-    let settings_btn;
-    const head = panel.querySelector(":scope > h2");
-    if (head) head.remove();
-    panel.insertBefore(html.node`
-        <div class="top-container">
-            <h2>
-                ${tl2(trans.albums)}
-            </h2>
-            <div class="accompany view-buttons blend blend-v2">
-                ${() => {
-      convert_to_select(select_btn);
-      select_btn.classList.remove("section-control", "dropdown-menu-clickable-button");
-      return select_btn;
-    }}
-            </div>
-            <div class="view-buttons blend blend-v2">
-                <button class="left-icon blend-v2-btn" data-type="collage" ref=${(el) => collage_btn = el} onclick=${() => {
-      const btn = list.querySelector(".dropdown-menu-clickable-item--selected");
-      const link = new URL("https://www.last.fm" + btn.getAttribute("href"));
-      const selected = link.searchParams.get("albums_date_preset");
-      window.location.href = `${root}bleh/minis/collage?type=albums&timeframe=date_preset=${selected}`;
-    }}>${tl2(trans.collage)}</button>
-                ${form ? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                    ${tl2(trans.settings)}
-                </button>
-                ` : ""}
-            </div>
-        </div>
-    `, panel.firstElementChild);
-    if (!form) return;
-    if (page.token == "") {
-      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    }
-    const timeframe = form.querySelector('[name="chart_range_top_albums"]');
-    const style2 = form.querySelector('[name="chart_style_top_albums"]');
-    const grid_length = form.querySelector('[name="albums_image_grid_length"]');
-    const chartlist_length = form.querySelector('[name="albums_chartlist_length"]');
-    let tooltip;
-    form.classList = "";
-    render(form, html`
-			<input
-				type="hidden"
-				name="csrfmiddlewaretoken"
-				value="${page.token}"
-			/>
-			<div class="setting-group blend">
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.default_timeframe)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(timeframe),
-      initial: timeframe.value,
-      name: timeframe.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_style)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(style2),
-      initial: style2.value,
-      name: style2.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="setting hide-if-album-list" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(grid_length),
-      initial: grid_length.value,
-      name: grid_length.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="setting hide-if-album-grid" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(chartlist_length),
-      initial: chartlist_length.value,
-      name: chartlist_length.name,
-      in_settings: true
-    })}
-			    </div>
-				<div class="settings-footer">
-					<button type="submit" class="btn-primary save" onclick=${() => {
-      tooltip.hide();
-    }}>
-			            ${tl2(trans.save)}
-			        </button>
-				</div>
-			</div>
-		`);
-    tooltip = tippy_esm_default(settings_btn, {
-      theme: "window",
-      content: form,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      hideOnClick: "toggle",
-      onClickOutside(instance) {
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
-          return;
-        }
-        instance.hide();
-      }
-    });
   }
   function bio_parse(text4, cache2 = true, take_effect = true) {
     const body = markdown(text4.textContent, {
@@ -107328,220 +107627,6 @@ var bleh = (() => {
         })
       })
     });
-  }
-
-  // src/components/range/range.tsx
-  function Range({ ref: ref2, id, className: className2, value = 0, suffix, min: min3 = 0, max: max3 = 1, step = 0.1, onInput, onChange }) {
-    const range = createRef();
-    const track = createRef();
-    const marker = createRef();
-    const working_max = max3 - min3;
-    const wrap2 = /* @__PURE__ */ jsx("div", {
-      class: [
-        "range",
-        className2 && className2
-      ],
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx("div", {
-          class: [
-            "track",
-            "colourful"
-          ],
-          "data-id": id,
-          ref: track,
-          children: [
-            /* @__PURE__ */ jsx("div", {
-              class: "fill"
-            }),
-            /* @__PURE__ */ jsx("div", {
-              class: "nub"
-            })
-          ]
-        }),
-        /* @__PURE__ */ jsx("p", {
-          class: "value-marker",
-          ref: marker
-        }),
-        /* @__PURE__ */ jsx("input", {
-          type: "range",
-          min: min3,
-          max: max3,
-          step,
-          ref: range,
-          onInput: () => {
-            set2(range.current.value, true);
-          },
-          onChange: () => {
-            set2(range.current.value, false);
-          }
-        })
-      ]
-    });
-    Object.defineProperty(wrap2, "value", {
-      get() {
-        return value;
-      },
-      set(val) {
-        set2(val);
-      }
-    });
-    function update() {
-      range.current.value = value;
-      marker.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          value,
-          suffix && /* @__PURE__ */ jsx("span", {
-            class: "suffix",
-            children: suffix
-          })
-        ]
-      }));
-      track.current.style.setProperty("--percent", `${(value - min3) / working_max * 100}%`);
-    }
-    let last = 0;
-    let timeout;
-    function set2(val, input2) {
-      val = Number(val);
-      value = val;
-      update();
-      if (input2) {
-        const now2 = performance.now();
-        const remaining = 20 - (now2 - last);
-        if (remaining <= 0) {
-          clearTimeout(timeout);
-          last = now2;
-          if (onInput) onInput(val);
-        } else {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => {
-            last = performance.now();
-            if (onInput) onInput(val);
-          }, remaining);
-        }
-        if (now2 - last >= 500) {
-          last = now2;
-          if (onInput) onInput(val);
-        }
-      } else {
-        if (onChange) onChange(val);
-      }
-    }
-    update();
-    return wrap2;
-  }
-
-  // src/components/settings/provider/range.tsx
-  function SettingRange({ ref: ref2, bind, icon: icon2, name, body, showLabel = true, value = 0, defaultValue = 0, suffix, min: min3 = 0, max: max3 = 1, step = 0.1, onChange, disabled, onMouseEnter, onMouseLeave }) {
-    if (bind) value = settings[bind];
-    const uuid = crypto.randomUUID();
-    if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
-        set2(val, true);
-        update();
-      });
-    }
-    const range = createRef();
-    const reset = createRef();
-    const store = get_from_store(bind);
-    if (store) {
-      if (!icon2) icon2 = store.icon;
-      if (store.min) min3 = store.min;
-      if (store.max) max3 = store.max;
-      if (store.step) step = store.step;
-      if (store.suffix) suffix = store.suffix;
-      if (store.default) defaultValue = store.default;
-      if (store.incompatible) {
-        Object.entries(store.incompatible).forEach(([key]) => {
-          useSettings.on(key, () => {
-            update();
-          });
-        });
-      }
-    }
-    function update() {
-      disabled = false;
-      let incompatible = false;
-      let incompatible_list = {};
-      let incompatible_strings = [];
-      if (store) {
-        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
-      }
-      if (incompatible) {
-        disabled = true;
-      }
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
-            name: icon2
-          }),
-          showLabel && /* @__PURE__ */ jsx(SettingLabel, {
-            name,
-            body,
-            store,
-            value,
-            setValue: (val) => {
-              set2(val);
-              update();
-            },
-            defaultValue,
-            ref: reset
-          }),
-          /* @__PURE__ */ jsx(Range, {
-            className: "setting-inner",
-            id: bind,
-            value,
-            min: min3,
-            max: max3,
-            step,
-            suffix,
-            onInput: set2,
-            ref: range
-          }),
-          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
-            list: incompatible_list,
-            strings: incompatible_strings
-          })
-        ]
-      }));
-    }
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: "setting",
-      "data-type": "input",
-      id: `setting_${bind}`,
-      onMouseEnter,
-      onMouseLeave,
-      ref: ref2
-    });
-    update();
-    function set2(val, received = false) {
-      if (value == val) return;
-      value = val;
-      reset.current.value = val;
-      if (bind) {
-        if (!received) useSettings.set(bind, val, uuid);
-      } else {
-        if (onChange) onChange(val);
-      }
-      if (onMouseEnter) onMouseEnter();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(val) {
-        value = val;
-        update();
-      }
-    });
-    elem.update = update;
-    return elem;
   }
 
   // src/components/settings/provider/colour.tsx
