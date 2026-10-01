@@ -222,6 +222,7 @@ export const icons = {
 	rose: 'rose',
 	insight: 'insight',
 	dot: 'dot',
+	taste: 'taste',
 };
 
 interface icon {

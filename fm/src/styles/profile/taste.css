@@ -61,10 +61,35 @@
 	display: flex;
 	flex-direction: column;
 
-	padding: calc(var(--card-padding) * 4) var(--card-padding) var(--card-padding) !important;
-	margin: calc(-1 * (var(--card-padding) * 4)) 0 calc(-1 * var(--card-padding)) !important;
+	padding: calc(var(--card-padding) * 3.5) var(--card-padding) var(--card-padding) !important;
+	margin: calc(-1 * (var(--card-padding) * 3.5)) 0 calc(-1 * var(--card-padding)) !important;
 
 	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%), transparent) !important;
+	overflow: hidden;
+}
+
+.profile-taste-texture {
+	position: absolute;
+	inset: 0 -100px;
+	pointer-events: none;
+	z-index: 0;
+
+	font-size: 120px;
+	color: oklch(var(--b5));
+	--icon-size: 130px;
+	--icon-colour: currentColor;
+	opacity: 0.2;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+	word-wrap: normal;
+	rotate: -6deg;
+
+	--mask: radial-gradient(at center, white, transparent);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
 }
 
 .profile-taste-top {
@@ -72,11 +97,12 @@
 	flex-direction: column;
 	position: relative;
 	cursor: default;
+	z-index: 10;
 }
 
 .profile-taste-top-badges {
 	display: flex;
-	gap: 4px;
+	gap: 5px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row-reverse;
@@ -109,13 +135,13 @@
 }
 
 .profile-taste-top-badge-formal {
-	font-family: Crimson Text, var(--font);
-	font-size: 20px;
+	font-family: var(--font-brand);
+	font-size: 18px;
 
 	color: oklch(var(--l2-c-theme-switch));
 	font-weight: var(--font-weight-bold);
 
-	translate: 0 -1px;
+	translate: 0 -3px;
 	rotate: 1deg;
 }
 
@@ -161,6 +187,7 @@
 	color: oklch(var(--c3));
 	margin-top: 8px;
 	cursor: default;
+	z-index: 10;
 }
 
 .taste-artist {
@@ -173,4 +200,5 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 12px;
+	z-index: 10;
 }

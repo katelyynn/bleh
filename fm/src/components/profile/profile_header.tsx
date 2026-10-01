@@ -335,6 +335,11 @@ export function redesign_profile_header(
 
 		const taste_wrap = (
 			<section class={['profile-taste', 'colourful']} data-taste={taste}>
+				<div class='profile-taste-texture'>
+					<Icon name={icons.taste} />
+					<Icon name={icons.taste} />
+					<Icon name={icons.taste} />
+				</div>
 				<div class='profile-taste-top'>
 					<div class={['profile-taste-top-badges']}>
 						<div class='profile-taste-top-badge-percent'>

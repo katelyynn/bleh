@@ -19,6 +19,7 @@
 	border-radius: var(--item-med-radius) !important;
 	padding: var(--side-action-padding) !important;
 	--button-sides: var(--side-action-side);
+	box-shadow: var(--interact-shadow) !important;
 	overflow: hidden;
 
 	position: relative;
@@ -32,7 +33,6 @@
 		left: 0;
 		right: 0;
 		height: 100%;
-		max-height: 60px;
 		pointer-events: none;
 		border-radius: inherit !important;
 		border-top-left-radius: unset;
@@ -45,8 +45,7 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 
-		opacity: 0.4;
-		display: none;
+		opacity: 0.1;
 	}
 
 	&:is(section) {
