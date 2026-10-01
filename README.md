@@ -33,4 +33,18 @@ bleh is built using a core package I created:
 
 ---
 
-made with [♡](https://katelyn.moe/sponsor) by katelyn and contributors
+<div align="center">
+<a href="https://www.star-history.com/?repos=katelyynn%2Fbleh&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=katelyynn/bleh&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=katelyynn/bleh&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=katelyynn/bleh&type=date&legend=top-left" />
+ </picture>
+</a>
+</div>
+
+---
+
+<div align="center">
+made with <a href="https://katelyn.moe/sponsor">♡</a> by katelyn and contributors
+</div>
