@@ -20,6 +20,8 @@
 	--mask-colour: var(--icon-colour);
 	min-height: unset !important;
 
+	--interact-mask: none !important;
+
 	&:not(.profile-streak-empty) {
 		&:after {
 			content: '';

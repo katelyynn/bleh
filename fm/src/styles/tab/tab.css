@@ -395,6 +395,8 @@ button.navlist-more {
 	align-items: center;
 	transform-origin: bottom !important;
 
+	--mask2: unset;
+
 	--icon-16-placeholder: var(--icon-16-dot);
 
 	&>.new-badge {
@@ -476,6 +478,14 @@ button.navlist-more {
 		/*min-width: 65px !important;*/
 
 		height: unset !important;
+
+		--mask2: var(--interact-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 
 		&:after {
 			display: none !important;

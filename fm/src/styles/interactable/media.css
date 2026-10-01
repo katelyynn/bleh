@@ -374,6 +374,14 @@
 
 		&>img {
 			border-radius: inherit;
+
+			--mask2: var(--grid-mask, none);
+			mask-image: var(--mask2) !important;
+			-webkit-mask-image: var(--mask2) !important;
+			mask-repeat: repeat !important;
+			-webkit-mask-repeat: repeat !important;
+			mask-size: contain !important;
+			-webkit-mask-size: contain !important;
 		}
 
 		&:before {
@@ -387,6 +395,14 @@
 			background-repeat: repeat-x;
 			z-index: 30;
 			pointer-events: none;
+
+			--mask2: var(--grid-mask, none);
+			mask-image: var(--mask2) !important;
+			-webkit-mask-image: var(--mask2) !important;
+			mask-repeat: repeat !important;
+			-webkit-mask-repeat: repeat !important;
+			mask-size: contain !important;
+			-webkit-mask-size: contain !important;
 		}
 
 		&:after {
@@ -402,6 +418,14 @@
 			padding: unset !important;
 			box-shadow: unset !important;
 			border-radius: inherit;
+
+			--mask2: var(--grid-mask, none);
+			mask-image: var(--mask2) !important;
+			-webkit-mask-image: var(--mask2) !important;
+			mask-repeat: repeat !important;
+			-webkit-mask-repeat: repeat !important;
+			mask-size: contain !important;
+			-webkit-mask-size: contain !important;
 		}
 	}
 

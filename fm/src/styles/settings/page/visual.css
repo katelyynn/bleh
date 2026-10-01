@@ -22,6 +22,8 @@
 
 		--icon-size: 12px;
 
+		--interact-mask: none !important;
+
 		.bubble {
 			width: 60px;
 			height: 48px;

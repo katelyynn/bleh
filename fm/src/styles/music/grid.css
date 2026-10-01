@@ -29,6 +29,7 @@
 	grid-template-columns: repeat(var(--width), var(--grid-item-size)) !important;
 	grid-template-rows: repeat(var(--height), var(--grid-item-size)) !important;
 	grid-template-areas: unset !important;
+	--grid-mask: none !important;
 
 	gap: var(--item-list-gap, 6px) !important;
 
@@ -194,6 +195,14 @@
 		pointer-events: none;
 
 		z-index: 100;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	&:after {
@@ -207,6 +216,14 @@
 		background-repeat: repeat-x;
 		z-index: 30;
 		pointer-events: none;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	&[data-theme="yuzu"] {
@@ -215,6 +232,10 @@
 		box-shadow: unset !important;
 		border-radius: unset !important;
 	}
+
+	&>.lazy-buylinks {
+		display: none !important;
+	}
 }
 
 .grid-items-cover-image {
@@ -222,6 +243,14 @@
 	position: absolute;
 	top: 0;
 	width: 100%;
+
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
 
 	&>.link-block-cover-link {
 		z-index: 20;

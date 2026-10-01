@@ -36,6 +36,8 @@
 	overflow: visible !important;
 	--force-underline: none !important;
 
+	--interact-mask: none !important;
+
 	&:before {
 		display: none;
 	}

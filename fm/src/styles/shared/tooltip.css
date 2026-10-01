@@ -57,7 +57,7 @@
 		padding: var(--vertical-menu-padding, 4px) var(--horizontal-menu-padding, 4px) !important;
 		background-color: oklch(var(--menu-bg) / var(--solarium-opacity,
 					var(--menu-opacity))) !important;
-		border-radius: calc(var(--menu-item-radius) + 4px) !important;
+		border-radius: var(--menu-radius) !important;
 		box-shadow: var(--override-full-shadow,
 				var(--menu-shadow)) !important;
 		border: 1px solid var(--menu-border) !important;
@@ -397,7 +397,7 @@
 	margin: unset !important;
 	background: oklch(var(--menu-bg) / var(--solarium-opacity,
 				var(--menu-opacity))) !important;
-	border-radius: calc(var(--menu-item-radius) + 4px) !important;
+	border-radius: var(--menu-radius) !important;
 	box-shadow: var(--override-full-shadow,
 			var(--menu-shadow)) !important;
 	border: 1px solid var(--menu-border) !important;

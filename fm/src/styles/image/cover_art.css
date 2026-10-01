@@ -25,22 +25,32 @@
 		padding: unset !important;
 		box-shadow: unset !important;
 		border-radius: inherit;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 }
+
 .catalogue-overview-similar-artists-item-image img,
 .artist-similar-artists-sidebar-item-image img,
-.cover-art > img,
+.cover-art>img,
 .similar-items-sidebar-item-image img,
 :is(.music-bookmarks-artists-item-image, .music-bookmarks-albums-item-image) img {
 	position: static;
 	aspect-ratio: 1 / 1;
-	display: block; /* requires when image fails to load */
+	display: block;
+	/* requires when image fails to load */
 	color: oklch(var(--c3));
 }
 
 .big-artist-list-avatar-desktop,
 .artist-similar-artists-sidebar-item-image,
-.source-album-art > .cover-art,
+.source-album-art>.cover-art,
 .track-similar-tracks-item-image,
 .similar-items-sidebar-item-image {
 	border-radius: var(--item-big-radius);
@@ -48,7 +58,8 @@
 	overflow: hidden;
 	background: var(--avatar-generic-background);
 }
-.artist-similar-artists-sidebar-item-image > img {
+
+.artist-similar-artists-sidebar-item-image>img {
 	border-radius: unset;
 }
 
@@ -65,7 +76,7 @@ button.lfmmaf-missing-artwork-button {
 	--shadow: none;
 	--mask: var(--icon-16-plus);
 
-	& > img {
+	&>img {
 		display: none !important;
 	}
 }

@@ -37,6 +37,8 @@ a {
 	--mask-size: 12px;
 	--margin-top: -6px;
 
+	--interact-mask: none !important;
+
 	&[data-link-type="bleh"],
 	&[data-link-type="bwaa"] {
 		--mask: var(--icon-16-bleh);

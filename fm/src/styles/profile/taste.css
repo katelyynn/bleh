@@ -112,7 +112,7 @@
 
 	background-color: oklch(var(--f4) / 20%);
 	padding: 0 7px;
-	border-radius: var(--radius-s);
+	border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
 	rotate: -1deg;
 
 	animation: profile-taste-badge 6.5s var(--trans-function-ani) infinite;

@@ -50,7 +50,7 @@
 	padding: var(--track-verts) calc(var(--side-left) + var(--love-offset, 0px)) var(--track-verts) var(--side-left) !important;
 	min-height: 40px;
 	max-height: fit-content;
-	border-radius: var(--radius-m);
+	border-radius: var(--track-radius);
 	box-shadow: var(--shadow);
 	margin: 0 -12px !important;
 	/* calc(- 12 px - var(--chartlist-inner-gap) / 2) */
@@ -63,6 +63,14 @@
 	animation-fill-mode: backwards !important;
 
 	contain: layout;
+
+	--mask2: var(--interact-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
 
 	/*&:nth-child(even) {
 	    --bg: var(--tracklist-odd);

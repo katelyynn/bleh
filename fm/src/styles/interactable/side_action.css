@@ -111,6 +111,8 @@
 
 	--icon-size: 16px !important;
 
+	--interact-mask: none !important;
+
 	&:not(.stationlink, .listening-report-promo) {
 		height: var(--side-action-height) !important;
 

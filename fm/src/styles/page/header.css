@@ -255,6 +255,14 @@
 		box-shadow: var(--avatar-inset);
 		border-radius: inherit;
 		pointer-events: none;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	&:after {
@@ -269,6 +277,14 @@
 		box-shadow: unset !important;
 
 		display: var(--page-header-avatar-gloss, block);
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	&>img {
@@ -276,6 +292,14 @@
 		height: 100%;
 		z-index: 10;
 		border-radius: var(--page-header-avatar-radius);
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	&>a {
@@ -329,6 +353,14 @@
 	transition-timing-function: var(--trans-function);
 
 	animation: page_avatar 3s var(--trans-function-ani) infinite;
+
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
 }
 
 @keyframes page_avatar {
