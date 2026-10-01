@@ -87632,9 +87632,9 @@ var bleh = (() => {
                     if (!title2) {
                       return avatar4;
                     }
-                    tippy_esm_default(avatar4, {
-                      content: title2
-                    });
+                    hover_tooltip(avatar4, /* @__PURE__ */ jsx(Tooltip, {
+                      children: title2
+                    }));
                     return avatar4;
                   })
                 }),
