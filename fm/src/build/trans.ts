@@ -3880,39 +3880,10 @@ export const trans = {
 		ru: 'Лучший трек',
 		pl: 'Najpopularniejszy utwór',
 	},
-	you_share_count_with: {
+	you_share_artists_with: {
 		// as in your musical taste % between you and someone else
 		// you are {percentage%} compatible (in taste) {list of artists}
-		en: 'You are {c} compatible',
-		de: 'Ihr seid {c} kompatibel',
-		es: 'Eres {c} compatible',
-		it: 'Siete compatibili al {c}',
-		pt: 'Voce é {c} compatível',
-		sv: 'Du är {c} kompatibel',
-		ru: 'Ваша совместимость {c}',
-		pl: 'Jesteście kompatybilni w {c}',
-		two: {
-			en: '{artist1}, {artist2}',
-			de: '{artist1}, {artist2}',
-			es: '{artist1}, {artist2}',
-			it: '{artist1}, {artist2}',
-			pt: '{artist1}, {artist2}',
-			sv: '{artist1}, {artist2}',
-			ja: '{artist1}、{artist2}',
-			ru: '{artist1}, {artist2}',
-			pl: '{artist1}, {artist2}',
-		},
-		three: {
-			en: '{artist1}, {artist2}, {artist3}',
-			de: '{artist1}, {artist2}, {artist3}',
-			es: '{artist1}, {artist2}, {artist3}',
-			it: '{artist1}, {artist2}, {artist3}',
-			pt: '{artist1}, {artist2}, {artist3}',
-			sv: '{artist1}, {artist2}, {artist3}',
-			ja: '{artist1}、{artist2}、{artist3}',
-			ru: '{artist1}, {artist2}, {artist3}',
-			pl: '{artist1}, {artist2}, {artist3}',
-		},
+		en: 'You share {artists} in common.',
 	},
 	you_are_a_value_match: {
 		// valentines easter egg

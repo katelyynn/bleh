@@ -42679,39 +42679,10 @@ var bleh = (() => {
       ru: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0442\u0440\u0435\u043A",
       pl: "Najpopularniejszy utw\xF3r"
     },
-    you_share_count_with: {
+    you_share_artists_with: {
       // as in your musical taste % between you and someone else
       // you are {percentage%} compatible (in taste) {list of artists}
-      en: "You are {c} compatible",
-      de: "Ihr seid {c} kompatibel",
-      es: "Eres {c} compatible",
-      it: "Siete compatibili al {c}",
-      pt: "Voce \xE9 {c} compat\xEDvel",
-      sv: "Du \xE4r {c} kompatibel",
-      ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C {c}",
-      pl: "Jeste\u015Bcie kompatybilni w {c}",
-      two: {
-        en: "{artist1}, {artist2}",
-        de: "{artist1}, {artist2}",
-        es: "{artist1}, {artist2}",
-        it: "{artist1}, {artist2}",
-        pt: "{artist1}, {artist2}",
-        sv: "{artist1}, {artist2}",
-        ja: "{artist1}\u3001{artist2}",
-        ru: "{artist1}, {artist2}",
-        pl: "{artist1}, {artist2}"
-      },
-      three: {
-        en: "{artist1}, {artist2}, {artist3}",
-        de: "{artist1}, {artist2}, {artist3}",
-        es: "{artist1}, {artist2}, {artist3}",
-        it: "{artist1}, {artist2}, {artist3}",
-        pt: "{artist1}, {artist2}, {artist3}",
-        sv: "{artist1}, {artist2}, {artist3}",
-        ja: "{artist1}\u3001{artist2}\u3001{artist3}",
-        ru: "{artist1}, {artist2}, {artist3}",
-        pl: "{artist1}, {artist2}, {artist3}"
-      }
+      en: "You share {artists} in common."
     },
     you_are_a_value_match: {
       // valentines easter egg
@@ -86074,27 +86045,33 @@ var bleh = (() => {
             class: "profile-taste-middle",
             children: /* @__PURE__ */ jsx("div", {
               class: "profile-taste-artists",
-              children: [
-                taste_artists[0] && /* @__PURE__ */ jsx(TasteArtist, {
-                  artist: taste_artists[0]
-                }),
-                taste_artists[1] && /* @__PURE__ */ jsx(Fragment, {
+              children: tl2(trans.you_share_artists_with, {
+                artists: /* @__PURE__ */ jsx(Fragment, {
                   children: [
-                    ", ",
-                    /* @__PURE__ */ jsx(TasteArtist, {
-                      artist: taste_artists[1]
-                    })
-                  ]
-                }),
-                taste_artists[2] && /* @__PURE__ */ jsx(Fragment, {
-                  children: [
-                    ", ",
-                    /* @__PURE__ */ jsx(TasteArtist, {
-                      artist: taste_artists[2]
+                    taste_artists[0] && /* @__PURE__ */ jsx(TasteArtist, {
+                      artist: taste_artists[0]
+                    }),
+                    taste_artists[1] && /* @__PURE__ */ jsx(Fragment, {
+                      children: [
+                        ",",
+                        " ",
+                        /* @__PURE__ */ jsx(TasteArtist, {
+                          artist: taste_artists[1]
+                        })
+                      ]
+                    }),
+                    taste_artists[2] && /* @__PURE__ */ jsx(Fragment, {
+                      children: [
+                        ",",
+                        " ",
+                        /* @__PURE__ */ jsx(TasteArtist, {
+                          artist: taste_artists[2]
+                        })
+                      ]
                     })
                   ]
                 })
-              ]
+              })
             })
           }),
           taste_artists.length > 0 && /* @__PURE__ */ jsx("div", {

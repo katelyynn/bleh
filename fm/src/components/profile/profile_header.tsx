@@ -353,19 +353,33 @@ export function redesign_profile_header(
 				</div>
 				<div class='profile-taste-middle'>
 					<div class='profile-taste-artists'>
-						{taste_artists[0] && (
-							<TasteArtist artist={taste_artists[0]} />
-						)}
-						{taste_artists[1] && (
-							<>
-								, <TasteArtist artist={taste_artists[1]} />
-							</>
-						)}
-						{taste_artists[2] && (
-							<>
-								, <TasteArtist artist={taste_artists[2]} />
-							</>
-						)}
+						{tl(trans.you_share_artists_with, {
+							artists: (
+								<>
+									{taste_artists[0] && (
+										<TasteArtist
+											artist={taste_artists[0]}
+										/>
+									)}
+									{taste_artists[1] && (
+										<>
+											,{' '}
+											<TasteArtist
+												artist={taste_artists[1]}
+											/>
+										</>
+									)}
+									{taste_artists[2] && (
+										<>
+											,{' '}
+											<TasteArtist
+												artist={taste_artists[2]}
+											/>
+										</>
+									)}
+								</>
+							),
+						})}
 					</div>
 				</div>
 				{taste_artists.length > 0 && (
