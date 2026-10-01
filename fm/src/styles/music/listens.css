@@ -236,7 +236,7 @@
 	flex-direction: column;
 	gap: 1px;
 
-	max-height: 300px;
+	max-height: 600px;
 
 	&[data-typing="true"] {
 		opacity: 0.1;
