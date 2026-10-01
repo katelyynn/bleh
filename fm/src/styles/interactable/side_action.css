@@ -79,6 +79,14 @@
 	&> :last-child:not(.attendance-control) {
 		--last-child-sep: none;
 	}
+
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat-x !important;
+	-webkit-mask-repeat: repeat-x !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
 }
 
 .listening-report-promos,
