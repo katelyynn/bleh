@@ -127,15 +127,15 @@
 .profile-taste-top-bar {
 	display: flex;
 	justify-content: center;
-	height: 6px;
+	height: 4px;
 	border-radius: var(--radius-s);
 
 	position: absolute;
 	top: 50%;
 	left: 0;
 	right: 0;
-	margin-top: -3px;
-	opacity: 0.2;
+	margin-top: -2px;
+	opacity: 0.3;
 
 	--mask: linear-gradient(90deg, transparent, white 20%, transparent 40%, transparent 60%, white 80%, transparent);
 	mask-image: var(--mask);
@@ -152,7 +152,7 @@
 .profile-taste-artists {
 	text-align: center;
 	color: oklch(var(--c3));
-	margin-top: 6px;
+	margin-top: 8px;
 	cursor: default;
 }
 
@@ -165,5 +165,5 @@
 .profile-taste-lower {
 	display: flex;
 	justify-content: center;
-	margin-top: 10px;
+	margin-top: 12px;
 }
