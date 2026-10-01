@@ -81,6 +81,11 @@
 	}
 }
 
+.listening-report-promos,
+.stationlink-list {
+	margin: var(--side-action-margin, 0 calc(-1 * var(--side-action-side)) 0) !important;
+}
+
 .attendance-control:last-child {
 	>.attendance-btn--maybe {
 		--last-child-sep: none;
