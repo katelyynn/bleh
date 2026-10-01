@@ -9524,6 +9524,14 @@ export const trans = {
 			pl: 'Zmniejsza intensywność animacji, efektów po najechaniu kursorem i innych ruchomych elementów',
 		},
 	},
+	reduced_flashing: {
+		name: {
+			en: 'Reduce flashing effects',
+		},
+		body: {
+			en: 'Prevents distracting or discomforting animations from taking place',
+		},
+	},
 	banners: {
 		en: 'Banners',
 		de: 'Banner',

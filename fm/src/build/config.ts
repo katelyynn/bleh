@@ -282,6 +282,12 @@ export const settings_store: Record<string, setting_instance> = {
 		body: trans.reduced_motion.body,
 		bubble: true,
 	},
+	reduced_flashing: {
+		default: false,
+		title: trans.reduced_flashing.name,
+		body: trans.reduced_flashing.body,
+		bubble: true,
+	},
 	underline_links: {
 		default: false,
 		title: trans.underline_links.name,

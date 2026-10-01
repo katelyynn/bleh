@@ -304,6 +304,9 @@ body {
 	&[data-bleh--reduced_motion="true"] {
 		--display-under-reduced-motion: none;
 	}
+	&[data-bleh--reduced_flashing="true"] {
+		--flash: none;
+	}
 
 	&[data-bleh--inbuilt-id_chart_style_top_artists="classic"],
 	&[data-bleh--inbuilt-id_chart_style_top_artists="grid"] {

@@ -20,6 +20,9 @@ export function accessibility() {
 				</PanelHead>
 				<SettingGroup>
 					<SettingSwitch bind='reduced_motion' />
+					<SettingSwitch bind='reduced_flashing' />
+				</SettingGroup>
+				<SettingGroup>
 					<SettingSwitch bind='show_scroller' />
 				</SettingGroup>
 			</section>

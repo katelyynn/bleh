@@ -46,15 +46,12 @@
 	--col: var(--c2);
 	--col-alt: var(--c3);
 	color: oklch(var(--col));
-	background-color: var(--bg);
+	background: transparent !important;
 	padding: var(--track-verts) calc(var(--side-left) + var(--love-offset, 0px)) var(--track-verts) var(--side-left) !important;
 	min-height: 40px;
 	max-height: fit-content;
 	border-radius: var(--radius-m);
 	box-shadow: var(--shadow);
-	transition-property: background-color;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
 	margin: 0 -12px !important;
 	/* calc(- 12 px - var(--chartlist-inner-gap) / 2) */
 	display: flex !important;
@@ -72,8 +69,24 @@
 	}*/
 
 	&:hover {
-		background-color: var(--bg-hov);
-		transition: none !important;
+		&:before {
+			background-color: var(--bg-hov);
+			transition: none !important;
+		}
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		display: block;
+		pointer-events: none;
+		border-radius: var(--radius-m);
+		background-color: var(--bg);
+
+		transition-property: background-color;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
 	}
 
 	&:not(:hover) {
@@ -469,16 +482,6 @@
 	--chart-button-hov: oklch(var(--h4) / 20%) !important;
 	--chart-button-atv: oklch(var(--h4) / 40%) !important;
 
-	&:before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: var(--hue-gradient, unset);
-		border-radius: var(--radius-s);
-		opacity: 0.35;
-		filter: brightness(80%) saturate(120%);
-	}
-
 	&[data-theme="nier"] {
 		--bg: var(--nier-selected) !important;
 		--bg-hov: var(--bg) !important;
@@ -492,6 +495,22 @@
 
 		--l3-c: var(--b5) !important;
 		--c3: var(--col-alt) !important;
+	}
+
+	&:before {
+		animation: var(--flash, active_track 7s var(--trans-function-ani) infinite);
+	}
+}
+
+@keyframes active_track {
+
+	from,
+	to {
+		box-shadow: 0 0 0 1px transparent;
+	}
+
+	40% {
+		box-shadow: 0 0 30px oklch(var(--k4) / 15%);
 	}
 }
 
