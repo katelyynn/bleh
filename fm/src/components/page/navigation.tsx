@@ -270,15 +270,15 @@ export function append_nav() {
 		scrobble: {
 			name: tl(trans.scrobble),
 			icon: icons.plus,
-			action: () => submit_scrobble(),
+			action: () => submit_scrobble({}),
 		},
 	};
 
 	const masthead = document.body.querySelector('.masthead');
 	if (!masthead) return;
-	const inner = masthead.querySelector('.masthead-inner-wrap');
+	const inner = masthead.querySelector('.masthead-inner-wrap')!;
 
-	const masthead_logo = inner.querySelector('.masthead-logo');
+	const masthead_logo = inner.querySelector('.masthead-logo')!;
 
 	const home_link = createRef();
 	const home_link_logo = createRef();

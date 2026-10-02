@@ -109269,7 +109269,7 @@ var bleh = (() => {
       scrobble: {
         name: tl2(trans.scrobble),
         icon: icons.plus,
-        action: () => submit_scrobble()
+        action: () => submit_scrobble({})
       }
     };
     const masthead = document.body.querySelector(".masthead");
