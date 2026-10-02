@@ -29,6 +29,7 @@ interface SettingSelectProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	allowArbitrary?: boolean;
 }
 
 type SettingSelectElement = HTMLDivElement & {
@@ -51,6 +52,7 @@ export function SettingSelect({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	allowArbitrary,
 }: SettingSelectProps) {
 	if (bind) value = useSettings.get(bind) as string;
 
@@ -65,6 +67,7 @@ export function SettingSelect({
 	}
 
 	const reset = createRef();
+	const select = createRef();
 
 	const store = get_from_store(bind);
 
@@ -132,6 +135,8 @@ export function SettingSelect({
 					onChange={set}
 					name={id}
 					inSettings
+					allowArbitrary={allowArbitrary}
+					ref={select}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
@@ -148,6 +153,9 @@ export function SettingSelect({
 			class='setting'
 			data-type='select'
 			id={`setting_${bind}`}
+			onClick={() => {
+				//select.current?.open();
+			}}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}
@@ -164,9 +172,9 @@ export function SettingSelect({
 
 		if (bind) {
 			if (!received) useSettings.set(bind, val, uuid);
-		} else {
-			if (onChange) onChange(val);
 		}
+
+		if (onChange) onChange(val);
 
 		if (onMouseEnter) onMouseEnter();
 	}

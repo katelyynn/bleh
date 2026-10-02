@@ -17,7 +17,7 @@
 	z-index: 9999;
 
 	.tooltip-sub {
-		font-size: 12px;
+		font-size: var(--font-size-sm);
 		color: oklch(var(--c3));
 	}
 
@@ -55,10 +55,11 @@
 	&[data-theme="select-menu"],
 	&[data-theme="language-menu"],
 	&[data-theme="menu"] {
-		padding: 4px !important;
+		padding: var(--vertical-menu-padding, 4px)
+			var(--horizontal-menu-padding, 4px) !important;
 		background-color: oklch(var(--menu-bg) / var(--solarium-opacity,
 			var(--menu-opacity))) !important;
-		border-radius: calc(var(--item-med-radius) + 4px) !important;
+		border-radius: var(--menu-radius) !important;
 		box-shadow: var(--override-full-shadow,
 			var(--menu-shadow)) !important;
 		border: 1px solid var(--menu-border) !important;
@@ -80,16 +81,40 @@
 		background-repeat: repeat-x !important;
 		background-position: 0 0 !important;
 
+		display: flex;
+		flex-direction: column;
+		gap: var(--menu-gap);
+
 		& > .tippy-content {
 			display: flex;
 			flex-direction: column;
 			gap: var(--menu-gap);
 		}
 
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			display: var(--menu-lines-display, none);
+			background-color: var(--menu-lines);
+			height: var(--menu-lines-height);
+			left: var(--menu-lines-horizontal) !important;
+			right: var(--menu-lines-horizontal) !important;
+		}
+
+		&:before {
+			top: var(--menu-lines-vertical);
+		}
+
+		&:after {
+			bottom: var(--menu-lines-vertical);
+		}
+
 		&[data-theme="select-menu"] {
 			max-height: 500px;
 			overflow-x: hidden;
 			overflow-y: auto;
+			scroll-behavior: unset;
 
 			.dropdown-menu-clickable-item:not(.v2) {
 				--btn-left: calc(var(--button-sides) + var(--mask-size, 14px) + 6px) !important;
@@ -297,7 +322,7 @@
 			}
 
 			.badge-reason {
-				font-size: 12px;
+				font-size: var(--font-size-sm);
 				margin-top: -2px;
 				color: oklch(var(--c3));
 			}
@@ -340,7 +365,7 @@
 			}
 
 			& > .sister {
-				font-size: 12px;
+				font-size: var(--font-size-sm);
 				margin-top: -2px;
 				color: oklch(var(--c3));
 			}
@@ -375,7 +400,7 @@
 	margin: unset !important;
 	background: oklch(var(--menu-bg) / var(--solarium-opacity,
 		var(--menu-opacity))) !important;
-	border-radius: calc(var(--input-radius) + 4px) !important;
+	border-radius: var(--menu-radius) !important;
 	box-shadow: var(--override-full-shadow,
 		var(--menu-shadow)) !important;
 	border: 1px solid var(--menu-border) !important;

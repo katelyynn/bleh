@@ -72,7 +72,7 @@ img.empty {
 				align-items: center;
 				gap: 4px;
 
-				font-size: 13px;
+				font-size: calc(var(--font-size) - 1px);
 				color: oklch(var(--c2) / 80%);
 				--icon-colour: currentColor;
 				--icon-size: 14px;
@@ -116,7 +116,7 @@ img.empty {
 	display: flex;
 	gap: 20px;
 	margin-left: var(--card-gap);
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 
 	opacity: 0.4;
 

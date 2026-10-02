@@ -15,11 +15,12 @@ import { version } from '@/main';
 import { download_with_progress, set_storage } from '@/build/tools';
 import cropper_css from 'cropperjs/dist/cropper.min.css' with { type: 'text' };
 import css from '@/styles/index.css' with { type: 'text' };
-import { root } from '@/build/page';
+import { page, root } from '@/build/page';
 import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
 import { useSettings } from '@/page.ts';
+import { update_branding_type } from '@/components/page/navigation.tsx';
 
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
@@ -28,8 +29,13 @@ export function append_style() {
 	const length = split.length - 1;
 
 	// style is neither fetched nor applied in these interfaces
-	if (split[0] == 'labs' && split[length] != 'labs') {
+	if (
+		(split[0] == 'labs' && split[length] != 'labs') || (
+			split[0] == 'api' && !split[length].includes('account')
+		)
+	) {
 		log('disabled loading for special interface', 'style');
+		page.disabled = true;
 		return;
 	}
 
@@ -134,6 +140,8 @@ export function update_check(force = false, btn, func) {
 					next_in: next,
 					current_time: new Date(),
 				});
+
+				update_branding_type();
 
 				if (func) func(true);
 			} catch (e) {

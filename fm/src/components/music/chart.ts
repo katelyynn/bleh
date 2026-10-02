@@ -252,11 +252,12 @@ export function load_chart_colours() {
 				},
 			},
 			y: {
-				display: true,
+				display: false,
 				grid: {
 					display: false,
 				},
 				suggestedMax: 10,
+				min: 0,
 			},
 		},
 		onClick: (e, active, chart) => {

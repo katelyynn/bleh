@@ -7,6 +7,23 @@
 import { ReactElement } from 'jsx-dom';
 import { expand_avatar } from '@/components/shared/avatar.tsx';
 
+// for counter-like sites
+// did they really have to call their counter site loli
+const proxy_free = [
+	'count.getloli.com',
+	'i.imgur.com',
+	'media1.tenor.com',
+	'katelyynn.github.io',
+	'i.pinimg.com',
+	'i.ibb.co',
+	'static.klipy.com',
+	'static2.klipy.com',
+	'cdn.discordapp.com',
+	'lastfm.freetls.fastly.net',
+	'lastfm-img.freetls.fastly.net',
+	'last.fm',
+];
+
 export function proxy_images(
 	body: ReactElement,
 	line_breaks = true,
@@ -18,20 +35,6 @@ export function proxy_images(
 			return;
 		}
 
-		// for counter-like sites
-		// did they really have to call their counter site loli
-		const proxy_free = [
-			'count.getloli.com',
-			'i.imgur.com',
-			'media1.tenor.com',
-			'katelyynn.github.io',
-			'i.pinimg.com',
-			'i.ibb.co',
-			'static.klipy.com',
-			'static2.klipy.com',
-			'cdn.discordapp.com',
-		];
-
 		try {
 			const url = new URL(image.src);
 
@@ -40,15 +43,11 @@ export function proxy_images(
 					'data-unsafe-href',
 					encodeURI(image.src),
 				);
-				image.src = `https://images.weserv.nl/?url=${
-					encodeURIComponent(image.src)
-				}&output=webp&n=-1`;
+				image.src = proxy_image(image.src);
 			}
 		} catch (e) {
 			image.setAttribute('data-unsafe-href', encodeURI(image.src));
-			image.src = `https://images.weserv.nl/?url=${
-				encodeURIComponent(image.src)
-			}&output=webp&n=-1`;
+			image.src = proxy_image(image.src);
 		}
 
 		image.setAttribute('loading', 'lazy');
@@ -61,4 +60,16 @@ export function proxy_images(
 		image.after(container);
 		container.appendChild(image);
 	});
+}
+
+export function proxy_image(url: string) {
+	try {
+		const instance = new URL(url);
+
+		if (proxy_free.includes(instance.hostname)) return url;
+	} catch {}
+
+	return `https://images.weserv.nl/?url=${
+		encodeURIComponent(url)
+	}&output=webp&n=-1`;
 }

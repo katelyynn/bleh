@@ -251,6 +251,27 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		const name = grid.querySelector('.grid-items-item-main-text > a');
 		if (!name) return;
 
+		function update() {
+			const theme = useSettings.get('theme') as string;
+
+			grid.setAttribute('data-theme', theme);
+			cover?.setAttribute('data-theme', theme);
+			image_wrap?.setAttribute('data-theme', theme);
+			details?.setAttribute('data-theme', theme);
+		}
+
+		grid.addEventListener('mouseenter', () => {
+			name.classList.add('hovered');
+		});
+
+		grid.addEventListener('mouseleave', () => {
+			name.classList.remove('hovered');
+		});
+
+		update();
+
+		useSettings.on('theme', update);
+
 		let artist;
 
 		if (!is_album) {

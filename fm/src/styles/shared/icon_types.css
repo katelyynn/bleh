@@ -28,8 +28,21 @@
 	--mask: var(--icon-16-created);
 }
 
+[data-type="more"],
 [data-type="manage"] {
 	--mask: var(--icon-16-dots);
+}
+
+[data-type="settings"] {
+	&:before {
+		rotate: 0deg;
+	}
+
+	&[aria-expanded="true"] {
+		&:before {
+			rotate: 180deg;
+		}
+	}
 }
 
 [data-type="share"] {
@@ -81,6 +94,10 @@
 
 [data-type="layout"] {
 	--mask: var(--icon-16-layout-manage);
+}
+
+[data-type="feature_flag"] {
+	--mask: var(--icon-16-feature-flag);
 }
 
 .update-check,
@@ -998,10 +1015,6 @@
 
 [data-bleh-page="seasonal"] {
 	--mask: var(--icon-16-season);
-}
-
-[data-bleh-page="sku"] {
-	--mask: var(--icon-plaster);
 }
 
 .gallery-image-votes,

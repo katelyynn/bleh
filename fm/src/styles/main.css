@@ -181,7 +181,7 @@ html body {
 }
 
 .main-content {
-	padding-top: calc(5px + var(--button-height)) !important;
+	padding-top: var(--main-content-padding) !important;
 
 	@media (max-width: 980px) {
 		padding-top: unset !important;

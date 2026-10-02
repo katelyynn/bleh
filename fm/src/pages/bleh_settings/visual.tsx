@@ -4,22 +4,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { html, render } from 'lighterhtml';
 import { auth, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { save_setting, setting } from '@/components/settings/settings';
-import { update_colour_swatches } from '@/config';
+import { save_setting } from '@/components/settings/settings';
 import {
 	page_loading,
 	register_skip_to,
 	render_setting_page,
-	theme_bubbles,
 } from './bleh_settings';
-import { ff } from '@/components/settings/sku';
 import { settings } from '@/build/config';
-import { match } from '@/components/settings/dynamic_theming';
-import { dialog } from '@/components/dialog/dialog';
-import { colour_tile, colour_type } from '@/components/settings/swatch';
+import { colour_type } from '@/components/settings/swatch';
 import { header_colour } from '@/components/page/colour';
 import { avatar } from '@/components/shared/avatar';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
@@ -40,7 +34,7 @@ import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
-import { useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.ts';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export function visual() {
@@ -68,7 +62,7 @@ export function visual() {
 
 	const sat_bg = createRef();
 
-	const season = page.state.seasons?.current;
+	const season = useSeasons.get().current;
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -133,6 +127,7 @@ export function visual() {
 					<SettingOptions
 						name={tl(trans.change_my_colour_when.name)}
 						body={tl(trans.change_my_colour_when.body)}
+						id='setting_change_my_colour_when'
 					>
 						<SettingCheckbox standalone bind='hue_from_artist' />
 						<SettingCheckbox standalone bind='hue_from_album' />

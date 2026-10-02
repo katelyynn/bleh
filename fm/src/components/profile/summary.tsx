@@ -34,6 +34,8 @@ import {
 	GraphBlocks,
 } from '@/components/summary/graph.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { collect_last_60 } from '@/components/profile/graph.tsx';
 
 export function profile_summary(
 	recent_tracks: Element | undefined,
@@ -47,12 +49,15 @@ export function profile_summary(
 
 	const title = createRef();
 	const graph_container = createRef();
+	const axes = createRef();
 
 	const panel = (
 		<ProfileSummary>
-			<PanelTop>
+			<PanelTop margin={false}>
 				<ProfileSummaryTitle ref={title}>
-					{tl(trans.value_scrobbles_recently, { v: 0 })}
+					<PanelHead icon={icons.insight} margin={false}>
+						{tl(trans.insight)}
+					</PanelHead>
 				</ProfileSummaryTitle>
 				<ProfileSummaryBlocks>
 					<ProfileSummaryBlock
@@ -83,37 +88,42 @@ export function profile_summary(
 					})}
 				</GraphBlocks>
 				<ProfileSummarySeparator />
-				<div class='month-graph' ref={graph_container}>
-					{page.state.scrobbles > 0
-						? (
-							<div
-								class={[
-									'scrobble-canvas-container',
-									'mini',
-									'icon-mask',
-								]}
-							>
-								<LoadingData>
-									{tl(trans.loading_count_days, { c: 90 })}
-								</LoadingData>
-							</div>
-						)
-						: auth.name && (
-							<div
-								class={[
-									'scrobble-canvas-container',
-									'mini',
-									'icon-mask',
-								]}
-							>
-								<LoadingData type='failed'>
-									{tl(
-										trans
-											.profile_does_not_have_enough_scrobbles,
-									)}
-								</LoadingData>
-							</div>
-						)}
+				<div class='summary-line-graph'>
+					<div class='summary-line-axes' ref={axes} />
+					<div class='month-graph' ref={graph_container}>
+						{page.state.scrobbles > 0
+							? (
+								<div
+									class={[
+										'scrobble-canvas-container',
+										'mini',
+										'icon-mask',
+									]}
+								>
+									<LoadingData>
+										{tl(trans.loading_count_days, {
+											c: 60,
+										})}
+									</LoadingData>
+								</div>
+							)
+							: auth.name && (
+								<div
+									class={[
+										'scrobble-canvas-container',
+										'mini',
+										'icon-mask',
+									]}
+								>
+									<LoadingData type='failed'>
+										{tl(
+											trans
+												.profile_does_not_have_enough_scrobbles,
+										)}
+									</LoadingData>
+								</div>
+							)}
+					</div>
 				</div>
 			</ProfileSummaryMain>
 		</ProfileSummary>
@@ -132,6 +142,15 @@ export function profile_summary(
     }
 
     */
+
+	collect_last_60(
+		graph_container.current,
+		graph_blocks,
+		title.current,
+		axes.current,
+	);
+
+	return;
 
 	fetch_30_day();
 
@@ -208,9 +227,11 @@ export function profile_summary(
 					});
 
 					title.current.replaceChildren(
-						tl(trans.value_scrobbles_recently, {
-							v: sum.toLocaleString(lang),
-						}),
+						<PanelHead icon={icons.play} margin={false}>
+							{tl(trans.value_scrobbles_recently, {
+								v: sum.toLocaleString(lang),
+							})}
+						</PanelHead>,
 					);
 				} catch (e) {
 					throw new Error(e);
@@ -223,7 +244,7 @@ export function profile_summary(
 	}
 }
 
-function graph_block_level(value: number, max: number, avg: number) {
+export function graph_block_level(value: number, max: number, avg: number) {
 	if (max == 0) return 0;
 
 	const normalized = value / (avg * 2);

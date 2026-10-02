@@ -12,7 +12,7 @@
 
 .username-original {
 	opacity: 0.6;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 }
 
 .username-custom,

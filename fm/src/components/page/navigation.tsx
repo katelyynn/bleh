@@ -13,7 +13,7 @@ import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
-import { useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.ts';
 import { save_setting, setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.ts';
@@ -53,7 +53,11 @@ import {
 	ButtonCombo,
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
-import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import {
 	NavWindow,
@@ -62,6 +66,11 @@ import {
 } from '@/components/menu/nav_window.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+
+const handle_update = (e: Event) => {
+	e.preventDefault();
+	prompt_for_update();
+};
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
@@ -76,6 +85,29 @@ export function update_branding_type(state = settings.branding_type) {
 				{'Last.fm'}
 			</div>,
 		);
+	}
+
+	const update_required = bool(
+		localStorage.getItem(keys.update_required) || 'false',
+	);
+
+	if (update_required) {
+		page.state.home_link.addEventListener('onclick', handle_update);
+
+		page.state.home_link.appendChild(
+			<span class='home-version'>
+				<div class='update-container'>
+					<Icon name={icons.update} />
+				</div>
+			</span>,
+		);
+
+		hover_tooltip(
+			page.state.home_link,
+			<Tooltip>{tl(trans.update_available_to_install)}</Tooltip>,
+		);
+	} else {
+		page.state.home_link.removeEventListener('onclick', handle_update);
 	}
 }
 
@@ -108,7 +140,7 @@ export function append_nav() {
 					top: 0,
 					left: 0,
 					right: 0,
-					padding: '20px',
+					padding: '15px',
 					background: '#fff',
 					zIndex: 100000000,
 					display: 'flex',
@@ -117,34 +149,58 @@ export function append_nav() {
 					gap: '30px',
 				}}
 			>
-				<strong>{tl(trans.style_warning)}</strong>
-				<button
-					type='button'
-					class='btn-primary'
-					onClick={() => {
-						useSettings.set('branch', 'uwu');
-						useSettings.set('dev', false);
-						window.location.reload();
-					}}
-				>
-					{tl(trans.re_enable_style_loading)}
-				</button>
-				<button
-					type='button'
-					class='btn-primary'
-					onClick={() => {
-						open(
-							`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
-						);
-					}}
-				>
-					{tl(trans.check_for_updates)}
-				</button>
+				{!page.disabled
+					? (
+						<>
+							<strong>{tl(trans.style_warning)}</strong>
+							<button
+								type='button'
+								class='btn-primary'
+								onClick={() => {
+									useSettings.set('branch', 'uwu');
+									useSettings.set('dev', false);
+									window.location.reload();
+								}}
+							>
+								{tl(trans.re_enable_style_loading)}
+							</button>
+							<button
+								type='button'
+								class='btn-primary'
+								onClick={() => {
+									open(
+										`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
+									);
+								}}
+							>
+								{tl(trans.check_for_updates)}
+							</button>
+						</>
+					)
+					: (
+						<>
+							<strong>
+								This page has bleh automatically disabled.
+							</strong>
+							<button
+								type='button'
+								class='btn-primary'
+								onClick={() => {
+									window.history.back();
+									window.location.reload();
+								}}
+							>
+								Go back one page
+							</button>
+						</>
+					)}
 			</div>
 		);
 		document.body.appendChild(style_warning);
 		page.structure.style_warning = style_warning;
 	}
+
+	if (page.disabled) return;
 
 	const update_required = bool(
 		localStorage.getItem(keys.update_required) || 'false',
@@ -214,20 +270,22 @@ export function append_nav() {
 		scrobble: {
 			name: tl(trans.scrobble),
 			icon: icons.plus,
-			action: () => submit_scrobble(),
+			action: () => submit_scrobble({}),
 		},
 	};
 
 	const masthead = document.body.querySelector('.masthead');
 	if (!masthead) return;
-	const inner = masthead.querySelector('.masthead-inner-wrap');
+	const inner = masthead.querySelector('.masthead-inner-wrap')!;
 
-	const masthead_logo = inner.querySelector('.masthead-logo');
+	const masthead_logo = inner.querySelector('.masthead-logo')!;
 
 	const home_link = createRef();
 	const home_link_logo = createRef();
 
 	const search_wrap = createRef();
+
+	const new_links = createRef();
 
 	masthead_logo.replaceChildren(
 		<>
@@ -248,6 +306,7 @@ export function append_nav() {
 					'masthead-nav',
 					'masthead-nav-top',
 				]}
+				ref={new_links}
 			>
 				<ul class='navlist-items'>
 					<a
@@ -274,29 +333,6 @@ export function append_nav() {
 	page.state.home_link = home_link_logo.current;
 
 	update_branding_type();
-
-	const handle_update = (e: Event) => {
-		e.preventDefault();
-		prompt_for_update();
-	};
-
-	if (update_required) {
-		home_link.current.addEventListener('onclick', handle_update);
-
-		home_link.current.appendChild(
-			<span class='home-version'>
-				<div class='update-container'>
-					<Icon name={icons.update} />
-				</div>
-			</span>,
-		);
-
-		tippy(home_link.current, {
-			content: tl(trans.update_available_to_install),
-		});
-	} else {
-		home_link.current.removeEventListener('onclick', handle_update);
-	}
 
 	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 
@@ -363,6 +399,22 @@ export function append_nav() {
 	const auth_link = masthead.querySelector(
 		'.masthead-nav-wrap > .site-auth .auth-link',
 	);
+
+	function update() {
+		const theme = useSettings.get('theme') as string;
+
+		masthead?.setAttribute('data-theme', theme);
+		masthead_logo?.setAttribute('data-theme', theme);
+		auth_link?.setAttribute('data-theme', theme);
+		search_wrap.current?.setAttribute('data-theme', theme);
+		search?.setAttribute('data-theme', theme);
+		new_links.current?.setAttribute('data-theme', theme);
+	}
+
+	update();
+
+	useSettings.on('theme', update);
+
 	if (!auth_link) {
 		render(
 			links,
@@ -483,7 +535,7 @@ export function append_nav() {
 				accented
 				href='https://github.com/katelyynn/lotus/issues/new/choose'
 				external
-				data-type='lotus'
+				className='lotus'
 			>
 				<Icon name={icons.lotus} />
 				{tl(trans.suggest_correction)}
@@ -508,37 +560,73 @@ export function append_nav() {
 		</MenuContents>,
 	);
 
-	links.appendChild(more_button);
-
-	const state = page.state.seasons;
-	console.info('season', state);
+	links!.appendChild(more_button);
 
 	// configure bleh
-	const bleh_container = html.node`
-        <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
-            ${tl(trans.bleh_settings)}
-        </a>
-    `;
-	if (!state.current) {
-		tippy(bleh_container, {
-			content: tl(trans.bleh_settings),
-		});
-	} else {
-		page.header.season_tooltip = tippy(bleh_container, {
-			theme: 'seasonal-swatch',
-			content: html.node`
-                <span class="season-colour-name colourful" data-season=${stored_season.id}>${
-				tl(trans.seasonal.listing[state.current.id])
-			}</span>
-                <span class="season-exclusive">${
-				tl(trans.seasonal.notice)
-			}</span>
-            `,
-		});
-	}
-	links.appendChild(bleh_container);
+	const bleh_container = (
+		<Button chibi className='masthead-nav-control' href={`${root}bleh`} />
+	);
+	const bleh_container_tooltip = <Tooltip />;
 
-	page.header.season = bleh_container;
+	hover_tooltip(
+		bleh_container,
+		bleh_container_tooltip,
+	);
+
+	function update_bleh() {
+		const state = useSeasons.get();
+
+		bleh_container.setAttribute('data-hidden', String(!state.current));
+
+		if (!state.current) {
+			bleh_container.setAttribute('href', `${root}bleh`);
+			bleh_container.replaceChildren(
+				<>
+					<Icon name={icons.bleh_settings} />
+					{tl(trans.bleh_settings)}
+				</>,
+			);
+			bleh_container_tooltip.textContent = tl(
+				trans.bleh_settings,
+			) as string;
+		} else {
+			bleh_container.setAttribute('href', `${root}bleh/seasonal`);
+			bleh_container.replaceChildren(
+				<>
+					<Icon
+						className='bleh-seasonal-icon'
+						data-season={state.current ? state.current.id : 'none'}
+					/>
+					{tl(
+						trans.seasonal.listing[
+							state.current ? state.current.id : 'none'
+						],
+					)}
+				</>,
+			);
+			bleh_container_tooltip.replaceChildren(
+				<>
+					<div
+						class={['icon-combo', 'colourful']}
+						data-season={state.current ? state.current.id : 'none'}
+					>
+						<Icon />
+						<p>
+							{tl(
+								trans.seasonal.listing[
+									state.current ? state.current.id : 'none'
+								],
+							)}
+						</p>
+					</div>
+				</>,
+			);
+		}
+	}
+
+	update_bleh();
+	useSeasons.on(update_bleh);
+	links!.appendChild(bleh_container);
 
 	// music
 	if (auth.pro) {
@@ -634,34 +722,17 @@ export function append_nav() {
 
 	const count = notif_count + messages_count;
 
-	if (settings.hybrid_inbox) {
+	if (useSettings.get('hybrid_inbox')) {
 		const inbox = html.node`
             <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
                 <div class="counter" data-count=${count}>${count}</div>
             </a>
         `;
 
-		tippy(inbox, {
-			theme: 'stack',
-			content: html.node`
-                <strong>${tl(trans.inbox)}</strong>
-                <div class="inbox-info">
-                    <div class="inbox-info-item">
-                        ${
-				icon({ name: icons.notifications, identifier: 'inbox-tooltip' })
-			}
-                        ${notif_count}
-                    </div>
-                    <div class="inbox-sep" />
-                    <div class="inbox-info-item">
-                        ${
-				icon({ name: icons.messages, identifier: 'inbox-tooltip' })
-			}
-                        ${messages_count}
-                    </div>
-                </div>
-            `,
-		});
+		hover_tooltip(
+			inbox,
+			<Tooltip>{tl(trans.inbox)}</Tooltip>,
+		);
 
 		inbox.addEventListener('click', (e) => {
 			const cmd = e.getModifierState('Control') ||
@@ -677,16 +748,12 @@ export function append_nav() {
 			notifications: {
 				icon: icons.notifications,
 				label: tl(trans.notifications),
-				content: () => {
-					return <></>;
-				},
+				content: () => {},
 			},
 			messages: {
 				icon: icons.messages,
 				label: tl(trans.messages),
-				content: () => {
-					return <></>;
-				},
+				content: () => {},
 			},
 		};
 
@@ -696,7 +763,12 @@ export function append_nav() {
 				<NavWindowContents>
 					<Tabbed
 						header={
-							<PanelHead small icon={icons.inbox} margin={false}>
+							<PanelHead
+								top
+								small
+								icon={icons.inbox}
+								margin={false}
+							>
 								{tl(trans.inbox)}
 							</PanelHead>
 						}
@@ -759,9 +831,10 @@ export function append_nav() {
 			if (!new_tab) e.preventDefault();
 		});
 
-		tippy(notifications, {
-			content: tl(trans.notifications),
-		});
+		hover_tooltip(
+			notifications,
+			<Tooltip>{tl(trans.notifications)}</Tooltip>,
+		);
 
 		tippy(notifications, {
 			content: html.node`
@@ -826,9 +899,10 @@ export function append_nav() {
 			if (!new_tab) e.preventDefault();
 		});
 
-		tippy(messages, {
-			content: tl(trans.messages),
-		});
+		hover_tooltip(
+			messages,
+			<Tooltip>{tl(trans.messages)}</Tooltip>,
+		);
 
 		tippy(messages, {
 			content: html.node`
@@ -1376,14 +1450,14 @@ export function append_nav() {
 							html`
 								${icon({ name: formal.icon })}
 								<div class="auth-dropdown-item-row">
-								    <span
-								        class="auth-dropdown-item-left"
-								    >
+									<span
+										class="auth-dropdown-item-left"
+									>
 								        ${formal.name}
 								    </span>
-								    <span
-								        class="auth-dropdown-item-right"
-								    >
+									<span
+										class="auth-dropdown-item-right"
+									>
 								        ${count}
 								    </span>
 								</div>
@@ -1753,6 +1827,7 @@ function NavigationPage1({
 				<Button
 					menu
 					onClick={() => toggle_theme()}
+					disabled={page.subpage.startsWith('listening-report')}
 				>
 					<Icon name={icons.theme} />
 					{tl(trans.themes.name)}
@@ -1762,6 +1837,8 @@ function NavigationPage1({
 					menu
 					chibi
 					onClick={() => {
+						if (page.subpage.startsWith('listening-report')) return;
+
 						next.current!.replaceChildren(
 							<NavigationThemes
 								side={side}
@@ -1769,6 +1846,7 @@ function NavigationPage1({
 						);
 						side.current!.setAttribute('data-page', '2');
 					}}
+					disabled={page.subpage.startsWith('listening-report')}
 					tooltip={tl(trans.more)}
 				>
 					<Icon name={icons.continue} />
@@ -1979,7 +2057,7 @@ function NavigationFriend({
 			</span>
 			{starred && (
 				<span class={['star-icon', 'colourful']}>
-					<Icon />
+					<Icon name={icons.star} />
 				</span>
 			)}
 		</a>
@@ -2079,6 +2157,8 @@ function NavigationThemes({
 	);
 
 	function update(theme?: string) {
+		if (page.subpage.startsWith('listening-report')) return;
+
 		if (!theme) theme = useSettings.get('theme') as string;
 
 		buttons.forEach((elem) => {

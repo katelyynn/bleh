@@ -220,3 +220,353 @@
 	width: 22px;
 	margin-right: 8px;
 }
+
+.listen-board-wrap {
+	width: 100%;
+	max-width: 400px;
+	position: relative;
+}
+
+.listen-board {
+	position: relative;
+	background: oklch(var(--b6) / 20%);
+	box-shadow: var(--group-shadow);
+	border-radius: var(--radius-s);
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+
+	max-height: 600px;
+
+	&[data-typing="true"] {
+		opacity: 0.1;
+		pointer-events: none;
+	}
+
+	&[data-expanded="false"] {
+		max-height: calc(((48px + 1px) * 3 - 1px + 24px));
+
+		&:before {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		& > :nth-child(4) {
+			--mask: linear-gradient(180deg, white, transparent 30%);
+			mask-image: var(--mask);
+			-webkit-mask-image: var(--mask);
+		}
+	}
+
+	transition-property: opacity,
+		max-height;
+	transition-duration: 1s;
+	transition-timing-function: var(--trans-function);
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 1px;
+		bottom: 1px;
+		right: 1px;
+		height: 30px;
+		display: block;
+		border-radius: var(--radius-s);
+		pointer-events: none;
+
+		background: linear-gradient(180deg, transparent, oklch(var(--b5) /
+			50%));
+		z-index: 20;
+
+		opacity: 0;
+
+		transition-property: opacity;
+		transition-duration: 1s;
+		transition-timing-function: var(--trans-function);
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		transform: unset !important;
+		bottom: unset !important;
+		top: 0;
+		left: 0;
+		width: 160px;
+		height: 80px;
+
+		opacity: 1;
+		transition: none;
+		background: unset;
+		border: 1px solid oklch(var(--c3) / 30%);
+		border-radius: var(--radius-s);
+		border-bottom: unset;
+		border-top-right-radius: unset;
+		border-bottom-right-radius: unset;
+		border-bottom-left-radius: unset;
+		border-right: unset;
+
+		pointer-events: none;
+
+		--mask: linear-gradient(145deg, white, transparent 30%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+}
+
+.listen-board-expand-hint {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 40;
+
+	display: flex;
+	justify-content: center;
+
+	height: 24px;
+
+	opacity: 0;
+	pointer-events: none;
+
+	&[data-expanded="false"] {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	transition-property: opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+}
+
+.listen-board-input-wrap {
+	position: absolute;
+	inset: 0 0 calc(18px + 10px);
+	box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 40%), var(--group-shadow);
+	border-radius: var(--radius-s);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	z-index: 10;
+
+	&[data-typing="false"] {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	transition-property: opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+}
+
+.listen-board-input-hint {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: oklch(var(--c3));
+	cursor: default;
+	display: none;
+}
+
+.listen-board-input {
+	--focus-outline: none !important;
+	appearance: none;
+	border: unset;
+	background: oklch(var(--b2) / 50%);
+	padding: 8px 4px;
+	border-radius: var(--radius-s);
+
+	width: 50%;
+	text-align: center;
+}
+
+.listen-board-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 10px;
+	margin-top: 10px;
+	padding: 0 10px;
+}
+
+.left-align-row {
+	flex: 1;
+}
+
+.right-align-row {
+	flex-shrink: 0;
+}
+
+.listen-board-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	position: relative;
+	overflow: hidden;
+	min-height: 48px;
+
+	background: oklch(var(--k4) / 15%);
+	padding: 6px 10px;
+
+	--mask-colour: oklch(var(--c2));
+
+	&:hover {
+		& > .bleh-icon-arrow-right {
+			translate: 2px 0;
+			opacity: 1;
+		}
+
+		&:before {
+			translate: 110px 0;
+		}
+
+		& > .listen-board-item-bg {
+			translate: 54px 0;
+			scale: 1.03;
+		}
+
+		& > .listen-board-item-info > .listen-board-item-name {
+			color: oklch(var(--l3-c));
+
+			&:after {
+				transform: scaleX(1);
+			}
+		}
+	}
+
+	& > .bleh-icon-arrow-right {
+		--icon-size: 16px;
+		opacity: 0;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		display: block;
+		background: linear-gradient(90deg, transparent 50%, oklch(var(--k4))
+			90%);
+
+		translate: 150px 0;
+		opacity: 0.8;
+
+		transition-property: translate;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function-ani);
+
+		pointer-events: none;
+	}
+
+	&:after {
+		display: none;
+	}
+
+	transition-property: scale;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
+}
+
+.listen-board-item-bg {
+	position: absolute;
+	inset: 0;
+
+	background-size: 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+
+	opacity: 0.08;
+
+	translate: 40px 0;
+	scale: 1;
+
+	pointer-events: none;
+
+	--mask: linear-gradient(90deg, transparent, white);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
+
+	transition-property: translate, scale;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
+}
+
+.listen-board-item-info {
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+	flex: 1;
+}
+
+.listen-board-item-image {
+	--w: 32px;
+	width: var(--w);
+	height: var(--w);
+
+	--mask-size: 18px;
+}
+
+.listen-board-item-name {
+	color: oklch(var(--c2));
+	--mask-colour: oklch(var(--l3-c) / 60%);
+	position: relative;
+
+	width: fit-content;
+
+	transition-property: color;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
+
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--mask-colour);
+		transform: var(--underline-scale, scaleX(0));
+		transform-origin: bottom left;
+		opacity: 0.6;
+
+		transition-property: transform;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function-ani);
+	}
+}
+
+.listen-board-item-plays {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	height: 18px;
+
+	--icon-size: 12px;
+	color: oklch(var(--l2-c-theme-switch));
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
+
+	& > .bleh-icon-spinner {
+		--icon-size: 12px;
+	}
+
+	&.waiting-for-hover {
+		animation: waiting 2s var(--trans-function-ani) infinite;
+	}
+}
+
+@keyframes waiting {
+	from,
+	to {
+		opacity: 0.8;
+	}
+
+	60% {
+		opacity: 0.4;
+	}
+}

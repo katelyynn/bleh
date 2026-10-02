@@ -24,6 +24,7 @@
 	    animation: new_page_header 0.6s var(--trans-function-ani);
 	}*/
 
+	&.for-home,
 	&.for-profile {
 		--page-header-avatar-radius: var(--avatar-radius);
 		--page-header-avatar-gloss: none;
@@ -71,6 +72,11 @@
 				flex-wrap: wrap;
 			}
 		}
+	}
+
+	&[data-theme="yuzu"] {
+		margin: 0 !important;
+		padding: 0 var(--card-padding);
 	}
 }
 
@@ -225,6 +231,8 @@
 	filter: var(--header-disc-filter, brightness(0.92));
 
 	transform: rotate(var(--disc-rotate, 0deg));
+
+	order: 10;
 }
 
 .page-header-avatar {
@@ -234,7 +242,6 @@
 	border-radius: var(--page-header-avatar-radius);
 	box-shadow: 0 10px 80px 10px oklch(var(--h4) / 40%), var(--menu-shadow);
 	position: relative;
-	overflow: hidden;
 	flex-shrink: 0;
 	--mask-size: var(--cover-size-200) !important;
 
@@ -248,6 +255,14 @@
 		box-shadow: var(--avatar-inset);
 		border-radius: inherit;
 		pointer-events: none;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	&:after {
@@ -262,12 +277,29 @@
 		box-shadow: unset !important;
 
 		display: var(--page-header-avatar-gloss, block);
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	& > img {
 		width: 100%;
 		height: 100%;
 		z-index: 10;
+		border-radius: var(--page-header-avatar-radius);
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	& > a {
@@ -279,19 +311,66 @@
 
 	scale: 1;
 
+	&[aria-expanded="true"],
 	&:hover {
-		scale: 1.06;
-		filter: brightness(110%);
+		& > .page-header-avatar-glow {
+			scale: 1;
+			opacity: 0.7;
+		}
 	}
 
-	transition-property: scale,
-		filter,
-		box-shadow;
-	transition-duration: 0.4s;
-	transition-timing-function: var(--trans-function-ani);
+	transition-property: scale;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 
 	&:active {
 		scale: 0.96;
+	}
+
+	&[data-theme="yuzu"] {
+		--page-header-avatar-radius: 0;
+		--page-header-avatar-size: 140px;
+		box-shadow: 0 0 0 1px #fff, 0 0 0 2px #ccc;
+
+		& > .page-header-avatar-glow {
+			display: none;
+		}
+	}
+}
+
+.page-header-avatar-glow {
+	position: absolute;
+	inset: -6px;
+	border-radius: calc(var(--page-header-avatar-radius) + 6px);
+
+	border: 3px solid oklch(var(--l3-c));
+
+	scale: 1.03;
+	opacity: 0;
+
+	transition-property: scale, opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	animation: page_avatar 3s var(--trans-function-ani) infinite;
+
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+}
+
+@keyframes page_avatar {
+	from,
+	to {
+		border: 3px solid oklch(var(--l3-c) / 90%);
+	}
+
+	50% {
+		border: 3px solid oklch(var(--l4-c) / 40%);
 	}
 }
 
@@ -319,58 +398,10 @@
 		}
 	}
 
-	.page-header-title {
-		margin: unset;
-		font-size: calc(26px * var(--custom-font-size-multiplier, 1));
-		line-height: 40px;
-		font-weight: var(--custom-font-weight, var(--font-weight-bold));
-		letter-spacing: unset;
-		cursor: default;
-
-		color: oklch(var(--c1));
-		position: relative;
-
-		& > a {
-			color: inherit !important;
-		}
-
-		&.generic-page-title {
-			font-size: 24px;
-			line-height: 30px;
-		}
-
-		/*&.generic-page-title {
-		    font-family: var(--font-head);
-		    font-style: var(--font-style-head);
-		    font-weight: var(--font-weight-head, var(--font-weight-bold));
-		    }*/
-	}
-
-	& > .page-header-artist {
-		font-size: 18px;
-		line-height: 22px;
-		color: oklch(var(--c2) / 80%);
-		cursor: default;
-		margin: unset !important;
-
-		display: -webkit-box;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		line-clamp: 1;
-		-webkit-line-clamp: 1;
-		-webkit-box-orient: vertical;
-		position: relative;
-
-		.header-new-crumb {
-			font-size: inherit;
-			line-height: inherit;
-		}
-	}
-
 	.header-title-secondary {
 		margin-top: 6px !important;
 		flex-wrap: wrap;
-		filter: var(--nav-filter-shadow);
+		filter: var(--precise-filter-shadow);
 
 		@media (max-width: 980px) {
 			justify-content: center;
@@ -383,6 +414,54 @@
 
 	.profile-top-header {
 		margin-top: var(--card-gap);
+	}
+}
+
+.page-header-title {
+	margin: unset;
+	font-size: calc(26px * var(--custom-font-size-multiplier, 1));
+	line-height: 40px;
+	font-weight: var(--custom-font-weight, var(--font-weight-bold));
+	letter-spacing: unset;
+	cursor: default;
+
+	color: oklch(var(--c1));
+	position: relative;
+
+	& > a {
+		color: inherit !important;
+	}
+
+	&.generic-page-title {
+		font-size: 24px;
+		line-height: 30px;
+	}
+
+	/*&.generic-page-title {
+		    font-family: var(--font-head);
+		    font-style: var(--font-style-head);
+		    font-weight: var(--font-weight-head, var(--font-weight-bold));
+		    }*/
+}
+
+.page-header-artist {
+	font-size: 18px;
+	line-height: 22px;
+	color: oklch(var(--c2) / 80%);
+	cursor: default;
+	margin: unset !important;
+
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	position: relative;
+
+	.header-new-crumb {
+		font-size: inherit;
+		line-height: inherit;
 	}
 }
 
@@ -437,6 +516,13 @@
 			}
 		}
 	}
+
+	&[data-theme="yuzu"] {
+		& > .page-header-title {
+			font-size: calc(16px * var(--custom-font-size-multiplier, 1));
+			line-height: 20px;
+		}
+	}
 }
 
 .dollar {
@@ -480,6 +566,7 @@
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
 		margin-left: 4px;
+		--mask-colour: oklch(var(--c3));
 
 		&:hover {
 			color: oklch(var(--c1));
@@ -495,8 +582,8 @@
 .greeting {
 	color: oklch(var(--c2));
 	font-weight: var(--font-weight-medium);
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	cursor: default;
 }
 

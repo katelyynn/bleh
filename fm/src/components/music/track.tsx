@@ -47,8 +47,11 @@ import { MenuContents } from '@/components/menu/menu.tsx';
 import { TrackMenuPreview } from '@/components/track/preview.tsx';
 import { GenericUsername } from '@/components/user/name.tsx';
 import { Token } from '@/components/form/token.tsx';
-import { createRef } from 'jsx-dom';
+import { createRef, ReactElement } from 'jsx-dom';
 import { SmartTitle } from '@/components/music/smart_title.tsx';
+import { ff } from '@/components/settings/sku.ts';
+import { non_pro_edit } from '@/components/music/non_pro_edit.tsx';
+import { queue_popup } from '@/components/dialog/popup.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -131,6 +134,19 @@ export function patch_titles(search = page.structure.main) {
 			':scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)',
 		);
 
+		function update() {
+			const theme = useSettings.get('theme') as string;
+
+			tracklist.setAttribute(
+				'data-theme',
+				theme,
+			);
+		}
+
+		useSettings.on('theme', update);
+
+		update();
+
 		tracks.forEach((track, index) => {
 			smart_track(track, index);
 		});
@@ -154,6 +170,19 @@ export function patch_titles(search = page.structure.main) {
 				return;
 			}
 			track[symbol] = true;
+
+			function update() {
+				const theme = useSettings.get('theme') as string;
+
+				track.setAttribute(
+					'data-theme',
+					theme,
+				);
+			}
+
+			useSettings.on('theme', update);
+
+			update();
 
 			const track_title = track.querySelector(
 				'.chartlist-name a:not(.offset-section-anchor)',
@@ -250,7 +279,7 @@ export function patch_titles(search = page.structure.main) {
 			if (is_user) {
 				track.setAttribute('data-track-type', 'user');
 
-				if (settings.colourful_counts) {
+				if (useSettings.get('colourful_counts')) {
 					patch_artist_ranks_in_list_view(track);
 				}
 
@@ -276,7 +305,7 @@ export function patch_titles(search = page.structure.main) {
 
 				const bar = track.querySelector('.chartlist-count-bar-slug');
 				if (bar) {
-					if (settings.colourful_counts) {
+					if (useSettings.get('colourful_counts')) {
 						patch_artist_ranks_in_list_view(track);
 					}
 
@@ -447,6 +476,7 @@ export function patch_titles(search = page.structure.main) {
 				);
 
 				// parse tags into text
+				track_title.classList.add('smart-title');
 				track_title.replaceChildren(
 					<SmartTitle
 						title={formatted.song_title}
@@ -561,7 +591,8 @@ export function patch_titles(search = page.structure.main) {
 				// since we cant rely on the elements existing anymore
 				const is_own_profile = user == auth.name;
 				const can_edit = is_own_profile && !is_active &&
-					(!is_album ? !has_bar : true) && auth.pro &&
+					(!is_album ? !has_bar : true) &&
+					(auth.pro || ff('non_pro_edit')) &&
 					['user', 'overview'].includes(page.type);
 				const can_delete = is_own_profile && !is_active && !has_bar &&
 					!is_album && ['user', 'overview'].includes(page.type);
@@ -582,7 +613,6 @@ export function patch_titles(search = page.structure.main) {
 
 				const more_button = (
 					<Button
-						chibi
 						className='track-more-button'
 						tooltip={tl(trans.more)}
 					>
@@ -792,7 +822,7 @@ export function patch_titles(search = page.structure.main) {
 					const menu_contents = (
 						<MenuContents>
 							{track.preview}
-							{can_edit
+							{(can_edit && auth.pro)
 								? (
 									<>
 										<ButtonCombo>
@@ -948,6 +978,61 @@ export function patch_titles(search = page.structure.main) {
 												</>
 											)}
 										</ButtonCombo>
+										<div class='sep' />
+										{can_copy_scrobble && (
+											<Button
+												menu
+												onClick={() => {
+													close_menus();
+													submit_scrobble({
+														pre_track: track_title
+															.getAttribute(
+																'data-name',
+															),
+														pre_artist:
+															track_artist,
+														pre_album: alt,
+														pre_album_artist:
+															album_artist,
+														pre_timestamp:
+															timestamp,
+													});
+												}}
+											>
+												<Icon
+													name={icons.copy_scrobble}
+												/>
+												{tl(trans.copy)}
+											</Button>
+										)}
+									</>
+								)
+								: (can_edit && !auth.pro)
+								? (
+									<>
+										<Button
+											menu
+											onClick={() => {
+												close_menus();
+												non_pro_edit({
+													pre_track: track_title
+														.getAttribute(
+															'data-name',
+														),
+													pre_artist: track_artist,
+													pre_album: alt,
+													pre_album_artist:
+														album_artist,
+													timestamp: timestamp,
+												});
+											}}
+										>
+											<Icon
+												name={icons
+													.edit}
+											/>
+											{tl(trans.edit)}
+										</Button>
 										<div class='sep' />
 										{can_copy_scrobble && (
 											<Button
@@ -1156,465 +1241,35 @@ export function patch_titles(search = page.structure.main) {
 						</MenuContents>
 					);
 
-					const menu = menu_tooltip(more_button, menu_contents);
-					const ctx_menu = context_menu_tooltip(track, menu_contents);
+					const menu_props = {
+						onShow: (element: ReactElement) => {
+							return;
+
+							const bulk_edit_host = element.querySelector(
+								'.bulk-edit-host',
+							) as HTMLButtonElement;
+
+							if (bulk_edit_host) {
+								queue_popup('bulk_edit', bulk_edit_host);
+							}
+						},
+					};
+
+					const menu = menu_tooltip(
+						more_button,
+						menu_contents,
+						menu_props,
+					);
+					const ctx_menu = context_menu_tooltip(
+						track,
+						menu_contents,
+						menu_props,
+					);
 
 					function close_menus() {
 						if (menu.is_mounted) menu.hide();
 						if (ctx_menu.is_mounted) ctx_menu.hide();
 					}
-
-					/*menu = tippy(more_button, {
-						theme: 'context-menu',
-						content: html.node`
-                            ${track.preview}
-                            ${
-							can_edit
-								? html.node`
-                                <div class="button-combo">
-                                    ${() => {
-									if (is_album) {
-										return html.node`
-                                                <form style="margin: 0" method="POST" action=${
-											track.getAttribute('data-action')
-										} data-edit-scrobble="">
-                                                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                    <input type="hidden" name="album_name" value=${
-											track.getAttribute(
-												'data-album-name',
-											)
-										}>
-                                                    <input type="hidden" name="album_artist_name" value=${
-											track.getAttribute(
-												'data-album-artist-name',
-											)
-										}>
-                                                    <input type="hidden" name="album_image" value=${
-											track.getAttribute(
-												'data-album-image',
-											)
-										}>
-                                                    <input type="hidden" name="album_name_original" value=${
-											track.getAttribute(
-												'data-album-name-original',
-											)
-										}>
-                                                    <input type="hidden" name="album_artist_name_original" value=${
-											track.getAttribute(
-												'data-album-artist-name-original',
-											)
-										}>
-                                                    <input type="hidden" name="count" value=${
-											track.getAttribute('data-count')
-										}>
-                                                    <button class="dropdown-menu-clickable-item" data-type="edit">
-                                                        ${tl(trans.edit)}
-                                                    </button>
-                                                </form>
-                                            `;
-									}
-
-									return html.node`
-                                            <form style="margin: 0" method="POST" action=${
-										track.getAttribute('data-action')
-									} data-edit-scrobble="">
-                                                <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                <input type="hidden" name="artist_name" value=${
-										track.getAttribute('data-artist-name')
-									}>
-                                                <input type="hidden" name="track_name" value=${
-										track.getAttribute('data-track-name')
-									}>
-                                                <input type="hidden" name="album_name" value=${
-										track.getAttribute('data-album-name')
-									}>
-                                                <input type="hidden" name="album_artist_name" value=${
-										track.getAttribute(
-											'data-album-artist-name',
-										)
-									}>
-                                                <input type="hidden" name="timestamp" value=${
-										track.getAttribute('data-timestamp')
-									}>
-                                                <button class="dropdown-menu-clickable-item" data-type="edit">
-                                                    ${tl(trans.edit)}
-                                                </button>
-                                            </form>
-                                        `;
-								}}
-                                    ${
-									bulk_edit_button
-										? html.node`
-                                        <div class="button-combo-sep" />
-                                        ${() => {
-											let button = track_legacy_menu
-												.querySelector(
-													'[data-analytics-action="BulkEditScrobblesOpen"]',
-												).cloneNode();
-											button.classList =
-												'dropdown-menu-clickable-item chibi';
-											button.textContent = tl(
-												trans.bulk_edit,
-											);
-											button.setAttribute(
-												'data-type',
-												'bulk-edit',
-											);
-
-											tippy(button, {
-												content: tl(trans.bulk_edit),
-											});
-
-											return button;
-										}}
-                                    `
-										: ''
-								}
-                                </div>
-                                ${
-									can_copy_scrobble
-										? html.node`
-                                    <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-											submit_scrobble({
-												pre_track: track_title
-													.getAttribute('data-name'),
-												pre_artist: track_artist,
-												pre_album: alt,
-												pre_album_artist: album_artist,
-												pre_timestamp: timestamp,
-											});
-										}}>
-                                        ${tl(trans.copy)}
-                                    </button>
-                                `
-										: ''
-								}
-                                <div class="sep" />
-                            `
-								: can_copy_scrobble
-								? html.node`
-                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-									submit_scrobble({
-										pre_track: track_title.getAttribute(
-											'data-name',
-										),
-										pre_artist: track_artist,
-										pre_album: alt,
-										pre_album_artist: album_artist,
-										pre_timestamp: timestamp,
-									});
-								}}>
-                                    ${tl(trans.copy)}
-                                </button>
-                                <div class="sep" />
-                            `
-								: bulk_edit_button
-								? html.node`
-                                ${() => {
-									const button = track_legacy_menu
-										.querySelector(
-											'[data-analytics-action="BulkEditScrobblesOpen"]',
-										);
-									button.textContent = tl(
-										trans.bulk_edit,
-									);
-									button.setAttribute(
-										'data-type',
-										'bulk-edit',
-									);
-
-									return button;
-								}}
-                                <div class="sep" />
-                            `
-								: ''
-						}
-                            ${() => {
-							const container = track.querySelector(
-								'.chartlist-play',
-							);
-							if (!container) return;
-
-							const button = container.querySelector(
-								'.chartlist-play-button',
-							);
-							if (!button) return;
-
-							button.classList.add(
-								'dropdown-menu-clickable-item',
-							);
-							button.classList.remove('chartlist-play-button');
-							button.textContent = tl(trans.play);
-							button.setAttribute('data-type', 'play');
-
-							track.removeChild(container);
-
-							return button;
-						}}
-                            ${
-							!is_album
-								? html.node`
-                            <div class="button-combo">
-                                ${() => {
-									return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="track" href=${
-										track_title.getAttribute('href')
-									}>
-                                            ${tl(trans.track)}
-                                        </a>
-                                    `;
-								}}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-									const button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
-										track_title.getAttribute('href')
-									}">
-                                            ${tl(trans.explore_in_library)}
-                                        </a>
-                                    `;
-
-									tippy(button, {
-										content: tl(trans.explore_in_library),
-										delay: [500, 0],
-									});
-
-									return button;
-								}}
-                            </div>
-                            `
-								: ''
-						}
-                            ${
-							album_name && album_link
-								? html.node`
-                            <div class="button-combo">
-                                ${() => {
-									return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${
-										album_link.getAttribute('href')
-									}>
-                                            ${tl(trans.album)}
-                                        </a>
-                                    `;
-								}}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-									let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
-										album_link.getAttribute('href')
-									}">
-                                            ${tl(trans.explore_in_library)}
-                                        </a>
-                                    `;
-
-									tippy(button, {
-										content: tl(trans.explore_in_library),
-										delay: [500, 0],
-									});
-
-									return button;
-								}}
-                            </div>
-                            `
-								: is_album
-								? html.node`
-                            <div class="button-combo">
-                                ${() => {
-									return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${
-										track_title.getAttribute('href')
-									}>
-                                            ${tl(trans.album)}
-                                        </a>
-                                    `;
-								}}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-									const button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
-										track_title.getAttribute('href')
-									})}">
-                                            ${tl(trans.explore_in_library)}
-                                        </a>
-                                    `;
-
-									tippy(button, {
-										content: tl(trans.explore_in_library),
-										delay: [500, 0],
-									});
-
-									return button;
-								}}
-                            </div>
-                            `
-								: ''
-						}
-                            <div class="button-combo">
-                                ${() => {
-							return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="artist" href="${root}music/${redirect()}${
-								sanitise(track_artist)
-							}">
-                                            ${tl(trans.artist)}
-                                        </a>
-                                    `;
-						}}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-							const button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${
-								sanitise(track_artist)
-							}">
-                                            ${tl(trans.explore_in_library)}
-                                        </a>
-                                    `;
-
-							tippy(button, {
-								content: tl(trans.explore_in_library),
-								delay: [500, 0],
-							});
-
-							return button;
-						}}
-                            </div>
-                            ${() => {
-							if (!is_own_profile || is_album) return;
-
-							let name = track.getAttribute('data-track-name');
-							let artist = track.getAttribute('data-artist-name');
-
-							if (!name) {
-								// now playing
-								name = track_title.getAttribute('data-name');
-								artist = track_artist;
-							}
-
-							return html.node`
-                                    <form style="margin: 0" method="POST" action="${root}user/${auth.name}/obsessions" data-submit-to-modal="">
-                                        <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                        <input type="hidden" name="name" value=${name}>
-                                        <input type="hidden" name="artist_name" value=${artist}>
-                                        <button class="dropdown-menu-clickable-item" data-type="obsession">
-                                            ${tl(trans.obsess)}
-                                        </button>
-                                    </form>
-                                `;
-						}}
-                            <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-							copy(track_title.href);
-						}}>
-                                ${tl(trans.copy_link)}
-                            </button>
-                            ${() => {
-							if (!is_own_profile || !can_delete) return;
-
-							const button = html.node`
-                                    <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
-                                        ${tl(trans.delete)}
-                                    </button>
-                                `;
-
-							let form;
-
-							return html.node`
-                                    <div class="sep" />
-                                    <form ref=${(
-								el,
-							) => (form =
-								el)} style="margin: 0" method="POST" action="${root}user/${auth.name}/library/delete" onsubmit=${async (
-								e,
-							) => {
-								e.preventDefault();
-
-								const url =
-									`${root}user/${auth.name}/library/delete`;
-								const form_data = new FormData(form);
-
-								console.info(form_data);
-
-								try {
-									track.setAttribute(
-										'data-ajax-form-state',
-										'deleted',
-									);
-
-									await fetch(url, {
-										method: 'POST',
-										body: form_data,
-									}).then((res) => {
-										if (!res.ok) {
-											log(
-												'failed to delete',
-												'form',
-												'error',
-												{ res: res },
-											);
-											track.removeAttribute(
-												'data-ajax-form-state',
-											);
-											return;
-										}
-
-										log(
-											'received response',
-											'form',
-											'info',
-											{ res: res },
-										);
-
-										notify({
-											id: 'delete',
-											title: tl(trans.deleted),
-											body: track_title.getAttribute(
-												'data-name',
-											),
-											icon: 'icon-16-trash',
-											type: 'error',
-										});
-									});
-								} catch (e) {
-									console.error(e);
-									track.removeAttribute(
-										'data-ajax-form-state',
-									);
-								}
-							}}>
-                                        <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                        <input type="hidden" name="artist_name" value=${
-								track.getAttribute('data-artist-name')
-							}>
-                                        <input type="hidden" name="track_name" value=${
-								track.getAttribute('data-track-name')
-							}>
-                                        <input type="hidden" name="timestamp" value=${
-								track.getAttribute('data-timestamp')
-							}>
-                                        ${button}
-                                    </form>
-                                `;
-						}}
-                        `,
-						placement: 'right-start',
-						trigger: 'manual',
-						interactive: true,
-						interactiveBorder: 10,
-						offset: [0, 0],
-						hideOnClick: false,
-						appendTo: document.body,
-
-						onCreate(instance) {
-							instance.popper.addEventListener('click', () => {
-								instance.hide();
-							});
-						},
-
-						onClickOutside(instance) {
-							instance.hide();
-						},
-					});
-
-					register_menu(track, menu);*/
 				}, 100);
 			}
 
@@ -1741,7 +1396,7 @@ function BulkEditButton({
 	if (!button.classList.contains('chibi')) {
 		button.classList = `dropdown-menu-clickable-item ${
 			chibi && 'chibi'
-		} v2`;
+		} v2 bulk-edit-host`;
 
 		button.addEventListener('click', onClick);
 

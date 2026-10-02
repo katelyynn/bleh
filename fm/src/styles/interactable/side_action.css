@@ -5,7 +5,7 @@
 .side-actions {
 	display: flex;
 	flex-direction: column;
-	gap: 1px;
+	gap: var(--side-action-gap);
 	/*margin: 0 calc(var(--card-padding) - (var(--inner) + var(--button-sides))) !important;
 
 	--inner: 6px;
@@ -14,13 +14,17 @@
 	padding: var(--inner) !important;
 	border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
-	margin: 0 calc(-1 * var(--button-sides)) !important;
+	margin: var(--side-action-margin) !important;
 	background-color: var(--side-action-bg) !important;
 	border-radius: var(--item-med-radius) !important;
-	padding: 2px 0 !important;
+	padding: var(--side-action-padding) !important;
+	--button-sides: var(--side-action-side);
+	box-shadow: var(--interact-shadow) !important;
 	overflow: hidden;
 
 	position: relative;
+
+	z-index: 20;
 
 	&:after {
 		content: '';
@@ -29,7 +33,6 @@
 		left: 0;
 		right: 0;
 		height: 100%;
-		max-height: 60px;
 		pointer-events: none;
 		border-radius: inherit !important;
 		border-top-left-radius: unset;
@@ -42,17 +45,17 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 
-		opacity: 0.4;
-		display: none;
+		opacity: 0.1;
 	}
 
 	&:is(section) {
-		margin: 0 calc(var(--card-padding) - var(--side-action-side)) 0
-			!important;
+		margin: var(--side-action-margin, 0 calc(var(--card-padding) -
+			var(--side-action-side)) 0) !important;
 
 		&:first-child {
-			margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) -
-				var(--side-action-side)) 0 !important;
+			margin: var(--side-action-margin, calc(-1 * (2px + 7px))
+				calc(var(--card-padding) - var(--side-action-side)) 0)
+				!important;
 		}
 	}
 
@@ -80,6 +83,20 @@
 	& > :last-child:not(.attendance-control) {
 		--last-child-sep: none;
 	}
+
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat-x !important;
+	-webkit-mask-repeat: repeat-x !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+}
+
+.listening-report-promos,
+.stationlink-list {
+	margin: var(--side-action-margin, 0 calc(-1 * var(--side-action-side)) 0)
+		!important;
 }
 
 .attendance-control:last-child {
@@ -89,16 +106,16 @@
 }
 
 .side-action {
-	--bg: transparent;
-	--bg-hov: transparent;
-	--bg-atv: transparent;
+	--bg: var(--side-action, transparent);
+	--bg-hov: var(--side-action-hover, var(--side-action, transparent));
+	--bg-atv: var(--side-action-active, var(--side-action-hover, var(--side-action, transparent)));
+	--col: var(--side-action-colour);
+	--mask-colour: var(--side-action-icon);
 	--shadow: none;
-	--col: oklch(var(--c2));
-	--mask-colour: oklch(var(--l2-c-theme-switch));
 	border-radius: unset !important;
 	overflow: unset;
 	text-overflow: ellipsis;
-	--padding: 7px var(--side-action-side) 7px calc(var(--side-action-side) + var(--icon-size) + 6px);
+	--padding: var(--side-action-vert) var(--side-action-side) var(--side-action-vert) calc(var(--side-action-side) + var(--icon-size) + 6px);
 	margin: unset !important;
 	width: unset !important;
 	position: relative;
@@ -106,6 +123,8 @@
 	--show-icon: block !important;
 
 	--icon-size: 16px !important;
+
+	--interact-mask: none !important;
 
 	&:not(.stationlink, .listening-report-promo) {
 		height: var(--side-action-height) !important;
@@ -152,7 +171,7 @@
 		background: var(--mask-colour) !important;
 		border: unset !important;
 		bottom: unset !important;
-		transition-property: background !important;
+		transition-property: background, rotate !important;
 		transition-duration: var(--trans) !important;
 		transition-timing-function: var(--trans-function) !important;
 	}
@@ -164,11 +183,14 @@
 		top: unset !important;
 		left: calc(var(--button-sides) + var(--icon-size) + 6px) !important;
 		right: var(--button-sides) !important;
-		bottom: -1px !important;
+		bottom: calc(-1 * var(--side-action-sep-height)) !important;
 		width: unset !important;
-		height: 1px !important;
-		background: oklch(var(--b2) / 30%) !important;
+		height: var(--side-action-sep-height) !important;
+		background: var(--side-action-sep) !important;
 		border: none !important;
+
+		opacity: unset !important;
+		transform: unset !important;
 	}
 
 	.listening-report-promo-date,
@@ -189,9 +211,10 @@
 		}
 	}
 
-	&:hover {
-		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+	&:hover,
+	&:active {
+		--col: var(--side-action-selected-colour);
+		--mask-colour: var(--side-action-selected-icon);
 	}
 }
 
@@ -204,10 +227,11 @@
 
 	position: relative;
 	--last-child-sep: none;
-	margin-bottom: 1px;
+	margin-bottom: var(--side-action-sep-height);
 	padding-right: var(--button-sides);
 
 	gap: 10px !important;
+	--icon-size: 14px !important;
 
 	&:after {
 		content: '';
@@ -216,16 +240,16 @@
 		top: none !important;
 		left: calc(var(--button-sides) + var(--icon-size) + 6px) !important;
 		right: var(--button-sides) !important;
-		bottom: -1px !important;
+		bottom: calc(-1 * var(--side-action-sep-height)) !important;
 		width: unset !important;
-		height: 1px !important;
-		background: oklch(var(--b2) / 40%) !important;
+		height: var(--side-action-sep-height) !important;
+		background: var(--side-action-sep) !important;
 	}
 }
 
 .side-action-small {
-	--bg-hov: oklch(var(--h4) / 20%);
-	--bg-atv: oklch(var(--h4) / 40%);
+	--bg-hov: oklch(var(--h4) / 20%) !important;
+	--bg-atv: oklch(var(--h4) / 40%) !important;
 	border-radius: 50px !important;
 
 	--side-action-height: 26px;
@@ -234,11 +258,18 @@
 	width: var(--side-action-height) !important;
 	flex: unset !important;
 	--padding: 6px var(--button-sides) !important;
+
 	--icon-size: 14px !important;
 
 	&:before {
 		--left: 50% !important;
 		--margin-left: calc(-1 * (var(--icon-size) / 2)) !important;
+	}
+
+	&:not([data-type="close_friends"]) {
+		--bg-hov: oklch(var(--b2) / 50%) !important;
+		--bg-atv: oklch(var(--b2) / 70%) !important;
+		--mask-colour: oklch(var(--c2));
 	}
 }
 
@@ -248,8 +279,11 @@
 [data-toggle-button-current-state="bookmarked"] > form > .header-new-bookmark-button,
 .side-action[data-is-shortcut="true"],
 [data-toggle-button-current-state="followed"] > form > .side-action[data-type="follow"] {
-	--col: oklch(var(--l3-c));
-	--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+	--bg: var(--side-action-selected, var(--side-action));
+	--bg-hov: var(--side-action-selected-hover, var(--side-action-selected, var(--side-action)));
+	--bg-atv: var(--side-action-selected-active, var(--side-action-selected-hover, var(--side-action-selected, var(--side-action))));
+	--col: var(--side-action-selected-colour);
+	--mask-colour: var(--side-action-selected-icon);
 	--force-font-weight: var(--font-weight-medium) !important;
 
 	&:before {
@@ -280,4 +314,10 @@
 
 .header-follower-btn {
 	inset: unset !important;
+}
+
+.chibi-side-buttons {
+	display: flex;
+	align-items: center;
+	gap: 2px;
 }

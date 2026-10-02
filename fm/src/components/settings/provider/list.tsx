@@ -31,12 +31,14 @@ interface SettingListProps {
 	name?: ReactNode;
 	body?: ReactNode;
 	value?: string[];
+	defaultValue?: string[];
 	values?: ListOptions;
 	predefined?: boolean;
 	onChange?: (val: string[]) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	new_release?: boolean;
 }
 
 type SettingListElement = HTMLDivElement & {
@@ -49,6 +51,7 @@ export type ListOptions = Record<string, ListOption>;
 export interface ListOption {
 	icon?: string;
 	name: translation | string;
+	host?: string;
 }
 
 export function SettingList({
@@ -59,12 +62,14 @@ export function SettingList({
 	name,
 	body,
 	value,
+	defaultValue,
 	values = {},
 	predefined,
 	onChange,
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	new_release,
 }: SettingListProps) {
 	if (bind) value = useSettings.get(bind) as string[];
 
@@ -84,6 +89,7 @@ export function SettingList({
 		if (!icon) icon = store.icon;
 
 		if (store.values) values = store.values;
+		if (store.default) defaultValue = store.default as string[];
 		predefined = store.predefined || false;
 
 		if (store.incompatible) {
@@ -93,6 +99,8 @@ export function SettingList({
 				});
 			});
 		}
+
+		if (store.new_release) new_release = store.new_release;
 	}
 
 	let sortable: Sortable;
@@ -143,6 +151,10 @@ export function SettingList({
 					name={name}
 					body={body}
 					store={store}
+					value={value}
+					defaultValue={defaultValue}
+					setValue={(v) => set(v as string[])}
+					new_release={new_release}
 				/>
 				<List>
 					<List ref={inner_list}>
@@ -150,6 +162,7 @@ export function SettingList({
 							? value!.map((val, i) => (
 								<ListItem
 									icon={values[val]?.icon}
+									host={values[val]?.host}
 									name={values[val]
 										? tl(values[val].name)
 										: val}
@@ -178,6 +191,7 @@ export function SettingList({
 						: Object.entries(available).map(([val, formal], i) => (
 							<ListCandidate
 								icon={formal.icon}
+								host={formal.host}
 								name={formal.name}
 								onAdd={() => {
 									const new_list = [...value!, val];

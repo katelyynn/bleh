@@ -62,7 +62,7 @@ export function profile_recents() {
 
 	panel.insertBefore(
 		<PanelTop>
-			<PanelHead icon={icons.recent}>
+			<PanelHead top icon={icons.recent}>
 				{tl(trans.recents)}
 			</PanelHead>
 			{ff('yuzu') && (
@@ -153,7 +153,7 @@ export function profile_recents() {
 						<SettingSwitch bind='format_guest_features' />
 						<SettingSwitch bind='show_guest_features' />
 					</SettingGroup>
-					<CardTip>{tl(trans.bleh_settings_notice)}</CardTip>
+					<CardTip minWidth>{tl(trans.bleh_settings_notice)}</CardTip>
 				</>
 			),
 		},

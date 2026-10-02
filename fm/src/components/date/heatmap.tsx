@@ -22,18 +22,3 @@ export function HeatmapTooltip({
 		</Tooltip>
 	);
 }
-
-interface HeatmapBlockProps {
-	index?: number;
-}
-
-export function HeatmapBlock({
-	index = 0,
-}: HeatmapBlockProps) {
-	return (
-		<div
-			class={['graph-block', 'empty']}
-			style={{ '--delay': `${index * 0.04}s` } as CSSProperties}
-		/>
-	);
-}

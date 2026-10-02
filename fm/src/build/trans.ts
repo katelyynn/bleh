@@ -28,6 +28,10 @@ export const lastfm_languages = [
 	'tr',
 	'zh',
 ];
+
+// when translating, credit your
+// last.fm username in the 'by' list
+// and update the date!!
 export const lang_info: Record<string, language> = {
 	en: {
 		name: 'English',
@@ -56,7 +60,7 @@ export const lang_info: Record<string, language> = {
 	},
 	pl: {
 		name: get_language_name('pl'),
-		by: ['zaktusii', 'iwas15with100k', 'P0kahontaz', 'livia09_'],
+		by: ['zaktusii', 'P0kahontaz', 'livia09_', 'iwas15with100k'],
 		last_updated: '2026-08-25',
 	},
 	pt: {
@@ -110,6 +114,7 @@ export interface language {
 	missing?: number;
 }
 
+// https://github.com/katelyynn/bleh/wiki/Translations
 export const trans = {
 	comma: {
 		// yes this is just a comma
@@ -126,6 +131,13 @@ export const trans = {
 		zh: ', ',
 		ja: '、',
 	},
+	and: {
+		// this is the end of a list
+		// the spaces around it are intentional and should be
+		// there if the language puts spaces in lists
+		en: ', and ',
+		de: ' und ',
+	},
 	page_templates: {
 		// these are used for browser tab titles
 		// {page} is something like 'Home' or 'Profile'
@@ -133,6 +145,7 @@ export const trans = {
 		// {brand} is bleh
 		// {build} and {sku} are version numbers
 		type: {
+			// Home on bleh 1234.56
 			en: '{page} on {brand} {build}.{sku}',
 			de: '{page} auf {brand} {build}.{sku}',
 			es: '{page} en {brand} {build}.{sku}',
@@ -145,6 +158,7 @@ export const trans = {
 			tr: '{page} ’de {brand} {build}.{sku}',
 		},
 		name_type: {
+			// Friends - username on bleh 1234.56
 			en: '{name} - {page} on {brand} {build}.{sku}',
 			de: '{name} - {page} auf {brand} {build}.{sku}',
 			es: '{name} - {page} en {brand} {build}.{sku}',
@@ -156,6 +170,7 @@ export const trans = {
 			tr: '{name} - {page} ’de {brand} {build}.{sku}',
 		},
 		name_sister_type: {
+			// Album by Artist - Albums on bleh 1234.56
 			en: '{name} by {sister} - {page} on {brand} {build}.{sku}',
 			de: '{name} von {sister} - {page} auf {brand} {build}.{sku}',
 			es: '{name} por {sister} - {page} en {brand} {build}.{sku}',
@@ -2261,6 +2276,23 @@ export const trans = {
 				pl: 'Wigilia',
 				zh: '平安夜',
 			},
+			graves: {
+				// a nod to the Deadlock character 'Graves'
+				// https://deadlock.wiki/Graves#Typography
+				en: 'Graves',
+			},
+			gloom: {
+				en: 'Gloom',
+			},
+			smoke: {
+				en: 'Smoke',
+			},
+			burgundy: {
+				en: 'Burgundy',
+			},
+			lantern: {
+				en: 'Lantern',
+			},
 		},
 		exclusive: {
 			// used as a tooltip for colours only available in certain seasons
@@ -2335,7 +2367,7 @@ export const trans = {
 	},
 	particles: {
 		en: 'Particles',
-		it: 'Particelle'
+		it: 'Particelle',
 	},
 	seasonal_particles_fps: {
 		name: {
@@ -2363,7 +2395,7 @@ export const trans = {
 	},
 	effects: {
 		en: 'Effects',
-		it: 'Effetti'
+		it: 'Effetti',
 	},
 	seasonal_overlays: {
 		name: {
@@ -2378,15 +2410,15 @@ export const trans = {
 			zh: '显示额外的时令特效',
 		},
 		body: {
-			en: 'During winter seasons this applies a coat of ice to panels, otherwise mainly gradients',
-			de: 'Während der Wintersaisons wird eine Eisschicht auf die Panels angewendet, ansonsten hauptsächlich Farbverläufe',
-			es: 'Durante temporadas invernales, aplica una capa de hielo a los paneles, de lo contrario, aplica principalmente gradientes',
-			it: 'Durante le stagioni invernali, applica un mantello di ghiacchi ai pannelli, altrimenti principalmente gradienti',
-			pt: 'Durante o inverno, isso aplica uma camada de gelo aos painéis; fora dessa época, aplica principalmente gradientes',
-			sv: 'Under vintersäsongen läggs ett lager is på paneler, annars mest bildgradienter',
-			ru: 'Отображать дополнительные сезонные эффекты',
-			pl: 'Podczas sezonu zimowego dodaje lód do paneli, w większości gradienty ',
-			zh: '冬季时会为界面披上一层冰霜质感，其他时令则主要以色彩渐变呈现',
+			en: 'Features image overlays like cobwebs and snow in certain seasons',
+		},
+	},
+	seasonal_masks: {
+		name: {
+			en: 'Change button and grid shapes',
+		},
+		body: {
+			en: 'Seasons can choose a custom look for buttons, menus, and grids',
 		},
 	},
 	seasonal_offset: {
@@ -3124,7 +3156,7 @@ export const trans = {
 	},
 	theme_no_saturation_support: {
 		en: 'This theme defines its own colours independently',
-		it: 'Questo tema definisce i suoi colori indipendentemente'
+		it: 'Questo tema definisce i suoi colori indipendentemente',
 	},
 	noise: {
 		name: {
@@ -3889,39 +3921,10 @@ export const trans = {
 		ru: 'Лучший трек',
 		pl: 'Najpopularniejszy utwór',
 	},
-	you_share_count_with: {
+	you_share_artists_with: {
 		// as in your musical taste % between you and someone else
 		// you are {percentage%} compatible (in taste) {list of artists}
-		en: 'You are {c} compatible',
-		de: 'Ihr seid {c} kompatibel',
-		es: 'Eres {c} compatible',
-		it: 'Siete compatibili al {c}',
-		pt: 'Voce é {c} compatível',
-		sv: 'Du är {c} kompatibel',
-		ru: 'Ваша совместимость {c}',
-		pl: 'Jesteście kompatybilni w {c}',
-		two: {
-			en: '{artist1}, {artist2}',
-			de: '{artist1}, {artist2}',
-			es: '{artist1}, {artist2}',
-			it: '{artist1}, {artist2}',
-			pt: '{artist1}, {artist2}',
-			sv: '{artist1}, {artist2}',
-			ja: '{artist1}、{artist2}',
-			ru: '{artist1}, {artist2}',
-			pl: '{artist1}, {artist2}',
-		},
-		three: {
-			en: '{artist1}, {artist2}, {artist3}',
-			de: '{artist1}, {artist2}, {artist3}',
-			es: '{artist1}, {artist2}, {artist3}',
-			it: '{artist1}, {artist2}, {artist3}',
-			pt: '{artist1}, {artist2}, {artist3}',
-			sv: '{artist1}, {artist2}, {artist3}',
-			ja: '{artist1}、{artist2}、{artist3}',
-			ru: '{artist1}, {artist2}, {artist3}',
-			pl: '{artist1}, {artist2}, {artist3}',
-		},
+		en: 'You share {artists} in common.',
 	},
 	you_are_a_value_match: {
 		// valentines easter egg
@@ -4099,7 +4102,7 @@ export const trans = {
 	},
 	sponsor_monthly: {
 		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
-		it: 'Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se più di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo.' // keeping dollars here? change later if necessary ~cuto
+		it: 'Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se più di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo.', // keeping dollars here? change later if necessary ~cuto
 	},
 	manage_sponsor: {
 		en: 'Manage sponsorship',
@@ -5106,6 +5109,10 @@ export const trans = {
 		sv: '{c} andra',
 		ru: '{c} других',
 		pl: '{c} innych',
+	},
+	value_you_follow: {
+		// number of people who also listen to an artist
+		en: '{v} you follow',
 	},
 	loading_album_plays: {
 		en: 'Collecting your album plays',
@@ -7851,6 +7858,9 @@ export const trans = {
 		ru: 'Всё время',
 		pl: 'Cały okres',
 	},
+	choose_a_timeframe: {
+		en: 'Choose a timeframe',
+	},
 	choose_a_timeframe_above: {
 		en: 'Choose a timeframe above',
 		de: 'Wähle oben einen Zeitraum',
@@ -9539,6 +9549,14 @@ export const trans = {
 			ru: 'Уменьшает интенсивность анимаций, эффектов при наведении и других движущихся элементов',
 			pt: 'Diminui a intensidade das animações, efeitos de hover e outras partes móveis',
 			pl: 'Zmniejsza intensywność animacji, efektów po najechaniu kursorem i innych ruchomych elementów',
+		},
+	},
+	reduced_flashing: {
+		name: {
+			en: 'Reduce flashing effects',
+		},
+		body: {
+			en: 'Prevents distracting or discomforting animations from taking place',
 		},
 	},
 	banners: {
@@ -11785,6 +11803,14 @@ export const trans = {
 			pl: 'Dostęp do wyszukiwarki jeszcze nigdy nie był tak łatwy, a do tego chowa się, gdy przewijasz w górę',
 		},
 	},
+	popup_bulk_edit: {
+		title: {
+			en: 'Bulk Edit has been detected!',
+		},
+		body: {
+			en: 'You can find it neatly packed into this button now',
+		},
+	},
 	send_a_reply: {
 		en: 'Send a reply',
 		de: 'Schicke eine Antwort',
@@ -12450,7 +12476,7 @@ export const trans = {
 		pt: 'Está com problemas para atualizar ou precisa de suporte em geral?',
 		es: '¿Tienes problemas al actualizar o necesitas soporte en general?',
 		pl: 'Masz problemy z aktualizacją lub potrzebujesz pomocy?',
-		it: 'Stai avendo dei problemi ad aggiornare o hai bisogno di supporto in generale?'
+		it: 'Stai avendo dei problemi ad aggiornare o hai bisogno di supporto in generale?',
 	},
 	hybrid_inbox: {
 		name: {
@@ -12562,7 +12588,7 @@ export const trans = {
 	miscellaneous: {
 		en: 'Miscellaneous',
 		pt: 'Diversos',
-		it: 'Altro'
+		it: 'Altro',
 	},
 	count_bar_style: {
 		en: 'Bar styling',
@@ -12630,7 +12656,7 @@ export const trans = {
 		// i guess like the NY times?
 		en: 'The {b} Times',
 		pt: 'O {b} Times',
-		it: 'La Gazzetta di {b}'
+		it: 'La Gazzetta di {b}',
 	},
 	from: {
 		// timeframe
@@ -12660,6 +12686,45 @@ export const trans = {
 		en: 'This list is empty',
 		pt: 'Esta lista está vazia',
 		it: 'Questa lista è vuota',
+	},
+	on: {
+		// switch state
+		en: 'On',
+	},
+	off: {
+		// switch state
+		en: 'Off',
+	},
+	select_arbitrary: {
+		en: 'Type to add to this list',
+	},
+	value_to_close: {
+		// keybind
+		en: '{v} to close',
+	},
+	hover_to_view: {
+		// hover mouse
+		en: 'Hover to view',
+	},
+	collage_style: {
+		en: 'Collage style',
+	},
+	stack: {
+		en: 'Stack',
+	},
+	music_and_data: {
+		en: 'Music & Data',
+	},
+	streak_information: {
+		en: 'Streaks are calculated locally and max 100 at the moment.',
+	},
+	view_your_compatibility: {
+		// taste
+		en: 'View your compatibility',
+	},
+	insight: {
+		// used on profiles
+		en: 'Insight',
 	},
 } as const satisfies Record<string, any>;
 

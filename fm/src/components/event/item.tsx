@@ -11,9 +11,9 @@ import { Button } from '@/components/button/button.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { root } from '@/build/page.ts';
 import { DateTime } from 'luxon';
-import { ReactNode } from 'jsx-dom';
+import { ReactElement, ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
-import tippy from 'tippy.js';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export type attendance = 'going' | 'maybe';
 
@@ -90,9 +90,10 @@ export function EventItem({
 										return avatar;
 									}
 
-									tippy(avatar, {
-										content: title,
-									});
+									hover_tooltip(
+										avatar as ReactElement,
+										<Tooltip>{title}</Tooltip>,
+									);
 
 									return avatar;
 								})}

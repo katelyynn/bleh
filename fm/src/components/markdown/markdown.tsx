@@ -370,6 +370,8 @@ export function markdown(
 		ellipsis: false,
 	});
 	const markdown = text
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
 		.replace(
 			/\[artist\]([^[\]]+)\[\/artist\]/g,
 			(_match, artist: string) =>

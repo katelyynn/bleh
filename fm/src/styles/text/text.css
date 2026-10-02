@@ -30,12 +30,6 @@
 		--icon-size: 14px;
 	}
 
-	/* see .this-month */
-	& > .see-more {
-		--col: oklch(var(--c3));
-		--mask-colour: oklch(var(--c3) / 80%);
-	}
-
 	@media (max-width: 980px) {
 		flex-direction: column;
 		justify-content: unset;
@@ -140,6 +134,15 @@
 	}
 }
 
+/* used for sign up */
+.text-24 {
+	color: oklch(var(--c1));
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: var(--font-weight-medium);
+	margin-bottom: var(--card-padding);
+}
+
 h4 {
 	&:not(.source-album-name, .top-header, .factbox-heading) {
 		& + p {
@@ -168,7 +171,7 @@ i {
 	color: oklch(var(--c3));
 
 	&:not(.btn) {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 		cursor: default;
 	}
 }
@@ -325,9 +328,10 @@ pre {
 }
 
 .card-tip {
+	display: inline-block;
 	margin-top: var(--card-gap);
 	font-weight: var(--font-weight) !important;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	cursor: default;
 
@@ -356,6 +360,15 @@ pre {
 
 	&.gap {
 		margin-top: var(--card-gap);
+	}
+
+	&.min-width {
+		max-width: 400px;
+	}
+
+	&.center {
+		text-align: center;
+		width: 100%;
 	}
 }
 
@@ -422,7 +435,7 @@ pre {
 
 .tip {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	width: fit-content;
 	cursor: default;
 
@@ -517,8 +530,8 @@ hr {
 	--icon-colour: oklch(var(--l3-c));
 
 	color: oklch(var(--c1));
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	margin-bottom: var(--card-gap);
 
 	&.is-small {
@@ -531,6 +544,53 @@ hr {
 	&:not(.with-margin),
 	.bleh--panel > & {
 		margin-bottom: unset;
+	}
+
+	&.is-top {
+		margin: unset;
+	}
+
+	&[data-theme="nier"] {
+		color: oklch(var(--b5)) !important;
+		--icon-colour: oklch(var(--b5));
+
+		/* in a top container */
+		&:not(.is-top) {
+			background: var(--nier-selected);
+			padding: 6px var(--card-padding);
+			margin-left: calc(-1 * var(--card-padding));
+			margin-right: calc(-1 * var(--card-padding));
+
+			section:first-child > & {
+				margin-top: calc(-1 * var(--card-padding));
+			}
+		}
+	}
+
+	&[data-theme="yuzu"] {
+		color: oklch(var(--l4-c)) !important;
+	}
+
+	&.with-margin {
+		.setting-group + & {
+			margin-top: var(--card-padding);
+		}
+	}
+}
+
+.panel-head-extra {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	--icon-size: 16px;
+	color: oklch(var(--l3-c));
+	--icon-colour: oklch(var(--c3));
+
+	& > .bleh-icon-dot {
+		margin: 0 -4px;
 	}
 }
 

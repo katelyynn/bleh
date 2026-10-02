@@ -27,7 +27,7 @@ type TooltipConfig = Partial<
 		exitAnimation: AnimationPreset;
 		ariaEnabled: boolean;
 		onShowing: () => void;
-		onShow: () => void;
+		onShow: (element: ReactElement) => void;
 		onHide: () => void;
 		delay: [number, number];
 	}
@@ -90,7 +90,7 @@ export class TooltipInstance<
 	private uuid = crypto.randomUUID();
 
 	public onShowing: (() => void) | null = null;
-	public onShow: (() => void) | null = null;
+	public onShow: ((element: ReactElement) => void) | null = null;
 	public onHide: (() => void) | null = null;
 
 	public constructor(
@@ -151,7 +151,7 @@ export class TooltipInstance<
 
 		this.current_animation = animation;
 
-		if (this.onShow) this.onShow();
+		if (this.onShow) this.onShow(this.element);
 	}
 
 	public hide() {
@@ -311,7 +311,7 @@ export function menu_tooltip<
 				crossAxis: true,
 				padding: 6,
 			}),
-			offsetMiddleware(10),
+			offsetMiddleware(6),
 		],
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
@@ -320,7 +320,11 @@ export function menu_tooltip<
 		...config,
 	});
 
+	let cancel_close = false;
+
 	const listener: EventListener = ({ target: t }) => {
+		if (cancel_close) return;
+
 		// TODO: if you click the button (or something inside it)
 		// that triggered the menu to show,
 		// it will fire this after the clicking again check
@@ -340,7 +344,13 @@ export function menu_tooltip<
 	};
 
 	host.addEventListener('click', (e) => {
+		cancel_close = true;
 		console.info('click', e);
+
+		setTimeout(() => {
+			cancel_close = false;
+		}, 0);
+
 		// close when clicking again
 		if (tooltip.is_mounted) {
 			log('hiding due to is_mounted', 'tooltip', 'info');

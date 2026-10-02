@@ -12,9 +12,6 @@ import { tl, trans } from '@/build/trans';
 import {
 	correct_artist,
 	correct_generic_combo_no_artist,
-	correct_item_by_artist,
-	name_includes,
-	smart_title,
 } from '@/components/music/lotus';
 import {
 	bleh_music_page_charts,
@@ -38,8 +35,7 @@ import { html, render } from 'lighterhtml';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { setting } from '@/components/settings/settings';
 import { open_starred_friend_window } from '@/pages/profile/profile';
-import { artist_title, page_header_avatar } from '@/components/music/header';
-import { header_colour } from '@/components/page/colour';
+import { artist_title, PageHeaderAvatar } from '@/components/music/header';
 import { oracle_process } from '@/components/music/oracle';
 import {
 	hover_tooltip,
@@ -50,8 +46,8 @@ import { useSettings } from '@/page.ts';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
-import { createRef, ReactElement } from 'jsx-dom';
-import { icons } from '@/components/shared/icon.tsx';
+import { createRef } from 'jsx-dom';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { clean_streaming_titles } from '@/build/music.ts';
@@ -64,6 +60,7 @@ import {
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -151,17 +148,17 @@ export function bleh_artists() {
 
 		if (on_tour) page.state.on_tour = true;
 
-		// TODO: change to tsx
-		const page_avatar = page_header_avatar(
-			avatar?.getAttribute('content') || '',
-		);
-
 		//const same_page = is_same_page();
 
 		const redesigned_artist_header = (
 			<PageHeader
 				type='artist'
-				avatar={page_avatar}
+				avatar={
+					<PageHeaderAvatar
+						url={avatar?.getAttribute('content') || ''}
+						paint={useSettings.get('hue_from_artist') as boolean}
+					/>
+				}
 				combined={page.multi}
 			>
 				<PageHeaderTitle>
@@ -174,13 +171,6 @@ export function bleh_artists() {
 		log('settings hue accent', 'dfbdfb', 'info', {
 			settings: JSON.stringify(settings),
 		});
-		header_colour(
-			page_avatar.image,
-			useSettings.get('hue_from_artist') as boolean,
-			[
-				page_avatar,
-			],
-		);
 
 		if (position) {
 			hover_tooltip(
@@ -220,11 +210,7 @@ export function bleh_artists() {
 			const menu = select_btn?.nextElementSibling as HTMLDivElement;
 
 			if (select_btn) {
-				select_btn.classList.add(
-					'select-button',
-					'link-select',
-					'blend-v2-btn',
-				);
+				convert_to_select(select_btn);
 				select_btn.classList.remove('dropdown-menu-clickable-button');
 			}
 
@@ -232,17 +218,20 @@ export function bleh_artists() {
 				'.section-playlink',
 			) as HTMLAnchorElement;
 			if (play) {
-				play.classList.add('blend-v2-btn', 'radio', 'left-icon');
+				play.classList.add('blend-v2-btn', 'left-icon');
 				play.classList.remove(
 					'section-playlink',
 					'hover-section-control',
 				);
-				play.setAttribute('data-type', 'play');
+				play.insertBefore(
+					<Icon name={icons.play} />,
+					play.firstChild,
+				);
 			}
 
 			top.replaceWith(
 				<PanelTop>
-					<PanelHead icon={icons.tracks}>
+					<PanelHead top icon={icons.tracks}>
 						{tl(trans.tracks)}
 					</PanelHead>
 					{select_btn && (
@@ -292,17 +281,13 @@ export function bleh_artists() {
 			const menu = select_btn?.nextElementSibling as HTMLDivElement;
 
 			if (select_btn) {
-				select_btn.classList.add(
-					'select-button',
-					'link-select',
-					'blend-v2-btn',
-				);
+				convert_to_select(select_btn);
 				select_btn.classList.remove('dropdown-menu-clickable-button');
 			}
 
 			top.replaceWith(
 				<PanelTop>
-					<PanelHead icon={icons.albums}>
+					<PanelHead top icon={icons.albums}>
 						{tl(trans.albums)}
 					</PanelHead>
 					{select_btn && (
@@ -517,11 +502,7 @@ function bleh_artist_tracks() {
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove('dropdown-menu-clickable-button');
 		}
 
@@ -565,11 +546,7 @@ function bleh_artist_albums() {
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
+			convert_to_select(select_btn);
 			select_btn.classList.remove('dropdown-menu-clickable-button');
 		}
 
@@ -675,6 +652,9 @@ function bleh_listeners() {
 		page.structure.side!.firstElementChild,
 	);
 
+	useSettings.on('friends', render_friends);
+	useSettings.on('starred_friend', render_friends);
+
 	function render_friends() {
 		const friends = settings.friends.filter((friend) =>
 			friend != useSettings.get('starred_friend')
@@ -683,9 +663,12 @@ function bleh_listeners() {
 		render(
 			friends_panel,
 			html`
-				<a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth
-					.name}/library/music/${redirect()}${sanitise(page.name)}">
-				    <span><span class="at">@</span>${auth.name}</span>
+				<a class="btn side-action icon-mask" data-type="profile"
+					href="${root}user/${auth
+						.name}/library/music/${redirect()}${sanitise(
+							page.name,
+						)}">
+					<span><span class="at">@</span>${auth.name}</span>
 				</a>
 				${useSettings.get('starred_friend') != ''
 					? html.node`
@@ -711,9 +694,7 @@ function bleh_listeners() {
             `
 				)}
 				<button class="btn side-action icon-mask" data-type="edit" onclick=${() =>
-					open_starred_friend_window(() => {
-						render_friends();
-					})}>
+					open_starred_friend_window()}>
 				    ${tl(trans.edit_close_friends)}
 				</button>
 				<button class="btn side-action icon-mask" data-type="add" onclick=${() =>

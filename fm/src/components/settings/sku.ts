@@ -5,19 +5,11 @@
  */
 
 import { log } from '@/build/log';
-import { version } from '@/main';
 import { useSettings } from '@/page.ts';
-
-interface flag {
-	default: boolean;
-	name: string;
-	notice?: string;
-	date: string;
-}
+import { flags } from '@/build/flags.ts';
 
 export function ff(flag: string) {
-	const flags: Record<string, flag> = version.feature_flags;
-	const local_flags: Record<string, flag> =
+	const local_flags: Record<string, boolean> =
 		useSettings.get('feature_flags') || {};
 
 	log(`parsing ${flag}`, 'flag', 'log', {
@@ -30,6 +22,6 @@ export function ff(flag: string) {
 	}
 
 	if (flags[flag] != null) {
-		return flags[flag].default;
+		return flags[flag].enabled;
 	}
 }

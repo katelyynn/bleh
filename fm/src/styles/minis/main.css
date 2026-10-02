@@ -33,6 +33,8 @@
 		border-radius: 0 !important;
 		transform: none !important;
 
+		--interact-mask: none !important;
+
 		&:first-child {
 			border-top-left-radius: var(--item-big-radius) !important;
 			border-top-right-radius: var(--item-big-radius) !important;
@@ -49,12 +51,12 @@
 			&:after {
 				content: "";
 				position: absolute;
+				display: block !important;
 				left: 12px;
 				right: 12px;
 				top: -1px;
 				height: 1px;
-				background: var(--card-border-base);
-				display: block;
+				background: var(--separator-base);
 			}
 		}
 
@@ -83,7 +85,7 @@
 
 			& > p {
 				color: oklch(var(--c3));
-				font-size: 13px;
+				font-size: calc(var(--font-size) - 1px);
 			}
 		}
 	}
@@ -191,6 +193,7 @@
 
 	z-index: 2;
 }
+
 .minis-header-body {
 	cursor: default;
 }

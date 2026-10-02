@@ -75,8 +75,8 @@
 .factbox-heading + :is(p, a),
 .factbox-item > ul,
 .catalogue-metadata-description {
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	font-weight: var(--font-weight-medium);
 	cursor: default;
 
@@ -168,12 +168,6 @@
 				}
 			}
 		}
-
-		.sub-text {
-			flex-direction: row;
-			gap: unset;
-			justify-content: space-between;
-		}
 	}
 
 	.metadata-column {
@@ -197,11 +191,6 @@
 
 	.wiki-column {
 		width: 100%;
-
-		.wiki-block {
-			font-size: 16px;
-			line-height: 22px;
-		}
 	}
 
 	.catalogue-metadata {
@@ -217,16 +206,10 @@
 	}
 }
 
-.wiki-section {
-	.wiki-block {
-		font-size: 16px;
-		line-height: 22px;
-	}
-}
-
-.wiki-content {
-	font-size: 16px;
-	line-height: 22px;
+.wiki-content,
+.wiki-block {
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 }
 
 .wiki-style-rules,
@@ -429,7 +412,7 @@
 }
 
 .wiki-block-inner-2 {
-	line-height: 20px;
+	line-height: inherit;
 }
 
 .wiki-block-cta {
@@ -515,7 +498,7 @@
 }
 
 .artist-age {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: 0;
 	color: oklch(var(--c3));
 }

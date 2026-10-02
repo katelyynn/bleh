@@ -120,7 +120,7 @@
 
 .language-row-time {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	cursor: default;
 	width: 130px;
 	display: flex;

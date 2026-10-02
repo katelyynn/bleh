@@ -11,7 +11,7 @@ export function time_tooltip(elem: Element, time: DateTime) {
 	hover_tooltip(
 		elem,
 		<Tooltip>
-			{time.toLocaleString(DateTime.DATE_MED)}
+			{time.toLocaleString(DateTime.DATETIME_MED)}
 		</Tooltip>,
 	);
 	return elem;

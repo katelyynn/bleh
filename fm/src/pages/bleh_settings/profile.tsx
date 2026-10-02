@@ -6,27 +6,19 @@
 
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { settings } from '@/build/config';
-import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
-import { SettingRange } from '@/components/settings/provider/range.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
-import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { SettingOptions } from '@/components/settings/provider/options.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { BetaIndicator } from '@/components/shared/indicator.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
-import { album_track_corrections, artist_corrections } from '@/build/music.ts';
-import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import {
 	page_loading,
 	render_setting_page,
-} from '@/pages/bleh_settings/bleh_settings.js';
+} from '@/pages/bleh_settings/bleh_settings.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
-import { select_prepare_list } from '@/components/settings/select.ts';
 import { useSettings } from '@/page.ts';
 import {
 	checkup_friend_cache,
@@ -36,9 +28,9 @@ import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx
 import { createRef } from 'jsx-dom';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
-import { keys } from '@/components/settings/storage.ts';
 import { status } from '@/components/dialog/status.js';
 import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
+import { Alert } from '@/components/text/alert.tsx';
 
 export async function profile() {
 	if (!auth.name) {
@@ -67,6 +59,8 @@ export async function profile() {
 	const cache = await load_profile_cache_externally(auth.name);
 
 	const profile_preview = createRef();
+
+	const markdown_alert = createRef();
 
 	useSettings.on('profile_header_own', render_banner_preview);
 	useSettings.on('profile_header_others', render_banner_preview);
@@ -120,6 +114,11 @@ export async function profile() {
 				<div class={['inner-preview', 'pad']}>
 					<ProfileSidebar ref={profile_preview} />
 				</div>
+				<Alert type='danger' ref={markdown_alert}>
+					{tl(trans.markdown_disabled_profile, {
+						v: '',
+					})}
+				</Alert>
 				<SettingGroup>
 					<SettingSwitch bind='bio_markdown' />
 				</SettingGroup>
@@ -268,5 +267,10 @@ export async function profile() {
 
 	function render_profile_preview() {
 		profile_preview.current.update();
+
+		markdown_alert.current.setAttribute(
+			'data-hidden',
+			String(useSettings.get('bio_markdown')),
+		);
 	}
 }

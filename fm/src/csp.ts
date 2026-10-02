@@ -65,6 +65,7 @@ const CspPolicies: PolicyMap = {
 		'https://cdnjs.cloudflare.com',
 		'https://cdn.cookielaw.org',
 		'https://google.com',
+		'https://*.google.com',
 		'https://*.gstatic.com',
 		'https://youtube.com',
 		'https://youtube-nocookie.com',
@@ -128,6 +129,9 @@ const CspPolicies: PolicyMap = {
 		'https://katelyynn.github.io',
 		'https://*.discordapp.com',
 		'https://*.discord.com',
+
+		'https://i.pinimg.com',
+		'https://i.ibb.co',
 	],
 	'connect-src': [
 		"'self'",

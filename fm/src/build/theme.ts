@@ -8,7 +8,7 @@ import { trans, translation } from '@/build/trans.ts';
 import { icons } from '@/components/shared/icon.tsx';
 
 export interface theme {
-	name: translation;
+	name: translation | string;
 	type: 'light' | 'dark';
 	icon?: string;
 	external?: boolean;
@@ -47,23 +47,36 @@ export function getThemes(): Record<string, theme> {
 		rose_pine: {
 			name: trans.themes.rose_pine,
 			type: 'dark',
+			icon: icons.rose,
 			external: true,
-			new_release: true,
 		},
 		rose_pine_dawn: {
 			name: trans.themes.rose_pine_dawn,
 			type: 'light',
+			icon: icons.rose,
 			external: true,
-			new_release: true,
 		},
 		kanagawa_dragon: {
 			name: trans.themes.kanagawa_dragon,
 			type: 'dark',
+			icon: icons.wave,
 			external: true,
-			new_release: true,
 		},
 		kanagawa: {
 			name: trans.themes.kanagawa,
+			type: 'light',
+			icon: icons.wave,
+			external: true,
+			new_release: true,
+		},
+		nier: {
+			name: 'NieR',
+			type: 'light',
+			external: true,
+			new_release: true,
+		},
+		yuzu: {
+			name: 'yuzu',
 			type: 'light',
 			external: true,
 			new_release: true,
@@ -88,4 +101,6 @@ export const saturation_themes_unsupported = [
 	'rose_pine_dawn',
 	'kanagawa_dragon',
 	'kanagawa',
+	'nier',
+	'yuzu',
 ];

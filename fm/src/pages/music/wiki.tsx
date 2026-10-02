@@ -15,6 +15,13 @@ import { settings } from '@/build/config';
 import { ReactElement } from 'jsx-dom';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 import { SymbolPresets } from '@/pages/music/presets.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { LinkTooltip } from '@/components/text/link.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { SubText } from '@/components/text/sub.tsx';
+import { useSettings } from '@/page.ts';
+import { link_strings } from '@/components/markdown/links.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -400,47 +407,52 @@ export function bleh_wiki_editor() {
 
 // fix wiki on some devices
 export function patch_wiki() {
-	// add info notes to things
-	if (ff('show_wiki_label')) {
-		let wiki_col = page.structure.main.querySelector('.wiki-column');
-		let wiki_empty = false;
+	let wiki_col = page.structure.main.querySelector('.wiki-column');
+	let wiki_empty = false;
 
-		if (!wiki_col) {
-			wiki_col = page.structure.main.querySelector('.wiki-section');
-		}
-		if (!wiki_col) return;
+	if (!wiki_col) {
+		wiki_col = page.structure.main.querySelector('.wiki-section');
+	}
+	if (!wiki_col) return;
 
-		let wiki_block = wiki_col.querySelector(
-			'.wiki-block.visible-lg .wiki-block-inner-2',
-		);
+	let wiki_block = wiki_col.querySelector(
+		'.wiki-block.visible-lg .wiki-block-inner-2',
+	);
 
-		if (!wiki_block) {
-			wiki_block = wiki_col.querySelector('.wiki-block-cta');
-			wiki_empty = true;
-		}
+	if (!wiki_block) {
+		wiki_block = wiki_col.querySelector('.wiki-block-cta');
+		wiki_empty = true;
+	}
 
-		let read_more = wiki_block.querySelector('a:last-child');
-		if (read_more) {
-			read_more.classList.add('read-more', 'icon');
-			read_more.textContent = tl(trans.read_more).toLowerCase();
-		}
+	const read_more = wiki_block!.querySelector(
+		'a:last-child',
+	) as HTMLAnchorElement;
+	read_more?.remove();
 
-		wiki_col.appendChild(html.node`
-            <div class="sub-text wiki-sub-text">
-                <span class="right-links">
-                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${
-			tl(trans.edit_wiki).toLowerCase()
-		}</a></p>
-                    ${
-			(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''
-		}
-                </span>
-            </div>
-        `);
+	wiki_col.appendChild(
+		<SubText className='wiki-sub-text'>
+			<span class='right-links'>
+				<SeeMore
+					className='wiki-lower'
+					href={`${window.location.href}/+wiki/edit`}
+					icon={icons.edit}
+				>
+					{(tl(trans.edit_wiki) as string).toLowerCase()}
+				</SeeMore>
+				{(!wiki_empty && read_more) && (
+					<SeeMore
+						className='wiki-lower'
+						href={read_more.getAttribute('href')!}
+					>
+						{(tl(trans.read_more) as string).toLowerCase()}
+					</SeeMore>
+				)}
+			</span>
+		</SubText>,
+	);
 
-		if (!wiki_empty) {
-			patch_wiki_contents(wiki_block);
-		}
+	if (!wiki_empty) {
+		patch_wiki_contents(wiki_block!);
 	}
 }
 
@@ -453,14 +465,17 @@ export function can_trust_link(href) {
 
 	if (!scheme || !scheme.startsWith('http')) dangerous = true;
 
-	if (settings.trusted_sites.includes(hostname)) {
+	if (
+		(useSettings.get('trusted_sites') as string[]).includes(hostname) ||
+		link_strings.hasOwnProperty(hostname)
+	) {
 		return { trusted: true, dangerous };
 	}
 
 	return { trusted: false, dangerous };
 }
 
-export function patch_wiki_contents(wiki_block: ReactElement) {
+export function patch_wiki_contents(wiki_block: Element) {
 	const links = wiki_block.querySelectorAll('a');
 	links.forEach((link) => {
 		let href = link.getAttribute('href');
@@ -470,67 +485,41 @@ export function patch_wiki_contents(wiki_block: ReactElement) {
 		let name = link.textContent.trim();
 		let sister;
 
+		link.classList.add('generic-link');
+
 		if (!href.startsWith(root)) {
 			if (href && is_link_external(href)) {
+				link.classList.add('link-with-icon');
+				link.appendChild(
+					<Icon name={icons.external} />,
+				);
+
 				const url = new URL(href);
 				const scheme = url.protocol;
 				const hostname = url.hostname;
-				const path = url.pathname + url.search + url.hash;
-
-				let dangerous = false;
-
-				if (!scheme || !scheme.startsWith('http')) dangerous = true;
+				const path = url.pathname;
 
 				link.addEventListener('click', (e) => {
-					if (settings.trusted_sites.includes(hostname)) return;
+					const { trusted, dangerous } = can_trust_link(href);
+					if (trusted) return;
 
 					e.preventDefault();
 
-					external_url_prompt(href, dangerous);
+					external_url_prompt(href!, dangerous);
 				});
 
 				if (link.textContent != href) {
-					tippy(link, {
-						theme: 'name-sister-combo',
-						content: html.node`
-                            <span class="name">
-                                <span class="link">
-                                    ${
-							scheme != 'https:'
-								? html.node`
-                                    <span class="scheme">
-                                        ${scheme}//
-                                    </span>
-                                    `
-								: ''
-						}
-                                    ${
-							hostname
-								? html.node`
-                                    <span class="hostname">
-                                        ${hostname}
-                                    </span>
-                                    `
-								: html.node`
-                                    <span class="hostname">
-                                        ${path}
-                                    </span>
-                                    `
-						}
-                                    ${
-							path != '/' && hostname
-								? html.node`
-                                    <span class="path">
-                                        ${path}
-                                    </span>
-                                    `
-								: ''
-						}
-                                </span>
-                            </span>
-                            <span class="sister">${tl(trans.external)}</span>
-                        `,
-					});
+					hover_tooltip(
+						link,
+						<LinkTooltip
+							scheme={scheme}
+							hostname={hostname}
+							path={path}
+						/>,
+						{
+							placement: 'bottom',
+						},
+					);
 				}
 
 				return;

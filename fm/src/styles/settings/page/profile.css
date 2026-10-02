@@ -16,7 +16,7 @@
 .banner-preview-label {
 	color: oklch(var(--c3));
 	font-weight: var(--font-weight);
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 }
 
 .banner-preview-avatar {

@@ -1,6 +1,6 @@
 .label,
 .header-new-on-tour {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: 13px;
 	font-weight: var(--font-weight-medium) !important;
 	display: flex;
@@ -17,30 +17,31 @@
 	box-shadow: unset !important;
 	min-height: unset;
 	line-height: unset;
-	transition-property: background-color;
+	transition-property: background-color, scale;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 	/* */
 	background: none !important;
 	position: relative;
-	--mask-size: 16px;
 
-	--sides: 10px;
+	--sides: 8px;
 
 	--left: var(--icon-left, var(--sides));
 	--top: 50%;
 	--margin-left: none;
-	--margin-top: calc(-1 * var(--mask-size) / 2);
+	--margin-top: calc(-1 * var(--icon-size) / 2);
 	height: 26px;
-	min-width: calc(var(--mask-size) + (var(--sides) * 2));
+	min-width: calc(var(--icon-size) + (var(--sides) * 2));
 	max-width: unset;
 	transition-delay: 0s !important;
+
+	--icon-size: 16px;
 
 	--bg: var(--badge);
 	--bg-hov: var(--badge-hov);
 	box-shadow: var(--badge-shadow) !important;
 	background-color: var(--bg) !important;
-	border-radius: var(--item-big-radius) !important;
+	border-radius: var(--radius-m) !important;
 	cursor: pointer;
 
 	backdrop-filter: var(--solarium);
@@ -48,7 +49,9 @@
 
 	&:hover {
 		background-color: var(--bg-hov) !important;
-		transition-duration: 0s !important;
+		transition-property: scale;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
 	}
 
 	&:not(.expand) {
@@ -57,14 +60,26 @@
 	}
 
 	&.expand {
-		padding-left: calc(
-			var(--mask-size) + var(--sides) + 4px
-		) !important;
+		padding-left: calc(var(--icon-size) + var(--sides) + 4px) !important;
 		padding-right: var(--sides) !important;
+
+		&:active {
+			scale: 0.97;
+		}
+	}
+
+	&:not(.small) {
+		--mask2: var(--interact-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 
 	.auth-link > & {
-		--mask-size: 16px;
+		--icon-size: 16px;
 		--left: 0;
 		min-width: 16px;
 		height: 16px;
@@ -75,6 +90,8 @@
 		border-radius: 0 !important;
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
+
+		--interact-mask: none !important;
 	}
 
 	&.translation-lang {
@@ -106,7 +123,7 @@
 		--sides: 0px;
 		height: unset;
 
-		--mask-size: 14px;
+		--icon-size: 14px;
 		min-width: 14px;
 
 		overflow: unset;
@@ -115,7 +132,7 @@
 		height: 18px;
 
 		&.expand {
-			padding-left: calc((var(--icon-left) * 2) + var(--mask-size) + 6px)
+			padding-left: calc((var(--icon-left) * 2) + var(--icon-size) + 6px)
 				!important;
 			--icon-left: 3px;
 			--mask-colour: oklch(var(--b7)) !important;
@@ -135,7 +152,7 @@
 
 .badge-back {
 	display: flex;
-	width: calc((var(--icon-left) * 2) + var(--mask-size));
+	width: calc((var(--icon-left) * 2) + var(--icon-size));
 	background-color: oklch(var(--h3));
 
 	position: absolute;
@@ -182,6 +199,7 @@
 	color: oklch(var(--l3-c)) !important;
 	--mask-colour: currentColor !important;
 }
+
 .user-status-subscriber {
 	--mask: var(--icon-pro);
 	--hue-over: var(--hue-pro);
@@ -192,18 +210,21 @@
 		order: 10;
 	}
 }
+
 .user-status-staff {
 	--mask: var(--icon-staff);
 	--hue-over: 16;
 	--sat-over: 2.68;
 	--lit-over: 0.77;
 }
+
 .user-status-mod {
 	--mask: var(--icon-staff);
 	--hue-over: 36;
 	--sat-over: 2.26;
 	--lit-over: 0.9;
 }
+
 .user-status-alum {
 	--mask: var(--icon-alum);
 	--hue-over: 56;
@@ -234,6 +255,7 @@
 	--sat-over: 1.34;
 	--lit-over: 0.94;
 }
+
 .translate.colourful {
 	--hue-over: 124;
 	--sat-over: 1.34;
@@ -261,6 +283,7 @@
 	--sat-over: 0;
 	--lit-over: 1;
 }
+
 .header-new-on-tour {
 	--mask: var(--icon-tour);
 	--hue-over: 11;
@@ -287,15 +310,15 @@
 	display: var(--show-status, initial);
 	font-size: 0 !important;
 	/* */
+	--mask-size: 100% !important;
 	--show-icon: block;
 	--left: 0;
 	--top: 0;
 	--margin-top: 0;
-	--mask-size: 18px;
+	--icon-size: 18px;
 	background: var(--override-bg, none) !important;
-	filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
-		drop-shadow(0px 2px 0 oklch(var(--b5)))
-		drop-shadow(-2px -0px 0 oklch(var(--b5)))
+	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0
+		oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5)))
 		drop-shadow(-0px -2px 0 oklch(var(--b5)));
 
 	&:before {
@@ -320,20 +343,20 @@
 .shout-user-avatar .avatar-status-dot {
 	width: 16px;
 	height: 16px;
-	--mask-size: 16px;
+	--icon-size: 16px;
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
 	width: 24px;
 	height: 24px;
-	--mask-size: 24px;
+	--icon-size: 24px;
 }
 
 .attendee-summary-user-avatar .avatar-status-dot,
 .playlisting-playlist-author-image .avatar-status-dot {
 	width: 14px;
 	height: 14px;
-	--mask-size: 14px;
+	--icon-size: 14px;
 }
 
 .shout-user-avatar:before,
@@ -349,6 +372,7 @@
 	--sat-over: 1;
 	--lit-over: 1;
 }
+
 .user-status--bleh-avatar-status-dot--staff,
 .avatar-status-dot--staff {
 	--mask: var(--icon-staff);
@@ -356,6 +380,7 @@
 	--sat-over: 1.325;
 	--lit-over: 0.825;
 }
+
 .user-status--bleh-avatar-status-dot--mod,
 .avatar-status-dot--mod {
 	--mask: var(--icon-mod);
@@ -363,6 +388,7 @@
 	--sat-over: 1;
 	--lit-over: 1;
 }
+
 .user-status--bleh-avatar-status-dot--alum,
 .avatar-status-dot--alum {
 	--mask: var(--icon-alum);
@@ -374,11 +400,9 @@
 .star-icon {
 	display: flex;
 	align-items: center;
-	--icon-colour: linear-gradient(
-        0deg,
-        oklch(var(--l3-c)),
-        oklch(var(--l2-c))
-    );
+	--icon-colour: linear-gradient(0deg,
+			oklch(var(--l3-c)),
+			oklch(var(--l2-c)));
 	--icon: var(--icon-16-star-fill);
 	--icon-size: 12px;
 	--hue-over: var(--hue-fav);

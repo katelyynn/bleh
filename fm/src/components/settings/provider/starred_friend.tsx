@@ -13,9 +13,20 @@ import { icons } from '@/components/shared/icon.tsx';
 export function StarredFriend() {
 	const elem = (
 		<SettingSelect
+			allowArbitrary
 			icon={icons.starred_friend}
 			bind='starred_friend'
 			values={set_list()}
+			onChange={(v: string) => {
+				if (!v) return;
+
+				const friends = useSettings.get('friends') as string[];
+				if (friends.includes(v)) {
+					return;
+				}
+
+				useSettings.append('friends', v);
+			}}
 		/>
 	);
 

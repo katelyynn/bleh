@@ -79,6 +79,15 @@ export function patch_avatar(
 	}
 
 	let image_header;
+
+	if (type == 'shout') {
+		if (badges.length > 0) {
+			return badges[badges.length - 1];
+		} else {
+			return {};
+		}
+	}
+
 	const popup = tippy(parent ? parent : avatar, {
 		theme: 'context-menu',
 		content: html.node`

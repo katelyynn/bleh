@@ -24,7 +24,7 @@ import {
 	sponsor_url,
 	urls,
 } from '@/build/page';
-import { stored_season } from '@/build/seasonal';
+import { new_season, Seasons, stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
 import { dialog, load_dialogs } from '@/components/dialog/dialog';
 import {
@@ -40,11 +40,11 @@ import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.tsx';
 import { load_settings, Settings } from '@/config';
-import { theme_version, version } from '@/main';
+import { version } from '@/main';
 import { append_nav, update_branding_type } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
-import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
+import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { bleh_setup } from '@/pages/bleh_setup';
 import { bleh_error } from '@/pages/error';
 import { bleh_events } from '@/pages/event';
@@ -61,7 +61,7 @@ import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
-import { set_season, update_season_nav } from '@/components/seasonal';
+import { update_season_nav } from '@/components/seasonal';
 import {
 	parse_shout_queue,
 	patch_shouts,
@@ -102,13 +102,16 @@ import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
 import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
-import { clean_storage } from './components/settings/storage';
+import { clean_storage, keys } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
+import { auth_page } from '@/pages/auth/main.tsx';
+import { seasonal } from '@/pages/bleh_settings/seasonal.tsx';
 
 export const useSettings: Settings = new Settings();
+export let useSeasons: Seasons;
 
 export function bleh() {
 	page.continue = true;
@@ -159,15 +162,11 @@ export function bleh() {
 
 			remove_lastfm_styles();
 
-			theme_version.state = getComputedStyle(document.body)
-				.getPropertyValue('--version-build')
-				.replaceAll("'", '')
-				.replaceAll('"', ''); // remove quotations
-
 			update_check(false, null);
 
 			load_notifications();
 			load_status();
+			useSeasons = new Seasons();
 
 			checkup_friend_cache();
 
@@ -476,6 +475,8 @@ export function is_url(url: string) {
 }
 
 function load_page(main_content?: HTMLElement) {
+	load_settings();
+
 	if (page.state.activity_preview_timer) {
 		clearInterval(page.state.activity_preview_timer);
 	}
@@ -509,8 +510,6 @@ function load_page(main_content?: HTMLElement) {
 
 	detect_mobile();
 	page.platform = detect_platform();
-
-	set_season();
 
 	bleh_footer();
 
@@ -575,8 +574,9 @@ function load_page(main_content?: HTMLElement) {
 		} else if (page.type == 'tag') bleh_tags();
 		else if (page.type == 'search') bleh_search();
 		else if (page.type == 'inbox') bleh_inbox();
-		else if (page.type == 'home') bleh_home_legacy();
-		else if (
+		else if (['home', 'anonymoushome'].includes(page.type)) {
+			bleh_home_legacy();
+		} else if (
 			page.type == 'overview' ||
 			page.type == 'recommended' ||
 			page.type == 'releases' ||
@@ -587,6 +587,7 @@ function load_page(main_content?: HTMLElement) {
 			bleh_home();
 		} else if (page.type == 'api') bleh_api();
 		else if (page.type == 'labs') bleh_labs();
+		else if (page.type == 'auth') auth_page();
 
 		if (
 			['user', 'events'].includes(page.type) &&
@@ -674,7 +675,6 @@ function load_page(main_content?: HTMLElement) {
 	seasonal_colour_switch();
 
 	append_nav();
-	update_season_nav();
 
 	page_title();
 
@@ -910,7 +910,10 @@ export function update_page() {
 	page.structure.row?.setAttribute('data-lacrimosa', ff('lacrimosa'));
 }
 
-export async function register_background(url: string | null, origin?: string) {
+export async function register_background(
+	url?: string | null,
+	origin?: string,
+) {
 	if (url && url.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg')) url = '';
 
 	register_banner(url, origin);
@@ -1025,6 +1028,13 @@ export function register_banner(url: string | null, origin = null) {
 			return;
 		}
 	}
+
+	function update() {
+		background.setAttribute('data-theme', useSettings.get('theme'));
+	}
+
+	update();
+	useSettings.on('theme', update);
 
 	banner_props();
 

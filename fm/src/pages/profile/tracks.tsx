@@ -8,7 +8,7 @@ import { page, root } from '@/build/page.ts';
 import { createRef } from 'jsx-dom';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
+import { icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { Tabbed, TabbedPage } from '@/components/tab/tabbed.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
@@ -25,6 +25,7 @@ import { select_prepare } from '@/components/settings/select.ts';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
 
 export function profile_tracks() {
 	const panel = page.structure.main!.querySelector('#top-tracks');
@@ -43,11 +44,7 @@ export function profile_tracks() {
 	) as HTMLButtonElement;
 
 	if (select_btn) {
-		select_btn.classList.add(
-			'select-button',
-			'link-select',
-			'blend-v2-btn',
-		);
+		convert_to_select(select_btn);
 		select_btn.classList.remove(
 			'section-control',
 			'dropdown-menu-clickable-button',
@@ -59,7 +56,7 @@ export function profile_tracks() {
 
 	panel.insertBefore(
 		<PanelTop>
-			<PanelHead icon={icons.tracks}>
+			<PanelHead top icon={icons.tracks}>
 				{tl(trans.tracks)}
 			</PanelHead>
 			<ViewButtons accompany>
@@ -115,7 +112,7 @@ export function profile_tracks() {
 						<SettingRadio bind='count_bar_style' />
 						<SettingRadio bind='count_bar_axis' />
 					</SettingGroup>
-					<CardTip>{tl(trans.bleh_settings_notice)}</CardTip>
+					<CardTip minWidth>{tl(trans.bleh_settings_notice)}</CardTip>
 				</>
 			),
 		},

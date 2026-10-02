@@ -5,7 +5,15 @@
  */
 
 import { createRef, ReactNode } from 'jsx-dom';
-import tippy, { Instance, Props } from 'tippy.js';
+import {
+	flip,
+	inline,
+	offset as offsetMiddleware,
+	shift as shiftMiddleware,
+} from '@floating-ui/dom';
+import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { tl, trans } from '@/build/trans.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export interface SelectOption {
 	value?: string;
@@ -23,11 +31,13 @@ interface SelectProps {
 	name?: string;
 	onChange?: (val: string) => void;
 	inSettings?: boolean;
+	allowArbitrary?: boolean;
 }
 
 type SelectElement = HTMLDivElement & {
 	value: string;
 	disabled: boolean;
+	open: () => void;
 };
 
 export function Select({
@@ -39,11 +49,15 @@ export function Select({
 	name,
 	onChange,
 	inSettings,
+	allowArbitrary,
 }: SelectProps) {
 	if (!value) value = values.find((v) => 'value' in v)?.value;
 
 	const button = createRef();
+	const indicator = createRef();
 	const select = createRef();
+	const inner = createRef();
+	const input = createRef();
 
 	const wrap = (
 		<div
@@ -57,38 +71,265 @@ export function Select({
 					'btn',
 					'select-button',
 					inSettings && 'select-in-settings',
+					allowArbitrary && 'arbitrary',
 				]}
 				ref={button}
+			>
+				<span class='select-value-indicator' ref={indicator} />
+			</button>
+			<input
+				class={['select-input']}
+				onInput={() => {
+					temporary_focus = -1;
+					search();
+				}}
+				onKeyDown={(e) => {
+					if (!e.key.startsWith('Arrow') && e.key != 'Enter') return;
+
+					e.preventDefault();
+
+					if (e.key.startsWith('Arrow')) {
+						if (temporary_focus < 0) find_temporary_focus();
+					}
+
+					if (
+						e.key == 'ArrowUp' &&
+						temporary_focus - 1 >= 0
+					) {
+						temporary_focus--;
+						search();
+					} else if (
+						e.key == 'ArrowDown' &&
+						temporary_focus + 1 < results.length
+					) {
+						temporary_focus++;
+						search();
+					} else if (e.key == 'Enter') {
+						if (results[temporary_focus].value != null) {
+							set(results[temporary_focus].value!);
+						} else if (results[temporary_focus].onSelect) {
+							results[temporary_focus].onSelect!();
+						}
+
+						temporary_focus = -1;
+					}
+				}}
+				ref={input}
 			/>
 		</div>
 	) as SelectElement;
 
-	const menu = tippy(button.current, {
-		theme: 'select-menu',
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
+	function find_temporary_focus() {
+		const in_results = results.findIndex((v) => v.value == value);
 
-		onShow(instance: Instance<Props>) {
-			if (values.length > 15) {
+		if (in_results >= 0) {
+			temporary_focus = in_results;
+		} else {
+			temporary_focus = 0;
+		}
+	}
+
+	let temporary_focus = 0;
+	let results: SelectOption[] = [];
+
+	const menu = menu_tooltip(
+		button.current,
+		<Tooltip
+			theme='select-menu'
+			ref={inner}
+			onPointerDown={() => {
 				setTimeout(() => {
-					const focused = instance.popper.querySelector(
-						'[aria-checked="true"]',
-					);
-					if (!focused) return;
+					if (menu.is_mounted) {
+						input.current.focus();
+					}
+				}, 0);
+			}}
+		/>,
+		{
+			middleware: [
+				flip(),
+				inline(),
+				shiftMiddleware({
+					crossAxis: true,
+					padding: 4,
+				}),
+				offsetMiddleware(4),
+			],
+			onShow: (element) => {
+				if (values.length > 15) {
+					setTimeout(() => {
+						const focused = element.querySelector(
+							'[aria-checked="true"]',
+						) as HTMLButtonElement;
+						if (!focused) return;
 
-					focused
-						.scrollIntoView({
-							behavior: 'instant',
-							block: 'center',
-							container: 'nearest',
-						});
-				}, 1);
-			}
+						const top = focused.offsetTop;
+						const bottom = top + focused.offsetHeight;
+
+						const padding = 100;
+
+						const visible_top = element.scrollTop + padding;
+						const visible_bottom = element.scrollTop +
+							element.clientHeight - padding;
+
+						if (top < visible_top) {
+							element.scrollTop = top - padding;
+						} else if (bottom > visible_bottom) {
+							element.scrollTop = bottom - element.clientHeight +
+								padding;
+						}
+					}, 1);
+				}
+
+				temporary_focus = -1;
+				input.current.value = '';
+				input.current.focus();
+				search();
+			},
+			onHide: () => {
+				temporary_focus = -1;
+				input.current.value = '';
+				input.current.blur();
+				input.current.classList.remove('with-query');
+				button.current.classList.remove('with-query');
+
+				button.current.focus();
+			},
 		},
-	});
+	);
+
+	function search() {
+		const query = input.current.value.trim() || '';
+		input.current.classList.toggle('with-query', query);
+		button.current.classList.toggle('with-query', query);
+
+		results = values.filter((val) => {
+			if (query == '') return true;
+
+			if (val.value == null) return false;
+
+			if (typeof val.text == 'function') {
+				const text = (val.text() as Element).textContent
+					.trim().toLowerCase();
+				console.info('testing elem', text);
+				if (!text.includes(query)) return false;
+			} else {
+				console.info('testing', val.text);
+				if (
+					!(val.text as string).toLowerCase().includes(
+						query,
+					)
+				) {
+					return false;
+				}
+			}
+
+			return true;
+		});
+
+		if (
+			!results.find((v) => v.value == query.toLowerCase()) &&
+			query != '' && allowArbitrary
+		) {
+			results = [
+				{
+					type: 'arbitrary',
+					text: query || value,
+					value: query || value,
+					onSelect: () => {
+						temporary_focus = -1;
+						input.current.value = '';
+					},
+				},
+				...results,
+			];
+		}
+
+		if (
+			query && (temporary_focus < 0 || temporary_focus > results.length)
+		) {
+			find_temporary_focus();
+		}
+
+		console.info(
+			'testing | query:',
+			query,
+			'focus:',
+			temporary_focus,
+			'value:',
+			value,
+			results,
+		);
+
+		inner.current.replaceChildren(
+			<>
+				{results.map((val, i) => {
+					if (val.value == null && val.type != 'arbitrary') {
+						if (val.onSelect) {
+							return (
+								<button
+									type='button'
+									class={[
+										'btn',
+										'dropdown-menu-clickable-item',
+										'icon-mask',
+									]}
+									data-type={val.type}
+									onClick={() => {
+										menu.hide();
+										val.onSelect!();
+									}}
+									key={i}
+								>
+									{select_text(val.text)}
+								</button>
+							);
+						}
+
+						if (val.text == 'sep') {
+							return <div class='sep' key={i} />;
+						}
+
+						return (
+							<div class='select-header' key={i}>
+								{select_text(val.text)}
+							</div>
+						);
+					}
+
+					const selected = val.value == value || i == temporary_focus;
+
+					return (
+						<button
+							type='button'
+							class={[
+								'btn',
+								'dropdown-menu-clickable-item',
+								'select-item',
+								(i == temporary_focus && val.value != value) &&
+								'candidate',
+							]}
+							aria-checked={String(selected)}
+							onClick={() => {
+								if (val.value == null) return;
+
+								if (val.onSelect) val.onSelect();
+								set(val.value!);
+							}}
+							key={i}
+						>
+							{select_text(val.text)}
+						</button>
+					);
+				})}
+				{(allowArbitrary && !query) && (
+					<div class='select-header'>
+						{tl(trans.select_arbitrary)}
+					</div>
+				)}
+			</>,
+		);
+	}
 
 	Object.defineProperty(wrap, 'value', {
 		get() {
@@ -108,6 +349,10 @@ export function Select({
 			update();
 		},
 	});
+
+	wrap.open = () => {
+		menu.show();
+	};
 
 	function set(val: string) {
 		value = val;
@@ -140,12 +385,11 @@ export function Select({
 		);
 
 		// fallback
-		button.current.replaceChildren('?');
+		indicator.current.replaceChildren(value);
 
-		const val = values.find((v) => v.value == value);
-		if (!val) return;
+		const val = values.find((v) => v.value == value) || { text: value };
 
-		button.current.replaceChildren(select_text(val.text));
+		indicator.current.replaceChildren(select_text(val.text));
 
 		select.current.value = value;
 
@@ -154,60 +398,7 @@ export function Select({
 		menu.hide();
 
 		setTimeout(() => {
-			menu.setContent(
-				<>
-					{values.map((val, i) => {
-						if (val.value == null) {
-							if (val.onSelect) {
-								return (
-									<button
-										type='button'
-										class={[
-											'btn',
-											'dropdown-menu-clickable-item',
-											'icon-mask',
-										]}
-										data-type={val.type}
-										onClick={() => {
-											menu.hide();
-											val.onSelect!();
-										}}
-										key={i}
-									>
-										{select_text(val.text)}
-									</button>
-								);
-							}
-
-							if (val.text == 'sep') {
-								return <div class='sep' key={i} />;
-							}
-
-							return (
-								<div class='select-header' key={i}>
-									{select_text(val.text)}
-								</div>
-							);
-						}
-
-						return (
-							<button
-								type='button'
-								class={[
-									'btn',
-									'dropdown-menu-clickable-item',
-									'select-item',
-								]}
-								aria-checked={String(val.value == value)}
-								onClick={() => set(val.value!)}
-								key={i}
-							>
-								{select_text(val.text)}
-							</button>
-						);
-					})}
-				</>,
-			);
+			search();
 		}, 300);
 	}
 
@@ -222,4 +413,19 @@ function select_text(text: ReactNode | (() => ReactNode)) {
 	}
 
 	return text;
+}
+
+// convert normal element into a select-like
+export function convert_to_select(button: Element | null) {
+	if (!button) return;
+
+	button.classList.add('select-button', 'link-select', 'blend-v2-btn');
+
+	return;
+
+	button.appendChild(
+		<span class='select-indicator'>
+			<Icon name={icons.arrow_down} identifier='select' />
+		</span>,
+	);
 }

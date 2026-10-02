@@ -262,7 +262,9 @@ export function oracle_process() {
 		let tracklist_view_panel;
 		tracklist_panel = html.node`
             <section class="oracle-tracks">
-                <div class="top-container">
+                <div class="top-container" data-theme=${
+			useSettings.get('theme')
+		}>
                     <h2>${tl(trans.tracklist)}<span class="new-badge beta">${
 			tl(trans.beta)
 		}</span></h2>

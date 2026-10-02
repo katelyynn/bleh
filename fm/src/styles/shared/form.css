@@ -178,6 +178,10 @@
 	color: oklch(var(--c1));
 }
 
+.control-label + .form-group-controls {
+	margin-top: 4px;
+}
+
 .form-group--create_automatic_edit_rule .form-group-controls {
 	flex-direction: column;
 	align-items: unset !important;
@@ -196,7 +200,7 @@
 .footnotes,
 .content-form .form-row-help-text {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: var(--line-height);
 	cursor: default;
 }

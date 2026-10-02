@@ -260,7 +260,7 @@
 					}
 
 					.charts-list-rank-overlay {
-						font-size: 13px;
+						font-size: calc(var(--font-size) - 1px);
 						line-height: 13px;
 						background-color: oklch(var(--h3) / 95%);
 						padding: 2px 7px;

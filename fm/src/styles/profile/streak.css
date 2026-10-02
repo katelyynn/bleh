@@ -17,9 +17,33 @@
 	color: oklch(var(--col) / 70%) !important;
 	font-weight: var(--font-weight-medium) !important;
 	--icon-colour: oklch(var(--l4-c));
+	--mask-colour: var(--icon-colour);
+	min-height: unset !important;
 
-	&:not(.profile-streak-empty):hover {
-		text-decoration: underline !important;
+	--interact-mask: none !important;
+
+	&:not(.profile-streak-empty) {
+		&:after {
+			content: '';
+			position: absolute;
+			display: block !important;
+			bottom: 0;
+			left: calc(var(--icon-size) + 4px);
+			right: 0;
+			height: 1px;
+			background: var(--mask-colour);
+			transform: var(--underline-scale, scaleX(0));
+			transform-origin: bottom left;
+			opacity: 0.6;
+
+			width: unset !important;
+			top: unset !important;
+			margin: unset !important;
+
+			transition-property: transform;
+			transition-duration: 0.2s;
+			transition-timing-function: var(--trans-function-ani);
+		}
 	}
 
 	&.profile-streak-empty {
@@ -51,6 +75,12 @@
 		&:not([data-streak-high]):not(:hover) {
 			--col: var(--c3);
 			--icon-colour: oklch(var(--c3) / 80%);
+		}
+
+		&:hover {
+			&:after {
+				transform: scaleX(1);
+			}
 		}
 	}
 
@@ -254,5 +284,5 @@
 	margin-top: var(--card-padding);
 	text-align: center;
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 }

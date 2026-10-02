@@ -8,6 +8,7 @@ import { Hole, html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
 import tippy from 'tippy.js';
 import { setting_value } from '@/build/config';
+import { SelectOption } from '@/components/select/select.tsx';
 
 unsafeWindow._update_inbuilt_select = function (id: string, value: string) {
 	update_inbuilt_select(id, value);
@@ -213,7 +214,7 @@ export function select({
 }
 
 export function select_prepare(element: HTMLSelectElement) {
-	const values: select_option[] = [];
+	const values: SelectOption[] = [];
 
 	element.querySelectorAll('option').forEach((option: HTMLOptionElement) => {
 		values.push({

@@ -244,54 +244,55 @@ function bleh_communication_panel(token) {
 		html`
 			<h4>${tl(trans.block_list)}</h4>
 			<div class="user-top-panel">
-			    <div class="user-top-avatar user-top-avatar-side-left">
-			        <div class="bleh-icon"></div>
-			    </div>
-			    <img
-			        class="user-top-avatar user-top-avatar-main"
-			        src=${avatar(auth.avatar, 'avatar300s')}
-			        alt=${auth.name}
-			    />
-			    <div class="user-top-avatar user-top-avatar-side-right">
-			        <div class="bleh-icon"></div>
-			    </div>
+				<div class="user-top-avatar user-top-avatar-side-left">
+					<div class="bleh-icon"></div>
+				</div>
+				<img
+					class="user-top-avatar user-top-avatar-main"
+					src=${avatar(auth.avatar, 'avatar300s')}
+					alt=${auth.name}
+				/>
+				<div class="user-top-avatar user-top-avatar-side-right">
+					<div class="bleh-icon"></div>
+				</div>
 			</div>
 			${alert}
-			<form action="${root}settings/privacy#ignorelist" name="ignorelist" method="post">
-			    <input type="hidden" name="csrfmiddlewaretoken" value=${page
-				.token} />
-			    <div class="setting-group">
-			        <div class="setting v" data-type="text">
-			            <div class="heading">
-			                <h5>${tl(trans.profile)}</h5>
-			            </div>
-			            <div class="input-container content-form">
-			                <input
-			                    type="text"
-			                    maxlength="80"
-			                    id="id_user"
-			                    name="user"
-			                    placeholder=${tl(trans.enter_username)}
-			                />
-			                <input
-			                    type="hidden"
-			                    name="listaction"
-			                    value="add"
-			                />
-			                <input
-			                    type="hidden"
-			                    name="submit"
-			                    value="ignorelist"
-			                />
-			                <button
-			                    class="btn primary icon block colourful danger-subtle"
-			                    type="submit"
-			                >
+			<form action="${root}settings/privacy#ignorelist" name="ignorelist"
+				method="post">
+				<input type="hidden" name="csrfmiddlewaretoken" value=${page
+					.token} />
+				<div class="setting-group">
+					<div class="setting v" data-type="text">
+						<div class="heading">
+							<h5>${tl(trans.profile)}</h5>
+						</div>
+						<div class="input-container content-form">
+							<input
+								type="text"
+								maxlength="80"
+								id="id_user"
+								name="user"
+								placeholder=${tl(trans.enter_username)}
+							/>
+							<input
+								type="hidden"
+								name="listaction"
+								value="add"
+							/>
+							<input
+								type="hidden"
+								name="submit"
+								value="ignorelist"
+							/>
+							<button
+								class="btn primary icon block colourful danger-subtle"
+								type="submit"
+							>
 			                    ${tl(trans.block)}
 			                </button>
-			            </div>
-			        </div>
-			    </div>
+						</div>
+					</div>
+				</div>
 			</form>
 			<div class="setting-group">
 			    ${new_list}
@@ -302,15 +303,15 @@ function bleh_communication_panel(token) {
 			<div class="sep" />
 			<h5>${tl(trans.when_blocked)}</h5>
 			<div class="to-consider">
-			    <ul class="to-consider-good">
-			        <li>${tl(trans.blocked_user_public)}</li>
-			        <li>${tl(trans.blocked_user_message)}</li>
-			        <li>${tl(trans.blocked_user_new_shouts)}</li>
-			    </ul>
-			    <ul class="to-consider-bad">
-			        <li>${tl(trans.blocked_user_old_shouts)}</li>
-			        <li>${tl(trans.blocked_user_view_profile)}</li>
-			    </ul>
+				<ul class="to-consider-good">
+					<li>${tl(trans.blocked_user_public)}</li>
+					<li>${tl(trans.blocked_user_message)}</li>
+					<li>${tl(trans.blocked_user_new_shouts)}</li>
+				</ul>
+				<ul class="to-consider-bad">
+					<li>${tl(trans.blocked_user_old_shouts)}</li>
+					<li>${tl(trans.blocked_user_view_profile)}</li>
+				</ul>
 			</div>
 		`,
 	);

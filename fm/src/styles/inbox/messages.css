@@ -20,11 +20,9 @@
 
 .inbox-message > .message-sender {
 	padding: 30px var(--card-padding);
-	background: linear-gradient(
-		180deg,
+	background: linear-gradient(180deg,
 		oklch(var(--h4) / 30%) 0%,
-		rgba(0, 0, 0, 0) 100%
-	);
+		rgba(0, 0, 0, 0) 100%);
 
 	display: flex;
 	flex-direction: column;
@@ -45,6 +43,7 @@
 		}
 	}
 }
+
 .inbox-message > .message-content {
 	width: 100%;
 	max-width: var(--message-width);
@@ -77,15 +76,17 @@
 
 	--mask-size: var(--cover-size-70);
 }
+
 .inbox-message-sender-name {
 	text-align: center;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	font-weight: var(--font-weight-medium);
 
 	margin-top: var(--card-gap);
 	margin-bottom: 4px;
 }
+
 .inbox-message-timestamp {
 	text-align: center;
 	font-size: calc(var(--font-size) - 1px);
@@ -99,6 +100,7 @@
 
 	transition: none;
 }
+
 .message-sender-action {
 	--bg: transparent;
 	--bg-hov: oklch(var(--h3) / 20%);
@@ -124,6 +126,7 @@
 	float: unset;
 	width: var(--message-width);
 }
+
 .inbox-message-view .inbox-message-message blockquote {
 	background: oklch(var(--b4) / 40%);
 	border: none;
@@ -131,6 +134,7 @@
 	margin: 0 0 var(--card-gap) 0;
 	padding: var(--card-padding);
 }
+
 .inbox-message-view .inbox-message-message blockquote cite {
 	color: oklch(var(--c3));
 	display: block;

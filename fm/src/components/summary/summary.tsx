@@ -6,6 +6,7 @@
 
 import { createRef, ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
+import { useSettings } from '@/page.ts';
 
 interface ProfileSummaryProps {
 	music?: boolean;
@@ -16,11 +17,20 @@ export function ProfileSummary({
 	music,
 	children,
 }: ProfileSummaryProps) {
-	return (
+	const elem = (
 		<section class={['profile-summary', music && 'music-summary']}>
 			{children}
 		</section>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 export function ProfileSummaryMain({
@@ -50,11 +60,20 @@ export function ProfileSummarySeparator() {
 export function ProfileSummaryAside({
 	children,
 }: WithChildren) {
-	return (
+	const elem = (
 		<div class='summary-aside'>
 			{children}
 		</div>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	return elem;
 }
 
 export function ProfileSummaryTitle({

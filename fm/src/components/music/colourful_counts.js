@@ -7,8 +7,11 @@
 import { log } from '@/build/log';
 import { ranks } from '@/build/music';
 import { interpolate_hue } from '@/build/tools';
+import { useSettings } from '@/page.ts';
 
 export function patch_artist_ranks_in_list_view(track) {
+	if (useSettings.get('theme') == 'nier') return;
+
 	const count_bar = track.querySelector('.chartlist-count-bar');
 	if (!count_bar) return;
 
@@ -37,6 +40,8 @@ export function patch_artist_ranks_in_list_view(track) {
 			'data-bleh--scrobble-milestone',
 			parsed_scrobble_as_rank.milestone,
 		);
+		count_bar.classList.add('colourful');
+		val.classList.add('colourful');
 		count_bar.style.setProperty('--hue-over', parsed_scrobble_as_rank.hue);
 		count_bar.style.setProperty('--sat-over', parsed_scrobble_as_rank.sat);
 		count_bar.style.setProperty('--lit-over', parsed_scrobble_as_rank.lit);

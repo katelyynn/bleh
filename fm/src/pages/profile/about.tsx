@@ -10,14 +10,11 @@ import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { InfoTip } from '@/components/text/tip.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import {
-	create_profile_note_panel,
-	load_profile_cache_externally,
-} from '@/pages/profile/profile.tsx';
+import { create_profile_note_panel } from '@/pages/profile/profile.tsx';
 import { menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { Button } from '@/components/button/button.tsx';
-import { copy, get_language_name, sanitise, translate } from '@/build/tools.ts';
+import { copy, get_language_name, translate } from '@/build/tools.ts';
 import { useSettings } from '@/page.ts';
 import { markdown } from '@/components/markdown/markdown.tsx';
 import { TranslatedHeader } from '@/components/shared/translate.tsx';

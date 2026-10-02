@@ -120,7 +120,11 @@
 
 	font-family: var(--custom-font);
 	font-weight: var(--custom-font-weight);
+	font-style: var(--custom-font-style, normal);
 	letter-spacing: var(--custom-font-spacing, 0px);
+
+	transform-origin: center;
+	transform: scaleY(var(--custom-font-y-scale, 1));
 
 	top: var(--custom-font-align-mini, 0px);
 
@@ -142,9 +146,28 @@
 	}
 }
 
+[data-font="inst"] {
+	--custom-font: 'Instrument Serif', var(--font);
+	--custom-font-size-multiplier: 1.2;
+	--custom-font-y-scale: 1.2;
+	--custom-font-weight: 300 !important;
+	--custom-font-align: -2px;
+}
+
 [data-font="uni"] {
 	--custom-font: 'UnifrakturCook', var(--font);
 	--custom-font-size-multiplier: 1.2;
+}
+
+[data-font="sister"] {
+	--custom-font: 'Love Ya Like A Sister', var(--font);
+	--custom-font-align: 2px;
+}
+
+[data-font="darum"] {
+	--custom-font: 'Darumadrop One', var(--font);
+	--custom-font-size-multiplier: 1.1;
+	--custom-font-align: -2px;
 }
 
 [data-font="lilita"] {

@@ -9,133 +9,190 @@ import { gendered_pattern, page } from '@/build/page';
 import { desanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { checkup_page_structure } from '@/components/page/structure';
-import { is_same_page, register_background, update_page } from '../page';
-import { ff } from '@/components/settings/sku';
+import { register_background, update_page, useSettings } from '../page';
 import {
 	bleh_wiki,
 	bleh_wiki_editor,
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
-import { settings } from '@/build/config';
 import { page_header_title } from '@/components/music/header';
-import { html } from 'lighterhtml';
-import { icon, icons } from '@/components/shared/icon';
+import { Icon, icons } from '@/components/shared/icon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { SideActions } from '@/components/button/side.tsx';
+import { PageHeader } from '@/components/page/header.tsx';
+import { SubText } from '@/components/text/sub.tsx';
+import { createRef, ReactNode } from 'jsx-dom';
+import { PanelTop } from '@/components/text/see_more.tsx';
+import {
+	ProfileSummary,
+	ProfileSummaryAside,
+	ProfileSummaryContent,
+	ProfileSummaryMain,
+	ProfileSummarySeparator,
+} from '@/components/summary/summary.tsx';
+import { avatar } from '@/components/shared/avatar.ts';
+import { header_colour } from '@/components/page/colour.ts';
 
 export function bleh_tags() {
-	const tag_header = document.body.querySelector('.header--tag');
+	const tag_header = document.body.querySelector(
+		'.header--tag',
+	) as HTMLDivElement;
 	if (!tag_header) return;
-
-	if (tag_header.hasAttribute('data-bwaa')) {
-		return;
-	}
-	tag_header.setAttribute('data-bwaa', 'true');
 
 	page_header_title(tag_header);
 
 	const is_subpage = tag_header.classList.contains('header--sub-page');
 
-	page.structure.container = document.body.querySelector('.page-content');
-	page.structure.row = page.structure.container.querySelector('.row');
+	page.structure.container = document.body.querySelector('.page-content')!;
+	page.structure.row = page.structure.container.querySelector('.row')!;
 	try {
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
+		page.structure.main = page.structure.row.querySelector('.col-main')!;
+		page.structure.side = page.structure.row.querySelector('.col-sidebar')!;
 	} catch (e) {
 		log('unable to find elements', 'page structure');
 	}
 
 	checkup_page_structure(is_subpage, tag_header);
 
-	if (ff('refreshed_music_nav')) {
-		const split = window.location.href.split('/');
+	const split = window.location.href.split('/');
 
-		/* languages */
-		let index = 4;
-		if (split[3] != 'tag') {
-			index = 5;
-		}
-
-		const title = desanitise(split[index]);
-		page.name = title;
-
-		const same_page = is_same_page();
-
-		const redesigned_tag_header = html.node`
-            <section class="page-header for-generic ${same_page ? 'same' : ''}">
-                <div class="page-header-icon">
-                    ${icon({ name: icons.tag })}
-                </div>
-                <div class="page-header-info">
-                    <div class="sub-text">${tl(trans.tag)}</div>
-                    <h1 class="page-header-title generic-page-title">${title}</h1>
-                </div>
-            </section>
-        `;
-
-		const background = document.body.querySelector(
-			'.header-background--has-image',
-		);
-		if (background) {
-			register_background(
-				background.style.getPropertyValue('background-image').replace(
-					'url("',
-					'',
-				).replace('")', ''),
-			);
-		} else {
-			register_background();
-		}
-
-		page.structure.container.insertBefore(
-			redesigned_tag_header,
-			page.structure.container.firstElementChild,
-		);
-		tag_header.classList.add('legacy-header');
+	let index = 4;
+	if (split[3] != 'tag') {
+		index = 5;
 	}
 
-	if (!is_subpage) {
-		const col_main = page.structure.main.querySelector('.wiki-section');
+	const title = desanitise(split[index]);
+	page.name = title;
 
-		const tags = document.createElement('div');
-		tags.classList.add('catalogue-tags');
-		const related = page.structure.main.querySelector('.tags-list');
+	//const same_page = is_same_page();
+
+	const redesigned_tag_header = (
+		<PageHeader
+			icon={icons.tag}
+			type='tag'
+			name={title}
+		/>
+	);
+
+	const background = document.body.querySelector(
+		'.header-background--has-image',
+	);
+	if (background) {
+		register_background(
+			background.style.getPropertyValue('background-image').replace(
+				'url("',
+				'',
+			).replace('")', ''),
+		);
+	} else {
+		register_background();
+	}
+
+	page.structure.container.insertBefore(
+		redesigned_tag_header,
+		page.structure.container.firstElementChild,
+	);
+	tag_header.classList.add('legacy-header');
+
+	const recommended = tag_header.querySelector(
+		'.recommended-next-page-container',
+	) as HTMLDivElement;
+	const next_image = recommended.querySelector(
+		'.recommended-next-page-image',
+	) as HTMLImageElement;
+	const next_name = recommended.querySelector(
+		'.recommended-next-page-name',
+	) as HTMLAnchorElement;
+
+	if (!is_subpage) {
+		const col_main = page.structure.main!.querySelector(
+			'.wiki-section',
+		) as HTMLDivElement;
+
+		const related = page.structure.main!.querySelector('.tags-list');
+		const tags = createRef();
 
 		if (related) {
-			page.structure.main.removeChild(related.parentElement);
-			tags.appendChild(related);
-
-			const header_tags = document.createElement('div');
-			header_tags.classList.add('sub-text', 'music-small-header');
-			header_tags.textContent = tl(trans.related_to);
-			col_main.appendChild(header_tags);
-
-			col_main.appendChild(tags);
-
-			bleh_tags_mini(tags);
+			const parent = related.parentElement!;
+			parent.remove();
 		}
 
-		const bookmark_form = page.structure.side.querySelector(':scope > div');
-		const view_all_panel = document.createElement('section');
-		view_all_panel.classList.add('side-actions');
+		const row = (
+			<div class='metadata-row'>
+				{related && (
+					<div class='metadata-group'>
+						<SubText className='music-small-header'>
+							{tl(trans.related_to)}
+						</SubText>
+						<div class='catalogue-tags' ref={tags}>
+							{related as ReactNode}
+						</div>
+					</div>
+				)}
+			</div>
+		);
 
-		const button = bookmark_form.querySelector('button');
-		button.classList = 'btn side-action icon-mask';
-		button.setAttribute('data-type', 'bookmark');
+		bleh_tags_mini(tags.current);
 
-		view_all_panel.appendChild(bookmark_form);
-		page.structure.side.appendChild(view_all_panel);
+		page.structure.main!.insertBefore(
+			<ProfileSummary music>
+				<PanelTop margin={false}>
+					<h2 class='summary-title'>{tl(trans.about)}</h2>
+				</PanelTop>
+				<ProfileSummaryMain>
+					<ProfileSummaryContent>
+						{col_main}
+						{row}
+					</ProfileSummaryContent>
+					{recommended && (
+						<>
+							<ProfileSummarySeparator />
+							<ProfileSummaryAside>
+								<Recommended
+									name={next_name}
+									image={next_image}
+								/>
+							</ProfileSummaryAside>
+						</>
+					)}
+				</ProfileSummaryMain>
+			</ProfileSummary>,
+			page.structure.main!.firstElementChild,
+		);
+
+		const bookmark_form = page.structure.side!.querySelector(
+			':scope > div',
+		);
+
+		const side = <SideActions />;
+
+		if (bookmark_form) {
+			const bookmark = bookmark_form.querySelector('button')!;
+			bookmark.classList.add('btn', 'side-action', 'icon-mask');
+			bookmark.setAttribute('data-type', 'bookmark');
+
+			side.appendChild(bookmark_form);
+		}
 
 		// new tag playlist
-		const new_playlist = page.structure.side.querySelector('form');
+		const new_playlist = page.structure.side!.querySelector(
+			'form[action$="from-tag"]',
+		);
+		if (new_playlist) {
+			const head = new_playlist.querySelector('h3');
+			if (head) head.remove();
 
-		const header = new_playlist.querySelector('h3');
-		new_playlist.removeChild(header);
+			const playlist = new_playlist.querySelector('button')!;
+			playlist.classList.add('btn', 'side-action', 'icon-mask');
+			playlist.setAttribute('data-type', 'playlist');
 
-		const playlist_button = new_playlist.querySelector('button');
-		playlist_button.classList = 'btn side-action icon-mask';
-		playlist_button.setAttribute('data-type', 'playlist');
+			side.appendChild(playlist);
+		}
 
-		view_all_panel.appendChild(new_playlist);
+		page.structure.side!.insertBefore(
+			side,
+			page.structure.side!.firstElementChild,
+		);
 	} else {
 		if (page.subpage == 'wiki_overview') {
 			bleh_wiki();
@@ -151,22 +208,20 @@ export function bleh_tags() {
 }
 
 export function bleh_tags_large(observer = page.structure.main) {
-	const hide_gendered = settings.gendered_tags;
-
 	const tags = observer.querySelectorAll('.big-tags-item-wrap');
 	tags.forEach((tag) => {
 		const text = tag.querySelector('.big-tags-item-name').textContent
 			.trim();
 
-		if (hide_gendered && gendered_pattern.test(text)) {
-			tag.remove();
-		}
+		const result = tag_test(text);
+
+		if (!result) tag.remove();
 	});
 }
 
 export function bleh_tags_mini(observer = page.structure.main) {
 	if (!observer) return;
-	const hide_gendered = settings.gendered_tags;
+	const hide_gendered = useSettings.get('gendered_tags') as boolean;
 
 	const tags = observer.querySelectorAll('.tag');
 	tags.forEach((tag) => {
@@ -175,9 +230,9 @@ export function bleh_tags_mini(observer = page.structure.main) {
 
 		const text = elem.textContent.trim();
 
-		if (hide_gendered && gendered_pattern.test(text)) {
-			tag.remove();
-		}
+		const result = tag_test(text);
+
+		if (!result) tag.remove();
 	});
 
 	const tag_user_avatar = observer.querySelector('.tags-user-avatar');
@@ -189,4 +244,70 @@ export function bleh_tags_mini(observer = page.structure.main) {
 		tag.classList.add('user-created-tag');
 		hover_tooltip(tag, <Tooltip>{tl(trans.personal_tag)}</Tooltip>);
 	});
+}
+
+export function tag_test(text: string) {
+	const hide_gendered = useSettings.get('gendered_tags') as boolean;
+
+	if (hide_gendered && gendered_pattern.test(text)) {
+		return false;
+	}
+
+	// annoying radio mis-use
+	if (text.startsWith('wsum 91.7')) {
+		return false;
+	}
+
+	return true;
+}
+
+interface RecommendedProps {
+	name: HTMLAnchorElement;
+	image: HTMLImageElement;
+}
+
+function Recommended({
+	name,
+	image,
+}: RecommendedProps) {
+	const name_elem = createRef();
+
+	const elem = (
+		<a
+			class={['recommended-goto', 'colourful']}
+			href={name.getAttribute('href')!}
+		>
+			<span
+				class='recommended-goto-bg'
+				style={{
+					backgroundImage: `url(${
+						avatar(
+							image.src,
+							'avatar300s',
+						)
+					})`,
+				}}
+			/>
+			<span class='recommended-goto-text'>
+				<span class='recommended-goto-label'>
+					{tl(trans.recommended)}
+				</span>
+				<span
+					class={['recommended-goto-name', 'colourful']}
+					ref={name_elem}
+				>
+					{name.textContent.trim()}
+				</span>
+			</span>
+			<Icon name={icons.arrow_right} />
+		</a>
+	);
+
+	header_colour(
+		<img src={avatar(image.src, 'avatar300s')} /> as HTMLImageElement,
+		false,
+		[elem, name_elem.current],
+	);
+
+	return elem;
 }

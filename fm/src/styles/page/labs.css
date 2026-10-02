@@ -6,3 +6,9 @@
 .btn-lab-title {
 	color: inherit !important;
 }
+
+.btn-lab-link {
+	&:after {
+		display: none;
+	}
+}

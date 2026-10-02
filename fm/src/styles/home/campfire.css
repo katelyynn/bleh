@@ -208,7 +208,9 @@
 				z-index: 30;
 			}
 
-			transition-property: transform, opacity, filter;
+			transition-property: transform,
+				opacity,
+				filter;
 			transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
 			transition-timing-function: var(--trans-function);
 		}
@@ -234,9 +236,10 @@
 			font-weight: var(--font-weight-medium);
 			justify-content: center;
 		}
+
 		& > .campfire-artist {
-			font-size: 16px;
-			line-height: 20px;
+			font-size: var(--font-size-subheading);
+			line-height: var(--line-height-subheading);
 			font-weight: var(--font-weight-medium);
 			margin-bottom: 10px;
 
@@ -253,6 +256,7 @@
 				margin-left: 4px;
 			}
 		}
+
 		& > .campfire-plays {
 			color: oklch(var(--c3));
 			cursor: default;
@@ -274,6 +278,7 @@
 		&.content-main {
 			flex: 1;
 		}
+
 		&.content-side {
 			flex-shrink: 0;
 			width: 500px;
@@ -329,6 +334,6 @@
 }
 
 .campfire-cta-text-sub {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 }

@@ -7,14 +7,16 @@
 import { ReactNode } from 'jsx-dom';
 
 interface SubTextProps {
+	className?: string;
 	children: ReactNode;
 }
 
 export function SubText({
+	className,
 	children,
 }: SubTextProps) {
 	return (
-		<label class='sub-text'>
+		<label class={['sub-text', className]}>
 			{children}
 		</label>
 	);

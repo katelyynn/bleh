@@ -175,79 +175,78 @@ function setup_themes() {
 					day: tl(trans.themes[settings.theme_day]),
 					night: tl(trans.themes[settings.theme_night]),
 				})}<a
-				    onclick=${() => {
-					dialog({
-						id: 'auto_theme',
-						title: tl(trans.themes.name),
-						body: html.node`
+					onclick=${() => {
+						dialog({
+							id: 'auto_theme',
+							title: tl(trans.themes.name),
+							body: html.node`
                         <div class="setting-group">
                             ${(theme_day = setting({
-							id: 'theme_day',
-							list: [
-								{
-									value: 'light',
-									text: tl(trans.themes.light),
+								id: 'theme_day',
+								list: [
+									{
+										value: 'light',
+										text: tl(trans.themes.light),
+									},
+									{
+										value: 'ink',
+										text: tl(trans.themes.ink),
+									},
+									{
+										value: 'dark',
+										text: tl(trans.themes.dark),
+									},
+									{
+										value: 'darker',
+										text: tl(trans.themes.darker),
+									},
+									{
+										value: 'oled',
+										text: tl(trans.themes.oled),
+									},
+								],
+								func: () => {
+									render_tip();
+									bubbles.re_render();
+									match();
 								},
-								{
-									value: 'ink',
-									text: tl(trans.themes.ink),
-								},
-								{
-									value: 'dark',
-									text: tl(trans.themes.dark),
-								},
-								{
-									value: 'darker',
-									text: tl(trans.themes.darker),
-								},
-								{
-									value: 'oled',
-									text: tl(trans.themes.oled),
-								},
-							],
-							func: () => {
-								render_tip();
-								bubbles.re_render();
-								match();
-							},
-						}))}
+							}))}
                             ${(theme_night = setting({
-							id: 'theme_night',
-							list: [
-								{
-									value: 'light',
-									text: tl(trans.themes.light),
+								id: 'theme_night',
+								list: [
+									{
+										value: 'light',
+										text: tl(trans.themes.light),
+									},
+									{
+										value: 'ink',
+										text: tl(trans.themes.ink),
+									},
+									{
+										value: 'dark',
+										text: tl(trans.themes.dark),
+									},
+									{
+										value: 'darker',
+										text: tl(trans.themes.darker),
+									},
+									{
+										value: 'oled',
+										text: tl(trans.themes.oled),
+									},
+								],
+								func: () => {
+									render_tip();
+									bubbles.re_render();
+									match();
 								},
-								{
-									value: 'ink',
-									text: tl(trans.themes.ink),
-								},
-								{
-									value: 'dark',
-									text: tl(trans.themes.dark),
-								},
-								{
-									value: 'darker',
-									text: tl(trans.themes.darker),
-								},
-								{
-									value: 'oled',
-									text: tl(trans.themes.oled),
-								},
-							],
-							func: () => {
-								render_tip();
-								bubbles.re_render();
-								match();
-							},
-						}))}
+							}))}
                         </div>
                         <p class="card-tip">${tl(trans.theme_schedule)}</p>
                     `,
-					});
-				}}
-				    >${tl(trans.change_schedule)}</a
-				>
+						});
+					}}
+				>${tl(trans.change_schedule)}</a>
 			`,
 		);
 	}

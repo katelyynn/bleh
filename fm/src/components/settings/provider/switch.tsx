@@ -14,6 +14,7 @@ import {
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { useSettings } from '@/page.ts';
+import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 
 interface SettingSwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -23,10 +24,12 @@ interface SettingSwitchProps {
 	icon?: string;
 	name?: ReactNode;
 	body?: ReactNode;
+	sub?: ReactNode;
 	onChange?: (val: boolean) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	new_release?: boolean;
 }
 
 type SettingSwitchElement = HTMLDivElement & {
@@ -42,10 +45,12 @@ export function SettingSwitch({
 	icon,
 	name,
 	body,
+	sub,
 	onChange,
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	new_release,
 }: SettingSwitchProps) {
 	if (bind) value = useSettings.get(bind) as boolean;
 	const checkbox = createRef();
@@ -72,6 +77,8 @@ export function SettingSwitch({
 				});
 			});
 		}
+
+		if (store.new_release) new_release = store.new_release;
 	}
 
 	function update() {
@@ -103,14 +110,30 @@ export function SettingSwitch({
 
 		elem.replaceChildren(
 			<>
+				{useSettings.get('theme') == 'yuzu' && (
+					<Checkbox
+						className='setting-inner'
+						name={id}
+						checked={value}
+						ref={checkbox}
+					/>
+				)}
 				{icon && <SettingIcon name={icon} />}
-				<SettingLabel name={name} body={body} store={store} />
-				<Switch
-					className='setting-inner'
-					name={id}
-					checked={value}
-					ref={checkbox}
+				<SettingLabel
+					name={name}
+					body={body}
+					sub={sub}
+					store={store}
+					new_release={new_release}
 				/>
+				{useSettings.get('theme') != 'yuzu' && (
+					<Switch
+						className='setting-inner'
+						name={id}
+						checked={value}
+						ref={checkbox}
+					/>
+				)}
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
 						list={incompatible_list}
@@ -136,6 +159,7 @@ export function SettingSwitch({
 	) as SettingSwitchElement;
 
 	update();
+	useSettings.on('theme', update);
 
 	function set(val: boolean, received = false) {
 		if (value == val) return;

@@ -77,6 +77,8 @@
 		line-height: var(--line-height) !important;
 		border-radius: unset !important;
 		transition: none !important;
+
+		--icon-size: 16px;
 	}
 
 	@media (max-width: 980px) {
@@ -397,6 +399,8 @@ button.navlist-more {
 	align-items: center;
 	transform-origin: bottom !important;
 
+	--mask2: unset;
+
 	--icon-16-placeholder: var(--icon-16-dot);
 
 	& > .new-badge {
@@ -442,7 +446,7 @@ button.navlist-more {
 	@media (max-width: 980px) {
 		--button-sides-icon: var(--button-sides);
 		--padding: calc(10px + var(--icon-size) + var(--icon-gap)) var(--button-sides) 10px !important;
-		--font-size: 13px;
+		--font-size: calc(var(--font-size) - 1px);
 		justify-content: center;
 
 		--top: 10px;
@@ -460,8 +464,11 @@ button.navlist-more {
 	}
 
 	:is(.toolbar, .library-controls) > .navlist > .navlist-items > .secondary-nav-item > & {
-		--bg-hov: oklch(var(--b2) / 20%) !important;
-		--bg-atv: oklch(var(--b2) / 40%) !important;
+		--bg: var(--toolbar-tab) !important;
+		--bg-hov: var(--toolbar-tab-hover) !important;
+		--bg-atv: var(--toolbar-tab-active) !important;
+		--col: var(--toolbar-tab-colour) !important;
+		--mask-colour: var(--toolbar-tab-icon) !important;
 		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 		filter: none !important;
 
@@ -475,6 +482,14 @@ button.navlist-more {
 		/*min-width: 65px !important;*/
 
 		height: unset !important;
+
+		--mask2: var(--interact-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 
 		&:after {
 			display: none !important;
@@ -496,13 +511,20 @@ button.navlist-more {
 		}
 
 		&:active {
-			transform: scale(0.98) !important;
+			transform: var(--button-click, scale(0.98)) !important;
+		}
+
+		&:not(.secondary-nav-item-link--active):is(:hover, :active) {
+			--col: var(--toolbar-tab-hover-colour) !important;
+			--mask-colour: var(--toolbar-tab-hover-icon) !important;
 		}
 
 		&.secondary-nav-item-link--active {
-			--bg: oklch(var(--h4) / 10%) !important;
-			--bg-hov: oklch(var(--h4) / 20%) !important;
-			--bg-atv: oklch(var(--h4) / 30%) !important;
+			--bg: var(--toolbar-tab-selected) !important;
+			--bg-hov: var(--toolbar-tab-selected-hover) !important;
+			--bg-atv: var(--toolbar-tab-selected-active) !important;
+			--col: var(--toolbar-tab-selected-colour) !important;
+			--mask-colour: var(--toolbar-tab-selected-icon) !important;
 		}
 	}
 
@@ -514,6 +536,42 @@ button.navlist-more {
 
 	&[data-should-hide="true"][data-hide="true"] {
 		display: none;
+	}
+}
+
+.toolbar {
+	&[data-theme="yuzu"] {
+		padding: 6px var(--card-padding) 0;
+
+		& > .navlist {
+			padding-left: unset !important;
+
+			& > .navlist-items > .secondary-nav-item {
+				& > .secondary-nav-item-link {
+					border: 1px solid #ccc !important;
+					border-radius: 5px !important;
+					border-bottom-left-radius: unset !important;
+					border-bottom-right-radius: unset !important;
+					margin-bottom: -1px !important;
+
+					z-index: 20;
+
+					--icon-size: 14px;
+
+					&:not(.secondary-nav-item-link--active) {
+						--mask-colour: oklch(var(--c3)) !important;
+					}
+
+					&.secondary-nav-item-link--active {
+						border-bottom: 1px solid #fff !important;
+
+						--bg: #fff !important;
+						--bg-hov: var(--bg) !important;
+						--bg-atv: var(--bg) !important;
+					}
+				}
+			}
+		}
 	}
 }
 

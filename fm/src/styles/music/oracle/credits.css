@@ -25,8 +25,8 @@
 .oracle-credit {
 	display: flex;
 	align-items: center;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 
 	cursor: default;
 

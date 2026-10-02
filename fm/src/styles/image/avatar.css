@@ -44,6 +44,14 @@ img {
 	display: block;
 	position: relative;
 
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+
 	& > img {
 		width: 100%;
 		height: 100%;
@@ -57,6 +65,14 @@ img {
 		pointer-events: none;
 		box-shadow: var(--avatar-inset);
 		border-radius: inherit;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 }
 
@@ -80,16 +96,16 @@ img {
 [src$="818148bf682d429dc215c1705eb27b98.png"] {
 	content: var(--blank) !important;
 	font-size: 0;
-	background-color: oklch(var(--c3)) !important;
+	background-color: var(--missing-avatar-colour) !important;
 	--mask: var(--icon-16-user);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 }
 
 /* missing album */
@@ -98,16 +114,16 @@ img {
 [src$="c6f59c1e5e7240a4c0d427abd71f3dbb.jpg"] {
 	content: var(--blank) !important;
 	font-size: 0;
-	background-color: oklch(var(--c3));
+	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-album);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 
 	&.error {
@@ -120,16 +136,16 @@ img {
 [src$="2a96cbd8b46e442fc41c2b86b821562f.jpg"] {
 	content: var(--blank) !important;
 	font-size: 0;
-	background-color: oklch(var(--c3));
+	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-artist);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }
 
@@ -139,16 +155,16 @@ img {
 [src$="4128a6eb29f94943c9d206c08e625904.jpg"] {
 	content: var(--blank) !important;
 	font-size: 0;
-	background-color: oklch(var(--c3));
+	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-track);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }
 
@@ -156,16 +172,16 @@ img {
 [src$="14d19fbdca555c1782176cd789e81af7.png"] {
 	content: var(--blank) !important;
 	font-size: 0;
-	background-color: oklch(var(--c3));
+	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-extension);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-32));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-32));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }
 
@@ -173,15 +189,15 @@ img {
 [src$="df27b3c25d608decf720b24afb507863.jpg"] {
 	content: var(--blank) !important;
 	font-size: 0;
-	background-color: oklch(var(--c3));
+	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-playlist);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }

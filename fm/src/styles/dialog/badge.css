@@ -127,14 +127,14 @@
 }
 
 .present-badge-type {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	max-width: 240px;
 	text-align: center;
 }
 
 .present-badge-count {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	max-width: 240px;
 }
@@ -232,8 +232,8 @@
 
 .present-badge-type-indicator {
 	margin-bottom: 20px;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
 	text-align: center;
 	font-weight: var(--font-weight-bold);
 	color: oklch(var(--l3-c));

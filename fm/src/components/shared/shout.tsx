@@ -54,6 +54,8 @@ import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
+import { ShoutAction } from '@/components/shout/action.tsx';
 
 type ShoutElement = HTMLDivElement & {
 	translated: boolean;
@@ -96,9 +98,16 @@ export function patch_shouts() {
 				</SponsorUsername>,
 			);
 
-			const shout_avatar = shout.querySelector('.shout-user-avatar');
+			const shout_avatar = shout.querySelector(
+				'.shout-user-avatar',
+			) as HTMLDivElement;
 
 			const badge = patch_avatar(shout_avatar, shout_name_text, 'shout');
+			shout.appendChild(
+				<ShoutAction name={shout_name_text} wrap={shout}>
+					{shout_avatar}
+				</ShoutAction>,
+			);
 
 			if (badge) {
 				if (badge.type && badge.type == 'avatar-status-dot--staff') {
@@ -160,6 +169,18 @@ export function patch_shouts() {
 						'shout-action-button',
 						'see-more',
 					);
+
+					if (button.classList.contains('vote-button')) {
+						button.classList.add('left-icon');
+						button.insertBefore(
+							<Icon name={icons.arrow_up} />,
+							button.firstChild,
+						);
+					} else if (button.classList.contains('shout-reply')) {
+						button.appendChild(
+							<Icon name={icons.external} />,
+						);
+					}
 				});
 			});
 
@@ -175,11 +196,17 @@ export function patch_shouts() {
 			);
 
 			const more_button = shout.querySelector('.shout-more-actions');
-			more_button?.classList?.add(
-				'btn',
-				'see-more',
-				'shout-action-button',
-			);
+			if (more_button) {
+				more_button.classList?.add(
+					'btn',
+					'see-more',
+					'shout-action-button',
+				);
+				more_button.insertBefore(
+					<Icon name={icons.settings} />,
+					more_button.firstChild,
+				);
+			}
 
 			// detect vote status
 			const form = shout.querySelector('.vote-button-toggle');
@@ -308,9 +335,16 @@ export function patch_shouts() {
 	shout_forms.forEach((shout_form) => {
 		shout_form.setAttribute('data-shout-form', 'true');
 
-		const avatar = shout_form.querySelector('.shout-user-avatar')!;
+		const avatar = shout_form.querySelector(
+			'.shout-user-avatar',
+		) as HTMLDivElement;
 
-		patch_avatar(avatar, auth.name);
+		patch_avatar(avatar, auth.name, 'shout');
+		shout_form.appendChild(
+			<ShoutAction name={auth.name!} wrap={shout_form}>
+				{avatar}
+			</ShoutAction>,
+		);
 
 		const send_button = shout_form.querySelector('.form-group--submit')!;
 		shout_send(send_button);
@@ -470,7 +504,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 		panel.insertBefore(
 			<PanelTop>
-				<PanelHead icon={icons.shoutbox}>
+				<PanelHead top icon={icons.shoutbox}>
 					{tl(trans.shouts)}
 				</PanelHead>
 				<ViewButtons accompany>
@@ -501,11 +535,9 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 		const select_btn = panel.querySelector(
 			'.dropdown-menu-clickable-button',
 		);
-		select_btn?.classList?.add(
-			'select-button',
-			'link-select',
-			'blend-v2-btn',
-		);
+
+		convert_to_select(select_btn);
+
 		select_btn?.classList?.remove(
 			'section-control',
 			'dropdown-menu-clickable-button',
@@ -524,7 +556,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 		panel.insertBefore(
 			<PanelTop>
-				<PanelHead icon={icons.shoutbox}>
+				<PanelHead top icon={icons.shoutbox}>
 					{tl(trans.shouts)}
 				</PanelHead>
 				{select_btn && (
@@ -553,7 +585,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 		candidate.replaceWith(
 			<PanelTop>
-				<PanelHead icon={icons.shoutbox}>
+				<PanelHead top icon={icons.shoutbox}>
 					{tl(trans.shouts)}
 				</PanelHead>
 				<ViewButtons>

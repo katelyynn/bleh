@@ -20,7 +20,7 @@
 			text-align: center;
 			cursor: default;
 			color: oklch(var(--c3));
-			font-size: 13px;
+			font-size: calc(var(--font-size) - 1px);
 		}
 	}
 
@@ -44,7 +44,7 @@
 		}
 
 		& > p {
-			font-size: 13px;
+			font-size: calc(var(--font-size) - 1px);
 			color: oklch(var(--c3));
 			cursor: default;
 		}

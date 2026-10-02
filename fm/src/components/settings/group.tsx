@@ -10,21 +10,54 @@ interface SettingGroupProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	minWidth?: boolean;
 	blend?: boolean;
+	disabled?: boolean;
+	gap?: boolean;
 	children?: ReactNode;
 }
+
+type SettingGroupElement = HTMLDivElement & {
+	disabled: boolean;
+};
 
 export function SettingGroup({
 	ref,
 	minWidth,
 	blend = false,
+	disabled,
+	gap,
 	children,
 }: SettingGroupProps) {
-	return (
+	const elem = (
 		<div
-			class={['setting-group', blend && 'blend', minWidth && 'min-width']}
+			class={[
+				'setting-group',
+				blend && 'blend',
+				minWidth && 'min-width',
+				gap && 'with-gap',
+			]}
 			ref={ref}
 		>
 			{children}
 		</div>
-	);
+	) as SettingGroupElement;
+
+	function update() {
+		elem.removeAttribute('disabled');
+
+		if (disabled) elem.setAttribute('disabled', 'true');
+	}
+
+	update();
+
+	Object.defineProperty(elem, 'disabled', {
+		get() {
+			return disabled;
+		},
+		set(v: boolean) {
+			disabled = v;
+			update();
+		},
+	});
+
+	return elem;
 }

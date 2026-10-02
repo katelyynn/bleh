@@ -4,19 +4,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import {
-	get_activity_list,
-	render_activity_list,
-} from '@/components/shared/activity';
+import { get_activity_list } from '@/components/shared/activity';
 import { settings } from '@/build/config';
 import { log } from '@/build/log.ts';
 import { auth, page, root } from '@/build/page';
 import { sponsor_list } from '@/build/sponsor';
-import { clean_number, copy, romanise, set_storage } from '@/build/tools';
+import { clean_number, romanise, set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
-import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { dialog } from '@/components/dialog/dialog';
 import {
 	correct_artist,
 	correct_item_by_artist,
@@ -26,82 +23,57 @@ import {
 } from '@/components/music/lotus';
 import { markdown } from '@/components/markdown/markdown';
 import { redesign_profile_header } from '@/components/profile/profile_header';
-import {
-	select,
-	select_prepare,
-	select_prepare_list,
-} from '@/components/settings/select';
+import { select, select_prepare } from '@/components/settings/select';
 import {
 	checkup_page_structure,
 	convert_to_toolbar,
-} from '@/components/page/structure.js';
-import { is_same_page, register_background, update_page } from '@/page';
+} from '@/components/page/structure.tsx';
+import { register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
-import { save_setting, setting } from '@/components/settings/settings';
-import { submit_scrobble } from '@/components/music/scrobble';
+import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
-import { avatar, style_name_from_badge } from '@/components/shared/avatar';
+import { avatar } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';
 import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
 import { profile_reports } from './reports';
-import { toggle } from '@/components/settings/toggle';
-import { page_header_avatar } from '@/components/music/header';
 import { profile_summary } from '@/components/profile/summary';
-import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
 import { useSettings } from '@/page.ts';
 import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { icons, SaveIcon } from '@/components/shared/icon.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
-import {
-	PanelTop,
-	SeeMore,
-	SeeMoreContainer,
-	ViewButtons,
-} from '@/components/text/see_more.tsx';
+import { SeeMore, SeeMoreContainer } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
-import {
-	hover_tooltip,
-	menu_tooltip,
-	Tooltip,
-} from '@/components/shared/tooltips.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SubTextPair } from '@/components/profile/sub.tsx';
 import {
 	AboutElement,
 	profile_about,
 	profile_bio_markdown_settings,
 } from '@/pages/profile/about.tsx';
-import {
-	FloatingWindow,
-	FloatingWindowContents,
-} from '@/components/menu/floating_window.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
-import { Tabbed, TabbedPage } from '@/components/tab/tabbed.tsx';
-import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
-import { SettingRadio } from '@/components/settings/provider/radio.tsx';
-import { Token } from '@/components/form/token.tsx';
-import { SettingSelect } from '@/components/settings/provider/select.tsx';
-import { SettingsFooter } from '@/components/form/footer.tsx';
-import { Button } from '@/components/button/button.tsx';
-import {
-	get_profile_streak,
-	ProfileStreak,
-} from '@/components/profile/streak.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { profile_recents } from '@/pages/profile/recents.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { profile_tracks } from '@/pages/profile/tracks.tsx';
+import { convert_to_select } from '@/components/select/select.tsx';
+import { PageHeaderAvatar } from '@/components/music/header.tsx';
+import { SettingList } from '@/components/settings/provider/list.tsx';
+import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
+import { profile_cache } from '@/types/profile.ts';
+import { profile_artists } from '@/pages/profile/artists.tsx';
+import { profile_albums } from '@/pages/profile/albums.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -119,7 +91,9 @@ export function bleh_profiles() {
 	const profile_header = document.body.querySelector('.header--user');
 	if (!profile_header) return;
 
-	let profile_name = profile_header.querySelector('.header-title > a')!;
+	let profile_name = profile_header.querySelector(
+		'.header-title > a',
+	) as HTMLAnchorElement;
 	page.name = profile_name.textContent;
 
 	// are we on the overview page?
@@ -127,28 +101,28 @@ export function bleh_profiles() {
 
 	page.structure.container = document.body.querySelector(
 		'.page-content:not(.profile-cards-container, .report-box-container .page-content)',
-	);
+	)!;
 	try {
 		page.structure.row = page.structure.container.querySelector(
 			'.row:not(._buffer)',
-		);
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+		)!;
+		page.structure.main = page.structure.row.querySelector('.col-main')!;
+		page.structure.side = page.structure.row.querySelector('.col-sidebar')!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
 	checkup_page_structure(is_subpage, profile_header);
 
-	page.supports_shoutbox = page.structure.nav.querySelector(
+	page.supports_shoutbox = !!(page.structure.nav!.querySelector(
 		'.secondary-nav-item--shoutbox',
-	);
+	));
 
 	let new_account = false;
 
-	const profile_cache =
-		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{};
+	const profile_cache = JSON.parse(
+		localStorage.getItem(keys.profile_cache) || '{}',
+	);
 	const cache = profile_cache[page.name] || {};
 
 	let about_me_sidebar = page.structure.row!.querySelector(
@@ -168,11 +142,15 @@ export function bleh_profiles() {
 		delete cache.username;
 
 		if (!about_me_sidebar) {
-			page.structure.side!.insertBefore(
+			about_me_sidebar = (
 				<section class='about-me-sidebar'>
 					<h2>{tl(trans.about)}</h2>
 					<p class='subtle'>{tl(trans.no_about, { u: page.name })}</p>
-				</section>,
+				</section>
+			);
+
+			page.structure.side!.insertBefore(
+				about_me_sidebar,
 				page.structure.side!.firstElementChild,
 			);
 		} else {
@@ -363,16 +341,18 @@ export function bleh_profiles() {
 		page.avatar = src;
 	}
 
-	const page_avatar = page_header_avatar(
-		(profile_avatar as HTMLImageElement).src,
-	);
-
 	//const same_page = is_same_page();
 
 	const redesigned_profile_header = (
 		<PageHeader
 			type='profile'
-			avatar={!new_account ? page_avatar : profile_avatar as ReactElement}
+			avatar={!new_account
+				? (
+					<PageHeaderAvatar
+						url={(profile_avatar as HTMLImageElement).src}
+					/>
+				)
+				: profile_avatar as ReactElement}
 			extra={
 				<>
 					{sub_wrap ? sub_wrap : cache.created &&
@@ -422,10 +402,6 @@ export function bleh_profiles() {
 				);
 			} else register_background(null, 'none');
 		}
-	}
-
-	if (page_avatar) {
-		header_colour(page_avatar.image, false, [page_avatar]);
 	}
 
 	page.structure.container!.insertBefore(
@@ -572,9 +548,7 @@ export function bleh_profiles() {
 			);
 		}
 
-		if (ff('redesigned_profile_header')) {
-			redesign_profile_header(is_own_profile, is_following);
-		}
+		redesign_profile_header(is_own_profile, is_following);
 	} else {
 		load_profile_cache(page.name, cache, profile_cache);
 
@@ -608,7 +582,7 @@ export function bleh_profiles() {
 
 				const header = page.structure.container!.querySelector(
 					'.content-top-header',
-				);
+				)!;
 				page.structure.content_top!.innerHTML = `
                     <div class="content-top-inner-wrap">
                         <div class="container content-top-lower">
@@ -684,7 +658,7 @@ export function bleh_profiles() {
 				.textContent.trim();
 			const chr = count_text.indexOf('(');
 
-			let count = 0;
+			let count = '0';
 			if (chr != -1) {
 				count = count_text
 					.substring(chr)
@@ -760,7 +734,7 @@ export function create_profile_note_panel(has_note?: string) {
 
 // patch following
 function patch_profile_following() {
-	const navlist = page.structure.nav.querySelector('.navlist-items');
+	const navlist = page.structure.nav!.querySelector('.navlist-items');
 
 	let following_tab = navlist.querySelector('.secondary-nav-item--following');
 	const followers_tab = navlist.querySelector(
@@ -839,7 +813,7 @@ function patch_profile_following() {
 		following_tab.classList.remove('secondary-nav-item-link--active');
 	}
 
-	if (ff('katsune') && page.subpage != 'neighbours') {
+	if (page.subpage != 'neighbours') {
 		const count_text = page.structure.content_top
 			.querySelector('h1')
 			.textContent.trim();
@@ -993,352 +967,6 @@ function bleh_featured_profile_track(object) {
 	);
 }
 
-function profile_artists() {
-	const panel = page.structure.main.querySelector('#top-artists');
-	if (!panel) return;
-
-	panel.classList.remove('section-with-settings');
-
-	const form = panel.querySelector('#artist-chart-settings');
-	const list = panel.querySelector('#artists_range');
-
-	let collage_btn;
-	const select_btn = panel.querySelector('.dropdown-menu-clickable-button');
-	let settings_btn;
-
-	const head = panel.querySelector(':scope > h2');
-	if (head) head.remove();
-
-	panel.insertBefore(
-		html.node`
-        <div class="top-container">
-            <h2>
-                ${tl(trans.artists)}
-            </h2>
-            <div class="accompany view-buttons blend blend-v2">
-                ${() => {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
-			select_btn.classList.remove(
-				'section-control',
-				'dropdown-menu-clickable-button',
-			);
-			return select_btn;
-		}}
-            </div>
-            <div class="view-buttons blend blend-v2">
-                <button class="left-icon blend-v2-btn" data-type="collage" ref=${(
-			el,
-		) => (collage_btn = el)} onclick=${() => {
-			let btn = list.querySelector(
-				'.dropdown-menu-clickable-item--selected',
-			);
-			let link = new URL(
-				'https://www.last.fm' + btn.getAttribute('href'),
-			);
-			let selected = link.searchParams.get('artists_date_preset');
-
-			window.location.href =
-				`${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}`;
-		}}>${tl(trans.collage)}</button>
-                ${
-			form
-				? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
-					el,
-				) => (settings_btn = el)}>
-                    ${tl(trans.settings)}
-                </button>
-                `
-				: ''
-		}
-            </div>
-        </div>
-    `,
-		panel.firstElementChild,
-	);
-
-	// own profile only
-
-	if (!form) return panel;
-	if (page.token == '') {
-		page.token = form
-			.querySelector('[name="csrfmiddlewaretoken"]')
-			.getAttribute('value');
-	}
-
-	const timeframe = form.querySelector('[name="chart_range_top_artists"]');
-	const style = form.querySelector('[name="chart_style_top_artists"]');
-	const grid_length = form.querySelector(
-		'[name="artists_image_grid_length"]',
-	);
-	const chartlist_length = form.querySelector(
-		'[name="artists_chartlist_length"]',
-	);
-
-	let tooltip;
-
-	form.classList = '';
-	render(
-		form,
-		html`
-			<input
-				type="hidden"
-				name="csrfmiddlewaretoken"
-				value="${page.token}"
-			/>
-			<div class="setting-group blend">
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.default_timeframe)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(timeframe),
-				initial: timeframe.value,
-				name: timeframe.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.chart_style)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(style),
-				initial: style.value,
-				name: style.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="setting hide-if-artist-list" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(grid_length),
-				initial: grid_length.value,
-				name: grid_length.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="setting hide-if-artist-grid" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(chartlist_length),
-				initial: chartlist_length.value,
-				name: chartlist_length.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="settings-footer">
-					<button type="submit" class="btn-primary save" onclick=${() => {
-						tooltip.hide();
-					}}>
-			            ${tl(trans.save)}
-			        </button>
-				</div>
-			</div>
-		`,
-	);
-
-	tooltip = tippy(settings_btn, {
-		theme: 'window',
-		content: form,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
-
-	return panel;
-}
-
-function profile_albums() {
-	const panel = page.structure.main.querySelector('#top-albums');
-	if (!panel) return;
-
-	panel.classList.remove('section-with-settings');
-
-	const form = panel.querySelector('#albums-chart-settings');
-	const list = panel.querySelector('#albums_range');
-
-	let collage_btn;
-	const select_btn = panel.querySelector('.dropdown-menu-clickable-button');
-	let settings_btn;
-
-	const head = panel.querySelector(':scope > h2');
-	if (head) head.remove();
-
-	panel.insertBefore(
-		html.node`
-        <div class="top-container">
-            <h2>
-                ${tl(trans.albums)}
-            </h2>
-            <div class="accompany view-buttons blend blend-v2">
-                ${() => {
-			select_btn.classList.add(
-				'select-button',
-				'link-select',
-				'blend-v2-btn',
-			);
-			select_btn.classList.remove(
-				'section-control',
-				'dropdown-menu-clickable-button',
-			);
-			return select_btn;
-		}}
-            </div>
-            <div class="view-buttons blend blend-v2">
-                <button class="left-icon blend-v2-btn" data-type="collage" ref=${(
-			el,
-		) => (collage_btn = el)} onclick=${() => {
-			const btn = list.querySelector(
-				'.dropdown-menu-clickable-item--selected',
-			);
-			const link = new URL(
-				'https://www.last.fm' + btn.getAttribute('href'),
-			);
-			const selected = link.searchParams.get('albums_date_preset');
-
-			window.location.href =
-				`${root}bleh/minis/collage?type=albums&timeframe=date_preset=${selected}`;
-		}}>${tl(trans.collage)}</button>
-                ${
-			form
-				? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
-					el,
-				) => (settings_btn = el)}>
-                    ${tl(trans.settings)}
-                </button>
-                `
-				: ''
-		}
-            </div>
-        </div>
-    `,
-		panel.firstElementChild,
-	);
-
-	// own profile only
-
-	if (!form) return;
-	if (page.token == '') {
-		page.token = form
-			.querySelector('[name="csrfmiddlewaretoken"]')
-			.getAttribute('value');
-	}
-
-	const timeframe = form.querySelector('[name="chart_range_top_albums"]');
-	const style = form.querySelector('[name="chart_style_top_albums"]');
-	const grid_length = form.querySelector('[name="albums_image_grid_length"]');
-	const chartlist_length = form.querySelector(
-		'[name="albums_chartlist_length"]',
-	);
-
-	let tooltip;
-
-	form.classList = '';
-	render(
-		form,
-		html`
-			<input
-				type="hidden"
-				name="csrfmiddlewaretoken"
-				value="${page.token}"
-			/>
-			<div class="setting-group blend">
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.default_timeframe)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(timeframe),
-				initial: timeframe.value,
-				name: timeframe.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.chart_style)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(style),
-				initial: style.value,
-				name: style.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="setting hide-if-album-list" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(grid_length),
-				initial: grid_length.value,
-				name: grid_length.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="setting hide-if-album-grid" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(chartlist_length),
-				initial: chartlist_length.value,
-				name: chartlist_length.name,
-				in_settings: true,
-			})}
-			    </div>
-				<div class="settings-footer">
-					<button type="submit" class="btn-primary save" onclick=${() => {
-						tooltip.hide();
-					}}>
-			            ${tl(trans.save)}
-			        </button>
-				</div>
-			</div>
-		`,
-	);
-
-	tooltip = tippy(settings_btn, {
-		theme: 'window',
-		content: form,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
-}
-
 function bio_parse(text, cache = true, take_effect = true) {
 	const body = markdown(text.textContent, {
 		...profile_bio_markdown_settings,
@@ -1430,42 +1058,30 @@ export async function checkup_friend_cache(list = settings.friends) {
 export function open_starred_friend_window(friend_func = null) {
 	dialog({
 		id: 'starred_friend',
-		title: tl(trans.close_friends),
-		body: html.node`
-            <div class="setting-group">
-                ${friends = setting({
-			id: 'friends',
-			list: settings.friends,
-			func: (val) => {
-				if (!val.includes(useSettings.get('starred_friend'))) {
-					save_setting('starred_friend', '');
-				}
+		icon: icons.friends,
+		title: tl(trans.friends),
+		body: (
+			<>
+				<SettingGroup>
+					<SettingList
+						bind='friends'
+						onChange={(val: string[]) => {
+							if (
+								!val.includes(
+									useSettings.get('starred_friend') as string,
+								)
+							) {
+								useSettings.set('starred_friend', '');
+							}
 
-				checkup_friend_cache(val);
-
-				starred.update(
-					select_prepare_list([
-						{ value: '', text: tl(trans.none) },
-						...val,
-					]),
-				);
-
-				if (friend_func) friend_func();
-			},
-		})}
-                ${starred = setting({
-			id: 'starred_friend',
-			list: select_prepare_list([
-				{ value: '', text: tl(trans.none) },
-				...settings.friends,
-			]),
-			func: () => {
-				if (friend_func) friend_func();
-			},
-		})}
-            </div>
-            <p class="card-tip">${tl(trans.friend_difference)}</p>
-        `,
+							checkup_friend_cache(val);
+						}}
+					/>
+					<StarredFriend />
+				</SettingGroup>
+				<CardTip>{tl(trans.friend_difference)}</CardTip>
+			</>
+		),
 	});
 }
 
@@ -1477,7 +1093,7 @@ export async function load_profile_cache_externally(name = page.name) {
 	const profile_cache =
 		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
 		{};
-	const cache = profile_cache[name];
+	const cache: profile_cache = profile_cache[name];
 
 	if (cache) {
 		if (cache.hue || cache.sat || cache.lit) {
@@ -1550,18 +1166,18 @@ function load_profile_cache(
 
 function request_profile_cache(
 	name = page.name,
-	cache = null,
-	profile_cache = null,
-) {
+	cache?: profile_cache,
+	profile_cache?: Record<string, profile_cache>,
+): Promise<profile_cache> {
 	log(`requesting fetch of profile cache for ${name}`, 'cache');
 
 	const will_cache = !cache || !profile_cache;
 
 	if (!profile_cache) {
-		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
+		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)!) ||
 			{};
 	}
-	if (!cache) cache = profile_cache[name] || {};
+	if (!cache) cache = profile_cache![name] || {};
 
 	return new Promise((resolve, reject) => {
 		fetch(`${root}user/${name}`)

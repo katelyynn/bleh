@@ -17,8 +17,8 @@
 
 	& > h1 {
 		color: oklch(var(--c1));
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 		font-weight: var(--font-weight-medium);
 		letter-spacing: unset;
 		margin: unset;
@@ -45,12 +45,14 @@
 		flex-wrap: wrap;
 	}
 }
+
 .sponsor {
 	position: relative;
 	--hue-over: var(--hue-sponsor);
 	--sat-over: var(--sat-sponsor);
 	--lit-over: var(--lit-sponsor);
 }
+
 .sponsor-related {
 	--hue-over: var(--hue-sponsor);
 	--sat-over: var(--sat-sponsor);

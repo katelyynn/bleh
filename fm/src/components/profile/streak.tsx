@@ -20,6 +20,7 @@ import {
 import { log } from '@/build/log.ts';
 import { correct_item_by_artist } from '@/components/music/lotus.tsx';
 import { DateTime } from 'luxon';
+import { CardTip } from '@/components/text/tip.tsx';
 
 const HIGHEST_STREAK = 100;
 
@@ -357,11 +358,15 @@ export function ProfileStreak({
 									)}
 								</div>
 							</hyper-card>
+							<CardTip center>
+								{tl(trans.streak_information)}
+							</CardTip>
 						</>
 					),
 					type: 'badge',
 					colourful: true,
 					colourful_bg: true,
+					has_overlays: false,
 				});
 			}}
 			data-streak-high={highest >= 15}

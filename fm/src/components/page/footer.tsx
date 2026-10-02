@@ -30,10 +30,10 @@ export function bleh_footer() {
 		sponsoring = Object.keys(sponsor_list.users).length - 2;
 	}
 
-	const bleh_website = 'https://bleh.katelyn.moe';
+	const bleh_website = 'https://bleh.yuzu.pet';
 	const contributors =
 		'https://github.com/katelyynn/bleh/graphs/contributors';
-	const source = 'https://github.com/katelyynn/bleh';
+	const source = 'https://yuzu.pet/~bleh';
 	const issue = 'https://github.com/katelyynn/bleh/issues/new/choose';
 
 	footer.appendChild(
@@ -147,6 +147,7 @@ function FooterLink({
 			target='_blank'
 		>
 			{children}
+			<Icon name={icons.external} />
 		</a>
 	);
 }

@@ -28,7 +28,7 @@
 
 .timeframe-picker-label {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 }
 
 .timeframe-error {

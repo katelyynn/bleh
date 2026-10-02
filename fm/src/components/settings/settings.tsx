@@ -14,9 +14,9 @@ import {
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page';
-import { request_reload, useSettings } from '@/config';
+import { request_reload } from '@/config';
 import { log } from '@/build/log.ts';
-import { change_settings_page } from '@/pages/bleh_settings/bleh_settings.js';
+import { change_settings_page } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { dialog_rm } from '@/components/dialog/dialog';
 import { keybind } from '@/components/dialog/rabbit';
 import tippy from 'tippy.js';

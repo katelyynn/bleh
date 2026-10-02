@@ -21,9 +21,11 @@
 	&[data-live="true"] {
 		order: -1;
 	}
+
 	&[data-own="true"] {
 		order: -2 !important;
 	}
+
 	&[data-live="false"] {
 		opacity: 0.6;
 
@@ -109,7 +111,7 @@
 }
 
 .track-time {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	cursor: default;
 	flex-shrink: 0;

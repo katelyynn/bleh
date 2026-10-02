@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { trans, translation } from '@/build/trans';
+import { tl, trans, translation } from '@/build/trans';
 import { icons } from '@/components/shared/icon.tsx';
 import { saturation_themes_unsupported } from '@/build/theme.ts';
 import { RadioOptions } from '@/components/settings/provider/radio.tsx';
@@ -218,6 +218,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.solarium.name,
 		body: trans.solarium.body,
 		bubble: true,
+		incompatible: { theme: 'yuzu' },
 	},
 	noise: {
 		css: 'noise-opacity',
@@ -228,6 +229,7 @@ export const settings_store: Record<string, setting_instance> = {
 		step: 0.05,
 		title: trans.noise.name,
 		body: trans.noise.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	gloss: {
 		css: 'gloss',
@@ -238,6 +240,7 @@ export const settings_store: Record<string, setting_instance> = {
 		step: 0.05,
 		title: trans.gloss.name,
 		body: trans.gloss.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	gendered_tags: {
 		default: true,
@@ -277,6 +280,12 @@ export const settings_store: Record<string, setting_instance> = {
 		default: false,
 		title: trans.reduced_motion.name,
 		body: trans.reduced_motion.body,
+		bubble: true,
+	},
+	reduced_flashing: {
+		default: false,
+		title: trans.reduced_flashing.name,
+		body: trans.reduced_flashing.body,
 		bubble: true,
 	},
 	underline_links: {
@@ -406,6 +415,8 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.colourful_counts.name,
 		body: trans.colourful_counts.body,
+		incompatible: { theme: 'nier' },
+		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	colourful_tracks: {
 		default: true,
@@ -532,7 +543,6 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.enable_seasons.name,
 		body: trans.enable_seasons.body,
-		require_reload: true,
 	},
 	seasonal_particles: {
 		default: 'all',
@@ -550,7 +560,6 @@ export const settings_store: Record<string, setting_instance> = {
 				name: trans.no_particles,
 			},
 		},
-		require_reload: true,
 		incompatible: { seasonal: false },
 	},
 	seasonal_particles_fps: {
@@ -559,6 +568,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.seasonal_particles_fps.name,
 		body: trans.seasonal_particles_fps.body,
 		incompatible: { seasonal: false },
+		bubble: true,
 	},
 	seasonal_overlays: {
 		default: true,
@@ -567,6 +577,15 @@ export const settings_store: Record<string, setting_instance> = {
 		body: trans.seasonal_overlays.body,
 		bubble: true,
 		incompatible: { seasonal: false },
+	},
+	seasonal_masks: {
+		default: true,
+		type: 'checkbox',
+		title: trans.seasonal_masks.name,
+		body: trans.seasonal_masks.body,
+		bubble: true,
+		incompatible: { seasonal: false },
+		new_release: true,
 	},
 	profile_header_own: {
 		default: true,
@@ -597,17 +616,6 @@ export const settings_store: Record<string, setting_instance> = {
 			trans.username.name,
 			trans.profile_banner.name,
 		],
-	},
-	profile_shortcut: {
-		default: '',
-		type: 'text',
-		avatar: true,
-		wait: true,
-		max: 40,
-		title: trans.profile_shortcut.name,
-		body: trans.profile_shortcut.body,
-		placeholder: trans.enter_username,
-		warn_if_matches_auth: true,
 	},
 	font: {
 		css: 'custom_font',
@@ -642,6 +650,7 @@ export const settings_store: Record<string, setting_instance> = {
 		tags: [
 			trans.text,
 		],
+		incompatible: { theme: 'yuzu' },
 	},
 	font_serif: {
 		default: true,
@@ -651,6 +660,7 @@ export const settings_store: Record<string, setting_instance> = {
 		tags: [
 			trans.text,
 		],
+		incompatible: { theme: 'yuzu' },
 	},
 	font_weight: {
 		css: 'custom_font_weight',
@@ -661,6 +671,7 @@ export const settings_store: Record<string, setting_instance> = {
 		type: 'range',
 		title: trans.font_weight.name,
 		body: trans.font_weight.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	font_weight_medium: {
 		css: 'custom_font_weight_medium',
@@ -671,6 +682,7 @@ export const settings_store: Record<string, setting_instance> = {
 		type: 'range',
 		title: trans.font_weight_medium.name,
 		body: trans.font_weight_medium.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	font_weight_bold: {
 		css: 'custom_font_weight_bold',
@@ -681,6 +693,7 @@ export const settings_store: Record<string, setting_instance> = {
 		type: 'range',
 		title: trans.font_weight_bold.name,
 		body: trans.font_weight_bold.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	font_emoji: {
 		default: true,
@@ -694,6 +707,8 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.grid_glow.name,
 		body: trans.grid_glow.body,
 		bubble: true,
+		incompatible: { theme: ['nier', 'yuzu'] },
+		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	default_avatar_action: {
 		default: 'expand',
@@ -708,6 +723,21 @@ export const settings_store: Record<string, setting_instance> = {
 				name: trans.photos,
 			},
 		},
+	},
+	collage_style: {
+		default: 'grid',
+		type: 'select',
+		title: trans.collage_style,
+		values: [
+			{
+				value: 'grid',
+				text: tl(trans.grid),
+			},
+			{
+				value: 'stack',
+				text: tl(trans.stack),
+			},
+		],
 	},
 	collage_title: {
 		default: true,
@@ -937,33 +967,6 @@ export const settings_store: Record<string, setting_instance> = {
 		default: [],
 		type: 'list',
 	},
-	profile_hue: {
-		default: 255,
-		type: 'range',
-		min: 0,
-		max: 360,
-		step: 1,
-		title: trans.hue,
-		vertical: true,
-	},
-	profile_sat: {
-		default: 1,
-		type: 'range',
-		min: 0,
-		max: 2,
-		step: 0.01,
-		title: trans.sat,
-		vertical: true,
-	},
-	profile_lit: {
-		default: 1,
-		type: 'range',
-		min: 0,
-		max: 1.5,
-		step: 0.01,
-		title: trans.lit,
-		vertical: true,
-	},
 	friends: {
 		default: [],
 		type: 'list',
@@ -1021,6 +1024,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.music_links.name,
 		body: trans.music_links.body,
 		predefined: true,
+		new_release: true,
 	},
 	inverse_compare: {
 		default: false,
@@ -1078,6 +1082,7 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.show_disc_image.name,
 		body: trans.show_disc_image.body,
+		incompatible: { theme: 'yuzu' },
 	},
 	count_bar_axis: {
 		type: 'radio',
@@ -1142,5 +1147,6 @@ export const settings_store: Record<string, setting_instance> = {
 				name: trans.minimal,
 			},
 		},
+		incompatible: { theme: 'yuzu' },
 	},
 };

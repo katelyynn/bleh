@@ -10,7 +10,7 @@
 .setting-group {
 	display: flex;
 	flex-direction: column;
-	gap: var(--setting-group-padding);
+	gap: var(--setting-group-gap, var(--setting-group-padding));
 	padding: var(--setting-group-padding);
 	text-align: left;
 	overflow: hidden;
@@ -19,39 +19,47 @@
 		width: 400px !important;
 	}
 
-	--setting-group-padding: 10px;
-
 	&:not(.blend) {
 		background: color-mix(in oklch, var(--setting-group), oklch(var(--b5))
 			20%);
-		border-radius: var(--item-big-radius);
+		border-radius: var(--radius-m);
 		box-shadow: var(--group-shadow);
 		width: 100%;
 	}
 
 	&.blend {
 		margin: calc(-1 * var(--setting-group-padding)) !important;
-		--setting-item-radius: var(--item-big-radius);
+		--setting-item-radius: var(--radius-m);
 	}
 
 	& > form > .setting,
 	& > .setting {
 		& + .setting {
-			margin-top: calc((-1 * var(--setting-group-padding)) + 1px +
-				var(--setting-group-padding)) !important;
+			margin-top: calc((-1 * var(--setting-group-padding)) +
+				var(--separator-height, 1px) + var(--setting-group-padding))
+				!important;
 
 			&:after {
 				content: "";
 				position: absolute;
 				left: var(--setting-group-padding);
 				right: var(--setting-group-padding);
-				top: -1px;
-				height: 1px;
+				top: calc(-1 * var(--separator-height, 1px));
+				height: var(--separator-height, 1px);
 				background: var(--separator);
 				box-shadow: var(--separator-shadow);
 				display: block;
 			}
 		}
+	}
+
+	&[disabled] {
+		pointer-events: none !important;
+		opacity: 0.5 !important;
+	}
+
+	&.with-gap {
+		margin-top: var(--card-padding);
 	}
 }
 
@@ -64,7 +72,7 @@
 	position: relative;
 
 	display: flex;
-	gap: 4px var(--card-gap);
+	gap: 4px var(--setting-inner-gap);
 	user-select: none;
 	flex-wrap: wrap;
 	touch-action: manipulation;
@@ -92,8 +100,12 @@
 	}
 
 	&:not(.standalone) {
+		background: var(--setting);
 		padding: var(--setting-group-padding);
 		margin: calc(-1 * var(--setting-group-padding)) !important;
+
+		--col: var(--setting-name);
+		--col-alt: var(--setting-alt);
 	}
 
 	border-radius: var(--setting-item-radius, none);
@@ -109,6 +121,9 @@
 	&:is([data-type="toggle"], [data-type="checkbox"]):not([aria-disabled="true"], [disabled="true"], .standalone):hover {
 		background: var(--setting-hover);
 		transition: none;
+
+		--col: var(--setting-name-hover);
+		--col-alt: var(--setting-alt-hover);
 	}
 
 	@media (max-width: 980px) {
@@ -131,7 +146,7 @@
 		flex: 1;
 
 		& > h5 {
-			color: oklch(var(--c2));
+			color: var(--col);
 			font-weight: var(--font-weight);
 			margin: unset;
 			cursor: default;
@@ -139,7 +154,7 @@
 			display: flex;
 			align-items: center;
 			gap: 4px;
-			min-height: 22px;
+			min-height: var(--setting-label-height);
 			max-height: var(--button-height);
 
 			width: var(--setting-heading-width, unset);
@@ -152,8 +167,8 @@
 		}
 
 		& > p {
-			color: oklch(var(--c3));
-			font-size: 13px;
+			color: var(--col-alt);
+			font-size: calc(var(--font-size) - 1px);
 			cursor: default;
 
 			& + p {
@@ -229,7 +244,7 @@
 		align-items: center;
 		gap: var(--card-gap);
 		flex-shrink: 0;
-		color: oklch(var(--c3));
+		color: var(--col-alt);
 
 		&.v {
 			flex-direction: column;
@@ -302,7 +317,7 @@
 			align-items: center;
 			flex-shrink: 0;
 			order: -1;
-			height: 22px;
+			height: var(--setting-label-height);
 
 			margin-right: calc(-1 * (var(--card-gap) - 10px));
 
@@ -322,6 +337,8 @@
 
 				--col: oklch(var(--b7)) !important;
 				--mask-colour: var(--col);
+
+				--button-height: 16px;
 
 				.bleh-icon {
 					transform: scale(0);
@@ -383,43 +400,6 @@
 				background-position: unset !important;
 			}
 		}
-
-		.radio-cont {
-			display: flex;
-			align-items: center;
-			flex-shrink: 0;
-			order: -1;
-			height: 22px;
-
-			margin-right: calc(-1 * (var(--card-gap) - 10px));
-
-			.radio {
-				position: relative;
-				width: 16px;
-				height: 16px;
-				--radius: 50px;
-				--padding: 0;
-
-				display: flex;
-				justify-content: center;
-				align-items: center;
-
-				--icon: var(--icon-16-check-thick);
-				--icon-size: 12px;
-
-				--col: oklch(var(--b7)) !important;
-				--mask-colour: var(--col);
-
-				&[aria-checked="true"] {
-					--bg: var(--bg-atv) !important;
-					--bg-hov: var(--bg) !important;
-					--shadow:
-						inset 0 0 0 4px oklch(var(--l3-c)),
-						0 3px 12px oklch(var(--h4) / 25%),
-						var(--interactable-outer);
-				}
-			}
-		}
 	}
 
 	&[data-type="checkbox"],
@@ -433,7 +413,7 @@
 	& > .icon {
 		display: flex;
 		align-items: center;
-		min-height: 22px;
+		min-height: var(--setting-label-height);
 		height: 100%;
 		max-height: 32px;
 		margin-right: -5px;
@@ -466,6 +446,58 @@
 				--mask: var(--icon-16-user);
 				--mask-size: 14px;
 			}
+		}
+	}
+}
+
+.radio-cont {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	order: -1;
+	height: var(--setting-label-height);
+
+	margin-right: calc(-1 * (var(--card-gap) - 10px));
+}
+
+.radio {
+	position: relative;
+	width: 16px;
+	height: 16px;
+	--radius: 50px;
+	--padding: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	--icon: var(--icon-16-check-thick);
+	--icon-size: 12px;
+
+	--col: oklch(var(--b7)) !important;
+	--mask-colour: var(--col);
+
+	--button-height: 16px;
+
+	&[aria-checked="true"] {
+		--bg: var(--bg-atv) !important;
+		--bg-hov: var(--bg) !important;
+		--shadow:
+			inset 0 0 0 4px oklch(var(--l3-c)),
+			0 3px 12px oklch(var(--h4) / 25%),
+			var(--interactable-outer);
+	}
+
+	&[data-theme="yuzu"] {
+		width: 14px;
+		height: 14px;
+
+		--button-height: 14px;
+
+		&[aria-checked="true"] {
+			--shadow:
+				inset 0 0 0 4px oklch(var(--l3-c)),
+				var(--interactable-outer);
 		}
 	}
 }
@@ -512,7 +544,7 @@
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	min-height: 22px;
+	min-height: var(--setting-label-height);
 	max-height: var(--button-height);
 	flex-shrink: 0;
 
@@ -525,8 +557,8 @@
 	display: flex;
 	align-items: center;
 	gap: 4px;
-	min-height: 22px;
-	max-height: 22px;
+	min-height: var(--setting-label-height);
+	max-height: var(--setting-label-height);
 	flex-shrink: 0;
 	margin-right: calc(-1 * (var(--card-gap) - 10px));
 }
@@ -567,7 +599,7 @@
 	}
 
 	p {
-		font-size: 12px;
+		font-size: var(--font-size-sm);
 		color: oklch(var(--l3-c));
 		font-weight: var(--font-weight-medium);
 		width: 30px;
@@ -586,7 +618,7 @@
 
 	.hint {
 		color: oklch(var(--c3));
-		font-size: 12px;
+		font-size: var(--font-size-sm);
 		position: absolute;
 		top: 18px;
 		left: 0;
@@ -604,10 +636,6 @@
 .setting-lists,
 .primary-selections {
 	flex: 0 0 100%;
-}
-
-.setting-lists {
-	margin-top: 4px;
 }
 
 .primary-selections {
@@ -836,15 +864,16 @@
 	position: relative;
 	--col: oklch(var(--c3));
 	transition-duration: 0.2s !important;
+	min-height: unset !important;
 
 	--radius: 50px;
 
 	--toggle-width: 34px;
 	--toggle-height: 20px;
 	--dot-size: 14px;
-	--toggle-padding: 3px;
+	--toggle-padding: calc((var(--toggle-height) - var(--dot-size)) / 2);
 
-	.dot {
+	& > .dot {
 		position: absolute;
 		width: var(--dot-size);
 		height: var(--dot-size);
@@ -867,13 +896,13 @@
 
 	&[aria-checked="true"] {
 		--bg:
-			var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
+			var(--cards-overlay-image-subtlest, none), oklch(var(--h3));
 		--bg-hov:
 			var(--cards-overlay-image-subtlest, none),
-			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%);
 		--bg-atv:
 			var(--cards-overlay-image-subtlest, none),
-			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
 		--col: oklch(var(--b7));
 		--shadow:
 			var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 25%),
@@ -881,7 +910,7 @@
 		--shadow-hov:
 			var(--interactable-outer), var(--interactable-active-outer);
 
-		.dot {
+		& > .dot {
 			background: var(--col);
 			left: calc(var(--toggle-width) - var(--dot-size) -
 				var(--toggle-padding));
@@ -890,6 +919,28 @@
 			--mask: var(--icon-16-check);
 		}
 	}
+
+	&[data-theme="nier"] {
+		--bg: transparent !important;
+		--bg-hov: transparent !important;
+		--bg-atv: transparent !important;
+		--col: inherit !important;
+		--shadow: unset !important;
+
+		--switch-label: block !important;
+
+		width: fit-content !important;
+		height: fit-content !important;
+		--padding: 0;
+
+		& > .dot {
+			display: none !important;
+		}
+	}
+}
+
+.switch-label {
+	display: var(--switch-label, none);
 }
 
 .checkbox-wrap {
@@ -900,13 +951,17 @@
 	&.menu-checkbox-wrap {
 		margin-right: 4px;
 	}
+
+	&[data-theme="yuzu"] {
+		align-items: start;
+	}
 }
 
 .check-box {
 	position: relative;
 	width: 16px;
 	height: 16px;
-	--radius: 4px;
+	--radius: var(--radius-xs);
 	--padding: 0;
 
 	/* 2026-09-01: last.fm changes */
@@ -914,9 +969,10 @@
 	justify-content: center;
 	align-items: center;
 	margin: unset !important;
+	min-height: unset !important;
 
 	--icon: var(--icon-16-check-thick);
-	--icon-size: 10px;
+	--icon-size: 12px;
 
 	--col: oklch(var(--b7)) !important;
 	--mask-colour: var(--col);
@@ -959,11 +1015,25 @@
 		width: 14px;
 		height: 14px;
 	}
+
+	&[data-theme="yuzu"] {
+		width: 14px;
+		height: 14px;
+		--icon-size: 12px;
+
+		--icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjcuMTMwMDI1ODYzNjQ3NDYxIDQuMTc5NTI1ODUyMjAzMzY5IDE0LjczMzU5ODcwOTEwNjQ0NSAxMS4xODgzMzE2MDQwMDM5MDYiPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0iY3VycmVudENvbG9yIiBkPSJNIDIxLjM1OCA2LjA0NWExIDEgMCAwIDAgLjM3NS0xLjM2MyAxLjAxIDEuMDEgMCAwIDAtMS4zNjQtLjM3NWMtLjM1My4yLS42OTQuNDI0LTEuMDMuNjVhMzAuMjY5IDMwLjI2OSAwIDAgMC0yLjQ2MyAxLjg0N2MtMS42NDIgMS4zNjYtMy42MTQgMy4yOS01LjIzOSA1LjcxOGE5Ljg1NSA5Ljg1NSAwIDAgMC0xLjc0Ni0xLjc4NGMtLjQyNy0uMzMzLS45MDItLjY2LTEuNDE1LS44NDZoLS4wMDFhMSAxIDAgMCAwLS42ODkgMS44NzhjLjAyNS4wMS4zNy4xNS44NzYuNTQ1LjU3OC40NSAxLjM3NiAxLjIzOSAyLjE0NiAyLjU1N2ExIDEgMCAwIDAgMS43MzMtLjAxYzEuNTg0LTIuNzkxIDMuNzg3LTUgNS42MTQtNi41Mi45MS0uNzU3IDEuNzItMS4zMzYgMi4yOTgtMS43MjQuMjk1LS4xOTkuNTk1LS4zOTQuOTA0LS41NzJaIi8+PC9zdmc+');
+
+		& > .bleh-icon {
+			position: relative;
+			top: -2px;
+			right: -3px;
+		}
+	}
 }
 
 .setting-incompatible-with {
 	flex-basis: 100%;
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	opacity: 0;
 
 	display: flex;
@@ -1002,9 +1072,10 @@
 .setting-icon {
 	display: flex;
 	align-items: center;
-	color: oklch(var(--c2) / 80%);
+	color: var(--col-alt);
 	--icon-size: 16px;
 	margin-right: calc(-1 * (var(--card-gap) - 10px));
+	min-height: var(--setting-label-height);
 	max-height: 22px;
 }
 
@@ -1066,7 +1137,7 @@
 .setting-body,
 .setting-sub {
 	color: oklch(var(--c3));
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	cursor: default;
 }
 

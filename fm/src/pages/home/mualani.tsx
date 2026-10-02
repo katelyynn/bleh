@@ -7,18 +7,17 @@
 import { register_background, update_page } from '@/page';
 import { auth, page } from '@/build/page';
 import { log } from '@/build/log.ts';
-import { checkup_page_structure } from '@/components/page/structure.js';
+import { checkup_page_structure } from '@/components/page/structure.tsx';
 import { html, render } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';
-import { download_with_progress } from '@/build/tools';
+import { download_with_progress, sanitise } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
-import { save_setting, setting } from '@/components/settings/settings';
+import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';
-import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
 import { click_indicator } from '@/components/shared/indicator';
 import { createRef, ReactNode } from 'jsx-dom';
@@ -91,6 +90,10 @@ import {
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
+import { UserSelect } from '@/components/select/user.tsx';
+import { Listen, ListenBoard } from '@/components/music/listen.tsx';
+import { ComparisonBars } from '@/components/minis/compare.tsx';
+import { keys } from '@/components/settings/storage.ts';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -205,6 +208,9 @@ export function mualani() {
 
 	const textcontent = createRef();
 
+	const c = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+	const avi = c.evangelicgirl.avatar;
+
 	page.structure.main!.replaceChildren(
 		<>
 			<section>
@@ -252,6 +258,7 @@ export function mualani() {
 					<DemoItem label='SeeMore'>
 						<SeeMore>See more</SeeMore>
 						<SeeMore iconPlacement='left'>See more</SeeMore>
+						<SeeMore icon={icons.external}>See more</SeeMore>
 					</DemoItem>
 				</DemoGrid>
 			</section>
@@ -408,6 +415,9 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='Select'>
 						<Select
+							onChange={(v) => {
+								notify({ title: `value is ${v}` });
+							}}
 							values={[
 								{
 									value: 'hello',
@@ -422,6 +432,9 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='Select (with advanced stuff)'>
 						<Select
+							onChange={(v) => {
+								notify({ title: `value is ${v}` });
+							}}
 							values={[
 								{
 									text: 'See below',
@@ -429,6 +442,38 @@ export function mualani() {
 								{
 									value: 'hello',
 									text: 'Hello',
+								},
+								{
+									text: 'sep',
+								},
+								{
+									value: 'world',
+									text: 'World',
+								},
+							]}
+						/>
+					</DemoItem>
+					<DemoItem label='Select (with advanced stuff and arbitrary)'>
+						<Select
+							allowArbitrary
+							onChange={(v) => {
+								notify({ title: `value is ${v}` });
+							}}
+							values={[
+								{
+									text: 'See below',
+								},
+								{
+									value: 'hello',
+									text: 'Hello',
+								},
+								{
+									value: 'hello2',
+									text: 'Hello2',
+								},
+								{
+									value: 'hello3',
+									text: 'Hello3',
 								},
 								{
 									text: 'sep',
@@ -1054,6 +1099,114 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='ProfileSidebar'>
 						<ProfileSidebar />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='UserSelect'>
+						<UserSelect />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Listen'>
+						<ListenBoard>
+							<Listen name='dressupdarling' />
+							<Listen name='dressupdarling' plays={10} />
+							<Listen
+								name='dressupdarling'
+								image={auth.avatar!}
+							/>
+							<Listen
+								name='dressupdarling'
+								image={auth.avatar!}
+								plays={10}
+							/>
+						</ListenBoard>
+					</DemoItem>
+					<DemoItem label='Listen'>
+						<ListenBoard>
+							<Listen name='dressupdarling' plays={1000} />
+							<Listen name='evangelicgirl' plays={100} />
+							<Listen name='satisfeita' plays={10} />
+							<Listen name='LAST.HQ' plays={10} />
+							<Listen name='readandpretend' plays={10} />
+						</ListenBoard>
+					</DemoItem>
+					<DemoItem label='Listen'>
+						<ListenBoard>
+							<Listen
+								name='dressupdarling'
+								plays={50000}
+								artist
+							/>
+							<Listen name='evangelicgirl' plays={20000} artist />
+							<Listen name='satisfeita' plays={5000} artist />
+							<Listen name='LAST.HQ' plays={500} artist />
+							<Listen name='readandpretend' plays={10} artist />
+						</ListenBoard>
+					</DemoItem>
+					<DemoItem label='Listen'>
+						<ListenBoard
+							url={sanitise('Sabrina Carpenter')}
+							others={34}
+						>
+							<Listen
+								name='dressupdarling'
+								artist
+								url={sanitise('Sabrina Carpenter')}
+							/>
+							<Listen
+								name='dressupdarling'
+								artist
+								url={sanitise('Sabrina Carpenter')}
+								waitForHover
+							/>
+							<Listen
+								name='evangelicgirl'
+								artist
+								url={sanitise('Sabrina Carpenter')}
+							/>
+							<Listen name='satisfeita' plays={10} artist />
+							<Listen name='LAST.HQ' plays={50} artist />
+							<Listen name='readandpretend' plays={10} artist />
+						</ListenBoard>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ComparisonBars'>
+						<ComparisonBars
+							you={{
+								avatar: auth.avatar!,
+								plays: 120,
+								link: '#',
+							}}
+							other={{
+								avatar: avi,
+								plays: 90,
+								link: '#',
+							}}
+							shared={120 + 90}
+						/>
+					</DemoItem>
+					<DemoItem label='ComparisonBars'>
+						<ComparisonBars
+							you={{
+								avatar: auth.avatar!,
+								plays: 90,
+								link: '#',
+							}}
+							other={{
+								avatar: avi,
+								plays: 120,
+								link: '#',
+							}}
+							shared={120 + 90}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>

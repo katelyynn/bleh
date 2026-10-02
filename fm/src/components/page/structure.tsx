@@ -10,26 +10,23 @@ import { chart_reflow } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
+import { useSettings } from '@/page.ts';
 
 export function basic_page_structure() {
-	page.structure.container = document.body.querySelector('.page-content');
+	page.structure.container = document.body.querySelector('.page-content')!;
 	try {
-		page.structure.row = page.structure.container.querySelector('.row');
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+		page.structure.row = page.structure.container.querySelector('.row')!;
+		page.structure.main = page.structure.row.querySelector('.col-main')!;
+		page.structure.side = page.structure.row.querySelector('.col-sidebar')!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
 	checkup_page_structure();
 }
 
-/**
- * ensures general health of the page structure, fills in the global page object
- * @param {boolean} is_subpage controls if the checker should identify content_top's etc.
- * @param {Element|null} header legacy header from last.fm to extract data from
- */
-export function checkup_page_structure(is_subpage = false, header = null) {
+// ensures general health of page structure
+export function checkup_page_structure(is_subpage = false, header?: Element) {
 	if (document.body.style.getPropertyValue('--hue-album')) {
 		page.state.replaced_accent = false;
 
@@ -104,6 +101,10 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 	}
 
 	page.structure.row.setAttribute('data-assigned', 'true');
+
+	page.structure.row.appendChild(
+		<div class='seasonal-decoration-top' />,
+	);
 
 	if (!page.structure.main || !document.body.contains(page.structure.main)) {
 		log('page missing main, creating', 'page structure');
@@ -268,6 +269,16 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                             </div>
                         `;
 
+						function update() {
+							toolbar.setAttribute(
+								'data-theme',
+								useSettings.get('theme'),
+							);
+						}
+
+						update();
+						useSettings.on('theme', update);
+
 						page.structure.row.insertBefore(
 							toolbar,
 							page.structure.row.firstElementChild,
@@ -389,6 +400,13 @@ export function checkup_nav() {
                 </div>
             `;
 
+			function update() {
+				toolbar.setAttribute('data-theme', useSettings.get('theme'));
+			}
+
+			update();
+			useSettings.on('theme', update);
+
 			page.structure.row.insertBefore(toolbar, page.structure.content);
 			page.structure.toolbar = toolbar;
 		} else {
@@ -408,6 +426,16 @@ export function convert_to_toolbar() {
             ${nav}
         </div>
     `;
+
+	function update() {
+		page.structure.toolbar.setAttribute(
+			'data-theme',
+			useSettings.get('theme'),
+		);
+	}
+
+	update();
+	useSettings.on('theme', update);
 
 	page.structure.row.insertBefore(
 		page.structure.toolbar,

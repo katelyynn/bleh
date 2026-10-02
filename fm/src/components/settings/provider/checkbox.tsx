@@ -17,6 +17,7 @@ import { useSettings } from '@/page.ts';
 
 interface SettingCheckboxProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	value?: boolean;
 	bind?: string;
 	standalone?: boolean;
 	icon?: string;
@@ -26,6 +27,7 @@ interface SettingCheckboxProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	new_release?: boolean;
 }
 
 type SettingCheckboxElement = HTMLDivElement & {
@@ -35,6 +37,7 @@ type SettingCheckboxElement = HTMLDivElement & {
 
 export function SettingCheckbox({
 	ref,
+	value,
 	bind,
 	standalone = false,
 	icon,
@@ -44,8 +47,9 @@ export function SettingCheckbox({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	new_release,
 }: SettingCheckboxProps) {
-	let value = bind ? useSettings.get(bind) as boolean : true;
+	if (bind) value = useSettings.get(bind) as boolean;
 	const checkbox = createRef();
 
 	const uuid = crypto.randomUUID();
@@ -70,6 +74,8 @@ export function SettingCheckbox({
 				});
 			});
 		}
+
+		if (store.new_release) new_release = store.new_release;
 	}
 
 	function update() {
@@ -107,7 +113,12 @@ export function SettingCheckbox({
 					ref={checkbox}
 				/>
 				{icon && <SettingIcon name={icon} />}
-				<SettingLabel name={name} body={body} store={store} />
+				<SettingLabel
+					name={name}
+					body={body}
+					store={store}
+					new_release={new_release}
+				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
 						list={incompatible_list}

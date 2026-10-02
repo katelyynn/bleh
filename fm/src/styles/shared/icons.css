@@ -1,9 +1,7 @@
 .icon-mask:before,
 .report-dropdown-button:before,
-.attendance-badge:before,
 .lfmmaf-missing-artwork-button:before,
 .input-container:after,
-.blend-v2-btn:before,
 .rabbit-search:after,
 .js-shout-reply-cancel:before,
 .inbox-compose-button:before,
@@ -14,13 +12,13 @@
 .listening-report-promo-date:after,
 .metadata-column .cta-link-wrap > a:before,
 .lyrics-snippet-more-link > a:before,
-.see-more:before,
 .music-featured-item-background:before,
 .gallery-image-preferred-states:before,
 .gallery-image-votes:before,
 .user-list-follower-btn:before,
 .icon:before,
 .icon-r:before,
+.icon-after:after,
 .chartlist-now-scrobbling:before,
 .tags-view-all:before,
 .weeklychart-listeners:before,
@@ -33,7 +31,7 @@
 .tag-icon:before,
 .breadcrumb :is(a, .breadcrumb-origin):before,
 .gallery-image-uploaded-by:before,
-.select-button:after,
+.select-button:before,
 .modal-action-button:before,
 .big-btn:before,
 .requesting:before,
@@ -94,7 +92,6 @@
 .playlisting-create-option-icon:before,
 /*     PLAYER BAR     */ .dropdown-menu-item-dark:before,
 /*     UPLOAD CTA     */ .cta-link:before,
-.shout-more-actions:before,
 .coloured-cta:before,
 /*     LIBRARY     */ .all-results-list li:before,
 .library-search-submit::before,
@@ -103,19 +100,21 @@
 /*     SEARCH     */ .search-submit:before,
 .search-reset:before,
 /*     SET AN OBSESSION     */ .obsession-candidate-inner .btn-sm:before,
-/*     GENERIC     */ .music-link:after,
-.btn--loading:after,
+/*     GENERIC     */ .btn--loading:after,
 .more-items:before {
 	content: "";
 	display: var(--show-icon, block) !important;
 	mask-position: 0 0 !important;
 	left: var(--left, var(--button-sides-icon)) !important;
 	margin-top: var(--margin-top,
-		calc(-1 * (var(--mask-size, var(--icon-size)) / 2))) !important;
+		calc(-1 * (var(--mask-size, var(--icon-size, var(--default-icon-size,
+		18px))) / 2))) !important;
 	margin-left: var(--margin-left, unset) !important;
 	margin-right: var(--margin-right, unset) !important;
-	width: var(--mask-size, var(--icon-size)) !important;
-	height: var(--mask-size, var(--icon-size)) !important;
+	width: var(--mask-size, var(--icon-size, var(--default-icon-size, 18px)))
+		!important;
+	height: var(--mask-size, var(--icon-size, var(--default-icon-size, 18px)))
+		!important;
 	box-shadow: unset !important;
 	position: absolute;
 	right: var(--right, auto) !important;
@@ -127,11 +126,14 @@
 	border-radius: unset;
 	mask-image: var(--mask, var(--icon-16-placeholder));
 	-webkit-mask-image: var(--mask, var(--icon-16-placeholder));
-	mask-size: var(--mask-size, var(--icon-size));
-	-webkit-mask-size: var(--mask-size, var(--icon-size));
+	mask-size: var(--mask-size, var(--icon-size, var(--default-icon-size,
+		18px)));
+	-webkit-mask-size: var(--mask-size, var(--icon-size,
+		var(--default-icon-size, 18px)));
 	transition-property: var(--transition-property,
+		rotate,
 		opacity,
-		left,
+		left, right,
 		background,
 		transform) !important;
 	transition-duration: var(--trans) !important;
@@ -140,7 +142,7 @@
 }
 
 .icon-r:before,
-.select-button:not(.link-select):after,
+.select-button:before,
 .external:before,
 .open:before,
 .gallery-next .arrow,
@@ -158,14 +160,15 @@
 	background: var(--icon-colour, var(--mask-colour, currentColor));
 	mask-image: var(--icon, var(--icon-16-placeholder));
 	-webkit-mask-image: var(--icon, var(--icon-16-placeholder));
-	mask-size: var(--icon-size, 18px);
-	-webkit-mask-size: var(--icon-size, 18px);
+	mask-size: var(--icon-size, var(--default-icon-size, 18px));
+	-webkit-mask-size: var(--icon-size, var(--default-icon-size, 18px));
 	mask-position: center;
 	-webkit-mask-position: center;
 	mask-repeat: no-repeat;
 	-webkit-mask-repeat: no-repeat;
-	width: var(--icon-width, var(--icon-size, 18px));
-	height: var(--icon-width, var(--icon-size, 18px));
+	width: var(--icon-width, var(--icon-size, var(--default-icon-size, 18px)));
+	height: var(--icon-height, var(--icon-size, var(--default-icon-size,
+		18px)));
 	contain: strict;
 
 	font-size: 0 !important;
@@ -183,10 +186,17 @@
 		background: var(--icon, var(--icon-16-placeholder));
 		mask-image: unset;
 		-webkit-mask-image: unset;
-		background-size: var(--icon-size, 18px);
+		background-size: var(--icon-size, var(--default-icon-size, 18px));
 		background-position: center;
 		background-repeat: no-repeat;
 	}
+
+	transition-property: translate,
+		rotate,
+		scale,
+		opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .bleh-icon-arrow-left,
@@ -216,7 +226,8 @@
 span.bleh-icon {
 	display: inline-block;
 	height: 100%;
-	min-height: var(--icon-size);
+	min-height: var(--icon-height, var(--icon-size, var(--default-icon-size,
+		18px)));
 }
 
 .bleh-icon-spinner {

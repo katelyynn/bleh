@@ -38,7 +38,7 @@ input[type="range"] {
 	.track {
 		display: flex;
 		background: oklch(var(--b3));
-		border-radius: var(--item-big-radius);
+		border-radius: var(--radius-l);
 		box-shadow: var(--group-shadow);
 		width: calc(100% - (30px + var(--card-gap)));
 		/* 30px = value width */
@@ -51,7 +51,7 @@ input[type="range"] {
 			display: flex;
 			width: var(--percent);
 			background-color: oklch(var(--h3));
-			border-radius: var(--item-big-radius);
+			border-radius: var(--radius-l);
 			box-shadow:
 				var(--primary-shadow),
 				0 3px 12px oklch(var(--h4) / 32%);
@@ -62,7 +62,7 @@ input[type="range"] {
 			width: var(--nub-w);
 			height: var(--nub-h);
 			background-color: oklch(var(--h3));
-			border-radius: var(--item-big-radius);
+			border-radius: var(--radius-l);
 			box-shadow:
 				var(--primary-shadow),
 				0 3px 12px oklch(var(--h4) / 32%);

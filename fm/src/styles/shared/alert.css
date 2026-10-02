@@ -1,7 +1,7 @@
 .async-content-error-message,
 .event-status,
 .alert:not(.big-modal-alert, .form-disclaimer > .alert) {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	line-height: var(--line-height);
 	margin-top: var(--card-gap);
 	padding: 4px 10px 4px calc(10px + var(--icon-size) + var(--icon-gap))
@@ -41,6 +41,14 @@
 	&[data-hidden="true"] {
 		display: none;
 	}
+
+	--mask2: var(--interact-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
 }
 
 .alert-error,
@@ -146,7 +154,7 @@
 	&.cta {
 		display: flex;
 		flex-direction: column;
-		gap: 6px;
+		gap: 2px;
 		margin: unset;
 		padding: 10px var(--card-padding) !important;
 		border-radius: unset !important;
@@ -211,10 +219,10 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	gap: 6px;
+	gap: 4px;
 
-	--icon-size: 16px;
-	--icon-colour: oklch(var(--c3));
+	--icon-size: 14px;
+	--icon-colour: oklch(var(--l3-c) / 50%);
 }
 
 .cta-actions {
@@ -247,6 +255,10 @@
 
 	&:hover {
 		scale: 2;
+	}
+
+	&:after {
+		display: none !important;
 	}
 }
 

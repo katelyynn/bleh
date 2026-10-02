@@ -214,6 +214,15 @@ export const icons = {
 	streak: 'streak',
 	streak_empty: 'streak-empty',
 	image: 'photo',
+	hover: 'mouse',
+	size: 'size',
+	preview: 'preview',
+	feature_flag: 'feature-flag',
+	wave: 'wave',
+	rose: 'rose',
+	insight: 'insight',
+	dot: 'dot',
+	taste: 'taste',
 };
 
 interface icon {
@@ -315,7 +324,7 @@ export function MinusIcon({
 }
 
 export function icon_mask({ name }: { name?: string }) {
-	if (name == 'inherit') return '';
+	if (name == 'inherit' || name == '') return '';
 
 	return `--icon: var(--icon-16-${name})`;
 }

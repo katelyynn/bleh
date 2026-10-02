@@ -25,6 +25,7 @@ type ButtonProps =
 		disabled?: boolean;
 		loading?: boolean;
 		menu?: boolean;
+		outline?: boolean;
 		href?: string;
 		external?: boolean;
 		onClick?: () => void;
@@ -59,6 +60,7 @@ export function Button({
 	disabled = false,
 	loading = false,
 	menu = false,
+	outline,
 	href,
 	external,
 	onClick,
@@ -75,6 +77,7 @@ export function Button({
 		chibi && 'chibi',
 		primary && 'primary',
 		colourful && 'colourful',
+		outline && 'outline-btn',
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
 		(opens != null) && 'select-button',

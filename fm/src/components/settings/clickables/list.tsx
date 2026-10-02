@@ -33,6 +33,7 @@ export function EmptyListText() {
 
 interface ListItemProps {
 	icon?: string;
+	host?: string;
 	name: string;
 	onMove?: (direction: 'left' | 'right') => void;
 	onRemove?: () => void;
@@ -41,6 +42,7 @@ interface ListItemProps {
 
 export function ListItem({
 	icon,
+	host,
 	name,
 	onMove,
 	onRemove,
@@ -49,8 +51,8 @@ export function ListItem({
 	const elem = (
 		<div class={['setting-list-item', 'current']}>
 			<div class='setting-list-item-info'>
-				{icon && (
-					<div class='setting-list-icon'>
+				{(icon || host) && (
+					<div class='setting-list-icon' data-host={host}>
 						<Icon name={icon} />
 					</div>
 				)}
@@ -75,20 +77,22 @@ export function ListItem({
 
 interface ListCandidateProps {
 	icon?: string;
+	host?: string;
 	name: string;
 	onAdd?: () => void;
 }
 
 export function ListCandidate({
 	icon,
+	host,
 	name,
 	onAdd,
 }: ListCandidateProps) {
 	const elem = (
 		<div class={['setting-list-item']}>
 			<div class='setting-list-item-info'>
-				{icon && (
-					<div class='setting-list-icon'>
+				{(icon || host) && (
+					<div class='setting-list-icon' data-host={host}>
 						<Icon name={icon} />
 					</div>
 				)}

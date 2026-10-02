@@ -106,7 +106,7 @@
 }
 
 .form-tip {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
 	cursor: default;
 	margin-top: calc(-1 * (var(--item-list-gap) - 6px));

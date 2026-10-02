@@ -6,20 +6,11 @@
 	gap: var(--card-gap);
 	flex: unset;
 
-	h1 {
-		font-size: 24px;
-		line-height: 30px;
-		font-weight: var(--font-weight-bold);
-		letter-spacing: unset;
-		margin: unset;
-		cursor: default;
-		color: oklch(var(--c1));
-	}
 	h4 {
 		color: oklch(var(--c1));
 
-		font-size: 16px;
-		line-height: 20px;
+		font-size: var(--font-size-subheading);
+		line-height: var(--line-height-subheading);
 
 		&.top-header {
 			width: fit-content;
@@ -39,6 +30,7 @@
 			}
 		}
 	}
+
 	h5 {
 		margin: unset;
 		color: oklch(var(--c1));

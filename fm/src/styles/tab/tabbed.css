@@ -37,10 +37,12 @@
 	--shadow: none;
 	position: relative;
 
+	--interact-mask: none !important;
+
 	&:after {
 		content: '';
 		position: absolute;
-		display: block;
+		display: block !important;
 		background-color: oklch(var(--l3-c));
 		border-radius: 5px;
 		left: var(--button-sides);

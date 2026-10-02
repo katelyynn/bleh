@@ -27,6 +27,7 @@ import { Alert } from '@/components/text/alert.tsx';
 interface HybridTimeframePickerProps {
 	ref?: ReturnType<typeof createRef<HybridTimeframePickerElement>>;
 	value?: string;
+	inSettings?: boolean;
 	disabled?: boolean;
 	onChange?: (val: string) => void;
 }
@@ -38,6 +39,7 @@ type HybridTimeframePickerElement = HTMLButtonElement & {
 export function HybridTimeframePicker({
 	ref,
 	value,
+	inSettings,
 	disabled = false,
 	onChange,
 }: HybridTimeframePickerProps) {
@@ -60,6 +62,7 @@ export function HybridTimeframePicker({
 				'flex-button',
 				'select-button',
 				'timeframe-picker-button',
+				inSettings && 'select-in-settings',
 			]}
 			ref={ref}
 		/>

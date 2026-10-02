@@ -66,8 +66,8 @@
 			letter-spacing: unset;
 			padding: unset;
 
-			font-size: 16px;
-			line-height: 20px;
+			font-size: var(--font-size-subheading);
+			line-height: var(--line-height-subheading);
 
 			&:before {
 				content: '#';
@@ -100,6 +100,7 @@
 		display: none;
 	}
 }
+
 .music-bookmarks-tags-item-wrap,
 .big-tags-item-wrap {
 	margin: unset !important;

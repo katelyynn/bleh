@@ -132,17 +132,17 @@ export function bleh_message_list(
 					: ''}
 				</div>
 				<div class="message-content">
-				    <div class="message-subject">
+					<div class="message-subject">
 				        ${subject}
 				    </div>
-				    <div class="message-summary">
+					<div class="message-summary">
 				        ${content}
 				    </div>
 				</div>
 				<div class="notification-time">${time}</div>
 				<a
-				    class="link-block-cover-link"
-				    href=${href}
+					class="link-block-cover-link"
+					href=${href}
 				/>
 			`,
 		);

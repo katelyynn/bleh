@@ -35,12 +35,32 @@
 }
 
 .tippy-box[data-theme="auth-menu-v2"] {
-	padding: 4px !important;
-	border-radius: calc(var(--item-med-radius) + 4px) !important;
+	padding: var(--vertical-menu-padding, 4px) var(--horizontal-menu-padding,
+		4px) !important;
+	border-radius: var(--menu-radius) !important;
 
 	--page-width: 230px;
 
 	overflow: hidden;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		display: var(--menu-lines-display, none);
+		background-color: var(--menu-lines);
+		height: var(--menu-lines-height);
+		left: var(--menu-lines-horizontal) !important;
+		right: var(--menu-lines-horizontal) !important;
+	}
+
+	&:before {
+		top: var(--menu-lines-vertical);
+	}
+
+	&:after {
+		bottom: var(--menu-lines-vertical);
+	}
 }
 
 .auth-menu-v2 {
@@ -256,9 +276,10 @@
 	cursor: default;
 	position: relative;
 	z-index: 20;
+	width: fit-content;
 
 	&.smaller {
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 	}
 
 	& > .artist > a,
@@ -299,12 +320,12 @@
 
 	&.status-album {
 		color: oklch(var(--c3));
-		font-size: 13px;
+		font-size: calc(var(--font-size) - 1px);
 	}
 }
 
 .status-time {
-	font-size: 13px;
+	font-size: calc(var(--font-size) - 1px);
 	margin-top: 10px;
 	color: oklch(var(--c3));
 }
@@ -326,7 +347,7 @@
 	align-items: center;
 	gap: var(--icon-gap);
 
-	font-size: 12px;
+	font-size: var(--font-size-sm);
 
 	--icon-size: 12px;
 

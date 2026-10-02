@@ -16,7 +16,7 @@ import { page, reload_pending } from '@/build/page';
 import { tl, trans } from '@/build/trans.ts';
 import { load_chart_colours } from '@/components/music/chart';
 import { notify } from '@/components/dialog/notify';
-import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
+import { load_skus } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { compile_settings, save_setting } from '@/components/settings/settings';
 import { useSettings } from '@/page.ts';
 import { dark_themes, light_themes } from '@/build/theme.ts';
@@ -296,7 +296,7 @@ export class Settings {
 	public append(key: string, value: setting_value) {
 		if (!Array.isArray(this.get(key))) return;
 
-		this.set(key, [...this.get(key), value]);
+		this.set(key, [...this.get(key) as setting_value[], value]);
 	}
 
 	// members can subscribe to setting changes

@@ -37,12 +37,22 @@ import {
 	CompareUsers,
 } from '@/components/minis/user.tsx';
 import { Input, InputGroup } from '@/components/input/input.tsx';
-import { Select } from '@/components/select/select.tsx';
+import { Select, SelectOption } from '@/components/select/select.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { Alert } from '@/components/text/alert.tsx';
 import { Placeholder } from '@/components/loading/placeholder.tsx';
 import { IconLabel } from '@/components/text/text.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingStub } from '@/components/settings/provider/stub.tsx';
+import { UserSelect } from '@/components/select/user.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { CollageGridPreview } from '@/components/settings/previews/collage.tsx';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { ff } from '@/components/settings/sku.ts';
+import { SettingsFooter } from '@/components/form/footer.tsx';
+import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -53,8 +63,11 @@ export function collage({ host, sidebar } = {}) {
 	const timeframe = createRef();
 	const type = createRef();
 
+	const downloader = createRef();
 	const submit = createRef();
 	const body = createRef();
+
+	const user = createRef();
 
 	const value = 3;
 	const min = 1;
@@ -66,6 +79,9 @@ export function collage({ host, sidebar } = {}) {
 	const default_type = page.requested.type || 'albums';
 	const default_timeframe = page.requested.timeframe ||
 		'date_preset=LAST_30_DAYS';
+
+	let blob_url: string;
+	let filename: string;
 
 	if (page.requested.redirect) {
 		setTimeout(() => {
@@ -79,40 +95,110 @@ export function collage({ host, sidebar } = {}) {
 		}, 100);
 	}
 
-	const user = createRef();
+	const grid_preview = createRef();
+	/* const grid_preview_settings = (
+		<InputGroup>
+			<Input
+				type='number'
+				value={value}
+				placeholder={value}
+				min={min}
+				length={max}
+				ref={width}
+				onChange={(v) => {
+					grid_preview.current.row = v;
+				}}
+			/>
+			<Icon name={icons.x} />
+			<Input
+				type='number'
+				value={value}
+				placeholder={value}
+				min={min}
+				length={max}
+				ref={height}
+				onChange={(v) => {
+					grid_preview.current.col = v;
+				}}
+			/>
+		</InputGroup>
+	);*/
+
+	const range: SelectOption[] = [];
+
+	Array.from({ length: 20 }).forEach((_, i) => {
+		range.push({
+			value: String(i + 1),
+			text: String(i + 1),
+		});
+	});
+
+	const grid_preview_settings = (
+		<InputGroup>
+			<Select
+				inSettings
+				value={String(value)}
+				values={range}
+				ref={width}
+				onChange={(v) => {
+					grid_preview.current.row = Number(v);
+				}}
+			/>
+			<Icon name={icons.x} />
+			<Select
+				inSettings
+				value={String(value)}
+				values={range}
+				ref={height}
+				onChange={(v) => {
+					grid_preview.current.col = Number(v);
+				}}
+			/>
+		</InputGroup>
+	);
 
 	host.replaceChildren(
 		<>
-			<CompareHeader>
-				<CompareUsers ref={user}>
-					<CompareUser name={page.name} replacePage />
-				</CompareUsers>
-				<CompareSelection>
-					<InputGroup>
-						<Input
-							type='number'
-							value={value}
-							placeholder={value}
-							min={min}
-							length={max}
-							ref={width}
-						/>
-						<Icon name={icons.x} />
-						<Input
-							type='number'
-							value={value}
-							placeholder={value}
-							min={min}
-							length={max}
-							ref={height}
-						/>
-					</InputGroup>
+			<CompareBody ref={body} data-filled='false'>
+				<Placeholder face='(๑>◡<๑)'>
+					{tl(trans.choose_a_timeframe)}
+				</Placeholder>
+			</CompareBody>
+		</>,
+	);
+
+	const group1 = createRef();
+	const group2 = createRef();
+
+	sidebar.replaceChildren(
+		<>
+			<PanelHead icon={icons.preview}>
+				{tl(trans.preview)}
+			</PanelHead>
+			<div class='collage-grid-preview-stack'>
+				<CollageGridPreview
+					row={width.current.value}
+					col={height.current.value}
+					ref={grid_preview}
+				/>
+			</div>
+			<SettingGroup ref={group1}>
+				<SettingStub name={tl(trans.profile)} type='select'>
+					<UserSelect
+						inSettings
+						value={page.requested.profile || ''}
+						onChange={(v) => {
+							page.requested.profile = v;
+							page.name = v;
+						}}
+						ref={user}
+					/>
+				</SettingStub>
+				<SettingStub name={tl(trans.item_type)} type='select'>
 					<Select
+						inSettings
 						value={default_type}
 						values={[
-							{
-								text: tl(trans.item_type),
-							},
 							{
 								value: 'artists',
 								text: () => (
@@ -140,107 +226,50 @@ export function collage({ host, sidebar } = {}) {
 						]}
 						ref={type}
 					/>
+				</SettingStub>
+				<SettingStub name={tl(trans.timeframe)} type='select'>
 					<HybridTimeframePicker
+						inSettings
 						value={default_timeframe}
 						ref={timeframe}
 					/>
-					<Button primary ref={submit} onClick={init_collage}>
-						<Icon name={icons.collage} />
-						{tl(trans.generate)}
-					</Button>
-				</CompareSelection>
-			</CompareHeader>
-			<CompareBody ref={body} data-filled='false'>
-				<Placeholder face='(๑>◡<๑)'>
-					{tl(trans.choose_a_timeframe_above)}
-				</Placeholder>
-			</CompareBody>
+				</SettingStub>
+				{ff('collage_style') && <SettingSelect bind='collage_style' />}
+				<SettingStub name={tl(trans.chart_size)} type='select'>
+					{grid_preview_settings}
+				</SettingStub>
+				<SettingSwitch bind='collage_title' />
+				<SettingSwitch bind='collage_grid_gap' />
+			</SettingGroup>
+			<PanelHead icon={icons.visual}>
+				{tl(trans.visual)}
+			</PanelHead>
+			<SettingGroup ref={group2}>
+				<SettingSwitch bind='collage_centered' />
+				<SettingSwitch bind='collage_grid_text' />
+				<SettingSwitch bind='collage_grid_plays' />
+			</SettingGroup>
+			<SettingsFooter gap>
+				<Button
+					primary
+					ref={downloader}
+					onClick={download_collage}
+					disabled
+				>
+					<Icon name={icons.download} />
+					{tl(trans.download)}
+				</Button>
+				<Button primary ref={submit} onClick={init_collage}>
+					<Icon name={icons.collage} />
+					{tl(trans.generate)}
+				</Button>
+			</SettingsFooter>
 		</>,
 	);
 
-	let setting_group;
-	let inputter;
-	render(
-		sidebar,
-		html`
-			<h2>${tl(trans.settings)}</h2>
-			<div class="setting-group" ref=${(el) => (setting_group = el)}>
-			    <div class="setting v" data-type="text">
-			        <div class="heading">
-			            <h5>${tl(trans.profile)}</h5>
-			        </div>
-			        <div class="input-container content-form">
-			            <input
-			                type="text"
-			                class="input"
-			                ref=${(el) => (inputter = el)}
-			                placeholder=${tl(trans.enter_a_profile)}
-			                value=${page.requested.profile}
-			                onchange=${(e) => {
-				page.requested.profile = e.target.value;
-				page.name = page.requested.profile;
-
-				page.avatar = '';
-				if (page.name == auth.name) {
-					page.avatar = auth.avatar;
-				}
-
-				render(
-					user,
-					html`
-						${render_user(
-							page.name,
-							page.avatar,
-							user,
-							true,
-						)}
-					`,
-				);
-			}}
-			            />
-			            ${() => {
-				let btn = html.node`
-                            <button class="btn chibi icon" data-type="profile" onclick=${() => {
-					inputter.value = auth.name;
-					inputter.dispatchEvent(new Event('change'));
-				}}>${tl(trans.profile)}</button>
-                        `;
-
-				tippy(btn, {
-					content: tl(trans.profile),
-				});
-
-				return btn;
-			}}
-			            ${() => {
-				let btn = html.node`
-                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${
-					useSettings.get('starred_friend') != ''
-				} onclick=${() => {
-					if (useSettings.get('starred_friend') == '') return;
-
-					inputter.value = useSettings.get('starred_friend');
-					inputter.dispatchEvent(new Event('change'));
-				}}>${tl(trans.starred_friend.name)}</button>
-                        `;
-
-				tippy(btn, {
-					content: tl(trans.starred_friend.name),
-				});
-
-				return btn;
-			}}
-			        </div>
-			    </div>
-			    ${setting({ id: 'collage_title' })}
-			    ${setting({ id: 'collage_grid_gap' })}
-			    ${setting({ id: 'collage_centered' })}
-			    ${setting({ id: 'collage_grid_text' })}
-			    ${setting({ id: 'collage_grid_plays' })}
-			</div>
-		`,
-	);
-	let collage_settings = setting_group.querySelectorAll(':scope > .setting');
+	setTimeout(() => {
+		width.current.focus();
+	}, 0);
 
 	function init_collage(bypass = false) {
 		try {
@@ -257,11 +286,9 @@ export function collage({ host, sidebar } = {}) {
 
 		console.error(e);
 
-		type.current.disabled = false;
-		timeframe.current.disabled = false;
-		collage_settings.forEach((option) => {
-			option.setAttribute('disabled', false);
-		});
+		downloader.current.disabled = true;
+		group1.current.disabled = false;
+		group2.current.disabled = false;
 		submit.current.loading = false;
 	}
 
@@ -299,8 +326,12 @@ export function collage({ host, sidebar } = {}) {
 			return;
 		}
 
-		let per_page = 50; // decided by last.fm
-		let pages = Math.ceil(
+		load_profile_cache_externally(user.current.value).then((cache) => {
+			page.avatar = cache.avatar || '';
+		});
+
+		const per_page = 50; // decided by last.fm
+		const pages = Math.ceil(
 			(width.current.value * height.current.value) / per_page,
 		);
 
@@ -328,11 +359,9 @@ export function collage({ host, sidebar } = {}) {
 			return;
 		}
 
-		type.current.disabled = true;
-		timeframe.current.disabled = true;
-		collage_settings.forEach((option) => {
-			option.setAttribute('disabled', true);
-		});
+		downloader.current.disabled = true;
+		group1.current.disabled = true;
+		group2.current.disabled = true;
 		submit.current.loading = true;
 
 		page.state.collage = [];
@@ -378,7 +407,7 @@ export function collage({ host, sidebar } = {}) {
 						item.name = track
 							.querySelector('.chartlist-name a')
 							.textContent.trim();
-						if (type.value != 'artists') {
+						if (type.current.value != 'artists') {
 							item.sister = track
 								.querySelector('.chartlist-artist a')
 								.textContent.trim();
@@ -428,11 +457,9 @@ export function collage({ host, sidebar } = {}) {
 					</LoadingData>,
 				);
 
-				type.current.disabled = false;
-				timeframe.current.disabled = false;
-				collage_settings.forEach((option) => {
-					option.setAttribute('disabled', false);
-				});
+				downloader.current.disabled = true;
+				group1.current.disabled = false;
+				group2.current.disabled = false;
 				submit.current.loading = false;
 
 				return;
@@ -599,6 +626,7 @@ export function collage({ host, sidebar } = {}) {
                     ${grid}
                 </div>
             `;
+
 			body.current.replaceChildren(
 				<>
 					<LoadingData>{tl(trans.waiting_for_images)}</LoadingData>
@@ -673,11 +701,11 @@ export function collage({ host, sidebar } = {}) {
 			}).then((canvas) => {
 				canvas.toBlob((blob) => {
 					try {
-						const blob_url = URL.createObjectURL(blob);
+						blob_url = URL.createObjectURL(blob);
 
 						const date = new Date();
 
-						const filename = tl(trans.chart_template_filename, {
+						filename = tl(trans.chart_template_filename, {
 							timeframe: timeframe_text(timeframe.current.value),
 							user: page.name,
 							type: tl(trans[type.current.value]),
@@ -687,21 +715,13 @@ export function collage({ host, sidebar } = {}) {
 							date: `${date.getFullYear()}-${
 								pad2(date.getMonth() + 1)
 							}-${pad2(date.getDate())}`,
-						});
+						}) as string;
 
 						body.current.replaceChildren(
 							<div class='collage-canvas'>
+								{collage_dom}
 								{canvas}
 								<div class='collage-canvas-actions'>
-									<Button
-										primary
-										onClick={() => {
-											download(blob_url, filename);
-										}}
-									>
-										<Icon name={icons.download} />
-										{tl(trans.download)}
-									</Button>
 									<Button
 										onClick={() => {
 											open(blob_url);
@@ -717,16 +737,18 @@ export function collage({ host, sidebar } = {}) {
 						collage_error(e);
 					}
 
-					type.current.disabled = false;
-					timeframe.current.disabled = false;
-					collage_settings.forEach((option) => {
-						option.setAttribute('disabled', false);
-					});
+					downloader.current.disabled = false;
+					group1.current.disabled = false;
+					group2.current.disabled = false;
 					submit.current.loading = false;
 				}, 'image/png');
 			});
 		} catch (e) {
 			collage_error(e);
 		}
+	}
+
+	function download_collage() {
+		download(blob_url, filename);
 	}
 }

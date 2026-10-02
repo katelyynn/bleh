@@ -22,12 +22,13 @@ import { SettingList } from '@/components/settings/provider/list.tsx';
 import {
 	page_loading,
 	render_setting_page,
-} from '@/pages/bleh_settings/bleh_settings.js';
+} from '@/pages/bleh_settings/bleh_settings.tsx';
 import { markdown } from '@/components/markdown/markdown.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { count_bar } from '@/components/track/bar.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
+import { ShoutAction } from '@/components/shout/action.tsx';
 
 export function interface_page() {
 	if (!page.state.music_links) {
@@ -43,6 +44,7 @@ export function interface_page() {
 	const bar_preview = createRef();
 	const shout_preview = createRef();
 
+	useSettings.on('theme', render_track_preview);
 	useSettings.on('track_album_name_location', render_track_preview);
 	useSettings.on('track_layout', render_track_preview);
 	useSettings.on('expand_tracks', render_track_preview);
@@ -50,6 +52,7 @@ export function interface_page() {
 	useSettings.on('gendered_tags', render_tag_preview);
 
 	useSettings.on('colourful_counts', render_bar_preview);
+	useSettings.on('theme', render_bar_preview); // nier
 	useSettings.on('count_bar_style', render_bar_preview);
 
 	useSettings.on('shout_markdown', render_shout_preview);
@@ -64,7 +67,10 @@ export function interface_page() {
 		const avi = avatar(auth.avatar, 'avatar170s');
 
 		track_preview.current.replaceChildren(
-			<table class='chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more'>
+			<table
+				class='chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more'
+				data-theme={useSettings.get('theme')}
+			>
 				<tbody>
 					<TrackPreview
 						playing
@@ -99,7 +105,8 @@ export function interface_page() {
 	}
 
 	function render_bar_preview() {
-		const colourful = useSettings.get('colourful_counts') as boolean;
+		const colourful = useSettings.get('colourful_counts') as boolean &&
+			useSettings.get('theme') != 'nier';
 		const v2 = useSettings.get('count_bar_style') == 'minimal';
 
 		const max = 20_000;
@@ -135,28 +142,6 @@ export function interface_page() {
 	page.structure.main!.replaceChildren(
 		<>
 			<section class='bleh--panel'>
-				<PanelHead icon={icons.recent}>
-					{tl(trans.recents)}
-				</PanelHead>
-				<div class='inner-preview pad' ref={track_preview} />
-				<SettingGroup>
-					<SettingRadio bind='track_layout' />
-					<SettingRadio bind='expand_tracks' />
-					<SettingRadio bind='track_album_name_location' />
-				</SettingGroup>
-			</section>
-			<section class='bleh--panel'>
-				<PanelHead icon={icons.play}>
-					{tl(trans.scrobbles)}
-				</PanelHead>
-				<div class='inner-preview pad' ref={bar_preview} />
-				<SettingGroup>
-					<SettingSwitch bind='colourful_counts' />
-					<SettingRadio bind='count_bar_axis' />
-					<SettingRadio bind='count_bar_style' />
-				</SettingGroup>
-			</section>
-			<section class='bleh--panel'>
 				<PanelHead icon={icons.album}>
 					{tl(trans.overview)}
 				</PanelHead>
@@ -169,6 +154,39 @@ export function interface_page() {
 				<SettingGroup>
 					<SettingRadio bind='default_avatar_action' />
 					<SettingSwitch bind='simulate_scroll' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.tracks}>
+					{tl(trans.tracks)}
+				</PanelHead>
+				<div class='inner-preview pad' ref={track_preview} />
+				<SettingGroup>
+					<SettingRadio bind='track_layout' />
+					<SettingRadio bind='expand_tracks' />
+					<SettingRadio bind='track_album_name_location' />
+				</SettingGroup>
+				<CardTip>
+					{tl(trans.related_setting, {
+						v: (
+							<a
+								href={`${root}bleh/visual?setting=change_my_colour_when`}
+							>
+								{tl(trans.change_my_colour_when.name)}
+							</a>
+						),
+					})}
+				</CardTip>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.play}>
+					{tl(trans.scrobbles)}
+				</PanelHead>
+				<div class='inner-preview pad' ref={bar_preview} />
+				<SettingGroup>
+					<SettingSwitch bind='colourful_counts' />
+					<SettingRadio bind='count_bar_axis' />
+					<SettingRadio bind='count_bar_style' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
@@ -269,6 +287,7 @@ function TrackPreview({
 			data-has-bar='false'
 			data-show-album-text={String(show_album_text)}
 			data-album-name-location={album_name_location}
+			data-theme={useSettings.get('theme')}
 		>
 			<td class='chartlist-image'>
 				<a class='cover-art'>
@@ -313,7 +332,7 @@ function BarPreview({
 	const val = createRef();
 
 	const elem = (
-		<div class='chartlist-count-bar'>
+		<div class={['chartlist-count-bar', 'colourful']}>
 			<a class='chartlist-count-bar-link'>
 				<span
 					class='chartlist-count-bar-slug'
@@ -322,7 +341,10 @@ function BarPreview({
 					data-stat-value={value}
 					style={{ width: `${(value / max) * 100}%` }}
 				/>
-				<span class='chartlist-count-bar-value' ref={val}>
+				<span
+					class={['chartlist-count-bar-value', 'colourful']}
+					ref={val}
+				>
 					{value.toLocaleString(lang)}
 				</span>
 			</a>
@@ -372,9 +394,10 @@ function ShoutPreview({
 	children,
 }: ShoutPreviewProps) {
 	const use_md = useSettings.get('shout_markdown');
+	const shout = createRef();
 
 	return (
-		<div class='shout icon-mask' data-kate-processed='true'>
+		<div class='shout icon-mask' data-kate-processed='true' ref={shout}>
 			<div class='shout-top'>
 				<div class='shout-basics'>
 					<h3 class='shout-user'>
@@ -384,9 +407,11 @@ function ShoutPreview({
 					</h3>
 				</div>
 			</div>
-			<span class='avatar shout-user-avatar'>
-				<img src={avatar(image, 'avatar170s')} loading='lazy' />
-			</span>
+			<ShoutAction name={name} wrap={shout.current} interact={false}>
+				<span class='avatar shout-user-avatar'>
+					<img src={avatar(image, 'avatar170s')} loading='lazy' />
+				</span>
+			</ShoutAction>
 			<div class='shout-body'>
 				{use_md ? markdown(String(children)) : children}
 			</div>

@@ -12,12 +12,9 @@ import {
 	root,
 } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { settings } from '@/build/config';
-import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
-import { SettingRange } from '@/components/settings/provider/range.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { SettingOptions } from '@/components/settings/provider/options.tsx';
@@ -87,6 +84,7 @@ export function playback() {
 						<a class='header-new-crumb'>
 							A$AP Rocky
 						</a>
+						{', '}
 						{format && (
 							<>
 								<a class='header-new-crumb'>
@@ -131,7 +129,7 @@ export function playback() {
 					<SettingInfo name={tl(trans.current_version)}>
 						<p>{lotus_version_text}</p>
 						<SeeMore
-							className='update-check'
+							icon={icons.update}
 							iconPlacement='left'
 							onClick={() => lotus(true)}
 						>
@@ -215,7 +213,7 @@ export function playback() {
 							{oracle_tracks.version}
 						</p>
 						<SeeMore
-							className='update-check'
+							icon={icons.update}
 							iconPlacement='left'
 							onClick={() => oracle_data(true)}
 						>

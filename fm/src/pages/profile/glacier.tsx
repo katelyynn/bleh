@@ -27,10 +27,12 @@ import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
+import { convert_to_select } from '@/components/select/select.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
-	const date_items = page.structure.side.querySelectorAll(
+	const date_items = page.structure.side!.querySelectorAll(
 		':scope > :is(div, figure)',
 	);
 
@@ -50,11 +52,11 @@ export function bleh_user_library() {
 	});
 
 	if (date_items.length > 0) {
-		if (!page.mobile) page.structure.side.appendChild(date_panel);
+		if (!page.mobile) page.structure.side!.appendChild(date_panel);
 		else {
-			page.structure.main.insertBefore(
+			page.structure.main!.insertBefore(
 				date_panel,
-				page.structure.main.firstChild,
+				page.structure.main!.firstChild,
 			);
 		}
 	}
@@ -62,8 +64,8 @@ export function bleh_user_library() {
 	page.structure.glacier.date_panel = date_panel;
 
 	// tabs
-	const search = page.structure.content_top.querySelector('.library-search');
-	const nav = page.structure.content_top.querySelector(
+	const search = page.structure.content_top!.querySelector('.library-search');
+	const nav = page.structure.content_top!.querySelector(
 		'.library-controls nav',
 	);
 	const tabs = nav.querySelector('.navlist-items');
@@ -364,6 +366,16 @@ function bleh_glacier_library_date() {
 
 	from_group.remove();
 	to_group.remove();
+
+	const cancel = picker_content.querySelector('.btn-cancel');
+	if (cancel) {
+		cancel.classList.remove('btn-cancel');
+		cancel.classList.add('see-more', 'left-icon');
+		cancel.insertBefore(
+			<Icon name={icons.x} />,
+			cancel.firstChild,
+		);
+	}
 }
 
 // can update at any time!!
@@ -1714,11 +1726,7 @@ function bleh_glacier_library_focused() {
 			return;
 		}
 
-		select_btn.classList.add(
-			'select-button',
-			'link-select',
-			'blend-v2-btn',
-		);
+		convert_to_select(select_btn);
 		select_btn.classList.remove('dropdown-menu-list-button');
 
 		header.after(html.node`

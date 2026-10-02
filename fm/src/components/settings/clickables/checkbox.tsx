@@ -5,9 +5,11 @@
  */
 
 import { createRef } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
 
 interface CheckboxProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	name?: string;
 	className?: string;
 	interact?: boolean;
 	checked?: boolean;
@@ -16,6 +18,7 @@ interface CheckboxProps {
 
 export function Checkbox({
 	ref,
+	name,
 	className,
 	interact = true,
 	checked = false,
@@ -25,8 +28,18 @@ export function Checkbox({
 	const elem = createRef();
 
 	function update() {
+		const theme = useSettings.get('theme') as string;
+
 		checkbox.current.checked = checked;
 		elem.current.setAttribute('aria-checked', checked);
+		elem.current.setAttribute(
+			'data-theme',
+			theme,
+		);
+		wrap.setAttribute(
+			'data-theme',
+			theme,
+		);
 	}
 
 	const wrap = (
@@ -38,7 +51,7 @@ export function Checkbox({
 			]}
 			ref={ref}
 		>
-			<input type='checkbox' ref={checkbox} />
+			<input type='checkbox' name={name} ref={checkbox} />
 			<button
 				type='button'
 				class={[
@@ -73,6 +86,8 @@ export function Checkbox({
 			update();
 		},
 	});
+
+	useSettings.on('theme', update);
 
 	return wrap;
 }

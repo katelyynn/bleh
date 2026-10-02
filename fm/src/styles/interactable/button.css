@@ -77,7 +77,8 @@ select,
 		var(--button-padding,
 		var(--btn-top) var(--btn-right) var(--btn-bottom) var(--btn-left)))
 		!important;
-	min-height: unset !important;
+	margin: unset;
+	min-height: var(--button-height) !important;
 	min-width: unset !important;
 	line-height: var(--line-height) !important;
 	text-transform: unset !important;
@@ -85,7 +86,7 @@ select,
 	font-family: var(--font) !important;
 	font-size: var(--font-size) !important;
 	font-weight: var(--force-font-weight, var(--font-weight)) !important;
-	text-shadow: none;
+	text-shadow: var(--button-text-shadow, none);
 	border-radius: var(--radius, var(--button-radius)) !important;
 	box-shadow: var(--shadow) !important;
 	border: unset !important;
@@ -133,6 +134,14 @@ select,
 		color: inherit;
 	}
 
+	--mask2: var(--interact-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+
 	&[aria-expanded="true"]:not(.delete-icon, .header-expand-button, .glacier-library-button),
 	&:is(.gallery-next, .gallery-previous):hover .arrow,
 	&:hover {
@@ -140,7 +149,7 @@ select,
 		transition-property: padding, transform, filter !important;
 		transition-duration: var(--trans) !important;
 		transition-timing-function: var(--trans-function) !important;
-		--transition-property: opacity, left, transform;
+		--transition-property: rotate, opacity, left, transform;
 		/*box-shadow: var(--shadow-hov) !important;*/
 
 		background-repeat: repeat-x !important;
@@ -150,7 +159,7 @@ select,
 	&:is(.gallery-next, .gallery-previous):active .arrow,
 	&:active {
 		background: var(--bg-atv) !important;
-		transform: scale(0.98);
+		transform: var(--button-click, scale(0.98));
 
 		background-repeat: repeat-x !important;
 		background-position: unset !important;
@@ -173,6 +182,10 @@ select,
 		&:not(.dropdown-menu-clickable-item) {
 			--icon-size: 16px;
 		}
+	}
+
+	&:after {
+		display: none;
 	}
 
 	/*     LOADING     */
@@ -212,10 +225,12 @@ select,
 		}
 
 		--shadow: var(--primary-shadow),
-		0 3px 12px oklch(var(--h4) / 32%),
+		var(--primary-glow),
 		var(--interactable-outer);
 		--shadow-hov: var(--interactable-outer),
 		var(--interactable-active-outer);
+
+		text-shadow: var(--button-text-shadow-primary, none);
 
 		[data-bleh--season="christmas"] & {
 			--hue-seasonal: 130;
@@ -233,7 +248,7 @@ select,
 			color: var(--mask-colour);
 		}
 
-		&.select-button:not(.link-select):after {
+		&.select-button:not(.link-select):before {
 			color: inherit;
 			opacity: 0.6;
 		}
@@ -273,8 +288,9 @@ select,
 		--btn-right: var(--button-sides) !important;
 		--font-size: 0 !important;
 		--mask-colour: currentColor !important;
-		min-width: var(--button-height) !important;
-		width: var(--button-height) !important;
+		--button-width: var(--button-height);
+		min-width: var(--button-width) !important;
+		width: var(--button-width) !important;
 		height: var(--button-height) !important;
 		position: relative;
 		--padding: 0 !important;
@@ -283,9 +299,13 @@ select,
 		gap: 0;
 
 		&:before {
-			--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
+			--left: calc((var(--button-width) - var(--icon-size)) / 2) !important;
 			--right: none !important;
 		}
+	}
+
+	&[data-hidden="true"] {
+		display: none;
 	}
 }
 
@@ -345,7 +365,7 @@ select,
 	flex-wrap: wrap;
 
 	& > .bleh-icon {
-		--icon-size: 14px;
+		--icon-size: 12px;
 		--icon-colour: oklch(var(--c3));
 	}
 

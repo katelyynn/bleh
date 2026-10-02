@@ -8,7 +8,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { DateTime } from 'luxon';
 import { root } from '@/build/page.ts';
-import { redirect } from '@/components/music/music.js';
+import { redirect } from '@/components/music/music.tsx';
 import { romanise, sanitise } from '@/build/tools.ts';
 import {
 	correct_artist,

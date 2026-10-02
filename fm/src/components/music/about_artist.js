@@ -35,7 +35,7 @@ export function bleh_about_artist() {
 		about_artist_container,
 		html`
 			<div class="about-artist-panel">
-			    <div class="about-artist-avatar">
+				<div class="about-artist-avatar">
 			        ${image
 				? html.node`
                 <img src=${avatar(image.src, 'avatar300s')}>
@@ -44,16 +44,17 @@ export function bleh_about_artist() {
                 <img class="missing-artist">
                 `}
 			    </div>
-			    <div class="about-artist-info">
+				<div class="about-artist-info">
 			        <div class="sub-text">${tl(trans.about)}</div>
 			        <h1 class="about-artist-name">${correct_artist(
 				page.sister,
 			)}</h1>
 			        ${listeners} ${tags} ${wiki}
 			    </div>
-			    <a class="link-block-cover-link" href="${root}music/${redirect()}${sanitise(
-				page.sister,
-			)}" />
+				<a class="link-block-cover-link"
+					href="${root}music/${redirect()}${sanitise(
+						page.sister,
+					)}" />
 			</div>
 			${page.sister_others.length > 0
 				? html.node`

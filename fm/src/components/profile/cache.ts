@@ -9,7 +9,7 @@ import { profile_cache } from '@/types/profile';
 export function delete_cache(cache: profile_cache) {
 	if (typeof cache != 'object') return;
 
-	delete cache.avatar;
+	//delete cache.avatar;
 	delete cache.banner;
 	delete cache.banner_orig;
 	delete cache.hue;

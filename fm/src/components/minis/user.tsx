@@ -7,7 +7,7 @@
 import { WithChildren } from '@/types/generic.tsx';
 import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
 import { profile_cache } from '@/types/profile.ts';
-import { page } from '@/build/page.ts';
+import { auth, page } from '@/build/page.ts';
 import { createRef } from 'jsx-dom';
 
 export function CompareUsers({
@@ -39,35 +39,47 @@ export function CompareSelection({
 }
 
 interface CompareUserProps {
-	name: string;
+	name?: string;
 	focus?: boolean;
+	avatarOnly?: boolean;
 	replacePage?: boolean;
 }
 
 export function CompareUser({
 	name,
 	focus,
+	avatarOnly = false,
 	replacePage = false,
 }: CompareUserProps) {
 	const elem = (
-		<div class={['compare-user', focus && 'focus']}>
+		<div
+			class={[
+				'compare-user',
+				focus && 'focus',
+				avatarOnly && 'avatar-only',
+			]}
+		>
 			<div class={['avatar', 'loading']} />
 			<strong class='compare-user-name'>{name}</strong>
 		</div>
 	);
 
-	load_profile_cache_externally().then((cache: profile_cache) => {
+	if (!name) return elem;
+
+	load_profile_cache_externally(name).then((cache: profile_cache) => {
+		const avatar = name == auth.name ? auth.avatar! : cache.avatar;
+
 		elem.replaceChildren(
 			<>
 				<div class={['avatar']}>
-					<img src={cache.avatar} />
+					<img src={avatar} />
 				</div>
 				<strong class='compare-user-name'>{name}</strong>
 			</>,
 		);
 
 		if (replacePage) {
-			page.avatar = cache.avatar || '';
+			page.avatar = avatar || '';
 			page.name = name;
 		}
 	});

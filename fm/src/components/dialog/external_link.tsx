@@ -4,13 +4,18 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { dialog, dialog_rm } from '@/components/dialog/dialog.tsx';
+import { dialog, dialog_rm, ModalFooter } from '@/components/dialog/dialog.tsx';
 import { log } from '@/build/log.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { toggle } from '@/components/settings/toggle.js';
 import { settings } from '@/build/config.ts';
 import { useSettings } from '@/page.ts';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { createRef } from 'jsx-dom';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Button } from '@/components/button/button.tsx';
 
 export function external_url_prompt(url: string, dangerous = false) {
 	log(
@@ -23,7 +28,7 @@ export function external_url_prompt(url: string, dangerous = false) {
 	const hostname = link.hostname;
 	const path = link.pathname + link.search + link.hash;
 
-	let trust_site: HTMLElement;
+	const trust_site = createRef();
 
 	dialog({
 		id: 'external_url',
@@ -63,30 +68,28 @@ export function external_url_prompt(url: string, dangerous = false) {
 							)
 							: ''}
 					</div>
-					{hostname != ''
-						? (
-							trust_site = toggle({
-								type: 'checkbox',
-								title: tl(trans.leaving_site_checkbox, {
-									v: hostname,
-								}),
-							})
-						)
-						: ''}
+					{hostname != '' && (
+						<SettingCheckbox
+							name={tl(trans.leaving_site_checkbox, {
+								v: hostname,
+							})}
+							standalone
+							ref={trust_site}
+						/>
+					)}
 				</div>
-				<div class='modal-footer'>
-					<button
-						type='button'
-						class={['see-more', 'cancel', 'left-icon']}
+				<ModalFooter>
+					<SeeMore
+						iconPlacement='left'
+						icon={icons.x}
 						onClick={() => dialog_rm({ id: 'external_url' })}
 					>
-						{tl(trans.back)}
-					</button>
-					<button
-						type='button'
-						class={['btn', 'primary', 'continue']}
+						{tl(trans.cancel)}
+					</SeeMore>
+					<Button
+						primary
 						onClick={() => {
-							if (trust_site?.checked()) {
+							if (trust_site.current.value) {
 								useSettings.append('trusted_sites', hostname);
 								log(
 									`added ${hostname} to trusted sites`,
@@ -99,8 +102,9 @@ export function external_url_prompt(url: string, dangerous = false) {
 						}}
 					>
 						{!dangerous ? tl(trans.visit) : tl(trans.open)}
-					</button>
-				</div>
+						<Icon name={icons.external} />
+					</Button>
+				</ModalFooter>
 			</>
 		),
 	});

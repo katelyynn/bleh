@@ -6,19 +6,10 @@
 
 import { settings } from '@/build/config';
 import { album_track_corrections, artist_corrections } from '@/build/music';
-import {
-	auth,
-	oracle_albums,
-	oracle_artists,
-	oracle_tracks,
-	page,
-	root,
-} from '@/build/page';
-import { copy, set_storage, time } from '@/build/tools';
+import { auth, page, root } from '@/build/page';
+import { copy, set_storage } from '@/build/tools';
 import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import { markdown } from '@/components/markdown/markdown';
-import { notify } from '@/components/dialog/notify';
 import { load_settings } from '../../config.ts';
 import { version } from '@/main';
 import { update_page, useSettings } from '@/page';
@@ -32,18 +23,12 @@ import {
 import { share } from '@/components/dialog/share';
 import tippy from 'tippy.js';
 import {
-	checkup_friend_cache,
-	load_profile_cache_externally,
-} from '../profile/profile';
-import {
 	select,
 	select_prepare_convert_from_setting,
-	select_prepare_list,
 } from '@/components/settings/select';
-import { manage_oracle_data, oracle_data } from '@/components/music/oracle';
 import { render_activity } from '@/components/shared/activity';
 import { DateTime } from 'luxon';
-import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
+import { sponsor, sponsor_manage } from '@/components/sponsor';
 import { version as florence_version } from '@tealmiku/florence';
 import { queue_popup } from '@/components/dialog/popup';
 import { visual } from '@/pages/bleh_settings/visual';
@@ -51,37 +36,38 @@ import { general } from '@/pages/bleh_settings/general.tsx';
 import { seasonal } from './seasonal';
 import { settings_search } from './search.js';
 import { icon, icons } from '@/components/shared/icon.js';
-import { chartlist_bar } from '@/components/music/bar.js';
 import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
-import { lotus_modal } from '@/components/music/lotus.js';
 import { new_indicator } from '@/components/shared/indicator.js';
-import {
-	interface_page,
-	rabbit_keybinds,
-} from '@/pages/bleh_settings/interface.tsx';
+import { interface_page } from '@/pages/bleh_settings/interface.tsx';
 import { playback } from '@/pages/bleh_settings/playback.tsx';
 import { profile } from '@/pages/bleh_settings/profile.tsx';
 import { accessibility } from '@/pages/bleh_settings/accessibility.tsx';
+import { Cta } from '@/components/cta/cta.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { SideAction, SideActions } from '@/components/button/side.tsx';
+import { CardTip } from '@/components/text/tip.tsx';
+import { LoadingData } from '@/components/loading/loading.tsx';
+import { flags_page } from '@/pages/bleh_settings/flags.tsx';
 
 export function bleh_settings() {
-	page.name = auth.name;
+	page.name = auth.name!;
 	page.subpage = '';
 
 	update_page();
 
 	// remove error stuff cus we control this page
-	page.structure.row.removeChild(page.structure.row.firstElementChild);
-	page.structure.row.removeChild(page.structure.row.firstElementChild);
+	page.structure.row!.firstElementChild?.remove();
+	page.structure.row!.firstElementChild?.remove();
 
-	let params = new URLSearchParams(document.location.search);
+	const params = new URLSearchParams(document.location.search);
 	page.requested.tab = params.get('tab');
 	page.requested.setting = params.get('setting');
 
-	let path = window.location.pathname.split('/');
+	const path = window.location.pathname.split('/');
 	let tab = path[path.length - 1];
 
-	if (tab == 'bleh') tab = null;
+	if (tab == 'bleh') tab = '';
 
 	if (page.requested.tab && !tab) tab = page.requested.tab;
 
@@ -139,25 +125,9 @@ export function bleh_settings() {
 				'rabbit',
 			],
 		},
-		profile: {
-			name: tl(trans.profile),
-			icon: 'user',
-			settings: [
-				'friends',
-				'starred_friend',
-				'navigation_items',
-				'navigation_language',
-				'profile_header_own',
-				'profile_header_others',
-				'profile_avi_background',
-				'bio_markdown',
-				'show_your_progress',
-				'activities',
-			],
-		},
 		playback: {
-			name: tl(trans.playback),
-			icon: 'album',
+			name: tl(trans.music_and_data),
+			icon: 'track',
 			settings: [
 				'corrections',
 				'prefer_no_redirect',
@@ -170,6 +140,22 @@ export function bleh_settings() {
 				'glacier_library_graphs',
 				'oracle_beta',
 				'tracklist_source',
+			],
+		},
+		profile: {
+			name: tl(trans.profiles),
+			icon: 'users',
+			settings: [
+				'friends',
+				'starred_friend',
+				'navigation_items',
+				'navigation_language',
+				'profile_header_own',
+				'profile_header_others',
+				'profile_avi_background',
+				'bio_markdown',
+				'show_your_progress',
+				'activities',
 			],
 		},
 		seasonal: {
@@ -208,99 +194,114 @@ export function bleh_settings() {
 		},
 		sku: {
 			name: tl(trans.flags),
+			icon: 'feature_flag',
 			password: settings.hu_tao,
 		},
 	};
 
 	// go wild
-	let nav = html.node`
-        <div class="toolbar">
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation bleh-settings-navigation">
-                <ul class="navlist-items">
-                    ${
-		Object.entries(tabs).map(([id, tab]) => {
-			if (tab.hide_if) return html.node``;
+	const nav = (
+		<div class='toolbar'>
+			<nav
+				class={[
+					'navlist',
+					'secondary-nav',
+					'navlist--more',
+					'redesigned-navigation',
+					'bleh-settings-navigation',
+				]}
+			>
+				<ul class='navlist-items'>
+					{Object.entries(tabs).map(([id, tab]) => {
+						if (tab.hide_if) return;
 
-			if (tab.type && tab.type == 'fill') {
-				return html.node`
-                                <div class="fill" />
-                            `;
-			}
+						if (tab.type && tab.type == 'fill') {
+							return <div class='fill' />;
+						}
 
-			return html.node`
-                            <li class="navlist-item secondary-nav-item">
-                                <a class="secondary-nav-item-link bleh--nav" data-bleh-page=${id} data-type=${tab.icon} data-password=${tab.password} data-should-hide=${tab.hide} data-hide=${
-				tab != id
-			} onclick=${() => change_settings_page(id)}>
-                                    ${tab.label ? tab.label : tab.name}
-                                </a>
-                            </li>
-                        `;
-		})
-	}
-                </ul>
-            </nav>
-        </div>
-    `;
-
-	render(
-		page.structure.side,
-		html`
-			${settings_search(tabs)}
-			<div class="cta first priority sponsor colourful">
-			    ${auth.sponsor
-				? html.node`
-                <strong>${tl(trans.you_are_a_sponsor)}</strong>
-                <a class="see-more" onclick=${() => sponsor_manage()}>${
-					tl(trans.manage_sponsor)
-				}</a>
-            `
-				: html.node`
-                <strong>${tl(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick=${() => sponsor()}>${
-					tl(trans.sponsor)
-				}</a>
-            `}
-			</div>
-			<section class="side-actions">
-			    <button class="btn side-action icon-mask" data-type="import" onclick=${() =>
-				import_settings()}>
-			        ${tl(trans.import)}
-			    </button>
-			    <button class="btn side-action icon-mask" data-type="export" onclick=${() =>
-				export_settings()}>
-			        ${tl(trans.export)}
-			    </button>
-			    <button class="btn side-action icon-mask" data-type="reset" onclick=${() =>
-				reset_settings()}>
-			        ${tl(trans.reset)}
-			    </button>
-			</section>
-			${ff('skip_to_setting')
-				? html.node`
-            <div class="bleh--panel">
-                <h4>${tl(trans.skip_to)}</h4>
-                <div class="skip-to-list"></div>
-            </div>
-        `
-				: ''}
-			<div class="bleh--panel">
-			    <p class="card-tip">
-			        ${version.brand} ${version.build} ‘${version.sku}’
-			    </p>
-			    <p class="card-tip">
-			        florence ${florence_version}
-			    </p>
-			    <p class="card-tip">
-			        ${DateTime.fromISO(version.built_on).toLocaleString(
-				DateTime.DATETIME_MED,
-			)}
-			    </p>
-			</div>
-		`,
+						return (
+							<li class={['navlist-item', 'secondary-nav-item']}>
+								<a
+									class={[
+										'secondary-nav-item-link',
+										'bleh--nav',
+									]}
+									data-bleh-page={id}
+									data-type={tab.icon}
+									data-password={tab.password}
+									data-should-hide={tab.hide}
+									data-hide={tab != id}
+									onClick={() =>
+										change_settings_page(id)}
+								>
+									{tab.label ? tab.label : tab.name}
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+			</nav>
+		</div>
 	);
 
-	page.structure.row.insertBefore(nav, page.structure.content);
+	function update() {
+		nav.setAttribute('data-theme', useSettings.get('theme') as string);
+	}
+
+	update();
+	useSettings.on('theme', update);
+
+	page.structure.side!.replaceChildren(
+		<>
+			{settings_search(tabs)}
+			<Cta
+				icon={icons.sponsor}
+				label={auth.sponsor
+					? tl(trans.you_are_a_sponsor)
+					: tl(trans.news_sponsor_cta)}
+				colourful
+				className='sponsor'
+				first
+			>
+				{auth.sponsor
+					? (
+						<SeeMore onClick={sponsor_manage} external>
+							{tl(trans.manage_sponsor)}
+						</SeeMore>
+					)
+					: (
+						<SeeMore onClick={sponsor} external>
+							{tl(trans.sponsor)}
+						</SeeMore>
+					)}
+			</Cta>
+			<SideActions>
+				<SideAction type='import' onClick={import_settings}>
+					{tl(trans.import)}
+				</SideAction>
+				<SideAction type='export' onClick={export_settings}>
+					{tl(trans.export)}
+				</SideAction>
+				<SideAction type='reset' onClick={reset_settings}>
+					{tl(trans.reset)}
+				</SideAction>
+			</SideActions>
+			<section>
+				<CardTip>
+					{version.brand} {version.build} ‘{version.sku}’ - florence
+					{' '}
+					{florence_version}
+				</CardTip>
+				<CardTip>
+					{DateTime.fromISO(version.built_on).toLocaleString(
+						DateTime.DATETIME_MED,
+					)}
+				</CardTip>
+			</section>
+		</>,
+	);
+
+	page.structure.row!.insertBefore(nav, page.structure.content!);
 
 	if (!tab) change_settings_page('general');
 	else change_settings_page(tab);
@@ -320,19 +321,15 @@ export function bleh_settings() {
 }
 
 export function page_loading() {
-	render(
-		page.structure.main,
-		html`
-			<div class="bleh--panel">
-				<div class="loading-data-container">
-					<div class="loading-data-text">${tl(trans.loading)}</div>
-				</div>
-			</div>
-		`,
+	page.structure.main!.replaceChildren(
+		<section>
+			<LoadingData>{tl(trans.loading)}</LoadingData>
+		</section>,
 	);
 }
 
 export function page_error(e) {
+	console.error(e);
 	render(
 		page.structure.main,
 		html`
@@ -365,6 +362,8 @@ export async function render_setting_page(page_id) {
 			interface_page();
 		} else if (page_id == 'accessibility') {
 			accessibility();
+		} else if (page_id == 'sku') {
+			flags_page();
 		}
 	} catch (e) {
 		page_error(e);
@@ -429,109 +428,6 @@ export async function render_setting_page(page_id) {
 				        Forget which popups have been seen
 				    </button>
 				</section>
-			`,
-		);
-	} else if (page_id == 'sku') {
-		register_skip_to([]);
-
-		const grouped = Object.entries(version.feature_flags)
-			.sort((a, b) => b[1].date.localeCompare(a[1].date))
-			.reduce((groups, entry) => {
-				const date = entry[1].date;
-				let key = date.slice(0, 7);
-
-				if (key.startsWith('2099')) key = '2099';
-
-				if (!groups[key]) groups[key] = [];
-
-				groups[key].push(entry);
-
-				return groups;
-			}, {});
-
-		render(
-			page.structure.main,
-			html`
-				<div class="bleh--panel">
-				    <div class="panel-intro">
-				        <div class="sub-text">
-				            ${version.build}.${version.sku}
-				        </div>
-				        <h1>☆⌒(>w<)</h1>
-				    </div>
-				    <div class="sep" />
-				    <h4>${tl(trans.manage_feature_flags)}</h4>
-				    <div class="alert alert-danger">
-				        ${tl(trans.beware_notice)}
-				    </div>
-				        ${Object.entries(grouped).map(([month, flags]) => {
-					let label = new Date(`${month}-01`).toLocaleString(
-						undefined,
-						{
-							month: 'long',
-							year: 'numeric',
-						},
-					);
-					if (month.startsWith('2099')) label = tl(trans.general);
-
-					console.error(month, label, flags);
-
-					return html.node`
-                            <h4>${label}</h4>
-                            <div class="setting-group">
-                                ${
-						flags.map(([flag, details]) => {
-							let value = ff(flag);
-
-							let checkbox;
-							let state;
-
-							return html.node`
-                                        <div class="setting" data-type="toggle" onclick=${() => {
-								let current = checkbox.checked;
-
-								checkbox.checked = !current;
-								state.setAttribute('aria-checked', !current);
-
-								settings.feature_flags[flag] = !current;
-								document.body.setAttribute(
-									`data-ff--${flag}`,
-									(!current).toString(),
-								);
-								compile_settings();
-							}}>
-                                            <div class="heading">
-                                                <h5>${details.name}</h5>
-                                                ${
-								details.notice
-									? html.node`<p>${{
-										html: details.notice,
-									}}</p>`
-									: ''
-							}
-                                                <div class="info-row">
-                                                    <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag}</p>
-                                                </div>
-                                            </div>
-                                            <div class="toggle-wrap">
-                                                <input type="checkbox" ref=${(
-								el,
-							) => (checkbox =
-								el)} value=${value} checked=${value} />
-                                                <button class="btn toggle colourful" aria-checked=${value} ref=${(
-								el,
-							) => (state = el)}>
-                                                    <div class="dot" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    `;
-						})
-					}
-                            </div>
-                        `;
-				})}
-				</div>
 			`,
 		);
 	} else if (page_id == 'translate') {

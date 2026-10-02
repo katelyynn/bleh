@@ -171,3 +171,15 @@
 .md-url {
 	color: oklch(var(--l3-c));
 }
+
+.markdown-image-preview {
+	width: 350px;
+	height: 200px;
+	background: oklch(var(--b6));
+	border-radius: var(--radius-s);
+	overflow: hidden;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: var(--card-padding);
+}
