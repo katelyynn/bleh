@@ -77,6 +77,8 @@
 		line-height: var(--line-height) !important;
 		border-radius: unset !important;
 		transition: none !important;
+
+		--icon-size: 16px;
 	}
 
 	@media (max-width: 980px) {
