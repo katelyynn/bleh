@@ -37,6 +37,8 @@
 	--shadow: none;
 	position: relative;
 
+	--interact-mask: none !important;
+
 	&:after {
 		content: '';
 		position: absolute;
