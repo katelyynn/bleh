@@ -376,12 +376,12 @@
 			border-radius: inherit;
 
 			--mask2: var(--grid-mask, none);
-			mask-image: var(--mask2) !important;
-			-webkit-mask-image: var(--mask2) !important;
-			mask-repeat: repeat !important;
-			-webkit-mask-repeat: repeat !important;
-			mask-size: contain !important;
-			-webkit-mask-size: contain !important;
+			mask-image: var(--mask2);
+			-webkit-mask-image: var(--mask2);
+			mask-repeat: repeat;
+			-webkit-mask-repeat: repeat;
+			mask-size: contain;
+			-webkit-mask-size: contain;
 		}
 
 		&:before {

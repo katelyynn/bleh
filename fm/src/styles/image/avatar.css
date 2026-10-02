@@ -44,6 +44,14 @@ img {
 	display: block;
 	position: relative;
 
+	--mask2: var(--grid-mask, none);
+	mask-image: var(--mask2) !important;
+	-webkit-mask-image: var(--mask2) !important;
+	mask-repeat: repeat !important;
+	-webkit-mask-repeat: repeat !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+
 	&>img {
 		width: 100%;
 		height: 100%;
@@ -57,6 +65,14 @@ img {
 		pointer-events: none;
 		box-shadow: var(--avatar-inset);
 		border-radius: inherit;
+
+		--mask2: var(--grid-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
 	}
 }
 
@@ -82,14 +98,14 @@ img {
 	font-size: 0;
 	background-color: var(--missing-avatar-colour) !important;
 	--mask: var(--icon-16-user);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 }
 
 /* missing album */
@@ -100,14 +116,14 @@ img {
 	font-size: 0;
 	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-album);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 
 	&.error {
@@ -122,14 +138,14 @@ img {
 	font-size: 0;
 	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-artist);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }
 
@@ -141,14 +157,14 @@ img {
 	font-size: 0;
 	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-track);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }
 
@@ -158,14 +174,14 @@ img {
 	font-size: 0;
 	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-extension);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-32));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-32));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }
 
@@ -175,13 +191,13 @@ img {
 	font-size: 0;
 	background-color: var(--missing-avatar-colour);
 	--mask: var(--icon-16-playlist);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	mask-size: var(--mask-size, var(--cover-size-50));
-	-webkit-mask-size: var(--mask-size, var(--cover-size-50));
-	mask-repeat: no-repeat;
-	-webkit-mask-repeat: no-repeat;
-	mask-position: center;
-	-webkit-mask-position: center;
+	mask-image: var(--mask) !important;
+	-webkit-mask-image: var(--mask) !important;
+	mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	-webkit-mask-size: var(--mask-size, var(--cover-size-50)) !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	mask-position: center !important;
+	-webkit-mask-position: center !important;
 	aspect-ratio: 1 / 1;
 }

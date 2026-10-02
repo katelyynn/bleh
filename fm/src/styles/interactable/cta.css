@@ -16,13 +16,19 @@
 	flex-direction: column;
 	color: oklch(var(--c3));
 }
+
 .cta-link {
 	--show-icon: none;
+
+	&:after {
+		display: none;
+	}
 }
 
 .coloured-cta--add-event-icon {
 	--mask: var(--icon-16-calendar-add);
 }
+
 .coloured-cta--upload-image-icon {
 	--mask: var(--icon-16-gallery-vertical);
 }

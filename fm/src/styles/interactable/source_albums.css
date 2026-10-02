@@ -24,6 +24,8 @@
 
 	transform: none !important;
 
+	--interact-mask: none !important;
+
 	&:hover {
 		--hover-underline: underline oklch(var(--c3));
 	}
