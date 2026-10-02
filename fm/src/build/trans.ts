@@ -3941,7 +3941,7 @@ export const trans = {
 		// as in your musical taste % between you and someone else
 		// you are {percentage%} compatible (in taste) {list of artists}
 		en: 'You share {artists} in common.',
-		pt: 'Vocês  {artists} em comum.',
+		pt: 'Vocês tem {artists} em comum.',
 	},
 	you_are_a_value_match: {
 		// valentines easter egg
