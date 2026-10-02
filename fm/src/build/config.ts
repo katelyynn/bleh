@@ -578,6 +578,14 @@ export const settings_store: Record<string, setting_instance> = {
 		bubble: true,
 		incompatible: { seasonal: false },
 	},
+	seasonal_masks: {
+		default: true,
+		type: 'checkbox',
+		title: trans.seasonal_masks.name,
+		body: trans.seasonal_masks.body,
+		bubble: true,
+		incompatible: { seasonal: false },
+	},
 	profile_header_own: {
 		default: true,
 		type: 'checkbox',

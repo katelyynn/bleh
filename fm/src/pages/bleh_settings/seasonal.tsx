@@ -137,6 +137,7 @@ export function seasonal() {
 				</PanelHead>
 				<SettingGroup>
 					<SettingCheckbox bind='seasonal_overlays' />
+					<SettingCheckbox bind='seasonal_masks' />
 				</SettingGroup>
 			</section>
 		</>,

@@ -2413,6 +2413,14 @@ export const trans = {
 			en: 'Features image overlays like cobwebs and snow in certain seasons',
 		},
 	},
+	seasonal_masks: {
+		name: {
+			en: 'Change button and grid shapes',
+		},
+		body: {
+			en: 'Seasons can choose a custom look for buttons, menus, and grids',
+		},
+	},
 	seasonal_offset: {
 		en: 'Seasonal events are ran in your timezone, which we calculated as {offset}',
 		de: 'Saisonale Events werden in deiner Zeitzone ausgeführt, die wir als {offset} berechnet haben',
