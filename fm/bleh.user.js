@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0910
+// @version      2026.1002
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -127186,12 +127186,12 @@ var bleh = (() => {
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0910",
+    build: "2026.1002",
     sku: "socks",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
-    built_on: "2026-10-02T17:11:24.290Z"
+    built_on: "2026-10-02T17:12:51.723Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
