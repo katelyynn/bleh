@@ -27,6 +27,7 @@ interface SettingCheckboxProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	new_release?: boolean;
 }
 
 type SettingCheckboxElement = HTMLDivElement & {
@@ -46,6 +47,7 @@ export function SettingCheckbox({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	new_release,
 }: SettingCheckboxProps) {
 	if (bind) value = useSettings.get(bind) as boolean;
 	const checkbox = createRef();
@@ -72,6 +74,8 @@ export function SettingCheckbox({
 				});
 			});
 		}
+
+		if (store.new_release) new_release = store.new_release;
 	}
 
 	function update() {
@@ -109,7 +113,12 @@ export function SettingCheckbox({
 					ref={checkbox}
 				/>
 				{icon && <SettingIcon name={icon} />}
-				<SettingLabel name={name} body={body} store={store} />
+				<SettingLabel
+					name={name}
+					body={body}
+					store={store}
+					new_release={new_release}
+				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
 						list={incompatible_list}

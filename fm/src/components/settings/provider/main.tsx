@@ -14,6 +14,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingReset } from '@/components/settings/provider/reset.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { useSettings } from '@/page.ts';
+import { NewIndicator } from '@/components/shared/indicator.tsx';
 
 interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -26,6 +27,7 @@ interface SettingLabelProps {
 	setValue?: (val: setting_value) => void;
 	defaultValue?: setting_value;
 	menu?: boolean;
+	new_release?: boolean;
 }
 
 export function SettingLabel({
@@ -39,6 +41,7 @@ export function SettingLabel({
 	setValue,
 	defaultValue,
 	menu,
+	new_release,
 }: SettingLabelProps) {
 	const reset = createRef();
 
@@ -61,6 +64,7 @@ export function SettingLabel({
 		<div class={['heading', 'setting-inner']} ref={ref}>
 			<h5 class='setting-name'>
 				{name}
+				{new_release && <NewIndicator />}
 				{(value != undefined && setValue != undefined &&
 					defaultValue != undefined) &&
 					(

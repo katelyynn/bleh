@@ -585,6 +585,7 @@ export const settings_store: Record<string, setting_instance> = {
 		body: trans.seasonal_masks.body,
 		bubble: true,
 		incompatible: { seasonal: false },
+		new_release: true,
 	},
 	profile_header_own: {
 		default: true,
@@ -1023,6 +1024,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.music_links.name,
 		body: trans.music_links.body,
 		predefined: true,
+		new_release: true,
 	},
 	inverse_compare: {
 		default: false,

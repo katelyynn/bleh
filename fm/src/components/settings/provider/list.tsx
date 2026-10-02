@@ -38,6 +38,7 @@ interface SettingListProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	new_release?: boolean;
 }
 
 type SettingListElement = HTMLDivElement & {
@@ -68,6 +69,7 @@ export function SettingList({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	new_release,
 }: SettingListProps) {
 	if (bind) value = useSettings.get(bind) as string[];
 
@@ -97,6 +99,8 @@ export function SettingList({
 				});
 			});
 		}
+
+		if (store.new_release) new_release = store.new_release;
 	}
 
 	let sortable: Sortable;
@@ -150,6 +154,7 @@ export function SettingList({
 					value={value}
 					defaultValue={defaultValue}
 					setValue={(v) => set(v as string[])}
+					new_release={new_release}
 				/>
 				<List>
 					<List ref={inner_list}>

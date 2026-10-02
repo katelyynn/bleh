@@ -29,6 +29,7 @@ interface SettingSwitchProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	new_release?: boolean;
 }
 
 type SettingSwitchElement = HTMLDivElement & {
@@ -49,6 +50,7 @@ export function SettingSwitch({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	new_release,
 }: SettingSwitchProps) {
 	if (bind) value = useSettings.get(bind) as boolean;
 	const checkbox = createRef();
@@ -75,6 +77,8 @@ export function SettingSwitch({
 				});
 			});
 		}
+
+		if (store.new_release) new_release = store.new_release;
 	}
 
 	function update() {
@@ -115,7 +119,13 @@ export function SettingSwitch({
 					/>
 				)}
 				{icon && <SettingIcon name={icon} />}
-				<SettingLabel name={name} body={body} sub={sub} store={store} />
+				<SettingLabel
+					name={name}
+					body={body}
+					sub={sub}
+					store={store}
+					new_release={new_release}
+				/>
 				{useSettings.get('theme') != 'yuzu' && (
 					<Switch
 						className='setting-inner'
