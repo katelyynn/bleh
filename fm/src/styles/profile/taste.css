@@ -109,13 +109,26 @@
 	margin: 0 auto;
 	z-index: 10;
 	line-height: var(--line-height-subheading);
+	position: relative;
 
-	background-color: oklch(var(--f4) / 20%);
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: oklch(var(--f4) / 20%);
+		border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+
+		--mask: url('data:image/webp;base64,UklGRn4DAABXRUJQVlA4WAoAAAAYAAAApgAAMQAAQUxQSEYCAAAJkGPbtmlbc1/72bZtpz98JfnMjNL86EeugG3j2cb12dlb66y3/4kjYgIAlfDhxNv5sPHJxL8a2H0Qw+d2CO5/e/0WqGceA2NPcHJrFsjz4cTZfNhZFKqG7dFopAWSexEDeQhAPYjZBaAEJ9+DPU3KPpT3uoVFeRoomUNa3J6cdkgYgLAIbRhAHeU4DpQSLHtUr4QyYT0qRiutAhooG3GghOCzBx0SyoXl1EZpGALqKX+OaTGbGiXUtMhCb4RhGMFygvUhRQvaVCWhzS0txjCEOkVIfbZodock1EFalGHQVQ/i8U9IE1lkgFhzA2Vzx0RhadVhBgzXUw4ygDKOSxrvEMkTAPJ8piHqu6djmBQpUSiB0X+ePTwVPXWU4g636d4s3TsV/iAlMhNGqdleu3pPBV01+lFiuNlWIyCZNpx+exlm3Igb7ufwgCFWM4Z7cwVm1LuW4bamTbGvDTcIU6ShjKZH2LLilMrzmewQ7G5pqhAlMHmET7zKcZtNmaPIVWo0cyq3KnFESGinZBU7o7iV44wSOq2dkD7GYtYZ6Xk4ogPsaEeUhFs5ISuha9xOSGfRrRxRBvVwyHFHpCysSdD/P61wICEpwjKb0nBLOOCI047Mpl0olbDFsUPbNYTFpSzkS1jh2KStGmKOCwppCQscq7QFURs2fGbT0AJS/ziWaL/5NMcDG96yKXgFzK1yzNO+8CmOf3f4nnPpFAoE/NlkSM+RNubYjsB66YDtdZwJ+ygR8HeD4fcBaW6JLc2zfJtt+x2TdQhWUDggMgAAAJADAJ0BKqcAMgAAGAAnpAADyWiY02iY02iY02iY02iY02iYywAA/v/e3PAAAAAAAAAARVhJRtgAAABJSSoACAAAAAYAEgEDAAEAAAABAAAAGgEFAAEAAABWAAAAGwEFAAEAAABeAAAAKAEDAAEAAAACAAAAMQECABEAAABmAAAAaYcEAAEAAAB4AAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjEyAAAFAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAKgBAABAAAApwAAAAOgBAABAAAAMgAAAAWgBAABAAAAugAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAAA=');
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		mask-size: contain;
+		-webkit-mask-size: contain;
+
+		animation: profile-taste-badge 6.5s var(--trans-function-ani) infinite;
+		rotate: -1deg;
+	}
+
 	padding: 0 7px;
-	border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
-	rotate: -1deg;
-
-	animation: profile-taste-badge 6.5s var(--trans-function-ani) infinite;
 }
 
 @keyframes profile-taste-badge {
