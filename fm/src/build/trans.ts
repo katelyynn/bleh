@@ -137,7 +137,7 @@ export const trans = {
 		// there if the language puts spaces in lists
 		en: ', and ',
 		de: ' und ',
-		pt: ' e',
+		pt: ' e ',
 	},
 	page_templates: {
 		// these are used for browser tab titles
