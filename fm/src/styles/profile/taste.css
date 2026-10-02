@@ -140,6 +140,7 @@
 
 	color: oklch(var(--l2-c-theme-switch));
 	font-weight: var(--font-weight-bold);
+	text-transform: capitalize;
 
 	translate: 0 -3px;
 	rotate: 1deg;

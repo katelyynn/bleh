@@ -369,7 +369,7 @@ export function redesign_profile_header(
 									)}
 									{taste_artists[1] && (
 										<>
-											,{' '}
+											{tl(trans.comma)}
 											<TasteArtist
 												artist={taste_artists[1]}
 											/>
@@ -377,7 +377,7 @@ export function redesign_profile_header(
 									)}
 									{taste_artists[2] && (
 										<>
-											,{' '}
+											{tl(trans.and)}
 											<TasteArtist
 												artist={taste_artists[2]}
 											/>

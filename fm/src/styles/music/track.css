@@ -790,6 +790,16 @@
 	width: 180px;
 	display: flex;
 
+	&:not(.v2) {
+		--mask2: var(--interact-mask, none);
+		mask-image: var(--mask2) !important;
+		-webkit-mask-image: var(--mask2) !important;
+		mask-repeat: repeat !important;
+		-webkit-mask-repeat: repeat !important;
+		mask-size: contain !important;
+		-webkit-mask-size: contain !important;
+	}
+
 	&.v2 {
 		background: unset;
 		border-radius: unset !important;
@@ -805,6 +815,14 @@
 			display: block;
 			background: oklch(var(--chartlist-bar-bg, var(--b2) / 40%));
 			height: var(--bar-height);
+
+			--mask2: var(--interact-mask, none);
+			mask-image: var(--mask2) !important;
+			-webkit-mask-image: var(--mask2) !important;
+			mask-repeat: repeat !important;
+			-webkit-mask-repeat: repeat !important;
+			mask-size: contain !important;
+			-webkit-mask-size: contain !important;
 		}
 
 		&:hover {

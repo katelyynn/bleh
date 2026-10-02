@@ -131,6 +131,13 @@ export const trans = {
 		zh: ', ',
 		ja: '、',
 	},
+	and: {
+		// this is the end of a list
+		// the spaces around it are intentional and should be
+		// there if the language puts spaces in lists
+		en: ', and ',
+		de: ' und ',
+	},
 	page_templates: {
 		// these are used for browser tab titles
 		// {page} is something like 'Home' or 'Profile'
@@ -2360,7 +2367,7 @@ export const trans = {
 	},
 	particles: {
 		en: 'Particles',
-		it: 'Particelle'
+		it: 'Particelle',
 	},
 	seasonal_particles_fps: {
 		name: {
@@ -2388,7 +2395,7 @@ export const trans = {
 	},
 	effects: {
 		en: 'Effects',
-		it: 'Effetti'
+		it: 'Effetti',
 	},
 	seasonal_overlays: {
 		name: {
@@ -3141,7 +3148,7 @@ export const trans = {
 	},
 	theme_no_saturation_support: {
 		en: 'This theme defines its own colours independently',
-		it: 'Questo tema definisce i suoi colori indipendentemente'
+		it: 'Questo tema definisce i suoi colori indipendentemente',
 	},
 	noise: {
 		name: {
@@ -4087,7 +4094,7 @@ export const trans = {
 	},
 	sponsor_monthly: {
 		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
-		it: 'Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se più di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo.' // keeping dollars here? change later if necessary ~cuto
+		it: 'Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se più di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo.', // keeping dollars here? change later if necessary ~cuto
 	},
 	manage_sponsor: {
 		en: 'Manage sponsorship',
@@ -12461,7 +12468,7 @@ export const trans = {
 		pt: 'Está com problemas para atualizar ou precisa de suporte em geral?',
 		es: '¿Tienes problemas al actualizar o necesitas soporte en general?',
 		pl: 'Masz problemy z aktualizacją lub potrzebujesz pomocy?',
-		it: 'Stai avendo dei problemi ad aggiornare o hai bisogno di supporto in generale?'
+		it: 'Stai avendo dei problemi ad aggiornare o hai bisogno di supporto in generale?',
 	},
 	hybrid_inbox: {
 		name: {
@@ -12641,7 +12648,7 @@ export const trans = {
 		// i guess like the NY times?
 		en: 'The {b} Times',
 		pt: 'O {b} Times',
-		it: 'La Gazzetta di {b}'
+		it: 'La Gazzetta di {b}',
 	},
 	from: {
 		// timeframe

@@ -257,9 +257,9 @@ u,
 	--setting-alt: oklch(var(--c3));
 	--setting-alt-hover: var(--setting-alt);
 
-	--toolbar-tab-selected: oklch(var(--h4) / 10%);
-	--toolbar-tab-selected-hover: oklch(var(--h4) / 20%);
-	--toolbar-tab-selected-active: oklch(var(--h4) / 30%);
+	--toolbar-tab-selected: oklch(var(--h4) / 20%);
+	--toolbar-tab-selected-hover: oklch(var(--h4) / 30%);
+	--toolbar-tab-selected-active: oklch(var(--h4) / 40%);
 	--toolbar-tab-selected-colour: oklch(var(--l3-c));
 	--toolbar-tab-selected-icon: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
 
