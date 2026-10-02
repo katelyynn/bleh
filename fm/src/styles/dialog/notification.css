@@ -6,7 +6,8 @@
 	align-items: end;
 	inset: 0;
 	pointer-events: none;
-	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap)) var(--card-gap);
+	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap))
+		var(--card-gap);
 	z-index: 99999999999;
 
 	transition-property: right, opacity;
@@ -28,7 +29,7 @@
 	overflow: hidden;
 
 	background: oklch(var(--b5) / var(--solarium-opacity,
-				var(--menu-opacity)));
+		var(--menu-opacity)));
 	box-shadow: var(--card-shadow);
 	padding: 12px var(--button-sides);
 	border: 1px solid var(--card-border-base);
@@ -44,7 +45,7 @@
 	gap: var(--card-gap);
 
 	background-image: var(--cards-overlay-image-subtle,
-			unset) !important;
+		unset) !important;
 	background-repeat: repeat-x !important;
 	background-position: 0 0 !important;
 
@@ -93,7 +94,8 @@
 	}
 
 	&.with-icon {
-		padding-left: calc(var(--button-sides-icon) + var(--icon-size, var(--default-icon-size)) + 8px);
+		padding-left: calc(var(--button-sides-icon) + var(--icon-size,
+			var(--default-icon-size)) + 8px);
 		--top: 12px;
 		--margin-top: 0;
 	}
@@ -184,8 +186,8 @@
 			color: oklch(var(--c1));
 		}
 
-		p+p,
-		.masthead-popup-text+.masthead-popup-text {
+		p + p,
+		.masthead-popup-text + .masthead-popup-text {
 			margin-top: var(--card-gap);
 		}
 

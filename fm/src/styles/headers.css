@@ -89,7 +89,7 @@ h2.text-18,
 		}
 	}
 
-	&>.new-badge {
+	& > .new-badge {
 		margin-left: 6px;
 	}
 }
@@ -108,7 +108,7 @@ h2.text-18,
 	line-height: 18px !important;
 	font-style: var(--font-style-head);
 
-	.music-section>& {
+	.music-section > & {
 		line-height: var(--line-height-head-3) !important;
 	}
 }

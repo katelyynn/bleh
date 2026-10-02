@@ -95,7 +95,6 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
-
 	&[data-bleh--theme="oled"],
 	body[data-bleh--theme="oled"] &:not(.theme-preview) {
 		--c1: 0.98 0 var(--hue);

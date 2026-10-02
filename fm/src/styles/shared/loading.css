@@ -78,7 +78,7 @@
 
 	margin-top: unset;
 
-	&>p,
+	& > p,
 	.loading-data-text {
 		color: oklch(var(--c3));
 		user-select: none;

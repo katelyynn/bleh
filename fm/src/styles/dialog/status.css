@@ -52,8 +52,8 @@
 
 		animation: status 0.2s var(--trans-function);
 		transition-property: opacity,
-		transform,
-		filter;
+			transform,
+			filter;
 		transition-duration: 0.2s;
 		transition-timing-function: var(--trans-function);
 

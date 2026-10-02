@@ -385,7 +385,8 @@ export function plot({ host, sidebar } = {}) {
 				})}
 				${icon({ name: icons.animated_dots })}
 				<button class="btn primary icon" data-type="plot" onclick=${() =>
-					add_data_point()} ref=${(el) => add_data_point_btn = el}>
+					add_data_point()}
+					ref=${(el) => add_data_point_btn = el}>
 				    ${tl(trans.plot.name)}
 				</button>
 			`,
@@ -1135,7 +1136,10 @@ function plot_media_title(data: plot_media, fancy = false) {
 	}
 
 	if (fancy) {
-		return html`<span class="bleh-icon" data-type=${icon_name} style="--icon: var(--mask)" />${text}`;
+		return html`
+			<span class="bleh-icon" data-type=${icon_name}
+				style="--icon: var(--mask)" />${text}
+		`;
 	}
 
 	return text;
@@ -1153,7 +1157,10 @@ function generic_user_title(user: string, type = 'user', fancy = false) {
 	}
 
 	if (fancy) {
-		return html`<span class="bleh-icon" data-type=${icon_name} style="--icon: var(--mask)" />${user}`;
+		return html`
+			<span class="bleh-icon" data-type=${icon_name}
+				style="--icon: var(--mask)" />${user}
+		`;
 	}
 
 	return user;

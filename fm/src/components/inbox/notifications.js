@@ -175,7 +175,7 @@ export function bleh_notification_list(list, mini = false) {
 				<div class="notification-avatar">${avatar}</div>
 				${icon({ name: icons[type] })}
 				<div class="notification-content">
-				    <div class="notification-title">
+					<div class="notification-title">
 				        ${type == 'shoutbox'
 					? html.node`
                     ${
@@ -217,7 +217,7 @@ export function bleh_notification_list(list, mini = false) {
 					)
 					: ''}
 				    </div>
-				    <div class="notification-context">
+					<div class="notification-context">
 				        ${icon({ name: icons.indent })}
 				        <span
 				            class="notification-type"
@@ -237,8 +237,8 @@ export function bleh_notification_list(list, mini = false) {
 				</div>
 				<div class="notification-time">${time}</div>
 				<a
-				    class="link-block-cover-link"
-				    href=${link.getAttribute('href')}
+					class="link-block-cover-link"
+					href=${link.getAttribute('href')}
 				/>
 			`,
 		);

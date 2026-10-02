@@ -14,7 +14,7 @@
 			display: flex !important;
 		}
 
-		.library-controls-datepicker>.library-date-picker {
+		.library-controls-datepicker > .library-date-picker {
 			display: flex;
 			justify-content: start;
 			height: 20px;
@@ -85,7 +85,7 @@
 	padding-top: var(--card-gap);
 	border-top: 1px solid var(--card-border-base);
 
-	&>.form-group {
+	& > .form-group {
 		margin: unset !important;
 	}
 }

@@ -128,7 +128,7 @@
 		--mask: var(--icon-16-block);
 	}
 
-	[data-toggle-button-current-state="followed"]>form>& {
+	[data-toggle-button-current-state="followed"] > form > & {
 		--mask: var(--icon-16-user);
 
 		&[data-followed="true"] {
@@ -1016,7 +1016,6 @@
 [data-bleh-page="seasonal"] {
 	--mask: var(--icon-16-season);
 }
-
 
 .gallery-image-votes,
 .vote-button {

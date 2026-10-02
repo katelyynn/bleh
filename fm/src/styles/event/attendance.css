@@ -78,8 +78,8 @@
 	--avatar-size: 28px;
 
 	&:hover {
-		&>.attendee-summary-user-inner-wrap {
-			&>.attendee-summary-user-link {
+		& > .attendee-summary-user-inner-wrap {
+			& > .attendee-summary-user-link {
 				&:after {
 					transform: scaleX(1);
 				}

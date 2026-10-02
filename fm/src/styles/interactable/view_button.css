@@ -48,7 +48,7 @@
 		width: fit-content;
 	}
 
-	&>form {
+	& > form {
 		display: flex;
 		align-items: center;
 		gap: inherit;
@@ -139,7 +139,7 @@
 				transition-duration: var(--trans);
 				transition-timing-function: var(--trans-function);
 
-				&+.view-item-avatar {
+				& + .view-item-avatar {
 					margin-left: -12px;
 					border-left: 1px solid oklch(var(--b5));
 				}
@@ -171,7 +171,7 @@
 			margin: 0 2px;
 			background: var(--card-border-base);
 
-			&+.listen-divider {
+			& + .listen-divider {
 				display: none;
 			}
 		}

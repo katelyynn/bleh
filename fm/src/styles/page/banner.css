@@ -75,7 +75,7 @@
 			display: none;
 		}
 
-		&>.background-inner {
+		& > .background-inner {
 			&:before {
 				display: none;
 			}

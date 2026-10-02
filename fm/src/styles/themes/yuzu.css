@@ -43,8 +43,7 @@ body,
 			/* top inner */
 			,
 			inset 0 -10px 8px 0 oklch(0.78 0 0 / 40%)
-			/* gradient */
-		;
+			/* gradient */;
 		--input-shadow:
 			inset 0 1px 0 0 oklch(0.64 0 0)
 			/* top */
@@ -62,8 +61,7 @@ body,
 			/* top inner */
 			,
 			inset 0 10px 8px 0 oklch(0.83 0 0 / 40%)
-			/* gradient */
-		;
+			/* gradient */;
 		--focused-input-shadow:
 			0 0 0 1px oklch(var(--l3-c) / 40%),
 			0 0 6px oklch(var(--l3-c) / 30%),
@@ -85,7 +83,6 @@ body,
 			/* top inner */
 			,
 			0 1px 3px oklch(0 0 0 / 5%);
-
 
 		--menu-shadow: 3px 3px 4px oklch(0 0 0 / 10%);
 
@@ -218,7 +215,6 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
-
 	&[data-bleh--theme="yuzu"],
 	body[data-bleh--theme="yuzu"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0 0 0;
@@ -333,8 +329,7 @@ u,
 			/* top inner */
 			,
 			inset 0 -10px 8px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.54) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue) / 30%)
-			/* gradient */
-		;
+			/* gradient */;
 		--bar-shadow: 0 0 transparent;
 	}
 }

@@ -127,17 +127,17 @@ function charts_panel() {
 			<h4>${tl(trans.recents)}</h4>
 			${alert}
 			<form action="${root}settings#update-chart" name="chart-form" method="post">
-			    <input type="hidden" name="csrfmiddlewaretoken" value=${page
-				.token}>
-			    <div class="inner-preview pad" ref=${(el) =>
-				recent_listening_preview = el}>
+				<input type="hidden" name="csrfmiddlewaretoken" value=${page
+					.token}>
+				<div class="inner-preview pad" ref=${(el) =>
+					recent_listening_preview = el}>
 			        ${render_track_preview(
 				false,
 				false,
 				original_chart_settings.recent.recent_artwork.checked,
 			)}
 			    </div>
-			    <div class="setting-group">
+				<div class="setting-group">
 			        <div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.amount_to_display)}</h5>
@@ -169,16 +169,16 @@ function charts_panel() {
 				standalone: false,
 			})}
 			    </div>
-			    <h4>${tl(trans.top_artists)}</h4>
-			    <div class="inner-preview pad" ref=${(el) =>
-				top_artists_preview = el}>
+				<h4>${tl(trans.top_artists)}</h4>
+				<div class="inner-preview pad" ref=${(el) =>
+					top_artists_preview = el}>
 			        ${render_chart(
 				'artist',
 				original_chart_settings.artists.style.value,
 			)}
 			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="select">
+				<div class="setting-group">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.default_timeframe)}</h5>
 			            </div>
@@ -191,7 +191,7 @@ function charts_panel() {
 				in_settings: true,
 			})}
 			        </div>
-			        <div class="setting" data-type="select">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.chart_style)}</h5>
 			            </div>
@@ -205,17 +205,17 @@ function charts_panel() {
 				},
 			})}
 			        </div>
-			    </div>
-			    <h4>${tl(trans.top_albums)}</h4>
-			    <div class="inner-preview pad" ref=${(el) =>
-				top_albums_preview = el}>
+				</div>
+				<h4>${tl(trans.top_albums)}</h4>
+				<div class="inner-preview pad" ref=${(el) =>
+					top_albums_preview = el}>
 			        ${render_chart(
 				'album',
 				original_chart_settings.albums.style.value,
 			)}
 			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="select">
+				<div class="setting-group">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.default_timeframe)}</h5>
 			            </div>
@@ -228,7 +228,7 @@ function charts_panel() {
 				in_settings: true,
 			})}
 			        </div>
-			        <div class="setting" data-type="select">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.chart_style)}</h5>
 			            </div>
@@ -242,13 +242,13 @@ function charts_panel() {
 				},
 			})}
 			        </div>
-			    </div>
-			    <h4>${tl(trans.top_tracks)}</h4>
-			    <div class="inner-preview pad">
+				</div>
+				<h4>${tl(trans.top_tracks)}</h4>
+				<div class="inner-preview pad">
 			        ${render_track_preview(false, true)}
 			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="select">
+				<div class="setting-group">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.default_timeframe)}</h5>
 			            </div>
@@ -261,7 +261,7 @@ function charts_panel() {
 				in_settings: true,
 			})}
 			        </div>
-			        <div class="setting" data-type="select">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.amount_to_display)}</h5>
 			            </div>
@@ -272,13 +272,13 @@ function charts_panel() {
 				in_settings: true,
 			})}
 			        </div>
-			    </div>
-			    <div class="settings-footer">
-			        <button type="submit" class="btn-primary save">
+				</div>
+				<div class="settings-footer">
+					<button type="submit" class="btn-primary save">
 			            ${tl(trans.save)}
 			        </button>
-			        <input type="hidden" value="chart" name="submit">
-			    </div>
+					<input type="hidden" value="chart" name="submit">
+				</div>
 			</form>
 		`,
 	);

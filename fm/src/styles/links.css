@@ -1,13 +1,13 @@
 .hide-link {
 	text-decoration: var(--force-underline, none) !important;
 
-	&>a:hover {
+	& > a:hover {
 		text-decoration: underline !important;
 	}
 }
 
 .metadata-column .cta-link-wrap a,
-.lyrics-snippet-more-link>a {
+.lyrics-snippet-more-link > a {
 	position: relative;
 	padding-right: calc(12px + 4px);
 	--left: none;
@@ -66,9 +66,8 @@ a {
 }
 
 .link-tooltip {
-
-	&>.path,
-	&>.scheme {
+	& > .path,
+	& > .scheme {
 		color: oklch(var(--c3));
 	}
 }
@@ -105,11 +104,11 @@ a {
 		transition-timing-function: var(--trans-function-ani);
 	}
 
-	&>.bleh-icon-arrow-up,
-	&>.bleh-icon-arrow-down,
-	&>.bleh-icon-arrow-left,
-	&>.bleh-icon-arrow-right,
-	&>.bleh-icon-external {
+	& > .bleh-icon-arrow-up,
+	& > .bleh-icon-arrow-down,
+	& > .bleh-icon-arrow-left,
+	& > .bleh-icon-arrow-right,
+	& > .bleh-icon-external {
 		--icon-size: 12px;
 	}
 
@@ -120,7 +119,7 @@ a {
 			transform: scaleX(1);
 		}
 
-		&>.bleh-icon-external {
+		& > .bleh-icon-external {
 			translate: var(--icon-transform) calc(-1 * var(--icon-transform));
 		}
 	}

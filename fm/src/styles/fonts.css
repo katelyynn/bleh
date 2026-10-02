@@ -8,7 +8,8 @@
 
 @font-face {
 	font-family: 'Zpix';
-	src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff') format('woff');
+	src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff')
+		format('woff');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
@@ -16,7 +17,8 @@
 
 @font-face {
 	font-family: 'Expose';
-	src: url('https://katelyynn.github.io/mask/Expose-Regular.woff2') format('woff2');
+	src: url('https://katelyynn.github.io/mask/Expose-Regular.woff2')
+		format('woff2');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;

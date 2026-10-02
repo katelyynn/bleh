@@ -61,10 +61,13 @@
 	display: flex;
 	flex-direction: column;
 
-	padding: calc(var(--card-padding) * 3.5) var(--card-padding) var(--card-padding) !important;
-	margin: calc(-1 * (var(--card-padding) * 3.5)) 0 calc(-1 * var(--card-padding)) !important;
+	padding: calc(var(--card-padding) * 3.5) var(--card-padding)
+		var(--card-padding) !important;
+	margin: calc(-1 * (var(--card-padding) * 3.5)) 0 calc(-1 *
+		var(--card-padding)) !important;
 
-	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%), transparent) !important;
+	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%),
+		transparent) !important;
 	overflow: hidden;
 }
 
@@ -132,7 +135,6 @@
 }
 
 @keyframes profile-taste-badge {
-
 	from,
 	to {
 		background-color: oklch(var(--f4) / 20%);

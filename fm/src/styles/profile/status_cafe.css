@@ -30,7 +30,7 @@
 		animation: spinner 1s linear infinite;
 	}
 
-	&>.bleh-icon {
+	& > .bleh-icon {
 		--icon: var(--icon-16-x);
 	}
 }

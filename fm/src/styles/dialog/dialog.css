@@ -92,7 +92,7 @@
 				display: var(--cards-overlay-display);
 
 				background-image: var(--cards-overlay-image,
-						unset), var(--cards-overlay, transparent) !important;
+					unset), var(--cards-overlay, transparent) !important;
 				background-repeat: repeat-x !important;
 				background-position: 0 -60px !important;
 				opacity: 0.9;
@@ -152,7 +152,7 @@
 	z-index: 100;
 	position: relative;
 
-	&>h4 {
+	& > h4 {
 		margin: unset;
 		color: oklch(var(--c1));
 		font-size: var(--font-size-subheading);
@@ -186,7 +186,8 @@
 
 	&[data-theme="yuzu"] {
 		border-bottom: 1px solid #ccc;
-		padding-right: calc(var(--card-padding) + var(--modal-close-size) + 10px);
+		padding-right: calc(var(--card-padding) + var(--modal-close-size) +
+			10px);
 		margin-left: calc(-1 * var(--card-padding));
 		margin-right: calc(-1 * var(--card-padding));
 		padding-top: 6px;
@@ -215,11 +216,11 @@
 }
 
 .bleh-modal-body {
-	&> :first-child {
+	& > :first-child {
 		margin-top: unset;
 	}
 
-	&>img {
+	& > img {
 		width: 100%;
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
@@ -229,11 +230,11 @@
 		margin-right: auto;
 	}
 
-	&>.sep {
+	& > .sep {
 		margin: var(--card-gap) 0;
 	}
 
-	&>p:not(.big-modal-alert, .card-tip) {
+	& > p:not(.big-modal-alert, .card-tip) {
 		max-width: 430px;
 	}
 }
@@ -241,8 +242,11 @@
 .bleh-modal-body[data-allow-scroll="true"],
 .modal-inner-content.allow-scroll {
 	max-height: 80vh;
-	padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
-	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
+	padding: calc(var(--card-padding) * 2) var(--card-padding)
+		var(--card-padding) var(--card-padding);
+	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding))
+		calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
+		!important;
 	overflow-y: hidden;
 
 	border-radius: var(--item-big-radius);

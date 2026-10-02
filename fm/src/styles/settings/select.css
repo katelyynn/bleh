@@ -31,24 +31,21 @@
 	}
 
 	&:active {
-
 		&:before,
-		&>.select-indicator {
+		& > .select-indicator {
 			transform: scaleY(1) translateY(1px) !important;
 		}
 	}
 
 	&[aria-expanded="true"] {
-
 		&:before,
-		&>.select-indicator {
+		& > .select-indicator {
 			transform: scaleY(-1) translateY(0) !important;
 		}
 
 		&:active {
-
 			&:before,
-			&>.select-indicator {
+			& > .select-indicator {
 				transform: scaleY(-1) translateY(-1px) !important;
 			}
 		}
@@ -94,7 +91,8 @@
 	padding: unset;
 	--focus-outline: none;
 	position: absolute;
-	inset: var(--button-verts) calc(var(--button-sides) + 12px + 4px) var(--button-verts) var(--button-sides);
+	inset: var(--button-verts) calc(var(--button-sides) + 12px + 4px)
+		var(--button-verts) var(--button-sides);
 	pointer-events: none;
 
 	/*&:not(.with-query) {

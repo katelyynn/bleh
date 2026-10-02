@@ -104,7 +104,6 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
-
 	&[data-bleh--theme="rose_pine_dawn"],
 	body[data-bleh--theme="rose_pine_dawn"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.3164 0.0519 289.72;

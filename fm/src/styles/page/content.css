@@ -6,9 +6,9 @@
 	gap: 10px var(--card-gap);
 	margin-bottom: var(--card-gap);
 
-	&+.library-fetch,
-	&+.buffer-standard,
-	&+.alert {
+	& + .library-fetch,
+	& + .buffer-standard,
+	& + .alert {
 		margin-top: unset !important;
 	}
 
@@ -30,12 +30,12 @@
 		margin-left: calc(-1 * var(--card-padding));
 		margin-right: calc(-1 * var(--card-padding));
 
-		section:first-child>& {
+		section:first-child > & {
 			margin-top: calc(-1 * var(--card-padding));
 		}
 	}
 
-	&>h2 {
+	& > h2 {
 		margin: unset !important;
 	}
 }

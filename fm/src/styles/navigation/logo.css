@@ -39,34 +39,37 @@
 		align-items: center;
 		gap: var(--icon-gap);
 
-		&>.new-badge {
+		& > .new-badge {
 			margin: unset !important;
 			cursor: pointer;
 		}
 
-		&>.update-container {
+		& > .update-container {
 			display: flex;
-			animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+			animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
+				infinite;
 
-			&>.bleh-icon {
+			& > .bleh-icon {
 				background: conic-gradient(from 270deg,
-						oklch(var(--c1)),
-						oklch(var(--c3)));
+					oklch(var(--c1)),
+					oklch(var(--c3)));
 			}
 		}
 	}
 
 	&[data-theme="yuzu"] {
-		&>.home-link {
+		& > .home-link {
 			--bg: transparent !important;
 			--bg-hov: var(--bg) !important;
 			--bg-atv: var(--bg) !important;
 			height: 44px !important;
 			padding: unset !important;
 
-			filter: drop-shadow(0 1px 1px oklch(calc(clamp(min(0.7), var(--lit), max(1)) * 0.44) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue)));
+			filter: drop-shadow(0 1px 1px oklch(calc(clamp(min(0.7), var(--lit),
+				max(1)) * 0.44) calc(clamp(min(0), var(--sat), max(2)) * 0.6)
+				var(--hue)));
 
-			&>.home-logo-container>.home-logo {
+			& > .home-logo-container > .home-logo {
 				background-color: #fff;
 			}
 		}
@@ -93,30 +96,30 @@
 		based on https://codepen.io/charliewilco/pen/BzrJzE */
 
 		background-image: linear-gradient(90deg,
-				var(--graph-colour-0) 10%,
-				var(--graph-colour-1) 23%,
-				var(--graph-colour-2) 38%,
-				var(--graph-colour-5) 55%,
-				var(--graph-colour-7) 67%,
-				var(--graph-colour-9) 100%);
+			var(--graph-colour-0) 10%,
+			var(--graph-colour-1) 23%,
+			var(--graph-colour-2) 38%,
+			var(--graph-colour-5) 55%,
+			var(--graph-colour-7) 67%,
+			var(--graph-colour-9) 100%);
 	}
 
 	[data-bleh--season="fall"] & {
 		background-image: linear-gradient(180deg,
-				var(--graph-colour-6) 0%,
-				oklch(var(--white)) 100%);
+			var(--graph-colour-6) 0%,
+			oklch(var(--white)) 100%);
 	}
 
 	[data-bleh--season="christmas"] & {
 		background-image: linear-gradient(90deg,
-				var(--graph-colour-0) 10%,
-				var(--graph-colour-0) 23%,
-				var(--graph-colour-4) 28%,
-				var(--graph-colour-4) 36%,
-				var(--graph-colour-0) 51%,
-				var(--graph-colour-0) 69%,
-				var(--graph-colour-4) 77%,
-				var(--graph-colour-4) 100%);
+			var(--graph-colour-0) 10%,
+			var(--graph-colour-0) 23%,
+			var(--graph-colour-4) 28%,
+			var(--graph-colour-4) 36%,
+			var(--graph-colour-0) 51%,
+			var(--graph-colour-0) 69%,
+			var(--graph-colour-4) 77%,
+			var(--graph-colour-4) 100%);
 	}
 
 	mask-image: var(--mask);

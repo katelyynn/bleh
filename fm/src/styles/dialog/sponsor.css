@@ -1,21 +1,21 @@
 .support-inner {
 	padding: var(--card-padding) 0;
 
-	&>.avatar {
+	& > .avatar {
 		width: 64px;
 		height: 64px;
 
-		&>img {
+		& > img {
 			border-radius: var(--avatar-radius);
 		}
 
-		&>.avatar-status-dot {
+		& > .avatar-status-dot {
 			width: 18px;
 			height: 18px;
 		}
 	}
 
-	&>h1 {
+	& > h1 {
 		color: oklch(var(--c1));
 		font-size: var(--font-size-subheading);
 		line-height: var(--line-height-subheading);
@@ -32,13 +32,13 @@
 		}
 	}
 
-	&>p {
+	& > p {
 		max-width: 360px;
 		text-align: center;
 		cursor: default;
 	}
 
-	&>.badges {
+	& > .badges {
 		display: flex;
 		flex-direction: row-reverse;
 		gap: 4px;

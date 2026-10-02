@@ -5,7 +5,7 @@
 	margin-bottom: var(--card-padding);
 	gap: var(--card-gap);
 
-	.alert+& {
+	.alert + & {
 		margin-top: var(--card-gap);
 	}
 
@@ -15,7 +15,7 @@
 		flex-wrap: wrap;
 		gap: var(--button-list-gap);
 
-		&>.bleh-icon {
+		& > .bleh-icon {
 			--icon: var(--icon-16-info);
 			color: oklch(var(--c3));
 			cursor: pointer;
@@ -31,24 +31,24 @@
 	gap: var(--card-gap);
 	flex: 1;
 
-	&>.bleh-icon {
+	& > .bleh-icon {
 		--icon: var(--icon-16-dots);
 		background-image: linear-gradient(90deg,
-				oklch(var(--b4)),
-				oklch(var(--c1)),
-				oklch(var(--b4)),
-				oklch(var(--c1)),
-				oklch(var(--b4)));
+			oklch(var(--b4)),
+			oklch(var(--c1)),
+			oklch(var(--b4)),
+			oklch(var(--c1)),
+			oklch(var(--b4)));
 		background-size: 200% 100%;
 		animation: gradient 1.3s linear infinite;
 
 		[data-bleh--theme_type="light"] & {
 			background-image: linear-gradient(90deg,
-					oklch(var(--c3)),
-					oklch(var(--b5)),
-					oklch(var(--c3)),
-					oklch(var(--b5)),
-					oklch(var(--c3)));
+				oklch(var(--c3)),
+				oklch(var(--b5)),
+				oklch(var(--c3)),
+				oklch(var(--b5)),
+				oklch(var(--c3)));
 		}
 	}
 }
@@ -59,7 +59,7 @@
 	gap: 6px;
 	cursor: default;
 
-	&>.avatar {
+	& > .avatar {
 		width: var(--button-height);
 		height: var(--button-height);
 		--mask-size: 18px;
@@ -74,7 +74,7 @@
 	}
 
 	&.avatar-only {
-		&>.compare-user-name {
+		& > .compare-user-name {
 			display: none;
 		}
 	}
@@ -111,12 +111,12 @@
 	min-width: 30px !important;
 	min-height: 30px !important;
 
-	&>.compare-user {
+	& > .compare-user {
 		cursor: pointer;
 		background: oklch(var(--b5));
 	}
 
-	&>.bleh-icon {
+	& > .bleh-icon {
 		--icon: var(--mask);
 		transform-origin: left;
 
@@ -126,20 +126,18 @@
 	}
 
 	&:not(.add-user) {
-		&>.bleh-icon {
+		& > .bleh-icon {
 			--icon-size: 14px;
 		}
 
 		&:not(:hover) {
-			&>.bleh-icon {
+			& > .bleh-icon {
 				opacity: 0;
 				margin-left: calc(-1 * (var(--icon-size) + var(--icon-gap)));
 			}
 		}
 	}
 }
-
-
 
 .comparison-bar {
 	display: flex;
@@ -168,20 +166,20 @@
 
 .comparison-bars {
 	width: 100%;
-
 }
 
 .comparison-bar-fill {
 	display: block;
 	background: linear-gradient(90deg, oklch(var(--l2-c-theme-switch)),
-			oklch(var(--l3-c)) 20%) !important;
-	box-shadow: var(--bar-shadow), 0 2px 1px 0 oklch(var(--k4) / 60%), 0 2px 8px oklch(var(--h4) / 40%);
+		oklch(var(--l3-c)) 20%) !important;
+	box-shadow: var(--bar-shadow), 0 2px 1px 0 oklch(var(--k4) / 60%), 0 2px 8px
+		oklch(var(--h4) / 40%);
 	height: 3px;
 	border-radius: var(--radius-s);
 
 	&.comparison-bar-fill-flip {
 		background: linear-gradient(270deg, oklch(var(--l2-c-theme-switch)),
-				oklch(var(--l3-c)) 20%) !important;
+			oklch(var(--l3-c)) 20%) !important;
 	}
 }
 

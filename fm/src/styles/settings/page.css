@@ -37,7 +37,7 @@
 		font-weight: var(--font-weight-medium);
 	}
 
-	&>.alert {
+	& > .alert {
 		margin: unset !important;
 	}
 

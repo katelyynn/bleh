@@ -33,7 +33,7 @@
 
 	margin-top: 10px;
 
-	&+.setting {
+	& + .setting {
 		width: 100%;
 	}
 }
@@ -48,7 +48,7 @@
 	align-items: center;
 	color: oklch(var(--c3));
 
-	&>.hostname {
+	& > .hostname {
 		color: oklch(var(--c2));
 	}
 }

@@ -85,7 +85,7 @@
 	justify-content: center;
 	text-align: center;
 
-	&>.name-style {
+	& > .name-style {
 		font-size: calc(15px * var(--custom-font-size-multiplier, 1));
 	}
 }

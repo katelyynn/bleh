@@ -13,11 +13,11 @@
 	border: 1px solid transparent;
 	box-shadow: var(--group-shadow);
 
-	&+h2 {
+	& + h2 {
 		margin-top: var(--card-gap) !important;
 	}
 
-	&>.mini {
+	& > .mini {
 		display: flex;
 		align-items: center;
 		gap: 10px;
@@ -45,7 +45,7 @@
 			border-bottom-right-radius: var(--item-big-radius) !important;
 		}
 
-		&+.mini {
+		& + .mini {
 			margin-top: calc(-12px + 1px + 12px) !important;
 
 			&:after {
@@ -60,7 +60,7 @@
 			}
 		}
 
-		&>.mini-icon {
+		& > .mini-icon {
 			width: 34px;
 			height: 34px;
 			background: oklch(var(--h4) / 20%);
@@ -76,14 +76,14 @@
 			--icon-size: 16px;
 		}
 
-		&>.mini-info {
+		& > .mini-info {
 			flex: 1;
 
-			&>h5 {
+			& > h5 {
 				color: oklch(var(--c2));
 			}
 
-			&>p {
+			& > p {
 				color: oklch(var(--c3));
 				font-size: calc(var(--font-size) - 1px);
 			}
@@ -142,11 +142,11 @@
 		align-items: unset;
 	}
 
-	&>.mini-arrow {
+	& > .mini-arrow {
 		--icon-size: 12px;
 	}
 
-	&>.news-update-action {
+	& > .news-update-action {
 		margin-left: calc(-1 * (var(--button-height) - var(--icon-size)) / 2);
 	}
 }
@@ -158,13 +158,15 @@
 
 .minis-header-bg {
 	position: absolute;
-	inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) -120px calc(-1 * var(--card-padding));
+	inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) -120px
+		calc(-1 * var(--card-padding));
 	background: oklch(var(--h3));
 	pointer-events: none;
 	z-index: 0;
 	border-top-left-radius: var(--card-radius);
 
-	background: radial-gradient(at left top, oklch(var(--k4) / 50%), transparent 50%);
+	background: radial-gradient(at left top, oklch(var(--k4) / 50%), transparent
+		50%);
 
 	@media (max-width: 980px) {
 		border-top-left-radius: unset;

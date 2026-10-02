@@ -63844,21 +63844,22 @@ var bleh = (() => {
       about_artist_container,
       html`
 			<div class="about-artist-panel">
-			    <div class="about-artist-avatar">
+				<div class="about-artist-avatar">
 			        ${image2 ? html.node`
                 <img src=${avatar(image2.src, "avatar300s")}>
                 ` : html.node`
                 <img class="missing-artist">
                 `}
 			    </div>
-			    <div class="about-artist-info">
+				<div class="about-artist-info">
 			        <div class="sub-text">${tl2(trans.about)}</div>
 			        <h1 class="about-artist-name">${correct_artist(
         page.sister
       )}</h1>
 			        ${listeners} ${tags} ${wiki}
 			    </div>
-			    <a class="link-block-cover-link" href="${root}music/${redirect()}${sanitise(
+				<a class="link-block-cover-link"
+					href="${root}music/${redirect()}${sanitise(
         page.sister
       )}" />
 			</div>
@@ -108888,7 +108889,7 @@ var bleh = (() => {
 				<div class="notification-avatar">${avatar4}</div>
 				${icon({ name: icons[type] })}
 				<div class="notification-content">
-				    <div class="notification-title">
+					<div class="notification-title">
 				        ${type == "shoutbox" ? html.node`
                     ${others_included == 0 ? html.node`
                         ${is_reply ? tl2(trans.user_replied).replace(
@@ -108912,7 +108913,7 @@ var bleh = (() => {
           involved[0]
         ) : ""}
 				    </div>
-				    <div class="notification-context">
+					<div class="notification-context">
 				        ${icon({ name: icons.indent })}
 				        <span
 				            class="notification-type"
@@ -108930,8 +108931,8 @@ var bleh = (() => {
 				</div>
 				<div class="notification-time">${time3}</div>
 				<a
-				    class="link-block-cover-link"
-				    href=${link.getAttribute("href")}
+					class="link-block-cover-link"
+					href=${link.getAttribute("href")}
 				/>
 			`
       );
@@ -109031,17 +109032,17 @@ var bleh = (() => {
                 ` : ""}
 				</div>
 				<div class="message-content">
-				    <div class="message-subject">
+					<div class="message-subject">
 				        ${subject}
 				    </div>
-				    <div class="message-summary">
+					<div class="message-summary">
 				        ${content2}
 				    </div>
 				</div>
 				<div class="notification-time">${time3}</div>
 				<a
-				    class="link-block-cover-link"
-				    href=${href}
+					class="link-block-cover-link"
+					href=${href}
 				/>
 			`
       );
@@ -117039,7 +117040,7 @@ var bleh = (() => {
           day: tl2(trans.themes[settings.theme_day]),
           night: tl2(trans.themes[settings.theme_night])
         })}<a
-				    onclick=${() => {
+					onclick=${() => {
           dialog({
             id: "auto_theme",
             title: tl2(trans.themes.name),
@@ -117110,8 +117111,7 @@ var bleh = (() => {
                     `
           });
         }}
-				    >${tl2(trans.change_schedule)}</a
-				>
+				>${tl2(trans.change_schedule)}</a>
 			`
       );
     }
@@ -119007,11 +119007,11 @@ var bleh = (() => {
 			<h4>${tl2(trans.recents)}</h4>
 			${alert2}
 			<form action="${root}settings#update-chart" name="chart-form" method="post">
-			    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-			    <div class="inner-preview pad" ref=${(el) => recent_listening_preview = el}>
+				<input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+				<div class="inner-preview pad" ref=${(el) => recent_listening_preview = el}>
 			        ${render_track_preview(false, false, original_chart_settings.recent.recent_artwork.checked)}
 			    </div>
-			    <div class="setting-group">
+				<div class="setting-group">
 			        <div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.amount_to_display)}</h5>
@@ -119040,12 +119040,12 @@ var bleh = (() => {
       standalone: false
     })}
 			    </div>
-			    <h4>${tl2(trans.top_artists)}</h4>
-			    <div class="inner-preview pad" ref=${(el) => top_artists_preview = el}>
+				<h4>${tl2(trans.top_artists)}</h4>
+				<div class="inner-preview pad" ref=${(el) => top_artists_preview = el}>
 			        ${render_chart("artist", original_chart_settings.artists.style.value)}
 			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="select">
+				<div class="setting-group">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.default_timeframe)}</h5>
 			            </div>
@@ -119056,7 +119056,7 @@ var bleh = (() => {
       in_settings: true
     })}
 			        </div>
-			        <div class="setting" data-type="select">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.chart_style)}</h5>
 			            </div>
@@ -119070,13 +119070,13 @@ var bleh = (() => {
       }
     })}
 			        </div>
-			    </div>
-			    <h4>${tl2(trans.top_albums)}</h4>
-			    <div class="inner-preview pad" ref=${(el) => top_albums_preview = el}>
+				</div>
+				<h4>${tl2(trans.top_albums)}</h4>
+				<div class="inner-preview pad" ref=${(el) => top_albums_preview = el}>
 			        ${render_chart("album", original_chart_settings.albums.style.value)}
 			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="select">
+				<div class="setting-group">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.default_timeframe)}</h5>
 			            </div>
@@ -119087,7 +119087,7 @@ var bleh = (() => {
       in_settings: true
     })}
 			        </div>
-			        <div class="setting" data-type="select">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.chart_style)}</h5>
 			            </div>
@@ -119101,13 +119101,13 @@ var bleh = (() => {
       }
     })}
 			        </div>
-			    </div>
-			    <h4>${tl2(trans.top_tracks)}</h4>
-			    <div class="inner-preview pad">
+				</div>
+				<h4>${tl2(trans.top_tracks)}</h4>
+				<div class="inner-preview pad">
 			        ${render_track_preview(false, true)}
 			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="select">
+				<div class="setting-group">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.default_timeframe)}</h5>
 			            </div>
@@ -119118,7 +119118,7 @@ var bleh = (() => {
       in_settings: true
     })}
 			        </div>
-			        <div class="setting" data-type="select">
+					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl2(trans.amount_to_display)}</h5>
 			            </div>
@@ -119129,13 +119129,13 @@ var bleh = (() => {
       in_settings: true
     })}
 			        </div>
-			    </div>
-			    <div class="settings-footer">
-			        <button type="submit" class="btn-primary save">
+				</div>
+				<div class="settings-footer">
+					<button type="submit" class="btn-primary save">
 			            ${tl2(trans.save)}
 			        </button>
-			        <input type="hidden" value="chart" name="submit">
-			    </div>
+					<input type="hidden" value="chart" name="submit">
+				</div>
 			</form>
 		`);
   }
@@ -119699,53 +119699,54 @@ var bleh = (() => {
     render(panel, html`
 			<h4>${tl2(trans.block_list)}</h4>
 			<div class="user-top-panel">
-			    <div class="user-top-avatar user-top-avatar-side-left">
-			        <div class="bleh-icon"></div>
-			    </div>
-			    <img
-			        class="user-top-avatar user-top-avatar-main"
-			        src=${avatar(auth.avatar, "avatar300s")}
-			        alt=${auth.name}
-			    />
-			    <div class="user-top-avatar user-top-avatar-side-right">
-			        <div class="bleh-icon"></div>
-			    </div>
+				<div class="user-top-avatar user-top-avatar-side-left">
+					<div class="bleh-icon"></div>
+				</div>
+				<img
+					class="user-top-avatar user-top-avatar-main"
+					src=${avatar(auth.avatar, "avatar300s")}
+					alt=${auth.name}
+				/>
+				<div class="user-top-avatar user-top-avatar-side-right">
+					<div class="bleh-icon"></div>
+				</div>
 			</div>
 			${alert2}
-			<form action="${root}settings/privacy#ignorelist" name="ignorelist" method="post">
-			    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token} />
-			    <div class="setting-group">
-			        <div class="setting v" data-type="text">
-			            <div class="heading">
-			                <h5>${tl2(trans.profile)}</h5>
-			            </div>
-			            <div class="input-container content-form">
-			                <input
-			                    type="text"
-			                    maxlength="80"
-			                    id="id_user"
-			                    name="user"
-			                    placeholder=${tl2(trans.enter_username)}
-			                />
-			                <input
-			                    type="hidden"
-			                    name="listaction"
-			                    value="add"
-			                />
-			                <input
-			                    type="hidden"
-			                    name="submit"
-			                    value="ignorelist"
-			                />
-			                <button
-			                    class="btn primary icon block colourful danger-subtle"
-			                    type="submit"
-			                >
+			<form action="${root}settings/privacy#ignorelist" name="ignorelist"
+				method="post">
+				<input type="hidden" name="csrfmiddlewaretoken" value=${page.token} />
+				<div class="setting-group">
+					<div class="setting v" data-type="text">
+						<div class="heading">
+							<h5>${tl2(trans.profile)}</h5>
+						</div>
+						<div class="input-container content-form">
+							<input
+								type="text"
+								maxlength="80"
+								id="id_user"
+								name="user"
+								placeholder=${tl2(trans.enter_username)}
+							/>
+							<input
+								type="hidden"
+								name="listaction"
+								value="add"
+							/>
+							<input
+								type="hidden"
+								name="submit"
+								value="ignorelist"
+							/>
+							<button
+								class="btn primary icon block colourful danger-subtle"
+								type="submit"
+							>
 			                    ${tl2(trans.block)}
 			                </button>
-			            </div>
-			        </div>
-			    </div>
+						</div>
+					</div>
+				</div>
 			</form>
 			<div class="setting-group">
 			    ${new_list}
@@ -119758,15 +119759,15 @@ var bleh = (() => {
 			<div class="sep" />
 			<h5>${tl2(trans.when_blocked)}</h5>
 			<div class="to-consider">
-			    <ul class="to-consider-good">
-			        <li>${tl2(trans.blocked_user_public)}</li>
-			        <li>${tl2(trans.blocked_user_message)}</li>
-			        <li>${tl2(trans.blocked_user_new_shouts)}</li>
-			    </ul>
-			    <ul class="to-consider-bad">
-			        <li>${tl2(trans.blocked_user_old_shouts)}</li>
-			        <li>${tl2(trans.blocked_user_view_profile)}</li>
-			    </ul>
+				<ul class="to-consider-good">
+					<li>${tl2(trans.blocked_user_public)}</li>
+					<li>${tl2(trans.blocked_user_message)}</li>
+					<li>${tl2(trans.blocked_user_new_shouts)}</li>
+				</ul>
+				<ul class="to-consider-bad">
+					<li>${tl2(trans.blocked_user_old_shouts)}</li>
+					<li>${tl2(trans.blocked_user_view_profile)}</li>
+				</ul>
 			</div>
 		`);
   }
@@ -123199,7 +123200,8 @@ var bleh = (() => {
 				${icon({
         name: icons.animated_dots
       })}
-				<button class="btn primary icon" data-type="plot" onclick=${() => add_data_point()} ref=${(el) => add_data_point_btn = el}>
+				<button class="btn primary icon" data-type="plot" onclick=${() => add_data_point()}
+					ref=${(el) => add_data_point_btn = el}>
 				    ${tl2(trans.plot.name)}
 				</button>
 			`);
@@ -123785,7 +123787,10 @@ var bleh = (() => {
       icon_name = icons.artist;
     }
     if (fancy) {
-      return html`<span class="bleh-icon" data-type=${icon_name} style="--icon: var(--mask)" />${text4}`;
+      return html`
+			<span class="bleh-icon" data-type=${icon_name}
+				style="--icon: var(--mask)" />${text4}
+		`;
     }
     return text4;
   }
@@ -123799,7 +123804,10 @@ var bleh = (() => {
       icon_name = icons.users;
     }
     if (fancy) {
-      return html`<span class="bleh-icon" data-type=${icon_name} style="--icon: var(--mask)" />${user}`;
+      return html`
+			<span class="bleh-icon" data-type=${icon_name}
+				style="--icon: var(--mask)" />${user}
+		`;
     }
     return user;
   }
@@ -127183,7 +127191,7 @@ var bleh = (() => {
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
-    built_on: "2026-09-26T23:22:20.468Z"
+    built_on: "2026-10-02T17:11:24.290Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
