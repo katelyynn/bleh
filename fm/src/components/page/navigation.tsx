@@ -535,7 +535,7 @@ export function append_nav() {
 				accented
 				href='https://github.com/katelyynn/lotus/issues/new/choose'
 				external
-				data-type='lotus'
+				className='lotus'
 			>
 				<Icon name={icons.lotus} />
 				{tl(trans.suggest_correction)}

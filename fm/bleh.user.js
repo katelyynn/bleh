@@ -109495,7 +109495,7 @@ var bleh = (() => {
           accented: true,
           href: "https://github.com/katelyynn/lotus/issues/new/choose",
           external: true,
-          "data-type": "lotus",
+          className: "lotus",
           children: [
             /* @__PURE__ */ jsx(Icon, {
               name: icons.lotus
