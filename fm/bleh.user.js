@@ -87198,10 +87198,11 @@ var bleh = (() => {
     });
     const values = [];
     const dates = [];
+    const isos = [];
     page.state.glacier.links = [];
-    await collect_day_range(part_2, values, dates);
-    await collect_day_range(part_1, values, dates);
-    render_graph(container, values, dates, axes);
+    await collect_day_range(part_2, values, dates, isos);
+    await collect_day_range(part_1, values, dates, isos);
+    render_graph(container, values, dates, isos, axes);
     useSettings.on("theme", () => {
       re_render();
     });
@@ -87210,7 +87211,7 @@ var bleh = (() => {
     });
     function re_render() {
       if (!container || !container.isConnected) return;
-      render_graph(container, values, dates, axes);
+      render_graph(container, values, dates, isos, axes);
     }
     const slice2 = values.slice(-30);
     let sum = 0;
@@ -87261,7 +87262,7 @@ var bleh = (() => {
       })
     }));
   }
-  function render_graph(container, values, dates, axes) {
+  function render_graph(container, values, dates, isos, axes) {
     prep_chart_colours();
     const scrobble_canvas_container = container.querySelector(".scrobble-canvas-container");
     scrobble_canvas_container.innerHTML = "";
@@ -87317,18 +87318,23 @@ var bleh = (() => {
       ]
     }));
     if (useSettings.get("profile_summary_pie_chart")) {
+      const monthly = {};
+      isos.forEach((date, i3) => {
+        const month = DateTime.fromISO(date).toFormat("yyyy-MM");
+        monthly[month] = (monthly[month] ?? 0) + values[i3];
+      });
+      const monthly_dates = Object.keys(monthly).map((date) => DateTime.fromISO(date).toFormat("MMM yyyy"));
       const scrobble_canvas_2 = document.createElement("canvas");
       scrobble_canvas_2.classList.add("scrobble-canvas", "monthly-canvas-pie");
       const scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext("2d"), {
         type: "pie",
         data: {
-          labels: dates,
+          labels: monthly_dates,
           datasets: [
             {
-              data: values,
+              data: Object.values(monthly),
               borderWidth: 2,
               backgroundColor: [
-                page.state.chart_colours.link_bg_col,
                 page.state.chart_colours.link_bg_col,
                 page.state.chart_colours.link_bg_col,
                 page.state.chart_colours.link_col
@@ -87348,7 +87354,7 @@ var bleh = (() => {
       }));
     }
   }
-  async function collect_day_range(start2, values, dates) {
+  async function collect_day_range(start2, values, dates, isos) {
     const end2 = start2.plus({
       days: 30
     });
@@ -87367,6 +87373,7 @@ var bleh = (() => {
       const date = DateTime.fromISO(url.searchParams.get("from") || "");
       values.push(value);
       dates.push(date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY));
+      isos.push(url.searchParams.get("from") || "");
       page.state.glacier.links.push(link);
     });
     return {

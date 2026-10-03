@@ -34,12 +34,13 @@ export async function collect_last_60(
 
 	const values: number[] = [];
 	const dates: string[] = [];
+	const isos: string[] = [];
 	page.state.glacier.links = [];
 
-	await collect_day_range(part_2, values, dates);
-	await collect_day_range(part_1, values, dates);
+	await collect_day_range(part_2, values, dates, isos);
+	await collect_day_range(part_1, values, dates, isos);
 
-	render_graph(container, values, dates, axes);
+	render_graph(container, values, dates, isos, axes);
 	useSettings.on('theme', () => {
 		re_render();
 	});
@@ -50,7 +51,7 @@ export async function collect_last_60(
 	function re_render() {
 		if (!container || !container.isConnected) return;
 
-		render_graph(container, values, dates, axes);
+		render_graph(container, values, dates, isos, axes);
 	}
 
 	const slice = values.slice(-30);
@@ -121,6 +122,7 @@ function render_graph(
 	container: Element,
 	values: number[],
 	dates: string[],
+	isos: string[],
 	axes: Element,
 ) {
 	prep_chart_colours();
@@ -186,6 +188,18 @@ function render_graph(
 	);
 
 	if (useSettings.get('profile_summary_pie_chart')) {
+		const monthly: Record<string, number> = {};
+
+		isos.forEach((date, i) => {
+			const month = DateTime.fromISO(date).toFormat('yyyy-MM');
+
+			monthly[month] = (monthly[month] ?? 0) + values[i];
+		});
+
+		const monthly_dates = Object.keys(monthly).map((date) =>
+			DateTime.fromISO(date).toFormat('MMM yyyy')
+		);
+
 		const scrobble_canvas_2 = document.createElement('canvas');
 		scrobble_canvas_2.classList.add(
 			'scrobble-canvas',
@@ -195,13 +209,12 @@ function render_graph(
 		const scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
 			type: 'pie',
 			data: {
-				labels: dates,
+				labels: monthly_dates,
 				datasets: [
 					{
-						data: values,
+						data: Object.values(monthly),
 						borderWidth: 2,
 						backgroundColor: [
-							page.state.chart_colours.link_bg_col,
 							page.state.chart_colours.link_bg_col,
 							page.state.chart_colours.link_bg_col,
 							page.state.chart_colours.link_col,
@@ -228,6 +241,7 @@ async function collect_day_range(
 	start: DateTime,
 	values: number[],
 	dates: string[],
+	isos: string[],
 ) {
 	const end = start.plus({ days: 30 });
 
@@ -263,6 +277,7 @@ async function collect_day_range(
 
 		values.push(value);
 		dates.push(date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY));
+		isos.push(url.searchParams.get('from') || '');
 		page.state.glacier.links.push(link);
 	});
 
