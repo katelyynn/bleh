@@ -168,7 +168,7 @@ export function visual() {
 					<SettingRange bind='font_weight' />
 					<SettingRange bind='font_weight_medium' />
 					<SettingRange bind='font_weight_bold' />
-					<SettingSwitch bind='font_emoji' />
+					<SettingCheckbox bind='font_emoji' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>

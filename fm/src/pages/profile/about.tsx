@@ -122,6 +122,7 @@ export function profile_about(
 					)}
 				<SeeMore
 					blend
+					chibi
 					iconPlacement='left'
 					icon={icons.more}
 					ref={open_settings}

@@ -5,13 +5,15 @@
  */
 
 import { ReactNode } from 'jsx-dom';
-import type { ClassNames, createRef } from 'jsx-dom';
+import type { ClassNames, createRef, ReactElement } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
 import { useSettings } from '@/page.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 interface SeeMoreProps {
 	ref?: ReturnType<typeof createRef>;
+	chibi?: boolean;
 	href?: string;
 	icon?: string;
 	external?: boolean;
@@ -25,6 +27,7 @@ interface SeeMoreProps {
 
 export function SeeMore({
 	ref,
+	chibi,
 	href,
 	icon,
 	external = false,
@@ -40,6 +43,7 @@ export function SeeMore({
 		iconPlacement == 'left' && 'left-icon',
 		blend && 'blend-v2-btn',
 		colourful && 'colourful',
+		chibi && 'chibi-see-more',
 		className && className,
 	];
 
@@ -47,8 +51,10 @@ export function SeeMore({
 		icon = icons.external;
 	}
 
+	let elem: ReactElement;
+
 	if (!href && onClick) {
-		return (
+		elem = (
 			<button
 				type='button'
 				class={classes}
@@ -65,28 +71,37 @@ export function SeeMore({
 				)}
 			</button>
 		);
+	} else {
+		elem = (
+			<a
+				class={classes}
+				href={href}
+				target={external ? '_blank' : undefined}
+				onClick={onClick}
+				data-see-more='true'
+				ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
+			>
+				{iconPlacement == 'left' && (
+					<Icon
+						name={icon || icons.arrow_left}
+					/>
+				)}
+				{children}
+				{iconPlacement == 'right' && (
+					<Icon name={icon || icons.arrow_right} />
+				)}
+			</a>
+		);
 	}
 
-	return (
-		<a
-			class={classes}
-			href={href}
-			target={external ? '_blank' : undefined}
-			onClick={onClick}
-			data-see-more='true'
-			ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
-		>
-			{iconPlacement == 'left' && (
-				<Icon
-					name={icon || icons.arrow_left}
-				/>
-			)}
-			{children}
-			{iconPlacement == 'right' && (
-				<Icon name={icon || icons.arrow_right} />
-			)}
-		</a>
-	);
+	if (chibi) {
+		hover_tooltip(
+			elem,
+			<Tooltip>{children}</Tooltip>,
+		);
+	}
+
+	return elem;
 }
 
 interface SeeMoreGroupProps {

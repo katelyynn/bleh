@@ -10,12 +10,16 @@ import { prep_chart_colours } from '@/components/music/chart.ts';
 import { Chart } from '@/main.ts';
 import { useSettings } from '@/page.ts';
 import { GraphBlockElement } from '@/components/summary/graph.tsx';
-import { hover_tooltip } from '@/components/shared/tooltips.tsx';
+import { hover_tooltip, menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
 import { lang, tl, trans } from '@/build/trans';
 import { graph_block_level } from '@/components/profile/summary.tsx';
 import { PanelHead, PanelHeadExtra } from '@/components/text/head.tsx';
 import { icons } from '../shared/icon';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { createRef } from 'jsx-dom';
+import { MenuContents } from '@/components/menu/menu.tsx';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 
 export async function collect_last_60(
 	container: Element,
@@ -37,10 +41,17 @@ export async function collect_last_60(
 
 	render_graph(container, values, dates, axes);
 	useSettings.on('theme', () => {
+		re_render();
+	});
+	useSettings.on('profile_summary_pie_chart', () => {
+		re_render();
+	});
+
+	function re_render() {
 		if (!container || !container.isConnected) return;
 
 		render_graph(container, values, dates, axes);
-	});
+	}
 
 	const slice = values.slice(-30);
 
@@ -74,6 +85,8 @@ export async function collect_last_60(
 		}
 	});
 
+	const more = createRef();
+
 	title.replaceChildren(
 		<PanelHead icon={icons.insight} margin={false}>
 			{tl(trans.insight)}
@@ -82,7 +95,25 @@ export async function collect_last_60(
 					v: sum.toLocaleString(lang),
 				})}
 			</PanelHeadExtra>
+			<PanelHeadExtra>
+				<SeeMore
+					chibi
+					blend
+					iconPlacement='left'
+					icon={icons.more}
+					ref={more}
+				>
+					{tl(trans.more)}
+				</SeeMore>
+			</PanelHeadExtra>
 		</PanelHead>,
+	);
+
+	menu_tooltip(
+		more.current,
+		<MenuContents>
+			<MenuCheckbox bind='profile_summary_pie_chart' />
+		</MenuContents>,
 	);
 }
 
@@ -153,6 +184,44 @@ function render_graph(
 			<div class={['summary-line-value', 'minimum']}>{min}</div>
 		</>,
 	);
+
+	if (useSettings.get('profile_summary_pie_chart')) {
+		const scrobble_canvas_2 = document.createElement('canvas');
+		scrobble_canvas_2.classList.add(
+			'scrobble-canvas',
+			'monthly-canvas-pie',
+		);
+
+		const scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
+			type: 'pie',
+			data: {
+				labels: dates,
+				datasets: [
+					{
+						data: values,
+						borderWidth: 2,
+						backgroundColor: [
+							page.state.chart_colours.link_bg_col,
+							page.state.chart_colours.link_bg_col,
+							page.state.chart_colours.link_bg_col,
+							page.state.chart_colours.link_col,
+						],
+						borderColor: page.state.chart_colours.bg_col,
+						pointRadius: 0,
+						pointHitRadius: 20,
+						tension: 0.1,
+					},
+				],
+			},
+			options: page.state.chart_library_pie_options,
+		});
+
+		scrobble_canvas_container.appendChild(
+			<div class='monthly-chart-pie'>
+				{scrobble_canvas_2}
+			</div>,
+		);
+	}
 }
 
 async function collect_day_range(

@@ -6752,26 +6752,7 @@ export const trans = {
 		},
 	},
 	font_emoji: {
-		name: {
-			en: 'Emoji compatibility',
-			de: 'Emoji-Kompatibilität',
-			es: 'Compatibilidad de emojis',
-			it: 'Compatibilità con le emoji',
-			pt: 'Compatibilidade de emojis',
-			sv: 'Emoji-kompatibilitet',
-			ru: 'Совместимость с эмодзи',
-			pl: 'Kompatybilność emoji',
-		},
-		body: {
-			en: 'Required to render emoji properly before Windows 11',
-			de: 'Erforderlich, um Emojis vor Windows 11 richtig darzustellen',
-			es: 'Requerido para renderizar emojis correctamente antes de Windows 11',
-			it: 'Richiesto per visualizzare correttamente le emoji prima di Windows 11',
-			pt: 'Necessário para renderizar emojis corretamente antes do Windows 11',
-			sv: 'Krävs för att visa emojis korrekt innan Windows 11',
-			ru: 'Требуется для правильного отображения эмодзи до Windows 11',
-			pl: 'Wymagane do poprawnego renderowania emoji przed Windows 11',
-		},
+		en: 'Use a fallback font for emojis',
 	},
 	font_example: {
 		// the trans flag is used to demonstrate the improper
@@ -12725,6 +12706,9 @@ export const trans = {
 	insight: {
 		// used on profiles
 		en: 'Insight',
+	},
+	profile_summary_pie_chart: {
+		en: 'Show pie chart',
 	},
 } as const satisfies Record<string, any>;
 

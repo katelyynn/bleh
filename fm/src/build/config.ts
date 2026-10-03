@@ -697,8 +697,7 @@ export const settings_store: Record<string, setting_instance> = {
 	},
 	font_emoji: {
 		default: true,
-		title: trans.font_emoji.name,
-		body: trans.font_emoji.body,
+		title: trans.font_emoji,
 		platforms: ['win32', 'linux', 'android', 'other'],
 		bubble: true,
 	},
@@ -1148,5 +1147,9 @@ export const settings_store: Record<string, setting_instance> = {
 			},
 		},
 		incompatible: { theme: 'yuzu' },
+	},
+	profile_summary_pie_chart: {
+		default: false,
+		title: trans.profile_summary_pie_chart,
 	},
 };

@@ -223,6 +223,7 @@ export const icons = {
 	insight: 'insight',
 	dot: 'dot',
 	taste: 'taste',
+	emoji: 'emoji',
 };
 
 interface icon {
