@@ -62,8 +62,8 @@ export async function collect_last_60(
 		slice.length;
 
 	slice.forEach((value, i) => {
-		const date = dates[i];
-		const link = page.state.glacier.links[i];
+		const date = dates.slice(-30)[i];
+		const link = page.state.glacier.links.slice(-30)[i];
 
 		const elem = graph_blocks[i];
 		if (!elem) return;

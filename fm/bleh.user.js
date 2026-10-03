@@ -87218,8 +87218,8 @@ var bleh = (() => {
     const max3 = Math.max(...slice2);
     const avg = slice2.reduce((sum2, val) => sum2 + val, 0) / slice2.length;
     slice2.forEach((value, i3) => {
-      const date = dates[i3];
-      const link = page.state.glacier.links[i3];
+      const date = dates.slice(-30)[i3];
+      const link = page.state.glacier.links.slice(-30)[i3];
       const elem = graph_blocks[i3];
       if (!elem) return;
       elem.href = link;
