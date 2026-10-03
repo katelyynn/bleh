@@ -5,7 +5,7 @@
 
 	--header-size: 180px;
 
-	--w: 1300px;
+	--w: min(1300px, 90vw);
 	--h: calc(99px + var(--tab-size) + var(--header-size));
 
 	&[data-page-type="events"],
@@ -75,7 +75,7 @@
 			display: none;
 		}
 
-		& > .background-inner {
+		&>.background-inner {
 			&:before {
 				display: none;
 			}
@@ -87,7 +87,7 @@
 	position: absolute;
 	inset: 0;
 	background-position: center;
-	background-size: 100%;
+	background-size: cover;
 	background-repeat: no-repeat;
 
 	--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
