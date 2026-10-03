@@ -2285,7 +2285,7 @@ export const trans = {
 				// a nod to the Deadlock character 'Graves'
 				// https://deadlock.wiki/Graves#Typography
 				en: 'Graves',
-				pt: 'Graves',  //since its a reference to a character ill keep it as graves instead of literally translating it 
+				pt: 'Mortícia',  //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
 			},
 			gloom: {
 				en: 'Gloom',
