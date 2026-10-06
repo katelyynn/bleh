@@ -94,6 +94,7 @@ import { UserSelect } from '@/components/select/user.tsx';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { ComparisonBars } from '@/components/minis/compare.tsx';
 import { keys } from '@/components/settings/storage.ts';
+import { useSeasons } from '@/page.ts';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1210,6 +1211,22 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Brand'>
+						<div class='brand-container-demo'>
+							<BrandDemo />
+						</div>
+						<div class='brand-container-demo'>
+							<BrandDemo mask />
+						</div>
+						<div class='brand-container-demo empty'>
+							<BrandDemo />
+							<BrandDemo small />
+						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
 
@@ -1483,6 +1500,45 @@ export function mualani() {
 			</section>
 		`,
 	);
+}
+
+interface BrandDemoProps {
+	small?: boolean;
+	mask?: boolean;
+}
+
+function BrandDemo({
+	small,
+	mask,
+}: BrandDemoProps) {
+	const inner = createRef();
+
+	const elem = (
+		<div
+			class={[
+				'brand-demo',
+				small && 'brand-demo-small',
+			]}
+		>
+			<div
+				class={['brand-inner', mask && 'brand-demo-mask']}
+				ref={inner}
+			/>
+		</div>
+	);
+
+	function update() {
+		elem.setAttribute('data-season', useSeasons.get().current?.id || '');
+		inner.current.setAttribute(
+			'data-season',
+			useSeasons.get().current?.id || '',
+		);
+	}
+
+	update();
+	useSeasons.on(update);
+
+	return elem;
 }
 
 function dialog_loop() {

@@ -73,16 +73,20 @@ const handle_update = (e: Event) => {
 };
 
 export function update_branding_type(state = settings.branding_type) {
+	const season = useSeasons.get().current?.id || '';
+
 	if (state == 'bleh') {
 		page.state.home_link.replaceChildren(
-			<div class={['home-logo', 'bleh-logo']}>
-				{version.brand}
+			<div class={['home-logo', 'bleh-logo']} data-season={season}>
+				<div class='brand-inner' data-season={season}>
+					{version.brand}
+				</div>
 			</div>,
 		);
 	} else if (state == 'lastfm') {
 		page.state.home_link.replaceChildren(
-			<div class={['home-logo', 'lastfm-logo']}>
-				{'Last.fm'}
+			<div class={['home-logo', 'lastfm-logo']} data-season={season}>
+				<div class='brand-inner' data-season={season}>{'Last.fm'}</div>
 			</div>,
 		);
 	}
