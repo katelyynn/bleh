@@ -6,8 +6,8 @@
 // @author       katelyn
 // @match        https://www.last.fm/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=last.fm
-// @updateURL    https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
-// @downloadURL  https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js
+// @updateURL    https://bleh.yuzu.pet/download
+// @downloadURL  https://bleh.yuzu.pet/download
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
 // @connect      musicbrainz.org
@@ -38590,36 +38590,37 @@ var bleh = (() => {
   }
   function download_with_progress(url, func) {
     return new Promise((resolve2, reject) => {
-      let xhr = new XMLHttpRequest();
-      xhr.open("GET", url, true);
-      xhr.responseType = "blob";
-      xhr.onprogress = (event3) => {
-        if (event3.lengthComputable) {
-          const percent = Math.round(event3.loaded / event3.total * 100);
-          func(percent);
-          log(`downloading ${percent}%`, "download", "info", {
+      GM_xmlhttpRequest({
+        method: "GET",
+        url,
+        responseType: "blob",
+        onprogress: (e5) => {
+          if (e5.lengthComputable) {
+            const percent = Math.round(e5.loaded / e5.total * 100);
+            func?.(percent);
+            log(`downloading ${percent}%`, "download", "info", {
+              url
+            });
+          }
+        },
+        onload: (res) => {
+          if (res.status == 200) {
+            resolve2(res.response);
+            log(`downloaded ${url}`, "download");
+          } else {
+            reject(new Error(`download failed: ${res.status}`));
+            log(`download failed: ${res.status}`, "download", "error", {
+              url
+            });
+          }
+        },
+        onerror: (e5) => {
+          reject(e5);
+          log("network error", "download", "error", {
             url
           });
         }
-      };
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          resolve2(xhr.response);
-          log(`downloaded ${url}`, "download");
-        } else {
-          reject(new Error(`download failed: ${xhr.status}`));
-          log(`download failed: ${xhr.status}`, "download", "error", {
-            url
-          });
-        }
-      };
-      xhr.onerror = () => {
-        reject(new Error("network error"));
-        log("network error", "download", "error", {
-          url
-        });
-      };
-      xhr.send();
+      });
     });
   }
   function pad2(num3) {
@@ -64243,7 +64244,7 @@ var bleh = (() => {
         }),
         /* @__PURE__ */ jsx(SeeMore, {
           className: "oracle-button",
-          href: "https://github.com/katelyynn/bleh/issues/new/choose",
+          href: "https://bleh.yuzu.pet/issues",
           external: true,
           children: tl2(trans.send_feedback)
         })
@@ -64647,7 +64648,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://github.com/katelyynn/bleh>`,
+          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -64781,7 +64782,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://github.com/katelyynn/bleh>`,
+          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -64849,7 +64850,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://github.com/katelyynn/bleh>`,
+          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -65046,7 +65047,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://github.com/katelyynn/bleh>`,
+          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -65786,7 +65787,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://github.com/katelyynn/bleh>`,
+          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -109237,7 +109238,7 @@ var bleh = (() => {
               type: "button",
               class: "btn-primary",
               onClick: () => {
-                open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
+                open(`https://bleh.yuzu.pet/download`);
               },
               children: tl2(trans.check_for_updates)
             })
@@ -109587,7 +109588,7 @@ var bleh = (() => {
         }),
         /* @__PURE__ */ jsx(Button, {
           menu: true,
-          href: "https://github.com/katelyynn/bleh/issues",
+          href: "https://bleh.yuzu.pet/issues",
           external: true,
           children: [
             /* @__PURE__ */ jsx(Icon, {
@@ -111137,7 +111138,7 @@ var bleh = (() => {
       }
     }
     if (btn) btn.setAttribute("disabled", "");
-    const url = `https://katelyynn.github.io/bleh/fm/src/build/build.json?${Date.now()}`;
+    const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
     download_with_progress(url, (percent) => {
     }).then(async (blob) => {
       const text4 = await blob.text();
@@ -111201,7 +111202,7 @@ var bleh = (() => {
     });
   }
   function start_update() {
-    open(`https://github.com/katelyynn/bleh/raw/refs/heads/uwu/fm/bleh.user.js?${Math.random()}`);
+    open(`https://bleh.yuzu.pet/download?${Math.random()}`);
     dialog({
       id: "bleh_update",
       title: tl2(trans.update_to_version).replace("{v}", localStorage.getItem("bleh_update_to") || "unknown"),
@@ -111369,7 +111370,7 @@ var bleh = (() => {
                 /* @__PURE__ */ jsx(SeeMoreGroup, {
                   children: [
                     /* @__PURE__ */ jsx(SeeMore, {
-                      href: "https://github.com/katelyynn/bleh/issues/new/choose",
+                      href: "https://bleh.yuzu.pet/issues",
                       external: true,
                       children: tl2(trans.report_issue)
                     }),
@@ -122130,9 +122131,9 @@ var bleh = (() => {
       sponsoring = Object.keys(sponsor_list.users).length - 2;
     }
     const bleh_website2 = "https://bleh.yuzu.pet";
-    const contributors = "https://github.com/katelyynn/bleh/graphs/contributors";
+    const contributors = "https://bleh.yuzu.pet/contributors";
     const source = "https://yuzu.pet/~bleh";
-    const issue = "https://github.com/katelyynn/bleh/issues/new/choose";
+    const issue = "https://bleh.yuzu.pet/issues";
     footer.appendChild(/* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx("div", {
@@ -126513,6 +126514,7 @@ var bleh = (() => {
       "https://*.github.io",
       "https://ws.audioscrobbler.com",
       "https://*.katelyn.moe",
+      "https://*.yuzu.pet",
       "https://translate.googleapis.com"
     ],
     "font-src": [
@@ -126697,10 +126699,10 @@ var bleh = (() => {
             </div>
             <div class="modal-footer">
                 <div class="fill"></div>
-                <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                <a class="see-more" href="https://bleh.yuzu.pet/issues" target="_blank">
                     Report bug now
                 </a>
-                <a class="see-more" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js?${Math.random}" target="_blank">
+                <a class="see-more" href="https://bleh.yuzu.pet/download?${Math.random}" target="_blank">
                     Check for updates
                 </a>
                 <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
@@ -127248,7 +127250,7 @@ var bleh = (() => {
     sku: "violet",
     bio: "bleh!!! ^-^",
     author: "katelyn",
-    url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
+    url: "https://bleh.yuzu.pet/download",
     built_on: "2026-10-02T17:12:51.723Z"
   };
 

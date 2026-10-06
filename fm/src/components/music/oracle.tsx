@@ -582,8 +582,7 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
 			onload: function (response) {
@@ -778,8 +777,7 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
 			onload: function (response) {
@@ -867,8 +865,7 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
 			onload: function (response) {
@@ -1184,8 +1181,7 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
 			onload: function (response) {
@@ -2437,8 +2433,7 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
 			onload: function (response) {

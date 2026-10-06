@@ -336,37 +336,38 @@ export function download_with_progress(
 	func?: (percent: number) => void,
 ) {
 	return new Promise((resolve, reject) => {
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', url, true);
-		xhr.responseType = 'blob';
+		GM_xmlhttpRequest({
+			method: 'GET',
+			url,
+			responseType: 'blob',
 
-		xhr.onprogress = (event) => {
-			if (event.lengthComputable) {
-				const percent = Math.round((event.loaded / event.total) * 100);
-				func(percent);
-				log(`downloading ${percent}%`, 'download', 'info', {
-					url: url,
-				});
-			}
-		};
+			onprogress: (e) => {
+				if (e.lengthComputable) {
+					const percent = Math.round((e.loaded / e.total) * 100);
+					func?.(percent);
+					log(`downloading ${percent}%`, 'download', 'info', {
+						url: url,
+					});
+				}
+			},
 
-		xhr.onload = () => {
-			if (xhr.status === 200) {
-				resolve(xhr.response);
-				log(`downloaded ${url}`, 'download');
-			} else {
-				reject(new Error(`download failed: ${xhr.status}`));
-				log(`download failed: ${xhr.status}`, 'download', 'error', {
-					url: url,
-				});
-			}
-		};
+			onload: (res) => {
+				if (res.status == 200) {
+					resolve(res.response);
+					log(`downloaded ${url}`, 'download');
+				} else {
+					reject(new Error(`download failed: ${res.status}`));
+					log(`download failed: ${res.status}`, 'download', 'error', {
+						url: url,
+					});
+				}
+			},
 
-		xhr.onerror = () => {
-			reject(new Error('network error'));
-			log('network error', 'download', 'error', { url: url });
-		};
-		xhr.send();
+			onerror: (e) => {
+				reject(e);
+				log('network error', 'download', 'error', { url: url });
+			},
+		});
 	});
 }
 

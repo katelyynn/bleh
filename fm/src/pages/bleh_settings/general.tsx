@@ -83,7 +83,7 @@ export function general() {
 					<SubText>{tl(trans.issues_updating)}</SubText>
 					<SeeMoreGroup>
 						<SeeMore
-							href='https://github.com/katelyynn/bleh/issues/new/choose'
+							href='https://bleh.yuzu.pet/issues'
 							external
 						>
 							{tl(trans.report_issue)}

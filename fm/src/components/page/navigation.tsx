@@ -169,7 +169,7 @@ export function append_nav() {
 								class='btn-primary'
 								onClick={() => {
 									open(
-										`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
+										`https://bleh.yuzu.pet/download`,
 									);
 								}}
 							>
@@ -551,7 +551,7 @@ export function append_nav() {
 			</Button>
 			<Button
 				menu
-				href='https://github.com/katelyynn/bleh/issues'
+				href='https://bleh.yuzu.pet/issues'
 				external
 			>
 				<Icon name={icons.issue} />

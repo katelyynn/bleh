@@ -31,10 +31,9 @@ export function bleh_footer() {
 	}
 
 	const bleh_website = 'https://bleh.yuzu.pet';
-	const contributors =
-		'https://github.com/katelyynn/bleh/graphs/contributors';
+	const contributors = 'https://bleh.yuzu.pet/contributors';
 	const source = 'https://yuzu.pet/~bleh';
-	const issue = 'https://github.com/katelyynn/bleh/issues/new/choose';
+	const issue = 'https://bleh.yuzu.pet/issues';
 
 	footer.appendChild(
 		<>

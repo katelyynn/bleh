@@ -143,6 +143,7 @@ const CspPolicies: PolicyMap = {
 		'https://*.github.io',
 		'https://ws.audioscrobbler.com',
 		'https://*.katelyn.moe',
+		'https://*.yuzu.pet',
 		'https://translate.googleapis.com',
 	],
 	'font-src': [
