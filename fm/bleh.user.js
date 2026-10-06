@@ -55541,7 +55541,7 @@ var bleh = (() => {
   }
 
   // src/components/button/button.tsx
-  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, outline, href, external, onClick, className: className2, children, tooltip, opens, onUpdate, ...props }) {
+  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, outline, subtle, href, external, onClick, className: className2, children, tooltip, opens, onUpdate, ...props }) {
     const classes = [
       "btn",
       "flex-button",
@@ -55549,6 +55549,7 @@ var bleh = (() => {
       primary && "primary",
       colourful && "colourful",
       outline && "outline-btn",
+      subtle && "subtle",
       menu && "dropdown-menu-clickable-item v2",
       menu && accented && "accented-menu-item",
       opens != null && "select-button",
@@ -55643,9 +55644,12 @@ var bleh = (() => {
       class: "button-combo-sep"
     });
   }
-  function ButtonGroup({ children }) {
+  function ButtonGroup({ extra, children }) {
     return /* @__PURE__ */ jsx("div", {
-      class: "button-group",
+      class: [
+        "button-group",
+        extra && "extra"
+      ],
       children
     });
   }
@@ -62390,85 +62394,39 @@ var bleh = (() => {
     });
   }
 
-  // src/components/settings/toggle.js
-  function toggle({
-    value = false,
-    type = "toggle",
-    name = "",
-    title = "",
-    body = "",
-    small = "",
-    disabled = false,
-    data: data2 = "",
-    func = null,
-    standalone = true,
-    id = ""
-  }) {
-    let checkbox;
-    let state;
-    const elem = html.node`
-        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
-      if (disabled) return;
-      const current = checkbox.checked;
-      if (func) func(!current);
-      checkbox.checked = !current;
-      state.setAttribute("aria-checked", !current);
-    }}>
-            <div class="heading">
-                <h5>${title}</h5>
-                ${body != "" ? html.node`<p>${body}</p>` : ""}
-                ${small != "" ? html.node`<small>${small}</small>` : ""}
-            </div>
-            ${type == "toggle" ? html.node`
-            <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} />
-                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value} type="button">
-                    <div class="dot" />
-                </button>
-            </div>
-            ` : html.node`
-            <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} disabled=${disabled} />
-                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
-                    <div class="bleh-icon" />
-                </div>
-            </div>
-            `}
-        </div>
-    `;
-    if (value) {
-      checkbox.checked = value;
-    }
-    if (data2) {
-      checkbox.setAttribute("value", data2);
-    }
-    elem.check = () => {
-      if (disabled) return;
-      if (func) func(true);
-      checkbox.checked = true;
-      state.setAttribute("aria-checked", true);
-    };
-    elem.uncheck = () => {
-      if (disabled) return;
-      if (func) func(false);
-      checkbox.checked = false;
-      state.setAttribute("aria-checked", false);
-    };
-    elem.checked = (val) => {
-      if (val == null) return checkbox.checked;
-      if (val) elem.check();
-      else elem.uncheck();
-    };
-    elem.disabled = (state2 = null) => {
-      if (state2 === null) return checkbox.getAttribute("disabled") || false;
-      if (state2 === true) checkbox.setAttribute("disabled", "true");
-      else checkbox.removeAttribute("disabled");
-      return state2;
-    };
-    return elem;
+  // src/components/form/form.tsx
+  function ScrobbleForm({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "new-scrobble-form",
+      children
+    });
+  }
+  function FormCombo({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "form-combo",
+      children
+    });
+  }
+  function FormActions({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "form-actions",
+      children
+    });
+  }
+  function FormInner({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "form-inner",
+      children
+    });
+  }
+  function GenericLabel({ children }) {
+    return /* @__PURE__ */ jsx("p", {
+      class: "generic-label",
+      children
+    });
   }
 
-  // src/components/music/scrobble.ts
+  // src/components/music/scrobble.tsx
   function submit_scrobble({ pre_track = "", pre_album = "", pre_artist = "", pre_album_artist = "", pre_timestamp = 0, func, can_api }) {
     if (can_api == void 0) {
       can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true" || false;
@@ -62478,13 +62436,13 @@ var bleh = (() => {
       return;
     }
     const random = random_list[Math.floor(Math.random() * random_list.length)];
-    let track;
-    let album;
-    let artist;
-    let album_artist;
-    let use_current;
+    const track = createRef();
+    const album = createRef();
+    const artist = createRef();
+    const album_artist = createRef();
+    const use_current = createRef();
     let date;
-    let create_scrobble;
+    const create_scrobble = createRef();
     const max_date = /* @__PURE__ */ new Date();
     max_date.setDate(max_date.getDate() + 1);
     const pre_existing_date = pre_timestamp != 0;
@@ -62500,230 +62458,278 @@ var bleh = (() => {
     dialog({
       id: "submit_scrobble",
       title: tl2(trans.new_scrobble),
-      body: html.node`
-            <div class="new-scrobble-form">
-                <div class="form-combo">
-                    <div class="form-inner">
-                        <p class="generic-label">${tl2(trans.track)}</p>
-                        ${track = input({
-        type: "text",
-        value: pre_track,
-        placeholder: tl2(trans.example, {
-          v: random.track
-        }),
-        warn_if_empty: true
-      })}
-                        <p class="generic-label">${tl2(trans.album)}</p>
-                        ${album = input({
-        type: "text",
-        value: pre_album,
-        placeholder: tl2(trans.example, {
-          v: random.album
-        })
-      })}
-                    </div>
-                    <div class="form-actions">
-                        ${() => {
-        const btn = html.node`
-                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-          const track_val = track.value;
-          const album_val = album.value;
-          if (!track_val && !album_val) return;
-          track.value = album_val;
-          album.value = track_val;
-        }}>
-                                    ${tl2(trans.switch)}
-                                </button>
-                            `;
-        tippy_esm_default(btn, {
-          content: btn.textContent
-        });
-        return btn;
-      }}
-                    </div>
-                </div>
-                <div class="form-combo">
-                    <div class="form-inner">
-                        <p class="generic-label">${tl2(trans.artist)}</p>
-                        ${artist = input({
-        type: "text",
-        value: pre_artist,
-        placeholder: tl2(trans.example, {
-          v: random.artist
-        }),
-        warn_if_empty: true
-      })}
-                        <p class="generic-label">${tl2(trans.album_artist)}</p>
-                        ${album_artist = input({
-        type: "text",
-        value: pre_album_artist,
-        placeholder: tl2(trans.example, {
-          v: random.album_artist
-        })
-      })}
-                    </div>
-                    <div class="form-actions">
-                        ${() => {
-        const btn = html.node`
-                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-          const artist_val = artist.value;
-          const album_artist_val = album_artist.value;
-          if (!artist_val && !album_artist_val) return;
-          artist.value = album_artist_val;
-          album_artist.value = artist_val;
-        }}>
-                                    ${tl2(trans.switch)}
-                                </button>
-                            `;
-        tippy_esm_default(btn, {
-          content: btn.textContent
-        });
-        return btn;
-      }}
-                    </div>
-                </div>
-                <p class="generic-label">${tl2(trans.time)}</p>
-                <div class="toggle-and-time">
-                    ${use_current = toggle({
-        value: !pre_existing_date,
-        type: "checkbox",
-        title: tl2(trans.use_current_time),
-        func: (state) => {
-          date.disabled(state);
-        }
-      })}
-                    ${date = input({
-        type: "date",
-        value: pre_existing_date ? pre_timestamp : null,
-        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
-        disabled: !pre_existing_date,
-        value_in_iso: typeof pre_timestamp == "number"
-      })}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({
-        id: "submit_scrobble"
-      })}>
-                    ${tl2(trans.cancel)}
-                </button>
-                <div class="fill" />
-                <div class="button-group extra">
-                    ${setting({
-        id: "auto_close_scrobble_modal",
-        standalone: true
-      })}
-                    <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
-        if (track.value == "" || artist.value == "") {
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.new_scrobble),
-            body: tl2(trans.missing_fields),
-            type: "error"
-          });
-          return;
-        }
-        track.disabled(true);
-        album.disabled(true);
-        artist.disabled(true);
-        album_artist.disabled(true);
-        use_current.disabled(true);
-        date.disabled(true);
-        create_scrobble.disabled = true;
-        if (album.value != "" && album_artist.value == "") {
-          album_artist.value = artist.value;
-        }
-        const params = {
-          sk: localStorage.getItem("bleh_auth"),
-          artist: artist.value,
-          track: track.value,
-          timestamp: use_current.checked() ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
-        };
-        if (album.value != "") params.album = album.value;
-        if (album_artist.value != "") {
-          params.albumArtist = album_artist.value;
-        }
-        const res = await fetch("https://jufufu.katelyn.moe/api/lastfm", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify({
-            method: "track.scrobble",
-            params
+      body: /* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(ScrobbleForm, {
+            children: [
+              /* @__PURE__ */ jsx(FormCombo, {
+                children: [
+                  /* @__PURE__ */ jsx(FormInner, {
+                    children: [
+                      /* @__PURE__ */ jsx(GenericLabel, {
+                        children: tl2(trans.track)
+                      }),
+                      /* @__PURE__ */ jsx(Input, {
+                        value: pre_track,
+                        placeholder: tl2(trans.example, {
+                          v: random.track
+                        }),
+                        ref: track
+                      }),
+                      /* @__PURE__ */ jsx(GenericLabel, {
+                        children: tl2(trans.album)
+                      }),
+                      /* @__PURE__ */ jsx(Input, {
+                        value: pre_album,
+                        placeholder: tl2(trans.example, {
+                          v: random.album
+                        }),
+                        ref: album
+                      })
+                    ]
+                  }),
+                  /* @__PURE__ */ jsx(FormActions, {
+                    children: /* @__PURE__ */ jsx(Button, {
+                      chibi: true,
+                      subtle: true,
+                      tooltip: tl2(trans.switch),
+                      onClick: () => {
+                        const track_val = track.current.value;
+                        const album_val = album.current.value;
+                        if (!track_val && !album_val) return;
+                        track.current.value = album_val;
+                        album.current.value = track_val;
+                      },
+                      children: [
+                        /* @__PURE__ */ jsx(Icon, {
+                          name: icons.switch
+                        }),
+                        tl2(trans.switch)
+                      ]
+                    })
+                  })
+                ]
+              }),
+              /* @__PURE__ */ jsx(FormCombo, {
+                children: [
+                  /* @__PURE__ */ jsx(FormInner, {
+                    children: [
+                      /* @__PURE__ */ jsx(GenericLabel, {
+                        children: tl2(trans.artist)
+                      }),
+                      /* @__PURE__ */ jsx(Input, {
+                        value: pre_artist,
+                        placeholder: tl2(trans.example, {
+                          v: random.artist
+                        }),
+                        ref: artist
+                      }),
+                      /* @__PURE__ */ jsx(GenericLabel, {
+                        children: tl2(trans.album_artist)
+                      }),
+                      /* @__PURE__ */ jsx(Input, {
+                        value: pre_album_artist,
+                        placeholder: tl2(trans.example, {
+                          v: random.album_artist
+                        }),
+                        ref: album_artist
+                      })
+                    ]
+                  }),
+                  /* @__PURE__ */ jsx(FormActions, {
+                    children: /* @__PURE__ */ jsx(Button, {
+                      chibi: true,
+                      subtle: true,
+                      tooltip: tl2(trans.switch),
+                      onClick: () => {
+                        const artist_val = artist.current.value;
+                        const album_artist_val = album_artist.current.value;
+                        if (!artist_val && !album_artist_val) {
+                          return;
+                        }
+                        artist.current.value = album_artist_val;
+                        album_artist.current.value = artist_val;
+                      },
+                      children: [
+                        /* @__PURE__ */ jsx(Icon, {
+                          name: icons.switch
+                        }),
+                        tl2(trans.switch)
+                      ]
+                    })
+                  })
+                ]
+              }),
+              /* @__PURE__ */ jsx(GenericLabel, {
+                children: tl2(trans.time)
+              }),
+              /* @__PURE__ */ jsx("div", {
+                class: "toggle-and-time",
+                children: [
+                  /* @__PURE__ */ jsx(SettingCheckbox, {
+                    standalone: true,
+                    value: !pre_existing_date,
+                    name: tl2(trans.use_current_time),
+                    ref: use_current,
+                    onChange: (v) => {
+                      date.disabled(v);
+                    }
+                  }),
+                  date = input({
+                    type: "date",
+                    value: pre_existing_date ? pre_timestamp : null,
+                    max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
+                    disabled: !pre_existing_date,
+                    value_in_iso: typeof pre_timestamp == "number"
+                  })
+                ]
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx(ModalFooter, {
+            children: [
+              /* @__PURE__ */ jsx(SeeMore, {
+                iconPlacement: "left",
+                icon: icons.x,
+                onClick: () => {
+                  dialog_rm({
+                    id: "submit_scrobble"
+                  });
+                },
+                children: tl2(trans.cancel)
+              }),
+              /* @__PURE__ */ jsx(FooterFill, {}),
+              /* @__PURE__ */ jsx(ButtonGroup, {
+                extra: true,
+                children: [
+                  /* @__PURE__ */ jsx(SettingCheckbox, {
+                    bind: "auto_close_scrobble_modal",
+                    standalone: true
+                  }),
+                  /* @__PURE__ */ jsx(Button, {
+                    primary: true,
+                    onClick: async () => {
+                      if (track.current.value == "" || artist.current.value == "") {
+                        notify({
+                          id: "submit_scrobble",
+                          title: tl2(trans.new_scrobble),
+                          body: tl2(trans.missing_fields),
+                          type: "error"
+                        });
+                        return;
+                      }
+                      track.current.disabled = true;
+                      album.current.disabled = true;
+                      artist.current.disabled = true;
+                      album_artist.current.disabled = true;
+                      use_current.current.disabled = true;
+                      date.disabled(true);
+                      create_scrobble.current.loading = true;
+                      if (album.current.value != "" && album_artist.current.value == "") {
+                        album_artist.current.value = artist.current.value;
+                      }
+                      const params = {
+                        sk: localStorage.getItem("bleh_auth"),
+                        artist: artist.current.value,
+                        track: track.current.value,
+                        timestamp: use_current.current.value ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
+                      };
+                      if (album.current.value != "") {
+                        params.album = album.current.value;
+                      }
+                      if (album_artist.current.value != "") {
+                        params.albumArtist = album_artist.current.value;
+                      }
+                      const res = await fetch("https://jufufu.katelyn.moe/api/lastfm", {
+                        method: "POST",
+                        headers: {
+                          "content-type": "application/json"
+                        },
+                        body: JSON.stringify({
+                          method: "track.scrobble",
+                          params
+                        })
+                      });
+                      const json = await res.json();
+                      log("received response", "submit scrobble", "info", {
+                        result: json
+                      });
+                      function re_enable() {
+                        track.current.disabled = false;
+                        album.current.disabled = false;
+                        artist.current.disabled = false;
+                        album_artist.current.disabled = false;
+                        use_current.current.disabled = false;
+                        date.disabled(false);
+                        create_scrobble.current.loading = false;
+                      }
+                      if (json.error) {
+                        log("error", "submit scrobble", "error");
+                        notify({
+                          id: "submit_scrobble",
+                          title: tl2(trans.scrobble_failed),
+                          body: json.message,
+                          type: "error",
+                          persist: true
+                        });
+                        re_enable();
+                        return;
+                      }
+                      const error_code = json.scrobbles.scrobble.ignoredMessage.code;
+                      if (error_code > 0) {
+                        log("error", "submit scrobble", "error", {
+                          error_code
+                        });
+                        notify({
+                          id: "submit_scrobble",
+                          title: tl2(trans.scrobble_failed),
+                          body: tl2(trans.scrobble_error_codes[error_code]),
+                          type: "error",
+                          persist: true
+                        });
+                        re_enable();
+                        return;
+                      }
+                      notify({
+                        id: "submit_scrobble",
+                        title: tl2(trans.new_scrobble),
+                        body: params.track,
+                        type: "success"
+                      });
+                      if (settings.auto_close_scrobble_modal) {
+                        dialog_rm({
+                          id: "submit_scrobble"
+                        });
+                      } else {
+                        dialog_rm({
+                          id: "submit_scrobble"
+                        });
+                        submit_scrobble({
+                          pre_track,
+                          pre_album,
+                          pre_artist,
+                          pre_album_artist,
+                          pre_timestamp,
+                          func,
+                          can_api
+                        });
+                      }
+                      if (func) func();
+                    },
+                    ref: create_scrobble,
+                    children: [
+                      /* @__PURE__ */ jsx(Icon, {
+                        name: icons.plus
+                      }),
+                      tl2(trans.scrobble)
+                    ]
+                  })
+                ]
+              })
+            ]
           })
-        });
-        const json = await res.json();
-        log("received response", "submit scrobble", "info", {
-          result: json
-        });
-        function re_enable() {
-          track.disabled(false);
-          album.disabled(false);
-          artist.disabled(false);
-          album_artist.disabled(false);
-          use_current.disabled(false);
-          date.disabled(false);
-          create_scrobble.disabled = false;
-        }
-        if (json.error) {
-          log("error", "submit scrobble", "error");
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: json.message,
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
-        if (error_code > 0) {
-          log("error", "submit scrobble", "error", {
-            error_code
-          });
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: tl2(trans.scrobble_error_codes[error_code]),
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        notify({
-          id: "submit_scrobble",
-          title: tl2(trans.new_scrobble),
-          body: params.track,
-          type: "success"
-        });
-        if (settings.auto_close_scrobble_modal) {
-          dialog_rm({
-            id: "submit_scrobble"
-          });
-        } else {
-          dialog_rm({
-            id: "submit_scrobble"
-          });
-          submit_scrobble({
-            pre_track,
-            pre_album,
-            pre_artist,
-            pre_album_artist,
-            pre_timestamp,
-            func,
-            can_api
-          });
-        }
-        if (func) func();
-      }}>
-                        ${tl2(trans.new)}
-                    </button>
-                </div>
-            </div>
-        `
+        ]
+      })
     });
   }
 
@@ -66804,20 +66810,6 @@ var bleh = (() => {
         text4 && "in-text"
       ],
       ref: ref2,
-      children
-    });
-  }
-
-  // src/components/form/form.tsx
-  function FormInner({ children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "form-inner",
-      children
-    });
-  }
-  function GenericLabel({ children }) {
-    return /* @__PURE__ */ jsx("p", {
-      class: "generic-label",
       children
     });
   }
@@ -93115,7 +93107,7 @@ var bleh = (() => {
   }
 
   // src/components/date/timeframe.tsx
-  function HybridTimeframePicker({ ref: ref2, value, inSettings, disabled = false, onChange }) {
+  function HybridTimeframePicker({ ref: ref2, value, limit, inSettings, disabled = false, onChange }) {
     if (!value) value = "date_preset=LAST_7_DAYS";
     const modal = /* @__PURE__ */ jsx(FloatingWindow, {});
     const alert2 = createRef();
@@ -93123,6 +93115,13 @@ var bleh = (() => {
     let time_to = "";
     let timeframe_valid = true;
     let timeframe_invalid_reason = "";
+    let min3 = "2003-01-01";
+    if (limit) {
+      const now2 = /* @__PURE__ */ new Date();
+      const min_date = min3 ? new Date(min3) : new Date(now2.getTime() - 14 * 24 * 60 * 60 * 1e3);
+      min_date.setHours(0, 0, 0, 0);
+      min3 = DateTime.fromJSDate(min_date).toISODate();
+    }
     const elem = /* @__PURE__ */ jsx("button", {
       type: "button",
       class: [
@@ -93275,7 +93274,7 @@ var bleh = (() => {
                 }),
                 from2 = input({
                   type: "date",
-                  min: "2003-01-01",
+                  min: min3,
                   max: date,
                   value: time_from || date,
                   show_time: false,
@@ -93297,7 +93296,7 @@ var bleh = (() => {
                 }),
                 to2 = input({
                   type: "date",
-                  min: "2003-01-01",
+                  min: min3,
                   max: date,
                   value: time_to || date,
                   show_time: false,
@@ -109007,6 +109006,84 @@ var bleh = (() => {
     });
   }
 
+  // src/components/settings/toggle.js
+  function toggle({
+    value = false,
+    type = "toggle",
+    name = "",
+    title = "",
+    body = "",
+    small = "",
+    disabled = false,
+    data: data2 = "",
+    func = null,
+    standalone = true,
+    id = ""
+  }) {
+    let checkbox;
+    let state;
+    const elem = html.node`
+        <div class="setting ${standalone ? "standalone" : ""}" data-type=${type} onclick=${() => {
+      if (disabled) return;
+      const current = checkbox.checked;
+      if (func) func(!current);
+      checkbox.checked = !current;
+      state.setAttribute("aria-checked", !current);
+    }}>
+            <div class="heading">
+                <h5>${title}</h5>
+                ${body != "" ? html.node`<p>${body}</p>` : ""}
+                ${small != "" ? html.node`<small>${small}</small>` : ""}
+            </div>
+            ${type == "toggle" ? html.node`
+            <div class="toggle-wrap">
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} />
+                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value} type="button">
+                    <div class="dot" />
+                </button>
+            </div>
+            ` : html.node`
+            <div class="check">
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} disabled=${disabled} />
+                <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
+                    <div class="bleh-icon" />
+                </div>
+            </div>
+            `}
+        </div>
+    `;
+    if (value) {
+      checkbox.checked = value;
+    }
+    if (data2) {
+      checkbox.setAttribute("value", data2);
+    }
+    elem.check = () => {
+      if (disabled) return;
+      if (func) func(true);
+      checkbox.checked = true;
+      state.setAttribute("aria-checked", true);
+    };
+    elem.uncheck = () => {
+      if (disabled) return;
+      if (func) func(false);
+      checkbox.checked = false;
+      state.setAttribute("aria-checked", false);
+    };
+    elem.checked = (val) => {
+      if (val == null) return checkbox.checked;
+      if (val) elem.check();
+      else elem.uncheck();
+    };
+    elem.disabled = (state2 = null) => {
+      if (state2 === null) return checkbox.getAttribute("disabled") || false;
+      if (state2 === true) checkbox.setAttribute("disabled", "true");
+      else checkbox.removeAttribute("disabled");
+      return state2;
+    };
+    return elem;
+  }
+
   // src/components/inbox/messages.js
   function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
     list.classList = "notification-list";
@@ -113807,7 +113884,7 @@ var bleh = (() => {
           children: [
             /* @__PURE__ */ jsx(SideAction, {
               type: "import",
-              onClick: import_settings14,
+              onClick: import_settings13,
               children: tl2(trans.import)
             }),
             /* @__PURE__ */ jsx(SideAction, {
@@ -114112,7 +114189,7 @@ var bleh = (() => {
     document.body.setAttribute(`data-ff--${flag2}`, `${!current_state}`);
     compile_settings();
   }
-  function import_settings14() {
+  function import_settings13() {
     let text4;
     const modal = dialog({
       id: "import_settings",

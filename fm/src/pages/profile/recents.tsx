@@ -15,7 +15,7 @@ import {
 	get_profile_streak,
 	ProfileStreak,
 } from '@/components/profile/streak.tsx';
-import { submit_scrobble } from '@/components/music/scrobble.ts';
+import { submit_scrobble } from '@/components/music/scrobble.tsx';
 import {
 	hover_tooltip,
 	menu_tooltip,

@@ -26,6 +26,7 @@ type ButtonProps =
 		loading?: boolean;
 		menu?: boolean;
 		outline?: boolean;
+		subtle?: boolean;
 		href?: string;
 		external?: boolean;
 		onClick?: () => void;
@@ -61,6 +62,7 @@ export function Button({
 	loading = false,
 	menu = false,
 	outline,
+	subtle,
 	href,
 	external,
 	onClick,
@@ -78,6 +80,7 @@ export function Button({
 		primary && 'primary',
 		colourful && 'colourful',
 		outline && 'outline-btn',
+		subtle && 'subtle',
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
 		(opens != null) && 'select-button',
@@ -202,11 +205,17 @@ export function ButtonComboSeparator() {
 	return <div class='button-combo-sep' />;
 }
 
+interface ButtonGroupProps {
+	extra?: boolean;
+	children?: ReactNode;
+}
+
 export function ButtonGroup({
+	extra,
 	children,
-}: WithChildren) {
+}: ButtonGroupProps) {
 	return (
-		<div class='button-group'>
+		<div class={['button-group', extra && 'extra']}>
 			{children}
 		</div>
 	);

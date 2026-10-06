@@ -17,7 +17,8 @@ export type InputType =
 	| 'password'
 	| 'textarea'
 	| 'colour'
-	| 'url';
+	| 'url'
+	| 'time';
 
 interface InputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

@@ -27,6 +27,7 @@ import { Alert } from '@/components/text/alert.tsx';
 interface HybridTimeframePickerProps {
 	ref?: ReturnType<typeof createRef<HybridTimeframePickerElement>>;
 	value?: string;
+	limit?: boolean;
 	inSettings?: boolean;
 	disabled?: boolean;
 	onChange?: (val: string) => void;
@@ -39,6 +40,7 @@ type HybridTimeframePickerElement = HTMLButtonElement & {
 export function HybridTimeframePicker({
 	ref,
 	value,
+	limit,
 	inSettings,
 	disabled = false,
 	onChange,
@@ -53,6 +55,19 @@ export function HybridTimeframePicker({
 
 	let timeframe_valid = true;
 	let timeframe_invalid_reason = '';
+
+	let min = '2003-01-01';
+
+	if (limit) {
+		const now = new Date();
+
+		const min_date = min
+			? new Date(min)
+			: new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+		min_date.setHours(0, 0, 0, 0);
+
+		min = DateTime.fromJSDate(min_date).toISODate()!;
+	}
 
 	const elem = (
 		<button
@@ -214,7 +229,7 @@ export function HybridTimeframePicker({
 						</label>
 						{from = input({
 							type: 'date',
-							min: '2003-01-01',
+							min,
 							max: date,
 							value: time_from || date,
 							show_time: false,
@@ -232,7 +247,7 @@ export function HybridTimeframePicker({
 						</label>
 						{to = input({
 							type: 'date',
-							min: '2003-01-01',
+							min,
 							max: date,
 							value: time_to || date,
 							show_time: false,
