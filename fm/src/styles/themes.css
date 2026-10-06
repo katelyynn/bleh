@@ -117,14 +117,10 @@ body {
 	    --button-radius: 50px;
 	}*/
 
-	--banner-height: 280px;
+	--banner-height: 800px;
 	--banner-offset: 240px;
 
 	--grid-item-size: 180px;
-
-	&[data-ff--short="true"] {
-		--banner-height: 800px;
-	}
 
 	--glass-bg: rgb(255 255 255 / 30%);
 	--glass-border: var(--glass-border);
