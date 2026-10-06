@@ -160,7 +160,7 @@ export function SeasonalTimeline({
 	next,
 	now,
 }: SeasonalTimelineProps) {
-	if (!useSettings.get('seasonal') || !prev || !next) return;
+	if (!useSettings.get('seasonal') || !prev || !next) return <></>;
 
 	return (
 		<div class='seasonal-timeline-wrap'>
