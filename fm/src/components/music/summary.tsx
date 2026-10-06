@@ -15,7 +15,7 @@ import { DateTime } from 'luxon';
 import { sanitise } from '@/build/tools';
 import { hover_tooltip } from '@/components/shared/tooltips.tsx';
 import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export interface music_stat {
 	text?: string;

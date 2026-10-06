@@ -18,7 +18,7 @@ import { load_chart_colours } from '@/components/music/chart';
 import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { compile_settings, save_setting } from '@/components/settings/settings';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { dark_themes, light_themes } from '@/build/theme.ts';
 
 function parse_bleh_version(version: string) {

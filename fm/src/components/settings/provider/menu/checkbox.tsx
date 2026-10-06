@@ -13,7 +13,7 @@ import {
 } from '@/components/settings/provider/main.tsx';
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 

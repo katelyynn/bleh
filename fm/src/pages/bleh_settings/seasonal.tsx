@@ -17,7 +17,7 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
-import { useSeasons, useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { createRef } from 'jsx-dom';

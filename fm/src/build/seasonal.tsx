@@ -8,7 +8,7 @@ import { season } from '@/components/seasonal.ts';
 import { log } from '@/build/log.ts';
 import { DateTime } from 'luxon';
 import { keys } from '@/components/settings/storage.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { set_storage } from '@/build/tools.ts';
 import { load_chart_colours } from '@/components/music/chart.ts';
 import { notify } from '@/components/dialog/notify.ts';

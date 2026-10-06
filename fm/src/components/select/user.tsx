@@ -5,7 +5,7 @@
  */
 
 import { Select, SelectOption } from '@/components/select/select.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { auth } from '@/build/page.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { createRef } from 'jsx-dom';

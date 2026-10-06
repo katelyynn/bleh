@@ -10,7 +10,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { auth, page, root } from '@/build/page.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
 import { PanelHead } from '@/components/text/head.tsx';

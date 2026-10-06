@@ -6,7 +6,7 @@
 
 import { ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
 interface PanelHeadProps {

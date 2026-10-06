@@ -94,7 +94,7 @@ import { UserSelect } from '@/components/select/user.tsx';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { ComparisonBars } from '@/components/minis/compare.tsx';
 import { keys } from '@/components/settings/storage.ts';
-import { useSeasons } from '@/page.ts';
+import { useSeasons } from '@/page.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');

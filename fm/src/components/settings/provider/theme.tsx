@@ -18,7 +18,7 @@ import {
 	theme_min,
 	theme_schedule_dialog,
 } from '@/components/dialog/theme_schedule.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 

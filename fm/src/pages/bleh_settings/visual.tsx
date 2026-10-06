@@ -34,7 +34,7 @@ import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
-import { useSeasons, useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export function visual() {

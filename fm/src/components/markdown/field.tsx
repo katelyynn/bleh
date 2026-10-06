@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { markdown_options } from '@/types/markdown.ts';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';

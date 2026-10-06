@@ -5,7 +5,7 @@
  */
 
 import { ReactNode } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface SideActionsProps {
 	children?: ReactNode;

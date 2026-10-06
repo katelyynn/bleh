@@ -46,7 +46,7 @@ import { profile_summary } from '@/components/profile/summary';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';

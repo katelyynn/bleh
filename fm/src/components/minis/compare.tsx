@@ -20,7 +20,7 @@ import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
 import { avatar } from '../shared/avatar';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { createRef } from 'jsx-dom';
 import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
 import {

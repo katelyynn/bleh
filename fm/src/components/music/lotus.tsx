@@ -29,7 +29,7 @@ import { redirect } from '@/components/music/music';
 import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
 import { notify } from '../dialog/notify';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { ReactElement } from 'jsx-dom';
 import { song_tag } from '@/components/track/song_tag.tsx';
 import { SmartTitle } from '@/components/music/smart_title.tsx';

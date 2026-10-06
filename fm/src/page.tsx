@@ -136,9 +136,9 @@ export function bleh() {
 				return;
 			}
 
-			page.state.colour_preview = html.node`
-                <div class="colour-preview colourful" />
-            `;
+			page.state.colour_preview = (
+				<div class={['colour-preview', 'colourful']} />
+			);
 			document.body.appendChild(page.state.colour_preview);
 
 			register_auth();
@@ -184,6 +184,7 @@ export function bleh() {
 			sponsors();
 
 			useSettings.on('branding_type', update_branding_type);
+			useSeasons.on(() => update_branding_type());
 		},
 		on_mutation: main_flow,
 		on_page_change: load_page,

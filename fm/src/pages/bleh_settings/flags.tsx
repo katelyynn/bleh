@@ -7,7 +7,7 @@
 import { tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { page } from '@/build/page.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';

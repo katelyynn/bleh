@@ -27,7 +27,7 @@ import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
 import { icons } from '../shared/icon';
 import { BetaIndicator } from '../shared/indicator';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { ReactNode } from 'jsx-dom';

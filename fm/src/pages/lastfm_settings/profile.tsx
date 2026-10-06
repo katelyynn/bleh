@@ -31,7 +31,7 @@ import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx
 import { ProfileName } from '@/components/settings/provider/profile_name.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons, SaveIcon } from '@/components/shared/icon.tsx';

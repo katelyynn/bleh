@@ -28,7 +28,7 @@ import {
 	timeframe_text,
 } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { createRef } from 'jsx-dom';
 import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
 import {

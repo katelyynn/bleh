@@ -11,7 +11,7 @@ import { tl, trans } from '@/build/trans';
 import { ReactElement, ReactNode } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
 import { WithChildren } from '@/types/generic.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function load_dialogs() {
 	const elem = (

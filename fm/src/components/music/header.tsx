@@ -20,7 +20,7 @@ import {
 } from './lotus';
 import { artist_corrections, combined_artists } from '@/build/music';
 import { log } from '@/build/log';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { createRef } from 'jsx-dom';
 import { header_colour } from '@/components/page/colour.ts';
 

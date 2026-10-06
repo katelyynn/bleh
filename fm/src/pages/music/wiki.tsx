@@ -20,7 +20,7 @@ import { LinkTooltip } from '@/components/text/link.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { SubText } from '@/components/text/sub.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { link_strings } from '@/components/markdown/links.tsx';
 
 export function bleh_wiki() {

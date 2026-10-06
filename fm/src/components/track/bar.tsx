@@ -5,7 +5,7 @@
  */
 
 import { page } from '@/build/page.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { ReactElement } from 'jsx-dom';
 
 export function count_bar(bar: HTMLDivElement | ReactElement) {

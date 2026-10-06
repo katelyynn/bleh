@@ -12,7 +12,7 @@ import { settings } from '@/build/config';
 import { input } from '../settings/input';
 import { DateTime } from 'luxon';
 import { pad2 } from '@/build/tools';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
 import {
 	FloatingWindow,

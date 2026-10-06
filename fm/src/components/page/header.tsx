@@ -11,7 +11,7 @@ import { InfoTip } from '@/components/text/tip.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 import { PageHeaderDisc } from '@/components/music/header.tsx';
 import { Icon } from '@/components/shared/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface PageHeaderProps {
 	icon?: string;

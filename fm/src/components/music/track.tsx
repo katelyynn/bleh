@@ -29,7 +29,7 @@ import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { count_bar } from '@/components/track/bar.tsx';
 import {
 	context_menu_tooltip,

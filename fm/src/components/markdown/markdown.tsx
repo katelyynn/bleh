@@ -36,7 +36,7 @@ import {
 	social_links,
 	social_links_extension,
 } from '@/components/markdown/links.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function markdown(

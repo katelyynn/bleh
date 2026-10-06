@@ -25,7 +25,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
 import { taste_artist, TasteArtist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { ReactElement } from 'jsx-dom';
 import { LoadingData } from '@/components/loading/loading.tsx';

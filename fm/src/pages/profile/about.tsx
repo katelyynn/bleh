@@ -15,7 +15,7 @@ import { menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { copy, get_language_name, translate } from '@/build/tools.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { markdown } from '@/components/markdown/markdown.tsx';
 import { TranslatedHeader } from '@/components/shared/translate.tsx';
 import { profile_cache } from '@/types/profile.ts';

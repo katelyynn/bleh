@@ -12,7 +12,7 @@ import { sponsor } from '@/components/sponsor';
 import { version } from '@/main';
 import { settings } from '@/build/config';
 import { Icon, icon, icons } from '../shared/icon';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { ReactNode } from 'jsx-dom';
 
 export function bleh_footer() {

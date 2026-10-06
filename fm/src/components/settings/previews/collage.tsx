@@ -5,7 +5,7 @@
  */
 
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface CollageGridPreviewProps {
 	ref?: ReturnType<typeof createRef<CollageGridPreviewElement>>;

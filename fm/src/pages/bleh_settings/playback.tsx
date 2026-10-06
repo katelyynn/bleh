@@ -27,7 +27,7 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { lotus, lotus_modal } from '@/components/music/lotus.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { manage_oracle_data, oracle_data } from '@/components/music/oracle.tsx';
 
 export function playback() {

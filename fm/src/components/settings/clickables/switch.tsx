@@ -5,7 +5,7 @@
  */
 
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { tl, trans } from '@/build/trans.ts';
 
 interface SwitchProps {

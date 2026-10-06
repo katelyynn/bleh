@@ -10,7 +10,7 @@ import { chart_reflow } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function basic_page_structure() {
 	page.structure.container = document.body.querySelector('.page-content')!;

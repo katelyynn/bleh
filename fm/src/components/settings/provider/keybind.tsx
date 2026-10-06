@@ -17,7 +17,7 @@ import {
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface SettingKeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

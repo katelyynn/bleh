@@ -12,7 +12,7 @@ import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import { SelectOption } from '@/components/select/select.tsx';
 import { settings } from '@/build/config.ts';
 import { Icon } from '@/components/shared/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export interface theme_min {
 	theme_day: string;

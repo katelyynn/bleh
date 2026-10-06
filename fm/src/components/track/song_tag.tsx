@@ -5,7 +5,7 @@
  */
 
 import { romanise } from '@/build/tools.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export type song_tag = {
 	type: string;

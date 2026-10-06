@@ -13,7 +13,7 @@ import {
 } from '@/components/settings/provider/main.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Select, SelectOption } from '@/components/select/select.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface SettingSelectProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

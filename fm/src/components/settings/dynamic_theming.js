@@ -8,7 +8,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { page } from '@/build/page';
 import { save_setting } from '@/components/settings/settings';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function dynamic_theming() {
 	const media = window.matchMedia('(prefers-color-scheme: dark)');

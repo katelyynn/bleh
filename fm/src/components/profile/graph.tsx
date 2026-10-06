@@ -8,7 +8,7 @@ import { DateTime } from 'luxon';
 import { page, root } from '@/build/page.ts';
 import { prep_chart_colours } from '@/components/music/chart.ts';
 import { Chart } from '@/main.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { GraphBlockElement } from '@/components/summary/graph.tsx';
 import { hover_tooltip, menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { HeatmapTooltip } from '@/components/date/heatmap.tsx';

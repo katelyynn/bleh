@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import {
 	music_links_edit,

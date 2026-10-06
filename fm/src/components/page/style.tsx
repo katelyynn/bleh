@@ -19,7 +19,7 @@ import { page, root } from '@/build/page';
 import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { update_branding_type } from '@/components/page/navigation.tsx';
 
 export function append_style() {
@@ -100,8 +100,7 @@ export function update_check(force = false, btn, func) {
 
 	if (btn) btn.setAttribute('disabled', '');
 
-	const url =
-		`https://bleh.yuzu.pet/info?${Date.now()}`;
+	const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
 
 	/*let notification = notify({
         id: 'updater',

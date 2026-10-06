@@ -42,7 +42,7 @@ import {
 	menu_tooltip,
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';

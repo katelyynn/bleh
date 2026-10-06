@@ -52,7 +52,7 @@ import { flag, flag_candidates } from '../shared/flag';
 import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { OracleNotice } from '@/components/oracle/notice.tsx';
 
 export function oracle_process() {

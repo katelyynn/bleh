@@ -5,7 +5,7 @@
  */
 
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 type RadioElement = HTMLDivElement & {
 	checked: boolean;

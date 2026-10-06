@@ -7,7 +7,7 @@
 import { ReactNode } from 'jsx-dom';
 import type { ClassNames, createRef, ReactElement } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 

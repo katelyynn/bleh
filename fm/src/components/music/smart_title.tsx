@@ -5,7 +5,7 @@
  */
 
 import { song_tag, SongTag } from '@/components/track/song_tag.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { romanise } from '@/build/tools.ts';
 import { page } from '@/build/page.ts';
 

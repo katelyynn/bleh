@@ -7,7 +7,7 @@
 import { log } from '@/build/log';
 import { ranks } from '@/build/music';
 import { interpolate_hue } from '@/build/tools';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function patch_artist_ranks_in_list_view(track) {
 	if (useSettings.get('theme') == 'nier') return;
