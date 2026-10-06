@@ -42,9 +42,9 @@ body,
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
 		--sidebar-border: color-mix(in oklch,
 				oklch(var(--b5)),
-				oklch(var(--b4)) 42%);
+				oklch(var(--b4)) 52%);
 		--toolbar-bg: oklch(var(--b5) / 70%);
-		--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 65%) 10%, oklch(var(--l3-c) / 25%), oklch(var(--b4) / 65%) 90%);
+		--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 65%) 10%, oklch(var(--l3-c) / 15%), oklch(var(--b4) / 65%) 90%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
 		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 73%));
@@ -109,6 +109,7 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
+
 	&[data-bleh--theme="light"],
 	body[data-bleh--theme="light"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0 calc(var(--sat) * 0.06) var(--hue);
