@@ -4,20 +4,25 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 
 interface LoadingDataProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	type?: 'loading' | 'failed' | 'private';
 	children: ReactNode;
 }
 
 export function LoadingData({
+	ref,
 	type = 'loading',
 	children,
 }: LoadingDataProps) {
 	return (
 		<div class='loading-data-container'>
-			<div class={['loading-data-text', type != 'loading' && type]}>
+			<div
+				class={['loading-data-text', type != 'loading' && type]}
+				ref={ref}
+			>
 				{children}
 			</div>
 		</div>

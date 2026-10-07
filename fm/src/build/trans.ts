@@ -2285,7 +2285,7 @@ export const trans = {
 				// a nod to the Deadlock character 'Graves'
 				// https://deadlock.wiki/Graves#Typography
 				en: 'Graves',
-				pt: 'Mortícia',  //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
+				pt: 'Mortícia', //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
 			},
 			gloom: {
 				en: 'Gloom',
@@ -8491,6 +8491,9 @@ export const trans = {
 		sv: 'Väntar på bilder',
 		ru: 'Ожидание изображений',
 		pl: 'Oczekiwanie na obrazy',
+	},
+	creating_collage_phase: {
+		en: 'Creating collage ({phase}), {progress}%',
 	},
 	collage_title: {
 		name: {

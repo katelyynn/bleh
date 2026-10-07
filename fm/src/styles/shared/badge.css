@@ -78,7 +78,7 @@
 		-webkit-mask-size: contain !important;
 	}
 
-	.auth-link > & {
+	.auth-link>& {
 		--icon-size: 16px;
 		--left: 0;
 		min-width: 16px;
@@ -132,8 +132,7 @@
 		height: 18px;
 
 		&.expand {
-			padding-left: calc((var(--icon-left) * 2) + var(--icon-size) + 6px)
-				!important;
+			padding-left: calc((var(--icon-left) * 2) + var(--icon-size) + 6px) !important;
 			--icon-left: 3px;
 			--mask-colour: oklch(var(--b7)) !important;
 
@@ -174,7 +173,7 @@
 .profile-badges {
 	margin-top: 8px;
 
-	& > .user-status-subscriber {
+	&>.user-status-subscriber {
 		order: -1 !important;
 	}
 
@@ -317,9 +316,7 @@
 	--margin-top: 0;
 	--icon-size: 18px;
 	background: var(--override-bg, none) !important;
-	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0
-		oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5)))
-		drop-shadow(-0px -2px 0 oklch(var(--b5)));
+	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
 
 	&:before {
 		content: '';
@@ -340,10 +337,14 @@
 	}
 }
 
-.shout-user-avatar .avatar-status-dot {
+.avatar-status-dot {
+	width: 20px;
+	height: 20px;
+}
+
+.shout-user-avatar>.avatar-status-dot {
 	width: 16px;
 	height: 16px;
-	--icon-size: 16px;
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
