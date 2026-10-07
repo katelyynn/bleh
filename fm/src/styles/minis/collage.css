@@ -61,7 +61,7 @@
 .collage {
 	width: 1500px;
 	height: 1547px;
-	background: #000;
+	background: linear-gradient(180deg, #0a0a0a, #000);
 	padding: 15px;
 	overflow: hidden;
 
@@ -112,7 +112,7 @@
 
 		.brand {
 			height: 18px;
-			margin-right: 20px;
+			margin-right: 5px;
 			fill: #fff;
 		}
 
@@ -122,9 +122,10 @@
 			gap: 15px;
 			cursor: default;
 
-			strong {
+			&>strong {
 				font-size: 16px;
 				line-height: 20px;
+				color: #bbb;
 			}
 		}
 
@@ -134,8 +135,8 @@
 			align-items: center;
 			gap: 10px;
 			cursor: default;
-			font-size: var(--font-size-subheading);
-			line-height: var(--line-height-subheading);
+			font-size: 16px;
+			line-height: 20px;
 
 			.avatar {
 				width: 32px;

@@ -49,7 +49,9 @@
 
 	.grid-items-item-details {
 		padding: 6px 10px;
-		background: rgb(0, 0, 0, 50%);
+		background: rgb(0, 0, 0, 45%);
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
 		text-shadow: none;
 		filter: none;
 		border-radius: var(--radius-s);
@@ -75,6 +77,7 @@
 			border-radius: 8px;
 			margin: var(--centered-gap) auto;
 			max-width: calc(var(--grid-item-size) - (var(--centered-gap) * 2));
+			box-shadow: 0 2px 7px oklch(0 0 0 / 70%);
 
 			.grid-items-item-aux-text,
 			.grid-items-item-main-text>a {
