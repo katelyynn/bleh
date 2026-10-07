@@ -75,7 +75,7 @@ export const lang_info: Record<string, language> = {
 			'suburbanno',
 			'lagb2ck',
 		],
-		last_updated: '2026-09-09',
+		last_updated: '2026-10-02',
 	},
 	sv: {
 		name: get_language_name('sv'),
@@ -137,6 +137,7 @@ export const trans = {
 		// there if the language puts spaces in lists
 		en: ', and ',
 		de: ' und ',
+		pt: ' e ',
 	},
 	page_templates: {
 		// these are used for browser tab titles
@@ -1739,21 +1740,25 @@ export const trans = {
 			// https://rosepinetheme.com
 			en: 'Rosé Pine',
 			it: 'Rosé Pine',
+			pt: 'Rosé Pine',
 		},
 		rose_pine_dawn: {
 			// https://rosepinetheme.com
 			en: 'Rosé Pine Dawn',
 			it: 'Rosé Pine Dawn',
+			pt: 'Rosé Pine Dawn',
 		},
 		kanagawa: {
 			// https://github.com/rebelot/kanagawa.nvim
 			en: 'Kanagawa',
 			it: 'Kanagawa',
+			pt: 'Kanagawa',
 		},
 		kanagawa_dragon: {
 			// https://github.com/rebelot/kanagawa.nvim
 			en: 'Kanagawa Dragon',
 			it: 'Kanagawa Dragon',
+			pt: 'Kanagawa Dragon',
 		},
 	},
 	bright: {
@@ -2280,18 +2285,23 @@ export const trans = {
 				// a nod to the Deadlock character 'Graves'
 				// https://deadlock.wiki/Graves#Typography
 				en: 'Graves',
+				pt: 'Mortícia',  //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
 			},
 			gloom: {
 				en: 'Gloom',
+				pt: 'Melancolia',
 			},
 			smoke: {
 				en: 'Smoke',
+				pt: 'Fumaça',
 			},
 			burgundy: {
 				en: 'Burgundy',
+				pt: 'Borgonha',
 			},
 			lantern: {
 				en: 'Lantern',
+				pt: 'Lanterna',
 			},
 		},
 		exclusive: {
@@ -2368,6 +2378,7 @@ export const trans = {
 	particles: {
 		en: 'Particles',
 		it: 'Particelle',
+		pt: 'Partículas',
 	},
 	seasonal_particles_fps: {
 		name: {
@@ -2396,6 +2407,7 @@ export const trans = {
 	effects: {
 		en: 'Effects',
 		it: 'Effetti',
+		pt: 'Efeitos',
 	},
 	seasonal_overlays: {
 		name: {
@@ -2411,14 +2423,17 @@ export const trans = {
 		},
 		body: {
 			en: 'Features image overlays like cobwebs and snow in certain seasons',
+			pt: 'Apresenta sobreposições de imagem, como teias de aranha e neve, em determinadas estações.',
 		},
 	},
 	seasonal_masks: {
 		name: {
 			en: 'Change button and grid shapes',
+			pt: 'Alterar formatos de botões e grades',
 		},
 		body: {
 			en: 'Seasons can choose a custom look for buttons, menus, and grids',
+			pt: 'As temporadas permitem escolher um visual personalizado para botões, menus e grades.',
 		},
 	},
 	seasonal_offset: {
@@ -3157,6 +3172,7 @@ export const trans = {
 	theme_no_saturation_support: {
 		en: 'This theme defines its own colours independently',
 		it: 'Questo tema definisce i suoi colori indipendentemente',
+		pt: 'Este tema define suas próprias cores independentemente.',
 	},
 	noise: {
 		name: {
@@ -3925,6 +3941,7 @@ export const trans = {
 		// as in your musical taste % between you and someone else
 		// you are {percentage%} compatible (in taste) {list of artists}
 		en: 'You share {artists} in common.',
+		pt: 'Vocês tem {artists} em comum.',
 	},
 	you_are_a_value_match: {
 		// valentines easter egg
@@ -4103,6 +4120,7 @@ export const trans = {
 	sponsor_monthly: {
 		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
 		it: 'Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se più di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo.', // keeping dollars here? change later if necessary ~cuto
+		pt: 'Se você contribui mensalmente, pode solicitar um emblema de perfil extra (ou dois, caso a contribuição seja maior que $6) enviando uma mensagem. Outros benefícios de perfil podem ser utilizados simplesmente editando o seu perfil.',
 	},
 	manage_sponsor: {
 		en: 'Manage sponsorship',
@@ -5113,6 +5131,7 @@ export const trans = {
 	value_you_follow: {
 		// number of people who also listen to an artist
 		en: '{v} you follow',
+		pt: '{v} você segue',
 	},
 	loading_album_plays: {
 		en: 'Collecting your album plays',
@@ -5376,6 +5395,7 @@ export const trans = {
 	cancelled: {
 		en: 'Cancelled',
 		it: 'Annullato',
+		pt: 'Cancelado',
 	},
 	event_cancelled: {
 		// obviously remove the emoji or replace it as
@@ -7841,6 +7861,7 @@ export const trans = {
 	},
 	choose_a_timeframe: {
 		en: 'Choose a timeframe',
+		pt: 'Escolha um período',
 	},
 	choose_a_timeframe_above: {
 		en: 'Choose a timeframe above',
@@ -8260,16 +8281,19 @@ export const trans = {
 	incompatible: {
 		en: 'Incompatible',
 		it: 'Incompatibile',
+		pt: 'Incompatível',
 	},
 	value_is_enabled: {
 		// a setting is enabled
 		en: '{v} is enabled',
 		it: '{v} è attivato', // this, and value_is_disabled, assume {v} is masculine as there is not really a "natural" way to say this in a neutral way ~cuto
+		pt: '{v} está ativado',
 	},
 	value_is_disabled: {
 		// a setting is disabled
 		en: '{v} is disabled',
 		it: '{v} è disattivato',
+		pt: '{v} está desativado',
 	},
 	bulk_edit_extension: {
 		// yes the extension
@@ -9535,9 +9559,11 @@ export const trans = {
 	reduced_flashing: {
 		name: {
 			en: 'Reduce flashing effects',
+			pt: 'Reduzir efeitos visuais intermitentes',
 		},
 		body: {
 			en: 'Prevents distracting or discomforting animations from taking place',
+			pt: 'Evita a exibição de animações que causam distração ou desconforto.',
 		},
 	},
 	banners: {
@@ -11787,9 +11813,11 @@ export const trans = {
 	popup_bulk_edit: {
 		title: {
 			en: 'Bulk Edit has been detected!',
+			pt: 'Edição em massa detectada!',
 		},
 		body: {
 			en: 'You can find it neatly packed into this button now',
+			pt: 'Agora você pode encontrá-lo organizado dentro deste botão.',
 		},
 	},
 	send_a_reply: {
@@ -11972,6 +12000,7 @@ export const trans = {
 		// page background colour
 		en: 'Body {v}',
 		it: 'Corpo {v}',
+		pt: 'Corpo {v}',
 	},
 	styled_with_font: {
 		en: 'Styled with {f}.',
@@ -12041,6 +12070,7 @@ export const trans = {
 	value_listeners_recently: {
 		en: '{v} listeners recently',
 		it: '{v} ascoltatori recenti',
+		pt: '{v} ouvintes recentemente',
 	},
 	on_tour: {
 		en: 'On tour',
@@ -12671,42 +12701,53 @@ export const trans = {
 	on: {
 		// switch state
 		en: 'On',
+		pt: 'Ligado',
 	},
 	off: {
 		// switch state
 		en: 'Off',
+		pt: 'Desligado',
 	},
 	select_arbitrary: {
 		en: 'Type to add to this list',
+		pt: 'Digite para adicionar a esta lista',
 	},
 	value_to_close: {
 		// keybind
 		en: '{v} to close',
+		pt: '{v} para fechar',
 	},
 	hover_to_view: {
 		// hover mouse
 		en: 'Hover to view',
+		pt: 'Passe o mouse para visualizar',
 	},
 	collage_style: {
 		en: 'Collage style',
+		pt: 'Estilo colagem',
 	},
 	stack: {
 		// a collage style, stacks items behind eachother
 		en: 'Stack',
+		pt: 'Agrupar', //im not 100% sure on this cause idk the context of 'stack' but it should work on most cases -lagb2ck
 	},
 	music_and_data: {
 		en: 'Music & Data',
+		pt: 'Música e Dados',
 	},
 	streak_information: {
 		en: 'Streaks are calculated locally and max 100 at the moment.',
+		pt: 'As sequências são calculadas localmente e limitadas a um máximo de 100 no momento.',
 	},
 	view_your_compatibility: {
 		// taste
 		en: 'View your compatibility',
+		pt: 'Veja sua compatibilidade',
 	},
 	insight: {
 		// used on profiles
 		en: 'Insight',
+		pt: 'Análise',
 	},
 	profile_summary_pie_chart: {
 		en: 'Show pie chart',
