@@ -11,6 +11,7 @@ import {
 	hover_tooltip,
 	menu_tooltip,
 	Tooltip,
+	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
@@ -60,7 +61,7 @@ export function Button({
 	accented = false,
 	disabled = false,
 	loading = false,
-	menu = false,
+	menu,
 	outline,
 	subtle,
 	href,

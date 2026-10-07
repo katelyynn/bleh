@@ -247,6 +247,7 @@ export function icon({ name, identifier, use_mask = true }: icon) {
 
 type IconProps = {
 	name?: string;
+	indicator?: boolean;
 	identifier?: string;
 	mask?: boolean;
 	className?: string;
@@ -254,6 +255,7 @@ type IconProps = {
 
 export function Icon({
 	name = 'inherit',
+	indicator,
 	identifier,
 	mask = true,
 	className,
@@ -267,6 +269,7 @@ export function Icon({
 				mask && 'use-mask',
 				identifier && `bleh-icon-${identifier}`,
 				className && className,
+				indicator && 'is-indicator',
 			]}
 			style={icon_mask({ name })}
 			{...props}

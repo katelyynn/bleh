@@ -9,9 +9,7 @@ import { html, render } from 'lighterhtml';
 import { avatar, expand_avatar } from '../shared/avatar';
 import { romanise, sanitise } from '@/build/tools';
 import { redirect } from './music';
-import tippy from 'tippy.js';
 import { tl, trans } from '@/build/trans';
-import { register_menu } from '../menu';
 import {
 	correct_artist,
 	correct_item_by_artist,
@@ -23,6 +21,10 @@ import { log } from '@/build/log';
 import { useSettings } from '@/page.tsx';
 import { createRef } from 'jsx-dom';
 import { header_colour } from '@/components/page/colour.ts';
+import { context_menu_tooltip } from '@/components/shared/tooltips.tsx';
+import { MenuContents } from '@/components/menu/menu.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 type PageHeaderAvatarElement = HTMLDivElement & {
 	image: HTMLImageElement;
@@ -105,60 +107,58 @@ export function PageHeaderAvatar({
 		glow.current,
 	]);
 
-	const menu = tippy(elem, {
-		theme: 'context-menu',
-		content: (
-			<>
-				{url
-					? (
-						<button
-							type='button'
-							class='dropdown-menu-clickable-item'
-							data-type='expand'
-							onClick={() => expand_avatar(avatar(url, 'ar0'))}
-						>
-							{tl(trans.expand)}
-						</button>
-					)
-					: ''}
-				{supports_gallery
-					? (
-						<>
-							<a
-								class='dropdown-menu-clickable-item'
-								data-type='gallery'
-								href={`${root}music/${redirect()}${link}/+images`}
-							>
-								{tl(trans.photos)}
-							</a>
-							<div class='sep' />
-							<a
-								class='dropdown-menu-clickable-item'
-								href={`${root}bleh/customise`}
-								data-menu-item='settings'
-							>
-								{tl(trans.settings)}
-							</a>
-						</>
-					)
-					: ''}
-			</>
-		),
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
-
-		onShow(instance) {
-			instance.popper.addEventListener('click', (event) => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(elem, menu);
+	const menu = context_menu_tooltip(
+		elem,
+		<MenuContents>
+			{url && (
+				<>
+					<Button
+						menu
+						onClick={() => {
+							expand_avatar(avatar(url, 'ar0'));
+							menu.hide();
+						}}
+					>
+						<Icon name={icons.expand} />
+						{tl(trans.expand)}
+					</Button>
+					<Button
+						menu
+						href={avatar(url, 'ar0')}
+						external
+						onClick={() => menu.hide()}
+					>
+						<Icon name={icons.link} />
+						{tl(trans.open)}
+						<Icon indicator name={icons.external} />
+					</Button>
+				</>
+			)}
+			{supports_gallery && (
+				<>
+					<div class='sep' />
+					<Button
+						menu
+						href={`${root}music/${redirect()}${link}/+images`}
+						onClick={() => menu.hide()}
+					>
+						<Icon name={icons.gallery} />
+						{page.type == 'artist'
+							? tl(trans.photos)
+							: tl(trans.artwork)}
+					</Button>
+					<Button
+						menu
+						href={`${root}bleh/customise`}
+						onClick={() => menu.hide()}
+					>
+						<Icon name={icons.settings} />
+						{tl(trans.settings)}
+					</Button>
+				</>
+			)}
+		</MenuContents>,
+	);
 
 	function update() {
 		elem.setAttribute('data-theme', useSettings.get('theme') as string);

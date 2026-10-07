@@ -34670,14 +34670,15 @@ var bleh = (() => {
       ]
     });
   }
-  function Icon({ name = "inherit", identifier, mask = true, className: className2, ...props }) {
+  function Icon({ name = "inherit", indicator, identifier, mask = true, className: className2, ...props }) {
     return /* @__PURE__ */ jsx("span", {
       class: [
         "bleh-icon",
         name && `bleh-icon-${name}`,
         mask && "use-mask",
         identifier && `bleh-icon-${identifier}`,
-        className2 && className2
+        className2 && className2,
+        indicator && "is-indicator"
       ],
       style: icon_mask({
         name
@@ -55541,7 +55542,7 @@ var bleh = (() => {
   }
 
   // src/components/button/button.tsx
-  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, outline, subtle, href, external, onClick, className: className2, children, tooltip, opens, onUpdate, ...props }) {
+  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu, outline, subtle, href, external, onClick, className: className2, children, tooltip, opens, onUpdate, ...props }) {
     const classes = [
       "btn",
       "flex-button",
@@ -63186,6 +63187,14 @@ var bleh = (() => {
     }
   }
 
+  // src/components/menu/menu.tsx
+  function MenuContents({ children }) {
+    return /* @__PURE__ */ jsx(Tooltip, {
+      theme: "context-menu",
+      children
+    });
+  }
+
   // src/components/music/header.tsx
   function PageHeaderAvatar({ ref: ref2, url, paint = false }) {
     const supports_gallery = [
@@ -63249,54 +63258,72 @@ var bleh = (() => {
       elem,
       glow.current
     ]);
-    const menu = tippy_esm_default(elem, {
-      theme: "context-menu",
-      content: /* @__PURE__ */ jsx(Fragment, {
-        children: [
-          url ? /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: "dropdown-menu-clickable-item",
-            "data-type": "expand",
-            onClick: () => expand_avatar(avatar(url, "ar0")),
-            children: tl2(trans.expand)
-          }) : "",
-          supports_gallery ? /* @__PURE__ */ jsx(Fragment, {
-            children: [
-              /* @__PURE__ */ jsx("a", {
-                class: "dropdown-menu-clickable-item",
-                "data-type": "gallery",
-                href: `${root}music/${redirect()}${link}/+images`,
-                children: tl2(trans.photos)
-              }),
-              /* @__PURE__ */ jsx("div", {
-                class: "sep"
-              }),
-              /* @__PURE__ */ jsx("a", {
-                class: "dropdown-menu-clickable-item",
-                href: `${root}bleh/customise`,
-                "data-menu-item": "settings",
-                children: tl2(trans.settings)
-              })
-            ]
-          }) : ""
-        ]
-      }),
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(elem, menu);
+    const menu = context_menu_tooltip(elem, /* @__PURE__ */ jsx(MenuContents, {
+      children: [
+        url && /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              onClick: () => {
+                expand_avatar(avatar(url, "ar0"));
+                menu.hide();
+              },
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.expand
+                }),
+                tl2(trans.expand)
+              ]
+            }),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              href: avatar(url, "ar0"),
+              external: true,
+              onClick: () => menu.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.link
+                }),
+                tl2(trans.open),
+                /* @__PURE__ */ jsx(Icon, {
+                  indicator: true,
+                  name: icons.external
+                })
+              ]
+            })
+          ]
+        }),
+        supports_gallery && /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "sep"
+            }),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              href: `${root}music/${redirect()}${link}/+images`,
+              onClick: () => menu.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.gallery
+                }),
+                page.type == "artist" ? tl2(trans.photos) : tl2(trans.artwork)
+              ]
+            }),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              href: `${root}bleh/customise`,
+              onClick: () => menu.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.settings
+                }),
+                tl2(trans.settings)
+              ]
+            })
+          ]
+        })
+      ]
+    }));
     function update() {
       elem.setAttribute("data-theme", useSettings.get("theme"));
     }
@@ -67714,14 +67741,6 @@ var bleh = (() => {
       children: name
     }));
     return button2;
-  }
-
-  // src/components/menu/menu.tsx
-  function MenuContents({ children }) {
-    return /* @__PURE__ */ jsx(Tooltip, {
-      theme: "context-menu",
-      children
-    });
   }
 
   // src/components/settings/provider/menu/checkbox.tsx
