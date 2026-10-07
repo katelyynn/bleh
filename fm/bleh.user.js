@@ -55907,9 +55907,9 @@ var bleh = (() => {
       checkbox.current.checked = checked;
       elem.current.setAttribute("aria-checked", checked);
       elem.current.setAttribute("data-theme", theme);
-      wrap2.setAttribute("data-theme", theme);
+      wrap.setAttribute("data-theme", theme);
     }
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "checkbox-wrap",
         className2 && className2,
@@ -55945,7 +55945,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap2, "checked", {
+    Object.defineProperty(wrap, "checked", {
       get() {
         return checked;
       },
@@ -55955,7 +55955,7 @@ var bleh = (() => {
       }
     });
     useSettings.on("theme", update);
-    return wrap2;
+    return wrap;
   }
 
   // src/components/settings/provider/checkbox.tsx
@@ -59273,7 +59273,7 @@ var bleh = (() => {
   function Input({ ref: ref2, className: className2, value = "", placeholder, name, min: min3, length, disabled, type = "text", onChange, onSubmit, saveManually = false, saveText }) {
     const input2 = createRef();
     const colour_block = createRef();
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "content-form",
         "input-container",
@@ -59362,7 +59362,7 @@ var bleh = (() => {
         if (onChange) onChange(input2.current.value);
       }
     }
-    Object.defineProperty(wrap2, "value", {
+    Object.defineProperty(wrap, "value", {
       get() {
         return value;
       },
@@ -59371,7 +59371,7 @@ var bleh = (() => {
         update();
       }
     });
-    Object.defineProperty(wrap2, "disabled", {
+    Object.defineProperty(wrap, "disabled", {
       get() {
         return disabled;
       },
@@ -59381,10 +59381,10 @@ var bleh = (() => {
       }
     });
     update();
-    wrap2.focus = () => {
+    wrap.focus = () => {
       input2.current.focus();
     };
-    return wrap2;
+    return wrap;
   }
   function InputGroup({ children }) {
     return /* @__PURE__ */ jsx("div", {
@@ -66741,7 +66741,7 @@ var bleh = (() => {
     function update() {
       if (entering) {
         tip.disable();
-        wrap2.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        wrap.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
           children: [
             /* @__PURE__ */ jsx("span", {
               class: "key-bind-text",
@@ -66769,22 +66769,22 @@ var bleh = (() => {
           ]
         }));
         input2.current.focus();
-        wrap2.setAttribute("data-entering", "true");
+        wrap.setAttribute("data-entering", "true");
       } else {
         if (keymap[value]) {
           tip.enable();
         } else {
           tip.disable();
         }
-        wrap2.replaceChildren(/* @__PURE__ */ jsx("span", {
+        wrap.replaceChildren(/* @__PURE__ */ jsx("span", {
           class: "key-bind-text",
           children: label(value)
         }));
-        wrap2.removeAttribute("data-entering");
+        wrap.removeAttribute("data-entering");
         tip.setContent(tooltip(value));
       }
     }
-    const wrap2 = /* @__PURE__ */ jsx("kbd", {
+    const wrap = /* @__PURE__ */ jsx("kbd", {
       class: [
         "key-bind",
         interact && "key-bind-interactable",
@@ -66801,7 +66801,7 @@ var bleh = (() => {
         children: label(value)
       })
     });
-    const tip = tippy_esm_default(wrap2, {
+    const tip = tippy_esm_default(wrap, {
       content: tooltip(value),
       delay: [
         1200,
@@ -66809,7 +66809,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap2, "key", {
+    Object.defineProperty(wrap, "key", {
       get() {
         return value;
       },
@@ -66832,7 +66832,7 @@ var bleh = (() => {
       if (keymap[value2]) return keymap[value2];
       return value2.toUpperCase();
     }
-    return wrap2;
+    return wrap;
   }
   function KeybindList({ ref: ref2, text: text4, children }) {
     return /* @__PURE__ */ jsx("div", {
@@ -67499,7 +67499,7 @@ var bleh = (() => {
     ];
     const overlay = createRef();
     const action_lookup = {};
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "markdown-field",
         shoutbox && "mini"
@@ -67598,12 +67598,12 @@ var bleh = (() => {
         })
       ]
     });
-    Object.defineProperty(wrap2, "editor", {
+    Object.defineProperty(wrap, "editor", {
       get() {
         return elem;
       }
     });
-    Object.defineProperty(wrap2, "value", {
+    Object.defineProperty(wrap, "value", {
       get() {
         return elem.value;
       },
@@ -67699,7 +67699,7 @@ var bleh = (() => {
     }
     if (shoutbox) {
       const interval = setInterval(() => {
-        if (!wrap2.isConnected) {
+        if (!wrap.isConnected) {
           clearInterval(interval);
           return;
         }
@@ -67710,9 +67710,9 @@ var bleh = (() => {
     }
     update();
     setTimeout(() => {
-      queue_popup("markdown", wrap2);
+      queue_popup("markdown", wrap);
     }, 0);
-    return wrap2;
+    return wrap;
   }
   function MarkdownAction({ type, name, onClick, hide: hide3 }) {
     if (hide3) return;
@@ -67844,7 +67844,7 @@ var bleh = (() => {
     const select2 = createRef();
     const inner = createRef();
     const input2 = createRef();
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "select-wrap",
         "custom-selector",
@@ -68056,7 +68056,7 @@ var bleh = (() => {
         ]
       }));
     }
-    Object.defineProperty(wrap2, "value", {
+    Object.defineProperty(wrap, "value", {
       get() {
         return value;
       },
@@ -68064,7 +68064,7 @@ var bleh = (() => {
         set2(val);
       }
     });
-    Object.defineProperty(wrap2, "disabled", {
+    Object.defineProperty(wrap, "disabled", {
       get() {
         return value;
       },
@@ -68073,7 +68073,7 @@ var bleh = (() => {
         update();
       }
     });
-    wrap2.open = () => {
+    wrap.open = () => {
       menu.show();
     };
     function set2(val) {
@@ -68109,7 +68109,7 @@ var bleh = (() => {
       }, 300);
     }
     update(true);
-    return wrap2;
+    return wrap;
   }
   function select_text(text4) {
     if (typeof text4 == "function") {
@@ -68131,16 +68131,16 @@ var bleh = (() => {
   }
 
   // src/components/shout/action.tsx
-  function ShoutAction({ name, wrap: wrap2, interact = true, children }) {
+  function ShoutAction({ name, wrap, interact = true, children }) {
     let menu;
     const elem = /* @__PURE__ */ jsx("div", {
       class: "shout-avatar-action-opener",
       onMouseEnter: () => {
-        wrap2.classList.add("hovering-avatar");
+        wrap.classList.add("hovering-avatar");
       },
       onMouseLeave: () => {
         if (menu?.is_mounted) return;
-        wrap2.classList.remove("hovering-avatar");
+        wrap.classList.remove("hovering-avatar");
       },
       children: [
         children,
@@ -68225,11 +68225,11 @@ var bleh = (() => {
         ]
       }), {
         onShow: () => {
-          wrap2.classList.add("hovering-avatar");
+          wrap.classList.add("hovering-avatar");
         },
         onHide: () => {
-          if (wrap2.matches(":hover")) return;
-          wrap2.classList.remove("hovering-avatar");
+          if (wrap.matches(":hover")) return;
+          wrap.classList.remove("hovering-avatar");
         }
       });
     }
@@ -74630,8 +74630,8 @@ var bleh = (() => {
   }
   function buildStacks(layouts2) {
     const stacks = {};
-    for (const wrap2 of layouts2) {
-      const { stack, pos, stackWeight } = wrap2;
+    for (const wrap of layouts2) {
+      const { stack, pos, stackWeight } = wrap;
       if (!stack || !STATIC_POSITIONS.includes(pos)) {
         continue;
       }
@@ -74667,7 +74667,7 @@ var bleh = (() => {
   }
   function buildLayoutBoxes(boxes) {
     const layoutBoxes = wrapBoxes(boxes);
-    const fullSize = sortByWeight(layoutBoxes.filter((wrap2) => wrap2.box.fullSize), true);
+    const fullSize = sortByWeight(layoutBoxes.filter((wrap) => wrap.box.fullSize), true);
     const left2 = sortByWeight(filterByPosition(layoutBoxes, "left"), true);
     const right2 = sortByWeight(filterByPosition(layoutBoxes, "right"));
     const top2 = sortByWeight(filterByPosition(layoutBoxes, "top"), true);
@@ -74872,7 +74872,7 @@ var bleh = (() => {
           box.beforeLayout();
         }
       });
-      const visibleVerticalBoxCount = verticalBoxes.reduce((total, wrap2) => wrap2.box.options && wrap2.box.options.display === false ? total : total + 1, 0) || 1;
+      const visibleVerticalBoxCount = verticalBoxes.reduce((total, wrap) => wrap.box.options && wrap.box.options.display === false ? total : total + 1, 0) || 1;
       const params = Object.freeze({
         outerWidth: width,
         outerHeight: height,
@@ -86833,7 +86833,7 @@ var bleh = (() => {
     });
     new_panel.appendChild(grid);
     const no_data = page.structure.container.querySelector(".no-data-message--obsession-history");
-    if (no_data) wrap.after(no_data);
+    if (no_data) new_panel.appendChild(no_data);
     const pagination = page.structure.container.querySelector(".pagination");
     if (pagination) new_panel.appendChild(pagination);
   }
@@ -88754,7 +88754,7 @@ var bleh = (() => {
       elem.current.setAttribute("data-theme", useSettings.get("theme"));
       label.current.replaceChildren(checked ? tl2(trans.on) : tl2(trans.off));
     }
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "toggle-wrap",
         className2 && className2
@@ -88793,7 +88793,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap2, "checked", {
+    Object.defineProperty(wrap, "checked", {
       get() {
         return checked;
       },
@@ -88803,7 +88803,7 @@ var bleh = (() => {
       }
     });
     useSettings.on("theme", update);
-    return wrap2;
+    return wrap;
   }
 
   // src/components/settings/provider/switch.tsx
@@ -89262,7 +89262,7 @@ var bleh = (() => {
       elem.current.setAttribute("aria-checked", checked);
       elem.current.setAttribute("data-theme", useSettings.get("theme"));
     }
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "radio-cont",
         className2 && className2
@@ -89294,7 +89294,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap2, "checked", {
+    Object.defineProperty(wrap, "checked", {
       get() {
         return checked;
       },
@@ -89304,7 +89304,7 @@ var bleh = (() => {
       }
     });
     useSettings.on("theme", update);
-    return wrap2;
+    return wrap;
   }
 
   // src/components/settings/provider/radio.tsx
@@ -89430,7 +89430,7 @@ var bleh = (() => {
     function update() {
       radio2.current.checked = checked;
     }
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "setting",
         "standalone"
@@ -89453,7 +89453,7 @@ var bleh = (() => {
       ]
     });
     update();
-    Object.defineProperty(wrap2, "checked", {
+    Object.defineProperty(wrap, "checked", {
       get() {
         return checked;
       },
@@ -89462,12 +89462,12 @@ var bleh = (() => {
         update();
       }
     });
-    Object.defineProperty(wrap2, "value", {
+    Object.defineProperty(wrap, "value", {
       get() {
         return value;
       }
     });
-    return wrap2;
+    return wrap;
   }
 
   // src/pages/profile/tracks.tsx
@@ -89658,7 +89658,7 @@ var bleh = (() => {
     const track = createRef();
     const marker = createRef();
     const working_max = max3 - min3;
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: [
         "range",
         className2 && className2
@@ -89700,7 +89700,7 @@ var bleh = (() => {
         })
       ]
     });
-    Object.defineProperty(wrap2, "value", {
+    Object.defineProperty(wrap, "value", {
       get() {
         return value;
       },
@@ -89750,7 +89750,7 @@ var bleh = (() => {
       }
     }
     update();
-    return wrap2;
+    return wrap;
   }
 
   // src/components/settings/provider/range.tsx
@@ -90557,9 +90557,9 @@ var bleh = (() => {
         new_panel.classList.add("obsessions-panel");
         page.structure.main.appendChild(new_panel);
         if (buttons.length > 0) {
-          const wrap2 = document.createElement("div");
-          wrap2.classList.add("view-buttons-wrapper");
-          wrap2.innerHTML = `<div class="info"><div class="alert alert-info">Playlists are a work in progress</div></div>`;
+          const wrap = document.createElement("div");
+          wrap.classList.add("view-buttons-wrapper");
+          wrap.innerHTML = `<div class="info"><div class="alert alert-info">Playlists are a work in progress</div></div>`;
           const button_header = html.node`
                     <div class="view-buttons playlist-home-buttons blend" />
                 `;
@@ -90577,8 +90577,8 @@ var bleh = (() => {
             button2.classList.add("btn", "view-item", "interact-item", "playlist-home-top-item", "icon");
             button_header.appendChild(button2);
           });
-          wrap2.appendChild(button_header);
-          new_panel.appendChild(wrap2);
+          wrap.appendChild(button_header);
+          new_panel.appendChild(wrap);
         }
         const playlists = page.structure.container.querySelector(".playlisting-playlists");
         if (playlists) {
@@ -112118,7 +112118,7 @@ var bleh = (() => {
       theme.theme_night = val;
       update();
     });
-    const wrap2 = /* @__PURE__ */ jsx(Fragment, {
+    const wrap = /* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(SettingGroup, {
           children: [
@@ -112210,7 +112210,7 @@ var bleh = (() => {
       });
     }
     update();
-    return wrap2;
+    return wrap;
     function set2(val) {
       theme = {
         ...theme,
@@ -112717,7 +112717,7 @@ var bleh = (() => {
       requires_flag: "colour_based_on_avatar",
       label: trans.avatar
     };
-    const wrap2 = /* @__PURE__ */ jsx(SettingGroup, {
+    const wrap = /* @__PURE__ */ jsx(SettingGroup, {
       ref: ref2,
       children: [
         /* @__PURE__ */ jsx("div", {
@@ -112848,12 +112848,12 @@ var bleh = (() => {
       }));
     }
     update();
-    wrap2.update = update;
+    wrap.update = update;
     const preview = page.state.colour_preview;
     const bg_colour = window.getComputedStyle(preview).backgroundColor;
     const final = formatHex(bg_colour);
     convert2.current.value = final;
-    return wrap2;
+    return wrap;
     function set2(value) {
       if (!value.sets) return;
       value.sets.hue = Number(value.sets.hue);
@@ -115214,7 +115214,7 @@ var bleh = (() => {
     }
   }
   function NavigationPage1({ instance, side, next, notif_count, messages_count, token }) {
-    const wrap2 = /* @__PURE__ */ jsx("div", {
+    const wrap = /* @__PURE__ */ jsx("div", {
       class: "side-page",
       "data-page": 1,
       children: [
@@ -115459,7 +115459,7 @@ var bleh = (() => {
         })
       ]
     });
-    const simple_menu = tippy_esm_default(wrap2, {
+    const simple_menu = tippy_esm_default(wrap, {
       theme: "context-menu",
       content: /* @__PURE__ */ jsx("a", {
         class: "dropdown-menu-clickable-item",
@@ -115482,8 +115482,8 @@ var bleh = (() => {
         });
       }
     });
-    register_menu(wrap2, simple_menu);
-    return wrap2;
+    register_menu(wrap, simple_menu);
+    return wrap;
   }
   function NavigationFriends({ instance, side }) {
     const starred = useSettings.get("starred_friend");
@@ -115619,7 +115619,7 @@ var bleh = (() => {
     });
     const buttons = [];
     const full_theme_list = getThemes();
-    const wrap2 = /* @__PURE__ */ jsx(Fragment, {
+    const wrap = /* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(Button, {
           menu: true,
@@ -115665,7 +115665,7 @@ var bleh = (() => {
       });
     }
     update();
-    return wrap2;
+    return wrap;
   }
   function NavigationTheme({ id, item, list, onChange, uuid }) {
     let active = false;

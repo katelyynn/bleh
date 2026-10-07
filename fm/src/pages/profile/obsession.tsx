@@ -533,7 +533,7 @@ export function obsession_list() {
 	const no_data = page.structure.container!.querySelector(
 		'.no-data-message--obsession-history',
 	);
-	if (no_data) wrap.after(no_data);
+	if (no_data) new_panel.appendChild(no_data);
 
 	const pagination = page.structure.container!.querySelector('.pagination');
 	if (pagination) new_panel.appendChild(pagination);
