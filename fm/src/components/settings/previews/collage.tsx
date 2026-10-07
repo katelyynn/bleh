@@ -64,7 +64,8 @@ export function CollageGridPreview({
 				<div
 					class={[
 						'collage-grid-preview-inner',
-						grid_gap && 'with-gap',
+						(grid_gap && style != 'stack') && 'with-gap',
+						style == 'stack' && 'with-stack',
 					]}
 				>
 					{Array.from({ length: row }).map(() => (

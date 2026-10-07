@@ -82,6 +82,10 @@
 	display: none !important;
 }
 
+.home-logo-container {
+	filter: drop-shadow(0 2px 4px oklch(var(--l4-c)));
+}
+
 .brand-demo,
 .bleh-logo,
 .lastfm-logo {

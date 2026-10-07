@@ -203,6 +203,11 @@
 				calc((180px - (var(--col) - 1) * 4px) * var(--row) / var(--col)));
 		--radius: 10%;
 	}
+
+	&.with-stack {
+		overflow: hidden;
+		border-radius: 8px;
+	}
 }
 
 .collage-grid-preview-item {

@@ -152,6 +152,8 @@ export function SettingSwitch({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onClick={() => {
+				if (disabled) return;
+
 				set(!value);
 			}}
 			ref={ref}
