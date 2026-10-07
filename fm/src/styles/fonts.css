@@ -8,8 +8,7 @@
 
 @font-face {
 	font-family: 'Zpix';
-	src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff')
-		format('woff');
+	src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff') format('woff');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
@@ -17,8 +16,7 @@
 
 @font-face {
 	font-family: 'Expose';
-	src: url('https://katelyynn.github.io/mask/Expose-Regular.woff2')
-		format('woff2');
+	src: url('https://katelyynn.github.io/mask/Expose-Regular.woff2') format('woff2');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
@@ -108,10 +106,33 @@ body {
 }
 
 .setting-head {
-	font-family: var(--font-head);
-	font-size: var(--font-size-head-3) !important;
-	line-height: var(--line-height-head-3) !important;
-	font-weight: var(--font-weight-head) !important;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 6px;
+	margin-top: 4px;
+	width: fit-content;
+}
+
+.setting-brand {
+	height: 26px !important;
+}
+
+.setting-brand-version {
+	font-family: var(--font-brand);
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	color: oklch(var(--l3-c));
+	font-weight: var(--font-weight-medium);
+
+	height: 20px;
+	border-radius: var(--radius-s);
+	cursor: default;
+	user-select: none;
+}
+
+.setting-brand-version-text {
+	translate: 0 -3px;
 }
 
 .highlight {

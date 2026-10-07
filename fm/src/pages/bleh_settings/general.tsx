@@ -45,6 +45,7 @@ import { createRef } from 'jsx-dom';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { Brand } from '@/pages/brand/brand.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -72,8 +73,12 @@ export function general() {
 				<div class={['section-intro', 'less']}>
 					<SubText>{tl(trans.current_version)}</SubText>
 					<h1 class='setting-head'>
-						<i>{version.brand}</i>{' '}
-						<i class='highlight'>{version.build}</i>
+						<Brand className='setting-brand' />
+						<div class='setting-brand-version'>
+							<div class='setting-brand-version-text'>
+								{version.build}
+							</div>
+						</div>
 					</h1>
 				</div>
 				<SettingGroup>

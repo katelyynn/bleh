@@ -32,6 +32,7 @@ body,
 			inset 0 1px 3px oklch(0 0 0 / 2%);
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
+			0 0 2px 4px oklch(var(--l4-c) / 6%),
 			var(--input-shadow);
 		--group-shadow:
 			inset 0 0 0 1px oklch(var(--b4) / 0.8),

@@ -208,6 +208,7 @@ body {
 			--menu-item-radius: var(--button-radius);
 			--menu-radius: var(--radius-s);
 			--track-radius: var(--menu-item-radius);
+			--chart-cover-radius: var(--menu-item-radius);
 
 			/*--item-med-radius: var(--radius-m);
 			--radius-m: 255px 5px 225px 5px/5px 225px 5px 255px;*/
