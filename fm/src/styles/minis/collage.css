@@ -240,6 +240,9 @@
 		margin-left: -120px;
 
 		z-index: calc(40 - var(--index));
+
+		box-shadow: 0 0 8px 1px oklch(0 0 0 / 70%) !important;
+		contain: unset !important;
 	}
 
 	&[data-centered] {

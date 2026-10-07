@@ -34,7 +34,7 @@
     "npm:fast-average-color@^9.5.2": "9.5.2",
     "npm:hangul-js@~0.2.6": "0.2.6",
     "npm:hangul-romanization@^1.0.1": "1.0.1",
-    "npm:html2canvas-pro@^1.6.7": "1.6.7",
+    "npm:html2canvas-pro@^2.5.1": "2.5.1",
     "npm:json5@^2.2.3": "2.2.3",
     "npm:jsx-dom@^8.1.6": "8.1.6",
     "npm:lighterhtml@^4.2.0": "4.2.0",
@@ -806,8 +806,8 @@
     "hangul-romanization@1.0.1": {
       "integrity": "sha512-Nh67VGRK0Zet2JRDWII4/RW004XSZyWVySSurM9PEAR1p+7/5Kr8OrrcSYQcQhyGCcBEKyQm98xd+rRnyO0uXg=="
     },
-    "html2canvas-pro@1.6.7": {
-      "integrity": "sha512-BzuCTXx0jf2TfnrJrtjMCY1FR9rxlPdy7yLWt9ZMhZm7Ylaw9MLb7agSheqv2mT/ARduBHDAqvJIFlbxrZfyOA==",
+    "html2canvas-pro@2.5.1": {
+      "integrity": "sha512-xx3I2Bv9xZGryEcEbGMdzJeIgWzdXLzXGirTbNuS9Rf+cjkLnM5umrlP6J+ZtbYe/cYea7bIkPNCOzwcceGTPg==",
       "dependencies": [
         "css-line-break",
         "text-segmentation"
@@ -1224,7 +1224,7 @@
       "npm:fast-average-color@^9.5.2",
       "npm:hangul-js@~0.2.6",
       "npm:hangul-romanization@^1.0.1",
-      "npm:html2canvas-pro@^1.6.7",
+      "npm:html2canvas-pro@^2.5.1",
       "npm:json5@^2.2.3",
       "npm:jsx-dom@^8.1.6",
       "npm:lighterhtml@^4.2.0",
