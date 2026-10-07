@@ -12691,6 +12691,7 @@ export const trans = {
 		en: 'Collage style',
 	},
 	stack: {
+		// a collage style, stacks items behind eachother
 		en: 'Stack',
 	},
 	music_and_data: {
