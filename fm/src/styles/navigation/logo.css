@@ -114,6 +114,12 @@
 				var(--graph-colour-9) 100%);
 	}
 
+	&[data-season="halloween"] {
+		background-image: linear-gradient(180deg,
+				#D64C31 45%,
+				#D8AD56 100%);
+	}
+
 	&[data-season="fall"] {
 		background-image: linear-gradient(180deg,
 				var(--graph-colour-6) 0%,
