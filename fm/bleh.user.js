@@ -38879,7 +38879,7 @@ var bleh = (() => {
         "suburbanno",
         "lagb2ck"
       ],
-      last_updated: "2026-09-09"
+      last_updated: "2026-10-02"
     },
     sv: {
       name: get_language_name("sv"),
@@ -38939,7 +38939,8 @@ var bleh = (() => {
       // the spaces around it are intentional and should be
       // there if the language puts spaces in lists
       en: ", and ",
-      de: " und "
+      de: " und ",
+      pt: " e "
     },
     page_templates: {
       // these are used for browser tab titles
@@ -40541,22 +40542,26 @@ var bleh = (() => {
       rose_pine: {
         // https://rosepinetheme.com
         en: "Ros\xE9 Pine",
-        it: "Ros\xE9 Pine"
+        it: "Ros\xE9 Pine",
+        pt: "Ros\xE9 Pine"
       },
       rose_pine_dawn: {
         // https://rosepinetheme.com
         en: "Ros\xE9 Pine Dawn",
-        it: "Ros\xE9 Pine Dawn"
+        it: "Ros\xE9 Pine Dawn",
+        pt: "Ros\xE9 Pine Dawn"
       },
       kanagawa: {
         // https://github.com/rebelot/kanagawa.nvim
         en: "Kanagawa",
-        it: "Kanagawa"
+        it: "Kanagawa",
+        pt: "Kanagawa"
       },
       kanagawa_dragon: {
         // https://github.com/rebelot/kanagawa.nvim
         en: "Kanagawa Dragon",
-        it: "Kanagawa Dragon"
+        it: "Kanagawa Dragon",
+        pt: "Kanagawa Dragon"
       }
     },
     bright: {
@@ -41082,19 +41087,24 @@ var bleh = (() => {
         graves: {
           // a nod to the Deadlock character 'Graves'
           // https://deadlock.wiki/Graves#Typography
-          en: "Graves"
+          en: "Graves",
+          pt: "Mort\xEDcia"
         },
         gloom: {
-          en: "Gloom"
+          en: "Gloom",
+          pt: "Melancolia"
         },
         smoke: {
-          en: "Smoke"
+          en: "Smoke",
+          pt: "Fuma\xE7a"
         },
         burgundy: {
-          en: "Burgundy"
+          en: "Burgundy",
+          pt: "Borgonha"
         },
         lantern: {
-          en: "Lantern"
+          en: "Lantern",
+          pt: "Lanterna"
         }
       },
       exclusive: {
@@ -41170,7 +41180,8 @@ var bleh = (() => {
     },
     particles: {
       en: "Particles",
-      it: "Particelle"
+      it: "Particelle",
+      pt: "Part\xEDculas"
     },
     seasonal_particles_fps: {
       name: {
@@ -41198,7 +41209,8 @@ var bleh = (() => {
     },
     effects: {
       en: "Effects",
-      it: "Effetti"
+      it: "Effetti",
+      pt: "Efeitos"
     },
     seasonal_overlays: {
       name: {
@@ -41213,15 +41225,18 @@ var bleh = (() => {
         zh: "\u663E\u793A\u989D\u5916\u7684\u65F6\u4EE4\u7279\u6548"
       },
       body: {
-        en: "Features image overlays like cobwebs and snow in certain seasons"
+        en: "Features image overlays like cobwebs and snow in certain seasons",
+        pt: "Apresenta sobreposi\xE7\xF5es de imagem, como teias de aranha e neve, em determinadas esta\xE7\xF5es."
       }
     },
     seasonal_masks: {
       name: {
-        en: "Change button and grid shapes"
+        en: "Change button and grid shapes",
+        pt: "Alterar formatos de bot\xF5es e grades"
       },
       body: {
-        en: "Seasons can choose a custom look for buttons, menus, and grids"
+        en: "Seasons can choose a custom look for buttons, menus, and grids",
+        pt: "As temporadas permitem escolher um visual personalizado para bot\xF5es, menus e grades."
       }
     },
     seasonal_offset: {
@@ -41959,7 +41974,8 @@ var bleh = (() => {
     },
     theme_no_saturation_support: {
       en: "This theme defines its own colours independently",
-      it: "Questo tema definisce i suoi colori indipendentemente"
+      it: "Questo tema definisce i suoi colori indipendentemente",
+      pt: "Este tema define suas pr\xF3prias cores independentemente."
     },
     noise: {
       name: {
@@ -42727,7 +42743,8 @@ var bleh = (() => {
     you_share_artists_with: {
       // as in your musical taste % between you and someone else
       // you are {percentage%} compatible (in taste) {list of artists}
-      en: "You share {artists} in common."
+      en: "You share {artists} in common.",
+      pt: "Voc\xEAs tem {artists} em comum."
     },
     you_are_a_value_match: {
       // valentines easter egg
@@ -42905,7 +42922,8 @@ var bleh = (() => {
     },
     sponsor_monthly: {
       en: "If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.",
-      it: "Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se pi\xF9 di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo."
+      it: "Se sponsorizzi mensilmente, puoi richiedere un distintivo extra (o due se pi\xF9 di $6) via messaggio. Altri vantaggi del profilo possono essere usati semplicemente modificando il tuo profilo.",
+      pt: "Se voc\xEA contribui mensalmente, pode solicitar um emblema de perfil extra (ou dois, caso a contribui\xE7\xE3o seja maior que $6) enviando uma mensagem. Outros benef\xEDcios de perfil podem ser utilizados simplesmente editando o seu perfil."
     },
     manage_sponsor: {
       en: "Manage sponsorship",
@@ -43915,7 +43933,8 @@ var bleh = (() => {
     },
     value_you_follow: {
       // number of people who also listen to an artist
-      en: "{v} you follow"
+      en: "{v} you follow",
+      pt: "{v} voc\xEA segue"
     },
     loading_album_plays: {
       en: "Collecting your album plays",
@@ -44178,7 +44197,8 @@ var bleh = (() => {
     },
     cancelled: {
       en: "Cancelled",
-      it: "Annullato"
+      it: "Annullato",
+      pt: "Cancelado"
     },
     event_cancelled: {
       // obviously remove the emoji or replace it as
@@ -46643,7 +46663,8 @@ var bleh = (() => {
       pl: "Ca\u0142y okres"
     },
     choose_a_timeframe: {
-      en: "Choose a timeframe"
+      en: "Choose a timeframe",
+      pt: "Escolha um per\xEDodo"
     },
     choose_a_timeframe_above: {
       en: "Choose a timeframe above",
@@ -47062,17 +47083,20 @@ var bleh = (() => {
     },
     incompatible: {
       en: "Incompatible",
-      it: "Incompatibile"
+      it: "Incompatibile",
+      pt: "Incompat\xEDvel"
     },
     value_is_enabled: {
       // a setting is enabled
       en: "{v} is enabled",
-      it: "{v} \xE8 attivato"
+      it: "{v} \xE8 attivato",
+      pt: "{v} est\xE1 ativado"
     },
     value_is_disabled: {
       // a setting is disabled
       en: "{v} is disabled",
-      it: "{v} \xE8 disattivato"
+      it: "{v} \xE8 disattivato",
+      pt: "{v} est\xE1 desativado"
     },
     bulk_edit_extension: {
       // yes the extension
@@ -48336,10 +48360,12 @@ var bleh = (() => {
     },
     reduced_flashing: {
       name: {
-        en: "Reduce flashing effects"
+        en: "Reduce flashing effects",
+        pt: "Reduzir efeitos visuais intermitentes"
       },
       body: {
-        en: "Prevents distracting or discomforting animations from taking place"
+        en: "Prevents distracting or discomforting animations from taking place",
+        pt: "Evita a exibi\xE7\xE3o de anima\xE7\xF5es que causam distra\xE7\xE3o ou desconforto."
       }
     },
     banners: {
@@ -50588,10 +50614,12 @@ var bleh = (() => {
     },
     popup_bulk_edit: {
       title: {
-        en: "Bulk Edit has been detected!"
+        en: "Bulk Edit has been detected!",
+        pt: "Edi\xE7\xE3o em massa detectada!"
       },
       body: {
-        en: "You can find it neatly packed into this button now"
+        en: "You can find it neatly packed into this button now",
+        pt: "Agora voc\xEA pode encontr\xE1-lo organizado dentro deste bot\xE3o."
       }
     },
     send_a_reply: {
@@ -50773,7 +50801,8 @@ var bleh = (() => {
       // body 1, body 2
       // page background colour
       en: "Body {v}",
-      it: "Corpo {v}"
+      it: "Corpo {v}",
+      pt: "Corpo {v}"
     },
     styled_with_font: {
       en: "Styled with {f}.",
@@ -50842,7 +50871,8 @@ var bleh = (() => {
     },
     value_listeners_recently: {
       en: "{v} listeners recently",
-      it: "{v} ascoltatori recenti"
+      it: "{v} ascoltatori recenti",
+      pt: "{v} ouvintes recentemente"
     },
     on_tour: {
       en: "On tour",
@@ -51472,43 +51502,54 @@ var bleh = (() => {
     },
     on: {
       // switch state
-      en: "On"
+      en: "On",
+      pt: "Ligado"
     },
     off: {
       // switch state
-      en: "Off"
+      en: "Off",
+      pt: "Desligado"
     },
     select_arbitrary: {
-      en: "Type to add to this list"
+      en: "Type to add to this list",
+      pt: "Digite para adicionar a esta lista"
     },
     value_to_close: {
       // keybind
-      en: "{v} to close"
+      en: "{v} to close",
+      pt: "{v} para fechar"
     },
     hover_to_view: {
       // hover mouse
-      en: "Hover to view"
+      en: "Hover to view",
+      pt: "Passe o mouse para visualizar"
     },
     collage_style: {
-      en: "Collage style"
+      en: "Collage style",
+      pt: "Estilo colagem"
     },
     stack: {
       // a collage style, stacks items behind eachother
-      en: "Stack"
+      en: "Stack",
+      pt: "Agrupar"
     },
     music_and_data: {
-      en: "Music & Data"
+      en: "Music & Data",
+      pt: "M\xFAsica e Dados"
     },
     streak_information: {
-      en: "Streaks are calculated locally and max 100 at the moment."
+      en: "Streaks are calculated locally and max 100 at the moment.",
+      pt: "As sequ\xEAncias s\xE3o calculadas localmente e limitadas a um m\xE1ximo de 100 no momento."
     },
     view_your_compatibility: {
       // taste
-      en: "View your compatibility"
+      en: "View your compatibility",
+      pt: "Veja sua compatibilidade"
     },
     insight: {
       // used on profiles
-      en: "Insight"
+      en: "Insight",
+      pt: "An\xE1lise"
     },
     profile_summary_pie_chart: {
       en: "Show pie chart"
