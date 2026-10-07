@@ -29,7 +29,7 @@ import {
 } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.tsx';
-import { createRef } from 'jsx-dom';
+import { createRef, CSSProperties } from 'jsx-dom';
 import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
 import {
 	CompareSelection,
@@ -153,6 +153,9 @@ export function collage({ host, sidebar } = {}) {
 				onChange={(v) => {
 					grid_preview.current.col = Number(v);
 				}}
+				disabled={ff('collage_style')
+					? useSettings.get('collage_style') == 'stack'
+					: false}
 			/>
 		</InputGroup>
 	);
@@ -234,7 +237,14 @@ export function collage({ host, sidebar } = {}) {
 						ref={timeframe}
 					/>
 				</SettingStub>
-				{ff('collage_style') && <SettingSelect bind='collage_style' />}
+				{ff('collage_style') && (
+					<SettingSelect
+						bind='collage_style'
+						onChange={(v) => {
+							height.current.disabled = v == 'stack';
+						}}
+					/>
+				)}
 				<SettingStub name={tl(trans.chart_size)} type='select'>
 					{grid_preview_settings}
 				</SettingStub>
@@ -326,13 +336,18 @@ export function collage({ host, sidebar } = {}) {
 			return;
 		}
 
+		const rows =
+			(ff('collage_style') && useSettings.get('collage_style') == 'stack')
+				? 1
+				: height.current.value;
+
 		load_profile_cache_externally(user.current.value).then((cache) => {
 			page.avatar = cache.avatar || '';
 		});
 
 		const per_page = 50; // decided by last.fm
 		const pages = Math.ceil(
-			(width.current.value * height.current.value) / per_page,
+			(width.current.value * rows) / per_page,
 		);
 
 		if (pages > 4 && !bypass) {
@@ -465,19 +480,38 @@ export function collage({ host, sidebar } = {}) {
 				return;
 			}
 
-			let grid = html.node`
-                <ol class="grid-items grid-items--numbered collage-grid" style="--width: ${width.current.value}; --height: ${height.current.value}" data-width=${width.current.value} data-height=${height.current.value} data-centered=${settings.collage_centered} />
-            `;
+			const stack = ff('collage_style') &&
+				useSettings.get('collage_style') == 'stack';
 
-			if (!settings.collage_grid_gap) {
+			const rows = stack ? 1 : height.current.value;
+
+			const grid = (
+				<ol
+					class={[
+						'grid-items',
+						'grid-items--numbered',
+						'collage-grid',
+						stack && 'collage-stack',
+					]}
+					style={{
+						'--width': width.current.value,
+						'--height': rows,
+					} as CSSProperties}
+					data-width={width.current.value}
+					data-height={rows}
+					data-centered={useSettings.get('collage_centered')}
+				/>
+			);
+
+			if (!useSettings.get('collage_grid_gap')) {
 				grid.style.setProperty('--item-list-gap', '0px');
 				grid.style.setProperty('--radius-s', '0');
 			}
 
-			let total = width.current.value * height.current.value - 1;
+			let total = width.current.value * rows - 1;
 			grid.style.setProperty(
 				'--highest',
-				Math.max(+width.current.value, +height.current.value)
+				Math.max(+width.current.value, +rows)
 					.toString(),
 			);
 
@@ -492,7 +526,7 @@ export function collage({ host, sidebar } = {}) {
 					}`;}
 
 				grid.appendChild(html.node`
-                    <li class="compare-item grid-items-item">
+                    <li class="compare-item grid-items-item" style="--index: ${index}">
                         <div class="grid-items-cover-image">
                             <div class="grid-items-cover-image-image ${
 					data.avatar.endsWith(
@@ -609,7 +643,7 @@ export function collage({ host, sidebar } = {}) {
 							tl(trans[type.current.value]),
 						)
 					}</strong>
-                            <strong>${width.current.value}×${height.current.value}</strong>
+                            <strong>${width.current.value}×${rows}</strong>
                         </div>
                         <div class="user">
                             <div class="avatar">
@@ -642,23 +676,27 @@ export function collage({ host, sidebar } = {}) {
 			const base = 6;
 			const highest = Math.max(
 				+width.current.value,
-				+height.current.value,
+				+rows,
 			);
 
-			const grid_item_size = Math.min(
+			const grid_item_size = stack ? 400 : Math.min(
 				default_size,
 				Math.floor((default_size * base) / highest),
 			);
-			const grid_item_gap = settings.collage_grid_gap ? 6 : 0;
-			const padding = settings.collage_grid_gap ? 15 : 0;
-			const title_height = settings.collage_title ? 32 + 15 : 0;
-			const cv_width = padding * 2 +
+			const grid_item_gap = stack
+				? -120
+				: useSettings.get('collage_grid_gap')
+				? 6
+				: 0;
+			const padding = useSettings.get('collage_grid_gap') ? 15 : 0;
+			const title_height = useSettings.get('collage_title') ? 32 + 15 : 0;
+			let cv_width = padding * 2 +
 				grid_item_size * width.current.value +
 				grid_item_gap * (width.current.value - 1);
 			const cv_height = padding * 2 +
 				title_height +
-				grid_item_size * height.current.value +
-				grid_item_gap * (height.current.value - 1);
+				grid_item_size * rows +
+				grid_item_gap * (rows - 1);
 
 			const cv_scale = 1;
 
@@ -709,8 +747,7 @@ export function collage({ host, sidebar } = {}) {
 							timeframe: timeframe_text(timeframe.current.value),
 							user: page.name,
 							type: tl(trans[type.current.value]),
-							size:
-								`${width.current.value}×${height.current.value}`,
+							size: `${width.current.value}×${rows}`,
 							brand: version.brand,
 							date: `${date.getFullYear()}-${
 								pad2(date.getMonth() + 1)

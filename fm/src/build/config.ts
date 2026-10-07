@@ -755,6 +755,7 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.collage_grid_gap.name,
 		body: trans.collage_grid_gap.body,
+		incompatible: { collage_style: 'stack' },
 	},
 	hu_tao: {
 		default: '',

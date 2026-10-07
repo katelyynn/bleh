@@ -25,6 +25,7 @@ export function CollageGridPreview({
 }: CollageGridPreviewProps) {
 	let grid_title = useSettings.get('collage_title') as boolean;
 	let grid_gap = useSettings.get('collage_grid_gap') as boolean;
+	let style = useSettings.get('collage_style') as string;
 
 	useSettings.on('collage_title', () => {
 		grid_title = useSettings.get('collage_title') as boolean;
@@ -32,6 +33,10 @@ export function CollageGridPreview({
 	});
 	useSettings.on('collage_grid_gap', () => {
 		grid_gap = useSettings.get('collage_grid_gap') as boolean;
+		update();
+	});
+	useSettings.on('collage_style', () => {
+		style = useSettings.get('collage_style') as string;
 		update();
 	});
 
@@ -43,6 +48,10 @@ export function CollageGridPreview({
 	) as CollageGridPreviewElement;
 
 	function update() {
+		if (style == 'stack') {
+			col = 1;
+		}
+
 		elem.replaceChildren(
 			<>
 				{grid_title && (

@@ -293,7 +293,7 @@ export const flags: Record<string, flag> = {
 		date: '2026-08-29',
 	},
 	'collage_style': {
-		enabled: false,
+		enabled: true,
 		name: 'Collage alternative styles',
 		date: '2026-09-20',
 	},
