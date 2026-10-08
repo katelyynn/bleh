@@ -23,7 +23,7 @@ import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { header_colour } from '@/components/page/colour';
-import { icon, icons } from '@/components/shared/icon';
+import { Icon, icon, icons } from '@/components/shared/icon';
 import { useSettings } from '@/page.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
@@ -371,8 +371,11 @@ export function obsession_list() {
 		) as HTMLButtonElement;
 
 		if (play) {
-			play.classList = 'blend-v2-btn radio left-icon';
-			play.setAttribute('data-type', 'play');
+			play.classList = 'blend-v2-btn left-icon';
+			play.insertBefore(
+				<Icon name={icons.play} />,
+				play.firstChild,
+			);
 		}
 	}
 

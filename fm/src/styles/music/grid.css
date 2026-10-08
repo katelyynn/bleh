@@ -156,8 +156,12 @@
 	/* 3 rows of text */
 	&.obsessions-item,
 	&.compare-item {
-		--extra-white: 35%;
+		--extra-white: 39%;
 	}
+
+	/*&.obsessions-item {
+		aspect-ratio: 1 / 1.2;
+	}*/
 
 	&.generic-cover {
 		--grid-colour-shadow-override: 0 10px 30px oklch(var(--b2) / 25%);
@@ -453,19 +457,28 @@
 	color: inherit;
 
 	&:not(.grid-item-plays) {
+		--clamp: 2;
 		display: -webkit-box;
 		min-width: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: wrap;
-		-webkit-line-clamp: 2;
+		-webkit-line-clamp: var(--clamp);
 		-webkit-box-orient: vertical;
+
+		&>a {
+			display: inline;
+		}
 	}
 
 	&.hovered {
 		&:after {
 			transform: scaleX(1);
 		}
+	}
+
+	&.smart-artist {
+		--clamp: 1;
 	}
 }
 
