@@ -54,9 +54,20 @@ import { ff } from '@/components/settings/sku.ts';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { load_profile_cache_externally } from '@/pages/profile/profile.tsx';
 import { formatHex } from 'culori';
+import { CardTip } from '@/components/text/tip.tsx';
+
+interface collage_item {
+	avatar?: string;
+	name: string;
+	sister?: string;
+	plays: number;
+}
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
+
+	let collage_items: collage_item[] = [];
+	let last_collage = '';
 
 	const width = createRef();
 	const height = createRef();
@@ -342,6 +353,27 @@ export function collage({ host, sidebar } = {}) {
 				? 1
 				: height.current.value;
 
+		const current = build_collage_reference(
+			page.name,
+			type.current.value,
+			timeframe.current.value,
+			useSettings.get('collage_style') as string,
+			`${width.current.value}x${rows}`,
+		);
+
+		if (current == last_collage) {
+			body.current.replaceChildren(
+				<>
+					<LoadingData>
+						{tl(trans.loading)}
+					</LoadingData>
+				</>,
+			);
+
+			continue_collage();
+			return;
+		}
+
 		load_profile_cache_externally(user.current.value).then((cache) => {
 			page.avatar = cache.avatar || '';
 		});
@@ -380,11 +412,11 @@ export function collage({ host, sidebar } = {}) {
 		group2.current.disabled = true;
 		submit.current.loading = true;
 
-		page.state.collage = [];
+		collage_items = [];
 		get_grid(1, pages);
 	}
 
-	function get_grid(current_page, pages) {
+	function get_grid(current_page: number, pages: number) {
 		body.current.replaceChildren(
 			<LoadingData>
 				{tl(trans.gathering_plays_for_user_pages, {
@@ -398,43 +430,43 @@ export function collage({ host, sidebar } = {}) {
 		fetch(
 			`${root}user/${page.name}/library/${type.current.value}?format=list&${timeframe.current.value}&page=${current_page}&ajax=1`,
 		)
-			.then(function (response) {
-				console.log('returned', response, response.text);
-
-				return response.text();
+			.then((res) => {
+				return res.text();
 			})
-			.then(function (dom) {
-				let doc = new DOMParser().parseFromString(dom, 'text/html');
-				console.log('DOC', doc);
+			.then((dom) => {
+				const doc = new DOMParser().parseFromString(dom, 'text/html');
 
-				let next_button = doc.querySelector('.pagination-next');
+				const next_button = doc.querySelector('.pagination-next');
 
 				try {
-					let tracks = doc.querySelectorAll('.chartlist-row');
+					const tracks = doc.querySelectorAll('.chartlist-row');
 					tracks.forEach((track) => {
-						let item = {};
+						const item: collage_item = {
+							name: '',
+							plays: 0,
+						};
 
-						item.avatar = track.querySelector(
+						const avi = track.querySelector(
 							'.chartlist-image img',
 						);
-						if (item.avatar) {
-							item.avatar = item.avatar.getAttribute('src');
+						if (avi) {
+							item.avatar = avi.getAttribute('src')!;
 						}
 						item.name = track
-							.querySelector('.chartlist-name a')
+							.querySelector('.chartlist-name a')!
 							.textContent.trim();
 						if (type.current.value != 'artists') {
 							item.sister = track
-								.querySelector('.chartlist-artist a')
+								.querySelector('.chartlist-artist a')!
 								.textContent.trim();
 						}
 						item.plays = clean_number(
 							track
-								.querySelector('.chartlist-count-bar-slug')
-								.getAttribute('data-stat-value'),
+								.querySelector('.chartlist-count-bar-slug')!
+								.getAttribute('data-stat-value')!,
 						);
 
-						page.state.collage.push(item);
+						collage_items.push(item);
 					});
 				} catch (e) {
 					notify({
@@ -457,16 +489,16 @@ export function collage({ host, sidebar } = {}) {
 			});
 	}
 
-	async function continue_collage() {
+	function continue_collage() {
 		try {
 			log(
 				'gathered initial values',
 				'collage',
 				'info',
-				page.state.collage,
+				collage_items,
 			);
 
-			if (page.state.collage.length == 0) {
+			if (collage_items.length == 0) {
 				body.current.replaceChildren(
 					<LoadingData type='failed'>
 						{tl(trans.no_plays_in_range)}
@@ -485,6 +517,14 @@ export function collage({ host, sidebar } = {}) {
 				useSettings.get('collage_style') == 'stack';
 
 			const rows = stack ? 1 : height.current.value;
+
+			last_collage = build_collage_reference(
+				page.name,
+				type.current.value,
+				timeframe.current.value,
+				useSettings.get('collage_style') as string,
+				`${width.current.value}x${rows}`,
+			);
 
 			const grid = (
 				<ol
@@ -516,7 +556,7 @@ export function collage({ host, sidebar } = {}) {
 					.toString(),
 			);
 
-			page.state.collage.some((data, index) => {
+			collage_items.some((data, index) => {
 				if (index > total) return false;
 
 				let template;
@@ -690,7 +730,7 @@ export function collage({ host, sidebar } = {}) {
 				</>,
 			);
 
-			music_grids(grid, false);
+			music_grids(grid as HTMLOListElement, false);
 
 			// 10 = item-list-gap
 			// 15 = card-gap
@@ -712,7 +752,7 @@ export function collage({ host, sidebar } = {}) {
 				: 0;
 			const padding = useSettings.get('collage_grid_gap') ? 15 : 0;
 			const title_height = useSettings.get('collage_title') ? 32 + 15 : 0;
-			let cv_width = padding * 2 +
+			const cv_width = padding * 2 +
 				grid_item_size * width.current.value +
 				grid_item_gap * (width.current.value - 1);
 			const cv_height = padding * 2 +
@@ -750,7 +790,7 @@ export function collage({ host, sidebar } = {}) {
 				/>
 			) as HTMLCanvasElement;
 
-			html2canvas(collage_dom, {
+			html2canvas(collage_dom as HTMLElement, {
 				useCORS: true,
 				letterRendering: true,
 				canvas: initial_canvas,
@@ -764,7 +804,7 @@ export function collage({ host, sidebar } = {}) {
 				onclone: (doc) => {
 					try {
 						doc.querySelectorAll('*').forEach((el) => {
-							el.style.setProperty(
+							(el as HTMLElement).style.setProperty(
 								'font-family',
 								'Hanken Grotesk, Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif',
 							);
@@ -776,7 +816,7 @@ export function collage({ host, sidebar } = {}) {
 			}).then((canvas) => {
 				canvas.toBlob((blob) => {
 					try {
-						blob_url = URL.createObjectURL(blob);
+						blob_url = URL.createObjectURL(blob!);
 
 						const date = new Date();
 
@@ -792,20 +832,21 @@ export function collage({ host, sidebar } = {}) {
 						}) as string;
 
 						body.current.replaceChildren(
-							<div class='collage-canvas'>
-								{collage_dom}
-								{canvas}
-								<div class='collage-canvas-actions'>
-									<Button
-										onClick={() => {
-											open(blob_url);
-										}}
-									>
-										{tl(trans.open)}
-										<Icon name={icons.external} />
-									</Button>
+							<>
+								<div class='collage-canvas'>
+									{collage_dom}
+									{canvas}
+									<a
+										class='collage-canvas-actions'
+										href={blob_url}
+										target='_blank'
+										download={filename}
+									/>
 								</div>
-							</div>,
+								<CardTip center gap>
+									{tl(trans.collage_tip)}
+								</CardTip>
+							</>,
 						);
 					} catch (e) {
 						collage_error(e);
@@ -825,4 +866,14 @@ export function collage({ host, sidebar } = {}) {
 	function download_collage() {
 		download(blob_url, filename);
 	}
+}
+
+function build_collage_reference(
+	user: string,
+	type: string,
+	timeframe: string,
+	style: string,
+	size: string,
+) {
+	return `${user}-${type}-${timeframe}-${style}-${size}`;
 }

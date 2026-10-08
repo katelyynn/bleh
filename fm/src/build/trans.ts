@@ -8495,6 +8495,9 @@ export const trans = {
 	creating_collage_phase: {
 		en: 'Creating collage ({phase}), {progress}%',
 	},
+	collage_tip: {
+		en: 'Click the collage above or use the sidebar to download. Adjusting visual settings now will refresh faster.',
+	},
 	collage_title: {
 		name: {
 			en: 'Collage title',

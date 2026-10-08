@@ -1,60 +1,23 @@
 .collage-canvas {
 	position: relative;
 
-	canvas {
+	&>canvas {
 		max-width: 100% !important;
 		max-height: 900px !important;
-		border-radius: var(--item-med-radius);
-		box-shadow: var(--interact-shadow);
-
-		transition-property: opacity;
-		transition-duration: 0.3s;
-		transition-timing-function: var(--trans-function-ani);
-	}
-
-	.collage-canvas-actions {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: var(--button-list-gap);
-		position: absolute;
-		inset: 0;
-
-		opacity: 0;
-		scale: 0.95;
-
-		transition-property: opacity, scale;
-		transition-duration: 0.3s;
-		transition-timing-function: var(--trans-function-ani);
+		border-radius: var(--radius-m);
+		box-shadow: var(--group-shadow);
 	}
 
 	width: fit-content;
 	margin: 0 auto;
-
-	&:hover {
-		canvas {
-			opacity: 0.3;
-		}
-
-		.collage-canvas-actions {
-			opacity: 1;
-			scale: 1;
-		}
-	}
 }
 
-.collage-finished {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: var(--card-gap);
-	margin-bottom: var(--card-gap);
+.collage-canvas-actions {
+	position: absolute;
+	inset: 0;
 
-	strong {
-		font-size: var(--font-size-subheading);
-		line-height: var(--line-height-subheading);
-		color: oklch(var(--c1));
-		cursor: default;
+	&:after {
+		display: none;
 	}
 }
 

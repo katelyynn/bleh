@@ -94,16 +94,10 @@ export function share(url) {
 	});
 }
 
-export function download(url, filename = null) {
+export function download(url: string, filename?: string) {
 	log(`downloading ${filename}`, 'download');
 
-	const link = html.node`
-        <a href=${url} download />
-    `;
-
-	if (filename) {
-		link.setAttribute('download', filename);
-	}
+	const link = <a href={url} download={filename} /> as HTMLAnchorElement;
 
 	link.click();
 	notify({
