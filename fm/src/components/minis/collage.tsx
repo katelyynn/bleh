@@ -720,7 +720,7 @@ export function collage({ host, sidebar } = {}) {
 				grid_item_size * rows +
 				grid_item_gap * (rows - 1);
 
-			const cv_scale = 1;
+			const cv_scale = 2;
 
 			collage_dom.style.width = `${cv_width}px`;
 			collage_dom.style.height = `${cv_height}px`;

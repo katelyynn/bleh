@@ -254,19 +254,12 @@
 
 		z-index: calc(40 - var(--index));
 
-		box-shadow: 0 0 8px 1px oklch(0 0 0 / 70%) !important;
+		box-shadow: 0 0 14px 1px oklch(0 0 0 / 70%) !important;
 		contain: unset !important;
 	}
 
 	&[data-centered] {
 		&>.grid-items-item {
-			&:first-child>.grid-items-cover-image {
-				.grid-items-item-details {
-					margin-left: 10px;
-					margin-right: 10px;
-				}
-			}
-
 			&:not(:first-child)>.grid-items-cover-image {
 				.grid-items-item-details {
 					margin-left: calc(120px + 10px);
