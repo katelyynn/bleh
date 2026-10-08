@@ -224,6 +224,7 @@ export const icons = {
 	dot: 'dot',
 	taste: 'taste',
 	emoji: 'emoji',
+	discord: 'discord',
 };
 
 interface icon {

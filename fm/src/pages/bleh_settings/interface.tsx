@@ -260,7 +260,7 @@ interface TrackPreviewProps {
 	expand_tracks: string;
 }
 
-function TrackPreview({
+export function TrackPreview({
 	playing,
 	avatar,
 	album_name_location,

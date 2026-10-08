@@ -6,14 +6,14 @@
 		margin-top: unset;
 	}
 
-	& > .content-main {
+	&>.content-main {
 		min-width: unset;
 		width: unset;
 		background: unset;
 		transition: none;
 	}
 
-	& > .content-side {
+	&>.content-side {
 		display: none;
 	}
 
@@ -77,6 +77,7 @@
 		width: 100%;
 	}
 }
+
 .setup {
 	display: flex;
 	flex-direction: column;
@@ -103,7 +104,7 @@
 		transition-duration: 0.4s;
 		transition-timing-function: var(--trans-function);
 
-		& > .mini-list {
+		&>.mini-list {
 			width: 100%;
 		}
 	}
@@ -136,17 +137,23 @@
 	}
 
 	&[data-page="themes"] {
-		width: 780px;
+		width: 700px;
 	}
+
+	&[data-page="colours"] {
+		width: 680px;
+	}
+
 	&[data-page="music"] {
 		width: 570px;
 	}
+
 	&[data-page="seasonal"] {
 		width: 700px;
 	}
 
 	&[data-animating="true"] {
-		& > .setup-content {
+		&>.setup-content {
 			opacity: 0;
 			max-height: 200px;
 			transform: scaleY(0.8);
@@ -154,19 +161,11 @@
 		}
 	}
 
-	.settings {
-		display: flex;
-		flex-direction: column;
-		gap: var(--card-gap);
-		text-align: left;
-		width: 100%;
-	}
-
 	[data-bleh--reduced_motion="true"] & {
 		transition: none;
 		opacity: unset;
 
-		& > .setup-content {
+		&>.setup-content {
 			opacity: none !important;
 			transition: none !important;
 			transform: none !important;
@@ -196,36 +195,36 @@
 	&:before {
 		content: '';
 		position: absolute;
-		inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
-			-90px calc(-1 * var(--card-padding));
-		background: radial-gradient(at center top, oklch(var(--k4)), transparent
-			75%);
+		inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) -90px calc(-1 * var(--card-padding));
+		background: radial-gradient(at center top, oklch(var(--k4)), transparent 75%);
 		animation: setup_bg 8s var(--trans-function-ani) infinite;
 
 		pointer-events: none;
 	}
+}
 
-	& > .avatar {
-		width: 120px;
-		height: 120px;
-		box-shadow: var(--interact-shadow);
-		--mask-size: var(--cover-size-100);
-		margin-top: -60px;
-	}
+.setup-avatar {
+	width: 120px;
+	height: 120px;
+	box-shadow: var(--interact-shadow);
+	--mask-size: var(--cover-size-100);
+	margin-top: -60px;
+}
 
-	& > .info {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 10px;
-	}
+.setup-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
 }
 
 @keyframes setup_bg {
+
 	from,
 	to {
 		opacity: 0.2;
 	}
+
 	50% {
 		opacity: 0.55;
 	}
@@ -235,7 +234,7 @@
 	margin: 20px 0 40px;
 	transform-origin: top;
 
-	& > p {
+	&>p {
 		width: 100%;
 		max-width: 430px;
 	}
