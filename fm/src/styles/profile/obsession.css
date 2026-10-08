@@ -1,6 +1,7 @@
 [data-page-subpage="obsessions_obsession"] {
-	& + .page-content,
-	.row > .col-sm-6 {
+
+	&+.page-content,
+	.row>.col-sm-6 {
 		display: none;
 	}
 
@@ -27,11 +28,9 @@
 			content: "";
 			position: absolute;
 			inset: -400px -250px;
-			background: radial-gradient(
-				circle,
-				oklch(var(--h4) / 6%) 0%,
-				transparent 65%
-			);
+			background: radial-gradient(circle,
+					oklch(var(--h4) / 6%) 0%,
+					transparent 65%);
 			pointer-events: none;
 		}
 
@@ -163,8 +162,10 @@
 			}
 
 			.fellow-obsessor-avatar {
-				&:has(.avatar[aria-expanded="true"]) {
-					z-index: 10;
+				&>a {
+					&:after {
+						display: none;
+					}
 				}
 
 				.obsession-first {
@@ -174,7 +175,7 @@
 				}
 			}
 
-			.fellow-obsessor-avatar > .avatar {
+			.fellow-obsessor-avatar>.avatar {
 				box-shadow: var(--interact-shadow);
 				z-index: 0;
 
@@ -195,6 +196,7 @@
 		}
 	}
 }
+
 .obsession-container {
 	display: none !important;
 }
@@ -215,8 +217,7 @@
 
 /* missing cover */
 [style="background-image: url(https://lastfm.freetls.fastly.net/i/u/ar0/4128a6eb29f94943c9d206c08e625904.jpg);"] {
-	background-image: url("https://lastfm.freetls.fastly.net/i/u/770x0/98f646bcb3c44ad7ed8df02fd12667d8.jpg")
-		!important;
+	background-image: url("https://lastfm.freetls.fastly.net/i/u/770x0/98f646bcb3c44ad7ed8df02fd12667d8.jpg") !important;
 	opacity: 0.3 !important;
 	background-position: top;
 }
@@ -224,6 +225,7 @@
 .obsession-container .page-content {
 	position: static !important;
 }
+
 .obsession-pagination {
 	position: absolute;
 	inset: 0 0 0 50%;
@@ -241,6 +243,7 @@
 		z-index: 30;
 	}
 }
+
 .obsession-pagination-next,
 .obsession-pagination-previous {
 	top: 0;
@@ -248,10 +251,12 @@
 	width: 120px;
 	pointer-events: auto;
 }
+
 .obsession-pagination-next {
 	--mask: var(--icon-16-arrow-left);
 	left: 0;
 }
+
 .obsession-pagination-previous {
 	--mask: var(--icon-16-arrow-right);
 	right: 0;
@@ -324,7 +329,8 @@
 		--top: 1px;
 	}
 }
-.obsession-history + .row,
+
+.obsession-history+.row,
 .obsession-history {
 	display: none;
 }
@@ -336,6 +342,7 @@
 		font-weight: 500;
 		line-height: 22px;
 	}
+
 	.search-form {
 		margin-top: unset;
 
@@ -356,14 +363,17 @@
 	--font-size: 0;
 	opacity: unset !important;
 }
+
 .search-submit {
 	--mask: var(--icon-16-search);
 }
+
 .search-reset {
 	--mask: var(--icon-16-x);
 }
 
 .obsession-search-results {
+
 	/* pro tip */
 	._buffer-medium {
 		margin-top: var(--card-gap);
@@ -396,6 +406,7 @@
 	flex-direction: column;
 	gap: 4px;
 }
+
 .obsession-candidate {
 	margin-top: unset;
 	height: 44px;
@@ -424,14 +435,14 @@
 		--mask: var(--icon-16-add);
 		width: 32px;
 		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(
-            in oklch,
-            oklch(var(--l3-c)),
-            oklch(var(--l4-c)) 30%
-        );
-		margin-left: 4px; /* 12px total */
+		--mask-colour: color-mix(in oklch,
+				oklch(var(--l3-c)),
+				oklch(var(--l4-c)) 30%);
+		margin-left: 4px;
+		/* 12px total */
 	}
 }
+
 .obsession-candidate-image {
 	position: static;
 	--mask-size: var(--cover-size-32);
@@ -444,6 +455,7 @@
 	width: 100%;
 	max-width: 370px;
 }
+
 .obsession-candidate-artist {
 	flex: 1;
 }
