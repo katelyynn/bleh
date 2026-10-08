@@ -61,6 +61,13 @@
 
 .pagination-next,
 .pagination-previous {
-	top: 50%;
-	margin-top: -9px;
+	position: static;
+}
+
+.pagination-next {
+	margin-left: var(--card-gap);
+}
+
+.pagination-previous {
+	margin-right: var(--card-gap);
 }
