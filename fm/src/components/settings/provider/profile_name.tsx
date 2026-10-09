@@ -38,8 +38,6 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { formatHex } from 'culori';
 import { auth, page } from '@/build/page.ts';
-import { MenuContents } from '@/components/menu/menu.tsx';
-import { notify, notify_rm } from '@/components/dialog/notify.ts';
 import { Carousel, CarouselItem } from '@/components/select/carousel.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
 import { NewIndicator } from '@/components/shared/indicator.tsx';

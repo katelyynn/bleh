@@ -5,10 +5,7 @@
  */
 
 import { lang, tl, trans } from '@/build/trans';
-import { html, render } from 'lighterhtml';
-import { select } from '@/components/settings/select';
-import { setting } from '@/components/settings/settings';
-import { input } from '@/components/settings/input';
+import { html } from 'lighterhtml';
 import { auth, page, root } from '@/build/page';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { clean_number, pad2, sanitise } from '@/build/tools';
@@ -17,26 +14,15 @@ import { music_grids } from '@/components/music/music_grid';
 import { settings } from '@/build/config';
 import { version } from '@/main';
 import { download } from '@/components/dialog/share';
-import { render_user } from '@/pages/home/minis.js';
 import { redirect } from '@/components/music/music';
-import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
-import { Icon, icon, icons } from '../shared/icon';
-import {
-	hybrid_timeframe_picker,
-	HybridTimeframePicker,
-	timeframe_text,
-} from '../date/timeframe';
+import { Icon, icons } from '../shared/icon';
+import { HybridTimeframePicker, timeframe_text } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.tsx';
 import { createRef, CSSProperties } from 'jsx-dom';
-import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
-import {
-	CompareSelection,
-	CompareUser,
-	CompareUsers,
-} from '@/components/minis/user.tsx';
-import { Input, InputGroup } from '@/components/input/input.tsx';
+import { CompareBody } from '@/components/minis/main.tsx';
+import { InputGroup } from '@/components/input/input.tsx';
 import { Select, SelectOption } from '@/components/select/select.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
@@ -325,10 +311,7 @@ export function collage({ host, sidebar } = {}) {
 		) {
 			notify({
 				id: 'collage_failed',
-				title: tl(trans.name_failed).replace(
-					'{name}',
-					tl(trans.collage),
-				),
+				title: tl(trans.name_failed, { name: tl(trans.collage) }),
 				body: tl(trans.your_settings_are_invalid),
 				type: 'error',
 			});
@@ -338,10 +321,7 @@ export function collage({ host, sidebar } = {}) {
 		if (!auth.name) {
 			notify({
 				id: 'collage_failed',
-				title: tl(trans.name_failed).replace(
-					'{name}',
-					tl(trans.collage),
-				),
+				title: tl(trans.name_failed, { name: tl(trans.collage) }),
 				body: tl(trans.you_need_to_be_logged_in),
 				type: 'error',
 			});
@@ -387,10 +367,9 @@ export function collage({ host, sidebar } = {}) {
 			let warn = notify({
 				id: 'collage_warning',
 				title: tl(trans.are_you_sure),
-				body: tl(trans.this_will_require_loading_count_pages).replace(
-					'{c}',
-					pages,
-				),
+				body: tl(trans.this_will_require_loading_count_pages, {
+					c: pages,
+				}),
 				type: 'warning',
 				actions: [
 					{

@@ -1243,6 +1243,66 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Notification'>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+								})}
+						>
+							Open notification
+						</Button>
+					</DemoItem>
+					<DemoItem label='Notification (persistent)'>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+								})}
+						>
+							Open notification
+						</Button>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+									type: 'error',
+								})}
+						>
+							Open notification
+						</Button>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+									type: 'warning',
+								})}
+						>
+							Open notification
+						</Button>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+									type: 'success',
+								})}
+						>
+							Open notification
+						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
 

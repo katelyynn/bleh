@@ -39,7 +39,7 @@ import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { formatHex } from 'culori';
 import { page } from '@/build/page.ts';
 import { MenuContents } from '@/components/menu/menu.tsx';
-import { notify, notify_rm } from '@/components/dialog/notify.ts';
+import { notify, notify_rm } from '@/components/dialog/notify.tsx';
 
 interface ProfileAccentProps {
 	disabled?: boolean;

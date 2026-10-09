@@ -11,7 +11,7 @@ import { keys } from '@/components/settings/storage.ts';
 import { useSettings } from '@/page.tsx';
 import { set_storage } from '@/build/tools.ts';
 import { load_chart_colours } from '@/components/music/chart.ts';
-import { notify } from '@/components/dialog/notify.ts';
+import { notify } from '@/components/dialog/notify.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { page } from '@/build/page.ts';
 import { CSSProperties } from 'jsx-dom';

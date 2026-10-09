@@ -6,17 +6,16 @@
 	align-items: end;
 	inset: 0;
 	pointer-events: none;
-	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap))
-		var(--card-gap);
+	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap)) var(--card-gap);
 	z-index: 99999999999;
 
 	transition-property: right, opacity;
-	transition-duration: 0.25s;
-	transition-timing-function: var(--trans-function);
+	transition-duration: 0.3s;
+	transition-timing-function: var(--trans-function-ani);
 
 	&[data-auth-open="true"] {
 		/*--auth-space: 244px;*/
-		right: -300px;
+		right: -200px;
 		opacity: 0;
 	}
 }
@@ -28,15 +27,13 @@
 
 	overflow: hidden;
 
+	--notification-verts: 12px;
+	--notification-sides: 10px;
+
 	background: oklch(var(--b5) / var(--solarium-opacity,
-		var(--menu-opacity)));
-	box-shadow: var(--card-shadow);
-	padding: 12px var(--button-sides);
-	border: 1px solid var(--card-border-base);
-	border-radius: var(--button-radius);
-	--mask-colour: color-mix(in oklch,
-			oklch(var(--c2)),
-			oklch(var(--c3)) 50%);
+				var(--menu-opacity)));
+	padding: var(--notification-verts) var(--notification-sides);
+	border-radius: var(--radius-m);
 
 	backdrop-filter: var(--solarium);
 	-webkit-backdrop-filter: var(--solarium);
@@ -45,7 +42,7 @@
 	gap: var(--card-gap);
 
 	background-image: var(--cards-overlay-image-subtle,
-		unset) !important;
+			unset) !important;
 	background-repeat: repeat-x !important;
 	background-position: 0 0 !important;
 
@@ -55,12 +52,12 @@
 		left: 0;
 		top: 0;
 		right: 0;
+		box-shadow: inset 0 0 0 1px var(--card-border-base), var(--card-shadow);
 		height: var(--cards-overlay-height);
 		max-height: 100%;
 		display: var(--cards-overlay-display);
 		background: var(--cards-overlay);
-		border-top-left-radius: var(--card-radius);
-		border-top-right-radius: var(--card-radius);
+		border-radius: var(--radius-m);
 		pointer-events: none;
 
 		/* fix for no-data-message overriding and stuff */
@@ -68,100 +65,107 @@
 		width: unset;
 	}
 
-	.notification-actions {
-		display: flex;
-
-		margin: -12px calc(-1 * var(--button-sides)) -12px 0;
-
-		.notification-action {
-			position: relative;
-			--bg: transparent;
-			--bg-hov: oklch(var(--b4) / 40%);
-			--bg-atv: oklch(var(--b4) / 60%);
-			--mask-colour: oklch(var(--c3));
-			--shadow: none;
-			--font-size: 0;
-			width: 38px;
-			--btn-top: 0;
-			--btn-bottom: 0;
-
-			--top: 50%;
-			--margin-top: calc(-1 * var(--icon-half));
-
-			--left: 50%;
-			--margin-left: calc(-1 * var(--icon-half));
-		}
-	}
-
-	&.with-icon {
-		padding-left: calc(var(--button-sides-icon) + var(--icon-size,
-			var(--default-icon-size)) + 8px);
-		--top: 12px;
-		--margin-top: 0;
-	}
-
 	text-align: left;
-
-	.notification-title {
-		color: oklch(var(--c1));
-		font-weight: var(--font-weight-medium);
-		cursor: default;
-	}
-
-	.notification-body {
-		cursor: default;
-		max-width: 400px;
-	}
 
 	&.fade-out {
 		opacity: 0;
 		animation: notif_out var(--trans) var(--trans-function);
 	}
+}
 
-	&[data-type="error"] {
-		--hue-over: var(--hue-neg);
-		--sat-over: var(--sat-neg);
-		--lit-over: var(--lit-neg);
+[data-notification-type="error"] {
+	--hue-over: var(--hue-neg);
+	--sat-over: var(--sat-neg);
+	--lit-over: var(--lit-neg);
+}
+
+[data-notification-type="warning"] {
+	--hue-over: var(--hue-orange);
+	--sat-over: var(--sat-orange);
+	--lit-over: var(--lit-orange);
+}
+
+[data-notification-type="success"] {
+	--hue-over: var(--hue-pos);
+	--sat-over: var(--sat-pos);
+	--lit-over: var(--lit-pos);
+}
+
+.notification-actions {
+	display: flex;
+
+	margin: calc(-1 * var(--notification-verts)) calc(-1 * var(--notification-sides)) calc(-1 * var(--notification-verts)) 0;
+
+	.notification-action {
+		position: relative;
+		--bg: transparent;
+		--bg-hov: oklch(var(--b4) / 40%);
+		--bg-atv: oklch(var(--b4) / 60%);
+		--mask-colour: oklch(var(--c3));
+		--shadow: none;
+		--font-size: 0;
+		width: 38px;
+		--btn-top: 0;
+		--btn-bottom: 0;
 	}
+}
 
-	&[data-type="warning"] {
-		--hue-over: var(--hue-orange);
-		--sat-over: var(--sat-orange);
-		--lit-over: var(--lit-orange);
+.notification-progress {
+	position: absolute;
+	left: var(--button-sides);
+	right: var(--button-sides);
+	bottom: 0;
+	pointer-events: none;
+
+	display: flex;
+	justify-content: end;
+}
+
+.notification-progress-fill {
+	width: 100%;
+	background-color: oklch(var(--l3-c) / 60%);
+	height: 3px;
+
+	border-radius: var(--radius-m);
+
+	transition: width 0.1s linear;
+}
+
+.bleh-notification-icon-wrap {
+	background-color: oklch(var(--b6) / 70%);
+	padding: var(--notification-verts) var(--notification-sides);
+	margin: calc(-1 * var(--notification-verts)) 0 calc(-1 * var(--notification-verts)) calc(-1 * var(--notification-sides));
+
+	position: relative;
+}
+
+.bleh-notification-icon {
+	&:not([data-notification-type="generic"]) {
+		color: oklch(var(--l3-c));
 	}
+}
 
-	&[data-type="success"] {
-		--hue-over: var(--hue-pos);
-		--sat-over: var(--sat-pos);
-		--lit-over: var(--lit-pos);
+.bleh-notification-icon-back {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(0deg, oklch(var(--f4) / 15%), transparent);
+
+	&[data-notification-type="generic"] {
+		display: none;
 	}
+}
 
-	&.colourful {
-		--mask-colour: color-mix(in oklch,
-				oklch(var(--l3-c)),
-				oklch(var(--l4-c)) 30%);
-	}
+.bleh-notification-title {
+	color: oklch(var(--c2));
+	font-weight: var(--font-weight);
+	cursor: default;
+}
 
-	.notification-progress {
-		position: absolute;
-		left: var(--button-sides);
-		right: var(--button-sides);
-		bottom: 0;
-		pointer-events: none;
-
-		display: flex;
-		justify-content: end;
-
-		.fill {
-			width: 100%;
-			background-color: oklch(var(--l3-c) / 60%);
-			height: 3px;
-
-			border-radius: var(--button-radius);
-
-			transition: width 0.1s linear;
-		}
-	}
+.bleh-notification-summary {
+	color: oklch(var(--c3));
+	font-size: calc(var(--font-size) - 1px);
+	cursor: default;
+	max-width: 400px;
 }
 
 .masthead-popup {
@@ -186,8 +190,8 @@
 			color: oklch(var(--c1));
 		}
 
-		p + p,
-		.masthead-popup-text + .masthead-popup-text {
+		p+p,
+		.masthead-popup-text+.masthead-popup-text {
 			margin-top: var(--card-gap);
 		}
 
