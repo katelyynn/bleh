@@ -13,6 +13,8 @@ import { copy, paste, redo, undo } from '@/build/tools';
 import { settings } from '@/build/config';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 import { useSettings } from '@/page.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export function register_menu(element, menu) {
 	element.setAttribute('data-has-bleh-menu', true);
@@ -296,4 +298,37 @@ export function generic_link_menu(link: string, copy_link: string = link) {
             ${tl(trans.copy_link)}
         </a>
     `;
+}
+
+interface GenericLinkMenuProps {
+	link: string;
+	copy_link?: string;
+	onClick?: () => void;
+}
+
+export function GenericLinkMenu({
+	link,
+	copy_link,
+	onClick,
+}: GenericLinkMenuProps) {
+	if (!copy_link) copy_link = link;
+
+	return (
+		<>
+			<Button menu href={link} external onClick={onClick}>
+				<Icon name={icons.link} />
+				{tl(trans.open_link)}
+			</Button>
+			<Button
+				menu
+				onClick={() => {
+					copy(copy_link);
+					onClick?.();
+				}}
+			>
+				<Icon name={icons.copy} />
+				{tl(trans.copy_link)}
+			</Button>
+		</>
+	);
 }

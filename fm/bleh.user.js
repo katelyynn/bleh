@@ -56319,7 +56319,7 @@ var bleh = (() => {
     });
   }
 
-  // src/components/menu.ts
+  // src/components/menu.tsx
   function register_menu(element, menu) {
     element.setAttribute("data-has-bleh-menu", true);
     element.addEventListener("contextmenu", (e4) => {
@@ -56537,6 +56537,38 @@ var bleh = (() => {
             ${tl2(trans.copy_link)}
         </a>
     `;
+  }
+  function GenericLinkMenu({ link, copy_link, onClick }) {
+    if (!copy_link) copy_link = link;
+    return /* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          href: link,
+          external: true,
+          onClick,
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.link
+            }),
+            tl2(trans.open_link)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => {
+            copy(copy_link);
+            onClick?.();
+          },
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.copy
+            }),
+            tl2(trans.copy_link)
+          ]
+        })
+      ]
+    });
   }
 
   // src/components/dialog/calendar.ts
@@ -113978,7 +114010,7 @@ var bleh = (() => {
     e4.preventDefault();
     prompt_for_update();
   };
-  function update_branding_type(state = settings.branding_type) {
+  function update_branding_type(state = useSettings.get("branding_type")) {
     const season = useSeasons.get().current?.id || "";
     if (state == "bleh") {
       page.state.home_link.replaceChildren(/* @__PURE__ */ jsx("div", {
@@ -114007,7 +114039,7 @@ var bleh = (() => {
         })
       }));
     }
-    const update_required = bool(localStorage.getItem(keys3.update_required) || "false");
+    const update_required = bool(localStorage.getItem(keys3.update_required));
     if (update_required) {
       page.state.home_link.addEventListener("onclick", handle_update);
       page.state.home_link.appendChild(/* @__PURE__ */ jsx("span", {
@@ -114791,13 +114823,9 @@ var bleh = (() => {
     const auth_bg = createRef();
     const side = createRef();
     const next_side = createRef();
-    let auth_menu = tippy_esm_default(auth_link, {
-      theme: "auth-menu-v2",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
+    const auth_menu = menu_tooltip(auth_link, /* @__PURE__ */ jsx(Tooltip, {
+      theme: "auth-menu-v2"
+    }), {
       onShow: (instance) => {
         if (!auth.avatar) {
           notify({
@@ -114805,20 +114833,18 @@ var bleh = (() => {
             title: "Could not open navigation menu",
             body: "Authorisation status is invalid"
           });
-          instance.hide();
+          auth_menu.hide();
           return;
         }
         page.structure.notifications.setAttribute("data-auth-open", "true");
         const update_required2 = localStorage.getItem("bleh_update_required") || "false";
-        let page_2;
         const current = useSettings.get("navigation_items");
         let length = current.length;
         if (length < 2) length = 2;
-        const show_language = settings.navigation_language == true ? 1 : 0;
+        const show_language = useSettings.get("navigation_language") ? 1 : 0;
         const gap = 1;
         const height = (length + 3 + show_language) * (28 + gap) - gap;
-        const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
-        instance.setContent(/* @__PURE__ */ jsx(Fragment, {
+        instance.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
           children: [
             bool(update_required2) && /* @__PURE__ */ jsx("div", {
               class: "update-available-banner",
@@ -114847,7 +114873,7 @@ var bleh = (() => {
                     "primary"
                   ],
                   onClick: () => {
-                    instance.hide();
+                    auth_menu.hide();
                   },
                   children: [
                     /* @__PURE__ */ jsx("div", {
@@ -114895,7 +114921,7 @@ var bleh = (() => {
                           class: "link-block-cover-link",
                           href: `${root}user/${auth.name}`,
                           onClick: () => {
-                            instance.hide();
+                            auth_menu.hide();
                           }
                         })
                       ]
@@ -114911,7 +114937,7 @@ var bleh = (() => {
                           chibi: true,
                           href: `${root}settings`,
                           onClick: () => {
-                            instance.hide();
+                            auth_menu.hide();
                           },
                           tooltip: tl2(trans.edit_profile),
                           children: [
@@ -114929,7 +114955,7 @@ var bleh = (() => {
                           className: "starred-friend",
                           href: `${root}user/${useSettings.get("starred_friend")}`,
                           onClick: () => {
-                            instance.hide();
+                            auth_menu.hide();
                           },
                           tooltip: useSettings.get("starred_friend"),
                           "data-starred": "true",
@@ -114944,7 +114970,7 @@ var bleh = (() => {
                           chibi: true,
                           onClick: () => {
                             open_starred_friend_window();
-                            instance.hide();
+                            auth_menu.hide();
                           },
                           tooltip: tl2(trans.starred_friend.name),
                           "data-starred": "false",
@@ -114965,7 +114991,7 @@ var bleh = (() => {
                   ref: side,
                   children: [
                     /* @__PURE__ */ jsx(NavigationPage1, {
-                      instance,
+                      instance: auth_menu,
                       side,
                       next: next_side,
                       notif_count,
@@ -114997,38 +115023,46 @@ var bleh = (() => {
           }
         });
       },
-      onHide(instance) {
+      onHide() {
         page.structure.notifications.setAttribute("data-auth-open", "false");
       }
     });
-    const auth_drop_menu = tippy_esm_default(auth_link, {
-      theme: "context-menu",
-      content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
-                ${tl2(trans.edit_quick_access)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
-                ${tl2(trans.copy_username)}
-            </button>
-            <div class="sep" />
-            ${generic_link_menu(`${root}user/${auth.name}`, `https://www.last.fm${root}user/${auth.name}`)}
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(auth_link, auth_drop_menu);
+    const auth_drop_menu = context_menu_tooltip(auth_link, /* @__PURE__ */ jsx(MenuContents, {
+      children: [
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          href: `${root}bleh/profile?setting=navigation_items`,
+          onClick: () => auth_drop_menu.hide(),
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.quick_access
+            }),
+            tl2(trans.edit_quick_access)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => {
+            copy(auth.name);
+            auth_drop_menu.hide();
+          },
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.copy
+            }),
+            tl2(trans.copy_username)
+          ]
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "sep"
+        }),
+        /* @__PURE__ */ jsx(GenericLinkMenu, {
+          link: `${root}user/${auth.name}`,
+          copy_link: `${root}user/${auth.name}`,
+          onClick: () => auth_drop_menu.hide()
+        })
+      ]
+    }));
     const container = new_auth.parentElement;
     container.parentElement.removeChild(container);
     auth_link.removeAttribute("aria-controls");
@@ -115337,11 +115371,12 @@ var bleh = (() => {
     }
   }
   function NavigationPage1({ instance, side, next, notif_count, messages_count, token }) {
+    const items = useSettings.get("navigation_items");
     const wrap = /* @__PURE__ */ jsx("div", {
       class: "side-page",
       "data-page": 1,
       children: [
-        useSettings.get("navigation_items").map((val) => {
+        items.map((val) => {
           let elem;
           const formal = page.state.quick_access_items[val];
           if (val == "friends") {
@@ -115582,30 +115617,19 @@ var bleh = (() => {
         })
       ]
     });
-    const simple_menu = tippy_esm_default(wrap, {
-      theme: "context-menu",
-      content: /* @__PURE__ */ jsx("a", {
-        class: "dropdown-menu-clickable-item",
-        "data-type": "quick_access",
+    const simple_menu = context_menu_tooltip(wrap, /* @__PURE__ */ jsx(MenuContents, {
+      children: /* @__PURE__ */ jsx(Button, {
+        menu: true,
         href: `${root}bleh/profile?setting=navigation_items`,
-        children: tl2(trans.edit_quick_access)
-      }),
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance2) {
-        instance2.popper.addEventListener("click", () => {
-          instance2.hide();
-        });
-      }
-    });
-    register_menu(wrap, simple_menu);
+        onClick: () => simple_menu.hide(),
+        children: [
+          /* @__PURE__ */ jsx(Icon, {
+            name: icons.quick_access
+          }),
+          tl2(trans.edit_quick_access)
+        ]
+      })
+    }));
     return wrap;
   }
   function NavigationFriends({ instance, side }) {
@@ -131649,15 +131673,16 @@ var bleh = (() => {
         bleh_tags_large();
       }
       if (page.subpage == "images_overview") {
-        let sort_button = page.structure.main.querySelector(".dropdown-menu-clickable-button");
-        let sort_menu = page.structure.main.querySelector(".dropdown-menu-clickable");
+        const sort_button = page.structure.main.querySelector(".dropdown-menu-clickable-button");
+        const sort_menu = page.structure.main.querySelector(".dropdown-menu-clickable");
         if (sort_button && sort_menu) {
-          page.structure.main.insertBefore(html.node`
-                    <div class="dropdown-top-wrap">
-                        ${sort_button}
-                        ${sort_menu}
-                    </div>
-                `, page.structure.main.firstElementChild);
+          page.structure.main.insertBefore(/* @__PURE__ */ jsx("div", {
+            class: "dropdown-top-wrap",
+            children: [
+              sort_button,
+              sort_menu
+            ]
+          }), page.structure.main.firstChild);
         }
       }
       if (page.subpage == "image") {
@@ -131665,10 +131690,12 @@ var bleh = (() => {
         images.forEach((image2) => {
           const star = image2.querySelector(".gallery-image-preferred-container");
           if (!star) return;
-          render(star, html`
-						<div class="bleh-icon" />
-						${tl2(trans.starred)}
-					`);
+          star.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+            children: [
+              /* @__PURE__ */ jsx(Icon, {}),
+              tl2(trans.starred)
+            ]
+          }));
         });
       }
     }
@@ -131722,7 +131749,7 @@ var bleh = (() => {
       title = tl2(trans.events);
     } else if (page.type == "bookmarks") title = tl2(trans.bookmarks);
     else if (page.type == "charts") title = tl2(trans.charts);
-    else if (page.type == "labs") title = tl2(trans.labs.name);
+    else if (page.type == "labs") title = tl2(trans.labs);
     else if (page.type == "minis") title = tl2(trans.minis);
     if (page.type == "inbox") {
       if (page.subpage == "notifications") {
@@ -131775,13 +131802,24 @@ var bleh = (() => {
   function detect_mobile() {
     if (window.innerWidth <= 980) {
       page.mobile = true;
-      document.head.appendChild(html.node`
-            <meta name="theme-color" content="#000000" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <link rel="manifest" href="https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest" />
-        `);
-      let icon2 = document.head.querySelector('[rel="apple-touch-icon"]');
-      icon2.setAttribute("href", "https://github.com/katelyynn/bleh/raw/uwu/fm/app.png");
+      document.head.appendChild(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx("meta", {
+            name: "theme-color",
+            content: "#000000"
+          }),
+          /* @__PURE__ */ jsx("meta", {
+            name: "apple-mobile-web-app-capable",
+            content: "yes"
+          }),
+          /* @__PURE__ */ jsx("link", {
+            rel: "manifest",
+            href: "https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest"
+          })
+        ]
+      }));
+      const icon2 = document.head.querySelector('[rel="apple-touch-icon"]');
+      icon2?.setAttribute("href", "https://github.com/katelyynn/bleh/raw/uwu/fm/app.png");
     } else {
       page.mobile = false;
     }
@@ -131840,6 +131878,7 @@ var bleh = (() => {
 		`);
   }
   function update_page() {
+    if (!page.structure.container) return;
     page.structure.container.setAttribute("data-page-type", page.type);
     page.structure.container.setAttribute("data-page-subpage", page.subpage);
     page.structure.container.setAttribute("data-beret", ff("beret"));
@@ -131853,9 +131892,12 @@ var bleh = (() => {
     log(`requested register of ${url} from ${origin}`, "background", "log");
     let background = page.structure.background;
     if (!background) {
-      background = html.node`
-            <div class="bleh-background katsune-bleh-background" />
-        `;
+      background = /* @__PURE__ */ jsx("div", {
+        class: [
+          "bleh-background",
+          "katsune-bleh-background"
+        ]
+      });
       document.body.appendChild(background);
       page.structure.background = background;
     } else {
@@ -131876,9 +131918,10 @@ var bleh = (() => {
     }
     if (url) {
       url = avatar(url, "avatar300s");
-      const img = html.node`
-            <img src=${url} crossorigin="anonymous" />
-        `;
+      const img = /* @__PURE__ */ jsx("img", {
+        src: url,
+        crossOrigin: "anonymous"
+      });
       await img.decode();
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -131892,14 +131935,18 @@ var bleh = (() => {
       url = canvas.toDataURL();
     }
     background.classList.add("ready");
+    background.innerHTML = "";
     render(background, html``);
     if (url) {
-      render(background, html`
-				<div class="page-background-image">
-					<div class="page-background-image-inner"
-						style="background-image: url(${url})" />
-				</div>
-			`);
+      background.replaceChildren(/* @__PURE__ */ jsx("div", {
+        class: "page-background-image",
+        children: /* @__PURE__ */ jsx("div", {
+          class: "page-background-image-inner",
+          style: {
+            backgroundImage: `url(${url})`
+          }
+        })
+      }));
     }
     if (page.type == "user") {
       if (page.name == auth.name) {

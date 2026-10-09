@@ -100,7 +100,7 @@ import { tag_page } from '@/components/music/tags';
 import { clear_popup_queue } from '@/components/dialog/popup';
 import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
-import { icon, icons } from './components/shared/icon';
+import { Icon, icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
 import { clean_storage, keys } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
@@ -632,28 +632,26 @@ function load_page(main_content?: HTMLElement) {
 		}
 
 		if (page.subpage == 'images_overview') {
-			let sort_button = page.structure.main.querySelector(
+			const sort_button = page.structure.main!.querySelector(
 				'.dropdown-menu-clickable-button',
-			);
-			let sort_menu = page.structure.main.querySelector(
+			) as HTMLButtonElement;
+			const sort_menu = page.structure.main!.querySelector(
 				'.dropdown-menu-clickable',
-			);
+			) as HTMLDivElement;
 
 			if (sort_button && sort_menu) {
-				page.structure.main.insertBefore(
-					html.node`
-                    <div class="dropdown-top-wrap">
-                        ${sort_button}
-                        ${sort_menu}
-                    </div>
-                `,
-					page.structure.main.firstElementChild,
+				page.structure.main!.insertBefore(
+					<div class='dropdown-top-wrap'>
+						{sort_button}
+						{sort_menu}
+					</div>,
+					page.structure.main!.firstChild,
 				);
 			}
 		}
 
 		if (page.subpage == 'image') {
-			const images = page.structure.row.querySelectorAll(
+			const images = page.structure.row!.querySelectorAll(
 				'.gallery-image',
 			);
 			images.forEach((image) => {
@@ -662,12 +660,11 @@ function load_page(main_content?: HTMLElement) {
 				);
 				if (!star) return;
 
-				render(
-					star,
-					html`
-						<div class="bleh-icon" />
-						${tl(trans.starred)}
-					`,
+				star.replaceChildren(
+					<>
+						<Icon />
+						{tl(trans.starred)}
+					</>,
 				);
 			});
 		}
@@ -751,7 +748,7 @@ function page_title() {
 		title = tl(trans.events);
 	} else if (page.type == 'bookmarks') title = tl(trans.bookmarks);
 	else if (page.type == 'charts') title = tl(trans.charts);
-	else if (page.type == 'labs') title = tl(trans.labs.name);
+	else if (page.type == 'labs') title = tl(trans.labs);
 	else if (page.type == 'minis') title = tl(trans.minis);
 
 	if (page.type == 'inbox') {
@@ -801,8 +798,8 @@ function page_title() {
 
 	if (page.state.error) title = tl(trans.error);
 
-	template = template
-		.replace('{page}', title)
+	template = (template as string)
+		.replace('{page}', title as string)
 		.replace('{name}', name)
 		.replace('{sister}', sister)
 		.replace('{build}', version.build)
@@ -817,7 +814,7 @@ function page_title() {
 		);
 	}
 
-	document.title = template;
+	document.title = template as string;
 
 	if (page.structure.indicator) page_indicator();
 }
@@ -826,14 +823,19 @@ function detect_mobile() {
 	if (window.innerWidth <= 980) {
 		page.mobile = true;
 
-		document.head.appendChild(html.node`
-            <meta name="theme-color" content="#000000" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <link rel="manifest" href="https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest" />
-        `);
+		document.head.appendChild(
+			<>
+				<meta name='theme-color' content='#000000' />
+				<meta name='apple-mobile-web-app-capable' content='yes' />
+				<link
+					rel='manifest'
+					href='https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest'
+				/>
+			</>,
+		);
 
-		let icon = document.head.querySelector('[rel="apple-touch-icon"]');
-		icon.setAttribute(
+		const icon = document.head.querySelector('[rel="apple-touch-icon"]');
+		icon?.setAttribute(
 			'href',
 			'https://github.com/katelyynn/bleh/raw/uwu/fm/app.png',
 		);
@@ -902,6 +904,8 @@ function page_indicator() {
 }
 
 export function update_page() {
+	if (!page.structure.container) return;
+
 	page.structure.container.setAttribute('data-page-type', page.type);
 	page.structure.container.setAttribute('data-page-subpage', page.subpage);
 	page.structure.container.setAttribute('data-beret', ff('beret'));
@@ -923,9 +927,9 @@ export async function register_background(
 	let background = page.structure.background;
 
 	if (!background) {
-		background = html.node`
-            <div class="bleh-background katsune-bleh-background" />
-        `;
+		background = (
+			<div class={['bleh-background', 'katsune-bleh-background']} />
+		);
 
 		document.body.appendChild(background);
 		page.structure.background = background;
@@ -952,9 +956,9 @@ export async function register_background(
 	if (url) {
 		url = avatar(url, 'avatar300s');
 
-		const img = html.node`
-            <img src=${url} crossorigin="anonymous" />
-        ` as HTMLImageElement;
+		const img = (
+			<img src={url} crossOrigin='anonymous' />
+		) as HTMLImageElement;
 
 		await img.decode();
 
@@ -986,16 +990,16 @@ export async function register_background(
     }
     */
 
+	background.innerHTML = '';
 	render(background, html``);
 	if (url) {
-		render(
-			background,
-			html`
-				<div class="page-background-image">
-					<div class="page-background-image-inner"
-						style="background-image: url(${url})" />
-				</div>
-			`,
+		background.replaceChildren(
+			<div class='page-background-image'>
+				<div
+					class='page-background-image-inner'
+					style={{ backgroundImage: `url(${url})` }}
+				/>
+			</div>,
 		);
 	}
 

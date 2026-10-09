@@ -587,7 +587,7 @@ export function get_language_name(code: string) {
 	}
 }
 
-export function bool(value?: string) {
+export function bool(value?: string | null) {
 	if (!value) return false;
 
 	return value.toLowerCase().trim() === 'true';

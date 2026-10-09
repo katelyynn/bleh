@@ -6,7 +6,6 @@
 
 import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
-import { stored_season } from '@/build/seasonal';
 import { lang, lang_info, lastfm_languages, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';
@@ -14,7 +13,7 @@ import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
 import { useSeasons, useSettings } from '@/page.tsx';
-import { save_setting, setting } from '@/components/settings/settings';
+import { setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.ts';
 import {
@@ -25,23 +24,22 @@ import {
 	smart_title,
 } from '@/components/music/lotus';
 import { bleh_notification_list } from '@/components/inbox/notifications';
-import tippy, { Instance } from 'tippy.js';
+import tippy from 'tippy.js';
 import {
 	load_profile_cache_externally,
 	open_starred_friend_window,
 } from '@/pages/profile/profile';
 import { is_sponsor, sponsor } from '@/components/sponsor';
-import { generic_link_menu, register_menu } from '@/components/menu';
+import { GenericLinkMenu, register_menu } from '@/components/menu';
 import { bool, copy, get_language_name, romanise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
-import { match } from '@/components/settings/dynamic_theming';
 import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
 import { Icon, icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
-import { convert_lang_to_country, Flag, flag } from '../shared/flag';
+import { convert_lang_to_country, Flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
@@ -54,9 +52,11 @@ import {
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
 import {
+	context_menu_tooltip,
 	hover_tooltip,
 	menu_tooltip,
 	Tooltip,
+	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import {
@@ -72,7 +72,7 @@ const handle_update = (e: Event) => {
 	prompt_for_update();
 };
 
-export function update_branding_type(state = settings.branding_type) {
+export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
 
 	if (state == 'bleh') {
@@ -86,13 +86,13 @@ export function update_branding_type(state = settings.branding_type) {
 	} else if (state == 'lastfm') {
 		page.state.home_link.replaceChildren(
 			<div class={['home-logo', 'lastfm-logo']} data-season={season}>
-				<div class='brand-inner' data-season={season}>{'Last.fm'}</div>
+				<div class='brand-inner' data-season={season}>Last.fm</div>
 			</div>,
 		);
 	}
 
 	const update_required = bool(
-		localStorage.getItem(keys.update_required) || 'false',
+		localStorage.getItem(keys.update_required),
 	);
 
 	if (update_required) {
@@ -1045,271 +1045,268 @@ export function append_nav() {
 	const side = createRef();
 	const next_side = createRef();
 
-	let auth_menu = tippy(auth_link, {
-		theme: 'auth-menu-v2',
-		placement: 'top',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
+	const auth_menu = menu_tooltip(
+		auth_link,
+		<Tooltip theme='auth-menu-v2' />,
+		{
+			onShow: (instance) => {
+				if (!auth.avatar) {
+					notify({
+						id: 'auth_broken',
+						title: 'Could not open navigation menu',
+						body: 'Authorisation status is invalid',
+					});
 
-		onShow: (instance) => {
-			if (!auth.avatar) {
-				notify({
-					id: 'auth_broken',
-					title: 'Could not open navigation menu',
-					body: 'Authorisation status is invalid',
-				});
+					auth_menu.hide();
+					return;
+				}
 
-				instance.hide();
-				return;
-			}
+				page.structure.notifications.setAttribute(
+					'data-auth-open',
+					'true',
+				);
 
-			page.structure.notifications.setAttribute('data-auth-open', 'true');
+				const update_required =
+					localStorage.getItem('bleh_update_required') || 'false';
 
-			const update_required =
-				localStorage.getItem('bleh_update_required') || 'false';
+				const current = useSettings.get('navigation_items') as string[];
 
-			let page_2;
+				let length = current.length;
+				if (length < 2) length = 2;
 
-			const current = useSettings.get('navigation_items');
+				const show_language = useSettings.get('navigation_language')
+					? 1
+					: 0;
+				const gap = 1;
 
-			let length = current.length;
-			if (length < 2) length = 2;
+				// user defined + themes + language + minis + settings
+				const height = (length + 3 + show_language) * (28 + gap) - gap;
 
-			const show_language = settings.navigation_language == true ? 1 : 0;
-			const gap = 1;
-
-			// user defined + themes + language + minis + settings
-			const height = (length + 3 + show_language) * (28 + gap) - gap;
-
-			// you cant change your theme when viewing
-			// a listening report or on a page with theme settings
-			const themes_disabled =
-				page.subpage.startsWith('listening-report') ||
-				page.state.settings_page == 'visual';
-
-			instance.setContent(
-				<>
-					{bool(update_required) && (
-						<div
-							class='update-available-banner'
-							onClick={prompt_for_update}
-						>
-							<div class='update-container'>
-								<Icon name={icons.update} />
+				instance.replaceChildren(
+					<>
+						{bool(update_required) && (
+							<div
+								class='update-available-banner'
+								onClick={prompt_for_update}
+							>
+								<div class='update-container'>
+									<Icon name={icons.update} />
+								</div>
+								<span>
+									{tl(trans.update_available_to_install)}
+								</span>
 							</div>
-							<span>{tl(trans.update_available_to_install)}</span>
-						</div>
-					)}
-					<div
-						class='auth-menu-v2'
-						style={{ '--page-height': `${height}px` }}
-					>
+						)}
 						<div
-							class={['side', 'primary']}
-							onClick={() => {
-								instance.hide();
-							}}
+							class='auth-menu-v2'
+							style={{ '--page-height': `${height}px` }}
 						>
-							<div class='auth-bg-container' ref={auth_bg}>
-								{!auth.avatar.endsWith(
-									'818148bf682d429dc215c1705eb27b98.png',
-								) && (
-									<div
-										class='bg'
-										style={{
-											backgroundImage: `url(${
-												avatar(
-													auth.avatar,
-													'avatar170s',
-												)
-											})`,
+							<div
+								class={['side', 'primary']}
+								onClick={() => {
+									auth_menu.hide();
+								}}
+							>
+								<div class='auth-bg-container' ref={auth_bg}>
+									{!auth.avatar.endsWith(
+										'818148bf682d429dc215c1705eb27b98.png',
+									) && (
+										<div
+											class='bg'
+											style={{
+												backgroundImage: `url(${
+													avatar(
+														auth.avatar,
+														'avatar170s',
+													)
+												})`,
+											}}
+										/>
+									)}
+								</div>
+								<div class='auth-menu-header'>
+									<div class='avatar'>
+										<img
+											src={avatar(
+												auth.avatar,
+												'avatar170s',
+											)}
+											alt={auth.name!}
+										/>
+									</div>
+									<div class='name' ref={auth_header}>
+										<span class='at'>@</span>
+										{auth.name!}
+									</div>
+									{badges
+										? (
+											<div class='badges'>
+												{create_badge(
+													badges,
+													false,
+													true,
+													true,
+												)}
+											</div>
+										)
+										: auth.pro && (
+											<div class='badges'>
+												{create_badge(
+													{
+														type:
+															'user-status-subscriber',
+														inbuilt: true,
+													},
+													false,
+													true,
+													true,
+												)}
+											</div>
+										)}
+									<a
+										class='link-block-cover-link'
+										href={`${root}user/${auth.name}`}
+										onClick={() => {
+											auth_menu.hide();
 										}}
 									/>
-								)}
+								</div>
+								<div class={['floating', 'button-group']}>
+									<Button
+										menu
+										chibi
+										href={`${root}settings`}
+										onClick={() => {
+											auth_menu.hide();
+										}}
+										tooltip={tl(trans.edit_profile)}
+									>
+										<Icon name={icons.edit} />
+										{tl(trans.edit_profile)}
+									</Button>
+									{useSettings.get('starred_friend') != ''
+										? (
+											<Button
+												menu
+												chibi
+												colourful
+												accented
+												className='starred-friend'
+												href={`${root}user/${
+													useSettings.get(
+														'starred_friend',
+													)
+												}`}
+												onClick={() => {
+													auth_menu.hide();
+												}}
+												tooltip={useSettings.get(
+													'starred_friend',
+												) as string}
+												data-starred='true'
+											>
+												<Icon
+													name={icons.starred_friend}
+												/>
+												{useSettings.get(
+													'starred_friend',
+												) as string}
+											</Button>
+										)
+										: (
+											<Button
+												menu
+												chibi
+												onClick={() => {
+													open_starred_friend_window();
+													auth_menu.hide();
+												}}
+												tooltip={tl(
+													trans.starred_friend.name,
+												)}
+												data-starred='false'
+											>
+												<Icon name={icons.plus} />
+												{tl(trans.starred_friend.name)}
+											</Button>
+										)}
+								</div>
 							</div>
-							<div class='auth-menu-header'>
-								<div class='avatar'>
-									<img
-										src={avatar(auth.avatar, 'avatar170s')}
-										alt={auth.name!}
-									/>
-								</div>
-								<div class='name' ref={auth_header}>
-									<span class='at'>@</span>
-									{auth.name!}
-								</div>
-								{badges
-									? (
-										<div class='badges'>
-											{create_badge(
-												badges,
-												false,
-												true,
-												true,
-											)}
-										</div>
-									)
-									: auth.pro && (
-										<div class='badges'>
-											{create_badge(
-												{
-													type:
-														'user-status-subscriber',
-													inbuilt: true,
-												},
-												false,
-												true,
-												true,
-											)}
-										</div>
-									)}
-								<a
-									class='link-block-cover-link'
-									href={`${root}user/${auth.name}`}
-									onClick={() => {
-										instance.hide();
-									}}
+							<div class='side' data-page='1' ref={side}>
+								<NavigationPage1
+									instance={auth_menu}
+									side={side}
+									next={next_side}
+									notif_count={notif_count}
+									messages_count={messages_count}
+									token={token!}
+								/>
+								<div
+									class='side-page'
+									data-page='2'
+									ref={next_side}
 								/>
 							</div>
-							<div class={['floating', 'button-group']}>
-								<Button
-									menu
-									chibi
-									href={`${root}settings`}
-									onClick={() => {
-										instance.hide();
-									}}
-									tooltip={tl(trans.edit_profile)}
-								>
-									<Icon name={icons.edit} />
-									{tl(trans.edit_profile)}
-								</Button>
-								{useSettings.get('starred_friend') != ''
-									? (
-										<Button
-											menu
-											chibi
-											colourful
-											accented
-											className='starred-friend'
-											href={`${root}user/${
-												useSettings.get(
-													'starred_friend',
-												)
-											}`}
-											onClick={() => {
-												instance.hide();
-											}}
-											tooltip={useSettings.get(
-												'starred_friend',
-											) as string}
-											data-starred='true'
-										>
-											<Icon
-												name={icons.starred_friend}
-											/>
-											{useSettings.get(
-												'starred_friend',
-											) as string}
-										</Button>
-									)
-									: (
-										<Button
-											menu
-											chibi
-											onClick={() => {
-												open_starred_friend_window();
-												instance.hide();
-											}}
-											tooltip={tl(
-												trans.starred_friend.name,
-											)}
-											data-starred='false'
-										>
-											<Icon name={icons.plus} />
-											{tl(trans.starred_friend.name)}
-										</Button>
-									)}
-							</div>
 						</div>
-						<div class='side' data-page='1' ref={side}>
-							<NavigationPage1
-								instance={instance}
-								side={side}
-								next={next_side}
-								notif_count={notif_count}
-								messages_count={messages_count}
-								token={token!}
-							/>
+					</>,
+				);
+
+				load_profile_cache_externally(auth.name).then((cache) => {
+					if (cache.banner) {
+						auth_bg.current.replaceChildren(
 							<div
-								class='side-page'
-								data-page='2'
-								ref={next_side}
-							/>
-						</div>
-					</div>
-				</>,
-			);
+								class='bg'
+								style={{
+									backgroundImage: `url(${cache.banner})`,
+								}}
+							/>,
+						);
+					}
 
-			load_profile_cache_externally(auth.name).then((cache) => {
-				if (cache.banner) {
-					auth_bg.current.replaceChildren(
-						<div
-							class='bg'
-							style={{ backgroundImage: `url(${cache.banner})` }}
-						/>,
-					);
-				}
+					if (cache.username) {
+						auth_header.current.textContent = cache.username;
+					}
+				});
+			},
 
-				if (cache.username) {
-					auth_header.current.textContent = cache.username;
-				}
-			});
+			onHide() {
+				page.structure.notifications.setAttribute(
+					'data-auth-open',
+					'false',
+				);
+			},
 		},
+	);
 
-		onHide(instance) {
-			page.structure.notifications.setAttribute(
-				'data-auth-open',
-				'false',
-			);
-		},
-	});
-
-	const auth_drop_menu = tippy(auth_link, {
-		theme: 'context-menu',
-		content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
-                ${tl(trans.edit_quick_access)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() =>
-			copy(auth.name)}>
-                ${tl(trans.copy_username)}
-            </button>
-            <div class="sep" />
-            ${
-			generic_link_menu(
-				`${root}user/${auth.name}`,
-				`https://www.last.fm${root}user/${auth.name}`,
-			)
-		}
-        `,
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
-
-		onShow(instance) {
-			instance.popper.addEventListener('click', (event) => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(auth_link, auth_drop_menu);
+	const auth_drop_menu = context_menu_tooltip(
+		auth_link,
+		<MenuContents>
+			<Button
+				menu
+				href={`${root}bleh/profile?setting=navigation_items`}
+				onClick={() => auth_drop_menu.hide()}
+			>
+				<Icon name={icons.quick_access} />
+				{tl(trans.edit_quick_access)}
+			</Button>
+			<Button
+				menu
+				onClick={() => {
+					copy(auth.name);
+					auth_drop_menu.hide();
+				}}
+			>
+				<Icon name={icons.copy} />
+				{tl(trans.copy_username)}
+			</Button>
+			<div class='sep' />
+			<GenericLinkMenu
+				link={`${root}user/${auth.name}`}
+				copy_link={`${root}user/${auth.name}`}
+				onClick={() => auth_drop_menu.hide()}
+			/>
+		</MenuContents>,
+	);
 
 	const container = new_auth.parentElement;
 	container.parentElement.removeChild(container);
@@ -1717,7 +1714,7 @@ export async function fetch_messages() {
 }
 
 interface NavigationPage1Props {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	side: RefObject<ReactElement>;
 	next: RefObject<ReactElement>;
 	notif_count: number;
@@ -1733,9 +1730,11 @@ function NavigationPage1({
 	messages_count,
 	token,
 }: NavigationPage1Props) {
+	const items = useSettings.get('navigation_items') as string[];
+
 	const wrap = (
 		<div class='side-page' data-page={1}>
-			{useSettings.get('navigation_items').map((val: string) => {
+			{items.map((val: string) => {
 				let elem;
 
 				const formal = page.state.quick_access_items[val];
@@ -1953,38 +1952,25 @@ function NavigationPage1({
 		</div>
 	);
 
-	const simple_menu = tippy(wrap, {
-		theme: 'context-menu',
-		content: (
-			<a
-				class='dropdown-menu-clickable-item'
-				data-type='quick_access'
+	const simple_menu = context_menu_tooltip(
+		wrap,
+		<MenuContents>
+			<Button
+				menu
 				href={`${root}bleh/profile?setting=navigation_items`}
+				onClick={() => simple_menu.hide()}
 			>
+				<Icon name={icons.quick_access} />
 				{tl(trans.edit_quick_access)}
-			</a>
-		),
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
-
-		onShow(instance: Instance) {
-			instance.popper.addEventListener('click', () => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(wrap, simple_menu);
+			</Button>
+		</MenuContents>,
+	);
 
 	return wrap;
 }
 
 interface NavigationFriendsProps {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	side: RefObject<ReactElement>;
 }
 
@@ -2034,7 +2020,7 @@ function NavigationFriends({
 }
 
 interface NavigationFriendProps {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	name: string;
 	starred?: boolean;
 }
@@ -2235,7 +2221,7 @@ function NavigationTheme({
 }
 
 interface NavigationLanguagesProps {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	side: RefObject<ReactElement>;
 }
 
