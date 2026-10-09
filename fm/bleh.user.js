@@ -113259,10 +113259,10 @@ var bleh = (() => {
             }),
             /* @__PURE__ */ jsx(SettingTheme, {
               theme: {
-                id: settings.theme,
-                adaptive: settings.theme_schedule,
-                theme_day: settings.theme_day,
-                theme_night: settings.theme_night
+                id: useSettings.get("theme"),
+                adaptive: useSettings.get("theme_schedule"),
+                theme_day: useSettings.get("theme_day"),
+                theme_night: useSettings.get("theme_night")
               }
             }),
             /* @__PURE__ */ jsx(SettingGroup, {
@@ -113320,24 +113320,10 @@ var bleh = (() => {
             }),
             /* @__PURE__ */ jsx(SettingColour, {
               colour: {
-                type: settings.accent_type,
-                hue: settings.hue,
-                sat: settings.sat,
-                lit: settings.lit
-              },
-              onChange: (val) => {
-                if (settings.hue != val.hue) {
-                  save_setting("hue", val.hue);
-                }
-                if (settings.sat != val.sat) {
-                  save_setting("sat", val.sat);
-                }
-                if (settings.lit != val.lit) {
-                  save_setting("lit", val.lit);
-                }
-                if (settings.accent_type != val.type) {
-                  save_setting("accent_type", val.type);
-                }
+                type: useSettings.get("accent_type"),
+                hue: useSettings.get("hue"),
+                sat: useSettings.get("sat"),
+                lit: useSettings.get("lit")
               },
               season
             }),
@@ -118690,7 +118676,7 @@ var bleh = (() => {
           children: [
             /* @__PURE__ */ jsx(SideAction, {
               type: "import",
-              onClick: import_settings13,
+              onClick: import_settings12,
               children: tl2(trans.import)
             }),
             /* @__PURE__ */ jsx(SideAction, {
@@ -118995,7 +118981,7 @@ var bleh = (() => {
     document.body.setAttribute(`data-ff--${flag2}`, `${!current_state}`);
     compile_settings();
   }
-  function import_settings13() {
+  function import_settings12() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -121873,10 +121859,10 @@ var bleh = (() => {
           children: [
             /* @__PURE__ */ jsx(SettingTheme, {
               theme: {
-                id: settings.theme,
-                adaptive: settings.theme_schedule,
-                theme_day: settings.theme_day,
-                theme_night: settings.theme_night
+                id: useSettings.get("theme"),
+                adaptive: useSettings.get("theme_schedule"),
+                theme_day: useSettings.get("theme_day"),
+                theme_night: useSettings.get("theme_night")
               }
             }),
             /* @__PURE__ */ jsx(SettingGroup, {
@@ -121898,24 +121884,10 @@ var bleh = (() => {
           children: [
             /* @__PURE__ */ jsx(SettingColour, {
               colour: {
-                type: settings.accent_type,
-                hue: settings.hue,
-                sat: settings.sat,
-                lit: settings.lit
-              },
-              onChange: (val) => {
-                if (settings.hue != val.hue) {
-                  save_setting("hue", val.hue);
-                }
-                if (settings.sat != val.sat) {
-                  save_setting("sat", val.sat);
-                }
-                if (settings.lit != val.lit) {
-                  save_setting("lit", val.lit);
-                }
-                if (settings.accent_type != val.type) {
-                  save_setting("accent_type", val.type);
-                }
+                type: useSettings.get("accent_type"),
+                hue: useSettings.get("hue"),
+                sat: useSettings.get("sat"),
+                lit: useSettings.get("lit")
               },
               season
             }),
@@ -129626,7 +129598,7 @@ var bleh = (() => {
                         value: "",
                         text: tl2(trans.none)
                       },
-                      ...settings.friends
+                      ...useSettings.get("friends")
                     ])
                   })
                 })
@@ -129641,18 +129613,18 @@ var bleh = (() => {
               children: [
                 /* @__PURE__ */ jsx(SettingTheme, {
                   theme: {
-                    id: settings.theme,
-                    adaptive: settings.theme_schedule,
-                    theme_day: settings.theme_day,
-                    theme_night: settings.theme_night
+                    id: useSettings.get("theme"),
+                    adaptive: useSettings.get("theme_schedule"),
+                    theme_day: useSettings.get("theme_day"),
+                    theme_night: useSettings.get("theme_night")
                   }
                 }),
                 /* @__PURE__ */ jsx(SettingTheme, {
                   theme: {
-                    id: settings.theme,
-                    adaptive: settings.theme_schedule,
-                    theme_day: settings.theme_day,
-                    theme_night: settings.theme_night
+                    id: useSettings.get("theme"),
+                    adaptive: useSettings.get("theme_schedule"),
+                    theme_day: useSettings.get("theme_day"),
+                    theme_night: useSettings.get("theme_night")
                   }
                 })
               ]
@@ -129714,10 +129686,10 @@ var bleh = (() => {
                 children: [
                   /* @__PURE__ */ jsx(SettingColour, {
                     colour: {
-                      type: settings.accent_type,
-                      hue: settings.hue,
-                      sat: settings.sat,
-                      lit: settings.lit
+                      type: useSettings.get("accent_type"),
+                      hue: useSettings.get("hue"),
+                      sat: useSettings.get("sat"),
+                      lit: useSettings.get("lit")
                     },
                     season: {
                       id: "christmas",
@@ -129792,10 +129764,10 @@ var bleh = (() => {
                   }),
                   /* @__PURE__ */ jsx(SettingColour, {
                     colour: {
-                      type: settings.accent_type,
-                      hue: settings.hue,
-                      sat: settings.sat,
-                      lit: settings.lit
+                      type: useSettings.get("accent_type"),
+                      hue: useSettings.get("hue"),
+                      sat: useSettings.get("sat"),
+                      lit: useSettings.get("lit")
                     },
                     season: {
                       id: "christmas",
@@ -131910,7 +131882,7 @@ var bleh = (() => {
       await img.decode();
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      const scale = 400;
+      const scale = 1300;
       canvas.width = scale;
       canvas.height = scale;
       ctx.imageSmoothingEnabled = true;

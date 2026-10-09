@@ -961,7 +961,7 @@ export async function register_background(
 		const canvas = document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
 
-		const scale = 400;
+		const scale = 1300;
 
 		canvas.width = scale;
 		canvas.height = scale;

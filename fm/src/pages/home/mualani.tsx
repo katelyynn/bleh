@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { register_background, update_page } from '@/page';
+import { register_background, update_page, useSettings } from '@/page';
 import { auth, page } from '@/build/page';
 import { log } from '@/build/log.ts';
 import { checkup_page_structure } from '@/components/page/structure.tsx';
@@ -509,7 +509,7 @@ export function mualani() {
 								bind='starred_friend'
 								values={select_prepare_list([
 									{ value: '', text: tl(trans.none) },
-									...settings.friends,
+									...useSettings.get('friends') as string[],
 								])}
 							/>
 						</SettingGroup>
@@ -521,18 +521,30 @@ export function mualani() {
 					<DemoItem label='SettingTheme'>
 						<SettingTheme
 							theme={{
-								id: settings.theme as string,
-								adaptive: settings.theme_schedule as boolean,
-								theme_day: settings.theme_day as string,
-								theme_night: settings.theme_night as string,
+								id: useSettings.get('theme') as string,
+								adaptive: useSettings.get(
+									'theme_schedule',
+								) as boolean,
+								theme_day: useSettings.get(
+									'theme_day',
+								) as string,
+								theme_night: useSettings.get(
+									'theme_night',
+								) as string,
 							}}
 						/>
 						<SettingTheme
 							theme={{
-								id: settings.theme as string,
-								adaptive: settings.theme_schedule as boolean,
-								theme_day: settings.theme_day as string,
-								theme_night: settings.theme_night as string,
+								id: useSettings.get('theme') as string,
+								adaptive: useSettings.get(
+									'theme_schedule',
+								) as boolean,
+								theme_day: useSettings.get(
+									'theme_day',
+								) as string,
+								theme_night: useSettings.get(
+									'theme_night',
+								) as string,
 							}}
 						/>
 					</DemoItem>
@@ -577,10 +589,12 @@ export function mualani() {
 					<DemoItem label='SettingColour'>
 						<SettingColour
 							colour={{
-								type: settings.accent_type as colour_type,
-								hue: settings.hue as number,
-								sat: settings.sat as number,
-								lit: settings.lit as number,
+								type: useSettings.get(
+									'accent_type',
+								) as colour_type,
+								hue: useSettings.get('hue') as number,
+								sat: useSettings.get('sat') as number,
+								lit: useSettings.get('lit') as number,
 							}}
 							season={{
 								id: 'christmas',
@@ -655,10 +669,12 @@ export function mualani() {
 						/>
 						<SettingColour
 							colour={{
-								type: settings.accent_type as colour_type,
-								hue: settings.hue as number,
-								sat: settings.sat as number,
-								lit: settings.lit as number,
+								type: useSettings.get(
+									'accent_type',
+								) as colour_type,
+								hue: useSettings.get('hue') as number,
+								sat: useSettings.get('sat') as number,
+								lit: useSettings.get('lit') as number,
 							}}
 							season={{
 								id: 'christmas',
