@@ -4,10 +4,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ReactNode } from 'jsx-dom';
+import { ReactElement, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { useSettings } from '@/page.tsx';
 import { WithChildren } from '@/types/generic.tsx';
+import { hover_tooltip } from '@/components/shared/tooltips.tsx';
 
 interface PanelHeadProps {
 	icon?: string;
@@ -15,6 +16,7 @@ interface PanelHeadProps {
 	margin?: boolean;
 	top?: boolean;
 	children: ReactNode;
+	hover?: ReactElement;
 }
 
 export function PanelHead({
@@ -23,6 +25,7 @@ export function PanelHead({
 	margin = true,
 	top,
 	children,
+	hover,
 }: PanelHeadProps) {
 	const elem = (
 		<h4
@@ -45,6 +48,13 @@ export function PanelHead({
 	update();
 
 	useSettings.on('theme', update);
+
+	if (hover) {
+		hover_tooltip(
+			elem,
+			hover,
+		);
+	}
 
 	return elem;
 }

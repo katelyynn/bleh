@@ -7,9 +7,15 @@
 import { html, render } from 'lighterhtml';
 import { page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
+import {
+	SideActionContent,
+	SideActionLabel,
+} from '@/components/button/side.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function bleh_radio() {
-	const radios = page.structure.side.querySelectorAll('.stationlink');
+	const radios = page.structure.side!.querySelectorAll('.stationlink');
 	radios.forEach((radio) => {
 		const type = radio.getAttribute('data-analytics-label');
 		radio.classList.add('btn', 'radio-button', 'side-action', 'icon-mask');
@@ -22,12 +28,11 @@ export function bleh_radio() {
 			text = tl(trans.artists);
 		}
 
-		render(
-			radio,
-			html`
-				<h3 class="sub-text">${tl(trans.radio)}</h3>
-				<h4>${text}</h4>
-			`,
+		radio.replaceChildren(
+			<>
+				<SideActionContent>{text}</SideActionContent>
+				<SideActionLabel>{tl(trans.radio)}</SideActionLabel>
+			</>,
 		);
 
 		radio.removeAttribute('title');
@@ -35,17 +40,21 @@ export function bleh_radio() {
 		radio.parentElement.replaceWith(radio);
 	});
 
-	const list = page.structure.side.querySelector('.stationlink-list');
+	const list = page.structure.side!.querySelector('.stationlink-list');
 	if (list) {
 		list.classList.add('side-actions');
 	}
 
 	if (page.type == 'user') {
-		const promo_v3 = page.structure.side.querySelector('.promo-v3');
+		const promo_v3 = page.structure.side!.querySelector('.promo-v3');
 		if (!promo_v3) return;
 
 		const header = promo_v3.querySelector('h2');
-		header.textContent = tl(trans.listening);
+		header?.replaceWith(
+			<PanelHead icon={icons.play}>
+				{tl(trans.listening)}
+			</PanelHead>,
+		);
 
 		const promos = promo_v3.querySelectorAll('.listening-report-promo');
 		const container = document.createElement('div');
@@ -58,16 +67,16 @@ export function bleh_radio() {
 
 		if (radios.length == 0) return;
 
-		const sep = document.createElement('div');
-		sep.classList.add('sep', 'listen-sep');
-		promo_v3.appendChild(sep);
-
 		if (list) list.parentElement.remove();
 		promo_v3.appendChild(list);
 	} else {
-		const header = page.structure.side.querySelector(
+		const header = page.structure.side!.querySelector(
 			'.stationlinks-header',
 		);
-		header.textContent = tl(trans.listening);
+		header?.replaceWith(
+			<PanelHead icon={icons.play}>
+				{tl(trans.listening)}
+			</PanelHead>,
+		);
 	}
 }

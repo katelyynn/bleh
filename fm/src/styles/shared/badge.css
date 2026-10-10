@@ -68,6 +68,8 @@
 		}
 	}
 
+	--mask-size: var(--icon-size);
+
 	&:not(.small) {
 		--mask2: var(--interact-mask, none);
 		mask-image: var(--mask2) !important;

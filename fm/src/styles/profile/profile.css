@@ -19,20 +19,32 @@
 @import './streak.css';
 
 .header-title-secondary {
-	margin-top: unset !important;
 	font-size: var(--font-size) !important;
 	line-height: var(--line-height) !important;
 
 	display: flex;
-	gap: 2px var(--item-list-gap);
+	gap: 2px 8px;
 	align-items: center;
+
+	--blur: blur(3px);
+	backdrop-filter: var(--blur);
+	-webkit-backdrop-filter: var(--blur);
+	width: fit-content;
+
+	padding: 5px;
+	margin: -2px -5px -4px !important;
+
+	--mask: linear-gradient(180deg, transparent, white 20%, white 80%, transparent);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
+	border-radius: 50px;
 }
 
 .sub-text-label {
 	display: flex;
 	align-items: center;
-	color: oklch(var(--c2) / 80%);
-	--mask-colour: currentColor;
+
+	filter: drop-shadow(0 1px 3px oklch(var(--b6)));
 
 	.sub-text-label-sr {
 		display: none;
@@ -42,12 +54,28 @@
 .sub-text-pair {
 	display: flex;
 	align-items: center;
-	gap: var(--icon-gap);
+	gap: 3px;
 	margin: unset;
+	color: oklch(var(--c2));
+	--mask-colour: oklch(var(--c2) / 80%);
+	text-shadow: 0 1px 5px oklch(var(--b6));
 
 	&.sub-text-follow {
 		font-weight: var(--font-weight-medium);
+		color: oklch(var(--l3-c));
+		--mask-colour: oklch(var(--l3-c) / 80%);
 	}
+
+	--icon-size: 14px;
+}
+
+.sub-text-dot {
+	display: flex;
+	width: 3px;
+	height: 3px;
+	background: oklch(var(--c2) / 70%);
+	box-shadow: 0 0 3px oklch(var(--b6));
+	border-radius: 10px;
 }
 
 .profile-name {
@@ -60,7 +88,7 @@
 	z-index: 10;
 	position: relative;
 
-	& > .sep {
+	&>.sep {
 		margin-top: var(--card-gap);
 	}
 
@@ -95,7 +123,7 @@
 	gap: var(--icon-gap);
 	text-align: left;
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon-colour: color-mix(in oklch,
 				oklch(var(--c2)),
 				oklch(var(--c3)) 50%);
@@ -119,10 +147,9 @@
 	width: 100% !important;
 	justify-content: center;
 	height: fit-content;
-	margin: calc(-1 * (var(--side-action-side) + (var(--button-height) / 2))) 0
-		0 0 !important;
+	margin: calc(-1 * (var(--side-action-side) + (var(--button-height) / 2))) 0 0 0 !important;
 
-	& > li {
+	&>li {
 		font: inherit;
 		flex: unset;
 	}
@@ -138,7 +165,7 @@
 	border-radius: unset;
 	--mask: var(--icon-16-plus);
 
-	& > .header-avatar-add-label {
+	&>.header-avatar-add-label {
 		display: none;
 	}
 }
@@ -159,7 +186,7 @@
 	margin: var(--side-action-side) 0 0 0;
 }
 
-.buffer-3 > h4 {
+.buffer-3>h4 {
 	color: oklch(var(--c3));
 	text-align: center;
 	font-size: calc(var(--font-size) - 1px);

@@ -6,6 +6,7 @@
 
 import { ReactNode } from 'jsx-dom';
 import { useSettings } from '@/page.tsx';
+import { WithChildren } from '@/types/generic.tsx';
 
 interface SideActionsProps {
 	children?: ReactNode;
@@ -51,4 +52,16 @@ export function SideAction({
 			{children}
 		</button>
 	);
+}
+
+export function SideActionLabel({
+	children,
+}: WithChildren) {
+	return <label class='side-action-label'>{children}</label>;
+}
+
+export function SideActionContent({
+	children,
+}: WithChildren) {
+	return <p class='side-action-content'>{children}</p>;
 }

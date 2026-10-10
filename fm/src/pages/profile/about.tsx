@@ -11,7 +11,7 @@ import { lang, tl, trans } from '@/build/trans.ts';
 import { InfoTip } from '@/components/text/tip.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { create_profile_note_panel } from '@/pages/profile/profile.tsx';
-import { menu_tooltip } from '@/components/shared/tooltips.tsx';
+import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { copy, get_language_name, translate } from '@/build/tools.ts';
@@ -24,6 +24,8 @@ import {
 	MarkdownUsageItem,
 } from '@/components/markdown/usage.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { Separator } from '@/components/divider/separator.tsx';
 
 export type AboutElement = HTMLDivElement & {
 	translated: boolean;
@@ -67,33 +69,38 @@ export function profile_about(
 
 	panel.insertBefore(
 		<PanelTop>
-			<h2 class='about-me-title'>
+			<PanelHead
+				top
+				icon={icons.info}
+				hover={uses_md
+					? (
+						<Tooltip>
+							<MarkdownUsage>
+								{cache.banner && (
+									<MarkdownUsageItem
+										type='banner'
+										value=''
+									/>
+								)}
+								{(cache.hue && cache.sat && cache.lit) && (
+									<MarkdownUsageItem
+										type='accent'
+										value={`${cache.hue}, ${cache.sat}, ${cache.lit}`}
+									/>
+								)}
+								{(cache.username || cache.font) && (
+									<MarkdownUsageItem
+										type='font'
+										value={`${cache.username} ${cache.font} ${cache.font_style}`}
+									/>
+								)}
+							</MarkdownUsage>
+						</Tooltip>
+					)
+					: undefined}
+			>
 				{tl(trans.about)}
-				{uses_md && (
-					<InfoTip>
-						<MarkdownUsage>
-							{cache.banner && (
-								<MarkdownUsageItem
-									type='banner'
-									value=''
-								/>
-							)}
-							{(cache.hue && cache.sat && cache.lit) && (
-								<MarkdownUsageItem
-									type='accent'
-									value={`${cache.hue}, ${cache.sat}, ${cache.lit}`}
-								/>
-							)}
-							{(cache.username || cache.font) && (
-								<MarkdownUsageItem
-									type='font'
-									value={`${cache.username} ${cache.font} ${cache.font_style}`}
-								/>
-							)}
-						</MarkdownUsage>
-					</InfoTip>
-				)}
-			</h2>
+			</PanelHead>
 			<ViewButtons blend blendV2>
 				{own_profile
 					? (
@@ -138,6 +145,7 @@ export function profile_about(
 		open_settings.current,
 		<MenuContents>
 			<MenuCheckbox bind='bio_markdown' />
+			<Separator />
 			<Button
 				menu
 				ref={translator}

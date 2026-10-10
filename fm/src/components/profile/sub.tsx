@@ -41,7 +41,7 @@ export function SubTextPair({
 			break;
 	}
 
-	return (
+	const elem = (
 		<dl class={['sub-text-pair', `sub-text-${type}`]}>
 			<SubTextLabel icon={icon} text={label} />
 			<dd class={['sub-text-item', !isText && 'not-text']}>
@@ -49,6 +49,13 @@ export function SubTextPair({
 			</dd>
 		</dl>
 	);
+
+	hover_tooltip(
+		elem,
+		<Tooltip>{label}</Tooltip>,
+	);
+
+	return elem;
 }
 
 interface SubTextLabelProps {
@@ -60,17 +67,14 @@ function SubTextLabel({
 	icon,
 	text,
 }: SubTextLabelProps) {
-	const elem = (
+	return (
 		<dt class='sub-text-label'>
 			<Icon name={icon} />
 			<span class='sub-text-label-sr'>{text}</span>
 		</dt>
 	);
+}
 
-	hover_tooltip(
-		elem,
-		<Tooltip>{text}</Tooltip>,
-	);
-
-	return elem;
+export function SubTextDot() {
+	return <div class='sub-text-dot' />;
 }

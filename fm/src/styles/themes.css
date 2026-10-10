@@ -65,8 +65,8 @@ body {
 	--lit-oracle: 0.8;
 
 	--trans-short: 0.2s;
-	--trans: 0.2s;
-	--trans-function: cubic-bezier(0.095, 0.410, 0.055, 0.960);
+	--trans: 0.35s;
+	--trans-function: cubic-bezier(0.04, 0.67, 0.31, 0.98);
 	--trans-function-ani: cubic-bezier(0.205, 0.060, 0.050, 0.965);
 
 	--ina: var(--motion, ina 0.4s var(--trans-function-ani));

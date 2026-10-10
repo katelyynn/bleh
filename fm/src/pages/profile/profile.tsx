@@ -54,7 +54,7 @@ import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
 import { SeeMore, SeeMoreContainer } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
-import { SubTextPair } from '@/components/profile/sub.tsx';
+import { SubTextDot, SubTextPair } from '@/components/profile/sub.tsx';
 import {
 	AboutElement,
 	profile_about,
@@ -1249,6 +1249,20 @@ function render_sub_text(
 ) {
 	parent.innerHTML = '';
 
+	if (page.state.follows_user) {
+		parent.appendChild(
+			<>
+				<SubTextPair
+					type='follow'
+					label={tl(trans.following)}
+					value={tl(trans.follows_you)}
+					isText={false}
+				/>
+				<SubTextDot />
+			</>,
+		);
+	}
+
 	if (display_name) {
 		parent.appendChild(
 			<SubTextPair
@@ -1289,17 +1303,6 @@ function render_sub_text(
 				type='created'
 				label={tl(trans.account_creation)}
 				value={created}
-				isText={false}
-			/>,
-		);
-	}
-
-	if (page.state.follows_user) {
-		parent.appendChild(
-			<SubTextPair
-				type='follow'
-				label={tl(trans.following)}
-				value={tl(trans.follows_you)}
 				isText={false}
 			/>,
 		);
