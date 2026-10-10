@@ -7,6 +7,11 @@
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
+import { SettingsFooter } from '@/components/form/footer.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { FooterFill, ModalFooter } from '@/components/dialog/dialog.tsx';
+import { Button } from '@/components/button/button.tsx';
 
 export function bleh_error() {
 	page.state.error = false;
@@ -29,6 +34,12 @@ export function bleh_error() {
 	const reason = page_content.querySelector('p');
 
 	page_content.classList.add('has-error');
+
+	if (page.subpage == '404') {
+		error_404(page_content);
+		return;
+	}
+
 	render(
 		page_content,
 		html`
@@ -61,5 +72,25 @@ export function bleh_error() {
 				</main>
 			</div>
 		`,
+	);
+}
+
+function error_404(content: HTMLElement) {
+	content.replaceChildren(
+		<div class='large-page-error'>
+			<h1 class='large-page-head'>404</h1>
+			<p class='large-page-body'>{window.location.pathname}</p>
+			<p class='error-page-sad'>(っ- ‸ - ς)</p>
+			<ModalFooter>
+				<SeeMore iconPlacement='left' icon={icons.arrow_left}>
+					{tl(trans.back)}
+				</SeeMore>
+				<FooterFill />
+				<Button primary href={`${root}user/${auth.name}`}>
+					<Icon name={icons.profile} />
+					{tl(trans.profile)}
+				</Button>
+			</ModalFooter>
+		</div>,
 	);
 }

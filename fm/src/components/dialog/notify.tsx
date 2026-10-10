@@ -10,6 +10,7 @@ import { tl, trans } from '@/build/trans';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
+import { IconLabel } from '@/components/text/text.tsx';
 
 export function load_notifications() {
 	if (!page.structure.notifications) {
@@ -103,10 +104,9 @@ export function notify({
 	actions.push({
 		onClick: () => notify_rm(notif),
 		children: () => (
-			<>
-				<Icon name={icons.x} />
+			<IconLabel icon={icons.x}>
 				{tl(trans.close)}
-			</>
+			</IconLabel>
 		),
 	});
 
@@ -114,6 +114,8 @@ export function notify({
 
 	const information = createRef();
 	const bar = createRef();
+
+	console.error(actions);
 
 	const notif = (
 		<div class={['bleh-notification']} data-notification-type={type}>
@@ -138,14 +140,18 @@ export function notify({
 				</div>
 			)}
 			<div class='notification-actions'>
-				{actions.map((action) => (
-					<Button
-						className='notification-action'
-						onClick={action.onClick}
-					>
-						{action.children()}
-					</Button>
-				))}
+				{actions.map((action) => {
+					console.error(action, action.children());
+
+					return (
+						<Button
+							className='notification-action'
+							onClick={action.onClick}
+						>
+							{action.children()}
+						</Button>
+					);
+				})}
 			</div>
 		</div>
 	) as NotificationElement;

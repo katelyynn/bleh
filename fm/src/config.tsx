@@ -20,6 +20,7 @@ import { load_skus } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { compile_settings, save_setting } from '@/components/settings/settings';
 import { useSettings } from '@/page.tsx';
 import { dark_themes, light_themes } from '@/build/theme.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 function parse_bleh_version(version: string) {
 	return parseFloat(version.substring(0, 7));
@@ -211,13 +212,17 @@ export function request_reload() {
 	notify({
 		title: tl(trans.refresh_pending.name),
 		body: tl(trans.refresh_pending.body),
-		icon: 'icon-16-settings',
+		icon: icons.settings,
 		persist: true,
 		actions: [
 			{
-				action: () => invoke_reload(),
-				text: tl(trans.refresh),
-				type: 'refresh',
+				onClick: () => invoke_reload(),
+				children: () => (
+					<>
+						<Icon name={icons.refresh} />
+						{tl(trans.refresh)}
+					</>
+				),
 			},
 		],
 	});

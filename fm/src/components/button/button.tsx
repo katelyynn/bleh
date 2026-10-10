@@ -98,9 +98,7 @@ export function Button({
 				onClick={handleOnClick}
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
 				{...props}
-			>
-				{children}
-			</button>
+			/>
 		) as ButtonElement;
 	} else {
 		elem = (
@@ -111,9 +109,7 @@ export function Button({
 				onClick={handleOnClick}
 				ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
 				{...props}
-			>
-				{children}
-			</a>
+			/>
 		) as ButtonLinkElement;
 	}
 

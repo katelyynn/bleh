@@ -1,3 +1,18 @@
+body.namespace--error_404 {
+	&>.main-content {
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			display: block;
+			background: radial-gradient(at center top, oklch(var(--k4) / 40%), transparent 45%) !important;
+			height: unset !important;
+		}
+	}
+}
+
 #error {
 	font-size: 16px;
 	margin-top: var(--card-gap);
@@ -16,15 +31,55 @@
 	border-top: 1px solid oklch(var(--b4));
 	margin-bottom: unset;
 }
+
 .translation {
 	color: oklch(var(--c2));
 
-	& > a {
+	&>a {
 		font-weight: var(--font-weight);
 	}
 
-	& > b {
+	&>b {
 		font-weight: var(--font-weight);
 		color: oklch(var(--c3));
 	}
+}
+
+.large-page-error {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 150px;
+}
+
+.large-page-head {
+	--size: 300px;
+	font-family: Instrument Serif, var(--font);
+	font-size: var(--size);
+	line-height: var(--size);
+	font-weight: var(--font-weight-medium);
+	user-select: none;
+	pointer-events: none;
+}
+
+.large-page-body {
+	font-family: var(--font-code);
+	font-size: 16px;
+	line-height: 20px;
+	background: oklch(var(--b2) / 20%);
+	border-radius: var(--radius-s);
+	padding: 3px 5px;
+	width: fit-content;
+	cursor: default;
+
+	margin-bottom: 10px;
+}
+
+.error-page-sad {
+	color: oklch(var(--l3-c));
+	font-weight: var(--font-weight-medium);
+	margin-top: unset !important;
+	margin-bottom: 50px;
 }

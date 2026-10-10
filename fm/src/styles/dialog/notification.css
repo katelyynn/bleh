@@ -95,19 +95,23 @@
 	display: flex;
 
 	margin: calc(-1 * var(--notification-verts)) calc(-1 * var(--notification-sides)) calc(-1 * var(--notification-verts)) 0;
+}
 
-	.notification-action {
-		position: relative;
-		--bg: transparent;
-		--bg-hov: oklch(var(--b4) / 40%);
-		--bg-atv: oklch(var(--b4) / 60%);
-		--mask-colour: oklch(var(--c3));
-		--shadow: none;
-		--font-size: 0;
-		width: 38px;
-		--btn-top: 0;
-		--btn-bottom: 0;
-	}
+.notification-action {
+	position: relative;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 40%);
+	--bg-atv: oklch(var(--b4) / 60%);
+	--mask-colour: oklch(var(--c3));
+	--shadow: none;
+	--font-size: 0;
+	width: 30px;
+	--button-verts: 0;
+	--button-sides: 0;
+
+	--icon-size: 14px !important;
+	justify-content: center;
+	gap: 0 !important;
 }
 
 .notification-progress {

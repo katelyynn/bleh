@@ -44,7 +44,7 @@ import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
 import { createRef, ReactElement, RefObject } from 'jsx-dom';
-import { toggle_theme } from '@/config.ts';
+import { toggle_theme } from '@/config.tsx';
 import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import {
 	Button,

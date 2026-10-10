@@ -10,7 +10,7 @@ import { auth, page, root } from '@/build/page';
 import { copy, set_storage } from '@/build/tools';
 import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import { load_settings } from '../../config.ts';
+import { load_settings } from '../../config.tsx';
 import { version } from '@/main';
 import { update_page, useSettings } from '@/page';
 import { ff } from '@/components/settings/sku.ts';
