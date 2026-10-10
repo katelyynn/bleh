@@ -4,7 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { denoPlugin } from '@deno/esbuild-plugin';
+import fs from 'node:fs/promises';
+
 import { serveDir } from '@std/http/file-server';
 import esbuild from 'esbuild';
 
@@ -21,7 +22,7 @@ type BundleOptions = esbuild.BuildOptions & {
 };
 
 const build: BuildSchema = JSON.parse(
-	await Deno.readTextFile('./src/build/build.json'),
+	await fs.readFile('./src/build/build.json'),
 );
 
 async function bundle({ name, ...options }: BundleOptions) {
@@ -105,7 +106,7 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	platform: 'browser',
 	format: 'iife',
 	loader: { '.svg': 'text' },
-	plugins: [bundle_css, denoPlugin()],
+	plugins: [bundle_css],
 	minifyWhitespace: false,
 	minifyIdentifiers: false,
 	minifySyntax: false,
@@ -140,34 +141,34 @@ const extension: BundleOptions = {
 	minify: true,
 };
 
-if (Deno.args[0] == 'serve') {
+if (process.argv[2] == 'serve') {
 	await Promise.all([
 		bundle(usercss),
 		bundle(userscript),
 	]);
 
-	Deno.serve((req) =>
+	Deno.serve(req =>
 		serveDir(req, {
 			showDirListing: true,
-		})
+		}),
 	);
 } else {
 	build.built_on = new Date().toISOString();
-	await Deno.writeTextFile(
+	await fs.writeFile(
 		'./src/build/build.json',
 		JSON.stringify(build, null, '\t'),
 	);
 
 	await bundle(userscript);
 	const manifest = JSON.parse(
-		await Deno.readTextFile('./ext/manifest.json'),
+		await fs.readFile('./ext/manifest.json'),
 	);
 	manifest.name = build.brand;
 	manifest.version = build.build.split('.')
-		.map((part) => parseInt(part, 10))
+		.map(part => parseInt(part, 10))
 		.join('.');
 	manifest.description = build.bio;
-	await Deno.writeTextFile(
+	await fs.readFile(
 		'./ext/manifest.json',
 		JSON.stringify(manifest, null, '\t'),
 	);
