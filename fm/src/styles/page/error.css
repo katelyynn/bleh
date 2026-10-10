@@ -82,4 +82,5 @@ body.namespace--error_404 {
 	font-weight: var(--font-weight-medium);
 	margin-top: unset !important;
 	margin-bottom: 50px;
+	cursor: default;
 }
