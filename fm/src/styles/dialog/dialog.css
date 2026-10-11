@@ -287,6 +287,9 @@
 	overflow: hidden;
 	margin: var(--modal-verts) calc(-1 * var(--modal-sides)) calc(-1 * var(--modal-verts)) calc(-1 * var(--modal-sides));
 	border-top: 1px solid var(--separator-base);
+
+	border-bottom-left-radius: var(--radius-m);
+	border-bottom-right-radius: var(--radius-m);
 }
 
 .bleh-modal-v2-action {
