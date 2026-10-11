@@ -307,7 +307,7 @@ interface ModalProps {
 
 export function Modal({
 	title,
-	close,
+	close = 'close',
 	canClose = true,
 	actions = [],
 	onClose,
