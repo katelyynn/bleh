@@ -132182,6 +132182,7 @@ ${version2.build} (${version2.sku})`;
     page.state.settings_page = "";
     page.state.on_tour = false;
     page.restricted = false;
+    page.continue = true;
     if (main_content) {
       const blacklist_level = Number(main_content.getAttribute("data-page-resource-blacklist-level") || "0");
       page.restricted = blacklist_level == 1;

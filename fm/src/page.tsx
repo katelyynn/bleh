@@ -526,6 +526,7 @@ function load_page(main_content?: HTMLElement) {
 	page.state.on_tour = false;
 
 	page.restricted = false;
+	page.continue = true;
 
 	if (main_content) {
 		const blacklist_level = Number(
