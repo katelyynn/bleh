@@ -4,39 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { useSettings } from '@/page.tsx';
-import { SettingSelect } from '@/components/settings/provider/select.tsx';
-import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
-import { settings_store } from '@/build/config.ts';
-import {
-	Icon,
-	IconArrowIcon,
-	icons,
-	SaveIcon,
-} from '@/components/shared/icon.tsx';
-import { SettingInput } from '@/components/settings/provider/input.tsx';
+import { SaveIcon } from '@/components/shared/icon.tsx';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
-import { expand_avatar } from '@/components/shared/avatar.tsx';
-import { Button, ButtonGroup } from '@/components/button/button.tsx';
-import { SettingGroup } from '@/components/settings/group.tsx';
-import {
-	dialog,
-	dialog_rm,
-	FooterFill,
-	ModalFooter,
-} from '@/components/dialog/dialog.tsx';
-import { SettingRange } from '@/components/settings/provider/range.tsx';
-import { SettingInfo } from '@/components/settings/provider/info.tsx';
-import {
-	ColourTile,
-	ColourTiles,
-} from '@/components/settings/provider/colour.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
-import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
-import { formatHex } from 'culori';
+import { dialog_rm, modal } from '@/components/dialog/dialog.tsx';
 import { auth, page } from '@/build/page.ts';
 import { Carousel, CarouselItem } from '@/components/select/carousel.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
@@ -102,7 +75,7 @@ export function ProfileName({
 							),
 						})}
 					</span>
-					<a class='card-tip-link' onClick={modal}>
+					<a class='card-tip-link' onClick={present}>
 						{tl(trans.change_font)}
 					</a>
 				</CardTip>
@@ -110,7 +83,7 @@ export function ProfileName({
 		</div>
 	) as ProfileNameElement;
 
-	function modal() {
+	function present() {
 		if (disabled) return;
 
 		let name = value.name;
@@ -118,7 +91,7 @@ export function ProfileName({
 		let style = value.style;
 		const current_preview = createRef();
 
-		dialog({
+		modal({
 			id: 'profile_name',
 			title: tl(trans.profile_font.name),
 			body: (
@@ -144,34 +117,28 @@ export function ProfileName({
 							}}
 						/>
 					</div>
-					<ModalFooter>
-						<SeeMore
-							iconPlacement='left'
-							icon={icons.x}
-							onClick={() => dialog_rm({ id: 'profile_name' })}
-						>
-							{tl(trans.cancel)}
-						</SeeMore>
-						<FooterFill />
-						<ButtonGroup>
-							<Button
-								primary
-								onClick={() => {
-									set({
-										name,
-										font,
-										style,
-									});
-									dialog_rm({ id: 'profile_name' });
-								}}
-							>
-								<SaveIcon />
-								{tl(trans.save)}
-							</Button>
-						</ButtonGroup>
-					</ModalFooter>
 				</>
 			),
+			close: 'cancel',
+			actions: [
+				{
+					primary: true,
+					onClick: () => {
+						set({
+							name,
+							font,
+							style,
+						});
+						dialog_rm({ id: 'profile_name' });
+					},
+					children: (
+						<>
+							<SaveIcon />
+							{tl(trans.save)}
+						</>
+					),
+				},
+			],
 		});
 
 		function update_preview() {

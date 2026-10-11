@@ -26,7 +26,7 @@ import {
 } from '@/build/page';
 import { new_season, Seasons, stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
-import { dialog, load_dialogs } from '@/components/dialog/dialog';
+import { dialog, load_dialogs, modal } from '@/components/dialog/dialog';
 import {
 	correct_artist,
 	correct_generic_artist,
@@ -109,6 +109,7 @@ import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
 import { auth_page } from '@/pages/auth/main.tsx';
 import { seasonal } from '@/pages/bleh_settings/seasonal.tsx';
+import { copy } from '@/build/tools.ts';
 
 export const useSettings: Settings = new Settings();
 export let useSeasons: Seasons;
@@ -255,48 +256,87 @@ function solarium() {
     `);
 }
 
-function handle_error(e = null) {
+export function handle_error(e = null) {
 	document.body.classList.add('florence-loaded');
 
-	dialog({
+	let error_text = `${e}`;
+
+	if (e.name) {
+		error_text = `${e.name}: ${e.message}
+
+${e.stack}
+
+on: ${page.type}/${page.subpage}
+${window.location.pathname}
+${version.build} (${version.sku})`;
+	}
+
+	modal({
 		id: 'error',
-		title: 'An error has occurred',
-		body: html.node`
-            <div class="error-inner">
-                <div class="error-top">
-                    ${icon({ name: icons.error })}
-                    <div class="error-top-info">
-                        <h1 class="error-head">oops.. something broke</h1>
-                        <p class="error-body">An error prevented ${version.brand} from finishing loading</p>
-                    </div>
-                </div>
-                <pre class="error-info colourful">${
-			e
-				? html
-					.node`<span class="error-type">${e.name}</span>: ${e.message}`
-				: ''
-		}${
-			e.stack
-				? html.node`<br><span class="error-stack">${e.stack}</span>`
-				: ''
-		}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
-                <p class="error-summary">It would be helpful if you could report this bug, including the error message above and any steps you took.</p>
-            </div>
-            <div class="modal-footer">
-                <div class="fill"></div>
-                <a class="see-more" href="https://bleh.yuzu.pet/issues" target="_blank">
-                    Report bug now
-                </a>
-                <a class="see-more" href="https://bleh.yuzu.pet/download?${Math.random}" target="_blank">
-                    Check for updates
-                </a>
-                <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
-                    Join Discord
-                </a>
-                <div class="fill"></div>
-            </div>
-        `,
-		type: 'error',
+		title: 'Something went wrong',
+		body: (
+			<>
+				<pre class={['error-info', 'colourful']}>
+					{e && (
+						<>
+							<span class='error-type'>{e.name}</span>: {e.message}
+						</>
+					)}
+					{e.stack && (
+						<>
+							<br />
+							<span class='error-stack'>{e.stack}</span>
+						</>
+					)}
+					<br />
+					on: {page.type}/{page.subpage}
+					<br />
+					{window.location.pathname}
+					<br />
+					{version.build} ({version.sku})
+				</pre>
+				<p>Copy the error details below and report this as a bug.</p>
+			</>
+		),
+		actions: [
+			{
+				onClick: () => {
+					open(`https://bleh.yuzu.pet/download?${Math.random()}`);
+				},
+				children: (
+					<>
+						<Icon name={icons.update} />
+						Attempt update
+					</>
+				),
+			},
+			{
+				colourful: true,
+				className: 'discord',
+				onClick: () => {
+					open(`https://discord.gg/${discord}`);
+				},
+				children: (
+					<>
+						<Icon name={icons.discord} />
+						Join Discord
+					</>
+				),
+			},
+			{
+				primary: true,
+				onClick: () => {
+					copy(error_text);
+					open('https://bleh.yuzu.pet/issues');
+				},
+				children: (
+					<>
+						<Icon name={icons.debug} />
+						Copy & report
+					</>
+				),
+			},
+		],
 	});
 
 	if (e != null) {

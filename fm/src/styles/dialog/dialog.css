@@ -374,13 +374,21 @@
 	flex: 1;
 
 	justify-content: center;
+	text-align: center;
 
+	height: 100%;
+
+	&.action-primary,
 	&.colourful {
 		--bg: transparent;
 		--bg-hov: oklch(var(--h4) / 10%);
 		--bg-atv: oklch(var(--h4) / 20%);
 		--col: oklch(var(--l3-c));
 		--mask-colour: oklch(var(--l3-c) / 80%);
+	}
+
+	&.action-primary {
+		font-weight: var(--font-weight-medium) !important;
 	}
 }
 

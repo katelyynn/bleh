@@ -862,6 +862,7 @@ function import_settings() {
 		),
 		actions: [
 			{
+				primary: true,
 				onClick: () => {
 					try {
 						const parsed = JSON.parse(text.current.value);
@@ -911,6 +912,7 @@ function export_settings() {
 		),
 		actions: [
 			{
+				primary: true,
 				onClick: () => {
 					copy(JSON.stringify(compile_settings()));
 				},

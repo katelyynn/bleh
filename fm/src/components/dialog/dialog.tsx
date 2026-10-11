@@ -244,7 +244,7 @@ export function FooterFill() {
 	return <div class='fill' />;
 }
 
-type close = 'back' | 'done' | ReactNode;
+type close = 'close' | 'cancel' | 'back' | 'done' | ReactNode;
 
 interface modal {
 	id: string;
@@ -259,7 +259,7 @@ export function modal({
 	id,
 	title,
 	body,
-	close,
+	close = 'close',
 	canClose = true,
 	actions = [],
 }: modal) {
@@ -293,6 +293,7 @@ interface ModalAction {
 	className?: string;
 	colourful?: boolean;
 	children: ReactNode;
+	primary?: boolean;
 }
 
 interface ModalProps {
@@ -326,11 +327,18 @@ export function Modal({
 				{tl(trans.done)}
 			</>
 		);
-	} else if (!close) {
+	} else if (close == 'cancel') {
 		close = (
 			<>
 				<CancelIcon />
 				{tl(trans.cancel)}
+			</>
+		);
+	} else if (close == 'close') {
+		close = (
+			<>
+				<CancelIcon />
+				{tl(trans.close)}
 			</>
 		);
 	}
@@ -363,7 +371,7 @@ export function Modal({
 							<Button
 								className={`bleh-modal-v2-action ${action.className} ${
 									action.colourful && 'colourful'
-								}`}
+								} ${action.primary && 'action-primary'}`}
 								onClick={action.onClick}
 							>
 								{action.children}

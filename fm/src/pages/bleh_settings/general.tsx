@@ -12,7 +12,7 @@ import {
 } from './bleh_settings';
 import { api_key, auth, page, root } from '@/build/page';
 import { create_badge, load_badges } from '@/components/shared/badge';
-import { dialog } from '@/components/dialog/dialog';
+import { dialog, modal } from '@/components/dialog/dialog';
 import { lang_info, language, tl, trans } from '@/build/trans';
 import { DateTime } from 'luxon';
 import { version } from '@/main';
@@ -473,7 +473,7 @@ function update_check_failed(e) {
 }
 
 function badge_prompt(badges: badge[]) {
-	dialog({
+	modal({
 		id: 'badges',
 		title: auth.name!,
 		body: (
@@ -495,6 +495,7 @@ function badge_prompt(badges: badge[]) {
 				))}
 			</div>
 		),
+		close: 'done',
 	});
 }
 

@@ -5,8 +5,6 @@
  */
 
 import { useSettings } from '@/page.tsx';
-import { SettingSelect } from '@/components/settings/provider/select.tsx';
-import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { settings_store } from '@/build/config.ts';
 import {
@@ -17,29 +15,22 @@ import {
 } from '@/components/shared/icon.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
-import { Input } from '@/components/input/input.tsx';
 import { createRef } from 'jsx-dom';
-import { expand_avatar } from '@/components/shared/avatar.tsx';
-import { Button, ButtonGroup } from '@/components/button/button.tsx';
+import { Button } from '@/components/button/button.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
-import {
-	dialog,
-	dialog_rm,
-	FooterFill,
-	ModalFooter,
-} from '@/components/dialog/dialog.tsx';
+import { dialog_rm, modal } from '@/components/dialog/dialog.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import {
 	ColourTile,
 	ColourTiles,
 } from '@/components/settings/provider/colour.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { formatHex } from 'culori';
 import { page } from '@/build/page.ts';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { notify, notify_rm } from '@/components/dialog/notify.tsx';
+import { SettingsFooter } from '@/components/form/footer.tsx';
 
 interface ProfileAccentProps {
 	disabled?: boolean;
@@ -81,7 +72,7 @@ export function ProfileAccent({
 			<div class='info'>
 				<div class='colour-tile-and-button'>
 					<div class={['colour-tile', 'colourful']} ref={preview} />
-					<Button onClick={modal}>
+					<Button onClick={present}>
 						<Icon name={icons.edit} />
 						{tl(trans.edit)}
 					</Button>
@@ -90,7 +81,7 @@ export function ProfileAccent({
 		</div>
 	) as ProfileAccentElement;
 
-	function modal() {
+	function present() {
 		if (disabled) return;
 
 		const convert = createRef();
@@ -99,7 +90,7 @@ export function ProfileAccent({
 		const lit = createRef();
 		const current_preview = createRef();
 
-		dialog({
+		modal({
 			id: 'profile_accent',
 			title: tl(trans.profile_accent.name),
 			body: (
@@ -165,132 +156,128 @@ export function ProfileAccent({
 							ref={lit}
 						/>
 					</SettingGroup>
-					<ModalFooter>
-						<SeeMore
-							iconPlacement='left'
-							icon={icons.x}
-							onClick={() => dialog_rm({ id: 'profile_accent' })}
-						>
-							{tl(trans.cancel)}
-						</SeeMore>
-						<FooterFill />
-						<ButtonGroup>
-							<Button
-								opens={
-									<MenuContents>
-										<Button
-											menu
-											onClick={() => {
-												hue.current.value = useSettings
-													.get('hue') as number;
-												sat.current.value = useSettings
-													.get('sat') as number;
-												lit.current.value = useSettings
-													.get('lit') as number;
+					<SettingsFooter>
+						<Button
+							opens={
+								<MenuContents>
+									<Button
+										menu
+										onClick={() => {
+											hue.current.value = useSettings
+												.get('hue') as number;
+											sat.current.value = useSettings
+												.get('sat') as number;
+											lit.current.value = useSettings
+												.get('lit') as number;
 
-												update_preview();
-											}}
-										>
-											<IconArrowIcon
-												icon1={
-													<Icon
-														name={icons
-															.bleh_settings}
-														className='icon-highlight'
-													/>
-												}
-												icon2={
-													<Icon
-														name={icons.profile}
-													/>
-												}
-											/>
-											{tl(trans.apply_global_accent)}
-										</Button>
-										<Button
-											menu
-											onClick={() => {
-												const warn = notify({
-													id: 'confirm_accent',
-													title: tl(
-														trans.are_you_sure,
-													),
-													body: tl(
-														trans
-															.this_will_replace_your_global_accent,
-													),
-													type: 'warning',
-													actions: [
-														{
-															type: 'check',
-															action: () => {
-																notify_rm(warn);
+											update_preview();
+										}}
+									>
+										<IconArrowIcon
+											icon1={
+												<Icon
+													name={icons
+														.bleh_settings}
+													className='icon-highlight'
+												/>
+											}
+											icon2={
+												<Icon
+													name={icons.profile}
+												/>
+											}
+										/>
+										{tl(trans.apply_global_accent)}
+									</Button>
+									<Button
+										menu
+										onClick={() => {
+											const warn = notify({
+												id: 'confirm_accent',
+												title: tl(
+													trans.are_you_sure,
+												),
+												body: tl(
+													trans
+														.this_will_replace_your_global_accent,
+												),
+												type: 'warning',
+												actions: [
+													{
+														type: 'check',
+														action: () => {
+															notify_rm(warn);
 
-																useSettings.set(
-																	'hue',
-																	hue.current
-																		.value as number,
-																);
-																useSettings.set(
-																	'sat',
-																	sat.current
-																		.value as number,
-																);
-																useSettings.set(
-																	'lit',
-																	lit.current
-																		.value as number,
-																);
-															},
-															text: tl(
-																trans.continue,
-															),
+															useSettings.set(
+																'hue',
+																hue.current
+																	.value as number,
+															);
+															useSettings.set(
+																'sat',
+																sat.current
+																	.value as number,
+															);
+															useSettings.set(
+																'lit',
+																lit.current
+																	.value as number,
+															);
 														},
-													],
-													persist: true,
-												});
-											}}
-										>
-											<IconArrowIcon
-												icon1={
-													<Icon
-														name={icons.profile}
-													/>
-												}
-												icon2={
-													<Icon
-														name={icons
-															.bleh_settings}
-														className='icon-highlight'
-													/>
-												}
-											/>
-											{tl(trans.apply_profile_accent)}
-										</Button>
-									</MenuContents>
-								}
-							>
-								<Icon name={icons.copy} />
-								{tl(trans.copy)}
-							</Button>
-							<Button
-								primary
-								onClick={() => {
-									set({
-										hue: hue.current.value,
-										sat: sat.current.value,
-										lit: lit.current.value,
-									});
-									dialog_rm({ id: 'profile_accent' });
-								}}
-							>
-								<SaveIcon />
-								{tl(trans.save)}
-							</Button>
-						</ButtonGroup>
-					</ModalFooter>
+														text: tl(
+															trans.continue,
+														),
+													},
+												],
+												persist: true,
+											});
+										}}
+									>
+										<IconArrowIcon
+											icon1={
+												<Icon
+													name={icons.profile}
+												/>
+											}
+											icon2={
+												<Icon
+													name={icons
+														.bleh_settings}
+													className='icon-highlight'
+												/>
+											}
+										/>
+										{tl(trans.apply_profile_accent)}
+									</Button>
+								</MenuContents>
+							}
+						>
+							<Icon name={icons.copy} />
+							{tl(trans.copy)}
+						</Button>
+					</SettingsFooter>
 				</>
 			),
+			close: 'cancel',
+			actions: [
+				{
+					primary: true,
+					onClick: () => {
+						set({
+							hue: hue.current.value,
+							sat: sat.current.value,
+							lit: lit.current.value,
+						});
+						dialog_rm({ id: 'profile_accent' });
+					},
+					children: (
+						<>
+							<SaveIcon />
+							{tl(trans.save)}
+						</>
+					),
+				},
+			],
 		});
 
 		function update_preview() {

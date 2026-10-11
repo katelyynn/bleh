@@ -4,7 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { register_background, update_page, useSettings } from '@/page';
+import {
+	handle_error,
+	register_background,
+	update_page,
+	useSettings,
+} from '@/page';
 import { auth, page } from '@/build/page';
 import { log } from '@/build/log.ts';
 import { checkup_page_structure } from '@/components/page/structure.tsx';
@@ -1462,6 +1467,18 @@ export function mualani() {
 							}}
 						>
 							Open modal
+						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Error'>
+						<Button
+							onClick={() =>
+								handle_error(new SyntaxError('random message'))}
+						>
+							Force error
 						</Button>
 					</DemoItem>
 				</DemoGrid>
