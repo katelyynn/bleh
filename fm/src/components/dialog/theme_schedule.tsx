@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { dialog } from '@/components/dialog/dialog.tsx';
+import { dialog, modal } from '@/components/dialog/dialog.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
@@ -29,14 +29,14 @@ export function theme_schedule_dialog({
 	let theme_day = useSettings.get('theme_day') as string;
 	let theme_night = useSettings.get('theme_night') as string;
 
-	dialog({
+	modal({
 		id: 'theme_schedule',
 		title: tl(trans.themes.name),
 		body: (
 			<SettingGroup>
 				<SettingSelect
 					bind='theme_day'
-					values={convert_list_to_select(getThemes(), 'light')}
+					values={convert_list_to_select(getThemes())}
 					onChange={(val: string) => {
 						theme_day = val;
 
@@ -45,7 +45,7 @@ export function theme_schedule_dialog({
 				/>
 				<SettingSelect
 					bind='theme_night'
-					values={convert_list_to_select(getThemes(), 'dark')}
+					values={convert_list_to_select(getThemes())}
 					onChange={(val: string) => {
 						theme_night = val;
 
@@ -59,15 +59,15 @@ export function theme_schedule_dialog({
 
 function convert_list_to_select(
 	list: Record<string, theme>,
-	filter: 'light' | 'dark',
+	filter?: 'light' | 'dark',
 ) {
 	const values: SelectOption[] = [];
 
-	let base_list;
+	let base_list = [...light_themes, ...dark_themes];
 
 	if (filter == 'light') {
 		base_list = light_themes;
-	} else {
+	} else if (filter == 'dark') {
 		base_list = dark_themes;
 	}
 

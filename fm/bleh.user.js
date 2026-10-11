@@ -112413,14 +112413,14 @@ var bleh = (() => {
   function theme_schedule_dialog({ onChange }) {
     let theme_day = useSettings.get("theme_day");
     let theme_night = useSettings.get("theme_night");
-    dialog({
+    modal({
       id: "theme_schedule",
       title: tl2(trans.themes.name),
       body: /* @__PURE__ */ jsx(SettingGroup, {
         children: [
           /* @__PURE__ */ jsx(SettingSelect, {
             bind: "theme_day",
-            values: convert_list_to_select(getThemes(), "light"),
+            values: convert_list_to_select(getThemes()),
             onChange: (val) => {
               theme_day = val;
               if (onChange) onChange({
@@ -112431,7 +112431,7 @@ var bleh = (() => {
           }),
           /* @__PURE__ */ jsx(SettingSelect, {
             bind: "theme_night",
-            values: convert_list_to_select(getThemes(), "dark"),
+            values: convert_list_to_select(getThemes()),
             onChange: (val) => {
               theme_night = val;
               if (onChange) onChange({
@@ -112446,10 +112446,13 @@ var bleh = (() => {
   }
   function convert_list_to_select(list, filter2) {
     const values = [];
-    let base_list;
+    let base_list = [
+      ...light_themes,
+      ...dark_themes
+    ];
     if (filter2 == "light") {
       base_list = light_themes;
-    } else {
+    } else if (filter2 == "dark") {
       base_list = dark_themes;
     }
     base_list.map((key) => {
