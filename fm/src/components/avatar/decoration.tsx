@@ -2,6 +2,12 @@ import { ReactNode } from 'jsx-dom';
 
 export type AvatarDecorationType = 'anger' | 'crown' | 'question' | undefined;
 
+export const decorations = {
+	anger: 'Anger',
+	crown: 'Crown',
+	question: '?',
+};
+
 interface AvatarDecorationProps {
 	type?: AvatarDecorationType;
 	children: ReactNode;
