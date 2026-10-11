@@ -34,6 +34,7 @@ interface InputProps {
 	onSubmit?: (val: string | number) => void;
 	saveManually?: boolean;
 	saveText?: string;
+	readOnly?: boolean;
 }
 
 type InputElement = HTMLDivElement & {
@@ -55,6 +56,7 @@ export function Input({
 	onSubmit,
 	saveManually = false,
 	saveText,
+	readOnly,
 }: InputProps) {
 	const input = createRef();
 	const colour_block = createRef();
@@ -86,6 +88,7 @@ export function Input({
 						min={min}
 						max={length}
 						name={name}
+						readOnly={readOnly}
 						onInput={() => {
 							if (
 								type == 'colour' &&
@@ -123,6 +126,7 @@ export function Input({
 						name={name}
 						minLength={min}
 						maxLength={length}
+						readOnly={readOnly}
 						onChange={() => {
 							value = input.current.value;
 							update(true);

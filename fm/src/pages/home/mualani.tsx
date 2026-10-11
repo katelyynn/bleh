@@ -1330,6 +1330,12 @@ export function mualani() {
 								{
 									colourful: true,
 									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
 									children: (
 										<>
 											<Icon name={icons.crown} />
@@ -1350,6 +1356,12 @@ export function mualani() {
 								{
 									colourful: true,
 									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
 									children: (
 										<>
 											<Icon name={icons.crown} />
@@ -1375,6 +1387,12 @@ export function mualani() {
 								{
 									colourful: true,
 									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
 									children: (
 										<>
 											<Icon name={icons.crown} />
@@ -1395,6 +1413,12 @@ export function mualani() {
 								{
 									colourful: true,
 									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
 									children: (
 										<>
 											<Icon name={icons.crown} />

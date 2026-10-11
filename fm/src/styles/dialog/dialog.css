@@ -54,7 +54,7 @@
 		}
 
 		&.to-remove {
-			translate: 0 6px;
+			translate: 0 4px;
 			opacity: 0;
 		}
 
@@ -134,7 +134,7 @@
 
 @keyframes modal_in {
 	from {
-		translate: 0 6px;
+		translate: 0 4px;
 		opacity: 0;
 	}
 
@@ -273,10 +273,38 @@
 	display: flex;
 	flex-direction: column;
 
-	--modal-verts: 18px;
-	--modal-sides: 14px;
+	--modal-verts: 20px;
+	--modal-sides: 15px;
 
 	padding: var(--modal-verts) var(--modal-sides);
+
+	&:not(:last-child) {
+		display: none;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: var(--cards-overlay-height);
+		max-height: 100%;
+		display: var(--cards-overlay-display);
+
+		background-image: var(--cards-overlay-image,
+				unset), var(--cards-overlay, transparent) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 -60px !important;
+		opacity: 0.9;
+		border-top-left-radius: var(--radius-m);
+		border-top-right-radius: var(--radius-m);
+		pointer-events: none;
+
+		/* fix for no-data-message overriding and stuff */
+		margin: unset;
+		width: unset;
+	}
 
 	&:before {
 		content: '';
@@ -292,6 +320,7 @@
 	scale: 1;
 	transform-origin: bottom;
 	animation: var(--motion, modal_in 0.3s var(--trans-function-ani));
+	animation-fill-mode: backwards;
 
 	transition-property: translate,
 	opacity;
@@ -306,7 +335,7 @@
 	}
 
 	&.to-remove {
-		translate: 0 6px;
+		translate: 0 4px;
 		opacity: 0;
 	}
 }
@@ -368,10 +397,18 @@
 	text-align: center;
 	gap: 10px;
 
-	justify-content: center;
+	align-items: center;
 	cursor: default;
 
 	z-index: 10;
+}
+
+.bleh-modal-v2-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 10px;
 }
 
 .bleh-modal-v2-title {
