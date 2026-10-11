@@ -55516,12 +55516,17 @@ var bleh = (() => {
           tl2(trans.back)
         ]
       });
+    } else if (close == "done") {
+      close = /* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(SaveIcon, {}),
+          tl2(trans.done)
+        ]
+      });
     } else if (!close) {
       close = /* @__PURE__ */ jsx(Fragment, {
         children: [
-          /* @__PURE__ */ jsx(Icon, {
-            name: icons.x
-          }),
+          /* @__PURE__ */ jsx(CancelIcon, {}),
           tl2(trans.cancel)
         ]
       });
@@ -112441,7 +112446,8 @@ var bleh = (() => {
             }
           })
         ]
-      })
+      }),
+      close: "done"
     });
   }
   function convert_list_to_select(list, filter2) {

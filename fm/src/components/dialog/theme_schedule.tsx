@@ -54,6 +54,7 @@ export function theme_schedule_dialog({
 				/>
 			</SettingGroup>
 		),
+		close: 'done',
 	});
 }
 

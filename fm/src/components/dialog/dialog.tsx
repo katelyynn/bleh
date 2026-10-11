@@ -13,7 +13,12 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
+import {
+	CancelIcon,
+	Icon,
+	icons,
+	SaveIcon,
+} from '@/components/shared/icon.tsx';
 
 export function load_dialogs() {
 	const elem = (
@@ -239,11 +244,13 @@ export function FooterFill() {
 	return <div class='fill' />;
 }
 
+type close = 'back' | 'done' | ReactNode;
+
 interface modal {
 	id: string;
 	title: ReactNode;
 	body?: ReactNode;
-	close?: ReactNode;
+	close?: close;
 	canClose?: boolean;
 	actions?: ModalAction[];
 }
@@ -290,7 +297,7 @@ interface ModalAction {
 
 interface ModalProps {
 	title: ReactNode;
-	close?: ReactNode;
+	close?: close;
 	canClose?: boolean;
 	actions?: ModalAction[];
 	onClose?: () => void;
@@ -312,10 +319,17 @@ export function Modal({
 				{tl(trans.back)}
 			</>
 		);
+	} else if (close == 'done') {
+		close = (
+			<>
+				<SaveIcon />
+				{tl(trans.done)}
+			</>
+		);
 	} else if (!close) {
 		close = (
 			<>
-				<Icon name={icons.x} />
+				<CancelIcon />
 				{tl(trans.cancel)}
 			</>
 		);
