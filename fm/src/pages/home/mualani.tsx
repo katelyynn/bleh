@@ -12,7 +12,7 @@ import { html, render } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';
 import { download_with_progress, sanitise } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
-import { dialog, Modal } from '@/components/dialog/dialog';
+import { dialog, Modal, modal } from '@/components/dialog/dialog';
 import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
@@ -1406,6 +1406,39 @@ export function mualani() {
 						>
 							This action cannot be undone.
 						</Modal>
+					</DemoItem>
+				</DemoGrid>
+				<DemoGrid>
+					<DemoItem label='ModalV2 (opener)'>
+						<Button
+							onClick={() => {
+								modal({
+									id: 'mimi',
+									title: 'Make mimi leader?',
+									body: 'This action cannot be undone.',
+									close: (
+										<>
+											<Icon name={icons.maybe} />
+											Reconsider
+										</>
+									),
+									actions: [
+										{
+											colourful: true,
+											className: 'delete',
+											children: (
+												<>
+													<Icon name={icons.crown} />
+													Make her leader
+												</>
+											),
+										},
+									],
+								});
+							}}
+						>
+							Open modal
+						</Button>
 					</DemoItem>
 				</DemoGrid>
 			</section>

@@ -277,6 +277,38 @@
 	--modal-sides: 14px;
 
 	padding: var(--modal-verts) var(--modal-sides);
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		display: block;
+		background: radial-gradient(at center top, oklch(var(--k4) / 40%), transparent 45%);
+		border-radius: var(--radius-m);
+		display: none;
+	}
+
+	translate: 0 0;
+	scale: 1;
+	transform-origin: bottom;
+	animation: var(--motion, modal_in 0.3s var(--trans-function-ani));
+
+	transition-property: translate,
+	opacity;
+	transition-duration: 0.3s;
+	transition-timing-function: var(--trans-function-ani);
+
+	max-height: 80vh;
+
+	&[data-reduced-motion] {
+		transition-duration: var(--trans);
+		translate: unset !important;
+	}
+
+	&.to-remove {
+		translate: 0 6px;
+		opacity: 0;
+	}
 }
 
 .bleh-modal-v2-actions {
@@ -290,6 +322,8 @@
 
 	border-bottom-left-radius: var(--radius-m);
 	border-bottom-right-radius: var(--radius-m);
+
+	z-index: 10;
 }
 
 .bleh-modal-v2-action {
@@ -323,7 +357,7 @@
 .modal-action-separator {
 	display: flex;
 	width: 1px;
-	height: 100%;
+	height: 38px;
 	background: var(--separator-base);
 	flex-shrink: 0;
 }
@@ -336,6 +370,8 @@
 
 	justify-content: center;
 	cursor: default;
+
+	z-index: 10;
 }
 
 .bleh-modal-v2-title {

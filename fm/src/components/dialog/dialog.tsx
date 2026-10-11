@@ -23,12 +23,28 @@ export function load_dialogs() {
 				const latest = Object.keys(dialogs).at(-1);
 				if (!latest) return;
 
-				if (dialogs[latest].dismiss) {
+				if (
+					dialogs[latest].dismiss &&
+					!dialogs[latest].handle_escape_manually
+				) {
 					dialog_rm({ id: latest, modal_bg: true });
 				}
 			}}
 		/>
 	);
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key != 'Escape') return;
+
+		const latest = Object.keys(dialogs).at(-1);
+		if (!latest) return;
+
+		if (
+			dialogs[latest].dismiss && !dialogs[latest].handle_escape_manually
+		) {
+			dialog_rm({ id: latest, modal_bg: true });
+		}
+	});
 
 	document.body.appendChild(elem);
 	page.structure.dialogs = elem;
@@ -137,14 +153,6 @@ export function dialog({
 		);
 	}
 
-	if (dismiss && !handle_escape_manually) {
-		document.addEventListener('keydown', (e) => {
-			if (e.key == 'Escape') {
-				dialog_rm({ id: id });
-			}
-		});
-	}
-
 	modal.appendChild(
 		<div class='bleh-modal-body' data-allow-scroll={String(allow_scroll)}>
 			{body}
@@ -154,6 +162,7 @@ export function dialog({
 	dialogs[id] = {
 		instance: modal,
 		dismiss,
+		handle_escape_manually,
 	};
 
 	if (replace || (!replace && dialogs.hasOwnProperty(replace_id))) {
@@ -230,6 +239,48 @@ export function FooterFill() {
 	return <div class='fill' />;
 }
 
+interface modal {
+	id: string;
+	title: ReactNode;
+	body?: ReactNode;
+	close?: ReactNode;
+	canClose?: boolean;
+	actions?: ModalAction[];
+}
+
+export function modal({
+	id,
+	title,
+	body,
+	close,
+	canClose = true,
+	actions = [],
+}: modal) {
+	const elem = (
+		<Modal
+			title={title}
+			close={close}
+			canClose={canClose}
+			actions={actions}
+			onClose={() => {
+				dialog_rm({ id });
+			}}
+		>
+			{body}
+		</Modal>
+	);
+
+	dialogs[id] = {
+		instance: elem,
+		dismiss: canClose,
+	};
+
+	page.structure.dialogs.appendChild(elem);
+	page.structure.dialogs.classList.add('has-dialog');
+
+	return elem;
+}
+
 interface ModalAction {
 	onClick?: () => void;
 	className?: string;
@@ -271,7 +322,10 @@ export function Modal({
 	}
 
 	return (
-		<div className={['bleh-modal-v2']}>
+		<div
+			className={['bleh-modal-v2']}
+			data-reduced-motion={useSettings.get('reduced_motion')}
+		>
 			<div class='bleh-modal-v2-content'>
 				<h1 className='bleh-modal-v2-title'>{title}</h1>
 				{children && (
