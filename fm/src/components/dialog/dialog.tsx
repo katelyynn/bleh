@@ -12,6 +12,8 @@ import { ReactElement, ReactNode } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 import { useSettings } from '@/page.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 export function load_dialogs() {
 	const elem = (
@@ -226,4 +228,86 @@ export function ModalFooter({
 
 export function FooterFill() {
 	return <div class='fill' />;
+}
+
+interface ModalAction {
+	onClick?: () => void;
+	className?: string;
+	colourful?: boolean;
+	children: ReactNode;
+}
+
+interface ModalProps {
+	title: ReactNode;
+	close?: ReactNode;
+	canClose?: boolean;
+	actions?: ModalAction[];
+	onClose?: () => void;
+	children?: ReactNode;
+}
+
+export function Modal({
+	title,
+	close,
+	canClose = true,
+	actions = [],
+	onClose,
+	children,
+}: ModalProps) {
+	if (close == 'back') {
+		close = (
+			<>
+				<Icon name={icons.arrow_left} />
+				{tl(trans.back)}
+			</>
+		);
+	} else if (!close) {
+		close = (
+			<>
+				<Icon name={icons.x} />
+				{tl(trans.cancel)}
+			</>
+		);
+	}
+
+	return (
+		<div className={['bleh-modal-v2']}>
+			<div class='bleh-modal-v2-content'>
+				<h1 className='bleh-modal-v2-title'>{title}</h1>
+				{children && (
+					<div class='bleh-modal-v2-body'>
+						{children}
+					</div>
+				)}
+			</div>
+			<div class='bleh-modal-v2-actions'>
+				{canClose && (
+					<Button className='bleh-modal-v2-action' onClick={onClose}>
+						{close}
+					</Button>
+				)}
+				{actions.map((action, i) => {
+					if (canClose) i++;
+
+					return (
+						<>
+							{i > 0 && <ModalActionSeparator />}
+							<Button
+								className={`bleh-modal-v2-action ${action.className} ${
+									action.colourful && 'colourful'
+								}`}
+								onClick={action.onClick}
+							>
+								{action.children}
+							</Button>
+						</>
+					);
+				})}
+			</div>
+		</div>
+	);
+}
+
+function ModalActionSeparator() {
+	return <div class='modal-action-separator' />;
 }

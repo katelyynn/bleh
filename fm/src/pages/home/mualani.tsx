@@ -12,7 +12,7 @@ import { html, render } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';
 import { download_with_progress, sanitise } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
-import { dialog } from '@/components/dialog/dialog';
+import { dialog, Modal } from '@/components/dialog/dialog';
 import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
@@ -59,6 +59,7 @@ import { SettingList } from '@/components/settings/provider/list.tsx';
 import { EventItem } from '@/components/event/item.tsx';
 import {
 	CancelIcon,
+	Icon,
 	icons,
 	MinusIcon,
 	PlusIcon,
@@ -1300,6 +1301,111 @@ export function mualani() {
 						>
 							Open notification
 						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							actions={[
+								{
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							close='back'
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							close={
+								<>
+									<Icon name={icons.maybe} />
+									Reconsider
+								</>
+							}
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							canClose={false}
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
 					</DemoItem>
 				</DemoGrid>
 			</section>

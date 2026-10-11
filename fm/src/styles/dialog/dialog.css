@@ -92,7 +92,7 @@
 				display: var(--cards-overlay-display);
 
 				background-image: var(--cards-overlay-image,
-					unset), var(--cards-overlay, transparent) !important;
+						unset), var(--cards-overlay, transparent) !important;
 				background-repeat: repeat-x !important;
 				background-position: 0 -60px !important;
 				opacity: 0.9;
@@ -152,7 +152,7 @@
 	z-index: 100;
 	position: relative;
 
-	& > h4 {
+	&>h4 {
 		margin: unset;
 		color: oklch(var(--c1));
 		font-size: var(--font-size-subheading);
@@ -186,8 +186,7 @@
 
 	&[data-theme="yuzu"] {
 		border-bottom: 1px solid #ccc;
-		padding-right: calc(var(--card-padding) + var(--modal-close-size) +
-			10px);
+		padding-right: calc(var(--card-padding) + var(--modal-close-size) + 10px);
 		margin-left: calc(-1 * var(--card-padding));
 		margin-right: calc(-1 * var(--card-padding));
 		padding-top: 6px;
@@ -216,11 +215,11 @@
 }
 
 .bleh-modal-body {
-	& > :first-child {
+	&> :first-child {
 		margin-top: unset;
 	}
 
-	& > img {
+	&>img {
 		width: 100%;
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
@@ -230,11 +229,11 @@
 		margin-right: auto;
 	}
 
-	& > .sep {
+	&>.sep {
 		margin: var(--card-gap) 0;
 	}
 
-	& > p:not(.big-modal-alert, .card-tip) {
+	&>p:not(.big-modal-alert, .card-tip) {
 		max-width: 430px;
 	}
 }
@@ -242,11 +241,8 @@
 .bleh-modal-body[data-allow-scroll="true"],
 .modal-inner-content.allow-scroll {
 	max-height: 80vh;
-	padding: calc(var(--card-padding) * 2) var(--card-padding)
-		var(--card-padding) var(--card-padding);
-	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding))
-		calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
-		!important;
+	padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
+	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
 	overflow-y: hidden;
 
 	border-radius: var(--item-big-radius);
@@ -258,4 +254,89 @@
 	--bg-mask: linear-gradient(0deg, white 96%, transparent);
 	mask-image: var(--bg-mask);
 	-webkit-mask-image: var(--bg-mask);
+}
+
+.bleh-modal-v2 {
+	background: oklch(var(--b5) / var(--solarium-opacity, 90%));
+	border-radius: var(--radius-m);
+	box-shadow: var(--override-full-shadow, var(--overlay-shadow));
+	border: 1px solid var(--card-border-base);
+	color: oklch(var(--c2));
+	min-width: 400px;
+	max-width: 800px;
+	position: relative;
+	z-index: 9999;
+
+	backdrop-filter: var(--solarium);
+	-webkit-backdrop-filter: var(--solarium);
+
+	display: flex;
+	flex-direction: column;
+
+	--modal-verts: 18px;
+	--modal-sides: 14px;
+
+	padding: var(--modal-verts) var(--modal-sides);
+}
+
+.bleh-modal-v2-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	overflow: hidden;
+	margin: var(--modal-verts) calc(-1 * var(--modal-sides)) calc(-1 * var(--modal-verts)) calc(-1 * var(--modal-sides));
+	border-top: 1px solid var(--separator-base);
+}
+
+.bleh-modal-v2-action {
+	--bg: transparent;
+	--bg-hov: oklch(var(--b2) / 20%);
+	--bg-atv: oklch(var(--b2) / 40%);
+	--shadow: none;
+	transform: unset !important;
+
+	--col: oklch(var(--c2));
+	--mask-colour: oklch(var(--c2) / 80%);
+
+	--mask2: unset !important;
+	--radius: 0;
+
+	--button-verts: 10px;
+	--button-sides: var(--modal-sides);
+	flex: 1;
+
+	justify-content: center;
+
+	&.colourful {
+		--bg: transparent;
+		--bg-hov: oklch(var(--h4) / 10%);
+		--bg-atv: oklch(var(--h4) / 20%);
+		--col: oklch(var(--l3-c));
+		--mask-colour: oklch(var(--l3-c) / 80%);
+	}
+}
+
+.modal-action-separator {
+	display: flex;
+	width: 1px;
+	height: 100%;
+	background: var(--separator-base);
+	flex-shrink: 0;
+}
+
+.bleh-modal-v2-content {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 10px;
+
+	justify-content: center;
+	cursor: default;
+}
+
+.bleh-modal-v2-title {
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	color: oklch(var(--c1));
 }
