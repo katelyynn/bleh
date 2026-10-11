@@ -12,7 +12,7 @@
 		.form-group-controls {
 			position: relative;
 
-			& > .btn-file {
+			&>.btn-file {
 				&[data-has-file] {
 					--bg: transparent !important;
 					--bg-hov: oklch(var(--b5), 10%) !important;
@@ -31,6 +31,7 @@
 					inset: 0;
 					opacity: 0 !important;
 				}
+
 				.btn-file-label {
 					display: none;
 				}
@@ -43,11 +44,9 @@
 	--mask: var(--icon-16-trash) !important;
 
 	--col: oklch(var(--l3-c)) !important;
-	--mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 40%
-    );
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 40%);
 
 	--hue-over: var(--hue-neg);
 	--sat-over: var(--sat-neg);
@@ -79,7 +78,7 @@
 	border-radius: var(--item-big-radius);
 	overflow: hidden;
 
-	& > img {
+	&>img {
 		height: 600px;
 	}
 
@@ -87,12 +86,52 @@
 		border-radius: var(--item-med-radius);
 		overflow: hidden;
 
-		& > .cropper-view-box {
+		&>.cropper-view-box {
 			outline: none;
 		}
 
-		& > [data-cropper-action] {
+		&>[data-cropper-action] {
 			opacity: 0;
 		}
+	}
+}
+
+.avatar-change-form {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+
+	&>form {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+}
+
+.avatar-change-divider {
+	width: 1px;
+	height: 18px;
+	background: var(--separator-base);
+}
+
+.avatar-change {
+	--button-sides: 16px;
+	--button-verts: 12px;
+
+	--bg: transparent;
+	--bg-hov: oklch(var(--h3) / 10%);
+	--bg-atv: oklch(var(--h3) / 20%);
+	--shadow: none;
+
+	--col: oklch(var(--l3-c));
+	--mask-colour: oklch(var(--l3-c) / 80%);
+
+	justify-content: center;
+
+	&>input {
+		position: absolute;
+		inset: 0;
+		opacity: 0 !important;
 	}
 }

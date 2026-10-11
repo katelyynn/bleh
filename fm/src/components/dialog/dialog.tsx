@@ -8,7 +8,7 @@ import { html } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { ReactElement, ReactNode } from 'jsx-dom';
+import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 import { useSettings } from '@/page.tsx';
@@ -252,7 +252,9 @@ interface modal {
 	body?: ReactNode;
 	close?: close;
 	canClose?: boolean;
+	onClose?: () => void;
 	actions?: ModalAction[];
+	replace?: boolean;
 }
 
 export function modal({
@@ -261,21 +263,36 @@ export function modal({
 	body,
 	close = 'close',
 	canClose = true,
+	onClose,
 	actions = [],
+	replace = false,
 }: modal) {
 	const elem = (
 		<Modal
+			id={id}
 			title={title}
 			close={close}
 			canClose={canClose}
 			actions={actions}
 			onClose={() => {
+				onClose?.();
 				dialog_rm({ id });
 			}}
 		>
 			{body}
 		</Modal>
-	);
+	) as ModalElement;
+
+	let replace_id = '';
+	if (replace && Object.keys(dialogs).length > 0) {
+		replace = true;
+
+		for (let dialog in dialogs) {
+			replace_id = dialog;
+			break;
+		}
+	}
+	if (replace_id) dialog_rm({ id: replace_id });
 
 	dialogs[id] = {
 		instance: elem,
@@ -297,6 +314,7 @@ interface ModalAction {
 }
 
 interface ModalProps {
+	id?: string;
 	title: ReactNode;
 	close?: close;
 	canClose?: boolean;
@@ -305,7 +323,13 @@ interface ModalProps {
 	children?: ReactNode;
 }
 
+type ModalElement = HTMLDivElement & {
+	id?: string;
+	body?: HTMLDivElement;
+};
+
 export function Modal({
+	id,
 	title,
 	close = 'close',
 	canClose = true,
@@ -343,7 +367,9 @@ export function Modal({
 		);
 	}
 
-	return (
+	const body = createRef();
+
+	const elem = (
 		<div
 			className={['bleh-modal-v2']}
 			data-reduced-motion={useSettings.get('reduced_motion')}
@@ -351,7 +377,7 @@ export function Modal({
 			<div class='bleh-modal-v2-content'>
 				<h1 className='bleh-modal-v2-title'>{title}</h1>
 				{children && (
-					<div class='bleh-modal-v2-body'>
+					<div class='bleh-modal-v2-body' ref={body}>
 						{children}
 					</div>
 				)}
@@ -381,7 +407,25 @@ export function Modal({
 				})}
 			</div>
 		</div>
-	);
+	) as ModalElement;
+
+	Object.defineProperty(elem, 'body', {
+		get() {
+			if (!body.current) return undefined;
+
+			return body.current;
+		},
+	});
+
+	Object.defineProperty(elem, 'id', {
+		get() {
+			if (!id) return '';
+
+			return id;
+		},
+	});
+
+	return elem;
 }
 
 function ModalActionSeparator() {

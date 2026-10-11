@@ -282,6 +282,10 @@
 		display: none;
 	}
 
+	&[data-loading="true"] {
+		pointer-events: none;
+	}
+
 	&:after {
 		content: "";
 		position: absolute;
