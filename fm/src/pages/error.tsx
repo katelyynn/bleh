@@ -33,6 +33,7 @@ export function bleh_error() {
 
 	const reason = page_content.querySelector('p');
 
+	document.body.classList.add('has-error');
 	page_content.classList.add('has-error');
 
 	if (page.subpage == '404') {

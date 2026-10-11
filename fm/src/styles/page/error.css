@@ -1,4 +1,4 @@
-body.namespace--error_404 {
+body.has-error {
 	&>.main-content {
 		position: relative;
 
