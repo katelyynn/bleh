@@ -68,8 +68,9 @@ export function ProfileAccent({
 			<SettingLabel
 				name={tl(trans.profile_accent.name)}
 				body={tl(trans.profile_accent.body)}
+				sponsorOnly
 			/>
-			<div class='info'>
+			<div class={['info', 'setting-inner']}>
 				<div class='colour-tile-and-button'>
 					<div class={['colour-tile', 'colourful']} ref={preview} />
 					<Button onClick={present}>

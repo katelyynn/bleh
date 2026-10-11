@@ -52,8 +52,9 @@ export function ProfileName({
 			<SettingLabel
 				name={tl(trans.display_name.name)}
 				body={tl(trans.display_name.body)}
+				sponsorOnly
 			/>
-			<div class={['info', 'v']}>
+			<div class={['info', 'v', 'setting-inner']}>
 				<Input
 					value={value.name}
 					ref={input}

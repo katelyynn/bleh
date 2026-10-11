@@ -28,6 +28,7 @@ interface SettingLabelProps {
 	defaultValue?: setting_value;
 	menu?: boolean;
 	new_release?: boolean;
+	sponsorOnly?: boolean;
 }
 
 export function SettingLabel({
@@ -42,6 +43,7 @@ export function SettingLabel({
 	defaultValue,
 	menu,
 	new_release,
+	sponsorOnly,
 }: SettingLabelProps) {
 	const reset = createRef();
 
@@ -65,6 +67,11 @@ export function SettingLabel({
 			<h5 class='setting-name'>
 				{name}
 				{new_release && <NewIndicator />}
+				{sponsorOnly && (
+					<label class={['new-badge', 'sponsor-related']}>
+						{tl(trans.sponsors_only)}
+					</label>
+				)}
 				{(value != undefined && setValue != undefined &&
 					defaultValue != undefined) &&
 					(
