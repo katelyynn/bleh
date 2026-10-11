@@ -101,6 +101,7 @@ import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { ComparisonBars } from '@/components/minis/compare.tsx';
 import { keys } from '@/components/settings/storage.ts';
 import { useSeasons } from '@/page.tsx';
+import { AvatarDecoration } from '@/components/avatar/decoration.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1480,6 +1481,44 @@ export function mualani() {
 						>
 							Force error
 						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='AvatarDecoration'>
+						<AvatarDecoration type='anger'>
+							<div class={['avatar', 'demo-avatar']}>
+								<img src={avatar(auth.avatar, 'avatar300s')} />
+							</div>
+						</AvatarDecoration>
+						<AvatarDecoration type='crown'>
+							<div class={['avatar', 'demo-avatar']}>
+								<img src={avatar(auth.avatar, 'avatar300s')} />
+							</div>
+						</AvatarDecoration>
+						<AvatarDecoration type='question'>
+							<div class={['avatar', 'demo-avatar']}>
+								<img src={avatar(auth.avatar, 'avatar300s')} />
+							</div>
+						</AvatarDecoration>
+					</DemoItem>
+					<DemoItem label='AvatarDecoration'>
+						<AvatarDecoration type='anger'>
+							<div class={['avatar', 'demo-avatar', 'small']}>
+								<img src={avatar(auth.avatar, 'avatar300s')} />
+							</div>
+						</AvatarDecoration>
+						<AvatarDecoration type='crown'>
+							<div class={['avatar', 'demo-avatar', 'small']}>
+								<img src={avatar(auth.avatar, 'avatar300s')} />
+							</div>
+						</AvatarDecoration>
+						<AvatarDecoration type='question'>
+							<div class={['avatar', 'demo-avatar', 'small']}>
+								<img src={avatar(auth.avatar, 'avatar300s')} />
+							</div>
+						</AvatarDecoration>
 					</DemoItem>
 				</DemoGrid>
 			</section>
