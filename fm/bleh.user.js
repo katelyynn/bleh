@@ -124630,7 +124630,7 @@ var bleh = (() => {
             })
           }
         ],
-        close: "cancel",
+        close: "back",
         onClose: () => {
           if (cropper && cropper.destroy) cropper.destroy();
           cropper = null;
