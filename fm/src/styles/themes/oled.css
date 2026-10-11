@@ -25,7 +25,7 @@ body,
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
 			0 0 2px 4px oklch(var(--l4-c) / 15%),
 			var(--input-shadow);
-		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 42%);
+		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 30%);
 
 		--separator-shadow: 0 1px 2px 0 oklch(0.03 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.4);
 
@@ -75,8 +75,10 @@ body,
 
 		--inset-background: oklch(var(--b2) / 10%);
 
-		--card-border-base: oklch(var(--b3) / 0.4);
+		--card-border-base: oklch(var(--b3) / 0.6);
 		--card-border-base-highlight: oklch(var(--b2) / 0.55);
+
+		--separator-base: oklch(var(--b3) / 0.5);
 	}
 }
 

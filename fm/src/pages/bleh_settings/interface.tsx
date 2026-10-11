@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { dialog } from '@/components/dialog/dialog.tsx';
+import { dialog, modal } from '@/components/dialog/dialog.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
@@ -420,7 +420,7 @@ function ShoutPreview({
 }
 
 export function rabbit_keybinds() {
-	dialog({
+	modal({
 		id: 'rabbit_keybinds',
 		title: tl(trans.quick_switcher),
 		body: (
@@ -432,5 +432,6 @@ export function rabbit_keybinds() {
 				<SettingKeybind bind='rabbit_bleh_settings' />
 			</SettingGroup>
 		),
+		close: 'done',
 	});
 }

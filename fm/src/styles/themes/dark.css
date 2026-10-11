@@ -17,13 +17,13 @@ body,
 	--b9: var(--b6);
 
 	--card-border: inset 0 0 0 1px oklch(var(--b4) / 0.6);
-	--card-border-base: oklch(var(--b3) / 0.6);
+	--card-border-base: oklch(var(--b3) / 0.7);
 	--card-border-base-highlight: oklch(var(--b2) / 0.55);
 
 	--menu-border: oklch(var(--b3) / 0.6);
 
 	--separator: var(--separator-base);
-	--separator-base: oklch(var(--b3) / 0.8);
+	--separator-base: oklch(var(--b3) / 0.6);
 
 	--textarea: oklch(var(--b6) / 20%);
 	--textarea-hov: oklch(var(--b6) / 40%);
@@ -43,7 +43,7 @@ body,
 		0 0 2px 4px oklch(var(--l4-c) / 10%),
 		var(--input-shadow);
 	--group-shadow:
-		inset 0 0 0 1px oklch(var(--b2) / 0.36),
+		inset 0 0 0 1px oklch(var(--b2) / 0.35),
 		0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
 
 	--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.15);
