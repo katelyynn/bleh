@@ -457,6 +457,22 @@
 			padding: unset;
 			margin: unset !important;
 		}
+
+		&>.profile-badges-scroller {
+			margin-top: calc((-1 * var(--card-padding) + 4px));
+
+			&>.profile-badges {
+				gap: 8px;
+
+				&>.label {
+					--mask2: unset !important;
+					--sides: 0px;
+					--bg: transparent !important;
+					--bg-hov: transparent !important;
+					box-shadow: unset !important;
+				}
+			}
+		}
 	}
 
 	.profile-top-header {
