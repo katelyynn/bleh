@@ -57,8 +57,9 @@
 		flex-direction: column;
 		align-items: unset;
 		gap: var(--card-gap);
+		padding: var(--card-padding) !important;
 
-		margin: unset !important;
+		margin: calc(-1 * var(--card-padding)) 0 calc(-1 * var(--card-padding)) !important;
 		width: unset !important;
 
 		order: -30;
@@ -71,6 +72,15 @@
 		--page-header-line-height: var(--page-header-line-height-generic);
 		--page-header-font-size-generic: 22px;
 		--page-header-line-height-generic: 32px;
+
+		&:before {
+			content: '';
+			position: absolute;
+			inset: 0 0 -100px 0;
+			background: linear-gradient(32deg, transparent 50%, oklch(var(--k4) / 30%)) !important;
+			border-top-right-radius: var(--card-radius);
+			pointer-events: none;
+		}
 	}
 
 	@media (max-width: 980px) {
@@ -236,7 +246,7 @@
 	align-items: center;
 
 	&.header-refresh {
-		margin-top: calc(-1 * (var(--card-padding) + (var(--page-header-avatar-size) * 0.8)));
+		margin-top: calc(-1 * (var(--card-padding) + (var(--page-header-avatar-size) * 0.6)));
 		position: absolute;
 		top: var(--card-padding);
 		right: var(--card-padding);
@@ -456,20 +466,12 @@
 			--mask: unset !important;
 			padding: unset;
 			margin: unset !important;
-		}
 
-		&>.profile-badges-scroller {
-			margin-top: calc((-1 * var(--card-padding) + 4px));
+			&>.sub-text-pair {
+				text-shadow: unset;
 
-			&>.profile-badges {
-				gap: 8px;
-
-				&>.label {
-					--mask2: unset !important;
-					--sides: 0px;
-					--bg: transparent !important;
-					--bg-hov: transparent !important;
-					box-shadow: unset !important;
+				&>.sub-text-label {
+					filter: unset;
 				}
 			}
 		}
@@ -477,6 +479,37 @@
 
 	.profile-top-header {
 		margin-top: var(--card-gap);
+	}
+}
+
+.profile-badges-scroller-container {
+	position: relative;
+	overflow: hidden;
+
+	&.header-refresh {
+		padding: 0 var(--card-padding);
+		margin: 0 calc(-1 * var(--card-padding));
+
+		--mask: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+}
+
+.profile-badges {
+	&.header-refresh {
+		gap: 8px;
+
+		&>.label {
+			--mask2: unset !important;
+			--sides: 0px;
+			--bg: transparent !important;
+			--bg-hov: transparent !important;
+			box-shadow: unset !important;
+			backdrop-filter: unset !important;
+			-webkit-backdrop-filter: unset !important;
+			border-radius: unset !important;
+		}
 	}
 }
 

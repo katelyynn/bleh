@@ -9,14 +9,16 @@ import { useSettings } from '@/page.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
 interface SideActionsProps {
+	inset?: boolean;
 	children?: ReactNode;
 }
 
 export function SideActions({
+	inset = true,
 	children,
 }: SideActionsProps) {
 	const elem = (
-		<section class='side-actions'>
+		<section class={['side-actions', !inset && 'no-inset']}>
 			{children}
 		</section>
 	);

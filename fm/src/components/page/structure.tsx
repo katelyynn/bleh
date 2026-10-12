@@ -445,6 +445,8 @@ export function convert_to_toolbar() {
 }
 
 function single_column() {
+	if (ff('header_refresh')) return;
+
 	if (
 		[
 			'following',
@@ -468,6 +470,6 @@ function single_column() {
 			'bookmarks',
 		].includes(page.type) || page.subpage.startsWith('event_attendance_')
 	) {
-		page.structure.content.classList.add('single-column');
+		page.structure.content!.classList.add('single-column');
 	}
 }

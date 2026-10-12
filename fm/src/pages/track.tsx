@@ -27,6 +27,7 @@ import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
 import { page_header_title, PageHeaderAvatar } from '@/components/music/header';
 import {
+	append_header,
 	PageHeader,
 	PageHeaderArtist,
 	PageHeaderTitle,
@@ -192,10 +193,7 @@ export function bleh_tracks() {
 			);
 		}
 
-		page.structure.container!.insertBefore(
-			redesigned_track_header,
-			page.structure.container!.firstElementChild,
-		);
+		append_header(redesigned_track_header);
 		track_header.classList.add('legacy-header');
 	}
 

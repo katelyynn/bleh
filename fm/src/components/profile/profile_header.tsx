@@ -32,12 +32,15 @@ import { LoadingData } from '@/components/loading/loading.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { SubText } from '@/components/text/sub.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SideActions } from '@/components/button/side.tsx';
 
 export function redesign_profile_header(
 	is_own_profile: boolean,
 	is_following: boolean,
 ) {
 	if (!auth.name) return;
+
+	const refresh = ff('header_refresh');
 
 	const is_sponsor_host = page.name == sponsor_list.related.account_name;
 
@@ -75,9 +78,7 @@ export function redesign_profile_header(
 	}
 
 	// create new
-	const profile_header = html.node`
-        <section class="side-actions" />
-    `;
+	const profile_header = <SideActions inset={!refresh} />;
 
 	if (
 		!is_own_profile &&

@@ -288,7 +288,7 @@
 		position: absolute;
 		width: 1px;
 		top: 0;
-		left: -1px;
+		left: 0;
 		bottom: 0;
 		display: block;
 		background: var(--sidebar-border);
@@ -315,7 +315,7 @@
 
 	&>form>section,
 	&>div,
-	&>section:not(.side-actions, .profile-summary, .featured-item-panel, .profile-taste) {
+	&>section:not(.side-actions, .profile-summary, .featured-item-panel, .profile-taste, .page-header) {
 		margin-top: unset !important;
 	}
 

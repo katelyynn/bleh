@@ -947,6 +947,8 @@ function page_indicator() {
 export function update_page() {
 	if (!page.structure.container) return;
 
+	const refresh = ff('header_refresh');
+
 	page.structure.container.setAttribute('data-page-type', page.type);
 	page.structure.container.setAttribute('data-page-subpage', page.subpage);
 	page.structure.container.setAttribute('data-beret', ff('beret'));
@@ -954,6 +956,8 @@ export function update_page() {
 	page.structure.container.setAttribute('data-lacrimosa', ff('lacrimosa'));
 
 	page.structure.row?.setAttribute('data-lacrimosa', ff('lacrimosa'));
+
+	page.structure.row?.setAttribute('data-refresh', String(refresh));
 }
 
 export async function register_background(
