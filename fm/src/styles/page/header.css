@@ -486,9 +486,11 @@
 	position: relative;
 	overflow: hidden;
 
+	margin-top: 4px;
+
 	&.header-refresh {
 		padding: 0 var(--card-padding);
-		margin: 0 calc(-1 * var(--card-padding));
+		margin: 0 calc(-1 * var(--card-padding)) !important;
 
 		--mask: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
 		mask-image: var(--mask);
