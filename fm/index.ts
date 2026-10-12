@@ -54,6 +54,7 @@ const JS_BANNER = `// ==UserScript==
 // @downloadURL  ${build.url}
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
+// @grant        GM.xmlHttpRequest
 // @connect      musicbrainz.org
 // @connect      raw.githubusercontent.com
 // @connect      github.com

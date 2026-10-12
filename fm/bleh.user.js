@@ -10,6 +10,7 @@
 // @downloadURL  https://bleh.yuzu.pet/download
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
+// @grant        GM.xmlHttpRequest
 // @connect      musicbrainz.org
 // @connect      raw.githubusercontent.com
 // @connect      github.com
@@ -131922,6 +131923,7 @@ var bleh = (() => {
       "data:",
       // stuff that last.fm uses
       "https://*.last.fm",
+      "blob:",
       "https://lastfm-img.freetls.fastly.net",
       "https://*.fastly.net",
       "https://cdn.cookielaw.org",
@@ -132685,8 +132687,15 @@ ${version2.build} (${version2.sku})`;
     }
     if (url) {
       url = avatar(url, "avatar300s");
+      const res = await GM.xmlHttpRequest({
+        method: "GET",
+        url,
+        responseType: "blob"
+      });
+      console.error(res, res.response);
+      const blob = URL.createObjectURL(res.response);
       const img = /* @__PURE__ */ jsx("img", {
-        src: url,
+        src: blob,
         crossOrigin: "anonymous"
       });
       await img.decode();

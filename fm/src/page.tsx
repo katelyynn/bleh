@@ -997,8 +997,17 @@ export async function register_background(
 	if (url) {
 		url = avatar(url, 'avatar300s');
 
+		const res = await GM.xmlHttpRequest({
+			method: 'GET',
+			url,
+			responseType: 'blob',
+		});
+
+		console.error(res, res.response);
+		const blob = URL.createObjectURL(res.response);
+
 		const img = (
-			<img src={url} crossOrigin='anonymous' />
+			<img src={blob} crossOrigin='anonymous' />
 		) as HTMLImageElement;
 
 		await img.decode();
