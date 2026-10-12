@@ -23,7 +23,6 @@ import {
 } from '@/components/music/lotus';
 import { markdown } from '@/components/markdown/markdown';
 import { redesign_profile_header } from '@/components/profile/profile_header';
-import { select, select_prepare } from '@/components/settings/select';
 import {
 	checkup_page_structure,
 	convert_to_toolbar,
@@ -34,7 +33,6 @@ import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
-import tippy from 'tippy.js';
 import { avatar } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
@@ -62,18 +60,22 @@ import {
 } from '@/pages/profile/about.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
-import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
+import {
+	append_header,
+	PageHeader,
+	PageHeaderTitle,
+} from '@/components/page/header.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { profile_recents } from '@/pages/profile/recents.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { profile_tracks } from '@/pages/profile/tracks.tsx';
-import { convert_to_select } from '@/components/select/select.tsx';
 import { PageHeaderAvatar } from '@/components/music/header.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
 import { profile_cache } from '@/types/profile.ts';
 import { profile_artists } from '@/pages/profile/artists.tsx';
 import { profile_albums } from '@/pages/profile/albums.tsx';
+import { ProfileBadges } from './badges.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -363,11 +365,9 @@ export function bleh_profiles() {
 							cache.username,
 						)}
 					{badge_elements.length > 0 && (
-						<div class={['badges', 'profile-badges']}>
-							{badge_elements.map((badge) =>
-								badge
-							)}
-						</div>
+						<ProfileBadges>
+							{badge_elements.toReversed().map((badge) => badge)}
+						</ProfileBadges>
 					)}
 				</>
 			}
@@ -404,10 +404,7 @@ export function bleh_profiles() {
 		}
 	}
 
-	page.structure.container!.insertBefore(
-		redesigned_profile_header,
-		page.structure.container!.firstElementChild,
-	);
+	append_header(redesigned_profile_header);
 	profile_header.classList.add('legacy-header');
 
 	// translations in other languages

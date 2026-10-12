@@ -3,10 +3,12 @@
 	inset: 0 0 0 50%;
 	z-index: -4;
 
-	--header-size: 180px;
+	--header-size: var(--page-header-avatar-size-default);
 
 	--w: min(1300px, 90vw);
 	--h: calc(99px + var(--tab-size) + var(--header-size));
+
+	aspect-ratio: 1300 / 325;
 
 	&[data-page-type="events"],
 	&[data-page-type="festival"],
@@ -84,8 +86,9 @@
 }
 
 .background-inner {
-	position: absolute;
-	inset: 0;
+	display: block;
+	height: 100%;
+	aspect-ratio: 1300 / 325;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;

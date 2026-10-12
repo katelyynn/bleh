@@ -194,3 +194,18 @@
 	font-weight: var(--font-weight);
 	display: none;
 }
+
+.profile-badges-scroller {
+	overflow: hidden;
+	padding: var(--card-padding);
+	margin: calc(-1 * var(--card-padding));
+
+	&>.profile-badges {
+		flex-wrap: unset;
+	}
+
+	&.scroll-manually {
+		overflow-x: scroll;
+		overflow-y: unset;
+	}
+}

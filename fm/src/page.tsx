@@ -1098,6 +1098,7 @@ export function register_banner(url: string | null, origin = null) {
 		background.setAttribute('data-page-type', page.type);
 		background.setAttribute('data-page-subpage', page.subpage);
 		background.setAttribute('data-background-origin', origin);
+		background.setAttribute('data-refresh', ff('header_refresh'));
 	}
 
 	let inner: HTMLSpanElement;

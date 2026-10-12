@@ -508,10 +508,14 @@ body {
 	--grid-default-height: calc((var(--cards-main-width) - (var(--card-padding) * 2)) / 4px);
 
 	--overview-bio-size: 440px;
-	--header-avatar-size: 170px;
+	--page-header-avatar-size-default: 180px;
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	&[data-ff--header_refresh="true"] {
+		--page-header-avatar-size-default: 100px;
+	}
 
 	@media (max-width: 980px) {
 		--card-padding: 15px;
@@ -520,7 +524,7 @@ body {
 		--cards-sidebar-width: 100vw;
 		--card-shadow: unset;
 
-		--header-avatar-size: 120px;
+		--header-avatar-size: 140px;
 
 		--max-tooltip-width: 100vw;
 	}

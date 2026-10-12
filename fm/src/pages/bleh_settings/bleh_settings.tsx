@@ -53,6 +53,7 @@ import { Alert } from '@/components/text/alert.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { createRef } from 'jsx-dom';
 import { IconLabel } from '@/components/text/text.tsx';
+import { flags } from '@/build/flags.ts';
 
 export function bleh_settings() {
 	page.name = auth.name!;
@@ -631,8 +632,8 @@ export function change_settings_page(page_id, setting = null) {
 export function load_skus() {
 	const local = useSettings.get('feature_flags');
 
-	for (const flag in version.feature_flags) {
-		let current_state = version.feature_flags[flag].default;
+	for (const flag in flags) {
+		let current_state = flags[flag].enabled;
 
 		if (local[flag] != null) {
 			current_state = local[flag];

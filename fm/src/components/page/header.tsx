@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ReactNode } from 'jsx-dom';
+import { ReactElement, ReactNode } from 'jsx-dom';
 import { tl, trans } from '@/build/trans.ts';
 import { SubText } from '@/components/text/sub.tsx';
 import { InfoTip } from '@/components/text/tip.tsx';
@@ -12,6 +12,8 @@ import { WithChildren } from '@/types/generic.tsx';
 import { PageHeaderDisc } from '@/components/music/header.tsx';
 import { Icon } from '@/components/shared/icon.tsx';
 import { useSettings } from '@/page.tsx';
+import { ff } from '@/components/settings/sku.ts';
+import { page } from '@/build/page.ts';
 
 interface PageHeaderProps {
 	icon?: string;
@@ -22,6 +24,10 @@ interface PageHeaderProps {
 	children?: ReactNode;
 	extra?: ReactNode;
 }
+
+type PageHeaderElement = HTMLDivElement & {
+	stub: ReactElement;
+};
 
 export function PageHeader({
 	icon,
@@ -35,26 +41,55 @@ export function PageHeader({
 	const generic = !!avatar;
 	const label = tl(trans[type]);
 
+	const refresh = ff('header_refresh');
+
 	const elem = (
-		<section class={['page-header', `for-${type}`]}>
+		<section
+			class={['page-header', `for-${type}`, refresh && 'header-refresh']}
+		>
 			{avatar && (
-				<div class='page-header-avatar-list'>
+				<div
+					class={[
+						'page-header-avatar-list',
+						refresh && 'header-refresh',
+					]}
+				>
 					{avatar}
 					{['album', 'track'].includes(type) && <PageHeaderDisc />}
 				</div>
 			)}
 			{icon && <PageHeaderIcon name={icon} />}
-			<div class={['page-header-info', 'has-main-info']}>
-				<div class='main-info'>
+			<div
+				class={[
+					'page-header-info',
+					'has-main-info',
+					refresh && 'header-refresh',
+				]}
+			>
+				<div class={['main-info', refresh && 'header-refresh']}>
 					{type != 'home'
-						? !combined ? <SubText>{label}</SubText> : (
-							<SubText>
-								{tl(trans.artists)}
-								<InfoTip>
-									{tl(trans.artists_tooltip)}
-								</InfoTip>
-							</SubText>
-						)
+						? !combined
+							? (
+								<SubText
+									className={`header-label ${
+										refresh && 'header-refresh'
+									}`}
+								>
+									{label}
+								</SubText>
+							)
+							: (
+								<SubText
+									className={`header-label ${
+										refresh && 'header-refresh'
+									}`}
+								>
+									{tl(trans.artists)}
+									<InfoTip>
+										{tl(trans.artists_tooltip)}
+									</InfoTip>
+								</SubText>
+							)
 						: ''}
 					{generic
 						? (
@@ -67,6 +102,7 @@ export function PageHeader({
 								class={[
 									'page-header-title',
 									'generic-page-title',
+									refresh && 'header-refresh',
 								]}
 							>
 								{name}
@@ -76,7 +112,7 @@ export function PageHeader({
 				{extra}
 			</div>
 		</section>
-	);
+	) as PageHeaderElement;
 
 	function update() {
 		elem.setAttribute('data-theme', useSettings.get('theme') as string);
@@ -85,7 +121,37 @@ export function PageHeader({
 	update();
 	useSettings.on('theme', update);
 
+	Object.defineProperty(elem, 'stub', {
+		get() {
+			return (
+				<div
+					class={['page-header-stub', `for-${type}`, 'page-header']}
+				/>
+			);
+		},
+	});
+
 	return elem;
+}
+
+export function append_header(head: PageHeaderElement) {
+	const refresh = ff('header_refresh');
+
+	if (refresh) {
+		page.structure.side!.insertBefore(
+			head,
+			page.structure.side!.firstElementChild,
+		);
+		page.structure.container!.insertBefore(
+			head.stub,
+			page.structure.container!.firstElementChild,
+		);
+	} else {
+		page.structure.container!.insertBefore(
+			head,
+			page.structure.container!.firstElementChild,
+		);
+	}
 }
 
 interface PageHeaderTitleProps {
@@ -97,8 +163,13 @@ export function PageHeaderTitle({
 	combined,
 	children,
 }: PageHeaderTitleProps) {
+	const refresh = ff('header_refresh');
+
 	const elem = (
-		<div class='title-container' data-multi={String(combined)}>
+		<div
+			class={['title-container', refresh && 'header-refresh']}
+			data-multi={String(combined)}
+		>
 			{children}
 		</div>
 	);
@@ -122,8 +193,16 @@ export function PageHeaderArtist({
 	type = 'track',
 	children,
 }: PageHeaderArtistProps) {
+	const refresh = ff('header_refresh');
+
 	const elem = (
-		<h2 class={['page-header-artist', `artist-for-${type}`]}>
+		<h2
+			class={[
+				'page-header-artist',
+				`artist-for-${type}`,
+				refresh && 'header-refresh',
+			]}
+		>
 			{children}
 		</h2>
 	);
