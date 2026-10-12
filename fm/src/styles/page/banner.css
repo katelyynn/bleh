@@ -31,6 +31,9 @@
 	border-bottom-left-radius: var(--card-radius);
 	border-bottom-right-radius: var(--card-radius);
 
+	display: flex;
+	justify-content: end;
+
 	overflow: hidden;
 
 	will-change: transform;
@@ -64,7 +67,7 @@
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
 
-		--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+		--mask: linear-gradient(90deg, transparent 0%, white 50%, white 70%, transparent 100%);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
@@ -93,11 +96,11 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 
-	--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+	--mask: linear-gradient(90deg, transparent 0%, white 50%, white 70%, transparent 100%);
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
-	opacity: 0.8;
+	opacity: 0.6;
 
 	&:before {
 		content: '';

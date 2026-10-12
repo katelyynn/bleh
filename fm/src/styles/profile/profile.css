@@ -25,19 +25,28 @@
 	display: flex;
 	gap: 2px 8px;
 	align-items: center;
+	position: relative;
 
-	--blur: blur(3px);
-	backdrop-filter: var(--blur);
-	-webkit-backdrop-filter: var(--blur);
+
 	width: fit-content;
 
 	padding: 5px;
-	margin: -2px -5px -4px !important;
+	margin: -4px -5px -4px !important;
 
-	--mask: linear-gradient(180deg, transparent, white 20%, white 80%, transparent);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
-	border-radius: 50px;
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+
+		--blur: blur(2px);
+		backdrop-filter: var(--blur);
+		-webkit-backdrop-filter: var(--blur);
+
+		--mask: linear-gradient(180deg, transparent, white 40%, white 60%, transparent);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		border-radius: 50px;
+	}
 }
 
 .sub-text-label {
@@ -67,6 +76,8 @@
 	}
 
 	--icon-size: 14px;
+
+	z-index: 10;
 }
 
 .sub-text-dot {
@@ -76,6 +87,8 @@
 	background: oklch(var(--c2) / 70%);
 	box-shadow: 0 0 3px oklch(var(--b6));
 	border-radius: 10px;
+
+	z-index: 10;
 }
 
 .profile-name {

@@ -30,12 +30,12 @@
 	--top: 50%;
 	--margin-left: none;
 	--margin-top: calc(-1 * var(--icon-size) / 2);
-	height: 26px;
+	height: 24px;
 	min-width: calc(var(--icon-size) + (var(--sides) * 2));
 	max-width: unset;
 	transition-delay: 0s !important;
 
-	--icon-size: 16px;
+	--icon-size: 14px;
 
 	--bg: var(--badge);
 	--bg-hov: var(--badge-hov);
@@ -172,7 +172,6 @@
 }
 
 .profile-badges {
-	margin-top: 8px;
 
 	&>.user-status-subscriber {
 		order: 1 !important;

@@ -65,6 +65,7 @@ body,
 	--nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));
 	--precise-filter-shadow: drop-shadow(0 0 2px oklch(var(--b6))) drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 12px oklch(var(--b6) / 60%));
 	--header-filter-shadow: drop-shadow(0 1px 3px oklch(var(--b6) / 80%)) drop-shadow(0 3px 10px oklch(var(--b6) / 60%));
+	--header-shadow: 0 1px 3px oklch(var(--b6) / 80%), 0 1px 6px oklch(var(--b6) / 80%);
 
 	--menu-item-hov: oklch(var(--b4) / 40%);
 	--menu-item-atv: oklch(var(--b4) / 60%);

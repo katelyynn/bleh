@@ -508,7 +508,7 @@ body {
 	--grid-default-height: calc((var(--cards-main-width) - (var(--card-padding) * 2)) / 4px);
 
 	--overview-bio-size: 440px;
-	--page-header-avatar-size-default: 180px;
+	--page-header-avatar-size-default: 160px;
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

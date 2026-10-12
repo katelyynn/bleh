@@ -10,13 +10,13 @@
 
 .page-header {
 	display: flex;
-	gap: var(--card-padding);
+	gap: 30px;
 
 	--page-header-avatar-size: var(--page-header-avatar-size-default);
 	--page-header-avatar-radius: var(--item-big-radius);
 
-	--page-header-font-size: 26px;
-	--page-header-line-height: 40px;
+	--page-header-font-size: 24px;
+	--page-header-line-height: 36px;
 	--page-header-font-size-generic: 24px;
 	--page-header-line-height-generic: 30px;
 
@@ -24,7 +24,6 @@
 	padding: 0 var(--card-padding);
 
 	align-items: center;
-	gap: calc(var(--card-gap) + var(--card-padding));
 	width: var(--cards-width);
 
 	contain: layout;
@@ -155,8 +154,8 @@
 			line-clamp: 1;
 			-webkit-line-clamp: 1;
 			-webkit-box-orient: vertical;
-			font-size: 26px;
-			line-height: 40px;
+			font-size: var(--page-header-font-size);
+			line-height: var(--page-header-line-height);
 
 			.feat {
 				padding: 0 0 0 10px;
@@ -221,11 +220,15 @@
 
 .page-header-info:not(.has-main-info),
 .main-info {
-	filter: var(--header-filter-shadow) !important;
+	text-shadow: var(--header-shadow) !important;
 
 	&.header-refresh {
-		filter: none !important;
+		text-shadow: none !important;
 	}
+}
+
+.profile-name {
+	filter: var(--header-filter-shadow);
 }
 
 .page-header-avatar-list {
