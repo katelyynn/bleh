@@ -15,6 +15,7 @@ import {
 	dialog,
 	dialog_rm,
 	FooterFill,
+	modal,
 	ModalFooter,
 } from '@/components/dialog/dialog.tsx';
 import { input } from '@/components/settings/input.ts';
@@ -206,7 +207,7 @@ export function MarkdownField({
 						const link = createRef();
 						const alt = createRef();
 
-						dialog({
+						modal({
 							id: 'link',
 							title: tl(trans.attach_image),
 							body: (
@@ -215,7 +216,7 @@ export function MarkdownField({
 										class='markdown-image-preview'
 										ref={preview}
 									/>
-									<FormInner>
+									<FormInner span>
 										<GenericLabel>
 											{tl(trans.link)}
 										</GenericLabel>
@@ -245,25 +246,24 @@ export function MarkdownField({
 											ref={alt}
 										/>
 									</FormInner>
-									<ModalFooter>
-										<SeeMore
-											icon={icons.x}
-											iconPlacement='left'
-											onClick={() => {
-												dialog_rm({ id: 'link' });
-												resolve(null);
-											}}
-										>
-											{tl(trans.cancel)}
-										</SeeMore>
-										<FooterFill />
-										<Button primary onClick={submit_link}>
-											<SaveIcon />
-											{tl(trans.finish)}
-										</Button>
-									</ModalFooter>
 								</>
 							),
+							close: 'cancel',
+							actions: [
+								{
+									primary: true,
+									onClick: submit_link,
+									children: (
+										<>
+											<Icon name={icons.image} />
+											{tl(trans.attach_image)}
+										</>
+									),
+								},
+							],
+							onClose: () => {
+								resolve(null);
+							},
 						});
 
 						link.current.focus();
@@ -273,7 +273,6 @@ export function MarkdownField({
 							const link_text = link.current.value;
 
 							if (!link_text) return;
-
 							dialog_rm({ id: 'link' });
 
 							let output;

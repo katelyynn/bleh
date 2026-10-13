@@ -77,7 +77,7 @@ body {
 	--button-verts: 5px;
 	--button-height: 28px;
 	--button-radius: 9px;
-	--input-radius: 9px;
+	--input-radius: 8px;
 	--track-radius: var(--radius-m);
 	/*--icon-size: 18px;*/
 	--default-icon-size: 18px;

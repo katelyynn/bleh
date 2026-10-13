@@ -5,6 +5,7 @@
  */
 
 import { WithChildren } from '@/types/generic.tsx';
+import { ReactNode } from 'jsx-dom';
 
 export function ScrobbleForm({
 	children,
@@ -36,11 +37,17 @@ export function FormActions({
 	);
 }
 
+interface FormInnerProps {
+	span?: boolean;
+	children: ReactNode;
+}
+
 export function FormInner({
+	span,
 	children,
-}: WithChildren) {
+}: FormInnerProps) {
 	return (
-		<div class='form-inner'>
+		<div class={['form-inner', span && 'span']}>
 			{children}
 		</div>
 	);
