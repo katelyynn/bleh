@@ -164,7 +164,7 @@
 
 	background-color: oklch(var(--h3));
 	color: oklch(var(--b7));
-	border-radius: var(--radius-s);
+	border-radius: var(--radius-xs);
 	box-shadow: 0 0 0 1px inset oklch(var(--h2) / 10%);
 
 	cursor: default;
