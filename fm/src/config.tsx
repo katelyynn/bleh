@@ -217,7 +217,7 @@ export function request_reload() {
 		actions: [
 			{
 				onClick: () => invoke_reload(),
-				children: () => (
+				children: (
 					<>
 						<Icon name={icons.refresh} />
 						{tl(trans.refresh)}

@@ -16,7 +16,7 @@ import { version } from '@/main';
 import { download } from '@/components/dialog/share';
 import { redirect } from '@/components/music/music';
 import html2canvas from 'html2canvas-pro';
-import { Icon, icons } from '../shared/icon';
+import { Icon, icons, SaveIcon } from '../shared/icon';
 import { HybridTimeframePicker, timeframe_text } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.tsx';
@@ -87,7 +87,7 @@ export function collage({ host, sidebar } = {}) {
 				id: 'collage_redirect',
 				title: tl(trans.collage),
 				body: tl(trans.collage_redirect),
-				icon: 'icon-16-collage',
+				icon: icons.collage,
 				persist: true,
 			});
 		}, 100);
@@ -373,12 +373,16 @@ export function collage({ host, sidebar } = {}) {
 				type: 'warning',
 				actions: [
 					{
-						type: 'check',
-						action: () => {
+						onClick: () => {
 							notify_rm(warn);
 							init_collage(true);
 						},
-						text: tl(trans.continue),
+						children: (
+							<>
+								<SaveIcon />
+								{tl(trans.continue)}
+							</>
+						),
 					},
 				],
 				persist: true,

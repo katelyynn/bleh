@@ -29,6 +29,7 @@ import { set_storage } from '@/build/tools';
 import { ff } from './sku';
 import { new_indicator } from '../shared/indicator';
 import { getThemes } from '@/build/theme.ts';
+import { icons } from '@/components/shared/icon.tsx';
 
 interface setting {
 	id: string;
@@ -1681,7 +1682,7 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
 		id: 'reset_setting',
 		title: tl(trans.settings),
 		body: tl(trans.reset_item_to_default),
-		icon: 'icon-16-settings',
+		icon: icons.settings,
 	});
 }
 

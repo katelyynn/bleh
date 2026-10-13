@@ -214,7 +214,6 @@ export function bleh() {
 					id: 'now',
 					title: tl(trans.now_notice.name),
 					body: tl(trans.now_notice.body),
-					type: 'info',
 					persist: true,
 				});
 			}

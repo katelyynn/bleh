@@ -10,6 +10,7 @@ import { dialog } from '@/components/dialog/dialog';
 import { tl, trans } from '@/build/trans';
 import { log } from '@/build/log.ts';
 import { copy } from '@/build/tools';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function share(url) {
 	let is_url = false;
@@ -104,6 +105,6 @@ export function download(url: string, filename?: string) {
 		id: 'downloaded',
 		title: tl(trans.downloaded),
 		body: filename,
-		icon: 'icon-16-download',
+		icon: icons.download,
 	});
 }

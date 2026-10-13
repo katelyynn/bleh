@@ -54,7 +54,7 @@ interface NotificationProps {
 
 type NotificationAction = {
 	onClick: () => void;
-	children: () => ReactNode;
+	children: ReactNode;
 };
 
 type NotificationElement = HTMLDivElement & {
@@ -103,7 +103,7 @@ export function notify({
 
 	actions.push({
 		onClick: () => notify_rm(notif),
-		children: () => (
+		children: (
 			<IconLabel icon={icons.x}>
 				{tl(trans.close)}
 			</IconLabel>
@@ -141,14 +141,12 @@ export function notify({
 			)}
 			<div class='notification-actions'>
 				{actions.map((action) => {
-					console.error(action, action.children());
-
 					return (
 						<Button
 							className='notification-action'
 							onClick={action.onClick}
 						>
-							{action.children()}
+							{action.children}
 						</Button>
 					);
 				})}

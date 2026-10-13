@@ -206,8 +206,7 @@ export function ProfileAccent({
 												type: 'warning',
 												actions: [
 													{
-														type: 'check',
-														action: () => {
+														onClick: () => {
 															notify_rm(warn);
 
 															useSettings.set(
@@ -226,8 +225,14 @@ export function ProfileAccent({
 																	.value as number,
 															);
 														},
-														text: tl(
-															trans.continue,
+														children: (
+															<>
+																<SaveIcon />
+																{tl(
+																	trans
+																		.continue,
+																)}
+															</>
 														),
 													},
 												],

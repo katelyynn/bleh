@@ -1563,7 +1563,7 @@ function DeleteButton({
 								body: track_title.getAttribute(
 									'data-name',
 								),
-								icon: 'icon-16-trash',
+								icon: icons.delete,
 								type: 'error',
 							});
 						});

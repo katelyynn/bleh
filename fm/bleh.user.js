@@ -35723,7 +35723,7 @@ var bleh = (() => {
     if (!icon2) icon2 = icons.info;
     actions.push({
       onClick: () => notify_rm(notif),
-      children: () => /* @__PURE__ */ jsx(IconLabel, {
+      children: /* @__PURE__ */ jsx(IconLabel, {
         icon: icons.x,
         children: tl2(trans.close)
       })
@@ -35770,11 +35770,10 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("div", {
           class: "notification-actions",
           children: actions.map((action) => {
-            console.error(action, action.children());
             return /* @__PURE__ */ jsx(Button, {
               className: "notification-action",
               onClick: action.onClick,
-              children: action.children()
+              children: action.children
             });
           })
         })
@@ -68792,7 +68791,7 @@ var bleh = (() => {
           title: tl2(trans.shouts),
           body: "Failed to be modified :(",
           type: "error",
-          icon: "icon-16-shoutbox"
+          icon: icons.shoutbox
         });
         log("failed to modify", "shout", "error", {
           error: e4
@@ -68879,7 +68878,7 @@ var bleh = (() => {
             id: "shout",
             title: tl2(trans.shouts),
             body: tl2(trans.sent),
-            icon: "icon-16-shoutbox"
+            icon: icons.shoutbox
           });
         }
       });
@@ -69059,7 +69058,7 @@ var bleh = (() => {
           title: tl2(trans.shouts),
           body: tl2(trans.failed_to_send),
           type: "error",
-          icon: "icon-16-shoutbox"
+          icon: icons.shoutbox
         });
       } else {
         return;
@@ -86130,7 +86129,7 @@ var bleh = (() => {
       id: "downloaded",
       title: tl2(trans.downloaded),
       body: filename,
-      icon: "icon-16-download"
+      icon: icons.download
     });
   }
 
@@ -86793,7 +86792,7 @@ var bleh = (() => {
               id: "friends",
               title: tl2(trans.removed_friend),
               body: page.name,
-              icon: "icon-16-minus",
+              icon: icons.minus,
               type: "error"
             });
           }}>
@@ -86814,7 +86813,7 @@ var bleh = (() => {
           id: "friends",
           title: tl2(trans.added_as_friend),
           body: page.name,
-          icon: "icon-16-users",
+          icon: icons.users,
           type: "success"
         });
       }
@@ -86853,7 +86852,7 @@ var bleh = (() => {
               id: "friends",
               title: tl2(trans.removed_star),
               body: page.name,
-              icon: "icon-16-minus",
+              icon: icons.minus,
               type: "error"
             });
           } else {
@@ -86864,7 +86863,7 @@ var bleh = (() => {
               id: "friends",
               title: tl2(trans.added_star),
               body: page.name,
-              icon: "icon-16-starred-friend"
+              icon: icons.starred_friend
             });
           }
         }}>
@@ -93446,7 +93445,7 @@ var bleh = (() => {
                   id: "delete",
                   title: tl2(trans.deleted),
                   body: track_title.getAttribute("data-name"),
-                  icon: "icon-16-trash",
+                  icon: icons.delete,
                   type: "error"
                 });
               });
@@ -94354,12 +94353,16 @@ var bleh = (() => {
           type: "warning",
           actions: [
             {
-              type: "check",
-              action: () => {
+              onClick: () => {
                 notify_rm(warn);
                 begin_comparing(true);
               },
-              text: tl2(trans.continue)
+              children: /* @__PURE__ */ jsx(Fragment, {
+                children: [
+                  /* @__PURE__ */ jsx(SaveIcon, {}),
+                  tl2(trans.continue)
+                ]
+              })
             }
           ],
           persist: true
@@ -107630,7 +107633,7 @@ var bleh = (() => {
           id: "collage_redirect",
           title: tl2(trans.collage),
           body: tl2(trans.collage_redirect),
-          icon: "icon-16-collage",
+          icon: icons.collage,
           persist: true
         });
       }, 100);
@@ -107891,12 +107894,16 @@ var bleh = (() => {
           type: "warning",
           actions: [
             {
-              type: "check",
-              action: () => {
+              onClick: () => {
                 notify_rm(warn);
                 init_collage(true);
               },
-              text: tl2(trans.continue)
+              children: /* @__PURE__ */ jsx(Fragment, {
+                children: [
+                  /* @__PURE__ */ jsx(SaveIcon, {}),
+                  tl2(trans.continue)
+                ]
+              })
             }
           ],
           persist: true
@@ -110771,7 +110778,7 @@ var bleh = (() => {
       id: "reset_setting",
       title: tl2(trans.settings),
       body: tl2(trans.reset_item_to_default),
-      icon: "icon-16-settings"
+      icon: icons.settings
     });
   }
   function save_setting(id, value) {
@@ -112313,7 +112320,7 @@ var bleh = (() => {
       actions: [
         {
           onClick: () => invoke_reload(),
-          children: () => /* @__PURE__ */ jsx(Fragment, {
+          children: /* @__PURE__ */ jsx(Fragment, {
             children: [
               /* @__PURE__ */ jsx(Icon, {
                 name: icons.refresh
@@ -116887,7 +116894,7 @@ var bleh = (() => {
           id: "update",
           title: tl2(trans.updates),
           body: tl2(trans.checked_for_updates),
-          icon: "icon-16-update"
+          icon: icons.update
         });
         render_setting_page("general");
       })}>${tl2(trans.check)}</button>
@@ -116925,7 +116932,7 @@ var bleh = (() => {
           id: "update",
           title: tl2(trans.updates),
           body: tl2(trans.checked_for_updates),
-          icon: "icon-16-update"
+          icon: icons.update
         });
         render_setting_page("general");
       })}>${tl2(trans.check)}</button>
@@ -116952,7 +116959,7 @@ var bleh = (() => {
       id: "update",
       title: tl2(trans.updates),
       body: tl2(trans.failed_to_check_for_updates),
-      icon: "icon-16-update",
+      icon: icons.update,
       type: "error"
     });
     dialog({
@@ -120525,7 +120532,7 @@ var bleh = (() => {
         v: tl2(trans.seasonal.listing[current.id]),
         time: current.end.toRelative(now2)
       }),
-      icon: "icon-16-season",
+      icon: icons.seasonal,
       persist: true
     });
   }
@@ -120670,7 +120677,7 @@ var bleh = (() => {
             id: "corrections",
             title: tl2(trans.redirected_from),
             body: active_nag.querySelector("strong"),
-            icon: "icon-16-refresh",
+            icon: icons.refresh,
             long: true
           });
         }
@@ -123615,14 +123622,18 @@ var bleh = (() => {
                           type: "warning",
                           actions: [
                             {
-                              type: "check",
-                              action: () => {
+                              onClick: () => {
                                 notify_rm(warn);
                                 useSettings.set("hue", hue4.current.value);
                                 useSettings.set("sat", sat.current.value);
                                 useSettings.set("lit", lit.current.value);
                               },
-                              text: tl2(trans.continue)
+                              children: /* @__PURE__ */ jsx(Fragment, {
+                                children: [
+                                  /* @__PURE__ */ jsx(SaveIcon, {}),
+                                  tl2(trans.continue)
+                                ]
+                              })
                             }
                           ],
                           persist: true
@@ -132209,7 +132220,6 @@ var bleh = (() => {
             id: "now",
             title: tl2(trans.now_notice.name),
             body: tl2(trans.now_notice.body),
-            type: "info",
             persist: true
           });
         }

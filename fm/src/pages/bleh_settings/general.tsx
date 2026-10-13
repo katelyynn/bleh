@@ -339,7 +339,7 @@ function update_setting() {
 									id: 'update',
 									title: tl(trans.updates),
 									body: tl(trans.checked_for_updates),
-									icon: 'icon-16-update',
+									icon: icons.update,
 								});
 								render_setting_page('general');
 							})}>${tl(trans.check)}</button>
@@ -393,7 +393,7 @@ function update_setting() {
 											id: 'update',
 											title: tl(trans.updates),
 											body: tl(trans.checked_for_updates),
-											icon: 'icon-16-update',
+											icon: icons.update,
 										});
 										render_setting_page('general');
 									},
@@ -428,7 +428,7 @@ function update_check_failed(e) {
 		id: 'update',
 		title: tl(trans.updates),
 		body: tl(trans.failed_to_check_for_updates),
-		icon: 'icon-16-update',
+		icon: icons.update,
 		type: 'error',
 	});
 

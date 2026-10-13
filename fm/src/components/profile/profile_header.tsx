@@ -611,7 +611,7 @@ function friends_button(parent: ReactElement) {
 						id: 'friends',
 						title: tl(trans.removed_friend),
 						body: page.name,
-						icon: 'icon-16-minus',
+						icon: icons.minus,
 						type: 'error',
 					});
 				}}>
@@ -632,7 +632,7 @@ function friends_button(parent: ReactElement) {
 				id: 'friends',
 				title: tl(trans.added_as_friend),
 				body: page.name,
-				icon: 'icon-16-users',
+				icon: icons.users,
 				type: 'success',
 			});
 		}
@@ -673,7 +673,7 @@ function friends_button(parent: ReactElement) {
 						id: 'friends',
 						title: tl(trans.removed_star),
 						body: page.name,
-						icon: 'icon-16-minus',
+						icon: icons.minus,
 						type: 'error',
 					});
 				} else {
@@ -685,7 +685,7 @@ function friends_button(parent: ReactElement) {
 						id: 'friends',
 						title: tl(trans.added_star),
 						body: page.name,
-						icon: 'icon-16-starred-friend',
+						icon: icons.starred_friend,
 					});
 				}
 			}}>

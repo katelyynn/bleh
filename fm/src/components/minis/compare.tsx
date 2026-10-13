@@ -28,7 +28,7 @@ import {
 	CompareUser,
 	CompareUsers,
 } from '@/components/minis/user.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { Select } from '@/components/select/select.tsx';
 import { IconLabel } from '@/components/text/text.tsx';
 import { HybridTimeframePicker } from '@/components/date/timeframe.tsx';
@@ -228,12 +228,16 @@ export function compare({ host, sidebar } = {}) {
 				type: 'warning',
 				actions: [
 					{
-						type: 'check',
-						action: () => {
+						onClick: () => {
 							notify_rm(warn);
 							begin_comparing(true);
 						},
-						text: tl(trans.continue),
+						children: (
+							<>
+								<SaveIcon />
+								{tl(trans.continue)}
+							</>
+						),
 					},
 				],
 				persist: true,

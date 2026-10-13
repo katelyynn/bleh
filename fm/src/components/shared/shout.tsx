@@ -318,7 +318,7 @@ export function patch_shouts() {
 				title: tl(trans.shouts),
 				body: 'Failed to be modified :(',
 				type: 'error',
-				icon: 'icon-16-shoutbox',
+				icon: icons.shoutbox,
 			});
 			log('failed to modify', 'shout', 'error', { error: e });
 		}
@@ -446,7 +446,7 @@ export function patch_shouts() {
 					id: 'shout',
 					title: tl(trans.shouts),
 					body: tl(trans.sent),
-					icon: 'icon-16-shoutbox',
+					icon: icons.shoutbox,
 				});
 			}
 		});
@@ -658,7 +658,7 @@ export function shout_messages() {
 				title: tl(trans.shouts),
 				body: tl(trans.failed_to_send),
 				type: 'error',
-				icon: 'icon-16-shoutbox',
+				icon: icons.shoutbox,
 			});
 		} else {
 			return;
