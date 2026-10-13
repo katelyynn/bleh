@@ -3,7 +3,7 @@
 	inset: 0 0 0 50%;
 	z-index: -4;
 
-	--header-size: var(--page-header-avatar-size-default);
+	--header-size: var(--page-header-banner-size-default);
 
 	--w: min(1300px, 90vw);
 	--h: calc(99px + var(--tab-size) + var(--header-size));

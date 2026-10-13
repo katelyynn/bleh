@@ -214,6 +214,7 @@ export function bleh_settings() {
 					'navlist--more',
 					'redesigned-navigation',
 					'bleh-settings-navigation',
+					ff('header_refresh') ? 'header-refresh' : '',
 				]}
 			>
 				<ul class='navlist-items'>

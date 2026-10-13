@@ -169,7 +169,10 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 		let navlist = header.querySelector('.navlist');
 
 		if (navlist) {
-			navlist.classList.add('redesigned-navigation');
+			navlist.classList.add(
+				'redesigned-navigation',
+				ff('header_refresh') ? 'header-refresh' : '',
+			);
 			page.structure.container.insertBefore(
 				navlist,
 				page.structure.container.firstElementChild,
@@ -260,7 +263,10 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 				navlist = page.structure.main.querySelector('.navlist');
 
 				if (navlist) {
-					navlist.classList.add('redesigned-navigation');
+					navlist.classList.add(
+						'redesigned-navigation',
+						ff('header_refresh') ? 'header-refresh' : '',
+					);
 
 					if (ff('mualani')) {
 						let toolbar = html.node`
@@ -419,7 +425,10 @@ export function convert_to_toolbar() {
 	const nav = page.structure.content_top.querySelector('.navlist');
 	if (!nav) return;
 
-	nav.classList.add('redesigned-navigation');
+	nav.classList.add(
+		'redesigned-navigation',
+		ff('header_refresh') ? 'header-refresh' : '',
+	);
 
 	page.structure.toolbar = html.node`
         <div class="toolbar">

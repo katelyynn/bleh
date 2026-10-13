@@ -104,7 +104,10 @@ export function bleh_user_library() {
             </div>
         `;
 
-		nav.classList.add('redesigned-navigation');
+		nav.classList.add(
+			'redesigned-navigation',
+			ff('header_refresh') ? 'header-refresh' : '',
+		);
 
 		page.structure.content_top.style.display = 'none';
 

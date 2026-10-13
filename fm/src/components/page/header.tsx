@@ -125,7 +125,12 @@ export function PageHeader({
 		get() {
 			return (
 				<div
-					class={['page-header-stub', `for-${type}`, 'page-header']}
+					class={[
+						'page-header-stub',
+						`for-${type}`,
+						'page-header',
+						refresh && 'header-refresh',
+					]}
 				/>
 			);
 		},

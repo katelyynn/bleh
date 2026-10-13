@@ -460,6 +460,17 @@
 	}
 }
 
+.redesigned-navigation {
+	&.header-refresh {
+		--tabbed-width-2: calc(var(--tabbed-width) - (var(--card-padding) * 2 + var(--page-header-avatar-size-default)));
+
+		&>.navlist-items {
+			width: calc(var(--tabbed-width-2) + var(--button-sides-icon) + var(--button-sides)) !important;
+			max-width: calc(var(--tabbed-width-2) + var(--button-sides-icon) + var(--button-sides)) !important;
+		}
+	}
+}
+
 .labs-cta,
 .external-links-section,
 .charts-nav,

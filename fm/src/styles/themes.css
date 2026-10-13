@@ -509,12 +509,14 @@ body {
 
 	--overview-bio-size: 440px;
 	--page-header-avatar-size-default: 160px;
+	--page-header-banner-size-default: 160px;
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
 	&[data-ff--header_refresh="true"] {
-		--page-header-avatar-size-default: 100px;
+		--page-header-avatar-size-default: 150px;
+		--page-header-banner-size-default: 100px;
 	}
 
 	@media (max-width: 980px) {

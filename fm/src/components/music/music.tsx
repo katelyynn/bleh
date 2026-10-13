@@ -100,6 +100,10 @@ export function show_your_scrobbles() {
 			'redesigned-navigation',
 		);
 
+		if (useSettings.get('header_refresh')) {
+			tabs.classList.add('header-refresh');
+		}
+
 		if (page.type == 'artist') {
 			tabs.appendChild(html.node`
                 <ul class="navlist-items">

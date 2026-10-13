@@ -648,7 +648,9 @@ function patch_gallery_image_listing() {
 	// create nav
 	const nav = html.node`
         <div class="toolbar">
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+		ff('header_refresh') ? 'header-refresh' : ''
+	}">
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-overview">
                         <a class="secondary-nav-item-link" onclick=${() =>

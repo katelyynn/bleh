@@ -766,17 +766,24 @@ function patch_profile_following() {
 	}
 
 	// create nav
-	const friends_nav = html.node`
-        <div class="toolbar">
-            <nav class="navlist secondary-nav redesigned-navigation">
-                <ul class="navlist-items">
-                    ${{ html: following_tab.outerHTML }}
-                    ${{ html: followers_tab.outerHTML }}
-                    ${{ html: neighbours_tab.outerHTML }}
-                </ul>
-            </nav>
-        </div>
-    `;
+	const friends_nav = (
+		<div class='toolbar'>
+			<nav
+				class={[
+					'navlist',
+					'secondary-nav',
+					'redesigned-navigation',
+					ff('theme_refresh') && 'theme-refresh',
+				]}
+			>
+				<ul class='navlist-items'>
+					{following_tab?.cloneNode(true)}
+					{followers_tab?.cloneNode(true)}
+					{neighbours_tab?.cloneNode(true)}
+				</ul>
+			</nav>
+		</div>
+	);
 
 	// we do this later to preserve the 'Following' text
 	following_tab.classList.remove('secondary-nav-item--following');

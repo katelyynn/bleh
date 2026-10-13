@@ -128,7 +128,9 @@ export async function bleh_home() {
 	let nav;
 	if (auth.name) {
 		nav = html.node`
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+			ff('header_refresh') ? 'header-refresh' : ''
+		}">
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${
@@ -208,7 +210,9 @@ export async function bleh_home() {
         `;
 	} else {
 		nav = html.node`
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+			ff('header_refresh') ? 'header-refresh' : ''
+		}">
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${
@@ -299,7 +303,9 @@ export async function bleh_home() {
 		} else {
 			const toolbar = html.node`
                 <div class="toolbar">
-                    <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                    <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+				ff('header_refresh') ? 'header-refresh' : ''
+			}">
                         <ul class="navlist-items">
                             <li class="navlist-item secondary-nav-item">
                                 <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">

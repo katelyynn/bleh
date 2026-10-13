@@ -15,6 +15,14 @@
 	--page-header-avatar-size: var(--page-header-avatar-size-default);
 	--page-header-avatar-radius: var(--item-big-radius);
 
+	&.page-header-stub.header-refresh {
+		--page-header-avatar-size: var(--page-header-banner-size-default);
+
+		&:before {
+			display: none;
+		}
+	}
+
 	--page-header-font-size: 22px;
 	--page-header-line-height: 40px;
 	--page-header-font-size-sub: 18px;
@@ -55,7 +63,7 @@
 		}
 	}
 
-	&.header-refresh {
+	&:not(.page-header-stub).header-refresh {
 		flex-direction: column;
 		align-items: unset;
 		gap: var(--card-gap);
@@ -511,11 +519,15 @@
 
 	&.header-refresh {
 		padding: 0 var(--card-padding);
-		margin: 0 calc(-1 * var(--card-padding)) !important;
+		margin: 6px calc(-1 * var(--card-padding)) 0 !important;
 
 		--mask: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
+
+		&:before {
+			display: none;
+		}
 	}
 
 	&:before {
@@ -539,6 +551,7 @@
 	filter: drop-shadow(0 1px 3px oklch(var(--b6))) !important;
 
 	&>.label {
+		font-size: var(--font-size) !important;
 		--mask2: unset !important;
 		--sides: 0px;
 		--bg: transparent !important;

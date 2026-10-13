@@ -37,7 +37,9 @@ export function bleh_charts() {
 	if (ff('aihara')) {
 		const new_nav = html.node`
             <div class="toolbar">
-                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+			ff('header_refresh') ? 'header-refresh' : ''
+		}">
                     <ul class="navlist-items">
                         <li class="navlist-item secondary-nav-item secondary-nav-item--daily">
                             <a href="${root}charts" class="secondary-nav-item-link ${
