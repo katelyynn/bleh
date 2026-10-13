@@ -30,7 +30,7 @@
 
 	width: fit-content;
 
-	padding: 5px;
+	padding: 4px 5px;
 	margin: -4px -5px -4px !important;
 
 	&:before {

@@ -15,10 +15,12 @@
 	--page-header-avatar-size: var(--page-header-avatar-size-default);
 	--page-header-avatar-radius: var(--item-big-radius);
 
-	--page-header-font-size: 24px;
-	--page-header-line-height: 36px;
-	--page-header-font-size-generic: 24px;
-	--page-header-line-height-generic: 30px;
+	--page-header-font-size: 22px;
+	--page-header-line-height: 40px;
+	--page-header-font-size-sub: 18px;
+	--page-header-line-height-sub: 22px;
+	--page-header-font-size-generic: 22px;
+	--page-header-line-height-generic: 32px;
 
 	margin: 30px -40px 20px !important;
 	padding: 0 var(--card-padding);
@@ -171,7 +173,7 @@
 				padding: 0 0 0 10px;
 				background-color: oklch(var(--b5), 40%);
 				border-radius: var(--item-med-radius);
-				font-size: 20px;
+				font-size: var(--page-header-font-size-sub);
 				line-height: 27px;
 				display: inline-flex;
 				position: relative;
@@ -180,8 +182,8 @@
 		}
 
 		.page-header-artist {
-			font-size: 20px;
-			line-height: 24px;
+			font-size: var(--page-header-font-size-sub);
+			line-height: var(--page-header-line-height-sub);
 		}
 
 		[data-multi="true"] .page-header-title {
@@ -261,13 +263,13 @@
 
 .page-header-disc {
 	background-image: var(--disc);
-	--w: calc(var(--page-header-avatar-size) * 0.8);
+	--w: calc(var(--page-header-avatar-size) * 0.7);
 
 	width: var(--w);
 	height: var(--w);
 	display: flex;
 
-	margin-left: calc(-1 * (var(--page-header-avatar-size) * 0.6));
+	margin-left: calc(-1 * (var(--page-header-avatar-size) * 0.5));
 	position: relative;
 	left: var(--disc-move, 0px);
 
@@ -287,6 +289,24 @@
 	transform: rotate(var(--disc-rotate, 0deg));
 
 	order: 10;
+
+	&:not(.motion) {
+		transform: rotate(var(--disc-rotate, 0deg));
+	}
+
+	&.motion {
+		animation: disc 8s linear infinite;
+	}
+}
+
+@keyframes disc {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .page-header-avatar {
@@ -486,7 +506,8 @@
 	position: relative;
 	overflow: hidden;
 
-	margin-top: 4px;
+	padding: 4px 5px;
+	margin: 2px -5px -4px !important;
 
 	&.header-refresh {
 		padding: 0 var(--card-padding);
@@ -496,22 +517,37 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+
+		--blur: blur(2px);
+		backdrop-filter: var(--blur);
+		-webkit-backdrop-filter: var(--blur);
+
+		--mask: linear-gradient(180deg, transparent, white 40%, white 60%, transparent);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+		border-radius: 50px;
+	}
 }
 
 .profile-badges {
-	&.header-refresh {
-		gap: 8px;
+	gap: 2px 8px !important;
+	filter: drop-shadow(0 1px 3px oklch(var(--b6))) !important;
 
-		&>.label {
-			--mask2: unset !important;
-			--sides: 0px;
-			--bg: transparent !important;
-			--bg-hov: transparent !important;
-			box-shadow: unset !important;
-			backdrop-filter: unset !important;
-			-webkit-backdrop-filter: unset !important;
-			border-radius: unset !important;
-		}
+	&>.label {
+		--mask2: unset !important;
+		--sides: 0px;
+		--bg: transparent !important;
+		--bg-hov: transparent !important;
+		box-shadow: unset !important;
+		backdrop-filter: unset !important;
+		-webkit-backdrop-filter: unset !important;
+		border-radius: unset !important;
+		height: unset !important;
 	}
 }
 
@@ -533,6 +569,8 @@
 	&>.info-tip {
 		--icon-size: 14px;
 	}
+
+	margin-bottom: -2px;
 }
 
 .page-header-title {
@@ -563,8 +601,8 @@
 }
 
 .page-header-artist {
-	font-size: 18px;
-	line-height: 22px;
+	font-size: var(--page-header-font-size-sub);
+	line-height: var(--page-header-line-height-sub);
 	color: oklch(var(--c2) / 80%);
 	cursor: default;
 	margin: unset !important;
@@ -673,8 +711,6 @@
 .artist-for-track {
 	display: flex;
 	color: oklch(var(--c1), 0.8);
-	font-size: 24px;
-	line-height: 24px;
 
 	.header-new-crumb {
 		color: inherit;

@@ -62,42 +62,44 @@ export function playback() {
 		const show_artist_tag = useSettings.get('show_guest_features');
 
 		header_preview.current.replaceChildren(
-			<div class='page-header-info'>
-				<div class='title-container'>
-					<h1
-						class='header-new-title page-header-title'
-						data-kate-processed='true'
-					>
-						<div class='title'>
-							THE END{!format &&
-								' (feat. will.i.am & Jessica Pratt)'}
-						</div>
-						{(format && show_artist_tag) && (
-							<div class='feat' data-tag-group='guests'>
-								feat. will.i.am & Jessica Pratt
+			<div class={['page-header', 'no-margin']}>
+				<div class='page-header-info'>
+					<div class='title-container'>
+						<h1
+							class='header-new-title page-header-title'
+							data-kate-processed='true'
+						>
+							<div class='title'>
+								THE END{!format &&
+									' (feat. will.i.am & Jessica Pratt)'}
 							</div>
-						)}
-					</h1>
+							{(format && show_artist_tag) && (
+								<div class='feat' data-tag-group='guests'>
+									feat. will.i.am & Jessica Pratt
+								</div>
+							)}
+						</h1>
+					</div>
+					<h2 class='page-header-artist artist-for-track'>
+						<span itemProp='byArtist' style={{ display: 'flex' }}>
+							<a class='header-new-crumb'>
+								A$AP Rocky
+							</a>
+							{', '}
+							{format && (
+								<>
+									<a class='header-new-crumb'>
+										will.i.am
+									</a>
+									{', '}
+									<a class='header-new-crumb'>
+										Jessica Pratt
+									</a>
+								</>
+							)}
+						</span>
+					</h2>
 				</div>
-				<h2 class='page-header-artist artist-for-track'>
-					<span itemProp='byArtist' style={{ display: 'flex' }}>
-						<a class='header-new-crumb'>
-							A$AP Rocky
-						</a>
-						{', '}
-						{format && (
-							<>
-								<a class='header-new-crumb'>
-									will.i.am
-								</a>
-								{', '}
-								<a class='header-new-crumb'>
-									Jessica Pratt
-								</a>
-							</>
-						)}
-					</span>
-				</h2>
 			</div>,
 		);
 	}

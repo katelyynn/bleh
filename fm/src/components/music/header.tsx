@@ -179,7 +179,9 @@ export function page_header_disc() {
 export function PageHeaderDisc() {
 	if (!useSettings.get('show_disc_image')) return;
 
-	return <div class='page-header-disc' />;
+	const motion = useSettings.get('reduced_motion');
+
+	return <div class={['page-header-disc', !motion && 'motion']} />;
 }
 
 export function artist_title(header = document.body) {

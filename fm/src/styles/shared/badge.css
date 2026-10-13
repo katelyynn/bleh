@@ -60,7 +60,7 @@
 	}
 
 	&.expand {
-		padding-left: calc(var(--icon-size) + var(--sides) + 4px) !important;
+		padding-left: calc(var(--icon-size) + var(--sides) + 3px) !important;
 		padding-right: var(--sides) !important;
 
 		&:active {
