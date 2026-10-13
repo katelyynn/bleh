@@ -398,6 +398,7 @@
 		&>.page-header-avatar-glow {
 			scale: 1;
 			opacity: 0.7;
+			animation: page_avatar 3s var(--trans-function-ani) infinite;
 		}
 	}
 
@@ -425,7 +426,7 @@
 	inset: -6px;
 	border-radius: calc(var(--page-header-avatar-radius) + 6px);
 
-	border: 3px solid oklch(var(--l3-c));
+	border: 3px solid oklch(var(--l3-c) / 90%);
 
 	scale: 1.03;
 	opacity: 0;
@@ -433,8 +434,6 @@
 	transition-property: scale, opacity;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
-
-	animation: page_avatar 3s var(--trans-function-ani) infinite;
 
 	--mask2: var(--grid-mask, none);
 	mask-image: var(--mask2) !important;
