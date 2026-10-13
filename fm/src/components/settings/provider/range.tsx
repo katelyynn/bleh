@@ -18,6 +18,7 @@ import { useSettings } from '@/page.tsx';
 
 interface SettingRangeProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	id?: string;
 	bind?: string;
 	icon?: string;
 	name?: ReactNode;
@@ -42,6 +43,7 @@ type SettingRangeElement = HTMLDivElement & {
 
 export function SettingRange({
 	ref,
+	id,
 	bind,
 	icon,
 	name,
@@ -139,7 +141,7 @@ export function SettingRange({
 				)}
 				<Range
 					className='setting-inner'
-					id={bind}
+					id={bind || id}
 					value={value}
 					min={min}
 					max={max}
@@ -162,7 +164,7 @@ export function SettingRange({
 		<div
 			class='setting'
 			data-type='input'
-			id={`setting_${bind}`}
+			id={`setting_${bind || id}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}

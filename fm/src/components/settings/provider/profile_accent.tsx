@@ -124,6 +124,7 @@ export function ProfileAccent({
 							ref={convert}
 						/>
 						<SettingRange
+							id='hue'
 							name={tl(trans.hue)}
 							value={value.hue ||
 								settings_store.hue.default as number}

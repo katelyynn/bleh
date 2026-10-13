@@ -137,7 +137,7 @@ export function SettingInput({
 		<div
 			class='setting'
 			data-type='input'
-			id={`setting_${bind}`}
+			id={`setting_${bind || id}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}

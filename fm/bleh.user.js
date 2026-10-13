@@ -90127,12 +90127,12 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/range.tsx
-  function SettingRange({ ref: ref2, bind, icon: icon2, name, body, showLabel = true, value = 0, defaultValue = 0, suffix, min: min3 = 0, max: max3 = 1, step = 0.1, onChange, disabled, onMouseEnter, onMouseLeave }) {
+  function SettingRange({ ref: ref2, id, bind, icon: icon2, name, body, showLabel = true, value = 0, defaultValue = 0, suffix, min: min3 = 0, max: max3 = 1, step = 0.1, onChange, disabled, onMouseEnter, onMouseLeave }) {
     if (bind) value = settings[bind];
     const uuid = crypto.randomUUID();
     if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
+      useSettings.on(bind, (val, id2) => {
+        if (id2 == uuid) return;
         set2(val, true);
         update();
       });
@@ -90190,7 +90190,7 @@ var bleh = (() => {
           }),
           /* @__PURE__ */ jsx(Range, {
             className: "setting-inner",
-            id: bind,
+            id: bind || id,
             value,
             min: min3,
             max: max3,
@@ -90209,7 +90209,7 @@ var bleh = (() => {
     const elem = /* @__PURE__ */ jsx("div", {
       class: "setting",
       "data-type": "input",
-      id: `setting_${bind}`,
+      id: `setting_${bind || id}`,
       onMouseEnter,
       onMouseLeave,
       ref: ref2
@@ -112955,7 +112955,7 @@ var bleh = (() => {
     const elem = /* @__PURE__ */ jsx("div", {
       class: "setting",
       "data-type": "input",
-      id: `setting_${bind}`,
+      id: `setting_${bind || id}`,
       onMouseEnter,
       onMouseLeave,
       ref: ref2
@@ -123522,6 +123522,7 @@ var bleh = (() => {
                   ref: convert2
                 }),
                 /* @__PURE__ */ jsx(SettingRange, {
+                  id: "hue",
                   name: tl2(trans.hue),
                   value: value.hue || settings_store.hue.default,
                   min: settings_store.hue.min,
