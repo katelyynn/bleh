@@ -170,6 +170,7 @@ u,
 	--f4: calc(var(--lit) * 0.42) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 	--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 	--k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.38) var(--hue);
+	--x4: calc(var(--lit) * 0.2) calc(clamp(min(0), var(--sat), max(1)) * 0.24) var(--hue);
 	--g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
 	--s3: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
@@ -247,7 +248,7 @@ u,
 
 	--primary-glow: 0 3px 12px oklch(var(--h4) / 32%);
 
-	--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 40%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
+	--badge-shadow: 1px 1px 0 0 oklch(var(--h4) / 12%) inset, -1px -1px 8px 0 oklch(var(--h4) / 25%) inset;
 	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
 	--side-action-bg: oklch(var(--k4) / 5%);

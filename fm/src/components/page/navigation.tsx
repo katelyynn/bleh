@@ -1817,6 +1817,7 @@ function NavigationPage1({
 					elem.replaceChildren(
 						<div class='auth-dropdown-item-row'>
 							<span class='auth-dropdown-item-left'>
+								<Icon name={formal.icon} />
 								{formal.name}
 							</span>
 							<span class='auth-dropdown-item-right'>
