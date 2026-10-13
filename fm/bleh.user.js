@@ -63247,7 +63247,10 @@ var bleh = (() => {
     if (ff("refreshed_music_nav") && header) {
       let navlist = header.querySelector(".navlist");
       if (navlist) {
-        navlist.classList.add("redesigned-navigation", ff("header_refresh") ? "header-refresh" : "");
+        navlist.classList.add("redesigned-navigation");
+        if (ff("header_refresh")) {
+          navlist.classList.add("header-refresh");
+        }
         page.structure.container.insertBefore(navlist, page.structure.container.firstElementChild);
         page.structure.nav = navlist;
         let overview = page.structure.nav.querySelector(".secondary-nav-item--overview a");
@@ -63306,7 +63309,10 @@ var bleh = (() => {
           }
           navlist = page.structure.main.querySelector(".navlist");
           if (navlist) {
-            navlist.classList.add("redesigned-navigation", ff("header_refresh") ? "header-refresh" : "");
+            navlist.classList.add("redesigned-navigation");
+            if (ff("header_refresh")) {
+              navlist.classList.add("header-refresh");
+            }
             if (ff("mualani")) {
               let update = function() {
                 toolbar.setAttribute("data-theme", useSettings.get("theme"));
@@ -63404,7 +63410,10 @@ var bleh = (() => {
   function convert_to_toolbar() {
     const nav = page.structure.content_top.querySelector(".navlist");
     if (!nav) return;
-    nav.classList.add("redesigned-navigation", ff("header_refresh") ? "header-refresh" : "");
+    nav.classList.add("redesigned-navigation");
+    if (ff("header_refresh")) {
+      nav.classList.add("header-refresh");
+    }
     page.structure.toolbar = html.node`
         <div class="toolbar">
             ${nav}
