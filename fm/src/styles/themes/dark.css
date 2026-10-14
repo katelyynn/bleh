@@ -248,7 +248,7 @@ u,
 
 	--primary-glow: 0 3px 12px oklch(var(--h4) / 32%);
 
-	--badge-shadow: 1px 1px 0 0 oklch(var(--h4) / 12%) inset, -1px -1px 8px 0 oklch(var(--h4) / 25%) inset;
+	--badge-shadow: 1px 1px 0 0 oklch(var(--h4) / 12%) inset, -1px -4px 8px 0 oklch(var(--h4) / 20%) inset;
 	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
 	--side-action-bg: oklch(var(--k4) / 5%);

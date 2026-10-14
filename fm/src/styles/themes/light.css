@@ -138,6 +138,7 @@ u,
 		--f4: calc(clamp(min(1), var(--lit), max(1.2)) * 0.96) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue);
 		--k4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.88) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
+		--x4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -151,7 +152,7 @@ u,
 
 		--badge: oklch(var(--f4) / 60%);
 		--badge-hov: oklch(var(--f4) / 80%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 2px 6px 0 oklch(calc(clamp(min(1), var(--lit), max(1.2)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue) / 60%) inset;
+		--badge-shadow: 1px 1px 0 0 oklch(var(--l2-c) / 42%) inset, -1px -4px 8px 0 oklch(var(--h4) / 13%) inset;
 
 		--grid-colour-shadow: var(--grid-colour-shadow-override,
 				0 10px 30px oklch(var(--h4) / 30%));

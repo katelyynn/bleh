@@ -556,7 +556,7 @@
 	&>.label {
 		font-size: calc(var(--font-size) - 1px) !important;
 		--mask2: unset !important;
-		--sides: 7px;
+		--sides: 8px;
 		--bg: oklch(var(--x4) / 80%) !important;
 		--bg-hov: color-mix(in oklch, oklch(var(--h3) / 80%) 13%, oklch(var(--x4) / 80%)) !important;
 		box-shadow: var(--badge-shadow), 0 1px 2px oklch(var(--x4) / 90%) !important;
