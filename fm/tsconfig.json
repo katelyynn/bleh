@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"checkJs": true,
+		"lib": ["dom", "esnext", "dom.iterable"],
+		"module": "nodenext",
+		"moduleResolution": "bundler",
+		"jsx": "react-jsx",
+		"jsxImportSource": "jsx-dom",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"],
+		},
+	},
+}
