@@ -112,7 +112,7 @@ export function dialog({
 	if (replace_if_possible && Object.keys(dialogs).length > 0) {
 		replace = true;
 
-		for (let dialog in dialogs) {
+		for (const dialog in dialogs) {
 			replace_id = dialog;
 			break;
 		}
@@ -196,7 +196,7 @@ export function dialog_rm({
 	if (all) {
 		log('requested kill all', 'window', 'info', { dialogs });
 
-		for (let dialog in dialogs) {
+		for (const dialog in dialogs) {
 			dialog_rm({
 				id: dialog,
 			});
@@ -210,7 +210,7 @@ export function dialog_rm({
 	if (!page.structure.dialogs) return;
 
 	if (dialogs.hasOwnProperty(id)) {
-		let dialog = dialogs[id];
+		const dialog = dialogs[id];
 
 		if (!page.structure.dialogs.contains(dialog.instance)) return;
 
@@ -287,7 +287,7 @@ export function modal({
 	if (replace && Object.keys(dialogs).length > 0) {
 		replace = true;
 
-		for (let dialog in dialogs) {
+		for (const dialog in dialogs) {
 			replace_id = dialog;
 			break;
 		}

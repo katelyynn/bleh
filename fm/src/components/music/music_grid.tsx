@@ -355,7 +355,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								let button = html.node`
+								const button = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
 									name.getAttribute('href')
 								}">
@@ -386,7 +386,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								let button = html.node`
+								const button = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
 									name.getAttribute('href')
 								}">
@@ -415,7 +415,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								let button = html.node`
+								const button = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
 									artist.getAttribute('href')
 								}">

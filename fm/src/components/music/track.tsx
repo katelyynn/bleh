@@ -775,7 +775,7 @@ export function patch_titles(search = page.structure.main) {
 						log('has delete button', 'track', 'info', {
 							delete_button,
 						});
-						let form = delete_button.parentElement;
+						const form = delete_button.parentElement;
 
 						page.token = form.querySelector(
 							'[name="csrfmiddlewaretoken"]',

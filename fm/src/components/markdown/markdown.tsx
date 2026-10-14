@@ -748,8 +748,8 @@ export function markdown_field(
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.value;
+							const link_text = link.value;
 
 							if (!link_text) return;
 
@@ -843,8 +843,8 @@ export function markdown_field(
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.value;
+							const link_text = link.value;
 
 							if (!link_text) return;
 
@@ -956,7 +956,7 @@ export function markdown_field(
 								selected.startsWith(item.start) &&
 								selected.endsWith(item.end)
 							) {
-								let replace_end = -1 * item.end.length;
+								const replace_end = -1 * item.end.length;
 
 								if (replace_end != 0) {
 									replacement = selected.slice(

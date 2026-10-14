@@ -61,7 +61,7 @@ export function calendar({
 	let legacy_date;
 	let date_display;
 	let time_input;
-	let popup_inner = html.node`<div class="calendar" />`;
+	const popup_inner = html.node`<div class="calendar" />`;
 
 	const locale = lang;
 	const months = Array.from(

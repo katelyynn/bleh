@@ -260,7 +260,7 @@ export function setting({
 					return;
 				}
 
-				let val = settings[id];
+				const val = settings[id];
 
 				toggle.setAttribute('aria-checked', !val);
 
@@ -446,8 +446,8 @@ export function setting({
 		} else if (type == 'text') {
 			let option;
 
-			let min = settings_store[id].min || 0;
-			let max = settings_store[id].max || 0;
+			const min = settings_store[id].min || 0;
+			const max = settings_store[id].max || 0;
 
 			if (max === 0) {
 				return setting_fail(id, {
@@ -513,7 +513,7 @@ export function setting({
                         ${
 						settings_store[id].extensions.map(
 							(extension) => () => {
-								let container = html.node`
+								const container = html.node`
                                 <div class="extension">
                                     <div class="bleh-icon" />
                                 </div>
@@ -726,7 +726,7 @@ export function setting({
                             ${
 							settings_store[id].extensions.map(
 								(extension) => () => {
-									let container = html.node`
+									const container = html.node`
                                     <div class="extension">
                                         <div class="bleh-icon" />
                                     </div>
@@ -796,7 +796,7 @@ export function setting({
 					return;
 				}
 
-				let val = settings[id];
+				const val = settings[id];
 
 				toggle.setAttribute('aria-checked', !val);
 
@@ -830,7 +830,7 @@ export function setting({
 
 			return elem;
 		} else if (type == 'tabs') {
-			let buttons = [];
+			const buttons = [];
 
 			const values = settings_store[id].values || list;
 
@@ -881,7 +881,7 @@ export function setting({
                 </div>
             `;
 		} else if (type == 'radio') {
-			let buttons = [];
+			const buttons = [];
 
 			let reset_btn;
 
@@ -923,7 +923,7 @@ export function setting({
                             ${
 							settings_store[id].extensions.map(
 								(extension) => () => {
-									let container = html.node`
+									const container = html.node`
                                     <div class="extension">
                                         <div class="bleh-icon" />
                                     </div>
@@ -1435,7 +1435,7 @@ export function setting({
 
 			let select_hook;
 
-			let elem = html.node`
+			const elem = html.node`
                 <div class="setting v2" data-type="select" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${
 				value != settings_store[id].default
 			}>
@@ -1469,7 +1469,7 @@ export function setting({
                         ${
 						settings_store[id].extensions.map(
 							(extension) => () => {
-								let container = html.node`
+								const container = html.node`
                                 <div class="extension">
                                     <div class="bleh-icon" />
                                 </div>
@@ -1593,7 +1593,7 @@ function setting_incompatible_block(entries) {
         <div class="incompatible">
             ${
 		entries.map((incompatible) => () => {
-			let container = html.node`
+			const container = html.node`
                     <div class="extension">
                         <div class="bleh-icon" />
                     </div>
@@ -1781,11 +1781,11 @@ export function seasonal_colour_switch() {
 export function compile_settings() {
 	const clone = structuredClone(settings);
 
-	for (let s in clone) {
+	for (const s in clone) {
 		console.log('settings marin before loop', s, clone[s], typeof clone[s]);
 	}
 
-	for (let setting in clone) {
+	for (const setting in clone) {
 		if (
 			settings_store[setting] &&
 			JSON.stringify(clone[setting]) ===

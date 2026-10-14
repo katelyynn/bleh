@@ -276,7 +276,7 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 					}
 
 					if (ff('mualani')) {
-						let toolbar = html.node`
+						const toolbar = html.node`
                             <div class="toolbar">
                                 ${navlist}
                             </div>

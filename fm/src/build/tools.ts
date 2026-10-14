@@ -163,8 +163,8 @@ export function desanitise(text: string, method = '+') {
  * @see return_artist_from_generic
  */
 export function return_artist_from_track(url, is_album) {
-	let split = url.split('/');
-	let length = split.length - 1;
+	const split = url.split('/');
+	const length = split.length - 1;
 
 	let desanitised;
 
@@ -189,8 +189,8 @@ export function return_artist_from_track(url, is_album) {
  * @see return_artist_from_track
  */
 export function return_artist_from_generic(url: string) {
-	let split = url.split('/');
-	let length = split.length - 1;
+	const split = url.split('/');
+	const length = split.length - 1;
 
 	// artist/_/name in the url means it is a track
 	if (split[length - 1] != '_') return desanitise(split[length - 1]);

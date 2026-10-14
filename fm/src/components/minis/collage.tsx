@@ -364,7 +364,7 @@ export function collage({ host, sidebar } = {}) {
 		);
 
 		if (pages > 4 && !bypass) {
-			let warn = notify({
+			const warn = notify({
 				id: 'collage_warning',
 				title: tl(trans.are_you_sure),
 				body: tl(trans.this_will_require_loading_count_pages, {
@@ -532,7 +532,7 @@ export function collage({ host, sidebar } = {}) {
 				grid.style.setProperty('--radius-s', '0');
 			}
 
-			let total = width.current.value * rows - 1;
+			const total = width.current.value * rows - 1;
 			grid.style.setProperty(
 				'--highest',
 				Math.max(+width.current.value, +rows)

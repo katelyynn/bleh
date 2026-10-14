@@ -233,7 +233,7 @@ export function bleh_music_chart_render() {
 
 	Chart.defaults.color = page.state.chart_colours.text_col;
 	Chart.defaults.font.family = page.state.chart_colours.font;
-	let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+	const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 		type: 'line',
 		data: {
 			labels: labels,
@@ -268,8 +268,8 @@ function fill_graph_blocks(labels: DateTime[], values: number[]) {
 	const title = page.state.graph_title;
 
 	let sum = 0;
-	let max = Math.max(...values);
-	let avg = values.reduce((sum, val) => sum + val, 0) / values.length;
+	const max = Math.max(...values);
+	const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
 
 	values.forEach((value, i) => {
 		const label = labels[i];

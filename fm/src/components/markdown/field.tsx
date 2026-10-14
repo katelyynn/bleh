@@ -157,8 +157,8 @@ export function MarkdownField({
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.value;
+							const link_text = link.value;
 
 							if (!link_text) return;
 
@@ -353,7 +353,7 @@ export function MarkdownField({
 													elem.selectionStart;
 												const sel_end =
 													elem.selectionEnd;
-												let new_val = elem.value;
+												const new_val = elem.value;
 
 												if (item.func) {
 													item.func().then(

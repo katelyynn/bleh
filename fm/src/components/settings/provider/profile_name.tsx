@@ -87,7 +87,7 @@ export function ProfileName({
 	function present() {
 		if (disabled) return;
 
-		let name = value.name;
+		const name = value.name;
 		let font = value.font;
 		let style = value.style;
 		const current_preview = createRef();

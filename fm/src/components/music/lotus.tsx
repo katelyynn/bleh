@@ -69,22 +69,22 @@ log('finalised flat patterns', 'lotus', 'info', { flat_patterns });
 export function lotus(force = false) {
 	if (!useSettings.get('corrections')) return;
 
-	let lotus_artist = localStorage.getItem('lotus_artist');
-	let lotus_artist_expire = new Date(
+	const lotus_artist = localStorage.getItem('lotus_artist');
+	const lotus_artist_expire = new Date(
 		localStorage.getItem('lotus_artist_expire'),
 	);
 
-	let lotus_album_track = localStorage.getItem('lotus_album_track');
-	let lotus_album_track_expire = new Date(
+	const lotus_album_track = localStorage.getItem('lotus_album_track');
+	const lotus_album_track_expire = new Date(
 		localStorage.getItem('lotus_album_track_expire'),
 	);
 
-	let lotus_combined_artists = localStorage.getItem('lotus_combined_artists');
-	let lotus_combined_artists_expire = new Date(
+	const lotus_combined_artists = localStorage.getItem('lotus_combined_artists');
+	const lotus_combined_artists_expire = new Date(
 		localStorage.getItem('lotus_combined_artists_expire'),
 	);
 
-	let current_time = new Date();
+	const current_time = new Date();
 
 	if (!lotus_artist) {
 		log('artist list is not cached, fetching', 'lotus');
@@ -150,11 +150,11 @@ function lotus_request(
 	send_notify = false,
 	refresh_page = false,
 ) {
-	let button = document.body.querySelector('[onclick="_lotus_check()"]');
+	const button = document.body.querySelector('[onclick="_lotus_check()"]');
 	if (button != null) button.setAttribute('disabled', '');
 
-	let xhr = new XMLHttpRequest();
-	let url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
+	const xhr = new XMLHttpRequest();
+	const url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
 	xhr.onload = function () {
@@ -169,7 +169,7 @@ function lotus_request(
 		}
 
 		// set expire date
-		let api_expire = new Date();
+		const api_expire = new Date();
 
 		if (xhr.status == 200) {
 			if (type == 'artist') {
@@ -286,7 +286,7 @@ export function lotus_modal() {
 export function correct_generic_artist(parent) {
 	if (!page.structure.container) return;
 
-	let albums = page.structure.container.querySelectorAll(`.${parent}`);
+	const albums = page.structure.container.querySelectorAll(`.${parent}`);
 	if (albums.length == 0) return;
 
 	if (!useSettings.get('corrections')) return;
@@ -295,7 +295,7 @@ export function correct_generic_artist(parent) {
 		if (!album.hasAttribute('data-kate-processed')) {
 			album.setAttribute('data-kate-processed', 'true');
 
-			let artist_name = album.querySelector(
+			const artist_name = album.querySelector(
 				`.${parent.replace('-details', '')}-name a`,
 			);
 			if (!artist_name) return;
@@ -778,8 +778,8 @@ export function create_correction(
 	existing = false,
 ) {
 	let title;
-	let current = name;
-	let link = window.location.href;
+	const current = name;
+	const link = window.location.href;
 
 	let correction;
 	let sources;

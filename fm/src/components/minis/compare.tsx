@@ -536,7 +536,7 @@ export function compare({ host, sidebar } = {}) {
 			});
 
 			page.state.compare.shared.forEach((data, index) => {
-				let template = `${sanitise(data.sister)}/_/${
+				const template = `${sanitise(data.sister)}/_/${
 					sanitise(data.name)
 				}`;
 

@@ -1618,7 +1618,7 @@ export function mualani() {
 					<button
 						class="btn continue"
 						onclick=${() => {
-							let notification = notify({
+							const notification = notify({
 								id: 'async',
 								title: 'progress',
 								body: 'downloading...',
@@ -1700,7 +1700,7 @@ export function mualani() {
 				<div class="inner-preview pad">
 					<div class="bars" ref=${(el) => (bars = el)}>
 			            ${() => {
-				let max = 100_000;
+				const max = 100_000;
 
 				for (
 					let value = 0;

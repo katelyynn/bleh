@@ -320,11 +320,11 @@ export function update_colour_swatches() {
 	let custom = null;
 	let seasonal = null;
 
-	let swatches = page.structure.main.querySelectorAll('.swatch');
+	const swatches = page.structure.main.querySelectorAll('.swatch');
 	swatches.forEach((swatch) => {
-		let h = swatch.style.getPropertyValue('--hue-over');
-		let s = swatch.style.getPropertyValue('--sat-over');
-		let l = swatch.style.getPropertyValue('--lit-over');
+		const h = swatch.style.getPropertyValue('--hue-over');
+		const s = swatch.style.getPropertyValue('--sat-over');
+		const l = swatch.style.getPropertyValue('--lit-over');
 
 		let parent = swatch.parentElement;
 		if (swatch.classList[0] == 'dropdown-menu-clickable-item') {
@@ -382,7 +382,7 @@ export function update_inbuilt_item(
 	//console.log('update item',item,value);
 	console.warn('update item', item, value, 'modify', modify);
 
-	let test_if_valid = element.querySelector(`#toggle-${item}`);
+	const test_if_valid = element.querySelector(`#toggle-${item}`);
 	console.warn(test_if_valid, `toggle-${item}`);
 	//console.info(test_if_valid, item, value, inbuilt_settings[item], 'modify', modify);
 	if (test_if_valid == undefined) return;

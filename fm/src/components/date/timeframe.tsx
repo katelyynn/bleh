@@ -388,7 +388,7 @@ export function hybrid_timeframe_picker({
         </button>
     `;
 
-	let menu = tippy(elem, {
+	const menu = tippy(elem, {
 		theme: 'window',
 		content: html.node``,
 		placement: 'bottom',

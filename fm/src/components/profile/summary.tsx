@@ -318,9 +318,9 @@ export function bleh_profile_chart_render(
 
 	if (entries.length == 0) return;
 
-	let labels = [];
+	const labels = [];
 	const links = [];
-	let values = [];
+	const values = [];
 
 	page.state.glacier.links = [];
 	entries.forEach((entry) => {
@@ -385,7 +385,7 @@ export function bleh_profile_chart_render(
 
 	Chart.defaults.color = page.state.chart_colours.text_col;
 	Chart.defaults.font.family = page.state.chart_colours.font;
-	let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+	const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 		type: 'line',
 		data: {
 			labels: labels,
@@ -416,7 +416,7 @@ export function bleh_profile_chart_render(
 	const scrobble_canvas_2 = document.createElement('canvas');
 	scrobble_canvas_2.classList.add('scrobble-canvas', 'monthly-canvas-pie');
 
-	let scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
+	const scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
 		type: 'pie',
 		data: {
 			labels: labels,

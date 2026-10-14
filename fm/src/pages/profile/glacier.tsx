@@ -934,7 +934,7 @@ function bleh_glacier_insights_generate(type, item) {
 			gradient = page.state.chart_colours.link_bg_col;
 		}
 
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'line',
 			data: {
 				labels: item.labels,
@@ -954,7 +954,7 @@ function bleh_glacier_insights_generate(type, item) {
 			options: page.state.chart_library_line_options_no_click,
 		});
 	} else if (settings.chart_insights_view == 'pie') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'pie',
 			data: {
 				labels: item.labels,
@@ -1094,7 +1094,7 @@ function bleh_glacier_insights_generate(type, item) {
 			options: page.state.chart_library_pie_options_no_click,
 		});
 	} else if (settings.chart_insights_view == 'bar') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'bar',
 			data: {
 				labels: item.labels,
@@ -1345,7 +1345,7 @@ export function bleh_glacier_date_graph_generate() {
 			gradient = page.state.chart_colours.link_bg_col;
 		}
 
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'line',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1365,7 +1365,7 @@ export function bleh_glacier_date_graph_generate() {
 			options: page.state.chart_library_line_options,
 		});
 	} else if (settings.chart_view == 'pie') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'pie',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1384,7 +1384,7 @@ export function bleh_glacier_date_graph_generate() {
 			options: page.state.chart_library_pie_options,
 		});
 	} else if (settings.chart_view == 'bar') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'bar',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1561,7 +1561,7 @@ function bleh_glacier_library_focused() {
 				'glacier-library-button',
 			);
 
-			let tooltips = wrapper.querySelectorAll(
+			const tooltips = wrapper.querySelectorAll(
 				'.user-library-controls-tooltip',
 			);
 			tooltips.forEach((tooltip) => {
@@ -1695,7 +1695,7 @@ function bleh_glacier_library_focused() {
 		);
 
 		metadatas.forEach((meta) => {
-			let glacier_meta_item = document.createElement('div');
+			const glacier_meta_item = document.createElement('div');
 			glacier_meta_item.classList.add('glacier-library-metadata-item');
 			glacier_meta_item.innerHTML = `
                 <div class="sub-text">${
@@ -1717,7 +1717,7 @@ function bleh_glacier_library_focused() {
 		page.structure.main.firstElementChild,
 	);
 
-	let overview_headers = page.structure.main.querySelectorAll(
+	const overview_headers = page.structure.main.querySelectorAll(
 		'.library-overview-header',
 	);
 	overview_headers.forEach((top) => {

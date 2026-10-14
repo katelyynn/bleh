@@ -105,7 +105,7 @@ export function oracle_process() {
 
 	const split = window.location.pathname.split('/');
 
-	let oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
+	const oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
 		{};
 
 	const now = Date.now();
@@ -138,7 +138,7 @@ export function oracle_process() {
 
 	if (!oracle_cache[artist]) oracle_cache[artist] = {};
 
-	let cache = oracle_cache[artist][item] || {
+	const cache = oracle_cache[artist][item] || {
 		album: {},
 		track: {},
 	};
@@ -540,7 +540,7 @@ export function oracle_process() {
 		if (tries < 1) return;
 		tries--;
 
-		let top_track = page.state.top_track;
+		const top_track = page.state.top_track;
 		let url;
 
 		let type = 'artist';
@@ -1462,8 +1462,8 @@ export function oracle_process() {
 					if (video) return html.node``;
 
 					const artists = track['artist-credit'];
-					let inherit_guests = [];
-					let guests = [];
+					const inherit_guests = [];
+					const guests = [];
 					let found_feature = false;
 					let first_joinphrase;
 
@@ -1609,7 +1609,7 @@ export function oracle_process() {
 		// let's comb through the releases to remove
 		// various artists
 		let releases = [];
-		let releases_to_move = [];
+		const releases_to_move = [];
 
 		if (!recording) {
 			if (releases_panel) {
@@ -1647,7 +1647,7 @@ export function oracle_process() {
 
 		// let's look thru the last.fm provided ones
 		// to possibly get listener and cover data
-		let lastfm_releases = [];
+		const lastfm_releases = [];
 		const lastfm_source_albums = albums_and_lyrics_row?.querySelectorAll(
 			'.source-album',
 		);
@@ -1863,7 +1863,7 @@ export function oracle_process() {
 			if (releases[0]) {
 				const release = releases[0];
 
-				let title = release.title;
+				const title = release.title;
 				const artist = fix_title(
 					oracle_aliases(
 						release['artist-credit']?.[0] ||
@@ -2013,7 +2013,7 @@ export function oracle_process() {
 							log('release', 'oracle', 'log', {
 								release,
 							});
-							let title = release.title;
+							const title = release.title;
 							const artist = fix_title(
 								oracle_aliases(
 									release['artist-credit']?.[0] ||
@@ -2782,22 +2782,22 @@ export function oracle_process() {
 export function oracle_data(force = false) {
 	if (!(ff('oracle') && settings.oracle_beta)) return;
 
-	let cached_artists = localStorage.getItem('oracle_artists');
-	let cached_artists_expire = new Date(
+	const cached_artists = localStorage.getItem('oracle_artists');
+	const cached_artists_expire = new Date(
 		localStorage.getItem('oracle_artists_expire'),
 	);
 
-	let cached_albums = localStorage.getItem('oracle_albums');
-	let cached_albums_expire = new Date(
+	const cached_albums = localStorage.getItem('oracle_albums');
+	const cached_albums_expire = new Date(
 		localStorage.getItem('oracle_albums_expire'),
 	);
 
-	let cached_tracks = localStorage.getItem('oracle_tracks');
-	let cached_tracks_expire = new Date(
+	const cached_tracks = localStorage.getItem('oracle_tracks');
+	const cached_tracks_expire = new Date(
 		localStorage.getItem('oracle_tracks_expire'),
 	);
 
-	let current_time = new Date();
+	const current_time = new Date();
 
 	if (!cached_artists) {
 		log('artists list is not cached, fetching', 'oracle');
@@ -2859,8 +2859,8 @@ function parse(value: {}, key: string, type: string) {
 }
 
 function oracle_request(type = 'albums', send_notify = false) {
-	let xhr = new XMLHttpRequest();
-	let url =
+	const xhr = new XMLHttpRequest();
+	const url =
 		`https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
@@ -2876,7 +2876,7 @@ function oracle_request(type = 'albums', send_notify = false) {
 		}
 
 		// set expire date
-		let api_expire = new Date();
+		const api_expire = new Date();
 
 		if (xhr.status == 200) {
 			if (type == 'artists') {
@@ -2944,7 +2944,7 @@ export function oracle_credits() {
 				acc[type] = [];
 			}
 
-			let existing = acc[type].find((a) => a.name == name);
+			const existing = acc[type].find((a) => a.name == name);
 
 			if (!existing) {
 				acc[type].push({
@@ -3013,7 +3013,7 @@ export function oracle_credits() {
                 </div>
                 `
 				: grouped.map(([type, artists]) => {
-					let text = trans.hasOwnProperty(`oracle_${type}`)
+					const text = trans.hasOwnProperty(`oracle_${type}`)
 						? tl(trans[`oracle_${type}`])
 						: `${type} (unknown, please report as bug)`;
 
@@ -3371,10 +3371,10 @@ function report_incorrect() {
 		return;
 	}
 
-	let title = `${correct_artist(page.sister)} - ${
+	const title = `${correct_artist(page.sister)} - ${
 		correct_item_by_artist(page.name, page.sister)
 	}`;
-	let link = window.location.href;
+	const link = window.location.href;
 
 	let sources;
 

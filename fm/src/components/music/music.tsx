@@ -628,17 +628,17 @@ export function show_your_scrobbles() {
 }
 
 function show_numbers_on_side(header_type) {
-	let metadata = document.body.querySelectorAll('.header-metadata-tnew-item');
+	const metadata = document.body.querySelectorAll('.header-metadata-tnew-item');
 
-	let listeners = {};
-	let scrobbles = {};
-	let metascore = {};
+	const listeners = {};
+	const scrobbles = {};
+	const metascore = {};
 
 	metadata.forEach((item, index) => {
-		let text = item
+		const text = item
 			.querySelector('.header-metadata-tnew-title')
 			.textContent.trim();
-		let value = item.querySelector('.header-metadata-tnew-display abbr');
+		const value = item.querySelector('.header-metadata-tnew-display abbr');
 
 		if (index == 0) {
 			listeners.text = text;
@@ -649,7 +649,7 @@ function show_numbers_on_side(header_type) {
 			scrobbles.value = clean_number(value.getAttribute('title'));
 			scrobbles.abbr = value.textContent.trim();
 		} else if (index == 2) {
-			let link = item.querySelector('a');
+			const link = item.querySelector('a');
 			if (!link) return;
 
 			metascore.text = text;
@@ -663,7 +663,7 @@ function show_numbers_on_side(header_type) {
 	music_summary(listeners, scrobbles, metascore);
 
 	// get panel
-	let panel = page.structure.side.querySelector(
+	const panel = page.structure.side.querySelector(
 		'section.section-with-separator:has(.listener-trend)',
 	);
 
@@ -671,7 +671,7 @@ function show_numbers_on_side(header_type) {
 
 	// is there album artwork?
 	if (page.type == 'album') {
-		let album_artwork = document.body.querySelector(
+		const album_artwork = document.body.querySelector(
 			'.artwork-and-metadata-row',
 		);
 
@@ -683,7 +683,7 @@ function show_numbers_on_side(header_type) {
 		}
 	}
 
-	let masonry = page.structure.row.querySelector(
+	const masonry = page.structure.row.querySelector(
 		':scope > .col-sidebar.masonry-right',
 	);
 	if (masonry) {
@@ -692,12 +692,12 @@ function show_numbers_on_side(header_type) {
 	}
 
 	if (page.type == 'album' || page.type == 'artist') {
-		let upper = document.body.querySelector('.col-main');
+		const upper = document.body.querySelector('.col-main');
 		upper.classList.add('upper-overview-to-hide');
 		// make last-child
 		page.structure.row.appendChild(upper);
 
-		let new_upper = document.createElement('div');
+		const new_upper = document.createElement('div');
 		new_upper.classList.add('top-overview-panel');
 		new_upper.setAttribute('data-page-type', page.type);
 		new_upper.innerHTML = upper.innerHTML;
@@ -710,7 +710,7 @@ function show_numbers_on_side(header_type) {
 
 	// is there a video?
 	if (page.type == 'track') {
-		let video_col = document.body.querySelector(
+		const video_col = document.body.querySelector(
 			'.track-overview-video-column.col-sidebar',
 		);
 
@@ -725,7 +725,7 @@ function show_numbers_on_side(header_type) {
 			page.structure.side.firstElementChild,
 		);
 
-		let video = video_col.querySelector('.video-preview');
+		const video = video_col.querySelector('.video-preview');
 
 		if (!video) {
 			video_unavailable(video_col);
@@ -738,8 +738,8 @@ function show_numbers_on_side(header_type) {
 			page.structure.side.firstElementChild,
 		);
 
-		let playlink = video.querySelector('.video-preview-playlink a');
-		let replace = video_col.querySelector('.video-preview-replace a');
+		const playlink = video.querySelector('.video-preview-playlink a');
+		const replace = video_col.querySelector('.video-preview-replace a');
 
 		video.appendChild(html.node`
             <a class="link-block-cover-link" href=${playlink.href} target="_blank" />
@@ -763,7 +763,7 @@ function show_numbers_on_side(header_type) {
 }
 
 function video_unavailable(video_col = null) {
-	let cta = page.structure.side.querySelector('.video-preview-upload-cta');
+	const cta = page.structure.side.querySelector('.video-preview-upload-cta');
 	if (cta) return;
 
 	if (video_col) page.structure.side.removeChild(video_col);
@@ -826,13 +826,13 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
 		position += (parseInt(page.requested.page) - 1) * 30;
 	}
 
-	let avatar = listener.querySelector(`.${key}-item-image`);
-	let name_wrap = listener.querySelector(`.${key}-item-name a`);
-	let name = name_wrap.textContent;
+	const avatar = listener.querySelector(`.${key}-item-image`);
+	const name_wrap = listener.querySelector(`.${key}-item-name a`);
+	const name = name_wrap.textContent;
 
-	let track_wrap = listener.querySelector(`.${key}-track`);
+	const track_wrap = listener.querySelector(`.${key}-track`);
 
-	let follow = listener.querySelector('.class');
+	const follow = listener.querySelector('.class');
 
 	let name_link;
 	let user_list_avatar;
@@ -874,7 +874,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
     `;
 
 	if (track_wrap) {
-		let track_link = about_me.querySelector('a');
+		const track_link = about_me.querySelector('a');
 
 		track_link.classList.add('top-track');
 		if (useSettings.get('format_guest_features')) {

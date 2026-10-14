@@ -444,7 +444,7 @@ export function bleh_artists() {
 			overview.classList.add('secondary-nav-item--global');
 			overview.querySelector('a').textContent = tl(trans.global);
 
-			let mutuals = toolbar.querySelector(
+			const mutuals = toolbar.querySelector(
 				'.secondary-nav-item--you-know a',
 			);
 			mutuals.textContent = tl(trans.mutuals);

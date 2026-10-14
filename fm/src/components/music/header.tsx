@@ -222,7 +222,7 @@ export function artist_title(header = document.body) {
 		page.multi = true;
 		title.innerHTML = '';
 
-		let split = title_text.split(';');
+		const split = title_text.split(';');
 
 		if (split.length < 2) {
 			page.multi = false;

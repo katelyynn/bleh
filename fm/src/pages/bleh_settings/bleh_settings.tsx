@@ -538,11 +538,11 @@ export function register_skip_to(
 
 	if (list == null) return;
 
-	let panel = page.structure.side.querySelector('.skip-to-list');
+	const panel = page.structure.side.querySelector('.skip-to-list');
 	panel.innerHTML = '';
 
 	list.forEach((item) => {
-		let button = document.createElement('button');
+		const button = document.createElement('button');
 		button.classList.add('skip-to-item');
 		button.setAttribute('onclick', `_scroll_to_setting('${item.id}')`);
 		button.textContent = item.name;
@@ -579,7 +579,7 @@ export function change_settings_page(page_id, setting = null) {
 
 	page.structure.main.innerHTML = '';
 
-	let btns = page.structure.container.querySelectorAll('.bleh--nav');
+	const btns = page.structure.container.querySelectorAll('.bleh--nav');
 	btns.forEach((btn) => {
 		const id = btn.getAttribute('data-bleh-page');
 
@@ -614,12 +614,12 @@ export function change_settings_page(page_id, setting = null) {
 	}
 
 	if (setting != null) {
-		let setting_container = page.structure.main.querySelector(
+		const setting_container = page.structure.main.querySelector(
 			`.setting[data-id="${setting}"]`,
 		);
 
 		if (setting_container != null) {
-			let y = setting_container.getBoundingClientRect().top +
+			const y = setting_container.getBoundingClientRect().top +
 				window.scrollY -
 				300;
 			window.scroll({
@@ -651,10 +651,10 @@ unsafeWindow._update_flag_toggle = function (flag, container) {
 	update_flag_toggle(flag, container);
 };
 function update_flag_toggle(flag, container) {
-	let button = container.querySelector('.toggle');
+	const button = container.querySelector('.toggle');
 	if (!button) return;
 
-	let current_state = ff(flag);
+	const current_state = ff(flag);
 
 	button.setAttribute('aria-checked', !current_state);
 	settings.feature_flags[flag] = !current_state;
@@ -668,12 +668,12 @@ function update_flag_toggle(flag, container) {
 }
 
 function init_profile_notes() {
-	let profile_notes_table = page.structure.main.querySelector(
+	const profile_notes_table = page.structure.main.querySelector(
 		'.profile-notes',
 	);
 	if (!profile_notes_table) return;
 
-	let profile_notes =
+	const profile_notes =
 		JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
 
 	if (Object.keys(profile_notes).length == 0) return;
@@ -682,7 +682,7 @@ function init_profile_notes() {
 		'generic-table-list user-vertical-list take-space profile-notes';
 	profile_notes_table.innerHTML = '';
 
-	for (let user in profile_notes) {
+	for (const user in profile_notes) {
 		profile_notes_table.appendChild(html.node`
             <div class="generic-table-list-entry user-vertical-list-item" id="profile-note-row--${user}">
                 <div class="name">
@@ -729,7 +729,7 @@ function init_profile_notes() {
 }
 
 function delete_profile_note(user) {
-	let profile_notes =
+	const profile_notes =
 		JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
 	delete profile_notes[username];
 	document
@@ -740,10 +740,10 @@ function delete_profile_note(user) {
 }
 
 function edit_profile_note(user) {
-	let profile_notes =
+	const profile_notes =
 		JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
 
-	let modal = dialog({
+	const modal = dialog({
 		id: 'edit_profile_note',
 		title: tl(trans.edit_profile_note),
 		body: html.node`
@@ -766,9 +766,9 @@ function edit_profile_note(user) {
 }
 
 function save_profile_note_in_window(modal, user) {
-	let profile_notes =
+	const profile_notes =
 		JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
-	let value_to_save = modal
+	const value_to_save = modal
 		.querySelector('#bleh--profile-note')
 		.value.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
@@ -785,11 +785,11 @@ function save_profile_note_in_window(modal, user) {
 }
 
 export function prepare_corrections_page() {
-	let corrections_table_artist = document.getElementById(
+	const corrections_table_artist = document.getElementById(
 		'corrections-artist',
 	);
 
-	for (let artist in artist_corrections) {
+	for (const artist in artist_corrections) {
 		if (artist == 'version') continue;
 
 		corrections_table_artist.appendChild(html.node`
@@ -806,11 +806,11 @@ export function prepare_corrections_page() {
 
 	//
 
-	let corrections_table_albums_tracks = document.getElementById(
+	const corrections_table_albums_tracks = document.getElementById(
 		'corrections-albums_tracks',
 	);
 
-	for (let artist in album_track_corrections) {
+	for (const artist in album_track_corrections) {
 		if (artist == 'version') continue;
 
 		corrections_table_albums_tracks.appendChild(html.node`
@@ -819,7 +819,7 @@ export function prepare_corrections_page() {
             </div>
         `);
 
-		for (let media in album_track_corrections[artist]) {
+		for (const media in album_track_corrections[artist]) {
 			corrections_table_albums_tracks.appendChild(html.node`
                 <div class="correction-row">
                     <div class="primary-name pre-transition">
@@ -972,10 +972,10 @@ function confirm_reset() {
 }
 
 function activity_preview() {
-	let preview = page.structure.main.querySelector('.activity-preview');
+	const preview = page.structure.main.querySelector('.activity-preview');
 	if (!preview) return;
 
-	let random_types = [
+	const random_types = [
 		'love',
 		'love',
 		'love',
@@ -988,7 +988,7 @@ function activity_preview() {
 		'shout',
 		'wiki',
 	];
-	let random_involved = [
+	const random_involved = [
 		{
 			name: 'Espresso',
 			type: 'track',
@@ -1302,7 +1302,7 @@ export function theme_bubbles(func = null) {
 		},
 	];
 
-	let buttons = [];
+	const buttons = [];
 
 	const bubbles = html.node`
         <div class="theme-bubbles">

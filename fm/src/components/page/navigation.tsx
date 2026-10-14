@@ -1600,7 +1600,7 @@ export async function live_status() {
 		artist.removeAttribute('target');
 		album.removeAttribute('target');
 
-		let next = new Date();
+		const next = new Date();
 		next.setMinutes(next.getMinutes() + 1);
 
 		if (useSettings.get('format_guest_features')) {
