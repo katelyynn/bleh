@@ -40506,8 +40506,8 @@ var bleh = (() => {
     );
   }
   function return_artist_from_track(url, is_album) {
-    let split = url.split("/");
-    let length = split.length - 1;
+    const split = url.split("/");
+    const length = split.length - 1;
     let desanitised;
     if (is_album) desanitised = desanitise(split[length - 1]);
     else desanitised = desanitise(split[length - 2]);
@@ -40519,8 +40519,8 @@ var bleh = (() => {
     return desanitised;
   }
   function return_artist_from_generic(url) {
-    let split = url.split("/");
-    let length = split.length - 1;
+    const split = url.split("/");
+    const length = split.length - 1;
     if (split[length - 1] != "_") return desanitise(split[length - 1]);
     else return desanitise(split[length - 2]);
   }
@@ -55381,7 +55381,7 @@ var bleh = (() => {
     if (replace && replace_if_possible) replace_if_possible = false;
     if (replace_if_possible && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (let dialog7 in dialogs) {
+      for (const dialog7 in dialogs) {
         replace_id = dialog7;
         break;
       }
@@ -55456,7 +55456,7 @@ var bleh = (() => {
     }
     if (all) {
       log("requested kill all", "window", "info", { dialogs });
-      for (let dialog7 in dialogs) {
+      for (const dialog7 in dialogs) {
         dialog_rm({
           id: dialog7
         });
@@ -55466,7 +55466,7 @@ var bleh = (() => {
     if (!id) return;
     if (!page.structure.dialogs) return;
     if (dialogs.hasOwnProperty(id)) {
-      let dialog7 = dialogs[id];
+      const dialog7 = dialogs[id];
       if (!page.structure.dialogs.contains(dialog7.instance)) return;
       log(`queuing ${id} to kill`, "window");
       dialog7.instance.classList.add("to-remove");
@@ -55515,7 +55515,7 @@ var bleh = (() => {
     let replace_id = "";
     if (replace && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (let dialog7 in dialogs) {
+      for (const dialog7 in dialogs) {
         replace_id = dialog7;
         break;
       }
@@ -56794,7 +56794,7 @@ var bleh = (() => {
     let legacy_date;
     let date_display;
     let time_input;
-    let popup_inner = html.node`<div class="calendar" />`;
+    const popup_inner = html.node`<div class="calendar" />`;
     const locale = lang;
     const months2 = Array.from(
       { length: 12 },
@@ -62834,19 +62834,19 @@ var bleh = (() => {
 
   // src/pages/music/wiki.tsx
   function bleh_wiki() {
-    let wiki_panel = document.createElement("section");
+    const wiki_panel = document.createElement("section");
     wiki_panel.classList.add("wiki-panel");
     wiki_panel.innerHTML = page.structure.main.innerHTML;
     page.structure.main.innerHTML = "";
     page.structure.main.appendChild(wiki_panel);
     page.structure.main.classList.add("not-a-panel");
-    let original_edit_button = page.structure.main.querySelector(
+    const original_edit_button = page.structure.main.querySelector(
       ".qa-wiki-edit"
     );
-    let original_version_history = page.structure.main.querySelector(
+    const original_version_history = page.structure.main.querySelector(
       ".wiki-history-link--desktop a"
     );
-    let side_actions = document.createElement("section");
+    const side_actions = document.createElement("section");
     side_actions.classList.add("side-actions");
     if (!page.mobile) {
       page.structure.side.insertBefore(
@@ -62857,7 +62857,7 @@ var bleh = (() => {
       page.structure.main.appendChild(side_actions);
     }
     if (original_edit_button) {
-      let side_edit = document.createElement("a");
+      const side_edit = document.createElement("a");
       side_edit.classList.add("btn", "side-action", "icon-mask");
       side_edit.setAttribute(
         "href",
@@ -62868,7 +62868,7 @@ var bleh = (() => {
       side_actions.appendChild(side_edit);
     }
     if (original_version_history) {
-      let side_history = document.createElement("a");
+      const side_history = document.createElement("a");
       side_history.classList.add("btn", "side-action", "icon-mask");
       side_history.setAttribute(
         "href",
@@ -62878,10 +62878,10 @@ var bleh = (() => {
       side_history.textContent = tl2(trans.timeline);
       side_actions.appendChild(side_history);
     }
-    let wiki_author = wiki_panel.querySelector(".wiki-author");
+    const wiki_author = wiki_panel.querySelector(".wiki-author");
     if (wiki_author) {
-      let h22 = wiki_panel.querySelector("h2.text-18");
-      let sub_text = document.createElement("div");
+      const h22 = wiki_panel.querySelector("h2.text-18");
+      const sub_text = document.createElement("div");
       sub_text.classList.add("sub-text", "space-below", "header-style");
       sub_text.innerHTML = `
             <div class="breadcrumb-origin prominent">
@@ -62896,12 +62896,12 @@ var bleh = (() => {
         wiki_panel.removeChild(h22);
       }
     }
-    let wiki = wiki_panel.querySelector(".wiki");
+    const wiki = wiki_panel.querySelector(".wiki");
     if (!wiki) return;
     patch_wiki_contents(wiki);
-    let factbox = wiki_panel.querySelector(".factbox");
+    const factbox = wiki_panel.querySelector(".factbox");
     if (factbox) {
-      let facts = html.node`
+      const facts = html.node`
             <section class="facts">
                 ${factbox}
             </section>
@@ -62924,7 +62924,7 @@ var bleh = (() => {
         ".content-top-header"
       );
     }
-    let sub_text = document.createElement("div");
+    const sub_text = document.createElement("div");
     sub_text.classList.add("sub-text", "space-below", "header-style");
     sub_text.innerHTML = `
         <div class="breadcrumb">
@@ -62944,11 +62944,11 @@ var bleh = (() => {
         ".wiki-history"
       );
     }
-    let wiki_history_table = buffer_container.querySelector(
+    const wiki_history_table = buffer_container.querySelector(
       ".wiki-history-table"
     );
-    let pagination = buffer_container.querySelector(".pagination");
-    let wiki_panel = document.createElement("section");
+    const pagination = buffer_container.querySelector(".pagination");
+    const wiki_panel = document.createElement("section");
     wiki_panel.classList.add("wiki-history-panel");
     wiki_panel.appendChild(sub_text);
     wiki_panel.appendChild(wiki_history_table);
@@ -62957,7 +62957,7 @@ var bleh = (() => {
     if (pagination) {
       wiki_panel.appendChild(pagination);
     }
-    let side_actions = html.node`
+    const side_actions = html.node`
         <section class="side-actions">
             <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
                 ${tl2(trans.view_latest)}
@@ -62969,13 +62969,13 @@ var bleh = (() => {
     } else {
       page.structure.main.appendChild(side_actions);
     }
-    let entries2 = page.structure.main.querySelectorAll(".wiki-history-entry");
+    const entries2 = page.structure.main.querySelectorAll(".wiki-history-entry");
     entries2.forEach((entry) => {
-      let author = entry.querySelector(".wiki-history-author");
-      let avatar4 = author.querySelector(".wiki-history-author-avatar");
-      let name = author.querySelector(".link-block-target");
+      const author = entry.querySelector(".wiki-history-author");
+      const avatar4 = author.querySelector(".wiki-history-author-avatar");
+      const name = author.querySelector(".link-block-target");
       if (name && avatar4) {
-        let badge = patch_avatar(avatar4, name.textContent, "wiki");
+        const badge = patch_avatar(avatar4, name.textContent, "wiki");
         if (badge && badge.type) {
           if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
             name.style.setProperty("--hue-over", badge.hue);
@@ -63000,7 +63000,7 @@ var bleh = (() => {
       const body = form?.querySelector("#id_body");
       body?.classList.add("wiki-editor-body");
     }
-    let wiki_edit_panel = document.createElement("section");
+    const wiki_edit_panel = document.createElement("section");
     wiki_edit_panel.classList.add("wiki-edit-panel");
     wiki_edit_panel.innerHTML = page.structure.main.innerHTML;
     page.structure.main.innerHTML = "";
@@ -63028,7 +63028,7 @@ var bleh = (() => {
         ".content-top-header"
       );
     }
-    let sub_text = document.createElement("div");
+    const sub_text = document.createElement("div");
     sub_text.classList.add("sub-text", "space-below", "header-style");
     sub_text.innerHTML = `
         <div class="breadcrumb">
@@ -63133,9 +63133,9 @@ var bleh = (() => {
             </div>
         </section>
     `);
-    let rules = page.structure.main.querySelector(".wiki-style-rules");
+    const rules = page.structure.main.querySelector(".wiki-style-rules");
     rules.removeAttribute("id");
-    let rules_panel = document.createElement("section");
+    const rules_panel = document.createElement("section");
     rules_panel.classList.add("rules-panel");
     rules_panel.setAttribute("id", "stylerules");
     rules_panel.innerHTML = rules.innerHTML;
@@ -63245,7 +63245,7 @@ var bleh = (() => {
       if (href.startsWith("tag/")) {
         type = "tag";
       } else {
-        let split = href.split("/");
+        const split = href.split("/");
         if (split.length == 1) {
           type = "artist";
         } else if (split.length == 2) {
@@ -63917,7 +63917,7 @@ var bleh = (() => {
                   useSettings.get("theme")
                 );
               };
-              let toolbar = html.node`
+              const toolbar = html.node`
                             <div class="toolbar">
                                 ${navlist}
                             </div>
@@ -64316,7 +64316,7 @@ var bleh = (() => {
       }
       page.multi = true;
       title.innerHTML = "";
-      let split = title_text.split(";");
+      const split = title_text.split(";");
       if (split.length < 2) {
         page.multi = false;
         if (!useSettings.get("corrections")) return;
@@ -65506,7 +65506,7 @@ var bleh = (() => {
     let metadata = meta_and_wiki?.querySelector(".metadata-column");
     const mb_delay = 1600;
     const split = window.location.pathname.split("/");
-    let oracle_cache = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
+    const oracle_cache = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
     const now2 = Date.now();
     for (const artist2 in oracle_cache) {
       for (const item2 in oracle_cache[artist2]) {
@@ -65530,7 +65530,7 @@ var bleh = (() => {
     set_storage("bleh_oracle_cache", JSON.stringify(oracle_cache));
     log("cleaned cache", "oracle", "info", { oracle_cache });
     if (!oracle_cache[artist]) oracle_cache[artist] = {};
-    let cache2 = oracle_cache[artist][item] || {
+    const cache2 = oracle_cache[artist][item] || {
       album: {},
       track: {}
     };
@@ -65851,7 +65851,7 @@ var bleh = (() => {
     function oracle_get_artist() {
       if (tries < 1) return;
       tries--;
-      let top_track = page.state.top_track;
+      const top_track = page.state.top_track;
       let url;
       let type = "artist";
       if (top_track) {
@@ -66504,8 +66504,8 @@ var bleh = (() => {
           const video = track.recording.video;
           if (video) return html.node``;
           const artists = track["artist-credit"];
-          let inherit_guests = [];
-          let guests = [];
+          const inherit_guests = [];
+          const guests = [];
           let found_feature = false;
           let first_joinphrase;
           for (let i2 = 1; i2 < artists.length; i2++) {
@@ -66611,7 +66611,7 @@ var bleh = (() => {
     }
     function oracle_track_releases(recording) {
       let releases = [];
-      let releases_to_move = [];
+      const releases_to_move = [];
       if (!recording) {
         if (releases_panel) {
           render(
@@ -66645,7 +66645,7 @@ var bleh = (() => {
         }
         return;
       }
-      let lastfm_releases = [];
+      const lastfm_releases = [];
       const lastfm_source_albums = albums_and_lyrics_row?.querySelectorAll(
         ".source-album"
       );
@@ -66789,7 +66789,7 @@ var bleh = (() => {
         });
         if (releases[0]) {
           const release = releases[0];
-          let title = release.title;
+          const title = release.title;
           const artist2 = fix_title(
             oracle_aliases(
               release["artist-credit"]?.[0] || recording["artist-credit"][0],
@@ -66908,7 +66908,7 @@ var bleh = (() => {
               log("release", "oracle", "log", {
                 release
               });
-              let title = release.title;
+              const title = release.title;
               const artist2 = fix_title(
                 oracle_aliases(
                   release["artist-credit"]?.[0] || recording["artist-credit"][0],
@@ -67445,19 +67445,19 @@ var bleh = (() => {
   }
   function oracle_data(force = false) {
     if (!(ff("oracle") && settings.oracle_beta)) return;
-    let cached_artists = localStorage.getItem("oracle_artists");
-    let cached_artists_expire = new Date(
+    const cached_artists = localStorage.getItem("oracle_artists");
+    const cached_artists_expire = new Date(
       localStorage.getItem("oracle_artists_expire")
     );
-    let cached_albums = localStorage.getItem("oracle_albums");
-    let cached_albums_expire = new Date(
+    const cached_albums = localStorage.getItem("oracle_albums");
+    const cached_albums_expire = new Date(
       localStorage.getItem("oracle_albums_expire")
     );
-    let cached_tracks = localStorage.getItem("oracle_tracks");
-    let cached_tracks_expire = new Date(
+    const cached_tracks = localStorage.getItem("oracle_tracks");
+    const cached_tracks_expire = new Date(
       localStorage.getItem("oracle_tracks_expire")
     );
-    let current_time = /* @__PURE__ */ new Date();
+    const current_time = /* @__PURE__ */ new Date();
     if (!cached_artists) {
       log("artists list is not cached, fetching", "oracle");
       oracle_request("artists", true);
@@ -67505,8 +67505,8 @@ var bleh = (() => {
     }
   }
   function oracle_request(type = "albums", send_notify = false) {
-    let xhr = new XMLHttpRequest();
-    let url = `https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
+    const xhr = new XMLHttpRequest();
+    const url = `https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
     xhr.open("GET", url, true);
     xhr.onload = function() {
       log(`${type} list responded with ${xhr.status}`, "oracle");
@@ -67517,7 +67517,7 @@ var bleh = (() => {
         );
         api_expire.setHours(api_expire.getHours() + 1);
       }
-      let api_expire = /* @__PURE__ */ new Date();
+      const api_expire = /* @__PURE__ */ new Date();
       if (xhr.status == 200) {
         if (type == "artists") {
           parse4(oracle_artists, this.response, "artists");
@@ -67569,7 +67569,7 @@ var bleh = (() => {
         if (!acc[type]) {
           acc[type] = [];
         }
-        let existing = acc[type].find((a) => a.name == name);
+        const existing = acc[type].find((a) => a.name == name);
         if (!existing) {
           acc[type].push({
             name,
@@ -67618,7 +67618,7 @@ var bleh = (() => {
                     <div class="loading-data-text failed">${tl2(trans.oracle_no_credits)}</div>
                 </div>
                 ` : grouped.map(([type, artists]) => {
-        let text4 = trans.hasOwnProperty(`oracle_${type}`) ? tl2(trans[`oracle_${type}`]) : `${type} (unknown, please report as bug)`;
+        const text4 = trans.hasOwnProperty(`oracle_${type}`) ? tl2(trans[`oracle_${type}`]) : `${type} (unknown, please report as bug)`;
         return html.node`
                         <div class="oracle-credit-group">
                             <h4 class="oracle-credit-group-title">${text4}</h4>
@@ -67896,8 +67896,8 @@ var bleh = (() => {
     if (settings.tracklist_source != "oracle" && page.type == "album") {
       return;
     }
-    let title = `${correct_artist(page.sister)} - ${correct_item_by_artist(page.name, page.sister)}`;
-    let link = window.location.href;
+    const title = `${correct_artist(page.sister)} - ${correct_item_by_artist(page.name, page.sister)}`;
+    const link = window.location.href;
     let sources;
     let template;
     if (page.type == "track") {
@@ -68482,8 +68482,8 @@ var bleh = (() => {
                             `
               });
               function submit_link() {
-                let alt_text = alt.value;
-                let link_text = link.value;
+                const alt_text = alt.value;
+                const link_text = link.value;
                 if (!link_text) return;
                 dialog_rm({ id: "link" });
                 let output;
@@ -68655,7 +68655,7 @@ var bleh = (() => {
               onClick: () => {
                 const sel_start = elem.selectionStart;
                 const sel_end = elem.selectionEnd;
-                let new_val = elem.value;
+                const new_val = elem.value;
                 if (item.func) {
                   item.func().then(
                     (replacement) => {
@@ -84562,7 +84562,7 @@ var bleh = (() => {
     }
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;
-    let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+    const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
       type: "line",
       data: {
         labels,
@@ -84593,8 +84593,8 @@ var bleh = (() => {
     const graph_blocks = page.state.graph_blocks;
     const title = page.state.graph_title;
     let sum = 0;
-    let max3 = Math.max(...values);
-    let avg = values.reduce((sum2, val) => sum2 + val, 0) / values.length;
+    const max3 = Math.max(...values);
+    const avg = values.reduce((sum2, val) => sum2 + val, 0) / values.length;
     values.forEach((value, i2) => {
       const label = labels[i2];
       const elem = graph_blocks[i2];
@@ -85158,7 +85158,7 @@ var bleh = (() => {
               "colourful",
               "icon"
             );
-            let type = link.classList[1];
+            const type = link.classList[1];
             if (type == "resource-external-link--homepage") {
               link.textContent = tl2(trans.website);
               link.appendChild(/* @__PURE__ */ jsx(Icon, { name: icons.external }));
@@ -85668,13 +85668,13 @@ var bleh = (() => {
     );
   }
   function show_numbers_on_side(header_type) {
-    let metadata = document.body.querySelectorAll(".header-metadata-tnew-item");
-    let listeners = {};
-    let scrobbles = {};
-    let metascore = {};
+    const metadata = document.body.querySelectorAll(".header-metadata-tnew-item");
+    const listeners = {};
+    const scrobbles = {};
+    const metascore = {};
     metadata.forEach((item, index3) => {
-      let text4 = item.querySelector(".header-metadata-tnew-title").textContent.trim();
-      let value = item.querySelector(".header-metadata-tnew-display abbr");
+      const text4 = item.querySelector(".header-metadata-tnew-title").textContent.trim();
+      const value = item.querySelector(".header-metadata-tnew-display abbr");
       if (index3 == 0) {
         listeners.text = text4;
         listeners.value = clean_number(value.getAttribute("title"));
@@ -85684,7 +85684,7 @@ var bleh = (() => {
         scrobbles.value = clean_number(value.getAttribute("title"));
         scrobbles.abbr = value.textContent.trim();
       } else if (index3 == 2) {
-        let link = item.querySelector("a");
+        const link = item.querySelector("a");
         if (!link) return;
         metascore.text = text4;
         metascore.abbr = value.textContent.trim();
@@ -85693,12 +85693,12 @@ var bleh = (() => {
     });
     page.structure.side.classList.remove("hidden-xs");
     music_summary(listeners, scrobbles, metascore);
-    let panel = page.structure.side.querySelector(
+    const panel = page.structure.side.querySelector(
       "section.section-with-separator:has(.listener-trend)"
     );
     if (panel) panel.remove();
     if (page.type == "album") {
-      let album_artwork = document.body.querySelector(
+      const album_artwork = document.body.querySelector(
         ".artwork-and-metadata-row"
       );
       if (album_artwork) {
@@ -85708,17 +85708,17 @@ var bleh = (() => {
         );
       }
     }
-    let masonry = page.structure.row.querySelector(
+    const masonry = page.structure.row.querySelector(
       ":scope > .col-sidebar.masonry-right"
     );
     if (masonry) {
       page.structure.row.appendChild(masonry);
     }
     if (page.type == "album" || page.type == "artist") {
-      let upper = document.body.querySelector(".col-main");
+      const upper = document.body.querySelector(".col-main");
       upper.classList.add("upper-overview-to-hide");
       page.structure.row.appendChild(upper);
-      let new_upper = document.createElement("div");
+      const new_upper = document.createElement("div");
       new_upper.classList.add("top-overview-panel");
       new_upper.setAttribute("data-page-type", page.type);
       new_upper.innerHTML = upper.innerHTML;
@@ -85728,7 +85728,7 @@ var bleh = (() => {
       );
     }
     if (page.type == "track") {
-      let video_col = document.body.querySelector(
+      const video_col = document.body.querySelector(
         ".track-overview-video-column.col-sidebar"
       );
       if (!video_col) {
@@ -85740,7 +85740,7 @@ var bleh = (() => {
         video_col,
         page.structure.side.firstElementChild
       );
-      let video = video_col.querySelector(".video-preview");
+      const video = video_col.querySelector(".video-preview");
       if (!video) {
         video_unavailable(video_col);
         return;
@@ -85750,8 +85750,8 @@ var bleh = (() => {
         video_col,
         page.structure.side.firstElementChild
       );
-      let playlink = video.querySelector(".video-preview-playlink a");
-      let replace = video_col.querySelector(".video-preview-replace a");
+      const playlink = video.querySelector(".video-preview-playlink a");
+      const replace = video_col.querySelector(".video-preview-replace a");
       video.appendChild(html.node`
             <a class="link-block-cover-link" href=${playlink.href} target="_blank" />
         `);
@@ -85769,7 +85769,7 @@ var bleh = (() => {
     }
   }
   function video_unavailable(video_col = null) {
-    let cta = page.structure.side.querySelector(".video-preview-upload-cta");
+    const cta = page.structure.side.querySelector(".video-preview-upload-cta");
     if (cta) return;
     if (video_col) page.structure.side.removeChild(video_col);
     page.structure.side.insertBefore(
@@ -85815,11 +85815,11 @@ var bleh = (() => {
     if (page.requested.page != null && page.requested.page != "1" && key == "top-listeners") {
       position2 += (parseInt(page.requested.page) - 1) * 30;
     }
-    let avatar4 = listener.querySelector(`.${key}-item-image`);
-    let name_wrap = listener.querySelector(`.${key}-item-name a`);
-    let name = name_wrap.textContent;
-    let track_wrap = listener.querySelector(`.${key}-track`);
-    let follow = listener.querySelector(".class");
+    const avatar4 = listener.querySelector(`.${key}-item-image`);
+    const name_wrap = listener.querySelector(`.${key}-item-name a`);
+    const name = name_wrap.textContent;
+    const track_wrap = listener.querySelector(`.${key}-track`);
+    const follow = listener.querySelector(".class");
     let name_link;
     let user_list_avatar;
     let about_me;
@@ -85849,7 +85849,7 @@ var bleh = (() => {
         </li>
     `;
     if (track_wrap) {
-      let track_link = about_me.querySelector("a");
+      const track_link = about_me.querySelector("a");
       track_link.classList.add("top-track");
       if (useSettings.get("format_guest_features")) {
         const formatted = name_includes(
@@ -86737,8 +86737,8 @@ var bleh = (() => {
                             `
               });
               function submit_link() {
-                let alt_text = alt.value;
-                let link_text = link.value;
+                const alt_text = alt.value;
+                const link_text = link.value;
                 if (!link_text) return;
                 dialog_rm({ id: "link" });
                 let output;
@@ -86821,8 +86821,8 @@ var bleh = (() => {
                             `
               });
               function submit_link() {
-                let alt_text = alt.value;
-                let link_text = link.value;
+                const alt_text = alt.value;
+                const link_text = link.value;
                 if (!link_text) return;
                 dialog_rm({ id: "link" });
                 let output;
@@ -86911,7 +86911,7 @@ var bleh = (() => {
             const selected = val.slice(sel_start, sel_end);
             let replacement;
             if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
-              let replace_end = -1 * item.end.length;
+              const replace_end = -1 * item.end.length;
               if (replace_end != 0) {
                 replacement = selected.slice(
                   item.start.length,
@@ -89017,9 +89017,9 @@ var bleh = (() => {
     if (!table) return;
     const entries2 = table.querySelectorAll("tbody tr");
     if (entries2.length == 0) return;
-    let labels = [];
+    const labels = [];
     const links = [];
-    let values = [];
+    const values = [];
     page.state.glacier.links = [];
     entries2.forEach((entry) => {
       const period = entry.querySelector(".js-period a");
@@ -89072,7 +89072,7 @@ var bleh = (() => {
     }
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;
-    let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+    const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
       type: "line",
       data: {
         labels,
@@ -89096,7 +89096,7 @@ var bleh = (() => {
     );
     const scrobble_canvas_2 = document.createElement("canvas");
     scrobble_canvas_2.classList.add("scrobble-canvas", "monthly-canvas-pie");
-    let scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext("2d"), {
+    const scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext("2d"), {
       type: "pie",
       data: {
         labels,
@@ -93434,7 +93434,7 @@ var bleh = (() => {
         }}
                         <div class="button-combo-sep"/>
                         ${() => {
-          let button2 = html.node`
+          const button2 = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${name.getAttribute("href")}">
                                     ${tl2(trans.explore_in_library)}
                                 </a>
@@ -93458,7 +93458,7 @@ var bleh = (() => {
         }}
                         <div class="button-combo-sep"/>
                         ${() => {
-          let button2 = html.node`
+          const button2 = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${name.getAttribute("href")}">
                                     ${tl2(trans.explore_in_library)}
                                 </a>
@@ -93481,7 +93481,7 @@ var bleh = (() => {
         }}
                         <div class="button-combo-sep"/>
                         ${() => {
-          let button2 = html.node`
+          const button2 = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${artist.getAttribute("href")}">
                                     ${tl2(trans.explore_in_library)}
                                 </a>
@@ -94241,7 +94241,7 @@ var bleh = (() => {
               log("has delete button", "track", "info", {
                 delete_button
               });
-              let form = delete_button.parentElement;
+              const form = delete_button.parentElement;
               page.token = form.querySelector(
                 '[name="csrfmiddlewaretoken"]'
               )?.value;
@@ -95443,7 +95443,7 @@ var bleh = (() => {
             ${timeframe_text(value)}
         </button>
     `;
-    let menu = tippy_esm_default(elem, {
+    const menu = tippy_esm_default(elem, {
       theme: "window",
       content: html.node``,
       placement: "bottom",
@@ -96164,7 +96164,7 @@ var bleh = (() => {
           if (item.plays.other > max3) max3 = item.plays.other;
         });
         page.state.compare.shared.forEach((data2, index3) => {
-          let template = `${sanitise(data2.sister)}/_/${sanitise(data2.name)}`;
+          const template = `${sanitise(data2.sister)}/_/${sanitise(data2.name)}`;
           tbody.appendChild(html.node`
                     <tr class="chartlist-row chartlist-row--with-artist compare-item">
                         <td class="chartlist-index">${index3 + 1}</td>
@@ -109749,7 +109749,7 @@ var bleh = (() => {
         width.current.value * rows / per_page
       );
       if (pages > 4 && !bypass) {
-        let warn = notify({
+        const warn = notify({
           id: "collage_warning",
           title: tl2(trans.are_you_sure),
           body: tl2(trans.this_will_require_loading_count_pages, {
@@ -109884,7 +109884,7 @@ var bleh = (() => {
           grid.style.setProperty("--item-list-gap", "0px");
           grid.style.setProperty("--radius-s", "0");
         }
-        let total = width.current.value * rows - 1;
+        const total = width.current.value * rows - 1;
         grid.style.setProperty(
           "--highest",
           Math.max(+width.current.value, +rows).toString()
@@ -111607,7 +111607,7 @@ var bleh = (() => {
             });
             return;
           }
-          let val = settings[id];
+          const val = settings[id];
           toggle2.setAttribute("aria-checked", !val);
           save_setting(id, !val);
           if (func) func(!val);
@@ -111794,8 +111794,8 @@ var bleh = (() => {
         return elem;
       } else if (type == "text") {
         let option2;
-        let min3 = settings_store[id].min || 0;
-        let max3 = settings_store[id].max || 0;
+        const min3 = settings_store[id].min || 0;
+        const max3 = settings_store[id].max || 0;
         if (max3 === 0) {
           return setting_fail(id, {
             message: "A text type requires a max defined in the settings store"
@@ -111835,7 +111835,7 @@ var bleh = (() => {
                     <div class="extensions">
                         ${settings_store[id].extensions.map(
           (extension) => () => {
-            let container2 = html.node`
+            const container2 = html.node`
                                 <div class="extension">
                                     <div class="bleh-icon" />
                                 </div>
@@ -111971,7 +111971,7 @@ var bleh = (() => {
             });
             return;
           }
-          let val = settings[id];
+          const val = settings[id];
           toggle2.setAttribute("aria-checked", !val);
           save_setting(id, !val);
           if (func) func(!val);
@@ -111997,7 +111997,7 @@ var bleh = (() => {
                         <div class="extensions">
                             ${settings_store[id].extensions.map(
             (extension) => () => {
-              let container = html.node`
+              const container = html.node`
                                     <div class="extension">
                                         <div class="bleh-icon" />
                                     </div>
@@ -112057,7 +112057,7 @@ var bleh = (() => {
         elem.compat();
         return elem;
       } else if (type == "tabs") {
-        let buttons = [];
+        const buttons = [];
         const values = settings_store[id].values || list;
         if (!values) {
           return setting_fail(id, {
@@ -112118,7 +112118,7 @@ var bleh = (() => {
             title: tl2(trans.reset_item_to_default)
           });
         };
-        let buttons = [];
+        const buttons = [];
         let reset_btn;
         let elem;
         let value_holder;
@@ -112140,7 +112140,7 @@ var bleh = (() => {
                         <div class="extensions">
                             ${settings_store[id].extensions.map(
             (extension) => () => {
-              let container = html.node`
+              const container = html.node`
                                     <div class="extension">
                                         <div class="bleh-icon" />
                                     </div>
@@ -112509,7 +112509,7 @@ var bleh = (() => {
         let menu;
         if (list.length == 0) disabled = true;
         let select_hook;
-        let elem = html.node`
+        const elem = html.node`
                 <div class="setting v2" data-type="select" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
                     ${icon5 ? html.node`
                     <div class="icon">
@@ -112526,7 +112526,7 @@ var bleh = (() => {
                     <div class="extensions">
                         ${settings_store[id].extensions.map(
           (extension) => () => {
-            let container = html.node`
+            const container = html.node`
                                 <div class="extension">
                                     <div class="bleh-icon" />
                                 </div>
@@ -112591,7 +112591,7 @@ var bleh = (() => {
     return html.node`
         <div class="incompatible">
             ${entries2.map((incompatible) => () => {
-      let container = html.node`
+      const container = html.node`
                     <div class="extension">
                         <div class="bleh-icon" />
                     </div>
@@ -112733,10 +112733,10 @@ var bleh = (() => {
   }
   function compile_settings() {
     const clone6 = structuredClone(settings);
-    for (let s2 in clone6) {
+    for (const s2 in clone6) {
       console.log("settings marin before loop", s2, clone6[s2], typeof clone6[s2]);
     }
-    for (let setting2 in clone6) {
+    for (const setting2 in clone6) {
       if (settings_store[setting2] && JSON.stringify(clone6[setting2]) === JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
         log(
           `dropped ${setting2} as value matches default`,
@@ -113419,7 +113419,7 @@ var bleh = (() => {
       } catch (e4) {
         gradient = page.state.chart_colours.link_bg_col;
       }
-      let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
         type: "line",
         data: {
           labels: item.labels,
@@ -113439,7 +113439,7 @@ var bleh = (() => {
         options: page.state.chart_library_line_options_no_click
       });
     } else if (settings.chart_insights_view == "pie") {
-      let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
         type: "pie",
         data: {
           labels: item.labels,
@@ -113539,7 +113539,7 @@ var bleh = (() => {
         options: page.state.chart_library_pie_options_no_click
       });
     } else if (settings.chart_insights_view == "bar") {
-      let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
         type: "bar",
         data: {
           labels: item.labels,
@@ -113726,7 +113726,7 @@ var bleh = (() => {
       } catch (e4) {
         gradient = page.state.chart_colours.link_bg_col;
       }
-      let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
         type: "line",
         data: {
           labels: page.state.glacier.labels,
@@ -113746,7 +113746,7 @@ var bleh = (() => {
         options: page.state.chart_library_line_options
       });
     } else if (settings.chart_view == "pie") {
-      let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
         type: "pie",
         data: {
           labels: page.state.glacier.labels,
@@ -113765,7 +113765,7 @@ var bleh = (() => {
         options: page.state.chart_library_pie_options
       });
     } else if (settings.chart_view == "bar") {
-      let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
         type: "bar",
         data: {
           labels: page.state.glacier.labels,
@@ -113890,7 +113890,7 @@ var bleh = (() => {
           "icon",
           "glacier-library-button"
         );
-        let tooltips = wrapper.querySelectorAll(
+        const tooltips = wrapper.querySelectorAll(
           ".user-library-controls-tooltip"
         );
         tooltips.forEach((tooltip) => {
@@ -114001,7 +114001,7 @@ var bleh = (() => {
         ".metadata-item:not(.library-header-ctas__wrapper)"
       );
       metadatas.forEach((meta) => {
-        let glacier_meta_item = document.createElement("div");
+        const glacier_meta_item = document.createElement("div");
         glacier_meta_item.classList.add("glacier-library-metadata-item");
         glacier_meta_item.innerHTML = `
                 <div class="sub-text">${meta.querySelector(".metadata-title").textContent}</div>
@@ -114015,7 +114015,7 @@ var bleh = (() => {
       header,
       page.structure.main.firstElementChild
     );
-    let overview_headers = page.structure.main.querySelectorAll(
+    const overview_headers = page.structure.main.querySelectorAll(
       ".library-overview-header"
     );
     overview_headers.forEach((top2) => {
@@ -114612,7 +114612,7 @@ var bleh = (() => {
   };
   function update_inbuilt_item(item, value, modify = true, element = document.body) {
     console.warn("update item", item, value, "modify", modify);
-    let test_if_valid = element.querySelector(`#toggle-${item}`);
+    const test_if_valid = element.querySelector(`#toggle-${item}`);
     console.warn(test_if_valid, `toggle-${item}`);
     if (test_if_valid == void 0) return;
     if (inbuilt_settings[item].type == "toggle") {
@@ -117720,7 +117720,7 @@ var bleh = (() => {
       track.removeAttribute("target");
       artist.removeAttribute("target");
       album.removeAttribute("target");
-      let next = /* @__PURE__ */ new Date();
+      const next = /* @__PURE__ */ new Date();
       next.setMinutes(next.getMinutes() + 1);
       if (useSettings.get("format_guest_features")) {
         album.textContent = romanise(
@@ -120794,10 +120794,10 @@ var bleh = (() => {
   function register_skip_to(list = null) {
     if (!ff("skip_to_setting")) return;
     if (list == null) return;
-    let panel = page.structure.side.querySelector(".skip-to-list");
+    const panel = page.structure.side.querySelector(".skip-to-list");
     panel.innerHTML = "";
     list.forEach((item) => {
-      let button2 = document.createElement("button");
+      const button2 = document.createElement("button");
       button2.classList.add("skip-to-item");
       button2.setAttribute("onclick", `_scroll_to_setting('${item.id}')`);
       button2.textContent = item.name;
@@ -120824,7 +120824,7 @@ var bleh = (() => {
     window.history.pushState(page_id, "", `${root}bleh/${page_id}`);
     page.state.settings_page = page_id;
     page.structure.main.innerHTML = "";
-    let btns = page.structure.container.querySelectorAll(".bleh--nav");
+    const btns = page.structure.container.querySelectorAll(".bleh--nav");
     btns.forEach((btn) => {
       const id = btn.getAttribute("data-bleh-page");
       btn.setAttribute("data-hide", page_id != id);
@@ -120852,11 +120852,11 @@ var bleh = (() => {
       );
     }
     if (setting2 != null) {
-      let setting_container = page.structure.main.querySelector(
+      const setting_container = page.structure.main.querySelector(
         `.setting[data-id="${setting2}"]`
       );
       if (setting_container != null) {
-        let y = setting_container.getBoundingClientRect().top + window.scrollY - 300;
+        const y = setting_container.getBoundingClientRect().top + window.scrollY - 300;
         window.scroll({
           top: y,
           behavior: "smooth"
@@ -120881,9 +120881,9 @@ var bleh = (() => {
     update_flag_toggle(flag2, container);
   };
   function update_flag_toggle(flag2, container) {
-    let button2 = container.querySelector(".toggle");
+    const button2 = container.querySelector(".toggle");
     if (!button2) return;
-    let current_state = ff(flag2);
+    const current_state = ff(flag2);
     button2.setAttribute("aria-checked", !current_state);
     settings.feature_flags[flag2] = !current_state;
     document.body.setAttribute(
@@ -121016,19 +121016,19 @@ var bleh = (() => {
   log("finalised flat patterns", "lotus", "info", { flat_patterns });
   function lotus(force = false) {
     if (!useSettings.get("corrections")) return;
-    let lotus_artist = localStorage.getItem("lotus_artist");
-    let lotus_artist_expire = new Date(
+    const lotus_artist = localStorage.getItem("lotus_artist");
+    const lotus_artist_expire = new Date(
       localStorage.getItem("lotus_artist_expire")
     );
-    let lotus_album_track = localStorage.getItem("lotus_album_track");
-    let lotus_album_track_expire = new Date(
+    const lotus_album_track = localStorage.getItem("lotus_album_track");
+    const lotus_album_track_expire = new Date(
       localStorage.getItem("lotus_album_track_expire")
     );
-    let lotus_combined_artists = localStorage.getItem("lotus_combined_artists");
-    let lotus_combined_artists_expire = new Date(
+    const lotus_combined_artists = localStorage.getItem("lotus_combined_artists");
+    const lotus_combined_artists_expire = new Date(
       localStorage.getItem("lotus_combined_artists_expire")
     );
-    let current_time = /* @__PURE__ */ new Date();
+    const current_time = /* @__PURE__ */ new Date();
     if (!lotus_artist) {
       log("artist list is not cached, fetching", "lotus");
       lotus_request("artist", true);
@@ -121076,10 +121076,10 @@ var bleh = (() => {
     }
   }
   function lotus_request(type = "artist", send_notify = false, refresh_page = false) {
-    let button2 = document.body.querySelector('[onclick="_lotus_check()"]');
+    const button2 = document.body.querySelector('[onclick="_lotus_check()"]');
     if (button2 != null) button2.setAttribute("disabled", "");
-    let xhr = new XMLHttpRequest();
-    let url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
+    const xhr = new XMLHttpRequest();
+    const url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
     xhr.open("GET", url, true);
     xhr.onload = function() {
       log(`${type} list responded with ${xhr.status}`, "lotus");
@@ -121090,7 +121090,7 @@ var bleh = (() => {
         );
         api_expire.setHours(api_expire.getHours() + 1);
       }
-      let api_expire = /* @__PURE__ */ new Date();
+      const api_expire = /* @__PURE__ */ new Date();
       if (xhr.status == 200) {
         if (type == "artist") {
           parse7(artist_corrections, this.response, "artist");
@@ -121184,13 +121184,13 @@ var bleh = (() => {
   }
   function correct_generic_artist(parent) {
     if (!page.structure.container) return;
-    let albums = page.structure.container.querySelectorAll(`.${parent}`);
+    const albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!useSettings.get("corrections")) return;
     albums.forEach((album) => {
       if (!album.hasAttribute("data-kate-processed")) {
         album.setAttribute("data-kate-processed", "true");
-        let artist_name = album.querySelector(
+        const artist_name = album.querySelector(
           `.${parent.replace("-details", "")}-name a`
         );
         if (!artist_name) return;
@@ -121499,8 +121499,8 @@ var bleh = (() => {
   }
   function create_correction(type, name = page.name, sister = page.sister, existing = false) {
     let title;
-    let current = name;
-    let link = window.location.href;
+    const current = name;
+    const link = window.location.href;
     let correction;
     let sources;
     let template;
@@ -123563,7 +123563,7 @@ var bleh = (() => {
         overview.classList.remove("secondary-nav-item--overview");
         overview.classList.add("secondary-nav-item--global");
         overview.querySelector("a").textContent = tl2(trans.global);
-        let mutuals = toolbar.querySelector(
+        const mutuals = toolbar.querySelector(
           ".secondary-nav-item--you-know a"
         );
         mutuals.textContent = tl2(trans.mutuals);
@@ -124275,7 +124275,7 @@ var bleh = (() => {
     } else if (page.type == "geo_charts") {
       bleh_geo_charts();
     }
-    let charts = page.structure.main.querySelector(".charts");
+    const charts = page.structure.main.querySelector(".charts");
     if (ff("aihara")) {
       const new_nav = html.node`
             <div class="toolbar">
@@ -124349,12 +124349,12 @@ var bleh = (() => {
     }
     if (page.subpage != "overview") return;
     charts.classList.add("legacy-charts");
-    let chart_rows = charts.querySelectorAll(
+    const chart_rows = charts.querySelectorAll(
       ".charts-col:not(.charts-col--mobile-ad)"
     );
-    let new_panel = document.createElement("section");
+    const new_panel = document.createElement("section");
     new_panel.classList.add("charts-panel");
-    let out_now = page.structure.side.querySelector(
+    const out_now = page.structure.side.querySelector(
       ".more-link-fullwidth-right a"
     );
     if (out_now) out_now.classList.add("btn", "out-now-btn", "icon", "icon-r");
@@ -124389,12 +124389,12 @@ var bleh = (() => {
       trigger: "click"
     });
     chart_rows.forEach((row, index3) => {
-      let chart_row = html.node`
+      const chart_row = html.node`
             <div class="charts-new-row" data-index=${index3}>
                 ${row.querySelector("h2")}
             </div>
         `;
-      let list = html.node`
+      const list = html.node`
             <ol class="music-bookmarks-artists charts-list" />
         `;
       if (settings.simulate_scroll) {
@@ -124415,13 +124415,13 @@ var bleh = (() => {
           }
         });
       }
-      let items = row.querySelectorAll(".globalchart-item");
+      const items = row.querySelectorAll(".globalchart-item");
       items.forEach((item, item_index) => {
         let list_item;
-        let image2 = item.querySelector(".globalchart-image img");
-        let rank = item.querySelector(".globalchart-rank");
-        let name = item.querySelector(".globalchart-name a");
-        let link = name.getAttribute("href");
+        const image2 = item.querySelector(".globalchart-image img");
+        const rank = item.querySelector(".globalchart-rank");
+        const name = item.querySelector(".globalchart-name a");
+        const link = name.getAttribute("href");
         image2.setAttribute(
           "src",
           image2.getAttribute("src").replace(
@@ -124455,7 +124455,7 @@ var bleh = (() => {
                     </li>
                 `;
         } else {
-          let artist = item.querySelector(
+          const artist = item.querySelector(
             ".globalchart-track-artist-name a"
           );
           artist.textContent = correct_artist(artist.textContent);
@@ -125432,7 +125432,7 @@ var bleh = (() => {
     ] });
     function present() {
       if (disabled) return;
-      let name = value.name;
+      const name = value.name;
       let font = value.font;
       let style2 = value.style;
       const current_preview = createRef();
@@ -129702,7 +129702,7 @@ var bleh = (() => {
   var import_json53 = __toESM(require_dist2(), 1);
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
-    let data_points = [];
+    const data_points = [];
     const graph_colour_length = 11;
     let temporary_data_source = {};
     let temporary_user = "";
@@ -129939,7 +129939,7 @@ var bleh = (() => {
         });
       }
       const starred = useSettings.get("starred_friend") || "";
-      let friends = settings.friends.filter((f3) => f3 != starred);
+      const friends = settings.friends.filter((f3) => f3 != starred);
       if (starred || friends.length > 0) {
         user_list.push({
           text: "sep"
@@ -129995,7 +129995,7 @@ var bleh = (() => {
       const nodes = await Promise.all(
         data_points.map(async (point, index3) => {
           const cache2 = await load_profile_cache_externally(point.user);
-          let user_name = html.node`
+          const user_name = html.node`
                     <a href="${root}user/${point.user}" />
                 `;
           const valid = is_sponsor(point.user);
@@ -130036,7 +130036,7 @@ var bleh = (() => {
                         <div class="plot-footer-action">
                             <button class="btn icon-mask chibi plot-footer-action-btn" data-type="x" onclick=${() => {
             for (let i2 = data_points.length - 1; i2 >= 0; i2--) {
-              let p4 = data_points[i2];
+              const p4 = data_points[i2];
               if (p4.user == point.user && p4.media == point.media) {
                 data_points.splice(i2, 1);
               }
@@ -130075,9 +130075,9 @@ var bleh = (() => {
       );
     }
     prep_chart_colours();
-    let scrobble_canvas_container = document.createElement("div");
+    const scrobble_canvas_container = document.createElement("div");
     scrobble_canvas_container.classList.add("plot-canvas-container");
-    let scrobble_canvas = document.createElement("canvas");
+    const scrobble_canvas = document.createElement("canvas");
     scrobble_canvas.classList.add("plot-canvas");
     Chart.defaults.font.family = page.state.chart_colours.font;
     const chart = new Chart(scrobble_canvas.getContext("2d"), {
@@ -132433,7 +132433,7 @@ var bleh = (() => {
 					<button
 						class="btn continue"
 						onclick=${() => {
-        let notification = notify({
+        const notification = notify({
           id: "async",
           title: "progress",
           body: "downloading...",
@@ -132510,7 +132510,7 @@ var bleh = (() => {
 				<div class="inner-preview pad">
 					<div class="bars" ref=${(el) => bars = el}>
 			            ${() => {
-        let max3 = 1e5;
+        const max3 = 1e5;
         for (let value = 0; value <= max3; value += 200) {
           bars.appendChild(chartlist_bar(value, max3));
         }
@@ -133353,7 +133353,7 @@ ${version2.build} (${version2.sku})`;
         }
       }
       if (page.type == "overview" && page.subpage == "music") {
-        let items = page.structure.main.querySelectorAll(
+        const items = page.structure.main.querySelectorAll(
           '.music-featured-item:not(.music-featured-tag, [data-passed="true"])'
         );
         items.forEach((item) => {
@@ -133364,8 +133364,8 @@ ${version2.build} (${version2.sku})`;
           if (!bg) return;
           let style2 = bg.style.getPropertyValue("background-image");
           if (!style2) style2 = bg.style.getPropertyValue("background");
-          let cover_substr = style2.indexOf("url");
-          let cover = style2.substring(cover_substr);
+          const cover_substr = style2.indexOf("url");
+          const cover = style2.substring(cover_substr);
           bg.style.setProperty("background", cover);
         });
       }
@@ -133851,9 +133851,9 @@ ${version2.build} (${version2.sku})`;
   }
   function favi() {
     if (settings.branding_type && settings.branding_type != "bleh") return;
-    let light = "data:image/png;base64,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";
-    let dark = "data:image/png;base64,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";
-    let favicon = document.querySelector('link[rel="icon"]');
+    const light = "data:image/png;base64,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";
+    const dark = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAA1KSURBVHhe7d0LsFVVGQdwdySIL8x8QSq+NcMUGzUtCcw0wZCccAwxNackitRMrdG0TA3Lx1hpOTojpuREpBVDjWmTrybUikgo0TIeGqj5BA0wPf2/s77rAN57vRfOPvv7r/3/zXzzrXW43PO4+ztr73P2XmsDERERERERERERERERERERERERERERqUjhuXYajcaWSPb8Xy6KYgX6G6O9KWIrxHaIbdfKKxH/XSteQSxCvIo4DLEhYjHCftZ+91DEJPx++zkhVIsCwcb/eaQhHnsg3onog+jwOuJtqdly41EgU70tEguKYx9Elab5QxFCZb1rRjLBc1VGeRZCWRcI3r0PRJqYepXZGI9jmLeFTO4jyGTPVXvYs5DJ9iAd79pvR1qFqPo5LsJB+mBvC5mcR5CDEBHeADR6EMu5QN7vuWrzPQuh3EeQCBZ4FkIqkPIt9CyEsiwQHKDvgrRj6lXuBc9CKNcRZLjnCJZ5FkIqkPLZyY5CKtcCOdJzBNt7FkLZFQiOP45F2ib1QniPZyGU4wjySc9R2Cn2QiqrU00weljB24VMfZs3xLCwKIqdvC1kchtBTkZEKg6zIwq3Fhem5Si3AjnUcyRWHDukprDJrUCifucQ5UtL6aXcCuTfnqN5wrOQya1AtvAcyUocpOuERVK5FcgYz5E85lkIZVMg/gXhnqkXyqOehVBOI8iFnqPRCEIsiwLB6HE60ntTLxwVCLFcRpCve45IF0wRy6VABniOSBdMEaMvED+NI/KpHCoQYjmMINHOvVrbcs9CSAVSvv08C6EcCsTW5IhsX89CKIcCsYVwIlOBEMuhQGwxnMhyeI1rSyNI+ZZ4FkIqkPKpQIjlUCART3FfnQqEWA4FEvlbdPOsZyGUQ4Fs7lmk5TSCiHQjhwLZzbNIy+VQINGn9mx4FkLUBdJoNEYjDUy9sFZ4FkLsI8gpniNTgRBjL5BjPEdmcwULKfYCed1zZBpBiOVwkB6dCoSYCqR8KhBiKpDy6VQTYiqQci0qiuJVbwshFUi5NGk1ORVIuf7lWUipQMqlAiFHWyCNRqMfUp/UC0u7WOSYR5Dol9oajSDkmAsk+mwmRqfik9MIUh5bUPSu1BRWGkHKc3ZRFIu8LaRUIOWYieK4zttCTAVSjls9CznmAok8m8liz0KOuUD+5zmiJzwLucgrM3Wr0Wicg3RZ6oXTD8cgq7zda3huNhHF5YiNEfcgOr5PsTcF+3TMFuV5CfEi4j+4L50xLGvCRvQFRETrPNUo/m9fxHnN39I7ryHmIW5ETEBs579S6gobwSmIiO70h9hj+D+DEN9EPGe/oEXuQFixbOt3I+uA+RjkFc/RzPbcLWy4WyNOsw0Z3ScR5yPeYf/WIkcgfoBYivuYiTgBQbtLXRXmAnnZczTdFgg20s94UTyN+CHCNuSyjUTcgnge930N4gPNW+UtMR+kH4b029QL5d04aH7E22vAYx6C9HDqVW4OYjriNjzevzVvkTdhLpCDkGalXhjLsLF1+f0MHvM0pLGpF8qDiNss8Pgfa94iTToGaa35nt8ExTEGKWJxmAMRkxGP4nHejxjfvFV0DNJinb77YoMbhGTHGwzs+ORmPGYrFnvctcZcIBGn9HzU89qsONg+bt0dMR1FYldu1hZzgUS83Hau5ybbuBC3o/mxdAudgxE/Sc16Yi6QiI/9Ac9WHMOQ7kXYsQezY/BcJnm7djSCtI59aNA8zQQb1AVIdg6VHfzm4Go8p6O9XSvMH/PuivSP1AvDHo8tS71Vs5efLxVFcZW3a0EjSGvZJA25Foe5Em9MUxE7eT97KhDprXEI+wj4pNTNmw7SZV1siJiCIvlU6uZLI4isj5tQJO042bIyGkFkfdlIMtjb2dEIIuvLluGekpr5YS4QuyZbYhiOUYTlXLNeYS6QZzxLDHZ15F0IuwwhG8wFosUx4/kwYhaKxC4fzgLzN+n2x9Dk0DHZtEQDi6KwTI15BNF11XFtirB5y+gxF8j+niWmczHK0592w1wg+3mWmPoizk5NXpTHIHhnsvmjnks9CW4HHIvQzlXMOoIwLL8myVmeKbEWSM6nlOfmVIz4trtFibVAbNZz4bAZ4tTU5MNaIFHn5ZXOqUDaLOKUP9K192E3y0YSOqwFYhM/C5d9PVOhLJCiKGz2EJ3Ny0UF0mZdzWIoMUVeU7JLzAVi6/MJh6cw6lOuG89cIMLj257pqECkbA9h9LjS23RUILHYVZK2ApUtBHoz4vuImQjm887u90yJ+YIpu1jKLppidT3iLwhbA91iAd5pu7xKEs93b6QDEDbfr31RutTDPvK2ZZ93RFyMiObHeF4neFvaxQoEweYZxOcQpZxLht9r5z1FQ33VJ/MIYqdQvyv1KCxEjMa76V9Ttxx4XWxhU1vgNIq5eM77eJsO5TEINgJb/YipOGwV2cPLLg53qeco2FbWWgPrQbrNDcviIcQRKI62LNWA+7ER5KepF8LWeEOj3VNhLRCWKX/+iDgKG+2TqdseuL/jkG5NvRBoRxHKAsEG8DhS9InjbLfq43isz6Zue+F+bZmCGalXORVIBf7sOaox2Eirvhbbvk+JYIBnOswFsrnniC5GcXS6ZnqbTfVcNdpZMJkLxL5ki8i+vLsoNSv3mueqqUAqYFP/RHQ3Ro9XvV21/p6rpgKpgK0mG9HLniPYyHPVVnqmowJpvUjXyw/yXDUVSAW29BxNlN0rE2W5Zu1iVcDWJJfu7ey5SnbmMe0yCJQF0mg0rDiiPvZIn/lHmIFySlEUlNejG9YRJPLosZdnSa71TIm1QPbwHNEQz4LiwOgxz9uUWAukLWfGrqPNsQs41NtVq/osWruAa1dvU6IsELwr/QrJvrGO6queq1Z1gfRDRLwMuMdYRxAz3XNEI/HOGeFcsQjXYRyP14Lp+p01MBfIzz1HtAliWmpWyiZzqNqyQKfe9BpzgdzrOaoj8c55mbfbDvd9ItLY1KvUU54pMReITXMT3Ume2wrFYSdyXp56lYt+YVu3mAuE4Zv0bbGxnubtdvoOYpvUrJw+5q0IyzLQ30CRfNDbpcN92fXokVZ0+plnSszzYu2AdDdil+YNsdn5SENxsFrqkg14Tey1+BMiypnOS/GcB3qbEu0Ighd+MdJIhE3IFp0tOvq91CyVLTEQ6TIA6tHDMO9iWZHMR7ow9cI7Au/wR3u75fC7v4V0eOqFEeGj7vVCXSAGRXITks0/xaClU4KiKPojzkDch+5X0q1hzMPfJvpH8W+J9hhkddhAzkRiWINiDjaadfpwAc/Rdp3sYN/OFh6M2B5hI8amiIjOx3O9xNu0cimQQ5B+n3rh7Y8NZ7a33xKem43ypyMuQES9zLgzu+F5/tPbtHIpkD5IqxAMu4w9Wi8Dz8lWhT3Zg6kwzCI8Rxvl6NEfgxj8MWz+pwdSL7xx2PiP9/YacPtghB1T2MfXNu/XGQi24jA9HiGjy6JAHEuBmCtQBM0v85C3QByHuAfdBYirEB+yfyNm38VkIYtdLIMN7BNIkab974lliM1SMysfxah+h7epZTOC4A9i14fcnno0cisO27Wy5R6yKA6TzQhiMIrY9eC2Sqy033UojAnezkZOxyA2isxF+m7qSRtdkWNxmKxGEINRxNYuXITIqvgDszXcd0aBvJS6ecluI8IfypY7uzH1pA1+mWtxmFzfZdk+zWIWdZ2WlshuF6sDdrXsdHg7X0nKY+svHooR5O+pm5+c99M1ipRvbM7FYXIuEPprEYIbh+L4nbezlW2B4I83C8muFZHWsovURuD1jbQOe2myPQbp4Oc4DUs9WU+3ICagOCItM1eqnHexOtgEalWvV87O5kE+BYVxYp2Kw2Q/ghiMIh9B+k3qSS/ZCZWHozAeTN16qcMIYscjdyJdkXrSC68jxtS1OEwtRhCDUWR3pFLnpcrQaBTHDG/XUi1GEIM/9GNITBdVVelpxMi6F4epTYE4O2C3P750zaYQOhjF8evUrbdaFYiPIjoW6dr1eI2GIR73fu3V5hhkdTgeuQjpa6knrkezrdRNLQvEoEhscZtzUq/2XkDsjQJZkrrSoW7HIG/AxnAu0nmpV3tfVnF0rrYjSAeMJCOQbLF7m9KzjmagOEZ7W9ZS+wIxKJKNkCYjvoio22uyFwrETkCUTtR2F2t12EBWIGwWw0GISxHL7fbM2ak3NkWPiqMbGkE6gRHF5quahLB5ce0b+Jz8AnE1CiP7azmkDVAstpzzjxAMbErTiYh5zd6abkAc4E9LekgjSA9h4xqANB5hM8kfjOh0AuoKfRqjwhuzueDx2mpWQxF2wuEN+Dfq9cqFDDbAsxBrm+O53Sb6wxKJAxvmIMQoxKGIPf22zyKeR7TDcsTY5oORUmgXqwTYaG0R/1GI4QjbzdkH0UovIq5BXItdJ5soT4QXCqYf4hDEVYgliNX9ATEXsbTZ695sxJmI/v6rRfKDDdx2y0Yg+vpNTehvghiNuBrxCKLDfYij/MdExKAodkIc610RERERERERERERERERERERERERERGR2thgg/8DbTvTnkkea1EAAAAASUVORK5CYII=";
+    const favicon = document.querySelector('link[rel="icon"]');
     if (!favicon) return;
     favicon.href = window.matchMedia("(prefers-color-scheme: dark)").matches ? dark : light;
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function() {

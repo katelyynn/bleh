@@ -139,7 +139,7 @@ if (process.argv[2] == 'serve') {
 	const css_context = await esbuild.context(usercss);
 
 	const serve = await js_context.serve({
-		servedir: '',
+		servedir: '.',
 	});
 
 	await js_context.watch();
