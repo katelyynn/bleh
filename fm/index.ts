@@ -4,10 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import fs from 'node:fs/promises';
-
-import { serveDir } from '@std/http/file-server';
 import esbuild from 'esbuild';
+import * as fs from 'fs';
 
 type BuildSchema = {
 	brand: string;
@@ -17,18 +15,15 @@ type BuildSchema = {
 	url: string;
 	built_on: string;
 };
-type BundleOptions = esbuild.BuildOptions & {
-	name: string;
-};
 
 const build: BuildSchema = JSON.parse(
-	await fs.readFile('./src/build/build.json'),
+	fs.readFileSync('./src/build/build.json'),
 );
 
-async function bundle({ name, ...options }: BundleOptions) {
+async function bundle({ ...options }: esbuild.BuildOptions) {
 	const start = Date.now();
 	console.log(
-		`%c📦 building %c${name}%c`,
+		`%c📦 building`,
 		'color:grey',
 		'color:grey;font-weight:bold',
 		'font-weight:regular;color:white',
@@ -98,7 +93,7 @@ const bundle_css: esbuild.Plugin = {
 	},
 };
 
-const shared_opts: Omit<BundleOptions, 'name'> = {
+const shared_opts: Omit<esbuild.BuildOptions, 'name'> = {
 	entryPoints: ['./src/main.ts'],
 	banner: { js: JS_BANNER, css: CSS_BANNER },
 	bundle: true,
@@ -114,13 +109,12 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	globalName: 'bleh',
 };
 
-const userscript: BundleOptions = {
+const userscript: esbuild.BuildOptions = {
 	...shared_opts,
-	name: 'userscript',
 	outfile: 'bleh.user.js',
 };
 
-const usercss: BundleOptions = {
+const usercss: esbuild.BuildOptions = {
 	entryPoints: ['./src/styles/index.css'],
 	banner: {
 		css: CSS_BANNER,
@@ -129,30 +123,31 @@ const usercss: BundleOptions = {
 		css: CSS_FOOTER,
 	},
 	bundle: true,
-	name: 'usercss',
 	outfile: 'bleh.user.css',
 	loader: { '.css': 'css' },
 	minify: true,
 };
 
-const extension: BundleOptions = {
+const extension: esbuild.BuildOptions = {
 	...shared_opts,
-	name: 'extension',
 	outfile: 'ext/bleh.js',
 	minify: true,
 };
 
 if (process.argv[2] == 'serve') {
-	await Promise.all([
-		bundle(usercss),
-		bundle(userscript),
-	]);
+	const js_context = await esbuild.context(userscript);
+	const css_context = await esbuild.context(usercss);
 
-	Deno.serve(req =>
-		serveDir(req, {
-			showDirListing: true,
-		}),
-	);
+	const serve = await js_context.serve({
+		servedir: '',
+	});
+
+	await js_context.watch();
+	await css_context.watch();
+
+	for (const host of serve.hosts) {
+		console.log(`http://${host}:${serve.port}`);
+	}
 } else {
 	build.built_on = new Date().toISOString();
 	await fs.writeFile(

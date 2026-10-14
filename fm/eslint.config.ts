@@ -1,31 +1,17 @@
-import js from '@eslint/js';
-import stylistic from '@stylistic/eslint-plugin';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import promise from 'eslint-plugin-promise';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
+import json from "@eslint/json";
+import css from "@eslint/css";
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-	globalIgnores(['ext/', 'bleh.user.js', 'bleh.user.css', 'node_modules/']),
-
-	js.configs.recommended,
-	tseslint.configs.recommended,
-	promise.configs['flat/recommended'],
-
-	stylistic.configs.customize({
-		indent: 'tab',
-		semi: true,
-		quotes: 'single',
-		braceStyle: '1tbs',
-	}),
-
-	{
-		languageOptions: { globals: globals.browser },
-		plugins: { 'simple-import-sort': simpleImportSort },
-		rules: {
-			'simple-import-sort/imports': 'error',
-			'simple-import-sort/exports': 'error',
-		},
-	},
+  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
+  tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
+  { files: ["**/*.jsonc"], plugins: { json }, language: "json/jsonc", extends: ["json/recommended"] },
+  { files: ["**/*.json5"], plugins: { json }, language: "json/json5", extends: ["json/recommended"] },
+  { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
 ]);

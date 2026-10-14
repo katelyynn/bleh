@@ -10,7 +10,8 @@
 	"scripts": {
 		"build": "node index.ts",
 		"dev": "node index.ts serve",
-		"license": "node scripts/copyright.ts"
+		"license": "node scripts/copyright.ts",
+		"fmt": "pnpm dlx eslint ."
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.8.0",
@@ -43,12 +44,15 @@
 		"wanakana": "^5.3.1"
 	},
 	"devDependencies": {
+		"@eslint/css": "^2.0.0",
 		"@eslint/js": "^10.0.1",
+		"@eslint/json": "^2.1.1",
 		"@stylistic/eslint-plugin": "^5.10.0",
 		"@types/eslint-plugin-promise": "^7.3.0",
 		"@types/node": "^26.6.4",
 		"eslint": "^10.8.1",
 		"eslint-plugin-promise": "^7.3.0",
+		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-simple-import-sort": "^14.0.0",
 		"globals": "^17.9.0",
 		"jiti": "^2.7.0",
@@ -57,7 +61,7 @@
 	"allowScripts": {
 		"esbuild@0.28.2": true
 	},
-	"packageManager": "npm@11.17.0",
+	"packageManager": "pnpm@10.33.2",
 	"engines": {
 		"node": ">=24"
 	}
