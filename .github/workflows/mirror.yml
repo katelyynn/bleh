@@ -1,0 +1,26 @@
+name: Mirror
+
+on:
+  push:
+  workflow_dispatch:
+  delete:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  codeberg:
+    name: Codeberg
+    if: github.repository == 'katelyynn/bleh'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: pixta-dev/repository-mirroring-action@674e65a7d483ca28dafaacba0d07351bdcc8bd75
+        with:
+          target_repo_url: "git@codeberg.org/aihara/bleh.git"
+          ssh_private_key: ${{ secrets.CODEBURG_SSH_PRIVATE_KEY }}
