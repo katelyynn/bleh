@@ -2284,6 +2284,8 @@ export const trans = {
 			graves: {
 				// a nod to the Deadlock character 'Graves'
 				// https://deadlock.wiki/Graves#Typography
+				// use the link above and check if there's already
+				// a translation of her that would work
 				en: 'Graves',
 				pt: 'Mortícia', //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
 			},
@@ -10384,6 +10386,9 @@ export const trans = {
 		pl: 'Last.fm nie udało się załadować tego elementu',
 	},
 	last_scrobbled_replace: {
+		//
+		// DO NOT TRANSLATE
+		//
 		// dont translate this, its replaced
 		// literally word for word from the Last.fm text
 		// for use in code
@@ -10401,6 +10406,9 @@ export const trans = {
 		zh: '{u} 上次记录了...',
 	},
 	notification_replied_ctx: {
+		//
+		// DO NOT TRANSLATE
+		//
 		// notifications can include text with valuable info such as:
 		// and 7 others replied to your shout on
 		// this is searching for the word 'replied'
@@ -10750,6 +10758,7 @@ export const trans = {
 		},
 	},
 	leaving_site_checkbox: {
+		// v = url
 		en: 'Trust {v} links in the future',
 		de: '{v}-Links zukünftig vertrauen',
 		es: 'Confiar en los vínculos de {v} en el futuro',
@@ -11115,6 +11124,7 @@ export const trans = {
 		},
 	},
 	credits: {
+		// credit for a song/album/artist
 		en: 'Credits',
 		de: 'Credits',
 		es: 'Créditos',
@@ -11125,6 +11135,7 @@ export const trans = {
 		pl: 'Autorzy',
 	},
 	view_credits: {
+		// credit for a song/album/artist
 		en: 'View credits',
 		de: 'Credits ansehen',
 		es: 'Ver créditos',
@@ -11135,6 +11146,7 @@ export const trans = {
 		pl: 'Wyświetl autorów',
 	},
 	credits_for_value: {
+		// credit for a song/album/artist
 		en: 'Credits for {v}',
 		de: 'Credits für {v}',
 		es: 'Créditos para {v}',
@@ -11323,7 +11335,7 @@ export const trans = {
 		pl: 'Przetłumacz',
 	},
 	translation_key: {
-		// a key such as 'you_have_new_badges' above
+		// a key/identifier such as 'you_have_new_badges' above
 		en: 'Translation key',
 		de: 'Übersetzungsschlüssel',
 		es: 'Clave de traducción',
@@ -12271,6 +12283,8 @@ export const trans = {
 		pl: 'Inni użytkownicy',
 	},
 	count_bar_right: {
+		// location of a play number
+		// either left or right
 		en: 'Text location',
 		pt: 'Posição do texto',
 		it: 'Posizione del testo',
@@ -12736,6 +12750,7 @@ export const trans = {
 	},
 	hover_to_view: {
 		// hover mouse
+		// used for listen leaderboards
 		en: 'Hover to view',
 		pt: 'Passe o mouse para visualizar',
 	},
