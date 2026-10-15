@@ -14,6 +14,7 @@ import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { createRef } from 'jsx-dom';
 import { expand_avatar } from '@/components/shared/avatar.tsx';
+import { proxy_image } from '@/components/markdown/proxy';
 
 interface ProfileBannerProps {
 	ref?: ReturnType<typeof createRef<ProfileBannerElement>>;
@@ -59,9 +60,7 @@ export function ProfileBanner({
 	) as ProfileBannerElement;
 
 	function update(val: string) {
-		const sanitised = `https://images.weserv.nl/?url=${
-			encodeURIComponent(val)
-		}&output=webp&n=-1`;
+		const sanitised = proxy_image(val);
 
 		preview.current.style.setProperty(
 			'background-image',

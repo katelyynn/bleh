@@ -29,7 +29,7 @@ import { markdown_options, social_link } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '@/components/sponsor';
-import { proxy_images } from '@/components/markdown/proxy.tsx';
+import { proxy_image, proxy_images } from '@/components/markdown/proxy.tsx';
 import { status_cafe } from '@/components/markdown/statuscafe.tsx';
 import { time } from '@/components/markdown/time.tsx';
 import {
@@ -126,9 +126,7 @@ export function markdown(
 					const safe = new URL(url);
 					if (!['http:', 'https:'].includes(safe.protocol)) return '';
 
-					cache.banner = `https://images.weserv.nl/?url=${
-						encodeURIComponent(url)
-					}&output=webp&n=-1`;
+					cache.banner = proxy_image(url);
 					if (name == auth.name) cache.banner_orig = url;
 				} catch {
 					cache.banner = 'accent';
