@@ -11,6 +11,7 @@ import {
 	dialog,
 	dialog_rm,
 	FooterFill,
+	modal,
 	ModalFooter,
 } from '@/components/dialog/dialog';
 import { input } from '@/components/settings/input';
@@ -92,7 +93,9 @@ export function submit_scrobble({
 		can_api,
 	});
 
-	dialog({
+	let loading = false;
+
+	modal({
 		id: 'submit_scrobble',
 		title: tl(trans.new_scrobble),
 		body: (
@@ -203,172 +206,164 @@ export function submit_scrobble({
 						})}
 					</div>
 				</ScrobbleForm>
-				<ModalFooter>
-					<SeeMore
-						iconPlacement='left'
-						icon={icons.x}
-						onClick={() => {
-							dialog_rm({ id: 'submit_scrobble' });
-						}}
-					>
-						{tl(trans.cancel)}
-					</SeeMore>
-					<FooterFill />
-					<ButtonGroup extra>
-						<SettingCheckbox
-							bind='auto_close_scrobble_modal'
-							standalone
-						/>
-						<Button
-							primary
-							onClick={async () => {
-								if (
-									track.current.value == '' ||
-									artist.current.value == ''
-								) {
-									notify({
-										id: 'submit_scrobble',
-										title: tl(trans.new_scrobble),
-										body: tl(trans.missing_fields),
-										type: 'error',
-									});
-									return;
-								}
-
-								track.current.disabled = true;
-								album.current.disabled = true;
-								artist.current.disabled = true;
-								album_artist.current.disabled = true;
-								use_current.current.disabled = true;
-								date.disabled(true);
-								create_scrobble.current.loading = true;
-
-								if (
-									album.current.value != '' &&
-									album_artist.current.value == ''
-								) {
-									album_artist.current.value =
-										artist.current.value;
-								}
-
-								const params = {
-									sk: localStorage.getItem('bleh_auth'),
-									artist: artist.current.value,
-									track: track.current.value,
-									timestamp: use_current.current.value
-										? DateTime.now().toUnixInteger()
-										: Math.floor(date.value / 1000),
-								};
-
-								if (album.current.value != '') {
-									params.album = album.current.value;
-								}
-								if (album_artist.current.value != '') {
-									params.albumArtist =
-										album_artist.current.value;
-								}
-
-								const res = await fetch(
-									'https://jufufu.katelyn.moe/api/lastfm',
-									{
-										method: 'POST',
-										headers: {
-											'content-type': 'application/json',
-										},
-										body: JSON.stringify({
-											method: 'track.scrobble',
-											params,
-										}),
-									},
-								);
-
-								const json = await res.json();
-								log(
-									'received response',
-									'submit scrobble',
-									'info',
-									{
-										result: json,
-									},
-								);
-
-								function re_enable() {
-									track.current.disabled = false;
-									album.current.disabled = false;
-									artist.current.disabled = false;
-									album_artist.current.disabled = false;
-									use_current.current.disabled = false;
-									date.disabled(false);
-									create_scrobble.current.loading = false;
-								}
-
-								if (json.error) {
-									log('error', 'submit scrobble', 'error');
-									notify({
-										id: 'submit_scrobble',
-										title: tl(trans.scrobble_failed),
-										body: json.message,
-										type: 'error',
-										persist: true,
-									});
-									re_enable();
-									return;
-								}
-
-								const error_code =
-									json.scrobbles.scrobble.ignoredMessage.code;
-								if (error_code > 0) {
-									log('error', 'submit scrobble', 'error', {
-										error_code,
-									});
-									notify({
-										id: 'submit_scrobble',
-										title: tl(trans.scrobble_failed),
-										body: tl(
-											trans
-												.scrobble_error_codes[
-													error_code
-												],
-										),
-										type: 'error',
-										persist: true,
-									});
-									re_enable();
-									return;
-								}
-
-								notify({
-									id: 'submit_scrobble',
-									title: tl(trans.new_scrobble),
-									body: params.track,
-									type: 'success',
-								});
-
-								if (settings.auto_close_scrobble_modal) {
-									dialog_rm({ id: 'submit_scrobble' });
-								} else {
-									dialog_rm({ id: 'submit_scrobble' });
-									submit_scrobble({
-										pre_track,
-										pre_album,
-										pre_artist,
-										pre_album_artist,
-										pre_timestamp,
-										func,
-										can_api,
-									});
-								}
-
-								if (func) func();
-							}}
-							ref={create_scrobble}
-						>
-							<Icon name={icons.plus} />
-							{tl(trans.scrobble)}
-						</Button>
-					</ButtonGroup>
-				</ModalFooter>
+				<SettingCheckbox
+					bind='auto_close_scrobble_modal'
+					standalone
+				/>
 			</>
 		),
+		actions: [
+			{
+				primary: true,
+				onClick: async () => {
+					if (loading) return;
+
+					if (
+						track.current.value == '' ||
+						artist.current.value == ''
+					) {
+						notify({
+							id: 'submit_scrobble',
+							title: tl(trans.new_scrobble),
+							body: tl(trans.missing_fields),
+							type: 'error',
+						});
+						return;
+					}
+
+					track.current.disabled = true;
+					album.current.disabled = true;
+					artist.current.disabled = true;
+					album_artist.current.disabled = true;
+					use_current.current.disabled = true;
+					date.disabled(true);
+					loading = true;
+
+					if (
+						album.current.value != '' &&
+						album_artist.current.value == ''
+					) {
+						album_artist.current.value =
+							artist.current.value;
+					}
+
+					const params = {
+						sk: localStorage.getItem('bleh_auth'),
+						artist: artist.current.value,
+						track: track.current.value,
+						timestamp: use_current.current.value
+							? DateTime.now().toUnixInteger()
+							: Math.floor(date.value / 1000),
+					};
+
+					if (album.current.value != '') {
+						params.album = album.current.value;
+					}
+					if (album_artist.current.value != '') {
+						params.albumArtist =
+							album_artist.current.value;
+					}
+
+					const res = await fetch(
+						'https://jufufu.katelyn.moe/api/lastfm',
+						{
+							method: 'POST',
+							headers: {
+								'content-type': 'application/json',
+							},
+							body: JSON.stringify({
+								method: 'track.scrobble',
+								params,
+							}),
+						},
+					);
+
+					const json = await res.json();
+					log(
+						'received response',
+						'submit scrobble',
+						'info',
+						{
+							result: json,
+						},
+					);
+
+					function re_enable() {
+						track.current.disabled = false;
+						album.current.disabled = false;
+						artist.current.disabled = false;
+						album_artist.current.disabled = false;
+						use_current.current.disabled = false;
+						date.disabled(false);
+						loading = false;
+					}
+
+					if (json.error) {
+						log('error', 'submit scrobble', 'error');
+						notify({
+							id: 'submit_scrobble',
+							title: tl(trans.scrobble_failed),
+							body: json.message,
+							type: 'error',
+							persist: true,
+						});
+						re_enable();
+						return;
+					}
+
+					const error_code =
+						json.scrobbles.scrobble.ignoredMessage.code;
+					if (error_code > 0) {
+						log('error', 'submit scrobble', 'error', {
+							error_code,
+						});
+						notify({
+							id: 'submit_scrobble',
+							title: tl(trans.scrobble_failed),
+							body: tl(
+								trans
+									.scrobble_error_codes[
+										error_code
+									],
+							),
+							type: 'error',
+							persist: true,
+						});
+						re_enable();
+						return;
+					}
+
+					notify({
+						id: 'submit_scrobble',
+						title: tl(trans.new_scrobble),
+						body: params.track,
+						type: 'success',
+					});
+
+					if (settings.auto_close_scrobble_modal) {
+						dialog_rm({ id: 'submit_scrobble' });
+					} else {
+						dialog_rm({ id: 'submit_scrobble' });
+						submit_scrobble({
+							pre_track,
+							pre_album,
+							pre_artist,
+							pre_album_artist,
+							pre_timestamp,
+							func,
+							can_api,
+						});
+					}
+
+					if (func) func();
+				},
+				children: (
+					<>
+						<Icon name={icons.plus} />
+						{tl(trans.scrobble)}
+					</>
+				)
+			}
+		]
 	});
 }

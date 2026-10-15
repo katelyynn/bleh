@@ -35976,12 +35976,6 @@ var bleh = (() => {
   function ButtonComboSeparator() {
     return /* @__PURE__ */ jsx("div", { class: "button-combo-sep" });
   }
-  function ButtonGroup({
-    extra,
-    children
-  }) {
-    return /* @__PURE__ */ jsx("div", { class: ["button-group", extra && "extra"], children });
-  }
 
   // src/components/text/text.tsx
   function IconLabel({
@@ -48553,8 +48547,7 @@ var bleh = (() => {
       pl: "Prywatno\u015B\u0107",
       pt: "Privacidade",
       sv: "Sekretess",
-      ru: "\u041A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
-      pl: "Prywatno\u015B\u0107"
+      ru: "\u041A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C"
     },
     recent_listening: {
       name: {
@@ -55382,8 +55375,8 @@ var bleh = (() => {
     if (replace && replace_if_possible) replace_if_possible = false;
     if (replace_if_possible && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (const dialog7 in dialogs) {
-        replace_id = dialog7;
+      for (const dialog8 in dialogs) {
+        replace_id = dialog8;
         break;
       }
     }
@@ -55457,9 +55450,9 @@ var bleh = (() => {
     }
     if (all) {
       log("requested kill all", "window", "info", { dialogs });
-      for (const dialog7 in dialogs) {
+      for (const dialog8 in dialogs) {
         dialog_rm({
-          id: dialog7
+          id: dialog8
         });
       }
       return;
@@ -55467,12 +55460,12 @@ var bleh = (() => {
     if (!id) return;
     if (!page.structure.dialogs) return;
     if (dialogs.hasOwnProperty(id)) {
-      const dialog7 = dialogs[id];
-      if (!page.structure.dialogs.contains(dialog7.instance)) return;
+      const dialog8 = dialogs[id];
+      if (!page.structure.dialogs.contains(dialog8.instance)) return;
       log(`queuing ${id} to kill`, "window");
-      dialog7.instance.classList.add("to-remove");
+      dialog8.instance.classList.add("to-remove");
       setTimeout(function() {
-        page.structure.dialogs.removeChild(dialog7.instance);
+        page.structure.dialogs.removeChild(dialog8.instance);
       }, 400);
       delete dialogs[id];
       if (JSON.stringify(dialogs) == "{}") {
@@ -55516,8 +55509,8 @@ var bleh = (() => {
     let replace_id = "";
     if (replace && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (const dialog7 in dialogs) {
-        replace_id = dialog7;
+      for (const dialog8 in dialogs) {
+        replace_id = dialog8;
         break;
       }
     }
@@ -63340,7 +63333,8 @@ var bleh = (() => {
       func,
       can_api
     });
-    dialog({
+    let loading = false;
+    modal({
       id: "submit_scrobble",
       title: tl2(trans.new_scrobble),
       body: /* @__PURE__ */ jsx(Fragment, { children: [
@@ -63460,155 +63454,138 @@ var bleh = (() => {
             })
           ] })
         ] }),
-        /* @__PURE__ */ jsx(ModalFooter, { children: [
-          /* @__PURE__ */ jsx(
-            SeeMore,
-            {
-              iconPlacement: "left",
-              icon: icons.x,
-              onClick: () => {
-                dialog_rm({ id: "submit_scrobble" });
-              },
-              children: tl2(trans.cancel)
+        /* @__PURE__ */ jsx(
+          SettingCheckbox,
+          {
+            bind: "auto_close_scrobble_modal",
+            standalone: true
+          }
+        )
+      ] }),
+      actions: [
+        {
+          primary: true,
+          onClick: async () => {
+            if (loading) return;
+            if (track.current.value == "" || artist.current.value == "") {
+              notify({
+                id: "submit_scrobble",
+                title: tl2(trans.new_scrobble),
+                body: tl2(trans.missing_fields),
+                type: "error"
+              });
+              return;
             }
-          ),
-          /* @__PURE__ */ jsx(FooterFill, {}),
-          /* @__PURE__ */ jsx(ButtonGroup, { extra: true, children: [
-            /* @__PURE__ */ jsx(
-              SettingCheckbox,
+            track.current.disabled = true;
+            album.current.disabled = true;
+            artist.current.disabled = true;
+            album_artist.current.disabled = true;
+            use_current.current.disabled = true;
+            date.disabled(true);
+            loading = true;
+            if (album.current.value != "" && album_artist.current.value == "") {
+              album_artist.current.value = artist.current.value;
+            }
+            const params = {
+              sk: localStorage.getItem("bleh_auth"),
+              artist: artist.current.value,
+              track: track.current.value,
+              timestamp: use_current.current.value ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
+            };
+            if (album.current.value != "") {
+              params.album = album.current.value;
+            }
+            if (album_artist.current.value != "") {
+              params.albumArtist = album_artist.current.value;
+            }
+            const res = await fetch(
+              "https://jufufu.katelyn.moe/api/lastfm",
               {
-                bind: "auto_close_scrobble_modal",
-                standalone: true
-              }
-            ),
-            /* @__PURE__ */ jsx(
-              Button,
-              {
-                primary: true,
-                onClick: async () => {
-                  if (track.current.value == "" || artist.current.value == "") {
-                    notify({
-                      id: "submit_scrobble",
-                      title: tl2(trans.new_scrobble),
-                      body: tl2(trans.missing_fields),
-                      type: "error"
-                    });
-                    return;
-                  }
-                  track.current.disabled = true;
-                  album.current.disabled = true;
-                  artist.current.disabled = true;
-                  album_artist.current.disabled = true;
-                  use_current.current.disabled = true;
-                  date.disabled(true);
-                  create_scrobble.current.loading = true;
-                  if (album.current.value != "" && album_artist.current.value == "") {
-                    album_artist.current.value = artist.current.value;
-                  }
-                  const params = {
-                    sk: localStorage.getItem("bleh_auth"),
-                    artist: artist.current.value,
-                    track: track.current.value,
-                    timestamp: use_current.current.value ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
-                  };
-                  if (album.current.value != "") {
-                    params.album = album.current.value;
-                  }
-                  if (album_artist.current.value != "") {
-                    params.albumArtist = album_artist.current.value;
-                  }
-                  const res = await fetch(
-                    "https://jufufu.katelyn.moe/api/lastfm",
-                    {
-                      method: "POST",
-                      headers: {
-                        "content-type": "application/json"
-                      },
-                      body: JSON.stringify({
-                        method: "track.scrobble",
-                        params
-                      })
-                    }
-                  );
-                  const json = await res.json();
-                  log(
-                    "received response",
-                    "submit scrobble",
-                    "info",
-                    {
-                      result: json
-                    }
-                  );
-                  function re_enable() {
-                    track.current.disabled = false;
-                    album.current.disabled = false;
-                    artist.current.disabled = false;
-                    album_artist.current.disabled = false;
-                    use_current.current.disabled = false;
-                    date.disabled(false);
-                    create_scrobble.current.loading = false;
-                  }
-                  if (json.error) {
-                    log("error", "submit scrobble", "error");
-                    notify({
-                      id: "submit_scrobble",
-                      title: tl2(trans.scrobble_failed),
-                      body: json.message,
-                      type: "error",
-                      persist: true
-                    });
-                    re_enable();
-                    return;
-                  }
-                  const error_code = json.scrobbles.scrobble.ignoredMessage.code;
-                  if (error_code > 0) {
-                    log("error", "submit scrobble", "error", {
-                      error_code
-                    });
-                    notify({
-                      id: "submit_scrobble",
-                      title: tl2(trans.scrobble_failed),
-                      body: tl2(
-                        trans.scrobble_error_codes[error_code]
-                      ),
-                      type: "error",
-                      persist: true
-                    });
-                    re_enable();
-                    return;
-                  }
-                  notify({
-                    id: "submit_scrobble",
-                    title: tl2(trans.new_scrobble),
-                    body: params.track,
-                    type: "success"
-                  });
-                  if (settings.auto_close_scrobble_modal) {
-                    dialog_rm({ id: "submit_scrobble" });
-                  } else {
-                    dialog_rm({ id: "submit_scrobble" });
-                    submit_scrobble({
-                      pre_track,
-                      pre_album,
-                      pre_artist,
-                      pre_album_artist,
-                      pre_timestamp,
-                      func,
-                      can_api
-                    });
-                  }
-                  if (func) func();
+                method: "POST",
+                headers: {
+                  "content-type": "application/json"
                 },
-                ref: create_scrobble,
-                children: [
-                  /* @__PURE__ */ jsx(Icon, { name: icons.plus }),
-                  tl2(trans.scrobble)
-                ]
+                body: JSON.stringify({
+                  method: "track.scrobble",
+                  params
+                })
               }
-            )
+            );
+            const json = await res.json();
+            log(
+              "received response",
+              "submit scrobble",
+              "info",
+              {
+                result: json
+              }
+            );
+            function re_enable() {
+              track.current.disabled = false;
+              album.current.disabled = false;
+              artist.current.disabled = false;
+              album_artist.current.disabled = false;
+              use_current.current.disabled = false;
+              date.disabled(false);
+              loading = false;
+            }
+            if (json.error) {
+              log("error", "submit scrobble", "error");
+              notify({
+                id: "submit_scrobble",
+                title: tl2(trans.scrobble_failed),
+                body: json.message,
+                type: "error",
+                persist: true
+              });
+              re_enable();
+              return;
+            }
+            const error_code = json.scrobbles.scrobble.ignoredMessage.code;
+            if (error_code > 0) {
+              log("error", "submit scrobble", "error", {
+                error_code
+              });
+              notify({
+                id: "submit_scrobble",
+                title: tl2(trans.scrobble_failed),
+                body: tl2(
+                  trans.scrobble_error_codes[error_code]
+                ),
+                type: "error",
+                persist: true
+              });
+              re_enable();
+              return;
+            }
+            notify({
+              id: "submit_scrobble",
+              title: tl2(trans.new_scrobble),
+              body: params.track,
+              type: "success"
+            });
+            if (settings.auto_close_scrobble_modal) {
+              dialog_rm({ id: "submit_scrobble" });
+            } else {
+              dialog_rm({ id: "submit_scrobble" });
+              submit_scrobble({
+                pre_track,
+                pre_album,
+                pre_artist,
+                pre_album_artist,
+                pre_timestamp,
+                func,
+                can_api
+              });
+            }
+            if (func) func();
+          },
+          children: /* @__PURE__ */ jsx(Fragment, { children: [
+            /* @__PURE__ */ jsx(Icon, { name: icons.plus }),
+            tl2(trans.scrobble)
           ] })
-        ] })
-      ] })
+        }
+      ]
     });
   }
 
