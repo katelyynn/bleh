@@ -36,7 +36,9 @@ export function bleh_error() {
 	document.body.classList.add('has-error');
 	page_content.classList.add('has-error');
 
-	if (page.subpage == '404') {
+	const error_line = error_content?.textContent || '';
+
+	if (page.subpage == '404' || error_line.includes('404')) {
 		error_404(page_content);
 		return;
 	}
@@ -50,8 +52,7 @@ export function bleh_error() {
 						<section class="error-panel sour">
 							<div class="info">
 								<h1>${tl(trans.erm)}</h1>
-								<div class="subtle">${error_content
-									.textContent}</div>
+								<div class="subtle">${error_line}</div>
 							</div>
 							<div class="error-content">
 			                    ${reason}

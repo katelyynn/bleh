@@ -227,6 +227,7 @@ export const icons = {
 	discord: 'discord',
 	warning: 'warning',
 	crown: 'crown',
+	about: 'about'
 };
 
 interface icon {

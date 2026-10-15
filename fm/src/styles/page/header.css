@@ -620,7 +620,7 @@
 	line-height: var(--page-header-line-height-sub);
 	color: oklch(var(--c2) / 80%);
 	cursor: default;
-	margin: unset !important;
+	margin: -2px 0 0 0 !important;
 
 	display: -webkit-box;
 	overflow: hidden;

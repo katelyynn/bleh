@@ -8,7 +8,6 @@ import { page, root } from '@/build/page.ts';
 import { createRef } from 'jsx-dom';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
-import { InfoTip } from '@/components/text/tip.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { create_profile_note_panel } from '@/pages/profile/profile.tsx';
 import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
@@ -71,7 +70,7 @@ export function profile_about(
 		<PanelTop>
 			<PanelHead
 				top
-				icon={icons.info}
+				icon={icons.about}
 				hover={uses_md
 					? (
 						<Tooltip>
