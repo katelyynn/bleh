@@ -111,7 +111,6 @@
 		position: absolute;
 		inset: 0;
 		background: var(--banner-overlay);
-		mix-blend-mode: var(--banner-mix);
 	}
 
 	@media (max-width: 980px) {
@@ -179,7 +178,6 @@
 		position: absolute;
 		inset: 0;
 		background: var(--background-overlay);
-		mix-blend-mode: var(--background-mix-mode);
 
 		z-index: 10;
 	}
