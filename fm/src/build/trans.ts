@@ -7742,7 +7742,6 @@ export const trans = {
 		pt: 'Privacidade',
 		sv: 'Sekretess',
 		ru: 'Конфиденциальность',
-		pl: 'Prywatność',
 	},
 	recent_listening: {
 		name: {
