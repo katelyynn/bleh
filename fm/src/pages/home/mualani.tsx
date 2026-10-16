@@ -105,6 +105,7 @@ import {
 	AvatarDecoration,
 	decorations,
 } from '@/components/avatar/decoration.tsx';
+import { HeatmapDates } from '@/components/date/heatmap';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1527,6 +1528,13 @@ export function mualani() {
 								</div>
 							</AvatarDecoration>
 						))}
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='HeatmapDates'>
+						<HeatmapDates />
 					</DemoItem>
 				</DemoGrid>
 			</section>

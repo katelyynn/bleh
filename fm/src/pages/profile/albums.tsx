@@ -109,6 +109,7 @@ export function profile_albums() {
 					<SettingGroup minWidth>
 						<SettingSwitch bind='format_guest_features' />
 						<SettingSwitch bind='grid_glow' />
+						<SettingSwitch bind='seasonal_masks' />
 						<SettingRange bind='gloss' />
 					</SettingGroup>
 					<CardTip minWidth>{tl(trans.bleh_settings_notice)}</CardTip>

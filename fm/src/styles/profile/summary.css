@@ -3,7 +3,7 @@
 	flex-direction: column;
 	gap: var(--card-gap);
 
-	--w: 26px;
+	--w: 24px;
 	--c: 3;
 	--g: 4px;
 
@@ -27,6 +27,18 @@
 		--w: 22px;
 		--g: 2px;
 	}
+}
+
+.heatmap-dates {
+	display: flex;
+	flex-direction: column;
+	gap: var(--g, 3px);
+}
+
+.heatmap-date {
+	height: var(--w, 18px);
+	color: oklch(var(--c3));
+	font-size: var(--font-size-sm);
 }
 
 .summary-title {

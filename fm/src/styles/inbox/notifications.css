@@ -56,8 +56,7 @@
 					--mask-size: var(--cover-size-32);
 
 					&>.avatar-status-dot {
-						width: 16px;
-						height: 16px;
+						--mask-size: 16px;
 					}
 				}
 			}
@@ -99,8 +98,7 @@
 				}
 
 				&>.avatar-status-dot {
-					width: 24px;
-					height: 24px;
+					--icon-size: 18px;
 				}
 			}
 		}

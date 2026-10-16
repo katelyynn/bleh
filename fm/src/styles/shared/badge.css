@@ -96,22 +96,33 @@
 		--interact-mask: none !important;
 	}
 
+	&:after {
+		display: none;
+	}
+
 	&.translation-lang {
 		&:after {
 			content: '';
 			position: absolute;
-			background: var(--flag);
-			aspect-ratio: 3 / 2;
+			display: block;
+			background-image: var(--flag);
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			aspect-ratio: 1 / 1;
 
-			--flag-size: 7px;
-			--flag-width: calc(var(--flag-size) * 1.5);
+			--flag-size: 6px;
+			--flag-width: var(--flag-size);
 			width: var(--flag-width);
 			height: var(--flag-size);
 			border-radius: 2px;
-			outline: 1px solid oklch(var(--b5) / 50%);
+			outline: 1px solid oklch(var(--k4) / 70%);
 
 			left: calc(var(--sides) + var(--icon-size) - var(--flag-width));
 			top: calc(50% + var(--icon-size) / 2 - var(--flag-size));
+
+			margin-top: -1px;
+			margin-left: -1px;
 		}
 	}
 
@@ -314,7 +325,6 @@
 	--left: 0;
 	--top: 0;
 	--margin-top: 0;
-	--icon-size: 18px;
 	background: var(--override-bg, none) !important;
 	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
 
@@ -338,8 +348,8 @@
 }
 
 .avatar-status-dot {
-	width: 20px;
-	height: 20px;
+	width: var(--icon-size, var(--mask-size)) !important;
+	height: var(--icon-size, var(--mask-size)) !important;
 }
 
 .shout-user-avatar>.avatar-status-dot {
