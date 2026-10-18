@@ -83,7 +83,7 @@
 }
 
 .home-logo-container {
-	filter: drop-shadow(0 2px 4px oklch(var(--l4-c)));
+	filter: drop-shadow(0 2px 2px oklch(var(--b6)));
 }
 
 .brand-demo,

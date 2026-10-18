@@ -40,10 +40,6 @@
 
 	overflow: hidden;
 
-	will-change: transform;
-	transform: translateZ(0);
-	backface-visibility: hidden;
-
 	@media (max-width: 980px) {
 		--w: var(--cards-width);
 		--header-size: 80px;
@@ -53,10 +49,6 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
-
-	--mask: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, white 20%);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
 
 	contain: strict;
 
@@ -106,6 +98,8 @@
 
 	opacity: 0.6;
 
+	will-change: opacity;
+
 	&:before {
 		content: '';
 		position: absolute;
@@ -129,10 +123,6 @@
 
 	opacity: 0;
 	height: var(--banner-height);
-
-	will-change: opacity, transform, filter;
-	transform: translateZ(0);
-	backface-visibility: hidden;
 
 	contain: strict;
 

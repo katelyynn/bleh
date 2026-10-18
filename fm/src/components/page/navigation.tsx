@@ -2050,7 +2050,7 @@ function NavigationFriend({
 			</span>
 			{starred && (
 				<span class={['star-icon', 'colourful']}>
-					<Icon name={icons.star} />
+					<Icon name={icons.starred_friend} />
 				</span>
 			)}
 		</a>
@@ -2080,7 +2080,7 @@ function NavigationFriend({
 					)}
 				{starred && (
 					<span class={['star-icon', 'colourful']}>
-						<Icon name={icons.star} />
+						<Icon name={icons.starred_friend} />
 					</span>
 				)}
 			</>,
