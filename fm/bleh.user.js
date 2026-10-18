@@ -116711,7 +116711,7 @@ var bleh = (() => {
     const auth_link = masthead.querySelector(
       ".masthead-nav-wrap > .site-auth .auth-link"
     );
-    auth_link.classList.add("select-button", "select-in-settings");
+    auth_link?.classList.add("select-button", "select-in-settings");
     function update() {
       const theme4 = useSettings.get("theme");
       masthead?.setAttribute("data-theme", theme4);

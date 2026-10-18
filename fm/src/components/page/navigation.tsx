@@ -404,7 +404,7 @@ export function append_nav() {
 		'.masthead-nav-wrap > .site-auth .auth-link',
 	);
 
-	auth_link.classList.add('select-button', 'select-in-settings');
+	auth_link?.classList.add('select-button', 'select-in-settings');
 
 	function update() {
 		const theme = useSettings.get('theme') as string;
