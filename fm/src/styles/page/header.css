@@ -459,7 +459,7 @@
 .page-header-icon {
 	display: flex;
 	flex-shrink: 0;
-	margin-right: calc(-1 * var(--card-padding));
+	margin-right: calc(-1 * var(--card-gap));
 	background-color: oklch(var(--c2) / 90%);
 	border-radius: 50px;
 	padding: 10px;

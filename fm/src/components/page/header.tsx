@@ -17,7 +17,7 @@ import { page } from '@/build/page.ts';
 
 interface PageHeaderProps {
 	icon?: string;
-	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home';
+	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home' | 'event';
 	combined?: boolean;
 	name?: ReactNode;
 	avatar?: ReactNode;
