@@ -35979,11 +35979,11 @@ var bleh = (() => {
 
   // src/components/text/text.tsx
   function IconLabel({
-    icon: icon6,
+    icon: icon5,
     children
   }) {
     return /* @__PURE__ */ jsx(Fragment, { children: [
-      /* @__PURE__ */ jsx(Icon, { name: icon6 }),
+      /* @__PURE__ */ jsx(Icon, { name: icon5 }),
       children
     ] });
   }
@@ -36000,7 +36000,7 @@ var bleh = (() => {
     id,
     title,
     body,
-    icon: icon6,
+    icon: icon5,
     classname,
     actions = [],
     persist = false,
@@ -36013,7 +36013,7 @@ var bleh = (() => {
       id,
       title,
       body,
-      icon: icon6,
+      icon: icon5,
       classname,
       persist,
       type,
@@ -36021,13 +36021,13 @@ var bleh = (() => {
       progress
     });
     if (type == "error") {
-      if (!icon6) icon6 = icons.error;
+      if (!icon5) icon5 = icons.error;
     } else if (type == "warning") {
-      if (!icon6) icon6 = icons.warning;
+      if (!icon5) icon5 = icons.warning;
     } else if (type == "success") {
-      if (!icon6) icon6 = icons.check;
+      if (!icon5) icon5 = icons.check;
     }
-    if (!icon6) icon6 = icons.info;
+    if (!icon5) icon5 = icons.info;
     actions.push({
       onClick: () => notify_rm(notif),
       children: /* @__PURE__ */ jsx(IconLabel, { icon: icons.x, children: tl2(trans.close) })
@@ -36053,7 +36053,7 @@ var bleh = (() => {
             /* @__PURE__ */ jsx(
               Icon,
               {
-                name: icon6,
+                name: icon5,
                 className: "colourful bleh-notification-icon",
                 "data-notification-type": type
               }
@@ -55285,7 +55285,7 @@ var bleh = (() => {
 
   // src/components/text/head.tsx
   function PanelHead({
-    icon: icon6,
+    icon: icon5,
     small,
     margin = true,
     top: top2,
@@ -55296,13 +55296,13 @@ var bleh = (() => {
       "h4",
       {
         class: [
-          icon6 && "header-with-icon",
+          icon5 && "header-with-icon",
           margin && "with-margin",
           small && "is-small",
           top2 && "is-top"
         ],
         children: [
-          icon6 && /* @__PURE__ */ jsx(Icon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(Icon, { name: icon5 }),
           children
         ]
       }
@@ -55357,7 +55357,7 @@ var bleh = (() => {
   }
   function dialog({
     id = "",
-    icon: icon6,
+    icon: icon5,
     title,
     subtitle,
     body = html.node``,
@@ -55419,7 +55419,7 @@ var bleh = (() => {
             id: "modal_title",
             "data-theme": useSettings.get("theme"),
             children: [
-              /* @__PURE__ */ jsx(PanelHead, { top: true, margin: false, icon: icon6, children: title }),
+              /* @__PURE__ */ jsx(PanelHead, { top: true, margin: false, icon: icon5, children: title }),
               subtitle && /* @__PURE__ */ jsx("p", { class: "bleh-modal-subtitle", children: subtitle })
             ]
           }
@@ -56200,7 +56200,7 @@ var bleh = (() => {
     value,
     bind,
     standalone = false,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     onChange,
@@ -56220,7 +56220,7 @@ var bleh = (() => {
     }
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
           useSettings.on(key, () => {
@@ -56262,7 +56262,7 @@ var bleh = (() => {
               ref: checkbox
             }
           ),
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -56325,7 +56325,7 @@ var bleh = (() => {
     ref: ref2,
     chibi,
     href,
-    icon: icon6,
+    icon: icon5,
     external = false,
     onClick,
     iconPlacement = "right",
@@ -56342,8 +56342,8 @@ var bleh = (() => {
       chibi && "chibi-see-more",
       className2 && className2
     ];
-    if (!icon6 && external) {
-      icon6 = icons.external;
+    if (!icon5 && external) {
+      icon5 = icons.external;
     }
     let elem;
     if (!href && onClick) {
@@ -56356,9 +56356,9 @@ var bleh = (() => {
           "data-see-more": "true",
           ref: ref2,
           children: [
-            iconPlacement == "left" && /* @__PURE__ */ jsx(Icon, { name: icon6 || icons.arrow_left }),
+            iconPlacement == "left" && /* @__PURE__ */ jsx(Icon, { name: icon5 || icons.arrow_left }),
             children,
-            iconPlacement == "right" && /* @__PURE__ */ jsx(Icon, { name: icon6 || icons.arrow_right })
+            iconPlacement == "right" && /* @__PURE__ */ jsx(Icon, { name: icon5 || icons.arrow_right })
           ]
         }
       );
@@ -56376,11 +56376,11 @@ var bleh = (() => {
             iconPlacement == "left" && /* @__PURE__ */ jsx(
               Icon,
               {
-                name: icon6 || icons.arrow_left
+                name: icon5 || icons.arrow_left
               }
             ),
             children,
-            iconPlacement == "right" && /* @__PURE__ */ jsx(Icon, { name: icon6 || icons.arrow_right })
+            iconPlacement == "right" && /* @__PURE__ */ jsx(Icon, { name: icon5 || icons.arrow_right })
           ]
         }
       );
@@ -57276,7 +57276,7 @@ var bleh = (() => {
     rows,
     required = false,
     hide_on_change,
-    icon: icon6
+    icon: icon5
   }) {
     if (type == "date") {
       return calendar({
@@ -57295,16 +57295,16 @@ var bleh = (() => {
     let error_tooltip;
     let colour_block;
     const container = html.node`
-        <div class="content-form input-container colourful ${type == "textarea" ? "textarea" : ""} ${icon6 ? "input-has-icon" : ""}" data-type=${type} data-has-error="false">
+        <div class="content-form input-container colourful ${type == "textarea" ? "textarea" : ""} ${icon5 ? "input-has-icon" : ""}" data-type=${type} data-has-error="false">
             ${type == "colour" ? html.node`<span class="colour-block" ref=${(el) => colour_block = el} />` : ""}
             ${type == "textarea" ? html.node`
                 <textarea class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} value=${value} placeholder=${placeholder} min=${min3} max=${max3} maxlength=${maxlength} cols=${cols} rows=${rows} required=${required} ref=${(el) => input_box = el} />
             ` : html.node`
                 <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min3} max=${max3} maxlength=${maxlength} required=${required} ref=${(el) => input_box = el} />
             `}
-            ${icon6 ? html.node`
+            ${icon5 ? html.node`
                 <div class="input-icons">
-                    ${icon({ name: icon6 })}
+                    ${icon({ name: icon5 })}
                 </div>
             ` : ""}
         </div>
@@ -60220,7 +60220,7 @@ var bleh = (() => {
     return /* @__PURE__ */ jsx("p", { class: "empty-list-text", children: tl2(trans.empty_list) });
   }
   function ListItem({
-    icon: icon6,
+    icon: icon5,
     host,
     name,
     onMove,
@@ -60229,7 +60229,7 @@ var bleh = (() => {
   }) {
     const elem = /* @__PURE__ */ jsx("div", { class: ["setting-list-item", "current"], children: [
       /* @__PURE__ */ jsx("div", { class: "setting-list-item-info", children: [
-        (icon6 || host) && /* @__PURE__ */ jsx("div", { class: "setting-list-icon", "data-host": host, children: /* @__PURE__ */ jsx(Icon, { name: icon6 }) }),
+        (icon5 || host) && /* @__PURE__ */ jsx("div", { class: "setting-list-icon", "data-host": host, children: /* @__PURE__ */ jsx(Icon, { name: icon5 }) }),
         name
       ] }),
       canRemove && /* @__PURE__ */ jsx(
@@ -60249,14 +60249,14 @@ var bleh = (() => {
     return elem;
   }
   function ListCandidate({
-    icon: icon6,
+    icon: icon5,
     host,
     name,
     onAdd
   }) {
     const elem = /* @__PURE__ */ jsx("div", { class: ["setting-list-item"], children: [
       /* @__PURE__ */ jsx("div", { class: "setting-list-item-info", children: [
-        (icon6 || host) && /* @__PURE__ */ jsx("div", { class: "setting-list-icon", "data-host": host, children: /* @__PURE__ */ jsx(Icon, { name: icon6 }) }),
+        (icon5 || host) && /* @__PURE__ */ jsx("div", { class: "setting-list-icon", "data-host": host, children: /* @__PURE__ */ jsx(Icon, { name: icon5 }) }),
         name
       ] }),
       /* @__PURE__ */ jsx(
@@ -62503,7 +62503,7 @@ var bleh = (() => {
     ref: ref2,
     bind,
     standalone = false,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     value,
@@ -62526,7 +62526,7 @@ var bleh = (() => {
     }
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.values) values = store.values;
       if (store.default) defaultValue = store.default;
       predefined = store.predefined || false;
@@ -62572,7 +62572,7 @@ var bleh = (() => {
       const inner_list = createRef();
       elem.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: [
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -64493,7 +64493,7 @@ var bleh = (() => {
 
   // src/components/page/header.tsx
   function PageHeader({
-    icon: icon6,
+    icon: icon5,
     type,
     combined,
     name,
@@ -64522,7 +64522,7 @@ var bleh = (() => {
               ]
             }
           ),
-          icon6 && /* @__PURE__ */ jsx(PageHeaderIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(PageHeaderIcon, { name: icon5 }),
           /* @__PURE__ */ jsx(
             "div",
             {
@@ -65343,9 +65343,9 @@ var bleh = (() => {
     });
     return values;
   }
-  function select_prepare_list(list, icon6 = null) {
+  function select_prepare_list(list, icon5 = null) {
     return list.map((item) => {
-      if (typeof item === "string") return { value: item, text: item, icon: icon6 };
+      if (typeof item === "string") return { value: item, text: item, icon: icon5 };
       return item;
     });
   }
@@ -65405,7 +65405,7 @@ var bleh = (() => {
 
   // src/components/cta/cta.tsx
   function Cta({
-    icon: icon6,
+    icon: icon5,
     label,
     className: className2,
     colourful,
@@ -65424,7 +65424,7 @@ var bleh = (() => {
           ],
           children: [
             /* @__PURE__ */ jsx("label", { class: "cta-label", children: [
-              icon6 && /* @__PURE__ */ jsx(Icon, { name: icon6 }),
+              icon5 && /* @__PURE__ */ jsx(Icon, { name: icon5 }),
               /* @__PURE__ */ jsx("strong", { children: label })
             ] }),
             /* @__PURE__ */ jsx("div", { class: "cta-actions", children })
@@ -68903,7 +68903,7 @@ var bleh = (() => {
     id,
     value = false,
     bind,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     onChange,
@@ -68922,7 +68922,7 @@ var bleh = (() => {
     }
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
           useSettings.on(key, () => {
@@ -68964,7 +68964,7 @@ var bleh = (() => {
               ref: checkbox
             }
           ),
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           /* @__PURE__ */ jsx(SettingLabel, { name, body, store, menu: true })
         ] })
       );
@@ -89442,26 +89442,26 @@ var bleh = (() => {
     isText = true,
     value
   }) {
-    let icon6 = "";
+    let icon5 = "";
     switch (type) {
       case "username":
-        icon6 = icons.username;
+        icon5 = icons.username;
         break;
       case "pronouns":
-        icon6 = icons.pronouns;
+        icon5 = icons.pronouns;
         break;
       case "aka":
-        icon6 = icons.aka;
+        icon5 = icons.aka;
         break;
       case "created":
-        icon6 = icons.created;
+        icon5 = icons.created;
         break;
       case "follow":
-        icon6 = icons.follow;
+        icon5 = icons.follow;
         break;
     }
     const elem = /* @__PURE__ */ jsx("dl", { class: ["sub-text-pair", `sub-text-${type}`], children: [
-      /* @__PURE__ */ jsx(SubTextLabel, { icon: icon6, text: label }),
+      /* @__PURE__ */ jsx(SubTextLabel, { icon: icon5, text: label }),
       /* @__PURE__ */ jsx("dd", { class: ["sub-text-item", !isText && "not-text"], children: value })
     ] });
     hover_tooltip(
@@ -89471,11 +89471,11 @@ var bleh = (() => {
     return elem;
   }
   function SubTextLabel({
-    icon: icon6,
+    icon: icon5,
     text: text4
   }) {
     return /* @__PURE__ */ jsx("dt", { class: "sub-text-label", children: [
-      /* @__PURE__ */ jsx(Icon, { name: icon6 }),
+      /* @__PURE__ */ jsx(Icon, { name: icon5 }),
       /* @__PURE__ */ jsx("span", { class: "sub-text-label-sr", children: text4 })
     ] });
   }
@@ -89494,19 +89494,19 @@ var bleh = (() => {
     value
   }) {
     let text4 = "";
-    let icon6 = "";
+    let icon5 = "";
     if (type == "banner") {
       text4 = tl2(trans.profile_banner.name);
-      icon6 = icons.banner;
+      icon5 = icons.banner;
     } else if (type == "accent") {
       text4 = tl2(trans.profile_accent.name);
-      icon6 = icons.accent;
+      icon5 = icons.accent;
     } else if (type == "font") {
       text4 = tl2(trans.display_name.name);
-      icon6 = icons.text;
+      icon5 = icons.text;
     }
     return /* @__PURE__ */ jsx("div", { class: "markdown-usage-item", children: [
-      /* @__PURE__ */ jsx(Icon, { name: icon6 }),
+      /* @__PURE__ */ jsx(Icon, { name: icon5 }),
       /* @__PURE__ */ jsx("strong", { class: "markdown-usage-type", children: text4 }),
       /* @__PURE__ */ jsx("p", { class: "markdown-usage-value", children: value })
     ] });
@@ -90028,7 +90028,7 @@ var bleh = (() => {
   }
   function Tab({
     label,
-    icon: icon6,
+    icon: icon5,
     chibi,
     active,
     id,
@@ -90042,7 +90042,7 @@ var bleh = (() => {
           if (onChange) onChange(id);
         },
         children: [
-          /* @__PURE__ */ jsx(Icon, { name: icon6 }),
+          /* @__PURE__ */ jsx(Icon, { name: icon5 }),
           label
         ]
       }
@@ -90142,7 +90142,7 @@ var bleh = (() => {
     id,
     value = false,
     bind,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     sub,
@@ -90163,7 +90163,7 @@ var bleh = (() => {
     }
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
           useSettings.on(key, () => {
@@ -90206,7 +90206,7 @@ var bleh = (() => {
               ref: checkbox
             }
           ),
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -90280,7 +90280,7 @@ var bleh = (() => {
     id,
     value,
     bind,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     showLabel = true,
@@ -90302,7 +90302,7 @@ var bleh = (() => {
     const select2 = createRef();
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (!values && store.values) values = store.values;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
@@ -90336,7 +90336,7 @@ var bleh = (() => {
       }
       elem.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: [
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           showLabel && /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -90703,7 +90703,7 @@ var bleh = (() => {
     ref: ref2,
     bind,
     standalone = false,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     value,
@@ -90725,7 +90725,7 @@ var bleh = (() => {
     const reset = createRef();
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.values) values = store.values;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
@@ -90760,7 +90760,7 @@ var bleh = (() => {
       buttons = [];
       elem.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: [
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -91169,7 +91169,7 @@ var bleh = (() => {
     ref: ref2,
     id,
     bind,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     showLabel = true,
@@ -91197,7 +91197,7 @@ var bleh = (() => {
     const reset = createRef();
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.min) min3 = store.min;
       if (store.max) max3 = store.max;
       if (store.step) step = store.step;
@@ -91235,7 +91235,7 @@ var bleh = (() => {
       }
       elem.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: [
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           showLabel && /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -91759,7 +91759,7 @@ var bleh = (() => {
     let about_me_sidebar = page.structure.row.querySelector(
       ".about-me-sidebar"
     );
-    const about_me_text = about_me_sidebar?.querySelector("p");
+    const about_me_text = about_me_sidebar?.querySelector("p") || /* @__PURE__ */ jsx("p", {});
     let about_me_text_value = "";
     if (page.subpage == "overview") {
       delete cache2.banner;
@@ -91779,7 +91779,7 @@ var bleh = (() => {
           page.structure.side.firstElementChild
         );
       } else {
-        if (settings.bio_markdown) {
+        if (useSettings.get("bio_markdown")) {
           about_me_text_value = about_me_text.textContent;
           const result = bio_parse(about_me_text, cache2);
           result.classList.add("about-me-content");
@@ -92403,14 +92403,8 @@ var bleh = (() => {
       take_effect
     });
     if (body.childElementCount == 0) {
-      render(
-        body,
-        html`
-				<p class="subtle">${tl2(trans.no_about).replace(
-          "{u}",
-          page.name
-        )}</p>
-			`
+      body.replaceChildren(
+        /* @__PURE__ */ jsx("p", { class: "subtle", children: tl2(trans.no_about, { u: page.name }) })
       );
     }
     return body;
@@ -92427,7 +92421,7 @@ var bleh = (() => {
     font,
     font_style,
     username: username2
-  } = {}, profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {}, name = page.name) {
+  } = {}, profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}"), name = page.name) {
     const profile_cache_o = Object.keys(profile_cache);
     if (profile_cache_o.length > 400) {
       const keys5 = Reflect.ownKeys(profile_cache);
@@ -92465,7 +92459,7 @@ var bleh = (() => {
       });
     }
   }
-  function open_starred_friend_window(friend_func = null) {
+  function open_starred_friend_window() {
     dialog({
       id: "starred_friend",
       icon: icons.friends,
@@ -111556,7 +111550,7 @@ var bleh = (() => {
       const type = settings_store[id].type || "toggle";
       const title = settings_store[id].title && !settings.developer_setting_names ? tl2(settings_store[id].title) : id;
       let body = settings_store[id].body ? tl2(settings_store[id].body) : null;
-      const icon6 = settings_store[id].icon;
+      const icon5 = settings_store[id].icon;
       if (![
         "toggle",
         "range",
@@ -111628,9 +111622,9 @@ var bleh = (() => {
         if (!in_menu) {
           elem = html.node`
                     <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="toggle" data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
-                        ${icon6 ? html.node`
+                        ${icon5 ? html.node`
                         <div class="icon">
-                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                            <div class="bleh-icon" style="--icon: var(--${icon5})" />
                         </div>
                         ` : ""}
                         ${text4 ? html.node`
@@ -111669,9 +111663,9 @@ var bleh = (() => {
         } else {
           elem = html.node`
                     <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => toggle2 = el}>
-                        ${icon6 ? html.node`
+                        ${icon5 ? html.node`
                         <div class="icon">
-                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                            <div class="bleh-icon" style="--icon: var(--${icon5})" />
                         </div>
                         ` : ""}
                         ${text4 ? html.node`
@@ -111823,9 +111817,9 @@ var bleh = (() => {
         }
         const container = html.node`
                 <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" ref=${(el) => option2 = el} data-modified=${value != settings_store[id].default}>
-                    ${icon6 ? html.node`
+                    ${icon5 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon5})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -111992,9 +111986,9 @@ var bleh = (() => {
         if (!in_menu) {
           elem = html.node`
                     <div class="setting v2 ${settings_store[id].horizontal ? "horizontal" : ""} ${standalone ? "standalone" : ""}" data-type="checkbox" id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
-                        ${icon6 ? html.node`
+                        ${icon5 ? html.node`
                         <div class="icon">
-                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                            <div class="bleh-icon" style="--icon: var(--${icon5})" />
                         </div>
                         ` : ""}
                         ${text4 ? html.node`
@@ -112033,9 +112027,9 @@ var bleh = (() => {
         } else {
           elem = html.node`
                     <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => toggle2 = el}>
-                        ${icon6 ? html.node`
+                        ${icon5 ? html.node`
                         <div class="icon">
-                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                            <div class="bleh-icon" style="--icon: var(--${icon5})" />
                         </div>
                         ` : ""}
                         ${text4 ? html.node`
@@ -112076,9 +112070,9 @@ var bleh = (() => {
         }
         const inner = html.node`
                 ${Object.entries(values).map(([key, val]) => {
-          const icon7 = val.icon || key;
+          const icon6 = val.icon || key;
           const button2 = html.node`
-                        <button class="btn view-item icon" data-type=${icon7} data-value=${key} onclick=${() => {
+                        <button class="btn view-item icon" data-type=${icon6} data-value=${key} onclick=${() => {
             save_setting(id, key);
             buttons.forEach((btn) => {
               btn.setAttribute(
@@ -112135,9 +112129,9 @@ var bleh = (() => {
         if (!in_menu) {
           elem = html.node`
                     <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
-                        ${icon6 ? html.node`
+                        ${icon5 ? html.node`
                         <div class="icon">
-                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                            <div class="bleh-icon" style="--icon: var(--${icon5})" />
                         </div>
                         ` : ""}
                         ${text4 ? html.node`
@@ -112169,7 +112163,7 @@ var bleh = (() => {
                         <div class="primary-selections">
                             ${Object.entries(settings_store[id].values).map(
             ([key, val]) => {
-              const icon7 = val.icon;
+              const icon6 = val.icon;
               const button2 = html.node`
                                         <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
                 update_radio(key);
@@ -112177,9 +112171,9 @@ var bleh = (() => {
                                             <div class="radio-cont">
                                                 <div class="radio" aria-checked=${value == key} />
                                             </div>
-                                            ${icon7 ? html.node`
+                                            ${icon6 ? html.node`
                                                         <div class="icon">
-                                                            <div class="bleh-icon" style="--icon: var(--${icon7})" />
+                                                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
                                                         </div>
                                                     ` : ""}
                                             <div class="heading">
@@ -112197,9 +112191,9 @@ var bleh = (() => {
         } else {
           elem = html.node`
                     <button class="dropdown-menu-clickable-item v2 icon-r opens-further" data-hide=${hide_if_incompatible}>
-                        ${icon6 ? html.node`
+                        ${icon5 ? html.node`
                         <div class="icon">
-                            <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                            <div class="bleh-icon" style="--icon: var(--${icon5})" />
                         </div>
                         ` : ""}
                         <div class="auth-dropdown-item-row">
@@ -112222,14 +112216,14 @@ var bleh = (() => {
             content: html.node`
                         ${Object.entries(settings_store[id].values).map(
               ([key, val]) => {
-                const icon7 = val.icon;
+                const icon6 = val.icon;
                 const button2 = html.node`
                                     <button class="dropdown-menu-clickable-item radio-menu-item" aria-checked=${value == key} data-value=${key} onclick=${() => {
                   update_radio(key);
                 }}>
-                                        ${icon7 ? html.node`
+                                        ${icon6 ? html.node`
                                                     <div class="icon">
-                                                        <div class="bleh-icon" style="--icon: var(--${icon7})" />
+                                                        <div class="bleh-icon" style="--icon: var(--${icon6})" />
                                                     </div>
                                                 ` : ""}
                                         ${tl2(val.name)}
@@ -112448,9 +112442,9 @@ var bleh = (() => {
         let lists;
         const elem = html.node`
                 <div class="setting v2" data-type="list" id="setting_${id}">
-                    ${icon6 ? html.node`
+                    ${icon5 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon5})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -112521,9 +112515,9 @@ var bleh = (() => {
         let select_hook;
         const elem = html.node`
                 <div class="setting v2" data-type="select" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
-                    ${icon6 ? html.node`
+                    ${icon5 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon5})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -114998,13 +114992,13 @@ var bleh = (() => {
   }
   function ThemeRow({
     ref: ref2,
-    icon: icon6,
+    icon: icon5,
     label,
     body,
     children
   }) {
     return /* @__PURE__ */ jsx("div", { class: ["setting", "theme-row"], ref: ref2, children: [
-      icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+      icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
       /* @__PURE__ */ jsx(SettingLabel, { name: label, body }),
       /* @__PURE__ */ jsx("div", { class: "theme-bubbles", children })
     ] });
@@ -115105,7 +115099,7 @@ var bleh = (() => {
     bind,
     type,
     length,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     showLabel = true,
@@ -115128,7 +115122,7 @@ var bleh = (() => {
     const reset = createRef();
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
     }
     function update() {
       disabled = false;
@@ -115149,7 +115143,7 @@ var bleh = (() => {
       }
       elem.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: [
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           showLabel && /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -116403,11 +116397,11 @@ var bleh = (() => {
     return /* @__PURE__ */ jsx(Tooltip, { theme: "nav-window", children });
   }
   function NavWindowHeader({
-    icon: icon6,
+    icon: icon5,
     name
   }) {
     return /* @__PURE__ */ jsx("div", { class: "window-header", children: [
-      /* @__PURE__ */ jsx(Icon, { name: icon6, identifier: "window_header" }),
+      /* @__PURE__ */ jsx(Icon, { name: icon5, identifier: "window_header" }),
       /* @__PURE__ */ jsx("div", { class: "window-title", children: name })
     ] });
   }
@@ -119419,7 +119413,7 @@ var bleh = (() => {
     ref: ref2,
     value = [],
     bind,
-    icon: icon6,
+    icon: icon5,
     name,
     body,
     showLabel = true,
@@ -119441,7 +119435,7 @@ var bleh = (() => {
     const reset = createRef();
     const store = get_from_store(bind);
     if (store) {
-      if (!icon6) icon6 = store.icon;
+      if (!icon5) icon5 = store.icon;
       if (store.incompatible) {
         Object.entries(store.incompatible).forEach(([key]) => {
           useSettings.on(key, () => {
@@ -119476,7 +119470,7 @@ var bleh = (() => {
       previousValue = value;
       elem.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: [
-          icon6 && /* @__PURE__ */ jsx(SettingIcon, { name: icon6 }),
+          icon5 && /* @__PURE__ */ jsx(SettingIcon, { name: icon5 }),
           showLabel && /* @__PURE__ */ jsx(
             SettingLabel,
             {
@@ -124729,7 +124723,7 @@ var bleh = (() => {
     let elem = html.node`
         <div class="primary-selections">
         ${Object.entries(values).map(([key, val]) => {
-      const icon6 = val.icon;
+      const icon5 = val.icon;
       let input2;
       const button2 = html.node`
                 <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
@@ -124739,9 +124733,9 @@ var bleh = (() => {
                         <input type="radio" name=${name} value=${key} required ref=${(el) => input2 = el}>
                         <div class="radio" aria-checked=${value == key} />
                     </div>
-                    ${icon6 ? html.node`
+                    ${icon5 ? html.node`
                                 <div class="icon">
-                                    <div class="bleh-icon" style="--icon: var(--${icon6})" />
+                                    <div class="bleh-icon" style="--icon: var(--${icon5})" />
                                 </div>
                             ` : ""}
                     <div class="heading">
@@ -133654,8 +133648,8 @@ ${version2.build} (${version2.sku})`;
           )
         ] })
       );
-      const icon6 = document.head.querySelector('[rel="apple-touch-icon"]');
-      icon6?.setAttribute(
+      const icon5 = document.head.querySelector('[rel="apple-touch-icon"]');
+      icon5?.setAttribute(
         "href",
         "https://github.com/katelyynn/bleh/raw/uwu/fm/app.png"
       );

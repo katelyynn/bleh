@@ -131,7 +131,7 @@ export function bleh_profiles() {
 		'.about-me-sidebar',
 	) as AboutElement;
 
-	const about_me_text = about_me_sidebar?.querySelector('p')!;
+	const about_me_text = about_me_sidebar?.querySelector('p') || <p />;
 	let about_me_text_value = '';
 
 	if (page.subpage == 'overview') {
@@ -156,7 +156,7 @@ export function bleh_profiles() {
 				page.structure.side!.firstElementChild,
 			);
 		} else {
-			if (settings.bio_markdown) {
+			if (useSettings.get('bio_markdown')) {
 				about_me_text_value = about_me_text.textContent;
 
 				// parse body
@@ -979,14 +979,8 @@ function bio_parse(text, cache = true, take_effect = true) {
 	});
 
 	if (body.childElementCount == 0) {
-		render(
-			body,
-			html`
-				<p class="subtle">${tl(trans.no_about).replace(
-					'{u}',
-					page.name,
-				)}</p>
-			`,
+		body.replaceChildren(
+			<p class='subtle'>{tl(trans.no_about, { u: page.name })}</p>
 		);
 	}
 
@@ -1007,8 +1001,7 @@ export function save_profile_cache(
 		font_style,
 		username,
 	} = {},
-	profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{},
+	profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}'),
 	name = page.name,
 ) {
 	const profile_cache_o = Object.keys(profile_cache);
@@ -1059,7 +1052,7 @@ export async function checkup_friend_cache(list = settings.friends) {
 	}
 }
 
-export function open_starred_friend_window(friend_func = null) {
+export function open_starred_friend_window() {
 	dialog({
 		id: 'starred_friend',
 		icon: icons.friends,

@@ -16,11 +16,11 @@ import {
 	checkup_page_structure,
 	convert_to_toolbar,
 } from '@/components/page/structure';
-import { is_same_page, register_background, update_page } from '../page';
+import { register_background, update_page } from '../page';
 import { bleh_home } from '@/pages/home';
 import { html, render } from 'lighterhtml';
 import { DateTime } from 'luxon';
-import { icon, icons } from '@/components/shared/icon';
+import { icons } from '@/components/shared/icon';
 import { settings } from '@/build/config';
 import { setting } from '@/components/settings/settings';
 import { PageHeader } from '@/components/page/header';

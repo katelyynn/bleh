@@ -411,7 +411,7 @@ export function markdown(
 			class={['parsed-markdown', 'markdown-body']}
 			dangerouslySetInnerHTML={{ __html: parsed }}
 		/>
-	);
+	) as HTMLDivElement;
 
 	log('rendered', 'markdown', 'info', { body });
 
