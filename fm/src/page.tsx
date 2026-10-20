@@ -222,37 +222,14 @@ export function bleh() {
 }
 
 function solarium() {
-	document.body.appendChild(html.node`
-        <svg style="position:absolute; width:0; height:0">
-            <filter id="solarium" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
-                <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.001 0.005"
-                    numOctaves="1"
-                    seed="17"
-                    result="turbulence"
-                />
-                <feGaussianBlur in="turbulence" stdDeviation="10" result="softMap" />
-                <feFlood flood-color="white" result="flood" />
-                <feComposite in="flood" in2="SourceAlpha" operator="in" result="circleBase" />
-                <feMorphology in="circleBase" operator="erode" radius="0" result="innerCircle" />
-                <feGaussianBlur in="innerCircle" stdDeviation="150" result="radialFade" />
-                <feComponentTransfer in="radialFade" result="edgeMask">
-                    <feFuncR type="table" tableValues="0 1" />
-                    <feFuncG type="table" tableValues="0 1" />
-                    <feFuncB type="table" tableValues="0 1" />
-                </feComponentTransfer>
-                <feBlend in="softMap" in2="edgeMask" mode="multiply" result="edgeDistortion" />
-                <feDisplacementMap
-                    in="SourceGraphic"
-                    in2="edgeDistortion"
-                    scale="200"
-                    xChannelSelector="R"
-                    yChannelSelector="G"
-                />
-            </filter>
-        </svg>
-    `);
+	document.body.appendChild(
+		<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute">
+			<filter id="solarium" x="-30%" y="-30%" width="160%" height="160%">
+				<feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="10" result="noise" />
+				<feDisplacementMap in="SourceGraphic" in2="noise" scale="61" />
+			</filter>
+		</svg>
+	);
 }
 
 export function handle_error(e = null) {
@@ -530,7 +507,7 @@ function load_page(main_content?: HTMLElement) {
 	if (main_content) {
 		const blacklist_level = Number(
 			main_content.getAttribute('data-page-resource-blacklist-level') ||
-				'0',
+			'0',
 		);
 		page.restricted = blacklist_level == 1;
 	}
@@ -1025,7 +1002,7 @@ export async function register_background(
 
 		ctx.imageSmoothingEnabled = true;
 		ctx.imageSmoothingQuality = 'high';
-		ctx.filter = 'blur(10px)';
+		ctx.filter = 'url(#solarium) blur(4px)';
 		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
 		url = canvas.toDataURL();
@@ -1034,14 +1011,14 @@ export async function register_background(
 	background.classList.add('ready');
 
 	/*
-    if (settings.static_banners) {
-        try {
-            url = await convert_gif_to_png(url);
-        } catch(e) {
-            log('could not convert banner image to static', 'banner', 'error', {e});
-        }
-    }
-    */
+	if (settings.static_banners) {
+		try {
+			url = await convert_gif_to_png(url);
+		} catch(e) {
+			log('could not convert banner image to static', 'banner', 'error', {e});
+		}
+	}
+	*/
 
 	background.innerHTML = '';
 	render(background, html``);
@@ -1146,7 +1123,7 @@ function favi() {
 
 	window
 		.matchMedia('(prefers-color-scheme: dark)')
-		.addEventListener('change', function () {
+		.addEventListener('change', function() {
 			favicon.href =
 				window.matchMedia('(prefers-color-scheme: dark)').matches
 					? dark

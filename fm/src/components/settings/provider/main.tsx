@@ -66,34 +66,37 @@ export function SettingLabel({
 	}
 
 	let label = (
-		<>
-			{icon && <SettingIcon name={icon} />}
-			<div class={['heading', 'setting-inner']} ref={ref}>
-				<h5 class='setting-name'>
-					{name}
-					{new_release && <NewIndicator />}
-					{sponsorOnly && (
-						<label class={['new-badge', 'sponsor-related']}>
-							{tl(trans.sponsors_only)}
-						</label>
+		<div class={['heading', 'setting-inner']} ref={ref}>
+			<h5 class='setting-name'>
+				{name}
+				{new_release && <NewIndicator />}
+				{sponsorOnly && (
+					<label class={['new-badge', 'sponsor-related']}>
+						{tl(trans.sponsors_only)}
+					</label>
+				)}
+				{(value != undefined && setValue != undefined &&
+					defaultValue != undefined) &&
+					(
+						<SettingReset
+							value={value}
+							setValue={setValue}
+							defaultValue={defaultValue}
+							ref={reset}
+						/>
 					)}
-					{(value != undefined && setValue != undefined &&
-						defaultValue != undefined) &&
-						(
-							<SettingReset
-								value={value}
-								setValue={setValue}
-								defaultValue={defaultValue}
-								ref={reset}
-							/>
-						)}
-				</h5>
-				{body && <p class='setting-body'>{body}</p>}
-				{sub && <p class='setting-sub'>{sub}</p>}
-				{children}
-			</div>
-		</>
+			</h5>
+			{body && <p class='setting-body'>{body}</p>}
+			{sub && <p class='setting-sub'>{sub}</p>}
+			{children}
+		</div>
 	);
+
+	Object.defineProperty(label, 'value', {
+		set(val: setting_value) {
+			if (reset.current) reset.current.value = val;
+		},
+	});
 
 	if (menu) {
 		label = (
@@ -104,15 +107,16 @@ export function SettingLabel({
 				</strong>
 			</span>
 		);
+
+		return label;
 	}
 
-	Object.defineProperty(label, 'value', {
-		set(val: setting_value) {
-			if (reset.current) reset.current.value = val;
-		},
-	});
-
-	return label;
+	return (
+		<>
+			{icon && <SettingIcon name={icon} />}
+			{label}
+		</>
+	);
 }
 
 export function get_from_store(id?: string) {
@@ -191,7 +195,7 @@ export function SettingIncompatibleWith({
 					}
 
 					if (settings_store[key]?.title) {
-						title = tl(settings_store[key].title);
+						title = tl(settings_store[key].title) as string;
 					}
 
 					if (val == true) {

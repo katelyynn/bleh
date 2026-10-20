@@ -618,9 +618,9 @@ body {
 	--bright: brightness(190%);
 	--dark: brightness(60%) contrast(120%);
 
-	--solarium: var(--card-blur) url(#solarium);
-	--solarium-bright: var(--card-blur) var(--bright) url(#solarium);
-	--solarium-dark: var(--card-blur) var(--dark) url(#solarium);
+	--solarium: url(#solarium) var(--card-blur);
+	--solarium-bright: url(#solarium) var(--card-blur) var(--bright);
+	--solarium-dark: url(#solarium) var(--card-blur) var(--dark);
 	--card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
 
 	--solarium-compensate: brightness(70%);

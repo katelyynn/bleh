@@ -60,13 +60,17 @@ export function SettingReset({
 			'setting: inspecting if modified',
 			String(value),
 			String(defaultValue),
+			String(
+				JSON.stringify(value) !=
+				JSON.stringify(defaultValue),
+			)
 		);
 
 		reset.setAttribute(
 			'data-modified',
 			String(
-				JSON.stringify(String(value)) !=
-					JSON.stringify(String(defaultValue)),
+				JSON.stringify(value) !=
+				JSON.stringify(defaultValue),
 			),
 		);
 	}
