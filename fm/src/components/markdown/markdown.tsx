@@ -224,10 +224,7 @@ export function markdown(
 				delete cache.font;
 				delete cache.font_style;
 
-				if (
-					sponsor_list.version &&
-					sponsor_list.users.hasOwnProperty(name)
-				) {
+				if (is_sponsor(name)) {
 					const split = family.split(',');
 
 					cache.font = split[0];
@@ -247,10 +244,7 @@ export function markdown(
 			replace: (_: string, username: string) => {
 				delete cache.username;
 
-				if (
-					sponsor_list.version &&
-					sponsor_list.users.hasOwnProperty(name)
-				) {
+				if (is_sponsor(name)) {
 					cache.username = username;
 				}
 
@@ -337,7 +331,7 @@ export function markdown(
 	let profile_cache: profile_cache_list;
 
 	const will_cache = cache === true;
-	const available = allow_banners || allow_hue;
+	const available = allow_banners || allow_hue || allow_fonts;
 	log(
 		`prepare new cache is ${will_cache}, caching features available is ${available}`,
 		'markdown',

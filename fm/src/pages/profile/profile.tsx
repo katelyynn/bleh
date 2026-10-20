@@ -72,10 +72,12 @@ import { profile_tracks } from '@/pages/profile/tracks.tsx';
 import { PageHeaderAvatar } from '@/components/music/header.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
-import { profile_cache } from '@/types/profile.ts';
+import { profile_cache, profile_cache_list } from '@/types/profile.ts';
 import { profile_artists } from '@/pages/profile/artists.tsx';
 import { profile_albums } from '@/pages/profile/albums.tsx';
 import { ProfileBadges } from './badges.tsx';
+import { DateTime } from 'luxon';
+import { is_sponsor } from '@/components/sponsor.ts';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -125,7 +127,9 @@ export function bleh_profiles() {
 	const profile_cache = JSON.parse(
 		localStorage.getItem(keys.profile_cache) || '{}',
 	);
-	const cache = profile_cache[page.name] || {};
+	const cache: profile_cache = profile_cache[page.name] || {};
+
+	cache.date = DateTime.now().toISO();
 
 	let about_me_sidebar = page.structure.row!.querySelector(
 		'.about-me-sidebar',
@@ -989,6 +993,7 @@ function bio_parse(text, cache = true, take_effect = true) {
 
 export function save_profile_cache(
 	{
+		date,
 		avatar,
 		banner,
 		banner_orig,
@@ -1000,7 +1005,7 @@ export function save_profile_cache(
 		font,
 		font_style,
 		username,
-	} = {},
+	}: profile_cache,
 	profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}'),
 	name = page.name,
 ) {
@@ -1011,7 +1016,7 @@ export function save_profile_cache(
 		const keys = Reflect.ownKeys(profile_cache);
 
 		// we dont delete logged in user or users on local friends list
-		const protected_users = new Set([auth.name, ...settings.friends]);
+		const protected_users = new Set([auth.name, ...(useSettings.get('friends') as string[])]);
 		const key_to_delete = keys.find(
 			(key) => !protected_users.has(profile_cache[key]),
 		);
@@ -1023,6 +1028,7 @@ export function save_profile_cache(
 	}
 
 	profile_cache[name] = {
+		date,
 		avatar,
 		banner,
 		banner_orig,
@@ -1088,21 +1094,29 @@ export async function load_profile_cache_externally(name = page.name) {
 	log(`requested profile cache for ${name}`, 'cache');
 
 	const profile_cache =
-		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{};
+		JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 	const cache: profile_cache = profile_cache[name];
 
 	if (cache) {
-		if (cache.hue || cache.sat || cache.lit) {
-			if (
-				!sponsor_list.version ||
-				(sponsor_list.version &&
-					!sponsor_list.users.hasOwnProperty(name))
-			) {
-				delete cache.hue;
-				delete cache.sat;
-				delete cache.lit;
+		if (cache.date) {
+			const updated = DateTime.fromISO(cache.date);
+
+			if (DateTime.now().diff(updated, 'days').days >= 3) {
+				log(`forcing a new cache due to date for ${name}`, 'cache', 'info', { updated });
+				return await request_profile_cache(name);
 			}
+		} else {
+			log(`forcing a new cache due to missing date for ${name}`, 'cache');
+			return await request_profile_cache(name);
+		}
+
+		if (!is_sponsor(name)) {
+			delete cache.hue;
+			delete cache.sat;
+			delete cache.lit;
+			delete cache.username;
+			delete cache.font;
+			delete cache.font_style;
 		}
 
 		log(`returning pre-cached result for ${name}`, 'cache', 'info', {
@@ -1116,28 +1130,24 @@ export async function load_profile_cache_externally(name = page.name) {
 
 function load_profile_cache(
 	name = page.name,
-	cache = null,
-	profile_cache = null,
+	cache: profile_cache,
+	profile_cache: profile_cache_list,
 ) {
 	if (!name) return;
 
 	if (!profile_cache) {
-		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-			{};
+		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 	}
 	if (!cache) cache = profile_cache[name] || {};
 
 	if (cache) {
-		if (cache.hue || cache.sat || cache.lit) {
-			if (
-				!sponsor_list.version ||
-				(sponsor_list.version &&
-					!sponsor_list.users.hasOwnProperty(name))
-			) {
-				delete cache.hue;
-				delete cache.sat;
-				delete cache.lit;
-			}
+		if (!is_sponsor(name)) {
+			delete cache.hue;
+			delete cache.sat;
+			delete cache.lit;
+			delete cache.username;
+			delete cache.font;
+			delete cache.font_style;
 		}
 
 		const hue = cache.hue;
@@ -1190,7 +1200,7 @@ function request_profile_cache(
 				const about_me_sidebar = doc.querySelector('.about-me-sidebar');
 				if (about_me_sidebar) {
 					const about_me_text = about_me_sidebar.querySelector('p');
-					bio_parse(about_me_text, cache ? cache : true, false);
+					bio_parse(about_me_text, cache, false);
 				} else {
 					delete cache.username;
 					delete cache.font;
@@ -1201,7 +1211,9 @@ function request_profile_cache(
 					delete cache.lit;
 				}
 
-				const avatar = doc.querySelector('.header-avatar .avatar img');
+				cache.date = DateTime.now().toISO();
+
+				const avatar = doc.querySelector('.header-avatar .avatar img') as HTMLImageElement;
 				if (avatar) cache.avatar = avatar.src;
 
 				const secondary = doc.querySelector('.header-title-secondary');

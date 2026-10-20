@@ -84869,15 +84869,19 @@ var bleh = (() => {
     }
     update();
     if (!image2) {
-      load_profile_cache_externally(name).then((cache2) => {
-        image2 = cache2.avatar;
-        if (cache2.banner) banner = cache2.banner;
-        update();
+      lazy(elem, () => {
+        load_profile_cache_externally(name).then((cache2) => {
+          image2 = cache2.avatar;
+          if (cache2.banner) banner = cache2.banner;
+          update();
+        });
       });
     }
     if (!plays && url) {
       if (!waitForHover) {
-        request();
+        lazy(elem, () => {
+          request();
+        });
       } else {
         elem.addEventListener("mouseenter", () => {
           request();
@@ -86376,7 +86380,7 @@ var bleh = (() => {
         replace: (_, family) => {
           delete cache2.font;
           delete cache2.font_style;
-          if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
+          if (is_sponsor(name)) {
             const split = family.split(",");
             cache2.font = split[0];
             cache2.font_style = split[1] || "solid";
@@ -86391,7 +86395,7 @@ var bleh = (() => {
         regex: /\[name=([^\]]+)\]/g,
         replace: (_, username2) => {
           delete cache2.username;
-          if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
+          if (is_sponsor(name)) {
             cache2.username = username2;
           }
           return "";
@@ -86461,7 +86465,7 @@ var bleh = (() => {
     extensions.push(mentions(), timestamp());
     let profile_cache;
     const will_cache = cache2 === true;
-    const available = allow_banners || allow_hue;
+    const available = allow_banners || allow_hue || allow_fonts;
     log(
       `prepare new cache is ${will_cache}, caching features available is ${available}`,
       "markdown",
@@ -91775,6 +91779,7 @@ var bleh = (() => {
       localStorage.getItem(keys3.profile_cache) || "{}"
     );
     const cache2 = profile_cache[page.name] || {};
+    cache2.date = DateTime.now().toISO();
     let about_me_sidebar = page.structure.row.querySelector(
       ".about-me-sidebar"
     );
@@ -92429,6 +92434,7 @@ var bleh = (() => {
     return body;
   }
   function save_profile_cache({
+    date,
     avatar: avatar4,
     banner,
     banner_orig,
@@ -92440,11 +92446,11 @@ var bleh = (() => {
     font,
     font_style,
     username: username2
-  } = {}, profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}"), name = page.name) {
+  }, profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}"), name = page.name) {
     const profile_cache_o = Object.keys(profile_cache);
     if (profile_cache_o.length > 400) {
       const keys5 = Reflect.ownKeys(profile_cache);
-      const protected_users = /* @__PURE__ */ new Set([auth.name, ...settings.friends]);
+      const protected_users = /* @__PURE__ */ new Set([auth.name, ...useSettings.get("friends")]);
       const key_to_delete = keys5.find(
         (key) => !protected_users.has(profile_cache[key])
       );
@@ -92452,6 +92458,7 @@ var bleh = (() => {
       delete profile_cache[name];
     }
     profile_cache[name] = {
+      date,
       avatar: avatar4,
       banner,
       banner_orig,
@@ -92508,15 +92515,26 @@ var bleh = (() => {
   async function load_profile_cache_externally(name = page.name) {
     if (!name) return {};
     log(`requested profile cache for ${name}`, "cache");
-    const profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {};
+    const profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
     const cache2 = profile_cache[name];
     if (cache2) {
-      if (cache2.hue || cache2.sat || cache2.lit) {
-        if (!sponsor_list.version || sponsor_list.version && !sponsor_list.users.hasOwnProperty(name)) {
-          delete cache2.hue;
-          delete cache2.sat;
-          delete cache2.lit;
+      if (cache2.date) {
+        const updated = DateTime.fromISO(cache2.date);
+        if (DateTime.now().diff(updated, "days").days >= 3) {
+          log(`forcing a new cache due to date for ${name}`, "cache", "info", { updated });
+          return await request_profile_cache(name);
         }
+      } else {
+        log(`forcing a new cache due to missing date for ${name}`, "cache");
+        return await request_profile_cache(name);
+      }
+      if (!is_sponsor(name)) {
+        delete cache2.hue;
+        delete cache2.sat;
+        delete cache2.lit;
+        delete cache2.username;
+        delete cache2.font;
+        delete cache2.font_style;
       }
       log(`returning pre-cached result for ${name}`, "cache", "info", {
         cache: cache2
@@ -92525,19 +92543,20 @@ var bleh = (() => {
     }
     return await request_profile_cache(name);
   }
-  function load_profile_cache(name = page.name, cache2 = null, profile_cache = null) {
+  function load_profile_cache(name = page.name, cache2, profile_cache) {
     if (!name) return;
     if (!profile_cache) {
-      profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {};
+      profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
     }
     if (!cache2) cache2 = profile_cache[name] || {};
     if (cache2) {
-      if (cache2.hue || cache2.sat || cache2.lit) {
-        if (!sponsor_list.version || sponsor_list.version && !sponsor_list.users.hasOwnProperty(name)) {
-          delete cache2.hue;
-          delete cache2.sat;
-          delete cache2.lit;
-        }
+      if (!is_sponsor(name)) {
+        delete cache2.hue;
+        delete cache2.sat;
+        delete cache2.lit;
+        delete cache2.username;
+        delete cache2.font;
+        delete cache2.font_style;
       }
       const hue4 = cache2.hue;
       const sat = cache2.sat;
@@ -92572,7 +92591,7 @@ var bleh = (() => {
         const about_me_sidebar = doc.querySelector(".about-me-sidebar");
         if (about_me_sidebar) {
           const about_me_text = about_me_sidebar.querySelector("p");
-          bio_parse(about_me_text, cache2 ? cache2 : true, false);
+          bio_parse(about_me_text, cache2, false);
         } else {
           delete cache2.username;
           delete cache2.font;
@@ -92582,6 +92601,7 @@ var bleh = (() => {
           delete cache2.sat;
           delete cache2.lit;
         }
+        cache2.date = DateTime.now().toISO();
         const avatar4 = doc.querySelector(".header-avatar .avatar img");
         if (avatar4) cache2.avatar = avatar4.src;
         const secondary = doc.querySelector(".header-title-secondary");
