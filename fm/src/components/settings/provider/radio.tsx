@@ -119,10 +119,10 @@ export function SettingRadio({
 
 		elem.replaceChildren(
 			<>
-				{icon && <SettingIcon name={icon} />}
 				<SettingLabel
 					name={name}
 					body={body}
+					icon={icon}
 					store={store}
 					value={value}
 					setValue={(val: string) => {

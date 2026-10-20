@@ -15,9 +15,11 @@ import { SettingReset } from '@/components/settings/provider/reset.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { useSettings } from '@/page.tsx';
 import { NewIndicator } from '@/components/shared/indicator.tsx';
+import { SettingIcon } from './icon';
 
 interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	icon?: string;
 	name?: ReactNode;
 	body?: ReactNode;
 	children?: ReactNode;
@@ -33,6 +35,7 @@ interface SettingLabelProps {
 
 export function SettingLabel({
 	ref,
+	icon,
 	name,
 	body,
 	children,
@@ -63,36 +66,40 @@ export function SettingLabel({
 	}
 
 	let label = (
-		<div class={['heading', 'setting-inner']} ref={ref}>
-			<h5 class='setting-name'>
-				{name}
-				{new_release && <NewIndicator />}
-				{sponsorOnly && (
-					<label class={['new-badge', 'sponsor-related']}>
-						{tl(trans.sponsors_only)}
-					</label>
-				)}
-				{(value != undefined && setValue != undefined &&
-					defaultValue != undefined) &&
-					(
-						<SettingReset
-							value={value}
-							setValue={setValue}
-							defaultValue={defaultValue}
-							ref={reset}
-						/>
+		<>
+			{icon && <SettingIcon name={icon} />}
+			<div class={['heading', 'setting-inner']} ref={ref}>
+				<h5 class='setting-name'>
+					{name}
+					{new_release && <NewIndicator />}
+					{sponsorOnly && (
+						<label class={['new-badge', 'sponsor-related']}>
+							{tl(trans.sponsors_only)}
+						</label>
 					)}
-			</h5>
-			{body && <p class='setting-body'>{body}</p>}
-			{sub && <p class='setting-sub'>{sub}</p>}
-			{children}
-		</div>
+					{(value != undefined && setValue != undefined &&
+						defaultValue != undefined) &&
+						(
+							<SettingReset
+								value={value}
+								setValue={setValue}
+								defaultValue={defaultValue}
+								ref={reset}
+							/>
+						)}
+				</h5>
+				{body && <p class='setting-body'>{body}</p>}
+				{sub && <p class='setting-sub'>{sub}</p>}
+				{children}
+			</div>
+		</>
 	);
 
 	if (menu) {
 		label = (
 			<span class='menu-item-body' ref={ref}>
 				<strong class='menu-item-head'>
+					{icon && <SettingIcon name={icon} />}
 					{name}
 				</strong>
 			</span>

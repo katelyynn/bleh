@@ -118,11 +118,11 @@ export function SettingSwitch({
 						ref={checkbox}
 					/>
 				)}
-				{icon && <SettingIcon name={icon} />}
 				<SettingLabel
 					name={name}
 					body={body}
 					sub={sub}
+					icon={icon}
 					store={store}
 					new_release={new_release}
 				/>

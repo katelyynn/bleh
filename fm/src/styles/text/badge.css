@@ -5,7 +5,7 @@
 
 	font-family: var(--font);
 	font-size: var(--font-size-sm);
-	background: oklch(var(--f4) / 20%);
+	background: oklch(var(--k4) / 20%);
 	color: oklch(var(--l3-c));
 	padding: 0 6px;
 	border-radius: var(--radius-xs);
@@ -33,9 +33,21 @@
 	}
 
 	&.new {
-		animation: new 4s linear infinite;
+		rotate: -2deg;
+		background: unset;
+		color: oklch(var(--l3-c));
+		padding: 0;
 
-		box-shadow: 0 0 20px oklch(var(--h4) / 40%);
+		&:before {
+			content: '';
+			position: absolute;
+			inset: 10px 0 2px 0;
+
+			background: oklch(var(--k4) / 20%);
+			border-radius: var(--radius-xs);
+
+			z-index: -1;
+		}
 	}
 
 	&.sponsor-related {

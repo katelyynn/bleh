@@ -231,8 +231,7 @@ export function ThemeRow({
 }: ThemeRowProps) {
 	return (
 		<div class={['setting', 'theme-row']} ref={ref}>
-			{icon && <SettingIcon name={icon} />}
-			<SettingLabel name={label} body={body} />
+			<SettingLabel name={label} body={body} icon={icon} />
 			<div class='theme-bubbles'>
 				{children}
 			</div>

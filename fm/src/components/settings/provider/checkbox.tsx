@@ -112,10 +112,10 @@ export function SettingCheckbox({
 					checked={value}
 					ref={checkbox}
 				/>
-				{icon && <SettingIcon name={icon} />}
 				<SettingLabel
 					name={name}
 					body={body}
+					icon={icon}
 					store={store}
 					new_release={new_release}
 				/>

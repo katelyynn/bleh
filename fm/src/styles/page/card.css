@@ -1,14 +1,16 @@
 /*     GLOBAL CARD STYLES     */
 .bleh--panel,
 .bleh--blank-panel,
-.col-main > section:not(.sour),
-.col-sidebar > section:not(.sour),
-.col-main > div.buffer-standard,
-/* covers weird shoutbox sections, 2026 */ .col-main > .lazy-shoutbox,
+.col-main>section:not(.sour),
+.col-sidebar>section:not(.sour),
+.col-main>div.buffer-standard,
+/* covers weird shoutbox sections, 2026 */
+.col-main>.lazy-shoutbox,
 .your-progress-component,
 .primary-column,
 .album-and-lyrics-row,
-/* event lineup */ .big-artist-list,
+/* event lineup */
+.big-artist-list,
 .panel-form {
 	background: transparent;
 	background-image: unset;
@@ -23,11 +25,15 @@
 
 .sour {
 	background: var(--card-specific-background, var(--card-background,
-		oklch(var(--b5))));
+				oklch(var(--b5))));
 	border-radius: var(--card-specific-radius, var(--card-radius));
 	box-shadow: var(--card-specific-shadow, var(--card-border),
-		var(--card-shadow));
+			var(--card-shadow));
 	padding: var(--card-padding);
+
+	transition-property: background;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }
 
 .section-controls {
@@ -56,11 +62,11 @@
 		float: unset;
 	}
 
-	& > .buffer-standard.section-with-separator {
+	&>.buffer-standard.section-with-separator {
 		display: none;
 	}
 
-	& > .section {
+	&>.section {
 		margin: unset !important;
 	}
 }

@@ -103,11 +103,11 @@ export function SettingInput({
 
 		elem.replaceChildren(
 			<>
-				{icon && <SettingIcon name={icon} />}
 				{showLabel && (
 					<SettingLabel
 						name={name}
 						body={body}
+						icon={icon}
 						store={store}
 						value={value}
 						setValue={set}

@@ -141,6 +141,7 @@
 		flex-direction: var(--setting-heading-direction, column);
 		align-items: var(--setting-heading-align, unset);
 		flex: 1;
+		/*max-width: 430px;*/
 
 		&>h5 {
 			color: var(--col);
@@ -155,6 +156,7 @@
 			max-height: var(--button-height);
 
 			width: var(--setting-heading-width, unset);
+			max-width: 600px;
 
 			&>a {
 				&:not(:hover) {
@@ -166,6 +168,7 @@
 		&>p {
 			color: var(--col-alt);
 			font-size: calc(var(--font-size) - 1px);
+			max-width: 600px;
 			cursor: default;
 
 			&+p {
@@ -177,6 +180,7 @@
 			display: flex;
 			gap: 10px;
 			margin-top: 4px;
+			max-width: 600px;
 
 			&>.new-badge {
 				width: 37px;
@@ -636,6 +640,10 @@
 .setting-lists,
 .primary-selections {
 	flex: 0 0 100%;
+
+	@media (max-width: 980px) {
+		flex: unset;
+	}
 }
 
 .primary-selections {
@@ -868,7 +876,7 @@
 
 	--radius: 50px;
 
-	--toggle-width: 34px;
+	--toggle-width: 32px;
 	--toggle-height: 20px;
 	--dot-size: 14px;
 	--toggle-padding: calc((var(--toggle-height) - var(--dot-size)) / 2);

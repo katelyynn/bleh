@@ -146,10 +146,10 @@ export function SettingList({
 
 		elem.replaceChildren(
 			<>
-				{icon && <SettingIcon name={icon} />}
 				<SettingLabel
 					name={name}
 					body={body}
+					icon={icon}
 					store={store}
 					value={value}
 					defaultValue={defaultValue}

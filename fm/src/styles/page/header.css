@@ -397,7 +397,7 @@
 	&:hover {
 		&>.page-header-avatar-glow {
 			scale: 1;
-			opacity: 0.7;
+			opacity: 0.6;
 			animation: page_avatar 3s var(--trans-function-ani) infinite;
 		}
 	}
@@ -428,7 +428,7 @@
 
 	border: 3px solid oklch(var(--l3-c) / 90%);
 
-	scale: 1.03;
+	scale: 1.06;
 	opacity: 0;
 
 	transition-property: scale, opacity;
@@ -448,11 +448,11 @@
 
 	from,
 	to {
-		border: 3px solid oklch(var(--l3-c) / 90%);
+		opacity: 0.8;
 	}
 
 	50% {
-		border: 3px solid oklch(var(--l4-c) / 40%);
+		opacity: 0.1;
 	}
 }
 
