@@ -123,6 +123,7 @@ function open_changelog(changelog) {
 		//		changelog_list = el}></div>
 		//    `,
 		type: 'changelog',
+		has_overlays: false
 	});
 
 	render_update();
