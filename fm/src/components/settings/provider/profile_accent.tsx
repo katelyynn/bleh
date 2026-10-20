@@ -91,6 +91,8 @@ export function ProfileAccent({
 		const lit = createRef();
 		const current_preview = createRef();
 
+		const copy = createRef();
+
 		modal({
 			id: 'profile_accent',
 			title: tl(trans.profile_accent.name),
@@ -173,6 +175,7 @@ export function ProfileAccent({
 												.get('lit') as number;
 
 											update_preview();
+											copy.current.menu.hide();
 										}}
 									>
 										<IconArrowIcon
@@ -238,6 +241,7 @@ export function ProfileAccent({
 												],
 												persist: true,
 											});
+											copy.current.menu.hide();
 										}}
 									>
 										<IconArrowIcon
@@ -258,6 +262,7 @@ export function ProfileAccent({
 									</Button>
 								</MenuContents>
 							}
+							ref={copy}
 						>
 							<Icon name={icons.copy} />
 							{tl(trans.copy)}

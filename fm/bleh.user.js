@@ -35885,6 +35885,7 @@ var bleh = (() => {
       className2 && className2
     ];
     let elem;
+    let instance;
     if (!href) {
       elem = /* @__PURE__ */ jsx(
         "button",
@@ -35916,7 +35917,7 @@ var bleh = (() => {
       );
     }
     if (opens) {
-      menu_tooltip(
+      instance = menu_tooltip(
         elem,
         opens
       );
@@ -35963,6 +35964,11 @@ var bleh = (() => {
       set(val) {
         loading = val;
         update();
+      }
+    });
+    Object.defineProperty(elem, "menu", {
+      get() {
+        return instance;
       }
     });
     update();
@@ -125014,6 +125020,7 @@ var bleh = (() => {
       const sat = createRef();
       const lit = createRef();
       const current_preview = createRef();
+      const copy3 = createRef();
       modal({
         id: "profile_accent",
         title: tl2(trans.profile_accent.name),
@@ -125097,6 +125104,7 @@ var bleh = (() => {
                       sat.current.value = useSettings.get("sat");
                       lit.current.value = useSettings.get("lit");
                       update_preview();
+                      copy3.current.menu.hide();
                     },
                     children: [
                       /* @__PURE__ */ jsx(
@@ -125162,6 +125170,7 @@ var bleh = (() => {
                         ],
                         persist: true
                       });
+                      copy3.current.menu.hide();
                     },
                     children: [
                       /* @__PURE__ */ jsx(
@@ -125187,6 +125196,7 @@ var bleh = (() => {
                   }
                 )
               ] }),
+              ref: copy3,
               children: [
                 /* @__PURE__ */ jsx(Icon, { name: icons.copy }),
                 tl2(trans.copy)

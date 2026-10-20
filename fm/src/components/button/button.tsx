@@ -45,11 +45,13 @@ type ButtonProps =
 type ButtonElement = HTMLButtonElement & {
 	disabled: boolean;
 	loading: boolean;
+	menu?: TooltipInstance<ReactElement, ReactElement>;
 };
 
 type ButtonLinkElement = HTMLAnchorElement & {
 	disabled: boolean;
 	loading: boolean;
+	menu?: TooltipInstance<ReactElement, ReactElement>;
 };
 
 export function Button({
@@ -90,6 +92,8 @@ export function Button({
 
 	let elem: ButtonElement | ButtonLinkElement;
 
+	let instance: TooltipInstance<ReactElement, ReactElement>;
+
 	if (!href) {
 		elem = (
 			<button
@@ -121,7 +125,7 @@ export function Button({
 	}
 
 	if (opens) {
-		menu_tooltip(
+		instance = menu_tooltip(
 			elem,
 			opens,
 		);
@@ -176,6 +180,12 @@ export function Button({
 		set(val: boolean) {
 			loading = val;
 			update();
+		},
+	});
+
+	Object.defineProperty(elem, 'menu', {
+		get() {
+			return instance;
 		},
 	});
 
