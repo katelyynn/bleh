@@ -139,6 +139,12 @@ export const trans = {
 		de: ' und ',
 		pt: ' e ',
 	},
+	or: {
+		// this is within a sentence
+		// the spaces around it are intentional and should be
+		// there if the language puts spaces
+		en: ' or ',
+	},
 	page_templates: {
 		// these are used for browser tab titles
 		// {page} is something like 'Home' or 'Profile'

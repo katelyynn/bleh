@@ -587,7 +587,9 @@ function avatar() {
 							style={{ display: 'none' }}
 						/>
 					</form>
-					<div class='avatar-change-divider' />
+					<div class='avatar-change-divider'>
+						{tl(trans.or)}
+					</div>
 					<form
 						action={`${root}settings/avatar/delete`}
 						name='avatar-form'

@@ -45,9 +45,12 @@
 
 .avatar-change-form {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	gap: 6px;
+	gap: 15px;
 	width: 100%;
+
+	margin-bottom: calc(var(--modal-verts) / 2);
 
 	&>form {
 		display: flex;
@@ -57,24 +60,30 @@
 }
 
 .avatar-change-divider {
-	width: 1px;
-	height: 18px;
-	background: var(--separator-base);
+	display: flex;
+	color: oklch(var(--c3));
+	font-size: var(--font-size-sm);
 }
 
 .avatar-change {
-	--button-sides: 16px;
-	--button-verts: 12px;
+	--button-sides: 20px;
+	--button-verts: 8px;
 
 	--bg: transparent;
-	--bg-hov: oklch(var(--h3) / 10%);
-	--bg-atv: oklch(var(--h3) / 20%);
+	--bg-hov: oklch(var(--h4) / 10%);
+	--bg-atv: oklch(var(--h4) / 20%);
 	--shadow: none;
 
 	--col: oklch(var(--l3-c));
 	--mask-colour: oklch(var(--l3-c) / 80%);
+	--shadow: 0 0 0 1px oklch(var(--l3-c) / 10%);
 
 	justify-content: center;
+
+	--icon-size: 14px !important;
+	--mask2: unset !important;
+
+	aspect-ratio: 1 / 1;
 
 	&>input {
 		position: absolute;
