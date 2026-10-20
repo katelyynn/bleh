@@ -1098,7 +1098,7 @@ export async function load_profile_cache_externally(name = page.name) {
 	const cache: profile_cache = profile_cache[name];
 
 	if (cache) {
-		if (cache.date) {
+		/*if (cache.date) {
 			const updated = DateTime.fromISO(cache.date);
 
 			if (DateTime.now().diff(updated, 'days').days >= 3) {
@@ -1108,7 +1108,7 @@ export async function load_profile_cache_externally(name = page.name) {
 		} else {
 			log(`forcing a new cache due to missing date for ${name}`, 'cache');
 			return await request_profile_cache(name);
-		}
+			}*/
 
 		if (!is_sponsor(name)) {
 			delete cache.hue;

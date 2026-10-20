@@ -92518,16 +92518,6 @@ var bleh = (() => {
     const profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
     const cache2 = profile_cache[name];
     if (cache2) {
-      if (cache2.date) {
-        const updated = DateTime.fromISO(cache2.date);
-        if (DateTime.now().diff(updated, "days").days >= 3) {
-          log(`forcing a new cache due to date for ${name}`, "cache", "info", { updated });
-          return await request_profile_cache(name);
-        }
-      } else {
-        log(`forcing a new cache due to missing date for ${name}`, "cache");
-        return await request_profile_cache(name);
-      }
       if (!is_sponsor(name)) {
         delete cache2.hue;
         delete cache2.sat;
