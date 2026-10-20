@@ -28,7 +28,7 @@ import { avatar } from '@/components/shared/avatar';
 import { sponsor_list } from '@/build/sponsor';
 import { createRef, ReactNode } from 'jsx-dom';
 import { SeeMore } from '@/components/text/see_more.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
@@ -491,7 +491,7 @@ export function bleh_setup() {
 					{current_page == pages.length - 1
 						? (
 							<Button primary onClick={go_next}>
-								<Icon name={icons.check} />
+								<SaveIcon />
 								{tl(trans.finish)}
 								<Icon name={icons.arrow_right} indicator />
 							</Button>

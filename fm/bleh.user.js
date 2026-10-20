@@ -124179,7 +124179,7 @@ var bleh = (() => {
             ),
             /* @__PURE__ */ jsx(FooterFill, {}),
             current_page == pages.length - 1 ? /* @__PURE__ */ jsx(Button, { primary: true, onClick: go_next, children: [
-              /* @__PURE__ */ jsx(Icon, { name: icons.check }),
+              /* @__PURE__ */ jsx(SaveIcon, {}),
               tl2(trans.finish),
               /* @__PURE__ */ jsx(Icon, { name: icons.arrow_right, indicator: true })
             ] }) : /* @__PURE__ */ jsx(Button, { primary: true, onClick: go_next, children: [
