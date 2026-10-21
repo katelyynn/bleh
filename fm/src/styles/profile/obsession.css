@@ -336,20 +336,35 @@
 }
 
 .obsession-search {
-	margin-top: var(--card-gap);
-
-	.obsession-search-header {
-		font-weight: 500;
-		line-height: 22px;
-	}
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
 
 	.search-form {
+		width: 460px !important;
 		margin-top: unset;
 
 		&:after {
 			display: none;
 		}
 	}
+}
+
+.search-reset,
+.search-submit {
+	position: absolute !important;
+}
+
+.search-reset {
+	right: var(--button-height) !important;
+}
+
+.obsession-search-header {
+	font-size: var(--font-size-subheading) !important;
+	line-height: var(--line-height-subheading) !important;
+	font-weight: var(--font-weight-medium) !important;
+	margin: unset !important;
 }
 
 .search-submit,

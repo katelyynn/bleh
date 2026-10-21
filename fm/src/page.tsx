@@ -777,7 +777,7 @@ function page_title() {
 	if (page.subpage.replace('event_', '').startsWith('shoutbox')) {
 		title = tl(trans.shouts);
 	} else if (page.subpage.startsWith('library')) title = tl(trans.library);
-	else if (page.subpage == 'obsessions_overview') {
+	else if (['obsessions_overview', 'obsessions_set'].includes(page.subpage)) {
 		title = tl(trans.obsessions);
 	} else if (page.subpage == 'obsessions_obsession') {
 		title = tl(trans.obsession);

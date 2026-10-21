@@ -78,6 +78,7 @@ import { profile_albums } from '@/pages/profile/albums.tsx';
 import { ProfileBadges } from './badges.tsx';
 import { DateTime } from 'luxon';
 import { is_sponsor } from '@/components/sponsor.ts';
+import { set_obsession } from './set_obsession.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -570,6 +571,8 @@ export function bleh_profiles() {
 			profile_reports();
 		} else if (page.subpage == 'obsessions_overview') {
 			obsession_list();
+		} else if (page.subpage == 'obsessions_set') {
+			set_obsession();
 		} else if (page.subpage == 'playlists_playlists') {
 			const section_controls = page.structure.container!.querySelector(
 				'.section-controls-full-width',
@@ -696,38 +699,37 @@ export function create_profile_note_panel(has_note?: string) {
                 <h2>${tl(trans.notes)}</h2>
                 <div class="view-buttons blend blend-v2">
                     <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
-		const notes = JSON.parse(
-			localStorage.getItem('bleh_profile_notes') || '{}',
-		);
-		delete notes[page.name];
+			const notes = JSON.parse(
+				localStorage.getItem('bleh_profile_notes') || '{}',
+			);
+			delete notes[page.name];
 
-		note.value = '';
-		set_storage('bleh_profile_notes', JSON.stringify(notes));
-		status({
-			id: 'note',
-			title: tl(trans.cleared_note_for_user, { u: page.name }),
-		});
-	}}>${tl(trans.clear)}</button>
+			note.value = '';
+			set_storage('bleh_profile_notes', JSON.stringify(notes));
+			status({
+				id: 'note',
+				title: tl(trans.cleared_note_for_user, { u: page.name }),
+			});
+		}}>${tl(trans.clear)}</button>
                     <button class="see-more left-icon blend-v2-btn" data-type="save" onclick=${() => {
-		const notes = JSON.parse(
-			localStorage.getItem('bleh_profile_notes'),
-		) || {};
+			const notes = JSON.parse(
+				localStorage.getItem('bleh_profile_notes'),
+			) || {};
 
-		notes[page.name] = note.value;
+			notes[page.name] = note.value;
 
-		set_storage('bleh_profile_notes', JSON.stringify(notes));
-		status({
-			id: 'note',
-			title: tl(trans.saved_note_for_user, { u: page.name }),
-			body: note.value,
-		});
-	}}>${tl(trans.save)}</button>
+			set_storage('bleh_profile_notes', JSON.stringify(notes));
+			status({
+				id: 'note',
+				title: tl(trans.saved_note_for_user, { u: page.name }),
+				body: note.value,
+			});
+		}}>${tl(trans.save)}</button>
                 </div>
             </div>
             <div class="content-form">
-                <textarea id="bleh--profile-note" placeholder=${
-		tl(trans.anything_you_can_imagine)
-	} ref=${(el) => (note = el)}>${has_note ?? has_note}</textarea>
+                <textarea id="bleh--profile-note" placeholder=${tl(trans.anything_you_can_imagine)
+		} ref=${(el) => (note = el)}>${has_note ?? has_note}</textarea>
             </div>
         </section>
     `);
@@ -852,8 +854,7 @@ function patch_profile_following() {
 		page.structure.main,
 		html.node`
         <section class="users">
-            ${
-			!no_data && !no_data_neighbours
+            ${!no_data && !no_data_neighbours
 				? setting({
 					id: 'list_view',
 					func: (val) => {
@@ -861,7 +862,7 @@ function patch_profile_following() {
 					},
 				})
 				: ''
-		}
+			}
             ${no_data}
             ${no_data_neighbours}
             ${user_list}
@@ -937,8 +938,7 @@ function bleh_featured_profile_track(object) {
 	const panel = html.node`
         <section class="featured-item-panel">
             <div class="sub-text">
-                ${
-		form
+                ${form
 			? html.node`
                 <a class="has-icon" data-type="obsession" href=${link}>
                     <div class="bleh-icon" style="--icon: var(--mask)" />
@@ -952,7 +952,7 @@ function bleh_featured_profile_track(object) {
                     ${tl(trans.top_track)}
                 </div>
                 `
-	}
+		}
             </div>
             <div class="source-album js-link-block link-block featured-item">
                 <div class="source-album-art small">
@@ -962,9 +962,8 @@ function bleh_featured_profile_track(object) {
                     <h4 class="source-album-name">${name_elem}</h4>
                     ${artist_elem_full}
                 </div>
-                <a class="js-link-block-cover-link link-block-cover-link" href=${
-		name_elem.getAttribute('href')
-	} />
+                <a class="js-link-block-cover-link link-block-cover-link" href=${name_elem.getAttribute('href')
+		} />
             </div>
         </section>
     `;
@@ -1188,12 +1187,12 @@ function request_profile_cache(
 
 	return new Promise((resolve, reject) => {
 		fetch(`${root}user/${name}`)
-			.then(function (response) {
+			.then(function(response) {
 				console.log('returned', response, response.text);
 
 				return response.text();
 			})
-			.then(function (dom) {
+			.then(function(dom) {
 				const doc = new DOMParser().parseFromString(dom, 'text/html');
 				console.log('DOC', doc);
 
@@ -1327,9 +1326,8 @@ function bleh_profile_events(no_events) {
 
 	const value_panel = html.node`
         <section class="value-panel">
-            <h2 class="text-18">${
-		selected_tab ? selected_tab.firstChild.textContent : tl(trans.events)
-	}</h2>
+            <h2 class="text-18">${selected_tab ? selected_tab.firstChild.textContent : tl(trans.events)
+		}</h2>
         </section>
     `;
 
