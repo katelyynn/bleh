@@ -693,28 +693,8 @@
 
 	flex-shrink: 0;
 
-	&:before {
-		content: "";
-		position: absolute;
-		inset: -2px;
-		border-radius: calc(var(--chart-cover-radius) + 2px);
-		opacity: 0;
-
-		border: 2px solid oklch(var(--c2) / 30%);
-		box-shadow: 0 0 30px oklch(var(--c2) / 10%);
-
-		transition-property: opacity;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-	}
-
 	&:hover {
 		transition-duration: 0.1s !important;
-
-		&:before {
-			opacity: 1;
-			transition: none;
-		}
 	}
 
 	&:active {

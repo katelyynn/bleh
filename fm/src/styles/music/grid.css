@@ -145,9 +145,11 @@
 	--lit-over: 0.5;
 
 	outline: 2px solid transparent;
+	outline-offset: 3px;
 
 	&:hover {
 		outline-color: oklch(var(--l3-c) / 60%);
+		outline-offset: 0px;
 		transition-property: transform, translate, scale, opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function-ani);
@@ -177,7 +179,8 @@
 	translate,
 	scale,
 	opacity,
-	outline-color;
+	outline-color,
+	outline-offset;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function-ani);
 
