@@ -15,7 +15,7 @@
 	},
 	"dependencies": {
 		"@floating-ui/dom": "^1.8.0",
-		"@tealmiku/florence": "^2026.827.0",
+		"@tealmiku/florence": "^2026.1021.0",
 		"@types/luxon": "^3.7.6",
 		"@zachleat/hypercard": "^2.0.3",
 		"chart.js": "^4.5.1",

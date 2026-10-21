@@ -12,8 +12,8 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       '@tealmiku/florence':
-        specifier: ^2026.827.0
-        version: 2026.827.0
+        specifier: ^2026.1021.0
+        version: 2026.1021.0
       '@types/luxon':
         specifier: ^3.7.6
         version: 3.7.6
@@ -402,8 +402,8 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
-  '@tealmiku/florence@2026.827.0':
-    resolution: {integrity: sha512-a6LR2oCm3JRnID4SuK0AHFn5m9Jt2Ts8mU5ZCv9jhh6qZ9tMPXnmSmh/3LnVAe3dH4aaHn6gqcKDUuXVrO6Taw==}
+  '@tealmiku/florence@2026.1021.0':
+    resolution: {integrity: sha512-KBfNoI9/igvCpD1W4lxNkXZ4ZlVWN1c4K5RbbBxuPo9HcCLa8tXuiCQ0pfrl41ytR6cT1e0MjQna0qn0D0R+Ow==}
 
   '@types/eslint-plugin-promise@7.3.0':
     resolution: {integrity: sha512-ewgA05z38/jROcbOEs1VFZ5A5rEOYxSQvsWl1xALLUAvwEEdHO7xHS0Y1UQrOgh1w05CUaRIxXyM1HkjeeG5Iw==}
@@ -1492,7 +1492,7 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.7
 
-  '@tealmiku/florence@2026.827.0': {}
+  '@tealmiku/florence@2026.1021.0': {}
 
   '@types/eslint-plugin-promise@7.3.0':
     dependencies:
