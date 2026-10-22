@@ -105,12 +105,10 @@
 		text-decoration: underline dotted oklch(var(--c3) / 60%);
 	}
 
-	transition-property: opacity;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
-
 	&.summary-block-hidden {
-		opacity: 0;
+		&>.summary-info>.summary-value {
+			opacity: 0;
+		}
 	}
 
 	&.size-lg {
@@ -167,6 +165,10 @@
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	font-weight: var(--font-weight-medium);
+
+	transition-property: opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }
 
 .graph-blocks {

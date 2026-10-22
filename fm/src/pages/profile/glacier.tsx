@@ -9,6 +9,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import {
+	clean_number,
 	desanitise,
 	sanitise,
 	sanitise_text,
@@ -29,6 +30,8 @@ import { Chart } from '@/main';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { convert_to_select } from '@/components/select/select.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { GraphBlock, GraphBlocks } from '@/components/summary/graph';
+import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -125,22 +128,20 @@ export function bleh_user_library() {
 	if (settings.glacier_library_graphs && date_items.length > 0) {
 		page.structure.glacier.selector.after(html.node`
             <div class="view-buttons chart-view-selector view-buttons-middle">
-                ${
-			setting({
-				id: 'chart_view',
-				standalone: true,
-				func: bleh_glacier_date_graph_generate,
-			})
-		}
+                ${setting({
+			id: 'chart_view',
+			standalone: true,
+			func: bleh_glacier_date_graph_generate,
+		})
+			}
             </div>
             <div class="view-buttons chart-axis-selector view-buttons-middle">
-                ${
-			setting({
+                ${setting({
 				id: 'chart_bar_axis',
 				standalone: true,
 				func: bleh_glacier_date_graph_generate,
 			})
-		}
+			}
             </div>
         `);
 	}
@@ -241,9 +242,8 @@ function bleh_glacier_library_date() {
 	if (old_date_btn) old_date_btn.remove();
 
 	const date_btn = html.node`
-        <button class="btn date-range-picker-button">${
-		button.querySelector('.date-range-picker-button-inner').textContent
-	}</button>
+        <button class="btn date-range-picker-button">${button.querySelector('.date-range-picker-button-inner').textContent
+		}</button>
     `;
 	date_picker.appendChild(date_btn);
 
@@ -288,14 +288,12 @@ function bleh_glacier_library_date() {
 			const target = index % 2;
 
 			picker_presets[target].appendChild(html.node`
-                <li class="date-range-picker-preset ${
-				selected ? 'date-range-picker-preset--selected' : ''
-			}">
-                    <a class="btn date-picker-preset-item" href="${
-				window.location.href.replace(window.location.search, '')
-			}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
-				modal.hide();
-			}}>
+                <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''
+				}">
+                    <a class="btn date-picker-preset-item" href="${window.location.href.replace(window.location.search, '')
+				}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
+					modal.hide();
+				}}>
                         ${year}
                     </a>
                 </li>
@@ -346,25 +344,23 @@ function bleh_glacier_library_date() {
 	form.insertBefore(
 		html.node`
         <div class="input-group library-date-group">
-            ${
-			input({
-				type: 'date',
-				value: from_input.value,
-				name: from_input.name,
-				min: '2000-01-01',
-				show_time: false,
-			})
-		}
+            ${input({
+			type: 'date',
+			value: from_input.value,
+			name: from_input.name,
+			min: '2000-01-01',
+			show_time: false,
+		})
+			}
             <div class="bleh-icon" style="--icon: var(--icon-16-arrow-right)" />
-            ${
-			input({
+            ${input({
 				type: 'date',
 				value: to_input.value,
 				name: to_input.name,
 				min: '2000-01-01',
 				show_time: false,
 			})
-		}
+			}
         </div>
     `,
 		form.firstChild,
@@ -484,22 +480,30 @@ function bleh_glacier_library_top(static_page = false) {
 		glacier_meta.innerHTML = '';
 	}
 
+	const metaV2 = <ProfileSummaryBlocks large />;
+	glacier_meta.appendChild(metaV2);
+
 	metadata.forEach((meta, index) => {
+		let type = 'scrobbles';
 		let text = meta.querySelector('.metadata-title');
-		let value = meta.querySelector('.metadata-display').textContent;
+		let value = meta.querySelector('.metadata-display')!.textContent;
 
 		if (text) {
-			text = text.textContent;
-
 			if (page.subpage == 'library_overview') {
-				if (index == 1) text = tl(trans.average);
+				if (index == 1) type = 'average';
 			} else if (page.subpage == 'library_artists') {
-				text = tl(trans.artists);
+				type = 'artists';
 			} else if (page.subpage == 'library_albums') {
-				text = tl(trans.albums);
+				type = 'albums';
 			} else if (page.subpage == 'library_tracks') {
-				text = tl(trans.tracks);
+				type = 'tracks';
+			} else {
+				type = 'scrobbles';
 			}
+
+			metaV2.appendChild(
+				<ProfileSummaryBlock counter large type={type} value={clean_number(value)} />
+			);
 		} else {
 			// search results
 			text = tl(trans.results_for);
@@ -508,14 +512,15 @@ function bleh_glacier_library_top(static_page = false) {
 			const start = value.indexOf('“') + 1;
 			const end = value.indexOf('”');
 			value = desanitise(value.substring(start, end));
+
+			glacier_meta.appendChild(html.node`
+	            <div class="glacier-library-metadata-item">
+	                <div class="sub-text">${text}</div>
+	                <div class="glacier-library-metadata-item-value">${value}</div>
+	            </div>
+	        `);
 		}
 
-		glacier_meta.appendChild(html.node`
-            <div class="glacier-library-metadata-item">
-                <div class="sub-text">${text}</div>
-                <div class="glacier-library-metadata-item-value">${value}</div>
-            </div>
-        `);
 	});
 
 	if (first_run) glacier_top.appendChild(glacier_meta);
@@ -556,24 +561,24 @@ function bleh_glacier_library_top(static_page = false) {
 	if (!static_page && page.subpage != 'library_tracks') {
 		const format_button = html.node`
             <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
-			const format = page.structure.main.querySelector(
-				'.library-view-button',
-			);
-			if (!format) return;
+				const format = page.structure.main.querySelector(
+					'.library-view-button',
+				);
+				if (!format) return;
 
-			format.click();
+				format.click();
 
-			if (
-				format.getAttribute('href') &&
-				format.getAttribute('href').endsWith('reset')
-			) {
-				format_button.setAttribute('data-glacier-view', 'list');
-				format_button.textContent = tl(trans.list);
-			} else {
-				format_button.setAttribute('data-glacier-view', 'grid');
-				format_button.textContent = tl(trans.grid);
-			}
-		}} />
+				if (
+					format.getAttribute('href') &&
+					format.getAttribute('href').endsWith('reset')
+				) {
+					format_button.setAttribute('data-glacier-view', 'list');
+					format_button.textContent = tl(trans.list);
+				} else {
+					format_button.setAttribute('data-glacier-view', 'grid');
+					format_button.textContent = tl(trans.grid);
+				}
+			}} />
         `;
 		add_divider = true;
 
@@ -614,25 +619,23 @@ function bleh_glacier_library_top(static_page = false) {
 		content: html.node`
             <div class="dialog-settings">
                 <div class="setting-group blend">
-                    ${
-			page.subpage == 'library_artists'
+                    ${page.subpage == 'library_artists'
 				? setting({ id: 'colourful_counts' })
 				: html.node`
                                 ${setting({ id: 'format_guest_features' })}
                                 ${setting({ id: 'show_guest_features' })}
                             `
-		}
-                    ${
-			(
-					(page.subpage == 'library_artists' ||
-						page.subpage == 'library_albums') &&
-					auth.pro
-				)
+			}
+                    ${(
+				(page.subpage == 'library_artists' ||
+					page.subpage == 'library_albums') &&
+				auth.pro
+			)
 				? html.node`
                                 ${setting({ id: 'grid_glow' })}
                             `
 				: ''
-		}
+			}
                     ${setting({ id: 'glacier_library_graphs' })}
                 </div>
             </div>
@@ -687,10 +690,10 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 
 	/*let scrobble_chart_wrap = page.structure.side.querySelector('.scrobble-table:not([data-glacier-date-graph])');
 
-    if (scrobble_chart_wrap == null)
-        return;
+	if (scrobble_chart_wrap == null)
+		return;
 
-    scrobble_chart_wrap.setAttribute('data-glacier-date-graph', 'true');*/
+	scrobble_chart_wrap.setAttribute('data-glacier-date-graph', 'true');*/
 
 	bleh_glacier_library_date();
 
@@ -775,21 +778,21 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 		bleh_glacier_library_request(request_url);
 		/*console.info(page.structure.glacier.table);
 
-        let series = page.structure.glacier.table.querySelectorAll('.highcharts-bar-series a');
+		let series = page.structure.glacier.table.querySelectorAll('.highcharts-bar-series a');
 
-        // we fake-hover the first bar to get the relationship
-        // between height and real value
-        let subject = series[0];
-        let bar = subject.querySelector('rect');
-        let height = bar.getAttribute('height');
+		// we fake-hover the first bar to get the relationship
+		// between height and real value
+		let subject = series[0];
+		let bar = subject.querySelector('rect');
+		let height = bar.getAttribute('height');
 
-        setTimeout(function() {
-            subject.dispatchEvent(new Event('mouseover'));
-        }, 300);
+		setTimeout(function() {
+			subject.dispatchEvent(new Event('mouseover'));
+		}, 300);
 
-        subject.addEventListener('mouseover', e => {
-            console.info(e);
-        });*/
+		subject.addEventListener('mouseover', e => {
+			console.info(e);
+		});*/
 
 		return;
 	}
@@ -844,8 +847,7 @@ export function bleh_glacier_insights(insights = null) {
 
 		for (const item in insights) {
 			log(
-				`checking insights status of item ${item} - display of ${
-					insights[item].display
+				`checking insights status of item ${item} - display of ${insights[item].display
 				}`,
 				'glacier library',
 				'log',
@@ -857,7 +859,7 @@ export function bleh_glacier_insights(insights = null) {
 			if (
 				insights[item].display &&
 				JSON.stringify(insights[item]) !=
-					JSON.stringify(page.state.glacier.insights[item])
+				JSON.stringify(page.state.glacier.insights[item])
 			) {
 				log(
 					`confirmed insights status of item ${item} - is different`,
@@ -963,125 +965,105 @@ function bleh_glacier_insights_generate(type, item) {
 						data: item.values,
 						borderWidth: 2,
 						backgroundColor: [
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'360',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'360',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'340',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'340',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'320',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'320',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'300',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'300',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'280',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'280',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'270',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'270',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'255',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'255',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'235',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'235',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'220',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'220',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'208',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'208',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'200',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'200',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'180',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'180',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'160',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'160',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'140',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'140',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'120',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'120',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'100',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'100',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'80',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'80',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'60',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'60',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'40',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'40',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'20',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'20',
+							)
 							})`,
 						],
 						borderColor: page.state.chart_colours.bg_col,
@@ -1103,125 +1085,105 @@ function bleh_glacier_insights_generate(type, item) {
 						data: item.values,
 						borderWidth: 0,
 						backgroundColor: [
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'360',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'360',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'340',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'340',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'320',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'320',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'300',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'300',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'280',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'280',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'270',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'270',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'255',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'255',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'235',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'235',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'220',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'220',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'208',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'208',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'200',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'200',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'180',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'180',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'160',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'160',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'140',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'140',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'120',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'120',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'100',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'100',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'80',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'80',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'60',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'60',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'40',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'40',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'20',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'20',
+							)
 							})`,
 						],
 						borderColor: page.state.chart_colours.bg_col,
@@ -1256,7 +1218,7 @@ function bleh_glacier_library_request(request_url) {
 	page.structure.glacier.date_panel.classList.add('data-is-loading');
 
 	fetch(request_url)
-		.then(function (response) {
+		.then(function(response) {
 			console.log(
 				'glacier library returned',
 				response,
@@ -1268,7 +1230,7 @@ function bleh_glacier_library_request(request_url) {
 
 			return response.text();
 		})
-		.then(function (html) {
+		.then(function(html) {
 			const doc = new DOMParser().parseFromString(html, 'text/html');
 			console.log(
 				'glacier library DOC',
@@ -1454,13 +1416,11 @@ function bleh_glacier_library_focused() {
 
 	let link = `${root}music/${redirect()}${sanitise(header_title)}`;
 	if (type == 'album') {
-		link = `${root}music/${redirect()}${sanitise(artist)}/${
-			sanitise(header_title)
-		}`;
+		link = `${root}music/${redirect()}${sanitise(artist)}/${sanitise(header_title)
+			}`;
 	} else if (type == 'track') {
-		link = `${root}music/${redirect()}${sanitise(artist)}/_/${
-			sanitise(header_title)
-		}`;
+		link = `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(header_title)
+			}`;
 	}
 
 	const header = document.createElement('section');
@@ -1484,28 +1444,23 @@ function bleh_glacier_library_focused() {
                     ${tl(trans[type])}
                 </div>
                 <div class="glacier-library-metadata-item-value glacier-library-metadata-focus" data-type="${type}">
-                    <a href="${link}">${
-		type == 'artist'
+                    <a href="${link}">${type == 'artist'
 			? correct_artist(header_title)
 			: correct_item_by_artist(header_title, artist)
-	}</a>${
-		duration
+		}</a>${duration
 			? html
 				.node`<span class="glacier-library-track-duration">${duration.textContent}</span>`
 			: ''
-	}${
-		type != 'artist'
+		}${type != 'artist'
 			? html`${{
 				html: tl(trans.by_artist, {
-					a: `<a href="${root}user/${page.name}/library/music/+noredirect/${
-						sanitise(artist)
-					}${current_suffix}">${
-						sanitise_text(correct_artist(artist))
-					}</a>`,
+					a: `<a href="${root}user/${page.name}/library/music/+noredirect/${sanitise(artist)
+						}${current_suffix}">${sanitise_text(correct_artist(artist))
+						}</a>`,
 				}),
 			}}`
 			: ''
-	}
+		}
                 </div>
             </div>
         </div>
@@ -1618,8 +1573,7 @@ function bleh_glacier_library_focused() {
 		search.textContent = tl(trans.search);
 		search.setAttribute(
 			'href',
-			`${root}user/${page.name}/library/tracks/search?query=${
-				sanitise(correct_artist(header_title))
+			`${root}user/${page.name}/library/tracks/search?query=${sanitise(correct_artist(header_title))
 			}`,
 		);
 
@@ -1698,12 +1652,10 @@ function bleh_glacier_library_focused() {
 			const glacier_meta_item = document.createElement('div');
 			glacier_meta_item.classList.add('glacier-library-metadata-item');
 			glacier_meta_item.innerHTML = `
-                <div class="sub-text">${
-				meta.querySelector('.metadata-title').textContent
-			}</div>
-                <div class="glacier-library-metadata-item-value">${
-				meta.querySelector('.metadata-display').textContent
-			}</div>
+                <div class="sub-text">${meta.querySelector('.metadata-title').textContent
+				}</div>
+                <div class="glacier-library-metadata-item-value">${meta.querySelector('.metadata-display').textContent
+				}</div>
             `;
 
 			lower_metadata.appendChild(glacier_meta_item);
