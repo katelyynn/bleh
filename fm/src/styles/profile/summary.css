@@ -90,6 +90,10 @@
 	display: flex;
 	gap: var(--card-gap);
 	cursor: default;
+
+	&.size-lg {
+		gap: var(--card-gap) var(--card-padding);
+	}
 }
 
 .summary-block {
@@ -108,11 +112,21 @@
 	&.summary-block-hidden {
 		opacity: 0;
 	}
+
+	&.size-lg {
+		gap: 6px;
+	}
 }
 
 .summary-icon {
 	display: flex;
 	align-items: center;
+
+	&.size-lg {
+		&>.bleh-icon-summary {
+			--icon-size: 18px;
+		}
+	}
 }
 
 .bleh-icon-summary {
@@ -125,6 +139,22 @@
 	align-items: center;
 	flex-direction: row-reverse;
 	gap: 4px;
+
+	&.size-lg {
+		flex-direction: column-reverse;
+		gap: 0;
+
+		&>.summary-value {
+			font-size: var(--font-size-subheading);
+			line-height: var(--line-height-subheading);
+		}
+
+		&>.summary-label {
+			font-size: calc(var(--font-size) - 1px);
+			line-height: calc(var(--line-height) - 1px);
+			margin-top: -2px;
+		}
+	}
 }
 
 .summary-label {

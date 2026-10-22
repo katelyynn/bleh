@@ -4,24 +4,30 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { WithChildren } from '@/types/generic.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { CountUp } from 'countup.js';
 
+interface ProfileSummaryBlocksProps {
+	large?: boolean;
+	children?: ReactNode;
+}
+
 export function ProfileSummaryBlocks({
+	large,
 	children,
-}: WithChildren) {
+}: ProfileSummaryBlocksProps) {
 	return (
-		<div class='summary-blocks'>
+		<div class={['summary-blocks', large && 'size-lg']}>
 			{children}
 		</div>
 	);
 }
 
 interface ProfileSummaryBlockProps {
+	large?: boolean;
 	type: string;
 	value: number;
 	tooltip?: ReactNode;
@@ -29,6 +35,7 @@ interface ProfileSummaryBlockProps {
 }
 
 export function ProfileSummaryBlock({
+	large,
 	type,
 	value,
 	tooltip,
@@ -51,11 +58,11 @@ export function ProfileSummaryBlock({
 	const value_elem = createRef();
 
 	const elem = (
-		<div class={['summary-block', counter && 'summary-block-hidden']}>
-			<div class='summary-icon'>
+		<div class={['summary-block', counter && 'summary-block-hidden', large && 'size-lg']}>
+			<div class={['summary-icon', large && 'size-lg']}>
 				<Icon name={icon_name} identifier='summary' />
 			</div>
-			<div class='summary-info'>
+			<div class={['summary-info', large && 'size-lg']}>
 				<h3 class='summary-label'>{text}</h3>
 				<p class='summary-value' ref={value_elem}>
 					{value.toLocaleString(lang)}

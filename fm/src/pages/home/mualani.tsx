@@ -107,6 +107,7 @@ import {
 } from '@/components/avatar/decoration.tsx';
 import { HeatmapDates } from '@/components/date/heatmap';
 import { OracleCredits } from '@/components/oracle/credits';
+import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1557,6 +1558,24 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='OracleCredits'>
 						<OracleCredits name='futaba' credits={{}} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SummaryBlock'>
+						<ProfileSummaryBlocks>
+							<ProfileSummaryBlock type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock type='artists' value={2025} />
+							<ProfileSummaryBlock type='loved' value={1446} />
+						</ProfileSummaryBlocks>
+					</DemoItem>
+					<DemoItem label='SummaryBlock (large)'>
+						<ProfileSummaryBlocks large>
+							<ProfileSummaryBlock large type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock large type='artists' value={2025} />
+							<ProfileSummaryBlock large type='loved' value={1446} />
+						</ProfileSummaryBlocks>
 					</DemoItem>
 				</DemoGrid>
 			</section>
