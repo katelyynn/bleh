@@ -1565,16 +1565,16 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='SummaryBlock'>
 						<ProfileSummaryBlocks>
-							<ProfileSummaryBlock type='scrobbles' value={191468} tooltip='That is an average of something' />
-							<ProfileSummaryBlock type='artists' value={2025} />
-							<ProfileSummaryBlock type='loved' value={1446} />
+							<ProfileSummaryBlock counter type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock counter type='artists' value={2025} />
+							<ProfileSummaryBlock counter type='loved' value={1446} />
 						</ProfileSummaryBlocks>
 					</DemoItem>
 					<DemoItem label='SummaryBlock (large)'>
 						<ProfileSummaryBlocks large>
-							<ProfileSummaryBlock large type='scrobbles' value={191468} tooltip='That is an average of something' />
-							<ProfileSummaryBlock large type='artists' value={2025} />
-							<ProfileSummaryBlock large type='loved' value={1446} />
+							<ProfileSummaryBlock counter large type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock counter large type='artists' value={2025} />
+							<ProfileSummaryBlock counter large type='loved' value={1446} />
 						</ProfileSummaryBlocks>
 					</DemoItem>
 				</DemoGrid>

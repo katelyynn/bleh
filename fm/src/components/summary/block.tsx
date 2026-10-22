@@ -9,6 +9,7 @@ import { createRef, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { CountUp } from 'countup.js';
+import { lazy } from '@/build/tools';
 
 interface ProfileSummaryBlocksProps {
 	large?: boolean;
@@ -81,13 +82,13 @@ export function ProfileSummaryBlock({
 	if (counter) {
 		const count = new CountUp(value_elem.current, value);
 
-		setTimeout(() => {
+		lazy(elem, () => {
 			count.start();
 
 			setTimeout(() => {
 				elem.classList.remove('summary-block-hidden');
 			}, 10);
-		}, 0);
+		});
 	}
 
 	return elem;

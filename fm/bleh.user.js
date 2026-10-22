@@ -88592,12 +88592,12 @@ var bleh = (() => {
     }
     if (counter) {
       const count = new i(value_elem.current, value);
-      setTimeout(() => {
+      lazy(elem, () => {
         count.start();
         setTimeout(() => {
           elem.classList.remove("summary-block-hidden");
         }, 10);
-      }, 0);
+      });
     }
     return elem;
   }
@@ -132392,14 +132392,14 @@ var bleh = (() => {
         ] }) }),
         /* @__PURE__ */ jsx("section", { children: /* @__PURE__ */ jsx(DemoGrid, { children: [
           /* @__PURE__ */ jsx(DemoItem, { label: "SummaryBlock", children: /* @__PURE__ */ jsx(ProfileSummaryBlocks, { children: [
-            /* @__PURE__ */ jsx(ProfileSummaryBlock, { type: "scrobbles", value: 191468, tooltip: "That is an average of something" }),
-            /* @__PURE__ */ jsx(ProfileSummaryBlock, { type: "artists", value: 2025 }),
-            /* @__PURE__ */ jsx(ProfileSummaryBlock, { type: "loved", value: 1446 })
+            /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, type: "scrobbles", value: 191468, tooltip: "That is an average of something" }),
+            /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, type: "artists", value: 2025 }),
+            /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, type: "loved", value: 1446 })
           ] }) }),
           /* @__PURE__ */ jsx(DemoItem, { label: "SummaryBlock (large)", children: /* @__PURE__ */ jsx(ProfileSummaryBlocks, { large: true, children: [
-            /* @__PURE__ */ jsx(ProfileSummaryBlock, { large: true, type: "scrobbles", value: 191468, tooltip: "That is an average of something" }),
-            /* @__PURE__ */ jsx(ProfileSummaryBlock, { large: true, type: "artists", value: 2025 }),
-            /* @__PURE__ */ jsx(ProfileSummaryBlock, { large: true, type: "loved", value: 1446 })
+            /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, large: true, type: "scrobbles", value: 191468, tooltip: "That is an average of something" }),
+            /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, large: true, type: "artists", value: 2025 }),
+            /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, large: true, type: "loved", value: 1446 })
           ] }) })
         ] }) })
       ] })
