@@ -122,8 +122,7 @@ export function show_your_scrobbles() {
                             ${tl(trans.albums)}
                         </a>
                     </li>
-                    ${
-				!page_is_blocked
+                    ${!page_is_blocked
 					? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
                         <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
@@ -162,7 +161,7 @@ export function show_your_scrobbles() {
                     </li>
                     `
 					: ''
-			}
+				}
                 </ul>
             `);
 		} else if (page.type == 'album') {
@@ -173,8 +172,7 @@ export function show_your_scrobbles() {
                             ${tl(trans.home)}
                         </a>
                     </li>
-                    ${
-				!page_is_blocked
+                    ${!page_is_blocked
 					? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
                         <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
@@ -198,7 +196,7 @@ export function show_your_scrobbles() {
                     </li>
                     `
 					: ''
-			}
+				}
                 </ul>
             `);
 		} else if (page.type == 'track') {
@@ -214,8 +212,7 @@ export function show_your_scrobbles() {
                             ${tl(trans.albums)}
                         </a>
                     </li>
-                    ${
-				!page_is_blocked
+                    ${!page_is_blocked
 					? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
                         <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
@@ -234,7 +231,7 @@ export function show_your_scrobbles() {
                     </li>
                     `
 					: ''
-			}
+				}
                 </ul>
             `);
 		}
@@ -345,8 +342,12 @@ export function show_your_scrobbles() {
 	) as HTMLDivElement;
 
 	Array.from(header_actions.children).forEach((form) => {
-		const item = form.querySelector('a, button');
-		if (!item) return;
+		let item = form;
+
+		if (form.nodeName != 'BUTTON') {
+			item = form.querySelector('a, button')!;
+			if (!item) return;
+		}
 
 		item.classList.add('btn', 'side-action', 'icon-mask');
 		const classes = item.classList;
@@ -387,7 +388,7 @@ export function show_your_scrobbles() {
 
 	if (ff('submit_scrobble')) {
 		const can_api = localStorage.getItem('bleh_auth') &&
-				localStorage.getItem('bleh_auth_valid') === 'true' || false;
+			localStorage.getItem('bleh_auth_valid') === 'true' || false;
 
 		const source_album = page.structure.main!.querySelector(
 			'.source-album-name',
@@ -576,10 +577,10 @@ export function show_your_scrobbles() {
 			html`
 				<div class="loading-data-text info">
 				    ${tl(
-					page.type == 'album'
-						? trans.missing_album_info
-						: trans.missing_artist_info,
-				)}
+				page.type == 'album'
+					? trans.missing_album_info
+					: trans.missing_artist_info,
+			)}
 				</div>
 			`,
 		);
@@ -844,20 +845,18 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                     ${position}
                 </span>
                 <h4 class="user-list-name">
-                    <a class="user-list-link link-block-target" href=${
-		name_wrap.getAttribute('href')
-	} ref=${(el) => (name_link = el)}>
+                    <a class="user-list-link link-block-target" href=${name_wrap.getAttribute('href')
+		} ref=${(el) => (name_link = el)}>
                         ${name}
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(
-		el,
-	) => (user_list_avatar = el)}>
+			el,
+		) => (user_list_avatar = el)}>
                     ${{ html: avatar.innerHTML }}
                 </span>
                 ${follow}
-                ${
-		track_wrap
+                ${track_wrap
 			? html.node`
                 <div class="user-list-description">
                     <p class="user-list-about-me has-featured-track" ref=${(
@@ -868,7 +867,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                 </div>
                 `
 			: ''
-	}
+		}
             </div>
         </li>
     `;
@@ -1045,16 +1044,14 @@ export function similar_items() {
 		controls.replaceWith(html.node`
             <div class="top-container">
                 <h2>${{
-			html: tl(trans.more_like_name, {
-				n: page.type == 'artist'
-					? `<i>${
-						sanitise_text(romanise(correct_artist(page.name)))
-					}<i>`
-					: `<i>${
-						sanitise_text(romanise(correct_artist(page.sister)))
-					}<i>`,
-			}),
-		}}</h2>
+				html: tl(trans.more_like_name, {
+					n: page.type == 'artist'
+						? `<i>${sanitise_text(romanise(correct_artist(page.name)))
+						}<i>`
+						: `<i>${sanitise_text(romanise(correct_artist(page.sister)))
+						}<i>`,
+				}),
+			}}</h2>
                 <div class="view-buttons blend blend-v2">
                     ${station}
                 </div>
@@ -1075,11 +1072,10 @@ export function similar_items() {
 			html`
 				${{
 					html: tl(trans.more_like_name, {
-						n: `<i>${
-							romanise(
-								correct_item_by_artist(page.name, page.sister),
-							)
-						}</i>`,
+						n: `<i>${romanise(
+							correct_item_by_artist(page.name, page.sister),
+						)
+							}</i>`,
 					}),
 				}}
 			`,
@@ -1097,11 +1093,10 @@ export function similar_items() {
 			html`
 				${{
 					html: tl(trans.more_like_name, {
-						n: `<i>${
-							romanise(
-								correct_item_by_artist(page.name, page.sister),
-							)
-						}</i>`,
+						n: `<i>${romanise(
+							correct_item_by_artist(page.name, page.sister),
+						)
+							}</i>`,
 					}),
 				}}
 			`,

@@ -85476,8 +85476,11 @@ var bleh = (() => {
       ".header-new-actions"
     );
     Array.from(header_actions.children).forEach((form) => {
-      const item = form.querySelector("a, button");
-      if (!item) return;
+      let item = form;
+      if (form.nodeName != "BUTTON") {
+        item = form.querySelector("a, button");
+        if (!item) return;
+      }
       item.classList.add("btn", "side-action", "icon-mask");
       const classes = item.classList;
       if (classes[0] == "header-new-more-button") return;
