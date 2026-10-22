@@ -151,7 +151,6 @@
 
 		&>.summary-label {
 			font-size: calc(var(--font-size) - 1px);
-			line-height: calc(var(--line-height) - 1px);
 			margin-top: -2px;
 		}
 	}
