@@ -231,6 +231,7 @@
 .side-action-label {
 	flex-shrink: 0;
 	color: oklch(var(--c3));
+	pointer-events: none;
 }
 
 .follow-combo {
