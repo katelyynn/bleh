@@ -498,12 +498,7 @@
 .user-list-avatar {
 	position: absolute;
 	--show-icon: none;
-
-	.avatar-status-dot {
-		width: 18px;
-		height: 18px;
-		--mask-size: 18px;
-	}
+	--icon-size: 18px;
 }
 
 .user-list-follower-btn {
