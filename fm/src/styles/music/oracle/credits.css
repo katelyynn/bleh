@@ -16,14 +16,8 @@
 	font-weight: var(--font-weight);
 }
 
-.oracle-credit-list {
-	display: flex;
-	gap: 0 6px;
-	flex-wrap: wrap;
-}
-
 .oracle-credit {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	font-size: var(--font-size-subheading);
 	line-height: var(--line-height-subheading);
@@ -33,18 +27,9 @@
 	color: oklch(var(--c2) / 80%);
 }
 
-.oracle-info-box {
-	margin-left: 4px;
-
-	--icon-size: 14px;
+.oracle-credit-attributes {
 	color: oklch(var(--c3));
-
-	display: flex;
-	align-items: center;
-}
-
-.oracle-attributes {
-	color: oklch(var(--c3));
+	font-size: var(--font-size);
 }
 
 .oracle-credit-link {
