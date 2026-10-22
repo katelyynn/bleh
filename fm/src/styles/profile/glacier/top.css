@@ -9,6 +9,8 @@
 	}
 
 	.glacier-library-buttons {
+		height: fit-content;
+
 		.glacier-view-button {
 			&[data-glacier-view="list"] {
 				--mask: var(--icon-16-list);
@@ -102,21 +104,22 @@
 			}
 		}
 	}
+}
 
-	.glacier-library-metadata-avatar {
-		position: relative;
-		width: 36px;
-		height: 36px;
-		background: var(--avatar-generic-background);
-		border-radius: var(--radius-s);
-		box-shadow: var(--interact-shadow);
-		overflow: hidden;
-		flex-shrink: 0;
+.glacier-library-metadata-avatar {
+	position: relative;
+	--w: 56px;
+	width: var(--w);
+	height: var(--w);
+	background: var(--avatar-generic-background);
+	border-radius: var(--radius-s);
+	box-shadow: var(--interact-shadow);
+	overflow: hidden;
+	flex-shrink: 0;
 
-		& > img {
-			width: 36px;
-			height: 36px;
-		}
+	&>img {
+		width: 100%;
+		height: 100%;
 	}
 }
 
@@ -138,7 +141,7 @@
 }
 
 .value-panel {
-	.glacier-library-metadata + h2 {
+	.glacier-library-metadata+h2 {
 		margin-top: var(--card-gap) !important;
 	}
 }
@@ -149,7 +152,7 @@
 }
 
 /* user did not scrobble album in date range */
-.library-header + .message {
+.library-header+.message {
 	color: oklch(var(--c3));
 	cursor: default;
 }
