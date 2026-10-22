@@ -47,13 +47,22 @@ export function ProfileSummaryBlock({
 
 	if (type == 'scrobbles') {
 		text = tl(trans.scrobbles);
-		icon_name = icons.track;
+		icon_name = icons.play;
 	} else if (type == 'artists') {
 		text = tl(trans.artists);
-		icon_name = icons.artist;
+		icon_name = icons.artists;
 	} else if (type == 'loved') {
 		text = tl(trans.loved);
 		icon_name = icons.loved;
+	} else if (type == 'average') {
+		text = tl(trans.average);
+		icon_name = icons.calendar;
+	} else if (type == 'albums') {
+		text = tl(trans.albums);
+		icon_name = icons.albums;
+	} else if (type == 'tracks') {
+		text = tl(trans.tracks);
+		icon_name = icons.tracks;
 	}
 
 	const value_elem = createRef();

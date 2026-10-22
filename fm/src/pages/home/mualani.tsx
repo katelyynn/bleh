@@ -1573,7 +1573,10 @@ export function mualani() {
 					<DemoItem label='SummaryBlock (large)'>
 						<ProfileSummaryBlocks large>
 							<ProfileSummaryBlock counter large type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock counter large type='average' value={120} />
 							<ProfileSummaryBlock counter large type='artists' value={2025} />
+							<ProfileSummaryBlock counter large type='albums' value={4781} />
+							<ProfileSummaryBlock counter large type='tracks' value={13490} />
 							<ProfileSummaryBlock counter large type='loved' value={1446} />
 						</ProfileSummaryBlocks>
 					</DemoItem>
