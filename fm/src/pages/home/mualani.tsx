@@ -1490,7 +1490,7 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
-			<section>
+			<section id='decoration'>
 				<DemoGrid>
 					<DemoItem label='AvatarDecoration'>
 						{Object.keys(decorations).map((deco) => (
@@ -1540,7 +1540,7 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
-			<section>
+			<section id='credits'>
 				<DemoGrid>
 					<DemoItem label='OracleCredits'>
 						<OracleCredits name='futaba' credits={{
@@ -1561,7 +1561,7 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
-			<section>
+			<section id='summary'>
 				<DemoGrid>
 					<DemoItem label='SummaryBlock'>
 						<ProfileSummaryBlocks>

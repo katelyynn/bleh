@@ -107,12 +107,12 @@
 
 	&.summary-block-hidden {
 		&>.summary-info>.summary-value {
-			opacity: 0;
+			opacity: 0.5;
 		}
 	}
 
 	&.size-lg {
-		gap: 6px;
+		align-items: start;
 	}
 }
 
@@ -121,9 +121,7 @@
 	align-items: center;
 
 	&.size-lg {
-		&>.bleh-icon-summary {
-			--icon-size: 18px;
-		}
+		height: var(--line-height-subheading);
 	}
 }
 
@@ -140,6 +138,7 @@
 
 	&.size-lg {
 		flex-direction: column-reverse;
+		align-items: unset;
 		gap: 0;
 
 		&>.summary-value {
@@ -167,8 +166,8 @@
 	font-weight: var(--font-weight-medium);
 
 	transition-property: opacity;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
+	transition-duration: 1s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .graph-blocks {

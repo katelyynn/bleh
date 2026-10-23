@@ -16,6 +16,10 @@
 	font-weight: var(--font-weight);
 }
 
+.oracle-credit-list {
+	cursor: default;
+}
+
 .oracle-credit {
 	display: inline-flex;
 	align-items: center;

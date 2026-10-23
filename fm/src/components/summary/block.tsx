@@ -55,7 +55,7 @@ export function ProfileSummaryBlock({
 		text = tl(trans.loved);
 		icon_name = icons.loved;
 	} else if (type == 'average') {
-		text = tl(trans.average);
+		text = tl(trans.daily);
 		icon_name = icons.calendar;
 	} else if (type == 'albums') {
 		text = tl(trans.albums);
