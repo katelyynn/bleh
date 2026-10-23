@@ -233,6 +233,17 @@
 			height: 1px;
 			background: var(--card-border-base);
 		}
+
+		background: oklch(var(--b5));
+
+		&>.content-main,
+		&>.content-side {
+			background: unset;
+
+			&:after {
+				display: none;
+			}
+		}
 	}
 }
 

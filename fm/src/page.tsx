@@ -930,9 +930,9 @@ export function update_page() {
 	page.structure.container.setAttribute('data-page-subpage', page.subpage);
 	page.structure.container.setAttribute('data-beret', ff('beret'));
 	page.structure.container.setAttribute('data-short', ff('short'));
-	page.structure.container.setAttribute('data-lacrimosa', ff('lacrimosa'));
+	page.structure.container.setAttribute('data-lacrimosa', String(ff('lacrimosa')));
 
-	page.structure.row?.setAttribute('data-lacrimosa', ff('lacrimosa'));
+	page.structure.row?.setAttribute('data-lacrimosa', String(ff('lacrimosa')));
 
 	page.structure.row?.setAttribute('data-refresh', String(refresh));
 }
@@ -973,6 +973,7 @@ export async function register_background(
 		background.setAttribute('data-page-type', page.type);
 		background.setAttribute('data-page-subpage', page.subpage);
 		background.setAttribute('data-background-origin', origin);
+		background.setAttribute('data-lacrimosa', String(ff('lacrimosa')));
 	}
 
 	if (url) {

@@ -3,19 +3,9 @@
 	inset: 0 0 0 50%;
 	z-index: -4;
 
-	--header-size: var(--page-header-banner-size-default);
-
 	--w: min(1300px, 90vw);
-	--h: calc(99px + var(--tab-size) + var(--header-size));
 
 	aspect-ratio: 1300 / 325;
-
-	&[data-page-type="events"],
-	&[data-page-type="festival"],
-	&[data-page-type="tag"],
-	&[data-page-type="search"] {
-		--header-size: 48px;
-	}
 
 	&[data-page-type="bleh_now"],
 	&[data-page-subpage="obsessions_obsession"],
@@ -116,6 +106,19 @@
 	}
 }
 
+.page-banner,
+.bleh-background {
+	--header-size: var(--page-header-banner-size-default);
+	--h: calc(99px + var(--tab-size) + var(--header-size));
+
+	&[data-page-type="events"],
+	&[data-page-type="festival"],
+	&[data-page-type="tag"],
+	&[data-page-type="search"] {
+		--header-size: 48px;
+	}
+}
+
 .bleh-background {
 	position: absolute;
 	inset: 0;
@@ -140,6 +143,7 @@
 	transition-duration: 0.5s;
 	transition-timing-function: var(--trans-function-ani);
 
+
 	&:after {
 		content: "";
 		position: absolute;
@@ -155,6 +159,15 @@
 		transition-timing-function: var(--trans-function);
 
 		z-index: 20;
+	}
+
+	&[data-lacrimosa="true"] {
+		background-color: oklch(var(--b5)) !important;
+		height: var(--h);
+
+		&:after {
+			background-color: oklch(var(--b5)) !important;
+		}
 	}
 
 	&[data-page-type="user"] {
