@@ -202,7 +202,9 @@
 	}
 
 	@media (min-width: 981px) {
-		.seasonal-decoration-top+& {
+
+		/* the :not() is for the profile friends tab */
+		.seasonal-decoration-top+&:not(.toolbar + .seasonal-decoration-top + &) {
 			&>.content-main {
 				border-top-left-radius: var(--card-radius);
 			}
