@@ -113221,18 +113221,26 @@ var bleh = (() => {
         const href = format.getAttribute("href");
         if (href && href.endsWith("reset")) {
           format_button.setAttribute("data-glacier-view", "list");
-          format_button.textContent = tl2(trans.list);
+          format_button.replaceChildren(
+            /* @__PURE__ */ jsx(IconLabel, { icon: icons.list, children: tl2(trans.list) })
+          );
         } else {
           format_button.setAttribute("data-glacier-view", "grid");
-          format_button.textContent = tl2(trans.grid);
+          format_button.replaceChildren(
+            /* @__PURE__ */ jsx(IconLabel, { icon: icons.grid, children: tl2(trans.grid) })
+          );
         }
       } });
       if (top_wrap.getAttribute("data-current-format") == "grid") {
         format_button.setAttribute("data-glacier-view", "grid");
-        format_button.textContent = tl2(trans.grid);
+        format_button.replaceChildren(
+          /* @__PURE__ */ jsx(IconLabel, { icon: icons.grid, children: tl2(trans.grid) })
+        );
       } else {
         format_button.setAttribute("data-glacier-view", "list");
-        format_button.textContent = tl2(trans.list);
+        format_button.replaceChildren(
+          /* @__PURE__ */ jsx(IconLabel, { icon: icons.list, children: tl2(trans.list) })
+        );
       }
       view_buttons.appendChild(format_button);
     }

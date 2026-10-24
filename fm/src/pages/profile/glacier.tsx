@@ -38,6 +38,7 @@ import { createRef } from 'jsx-dom';
 import { SettingRadio } from '@/components/settings/provider/radio';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 import { Button } from '@/components/button/button';
+import { IconLabel } from '@/components/text/text';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -612,20 +613,36 @@ function bleh_glacier_library_top(static_page = false) {
 
 				if (href && href.endsWith('reset')) {
 					format_button.setAttribute('data-glacier-view', 'list');
-					format_button.textContent = tl(trans.list) as string;
+					format_button.replaceChildren(
+						<IconLabel icon={icons.list}>
+							{tl(trans.list)}
+						</IconLabel>
+					);
 				} else {
 					format_button.setAttribute('data-glacier-view', 'grid');
-					format_button.textContent = tl(trans.grid) as string;
+					format_button.replaceChildren(
+						<IconLabel icon={icons.grid}>
+							{tl(trans.grid)}
+						</IconLabel>
+					);
 				}
 			}} />
 		);
 
 		if (top_wrap.getAttribute('data-current-format') == 'grid') {
 			format_button.setAttribute('data-glacier-view', 'grid');
-			format_button.textContent = tl(trans.grid) as string;
+			format_button.replaceChildren(
+				<IconLabel icon={icons.grid}>
+					{tl(trans.grid)}
+				</IconLabel>
+			);
 		} else {
 			format_button.setAttribute('data-glacier-view', 'list');
-			format_button.textContent = tl(trans.list) as string;
+			format_button.replaceChildren(
+				<IconLabel icon={icons.list}>
+					{tl(trans.list)}
+				</IconLabel>
+			);
 		}
 
 		view_buttons.appendChild(format_button);
