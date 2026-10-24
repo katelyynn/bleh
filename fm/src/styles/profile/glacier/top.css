@@ -44,9 +44,7 @@
 
 	&.delete-icon {
 		--mask: var(--icon-16-trash);
-		--bg-hov: oklch(var(--h4) / 10%);
-		--bg-atv: oklch(var(--h4) / 20%);
-		--hue-over: var(--hue-neg);
+		--hue-over: var(--hue-neg) !important;
 		--sat-over: var(--sat-neg) !important;
 		--lit-over: var(--lit-neg) !important;
 	}
@@ -129,9 +127,15 @@
 	}
 }
 
-.glacier-library-metadata-avatar {
+.glacier-overview {
+	display: flex;
+	gap: 10px;
+	margin-bottom: var(--card-gap);
+}
+
+.glacier-overview-avatar {
 	position: relative;
-	--w: 56px;
+	--w: 48px;
 	width: var(--w);
 	height: var(--w);
 	background: var(--avatar-generic-background);
@@ -139,27 +143,26 @@
 	box-shadow: var(--interact-shadow);
 	overflow: hidden;
 	flex-shrink: 0;
+}
 
-	&>img {
-		width: 100%;
-		height: 100%;
+.glacier-overview-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.glacier-overview-title {
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	font-weight: var(--font-weight-medium);
+
+	&:not(:hover) {
+		color: oklch(var(--c2));
 	}
 }
 
-.glacier-library-focused-header {
-	display: flex;
-	flex-direction: column;
-	gap: var(--card-gap);
-
-	.glacier-library-top-upper {
-		display: flex;
-		justify-content: space-between;
-
-		@media (max-width: 980px) {
-			justify-content: unset;
-			flex-direction: column;
-			gap: var(--card-gap);
-		}
+.glacier-overview-artist {
+	&:not(:hover) {
+		color: oklch(var(--c2) / 80%);
 	}
 }
 

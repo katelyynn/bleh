@@ -1401,6 +1401,16 @@ function bleh_glacier_library_focused() {
 	else if (page.subpage.startsWith('library_album')) type = 'album';
 	else if (page.subpage.startsWith('library_track')) type = 'track';
 
+	let text = tl(trans.scrobbles);
+
+	if (type == 'artist') {
+		text = tl(trans.artist);
+	} else if (type == 'album') {
+		text = tl(trans.album);
+	} else if (type == 'track') {
+		text = tl(trans.track);
+	}
+
 	let header_title = legacy_header.querySelector('.library-header-crumb'); // subpage
 	if (!header_title) {
 		header_title = legacy_header.querySelector('.library-header-title'); // main
@@ -1416,7 +1426,7 @@ function bleh_glacier_library_focused() {
 	let artist = legacy_header.querySelector('.text-colour-link');
 	if (artist) artist = artist.textContent.trim();
 
-	const image = legacy_header.querySelector('.library-header-image img');
+	const image = legacy_header.querySelector('.library-header-image img') as HTMLImageElement;
 
 	let link = `${root}music/${redirect()}${sanitise(header_title)}`;
 	if (type == 'album') {
@@ -1433,48 +1443,72 @@ function bleh_glacier_library_focused() {
 		'glacier-library-focused-header',
 	);
 
-	const upper_wrap = document.createElement('div');
-	upper_wrap.classList.add('glacier-library-top-upper');
-
 	const current_suffix = window.location.search;
 
-	const metadata = html.node`
-        <div class="glacier-library-metadata">
-            <div class="glacier-library-metadata-avatar">
-                ${image}
-            </div>
-            <div class="glacier-library-metadata-item">
-                <div class="sub-text">
-                    ${tl(trans[type])}
-                </div>
-                <div class="glacier-library-metadata-item-value glacier-library-metadata-focus" data-type="${type}">
-                    <a href="${link}">${type == 'artist'
-			? correct_artist(header_title)
-			: correct_item_by_artist(header_title, artist)
-		}</a>${duration
-			? html
-				.node`<span class="glacier-library-track-duration">${duration.textContent}</span>`
-			: ''
-		}${type != 'artist'
-			? html`${{
-				html: tl(trans.by_artist, {
-					a: `<a href="${root}user/${page.name}/library/music/+noredirect/${sanitise(artist)
-						}${current_suffix}">${sanitise_text(correct_artist(artist))
-						}</a>`,
-				}),
-			}}`
-			: ''
-		}
-                </div>
-            </div>
-        </div>
-    `;
+	const more = createRef();
 
-	upper_wrap.appendChild(metadata);
-	header.appendChild(upper_wrap);
+	const metadata = (
+		<>
+			<PanelTop>
+				<PanelHead icon={icons.library} top>
+					{tl(trans.library)}
+					<PanelHeadExtra>
+						{text}
+					</PanelHeadExtra>
+				</PanelHead>
+				<ViewButtons>
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={more}
+					>
+						{tl(trans.settings)}
+					</SeeMore>
+				</ViewButtons>
+			</PanelTop>
+			<div class='glacier-overview'>
+				<div class={['glacier-overview-avatar', 'cover-art']}>
+					{image}
+				</div>
+				<div class='glacier-overview-body'>
+					<a class='glacier-overview-title' href={link}>
+						{type == 'artist' ? correct_artist(header_title) : correct_item_by_artist(header_title, artist)}
+					</a>
+					{type != 'artist' && (
+						<a class='glacier-overview-artist' href={`${root}user/${page.name}/library/music/${redirect()}${sanitise(artist)}${current_suffix}`}>
+							{correct_artist(artist)}
+						</a>
+					)}
+					{duration && (
+						<span class='glacier-overview-duration'>{duration.textContent}</span>
+					)}
+				</div>
+			</div>
+		</>
+	);
 
-	const view_buttons = document.createElement('div');
-	view_buttons.classList.add('view-buttons', 'glacier-library-buttons');
+	menu_tooltip(
+		more.current,
+		<MenuContents>
+			<MenuCheckbox bind='format_guest_features' />
+			<MenuCheckbox bind='show_guest_features' />
+			<MenuCheckbox bind='glacier_library_graphs' />
+			<SettingRadio bind='count_bar_axis' />
+			<SettingRadio bind='count_bar_style' />
+		</MenuContents>
+	);
+
+	header.appendChild(metadata);
+
+	const components = (
+		<div class='glacier-components' />
+	);
+	header.appendChild(components);
+
+	const view_buttons = (
+		<div class='glacier-library-buttons' />
+	);
 
 	const cta = legacy_header.querySelector('.library-header-ctas');
 
@@ -1515,7 +1549,6 @@ function bleh_glacier_library_focused() {
 
 			button.classList.add(
 				'btn',
-				'view-item',
 				'icon',
 				'glacier-library-button',
 			);
@@ -1524,7 +1557,7 @@ function bleh_glacier_library_focused() {
 				'.user-library-controls-tooltip',
 			);
 			tooltips.forEach((tooltip) => {
-				tooltip.parentElement.removeChild(tooltip);
+				tooltip.remove();
 			});
 
 			view_buttons.appendChild(wrapper);
@@ -1543,7 +1576,6 @@ function bleh_glacier_library_focused() {
 					if (button) {
 						button.classList.add(
 							'btn',
-							'view-item',
 							'icon',
 							'glacier-library-button',
 						);
@@ -1552,24 +1584,17 @@ function bleh_glacier_library_focused() {
 			} else {
 				// have to read classlist
 				if (button.classList.contains('delete-icon')) {
-					button.classList.add('colourful');
+					button.classList.add('colourful', 'primary');
 					button.textContent = tl(trans.delete);
 				}
 			}
 		});
-
-		if (wrappers.length > 0) {
-			const listen_divider = document.createElement('div');
-			listen_divider.classList.add('listen-divider');
-			view_buttons.appendChild(listen_divider);
-		}
 	}
 
 	if (page.subpage == 'library_artist_overview' && auth.pro) {
 		const search = document.createElement('a');
 		search.classList.add(
 			'btn',
-			'view-item',
 			'icon',
 			'glacier-library-button',
 			'glacier-search-button',
@@ -1589,60 +1614,9 @@ function bleh_glacier_library_focused() {
 		if (divider) view_buttons.insertBefore(search, divider);
 	}
 
-	const configure_button = document.createElement('button');
-	configure_button.classList.add(
-		'btn',
-		'view-item',
-		'icon',
-		'glacier-library-button',
-		'glacier-configure-button',
-		'panel-settings-button',
+	const lower_wrap = (
+		<ProfileSummaryBlocks large />
 	);
-	configure_button.textContent = tl(trans.settings);
-
-	tippy(configure_button, {
-		content: tl(trans.settings),
-	});
-
-	tippy(configure_button, {
-		theme: 'window',
-		content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${setting({ id: 'format_guest_features' })}
-                    ${setting({ id: 'show_guest_features' })}
-                    ${setting({ id: 'glacier_library_graphs' })}
-                </div>
-            </div>
-        `,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
-
-	view_buttons.appendChild(configure_button);
-
-	upper_wrap.appendChild(view_buttons);
-
-	let lower_metadata;
-	const lower_wrap = html.node`
-        <div class="glacier-library-top-lower">
-            <div class="glacier-library-metadata" ref=${(
-		el,
-	) => (lower_metadata = el)} />
-        </div>
-    `;
 
 	const legacy_meta_wrap = page.structure.main.querySelector(
 		'.metadata-list',
@@ -1653,20 +1627,15 @@ function bleh_glacier_library_focused() {
 		);
 
 		metadatas.forEach((meta) => {
-			const glacier_meta_item = document.createElement('div');
-			glacier_meta_item.classList.add('glacier-library-metadata-item');
-			glacier_meta_item.innerHTML = `
-                <div class="sub-text">${meta.querySelector('.metadata-title').textContent
-				}</div>
-                <div class="glacier-library-metadata-item-value">${meta.querySelector('.metadata-display').textContent
-				}</div>
-            `;
-
-			lower_metadata.appendChild(glacier_meta_item);
+			lower_wrap.appendChild(
+				<ProfileSummaryBlock large counter type='scrobbles' value={clean_number(meta.querySelector('.metadata-display')!.textContent)} />
+			);
 		});
 
-		header.appendChild(lower_wrap);
+		components.appendChild(lower_wrap);
 	}
+
+	components.appendChild(view_buttons);
 
 	page.structure.main.insertBefore(
 		header,
