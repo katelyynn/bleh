@@ -625,7 +625,7 @@ function bleh_glacier_library_top(static_page = false) {
 					format_button.textContent = tl(trans.grid) as string;
 				}
 			}} />
-		)
+		);
 
 		if (top_wrap.getAttribute('data-current-format') == 'grid') {
 			format_button.setAttribute('data-glacier-view', 'grid');
@@ -652,7 +652,7 @@ function bleh_glacier_library_top(static_page = false) {
 				);
 				const sort_menu = sort.querySelector(
 					'.dropdown-menu-clickable',
-				);
+				)!;
 
 				view_buttons.appendChild(sort_button);
 				view_buttons.appendChild(sort_menu);
@@ -741,7 +741,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 
 	page.state.glacier.current_view = current_view;
 
-	const scrobble_chart_content = page.structure.row.querySelector(
+	const scrobble_chart_content = page.structure.row!.querySelector(
 		'#scrobble-chart-content',
 	);
 	if (!scrobble_chart_content) return;
@@ -756,7 +756,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 		return;
 	}
 
-	const scrobble_chart_wrap = page.structure.row.querySelector(
+	const scrobble_chart_wrap = page.structure.row!.querySelector(
 		'.scrobble-table',
 	);
 
