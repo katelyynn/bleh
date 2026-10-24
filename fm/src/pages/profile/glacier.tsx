@@ -1567,10 +1567,6 @@ function bleh_glacier_library_focused() {
 				if (action == 'EditScrobbleOpen') {
 					button.textContent = tl(trans.edit);
 				} else if (action == 'UnloveTrack' || action == 'LoveTrack') {
-					const listen_divider = document.createElement('div');
-					listen_divider.classList.add('listen-divider');
-					view_buttons.appendChild(listen_divider);
-
 					// we need to target the other button too lol
 					button = wrapper.querySelector('button:not(.btn)');
 					if (button) {

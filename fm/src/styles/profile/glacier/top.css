@@ -51,9 +51,6 @@
 
 	&.love-button {
 		--mask: var(--icon-16-heart);
-		--font-size: 0;
-		--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
-		--btn-left: 12px !important;
 
 		&.love-button--loved {
 			--mask: var(--icon-16-heart-solid);
@@ -154,6 +151,7 @@
 	font-size: var(--font-size-subheading);
 	line-height: var(--line-height-subheading);
 	font-weight: var(--font-weight-medium);
+	width: fit-content;
 
 	&:not(:hover) {
 		color: oklch(var(--c2));
@@ -161,6 +159,8 @@
 }
 
 .glacier-overview-artist {
+	width: fit-content;
+
 	&:not(:hover) {
 		color: oklch(var(--c2) / 80%);
 	}
