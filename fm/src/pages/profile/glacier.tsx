@@ -1565,26 +1565,28 @@ function bleh_glacier_library_focused() {
 			const action = button.getAttribute('data-analytics-action');
 			if (action) {
 				if (action == 'EditScrobbleOpen') {
-					button.textContent = tl(trans.edit);
-				} else if (action == 'UnloveTrack' || action == 'LoveTrack') {
-					// we need to target the other button too lol
-					button = wrapper.querySelector('button:not(.btn)');
-					if (button) {
-						button.classList.add(
-							'btn',
-							'icon',
-							'glacier-library-button',
-						);
-					}
+					button.textContent = tl(trans.edit) as string;
 				}
 			} else {
 				// have to read classlist
 				if (button.classList.contains('delete-icon')) {
 					button.classList.add('colourful', 'primary');
-					button.textContent = tl(trans.delete);
+					button.textContent = tl(trans.delete) as string;
 				}
 			}
 		});
+
+		const loved = view_buttons.querySelector('button[data-analytics-action="UnloveTrack"]');
+		if (loved) {
+			loved.classList.add('btn', 'icon', 'glacier-library-button', 'primary');
+			loved.textContent = tl(trans.loved) as string;
+		}
+
+		const unloved = view_buttons.querySelector('button[data-analytics-action="LoveTrack"]');
+		if (unloved) {
+			unloved.classList.add('btn', 'icon', 'glacier-library-button');
+			unloved.textContent = tl(trans.love) as string;
+		}
 	}
 
 	if (page.subpage == 'library_artist_overview' && auth.pro) {

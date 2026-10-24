@@ -113959,15 +113959,6 @@ var bleh = (() => {
         if (action) {
           if (action == "EditScrobbleOpen") {
             button2.textContent = tl2(trans.edit);
-          } else if (action == "UnloveTrack" || action == "LoveTrack") {
-            button2 = wrapper.querySelector("button:not(.btn)");
-            if (button2) {
-              button2.classList.add(
-                "btn",
-                "icon",
-                "glacier-library-button"
-              );
-            }
           }
         } else {
           if (button2.classList.contains("delete-icon")) {
@@ -113976,6 +113967,16 @@ var bleh = (() => {
           }
         }
       });
+      const loved = view_buttons.querySelector('button[data-analytics-action="UnloveTrack"]');
+      if (loved) {
+        loved.classList.add("btn", "icon", "glacier-library-button", "primary");
+        loved.textContent = tl2(trans.loved);
+      }
+      const unloved = view_buttons.querySelector('button[data-analytics-action="LoveTrack"]');
+      if (unloved) {
+        unloved.classList.add("btn", "icon", "glacier-library-button");
+        unloved.textContent = tl2(trans.love);
+      }
     }
     if (page.subpage == "library_artist_overview" && auth.pro) {
       const search = document.createElement("a");
