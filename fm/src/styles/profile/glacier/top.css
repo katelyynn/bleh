@@ -132,7 +132,7 @@
 
 .glacier-overview-avatar {
 	position: relative;
-	--w: 48px;
+	--w: 56px;
 	width: var(--w);
 	height: var(--w);
 	background: var(--avatar-generic-background);
@@ -164,6 +164,12 @@
 	&:not(:hover) {
 		color: oklch(var(--c2) / 80%);
 	}
+}
+
+.glacier-overview-duration {
+	font-size: var(--font-size-sm);
+	color: oklch(var(--c3));
+	cursor: default;
 }
 
 .value-panel {
