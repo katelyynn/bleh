@@ -12,7 +12,6 @@ import {
 	clean_number,
 	desanitise,
 	sanitise,
-	sanitise_text,
 	year_from_date,
 } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
@@ -30,16 +29,12 @@ import { Chart } from '@/main';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { convert_to_select } from '@/components/select/select.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import { GraphBlock, GraphBlocks } from '@/components/summary/graph';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 import { PanelHead, PanelHeadExtra } from '@/components/text/head';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more';
 import { menu_tooltip } from '@/components/shared/tooltips';
 import { MenuContents } from '@/components/menu/menu';
 import { createRef } from 'jsx-dom';
-import { FloatingWindow, FloatingWindowContents } from '@/components/menu/floating_window';
-import { SettingGroup } from '@/components/settings/group';
-import { SettingSwitch } from '@/components/settings/provider/switch';
 import { SettingRadio } from '@/components/settings/provider/radio';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 import { Button } from '@/components/button/button';
@@ -81,34 +76,32 @@ export function bleh_user_library() {
 	const search = page.structure.content_top!.querySelector('.library-search');
 	const nav = page.structure.content_top!.querySelector(
 		'.library-controls nav',
-	);
-	const tabs = nav.querySelector('.navlist-items');
+	) as HTMLElement;
+	const tabs = nav.querySelector('.navlist-items') as HTMLUListElement;
+
 	if (page.name == auth.name) {
-		const velocity_tab = document.createElement('li');
-		velocity_tab.classList.add(
-			'navlist-item',
-			'secondary-nav-item',
-			'secondary-nav-item--velocity',
+		tabs.appendChild(
+			<li class={['navlist-item', 'secondary-nav-item', 'secondary-nav-item--velocity']}>
+				<a class='secondary-nav-item-link' href={`${root}labs/artist-velocity`} target='_blank'>
+					{tl(trans.velocity)}
+					<Icon name={icons.external} />
+				</a>
+			</li>
 		);
-		velocity_tab.innerHTML = `
-            <a class="secondary-nav-item-link" href="${root}labs/artist-velocity" target="_blank">
-                ${tl(trans.velocity)}
-            </a>
-        `;
-		tabs.appendChild(velocity_tab);
 	} else {
-		tabs.appendChild(html.node`
-            <li class="navlist-item secondary-nav-item secondary-nav-item--compare">
-                <a class="secondary-nav-item-link" href="${root}bleh/minis/compare?profile=${page.name}">
-                    ${tl(trans.compare)}
-                </a>
-            </li>
-        `);
+		tabs.appendChild(
+			<li class={['navlist-item', 'secondary-nav-item', 'secondary-nav-item--compare']}>
+				<a class='secondary-nav-item-link' href={`${root}bleh/minis/compare?profile=${page.name}`}>
+					{tl(trans.compare)}
+					<Icon name={icons.external} />
+				</a>
+			</li>
+		);
 	}
 
 	const scrobbles = tabs.querySelector('.secondary-nav-item--overview');
-	scrobbles.classList.remove('secondary-nav-item--overview');
-	scrobbles.classList.add('secondary-nav-item--scrobbles');
+	scrobbles?.classList.remove('secondary-nav-item--overview');
+	scrobbles?.classList.add('secondary-nav-item--scrobbles');
 
 	if (ff('mualani')) {
 		const toolbar = html.node`
@@ -126,11 +119,11 @@ export function bleh_user_library() {
 			nav.classList.add('header-refresh');
 		}
 
-		page.structure.content_top.style.display = 'none';
+		page.structure.content_top!.style.display = 'none';
 
-		page.structure.row.insertBefore(
+		page.structure.row!.insertBefore(
 			toolbar,
-			page.structure.row.firstElementChild,
+			page.structure.row!.firstElementChild,
 		);
 	}
 
@@ -167,14 +160,14 @@ export function bleh_user_library() {
 		// scrobbles tab
 		bleh_glacier_library_top(true);
 
-		const pagination = page.structure.main.querySelector(
+		const pagination = page.structure.main!.querySelector(
 			':scope > .pagination',
+		) as HTMLElement;
+		page.structure.main!.appendChild(
+			<section class='pagination-panel'>
+				{pagination}
+			</section>
 		);
-		page.structure.main.appendChild(html.node`
-            <section class="pagination-panel">
-                ${pagination}
-            </section>
-        `);
 
 		page.state.glacier.insights = {
 			artist: {
@@ -1202,7 +1195,7 @@ function bleh_glacier_insights_generate(type, item) {
 
 	scrobble_canvas_container.appendChild(scrobble_canvas);
 	scrobble_insights_panel.appendChild(scrobble_canvas_container);
-	if (new_run) page.structure.side.appendChild(scrobble_insights_panel);
+	if (new_run) page.structure.side!.appendChild(scrobble_insights_panel);
 }
 
 export function bleh_glacier_library_open_index(index) {
@@ -1281,18 +1274,17 @@ export function bleh_glacier_date_graph_generate() {
 	let scrobble_canvas_container = page.structure.glacier.date_panel
 		.querySelector('.scrobble-canvas-container');
 	if (scrobble_canvas_container == null) {
-		scrobble_canvas_container = document.createElement('div');
-		scrobble_canvas_container.classList.add(
-			'scrobble-canvas-container',
-			'icon-mask',
+		scrobble_canvas_container = (
+			<div class={['scrobble-canvas-container', 'icon-mask']} />
 		);
 		new_run = true;
 	} else {
 		scrobble_canvas_container.innerHTML = '';
 	}
 
-	const scrobble_canvas = document.createElement('canvas');
-	scrobble_canvas.classList.add('scrobble-canvas');
+	const scrobble_canvas = (
+		<canvas class='scrobble-canvas' />
+	) as HTMLCanvasElement;
 
 	scrobble_canvas_container.setAttribute('data-view', settings.chart_view);
 
@@ -1300,7 +1292,7 @@ export function bleh_glacier_date_graph_generate() {
 	Chart.defaults.font.family = page.state.chart_colours.font;
 	if (settings.chart_view == 'line') {
 		let gradient = scrobble_canvas
-			.getContext('2d')
+			.getContext('2d')!
 			.createLinearGradient(0, 0, 0, 160);
 		try {
 			gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
@@ -1309,7 +1301,7 @@ export function bleh_glacier_date_graph_generate() {
 			gradient = page.state.chart_colours.link_bg_col;
 		}
 
-		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'line',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1329,7 +1321,7 @@ export function bleh_glacier_date_graph_generate() {
 			options: page.state.chart_library_line_options,
 		});
 	} else if (settings.chart_view == 'pie') {
-		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'pie',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1348,7 +1340,7 @@ export function bleh_glacier_date_graph_generate() {
 			options: page.state.chart_library_pie_options,
 		});
 	} else if (settings.chart_view == 'bar') {
-		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'bar',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1392,7 +1384,7 @@ function bleh_glacier_library_focused() {
 		},
 	};
 
-	const legacy_header = page.structure.main.querySelector('.library-header');
+	const legacy_header = page.structure.main!.querySelector('.library-header') as HTMLElement;
 
 	let type;
 	if (page.subpage.startsWith('library_artist')) type = 'artist';
@@ -1409,20 +1401,20 @@ function bleh_glacier_library_focused() {
 		text = tl(trans.track);
 	}
 
-	let header_title = legacy_header.querySelector('.library-header-crumb'); // subpage
-	if (!header_title) {
-		header_title = legacy_header.querySelector('.library-header-title'); // main
+	let header_title_elem = legacy_header.querySelector('.library-header-crumb')!; // subpage
+	if (!header_title_elem) {
+		header_title_elem = legacy_header.querySelector('.library-header-title')!; // main
 	}
 
-	const duration = header_title.querySelector(
+	const duration = header_title_elem.querySelector(
 		'.library-header-title-duration',
 	);
-	if (duration) header_title.removeChild(duration);
+	duration?.remove();
 
-	header_title = header_title.textContent.trim();
+	const header_title = header_title_elem.textContent.trim();
 
-	let artist = legacy_header.querySelector('.text-colour-link');
-	if (artist) artist = artist.textContent.trim();
+	const artist_elem = legacy_header.querySelector('.text-colour-link');
+	const artist = artist_elem?.textContent.trim();
 
 	const image = legacy_header.querySelector('.library-header-image img') as HTMLImageElement;
 
@@ -1510,6 +1502,7 @@ function bleh_glacier_library_focused() {
 
 	const cta = legacy_header.querySelector('.library-header-ctas');
 
+	// chore: this looks horror
 	const love_form = legacy_header.querySelector(
 		'.library-header-love-form:not(:has(button))',
 	);
@@ -1601,7 +1594,7 @@ function bleh_glacier_library_focused() {
 		<ProfileSummaryBlocks large />
 	);
 
-	const legacy_meta_wrap = page.structure.main.querySelector(
+	const legacy_meta_wrap = page.structure.main!.querySelector(
 		'.metadata-list',
 	);
 	if (legacy_meta_wrap) {
@@ -1628,18 +1621,18 @@ function bleh_glacier_library_focused() {
 
 	components.appendChild(view_buttons);
 
-	page.structure.main.insertBefore(
+	page.structure.main!.insertBefore(
 		header,
-		page.structure.main.firstElementChild,
+		page.structure.main!.firstElementChild,
 	);
 
-	const overview_headers = page.structure.main.querySelectorAll(
+	const overview_headers = page.structure.main!.querySelectorAll(
 		'.library-overview-header',
 	);
 	overview_headers.forEach((top) => {
 		top.classList = 'top-container';
 
-		const header = top.querySelector('h2');
+		const header = top.querySelector('h2') as HTMLElement;
 
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
@@ -1659,20 +1652,20 @@ function bleh_glacier_library_focused() {
 	});
 
 	// move random overview header into their section below
-	const overview_header = page.structure.main.querySelector(
+	const overview_header = page.structure.main!.querySelector(
 		':scope > .top-container',
 	);
 	if (!overview_header) return;
 
-	overview_header.nextElementSibling.insertBefore(
+	overview_header.nextElementSibling!.insertBefore(
 		overview_header,
-		overview_header.nextElementSibling.firstElementChild,
+		overview_header.nextElementSibling!.firstElementChild,
 	);
 }
 
 export function bleh_glacier_library_bulk_edit() {
 	// quick check to see if bulk edit is present
-	const library_header = page.structure.main.querySelector('.library-header');
+	const library_header = page.structure.main!.querySelector('.library-header');
 	if (!library_header) return;
 
 	const bulk_edit = library_header.querySelector(
@@ -1681,7 +1674,7 @@ export function bleh_glacier_library_bulk_edit() {
 	if (!bulk_edit) return;
 
 	// move to new area
-	const view_buttons = page.structure.main.querySelector(
+	const view_buttons = page.structure.main!.querySelector(
 		'.glacier-library-buttons',
 	);
 	if (!view_buttons) return;
@@ -1697,12 +1690,11 @@ export function bleh_glacier_library_bulk_edit() {
 
 	bulk_edit.classList.add(
 		'btn',
-		'view-item',
 		'icon',
 		'glacier-library-button',
 		'bulk-edit-button',
 	);
-	bulk_edit.textContent = tl(trans.bulk_edit);
+	bulk_edit.textContent = tl(trans.bulk_edit) as string;
 
 	if (!edit_form) view_buttons.insertBefore(bulk_edit, delete_button);
 	else view_buttons.insertBefore(bulk_edit, edit_form);

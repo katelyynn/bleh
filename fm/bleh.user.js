@@ -112829,30 +112829,23 @@ var bleh = (() => {
     );
     const tabs = nav.querySelector(".navlist-items");
     if (page.name == auth.name) {
-      const velocity_tab = document.createElement("li");
-      velocity_tab.classList.add(
-        "navlist-item",
-        "secondary-nav-item",
-        "secondary-nav-item--velocity"
+      tabs.appendChild(
+        /* @__PURE__ */ jsx("li", { class: ["navlist-item", "secondary-nav-item", "secondary-nav-item--velocity"], children: /* @__PURE__ */ jsx("a", { class: "secondary-nav-item-link", href: `${root}labs/artist-velocity`, target: "_blank", children: [
+          tl2(trans.velocity),
+          /* @__PURE__ */ jsx(Icon, { name: icons.external })
+        ] }) })
       );
-      velocity_tab.innerHTML = `
-            <a class="secondary-nav-item-link" href="${root}labs/artist-velocity" target="_blank">
-                ${tl2(trans.velocity)}
-            </a>
-        `;
-      tabs.appendChild(velocity_tab);
     } else {
-      tabs.appendChild(html.node`
-            <li class="navlist-item secondary-nav-item secondary-nav-item--compare">
-                <a class="secondary-nav-item-link" href="${root}bleh/minis/compare?profile=${page.name}">
-                    ${tl2(trans.compare)}
-                </a>
-            </li>
-        `);
+      tabs.appendChild(
+        /* @__PURE__ */ jsx("li", { class: ["navlist-item", "secondary-nav-item", "secondary-nav-item--compare"], children: /* @__PURE__ */ jsx("a", { class: "secondary-nav-item-link", href: `${root}bleh/minis/compare?profile=${page.name}`, children: [
+          tl2(trans.compare),
+          /* @__PURE__ */ jsx(Icon, { name: icons.external })
+        ] }) })
+      );
     }
     const scrobbles = tabs.querySelector(".secondary-nav-item--overview");
-    scrobbles.classList.remove("secondary-nav-item--overview");
-    scrobbles.classList.add("secondary-nav-item--scrobbles");
+    scrobbles?.classList.remove("secondary-nav-item--overview");
+    scrobbles?.classList.add("secondary-nav-item--scrobbles");
     if (ff("mualani")) {
       const toolbar = html.node`
             <div class="toolbar">
@@ -112897,11 +112890,9 @@ var bleh = (() => {
       const pagination = page.structure.main.querySelector(
         ":scope > .pagination"
       );
-      page.structure.main.appendChild(html.node`
-            <section class="pagination-panel">
-                ${pagination}
-            </section>
-        `);
+      page.structure.main.appendChild(
+        /* @__PURE__ */ jsx("section", { class: "pagination-panel", children: pagination })
+      );
       page.state.glacier.insights = {
         artist: {
           display: false,
@@ -113735,17 +113726,12 @@ var bleh = (() => {
     let new_run = false;
     let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector(".scrobble-canvas-container");
     if (scrobble_canvas_container == null) {
-      scrobble_canvas_container = document.createElement("div");
-      scrobble_canvas_container.classList.add(
-        "scrobble-canvas-container",
-        "icon-mask"
-      );
+      scrobble_canvas_container = /* @__PURE__ */ jsx("div", { class: ["scrobble-canvas-container", "icon-mask"] });
       new_run = true;
     } else {
       scrobble_canvas_container.innerHTML = "";
     }
-    const scrobble_canvas = document.createElement("canvas");
-    scrobble_canvas.classList.add("scrobble-canvas");
+    const scrobble_canvas = /* @__PURE__ */ jsx("canvas", { class: "scrobble-canvas" });
     scrobble_canvas_container.setAttribute("data-view", settings.chart_view);
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;
@@ -113757,7 +113743,7 @@ var bleh = (() => {
       } catch (e4) {
         gradient = page.state.chart_colours.link_bg_col;
       }
-      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      new Chart(scrobble_canvas.getContext("2d"), {
         type: "line",
         data: {
           labels: page.state.glacier.labels,
@@ -113777,7 +113763,7 @@ var bleh = (() => {
         options: page.state.chart_library_line_options
       });
     } else if (settings.chart_view == "pie") {
-      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      new Chart(scrobble_canvas.getContext("2d"), {
         type: "pie",
         data: {
           labels: page.state.glacier.labels,
@@ -113796,7 +113782,7 @@ var bleh = (() => {
         options: page.state.chart_library_pie_options
       });
     } else if (settings.chart_view == "bar") {
-      const scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      new Chart(scrobble_canvas.getContext("2d"), {
         type: "bar",
         data: {
           labels: page.state.glacier.labels,
@@ -113848,17 +113834,17 @@ var bleh = (() => {
     } else if (type == "track") {
       text4 = tl2(trans.track);
     }
-    let header_title = legacy_header.querySelector(".library-header-crumb");
-    if (!header_title) {
-      header_title = legacy_header.querySelector(".library-header-title");
+    let header_title_elem = legacy_header.querySelector(".library-header-crumb");
+    if (!header_title_elem) {
+      header_title_elem = legacy_header.querySelector(".library-header-title");
     }
-    const duration2 = header_title.querySelector(
+    const duration2 = header_title_elem.querySelector(
       ".library-header-title-duration"
     );
-    if (duration2) header_title.removeChild(duration2);
-    header_title = header_title.textContent.trim();
-    let artist = legacy_header.querySelector(".text-colour-link");
-    if (artist) artist = artist.textContent.trim();
+    duration2?.remove();
+    const header_title = header_title_elem.textContent.trim();
+    const artist_elem = legacy_header.querySelector(".text-colour-link");
+    const artist = artist_elem?.textContent.trim();
     const image2 = legacy_header.querySelector(".library-header-image img");
     let link = `${root}music/${redirect()}${sanitise(header_title)}`;
     if (type == "album") {
@@ -114057,7 +114043,6 @@ var bleh = (() => {
     if (!delete_button) return;
     bulk_edit.classList.add(
       "btn",
-      "view-item",
       "icon",
       "glacier-library-button",
       "bulk-edit-button"
