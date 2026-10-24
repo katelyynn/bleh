@@ -113210,7 +113210,7 @@ var bleh = (() => {
         const start2 = value.indexOf("\u201C") + 1;
         const end2 = value.indexOf("\u201D");
         value = desanitise(value.substring(start2, end2));
-        glacier_meta.appendChild(html.node`
+        metaV2.appendChild(html.node`
 	            <div class="glacier-library-metadata-item">
 	                <div class="sub-text">${text4}</div>
 	                <div class="glacier-library-metadata-item-value">${value}</div>
@@ -113979,23 +113979,13 @@ var bleh = (() => {
       }
     }
     if (page.subpage == "library_artist_overview" && auth.pro) {
-      const search = document.createElement("a");
-      search.classList.add(
-        "btn",
-        "icon",
-        "glacier-library-button",
-        "glacier-search-button"
+      view_buttons.insertBefore(
+        /* @__PURE__ */ jsx(Button, { href: `${root}user/${page.name}/library/tracks/search?query=${sanitise(correct_artist(header_title))}`, children: [
+          /* @__PURE__ */ jsx(Icon, { name: icons.search }),
+          tl2(trans.search)
+        ] }),
+        view_buttons.firstChild
       );
-      search.textContent = tl2(trans.search);
-      search.setAttribute(
-        "href",
-        `${root}user/${page.name}/library/tracks/search?query=${sanitise(correct_artist(header_title))}`
-      );
-      tippy_esm_default(search, {
-        content: tl2(trans.search_guest)
-      });
-      const divider = view_buttons.querySelector(".listen-divider");
-      if (divider) view_buttons.insertBefore(search, divider);
     }
     const lower_wrap = /* @__PURE__ */ jsx(ProfileSummaryBlocks, { large: true });
     const legacy_meta_wrap = page.structure.main.querySelector(
@@ -114005,9 +113995,15 @@ var bleh = (() => {
       const metadatas = legacy_meta_wrap.querySelectorAll(
         ".metadata-item:not(.library-header-ctas__wrapper)"
       );
-      metadatas.forEach((meta) => {
+      metadatas.forEach((meta, i2) => {
+        let type2 = "scrobbles";
+        if (i2 == 1) {
+          type2 = "albums";
+        } else if (i2 == 2) {
+          type2 = "tracks";
+        }
         lower_wrap.appendChild(
-          /* @__PURE__ */ jsx(ProfileSummaryBlock, { large: true, counter: true, type: "scrobbles", value: clean_number(meta.querySelector(".metadata-display").textContent) })
+          /* @__PURE__ */ jsx(ProfileSummaryBlock, { large: true, counter: true, type: type2, value: clean_number(meta.querySelector(".metadata-display").textContent) })
         );
       });
       components.appendChild(lower_wrap);

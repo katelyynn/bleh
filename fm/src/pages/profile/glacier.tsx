@@ -42,6 +42,7 @@ import { SettingGroup } from '@/components/settings/group';
 import { SettingSwitch } from '@/components/settings/provider/switch';
 import { SettingRadio } from '@/components/settings/provider/radio';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
+import { Button } from '@/components/button/button';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -577,6 +578,7 @@ function bleh_glacier_library_top(static_page = false) {
 			);
 		} else {
 			// search results
+			// TODO: replace
 			text = tl(trans.results_for);
 			value = meta.querySelector('.metadata-display').textContent;
 
@@ -584,7 +586,7 @@ function bleh_glacier_library_top(static_page = false) {
 			const end = value.indexOf('”');
 			value = desanitise(value.substring(start, end));
 
-			glacier_meta.appendChild(html.node`
+			metaV2.appendChild(html.node`
 	            <div class="glacier-library-metadata-item">
 	                <div class="sub-text">${text}</div>
 	                <div class="glacier-library-metadata-item-value">${value}</div>
@@ -1590,26 +1592,13 @@ function bleh_glacier_library_focused() {
 	}
 
 	if (page.subpage == 'library_artist_overview' && auth.pro) {
-		const search = document.createElement('a');
-		search.classList.add(
-			'btn',
-			'icon',
-			'glacier-library-button',
-			'glacier-search-button',
+		view_buttons.insertBefore(
+			<Button href={`${root}user/${page.name}/library/tracks/search?query=${sanitise(correct_artist(header_title))}`}>
+				<Icon name={icons.search} />
+				{tl(trans.search)}
+			</Button>,
+			view_buttons.firstChild
 		);
-		search.textContent = tl(trans.search);
-		search.setAttribute(
-			'href',
-			`${root}user/${page.name}/library/tracks/search?query=${sanitise(correct_artist(header_title))
-			}`,
-		);
-
-		tippy(search, {
-			content: tl(trans.search_guest),
-		});
-
-		const divider = view_buttons.querySelector('.listen-divider');
-		if (divider) view_buttons.insertBefore(search, divider);
 	}
 
 	const lower_wrap = (
@@ -1624,9 +1613,17 @@ function bleh_glacier_library_focused() {
 			'.metadata-item:not(.library-header-ctas__wrapper)',
 		);
 
-		metadatas.forEach((meta) => {
+		metadatas.forEach((meta, i) => {
+			let type = 'scrobbles';
+
+			if (i == 1) {
+				type = 'albums';
+			} else if (i == 2) {
+				type = 'tracks';
+			}
+
 			lower_wrap.appendChild(
-				<ProfileSummaryBlock large counter type='scrobbles' value={clean_number(meta.querySelector('.metadata-display')!.textContent)} />
+				<ProfileSummaryBlock large counter type={type} value={clean_number(meta.querySelector('.metadata-display')!.textContent)} />
 			);
 		});
 
