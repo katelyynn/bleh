@@ -32,6 +32,14 @@ import { convert_to_select } from '@/components/select/select.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { GraphBlock, GraphBlocks } from '@/components/summary/graph';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
+import { PanelHead, PanelHeadExtra } from '@/components/text/head';
+import { SeeMore } from '@/components/text/see_more';
+import { menu_tooltip } from '@/components/shared/tooltips';
+import { MenuContents } from '@/components/menu/menu';
+import { createRef } from 'jsx-dom';
+import { FloatingWindow, FloatingWindowContents } from '@/components/menu/floating_window';
+import { SettingGroup } from '@/components/settings/group';
+import { SettingSwitch } from '@/components/settings/provider/switch';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -459,20 +467,78 @@ function bleh_glacier_library_top(static_page = false) {
 
 	let first_run = false;
 	let glacier_top = page.structure.glacier.top;
-	if (!glacier_top || !page.structure.main.contains(glacier_top)) {
+	if (!glacier_top || !page.structure.main!.contains(glacier_top)) {
 		first_run = true;
 	}
 
 	if (first_run) {
-		glacier_top = document.createElement('section');
-		glacier_top.classList.add('glacier-library-top');
+		const type = page.subpage.replace('library_', '');
+		let text = tl(trans.scrobbles);
+
+		if (type.startsWith('artist')) {
+			text = tl(trans.artists);
+		} else if (type.startsWith('album')) {
+			text = tl(trans.albums);
+		} else if (type.startsWith('track')) {
+			text = tl(trans.tracks);
+		}
+
+		const more = createRef();
+
+		glacier_top = (
+			<section class='glacier-library-top'>
+				<PanelHead icon={icons.library}>
+					{tl(trans.library)}
+					<PanelHeadExtra>
+						{text}
+					</PanelHeadExtra>
+					<PanelHeadExtra>
+						<SeeMore
+							chibi
+							blend
+							iconPlacement='left'
+							icon={icons.more}
+							ref={more}
+						>
+							{tl(trans.more)}
+						</SeeMore>
+					</PanelHeadExtra>
+				</PanelHead>
+				<div class='glacier-components' />
+			</section>
+		);
+
+		menu_tooltip(
+			more.current,
+			<FloatingWindow>
+				<FloatingWindowContents>
+					<SettingGroup>
+						{type.startsWith('artist') ? (
+							<SettingSwitch bind='colourful_counts' />
+						) : (
+							<>
+								<SettingSwitch bind='format_guest_features' />
+								<SettingSwitch bind='show_guest_features' />
+							</>
+						)}
+						{(type.startsWith('artist') || type.startsWith('album') && auth.pro) && (
+							<SettingSwitch bind='grid_glow' />
+						)}
+						<SettingSwitch bind='glacier_library_graphs' />
+					</SettingGroup>
+				</FloatingWindowContents>
+			</FloatingWindow>
+		);
 	}
+
+	const glacier_top_components = glacier_top.querySelector('.glacier-components')!;
 
 	// meta
 	let glacier_meta;
 	if (first_run) {
-		glacier_meta = document.createElement('div');
-		glacier_meta.classList.add('glacier-library-metadata');
+		glacier_meta = (
+			<div class='glacier-library-metadata' />
+		);
 	} else {
 		glacier_meta = page.structure.glacier.top.querySelector(
 			'.glacier-library-metadata',
@@ -523,15 +589,16 @@ function bleh_glacier_library_top(static_page = false) {
 
 	});
 
-	if (first_run) glacier_top.appendChild(glacier_meta);
+	if (first_run) glacier_top_components.appendChild(glacier_meta);
 
 	if (!first_run) return;
 
 	// buttons
 	const top_wrap = page.structure.main.querySelector('.library-top-wrap');
 
-	const view_buttons = document.createElement('div');
-	view_buttons.classList.add('view-buttons', 'glacier-library-buttons');
+	const view_buttons = (
+		<div class='glacier-library-buttons' />
+	);
 
 	let add_divider = false;
 
@@ -593,72 +660,7 @@ function bleh_glacier_library_top(static_page = false) {
 		view_buttons.appendChild(format_button);
 	}
 
-	if (!static_page && add_divider) {
-		view_buttons.appendChild(html.node`
-            <div class="listen-divider" />
-        `);
-	}
-
-	const configure_button = document.createElement('button');
-	configure_button.classList.add(
-		'btn',
-		'view-item',
-		'icon',
-		'glacier-library-button',
-		'glacier-configure-button',
-		'panel-settings-button',
-	);
-	configure_button.textContent = tl(trans.settings);
-
-	tippy(configure_button, {
-		content: tl(trans.settings),
-	});
-
-	tippy(configure_button, {
-		theme: 'window',
-		content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${page.subpage == 'library_artists'
-				? setting({ id: 'colourful_counts' })
-				: html.node`
-                                ${setting({ id: 'format_guest_features' })}
-                                ${setting({ id: 'show_guest_features' })}
-                            `
-			}
-                    ${(
-				(page.subpage == 'library_artists' ||
-					page.subpage == 'library_albums') &&
-				auth.pro
-			)
-				? html.node`
-                                ${setting({ id: 'grid_glow' })}
-                            `
-				: ''
-			}
-                    ${setting({ id: 'glacier_library_graphs' })}
-                </div>
-            </div>
-        `,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
-
-	view_buttons.appendChild(configure_button);
-
-	glacier_top.appendChild(view_buttons);
+	glacier_top_components.appendChild(view_buttons);
 
 	page.structure.glacier.top = glacier_top;
 	page.structure.main.insertBefore(
