@@ -113187,7 +113187,7 @@ var bleh = (() => {
     glacier_meta.appendChild(metaV2);
     metadata.forEach((meta, index3) => {
       let type = "scrobbles";
-      let text4 = meta.querySelector(".metadata-title");
+      const text4 = meta.querySelector(".metadata-title");
       let value = meta.querySelector(".metadata-display").textContent;
       if (text4) {
         if (page.subpage == "library_overview") {
@@ -113205,14 +113205,12 @@ var bleh = (() => {
           /* @__PURE__ */ jsx(ProfileSummaryBlock, { counter: true, large: true, type, value: clean_number(value) })
         );
       } else {
-        text4 = tl2(trans.results_for);
-        value = meta.querySelector(".metadata-display").textContent;
         const start2 = value.indexOf("\u201C") + 1;
         const end2 = value.indexOf("\u201D");
         value = desanitise(value.substring(start2, end2));
         metaV2.appendChild(html.node`
 	            <div class="glacier-library-metadata-item">
-	                <div class="sub-text">${text4}</div>
+	                <div class="sub-text">${tl2(trans.results_for)}</div>
 	                <div class="glacier-library-metadata-item-value">${value}</div>
 	            </div>
 	        `);
@@ -113223,23 +113221,21 @@ var bleh = (() => {
     const top_wrap = page.structure.main.querySelector(".library-top-wrap");
     const view_buttons = /* @__PURE__ */ jsx("div", { class: "glacier-library-buttons" });
     if (!static_page && page.subpage != "library_tracks") {
-      const format_button = html.node`
-            <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
+      const format_button = /* @__PURE__ */ jsx(Button, { onClick: () => {
         const format = page.structure.main.querySelector(
           ".library-view-button"
         );
         if (!format) return;
         format.click();
-        if (format.getAttribute("href") && format.getAttribute("href").endsWith("reset")) {
+        const href = format.getAttribute("href");
+        if (href && href.endsWith("reset")) {
           format_button.setAttribute("data-glacier-view", "list");
           format_button.textContent = tl2(trans.list);
         } else {
           format_button.setAttribute("data-glacier-view", "grid");
           format_button.textContent = tl2(trans.grid);
         }
-      }} />
-        `;
-      add_divider = true;
+      } });
       if (top_wrap.getAttribute("data-current-format") == "grid") {
         format_button.setAttribute("data-glacier-view", "grid");
         format_button.textContent = tl2(trans.grid);

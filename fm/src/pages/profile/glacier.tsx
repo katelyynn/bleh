@@ -445,9 +445,9 @@ function bleh_glacier_library_top(static_page = false) {
 
 	let legacy_top_header;
 	if (!static_page) {
-		legacy_top_header = page.structure.main.querySelector('.library-top');
+		legacy_top_header = page.structure.main!.querySelector('.library-top') as HTMLElement;
 	} else {
-		legacy_top_header = page.structure.main.querySelector('.metadata-list');
+		legacy_top_header = page.structure.main!.querySelector('.metadata-list') as HTMLElement;
 	}
 
 	if (!legacy_top_header) return;
@@ -557,7 +557,7 @@ function bleh_glacier_library_top(static_page = false) {
 
 	metadata.forEach((meta, index) => {
 		let type = 'scrobbles';
-		let text = meta.querySelector('.metadata-title');
+		const text = meta.querySelector('.metadata-title');
 		let value = meta.querySelector('.metadata-display')!.textContent;
 
 		if (text) {
@@ -579,8 +579,6 @@ function bleh_glacier_library_top(static_page = false) {
 		} else {
 			// search results
 			// TODO: replace
-			text = tl(trans.results_for);
-			value = meta.querySelector('.metadata-display').textContent;
 
 			const start = value.indexOf('“') + 1;
 			const end = value.indexOf('”');
@@ -588,7 +586,7 @@ function bleh_glacier_library_top(static_page = false) {
 
 			metaV2.appendChild(html.node`
 	            <div class="glacier-library-metadata-item">
-	                <div class="sub-text">${text}</div>
+	                <div class="sub-text">${tl(trans.results_for)}</div>
 	                <div class="glacier-library-metadata-item-value">${value}</div>
 	            </div>
 	        `);
@@ -601,42 +599,40 @@ function bleh_glacier_library_top(static_page = false) {
 	if (!first_run) return;
 
 	// buttons
-	const top_wrap = page.structure.main.querySelector('.library-top-wrap');
+	const top_wrap = page.structure.main!.querySelector('.library-top-wrap')!;
 
 	const view_buttons = (
 		<div class='glacier-library-buttons' />
 	);
 
 	if (!static_page && page.subpage != 'library_tracks') {
-		const format_button = html.node`
-            <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
-				const format = page.structure.main.querySelector(
+		const format_button = (
+			<Button onClick={() => {
+				const format = page.structure.main!.querySelector(
 					'.library-view-button',
-				);
+				) as HTMLButtonElement;
 				if (!format) return;
 
 				format.click();
 
-				if (
-					format.getAttribute('href') &&
-					format.getAttribute('href').endsWith('reset')
-				) {
+				const href = format.getAttribute('href');
+
+				if (href && href.endsWith('reset')) {
 					format_button.setAttribute('data-glacier-view', 'list');
-					format_button.textContent = tl(trans.list);
+					format_button.textContent = tl(trans.list) as string;
 				} else {
 					format_button.setAttribute('data-glacier-view', 'grid');
-					format_button.textContent = tl(trans.grid);
+					format_button.textContent = tl(trans.grid) as string;
 				}
 			}} />
-        `;
-		add_divider = true;
+		)
 
 		if (top_wrap.getAttribute('data-current-format') == 'grid') {
 			format_button.setAttribute('data-glacier-view', 'grid');
-			format_button.textContent = tl(trans.grid);
+			format_button.textContent = tl(trans.grid) as string;
 		} else {
 			format_button.setAttribute('data-glacier-view', 'list');
-			format_button.textContent = tl(trans.list);
+			format_button.textContent = tl(trans.list) as string;
 		}
 
 		view_buttons.appendChild(format_button);
@@ -667,9 +663,9 @@ function bleh_glacier_library_top(static_page = false) {
 	glacier_top_components.appendChild(view_buttons);
 
 	page.structure.glacier.top = glacier_top;
-	page.structure.main.insertBefore(
+	page.structure.main!.insertBefore(
 		glacier_top,
-		page.structure.main.firstElementChild,
+		page.structure.main!.firstElementChild,
 	);
 }
 
