@@ -113139,18 +113139,19 @@ var bleh = (() => {
       }
       const more = createRef();
       glacier_top = /* @__PURE__ */ jsx("section", { class: "glacier-library-top", children: [
-        /* @__PURE__ */ jsx(PanelHead, { icon: icons.library, children: [
-          tl2(trans.library),
-          /* @__PURE__ */ jsx(PanelHeadExtra, { children: text4 }),
-          /* @__PURE__ */ jsx(PanelHeadExtra, { children: /* @__PURE__ */ jsx(
+        /* @__PURE__ */ jsx(PanelTop, { children: [
+          /* @__PURE__ */ jsx(PanelHead, { icon: icons.library, top: true, children: [
+            tl2(trans.library),
+            /* @__PURE__ */ jsx(PanelHeadExtra, { children: text4 })
+          ] }),
+          /* @__PURE__ */ jsx(ViewButtons, { children: /* @__PURE__ */ jsx(
             SeeMore,
             {
-              chibi: true,
               blend: true,
               iconPlacement: "left",
-              icon: icons.more,
+              icon: icons.settings,
               ref: more,
-              children: tl2(trans.more)
+              children: tl2(trans.settings)
             }
           ) })
         ] }),

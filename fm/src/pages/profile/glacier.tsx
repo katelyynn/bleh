@@ -33,7 +33,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { GraphBlock, GraphBlocks } from '@/components/summary/graph';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 import { PanelHead, PanelHeadExtra } from '@/components/text/head';
-import { SeeMore } from '@/components/text/see_more';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more';
 import { menu_tooltip } from '@/components/shared/tooltips';
 import { MenuContents } from '@/components/menu/menu';
 import { createRef } from 'jsx-dom';
@@ -487,23 +487,24 @@ function bleh_glacier_library_top(static_page = false) {
 
 		glacier_top = (
 			<section class='glacier-library-top'>
-				<PanelHead icon={icons.library}>
-					{tl(trans.library)}
-					<PanelHeadExtra>
-						{text}
-					</PanelHeadExtra>
-					<PanelHeadExtra>
+				<PanelTop>
+					<PanelHead icon={icons.library} top>
+						{tl(trans.library)}
+						<PanelHeadExtra>
+							{text}
+						</PanelHeadExtra>
+					</PanelHead>
+					<ViewButtons>
 						<SeeMore
-							chibi
 							blend
 							iconPlacement='left'
-							icon={icons.more}
+							icon={icons.settings}
 							ref={more}
 						>
-							{tl(trans.more)}
+							{tl(trans.settings)}
 						</SeeMore>
-					</PanelHeadExtra>
-				</PanelHead>
+					</ViewButtons>
+				</PanelTop>
 				<div class='glacier-components' />
 			</section>
 		);
