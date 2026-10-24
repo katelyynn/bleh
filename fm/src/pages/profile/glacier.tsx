@@ -40,6 +40,8 @@ import { createRef } from 'jsx-dom';
 import { FloatingWindow, FloatingWindowContents } from '@/components/menu/floating_window';
 import { SettingGroup } from '@/components/settings/group';
 import { SettingSwitch } from '@/components/settings/provider/switch';
+import { SettingRadio } from '@/components/settings/provider/radio';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -511,24 +513,26 @@ function bleh_glacier_library_top(static_page = false) {
 
 		menu_tooltip(
 			more.current,
-			<FloatingWindow>
-				<FloatingWindowContents>
-					<SettingGroup>
-						{type.startsWith('artist') ? (
-							<SettingSwitch bind='colourful_counts' />
-						) : (
-							<>
-								<SettingSwitch bind='format_guest_features' />
-								<SettingSwitch bind='show_guest_features' />
-							</>
-						)}
-						{(type.startsWith('artist') || type.startsWith('album') && auth.pro) && (
-							<SettingSwitch bind='grid_glow' />
-						)}
-						<SettingSwitch bind='glacier_library_graphs' />
-					</SettingGroup>
-				</FloatingWindowContents>
-			</FloatingWindow>
+			<MenuContents>
+				{type.startsWith('artist') ? (
+					<MenuCheckbox bind='colourful_counts' />
+				) : (
+					<>
+						<MenuCheckbox bind='format_guest_features' />
+						<MenuCheckbox bind='show_guest_features' />
+					</>
+				)}
+				{(type.startsWith('artist') || type.startsWith('album') && auth.pro) && (
+					<MenuCheckbox bind='grid_glow' />
+				)}
+				<MenuCheckbox bind='glacier_library_graphs' />
+				{!type.startsWith('overview') && (
+					<>
+						<SettingRadio bind='count_bar_axis' />
+						<SettingRadio bind='count_bar_style' />
+					</>
+				)}
+			</MenuContents>
 		);
 	}
 
@@ -601,31 +605,6 @@ function bleh_glacier_library_top(static_page = false) {
 		<div class='glacier-library-buttons' />
 	);
 
-	let add_divider = false;
-
-	const sort = legacy_top_header.querySelector('.library-sort');
-	if (!static_page) {
-		let sort_button;
-		if (sort) {
-			sort_button = sort.querySelector('.dropdown-menu-clickable-button');
-			add_divider = true;
-
-			if (sort_button) {
-				sort_button.classList.add(
-					'btn',
-					'view-item',
-					'glacier-library-button',
-				);
-				const sort_menu = sort.querySelector(
-					'.dropdown-menu-clickable',
-				);
-
-				view_buttons.appendChild(sort_button);
-				view_buttons.appendChild(sort_menu);
-			}
-		}
-	}
-
 	if (!static_page && page.subpage != 'library_tracks') {
 		const format_button = html.node`
             <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
@@ -659,6 +638,28 @@ function bleh_glacier_library_top(static_page = false) {
 		}
 
 		view_buttons.appendChild(format_button);
+	}
+
+	const sort = legacy_top_header.querySelector('.library-sort');
+	if (!static_page) {
+		let sort_button;
+		if (sort) {
+			sort_button = sort.querySelector('.dropdown-menu-clickable-button');
+
+			if (sort_button) {
+				sort_button.classList.add(
+					'btn',
+					'view-item',
+					'glacier-library-button',
+				);
+				const sort_menu = sort.querySelector(
+					'.dropdown-menu-clickable',
+				);
+
+				view_buttons.appendChild(sort_button);
+				view_buttons.appendChild(sort_menu);
+			}
+		}
 	}
 
 	glacier_top_components.appendChild(view_buttons);

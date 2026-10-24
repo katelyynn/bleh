@@ -113159,14 +113159,18 @@ var bleh = (() => {
       ] });
       menu_tooltip(
         more.current,
-        /* @__PURE__ */ jsx(FloatingWindow, { children: /* @__PURE__ */ jsx(FloatingWindowContents, { children: /* @__PURE__ */ jsx(SettingGroup, { children: [
-          type.startsWith("artist") ? /* @__PURE__ */ jsx(SettingSwitch, { bind: "colourful_counts" }) : /* @__PURE__ */ jsx(Fragment, { children: [
-            /* @__PURE__ */ jsx(SettingSwitch, { bind: "format_guest_features" }),
-            /* @__PURE__ */ jsx(SettingSwitch, { bind: "show_guest_features" })
+        /* @__PURE__ */ jsx(MenuContents, { children: [
+          type.startsWith("artist") ? /* @__PURE__ */ jsx(MenuCheckbox, { bind: "colourful_counts" }) : /* @__PURE__ */ jsx(Fragment, { children: [
+            /* @__PURE__ */ jsx(MenuCheckbox, { bind: "format_guest_features" }),
+            /* @__PURE__ */ jsx(MenuCheckbox, { bind: "show_guest_features" })
           ] }),
-          (type.startsWith("artist") || type.startsWith("album") && auth.pro) && /* @__PURE__ */ jsx(SettingSwitch, { bind: "grid_glow" }),
-          /* @__PURE__ */ jsx(SettingSwitch, { bind: "glacier_library_graphs" })
-        ] }) }) })
+          (type.startsWith("artist") || type.startsWith("album") && auth.pro) && /* @__PURE__ */ jsx(MenuCheckbox, { bind: "grid_glow" }),
+          /* @__PURE__ */ jsx(MenuCheckbox, { bind: "glacier_library_graphs" }),
+          !type.startsWith("overview") && /* @__PURE__ */ jsx(Fragment, { children: [
+            /* @__PURE__ */ jsx(SettingRadio, { bind: "count_bar_axis" }),
+            /* @__PURE__ */ jsx(SettingRadio, { bind: "count_bar_style" })
+          ] })
+        ] })
       );
     }
     const glacier_top_components = glacier_top.querySelector(".glacier-components");
@@ -113218,27 +113222,6 @@ var bleh = (() => {
     if (!first_run) return;
     const top_wrap = page.structure.main.querySelector(".library-top-wrap");
     const view_buttons = /* @__PURE__ */ jsx("div", { class: "glacier-library-buttons" });
-    let add_divider = false;
-    const sort2 = legacy_top_header.querySelector(".library-sort");
-    if (!static_page) {
-      let sort_button;
-      if (sort2) {
-        sort_button = sort2.querySelector(".dropdown-menu-clickable-button");
-        add_divider = true;
-        if (sort_button) {
-          sort_button.classList.add(
-            "btn",
-            "view-item",
-            "glacier-library-button"
-          );
-          const sort_menu = sort2.querySelector(
-            ".dropdown-menu-clickable"
-          );
-          view_buttons.appendChild(sort_button);
-          view_buttons.appendChild(sort_menu);
-        }
-      }
-    }
     if (!static_page && page.subpage != "library_tracks") {
       const format_button = html.node`
             <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
@@ -113265,6 +113248,25 @@ var bleh = (() => {
         format_button.textContent = tl2(trans.list);
       }
       view_buttons.appendChild(format_button);
+    }
+    const sort2 = legacy_top_header.querySelector(".library-sort");
+    if (!static_page) {
+      let sort_button;
+      if (sort2) {
+        sort_button = sort2.querySelector(".dropdown-menu-clickable-button");
+        if (sort_button) {
+          sort_button.classList.add(
+            "btn",
+            "view-item",
+            "glacier-library-button"
+          );
+          const sort_menu = sort2.querySelector(
+            ".dropdown-menu-clickable"
+          );
+          view_buttons.appendChild(sort_button);
+          view_buttons.appendChild(sort_menu);
+        }
+      }
     }
     glacier_top_components.appendChild(view_buttons);
     page.structure.glacier.top = glacier_top;
