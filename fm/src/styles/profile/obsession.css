@@ -282,6 +282,10 @@
 		transition: none;
 	}
 
+	&:after {
+		display: none;
+	}
+
 	transition-property: opacity;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
