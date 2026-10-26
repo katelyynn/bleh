@@ -66,6 +66,7 @@ import {
 } from '@/components/menu/nav_window.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import { MenuRadio } from '../settings/provider/menu/radio';
 
 const handle_update = (e: Event) => {
 	e.preventDefault();
@@ -338,43 +339,20 @@ export function append_nav() {
 
 	update_branding_type();
 
-	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
+	//const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 
-	const link_menu = tippy(home_link.current, {
-		theme: 'context-menu',
-		content: html.node`
-            ${
-			setting({
-				id: 'branding_type',
-				func: update_branding_type,
-				in_menu: true,
-			})
-		}
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${
-			last_checked
-				? tl(trans.last_checked_date, {
-					d: DateTime.fromJSDate(new Date(last_checked)).toRelative(),
-				})
-				: tl(trans.never_checked)
-		}
-            </a>
-        `,
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
+	context_menu_tooltip(
+		home_link.current,
+		<MenuContents>
+			<MenuRadio bind='branding_type' />
+			<Button menu href={`${root}bleh/general`}>
+				<Icon name={icons.update} />
+				{tl(trans.check_for_updates)}
+			</Button>
+		</MenuContents>
+	);
 
-		onShow(instance) {
-			instance.popper.addEventListener('click', (event) => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(home_link.current, link_menu);
+	useSettings.on('branding_type', update_branding_type);
 
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
@@ -448,9 +426,8 @@ export function append_nav() {
                 <a class="btn mobile-control icon" data-type="register" href="${root}join">
                     ${tl(trans.sign_up)}
                 </a>
-                <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'settings' || page.type == 'bleh_settings'
-		} data-menu-item="settings" href="${root}bleh">
+                <a class="btn mobile-control icon" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'
+			} data-menu-item="settings" href="${root}bleh">
                     ${tl(trans.settings)}
                 </a>
                 <a class="btn mobile-control icon" data-type="login" href="${root}login">
@@ -484,25 +461,24 @@ export function append_nav() {
 		auth_link.appendChild(create_badge(badges, false, false, true));
 	} else if (auth.pro) {
 		auth_link.appendChild(html.node`
-            <span class="label user-status-subscriber auth-badge">${
-			tl(trans.badges['user-status-subscriber'].name)
-		}</span>
+            <span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)
+			}</span>
         `);
 	}
 
 	/*let quick_switcher = html.node`
-        <li class="masthead-nav-item">
-            <button class="masthead-nav-control" data-type="cmd" onclick=${() => page.state.rabbit()}>
-                ${tl(trans.quick_switcher)}
-            </button>
-        </li>
-    `;
+		<li class="masthead-nav-item">
+			<button class="masthead-nav-control" data-type="cmd" onclick=${() => page.state.rabbit()}>
+				${tl(trans.quick_switcher)}
+			</button>
+		</li>
+	`;
 
-    tippy(quick_switcher, {
-        content: tl(trans.quick_switcher)
-    });
+	tippy(quick_switcher, {
+		content: tl(trans.quick_switcher)
+	});
 
-    links.appendChild(quick_switcher);*/
+	links.appendChild(quick_switcher);*/
 
 	const more_button = (
 		<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)}>
@@ -605,7 +581,7 @@ export function append_nav() {
 					/>
 					{tl(
 						trans.seasonal.listing[
-							state.current ? state.current.id : 'none'
+						state.current ? state.current.id : 'none'
 						],
 					)}
 				</>,
@@ -620,7 +596,7 @@ export function append_nav() {
 						<p>
 							{tl(
 								trans.seasonal.listing[
-									state.current ? state.current.id : 'none'
+								state.current ? state.current.id : 'none'
 								],
 							)}
 						</p>
@@ -688,11 +664,11 @@ export function append_nav() {
 						</div>
 						<div class="status-info">
 							<strong class="status-text status-title">${status
-								.name}</strong>
+						.name}</strong>
 							<p class="status-text status-artist">${status
-								.artist}</p>
+						.artist}</p>
 							<p class="status-text status-album">${status
-								.album}</p>
+						.album}</p>
 						</div>
 					</div>
 					<div class="status-time">
@@ -754,12 +730,12 @@ export function append_nav() {
 			notifications: {
 				icon: icons.notifications,
 				label: tl(trans.notifications),
-				content: () => {},
+				content: () => { },
 			},
 			messages: {
 				icon: icons.messages,
 				label: tl(trans.messages),
-				content: () => {},
+				content: () => { },
 			},
 		};
 
@@ -845,9 +821,8 @@ export function append_nav() {
 		tippy(notifications, {
 			content: html.node`
                 <div class="window-header">
-                    ${
-				icon({ name: icons.notifications, identifier: 'window_header' })
-			}
+                    ${icon({ name: icons.notifications, identifier: 'window_header' })
+				}
                     <div class="window-title">${tl(trans.notifications)}</div>
                 </div>
                 <div class="window-content" />
@@ -913,9 +888,8 @@ export function append_nav() {
 		tippy(messages, {
 			content: html.node`
                 <div class="window-header">
-                    ${
-				icon({ name: icons.messages, identifier: 'window_header' })
-			}
+                    ${icon({ name: icons.messages, identifier: 'window_header' })
+				}
                     <div class="window-title">${tl(trans.messages)}</div>
                 </div>
                 <div class="window-content" />
@@ -970,8 +944,8 @@ export function append_nav() {
 				    ${notifications}
 				    <p class="more-link">
 				        <a class="see-more" href="${root}inbox/notifications">${tl(
-					trans.read_more,
-				)}</a>
+				trans.read_more,
+			)}</a>
 				    </p>
 				</div>
 			`,
@@ -990,8 +964,8 @@ export function append_nav() {
 				    ${messages}
 				    <p class="more-link">
 				        <a class="see-more" href="${root}inbox">${tl(
-					trans.read_more,
-				)}</a>
+				trans.read_more,
+			)}</a>
 				    </p>
 				</div>
 			`,
@@ -1113,18 +1087,17 @@ export function append_nav() {
 									{!auth.avatar.endsWith(
 										'818148bf682d429dc215c1705eb27b98.png',
 									) && (
-										<div
-											class='bg'
-											style={{
-												backgroundImage: `url(${
-													avatar(
+											<div
+												class='bg'
+												style={{
+													backgroundImage: `url(${avatar(
 														auth.avatar,
 														'avatar170s',
 													)
-												})`,
-											}}
-										/>
-									)}
+														})`,
+												}}
+											/>
+										)}
 								</div>
 								<div class='auth-menu-header'>
 									<div class='avatar'>
@@ -1194,11 +1167,10 @@ export function append_nav() {
 												colourful
 												accented
 												className='starred-friend'
-												href={`${root}user/${
-													useSettings.get(
-														'starred_friend',
-													)
-												}`}
+												href={`${root}user/${useSettings.get(
+													'starred_friend',
+												)
+													}`}
 												onClick={() => {
 													auth_menu.hide();
 												}}
@@ -1328,22 +1300,20 @@ export function append_nav() {
 	masthead.appendChild(html.node`
         <div class="mobile-controls">
             ${() => {
-		const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'inbox'
-		} data-type="inbox">
+			const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'
+				} data-type="inbox">
                         ${tl(trans.inbox)}
-                        ${
-			count > 0
-				? html.node`<div class="notification-count-badge"></div>`
-				: ''
-		}
+                        ${count > 0
+					? html.node`<div class="notification-count-badge"></div>`
+					: ''
+				}
                     </a>
                 `;
 
-		tippy(btn, {
-			theme: 'mobile',
-			content: html.node`
+			tippy(btn, {
+				theme: 'mobile',
+				content: html.node`
                         <div class="window-header">
                             <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
                             <div class="window-title">${tl(trans.inbox)}</div>
@@ -1351,106 +1321,100 @@ export function append_nav() {
                         ${setting({ id: 'inbox_view', func: render_inbox })}
                         <div class="window-content" />
                     `,
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
+				placement: 'top',
+				interactive: true,
+				interactiveBorder: 10,
+				trigger: 'click',
+				appendTo: document.body,
 
-			onShow(instance) {
-				console.info(
-					'navigation instance',
-					instance,
-					instance.popper,
-				);
-				page.state.inbox_content = instance.popper.querySelector(
-					'.window-content',
-				);
+				onShow(instance) {
+					console.info(
+						'navigation instance',
+						instance,
+						instance.popper,
+					);
+					page.state.inbox_content = instance.popper.querySelector(
+						'.window-content',
+					);
 
-				render_inbox();
-			},
-		});
+					render_inbox();
+				},
+			});
 
-		return btn;
-	}}
+			return btn;
+		}}
             ${() => {
-		const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'user' && page.name == auth.name
-		} data-menu-item="profile_mobile">
+			const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'user' && page.name == auth.name
+				} data-menu-item="profile_mobile">
                         <span class="avatar">
                             <img src=${auth.avatar} alt=${auth.name}>
                         </span>
                         ${auth.name}
-                        ${
-			update_required === 'true'
-				? html.node`<div class="notification-count-badge"></div>`
-				: ''
-		}
+                        ${update_required === 'true'
+					? html.node`<div class="notification-count-badge"></div>`
+					: ''
+				}
                     </a>
                 `;
 
-		tippy(btn, {
-			theme: 'mobile',
-			content: html.node`
+			tippy(btn, {
+				theme: 'mobile',
+				content: html.node`
                         <div class="window-menu-items">
                             <a class="btn window-menu-item icon-r window-menu-item-big" href="${root}user/${auth.name}">
                                 <span class="avatar window-menu-avatar">
-                                    <img src=${
-				avatar(auth.avatar, 'avatar170s')
-			} alt=${auth.name}>
+                                    <img src=${avatar(auth.avatar, 'avatar170s')
+					} alt=${auth.name}>
                                 </span>
                                 ${auth.name}
                             </a>
-                            ${
-				useSettings.get('starred_friend') != ''
-					? html.node`
-                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${
-						useSettings.get('starred_friend')
-					}">
+                            ${useSettings.get('starred_friend') != ''
+						? html.node`
+                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${useSettings.get('starred_friend')
+							}">
                                     ${icon({ name: 'inherit' })}
                                     ${useSettings.get('starred_friend')}
                                 </a>
                             `
-					: ''
-			}
+						: ''
+					}
                             <button class="btn window-menu-item icon-r" onclick=${() => {
-				news();
-			}}>
+						news();
+					}}>
                                 ${icon({ name: icons.news })}
                                 ${tl(trans.news)}
                             </button>
-                            ${
-				settings.navigation_items.map((val) => {
-					let elem;
+                            ${settings.navigation_items.map((val) => {
+						let elem;
 
-					const formal = page.state.quick_access_items[val];
+						const formal = page.state.quick_access_items[val];
 
-					if (formal.url) {
-						elem = html.node`<a href=${formal.url} />`;
-					} else {
-						elem = html.node`<button onclick=${formal.action} />`;
-					}
+						if (formal.url) {
+							elem = html.node`<a href=${formal.url} />`;
+						} else {
+							elem = html.node`<button onclick=${formal.action} />`;
+						}
 
-					elem.classList = 'btn window-menu-item icon-r';
+						elem.classList = 'btn window-menu-item icon-r';
 
-					render(
-						elem,
-						html`
-							${icon({ name: formal.icon })}
-							${formal.name}
-						`,
-					);
-
-					let count = 0;
-
-					if (val == 'notifications') count = notif_count;
-					else if (val == 'messages') count = messages_count;
-
-					if (count) {
 						render(
 							elem,
 							html`
+							${icon({ name: formal.icon })}
+							${formal.name}
+						`,
+						);
+
+						let count = 0;
+
+						if (val == 'notifications') count = notif_count;
+						else if (val == 'messages') count = messages_count;
+
+						if (count) {
+							render(
+								elem,
+								html`
 								${icon({ name: formal.icon })}
 								<div class="auth-dropdown-item-row">
 									<span
@@ -1465,90 +1429,87 @@ export function append_nav() {
 								    </span>
 								</div>
 							`,
-						);
-					}
+							);
+						}
 
-					return elem;
-				})
-			}
-                            <a class="btn window-menu-item icon-r" aria-checked=${
-				page.type == 'bleh_settings'
-			} href="${root}bleh">
+						return elem;
+					})
+					}
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == 'bleh_settings'
+					} href="${root}bleh">
                                 ${icon({ name: icons.bleh_settings })}
                                 ${version.brand}
                             </a>
-                            <a class="btn window-menu-item icon-r" aria-checked=${
-				page.type == 'settings'
-			} href="${root}settings">
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == 'settings'
+					} href="${root}settings">
                                 ${icon({ name: icons.settings })}
                                 ${tl(trans.settings)}
                             </a>
                             <form>
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                                 <a class="btn window-menu-item icon-r colourful" ref=${(
-				el,
-			) => (button = el)} data-menu-item="logout" href="${root}logout">
+						el,
+					) => (button = el)} data-menu-item="logout" href="${root}logout">
                                     ${icon({ name: icons.logout })}
                                     ${tl(trans.logout)}
                                 </a>
                             </form>
                         </div>
                     `,
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
-		});
+				placement: 'top',
+				interactive: true,
+				interactiveBorder: 10,
+				trigger: 'click',
+				appendTo: document.body,
+			});
 
-		return btn;
-	}}
+			return btn;
+		}}
             ${() => {
-		const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'search'
-		} data-menu-item="search">
+			const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'
+				} data-menu-item="search">
                         ${tl(trans.search)}
                     </a>
                 `;
 
-		let search_input;
+			let search_input;
 
-		tippy(btn, {
-			theme: 'mobile',
-			content: html.node`
+			tippy(btn, {
+				theme: 'mobile',
+				content: html.node`
                         <div class="window-header">
                             <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
                             <div class="window-title">${tl(trans.search)}</div>
                         </div>
                         ${() => {
-				const form = html.node`
+						const form = html.node`
                                 <form action="${root}search" method="get">
                                     ${(search_input = input({
-					name: 'q',
-					func: () => {
-						form.submit();
-					},
-				}))}
+							name: 'q',
+							func: () => {
+								form.submit();
+							},
+						}))}
                                 </form>
                             `;
 
-				return form;
-			}}
+						return form;
+					}}
                     `,
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
+				placement: 'top',
+				interactive: true,
+				interactiveBorder: 10,
+				trigger: 'click',
+				appendTo: document.body,
 
-			onShow() {
-				search_input.focus();
-			},
-		});
+				onShow() {
+					search_input.focus();
+				},
+			});
 
-		return btn;
-	}}
+			return btn;
+		}}
         </div>
     `);
 }
@@ -1583,7 +1544,7 @@ export async function live_status() {
 		let active = true;
 		if (
 			intro.textContent.trim() ===
-				tl(trans.last_scrobbled_replace).replace('{u}', auth.name)
+			tl(trans.last_scrobbled_replace).replace('{u}', auth.name)
 		) {
 			active = false;
 		}
@@ -1618,9 +1579,8 @@ export async function live_status() {
 				track,
 				smart_title(formatted.song_title, formatted.song_tags),
 			);
-			artist = html.node`<span class="artist">${
-				smart_artists(formatted.song_artist, formatted.song_guests)
-			}</span>`;
+			artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)
+				}</span>`;
 		} else if (useSettings.get('corrections')) {
 			album.textContent = romanise(
 				correct_item_by_artist(album.textContent, artist.textContent),

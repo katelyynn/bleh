@@ -17,6 +17,7 @@ import { Radio } from '@/components/settings/clickables/radio.tsx';
 import { MenuContents } from '@/components/menu/menu';
 import { Button } from '@/components/button/button';
 import { hover_tooltip, menu_tooltip } from '@/components/shared/tooltips';
+import { Icon, icons } from '@/components/shared/icon';
 
 interface MenuRadioProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -90,6 +91,8 @@ export function MenuRadio({
 		}
 	}
 
+	const value_name = createRef();
+
 	function update() {
 		disabled = false;
 
@@ -121,20 +124,28 @@ export function MenuRadio({
 
 		elem.replaceChildren(
 			<>
-				<SettingLabel
-					name={name}
-					body={body}
-					icon={icon}
-					store={store}
-					value={value}
-					setValue={(val: string) => {
-						set(val);
-						update();
-					}}
-					defaultValue={store?.default}
-					menu
-					ref={reset}
-				/>
+				<div class='auth-dropdown-item-row'>
+					<span class='auth-dropdown-item-left'>
+						<SettingLabel
+							name={name}
+							body={body}
+							icon={icon}
+							store={store}
+							value={value}
+							setValue={(val: string) => {
+								set(val);
+								update();
+							}}
+							defaultValue={store?.default}
+							menu
+							ref={reset}
+						/>
+					</span>
+					<span class='auth-dropdown-item-right'>
+						<p ref={value_name}>{tl(values![value].name)}</p>
+					</span>
+				</div>
+				<Icon name={icons.arrow_right} />
 			</>,
 		);
 
@@ -218,6 +229,8 @@ export function MenuRadio({
 		});
 
 		if (onMouseEnter) onMouseEnter();
+
+		value_name.current.textContent = tl(values![value].name) as string;
 	}
 
 	Object.defineProperty(elem, 'value', {

@@ -116396,6 +116396,218 @@ var bleh = (() => {
     return /* @__PURE__ */ jsx("div", { class: ["window-content", className2 && className2], ref: ref2, children });
   }
 
+  // src/components/settings/provider/menu/radio.tsx
+  function MenuRadio({
+    ref: ref2,
+    bind,
+    standalone = false,
+    icon: icon5,
+    name,
+    body,
+    value,
+    values,
+    onChange,
+    disabled,
+    onMouseEnter,
+    onMouseLeave
+  }) {
+    if (bind) value = useSettings.get(bind);
+    let buttons = [];
+    const uuid = crypto.randomUUID();
+    if (bind) {
+      useSettings.on(bind, (val, id) => {
+        if (id == uuid) return;
+        set2(val, true);
+      });
+    }
+    const reset = createRef();
+    const store = get_from_store(bind);
+    if (store) {
+      if (!icon5) icon5 = store.icon;
+      if (store.values) values = store.values;
+      if (store.incompatible) {
+        Object.entries(store.incompatible).forEach(([key]) => {
+          useSettings.on(key, () => {
+            update();
+          });
+        });
+      }
+    }
+    const value_name = createRef();
+    function update() {
+      disabled = false;
+      let incompatible = false;
+      let incompatible_list = {};
+      let incompatible_strings = [];
+      if (store) {
+        ({
+          incompatible,
+          list: incompatible_list,
+          list_strings: incompatible_strings
+        } = is_incompatible(
+          store
+        ));
+      }
+      if (incompatible) {
+        disabled = true;
+      }
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      buttons = [];
+      elem.replaceChildren(
+        /* @__PURE__ */ jsx(Fragment, { children: [
+          /* @__PURE__ */ jsx("div", { class: "auth-dropdown-item-row", children: [
+            /* @__PURE__ */ jsx("span", { class: "auth-dropdown-item-left", children: /* @__PURE__ */ jsx(
+              SettingLabel,
+              {
+                name,
+                body,
+                icon: icon5,
+                store,
+                value,
+                setValue: (val) => {
+                  set2(val);
+                  update();
+                },
+                defaultValue: store?.default,
+                menu: true,
+                ref: reset
+              }
+            ) }),
+            /* @__PURE__ */ jsx("span", { class: "auth-dropdown-item-right", children: /* @__PURE__ */ jsx("p", { ref: value_name, children: tl2(values[value].name) }) })
+          ] }),
+          /* @__PURE__ */ jsx(Icon, { name: icons.arrow_right })
+        ] })
+      );
+      menu.replaceChildren(
+        /* @__PURE__ */ jsx(Fragment, { children: Object.entries(values).map(
+          ([key, val], i2) => {
+            const elem2 = /* @__PURE__ */ jsx(
+              RadioItem2,
+              {
+                id: bind || "",
+                value: key,
+                name: tl2(val.name),
+                onChange: set2
+              },
+              i2
+            );
+            buttons.push(elem2);
+            return elem2;
+          }
+        ) })
+      );
+      buttons.forEach((elem2) => {
+        elem2.checked = elem2.value == value;
+      });
+    }
+    const elem = /* @__PURE__ */ jsx(
+      Button,
+      {
+        className: "menu-setting",
+        menu: true,
+        onMouseEnter,
+        onMouseLeave,
+        ref: ref2
+      }
+    );
+    const menu = /* @__PURE__ */ jsx(MenuContents, {});
+    const popout = menu_tooltip(
+      elem,
+      menu,
+      {
+        placement: "right"
+      }
+    );
+    document.body.addEventListener("click", () => {
+      setTimeout(() => {
+        if (popout.element.matches(":hover") || elem.matches(":hover")) return;
+        popout.hide();
+      }, 1);
+    });
+    update();
+    function set2(val, received = false) {
+      if (value == val) return;
+      value = val;
+      reset.current.value = val;
+      if (bind) {
+        if (!received) useSettings.set(bind, val, uuid);
+      } else {
+        if (onChange) onChange(val);
+      }
+      buttons.forEach((elem2) => {
+        elem2.checked = elem2.value == val;
+      });
+      if (onMouseEnter) onMouseEnter();
+      value_name.current.textContent = tl2(values[value].name);
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(val) {
+        set2(val);
+      }
+    });
+    elem.update = update;
+    return elem;
+  }
+  function RadioItem2({
+    id,
+    value,
+    name,
+    checked,
+    onChange
+  }) {
+    const radio2 = createRef();
+    function update() {
+      radio2.current.checked = checked;
+    }
+    const wrap = /* @__PURE__ */ jsx(
+      Button,
+      {
+        className: "menu-setting",
+        menu: true,
+        onClick: () => {
+          onChange(value);
+        },
+        children: [
+          /* @__PURE__ */ jsx(
+            Radio,
+            {
+              name: id,
+              value,
+              ref: radio2,
+              className: "setting-inner",
+              menu: true,
+              interact: false
+            }
+          ),
+          /* @__PURE__ */ jsx(SettingLabel, { name, menu: true })
+        ]
+      }
+    );
+    update();
+    Object.defineProperty(wrap, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    Object.defineProperty(wrap, "value", {
+      get() {
+        return value;
+      }
+    });
+    return wrap;
+  }
+
   // src/components/page/navigation.tsx
   var handle_update = (e4) => {
     e4.preventDefault();
@@ -116642,34 +116854,17 @@ var bleh = (() => {
     );
     page.state.home_link = home_link_logo.current;
     update_branding_type();
-    const last_checked = localStorage.getItem(keys3.update_checked_date) || null;
-    const link_menu = tippy_esm_default(home_link.current, {
-      theme: "context-menu",
-      content: html.node`
-            ${setting({
-        id: "branding_type",
-        func: update_branding_type,
-        in_menu: true
-      })}
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${last_checked ? tl2(trans.last_checked_date, {
-        d: DateTime.fromJSDate(new Date(last_checked)).toRelative()
-      }) : tl2(trans.never_checked)}
-            </a>
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(home_link.current, link_menu);
+    context_menu_tooltip(
+      home_link.current,
+      /* @__PURE__ */ jsx(MenuContents, { children: [
+        /* @__PURE__ */ jsx(MenuRadio, { bind: "branding_type" }),
+        /* @__PURE__ */ jsx(Button, { menu: true, href: `${root}bleh/general`, children: [
+          /* @__PURE__ */ jsx(Icon, { name: icons.update }),
+          tl2(trans.check_for_updates)
+        ] })
+      ] })
+    );
+    useSettings.on("branding_type", update_branding_type);
     const navs = inner.querySelector(".masthead-nav-wrap");
     const search = inner.querySelector(".masthead-search-form");
     const form = search.querySelector(".masthead-search-field");
@@ -131011,210 +131206,6 @@ var bleh = (() => {
       children,
       /* @__PURE__ */ jsx("div", { class: "avatar-decoration", "data-type": type })
     ] });
-  }
-
-  // src/components/settings/provider/menu/radio.tsx
-  function MenuRadio({
-    ref: ref2,
-    bind,
-    standalone = false,
-    icon: icon5,
-    name,
-    body,
-    value,
-    values,
-    onChange,
-    disabled,
-    onMouseEnter,
-    onMouseLeave
-  }) {
-    if (bind) value = useSettings.get(bind);
-    let buttons = [];
-    const uuid = crypto.randomUUID();
-    if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
-        set2(val, true);
-      });
-    }
-    const reset = createRef();
-    const store = get_from_store(bind);
-    if (store) {
-      if (!icon5) icon5 = store.icon;
-      if (store.values) values = store.values;
-      if (store.incompatible) {
-        Object.entries(store.incompatible).forEach(([key]) => {
-          useSettings.on(key, () => {
-            update();
-          });
-        });
-      }
-    }
-    function update() {
-      disabled = false;
-      let incompatible = false;
-      let incompatible_list = {};
-      let incompatible_strings = [];
-      if (store) {
-        ({
-          incompatible,
-          list: incompatible_list,
-          list_strings: incompatible_strings
-        } = is_incompatible(
-          store
-        ));
-      }
-      if (incompatible) {
-        disabled = true;
-      }
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      buttons = [];
-      elem.replaceChildren(
-        /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
-          SettingLabel,
-          {
-            name,
-            body,
-            icon: icon5,
-            store,
-            value,
-            setValue: (val) => {
-              set2(val);
-              update();
-            },
-            defaultValue: store?.default,
-            menu: true,
-            ref: reset
-          }
-        ) })
-      );
-      menu.replaceChildren(
-        /* @__PURE__ */ jsx(Fragment, { children: Object.entries(values).map(
-          ([key, val], i2) => {
-            const elem2 = /* @__PURE__ */ jsx(
-              RadioItem2,
-              {
-                id: bind || "",
-                value: key,
-                name: tl2(val.name),
-                onChange: set2
-              },
-              i2
-            );
-            buttons.push(elem2);
-            return elem2;
-          }
-        ) })
-      );
-      buttons.forEach((elem2) => {
-        elem2.checked = elem2.value == value;
-      });
-    }
-    const elem = /* @__PURE__ */ jsx(
-      Button,
-      {
-        className: "menu-setting",
-        menu: true,
-        onMouseEnter,
-        onMouseLeave,
-        ref: ref2
-      }
-    );
-    const menu = /* @__PURE__ */ jsx(MenuContents, {});
-    const popout = menu_tooltip(
-      elem,
-      menu,
-      {
-        placement: "right"
-      }
-    );
-    document.body.addEventListener("click", () => {
-      setTimeout(() => {
-        if (popout.element.matches(":hover") || elem.matches(":hover")) return;
-        popout.hide();
-      }, 1);
-    });
-    update();
-    function set2(val, received = false) {
-      if (value == val) return;
-      value = val;
-      reset.current.value = val;
-      if (bind) {
-        if (!received) useSettings.set(bind, val, uuid);
-      } else {
-        if (onChange) onChange(val);
-      }
-      buttons.forEach((elem2) => {
-        elem2.checked = elem2.value == val;
-      });
-      if (onMouseEnter) onMouseEnter();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(val) {
-        set2(val);
-      }
-    });
-    elem.update = update;
-    return elem;
-  }
-  function RadioItem2({
-    id,
-    value,
-    name,
-    checked,
-    onChange
-  }) {
-    const radio2 = createRef();
-    function update() {
-      radio2.current.checked = checked;
-    }
-    const wrap = /* @__PURE__ */ jsx(
-      Button,
-      {
-        className: "menu-setting",
-        menu: true,
-        onClick: () => {
-          onChange(value);
-        },
-        children: [
-          /* @__PURE__ */ jsx(
-            Radio,
-            {
-              name: id,
-              value,
-              ref: radio2,
-              className: "setting-inner",
-              menu: true,
-              interact: false
-            }
-          ),
-          /* @__PURE__ */ jsx(SettingLabel, { name, menu: true })
-        ]
-      }
-    );
-    update();
-    Object.defineProperty(wrap, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    Object.defineProperty(wrap, "value", {
-      get() {
-        return value;
-      }
-    });
-    return wrap;
   }
 
   // src/pages/home/mualani.tsx
