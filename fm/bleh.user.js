@@ -95766,7 +95766,7 @@ var bleh = (() => {
         values.push({
           text: () => /* @__PURE__ */ jsx(Fragment, { children: [
             starred,
-            /* @__PURE__ */ jsx("span", { class: ["star-icon", "colourful"], children: /* @__PURE__ */ jsx(Icon, { name: icons.star }) })
+            /* @__PURE__ */ jsx("span", { class: ["star-icon", "colourful"], children: /* @__PURE__ */ jsx(Icon, { name: icons.starred_friend }) })
           ] }),
           value: starred
         });
