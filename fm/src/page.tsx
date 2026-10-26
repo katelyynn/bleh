@@ -11,22 +11,16 @@ import {
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import {
-	api_url,
 	auth,
-	bleh_url,
 	discord,
-	minis_url,
-	mualani_url,
 	page,
 	root,
-	setup_url,
 	shout_parse_queue,
-	sponsor_url,
 	urls,
 } from '@/build/page';
-import { new_season, Seasons, stored_season } from '@/build/seasonal';
+import { Seasons, stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
-import { dialog, load_dialogs, modal } from '@/components/dialog/dialog';
+import { load_dialogs, modal } from '@/components/dialog/dialog';
 import {
 	correct_artist,
 	correct_generic_artist,
@@ -61,7 +55,6 @@ import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
-import { update_season_nav } from '@/components/seasonal';
 import {
 	parse_shout_queue,
 	patch_shouts,
@@ -100,17 +93,15 @@ import { tag_page } from '@/components/music/tags';
 import { clear_popup_queue } from '@/components/dialog/popup';
 import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
-import { Icon, icon, icons } from './components/shared/icon';
+import { Icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
-import { clean_storage, keys } from './components/settings/storage';
+import { clean_storage } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
 import { auth_page } from '@/pages/auth/main.tsx';
-import { seasonal } from '@/pages/bleh_settings/seasonal.tsx';
 import { copy } from '@/build/tools.ts';
-import { createRef } from 'jsx-dom';
 
 export const useSettings: Settings = new Settings();
 export let useSeasons: Seasons;
