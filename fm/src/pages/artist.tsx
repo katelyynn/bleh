@@ -65,6 +65,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { convert_to_select } from '@/components/select/select.tsx';
+import { Wordmark } from '@/components/music/wordmark';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -170,6 +171,10 @@ export function bleh_artists() {
 					{position}
 				</PageHeaderTitle>
 			</PageHeader>
+		);
+
+		title.replaceChildren(
+			<Wordmark name={page.name} />
 		);
 
 		log('settings hue accent', 'dfbdfb', 'info', {
@@ -339,9 +344,8 @@ export function bleh_artists() {
 						artist={page.name}
 						listeners={tl(trans.latest_album)}
 						date={aux}
-						href={`${root}music/${sanitise(page.name)}/${
-							sanitise(clean_streaming_titles(name))
-						}`}
+						href={`${root}music/${sanitise(page.name)}/${sanitise(clean_streaming_titles(name))
+							}`}
 						image={avatar(image, '300x300')}
 					/>,
 					carousel.firstElementChild,
@@ -579,9 +583,8 @@ function bleh_artist_similar() {
 			    <h2 class="text-18">
 			        ${{
 				html: tl(trans.artists_similar_to_name, {
-					n: `<i>${
-						sanitise_text(romanise(correct_artist(page.name)))
-					}</i>`,
+					n: `<i>${sanitise_text(romanise(correct_artist(page.name)))
+						}</i>`,
 				}),
 			}}
 			    </h2>
@@ -617,12 +620,11 @@ function bleh_listeners() {
 
 		buffer.insertBefore(
 			html.node`
-            <h2>${
-				tl(trans.count_mutual_listeners).replace(
-					'{c}',
-					count.toString(),
-				)
-			}</h2>
+            <h2>${tl(trans.count_mutual_listeners).replace(
+				'{c}',
+				count.toString(),
+			)
+				}</h2>
         `,
 			buffer.firstElementChild,
 		);
@@ -666,19 +668,17 @@ function bleh_listeners() {
 			html`
 				<a class="btn side-action icon-mask" data-type="profile"
 					href="${root}user/${auth
-						.name}/library/music/${redirect()}${sanitise(
-							page.name,
-						)}">
+					.name}/library/music/${redirect()}${sanitise(
+						page.name,
+					)}">
 					<span><span class="at">@</span>${auth.name}</span>
 				</a>
 				${useSettings.get('starred_friend') != ''
 					? html.node`
-            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${
-						useSettings.get('starred_friend')
-					}/library/music/${redirect()}${sanitise(page.name)}">
-                <span><span class="at">@</span>${
-						useSettings.get('starred_friend')
-					}</span>
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${useSettings.get('starred_friend')
+						}/library/music/${redirect()}${sanitise(page.name)}">
+                <span><span class="at">@</span>${useSettings.get('starred_friend')
+						}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
                 </span>
@@ -686,14 +686,13 @@ function bleh_listeners() {
             `
 					: ''}
 				${friends.map((friend) =>
-					html.node`
-            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${
-						sanitise(page.name)
-					}">
+						html.node`
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)
+							}">
                 <span><span class="at">@</span>${friend}</span>
             </a>
             `
-				)}
+					)}
 				<button class="btn side-action icon-mask" data-type="edit" onclick=${() =>
 					open_starred_friend_window()}>
 				    ${tl(trans.edit_close_friends)}

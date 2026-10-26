@@ -15,7 +15,25 @@ export const validWordmarks: Record<string, string> = {
 }
 
 export function retrieveWordmark(name: string) {
-	if (name in validWordmarks) {
-		return `https://katelyynn.github.io/artist-wordmarks/${validWordmarks[name]}.webp`;
+	if (name.toLowerCase() in validWordmarks) {
+		return `https://katelyynn.github.io/artist-wordmarks/${validWordmarks[name.toLowerCase()]}.webp`;
 	}
+}
+
+interface WordmarkProps {
+	name: string;
+}
+
+export function Wordmark({
+	name
+}: WordmarkProps) {
+	const wordmark = retrieveWordmark(name);
+
+	if (!wordmark) return name;
+
+	return (
+		<div class='artist-wordmark'>
+			<img class='artist-wordmark-image' src={wordmark} alt={name} />
+		</div>
+	);
 }
