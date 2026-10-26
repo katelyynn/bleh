@@ -47,6 +47,7 @@ import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import {
 	append_header,
 	PageHeader,
+	PageHeaderPosition,
 	PageHeaderTitle,
 } from '@/components/page/header.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
@@ -168,8 +169,10 @@ export function bleh_artists() {
 			>
 				<PageHeaderTitle>
 					{title}
-					{position}
 				</PageHeaderTitle>
+				{position && (
+					<PageHeaderPosition text={position.textContent} />
+				)}
 			</PageHeader>
 		);
 

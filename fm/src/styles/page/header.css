@@ -764,3 +764,10 @@
 		margin: unset !important;
 	}
 }
+
+
+.chart-position {
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	cursor: default;
+}

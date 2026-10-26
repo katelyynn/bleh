@@ -12790,6 +12790,11 @@ export const trans = {
 	profile_summary_pie_chart: {
 		en: 'Show pie chart',
 	},
+	chart_position: {
+		// shown on artist/album pages
+		// v = the number placement
+		en: '#{v} in the world'
+	}
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

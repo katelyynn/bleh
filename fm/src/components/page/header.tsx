@@ -13,7 +13,7 @@ import { PageHeaderDisc } from '@/components/music/header.tsx';
 import { Icon } from '@/components/shared/icon.tsx';
 import { useSettings } from '@/page.tsx';
 import { ff } from '@/components/settings/sku.ts';
-import { page } from '@/build/page.ts';
+import { page, root } from '@/build/page.ts';
 
 interface PageHeaderProps {
 	icon?: string;
@@ -71,18 +71,16 @@ export function PageHeader({
 						? !combined
 							? (
 								<SubText
-									className={`header-label ${
-										refresh && 'header-refresh'
-									}`}
+									className={`header-label ${refresh && 'header-refresh'
+										}`}
 								>
 									{label}
 								</SubText>
 							)
 							: (
 								<SubText
-									className={`header-label ${
-										refresh && 'header-refresh'
-									}`}
+									className={`header-label ${refresh && 'header-refresh'
+										}`}
 								>
 									{tl(trans.artists)}
 									<InfoTip>
@@ -187,6 +185,20 @@ export function PageHeaderTitle({
 	useSettings.on('theme', update);
 
 	return elem;
+}
+
+interface PageHeaderPositionProps {
+	text: string;
+}
+
+export function PageHeaderPosition({
+	text
+}: PageHeaderPositionProps) {
+	return (
+		<a class='chart-position' href={`${root}charts`}>
+			{tl(trans.chart_position, { v: text.trim().replace('#', '') })}
+		</a>
+	)
 }
 
 interface PageHeaderArtistProps {

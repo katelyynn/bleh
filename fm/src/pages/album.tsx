@@ -41,6 +41,7 @@ import {
 	append_header,
 	PageHeader,
 	PageHeaderArtist,
+	PageHeaderPosition,
 	PageHeaderTitle,
 } from '@/components/page/header.tsx';
 
@@ -139,7 +140,7 @@ export function bleh_albums() {
 
 		let page_avatar;
 
-		const same_page = is_same_page();
+		//const same_page = is_same_page();
 
 		const redesigned_album_header = (
 			<PageHeader
@@ -153,11 +154,13 @@ export function bleh_albums() {
 			>
 				<PageHeaderTitle>
 					{title}
-					{position}
 				</PageHeaderTitle>
 				<PageHeaderArtist type='album'>
 					{artist}
 				</PageHeaderArtist>
+				{position && (
+					<PageHeaderPosition text={position.textContent} />
+				)}
 			</PageHeader>
 		);
 
@@ -265,28 +268,25 @@ function album_missing_a_tracklist() {
             <section>
                 ${top}
                 <div class="loading-data-container">
-                    <p class="loading-data-text">${
-			tl(trans.gathering_your_plays)
-		}</p>
+                    <p class="loading-data-text">${tl(trans.gathering_your_plays)
+			}</p>
                 </div>
             </section>
         `;
 		top_overview.after(tracklist);
 
 		/*let url_split = window.location.href.split('/');
-        let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
-        let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);*/
+		let album_url = `${url_split[(url_split.length - 2)]}/${url_split[(url_split.length - 1)]}`;
+		let album_as_track_url = window.location.href.replace(album_url, `${url_split[(url_split.length - 2)]}/_/${url_split[(url_split.length - 1)]}`);*/
 
 		let url = document.querySelector('.header-metadata-display a');
 		if (!url) {
 			const url_split = window.location.href.split('/');
-			const album_url = `${url_split[url_split.length - 2]}/${
-				url_split[url_split.length - 1]
-			}`;
+			const album_url = `${url_split[url_split.length - 2]}/${url_split[url_split.length - 1]
+				}`;
 			const album_as_track_url = window.location.href.replace(
 				album_url,
-				`${url_split[url_split.length - 2]}/_/${
-					url_split[url_split.length - 1]
+				`${url_split[url_split.length - 2]}/_/${url_split[url_split.length - 1]
 				}`,
 			);
 
@@ -310,12 +310,12 @@ function album_missing_a_tracklist() {
 
 		// we need to fetch the tracklist
 		fetch(url)
-			.then(function (response) {
+			.then(function(response) {
 				console.error('returned', response, response.text);
 
 				return response.text();
 			})
-			.then(function (dom) {
+			.then(function(dom) {
 				const doc = new DOMParser().parseFromString(dom, 'text/html');
 
 				//deliver_notif(`using url ${`/user/${auth.name}/library/music/${album_url}`}`);
@@ -326,13 +326,11 @@ function album_missing_a_tracklist() {
 				);
 				if (inner_tracklist == null) {
 					const url_split = window.location.href.split('/');
-					const album_url = `${url_split[url_split.length - 2]}/${
-						url_split[url_split.length - 1]
-					}`;
+					const album_url = `${url_split[url_split.length - 2]}/${url_split[url_split.length - 1]
+						}`;
 					const album_as_track_url = window.location.href.replace(
 						album_url,
-						`${url_split[url_split.length - 2]}/_/${
-							url_split[url_split.length - 1]
+						`${url_split[url_split.length - 2]}/_/${url_split[url_split.length - 1]
 						}`,
 					);
 
