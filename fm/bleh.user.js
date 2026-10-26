@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.1003
+// @version      2026.1026
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -116219,7 +116219,7 @@ var bleh = (() => {
           v: `${version2.build}.${version2.sku}`
         }),
         persist: true,
-        icon: "icon-16-update"
+        icon: icons.update
       });
       register_activity(
         "update_bleh",
@@ -134071,7 +134071,7 @@ ${version2.build} (${version2.sku})`;
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.1003",
+    build: "2026.1026",
     sku: "violet",
     bio: "bleh!!! ^-^",
     author: "katelyn",

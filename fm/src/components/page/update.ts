@@ -12,6 +12,7 @@ import { root } from '@/build/page';
 import { notify } from '../dialog/notify';
 import { request_changelog } from '../news';
 import { tl, trans } from '@/build/trans';
+import { icons } from '../shared/icon';
 
 export function reset_update_status() {
 	set_storage(keys.update_required, 'false');
@@ -38,7 +39,7 @@ export function notify_if_new_update() {
 				v: `${version.build}.${version.sku}`,
 			}),
 			persist: true,
-			icon: 'icon-16-update',
+			icon: icons.update,
 		});
 		register_activity(
 			'update_bleh',
