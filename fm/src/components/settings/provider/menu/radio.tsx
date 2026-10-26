@@ -8,7 +8,6 @@ import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
-	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { tl, translation } from '@/build/trans.ts';
@@ -16,7 +15,7 @@ import { useSettings } from '@/page.tsx';
 import { Radio } from '@/components/settings/clickables/radio.tsx';
 import { MenuContents } from '@/components/menu/menu';
 import { Button } from '@/components/button/button';
-import { hover_tooltip, menu_tooltip } from '@/components/shared/tooltips';
+import { menu_tooltip } from '@/components/shared/tooltips';
 import { Icon, icons } from '@/components/shared/icon';
 
 interface MenuRadioProps {

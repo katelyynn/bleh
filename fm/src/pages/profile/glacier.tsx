@@ -33,7 +33,7 @@ import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/
 import { PanelHead, PanelHeadExtra } from '@/components/text/head';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more';
 import { menu_tooltip } from '@/components/shared/tooltips';
-import { MenuContents } from '@/components/menu/menu';
+import { MenuContents, MenuSeparator } from '@/components/menu/menu';
 import { createRef } from 'jsx-dom';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 import { Button } from '@/components/button/button';
@@ -520,13 +520,15 @@ function bleh_glacier_library_top(static_page = false) {
 				{(type.startsWith('artist') || type.startsWith('album') && auth.pro) && (
 					<MenuCheckbox bind='grid_glow' />
 				)}
-				<MenuCheckbox bind='glacier_library_graphs' />
 				{!type.startsWith('overview') && (
 					<>
+						<MenuSeparator />
 						<MenuRadio bind='count_bar_axis' />
 						<MenuRadio bind='count_bar_style' />
 					</>
 				)}
+				<MenuSeparator />
+				<MenuCheckbox bind='glacier_library_graphs' />
 			</MenuContents>
 		);
 	}
@@ -1500,9 +1502,11 @@ function bleh_glacier_library_focused() {
 		<MenuContents>
 			<MenuCheckbox bind='format_guest_features' />
 			<MenuCheckbox bind='show_guest_features' />
-			<MenuCheckbox bind='glacier_library_graphs' />
+			<MenuSeparator />
 			<MenuRadio bind='count_bar_axis' />
 			<MenuRadio bind='count_bar_style' />
+			<MenuSeparator />
+			<MenuCheckbox bind='glacier_library_graphs' />
 		</MenuContents>
 	);
 
