@@ -35,10 +35,10 @@ import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more';
 import { menu_tooltip } from '@/components/shared/tooltips';
 import { MenuContents } from '@/components/menu/menu';
 import { createRef } from 'jsx-dom';
-import { SettingRadio } from '@/components/settings/provider/radio';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 import { Button } from '@/components/button/button';
 import { IconLabel } from '@/components/text/text';
+import { MenuRadio } from '@/components/settings/provider/menu/radio';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -523,8 +523,8 @@ function bleh_glacier_library_top(static_page = false) {
 				<MenuCheckbox bind='glacier_library_graphs' />
 				{!type.startsWith('overview') && (
 					<>
-						<SettingRadio bind='count_bar_axis' />
-						<SettingRadio bind='count_bar_style' />
+						<MenuRadio bind='count_bar_axis' />
+						<MenuRadio bind='count_bar_style' />
 					</>
 				)}
 			</MenuContents>
@@ -1501,8 +1501,8 @@ function bleh_glacier_library_focused() {
 			<MenuCheckbox bind='format_guest_features' />
 			<MenuCheckbox bind='show_guest_features' />
 			<MenuCheckbox bind='glacier_library_graphs' />
-			<SettingRadio bind='count_bar_axis' />
-			<SettingRadio bind='count_bar_style' />
+			<MenuRadio bind='count_bar_axis' />
+			<MenuRadio bind='count_bar_style' />
 		</MenuContents>
 	);
 

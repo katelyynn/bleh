@@ -171,6 +171,9 @@ export function MenuRadio({
 						return elem;
 					},
 				)}
+				{body && (
+					<p class='menu-item-description'>{body}</p>
+				)}
 			</>
 		);
 
