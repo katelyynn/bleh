@@ -40,7 +40,6 @@ import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { settings } from '@/build/config.ts';
 import { Select } from '@/components/select/select.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
@@ -108,6 +107,7 @@ import {
 import { HeatmapDates } from '@/components/date/heatmap';
 import { OracleCredits } from '@/components/oracle/credits';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
+import { MenuRadio } from '@/components/settings/provider/menu/radio';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1115,12 +1115,22 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
-			<section>
+			<section id='menu'>
 				<DemoGrid>
 					<DemoItem label='Menu settings'>
 						<MenuContents>
 							<MenuCheckbox name='Setting name' />
 							<MenuCheckbox bind='solarium' />
+							<MenuRadio name='Setting name' value='hello'
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}} />
+							<MenuRadio bind='branding_type' />
 						</MenuContents>
 					</DemoItem>
 				</DemoGrid>

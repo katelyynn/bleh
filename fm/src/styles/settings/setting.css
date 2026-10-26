@@ -462,6 +462,17 @@
 	height: var(--setting-label-height);
 
 	margin-right: calc(-1 * (var(--card-gap) - 10px));
+
+	&>input {
+		display: none;
+	}
+}
+
+.menu-setting {
+	&>.radio-cont {
+		margin-right: unset;
+		height: unset;
+	}
 }
 
 .radio {
@@ -490,6 +501,13 @@
 			inset 0 0 0 4px oklch(var(--l3-c)),
 			0 3px 12px oklch(var(--h4) / 25%),
 			var(--interactable-outer);
+	}
+
+	&.menu-radio {
+		width: 14px;
+		height: 14px;
+
+		--button-height: 14px;
 	}
 
 	&[data-theme="yuzu"] {

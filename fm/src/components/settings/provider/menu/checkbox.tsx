@@ -8,10 +8,8 @@ import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
-	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
-import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
