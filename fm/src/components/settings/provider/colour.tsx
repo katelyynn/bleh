@@ -21,7 +21,7 @@ import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { auth, page } from '@/build/page.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { settings_store } from '@/build/config.ts';
 import { WithChildren } from '@/types/generic.tsx';
 

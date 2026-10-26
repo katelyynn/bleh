@@ -8,13 +8,14 @@ import { season } from '@/components/seasonal.ts';
 import { log } from '@/build/log.ts';
 import { DateTime } from 'luxon';
 import { keys } from '@/components/settings/storage.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { set_storage } from '@/build/tools.ts';
 import { load_chart_colours } from '@/components/music/chart.ts';
-import { notify } from '@/components/dialog/notify.ts';
+import { notify } from '@/components/dialog/notify.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { page } from '@/build/page.ts';
 import { CSSProperties } from 'jsx-dom';
+import { icons } from '@/components/shared/icon.tsx';
 
 export const seasonal_timer = {
 	state: undefined,
@@ -284,7 +285,7 @@ export function new_season(current: season, now: DateTime) {
 			v: tl(trans.seasonal.listing[current.id]),
 			time: current.end.toRelative(now),
 		}),
-		icon: 'icon-16-season',
+		icon: icons.seasonal,
 		persist: true,
 	});
 }

@@ -4,9 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { denoPlugin } from '@deno/esbuild-plugin';
-import { serveDir } from '@std/http/file-server';
 import esbuild from 'esbuild';
+import * as fs from 'fs';
 
 type BuildSchema = {
 	brand: string;
@@ -16,18 +15,15 @@ type BuildSchema = {
 	url: string;
 	built_on: string;
 };
-type BundleOptions = esbuild.BuildOptions & {
-	name: string;
-};
 
 const build: BuildSchema = JSON.parse(
-	await Deno.readTextFile('./src/build/build.json'),
+	fs.readFileSync('./src/build/build.json'),
 );
 
-async function bundle({ name, ...options }: BundleOptions) {
+async function bundle({ ...options }: esbuild.BuildOptions) {
 	const start = Date.now();
 	console.log(
-		`%c📦 building %c${name}%c`,
+		`%c📦 building`,
 		'color:grey',
 		'color:grey;font-weight:bold',
 		'font-weight:regular;color:white',
@@ -54,6 +50,7 @@ const JS_BANNER = `// ==UserScript==
 // @downloadURL  ${build.url}
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
+// @grant        GM.xmlHttpRequest
 // @connect      musicbrainz.org
 // @connect      raw.githubusercontent.com
 // @connect      github.com
@@ -87,16 +84,15 @@ const bundle_css: esbuild.Plugin = {
 			});
 
 			return {
-				contents: `export default ${
-					JSON.stringify(result.outputFiles[0].text)
-				}`,
+				contents: `export default ${JSON.stringify(result.outputFiles[0].text)
+					}`,
 				loader: 'js',
 			};
 		});
 	},
 };
 
-const shared_opts: Omit<BundleOptions, 'name'> = {
+const shared_opts: Omit<esbuild.BuildOptions, 'name'> = {
 	entryPoints: ['./src/main.ts'],
 	banner: { js: JS_BANNER, css: CSS_BANNER },
 	bundle: true,
@@ -105,20 +101,19 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	platform: 'browser',
 	format: 'iife',
 	loader: { '.svg': 'text' },
-	plugins: [bundle_css, denoPlugin()],
+	plugins: [bundle_css],
 	minifyWhitespace: false,
 	minifyIdentifiers: false,
 	minifySyntax: false,
 	globalName: 'bleh',
 };
 
-const userscript: BundleOptions = {
+const userscript: esbuild.BuildOptions = {
 	...shared_opts,
-	name: 'userscript',
 	outfile: 'bleh.user.js',
 };
 
-const usercss: BundleOptions = {
+const usercss: esbuild.BuildOptions = {
 	entryPoints: ['./src/styles/index.css'],
 	banner: {
 		css: CSS_BANNER,
@@ -127,47 +122,48 @@ const usercss: BundleOptions = {
 		css: CSS_FOOTER,
 	},
 	bundle: true,
-	name: 'usercss',
 	outfile: 'bleh.user.css',
 	loader: { '.css': 'css' },
 	minify: true,
 };
 
-const extension: BundleOptions = {
+const extension: esbuild.BuildOptions = {
 	...shared_opts,
-	name: 'extension',
 	outfile: 'ext/bleh.js',
 	minify: true,
 };
 
-if (Deno.args[0] == 'serve') {
-	await Promise.all([
-		bundle(usercss),
-		bundle(userscript),
-	]);
+if (process.argv[2] == 'serve') {
+	const js_context = await esbuild.context(userscript);
+	const css_context = await esbuild.context(usercss);
 
-	Deno.serve((req) =>
-		serveDir(req, {
-			showDirListing: true,
-		})
-	);
+	const serve = await js_context.serve({
+		servedir: '.',
+	});
+
+	await js_context.watch();
+	await css_context.watch();
+
+	for (const host of serve.hosts) {
+		console.log(`http://${host}:${serve.port}`);
+	}
 } else {
 	build.built_on = new Date().toISOString();
-	await Deno.writeTextFile(
+	fs.writeFileSync(
 		'./src/build/build.json',
 		JSON.stringify(build, null, '\t'),
 	);
 
 	await bundle(userscript);
 	const manifest = JSON.parse(
-		await Deno.readTextFile('./ext/manifest.json'),
+		fs.readFileSync('./ext/manifest.json', 'utf8'),
 	);
 	manifest.name = build.brand;
 	manifest.version = build.build.split('.')
-		.map((part) => parseInt(part, 10))
+		.map(part => parseInt(part, 10))
 		.join('.');
 	manifest.description = build.bio;
-	await Deno.writeTextFile(
+	fs.writeFileSync(
 		'./ext/manifest.json',
 		JSON.stringify(manifest, null, '\t'),
 	);

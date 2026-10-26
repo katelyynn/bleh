@@ -61,15 +61,18 @@ export function profile_summary(
 				</ProfileSummaryTitle>
 				<ProfileSummaryBlocks>
 					<ProfileSummaryBlock
+						counter
 						type='scrobbles'
 						value={page.state.scrobbles}
 						tooltip={page.state.average}
 					/>
 					<ProfileSummaryBlock
+						counter
 						type='artists'
 						value={page.state.artists}
 					/>
 					<ProfileSummaryBlock
+						counter
 						type='loved'
 						value={page.state.loved}
 					/>
@@ -133,15 +136,15 @@ export function profile_summary(
 
 	/*
 
-    if (top_artists) {
-        page.structure.main!.insertBefore(panel, top_artists);
-    } else if (recent_tracks) {
-        recent_tracks.after(panel);
-    } else {
-        page.structure.main!.insertBefore(panel, page.structure.main!.firstChild);
-    }
+	if (top_artists) {
+		page.structure.main!.insertBefore(panel, top_artists);
+	} else if (recent_tracks) {
+		recent_tracks.after(panel);
+	} else {
+		page.structure.main!.insertBefore(panel, page.structure.main!.firstChild);
+	}
 
-    */
+	*/
 
 	collect_last_60(
 		graph_container.current,
@@ -186,9 +189,8 @@ export function profile_summary(
 						const elem = graph_blocks[i - 1];
 						if (!elem) return;
 
-						const link = `${root}user/${page.name}/library${
-							period?.getAttribute('href')
-						}`;
+						const link = `${root}user/${page.name}/library${period?.getAttribute('href')
+							}`;
 						elem.href = link;
 
 						const url = new URL(`https://www.last.fm${link}`);
@@ -262,7 +264,7 @@ function bleh_profile_chart(panel: HTMLElement) {
 	fetch(
 		`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`,
 	)
-		.then(function (response) {
+		.then(function(response) {
 			console.log(
 				'glacier library returned',
 				response,
@@ -274,7 +276,7 @@ function bleh_profile_chart(panel: HTMLElement) {
 
 			return response.text();
 		})
-		.then(function (html) {
+		.then(function(html) {
 			const doc = new DOMParser().parseFromString(
 				html,
 				'text/html',
@@ -318,9 +320,9 @@ export function bleh_profile_chart_render(
 
 	if (entries.length == 0) return;
 
-	let labels = [];
+	const labels = [];
 	const links = [];
-	let values = [];
+	const values = [];
 
 	page.state.glacier.links = [];
 	entries.forEach((entry) => {
@@ -385,7 +387,7 @@ export function bleh_profile_chart_render(
 
 	Chart.defaults.color = page.state.chart_colours.text_col;
 	Chart.defaults.font.family = page.state.chart_colours.font;
-	let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+	const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 		type: 'line',
 		data: {
 			labels: labels,
@@ -416,7 +418,7 @@ export function bleh_profile_chart_render(
 	const scrobble_canvas_2 = document.createElement('canvas');
 	scrobble_canvas_2.classList.add('scrobble-canvas', 'monthly-canvas-pie');
 
-	let scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
+	const scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
 		type: 'pie',
 		data: {
 			labels: labels,

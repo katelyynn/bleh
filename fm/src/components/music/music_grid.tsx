@@ -23,7 +23,7 @@ import tippy from 'tippy.js';
 import { expand_avatar } from '@/components/shared/avatar';
 import { save_hoshino_artwork } from '@/components/music/hoshino';
 import { header_colour } from '../page/colour';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
 	if (!search) return;
@@ -355,7 +355,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								let button = html.node`
+								const button = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
 									name.getAttribute('href')
 								}">
@@ -386,7 +386,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								let button = html.node`
+								const button = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
 									name.getAttribute('href')
 								}">
@@ -415,7 +415,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								let button = html.node`
+								const button = html.node`
                                 <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
 									artist.getAttribute('href')
 								}">

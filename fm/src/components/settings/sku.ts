@@ -5,7 +5,7 @@
  */
 
 import { log } from '@/build/log';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { flags } from '@/build/flags.ts';
 
 export function ff(flag: string) {

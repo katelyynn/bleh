@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import {
 	music_links_edit,
@@ -347,7 +347,7 @@ export function create_music_links(col_main: HTMLElement) {
 						'icon',
 					);
 
-					let type = link.classList[1];
+					const type = link.classList[1];
 
 					if (type == 'resource-external-link--homepage') {
 						link.textContent = tl(trans.website) as string;

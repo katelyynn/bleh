@@ -42,37 +42,39 @@
 		padding: 5px 0;
 		gap: var(--card-gap);
 		min-height: 43px;
+		text-align: left;
 
 		&:not(:first-child) {
-			border-top: 1px solid var(--card-border-base);
+			border-top: 1px solid var(--separator-base);
 		}
 
 		&.badge-list-entry {
-			& > .icon-container,
-			& > .name {
+
+			&>.icon-container,
+			&>.name {
 				color: oklch(var(--l3-c));
 			}
 
-			& > .name {
+			&>.name {
 				font-weight: var(--font-weight-medium);
 			}
 
-			& > .text {
+			&>.text {
 				color: oklch(var(--c3));
 			}
 		}
 
-		& > .name {
+		&>.name {
 			min-width: 200px;
 		}
 
-		& > .text {
+		&>.text {
 			flex: 1;
 			font-size: calc(var(--font-size) - 1px);
 			cursor: default;
 		}
 
-		& > .preview {
+		&>.preview {
 			display: -webkit-box;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -81,7 +83,7 @@
 			-webkit-box-orient: vertical;
 		}
 
-		& > .actions {
+		&>.actions {
 			display: flex;
 			gap: var(--button-list-gap);
 			flex-shrink: 0;
@@ -109,7 +111,7 @@
 	width: 100%;
 	text-align: left;
 
-	& > thead {
+	&>thead {
 		border-bottom: 1px solid oklch(var(--b4) / 60%);
 	}
 
@@ -128,7 +130,7 @@
 		cursor: default;
 	}
 
-	tr:first-child > td {
+	tr:first-child>td {
 		padding-top: 15px;
 	}
 

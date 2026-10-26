@@ -2,30 +2,36 @@
 	"languages": {
 		"JavaScript": {
 			"language_servers": [
-				"deno",
-				"!typescript-language-server",
+				"eslint",
+				"typescript-language-server",
+				"!deno",
 				"!vtsls",
-				"!eslint",
 			],
-			"formatter": "language_server",
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			}
 		},
 		"TypeScript": {
 			"language_servers": [
-				"deno",
-				"!typescript-language-server",
+				"eslint",
+				"typescript-language-server",
+				"!deno",
 				"!vtsls",
-				"!eslint",
 			],
-			"formatter": "language_server",
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			}
 		},
 		"TSX": {
 			"language_servers": [
-				"deno",
-				"!typescript-language-server",
+				"eslint",
+				"typescript-language-server",
+				"!deno",
 				"!vtsls",
-				"!eslint",
 			],
-			"formatter": "language_server",
-		}
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			}
+		},
 	},
 }

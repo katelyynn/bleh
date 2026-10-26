@@ -17,7 +17,7 @@ import {
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface SettingKeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -113,11 +113,11 @@ export function SettingKeybind({
 
 		elem.replaceChildren(
 			<>
-				{icon && <SettingIcon name={icon} />}
 				{showLabel && (
 					<SettingLabel
 						name={name}
 						body={body}
+						icon={icon}
 						store={store}
 						value={value}
 						setValue={set}

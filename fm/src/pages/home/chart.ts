@@ -32,12 +32,14 @@ export function bleh_charts() {
 		bleh_geo_charts();
 	}
 
-	let charts = page.structure.main.querySelector('.charts');
+	const charts = page.structure.main.querySelector('.charts');
 
 	if (ff('aihara')) {
 		const new_nav = html.node`
             <div class="toolbar">
-                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+			ff('header_refresh') ? 'header-refresh' : ''
+		}">
                     <ul class="navlist-items">
                         <li class="navlist-item secondary-nav-item secondary-nav-item--daily">
                             <a href="${root}charts" class="secondary-nav-item-link ${
@@ -126,14 +128,14 @@ export function bleh_charts() {
 	if (page.subpage != 'overview') return;
 
 	charts.classList.add('legacy-charts');
-	let chart_rows = charts.querySelectorAll(
+	const chart_rows = charts.querySelectorAll(
 		'.charts-col:not(.charts-col--mobile-ad)',
 	);
 
-	let new_panel = document.createElement('section');
+	const new_panel = document.createElement('section');
 	new_panel.classList.add('charts-panel');
 
-	let out_now = page.structure.side.querySelector(
+	const out_now = page.structure.side.querySelector(
 		'.more-link-fullwidth-right a',
 	);
 	if (out_now) out_now.classList.add('btn', 'out-now-btn', 'icon', 'icon-r');
@@ -176,13 +178,13 @@ export function bleh_charts() {
 	});
 
 	chart_rows.forEach((row, index) => {
-		let chart_row = html.node`
+		const chart_row = html.node`
             <div class="charts-new-row" data-index=${index}>
                 ${row.querySelector('h2')}
             </div>
         `;
 
-		let list = html.node`
+		const list = html.node`
             <ol class="music-bookmarks-artists charts-list" />
         `;
 
@@ -206,15 +208,15 @@ export function bleh_charts() {
 			});
 		}
 
-		let items = row.querySelectorAll('.globalchart-item');
+		const items = row.querySelectorAll('.globalchart-item');
 		items.forEach((item, item_index) => {
 			let list_item;
 
-			let image = item.querySelector('.globalchart-image img');
-			let rank = item.querySelector('.globalchart-rank');
-			let name = item.querySelector('.globalchart-name a');
+			const image = item.querySelector('.globalchart-image img');
+			const rank = item.querySelector('.globalchart-rank');
+			const name = item.querySelector('.globalchart-name a');
 
-			let link = name.getAttribute('href');
+			const link = name.getAttribute('href');
 
 			image.setAttribute(
 				'src',
@@ -253,7 +255,7 @@ export function bleh_charts() {
                     </li>
                 `;
 			} else {
-				let artist = item.querySelector(
+				const artist = item.querySelector(
 					'.globalchart-track-artist-name a',
 				);
 				artist.textContent = correct_artist(artist.textContent);

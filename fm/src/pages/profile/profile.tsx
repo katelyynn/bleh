@@ -23,7 +23,6 @@ import {
 } from '@/components/music/lotus';
 import { markdown } from '@/components/markdown/markdown';
 import { redesign_profile_header } from '@/components/profile/profile_header';
-import { select, select_prepare } from '@/components/settings/select';
 import {
 	checkup_page_structure,
 	convert_to_toolbar,
@@ -34,7 +33,6 @@ import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
-import tippy from 'tippy.js';
 import { avatar } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
@@ -46,7 +44,7 @@ import { profile_summary } from '@/components/profile/summary';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
@@ -54,7 +52,7 @@ import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
 import { SeeMore, SeeMoreContainer } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
-import { SubTextPair } from '@/components/profile/sub.tsx';
+import { SubTextDot, SubTextPair } from '@/components/profile/sub.tsx';
 import {
 	AboutElement,
 	profile_about,
@@ -62,18 +60,25 @@ import {
 } from '@/pages/profile/about.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
-import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
+import {
+	append_header,
+	PageHeader,
+	PageHeaderTitle,
+} from '@/components/page/header.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { profile_recents } from '@/pages/profile/recents.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { profile_tracks } from '@/pages/profile/tracks.tsx';
-import { convert_to_select } from '@/components/select/select.tsx';
 import { PageHeaderAvatar } from '@/components/music/header.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
-import { profile_cache } from '@/types/profile.ts';
+import { profile_cache, profile_cache_list } from '@/types/profile.ts';
 import { profile_artists } from '@/pages/profile/artists.tsx';
 import { profile_albums } from '@/pages/profile/albums.tsx';
+import { ProfileBadges } from './badges.tsx';
+import { DateTime } from 'luxon';
+import { is_sponsor } from '@/components/sponsor.ts';
+import { set_obsession } from './set_obsession.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -123,13 +128,15 @@ export function bleh_profiles() {
 	const profile_cache = JSON.parse(
 		localStorage.getItem(keys.profile_cache) || '{}',
 	);
-	const cache = profile_cache[page.name] || {};
+	const cache: profile_cache = profile_cache[page.name] || {};
+
+	cache.date = DateTime.now().toISO();
 
 	let about_me_sidebar = page.structure.row!.querySelector(
 		'.about-me-sidebar',
 	) as AboutElement;
 
-	const about_me_text = about_me_sidebar?.querySelector('p')!;
+	const about_me_text = about_me_sidebar?.querySelector('p') || <p />;
 	let about_me_text_value = '';
 
 	if (page.subpage == 'overview') {
@@ -154,7 +161,7 @@ export function bleh_profiles() {
 				page.structure.side!.firstElementChild,
 			);
 		} else {
-			if (settings.bio_markdown) {
+			if (useSettings.get('bio_markdown')) {
 				about_me_text_value = about_me_text.textContent;
 
 				// parse body
@@ -363,11 +370,9 @@ export function bleh_profiles() {
 							cache.username,
 						)}
 					{badge_elements.length > 0 && (
-						<div class={['badges', 'profile-badges']}>
-							{badge_elements.map((badge) =>
-								badge
-							)}
-						</div>
+						<ProfileBadges>
+							{badge_elements.toReversed().map((badge) => badge)}
+						</ProfileBadges>
 					)}
 				</>
 			}
@@ -404,10 +409,7 @@ export function bleh_profiles() {
 		}
 	}
 
-	page.structure.container!.insertBefore(
-		redesigned_profile_header,
-		page.structure.container!.firstElementChild,
-	);
+	append_header(redesigned_profile_header);
 	profile_header.classList.add('legacy-header');
 
 	// translations in other languages
@@ -569,6 +571,8 @@ export function bleh_profiles() {
 			profile_reports();
 		} else if (page.subpage == 'obsessions_overview') {
 			obsession_list();
+		} else if (page.subpage == 'obsessions_set') {
+			set_obsession();
 		} else if (page.subpage == 'playlists_playlists') {
 			const section_controls = page.structure.container!.querySelector(
 				'.section-controls-full-width',
@@ -695,38 +699,37 @@ export function create_profile_note_panel(has_note?: string) {
                 <h2>${tl(trans.notes)}</h2>
                 <div class="view-buttons blend blend-v2">
                     <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
-		const notes = JSON.parse(
-			localStorage.getItem('bleh_profile_notes') || '{}',
-		);
-		delete notes[page.name];
+			const notes = JSON.parse(
+				localStorage.getItem('bleh_profile_notes') || '{}',
+			);
+			delete notes[page.name];
 
-		note.value = '';
-		set_storage('bleh_profile_notes', JSON.stringify(notes));
-		status({
-			id: 'note',
-			title: tl(trans.cleared_note_for_user, { u: page.name }),
-		});
-	}}>${tl(trans.clear)}</button>
+			note.value = '';
+			set_storage('bleh_profile_notes', JSON.stringify(notes));
+			status({
+				id: 'note',
+				title: tl(trans.cleared_note_for_user, { u: page.name }),
+			});
+		}}>${tl(trans.clear)}</button>
                     <button class="see-more left-icon blend-v2-btn" data-type="save" onclick=${() => {
-		const notes = JSON.parse(
-			localStorage.getItem('bleh_profile_notes'),
-		) || {};
+			const notes = JSON.parse(
+				localStorage.getItem('bleh_profile_notes'),
+			) || {};
 
-		notes[page.name] = note.value;
+			notes[page.name] = note.value;
 
-		set_storage('bleh_profile_notes', JSON.stringify(notes));
-		status({
-			id: 'note',
-			title: tl(trans.saved_note_for_user, { u: page.name }),
-			body: note.value,
-		});
-	}}>${tl(trans.save)}</button>
+			set_storage('bleh_profile_notes', JSON.stringify(notes));
+			status({
+				id: 'note',
+				title: tl(trans.saved_note_for_user, { u: page.name }),
+				body: note.value,
+			});
+		}}>${tl(trans.save)}</button>
                 </div>
             </div>
             <div class="content-form">
-                <textarea id="bleh--profile-note" placeholder=${
-		tl(trans.anything_you_can_imagine)
-	} ref=${(el) => (note = el)}>${has_note ?? has_note}</textarea>
+                <textarea id="bleh--profile-note" placeholder=${tl(trans.anything_you_can_imagine)
+		} ref=${(el) => (note = el)}>${has_note ?? has_note}</textarea>
             </div>
         </section>
     `);
@@ -769,17 +772,24 @@ function patch_profile_following() {
 	}
 
 	// create nav
-	const friends_nav = html.node`
-        <div class="toolbar">
-            <nav class="navlist secondary-nav redesigned-navigation">
-                <ul class="navlist-items">
-                    ${{ html: following_tab.outerHTML }}
-                    ${{ html: followers_tab.outerHTML }}
-                    ${{ html: neighbours_tab.outerHTML }}
-                </ul>
-            </nav>
-        </div>
-    `;
+	const friends_nav = (
+		<div class='toolbar'>
+			<nav
+				class={[
+					'navlist',
+					'secondary-nav',
+					'redesigned-navigation',
+					ff('theme_refresh') && 'theme-refresh',
+				]}
+			>
+				<ul class='navlist-items'>
+					{following_tab?.cloneNode(true)}
+					{followers_tab?.cloneNode(true)}
+					{neighbours_tab?.cloneNode(true)}
+				</ul>
+			</nav>
+		</div>
+	);
 
 	// we do this later to preserve the 'Following' text
 	following_tab.classList.remove('secondary-nav-item--following');
@@ -844,8 +854,7 @@ function patch_profile_following() {
 		page.structure.main,
 		html.node`
         <section class="users">
-            ${
-			!no_data && !no_data_neighbours
+            ${!no_data && !no_data_neighbours
 				? setting({
 					id: 'list_view',
 					func: (val) => {
@@ -853,7 +862,7 @@ function patch_profile_following() {
 					},
 				})
 				: ''
-		}
+			}
             ${no_data}
             ${no_data_neighbours}
             ${user_list}
@@ -929,8 +938,7 @@ function bleh_featured_profile_track(object) {
 	const panel = html.node`
         <section class="featured-item-panel">
             <div class="sub-text">
-                ${
-		form
+                ${form
 			? html.node`
                 <a class="has-icon" data-type="obsession" href=${link}>
                     <div class="bleh-icon" style="--icon: var(--mask)" />
@@ -944,7 +952,7 @@ function bleh_featured_profile_track(object) {
                     ${tl(trans.top_track)}
                 </div>
                 `
-	}
+		}
             </div>
             <div class="source-album js-link-block link-block featured-item">
                 <div class="source-album-art small">
@@ -954,9 +962,8 @@ function bleh_featured_profile_track(object) {
                     <h4 class="source-album-name">${name_elem}</h4>
                     ${artist_elem_full}
                 </div>
-                <a class="js-link-block-cover-link link-block-cover-link" href=${
-		name_elem.getAttribute('href')
-	} />
+                <a class="js-link-block-cover-link link-block-cover-link" href=${name_elem.getAttribute('href')
+		} />
             </div>
         </section>
     `;
@@ -975,14 +982,8 @@ function bio_parse(text, cache = true, take_effect = true) {
 	});
 
 	if (body.childElementCount == 0) {
-		render(
-			body,
-			html`
-				<p class="subtle">${tl(trans.no_about).replace(
-					'{u}',
-					page.name,
-				)}</p>
-			`,
+		body.replaceChildren(
+			<p class='subtle'>{tl(trans.no_about, { u: page.name })}</p>
 		);
 	}
 
@@ -991,6 +992,7 @@ function bio_parse(text, cache = true, take_effect = true) {
 
 export function save_profile_cache(
 	{
+		date,
 		avatar,
 		banner,
 		banner_orig,
@@ -1002,9 +1004,8 @@ export function save_profile_cache(
 		font,
 		font_style,
 		username,
-	} = {},
-	profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{},
+	}: profile_cache,
+	profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}'),
 	name = page.name,
 ) {
 	const profile_cache_o = Object.keys(profile_cache);
@@ -1014,7 +1015,7 @@ export function save_profile_cache(
 		const keys = Reflect.ownKeys(profile_cache);
 
 		// we dont delete logged in user or users on local friends list
-		const protected_users = new Set([auth.name, ...settings.friends]);
+		const protected_users = new Set([auth.name, ...(useSettings.get('friends') as string[])]);
 		const key_to_delete = keys.find(
 			(key) => !protected_users.has(profile_cache[key]),
 		);
@@ -1026,6 +1027,7 @@ export function save_profile_cache(
 	}
 
 	profile_cache[name] = {
+		date,
 		avatar,
 		banner,
 		banner_orig,
@@ -1055,7 +1057,7 @@ export async function checkup_friend_cache(list = settings.friends) {
 	}
 }
 
-export function open_starred_friend_window(friend_func = null) {
+export function open_starred_friend_window() {
 	dialog({
 		id: 'starred_friend',
 		icon: icons.friends,
@@ -1091,21 +1093,29 @@ export async function load_profile_cache_externally(name = page.name) {
 	log(`requested profile cache for ${name}`, 'cache');
 
 	const profile_cache =
-		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{};
+		JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 	const cache: profile_cache = profile_cache[name];
 
 	if (cache) {
-		if (cache.hue || cache.sat || cache.lit) {
-			if (
-				!sponsor_list.version ||
-				(sponsor_list.version &&
-					!sponsor_list.users.hasOwnProperty(name))
-			) {
-				delete cache.hue;
-				delete cache.sat;
-				delete cache.lit;
+		/*if (cache.date) {
+			const updated = DateTime.fromISO(cache.date);
+
+			if (DateTime.now().diff(updated, 'days').days >= 3) {
+				log(`forcing a new cache due to date for ${name}`, 'cache', 'info', { updated });
+				return await request_profile_cache(name);
 			}
+		} else {
+			log(`forcing a new cache due to missing date for ${name}`, 'cache');
+			return await request_profile_cache(name);
+			}*/
+
+		if (!is_sponsor(name)) {
+			delete cache.hue;
+			delete cache.sat;
+			delete cache.lit;
+			delete cache.username;
+			delete cache.font;
+			delete cache.font_style;
 		}
 
 		log(`returning pre-cached result for ${name}`, 'cache', 'info', {
@@ -1119,28 +1129,24 @@ export async function load_profile_cache_externally(name = page.name) {
 
 function load_profile_cache(
 	name = page.name,
-	cache = null,
-	profile_cache = null,
+	cache: profile_cache,
+	profile_cache: profile_cache_list,
 ) {
 	if (!name) return;
 
 	if (!profile_cache) {
-		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-			{};
+		profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 	}
 	if (!cache) cache = profile_cache[name] || {};
 
 	if (cache) {
-		if (cache.hue || cache.sat || cache.lit) {
-			if (
-				!sponsor_list.version ||
-				(sponsor_list.version &&
-					!sponsor_list.users.hasOwnProperty(name))
-			) {
-				delete cache.hue;
-				delete cache.sat;
-				delete cache.lit;
-			}
+		if (!is_sponsor(name)) {
+			delete cache.hue;
+			delete cache.sat;
+			delete cache.lit;
+			delete cache.username;
+			delete cache.font;
+			delete cache.font_style;
 		}
 
 		const hue = cache.hue;
@@ -1181,19 +1187,19 @@ function request_profile_cache(
 
 	return new Promise((resolve, reject) => {
 		fetch(`${root}user/${name}`)
-			.then(function (response) {
+			.then(function(response) {
 				console.log('returned', response, response.text);
 
 				return response.text();
 			})
-			.then(function (dom) {
+			.then(function(dom) {
 				const doc = new DOMParser().parseFromString(dom, 'text/html');
 				console.log('DOC', doc);
 
 				const about_me_sidebar = doc.querySelector('.about-me-sidebar');
 				if (about_me_sidebar) {
 					const about_me_text = about_me_sidebar.querySelector('p');
-					bio_parse(about_me_text, cache ? cache : true, false);
+					bio_parse(about_me_text, cache, false);
 				} else {
 					delete cache.username;
 					delete cache.font;
@@ -1204,7 +1210,9 @@ function request_profile_cache(
 					delete cache.lit;
 				}
 
-				const avatar = doc.querySelector('.header-avatar .avatar img');
+				cache.date = DateTime.now().toISO();
+
+				const avatar = doc.querySelector('.header-avatar .avatar img') as HTMLImageElement;
 				if (avatar) cache.avatar = avatar.src;
 
 				const secondary = doc.querySelector('.header-title-secondary');
@@ -1248,6 +1256,20 @@ function render_sub_text(
 	display_name?: string,
 ) {
 	parent.innerHTML = '';
+
+	if (page.state.follows_user) {
+		parent.appendChild(
+			<>
+				<SubTextPair
+					type='follow'
+					label={tl(trans.following)}
+					value={tl(trans.follows_you)}
+					isText={false}
+				/>
+				<SubTextDot />
+			</>,
+		);
+	}
 
 	if (display_name) {
 		parent.appendChild(
@@ -1294,17 +1316,6 @@ function render_sub_text(
 		);
 	}
 
-	if (page.state.follows_user) {
-		parent.appendChild(
-			<SubTextPair
-				type='follow'
-				label={tl(trans.following)}
-				value={tl(trans.follows_you)}
-				isText={false}
-			/>,
-		);
-	}
-
 	return parent;
 }
 
@@ -1315,9 +1326,8 @@ function bleh_profile_events(no_events) {
 
 	const value_panel = html.node`
         <section class="value-panel">
-            <h2 class="text-18">${
-		selected_tab ? selected_tab.firstChild.textContent : tl(trans.events)
-	}</h2>
+            <h2 class="text-18">${selected_tab ? selected_tab.firstChild.textContent : tl(trans.events)
+		}</h2>
         </section>
     `;
 

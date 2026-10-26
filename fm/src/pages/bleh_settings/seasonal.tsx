@@ -17,7 +17,7 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
-import { useSeasons, useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { createRef } from 'jsx-dom';
@@ -160,7 +160,7 @@ export function SeasonalTimeline({
 	next,
 	now,
 }: SeasonalTimelineProps) {
-	if (!useSettings.get('seasonal') || !prev || !next) return;
+	if (!useSettings.get('seasonal') || !prev || !next) return <></>;
 
 	return (
 		<div class='seasonal-timeline-wrap'>

@@ -13,7 +13,7 @@ import {
 } from '@/components/settings/provider/main.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface SettingCheckboxProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -112,10 +112,10 @@ export function SettingCheckbox({
 					checked={value}
 					ref={checkbox}
 				/>
-				{icon && <SettingIcon name={icon} />}
 				<SettingLabel
 					name={name}
 					body={body}
+					icon={icon}
 					store={store}
 					new_release={new_release}
 				/>

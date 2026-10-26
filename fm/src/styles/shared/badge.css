@@ -30,12 +30,12 @@
 	--top: 50%;
 	--margin-left: none;
 	--margin-top: calc(-1 * var(--icon-size) / 2);
-	height: 26px;
+	height: 24px;
 	min-width: calc(var(--icon-size) + (var(--sides) * 2));
 	max-width: unset;
 	transition-delay: 0s !important;
 
-	--icon-size: 16px;
+	--icon-size: 14px;
 
 	--bg: var(--badge);
 	--bg-hov: var(--badge-hov);
@@ -60,13 +60,15 @@
 	}
 
 	&.expand {
-		padding-left: calc(var(--icon-size) + var(--sides) + 4px) !important;
+		padding-left: calc(var(--icon-size) + var(--sides) + 3px) !important;
 		padding-right: var(--sides) !important;
 
 		&:active {
 			scale: 0.97;
 		}
 	}
+
+	--mask-size: var(--icon-size);
 
 	&:not(.small) {
 		--mask2: var(--interact-mask, none);
@@ -78,7 +80,7 @@
 		-webkit-mask-size: contain !important;
 	}
 
-	.auth-link > & {
+	.auth-link>& {
 		--icon-size: 16px;
 		--left: 0;
 		min-width: 16px;
@@ -94,22 +96,33 @@
 		--interact-mask: none !important;
 	}
 
+	&:after {
+		display: none;
+	}
+
 	&.translation-lang {
 		&:after {
 			content: '';
 			position: absolute;
-			background: var(--flag);
-			aspect-ratio: 3 / 2;
+			display: block;
+			background-image: var(--flag);
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			aspect-ratio: 1 / 1;
 
-			--flag-size: 7px;
-			--flag-width: calc(var(--flag-size) * 1.5);
+			--flag-size: 6px;
+			--flag-width: var(--flag-size);
 			width: var(--flag-width);
 			height: var(--flag-size);
 			border-radius: 2px;
-			outline: 1px solid oklch(var(--b5) / 50%);
+			outline: 1px solid oklch(var(--k4) / 70%);
 
 			left: calc(var(--sides) + var(--icon-size) - var(--flag-width));
 			top: calc(50% + var(--icon-size) / 2 - var(--flag-size));
+
+			margin-top: -1px;
+			margin-left: -1px;
 		}
 	}
 
@@ -132,8 +145,7 @@
 		height: 18px;
 
 		&.expand {
-			padding-left: calc((var(--icon-left) * 2) + var(--icon-size) + 6px)
-				!important;
+			padding-left: calc((var(--icon-left) * 2) + var(--icon-size) + 6px) !important;
 			--icon-left: 3px;
 			--mask-colour: oklch(var(--b7)) !important;
 
@@ -165,17 +177,15 @@
 
 .badges {
 	display: flex;
-	flex-direction: row-reverse;
 	gap: 4px;
 	flex-wrap: wrap;
 	width: fit-content;
 }
 
 .profile-badges {
-	margin-top: 8px;
 
-	& > .user-status-subscriber {
-		order: -1 !important;
+	&>.user-status-subscriber {
+		order: 1 !important;
 	}
 
 	@media (max-width: 980px) {
@@ -315,11 +325,8 @@
 	--left: 0;
 	--top: 0;
 	--margin-top: 0;
-	--icon-size: 18px;
 	background: var(--override-bg, none) !important;
-	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0
-		oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5)))
-		drop-shadow(-0px -2px 0 oklch(var(--b5)));
+	filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
 
 	&:before {
 		content: '';
@@ -340,10 +347,14 @@
 	}
 }
 
-.shout-user-avatar .avatar-status-dot {
+.avatar-status-dot {
+	width: var(--icon-size, var(--mask-size)) !important;
+	height: var(--icon-size, var(--mask-size)) !important;
+}
+
+.shout-user-avatar>.avatar-status-dot {
 	width: 16px;
 	height: 16px;
-	--icon-size: 16px;
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {

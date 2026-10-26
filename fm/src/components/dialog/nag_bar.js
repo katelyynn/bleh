@@ -8,7 +8,8 @@ import { settings } from '@/build/config';
 import { page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function nag_bar() {
 	/*if (!page.structure.nag_bar) {
@@ -29,7 +30,7 @@ export function nag_bar() {
 					id: 'corrections',
 					title: tl(trans.redirected_from),
 					body: active_nag.querySelector('strong'),
-					icon: 'icon-16-refresh',
+					icon: icons.refresh,
 					long: true,
 				});
 			}

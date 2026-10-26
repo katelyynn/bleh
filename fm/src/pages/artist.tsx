@@ -42,9 +42,13 @@ import {
 	menu_tooltip,
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
-import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
+import {
+	append_header,
+	PageHeader,
+	PageHeaderTitle,
+} from '@/components/page/header.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { createRef } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
@@ -182,10 +186,7 @@ export function bleh_artists() {
 		if (avatar) register_background(avatar.getAttribute('content'));
 		else register_background(null);
 
-		page.structure.container!.insertBefore(
-			redesigned_artist_header,
-			page.structure.container!.firstElementChild,
-		);
+		append_header(redesigned_artist_header);
 		artist_header.classList.add('legacy-header');
 	}
 
@@ -443,7 +444,7 @@ export function bleh_artists() {
 			overview.classList.add('secondary-nav-item--global');
 			overview.querySelector('a').textContent = tl(trans.global);
 
-			let mutuals = toolbar.querySelector(
+			const mutuals = toolbar.querySelector(
 				'.secondary-nav-item--you-know a',
 			);
 			mutuals.textContent = tl(trans.mutuals);

@@ -21,7 +21,7 @@ export function status_cafe(body: ReactElement, user?: string) {
 					</span>
 				</span>
 				<span className='status-cafe-text'>
-					${tl(trans.loading_status, { u: user })}
+					{tl(trans.loading_status, { u: user })}
 				</span>
 			</div>
 			<div className='status-cafe-top'>

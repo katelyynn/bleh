@@ -6,7 +6,7 @@
 
 import { CSSProperties } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function GraphBlocks({
 	children,

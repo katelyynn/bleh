@@ -18,7 +18,7 @@ import {
 import { keybind } from '@/components/dialog/rabbit';
 import { log } from '@/build/log.ts';
 import { settings } from '@/build/config';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function pixel({
 	host,

@@ -5,12 +5,10 @@
  */
 
 import { page } from '@/build/page.ts';
-import { useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.tsx';
 import { ReactElement } from 'jsx-dom';
 
 export function count_bar(bar: HTMLDivElement | ReactElement) {
-	const season = page.state.seasons.current?.id || 'none';
-
 	const link = bar.querySelector(
 		'.chartlist-count-bar-link',
 	) as HTMLAnchorElement;
@@ -23,9 +21,11 @@ export function count_bar(bar: HTMLDivElement | ReactElement) {
 		'.chartlist-count-bar-value',
 	) as HTMLSpanElement;
 
-	bar.setAttribute('data-season', season);
-
 	function update() {
+		const season = page.state.seasons.current?.id || 'none';
+
+		bar.setAttribute('data-season', season);
+
 		const v2 = useSettings.get('count_bar_style') == 'minimal';
 
 		bar.classList.toggle('v2', v2);
@@ -35,6 +35,7 @@ export function count_bar(bar: HTMLDivElement | ReactElement) {
 	}
 
 	useSettings.on('count_bar_style', update);
+	useSeasons.on(update);
 
 	update();
 }

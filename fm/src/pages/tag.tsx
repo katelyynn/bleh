@@ -19,7 +19,7 @@ import { page_header_title } from '@/components/music/header';
 import { Icon, icons } from '@/components/shared/icon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SideActions } from '@/components/button/side.tsx';
-import { PageHeader } from '@/components/page/header.tsx';
+import { append_header, PageHeader } from '@/components/page/header.tsx';
 import { SubText } from '@/components/text/sub.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { PanelTop } from '@/components/text/see_more.tsx';
@@ -88,10 +88,7 @@ export function bleh_tags() {
 		register_background();
 	}
 
-	page.structure.container.insertBefore(
-		redesigned_tag_header,
-		page.structure.container.firstElementChild,
-	);
+	append_header(redesigned_tag_header);
 	tag_header.classList.add('legacy-header');
 
 	const recommended = tag_header.querySelector(

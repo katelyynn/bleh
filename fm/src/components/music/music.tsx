@@ -27,7 +27,7 @@ import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
 import { icons } from '../shared/icon';
 import { BetaIndicator } from '../shared/indicator';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { ReactNode } from 'jsx-dom';
@@ -100,6 +100,10 @@ export function show_your_scrobbles() {
 			'redesigned-navigation',
 		);
 
+		if (useSettings.get('header_refresh')) {
+			tabs.classList.add('header-refresh');
+		}
+
 		if (page.type == 'artist') {
 			tabs.appendChild(html.node`
                 <ul class="navlist-items">
@@ -118,8 +122,7 @@ export function show_your_scrobbles() {
                             ${tl(trans.albums)}
                         </a>
                     </li>
-                    ${
-				!page_is_blocked
+                    ${!page_is_blocked
 					? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--images">
                         <a class="secondary-nav-item-link" href="${window.location.pathname}/+images">
@@ -158,7 +161,7 @@ export function show_your_scrobbles() {
                     </li>
                     `
 					: ''
-			}
+				}
                 </ul>
             `);
 		} else if (page.type == 'album') {
@@ -169,8 +172,7 @@ export function show_your_scrobbles() {
                             ${tl(trans.home)}
                         </a>
                     </li>
-                    ${
-				!page_is_blocked
+                    ${!page_is_blocked
 					? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
                         <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
@@ -194,7 +196,7 @@ export function show_your_scrobbles() {
                     </li>
                     `
 					: ''
-			}
+				}
                 </ul>
             `);
 		} else if (page.type == 'track') {
@@ -210,8 +212,7 @@ export function show_your_scrobbles() {
                             ${tl(trans.albums)}
                         </a>
                     </li>
-                    ${
-				!page_is_blocked
+                    ${!page_is_blocked
 					? html.node`
                     <li class="navlist-item secondary-nav-item secondary-nav-item--wiki">
                         <a class="secondary-nav-item-link" href="${window.location.pathname}/+wiki">
@@ -230,7 +231,7 @@ export function show_your_scrobbles() {
                     </li>
                     `
 					: ''
-			}
+				}
                 </ul>
             `);
 		}
@@ -341,8 +342,12 @@ export function show_your_scrobbles() {
 	) as HTMLDivElement;
 
 	Array.from(header_actions.children).forEach((form) => {
-		const item = form.querySelector('a, button');
-		if (!item) return;
+		let item = form;
+
+		if (form.nodeName != 'BUTTON') {
+			item = form.querySelector('a, button')!;
+			if (!item) return;
+		}
 
 		item.classList.add('btn', 'side-action', 'icon-mask');
 		const classes = item.classList;
@@ -383,7 +388,7 @@ export function show_your_scrobbles() {
 
 	if (ff('submit_scrobble')) {
 		const can_api = localStorage.getItem('bleh_auth') &&
-				localStorage.getItem('bleh_auth_valid') === 'true' || false;
+			localStorage.getItem('bleh_auth_valid') === 'true' || false;
 
 		const source_album = page.structure.main!.querySelector(
 			'.source-album-name',
@@ -572,10 +577,10 @@ export function show_your_scrobbles() {
 			html`
 				<div class="loading-data-text info">
 				    ${tl(
-					page.type == 'album'
-						? trans.missing_album_info
-						: trans.missing_artist_info,
-				)}
+				page.type == 'album'
+					? trans.missing_album_info
+					: trans.missing_artist_info,
+			)}
 				</div>
 			`,
 		);
@@ -624,17 +629,17 @@ export function show_your_scrobbles() {
 }
 
 function show_numbers_on_side(header_type) {
-	let metadata = document.body.querySelectorAll('.header-metadata-tnew-item');
+	const metadata = document.body.querySelectorAll('.header-metadata-tnew-item');
 
-	let listeners = {};
-	let scrobbles = {};
-	let metascore = {};
+	const listeners = {};
+	const scrobbles = {};
+	const metascore = {};
 
 	metadata.forEach((item, index) => {
-		let text = item
+		const text = item
 			.querySelector('.header-metadata-tnew-title')
 			.textContent.trim();
-		let value = item.querySelector('.header-metadata-tnew-display abbr');
+		const value = item.querySelector('.header-metadata-tnew-display abbr');
 
 		if (index == 0) {
 			listeners.text = text;
@@ -645,7 +650,7 @@ function show_numbers_on_side(header_type) {
 			scrobbles.value = clean_number(value.getAttribute('title'));
 			scrobbles.abbr = value.textContent.trim();
 		} else if (index == 2) {
-			let link = item.querySelector('a');
+			const link = item.querySelector('a');
 			if (!link) return;
 
 			metascore.text = text;
@@ -659,7 +664,7 @@ function show_numbers_on_side(header_type) {
 	music_summary(listeners, scrobbles, metascore);
 
 	// get panel
-	let panel = page.structure.side.querySelector(
+	const panel = page.structure.side.querySelector(
 		'section.section-with-separator:has(.listener-trend)',
 	);
 
@@ -667,7 +672,7 @@ function show_numbers_on_side(header_type) {
 
 	// is there album artwork?
 	if (page.type == 'album') {
-		let album_artwork = document.body.querySelector(
+		const album_artwork = document.body.querySelector(
 			'.artwork-and-metadata-row',
 		);
 
@@ -679,7 +684,7 @@ function show_numbers_on_side(header_type) {
 		}
 	}
 
-	let masonry = page.structure.row.querySelector(
+	const masonry = page.structure.row.querySelector(
 		':scope > .col-sidebar.masonry-right',
 	);
 	if (masonry) {
@@ -688,12 +693,12 @@ function show_numbers_on_side(header_type) {
 	}
 
 	if (page.type == 'album' || page.type == 'artist') {
-		let upper = document.body.querySelector('.col-main');
+		const upper = document.body.querySelector('.col-main');
 		upper.classList.add('upper-overview-to-hide');
 		// make last-child
 		page.structure.row.appendChild(upper);
 
-		let new_upper = document.createElement('div');
+		const new_upper = document.createElement('div');
 		new_upper.classList.add('top-overview-panel');
 		new_upper.setAttribute('data-page-type', page.type);
 		new_upper.innerHTML = upper.innerHTML;
@@ -706,7 +711,7 @@ function show_numbers_on_side(header_type) {
 
 	// is there a video?
 	if (page.type == 'track') {
-		let video_col = document.body.querySelector(
+		const video_col = document.body.querySelector(
 			'.track-overview-video-column.col-sidebar',
 		);
 
@@ -721,7 +726,7 @@ function show_numbers_on_side(header_type) {
 			page.structure.side.firstElementChild,
 		);
 
-		let video = video_col.querySelector('.video-preview');
+		const video = video_col.querySelector('.video-preview');
 
 		if (!video) {
 			video_unavailable(video_col);
@@ -734,8 +739,8 @@ function show_numbers_on_side(header_type) {
 			page.structure.side.firstElementChild,
 		);
 
-		let playlink = video.querySelector('.video-preview-playlink a');
-		let replace = video_col.querySelector('.video-preview-replace a');
+		const playlink = video.querySelector('.video-preview-playlink a');
+		const replace = video_col.querySelector('.video-preview-replace a');
 
 		video.appendChild(html.node`
             <a class="link-block-cover-link" href=${playlink.href} target="_blank" />
@@ -759,7 +764,7 @@ function show_numbers_on_side(header_type) {
 }
 
 function video_unavailable(video_col = null) {
-	let cta = page.structure.side.querySelector('.video-preview-upload-cta');
+	const cta = page.structure.side.querySelector('.video-preview-upload-cta');
 	if (cta) return;
 
 	if (video_col) page.structure.side.removeChild(video_col);
@@ -822,13 +827,13 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
 		position += (parseInt(page.requested.page) - 1) * 30;
 	}
 
-	let avatar = listener.querySelector(`.${key}-item-image`);
-	let name_wrap = listener.querySelector(`.${key}-item-name a`);
-	let name = name_wrap.textContent;
+	const avatar = listener.querySelector(`.${key}-item-image`);
+	const name_wrap = listener.querySelector(`.${key}-item-name a`);
+	const name = name_wrap.textContent;
 
-	let track_wrap = listener.querySelector(`.${key}-track`);
+	const track_wrap = listener.querySelector(`.${key}-track`);
 
-	let follow = listener.querySelector('.class');
+	const follow = listener.querySelector('.class');
 
 	let name_link;
 	let user_list_avatar;
@@ -840,20 +845,18 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                     ${position}
                 </span>
                 <h4 class="user-list-name">
-                    <a class="user-list-link link-block-target" href=${
-		name_wrap.getAttribute('href')
-	} ref=${(el) => (name_link = el)}>
+                    <a class="user-list-link link-block-target" href=${name_wrap.getAttribute('href')
+		} ref=${(el) => (name_link = el)}>
                         ${name}
                     </a>
                 </h4>
                 <span class="avatar user-list-avatar" ref=${(
-		el,
-	) => (user_list_avatar = el)}>
+			el,
+		) => (user_list_avatar = el)}>
                     ${{ html: avatar.innerHTML }}
                 </span>
                 ${follow}
-                ${
-		track_wrap
+                ${track_wrap
 			? html.node`
                 <div class="user-list-description">
                     <p class="user-list-about-me has-featured-track" ref=${(
@@ -864,13 +867,13 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                 </div>
                 `
 			: ''
-	}
+		}
             </div>
         </li>
     `;
 
 	if (track_wrap) {
-		let track_link = about_me.querySelector('a');
+		const track_link = about_me.querySelector('a');
 
 		track_link.classList.add('top-track');
 		if (useSettings.get('format_guest_features')) {
@@ -1041,16 +1044,14 @@ export function similar_items() {
 		controls.replaceWith(html.node`
             <div class="top-container">
                 <h2>${{
-			html: tl(trans.more_like_name, {
-				n: page.type == 'artist'
-					? `<i>${
-						sanitise_text(romanise(correct_artist(page.name)))
-					}<i>`
-					: `<i>${
-						sanitise_text(romanise(correct_artist(page.sister)))
-					}<i>`,
-			}),
-		}}</h2>
+				html: tl(trans.more_like_name, {
+					n: page.type == 'artist'
+						? `<i>${sanitise_text(romanise(correct_artist(page.name)))
+						}<i>`
+						: `<i>${sanitise_text(romanise(correct_artist(page.sister)))
+						}<i>`,
+				}),
+			}}</h2>
                 <div class="view-buttons blend blend-v2">
                     ${station}
                 </div>
@@ -1071,11 +1072,10 @@ export function similar_items() {
 			html`
 				${{
 					html: tl(trans.more_like_name, {
-						n: `<i>${
-							romanise(
-								correct_item_by_artist(page.name, page.sister),
-							)
-						}</i>`,
+						n: `<i>${romanise(
+							correct_item_by_artist(page.name, page.sister),
+						)
+							}</i>`,
 					}),
 				}}
 			`,
@@ -1093,11 +1093,10 @@ export function similar_items() {
 			html`
 				${{
 					html: tl(trans.more_like_name, {
-						n: `<i>${
-							romanise(
-								correct_item_by_artist(page.name, page.sister),
-							)
-						}</i>`,
+						n: `<i>${romanise(
+							correct_item_by_artist(page.name, page.sister),
+						)
+							}</i>`,
 					}),
 				}}
 			`,

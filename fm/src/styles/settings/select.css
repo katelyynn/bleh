@@ -31,21 +31,24 @@
 	}
 
 	&:active {
+
 		&:before,
-		& > .select-indicator {
+		&>.select-indicator {
 			transform: scaleY(1) translateY(1px) !important;
 		}
 	}
 
 	&[aria-expanded="true"] {
+
 		&:before,
-		& > .select-indicator {
+		&>.select-indicator {
 			transform: scaleY(-1) translateY(0) !important;
 		}
 
 		&:active {
+
 			&:before,
-			& > .select-indicator {
+			&>.select-indicator {
 				transform: scaleY(-1) translateY(-1px) !important;
 			}
 		}
@@ -91,8 +94,7 @@
 	padding: unset;
 	--focus-outline: none;
 	position: absolute;
-	inset: var(--button-verts) calc(var(--button-sides) + 12px + 4px)
-		var(--button-verts) var(--button-sides);
+	inset: var(--button-verts) calc(var(--button-sides) + 12px + 4px) var(--button-verts) var(--button-sides);
 	pointer-events: none;
 
 	/*&:not(.with-query) {
@@ -118,18 +120,22 @@
 		content: '';
 		position: absolute;
 		display: block !important;
-		right: calc(var(--button-sides-icon) - (var(--margin) / 2));
 
 		--size: calc(var(--select-arrow-icon-size) + 2px);
 		--margin: calc(var(--size) - var(--select-arrow-icon-size));
 
-		background-color: oklch(var(--b2) / 20%);
+		background-color: oklch(var(--b2) / 20%) !important;
 		border-radius: 4px;
 		width: var(--size);
 		height: var(--size);
 
-		top: 50%;
+		top: 50% !important;
+		bottom: unset !important;
+		left: unset !important;
+		right: calc(var(--button-sides-icon) - (var(--margin) / 2)) !important;
 		margin-top: calc(-1 * (var(--size) / 2));
+		transform: unset !important;
+		opacity: unset;
 
 		transition-property: opacity;
 		transition-duration: var(--trans);
@@ -146,7 +152,7 @@
 	&:active,
 	&[aria-expanded="true"] {
 		&:after {
-			opacity: 0;
+			opacity: 0 !important;
 		}
 	}
 }

@@ -29,14 +29,14 @@ import { markdown_options, social_link } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '@/components/sponsor';
-import { proxy_images } from '@/components/markdown/proxy.tsx';
+import { proxy_image, proxy_images } from '@/components/markdown/proxy.tsx';
 import { status_cafe } from '@/components/markdown/statuscafe.tsx';
 import { time } from '@/components/markdown/time.tsx';
 import {
 	social_links,
 	social_links_extension,
 } from '@/components/markdown/links.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function markdown(
@@ -126,9 +126,7 @@ export function markdown(
 					const safe = new URL(url);
 					if (!['http:', 'https:'].includes(safe.protocol)) return '';
 
-					cache.banner = `https://images.weserv.nl/?url=${
-						encodeURIComponent(url)
-					}&output=webp&n=-1`;
+					cache.banner = proxy_image(url);
 					if (name == auth.name) cache.banner_orig = url;
 				} catch {
 					cache.banner = 'accent';
@@ -226,10 +224,7 @@ export function markdown(
 				delete cache.font;
 				delete cache.font_style;
 
-				if (
-					sponsor_list.version &&
-					sponsor_list.users.hasOwnProperty(name)
-				) {
+				if (is_sponsor(name)) {
 					const split = family.split(',');
 
 					cache.font = split[0];
@@ -249,10 +244,7 @@ export function markdown(
 			replace: (_: string, username: string) => {
 				delete cache.username;
 
-				if (
-					sponsor_list.version &&
-					sponsor_list.users.hasOwnProperty(name)
-				) {
+				if (is_sponsor(name)) {
 					cache.username = username;
 				}
 
@@ -339,7 +331,7 @@ export function markdown(
 	let profile_cache: profile_cache_list;
 
 	const will_cache = cache === true;
-	const available = allow_banners || allow_hue;
+	const available = allow_banners || allow_hue || allow_fonts;
 	log(
 		`prepare new cache is ${will_cache}, caching features available is ${available}`,
 		'markdown',
@@ -413,7 +405,7 @@ export function markdown(
 			class={['parsed-markdown', 'markdown-body']}
 			dangerouslySetInnerHTML={{ __html: parsed }}
 		/>
-	);
+	) as HTMLDivElement;
 
 	log('rendered', 'markdown', 'info', { body });
 
@@ -748,8 +740,8 @@ export function markdown_field(
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.value;
+							const link_text = link.value;
 
 							if (!link_text) return;
 
@@ -843,8 +835,8 @@ export function markdown_field(
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.value;
+							const link_text = link.value;
 
 							if (!link_text) return;
 
@@ -956,7 +948,7 @@ export function markdown_field(
 								selected.startsWith(item.start) &&
 								selected.endsWith(item.end)
 							) {
-								let replace_end = -1 * item.end.length;
+								const replace_end = -1 * item.end.length;
 
 								if (replace_end != 0) {
 									replacement = selected.slice(

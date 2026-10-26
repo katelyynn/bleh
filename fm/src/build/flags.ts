@@ -287,14 +287,19 @@ export const flags: Record<string, flag> = {
 		name: 'Remove Last.fm-provided stylesheets for performance',
 		date: '2026-07-30',
 	},
-	'yuzu': {
+	yuzu: {
 		enabled: true,
 		name: 'Keep track of track/album/artist streaks on profiles',
 		date: '2026-08-29',
 	},
-	'collage_style': {
-		enabled: false,
+	collage_style: {
+		enabled: true,
 		name: 'Collage alternative styles',
 		date: '2026-09-20',
+	},
+	header_refresh: {
+		enabled: false,
+		name: 'Refresh header location',
+		date: '2026-10-12',
 	},
 };

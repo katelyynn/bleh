@@ -13,7 +13,7 @@ import {
 } from '@/components/settings/provider/main.tsx';
 import { tl, translation } from '@/build/trans.ts';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Radio } from '@/components/settings/clickables/radio.tsx';
 
 interface SettingRadioProps {
@@ -119,10 +119,10 @@ export function SettingRadio({
 
 		elem.replaceChildren(
 			<>
-				{icon && <SettingIcon name={icon} />}
 				<SettingLabel
 					name={name}
 					body={body}
+					icon={icon}
 					store={store}
 					value={value}
 					setValue={(val: string) => {

@@ -5,19 +5,19 @@
 
 	font-family: var(--font);
 	font-size: var(--font-size-sm);
-	background: oklch(var(--f4) / 20%);
+	background: oklch(var(--k4) / 20%);
 	color: oklch(var(--l3-c));
 	padding: 0 6px;
 	border-radius: var(--radius-xs);
 
-	font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight-medium) !important;
 
 	&.spacing {
 		gap: 4px;
 	}
 
-	& > .bleh-icon-container,
-	& > .bleh-icon {
+	&>.bleh-icon-container,
+	&>.bleh-icon {
 		--icon-size: 12px;
 		height: var(--icon-size);
 		--mask-colour: currentColor;
@@ -33,9 +33,21 @@
 	}
 
 	&.new {
-		animation: new 4s linear infinite;
+		rotate: -2deg;
+		background: unset;
+		color: oklch(var(--l3-c));
+		padding: 0;
 
-		box-shadow: 0 0 20px oklch(var(--h4) / 40%);
+		&:before {
+			content: '';
+			position: absolute;
+			inset: 10px 0 2px 0;
+
+			background: oklch(var(--k4) / 20%);
+			border-radius: var(--radius-xs);
+
+			z-index: -1;
+		}
 	}
 
 	&.sponsor-related {
@@ -43,7 +55,7 @@
 		border-radius: unset;
 	}
 
-	.side-action > & {
+	.side-action>& {
 		margin: unset !important;
 	}
 }
@@ -68,6 +80,6 @@
 	height: var(--icon-size);
 }
 
-.sku > .bleh-icon-container {
+.sku>.bleh-icon-container {
 	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }

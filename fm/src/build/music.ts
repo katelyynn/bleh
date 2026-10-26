@@ -92,7 +92,7 @@ export const ranks = [
 	},
 ];
 
-export let includes = {
+export const includes = {
 	guests: [
 		/\sfeat\s/i,
 		/\sfeat\./i,

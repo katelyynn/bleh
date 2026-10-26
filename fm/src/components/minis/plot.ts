@@ -29,12 +29,12 @@ import { redirect } from '../music/music';
 import { notify } from '../dialog/notify';
 import { toggle } from '../settings/toggle';
 import { save_setting } from '../settings/settings';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function plot({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
 
-	let data_points = [];
+	const data_points = [];
 
 	const graph_colour_length = 11;
 
@@ -335,7 +335,7 @@ export function plot({ host, sidebar } = {}) {
 		}
 
 		const starred = useSettings.get('starred_friend') || '';
-		let friends = settings.friends.filter((f) => f != starred);
+		const friends = settings.friends.filter((f) => f != starred);
 
 		if (starred || friends.length > 0) {
 			user_list.push({
@@ -402,7 +402,7 @@ export function plot({ host, sidebar } = {}) {
 			data_points.map(async (point, index) => {
 				const cache = await load_profile_cache_externally(point.user);
 
-				let user_name = html.node`
+				const user_name = html.node`
                     <a href="${root}user/${point.user}" />
                 `;
 
@@ -452,7 +452,7 @@ export function plot({ host, sidebar } = {}) {
                         <div class="plot-footer-action">
                             <button class="btn icon-mask chibi plot-footer-action-btn" data-type="x" onclick=${() => {
 					for (let i = data_points.length - 1; i >= 0; i--) {
-						let p = data_points[i];
+						const p = data_points[i];
 						if (
 							(p.user == point.user) && (p.media == point.media)
 						) {
@@ -501,10 +501,10 @@ export function plot({ host, sidebar } = {}) {
 
 	prep_chart_colours();
 
-	let scrobble_canvas_container = document.createElement('div');
+	const scrobble_canvas_container = document.createElement('div');
 	scrobble_canvas_container.classList.add('plot-canvas-container');
 
-	let scrobble_canvas = document.createElement('canvas');
+	const scrobble_canvas = document.createElement('canvas');
 	scrobble_canvas.classList.add('plot-canvas');
 
 	Chart.defaults.font.family = page.state.chart_colours.font;

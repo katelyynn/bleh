@@ -11,6 +11,7 @@ import {
 	hover_tooltip,
 	menu_tooltip,
 	Tooltip,
+	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
@@ -26,6 +27,7 @@ type ButtonProps =
 		loading?: boolean;
 		menu?: boolean;
 		outline?: boolean;
+		subtle?: boolean;
 		href?: string;
 		external?: boolean;
 		onClick?: () => void;
@@ -43,11 +45,13 @@ type ButtonProps =
 type ButtonElement = HTMLButtonElement & {
 	disabled: boolean;
 	loading: boolean;
+	menu?: TooltipInstance<ReactElement, ReactElement>;
 };
 
 type ButtonLinkElement = HTMLAnchorElement & {
 	disabled: boolean;
 	loading: boolean;
+	menu?: TooltipInstance<ReactElement, ReactElement>;
 };
 
 export function Button({
@@ -59,8 +63,9 @@ export function Button({
 	accented = false,
 	disabled = false,
 	loading = false,
-	menu = false,
+	menu,
 	outline,
+	subtle,
 	href,
 	external,
 	onClick,
@@ -78,6 +83,7 @@ export function Button({
 		primary && 'primary',
 		colourful && 'colourful',
 		outline && 'outline-btn',
+		subtle && 'subtle',
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
 		(opens != null) && 'select-button',
@@ -85,6 +91,8 @@ export function Button({
 	];
 
 	let elem: ButtonElement | ButtonLinkElement;
+
+	let instance: TooltipInstance<ReactElement, ReactElement>;
 
 	if (!href) {
 		elem = (
@@ -94,9 +102,7 @@ export function Button({
 				onClick={handleOnClick}
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
 				{...props}
-			>
-				{children}
-			</button>
+			/>
 		) as ButtonElement;
 	} else {
 		elem = (
@@ -107,9 +113,7 @@ export function Button({
 				onClick={handleOnClick}
 				ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
 				{...props}
-			>
-				{children}
-			</a>
+			/>
 		) as ButtonLinkElement;
 	}
 
@@ -121,7 +125,7 @@ export function Button({
 	}
 
 	if (opens) {
-		menu_tooltip(
+		instance = menu_tooltip(
 			elem,
 			opens,
 		);
@@ -179,6 +183,12 @@ export function Button({
 		},
 	});
 
+	Object.defineProperty(elem, 'menu', {
+		get() {
+			return instance;
+		},
+	});
+
 	update();
 
 	return elem;
@@ -202,11 +212,17 @@ export function ButtonComboSeparator() {
 	return <div class='button-combo-sep' />;
 }
 
+interface ButtonGroupProps {
+	extra?: boolean;
+	children?: ReactNode;
+}
+
 export function ButtonGroup({
+	extra,
 	children,
-}: WithChildren) {
+}: ButtonGroupProps) {
 	return (
-		<div class='button-group'>
+		<div class={['button-group', extra && 'extra']}>
 			{children}
 		</div>
 	);

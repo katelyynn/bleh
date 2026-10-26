@@ -8,10 +8,17 @@ import { html } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { ReactElement, ReactNode } from 'jsx-dom';
+import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
 import { WithChildren } from '@/types/generic.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
+import { Button } from '@/components/button/button.tsx';
+import {
+	CancelIcon,
+	Icon,
+	icons,
+	SaveIcon,
+} from '@/components/shared/icon.tsx';
 
 export function load_dialogs() {
 	const elem = (
@@ -21,12 +28,28 @@ export function load_dialogs() {
 				const latest = Object.keys(dialogs).at(-1);
 				if (!latest) return;
 
-				if (dialogs[latest].dismiss) {
+				if (
+					dialogs[latest].dismiss &&
+					!dialogs[latest].handle_escape_manually
+				) {
 					dialog_rm({ id: latest, modal_bg: true });
 				}
 			}}
 		/>
 	);
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key != 'Escape') return;
+
+		const latest = Object.keys(dialogs).at(-1);
+		if (!latest) return;
+
+		if (
+			dialogs[latest].dismiss && !dialogs[latest].handle_escape_manually
+		) {
+			dialog_rm({ id: latest, modal_bg: true });
+		}
+	});
 
 	document.body.appendChild(elem);
 	page.structure.dialogs = elem;
@@ -89,7 +112,7 @@ export function dialog({
 	if (replace_if_possible && Object.keys(dialogs).length > 0) {
 		replace = true;
 
-		for (let dialog in dialogs) {
+		for (const dialog in dialogs) {
 			replace_id = dialog;
 			break;
 		}
@@ -135,14 +158,6 @@ export function dialog({
 		);
 	}
 
-	if (dismiss && !handle_escape_manually) {
-		document.addEventListener('keydown', (e) => {
-			if (e.key == 'Escape') {
-				dialog_rm({ id: id });
-			}
-		});
-	}
-
 	modal.appendChild(
 		<div class='bleh-modal-body' data-allow-scroll={String(allow_scroll)}>
 			{body}
@@ -152,6 +167,7 @@ export function dialog({
 	dialogs[id] = {
 		instance: modal,
 		dismiss,
+		handle_escape_manually,
 	};
 
 	if (replace || (!replace && dialogs.hasOwnProperty(replace_id))) {
@@ -180,7 +196,7 @@ export function dialog_rm({
 	if (all) {
 		log('requested kill all', 'window', 'info', { dialogs });
 
-		for (let dialog in dialogs) {
+		for (const dialog in dialogs) {
 			dialog_rm({
 				id: dialog,
 			});
@@ -194,7 +210,7 @@ export function dialog_rm({
 	if (!page.structure.dialogs) return;
 
 	if (dialogs.hasOwnProperty(id)) {
-		let dialog = dialogs[id];
+		const dialog = dialogs[id];
 
 		if (!page.structure.dialogs.contains(dialog.instance)) return;
 
@@ -226,4 +242,192 @@ export function ModalFooter({
 
 export function FooterFill() {
 	return <div class='fill' />;
+}
+
+type close = 'close' | 'cancel' | 'back' | 'done' | ReactNode;
+
+interface modal {
+	id: string;
+	title: ReactNode;
+	body?: ReactNode;
+	close?: close;
+	canClose?: boolean;
+	onClose?: () => void;
+	actions?: ModalAction[];
+	replace?: boolean;
+}
+
+export function modal({
+	id,
+	title,
+	body,
+	close = 'close',
+	canClose = true,
+	onClose,
+	actions = [],
+	replace = false,
+}: modal) {
+	const elem = (
+		<Modal
+			id={id}
+			title={title}
+			close={close}
+			canClose={canClose}
+			actions={actions}
+			onClose={() => {
+				onClose?.();
+				dialog_rm({ id });
+			}}
+		>
+			{body}
+		</Modal>
+	) as ModalElement;
+
+	let replace_id = '';
+	if (replace && Object.keys(dialogs).length > 0) {
+		replace = true;
+
+		for (const dialog in dialogs) {
+			replace_id = dialog;
+			break;
+		}
+	}
+	if (replace_id) dialog_rm({ id: replace_id });
+
+	dialogs[id] = {
+		instance: elem,
+		dismiss: canClose,
+	};
+
+	page.structure.dialogs.appendChild(elem);
+	page.structure.dialogs.classList.add('has-dialog');
+
+	return elem;
+}
+
+interface ModalAction {
+	onClick?: () => void;
+	className?: string;
+	colourful?: boolean;
+	children: ReactNode;
+	primary?: boolean;
+}
+
+interface ModalProps {
+	id?: string;
+	title: ReactNode;
+	close?: close;
+	canClose?: boolean;
+	actions?: ModalAction[];
+	onClose?: () => void;
+	children?: ReactNode;
+}
+
+type ModalElement = HTMLDivElement & {
+	id?: string;
+	body?: HTMLDivElement;
+};
+
+export function Modal({
+	id,
+	title,
+	close = 'close',
+	canClose = true,
+	actions = [],
+	onClose,
+	children,
+}: ModalProps) {
+	if (close == 'back') {
+		close = (
+			<>
+				<Icon name={icons.arrow_left} />
+				{tl(trans.back)}
+			</>
+		);
+	} else if (close == 'done') {
+		close = (
+			<>
+				<SaveIcon />
+				{tl(trans.done)}
+			</>
+		);
+	} else if (close == 'cancel') {
+		close = (
+			<>
+				<CancelIcon />
+				{tl(trans.cancel)}
+			</>
+		);
+	} else if (close == 'close') {
+		close = (
+			<>
+				<CancelIcon />
+				{tl(trans.close)}
+			</>
+		);
+	}
+
+	const body = createRef();
+
+	const elem = (
+		<div
+			className={['bleh-modal-v2']}
+			data-reduced-motion={useSettings.get('reduced_motion')}
+		>
+			<div class='bleh-modal-v2-content'>
+				<h1 className='bleh-modal-v2-title'>{title}</h1>
+				{children && (
+					<div class='bleh-modal-v2-body' ref={body}>
+						{children}
+					</div>
+				)}
+			</div>
+			<div class='bleh-modal-v2-actions'>
+				{canClose && (
+					<Button className='bleh-modal-v2-action' onClick={onClose}>
+						{close}
+					</Button>
+				)}
+				{actions.map((action, i) => {
+					if (canClose) i++;
+
+					return (
+						<>
+							{i > 0 && <ModalActionSeparator />}
+							<Button
+								className={`bleh-modal-v2-action ${action.className} ${
+									action.colourful && 'colourful'
+								} ${action.primary && 'action-primary'}`}
+								onClick={action.onClick}
+							>
+								{action.children}
+							</Button>
+						</>
+					);
+				})}
+			</div>
+		</div>
+	) as ModalElement;
+
+	Object.defineProperty(elem, 'body', {
+		get() {
+			if (!body.current) return undefined;
+
+			return body.current;
+		},
+	});
+
+	Object.defineProperty(elem, 'id', {
+		get() {
+			if (!id) return '';
+
+			return id;
+		},
+	});
+
+	return elem;
+}
+
+function ModalActionSeparator() {
+	return <div class='modal-action-separator' />;
 }

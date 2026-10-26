@@ -10,6 +10,7 @@ import { dialog } from '@/components/dialog/dialog';
 import { tl, trans } from '@/build/trans';
 import { log } from '@/build/log.ts';
 import { copy } from '@/build/tools';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function share(url) {
 	let is_url = false;
@@ -94,22 +95,16 @@ export function share(url) {
 	});
 }
 
-export function download(url, filename = null) {
+export function download(url: string, filename?: string) {
 	log(`downloading ${filename}`, 'download');
 
-	const link = html.node`
-        <a href=${url} download />
-    `;
-
-	if (filename) {
-		link.setAttribute('download', filename);
-	}
+	const link = <a href={url} download={filename} /> as HTMLAnchorElement;
 
 	link.click();
 	notify({
 		id: 'downloaded',
 		title: tl(trans.downloaded),
 		body: filename,
-		icon: 'icon-16-download',
+		icon: icons.download,
 	});
 }

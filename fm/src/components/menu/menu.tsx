@@ -6,6 +6,7 @@
 
 import { WithChildren } from '@/types/generic.tsx';
 import { Tooltip } from '@/components/shared/tooltips.tsx';
+import { Separator } from '../divider/separator';
 
 export function MenuContents({
 	children,
@@ -15,4 +16,8 @@ export function MenuContents({
 			{children}
 		</Tooltip>
 	);
+}
+
+export function MenuSeparator() {
+	return <Separator />;
 }

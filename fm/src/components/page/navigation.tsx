@@ -6,15 +6,14 @@
 
 import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
-import { stored_season } from '@/build/seasonal';
 import { lang, lang_info, lastfm_languages, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
-import { useSeasons, useSettings } from '@/page.ts';
-import { save_setting, setting } from '@/components/settings/settings';
+import { useSeasons, useSettings } from '@/page.tsx';
+import { setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.ts';
 import {
@@ -25,28 +24,27 @@ import {
 	smart_title,
 } from '@/components/music/lotus';
 import { bleh_notification_list } from '@/components/inbox/notifications';
-import tippy, { Instance } from 'tippy.js';
+import tippy from 'tippy.js';
 import {
 	load_profile_cache_externally,
 	open_starred_friend_window,
 } from '@/pages/profile/profile';
 import { is_sponsor, sponsor } from '@/components/sponsor';
-import { generic_link_menu, register_menu } from '@/components/menu';
+import { GenericLinkMenu, register_menu } from '@/components/menu';
 import { bool, copy, get_language_name, romanise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
-import { match } from '@/components/settings/dynamic_theming';
 import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
 import { Icon, icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
-import { convert_lang_to_country, Flag, flag } from '../shared/flag';
+import { convert_lang_to_country, Flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
 import { createRef, ReactElement, RefObject } from 'jsx-dom';
-import { toggle_theme } from '@/config.ts';
+import { toggle_theme } from '@/config.tsx';
 import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import {
 	Button,
@@ -54,9 +52,11 @@ import {
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
 import {
+	context_menu_tooltip,
 	hover_tooltip,
 	menu_tooltip,
 	Tooltip,
+	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import {
@@ -66,29 +66,34 @@ import {
 } from '@/components/menu/nav_window.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import { MenuRadio } from '../settings/provider/menu/radio';
 
 const handle_update = (e: Event) => {
 	e.preventDefault();
 	prompt_for_update();
 };
 
-export function update_branding_type(state = settings.branding_type) {
+export function update_branding_type(state = useSettings.get('branding_type')) {
+	const season = useSeasons.get().current?.id || '';
+
 	if (state == 'bleh') {
 		page.state.home_link.replaceChildren(
-			<div class={['home-logo', 'bleh-logo']}>
-				{version.brand}
+			<div class={['home-logo', 'bleh-logo']} data-season={season}>
+				<div class='brand-inner' data-season={season}>
+					{version.brand}
+				</div>
 			</div>,
 		);
 	} else if (state == 'lastfm') {
 		page.state.home_link.replaceChildren(
-			<div class={['home-logo', 'lastfm-logo']}>
-				{'Last.fm'}
+			<div class={['home-logo', 'lastfm-logo']} data-season={season}>
+				<div class='brand-inner' data-season={season}>Last.fm</div>
 			</div>,
 		);
 	}
 
 	const update_required = bool(
-		localStorage.getItem(keys.update_required) || 'false',
+		localStorage.getItem(keys.update_required),
 	);
 
 	if (update_required) {
@@ -169,7 +174,7 @@ export function append_nav() {
 								class='btn-primary'
 								onClick={() => {
 									open(
-										`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
+										`https://bleh.yuzu.pet/download`,
 									);
 								}}
 							>
@@ -334,43 +339,20 @@ export function append_nav() {
 
 	update_branding_type();
 
-	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
+	//const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 
-	const link_menu = tippy(home_link.current, {
-		theme: 'context-menu',
-		content: html.node`
-            ${
-			setting({
-				id: 'branding_type',
-				func: update_branding_type,
-				in_menu: true,
-			})
-		}
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${
-			last_checked
-				? tl(trans.last_checked_date, {
-					d: DateTime.fromJSDate(new Date(last_checked)).toRelative(),
-				})
-				: tl(trans.never_checked)
-		}
-            </a>
-        `,
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
+	context_menu_tooltip(
+		home_link.current,
+		<MenuContents>
+			<MenuRadio bind='branding_type' />
+			<Button menu href={`${root}bleh/general`}>
+				<Icon name={icons.update} />
+				{tl(trans.check_for_updates)}
+			</Button>
+		</MenuContents>
+	);
 
-		onShow(instance) {
-			instance.popper.addEventListener('click', (event) => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(home_link.current, link_menu);
+	useSettings.on('branding_type', update_branding_type);
 
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
@@ -399,6 +381,8 @@ export function append_nav() {
 	const auth_link = masthead.querySelector(
 		'.masthead-nav-wrap > .site-auth .auth-link',
 	);
+
+	auth_link?.classList.add('select-button', 'select-in-settings');
 
 	function update() {
 		const theme = useSettings.get('theme') as string;
@@ -442,9 +426,8 @@ export function append_nav() {
                 <a class="btn mobile-control icon" data-type="register" href="${root}join">
                     ${tl(trans.sign_up)}
                 </a>
-                <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'settings' || page.type == 'bleh_settings'
-		} data-menu-item="settings" href="${root}bleh">
+                <a class="btn mobile-control icon" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'
+			} data-menu-item="settings" href="${root}bleh">
                     ${tl(trans.settings)}
                 </a>
                 <a class="btn mobile-control icon" data-type="login" href="${root}login">
@@ -478,25 +461,24 @@ export function append_nav() {
 		auth_link.appendChild(create_badge(badges, false, false, true));
 	} else if (auth.pro) {
 		auth_link.appendChild(html.node`
-            <span class="label user-status-subscriber auth-badge">${
-			tl(trans.badges['user-status-subscriber'].name)
-		}</span>
+            <span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)
+			}</span>
         `);
 	}
 
 	/*let quick_switcher = html.node`
-        <li class="masthead-nav-item">
-            <button class="masthead-nav-control" data-type="cmd" onclick=${() => page.state.rabbit()}>
-                ${tl(trans.quick_switcher)}
-            </button>
-        </li>
-    `;
+		<li class="masthead-nav-item">
+			<button class="masthead-nav-control" data-type="cmd" onclick=${() => page.state.rabbit()}>
+				${tl(trans.quick_switcher)}
+			</button>
+		</li>
+	`;
 
-    tippy(quick_switcher, {
-        content: tl(trans.quick_switcher)
-    });
+	tippy(quick_switcher, {
+		content: tl(trans.quick_switcher)
+	});
 
-    links.appendChild(quick_switcher);*/
+	links.appendChild(quick_switcher);*/
 
 	const more_button = (
 		<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)}>
@@ -551,7 +533,7 @@ export function append_nav() {
 			</Button>
 			<Button
 				menu
-				href='https://github.com/katelyynn/bleh/issues'
+				href='https://bleh.yuzu.pet/issues'
 				external
 			>
 				<Icon name={icons.issue} />
@@ -599,7 +581,7 @@ export function append_nav() {
 					/>
 					{tl(
 						trans.seasonal.listing[
-							state.current ? state.current.id : 'none'
+						state.current ? state.current.id : 'none'
 						],
 					)}
 				</>,
@@ -614,7 +596,7 @@ export function append_nav() {
 						<p>
 							{tl(
 								trans.seasonal.listing[
-									state.current ? state.current.id : 'none'
+								state.current ? state.current.id : 'none'
 								],
 							)}
 						</p>
@@ -682,11 +664,11 @@ export function append_nav() {
 						</div>
 						<div class="status-info">
 							<strong class="status-text status-title">${status
-								.name}</strong>
+						.name}</strong>
 							<p class="status-text status-artist">${status
-								.artist}</p>
+						.artist}</p>
 							<p class="status-text status-album">${status
-								.album}</p>
+						.album}</p>
 						</div>
 					</div>
 					<div class="status-time">
@@ -748,12 +730,12 @@ export function append_nav() {
 			notifications: {
 				icon: icons.notifications,
 				label: tl(trans.notifications),
-				content: () => {},
+				content: () => { },
 			},
 			messages: {
 				icon: icons.messages,
 				label: tl(trans.messages),
-				content: () => {},
+				content: () => { },
 			},
 		};
 
@@ -839,9 +821,8 @@ export function append_nav() {
 		tippy(notifications, {
 			content: html.node`
                 <div class="window-header">
-                    ${
-				icon({ name: icons.notifications, identifier: 'window_header' })
-			}
+                    ${icon({ name: icons.notifications, identifier: 'window_header' })
+				}
                     <div class="window-title">${tl(trans.notifications)}</div>
                 </div>
                 <div class="window-content" />
@@ -907,9 +888,8 @@ export function append_nav() {
 		tippy(messages, {
 			content: html.node`
                 <div class="window-header">
-                    ${
-				icon({ name: icons.messages, identifier: 'window_header' })
-			}
+                    ${icon({ name: icons.messages, identifier: 'window_header' })
+				}
                     <div class="window-title">${tl(trans.messages)}</div>
                 </div>
                 <div class="window-content" />
@@ -964,8 +944,8 @@ export function append_nav() {
 				    ${notifications}
 				    <p class="more-link">
 				        <a class="see-more" href="${root}inbox/notifications">${tl(
-					trans.read_more,
-				)}</a>
+				trans.read_more,
+			)}</a>
 				    </p>
 				</div>
 			`,
@@ -984,8 +964,8 @@ export function append_nav() {
 				    ${messages}
 				    <p class="more-link">
 				        <a class="see-more" href="${root}inbox">${tl(
-					trans.read_more,
-				)}</a>
+				trans.read_more,
+			)}</a>
 				    </p>
 				</div>
 			`,
@@ -1041,271 +1021,266 @@ export function append_nav() {
 	const side = createRef();
 	const next_side = createRef();
 
-	let auth_menu = tippy(auth_link, {
-		theme: 'auth-menu-v2',
-		placement: 'top',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
+	const auth_menu = menu_tooltip(
+		auth_link,
+		<Tooltip theme='auth-menu-v2' />,
+		{
+			onShow: (instance) => {
+				if (!auth.avatar) {
+					notify({
+						id: 'auth_broken',
+						title: 'Could not open navigation menu',
+						body: 'Authorisation status is invalid',
+					});
 
-		onShow: (instance) => {
-			if (!auth.avatar) {
-				notify({
-					id: 'auth_broken',
-					title: 'Could not open navigation menu',
-					body: 'Authorisation status is invalid',
-				});
+					auth_menu.hide();
+					return;
+				}
 
-				instance.hide();
-				return;
-			}
+				page.structure.notifications.setAttribute(
+					'data-auth-open',
+					'true',
+				);
 
-			page.structure.notifications.setAttribute('data-auth-open', 'true');
+				const update_required =
+					localStorage.getItem('bleh_update_required') || 'false';
 
-			const update_required =
-				localStorage.getItem('bleh_update_required') || 'false';
+				const current = useSettings.get('navigation_items') as string[];
 
-			let page_2;
+				let length = current.length;
+				if (length < 2) length = 2;
 
-			const current = useSettings.get('navigation_items');
+				const show_language = useSettings.get('navigation_language')
+					? 1
+					: 0;
+				const gap = 1;
 
-			let length = current.length;
-			if (length < 2) length = 2;
+				// user defined + themes + language + minis + settings
+				const height = (length + 3 + show_language) * (28 + gap) - gap;
 
-			const show_language = settings.navigation_language == true ? 1 : 0;
-			const gap = 1;
-
-			// user defined + themes + language + minis + settings
-			const height = (length + 3 + show_language) * (28 + gap) - gap;
-
-			// you cant change your theme when viewing
-			// a listening report or on a page with theme settings
-			const themes_disabled =
-				page.subpage.startsWith('listening-report') ||
-				page.state.settings_page == 'visual';
-
-			instance.setContent(
-				<>
-					{bool(update_required) && (
-						<div
-							class='update-available-banner'
-							onClick={prompt_for_update}
-						>
-							<div class='update-container'>
-								<Icon name={icons.update} />
+				instance.replaceChildren(
+					<>
+						{bool(update_required) && (
+							<div
+								class='update-available-banner'
+								onClick={prompt_for_update}
+							>
+								<div class='update-container'>
+									<Icon name={icons.update} />
+								</div>
+								<span>
+									{tl(trans.update_available_to_install)}
+								</span>
 							</div>
-							<span>{tl(trans.update_available_to_install)}</span>
-						</div>
-					)}
-					<div
-						class='auth-menu-v2'
-						style={{ '--page-height': `${height}px` }}
-					>
+						)}
 						<div
-							class={['side', 'primary']}
-							onClick={() => {
-								instance.hide();
-							}}
+							class='auth-menu-v2'
+							style={{ '--page-height': `${height}px` }}
 						>
-							<div class='auth-bg-container' ref={auth_bg}>
-								{!auth.avatar.endsWith(
-									'818148bf682d429dc215c1705eb27b98.png',
-								) && (
-									<div
-										class='bg'
-										style={{
-											backgroundImage: `url(${
-												avatar(
-													auth.avatar,
-													'avatar170s',
-												)
-											})`,
+							<div
+								class={['side', 'primary']}
+								onClick={() => {
+									auth_menu.hide();
+								}}
+							>
+								<div class='auth-bg-container' ref={auth_bg}>
+									{!auth.avatar.endsWith(
+										'818148bf682d429dc215c1705eb27b98.png',
+									) && (
+											<div
+												class='bg'
+												style={{
+													backgroundImage: `url(${avatar(
+														auth.avatar,
+														'avatar170s',
+													)
+														})`,
+												}}
+											/>
+										)}
+								</div>
+								<div class='auth-menu-header'>
+									<div class='avatar'>
+										<img
+											src={avatar(
+												auth.avatar,
+												'avatar170s',
+											)}
+											alt={auth.name!}
+										/>
+									</div>
+									<div class='name' ref={auth_header}>
+										<span class='at'>@</span>
+										{auth.name!}
+									</div>
+									{badges
+										? (
+											<div class='badges'>
+												{create_badge(
+													badges,
+													false,
+													true,
+													true,
+												)}
+											</div>
+										)
+										: auth.pro && (
+											<div class='badges'>
+												{create_badge(
+													{
+														type:
+															'user-status-subscriber',
+														inbuilt: true,
+													},
+													false,
+													true,
+													true,
+												)}
+											</div>
+										)}
+									<a
+										class='link-block-cover-link'
+										href={`${root}user/${auth.name}`}
+										onClick={() => {
+											auth_menu.hide();
 										}}
 									/>
-								)}
-							</div>
-							<div class='auth-menu-header'>
-								<div class='avatar'>
-									<img
-										src={avatar(auth.avatar, 'avatar170s')}
-										alt={auth.name!}
-									/>
 								</div>
-								<div class='name' ref={auth_header}>
-									<span class='at'>@</span>
-									{auth.name!}
-								</div>
-								{badges
-									? (
-										<div class='badges'>
-											{create_badge(
-												badges,
-												false,
-												true,
-												true,
-											)}
-										</div>
-									)
-									: auth.pro && (
-										<div class='badges'>
-											{create_badge(
-												{
-													type:
-														'user-status-subscriber',
-													inbuilt: true,
-												},
-												false,
-												true,
-												true,
-											)}
-										</div>
-									)}
-								<a
-									class='link-block-cover-link'
-									href={`${root}user/${auth.name}`}
-									onClick={() => {
-										instance.hide();
-									}}
-								/>
-							</div>
-							<div class={['floating', 'button-group']}>
-								<Button
-									menu
-									chibi
-									href={`${root}settings`}
-									onClick={() => {
-										instance.hide();
-									}}
-									tooltip={tl(trans.edit_profile)}
-								>
-									<Icon name={icons.edit} />
-									{tl(trans.edit_profile)}
-								</Button>
-								{useSettings.get('starred_friend') != ''
-									? (
-										<Button
-											menu
-											chibi
-											colourful
-											accented
-											className='starred-friend'
-											href={`${root}user/${
-												useSettings.get(
+								<div class={['floating', 'button-group']}>
+									<Button
+										menu
+										chibi
+										href={`${root}settings`}
+										onClick={() => {
+											auth_menu.hide();
+										}}
+										tooltip={tl(trans.edit_profile)}
+									>
+										<Icon name={icons.edit} />
+										{tl(trans.edit_profile)}
+									</Button>
+									{useSettings.get('starred_friend') != ''
+										? (
+											<Button
+												menu
+												chibi
+												colourful
+												accented
+												className='starred-friend'
+												href={`${root}user/${useSettings.get(
 													'starred_friend',
 												)
-											}`}
-											onClick={() => {
-												instance.hide();
-											}}
-											tooltip={useSettings.get(
-												'starred_friend',
-											) as string}
-											data-starred='true'
-										>
-											<Icon
-												name={icons.starred_friend}
-											/>
-											{useSettings.get(
-												'starred_friend',
-											) as string}
-										</Button>
-									)
-									: (
-										<Button
-											menu
-											chibi
-											onClick={() => {
-												open_starred_friend_window();
-												instance.hide();
-											}}
-											tooltip={tl(
-												trans.starred_friend.name,
-											)}
-											data-starred='false'
-										>
-											<Icon name={icons.plus} />
-											{tl(trans.starred_friend.name)}
-										</Button>
-									)}
+													}`}
+												onClick={() => {
+													auth_menu.hide();
+												}}
+												tooltip={useSettings.get(
+													'starred_friend',
+												) as string}
+												data-starred='true'
+											>
+												<Icon
+													name={icons.starred_friend}
+												/>
+												{useSettings.get(
+													'starred_friend',
+												) as string}
+											</Button>
+										)
+										: (
+											<Button
+												menu
+												chibi
+												onClick={() => {
+													open_starred_friend_window();
+													auth_menu.hide();
+												}}
+												tooltip={tl(
+													trans.starred_friend.name,
+												)}
+												data-starred='false'
+											>
+												<Icon name={icons.plus} />
+												{tl(trans.starred_friend.name)}
+											</Button>
+										)}
+								</div>
+							</div>
+							<div class='side' data-page='1' ref={side}>
+								<NavigationPage1
+									instance={auth_menu}
+									side={side}
+									next={next_side}
+									notif_count={notif_count}
+									messages_count={messages_count}
+									token={token!}
+								/>
+								<div
+									class='side-page'
+									data-page='2'
+									ref={next_side}
+								/>
 							</div>
 						</div>
-						<div class='side' data-page='1' ref={side}>
-							<NavigationPage1
-								instance={instance}
-								side={side}
-								next={next_side}
-								notif_count={notif_count}
-								messages_count={messages_count}
-								token={token!}
-							/>
+					</>,
+				);
+
+				load_profile_cache_externally(auth.name).then((cache) => {
+					if (cache.banner) {
+						auth_bg.current.replaceChildren(
 							<div
-								class='side-page'
-								data-page='2'
-								ref={next_side}
-							/>
-						</div>
-					</div>
-				</>,
-			);
+								class='bg'
+								style={{
+									backgroundImage: `url(${cache.banner})`,
+								}}
+							/>,
+						);
+					}
 
-			load_profile_cache_externally(auth.name).then((cache) => {
-				if (cache.banner) {
-					auth_bg.current.replaceChildren(
-						<div
-							class='bg'
-							style={{ backgroundImage: `url(${cache.banner})` }}
-						/>,
-					);
-				}
+					if (cache.username) {
+						auth_header.current.textContent = cache.username;
+					}
+				});
+			},
 
-				if (cache.username) {
-					auth_header.current.textContent = cache.username;
-				}
-			});
+			onHide() {
+				page.structure.notifications.setAttribute(
+					'data-auth-open',
+					'false',
+				);
+			},
 		},
+	);
 
-		onHide(instance) {
-			page.structure.notifications.setAttribute(
-				'data-auth-open',
-				'false',
-			);
-		},
-	});
-
-	const auth_drop_menu = tippy(auth_link, {
-		theme: 'context-menu',
-		content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
-                ${tl(trans.edit_quick_access)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() =>
-			copy(auth.name)}>
-                ${tl(trans.copy_username)}
-            </button>
-            <div class="sep" />
-            ${
-			generic_link_menu(
-				`${root}user/${auth.name}`,
-				`https://www.last.fm${root}user/${auth.name}`,
-			)
-		}
-        `,
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
-
-		onShow(instance) {
-			instance.popper.addEventListener('click', (event) => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(auth_link, auth_drop_menu);
+	const auth_drop_menu = context_menu_tooltip(
+		auth_link,
+		<MenuContents>
+			<Button
+				menu
+				href={`${root}bleh/profile?setting=navigation_items`}
+				onClick={() => auth_drop_menu.hide()}
+			>
+				<Icon name={icons.quick_access} />
+				{tl(trans.edit_quick_access)}
+			</Button>
+			<Button
+				menu
+				onClick={() => {
+					copy(auth.name);
+					auth_drop_menu.hide();
+				}}
+			>
+				<Icon name={icons.copy} />
+				{tl(trans.copy_username)}
+			</Button>
+			<div class='sep' />
+			<GenericLinkMenu
+				link={`${root}user/${auth.name}`}
+				copy_link={`${root}user/${auth.name}`}
+				onClick={() => auth_drop_menu.hide()}
+			/>
+		</MenuContents>,
+	);
 
 	const container = new_auth.parentElement;
 	container.parentElement.removeChild(container);
@@ -1325,22 +1300,20 @@ export function append_nav() {
 	masthead.appendChild(html.node`
         <div class="mobile-controls">
             ${() => {
-		const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'inbox'
-		} data-type="inbox">
+			const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'
+				} data-type="inbox">
                         ${tl(trans.inbox)}
-                        ${
-			count > 0
-				? html.node`<div class="notification-count-badge"></div>`
-				: ''
-		}
+                        ${count > 0
+					? html.node`<div class="notification-count-badge"></div>`
+					: ''
+				}
                     </a>
                 `;
 
-		tippy(btn, {
-			theme: 'mobile',
-			content: html.node`
+			tippy(btn, {
+				theme: 'mobile',
+				content: html.node`
                         <div class="window-header">
                             <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
                             <div class="window-title">${tl(trans.inbox)}</div>
@@ -1348,106 +1321,100 @@ export function append_nav() {
                         ${setting({ id: 'inbox_view', func: render_inbox })}
                         <div class="window-content" />
                     `,
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
+				placement: 'top',
+				interactive: true,
+				interactiveBorder: 10,
+				trigger: 'click',
+				appendTo: document.body,
 
-			onShow(instance) {
-				console.info(
-					'navigation instance',
-					instance,
-					instance.popper,
-				);
-				page.state.inbox_content = instance.popper.querySelector(
-					'.window-content',
-				);
+				onShow(instance) {
+					console.info(
+						'navigation instance',
+						instance,
+						instance.popper,
+					);
+					page.state.inbox_content = instance.popper.querySelector(
+						'.window-content',
+					);
 
-				render_inbox();
-			},
-		});
+					render_inbox();
+				},
+			});
 
-		return btn;
-	}}
+			return btn;
+		}}
             ${() => {
-		const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'user' && page.name == auth.name
-		} data-menu-item="profile_mobile">
+			const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'user' && page.name == auth.name
+				} data-menu-item="profile_mobile">
                         <span class="avatar">
                             <img src=${auth.avatar} alt=${auth.name}>
                         </span>
                         ${auth.name}
-                        ${
-			update_required === 'true'
-				? html.node`<div class="notification-count-badge"></div>`
-				: ''
-		}
+                        ${update_required === 'true'
+					? html.node`<div class="notification-count-badge"></div>`
+					: ''
+				}
                     </a>
                 `;
 
-		tippy(btn, {
-			theme: 'mobile',
-			content: html.node`
+			tippy(btn, {
+				theme: 'mobile',
+				content: html.node`
                         <div class="window-menu-items">
                             <a class="btn window-menu-item icon-r window-menu-item-big" href="${root}user/${auth.name}">
                                 <span class="avatar window-menu-avatar">
-                                    <img src=${
-				avatar(auth.avatar, 'avatar170s')
-			} alt=${auth.name}>
+                                    <img src=${avatar(auth.avatar, 'avatar170s')
+					} alt=${auth.name}>
                                 </span>
                                 ${auth.name}
                             </a>
-                            ${
-				useSettings.get('starred_friend') != ''
-					? html.node`
-                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${
-						useSettings.get('starred_friend')
-					}">
+                            ${useSettings.get('starred_friend') != ''
+						? html.node`
+                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${useSettings.get('starred_friend')
+							}">
                                     ${icon({ name: 'inherit' })}
                                     ${useSettings.get('starred_friend')}
                                 </a>
                             `
-					: ''
-			}
+						: ''
+					}
                             <button class="btn window-menu-item icon-r" onclick=${() => {
-				news();
-			}}>
+						news();
+					}}>
                                 ${icon({ name: icons.news })}
                                 ${tl(trans.news)}
                             </button>
-                            ${
-				settings.navigation_items.map((val) => {
-					let elem;
+                            ${settings.navigation_items.map((val) => {
+						let elem;
 
-					const formal = page.state.quick_access_items[val];
+						const formal = page.state.quick_access_items[val];
 
-					if (formal.url) {
-						elem = html.node`<a href=${formal.url} />`;
-					} else {
-						elem = html.node`<button onclick=${formal.action} />`;
-					}
+						if (formal.url) {
+							elem = html.node`<a href=${formal.url} />`;
+						} else {
+							elem = html.node`<button onclick=${formal.action} />`;
+						}
 
-					elem.classList = 'btn window-menu-item icon-r';
+						elem.classList = 'btn window-menu-item icon-r';
 
-					render(
-						elem,
-						html`
-							${icon({ name: formal.icon })}
-							${formal.name}
-						`,
-					);
-
-					let count = 0;
-
-					if (val == 'notifications') count = notif_count;
-					else if (val == 'messages') count = messages_count;
-
-					if (count) {
 						render(
 							elem,
 							html`
+							${icon({ name: formal.icon })}
+							${formal.name}
+						`,
+						);
+
+						let count = 0;
+
+						if (val == 'notifications') count = notif_count;
+						else if (val == 'messages') count = messages_count;
+
+						if (count) {
+							render(
+								elem,
+								html`
 								${icon({ name: formal.icon })}
 								<div class="auth-dropdown-item-row">
 									<span
@@ -1462,90 +1429,87 @@ export function append_nav() {
 								    </span>
 								</div>
 							`,
-						);
-					}
+							);
+						}
 
-					return elem;
-				})
-			}
-                            <a class="btn window-menu-item icon-r" aria-checked=${
-				page.type == 'bleh_settings'
-			} href="${root}bleh">
+						return elem;
+					})
+					}
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == 'bleh_settings'
+					} href="${root}bleh">
                                 ${icon({ name: icons.bleh_settings })}
                                 ${version.brand}
                             </a>
-                            <a class="btn window-menu-item icon-r" aria-checked=${
-				page.type == 'settings'
-			} href="${root}settings">
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == 'settings'
+					} href="${root}settings">
                                 ${icon({ name: icons.settings })}
                                 ${tl(trans.settings)}
                             </a>
                             <form>
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                                 <a class="btn window-menu-item icon-r colourful" ref=${(
-				el,
-			) => (button = el)} data-menu-item="logout" href="${root}logout">
+						el,
+					) => (button = el)} data-menu-item="logout" href="${root}logout">
                                     ${icon({ name: icons.logout })}
                                     ${tl(trans.logout)}
                                 </a>
                             </form>
                         </div>
                     `,
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
-		});
+				placement: 'top',
+				interactive: true,
+				interactiveBorder: 10,
+				trigger: 'click',
+				appendTo: document.body,
+			});
 
-		return btn;
-	}}
+			return btn;
+		}}
             ${() => {
-		const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${
-			page.type == 'search'
-		} data-menu-item="search">
+			const btn = html.node`
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'
+				} data-menu-item="search">
                         ${tl(trans.search)}
                     </a>
                 `;
 
-		let search_input;
+			let search_input;
 
-		tippy(btn, {
-			theme: 'mobile',
-			content: html.node`
+			tippy(btn, {
+				theme: 'mobile',
+				content: html.node`
                         <div class="window-header">
                             <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
                             <div class="window-title">${tl(trans.search)}</div>
                         </div>
                         ${() => {
-				const form = html.node`
+						const form = html.node`
                                 <form action="${root}search" method="get">
                                     ${(search_input = input({
-					name: 'q',
-					func: () => {
-						form.submit();
-					},
-				}))}
+							name: 'q',
+							func: () => {
+								form.submit();
+							},
+						}))}
                                 </form>
                             `;
 
-				return form;
-			}}
+						return form;
+					}}
                     `,
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
+				placement: 'top',
+				interactive: true,
+				interactiveBorder: 10,
+				trigger: 'click',
+				appendTo: document.body,
 
-			onShow() {
-				search_input.focus();
-			},
-		});
+				onShow() {
+					search_input.focus();
+				},
+			});
 
-		return btn;
-	}}
+			return btn;
+		}}
         </div>
     `);
 }
@@ -1580,7 +1544,7 @@ export async function live_status() {
 		let active = true;
 		if (
 			intro.textContent.trim() ===
-				tl(trans.last_scrobbled_replace).replace('{u}', auth.name)
+			tl(trans.last_scrobbled_replace).replace('{u}', auth.name)
 		) {
 			active = false;
 		}
@@ -1597,7 +1561,7 @@ export async function live_status() {
 		artist.removeAttribute('target');
 		album.removeAttribute('target');
 
-		let next = new Date();
+		const next = new Date();
 		next.setMinutes(next.getMinutes() + 1);
 
 		if (useSettings.get('format_guest_features')) {
@@ -1615,9 +1579,8 @@ export async function live_status() {
 				track,
 				smart_title(formatted.song_title, formatted.song_tags),
 			);
-			artist = html.node`<span class="artist">${
-				smart_artists(formatted.song_artist, formatted.song_guests)
-			}</span>`;
+			artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)
+				}</span>`;
 		} else if (useSettings.get('corrections')) {
 			album.textContent = romanise(
 				correct_item_by_artist(album.textContent, artist.textContent),
@@ -1713,7 +1676,7 @@ export async function fetch_messages() {
 }
 
 interface NavigationPage1Props {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	side: RefObject<ReactElement>;
 	next: RefObject<ReactElement>;
 	notif_count: number;
@@ -1729,9 +1692,11 @@ function NavigationPage1({
 	messages_count,
 	token,
 }: NavigationPage1Props) {
+	const items = useSettings.get('navigation_items') as string[];
+
 	const wrap = (
 		<div class='side-page' data-page={1}>
-			{useSettings.get('navigation_items').map((val: string) => {
+			{items.map((val: string) => {
 				let elem;
 
 				const formal = page.state.quick_access_items[val];
@@ -1812,6 +1777,7 @@ function NavigationPage1({
 					elem.replaceChildren(
 						<div class='auth-dropdown-item-row'>
 							<span class='auth-dropdown-item-left'>
+								<Icon name={formal.icon} />
 								{formal.name}
 							</span>
 							<span class='auth-dropdown-item-right'>
@@ -1949,38 +1915,25 @@ function NavigationPage1({
 		</div>
 	);
 
-	const simple_menu = tippy(wrap, {
-		theme: 'context-menu',
-		content: (
-			<a
-				class='dropdown-menu-clickable-item'
-				data-type='quick_access'
+	const simple_menu = context_menu_tooltip(
+		wrap,
+		<MenuContents>
+			<Button
+				menu
 				href={`${root}bleh/profile?setting=navigation_items`}
+				onClick={() => simple_menu.hide()}
 			>
+				<Icon name={icons.quick_access} />
 				{tl(trans.edit_quick_access)}
-			</a>
-		),
-		placement: 'right-start',
-		trigger: 'manual',
-		interactive: true,
-		interactiveBorder: 10,
-		offset: [0, 0],
-		appendTo: document.body,
-
-		onShow(instance: Instance) {
-			instance.popper.addEventListener('click', () => {
-				instance.hide();
-			});
-		},
-	});
-
-	register_menu(wrap, simple_menu);
+			</Button>
+		</MenuContents>,
+	);
 
 	return wrap;
 }
 
 interface NavigationFriendsProps {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	side: RefObject<ReactElement>;
 }
 
@@ -2030,7 +1983,7 @@ function NavigationFriends({
 }
 
 interface NavigationFriendProps {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	name: string;
 	starred?: boolean;
 }
@@ -2057,7 +2010,7 @@ function NavigationFriend({
 			</span>
 			{starred && (
 				<span class={['star-icon', 'colourful']}>
-					<Icon name={icons.star} />
+					<Icon name={icons.starred_friend} />
 				</span>
 			)}
 		</a>
@@ -2087,7 +2040,7 @@ function NavigationFriend({
 					)}
 				{starred && (
 					<span class={['star-icon', 'colourful']}>
-						<Icon name={icons.star} />
+						<Icon name={icons.starred_friend} />
 					</span>
 				)}
 			</>,
@@ -2231,7 +2184,7 @@ function NavigationTheme({
 }
 
 interface NavigationLanguagesProps {
-	instance: Instance;
+	instance: TooltipInstance<ReactElement, ReactElement>;
 	side: RefObject<ReactElement>;
 }
 

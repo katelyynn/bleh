@@ -14,7 +14,7 @@ import { header_colour } from '@/components/page/colour.ts';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { root } from '@/build/page.ts';
 import { redirect } from '@/components/music/music.tsx';
-import { clean_number } from '@/build/tools.ts';
+import { clean_number, lazy } from '@/build/tools.ts';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts.js';
 import {
 	Keybind,
@@ -294,18 +294,22 @@ export function Listen({
 	update();
 
 	if (!image) {
-		load_profile_cache_externally(name).then((cache) => {
-			image = cache.avatar;
+		lazy(elem, () => {
+			load_profile_cache_externally(name).then((cache) => {
+				image = cache.avatar;
 
-			if (cache.banner) banner = cache.banner;
+				if (cache.banner) banner = cache.banner;
 
-			update();
+				update();
+			});
 		});
 	}
 
 	if (!plays && url) {
 		if (!waitForHover) {
-			request();
+			lazy(elem, () => {
+				request();
+			});
 		} else {
 			elem.addEventListener('mouseenter', () => {
 				request();

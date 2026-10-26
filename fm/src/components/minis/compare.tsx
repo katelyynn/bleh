@@ -20,7 +20,7 @@ import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
 import { avatar } from '../shared/avatar';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { createRef } from 'jsx-dom';
 import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
 import {
@@ -28,7 +28,7 @@ import {
 	CompareUser,
 	CompareUsers,
 } from '@/components/minis/user.tsx';
-import { Icon, icons } from '@/components/shared/icon.tsx';
+import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { Select } from '@/components/select/select.tsx';
 import { IconLabel } from '@/components/text/text.tsx';
 import { HybridTimeframePicker } from '@/components/date/timeframe.tsx';
@@ -228,12 +228,16 @@ export function compare({ host, sidebar } = {}) {
 				type: 'warning',
 				actions: [
 					{
-						type: 'check',
-						action: () => {
+						onClick: () => {
 							notify_rm(warn);
 							begin_comparing(true);
 						},
-						text: tl(trans.continue),
+						children: (
+							<>
+								<SaveIcon />
+								{tl(trans.continue)}
+							</>
+						),
 					},
 				],
 				persist: true,
@@ -532,7 +536,7 @@ export function compare({ host, sidebar } = {}) {
 			});
 
 			page.state.compare.shared.forEach((data, index) => {
-				let template = `${sanitise(data.sister)}/_/${
+				const template = `${sanitise(data.sister)}/_/${
 					sanitise(data.name)
 				}`;
 

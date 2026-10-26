@@ -28,7 +28,7 @@ export function OracleNotice() {
 			</SeeMore>
 			<SeeMore
 				className='oracle-button'
-				href='https://github.com/katelyynn/bleh/issues/new/choose'
+				href='https://bleh.yuzu.pet/issues'
 				external
 			>
 				{tl(trans.send_feedback)}

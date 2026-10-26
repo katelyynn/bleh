@@ -16,13 +16,14 @@ import {
 	checkup_page_structure,
 	convert_to_toolbar,
 } from '@/components/page/structure';
-import { is_same_page, register_background, update_page } from '../page';
+import { register_background, update_page } from '../page';
 import { bleh_home } from '@/pages/home';
 import { html, render } from 'lighterhtml';
 import { DateTime } from 'luxon';
-import { icon, icons } from '@/components/shared/icon';
+import { icons } from '@/components/shared/icon';
 import { settings } from '@/build/config';
 import { setting } from '@/components/settings/settings';
+import { PageHeader } from '@/components/page/header';
 
 export function bleh_events() {
 	if (page.subpage == 'overview') {
@@ -37,29 +38,29 @@ export function bleh_events() {
 	if (auth.pro) {
 		// pro
 
-		page.structure.container = document.body.querySelector('.page-content');
+		page.structure.container = document.body.querySelector('.page-content')!;
 	} else {
 		// not pro
 
 		if (!is_subpage) {
 			page.structure.container = document.body.querySelector(
 				'.page-content:not(header + .page-content)',
-			);
+			)!;
 		} else {
 			page.structure.container = document.body.querySelector(
 				'.page-content',
-			);
+			)!;
 		}
 	}
-	page.structure.row = page.structure.container.querySelector('.row');
+	page.structure.row = page.structure.container.querySelector('.row')!;
 	try {
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+		page.structure.main = page.structure.row.querySelector('.col-main')!;
+		page.structure.side = page.structure.row.querySelector('.col-sidebar')!;
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
-	const event_header = document.body.querySelector('header');
+	const event_header = document.body.querySelector('header') as HTMLElement;
 
 	checkup_page_structure(is_subpage, event_header);
 
@@ -71,27 +72,17 @@ export function bleh_events() {
 		return;
 	}
 
-	page.name = event_header.querySelector('.header-title').textContent.trim();
-	page.sister = event_header.querySelector('.header-title').textContent
+	page.name = event_header.querySelector('.header-title')!.textContent.trim();
+	page.sister = event_header.querySelector('.header-title')!.textContent
 		.trim();
 
-	const same_page = is_same_page();
+	//const same_page = is_same_page();
 
-	const redesigned_event_header = html.node`
-        <section class="page-header for-generic ${same_page ? 'same' : ''}">
-            <div class="page-header-icon">
-                ${icon({ name: icons.events })}
-            </div>
-            <div class="page-header-info">
-                <div class="sub-text">${tl(trans.event)}</div>
-                <h1 class="page-header-title generic-page-title">${page.name}</h1>
-            </div>
-        </section>
-    `;
+	const redesigned_event_header = <PageHeader icon={icons.events} type='event' name={page.name} />;
 
-	let background = document.body.querySelector(
+	const background = document.body.querySelector(
 		'.header-background--has-image',
-	);
+	) as HTMLElement;
 	if (background) {
 		register_background(
 			background.style.getPropertyValue('background-image').replace(
@@ -110,17 +101,17 @@ export function bleh_events() {
 	event_header.classList.add('legacy-header');
 
 	if (!is_subpage) {
-		let header_meta = document.body.querySelector('.header-metadata');
+		const header_meta = document.body.querySelector('.header-metadata');
 		header_meta.classList.add('profile-header-metadata-legacy');
 
 		// acquire info
-		let metadata = header_meta.querySelectorAll('.header-metadata-display');
+		const metadata = header_meta.querySelectorAll('.header-metadata-display');
 
 		let going = 0;
 		let maybe = 0;
 
 		metadata.forEach((item, index) => {
-			let para = item.querySelector('p');
+			const para = item.querySelector('p');
 			if (index == 0) {
 				going = clean_number(para.textContent.trim());
 			} else if (index == 1) {
@@ -129,7 +120,7 @@ export function bleh_events() {
 		});
 
 		// create new
-		let side_actions = document.createElement('section');
+		const side_actions = document.createElement('section');
 		side_actions.classList.add('side-actions');
 
 		if (!page.mobile) {
@@ -141,8 +132,8 @@ export function bleh_events() {
 			page.structure.main.appendChild(side_actions);
 		}
 
-		let form = document.body.querySelector('.attendance-control');
-		let buttons = form.querySelectorAll('button');
+		const form = document.body.querySelector('.attendance-control');
+		const buttons = form.querySelectorAll('button');
 		buttons.forEach((button) => {
 			button.classList.add('btn', 'side-action', 'icon-mask');
 		});
@@ -304,7 +295,7 @@ export function bleh_events() {
 		}
 
 		// edit button
-		let edit_button = main_panel.querySelector(
+		const edit_button = main_panel.querySelector(
 			'.event-metadata + .event-metadata a',
 		);
 		if (edit_button) {
@@ -314,7 +305,7 @@ export function bleh_events() {
 		}
 
 		// move poster
-		let poster = main_panel.querySelector('.event-poster-preview');
+		const poster = main_panel.querySelector('.event-poster-preview');
 		let poster_panel;
 		if (poster) {
 			poster_panel = document.createElement('section');
@@ -334,14 +325,14 @@ export function bleh_events() {
 		}
 
 		// attendees
-		let users = page.structure.main.querySelectorAll(
+		const users = page.structure.main.querySelectorAll(
 			'.attendee-summary-user-inner-wrap',
 		);
 		users.forEach((user) => {
-			let avatar = user.querySelector('.attendee-summary-user-avatar');
-			let name = user.querySelector('.attendee-summary-user-link');
+			const avatar = user.querySelector('.attendee-summary-user-avatar');
+			const name = user.querySelector('.attendee-summary-user-link');
 
-			let badge = patch_avatar(avatar, name.textContent, 'event');
+			const badge = patch_avatar(avatar, name.textContent, 'event');
 
 			if (badge) {
 				style_name_from_badge(name, badge);
@@ -349,7 +340,7 @@ export function bleh_events() {
 		});
 
 		// cancelled
-		let cancelled = page.structure.main.querySelector(
+		const cancelled = page.structure.main.querySelector(
 			'.event-status--cancelled',
 		);
 		if (cancelled) {
@@ -416,8 +407,8 @@ function bleh_events_manage() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
-	let header_text =
+	const content_top = document.body.querySelector('.content-top');
+	const header_text =
 		content_top.querySelector('.content-top-header').textContent;
 
 	checkup_page_structure(false, content_top);
@@ -428,7 +419,7 @@ function bleh_events_manage() {
 
 	page.structure.nav.classList.add('navlist--more');
 
-	let edit_header = document.createElement('section');
+	const edit_header = document.createElement('section');
 	edit_header.classList.add(
 		'redesigned-header',
 		'event-manage-header',
@@ -457,8 +448,8 @@ function bleh_events_create() {
 function bleh_events_edit() {
 	bleh_events_manage();
 
-	let back = document.body.querySelector('.content-top-back-link a');
-	let nav = page.structure.nav.querySelector('ul');
+	const back = document.body.querySelector('.content-top-back-link a');
+	const nav = page.structure.nav.querySelector('ul');
 
 	nav.insertBefore(
 		html.node`
@@ -479,12 +470,12 @@ function bleh_events_home() {
 
 	bleh_home();
 
-	let filters = page.structure.container.querySelector('.events-filters');
-	let panel = page.structure.main.querySelector('section');
+	const filters = page.structure.container.querySelector('.events-filters');
+	const panel = page.structure.main.querySelector('section');
 
 	filters.classList = 'view-buttons';
 
-	let buttons = filters.querySelectorAll('.events-filter > button');
+	const buttons = filters.querySelectorAll('.events-filter > button');
 	buttons.forEach((button) => {
 		button.classList.add('btn', 'view-item');
 

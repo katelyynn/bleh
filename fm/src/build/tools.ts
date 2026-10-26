@@ -16,7 +16,7 @@ import { status } from '@/components/dialog/status.js';
 import { root } from '@/build/page';
 import { hsl, oklch } from 'culori';
 import JSON5 from 'json5';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function hex_to_hsl(hex: string) {
 	return hsl(hex);
@@ -163,8 +163,8 @@ export function desanitise(text: string, method = '+') {
  * @see return_artist_from_generic
  */
 export function return_artist_from_track(url, is_album) {
-	let split = url.split('/');
-	let length = split.length - 1;
+	const split = url.split('/');
+	const length = split.length - 1;
 
 	let desanitised;
 
@@ -189,8 +189,8 @@ export function return_artist_from_track(url, is_album) {
  * @see return_artist_from_track
  */
 export function return_artist_from_generic(url: string) {
-	let split = url.split('/');
-	let length = split.length - 1;
+	const split = url.split('/');
+	const length = split.length - 1;
 
 	// artist/_/name in the url means it is a track
 	if (split[length - 1] != '_') return desanitise(split[length - 1]);
@@ -336,37 +336,38 @@ export function download_with_progress(
 	func?: (percent: number) => void,
 ) {
 	return new Promise((resolve, reject) => {
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', url, true);
-		xhr.responseType = 'blob';
+		GM_xmlhttpRequest({
+			method: 'GET',
+			url,
+			responseType: 'blob',
 
-		xhr.onprogress = (event) => {
-			if (event.lengthComputable) {
-				const percent = Math.round((event.loaded / event.total) * 100);
-				func(percent);
-				log(`downloading ${percent}%`, 'download', 'info', {
-					url: url,
-				});
-			}
-		};
+			onprogress: (e) => {
+				if (e.lengthComputable) {
+					const percent = Math.round((e.loaded / e.total) * 100);
+					func?.(percent);
+					log(`downloading ${percent}%`, 'download', 'info', {
+						url: url,
+					});
+				}
+			},
 
-		xhr.onload = () => {
-			if (xhr.status === 200) {
-				resolve(xhr.response);
-				log(`downloaded ${url}`, 'download');
-			} else {
-				reject(new Error(`download failed: ${xhr.status}`));
-				log(`download failed: ${xhr.status}`, 'download', 'error', {
-					url: url,
-				});
-			}
-		};
+			onload: (res) => {
+				if (res.status == 200) {
+					resolve(res.response);
+					log(`downloaded ${url}`, 'download');
+				} else {
+					reject(new Error(`download failed: ${res.status}`));
+					log(`download failed: ${res.status}`, 'download', 'error', {
+						url: url,
+					});
+				}
+			},
 
-		xhr.onerror = () => {
-			reject(new Error('network error'));
-			log('network error', 'download', 'error', { url: url });
-		};
-		xhr.send();
+			onerror: (e) => {
+				reject(e);
+				log('network error', 'download', 'error', { url: url });
+			},
+		});
 	});
 }
 
@@ -586,7 +587,7 @@ export function get_language_name(code: string) {
 	}
 }
 
-export function bool(value?: string) {
+export function bool(value?: string | null) {
 	if (!value) return false;
 
 	return value.toLowerCase().trim() === 'true';

@@ -3,17 +3,9 @@
 	inset: 0 0 0 50%;
 	z-index: -4;
 
-	--header-size: 180px;
+	--w: min(1300px, 90vw);
 
-	--w: 1300px;
-	--h: calc(99px + var(--tab-size) + var(--header-size));
-
-	&[data-page-type="events"],
-	&[data-page-type="festival"],
-	&[data-page-type="tag"],
-	&[data-page-type="search"] {
-		--header-size: 48px;
-	}
+	aspect-ratio: 1300 / 325;
 
 	&[data-page-type="bleh_now"],
 	&[data-page-subpage="obsessions_obsession"],
@@ -29,11 +21,14 @@
 	border-bottom-left-radius: var(--card-radius);
 	border-bottom-right-radius: var(--card-radius);
 
-	overflow: hidden;
+	display: flex;
+	justify-content: end;
 
-	will-change: transform;
-	transform: translateZ(0);
-	backface-visibility: hidden;
+	&[data-refresh="true"] {
+		justify-content: start;
+	}
+
+	overflow: hidden;
 
 	@media (max-width: 980px) {
 		--w: var(--cards-width);
@@ -44,10 +39,6 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
-
-	--mask: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, white 20%);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
 
 	contain: strict;
 
@@ -62,7 +53,7 @@
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
 
-		--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+		--mask: linear-gradient(90deg, transparent 0%, white 50%, white 70%, transparent 100%);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
@@ -75,7 +66,7 @@
 			display: none;
 		}
 
-		& > .background-inner {
+		&>.background-inner {
 			&:before {
 				display: none;
 			}
@@ -84,24 +75,26 @@
 }
 
 .background-inner {
-	position: absolute;
-	inset: 0;
+	display: block;
+	height: 100%;
+	aspect-ratio: 1300 / 325;
 	background-position: center;
-	background-size: 100%;
+	background-size: cover;
 	background-repeat: no-repeat;
 
-	--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+	--mask: linear-gradient(90deg, transparent 0%, white 50%, white 70%, transparent 100%);
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
-	opacity: 0.8;
+	opacity: 0.6;
+
+	will-change: opacity;
 
 	&:before {
 		content: '';
 		position: absolute;
 		inset: 0;
 		background: var(--banner-overlay);
-		mix-blend-mode: var(--banner-mix);
 	}
 
 	@media (max-width: 980px) {
@@ -113,6 +106,19 @@
 	}
 }
 
+.page-banner,
+.bleh-background {
+	--header-size: var(--page-header-banner-size-default);
+	--h: calc(99px + var(--tab-size) + var(--header-size));
+
+	&[data-page-type="events"],
+	&[data-page-type="festival"],
+	&[data-page-type="tag"],
+	&[data-page-type="search"] {
+		--header-size: 48px;
+	}
+}
+
 .bleh-background {
 	position: absolute;
 	inset: 0;
@@ -120,10 +126,6 @@
 
 	opacity: 0;
 	height: var(--banner-height);
-
-	will-change: opacity, transform, filter;
-	transform: translateZ(0);
-	backface-visibility: hidden;
 
 	contain: strict;
 
@@ -140,6 +142,7 @@
 	transition-property: opacity;
 	transition-duration: 0.5s;
 	transition-timing-function: var(--trans-function-ani);
+
 
 	&:after {
 		content: "";
@@ -158,6 +161,15 @@
 		z-index: 20;
 	}
 
+	&[data-lacrimosa="true"] {
+		background-color: oklch(var(--b5)) !important;
+		height: var(--h);
+
+		&:after {
+			background-color: oklch(var(--b5)) !important;
+		}
+	}
+
 	&[data-page-type="user"] {
 		&[data-page-subpage="obsessions_obsession"] {
 			height: 700px;
@@ -169,7 +181,6 @@
 		position: absolute;
 		inset: 0;
 		background: var(--background-overlay);
-		mix-blend-mode: var(--background-mix-mode);
 
 		z-index: 10;
 	}
@@ -201,7 +212,7 @@
 	background-position: center 60%;
 	background-size: cover;
 
-	scale: 1.2;
+	scale: 1.03;
 }
 
 .katsune-bleh-background-border {

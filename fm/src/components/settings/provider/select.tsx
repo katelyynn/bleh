@@ -13,7 +13,7 @@ import {
 } from '@/components/settings/provider/main.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Select, SelectOption } from '@/components/select/select.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface SettingSelectProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -113,11 +113,11 @@ export function SettingSelect({
 
 		elem.replaceChildren(
 			<>
-				{icon && <SettingIcon name={icon} />}
 				{showLabel && (
 					<SettingLabel
 						name={name}
 						body={body}
+						icon={icon}
 						store={store}
 						value={value}
 						setValue={(val: string) => {

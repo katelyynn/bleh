@@ -32,6 +32,7 @@ body,
 			inset 0 1px 3px oklch(0 0 0 / 2%);
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
+			0 0 2px 4px oklch(var(--l4-c) / 6%),
 			var(--input-shadow);
 		--group-shadow:
 			inset 0 0 0 1px oklch(var(--b4) / 0.8),
@@ -42,9 +43,9 @@ body,
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
 		--sidebar-border: color-mix(in oklch,
 				oklch(var(--b5)),
-				oklch(var(--b4)) 42%);
+				oklch(var(--b4)) 52%);
 		--toolbar-bg: oklch(var(--b5) / 70%);
-		--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 65%) 10%, oklch(var(--l3-c) / 25%), oklch(var(--b4) / 65%) 90%);
+		--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 65%) 10%, oklch(var(--l3-c) / 15%), oklch(var(--b4) / 65%) 90%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
 		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 73%));
@@ -70,7 +71,7 @@ body,
 		--view-buttons-hov: oklch(var(--b4) / 60%);
 		--view-buttons-atv: oklch(var(--b4) / 80%);
 
-		--background-overlay: oklch(var(--b5));
+		--background-overlay: oklch(var(--b5) / 40%);
 		--background-mix-mode: overlay;
 
 		--card-overlay-filter: invert(0.4);
@@ -109,6 +110,7 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
+
 	&[data-bleh--theme="light"],
 	body[data-bleh--theme="light"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0 calc(var(--sat) * 0.06) var(--hue);
@@ -135,7 +137,8 @@ u,
 		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f4: calc(clamp(min(1), var(--lit), max(1.2)) * 0.96) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue);
-		--k4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.88) calc(clamp(min(0), var(--sat), max(2)) * 0.15) var(--hue);
+		--k4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.88) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
+		--x4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -149,7 +152,7 @@ u,
 
 		--badge: oklch(var(--f4) / 60%);
 		--badge-hov: oklch(var(--f4) / 80%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 2px 6px 0 oklch(calc(clamp(min(1), var(--lit), max(1.2)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue) / 60%) inset;
+		--badge-shadow: 1px 1px 0 0 oklch(var(--l2-c) / 42%) inset, -1px -4px 8px 0 oklch(var(--h4) / 13%) inset;
 
 		--grid-colour-shadow: var(--grid-colour-shadow-override,
 				0 10px 30px oklch(var(--h4) / 30%));
@@ -205,6 +208,6 @@ u,
 		--primary-shadow: 0 0 transparent;
 		--bar-shadow: 0 0 transparent;
 
-		--side-action-bg: oklch(var(--k4) / 15%);
+		--side-action-bg: oklch(var(--k4) / 20%);
 	}
 }

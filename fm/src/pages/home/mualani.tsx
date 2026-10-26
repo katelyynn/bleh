@@ -4,7 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { register_background, update_page } from '@/page';
+import {
+	handle_error,
+	register_background,
+	update_page,
+	useSettings,
+} from '@/page';
 import { auth, page } from '@/build/page';
 import { log } from '@/build/log.ts';
 import { checkup_page_structure } from '@/components/page/structure.tsx';
@@ -12,7 +17,7 @@ import { html, render } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';
 import { download_with_progress, sanitise } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
-import { dialog } from '@/components/dialog/dialog';
+import { dialog, Modal, modal } from '@/components/dialog/dialog';
 import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
@@ -35,7 +40,6 @@ import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { settings } from '@/build/config.ts';
 import { Select } from '@/components/select/select.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
@@ -59,6 +63,7 @@ import { SettingList } from '@/components/settings/provider/list.tsx';
 import { EventItem } from '@/components/event/item.tsx';
 import {
 	CancelIcon,
+	Icon,
 	icons,
 	MinusIcon,
 	PlusIcon,
@@ -94,6 +99,15 @@ import { UserSelect } from '@/components/select/user.tsx';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { ComparisonBars } from '@/components/minis/compare.tsx';
 import { keys } from '@/components/settings/storage.ts';
+import { useSeasons } from '@/page.tsx';
+import {
+	AvatarDecoration,
+	decorations,
+} from '@/components/avatar/decoration.tsx';
+import { HeatmapDates } from '@/components/date/heatmap';
+import { OracleCredits } from '@/components/oracle/credits';
+import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
+import { MenuRadio } from '@/components/settings/provider/menu/radio';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -508,7 +522,7 @@ export function mualani() {
 								bind='starred_friend'
 								values={select_prepare_list([
 									{ value: '', text: tl(trans.none) },
-									...settings.friends,
+									...useSettings.get('friends') as string[],
 								])}
 							/>
 						</SettingGroup>
@@ -520,18 +534,30 @@ export function mualani() {
 					<DemoItem label='SettingTheme'>
 						<SettingTheme
 							theme={{
-								id: settings.theme as string,
-								adaptive: settings.theme_schedule as boolean,
-								theme_day: settings.theme_day as string,
-								theme_night: settings.theme_night as string,
+								id: useSettings.get('theme') as string,
+								adaptive: useSettings.get(
+									'theme_schedule',
+								) as boolean,
+								theme_day: useSettings.get(
+									'theme_day',
+								) as string,
+								theme_night: useSettings.get(
+									'theme_night',
+								) as string,
 							}}
 						/>
 						<SettingTheme
 							theme={{
-								id: settings.theme as string,
-								adaptive: settings.theme_schedule as boolean,
-								theme_day: settings.theme_day as string,
-								theme_night: settings.theme_night as string,
+								id: useSettings.get('theme') as string,
+								adaptive: useSettings.get(
+									'theme_schedule',
+								) as boolean,
+								theme_day: useSettings.get(
+									'theme_day',
+								) as string,
+								theme_night: useSettings.get(
+									'theme_night',
+								) as string,
 							}}
 						/>
 					</DemoItem>
@@ -576,10 +602,12 @@ export function mualani() {
 					<DemoItem label='SettingColour'>
 						<SettingColour
 							colour={{
-								type: settings.accent_type as colour_type,
-								hue: settings.hue as number,
-								sat: settings.sat as number,
-								lit: settings.lit as number,
+								type: useSettings.get(
+									'accent_type',
+								) as colour_type,
+								hue: useSettings.get('hue') as number,
+								sat: useSettings.get('sat') as number,
+								lit: useSettings.get('lit') as number,
 							}}
 							season={{
 								id: 'christmas',
@@ -654,10 +682,12 @@ export function mualani() {
 						/>
 						<SettingColour
 							colour={{
-								type: settings.accent_type as colour_type,
-								hue: settings.hue as number,
-								sat: settings.sat as number,
-								lit: settings.lit as number,
+								type: useSettings.get(
+									'accent_type',
+								) as colour_type,
+								hue: useSettings.get('hue') as number,
+								sat: useSettings.get('sat') as number,
+								lit: useSettings.get('lit') as number,
 							}}
 							season={{
 								id: 'christmas',
@@ -1085,12 +1115,22 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
-			<section>
+			<section id='menu'>
 				<DemoGrid>
 					<DemoItem label='Menu settings'>
 						<MenuContents>
 							<MenuCheckbox name='Setting name' />
 							<MenuCheckbox bind='solarium' />
+							<MenuRadio name='Setting name' value='hello'
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}} />
+							<MenuRadio bind='branding_type' />
 						</MenuContents>
 					</DemoItem>
 				</DemoGrid>
@@ -1210,6 +1250,348 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Brand'>
+						<div class='brand-container-demo'>
+							<BrandDemo />
+						</div>
+						<div class='brand-container-demo'>
+							<BrandDemo mask />
+						</div>
+						<div class='brand-container-demo empty'>
+							<BrandDemo />
+							<BrandDemo small />
+						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Notification'>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+								})}
+						>
+							Open notification
+						</Button>
+					</DemoItem>
+					<DemoItem label='Notification (persistent)'>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+								})}
+						>
+							Open notification
+						</Button>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+									type: 'error',
+								})}
+						>
+							Open notification
+						</Button>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+									type: 'warning',
+								})}
+						>
+							Open notification
+						</Button>
+						<Button
+							onClick={() =>
+								notify({
+									title: 'hello world',
+									body: 'this is a body',
+									persist: true,
+									type: 'success',
+								})}
+						>
+							Open notification
+						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							actions={[
+								{
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							close='back'
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							close={
+								<>
+									<Icon name={icons.maybe} />
+									Reconsider
+								</>
+							}
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+					<DemoItem label='ModalV2'>
+						<Modal
+							title='Make mimi leader?'
+							canClose={false}
+							actions={[
+								{
+									colourful: true,
+									className: 'delete',
+									onClick: () => {
+										notify({
+											title: 'mimi:',
+											body: 'I am your new leader',
+										});
+									},
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
+				</DemoGrid>
+				<DemoGrid>
+					<DemoItem label='ModalV2 (opener)'>
+						<Button
+							onClick={() => {
+								modal({
+									id: 'mimi',
+									title: 'Make mimi leader?',
+									body: 'This action cannot be undone.',
+									close: (
+										<>
+											<Icon name={icons.maybe} />
+											Reconsider
+										</>
+									),
+									actions: [
+										{
+											colourful: true,
+											className: 'delete',
+											children: (
+												<>
+													<Icon name={icons.crown} />
+													Make her leader
+												</>
+											),
+										},
+									],
+								});
+							}}
+						>
+							Open modal
+						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Error'>
+						<Button
+							onClick={() =>
+								handle_error(new SyntaxError('random message'))}
+						>
+							Force error
+						</Button>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='decoration'>
+				<DemoGrid>
+					<DemoItem label='AvatarDecoration'>
+						{Object.keys(decorations).map((deco) => (
+							<AvatarDecoration type={deco}>
+								<div class={['avatar', 'demo-avatar']}>
+									<img
+										src={avatar(auth.avatar, 'avatar300s')}
+									/>
+								</div>
+							</AvatarDecoration>
+						))}
+					</DemoItem>
+					<DemoItem label='AvatarDecoration'>
+						{Object.keys(decorations).map((deco) => (
+							<AvatarDecoration type={deco}>
+								<div class={['avatar', 'demo-avatar', 'small']}>
+									<img
+										src={avatar(auth.avatar, 'avatar300s')}
+									/>
+								</div>
+							</AvatarDecoration>
+						))}
+					</DemoItem>
+					<DemoItem label='AvatarDecoration'>
+						{Object.keys(decorations).map((deco) => (
+							<AvatarDecoration type={deco}>
+								<div
+									class={[
+										'avatar',
+										'demo-avatar',
+										'smallest',
+									]}
+								>
+									<img
+										src={avatar(auth.avatar, 'avatar300s')}
+									/>
+								</div>
+							</AvatarDecoration>
+						))}
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='HeatmapDates'>
+						<HeatmapDates />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='credits'>
+				<DemoGrid>
+					<DemoItem label='OracleCredits'>
+						<OracleCredits name='futaba' credits={{
+							vocal: [
+								{
+									name: 'glaive',
+									attributes: []
+								},
+								{
+									name: 'glaive',
+									attributes: ['banjo']
+								}
+							]
+						}} />
+					</DemoItem>
+					<DemoItem label='OracleCredits'>
+						<OracleCredits name='futaba' credits={{}} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='summary'>
+				<DemoGrid>
+					<DemoItem label='SummaryBlock'>
+						<ProfileSummaryBlocks>
+							<ProfileSummaryBlock counter type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock counter type='artists' value={2025} />
+							<ProfileSummaryBlock counter type='loved' value={1446} />
+						</ProfileSummaryBlocks>
+					</DemoItem>
+					<DemoItem label='SummaryBlock (large)'>
+						<ProfileSummaryBlocks large>
+							<ProfileSummaryBlock counter large type='scrobbles' value={191468} tooltip='That is an average of something' />
+							<ProfileSummaryBlock counter large type='average' value={120} />
+							<ProfileSummaryBlock counter large type='artists' value={2025} />
+							<ProfileSummaryBlock counter large type='albums' value={4781} />
+							<ProfileSummaryBlock counter large type='tracks' value={13490} />
+							<ProfileSummaryBlock counter large type='loved' value={1446} />
+						</ProfileSummaryBlocks>
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
 
@@ -1219,12 +1601,11 @@ export function mualani() {
 	});
 
 	textcontent.current.after(html.node`
-		${
-		tl(trans.page_templates.type, {
-			page: 0,
-			brand: 1,
-		})
-	}
+		${tl(trans.page_templates.type, {
+		page: 0,
+		brand: 1,
+	})
+		}
 	`);
 
 	return;
@@ -1257,9 +1638,9 @@ export function mualani() {
 			        ${setting({ id: 'expand_tracks' })}
 			        ${setting({ id: 'romanise_jp' })}
 			        ${setting({
-				id: 'navigation_items',
-				list: page.state.quick_access_items,
-			})}
+			id: 'navigation_items',
+			list: page.state.quick_access_items,
+		})}
 			    </div>
 				<div class="tippy-box" data-theme="context-menu" data-state="visible">
 					<div class="tippy-content">
@@ -1275,53 +1656,53 @@ export function mualani() {
 					<button
 						class="btn continue"
 						onclick=${() =>
-							notify({
-								id: 'test',
-								title: 'testing!',
-								body: 'haaaiaiii test bodyyy.......',
-							})}
+				notify({
+					id: 'test',
+					title: 'testing!',
+					body: 'haaaiaiii test bodyyy.......',
+				})}
 					>
 			            Deliver notification
 			        </button>
 					<button
 						class="btn continue"
 						onclick=${() =>
-							notify({
-								id: 'test',
-								title: 'testing!',
-								body: 'haaaiaiii test bodyyy.......',
-								persist: true,
-							})}
+				notify({
+					id: 'test',
+					title: 'testing!',
+					body: 'haaaiaiii test bodyyy.......',
+					persist: true,
+				})}
 					>
 			            Deliver persistent notification
 			        </button>
 					<button
 						class="btn continue"
 						onclick=${() => {
-							let notification = notify({
-								id: 'async',
-								title: 'progress',
-								body: 'downloading...',
-								progress: true,
-							});
+				const notification = notify({
+					id: 'async',
+					title: 'progress',
+					body: 'downloading...',
+					progress: true,
+				});
 
-							download_with_progress(
-								`https://lastfm.freetls.fastly.net/i/u/ar0/6644c67eaa3669676252d3190f9b019f.jpg?a=${Math.random()}`,
-								(percent) => {
-									notification.set_body(
-										`downloading... ${percent}%`,
-									);
-									notification.set(percent);
-								},
-							).then(async (blob) => {
-								const text = await blob.text();
+				download_with_progress(
+					`https://lastfm.freetls.fastly.net/i/u/ar0/6644c67eaa3669676252d3190f9b019f.jpg?a=${Math.random()}`,
+					(percent) => {
+						notification.set_body(
+							`downloading... ${percent}%`,
+						);
+						notification.set(percent);
+					},
+				).then(async (blob) => {
+					const text = await blob.text();
 
-								notification.set_body('download complete');
-								notification.set(100);
+					notification.set_body('download complete');
+					notification.set(100);
 
-								console.info(text);
-							});
-						}}
+					console.info(text);
+				});
+			}}
 					>
 			            Deliver async progress notification
 			        </button>
@@ -1332,10 +1713,10 @@ export function mualani() {
 				<button
 					class="btn continue"
 					onclick=${() =>
-						status({
-							title: 'test alert',
-							body: 'haiaiai nothing to worry about >_<',
-						})}
+				status({
+					title: 'test alert',
+					body: 'haiaiai nothing to worry about >_<',
+				})}
 				>
 			        Deliver status alert
 			    </button>
@@ -1349,16 +1730,16 @@ export function mualani() {
 			<section class="flexy">
 			    <h2>Markdown (with bio settings)</h2>
 			    ${markdown_field((val) => {
-				render(md_body, markdown(val, md_options));
-			}, md_options)}
+					render(md_body, markdown(val, md_options));
+				}, md_options)}
 			    <div class="sep" />
 			    <div class="markdown-body" ref=${(el) => md_body = el} />
 			</section>
 			<section class="flexy">
 			    <h2>Markdown (with defaults)</h2>
 			    ${markdown_field((val) => {
-				render(md_body_default, markdown(val));
-			})}
+					render(md_body_default, markdown(val));
+				})}
 			    <div class="sep" />
 			    <div class="markdown-body" ref=${(el) =>
 				md_body_default = el} />
@@ -1367,20 +1748,20 @@ export function mualani() {
 				<h2>Graph colours</h2>
 				<div style="display: flex; flex-wrap: wrap; gap: 8px">
 			        ${Array.from({ length: 13 }, (_, i) => {
-				return html.node`
+					return html.node`
                             <div style="display: flex; flex-direction: column; gap: 10px">
                                 <div style="width: 40px; height: 40px; background-color: var(--graph-colour-${i})" />
                                 <div style="width: 40px; height: 3px; background-color: var(--graph-colour-${i})" />
                             </div>
                         `;
-			})}
+				})}
 			    </div>
 			</section>
 			<section class="flexy">
 				<div class="inner-preview pad">
 					<div class="bars" ref=${(el) => (bars = el)}>
 			            ${() => {
-				let max = 100_000;
+				const max = 100_000;
 
 				for (
 					let value = 0;
@@ -1409,12 +1790,10 @@ export function mualani() {
 
 				return html.node`
                                 <div class="colour-list-item">
-                                    <div class="colour-tile colourful" style="background: rgb(${
-					colour[0]
-				}, ${colour[1]}, ${colour[2]})" />
-                                    <div class="colour-text">rgb(${
-					colour[0]
-				}, ${colour[1]}, ${colour[2]})</div>
+                                    <div class="colour-tile colourful" style="background: rgb(${colour[0]
+					}, ${colour[1]}, ${colour[2]})" />
+                                    <div class="colour-text">rgb(${colour[0]
+					}, ${colour[1]}, ${colour[2]})</div>
                                     <div class="bleh-icon" data-type="arrow-right" style="--icon: var(--mask)" />
                                     <div class="colour-tile colourful" style="--hue-over: ${hue.h}; --sat-over: ${hue.s}; --lit-over: ${hue.l}" />
                                     <div class="colour-text">hue ${hue.h}, sat ${hue.s}, lit ${hue.l}</div>
@@ -1431,15 +1810,14 @@ export function mualani() {
 					const badges = load_badges(user);
 
 					return html.node`
-                            ${
-						badges.map((badge) => {
-							if (
-								badge.type == 'sponsor' && !badge.icon
-							) return html.node``;
+                            ${badges.map((badge) => {
+						if (
+							badge.type == 'sponsor' && !badge.icon
+						) return html.node``;
 
-							return create_badge(badge, false, true);
-						})
-					}
+						return create_badge(badge, false, true);
+					})
+						}
                         `;
 				})
 				: ''}
@@ -1450,15 +1828,14 @@ export function mualani() {
 					const badges = load_badges(user);
 
 					return html.node`
-                            ${
-						badges.map((badge) => {
-							if (
-								badge.type == 'sponsor' && !badge.icon
-							) return html.node``;
+                            ${badges.map((badge) => {
+						if (
+							badge.type == 'sponsor' && !badge.icon
+						) return html.node``;
 
-							return create_badge(badge, false, true, true);
-						})
-					}
+						return create_badge(badge, false, true, true);
+					})
+						}
                         `;
 				})
 				: ''}
@@ -1483,6 +1860,45 @@ export function mualani() {
 			</section>
 		`,
 	);
+}
+
+interface BrandDemoProps {
+	small?: boolean;
+	mask?: boolean;
+}
+
+function BrandDemo({
+	small,
+	mask,
+}: BrandDemoProps) {
+	const inner = createRef();
+
+	const elem = (
+		<div
+			class={[
+				'brand-demo',
+				small && 'brand-demo-small',
+			]}
+		>
+			<div
+				class={['brand-inner', mask && 'brand-demo-mask']}
+				ref={inner}
+			/>
+		</div>
+	);
+
+	function update() {
+		elem.setAttribute('data-season', useSeasons.get().current?.id || '');
+		inner.current.setAttribute(
+			'data-season',
+			useSeasons.get().current?.id || '',
+		);
+	}
+
+	update();
+	useSeasons.on(update);
+
+	return elem;
 }
 
 function dialog_loop() {

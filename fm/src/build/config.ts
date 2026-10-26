@@ -15,16 +15,16 @@ export interface setting_instance {
 	css?: string;
 	default: setting_value;
 	type?:
-		| 'toggle'
-		| 'checkbox'
-		| 'range'
-		| 'select'
-		| 'radio'
-		| 'list'
-		| 'tabs'
-		| 'text'
-		| 'keybind'
-		| 'other';
+	| 'toggle'
+	| 'checkbox'
+	| 'range'
+	| 'select'
+	| 'radio'
+	| 'list'
+	| 'tabs'
+	| 'text'
+	| 'keybind'
+	| 'other';
 	title?: translation;
 	body?: translation;
 	incompatible?: Record<string, setting_value>;
@@ -394,6 +394,7 @@ export const settings_store: Record<string, setting_instance> = {
 		tags: [
 			'music',
 		],
+		require_reload: 'partial'
 	},
 	show_remaster_tags: {
 		default: true,
@@ -697,8 +698,7 @@ export const settings_store: Record<string, setting_instance> = {
 	},
 	font_emoji: {
 		default: true,
-		title: trans.font_emoji.name,
-		body: trans.font_emoji.body,
+		title: trans.font_emoji,
 		platforms: ['win32', 'linux', 'android', 'other'],
 		bubble: true,
 	},
@@ -756,6 +756,7 @@ export const settings_store: Record<string, setting_instance> = {
 		default: true,
 		title: trans.collage_grid_gap.name,
 		body: trans.collage_grid_gap.body,
+		incompatible: { collage_style: 'stack' },
 	},
 	hu_tao: {
 		default: '',
@@ -1148,5 +1149,9 @@ export const settings_store: Record<string, setting_instance> = {
 			},
 		},
 		incompatible: { theme: 'yuzu' },
+	},
+	profile_summary_pie_chart: {
+		default: false,
+		title: trans.profile_summary_pie_chart,
 	},
 };

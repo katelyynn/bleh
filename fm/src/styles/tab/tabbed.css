@@ -8,7 +8,7 @@
 	display: flex;
 
 	&.with-header {
-		& > .tabbed-tabs {
+		&>.tabbed-tabs {
 			margin-left: auto;
 			margin-right: unset;
 		}
@@ -38,6 +38,10 @@
 	position: relative;
 
 	--interact-mask: none !important;
+
+	--icon-size: 14px !important;
+	--button-verts: 3px;
+	min-height: unset !important;
 
 	&:after {
 		content: '';

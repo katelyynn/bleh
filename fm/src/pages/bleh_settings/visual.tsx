@@ -34,7 +34,7 @@ import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
-import { useSeasons, useSettings } from '@/page.ts';
+import { useSeasons, useSettings } from '@/page.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export function visual() {
@@ -72,10 +72,10 @@ export function visual() {
 				</PanelHead>
 				<SettingTheme
 					theme={{
-						id: settings.theme as string,
-						adaptive: settings.theme_schedule as boolean,
-						theme_day: settings.theme_day as string,
-						theme_night: settings.theme_night as string,
+						id: useSettings.get('theme') as string,
+						adaptive: useSettings.get('theme_schedule') as boolean,
+						theme_day: useSettings.get('theme_day') as string,
+						theme_night: useSettings.get('theme_night') as string,
 					}}
 				/>
 				<SettingGroup>
@@ -102,24 +102,10 @@ export function visual() {
 				</div>
 				<SettingColour
 					colour={{
-						type: settings.accent_type as colour_type,
-						hue: settings.hue as number,
-						sat: settings.sat as number,
-						lit: settings.lit as number,
-					}}
-					onChange={(val) => {
-						if (settings.hue != val.hue) {
-							save_setting('hue', val.hue);
-						}
-						if (settings.sat != val.sat) {
-							save_setting('sat', val.sat);
-						}
-						if (settings.lit != val.lit) {
-							save_setting('lit', val.lit);
-						}
-						if (settings.accent_type != val.type) {
-							save_setting('accent_type', val.type);
-						}
+						type: useSettings.get('accent_type') as colour_type,
+						hue: useSettings.get('hue') as number,
+						sat: useSettings.get('sat') as number,
+						lit: useSettings.get('lit') as number,
 					}}
 					season={season}
 				/>
@@ -168,7 +154,7 @@ export function visual() {
 					<SettingRange bind='font_weight' />
 					<SettingRange bind='font_weight_medium' />
 					<SettingRange bind='font_weight_bold' />
-					<SettingSwitch bind='font_emoji' />
+					<SettingCheckbox bind='font_emoji' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>

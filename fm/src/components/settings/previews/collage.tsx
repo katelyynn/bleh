@@ -5,7 +5,7 @@
  */
 
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface CollageGridPreviewProps {
 	ref?: ReturnType<typeof createRef<CollageGridPreviewElement>>;
@@ -25,6 +25,7 @@ export function CollageGridPreview({
 }: CollageGridPreviewProps) {
 	let grid_title = useSettings.get('collage_title') as boolean;
 	let grid_gap = useSettings.get('collage_grid_gap') as boolean;
+	let style = useSettings.get('collage_style') as string;
 
 	useSettings.on('collage_title', () => {
 		grid_title = useSettings.get('collage_title') as boolean;
@@ -32,6 +33,10 @@ export function CollageGridPreview({
 	});
 	useSettings.on('collage_grid_gap', () => {
 		grid_gap = useSettings.get('collage_grid_gap') as boolean;
+		update();
+	});
+	useSettings.on('collage_style', () => {
+		style = useSettings.get('collage_style') as string;
 		update();
 	});
 
@@ -43,6 +48,10 @@ export function CollageGridPreview({
 	) as CollageGridPreviewElement;
 
 	function update() {
+		if (style == 'stack') {
+			col = 1;
+		}
+
 		elem.replaceChildren(
 			<>
 				{grid_title && (
@@ -55,7 +64,8 @@ export function CollageGridPreview({
 				<div
 					class={[
 						'collage-grid-preview-inner',
-						grid_gap && 'with-gap',
+						(grid_gap && style != 'stack') && 'with-gap',
+						style == 'stack' && 'with-stack',
 					]}
 				>
 					{Array.from({ length: row }).map(() => (

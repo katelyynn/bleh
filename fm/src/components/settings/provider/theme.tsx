@@ -18,7 +18,7 @@ import {
 	theme_min,
 	theme_schedule_dialog,
 } from '@/components/dialog/theme_schedule.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
@@ -231,8 +231,7 @@ export function ThemeRow({
 }: ThemeRowProps) {
 	return (
 		<div class={['setting', 'theme-row']} ref={ref}>
-			{icon && <SettingIcon name={icon} />}
-			<SettingLabel name={label} body={body} />
+			<SettingLabel name={label} body={body} icon={icon} />
 			<div class='theme-bubbles'>
 				{children}
 			</div>

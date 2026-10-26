@@ -20,12 +20,12 @@ import { LinkTooltip } from '@/components/text/link.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { SubText } from '@/components/text/sub.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { link_strings } from '@/components/markdown/links.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
-	let wiki_panel = document.createElement('section');
+	const wiki_panel = document.createElement('section');
 	wiki_panel.classList.add('wiki-panel');
 	wiki_panel.innerHTML = page.structure.main.innerHTML;
 
@@ -33,14 +33,14 @@ export function bleh_wiki() {
 	page.structure.main.appendChild(wiki_panel);
 	page.structure.main.classList.add('not-a-panel');
 
-	let original_edit_button = page.structure.main.querySelector(
+	const original_edit_button = page.structure.main.querySelector(
 		'.qa-wiki-edit',
 	);
-	let original_version_history = page.structure.main.querySelector(
+	const original_version_history = page.structure.main.querySelector(
 		'.wiki-history-link--desktop a',
 	);
 
-	let side_actions = document.createElement('section');
+	const side_actions = document.createElement('section');
 	side_actions.classList.add('side-actions');
 
 	if (!page.mobile) {
@@ -53,7 +53,7 @@ export function bleh_wiki() {
 	}
 
 	if (original_edit_button) {
-		let side_edit = document.createElement('a');
+		const side_edit = document.createElement('a');
 		side_edit.classList.add('btn', 'side-action', 'icon-mask');
 		side_edit.setAttribute(
 			'href',
@@ -65,7 +65,7 @@ export function bleh_wiki() {
 	}
 
 	if (original_version_history) {
-		let side_history = document.createElement('a');
+		const side_history = document.createElement('a');
 		side_history.classList.add('btn', 'side-action', 'icon-mask');
 		side_history.setAttribute(
 			'href',
@@ -77,12 +77,12 @@ export function bleh_wiki() {
 	}
 
 	// author
-	let wiki_author = wiki_panel.querySelector('.wiki-author');
+	const wiki_author = wiki_panel.querySelector('.wiki-author');
 	// this cant be null i believe but still
 	if (wiki_author) {
-		let h2 = wiki_panel.querySelector('h2.text-18');
+		const h2 = wiki_panel.querySelector('h2.text-18');
 
-		let sub_text = document.createElement('div');
+		const sub_text = document.createElement('div');
 		sub_text.classList.add('sub-text', 'space-below', 'header-style');
 		sub_text.innerHTML = `
             <div class="breadcrumb-origin prominent">
@@ -104,14 +104,14 @@ export function bleh_wiki() {
 		}
 	}
 
-	let wiki = wiki_panel.querySelector('.wiki');
+	const wiki = wiki_panel.querySelector('.wiki');
 	if (!wiki) return;
 
 	patch_wiki_contents(wiki);
 
-	let factbox = wiki_panel.querySelector('.factbox');
+	const factbox = wiki_panel.querySelector('.factbox');
 	if (factbox) {
-		let facts = html.node`
+		const facts = html.node`
             <section class="facts">
                 ${factbox}
             </section>
@@ -139,7 +139,7 @@ export function bleh_wiki_history() {
 		);
 	}
 
-	let sub_text = document.createElement('div');
+	const sub_text = document.createElement('div');
 	sub_text.classList.add('sub-text', 'space-below', 'header-style');
 	sub_text.innerHTML = `
         <div class="breadcrumb">
@@ -164,15 +164,15 @@ export function bleh_wiki_history() {
 		);
 	}
 
-	let wiki_history_table = buffer_container.querySelector(
+	const wiki_history_table = buffer_container.querySelector(
 		'.wiki-history-table',
 	);
 
 	// nav
-	let pagination = buffer_container.querySelector('.pagination');
+	const pagination = buffer_container.querySelector('.pagination');
 
 	// put this in col-main
-	let wiki_panel = document.createElement('section');
+	const wiki_panel = document.createElement('section');
 	wiki_panel.classList.add('wiki-history-panel');
 
 	wiki_panel.appendChild(sub_text);
@@ -186,7 +186,7 @@ export function bleh_wiki_history() {
 	}
 
 	// latest
-	let side_actions = html.node`
+	const side_actions = html.node`
         <section class="side-actions">
             <a class="btn side-action icon-mask" data-type="latest-wiki" href="${
 		sub_text.querySelector('a').getAttribute('href')
@@ -203,14 +203,14 @@ export function bleh_wiki_history() {
 	}
 
 	// entries
-	let entries = page.structure.main.querySelectorAll('.wiki-history-entry');
+	const entries = page.structure.main.querySelectorAll('.wiki-history-entry');
 	entries.forEach((entry) => {
-		let author = entry.querySelector('.wiki-history-author');
-		let avatar = author.querySelector('.wiki-history-author-avatar');
-		let name = author.querySelector('.link-block-target');
+		const author = entry.querySelector('.wiki-history-author');
+		const avatar = author.querySelector('.wiki-history-author-avatar');
+		const name = author.querySelector('.link-block-target');
 
 		if (name && avatar) {
-			let badge = patch_avatar(avatar, name.textContent, 'wiki');
+			const badge = patch_avatar(avatar, name.textContent, 'wiki');
 
 			if (badge && badge.type) {
 				if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
@@ -240,7 +240,7 @@ export function bleh_wiki_editor() {
 	}
 
 	// make a new panel
-	let wiki_edit_panel = document.createElement('section');
+	const wiki_edit_panel = document.createElement('section');
 	wiki_edit_panel.classList.add('wiki-edit-panel');
 	wiki_edit_panel.innerHTML = page.structure.main.innerHTML;
 
@@ -276,7 +276,7 @@ export function bleh_wiki_editor() {
 		);
 	}
 
-	let sub_text = document.createElement('div');
+	const sub_text = document.createElement('div');
 	sub_text.classList.add('sub-text', 'space-below', 'header-style');
 	sub_text.innerHTML = `
         <div class="breadcrumb">
@@ -394,10 +394,10 @@ export function bleh_wiki_editor() {
     `);
 
 	// rules
-	let rules = page.structure.main.querySelector('.wiki-style-rules');
+	const rules = page.structure.main.querySelector('.wiki-style-rules');
 	rules.removeAttribute('id');
 
-	let rules_panel = document.createElement('section');
+	const rules_panel = document.createElement('section');
 	rules_panel.classList.add('rules-panel');
 	rules_panel.setAttribute('id', 'stylerules');
 	rules_panel.innerHTML = rules.innerHTML;
@@ -536,7 +536,7 @@ export function patch_wiki_contents(wiki_block: Element) {
 		if (href.startsWith('tag/')) {
 			type = 'tag';
 		} else {
-			let split = href.split('/');
+			const split = href.split('/');
 			//console.info(href, split.length);
 
 			if (split.length == 1) {

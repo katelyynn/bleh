@@ -210,6 +210,7 @@ interface page {
 		indicator?: HTMLElement;
 		logs?: HTMLElement;
 		tabs?: HTMLElement;
+		notifications: HTMLElement;
 	};
 	requested: Record<string, string | null>;
 	header: Record<string, ReactNode>;
@@ -233,6 +234,8 @@ interface page {
 		snow?: ReactElement;
 		avatar_side?: RefObject<ReactElement>;
 		avatar_side_override?: string;
+		colour_preview?: ReactElement;
+		home_link: ReactElement;
 	};
 	previous?: {
 		type: string;

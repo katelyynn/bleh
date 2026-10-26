@@ -22,9 +22,10 @@ body,
 			inset 0 0 0 1px oklch(var(--b3)),
 			inset 0 1px 2px 1px oklch(var(--b6) / 80%);
 		--focused-input-shadow:
-			inset 0 0 0 1px oklch(var(--h3) / 0.4),
+			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
+			0 0 2px 4px oklch(var(--l4-c) / 15%),
 			var(--input-shadow);
-		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 42%);
+		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 30%);
 
 		--separator-shadow: 0 1px 2px 0 oklch(0.03 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.4);
 
@@ -74,8 +75,10 @@ body,
 
 		--inset-background: oklch(var(--b2) / 10%);
 
-		--card-border-base: oklch(var(--b3) / 0.4);
+		--card-border-base: oklch(var(--b3) / 0.6);
 		--card-border-base-highlight: oklch(var(--b2) / 0.55);
+
+		--separator-base: oklch(var(--b3) / 0.5);
 	}
 }
 
@@ -95,6 +98,7 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
+
 	&[data-bleh--theme="oled"],
 	body[data-bleh--theme="oled"] &:not(.theme-preview) {
 		--c1: 0.98 0 var(--hue);
@@ -105,7 +109,7 @@ u,
 		--l4: calc(var(--lit) * 0.45) calc(var(--sat) * 0.6) var(--hue);
 
 		--f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
-		--k4: calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.44) var(--hue);
+		--k4: calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
 		--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 

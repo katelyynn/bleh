@@ -10,7 +10,7 @@ import { chart_reflow } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 export function basic_page_structure() {
 	page.structure.container = document.body.querySelector('.page-content')!;
@@ -169,7 +169,14 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 		let navlist = header.querySelector('.navlist');
 
 		if (navlist) {
-			navlist.classList.add('redesigned-navigation');
+			navlist.classList.add(
+				'redesigned-navigation',
+			);
+
+			if (ff('header_refresh')) {
+				navlist.classList.add('header-refresh');
+			}
+
 			page.structure.container.insertBefore(
 				navlist,
 				page.structure.container.firstElementChild,
@@ -260,10 +267,16 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 				navlist = page.structure.main.querySelector('.navlist');
 
 				if (navlist) {
-					navlist.classList.add('redesigned-navigation');
+					navlist.classList.add(
+						'redesigned-navigation',
+					);
+
+					if (ff('header_refresh')) {
+						navlist.classList.add('header-refresh');
+					}
 
 					if (ff('mualani')) {
-						let toolbar = html.node`
+						const toolbar = html.node`
                             <div class="toolbar">
                                 ${navlist}
                             </div>
@@ -419,7 +432,13 @@ export function convert_to_toolbar() {
 	const nav = page.structure.content_top.querySelector('.navlist');
 	if (!nav) return;
 
-	nav.classList.add('redesigned-navigation');
+	nav.classList.add(
+		'redesigned-navigation',
+	);
+
+	if (ff('header_refresh')) {
+		nav.classList.add('header-refresh');
+	}
 
 	page.structure.toolbar = html.node`
         <div class="toolbar">
@@ -445,6 +464,8 @@ export function convert_to_toolbar() {
 }
 
 function single_column() {
+	if (ff('header_refresh')) return;
+
 	if (
 		[
 			'following',
@@ -468,6 +489,6 @@ function single_column() {
 			'bookmarks',
 		].includes(page.type) || page.subpage.startsWith('event_attendance_')
 	) {
-		page.structure.content.classList.add('single-column');
+		page.structure.content!.classList.add('single-column');
 	}
 }

@@ -19,7 +19,7 @@ import {
 	render_setting_page,
 } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import {
 	checkup_friend_cache,
 	load_profile_cache_externally,

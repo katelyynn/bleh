@@ -7,12 +7,11 @@
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { dialog, dialog_rm, modal } from '@/components/dialog/dialog';
 import { select, select_prepare } from '@/components/settings/select';
 import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { html, render } from 'lighterhtml';
-import tippy from 'tippy.js';
 import Cropper from 'cropperjs';
 import { toggle } from '@/components/settings/toggle';
 import {
@@ -31,16 +30,17 @@ import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx
 import { ProfileName } from '@/components/settings/provider/profile_name.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { icons, SaveIcon } from '@/components/shared/icon.tsx';
+import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { Token } from '@/components/form/token.tsx';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
+import { Alert } from '@/components/text/alert.tsx';
 
 let cropper: Cropper;
 
@@ -301,7 +301,7 @@ function profile_panel() {
 	const upload_finished = update_picture.querySelector('.alert-success');
 
 	if (page.state.avatar_changer && upload_finished) {
-		const id = page.state.avatar_changer.getAttribute('data-modal-id');
+		const id = page.state.avatar_changer.id;
 		dialog_rm({ id });
 	}
 
@@ -550,73 +550,82 @@ function profile_panel() {
 }
 
 function avatar() {
-	page.state.avatar_changer = dialog({
+	const form = createRef();
+	const save_button = createRef();
+
+	page.state.avatar_changer = modal({
 		id: 'edit_avatar',
 		title: tl(trans.change_avatar),
-		body: html.node`
-            <div class="forms">
-                <form action="${root}settings" name="avatar-form" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                    <div class="form-group form-group--avatar js-form-group upload-avatar">
-                        <div class="js-form-group-controls form-group-controls">
-                            <span class="btn-secondary btn primary btn-file btn-lg" data-kate-processed="true">
-                                ${tl(trans.upload)}
-                                <input type="file" onchange=${() =>
-			update_avatar(
-				event,
-			)} name="avatar" data-require="components/file-input" data-file-input-copy="${
-			tl(trans.upload)
-		}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
-                            </span>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary save" id="avatar_saver">
-                        ${tl(trans.save)}
-                    </button>
-                    <input type="hidden" value="avatar" name="submit">
-                </form>
-                <form action="${root}settings/avatar/delete" method="post">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                    <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove icon colourful btn-lg" type="submit" value="delete-avatar" name="delete-avatar">${
-			tl(trans.delete)
-		}</button>
-                    </div>
-                </form>
-            </div>
-            <div class="crop-before-uploading">
-                ${
-			setting({ id: 'crop_image_before_uploading', standalone: true })
-		}
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel left-icon" onclick=${() =>
-			dialog_rm({ id: 'edit_avatar' })}>${tl(trans.cancel)}</button>
-                <div class="fill"></div>
-                <button class="btn primary save" onclick=${() =>
-			save_avatar()} disabled>${tl(trans.save)}</button>
-            </div>
-        `,
-		replace_if_possible: true,
+		body: (
+			<>
+				<div class='avatar-change-form' ref={form}>
+					<form
+						action={`${root}settings`}
+						name='avatar-form'
+						method='post'
+						encType='multipart/form-data'
+						onSubmit={finish_saving_avatar}
+					>
+						<Token value={page.token} />
+						<Button className='avatar-change'>
+							<Icon name={icons.upload} />
+							{tl(trans.upload)}
+							<input
+								type='file'
+								onChange={() => {
+									update_avatar(event);
+								}}
+								accept='image/*'
+								required
+								name='avatar'
+							/>
+						</Button>
+						<input type='hidden' value='avatar' name='submit' />
+						<button
+							type='submit'
+							ref={save_button}
+							style={{ display: 'none' }}
+						/>
+					</form>
+					<div class='avatar-change-divider'>
+						{tl(trans.or)}
+					</div>
+					<form
+						action={`${root}settings/avatar/delete`}
+						name='avatar-form'
+						method='post'
+						encType='multipart/form-data'
+					>
+						<Token value={page.token} />
+						<Button
+							type='submit'
+							className='avatar-change delete'
+							colourful
+							value='delete-avatar'
+							name='delete-avatar'
+						>
+							<Icon name={icons.delete} />
+							{tl(trans.delete)}
+						</Button>
+					</form>
+				</div>
+				<SettingCheckbox
+					standalone
+					bind='crop_image_before_uploading'
+				/>
+			</>
+		),
+		close: 'cancel',
+		replace: true,
 	});
-
-	page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit =
-		finish_saving_avatar;
-	const file_button = page.state.avatar_changer.querySelector('.btn-file');
-	const save_button = page.state.avatar_changer.querySelector(
-		'.modal-footer .primary',
-	);
-
-	let form;
 
 	function update_avatar(e) {
 		console.info(e);
 		if (!e.target.files || !e.target.files[0]) return;
-		form = page.state.avatar_changer.querySelector('.bleh-modal-body');
 
 		if (
 			e.target.files[0].type == 'image/gif' ||
-			!settings.crop_image_before_uploading
+			!useSettings.get('crop_image_before_uploading')
 		) {
 			save_avatar();
 			finish_saving_avatar();
@@ -626,97 +635,99 @@ function avatar() {
 		const reader = new FileReader();
 		reader.onload = function () {
 			crop(reader.result);
-			save_button.removeAttribute('disabled');
 		};
 		reader.readAsDataURL(e.target.files[0]);
 	}
 
 	function save_avatar() {
-		page.state.avatar_changer.querySelector('#avatar_saver').click();
+		save_button.current.click();
 	}
 
 	function finish_saving_avatar() {
 		page.state.avatar_changer.setAttribute('data-loading', 'true');
-		page.state.avatar_changer
-			.querySelectorAll('.bleh-modal-body button')
-			.forEach((button) => {
-				button.setAttribute('disabled', 'true');
-				button.removeAttribute('onclick');
-			});
 	}
 
-	function crop(file) {
-		let crop_image;
-		let save;
+	function crop(file: string) {
+		const crop_image = createRef();
 
-		const crop_dialog = dialog({
+		const crop_dialog = modal({
 			id: 'crop',
 			title: tl(trans.crop_avatar),
-			body: html.node`
-                <div class="crop">
-                    <img src=${file} ref=${(el) => (crop_image = el)}>
-                </div>
-                <div class="alert alert-info">
-                    ${tl(trans.crop_notice)}
-                </div>
-                <div class="modal-footer">
-                    <button class="see-more cancel left-icon" onclick=${() => {
+			body: (
+				<>
+					<div class='crop'>
+						<img src={file} ref={crop_image} />
+					</div>
+					<p>
+						{tl(trans.crop_notice)}
+					</p>
+				</>
+			),
+			actions: [
+				{
+					primary: true,
+					onClick: () => {
+						if (!cropper) return;
+
+						finish_saving_avatar();
+
+						const canvas = cropper.getCroppedCanvas();
+
+						canvas.toBlob((blob) => {
+							const cropped_file = new File(
+								[blob],
+								'avatar.png',
+								{ type: 'image/png' },
+							);
+
+							const inner_form = form.current.querySelector(
+								'form',
+							);
+							inner_form.style.display = 'none';
+							crop_dialog.body!
+								.appendChild(inner_form);
+
+							const file_input = inner_form.querySelector(
+								'input[type="file"]',
+							);
+
+							const data_transfer = new DataTransfer();
+							data_transfer.items.add(cropped_file);
+							file_input.files = data_transfer.files;
+
+							save_button.current.click();
+						}, 'image/png');
+					},
+					children: (
+						<>
+							<SaveIcon />
+							{tl(trans.save)}
+						</>
+					),
+				},
+			],
+			close: 'back',
+			onClose: () => {
 				if (cropper && cropper.destroy) cropper.destroy();
 				cropper = null;
 
 				avatar();
-			}}>${tl(trans.cancel)}</button>
-                    <div class="fill"></div>
-                    <button class="btn primary save" onclick=${() => {
-				if (!cropper) return;
-
-				crop_dialog
-					.querySelectorAll('.bleh-modal-body button')
-					.forEach((button) => {
-						button.setAttribute('disabled', 'true');
-						button.removeAttribute('onclick');
-					});
-
-				const canvas = cropper.getCroppedCanvas();
-
-				canvas.toBlob((blob) => {
-					const cropped_file = new File(
-						[blob],
-						'avatar.png',
-						{ type: 'image/png' },
-					);
-
-					const inner_form = form.querySelector('form');
-					inner_form.style.display = 'none';
-					crop_dialog
-						.querySelector('.bleh-modal-body')
-						.appendChild(inner_form);
-
-					const file_input = inner_form.querySelector(
-						'input[type="file"]',
-					);
-
-					const data_transfer = new DataTransfer();
-					data_transfer.items.add(cropped_file);
-					file_input.files = data_transfer.files;
-
-					inner_form.querySelector('#avatar_saver').click();
-				}, 'image/png');
-			}} ref=${(el) => (save = el)} disabled>${tl(trans.save)}</button>
-                </div>
-            `,
-			replace_if_possible: true,
+			},
+			replace: true,
 		});
+
 		page.state.avatar_changer = crop_dialog;
 
-		crop_image.onload = () => {
+		crop_image.current.onload = () => {
 			if (cropper && cropper.destroy) cropper.destroy();
 
-			crop_image.style.maxWidth = 'none';
-			crop_image.style.width = crop_image.naturalWidth + 'px';
-			crop_image.style.height = crop_image.naturalHeight + 'px';
+			crop_image.current.style.maxWidth = 'none';
+			crop_image.current.style.width = crop_image.current.naturalWidth +
+				'px';
+			crop_image.current.style.height = crop_image.current.naturalHeight +
+				'px';
 
-			cropper = new Cropper(crop_image, {
+			cropper = new Cropper(crop_image.current, {
 				viewMode: 3,
 				dragMode: 'crop',
 				movable: true,
@@ -728,8 +739,6 @@ function avatar() {
 				guides: true,
 				autoCropArea: 1,
 			});
-
-			save.removeAttribute('disabled');
 		};
 	}
 }

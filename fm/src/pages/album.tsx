@@ -38,6 +38,7 @@ import { save_hoshino_artwork } from '@/components/music/hoshino.js';
 import { page_header_title, PageHeaderAvatar } from '@/components/music/header';
 import { convert_to_select } from '@/components/select/select.tsx';
 import {
+	append_header,
 	PageHeader,
 	PageHeaderArtist,
 	PageHeaderTitle,
@@ -163,10 +164,7 @@ export function bleh_albums() {
 		if (avatar) register_background(avatar.getAttribute('content'));
 		else register_background(null);
 
-		page.structure.container!.insertBefore(
-			redesigned_album_header,
-			page.structure.container!.firstElementChild,
-		);
+		append_header(redesigned_album_header);
 		album_header.classList.add('legacy-header');
 	}
 

@@ -25,19 +25,22 @@ import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
 import { taste_artist, TasteArtist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { ReactElement } from 'jsx-dom';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { SubText } from '@/components/text/sub.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SideActions } from '@/components/button/side.tsx';
 
 export function redesign_profile_header(
 	is_own_profile: boolean,
 	is_following: boolean,
 ) {
 	if (!auth.name) return;
+
+	const refresh = ff('header_refresh');
 
 	const is_sponsor_host = page.name == sponsor_list.related.account_name;
 
@@ -75,9 +78,7 @@ export function redesign_profile_header(
 	}
 
 	// create new
-	const profile_header = html.node`
-        <section class="side-actions" />
-    `;
+	const profile_header = <SideActions inset={!refresh} />;
 
 	if (
 		!is_own_profile &&
@@ -610,7 +611,7 @@ function friends_button(parent: ReactElement) {
 						id: 'friends',
 						title: tl(trans.removed_friend),
 						body: page.name,
-						icon: 'icon-16-minus',
+						icon: icons.minus,
 						type: 'error',
 					});
 				}}>
@@ -631,7 +632,7 @@ function friends_button(parent: ReactElement) {
 				id: 'friends',
 				title: tl(trans.added_as_friend),
 				body: page.name,
-				icon: 'icon-16-users',
+				icon: icons.users,
 				type: 'success',
 			});
 		}
@@ -672,7 +673,7 @@ function friends_button(parent: ReactElement) {
 						id: 'friends',
 						title: tl(trans.removed_star),
 						body: page.name,
-						icon: 'icon-16-minus',
+						icon: icons.minus,
 						type: 'error',
 					});
 				} else {
@@ -684,7 +685,7 @@ function friends_button(parent: ReactElement) {
 						id: 'friends',
 						title: tl(trans.added_star),
 						body: page.name,
-						icon: 'icon-16-starred-friend',
+						icon: icons.starred_friend,
 					});
 				}
 			}}>

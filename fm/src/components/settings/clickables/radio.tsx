@@ -5,7 +5,7 @@
  */
 
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 type RadioElement = HTMLDivElement & {
 	checked: boolean;
@@ -18,6 +18,7 @@ interface RadioProps {
 	className?: string;
 	interact?: boolean;
 	checked?: boolean;
+	menu?: boolean;
 }
 
 export function Radio({
@@ -27,6 +28,7 @@ export function Radio({
 	className,
 	interact = true,
 	checked = false,
+	menu
 }: RadioProps) {
 	const radio = createRef();
 	const elem = createRef();
@@ -45,7 +47,7 @@ export function Radio({
 			<input type='radio' name={name} value={value} ref={radio} />
 			<button
 				type='button'
-				class={['btn', 'radio', !interact && 'no-interact']}
+				class={['btn', 'radio', !interact && 'no-interact', menu && 'menu-radio']}
 				ref={elem}
 				onClick={() => {
 					if (!interact) {

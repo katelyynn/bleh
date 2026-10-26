@@ -54,7 +54,7 @@
 		}
 
 		&.to-remove {
-			translate: 0 6px;
+			translate: 0 4px;
 			opacity: 0;
 		}
 
@@ -92,7 +92,7 @@
 				display: var(--cards-overlay-display);
 
 				background-image: var(--cards-overlay-image,
-					unset), var(--cards-overlay, transparent) !important;
+						unset), var(--cards-overlay, transparent) !important;
 				background-repeat: repeat-x !important;
 				background-position: 0 -60px !important;
 				opacity: 0.9;
@@ -134,7 +134,7 @@
 
 @keyframes modal_in {
 	from {
-		translate: 0 6px;
+		translate: 0 4px;
 		opacity: 0;
 	}
 
@@ -152,7 +152,7 @@
 	z-index: 100;
 	position: relative;
 
-	& > h4 {
+	&>h4 {
 		margin: unset;
 		color: oklch(var(--c1));
 		font-size: var(--font-size-subheading);
@@ -186,8 +186,7 @@
 
 	&[data-theme="yuzu"] {
 		border-bottom: 1px solid #ccc;
-		padding-right: calc(var(--card-padding) + var(--modal-close-size) +
-			10px);
+		padding-right: calc(var(--card-padding) + var(--modal-close-size) + 10px);
 		margin-left: calc(-1 * var(--card-padding));
 		margin-right: calc(-1 * var(--card-padding));
 		padding-top: 6px;
@@ -216,11 +215,11 @@
 }
 
 .bleh-modal-body {
-	& > :first-child {
+	&> :first-child {
 		margin-top: unset;
 	}
 
-	& > img {
+	&>img {
 		width: 100%;
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
@@ -230,11 +229,11 @@
 		margin-right: auto;
 	}
 
-	& > .sep {
+	&>.sep {
 		margin: var(--card-gap) 0;
 	}
 
-	& > p:not(.big-modal-alert, .card-tip) {
+	&>p:not(.big-modal-alert, .card-tip) {
 		max-width: 430px;
 	}
 }
@@ -242,11 +241,8 @@
 .bleh-modal-body[data-allow-scroll="true"],
 .modal-inner-content.allow-scroll {
 	max-height: 80vh;
-	padding: calc(var(--card-padding) * 2) var(--card-padding)
-		var(--card-padding) var(--card-padding);
-	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding))
-		calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
-		!important;
+	padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
+	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
 	overflow-y: hidden;
 
 	border-radius: var(--item-big-radius);
@@ -258,4 +254,178 @@
 	--bg-mask: linear-gradient(0deg, white 96%, transparent);
 	mask-image: var(--bg-mask);
 	-webkit-mask-image: var(--bg-mask);
+}
+
+.bleh-modal-v2 {
+	background: oklch(var(--b5) / var(--solarium-opacity, 90%));
+	border-radius: var(--radius-m);
+	box-shadow: var(--override-full-shadow, var(--overlay-shadow));
+	border: 1px solid var(--card-border-base);
+	color: oklch(var(--c2));
+	min-width: 300px;
+	max-width: 800px;
+	position: relative;
+	z-index: 9999;
+
+	backdrop-filter: var(--solarium);
+	-webkit-backdrop-filter: var(--solarium);
+
+	display: flex;
+	flex-direction: column;
+
+	--modal-verts: 20px;
+	--modal-sides: 15px;
+
+	padding: var(--modal-verts) var(--modal-sides);
+
+	&:not(:last-child) {
+		display: none;
+	}
+
+	&[data-loading="true"] {
+		pointer-events: none;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: var(--cards-overlay-height);
+		max-height: 100%;
+		display: var(--cards-overlay-display);
+
+		background-image: var(--cards-overlay-image,
+				unset), var(--cards-overlay, transparent) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 -60px !important;
+		opacity: 0.9;
+		border-top-left-radius: var(--radius-m);
+		border-top-right-radius: var(--radius-m);
+		pointer-events: none;
+
+		/* fix for no-data-message overriding and stuff */
+		margin: unset;
+		width: unset;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		display: block;
+		background: radial-gradient(at center top, oklch(var(--k4) / 40%), transparent 45%);
+		border-radius: var(--radius-m);
+		display: none;
+	}
+
+	translate: 0 0;
+	scale: 1;
+	transform-origin: bottom;
+	animation: var(--motion, modal_in 0.3s var(--trans-function-ani));
+	animation-fill-mode: backwards;
+
+	transition-property: translate,
+	opacity;
+	transition-duration: 0.3s;
+	transition-timing-function: var(--trans-function-ani);
+
+	max-height: 80vh;
+
+	&[data-reduced-motion] {
+		transition-duration: var(--trans);
+		translate: unset !important;
+	}
+
+	&.to-remove {
+		translate: 0 4px;
+		opacity: 0;
+	}
+}
+
+.bleh-modal-v2-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	overflow: hidden;
+	margin: var(--modal-verts) calc(-1 * var(--modal-sides)) calc(-1 * var(--modal-verts)) calc(-1 * var(--modal-sides));
+	border-top: 1px solid var(--separator-base);
+
+	border-bottom-left-radius: var(--radius-m);
+	border-bottom-right-radius: var(--radius-m);
+
+	z-index: 10;
+}
+
+.bleh-modal-v2-action {
+	--bg: transparent;
+	--bg-hov: oklch(var(--b2) / 20%);
+	--bg-atv: oklch(var(--b2) / 40%);
+	--shadow: none;
+	transform: unset !important;
+
+	--col: oklch(var(--c2));
+	--mask-colour: oklch(var(--c2) / 80%);
+	--icon-size: 14px !important;
+
+	--mask2: unset !important;
+	--radius: 0;
+
+	--button-verts: 10px;
+	--button-sides: var(--modal-sides);
+	flex: 1;
+
+	justify-content: center;
+	text-align: center;
+
+	height: 100%;
+
+	&.action-primary,
+	&.colourful {
+		--bg: transparent;
+		--bg-hov: oklch(var(--h4) / 10%);
+		--bg-atv: oklch(var(--h4) / 20%);
+		--col: oklch(var(--l3-c));
+		--mask-colour: oklch(var(--l3-c) / 80%);
+	}
+
+	&.action-primary {
+		font-weight: var(--font-weight-medium) !important;
+	}
+}
+
+.modal-action-separator {
+	display: flex;
+	width: 1px;
+	height: 38px;
+	background: var(--separator-base);
+	flex-shrink: 0;
+}
+
+.bleh-modal-v2-content {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: var(--modal-verts);
+
+	align-items: center;
+	cursor: default;
+
+	z-index: 10;
+}
+
+.bleh-modal-v2-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: calc(var(--modal-verts) / 2);
+}
+
+.bleh-modal-v2-title {
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	color: oklch(var(--c1));
 }

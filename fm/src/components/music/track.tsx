@@ -29,7 +29,7 @@ import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { count_bar } from '@/components/track/bar.tsx';
 import {
 	context_menu_tooltip,
@@ -52,6 +52,11 @@ import { SmartTitle } from '@/components/music/smart_title.tsx';
 import { ff } from '@/components/settings/sku.ts';
 import { non_pro_edit } from '@/components/music/non_pro_edit.tsx';
 import { queue_popup } from '@/components/dialog/popup.tsx';
+
+type TrackElement = HTMLElement & {
+	symbol: symbol;
+	preview?: ReactElement;
+}
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -151,14 +156,14 @@ export function patch_titles(search = page.structure.main) {
 			smart_track(track, index);
 		});
 
-		function smart_track(track, index) {
+		function smart_track(track: TrackElement, index: number) {
 			if (!track) return;
 
-			if (track.getAttribute('data-track-type')) return;
+			//if (track.getAttribute('data-track-type')) return;
 
 			// ads slowly move up the tree until eventually causing a crash
 			if (track.classList[0] == 'chartlist-row--interlist-ad') {
-				track.parentElement.removeChild(track);
+				track.remove();
 				return;
 			}
 
@@ -339,8 +344,7 @@ export function patch_titles(search = page.structure.main) {
 				is_album,
 			);
 			log(
-				`returned ${track_artist} from url ${
-					track_title.getAttribute('href')
+				`returned ${track_artist} from url ${track_title.getAttribute('href')
 				}`,
 				'track',
 			);
@@ -379,7 +383,7 @@ export function patch_titles(search = page.structure.main) {
 
 			const track_timestamp = track.querySelector(
 				'.chartlist-timestamp span',
-			);
+			) as HTMLElement;
 			let track_timestamp_contents;
 			if (track_timestamp && !is_active) {
 				track_timestamp_contents = track_timestamp.getAttribute(
@@ -420,7 +424,7 @@ export function patch_titles(search = page.structure.main) {
 				(is_active || settings.expand_tracks == 'always') &&
 				settings.expand_tracks != 'never' &&
 				useSettings.get('track_layout') == 'column';
-			track.setAttribute('data-show-album-text', show_album_text);
+			track.setAttribute('data-show-album-text', String(show_album_text));
 
 			const image_wrap = track.querySelector('.chartlist-image');
 			let link;
@@ -464,9 +468,9 @@ export function patch_titles(search = page.structure.main) {
 
 			if (useSettings.get('format_guest_features')) {
 				const formatted = name_includes(
-					track_title.getAttribute('data-name'),
+					track_title.getAttribute('data-name')!,
 					track_artist,
-					track_title.getAttribute('data-inherit-artists'),
+					track_title.getAttribute('data-inherit-artists')!,
 				);
 				console.log('formatted', formatted);
 
@@ -485,16 +489,17 @@ export function patch_titles(search = page.structure.main) {
 				);
 
 				if (!song_artist_element && !is_user) {
-					song_artist_element = document.createElement('td');
-					song_artist_element.classList.add('chartlist-artist');
+					song_artist_element = (
+						<td class='chartlist-artist' />
+					);
 					track_info.appendChild(song_artist_element);
 				}
 
 				if (
-					song_artist_element.textContent
-							.replaceAll('+', ' ')
-							.trim() === track_artist ||
-					song_artist_element.textContent.trim() === ''
+					song_artist_element!.textContent
+						.replaceAll('+', ' ')
+						.trim() === track_artist ||
+					song_artist_element!.textContent.trim() === ''
 				) {
 					log(
 						'artist either matches or is blank, replacing',
@@ -514,9 +519,8 @@ export function patch_titles(search = page.structure.main) {
 				if (track.getAttribute('data-disambig') == 'explicit') {
 					song_artist_element.insertBefore(
 						html.node`
-                        <span class="track-explicit icon">${
-							tl(trans.explicit)
-						}</span>
+                        <span class="track-explicit icon">${tl(trans.explicit)
+							}</span>
                     `,
 						song_artist_element.firstChild,
 					);
@@ -536,8 +540,8 @@ export function patch_titles(search = page.structure.main) {
 									track_artist,
 								)
 								: album
-								? album.textContent
-								: undefined}
+									? album.textContent
+									: undefined}
 							timestamp={track_timestamp_contents}
 						/>
 					);
@@ -622,7 +626,7 @@ export function patch_titles(search = page.structure.main) {
 				);
 
 				/*const more_button = html.node`
-                    <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
+					<button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
 					log('requested track in-built', 'menu', 'info', {
 						menu,
 					});
@@ -638,9 +642,9 @@ export function patch_titles(search = page.structure.main) {
 						menu.show();
 					}
 				}}>
-                        ${tl(trans.more)}
-                    </button>
-                `;
+						${tl(trans.more)}
+					</button>
+				`;
 
 				hover_tooltip(
 					more_button,
@@ -775,7 +779,7 @@ export function patch_titles(search = page.structure.main) {
 						log('has delete button', 'track', 'info', {
 							delete_button,
 						});
-						let form = delete_button.parentElement;
+						const form = delete_button.parentElement;
 
 						page.token = form.querySelector(
 							'[name="csrfmiddlewaretoken"]',
@@ -811,8 +815,8 @@ export function patch_titles(search = page.structure.main) {
 								track_artist,
 							)
 							: album
-							? album.textContent
-							: '',
+								? album.textContent
+								: '',
 					);
 
 					const play_container = track.querySelector(
@@ -1008,95 +1012,95 @@ export function patch_titles(search = page.structure.main) {
 									</>
 								)
 								: (can_edit && !auth.pro)
-								? (
-									<>
-										<Button
-											menu
-											onClick={() => {
-												close_menus();
-												non_pro_edit({
-													pre_track: track_title
-														.getAttribute(
-															'data-name',
-														),
-													pre_artist: track_artist,
-													pre_album: alt,
-													pre_album_artist:
-														album_artist,
-													timestamp: timestamp,
-												});
-											}}
-										>
-											<Icon
-												name={icons
-													.edit}
-											/>
-											{tl(trans.edit)}
-										</Button>
-										<div class='sep' />
-										{can_copy_scrobble && (
+									? (
+										<>
 											<Button
 												menu
 												onClick={() => {
 													close_menus();
-													submit_scrobble({
+													non_pro_edit({
 														pre_track: track_title
 															.getAttribute(
 																'data-name',
 															),
-														pre_artist:
-															track_artist,
+														pre_artist: track_artist,
 														pre_album: alt,
 														pre_album_artist:
 															album_artist,
-														pre_timestamp:
-															timestamp,
+														timestamp: timestamp,
 													});
 												}}
 											>
 												<Icon
-													name={icons.copy_scrobble}
+													name={icons
+														.edit}
 												/>
-												{tl(trans.copy)}
+												{tl(trans.edit)}
 											</Button>
+											<div class='sep' />
+											{can_copy_scrobble && (
+												<Button
+													menu
+													onClick={() => {
+														close_menus();
+														submit_scrobble({
+															pre_track: track_title
+																.getAttribute(
+																	'data-name',
+																),
+															pre_artist:
+																track_artist,
+															pre_album: alt,
+															pre_album_artist:
+																album_artist,
+															pre_timestamp:
+																timestamp,
+														});
+													}}
+												>
+													<Icon
+														name={icons.copy_scrobble}
+													/>
+													{tl(trans.copy)}
+												</Button>
+											)}
+										</>
+									)
+									: can_copy_scrobble
+										? (
+											<>
+												<Button
+													menu
+													onClick={() => {
+														close_menus();
+														submit_scrobble({
+															pre_track: track_title
+																.getAttribute(
+																	'data-name',
+																),
+															pre_artist: track_artist,
+															pre_album: alt,
+															pre_album_artist:
+																album_artist,
+															pre_timestamp: timestamp,
+														});
+													}}
+												>
+													<Icon name={icons.copy_scrobble} />
+													{tl(trans.copy)}
+												</Button>
+												<div class='sep' />
+											</>
+										)
+										: bulk_edit_button && (
+											<>
+												<BulkEditButton
+													button={bulk_edit_button}
+													onClick={close_menus}
+												/>
+												<div class='sep' />
+											</>
 										)}
-									</>
-								)
-								: can_copy_scrobble
-								? (
-									<>
-										<Button
-											menu
-											onClick={() => {
-												close_menus();
-												submit_scrobble({
-													pre_track: track_title
-														.getAttribute(
-															'data-name',
-														),
-													pre_artist: track_artist,
-													pre_album: alt,
-													pre_album_artist:
-														album_artist,
-													pre_timestamp: timestamp,
-												});
-											}}
-										>
-											<Icon name={icons.copy_scrobble} />
-											{tl(trans.copy)}
-										</Button>
-										<div class='sep' />
-									</>
-								)
-								: bulk_edit_button && (
-									<>
-										<BulkEditButton
-											button={bulk_edit_button}
-											onClick={close_menus}
-										/>
-										<div class='sep' />
-									</>
-								)}
 							{play_container && (
 								<PlayButton container={play_container} />
 							)}
@@ -1118,9 +1122,8 @@ export function patch_titles(search = page.structure.main) {
 										tooltip={tl(
 											trans.explore_in_library,
 										)}
-										href={`${root}user/${user}/library${
-											track_title.getAttribute('href')
-										}`}
+										href={`${root}user/${user}/library${track_title.getAttribute('href')
+											}`}
 									>
 										<Icon name={icons.arrow_right} />
 										{tl(trans.explore_in_library)}
@@ -1148,9 +1151,8 @@ export function patch_titles(search = page.structure.main) {
 											tooltip={tl(
 												trans.explore_in_library,
 											)}
-											href={`${root}user/${user}/library${
-												album_link.getAttribute('href')
-											}`}
+											href={`${root}user/${user}/library${album_link.getAttribute('href')
+												}`}
 										>
 											<Icon name={icons.arrow_right} />
 											{tl(trans.explore_in_library)}
@@ -1177,9 +1179,8 @@ export function patch_titles(search = page.structure.main) {
 											tooltip={tl(
 												trans.explore_in_library,
 											)}
-											href={`${root}user/${user}/library${
-												track_title.getAttribute('href')
-											}`}
+											href={`${root}user/${user}/library${track_title.getAttribute('href')
+												}`}
 										>
 											<Icon name={icons.arrow_right} />
 											{tl(trans.explore_in_library)}
@@ -1190,9 +1191,8 @@ export function patch_titles(search = page.structure.main) {
 								<Button
 									menu
 									onClick={close_menus}
-									href={`${root}music/${redirect()}${
-										sanitise(track_artist)
-									}`}
+									href={`${root}music/${redirect()}${sanitise(track_artist)
+										}`}
 								>
 									<Icon name={icons.artist} />
 									{tl(trans.artist)}
@@ -1205,9 +1205,8 @@ export function patch_titles(search = page.structure.main) {
 									tooltip={tl(
 										trans.explore_in_library,
 									)}
-									href={`${root}user/${user}/library/music/${redirect()}${
-										sanitise(track_artist)
-									}`}
+									href={`${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)
+										}`}
 								>
 									<Icon name={icons.arrow_right} />
 									{tl(trans.explore_in_library)}
@@ -1275,25 +1274,23 @@ export function patch_titles(search = page.structure.main) {
 
 			if (is_album) {
 				log(
-					`pushed insight album label of ${
-						track_title.getAttribute('data-name')
+					`pushed insight album label of ${track_title.getAttribute('data-name')
 					}`,
 					'glacier library',
 					'log',
 				);
 				insights.album.labels.push(
-					track_title.getAttribute('data-name'),
+					track_title.getAttribute('data-name')!,
 				);
 			} else {
 				log(
-					`pushed insight track label of ${
-						track_title.getAttribute('data-name')
+					`pushed insight track label of ${track_title.getAttribute('data-name')
 					}`,
 					'glacier library',
 					'log',
 				);
 				insights.track.labels.push(
-					track_title.getAttribute('data-name'),
+					track_title.getAttribute('data-name')!,
 				);
 			}
 
@@ -1302,7 +1299,7 @@ export function patch_titles(search = page.structure.main) {
 				loved.classList.add('colourful');
 				loved.setAttribute('data-season', season);
 
-				const love = loved.querySelector('.chartlist-love-button');
+				const love = loved.querySelector('.chartlist-love-button') as HTMLButtonElement;
 
 				love.classList.add('btn', 'icon-mask');
 
@@ -1326,13 +1323,13 @@ export function patch_titles(search = page.structure.main) {
 				}
 
 				if (
-					!settings.colourful_tracks &&
-					!settings.colourful_tracks_all
+					!useSettings.get('colourful_tracks') &&
+					!useSettings.get('colourful_tracks_all')
 				) {
 					return;
 				}
 
-				if (!settings.colourful_tracks_all && !is_active) return;
+				if (!useSettings.get('colourful_tracks_all') && !is_active) return;
 
 				image.setAttribute('crossorigin', 'anonymous');
 				try {
@@ -1349,14 +1346,16 @@ export function patch_titles(search = page.structure.main) {
 							track.style.setProperty('--hue-over', hue);
 							track.style.setProperty('--sat-over', sat);
 							track.style.setProperty('--lit-over', lit);
-						} else {to_colour.forEach((elem) => {
+						} else {
+							to_colour.forEach((elem) => {
 								elem.classList.add('colourful');
 								elem.style.setProperty('--hue-over', hue);
 								elem.style.setProperty('--sat-over', sat);
 								elem.style.setProperty('--lit-over', lit);
-							});}
+							});
+						}
 					};
-				} catch (e) {}
+				} catch (e) { }
 			}
 		}
 	});
@@ -1394,9 +1393,8 @@ function BulkEditButton({
 	onClick,
 }: { chibi?: boolean; button: HTMLButtonElement; onClick: () => void }) {
 	if (!button.classList.contains('chibi')) {
-		button.classList = `dropdown-menu-clickable-item ${
-			chibi && 'chibi'
-		} v2 bulk-edit-host`;
+		button.classList = `dropdown-menu-clickable-item ${chibi && 'chibi'
+			} v2 bulk-edit-host`;
 
 		button.addEventListener('click', onClick);
 
@@ -1563,7 +1561,7 @@ function DeleteButton({
 								body: track_title.getAttribute(
 									'data-name',
 								),
-								icon: 'icon-16-trash',
+								icon: icons.delete,
 								type: 'error',
 							});
 						});

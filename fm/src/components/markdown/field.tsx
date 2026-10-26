@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { markdown_options } from '@/types/markdown.ts';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
@@ -15,6 +15,7 @@ import {
 	dialog,
 	dialog_rm,
 	FooterFill,
+	modal,
 	ModalFooter,
 } from '@/components/dialog/dialog.tsx';
 import { input } from '@/components/settings/input.ts';
@@ -156,8 +157,8 @@ export function MarkdownField({
 						});
 
 						function submit_link() {
-							let alt_text = alt.value;
-							let link_text = link.value;
+							const alt_text = alt.value;
+							const link_text = link.value;
 
 							if (!link_text) return;
 
@@ -206,7 +207,7 @@ export function MarkdownField({
 						const link = createRef();
 						const alt = createRef();
 
-						dialog({
+						modal({
 							id: 'link',
 							title: tl(trans.attach_image),
 							body: (
@@ -215,7 +216,7 @@ export function MarkdownField({
 										class='markdown-image-preview'
 										ref={preview}
 									/>
-									<FormInner>
+									<FormInner span>
 										<GenericLabel>
 											{tl(trans.link)}
 										</GenericLabel>
@@ -245,25 +246,24 @@ export function MarkdownField({
 											ref={alt}
 										/>
 									</FormInner>
-									<ModalFooter>
-										<SeeMore
-											icon={icons.x}
-											iconPlacement='left'
-											onClick={() => {
-												dialog_rm({ id: 'link' });
-												resolve(null);
-											}}
-										>
-											{tl(trans.cancel)}
-										</SeeMore>
-										<FooterFill />
-										<Button primary onClick={submit_link}>
-											<SaveIcon />
-											{tl(trans.finish)}
-										</Button>
-									</ModalFooter>
 								</>
 							),
+							close: 'cancel',
+							actions: [
+								{
+									primary: true,
+									onClick: submit_link,
+									children: (
+										<>
+											<Icon name={icons.image} />
+											{tl(trans.attach_image)}
+										</>
+									),
+								},
+							],
+							onClose: () => {
+								resolve(null);
+							},
 						});
 
 						link.current.focus();
@@ -273,7 +273,6 @@ export function MarkdownField({
 							const link_text = link.current.value;
 
 							if (!link_text) return;
-
 							dialog_rm({ id: 'link' });
 
 							let output;
@@ -354,7 +353,7 @@ export function MarkdownField({
 													elem.selectionStart;
 												const sel_end =
 													elem.selectionEnd;
-												let new_val = elem.value;
+												const new_val = elem.value;
 
 												if (item.func) {
 													item.func().then(

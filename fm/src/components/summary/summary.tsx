@@ -6,7 +6,7 @@
 
 import { createRef, ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 
 interface ProfileSummaryProps {
 	music?: boolean;

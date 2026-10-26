@@ -13,11 +13,13 @@ import { tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingReset } from '@/components/settings/provider/reset.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { NewIndicator } from '@/components/shared/indicator.tsx';
+import { SettingIcon } from './icon';
 
 interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	icon?: string;
 	name?: ReactNode;
 	body?: ReactNode;
 	children?: ReactNode;
@@ -28,10 +30,12 @@ interface SettingLabelProps {
 	defaultValue?: setting_value;
 	menu?: boolean;
 	new_release?: boolean;
+	sponsorOnly?: boolean;
 }
 
 export function SettingLabel({
 	ref,
+	icon,
 	name,
 	body,
 	children,
@@ -42,6 +46,7 @@ export function SettingLabel({
 	defaultValue,
 	menu,
 	new_release,
+	sponsorOnly,
 }: SettingLabelProps) {
 	const reset = createRef();
 
@@ -65,6 +70,11 @@ export function SettingLabel({
 			<h5 class='setting-name'>
 				{name}
 				{new_release && <NewIndicator />}
+				{sponsorOnly && (
+					<label class={['new-badge', 'sponsor-related']}>
+						{tl(trans.sponsors_only)}
+					</label>
+				)}
 				{(value != undefined && setValue != undefined &&
 					defaultValue != undefined) &&
 					(
@@ -82,23 +92,31 @@ export function SettingLabel({
 		</div>
 	);
 
-	if (menu) {
-		label = (
-			<span class='menu-item-body' ref={ref}>
-				<strong class='menu-item-head'>
-					{name}
-				</strong>
-			</span>
-		);
-	}
-
 	Object.defineProperty(label, 'value', {
 		set(val: setting_value) {
 			if (reset.current) reset.current.value = val;
 		},
 	});
 
-	return label;
+	if (menu) {
+		label = (
+			<span class='menu-item-body' ref={ref}>
+				<strong class='menu-item-head'>
+					{icon && <SettingIcon name={icon} />}
+					{name}
+				</strong>
+			</span>
+		);
+
+		return label;
+	}
+
+	return (
+		<>
+			{icon && <SettingIcon name={icon} />}
+			{label}
+		</>
+	);
 }
 
 export function get_from_store(id?: string) {
@@ -177,7 +195,7 @@ export function SettingIncompatibleWith({
 					}
 
 					if (settings_store[key]?.title) {
-						title = tl(settings_store[key].title);
+						title = tl(settings_store[key].title) as string;
 					}
 
 					if (val == true) {

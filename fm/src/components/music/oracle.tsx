@@ -35,7 +35,7 @@ import { lang, tl, trans } from '@/build/trans';
 import { clean_title, fix_title } from '@/build/music';
 import { version } from '../../main';
 import { settings } from '@/build/config';
-import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { dialog, dialog_rm, modal } from '@/components/dialog/dialog';
 import tippy from 'tippy.js';
 import {
 	load_hoshino_artwork,
@@ -52,8 +52,9 @@ import { flag, flag_candidates } from '../shared/flag';
 import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { OracleNotice } from '@/components/oracle/notice.tsx';
+import { FormattedOracleCredits, OracleCredits } from '../oracle/credits';
 
 export function oracle_process() {
 	log('beginning', 'oracle');
@@ -105,7 +106,7 @@ export function oracle_process() {
 
 	const split = window.location.pathname.split('/');
 
-	let oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
+	const oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
 		{};
 
 	const now = Date.now();
@@ -138,7 +139,7 @@ export function oracle_process() {
 
 	if (!oracle_cache[artist]) oracle_cache[artist] = {};
 
-	let cache = oracle_cache[artist][item] || {
+	const cache = oracle_cache[artist][item] || {
 		album: {},
 		track: {},
 	};
@@ -244,15 +245,13 @@ export function oracle_process() {
 		metadata = html.node`
             <div class="metadata-column">
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${
-			tl(trans.length)
-		}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.length)
+			}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">?? ????, ??:??</dd>
                 </div>
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${
-			tl(trans.released)
-		}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.released)
+			}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">? ??? ????</dd>
                 </div>
             </div>
@@ -262,15 +261,12 @@ export function oracle_process() {
 		let tracklist_view_panel;
 		tracklist_panel = html.node`
             <section class="oracle-tracks">
-                <div class="top-container" data-theme=${
-			useSettings.get('theme')
-		}>
-                    <h2>${tl(trans.tracklist)}<span class="new-badge beta">${
-			tl(trans.beta)
-		}</span></h2>
+                <div class="top-container" data-theme=${useSettings.get('theme')
+			}>
+                    <h2>${tl(trans.tracklist)}<span class="new-badge beta">${tl(trans.beta)
+			}</span></h2>
                     <div class="accompany view-buttons blend blend-v2">
-                        ${
-			select({
+                        ${select({
 				values: page.state.tracklist_sources,
 				initial: settings.tracklist_source,
 				func: (val: string) => {
@@ -281,54 +277,51 @@ export function oracle_process() {
 				},
 				blend: true,
 			})
-		}
+			}
                     </div>
                     <div class="view-buttons blend blend-v2">
-                        <p class="blend-text">${
-			tl(trans.are_these_results_accurate)
-		}</p>
+                        <p class="blend-text">${tl(trans.are_these_results_accurate)
+			}</p>
                         <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
-			report_incorrect();
-		}}>
+				report_incorrect();
+			}}>
                             ${tl(trans.report_incorrect)}
                         </button>
                         ${() => {
-			const btn = html.node`
+				const btn = html.node`
                                 <button class="left-icon blend-v2-btn" data-type="settings">
                                     ${tl(trans.settings)}
                                 </button>
                             `;
 
-			tippy(btn, {
-				theme: 'window',
-				content: html.node`
+				tippy(btn, {
+					theme: 'window',
+					content: html.node`
                                     <div class="dialog-settings">
                                         <div class="setting-group blend">
-                                            ${
-					setting({ id: 'format_guest_features' })
-				}
-                                            ${
-					setting({ id: 'show_guest_features' })
-				}
+                                            ${setting({ id: 'format_guest_features' })
+						}
+                                            ${setting({ id: 'show_guest_features' })
+						}
                                             ${setting({ id: 'count_bar_axis' })}
                                         </div>
                                     </div>
                                 `,
-				placement: 'bottom',
-				interactive: true,
-				interactiveBorder: 10,
-				trigger: 'click',
-			});
+					placement: 'bottom',
+					interactive: true,
+					interactiveBorder: 10,
+					trigger: 'click',
+				});
 
-			return btn;
-		}}
+				return btn;
+			}}
                     </div>
                 </div>
                 <div class="oracle-tracklist-view" data-view=${settings.tracklist_source} ref=${(
-			el,
-		) => tracklist_view_panel = el}>
+				el,
+			) => tracklist_view_panel = el}>
                     <div class="oracle-tracklist" ref=${(el) =>
-			tracklist_oracle = el} data-type="oracle">
+				tracklist_oracle = el} data-type="oracle">
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-1 chartlist--with-artist chartlist--with-more chartlist--with-duration chartlist--with-bar">
                             <tbody>
                                 ${Array.from({ length: 14 }, track_placeholder)}
@@ -336,7 +329,7 @@ export function oracle_process() {
                         </table>
                     </div>
                     <div class="oracle-tracklist" ref=${(el) =>
-			tracklist_own = el} data-type="own">
+				tracklist_own = el} data-type="own">
                         <table class="chartlist chartlist--with-index chartlist--with-index--length-1 chartlist--with-artist chartlist--with-more chartlist--with-duration chartlist--with-bar">
                             <tbody>
                                 ${Array.from({ length: 14 }, track_placeholder)}
@@ -344,7 +337,7 @@ export function oracle_process() {
                         </table>
                     </div>
                     <div class="oracle-tracklist" ref=${(el) =>
-			tracklist_lfm = el} data-type="lfm" />
+				tracklist_lfm = el} data-type="lfm" />
                 </div>
             </section>
         `;
@@ -401,15 +394,13 @@ export function oracle_process() {
 		metadata = html.node`
             <div class="metadata-column">
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${
-			tl(trans.origin)
-		}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.origin)
+			}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">????</dd>
                 </div>
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${
-			tl(trans.born)
-		}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.born)
+			}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">? ??? ????</dd>
                 </div>
             </div>
@@ -540,24 +531,21 @@ export function oracle_process() {
 		if (tries < 1) return;
 		tries--;
 
-		let top_track = page.state.top_track;
+		const top_track = page.state.top_track;
 		let url;
 
 		let type = 'artist';
 
 		if (top_track) {
-			url = `https://musicbrainz.org/ws/2/recording?query=${
-				encodeURIComponent(
-					`recording:"${
-						clean_title(top_track)
-					}" AND artist:"${page.name}" AND status:Official`,
-				)
-			}`;
+			url = `https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(
+				`recording:"${clean_title(top_track)
+				}" AND artist:"${page.name}" AND status:Official`,
+			)
+				}`;
 			type = 'recording';
 		} else {
-			url = `https://musicbrainz.org/ws/2/artist?query=${
-				encodeURIComponent(page.name)
-			}`;
+			url = `https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(page.name)
+				}`;
 		}
 
 		if (
@@ -582,11 +570,10 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function (response) {
+			onload: function(response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching artist data', 'oracle', 'error', {
 						response,
@@ -639,7 +626,7 @@ export function oracle_process() {
 					}, mb_delay);
 				}
 			},
-			onerror: function (err) {
+			onerror: function(err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -660,21 +647,17 @@ export function oracle_process() {
 
 		if (page.type == 'track') {
 			url =
-				`https://musicbrainz.org/ws/2/recording?inc=release-events&query=${
-					encodeURIComponent(
-						`recording:"${
-							clean_title(page.name)
-						}" AND ${artist_template} AND status:Official`,
-					)
+				`https://musicbrainz.org/ws/2/recording?inc=release-events&query=${encodeURIComponent(
+					`recording:"${clean_title(page.name)
+					}" AND ${artist_template} AND status:Official`,
+				)
 				}`;
 		} else if (page.type == 'album') {
-			url = `https://musicbrainz.org/ws/2/release?query=${
-				encodeURIComponent(
-					`release:"${
-						clean_title(page.name)
-					}" AND ${artist_template}`,
-				)
-			}`;
+			url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(
+				`release:"${clean_title(page.name)
+				}" AND ${artist_template}`,
+			)
+				}`;
 		}
 
 		if (page.type == 'album') {
@@ -778,11 +761,10 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function (response) {
+			onload: function(response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -807,7 +789,7 @@ export function oracle_process() {
 
 				oracle(data);
 			},
-			onerror: function (err) {
+			onerror: function(err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -867,11 +849,10 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function (response) {
+			onload: function(response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -910,7 +891,7 @@ export function oracle_process() {
 
 				oracle_track_releases(data);
 			},
-			onerror: function (err) {
+			onerror: function(err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -1184,11 +1165,10 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function (response) {
+			onload: function(response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -1232,7 +1212,7 @@ export function oracle_process() {
 
 				oracle_album(data);
 			},
-			onerror: function (err) {
+			onerror: function(err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -1277,21 +1257,21 @@ export function oracle_process() {
 		}
 
 		/*if (page.subpage == 'overview') {
-            const metadata_row = info_panel?.querySelector('.metadata-row');
+			const metadata_row = info_panel?.querySelector('.metadata-row');
 
-            if (data.annotation && metadata_row) {
-                metadata_row.appendChild(html.node`
-                    <div class="metadata-group">
-                        <div class="sub-text music-small-header">
-                            ${tl(trans.annotation)}
-                        </div>
-                        <div class="oracle-annotation">
-                            ${data.annotation}
-                        </div>
-                    </div>
-                `);
-            }
-        }*/
+			if (data.annotation && metadata_row) {
+				metadata_row.appendChild(html.node`
+					<div class="metadata-group">
+						<div class="sub-text music-small-header">
+							${tl(trans.annotation)}
+						</div>
+						<div class="oracle-annotation">
+							${data.annotation}
+						</div>
+					</div>
+				`);
+			}
+		}*/
 
 		let labels = data['label-info'];
 		if (labels && labels.length > 0 && page.subpage == 'overview') {
@@ -1312,23 +1292,22 @@ export function oracle_process() {
 				html`
 					©
 					${labels.map((label, index) => {
-						let label_elem;
-						const elem = html.node`
+					let label_elem;
+					const elem = html.node`
                         <span class="music-label" ref=${(
-							el,
-						) => (label_elem = el)}>${label.label.name}</span>${
-							index < labels.length - 1 ? ', ' : ''
+						el,
+					) => (label_elem = el)}>${label.label.name}</span>${index < labels.length - 1 ? ', ' : ''
 						}
                     `;
 
-						if (label.label.disambiguation != '') {
-							tippy(label_elem, {
-								content: label.label.disambiguation,
-							});
-						}
+					if (label.label.disambiguation != '') {
+						tippy(label_elem, {
+							content: label.label.disambiguation,
+						});
+					}
 
-						return elem;
-					})}
+					return elem;
+				})}
 				`,
 			);
 		}
@@ -1362,21 +1341,21 @@ export function oracle_process() {
 			html`
 				<div class="metadata-group">
 					<dt class="catalogue-metadata-heading">${tl(
-						trans.length,
-					)}</dt>
+				trans.length,
+			)}</dt>
 					<dd class="catalogue-metadata-description">${tl(
-						trans.value_tracks_time,
-						{ count: result.count, length },
-					)}</dd>
+				trans.value_tracks_time,
+				{ count: result.count, length },
+			)}</dd>
 				</div>
 				<div class="metadata-group">
 					<dt class="catalogue-metadata-heading">${tl(
-						trans.released,
-					)}</dt>
+				trans.released,
+			)}</dt>
 					<dd class="catalogue-metadata-description">${DateTime
-						.fromISO(data.date).toLocaleString(
-							DateTime.DATE_MED,
-						)}</dd>
+					.fromISO(data.date).toLocaleString(
+						DateTime.DATE_MED,
+					)}</dd>
 				</div>
 			`,
 		);
@@ -1392,9 +1371,9 @@ export function oracle_process() {
 		const oracle_entry = {
 			...defaults,
 			...((
-					oracle_albums.hasOwnProperty(artist) &&
-					oracle_albums[artist].hasOwnProperty(album)
-				)
+				oracle_albums.hasOwnProperty(artist) &&
+				oracle_albums[artist].hasOwnProperty(album)
+			)
 				? oracle_albums[artist][album]
 				: {}),
 		};
@@ -1406,8 +1385,8 @@ export function oracle_process() {
 				html`
 					<div class="loading-data-container">
 						<div class="loading-data-text failed">${tl(
-							trans.no_tracks_found_mb,
-						)}</div>
+					trans.no_tracks_found_mb,
+				)}</div>
 					</div>
 				`,
 			);
@@ -1419,15 +1398,14 @@ export function oracle_process() {
 			tracklist_oracle,
 			html`
 				${discs.map((disc) =>
-					render_tracklist(disc, discs.length, artist)
-				)}
+				render_tracklist(disc, discs.length, artist)
+			)}
 			`,
 		);
 
 		function render_tracklist(disc, length, retrieved_artist) {
 			return html.node`
-                ${
-				length > 1
+                ${length > 1
 					? html.node`
                 <div class="sub-text normal disc-header">
                     <span class="bleh-icon" style="--icon: var(--mask)" />
@@ -1435,11 +1413,10 @@ export function oracle_process() {
                 </div>
                 `
 					: ''
-			}
+				}
                 <table class="chartlist chartlist--with-index chartlist--with-index--length-1 chartlist--with-artist chartlist--with-more chartlist--with-duration chartlist--with-bar">
                     <tbody>
-                        ${
-				disc.tracks.map((track) => {
+                        ${disc.tracks.map((track) => {
 					let title = fix_title(track.title);
 
 					const artist_lower = fix_title(
@@ -1448,11 +1425,11 @@ export function oracle_process() {
 					const title_lower = title.toLowerCase();
 
 					const track_entry = (
-							oracle_tracks.hasOwnProperty(artist_lower) &&
-							oracle_tracks[artist_lower].hasOwnProperty(
-								title_lower,
-							)
+						oracle_tracks.hasOwnProperty(artist_lower) &&
+						oracle_tracks[artist_lower].hasOwnProperty(
+							title_lower,
 						)
+					)
 						? oracle_tracks[artist_lower][title_lower]
 						: null;
 
@@ -1466,8 +1443,8 @@ export function oracle_process() {
 					if (video) return html.node``;
 
 					const artists = track['artist-credit'];
-					let inherit_guests = [];
-					let guests = [];
+					const inherit_guests = [];
+					const guests = [];
 					let found_feature = false;
 					let first_joinphrase;
 
@@ -1507,9 +1484,8 @@ export function oracle_process() {
 						oracle_entry.guests_in_title &&
 						guests.length > 0
 					) {
-						title += ` ${
-							oracle_entry.guest_brackets != 'none' ? '(' : ''
-						}${first_joinphrase} `;
+						title += ` ${oracle_entry.guest_brackets != 'none' ? '(' : ''
+							}${first_joinphrase} `;
 
 						guests.forEach((artist, index) => {
 							log(`guest ${index}`, 'oracle', 'info', {
@@ -1549,23 +1525,20 @@ export function oracle_process() {
                                 <tr class="chartlist-row" data-disambig=${disambig}>
                                     <td class="chartlist-index">${track.position}</td>
                                     <td class="chartlist-name">
-                                        <a href="${root}music/${
-						sanitise(
-							fix_title(
-								oracle_aliases(
-									track['artist-credit'][0],
-									page.sister,
-									artist_id,
-								),
+                                        <a href="${root}music/${sanitise(
+						fix_title(
+							oracle_aliases(
+								track['artist-credit'][0],
+								page.sister,
+								artist_id,
 							),
-						)
-					}/_/${
-						sanitise(title)
-					}" data-name=${title} data-inherit-artists=${
-						inherit_guests.map((artist) =>
+						),
+					)
+						}/_/${sanitise(title)
+						}" data-name=${title} data-inherit-artists=${inherit_guests.map((artist) =>
 							sanitise(fix_title(artist.name), ' ')
 						).join(';')
-					}>
+						}>
                                             ${title}
                                         </a>
                                     </td>
@@ -1582,7 +1555,7 @@ export function oracle_process() {
 
 					return elem;
 				})
-			}
+				}
                     </tbody>
                 </table>
             `;
@@ -1613,7 +1586,7 @@ export function oracle_process() {
 		// let's comb through the releases to remove
 		// various artists
 		let releases = [];
-		let releases_to_move = [];
+		const releases_to_move = [];
 
 		if (!recording) {
 			if (releases_panel) {
@@ -1623,17 +1596,17 @@ export function oracle_process() {
 						<div class="top-container">
 							<h3 class="text-18">
 						        ${tl(
-							trans.albums,
-						)}<span class="new-badge beta">${tl(trans.beta)}</span>
+						trans.albums,
+					)}<span class="new-badge beta">${tl(trans.beta)}</span>
 						    </h3>
 							<div class="view-buttons blend blend-v2">
 								<p class="blend-text">${tl(
-									trans.are_these_results_accurate,
-								)}</p>
+						trans.are_these_results_accurate,
+					)}</p>
 								<button class="left-icon blend-v2-btn mark-incorrect"
 									data-type="dislike" onclick=${() => {
-										report_incorrect();
-									}}>
+							report_incorrect();
+						}}>
 						            ${tl(trans.report_incorrect)}
 						        </button>
 							</div>
@@ -1651,7 +1624,7 @@ export function oracle_process() {
 
 		// let's look thru the last.fm provided ones
 		// to possibly get listener and cover data
-		let lastfm_releases = [];
+		const lastfm_releases = [];
 		const lastfm_source_albums = albums_and_lyrics_row?.querySelectorAll(
 			'.source-album',
 		);
@@ -1730,7 +1703,7 @@ export function oracle_process() {
 				const artist = fix_title(
 					oracle_aliases(
 						release['artist-credit']?.[0] ||
-							recording['artist-credit'][0],
+						recording['artist-credit'][0],
 						page.sister,
 						'',
 					),
@@ -1747,11 +1720,11 @@ export function oracle_process() {
 				const oracle_entry = {
 					...defaults,
 					...((
-							oracle_albums.hasOwnProperty(artist_lower) &&
-							oracle_albums[artist_lower].hasOwnProperty(
-								title_lower,
-							)
+						oracle_albums.hasOwnProperty(artist_lower) &&
+						oracle_albums[artist_lower].hasOwnProperty(
+							title_lower,
 						)
+					)
 						? oracle_albums[artist_lower][title_lower]
 						: {}),
 				};
@@ -1780,7 +1753,7 @@ export function oracle_process() {
 					(r) =>
 						r.title.toLowerCase() == title.toLowerCase() &&
 						r['artist-credit']?.[0]?.name?.toLowerCase() ==
-							artist?.toLowerCase(),
+						artist?.toLowerCase(),
 				);
 
 				// if multiple, prefer digital media pressing
@@ -1802,12 +1775,12 @@ export function oracle_process() {
 				// otherwise, use what we have
 				return (
 					index ==
-						self.findIndex(
-							(r) =>
-								r.title.toLowerCase() == title.toLowerCase() &&
-								r['artist-credit']?.[0]?.name.toLowerCase() ==
-									artist.toLowerCase(),
-						)
+					self.findIndex(
+						(r) =>
+							r.title.toLowerCase() == title.toLowerCase() &&
+							r['artist-credit']?.[0]?.name.toLowerCase() ==
+							artist.toLowerCase(),
+					)
 				);
 			});
 
@@ -1867,11 +1840,11 @@ export function oracle_process() {
 			if (releases[0]) {
 				const release = releases[0];
 
-				let title = release.title;
+				const title = release.title;
 				const artist = fix_title(
 					oracle_aliases(
 						release['artist-credit']?.[0] ||
-							recording['artist-credit'][0],
+						recording['artist-credit'][0],
 						page.sister,
 					),
 				);
@@ -1919,8 +1892,7 @@ export function oracle_process() {
 						);
 
 						fetch(
-							`${root}music/${sanitise(artist)}/${
-								sanitise(title)
+							`${root}music/${sanitise(artist)}/${sanitise(title)
 							}/`,
 						)
 							.then((res) => {
@@ -1992,17 +1964,17 @@ export function oracle_process() {
 						<div class="top-container">
 							<h3 class="text-18">
 						        ${tl(
-							trans.albums,
-						)}<span class="new-badge beta">${tl(trans.beta)}</span>
+						trans.albums,
+					)}<span class="new-badge beta">${tl(trans.beta)}</span>
 						    </h3>
 							<div class="view-buttons blend blend-v2">
 								<p class="blend-text">${tl(
-									trans.are_these_results_accurate,
-								)}</p>
+						trans.are_these_results_accurate,
+					)}</p>
 								<button class="left-icon blend-v2-btn mark-incorrect"
 									data-type="dislike" onclick=${() => {
-										report_incorrect();
-									}}>
+							report_incorrect();
+						}}>
 						            ${tl(trans.report_incorrect)}
 						        </button>
 							</div>
@@ -2011,202 +1983,189 @@ export function oracle_process() {
 							? 'source-albums-container'
 							: 'resource-list-container'}">
 							<div class="${page.subpage == 'overview'
-								? 'source-albums'
-								: 'resource-list--release-list'}">
+							? 'source-albums'
+							: 'resource-list--release-list'}">
 						        ${releases.map((release, index) => {
-							log('release', 'oracle', 'log', {
-								release,
-							});
-							let title = release.title;
-							const artist = fix_title(
-								oracle_aliases(
-									release['artist-credit']?.[0] ||
+								log('release', 'oracle', 'log', {
+									release,
+								});
+								const title = release.title;
+								const artist = fix_title(
+									oracle_aliases(
+										release['artist-credit']?.[0] ||
 										recording['artist-credit'][0],
-									page.sister,
-								),
-							);
-
-							const types = {
-								album: tl(trans.album),
-								single: tl(trans.single),
-								ep: 'EP',
-								other: tl(trans.other),
-							};
-
-							let type = release['release-group']['primary-type'];
-							if (type && type.toLowerCase() in types) {
-								type = types[type.toLowerCase()];
-							}
-
-							// is there a matching last.fm entry available atm?
-							const match = lastfm_releases.find(
-								(r) =>
-									r.title == title &&
-									r.artist == artist,
-							);
-
-							let plays = 0;
-							let artwork;
-							if (match) {
-								plays = match.plays;
-								artwork = match.artwork;
-							}
-
-							let artwork_container;
-							let stats;
-
-							let title_elem;
-							let artist_elem;
-							if (useSettings.get('format_guest_features')) {
-								const formatted = name_includes(
-									title,
-									artist,
+										page.sister,
+									),
 								);
 
-								title_elem = html.node`<a class="smart-title">${
-									smart_title(
+								const types = {
+									album: tl(trans.album),
+									single: tl(trans.single),
+									ep: 'EP',
+									other: tl(trans.other),
+								};
+
+								let type = release['release-group']['primary-type'];
+								if (type && type.toLowerCase() in types) {
+									type = types[type.toLowerCase()];
+								}
+
+								// is there a matching last.fm entry available atm?
+								const match = lastfm_releases.find(
+									(r) =>
+										r.title == title &&
+										r.artist == artist,
+								);
+
+								let plays = 0;
+								let artwork;
+								if (match) {
+									plays = match.plays;
+									artwork = match.artwork;
+								}
+
+								let artwork_container;
+								let stats;
+
+								let title_elem;
+								let artist_elem;
+								if (useSettings.get('format_guest_features')) {
+									const formatted = name_includes(
+										title,
+										artist,
+									);
+
+									title_elem = html.node`<a class="smart-title">${smart_title(
 										formatted.song_title,
 										formatted.song_tags,
 									)
-								}</a>`;
-								artist_elem = html.node`${
-									smart_artists(
+										}</a>`;
+									artist_elem = html.node`${smart_artists(
 										formatted.song_artist,
 										formatted.song_guests,
 									)
-								}`;
-							} else {
-								title_elem = romanise(
-									correct_item_by_artist(
-										title,
-										artist,
-									),
-								);
-								artist_elem = romanise(
-									correct_artist(artist),
-								);
-							}
+										}`;
+								} else {
+									title_elem = romanise(
+										correct_item_by_artist(
+											title,
+											artist,
+										),
+									);
+									artist_elem = romanise(
+										correct_artist(artist),
+									);
+								}
 
-							let elem;
+								let elem;
 
-							if (page.subpage == 'overview') {
-								elem = html.node`
+								if (page.subpage == 'overview') {
+									elem = html.node`
                                         <div class="source-album js-link-block link-block-cover-link">
                                             <div class="source-album-art" ref=${(
-									el,
-								) => artwork_container = el}>
-                                                ${
-									artwork
-										? html.node`
+										el,
+									) => artwork_container = el}>
+                                                ${artwork
+											? html.node`
                                                     <span class="cover-art">
                                                         <img src=${artwork} alt=${title} loading="lazy">
                                                     </span>
                                                 `
-										: html.node`
+											: html.node`
                                                     <span class="cover-art">
                                                         <img class="missing-album" />
                                                     </span>
                                                 `
-								}
+										}
                                             </div>
                                             <div class="source-album-details" data-kate-processed="true">
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(
-									el,
-								) => (stats = el)}>
+											el,
+										) => (stats = el)}>
                                                     <span class="oracle-stat type">${type}</span>
-                                                    ${
-									match
-										? html.node`
+                                                    ${match
+											? html.node`
                                                         <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
-                                                            ${
-											plays.toLocaleString(lang)
-										}
+                                                            ${plays.toLocaleString(lang)
+												}
                                                         </span>
                                                     `
-										: ''
-								}
+											: ''
+										}
                                                 </p>
-                                                <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${
-									sanitise(artist)
-								}/${
-									sanitise(title)
-								}" tabindex="-1" aria-hidden="true" />
+                                                <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist)
+										}/${sanitise(title)
+										}" tabindex="-1" aria-hidden="true" />
                                             </div>
                                         </div>
                                     `;
-							} else {
-								elem = html.node`
+								} else {
+									elem = html.node`
                                         <div class="resource-list--release-list-item-wrap">
                                             <div class="resource-list--release-list-item js-link-block">
                                                 <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
                                                 <p class="resource-list--release-list-item-artist">${artist_elem}</p>
                                                 <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(
-									el,
-								) => stats = el}>
+										el,
+									) => stats = el}>
                                                     <span class="oracle-stat type">${type}</span>
-                                                    ${
-									match
-										? html.node`
+                                                    ${match
+											? html.node`
                                                         <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
-                                                            ${
-											plays.toLocaleString(lang)
-										}
+                                                            ${plays.toLocaleString(lang)
+												}
                                                         </span>
                                                     `
-										: ''
-								}
+											: ''
+										}
                                                 </p>
                                                 <p class="resource-list--release-list-item-aux-text">
-                                                    ${
-									tl(trans.count_tracks, {
-										c: release['track-count'],
-									})
-								}
+                                                    ${tl(trans.count_tracks, {
+											c: release['track-count'],
+										})
+										}
                                                 </p>
                                                 <div class="media-item" ref=${(
-									el,
-								) => artwork_container = el}>
-                                                    ${
-									artwork
-										? html.node`
+											el,
+										) => artwork_container = el}>
+                                                    ${artwork
+											? html.node`
                                                         <span class="resource-list--release-list-item-image cover-art">
                                                             <img src=${artwork} alt=${title}>
                                                         </span>
                                                     `
-										: html.node`
+											: html.node`
                                                         <span class="resource-list--release-list-item-image cover-art">
                                                             <img class="missing-album" />
                                                         </span>
                                                     `
-								}
+										}
                                                 </div>
-                                                <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${
-									sanitise(artist)
-								}/${
-									sanitise(title)
-								}" tabindex="-1" aria-hidden="true" />
+                                                <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist)
+										}/${sanitise(title)
+										}" tabindex="-1" aria-hidden="true" />
                                             </div>
                                         </div>
                                     `;
-							}
+								}
 
-							if (!artwork && index < 2) {
-								load_cover_art(
-									artwork_container,
-									title,
-									artist,
-									stats,
-									type,
-									index,
-								);
-							}
+								if (!artwork && index < 2) {
+									load_cover_art(
+										artwork_container,
+										title,
+										artist,
+										stats,
+										type,
+										index,
+									);
+								}
 
-							return elem;
-						})}
+								return elem;
+							})}
 						    </div>
 						</div>
 					`,
@@ -2217,9 +2176,8 @@ export function oracle_process() {
 			if (recording.disambiguation == 'explicit') {
 				artist_elem.insertBefore(
 					html.node`
-                    <span class="track-explicit icon">${
-						tl(trans.explicit)
-					}</span>
+                    <span class="track-explicit icon">${tl(trans.explicit)
+						}</span>
                 `,
 					artist_elem.firstChild,
 				);
@@ -2396,9 +2354,8 @@ export function oracle_process() {
 			info_panel?.after(html.node`
                 <section class="oracle-error">
                     <div class="alert alert-error">
-                        oracle: ${
-				response.message ? response.message : response
-			}
+                        oracle: ${response.message ? response.message : response
+				}
                     </div>
                 </section>
             `);
@@ -2408,7 +2365,7 @@ export function oracle_process() {
 		let text = response.responseText;
 		try {
 			text = JSON.parse(response.responseText)?.error;
-		} catch {}
+		} catch { }
 
 		info_panel?.after(html.node`
             <section class="oracle-error">
@@ -2437,11 +2394,10 @@ export function oracle_process() {
 			method: 'GET',
 			url,
 			headers: {
-				'User-Agent':
-					`bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function (response) {
+			onload: function(response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -2480,7 +2436,7 @@ export function oracle_process() {
 
 				oracle_artist(data);
 			},
-			onerror: function (err) {
+			onerror: function(err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -2547,9 +2503,8 @@ export function oracle_process() {
 				    ${area
 					? html.node`
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${
-						tl(trans.origin)
-					}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.origin)
+						}</dt>
                     <dd class="catalogue-metadata-description has-flag">
                         ${flag(area_code)}
                         ${area_name}
@@ -2559,31 +2514,24 @@ export function oracle_process() {
 					: ''}
 				    ${data.type == 'Person'
 					? html.node`
-                    ${
-						lifespan.begin
+                    ${lifespan.begin
 							? html.node`
-                    <div class="metadata-group ${
-								begin_code || begin ? 'has-secondary-info' : ''
-							}">
-                        <dt class="catalogue-metadata-heading">${
-								tl(trans.born)
-							}</dt>
+                    <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''
+								}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.born)
+								}</dt>
                         <dd class="catalogue-metadata-description has-age">
-                            ${
-								DateTime.fromISO(lifespan.begin).toLocaleString(
+                            ${DateTime.fromISO(lifespan.begin).toLocaleString(
 									DateTime.DATE_MED,
 								)
-							}
-                            ${
-								!lifespan.end
-									? html.node`<span class="artist-age">(${
-										age(lifespan.begin)
-									})</span>`
+								}
+                            ${!lifespan.end
+									? html.node`<span class="artist-age">(${age(lifespan.begin)
+										})</span>`
 									: ''
-							}
+								}
                         </dd>
-                        ${
-								begin_code
+                        ${begin_code
 									? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(begin_code)}
@@ -2591,39 +2539,33 @@ export function oracle_process() {
                         </dd>
                         `
 									: begin
-									? html.node`
+										? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(area_code)}
                             ${begin.name}
                         </dd>
                         `
-									: ''
-							}
+										: ''
+								}
                     </div>
                     `
 							: ''
-					}
-                    ${
-						lifespan.end
+						}
+                    ${lifespan.end
 							? html.node`
-                    <div class="metadata-group ${
-								end_code || end ? 'has-secondary-info' : ''
-							}">
-                        <dt class="catalogue-metadata-heading">${
-								tl(trans.died)
-							}</dt>
+                    <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''
+								}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.died)
+								}</dt>
                         <dd class="catalogue-metadata-description has-age">
-                            ${
-								DateTime.fromISO(lifespan.end).toLocaleString(
+                            ${DateTime.fromISO(lifespan.end).toLocaleString(
 									DateTime.DATE_MED,
 								)
-							}
-                            <span class="artist-age">(${
-								age(lifespan.begin, lifespan.end)
-							})</span>
+								}
+                            <span class="artist-age">(${age(lifespan.begin, lifespan.end)
+								})</span>
                         </dd>
-                        ${
-								end_code
+                        ${end_code
 									? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(end_code)}
@@ -2631,38 +2573,33 @@ export function oracle_process() {
                         </dd>
                         `
 									: end
-									? html.node`
+										? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(area_code)}
                             ${end.name}
                         </dd>
                         `
-									: ''
-							}
+										: ''
+								}
                     </div>
                     `
 							: ''
-					}
+						}
                 `
 					: html.node`
-                    ${
-						lifespan.begin
+                    ${lifespan.begin
 							? html.node`
-                    <div class="metadata-group ${
-								begin_code || begin ? 'has-secondary-info' : ''
-							}">
-                        <dt class="catalogue-metadata-heading">${
-								tl(trans.formed)
-							}</dt>
+                    <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''
+								}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.formed)
+								}</dt>
                         <dd class="catalogue-metadata-description has-age">
-                            ${
-								DateTime.fromISO(lifespan.begin).toLocaleString(
+                            ${DateTime.fromISO(lifespan.begin).toLocaleString(
 									DateTime.DATE_MED,
 								)
-							}
+								}
                         </dd>
-                        ${
-								begin_code
+                        ${begin_code
 									? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(begin_code)}
@@ -2670,36 +2607,31 @@ export function oracle_process() {
                         </dd>
                         `
 									: begin
-									? html.node`
+										? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(area_code)}
                             ${begin.name}
                         </dd>
                         `
-									: ''
-							}
+										: ''
+								}
                     </div>
                     `
 							: ''
-					}
-                    ${
-						lifespan.end
+						}
+                    ${lifespan.end
 							? html.node`
-                    <div class="metadata-group ${
-								end_code || end ? 'has-secondary-info' : ''
-							}">
-                        <dt class="catalogue-metadata-heading">${
-								tl(trans.ended)
-							}</dt>
+                    <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''
+								}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.ended)
+								}</dt>
                         <dd class="catalogue-metadata-description has-age">
-                            ${
-								DateTime.fromISO(lifespan.end).toLocaleString(
+                            ${DateTime.fromISO(lifespan.end).toLocaleString(
 									DateTime.DATE_MED,
 								)
-							}
+								}
                         </dd>
-                        ${
-								end_code
+                        ${end_code
 									? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(end_code)}
@@ -2707,49 +2639,44 @@ export function oracle_process() {
                         </dd>
                         `
 									: end
-									? html.node`
+										? html.node`
                         <dd class="catalogue-metadata-description has-flag secondary-info">
                             ${flag(area_code)}
                             ${end.name}
                         </dd>
                         `
-									: ''
-							}
+										: ''
+								}
                     </div>
                     `
 							: ''
-					}
-                    ${
-						artists.length > 0
+						}
+                    ${artists.length > 0
 							? html.node`
                     <div class="metadata-group">
-                        <dt class="catalogue-metadata-heading">${
-								tl(trans.artists)
-							}</dt>
+                        <dt class="catalogue-metadata-heading">${tl(trans.artists)
+								}</dt>
                         <dd class="catalogue-metadata-description group-artist-list">
-                            ${
-								artists.map((artist, i) => {
+                            ${artists.map((artist, i) => {
 									const last = i == artists.length - 1;
 									console.info('group artist', artist);
 
 									return html.node`
                                     <span class="group-artist">
-                                        <a class="group-artist-link" href="${root}music/${redirect()}${
-										sanitise(artist.artist.name)
-									}">${
-										romanise(
+                                        <a class="group-artist-link" href="${root}music/${redirect()}${sanitise(artist.artist.name)
+										}">${romanise(
 											correct_artist(artist.artist.name),
 										)
-									}</a>${!last ? ',' : ''}
+										}</a>${!last ? ',' : ''}
                                     </span>
                                 `;
 								})
-							}
+								}
                         </dd>
                     </div>
                     `
 							: ''
-					}
+						}
                 `}
 				</div>
 			`,
@@ -2761,23 +2688,22 @@ export function oracle_process() {
 				html`
 					©
 					${labels.map((label, index) => {
-						let label_elem;
-						const elem = html.node`
+					let label_elem;
+					const elem = html.node`
                         <span class="music-label" ref=${(
-							el,
-						) => (label_elem = el)}>${label.label.name}</span>${
-							index < labels.length - 1 ? ', ' : ''
+						el,
+					) => (label_elem = el)}>${label.label.name}</span>${index < labels.length - 1 ? ', ' : ''
 						}
                     `;
 
-						if (label.label.disambiguation != '') {
-							tippy(label_elem, {
-								content: label.label.disambiguation,
-							});
-						}
+					if (label.label.disambiguation != '') {
+						tippy(label_elem, {
+							content: label.label.disambiguation,
+						});
+					}
 
-						return elem;
-					})}
+					return elem;
+				})}
 				`,
 			);
 		}
@@ -2787,22 +2713,22 @@ export function oracle_process() {
 export function oracle_data(force = false) {
 	if (!(ff('oracle') && settings.oracle_beta)) return;
 
-	let cached_artists = localStorage.getItem('oracle_artists');
-	let cached_artists_expire = new Date(
+	const cached_artists = localStorage.getItem('oracle_artists');
+	const cached_artists_expire = new Date(
 		localStorage.getItem('oracle_artists_expire'),
 	);
 
-	let cached_albums = localStorage.getItem('oracle_albums');
-	let cached_albums_expire = new Date(
+	const cached_albums = localStorage.getItem('oracle_albums');
+	const cached_albums_expire = new Date(
 		localStorage.getItem('oracle_albums_expire'),
 	);
 
-	let cached_tracks = localStorage.getItem('oracle_tracks');
-	let cached_tracks_expire = new Date(
+	const cached_tracks = localStorage.getItem('oracle_tracks');
+	const cached_tracks_expire = new Date(
 		localStorage.getItem('oracle_tracks_expire'),
 	);
 
-	let current_time = new Date();
+	const current_time = new Date();
 
 	if (!cached_artists) {
 		log('artists list is not cached, fetching', 'oracle');
@@ -2864,12 +2790,12 @@ function parse(value: {}, key: string, type: string) {
 }
 
 function oracle_request(type = 'albums', send_notify = false) {
-	let xhr = new XMLHttpRequest();
-	let url =
+	const xhr = new XMLHttpRequest();
+	const url =
 		`https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
-	xhr.onload = function () {
+	xhr.onload = function() {
 		log(`${type} list responded with ${xhr.status}`, 'oracle');
 
 		if (xhr.status != 200) {
@@ -2881,7 +2807,7 @@ function oracle_request(type = 'albums', send_notify = false) {
 		}
 
 		// set expire date
-		let api_expire = new Date();
+		const api_expire = new Date();
 
 		if (xhr.status == 200) {
 			if (type == 'artists') {
@@ -2949,7 +2875,7 @@ export function oracle_credits() {
 				acc[type] = [];
 			}
 
-			let existing = acc[type].find((a) => a.name == name);
+			const existing = acc[type].find((a) => a.name == name);
 
 			if (!existing) {
 				acc[type].push({
@@ -2969,105 +2895,17 @@ export function oracle_credits() {
 			}
 
 			return acc;
-		}, {});
+		}, {}) as FormattedOracleCredits;
 	};
 
-	const order = [
-		'vocal',
-		'recording',
-		'mix',
-		'engineer',
-		'writer',
-	];
+	console.info('oracle list', relations, list(flatten(relations)));
 
-	const grouped = Object.entries(list(flatten(relations)))
-		.sort(([a], [b]) => {
-			const a_index = order.indexOf(a);
-			const b_index = order.indexOf(b);
-
-			if (a_index == -1) return 1;
-			if (b_index == -1) return -1;
-
-			return a_index - b_index;
-		});
-
-	console.info('oracle list', grouped, relations);
-
-	dialog({
+	modal({
 		id: 'oracle_credits',
-		title: tl(trans.credits_for_value, {
-			v: (
-				<i>
-					{sanitise_text(
-						romanise(
-							correct_item_by_artist(page.name, page.sister),
-						),
-					)}
-				</i>
-			),
-		}, false),
-		body: html.node`
-            <div class="oracle-credits">
-                ${
-			grouped.length == 0
-				? html.node`
-                <div class="loading-data-container">
-                    <div class="loading-data-text failed">${
-					tl(trans.oracle_no_credits)
-				}</div>
-                </div>
-                `
-				: grouped.map(([type, artists]) => {
-					let text = trans.hasOwnProperty(`oracle_${type}`)
-						? tl(trans[`oracle_${type}`])
-						: `${type} (unknown, please report as bug)`;
-
-					return html.node`
-                        <div class="oracle-credit-group">
-                            <h4 class="oracle-credit-group-title">${text}</h4>
-                            <div class="oracle-credit-list">
-                                ${
-						artists.map((artist, i) => {
-							const name = artist.name;
-							const attributes = artist.attributes;
-							const last = i == artists.length - 1;
-
-							const info_box = html.node`
-                                        <div class="oracle-info-box">
-                                            ${icon({ name: icons.info })}
-                                        </div>
-                                    `;
-
-							const elem = html.node`
-                                        <div class="oracle-credit">
-                                            <a class="oracle-credit-link" href="${root}music/${redirect()}${
-								sanitise(name)
-							}">${romanise(correct_artist(name))}</a>
-                                            ${attributes.length ? info_box : ''}
-                                            ${!last ? ', ' : ''}
-                                        </div>
-                                    `;
-
-							if (attributes.length) {
-								tippy(elem, {
-									content: html.node`
-                                                <span class="oracle-attributes">${
-										attributes.join(', ')
-									}</span>
-                                            `,
-								});
-							}
-
-							return elem;
-						})
-					}
-                            </div>
-                        </div>
-                    `;
-				})
-		}
-            </div>
-        `,
+		title: tl(trans.credits_for_value, { v: <i>{romanise(correct_item_by_artist(page.name, page.sister))}</i> }),
+		body: (
+			<OracleCredits name={page.name} credits={list(flatten(relations))} />
+		)
 	});
 }
 
@@ -3080,10 +2918,9 @@ export function oracle_debug() {
 		title: 'oracle',
 		body: html.node`
             <div class="setting-group">
-                ${
-			Object.entries(debug).map(([item, val]) => {
-				let va;
-				const entry = html.node`
+                ${Object.entries(debug).map(([item, val]) => {
+			let va;
+			const entry = html.node`
                         <div class="setting" data-type="info">
                             <div class="heading">
                                 <h5>${item}</h5>
@@ -3094,14 +2931,14 @@ export function oracle_debug() {
                         </tr>
                     `;
 
-				if (item == 'artist') {
-					render(
-						va,
-						html`
+			if (item == 'artist') {
+				render(
+					va,
+					html`
 							<p>type: ${val.type}</p>
 							<p>name: ${val.name}</p>
 							${val.type == 'id'
-								? html.node`
+							? html.node`
                                 <a
                                     class="see-more"
                                     href="https://musicbrainz.org/artist/${val.name}"
@@ -3109,13 +2946,13 @@ export function oracle_debug() {
                                     >view</a
                                 >
                                 `
-								: ''}
+							: ''}
 						`,
-					);
-				} else if (item == 'release_id') {
-					render(
-						va,
-						html`
+				);
+			} else if (item == 'release_id') {
+				render(
+					va,
+					html`
 							<p>${val}</p>
 							<a
 								class="see-more"
@@ -3123,11 +2960,11 @@ export function oracle_debug() {
 								target="_blank"
 							>view</a>
 						`,
-					);
-				} else if (item == 'recording_id') {
-					render(
-						va,
-						html`
+				);
+			} else if (item == 'recording_id') {
+				render(
+					va,
+					html`
 							<p>${val}</p>
 							<a
 								class="see-more"
@@ -3135,11 +2972,11 @@ export function oracle_debug() {
 								target="_blank"
 							>view</a>
 						`,
-					);
-				} else if (item == 'artist_id') {
-					render(
-						va,
-						html`
+				);
+			} else if (item == 'artist_id') {
+				render(
+					va,
+					html`
 							<p>${val}</p>
 							<a
 								class="see-more"
@@ -3147,20 +2984,19 @@ export function oracle_debug() {
 								target="_blank"
 							>view</a>
 						`,
-					);
-				}
+				);
+			}
 
-				return entry;
-			})
-		}
+			return entry;
+		})
+			}
                 <div
                     class="setting"
                     data-type="info"
-                    disabled=${
-			!oracle_artists.version ||
+                    disabled=${!oracle_artists.version ||
 			!oracle_albums.version ||
 			!oracle_tracks.version
-		}
+			}
                 >
                     <div class="heading">
                         <h5>${tl(trans.current_version)}</h5>
@@ -3180,11 +3016,10 @@ export function oracle_debug() {
                 <div
                     class="setting"
                     data-type="info"
-                    disabled=${
-			!oracle_artists.version ||
+                    disabled=${!oracle_artists.version ||
 			!oracle_albums.version ||
 			!oracle_tracks.version
-		}
+			}
                 >
                     <div class="heading">
                         <h5>${tl(trans.manage_data)}</h5>
@@ -3213,11 +3048,10 @@ export function manage_oracle_data() {
 		title: tl(trans.manage_data),
 		body: html.node`
             <div class="data-table">
-                ${
-			Object.entries(oracle).map(([artist, data]) =>
-				load_artist(artist, data)
-			)
-		}
+                ${Object.entries(oracle).map(([artist, data]) =>
+			load_artist(artist, data)
+		)
+			}
             </div>
         `,
 		allow_scroll: true,
@@ -3230,15 +3064,14 @@ export function manage_oracle_data() {
                     <strong class="entry-header-text">${artist}</strong>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() =>
-			delete_artist()}>${tl(trans.delete)}</button>
+				delete_artist()}>${tl(trans.delete)}</button>
                     </div>
                 </div>
                 <div class="entry-data">
-                    ${
-			Object.entries(data).map(([item, data]) =>
-				load_item(item, data, artist)
-			)
-		}
+                    ${Object.entries(data).map(([item, data]) =>
+					load_item(item, data, artist)
+				)
+			}
                 </div>
             </div>
         `;
@@ -3260,20 +3093,18 @@ export function manage_oracle_data() {
                     <strong class="entry-header-text">${item}</strong>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() =>
-			delete_item()}>${tl(trans.delete)}</button>
+				delete_item()}>${tl(trans.delete)}</button>
                     </div>
                 </div>
                 <div class="entry-data">
-                    ${
-			data.album && Object.keys(data.album).length > 0
+                    ${data.album && Object.keys(data.album).length > 0
 				? load_item_data('album', data.album, item, artist)
 				: ''
-		}
-                    ${
-			data.track && Object.keys(data.track).length > 0
+			}
+                    ${data.track && Object.keys(data.track).length > 0
 				? load_item_data('track', data.track, item, artist)
 				: ''
-		}
+			}
                 </div>
             </div>
         `;
@@ -3297,55 +3128,49 @@ export function manage_oracle_data() {
                         ${type}
                     </strong>
                     <div class="entry-subdata">
-                        ${
-			data.date
+                        ${data.date
 				? html.node`
                             <div class="entry-data-row">
                                 <strong class="entry-data-head">fetched:</strong>
-                                <p class="entry-data-text">${
-					DateTime.fromMillis(data.date).toRelative()
-				}</p>
+                                <p class="entry-data-text">${DateTime.fromMillis(data.date).toRelative()
+					}</p>
                             </div>
                         `
 				: ''
-		}
-                        ${
-			data.expire
+			}
+                        ${data.expire
 				? html.node`
                             <div class="entry-data-row">
                                 <strong class="entry-data-head">expires:</strong>
-                                <p class="entry-data-text">${
-					DateTime.fromMillis(data.expire).toRelative()
-				}</p>
+                                <p class="entry-data-text">${DateTime.fromMillis(data.expire).toRelative()
+					}</p>
                             </div>
                         `
 				: ''
-		}
+			}
                     </div>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() =>
-			delete_item()}>${tl(trans.delete)}</button>
+				delete_item()}>${tl(trans.delete)}</button>
                     </div>
                 </div>
                 <div class="entry-subdata">
-                    ${
-			data.id
+                    ${data.id
 				? html.node`
                         <div class="entry-data-row">
                             <p>id: ${data.id}</p>
                         </div>
                     `
 				: ''
-		}
-                    ${
-			data.artwork
+			}
+                    ${data.artwork
 				? html.node`
                         <div class="entry-data-row">
                             <p>artwork</p>
                         </div>
                     `
 				: ''
-		}
+			}
                 </div>
             </div>
         `;
@@ -3376,10 +3201,9 @@ function report_incorrect() {
 		return;
 	}
 
-	let title = `${correct_artist(page.sister)} - ${
-		correct_item_by_artist(page.name, page.sister)
-	}`;
-	let link = window.location.href;
+	const title = `${correct_artist(page.sister)} - ${correct_item_by_artist(page.name, page.sister)
+		}`;
+	const link = window.location.href;
 
 	let sources;
 
@@ -3400,25 +3224,22 @@ function report_incorrect() {
                 ${sources = input({
 			type: 'textarea',
 		})}
-                <p class="form-tip">${
-			tl(trans[`oracle_sources_tip_${page.type}`])
-		}</p>
+                <p class="form-tip">${tl(trans[`oracle_sources_tip_${page.type}`])
+			}</p>
             </div>
             <div class="modal-footer">
                 <button class="see-more cancel left-icon" onclick=${() =>
-			dialog_rm({ id: 'oracle_correction' })}>
+				dialog_rm({ id: 'oracle_correction' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill" />
                 <button class="btn primary continue" onclick=${() => {
-			open(
-				`https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${
-					sanitise(title, ' ')
-				}&link=${encodeURIComponent(link)}&sources=${
-					sanitise(sources.value, ' ')
-				}`,
-			);
-		}}>
+				open(
+					`https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${sanitise(title, ' ')
+					}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value, ' ')
+					}`,
+				);
+			}}>
                     ${tl(trans.suggest)}
                 </button>
             </div>

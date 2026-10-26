@@ -9,9 +9,9 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import {
+	clean_number,
 	desanitise,
 	sanitise,
-	sanitise_text,
 	year_from_date,
 } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
@@ -29,6 +29,16 @@ import { Chart } from '@/main';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { convert_to_select } from '@/components/select/select.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
+import { PanelHead, PanelHeadExtra } from '@/components/text/head';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more';
+import { menu_tooltip } from '@/components/shared/tooltips';
+import { MenuContents, MenuSeparator } from '@/components/menu/menu';
+import { createRef } from 'jsx-dom';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
+import { Button } from '@/components/button/button';
+import { IconLabel } from '@/components/text/text';
+import { MenuRadio } from '@/components/settings/provider/menu/radio';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -67,34 +77,32 @@ export function bleh_user_library() {
 	const search = page.structure.content_top!.querySelector('.library-search');
 	const nav = page.structure.content_top!.querySelector(
 		'.library-controls nav',
-	);
-	const tabs = nav.querySelector('.navlist-items');
+	) as HTMLElement;
+	const tabs = nav.querySelector('.navlist-items') as HTMLUListElement;
+
 	if (page.name == auth.name) {
-		const velocity_tab = document.createElement('li');
-		velocity_tab.classList.add(
-			'navlist-item',
-			'secondary-nav-item',
-			'secondary-nav-item--velocity',
+		tabs.appendChild(
+			<li class={['navlist-item', 'secondary-nav-item', 'secondary-nav-item--velocity']}>
+				<a class='secondary-nav-item-link' href={`${root}labs/artist-velocity`} target='_blank'>
+					{tl(trans.velocity)}
+					<Icon name={icons.external} />
+				</a>
+			</li>
 		);
-		velocity_tab.innerHTML = `
-            <a class="secondary-nav-item-link" href="${root}labs/artist-velocity" target="_blank">
-                ${tl(trans.velocity)}
-            </a>
-        `;
-		tabs.appendChild(velocity_tab);
 	} else {
-		tabs.appendChild(html.node`
-            <li class="navlist-item secondary-nav-item secondary-nav-item--compare">
-                <a class="secondary-nav-item-link" href="${root}bleh/minis/compare?profile=${page.name}">
-                    ${tl(trans.compare)}
-                </a>
-            </li>
-        `);
+		tabs.appendChild(
+			<li class={['navlist-item', 'secondary-nav-item', 'secondary-nav-item--compare']}>
+				<a class='secondary-nav-item-link' href={`${root}bleh/minis/compare?profile=${page.name}`}>
+					{tl(trans.compare)}
+					<Icon name={icons.external} />
+				</a>
+			</li>
+		);
 	}
 
 	const scrobbles = tabs.querySelector('.secondary-nav-item--overview');
-	scrobbles.classList.remove('secondary-nav-item--overview');
-	scrobbles.classList.add('secondary-nav-item--scrobbles');
+	scrobbles?.classList.remove('secondary-nav-item--overview');
+	scrobbles?.classList.add('secondary-nav-item--scrobbles');
 
 	if (ff('mualani')) {
 		const toolbar = html.node`
@@ -104,13 +112,19 @@ export function bleh_user_library() {
             </div>
         `;
 
-		nav.classList.add('redesigned-navigation');
+		nav.classList.add(
+			'redesigned-navigation',
+		);
 
-		page.structure.content_top.style.display = 'none';
+		if (ff('header_refresh')) {
+			nav.classList.add('header-refresh');
+		}
 
-		page.structure.row.insertBefore(
+		page.structure.content_top!.style.display = 'none';
+
+		page.structure.row!.insertBefore(
 			toolbar,
-			page.structure.row.firstElementChild,
+			page.structure.row!.firstElementChild,
 		);
 	}
 
@@ -119,22 +133,20 @@ export function bleh_user_library() {
 	if (settings.glacier_library_graphs && date_items.length > 0) {
 		page.structure.glacier.selector.after(html.node`
             <div class="view-buttons chart-view-selector view-buttons-middle">
-                ${
-			setting({
-				id: 'chart_view',
-				standalone: true,
-				func: bleh_glacier_date_graph_generate,
-			})
-		}
+                ${setting({
+			id: 'chart_view',
+			standalone: true,
+			func: bleh_glacier_date_graph_generate,
+		})
+			}
             </div>
             <div class="view-buttons chart-axis-selector view-buttons-middle">
-                ${
-			setting({
+                ${setting({
 				id: 'chart_bar_axis',
 				standalone: true,
 				func: bleh_glacier_date_graph_generate,
 			})
-		}
+			}
             </div>
         `);
 	}
@@ -149,14 +161,14 @@ export function bleh_user_library() {
 		// scrobbles tab
 		bleh_glacier_library_top(true);
 
-		const pagination = page.structure.main.querySelector(
+		const pagination = page.structure.main!.querySelector(
 			':scope > .pagination',
+		) as HTMLElement;
+		page.structure.main!.appendChild(
+			<section class='pagination-panel'>
+				{pagination}
+			</section>
 		);
-		page.structure.main.appendChild(html.node`
-            <section class="pagination-panel">
-                ${pagination}
-            </section>
-        `);
 
 		page.state.glacier.insights = {
 			artist: {
@@ -235,9 +247,8 @@ function bleh_glacier_library_date() {
 	if (old_date_btn) old_date_btn.remove();
 
 	const date_btn = html.node`
-        <button class="btn date-range-picker-button">${
-		button.querySelector('.date-range-picker-button-inner').textContent
-	}</button>
+        <button class="btn date-range-picker-button">${button.querySelector('.date-range-picker-button-inner').textContent
+		}</button>
     `;
 	date_picker.appendChild(date_btn);
 
@@ -282,14 +293,12 @@ function bleh_glacier_library_date() {
 			const target = index % 2;
 
 			picker_presets[target].appendChild(html.node`
-                <li class="date-range-picker-preset ${
-				selected ? 'date-range-picker-preset--selected' : ''
-			}">
-                    <a class="btn date-picker-preset-item" href="${
-				window.location.href.replace(window.location.search, '')
-			}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
-				modal.hide();
-			}}>
+                <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''
+				}">
+                    <a class="btn date-picker-preset-item" href="${window.location.href.replace(window.location.search, '')
+				}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
+					modal.hide();
+				}}>
                         ${year}
                     </a>
                 </li>
@@ -340,25 +349,23 @@ function bleh_glacier_library_date() {
 	form.insertBefore(
 		html.node`
         <div class="input-group library-date-group">
-            ${
-			input({
-				type: 'date',
-				value: from_input.value,
-				name: from_input.name,
-				min: '2000-01-01',
-				show_time: false,
-			})
-		}
+            ${input({
+			type: 'date',
+			value: from_input.value,
+			name: from_input.name,
+			min: '2000-01-01',
+			show_time: false,
+		})
+			}
             <div class="bleh-icon" style="--icon: var(--icon-16-arrow-right)" />
-            ${
-			input({
+            ${input({
 				type: 'date',
 				value: to_input.value,
 				name: to_input.name,
 				min: '2000-01-01',
 				show_time: false,
 			})
-		}
+			}
         </div>
     `,
 		form.firstChild,
@@ -432,9 +439,9 @@ function bleh_glacier_library_top(static_page = false) {
 
 	let legacy_top_header;
 	if (!static_page) {
-		legacy_top_header = page.structure.main.querySelector('.library-top');
+		legacy_top_header = page.structure.main!.querySelector('.library-top') as HTMLElement;
 	} else {
-		legacy_top_header = page.structure.main.querySelector('.metadata-list');
+		legacy_top_header = page.structure.main!.querySelector('.metadata-list') as HTMLElement;
 	}
 
 	if (!legacy_top_header) return;
@@ -457,20 +464,83 @@ function bleh_glacier_library_top(static_page = false) {
 
 	let first_run = false;
 	let glacier_top = page.structure.glacier.top;
-	if (!glacier_top || !page.structure.main.contains(glacier_top)) {
+	if (!glacier_top || !page.structure.main!.contains(glacier_top)) {
 		first_run = true;
 	}
 
 	if (first_run) {
-		glacier_top = document.createElement('section');
-		glacier_top.classList.add('glacier-library-top');
+		const type = page.subpage.replace('library_', '');
+		let text = tl(trans.scrobbles);
+
+		if (type.startsWith('artist')) {
+			text = tl(trans.artists);
+		} else if (type.startsWith('album')) {
+			text = tl(trans.albums);
+		} else if (type.startsWith('track')) {
+			text = tl(trans.tracks);
+		}
+
+		const more = createRef();
+
+		glacier_top = (
+			<section class='glacier-library-top'>
+				<PanelTop>
+					<PanelHead icon={icons.library} top>
+						{tl(trans.library)}
+						<PanelHeadExtra>
+							{text}
+						</PanelHeadExtra>
+					</PanelHead>
+					<ViewButtons>
+						<SeeMore
+							blend
+							iconPlacement='left'
+							icon={icons.settings}
+							ref={more}
+						>
+							{tl(trans.settings)}
+						</SeeMore>
+					</ViewButtons>
+				</PanelTop>
+				<div class='glacier-components' />
+			</section>
+		);
+
+		menu_tooltip(
+			more.current,
+			<MenuContents>
+				{type.startsWith('artist') ? (
+					<MenuCheckbox bind='colourful_counts' />
+				) : (
+					<>
+						<MenuCheckbox bind='format_guest_features' />
+						<MenuCheckbox bind='show_guest_features' />
+					</>
+				)}
+				{(type.startsWith('artist') || type.startsWith('album') && auth.pro) && (
+					<MenuCheckbox bind='grid_glow' />
+				)}
+				{!type.startsWith('overview') && (
+					<>
+						<MenuSeparator />
+						<MenuRadio bind='count_bar_axis' />
+						<MenuRadio bind='count_bar_style' />
+					</>
+				)}
+				<MenuSeparator />
+				<MenuCheckbox bind='glacier_library_graphs' />
+			</MenuContents>
+		);
 	}
+
+	const glacier_top_components = glacier_top.querySelector('.glacier-components')!;
 
 	// meta
 	let glacier_meta;
 	if (first_run) {
-		glacier_meta = document.createElement('div');
-		glacier_meta.classList.add('glacier-library-metadata');
+		glacier_meta = (
+			<div class='glacier-library-metadata' />
+		);
 	} else {
 		glacier_meta = page.structure.glacier.top.querySelector(
 			'.glacier-library-metadata',
@@ -478,58 +548,113 @@ function bleh_glacier_library_top(static_page = false) {
 		glacier_meta.innerHTML = '';
 	}
 
+	const metaV2 = <ProfileSummaryBlocks large />;
+	glacier_meta.appendChild(metaV2);
+
 	metadata.forEach((meta, index) => {
-		let text = meta.querySelector('.metadata-title');
-		let value = meta.querySelector('.metadata-display').textContent;
+		let type = 'scrobbles';
+		const text = meta.querySelector('.metadata-title');
+		let value = meta.querySelector('.metadata-display')!.textContent;
 
 		if (text) {
-			text = text.textContent;
-
 			if (page.subpage == 'library_overview') {
-				if (index == 1) text = tl(trans.average);
+				if (index == 1) type = 'average';
 			} else if (page.subpage == 'library_artists') {
-				text = tl(trans.artists);
+				type = 'artists';
 			} else if (page.subpage == 'library_albums') {
-				text = tl(trans.albums);
+				type = 'albums';
 			} else if (page.subpage == 'library_tracks') {
-				text = tl(trans.tracks);
+				type = 'tracks';
+			} else {
+				type = 'scrobbles';
 			}
+
+			metaV2.appendChild(
+				<ProfileSummaryBlock counter large type={type} value={clean_number(value)} />
+			);
 		} else {
 			// search results
-			text = tl(trans.results_for);
-			value = meta.querySelector('.metadata-display').textContent;
+			// TODO: replace
 
 			const start = value.indexOf('“') + 1;
 			const end = value.indexOf('”');
 			value = desanitise(value.substring(start, end));
+
+			metaV2.appendChild(html.node`
+	            <div class="glacier-library-metadata-item">
+	                <div class="sub-text">${tl(trans.results_for)}</div>
+	                <div class="glacier-library-metadata-item-value">${value}</div>
+	            </div>
+	        `);
 		}
 
-		glacier_meta.appendChild(html.node`
-            <div class="glacier-library-metadata-item">
-                <div class="sub-text">${text}</div>
-                <div class="glacier-library-metadata-item-value">${value}</div>
-            </div>
-        `);
 	});
 
-	if (first_run) glacier_top.appendChild(glacier_meta);
+	if (first_run) glacier_top_components.appendChild(glacier_meta);
 
 	if (!first_run) return;
 
 	// buttons
-	const top_wrap = page.structure.main.querySelector('.library-top-wrap');
+	const top_wrap = page.structure.main!.querySelector('.library-top-wrap')!;
 
-	const view_buttons = document.createElement('div');
-	view_buttons.classList.add('view-buttons', 'glacier-library-buttons');
+	const view_buttons = (
+		<div class='glacier-library-buttons' />
+	);
 
-	let add_divider = false;
+	if (!static_page && page.subpage != 'library_tracks') {
+		const format_button = (
+			<Button onClick={() => {
+				const format = page.structure.main!.querySelector(
+					'.library-view-button',
+				) as HTMLButtonElement;
+				if (!format) return;
+
+				format.click();
+
+				const href = format.getAttribute('href');
+
+				if (href && href.endsWith('reset')) {
+					format_button.setAttribute('data-glacier-view', 'list');
+					format_button.replaceChildren(
+						<IconLabel icon={icons.list}>
+							{tl(trans.list)}
+						</IconLabel>
+					);
+				} else {
+					format_button.setAttribute('data-glacier-view', 'grid');
+					format_button.replaceChildren(
+						<IconLabel icon={icons.grid}>
+							{tl(trans.grid)}
+						</IconLabel>
+					);
+				}
+			}} />
+		);
+
+		if (top_wrap.getAttribute('data-current-format') == 'grid') {
+			format_button.setAttribute('data-glacier-view', 'grid');
+			format_button.replaceChildren(
+				<IconLabel icon={icons.grid}>
+					{tl(trans.grid)}
+				</IconLabel>
+			);
+		} else {
+			format_button.setAttribute('data-glacier-view', 'list');
+			format_button.replaceChildren(
+				<IconLabel icon={icons.list}>
+					{tl(trans.list)}
+				</IconLabel>
+			);
+		}
+
+		view_buttons.appendChild(format_button);
+	}
 
 	const sort = legacy_top_header.querySelector('.library-sort');
 	if (!static_page) {
 		let sort_button;
 		if (sort) {
 			sort_button = sort.querySelector('.dropdown-menu-clickable-button');
-			add_divider = true;
 
 			if (sort_button) {
 				sort_button.classList.add(
@@ -539,7 +664,7 @@ function bleh_glacier_library_top(static_page = false) {
 				);
 				const sort_menu = sort.querySelector(
 					'.dropdown-menu-clickable',
-				);
+				)!;
 
 				view_buttons.appendChild(sort_button);
 				view_buttons.appendChild(sort_menu);
@@ -547,114 +672,12 @@ function bleh_glacier_library_top(static_page = false) {
 		}
 	}
 
-	if (!static_page && page.subpage != 'library_tracks') {
-		const format_button = html.node`
-            <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
-			const format = page.structure.main.querySelector(
-				'.library-view-button',
-			);
-			if (!format) return;
-
-			format.click();
-
-			if (
-				format.getAttribute('href') &&
-				format.getAttribute('href').endsWith('reset')
-			) {
-				format_button.setAttribute('data-glacier-view', 'list');
-				format_button.textContent = tl(trans.list);
-			} else {
-				format_button.setAttribute('data-glacier-view', 'grid');
-				format_button.textContent = tl(trans.grid);
-			}
-		}} />
-        `;
-		add_divider = true;
-
-		if (top_wrap.getAttribute('data-current-format') == 'grid') {
-			format_button.setAttribute('data-glacier-view', 'grid');
-			format_button.textContent = tl(trans.grid);
-		} else {
-			format_button.setAttribute('data-glacier-view', 'list');
-			format_button.textContent = tl(trans.list);
-		}
-
-		view_buttons.appendChild(format_button);
-	}
-
-	if (!static_page && add_divider) {
-		view_buttons.appendChild(html.node`
-            <div class="listen-divider" />
-        `);
-	}
-
-	const configure_button = document.createElement('button');
-	configure_button.classList.add(
-		'btn',
-		'view-item',
-		'icon',
-		'glacier-library-button',
-		'glacier-configure-button',
-		'panel-settings-button',
-	);
-	configure_button.textContent = tl(trans.settings);
-
-	tippy(configure_button, {
-		content: tl(trans.settings),
-	});
-
-	tippy(configure_button, {
-		theme: 'window',
-		content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${
-			page.subpage == 'library_artists'
-				? setting({ id: 'colourful_counts' })
-				: html.node`
-                                ${setting({ id: 'format_guest_features' })}
-                                ${setting({ id: 'show_guest_features' })}
-                            `
-		}
-                    ${
-			(
-					(page.subpage == 'library_artists' ||
-						page.subpage == 'library_albums') &&
-					auth.pro
-				)
-				? html.node`
-                                ${setting({ id: 'grid_glow' })}
-                            `
-				: ''
-		}
-                    ${setting({ id: 'glacier_library_graphs' })}
-                </div>
-            </div>
-        `,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
-
-	view_buttons.appendChild(configure_button);
-
-	glacier_top.appendChild(view_buttons);
+	glacier_top_components.appendChild(view_buttons);
 
 	page.structure.glacier.top = glacier_top;
-	page.structure.main.insertBefore(
+	page.structure.main!.insertBefore(
 		glacier_top,
-		page.structure.main.firstElementChild,
+		page.structure.main!.firstElementChild,
 	);
 }
 
@@ -681,10 +704,10 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 
 	/*let scrobble_chart_wrap = page.structure.side.querySelector('.scrobble-table:not([data-glacier-date-graph])');
 
-    if (scrobble_chart_wrap == null)
-        return;
+	if (scrobble_chart_wrap == null)
+		return;
 
-    scrobble_chart_wrap.setAttribute('data-glacier-date-graph', 'true');*/
+	scrobble_chart_wrap.setAttribute('data-glacier-date-graph', 'true');*/
 
 	bleh_glacier_library_date();
 
@@ -730,7 +753,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 
 	page.state.glacier.current_view = current_view;
 
-	const scrobble_chart_content = page.structure.row.querySelector(
+	const scrobble_chart_content = page.structure.row!.querySelector(
 		'#scrobble-chart-content',
 	);
 	if (!scrobble_chart_content) return;
@@ -745,7 +768,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 		return;
 	}
 
-	const scrobble_chart_wrap = page.structure.row.querySelector(
+	const scrobble_chart_wrap = page.structure.row!.querySelector(
 		'.scrobble-table',
 	);
 
@@ -769,21 +792,21 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 		bleh_glacier_library_request(request_url);
 		/*console.info(page.structure.glacier.table);
 
-        let series = page.structure.glacier.table.querySelectorAll('.highcharts-bar-series a');
+		let series = page.structure.glacier.table.querySelectorAll('.highcharts-bar-series a');
 
-        // we fake-hover the first bar to get the relationship
-        // between height and real value
-        let subject = series[0];
-        let bar = subject.querySelector('rect');
-        let height = bar.getAttribute('height');
+		// we fake-hover the first bar to get the relationship
+		// between height and real value
+		let subject = series[0];
+		let bar = subject.querySelector('rect');
+		let height = bar.getAttribute('height');
 
-        setTimeout(function() {
-            subject.dispatchEvent(new Event('mouseover'));
-        }, 300);
+		setTimeout(function() {
+			subject.dispatchEvent(new Event('mouseover'));
+		}, 300);
 
-        subject.addEventListener('mouseover', e => {
-            console.info(e);
-        });*/
+		subject.addEventListener('mouseover', e => {
+			console.info(e);
+		});*/
 
 		return;
 	}
@@ -838,8 +861,7 @@ export function bleh_glacier_insights(insights = null) {
 
 		for (const item in insights) {
 			log(
-				`checking insights status of item ${item} - display of ${
-					insights[item].display
+				`checking insights status of item ${item} - display of ${insights[item].display
 				}`,
 				'glacier library',
 				'log',
@@ -851,7 +873,7 @@ export function bleh_glacier_insights(insights = null) {
 			if (
 				insights[item].display &&
 				JSON.stringify(insights[item]) !=
-					JSON.stringify(page.state.glacier.insights[item])
+				JSON.stringify(page.state.glacier.insights[item])
 			) {
 				log(
 					`confirmed insights status of item ${item} - is different`,
@@ -928,7 +950,7 @@ function bleh_glacier_insights_generate(type, item) {
 			gradient = page.state.chart_colours.link_bg_col;
 		}
 
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'line',
 			data: {
 				labels: item.labels,
@@ -948,7 +970,7 @@ function bleh_glacier_insights_generate(type, item) {
 			options: page.state.chart_library_line_options_no_click,
 		});
 	} else if (settings.chart_insights_view == 'pie') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'pie',
 			data: {
 				labels: item.labels,
@@ -957,125 +979,105 @@ function bleh_glacier_insights_generate(type, item) {
 						data: item.values,
 						borderWidth: 2,
 						backgroundColor: [
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'360',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'360',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'340',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'340',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'320',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'320',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'300',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'300',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'280',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'280',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'270',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'270',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'255',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'255',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'235',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'235',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'220',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'220',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'208',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'208',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'200',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'200',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'180',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'180',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'160',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'160',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'140',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'140',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'120',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'120',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'100',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'100',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'80',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'80',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'60',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'60',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'40',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'40',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'20',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'20',
+							)
 							})`,
 						],
 						borderColor: page.state.chart_colours.bg_col,
@@ -1088,7 +1090,7 @@ function bleh_glacier_insights_generate(type, item) {
 			options: page.state.chart_library_pie_options_no_click,
 		});
 	} else if (settings.chart_insights_view == 'bar') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
 			type: 'bar',
 			data: {
 				labels: item.labels,
@@ -1097,125 +1099,105 @@ function bleh_glacier_insights_generate(type, item) {
 						data: item.values,
 						borderWidth: 0,
 						backgroundColor: [
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'360',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'360',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'340',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'340',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'320',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'320',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'300',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'300',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'280',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'280',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'270',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'270',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'255',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'255',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'235',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'235',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'220',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'220',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'208',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'208',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'200',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'200',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'180',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'180',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'160',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'160',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'140',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'140',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'120',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'120',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'100',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'100',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'80',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'80',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'60',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'60',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'40',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'40',
+							)
 							})`,
-							`hsl(${
-								page.state.chart_colours.link_h_col.replace(
-									page.state.chart_colours.hue,
-									'20',
-								)
+							`hsl(${page.state.chart_colours.link_h_col.replace(
+								page.state.chart_colours.hue,
+								'20',
+							)
 							})`,
 						],
 						borderColor: page.state.chart_colours.bg_col,
@@ -1232,7 +1214,7 @@ function bleh_glacier_insights_generate(type, item) {
 
 	scrobble_canvas_container.appendChild(scrobble_canvas);
 	scrobble_insights_panel.appendChild(scrobble_canvas_container);
-	if (new_run) page.structure.side.appendChild(scrobble_insights_panel);
+	if (new_run) page.structure.side!.appendChild(scrobble_insights_panel);
 }
 
 export function bleh_glacier_library_open_index(index) {
@@ -1250,7 +1232,7 @@ function bleh_glacier_library_request(request_url) {
 	page.structure.glacier.date_panel.classList.add('data-is-loading');
 
 	fetch(request_url)
-		.then(function (response) {
+		.then(function(response) {
 			console.log(
 				'glacier library returned',
 				response,
@@ -1262,7 +1244,7 @@ function bleh_glacier_library_request(request_url) {
 
 			return response.text();
 		})
-		.then(function (html) {
+		.then(function(html) {
 			const doc = new DOMParser().parseFromString(html, 'text/html');
 			console.log(
 				'glacier library DOC',
@@ -1311,18 +1293,17 @@ export function bleh_glacier_date_graph_generate() {
 	let scrobble_canvas_container = page.structure.glacier.date_panel
 		.querySelector('.scrobble-canvas-container');
 	if (scrobble_canvas_container == null) {
-		scrobble_canvas_container = document.createElement('div');
-		scrobble_canvas_container.classList.add(
-			'scrobble-canvas-container',
-			'icon-mask',
+		scrobble_canvas_container = (
+			<div class={['scrobble-canvas-container', 'icon-mask']} />
 		);
 		new_run = true;
 	} else {
 		scrobble_canvas_container.innerHTML = '';
 	}
 
-	const scrobble_canvas = document.createElement('canvas');
-	scrobble_canvas.classList.add('scrobble-canvas');
+	const scrobble_canvas = (
+		<canvas class='scrobble-canvas' />
+	) as HTMLCanvasElement;
 
 	scrobble_canvas_container.setAttribute('data-view', settings.chart_view);
 
@@ -1330,7 +1311,7 @@ export function bleh_glacier_date_graph_generate() {
 	Chart.defaults.font.family = page.state.chart_colours.font;
 	if (settings.chart_view == 'line') {
 		let gradient = scrobble_canvas
-			.getContext('2d')
+			.getContext('2d')!
 			.createLinearGradient(0, 0, 0, 160);
 		try {
 			gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
@@ -1339,7 +1320,7 @@ export function bleh_glacier_date_graph_generate() {
 			gradient = page.state.chart_colours.link_bg_col;
 		}
 
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'line',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1359,7 +1340,7 @@ export function bleh_glacier_date_graph_generate() {
 			options: page.state.chart_library_line_options,
 		});
 	} else if (settings.chart_view == 'pie') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'pie',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1378,7 +1359,7 @@ export function bleh_glacier_date_graph_generate() {
 			options: page.state.chart_library_pie_options,
 		});
 	} else if (settings.chart_view == 'bar') {
-		let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'bar',
 			data: {
 				labels: page.state.glacier.labels,
@@ -1422,39 +1403,47 @@ function bleh_glacier_library_focused() {
 		},
 	};
 
-	const legacy_header = page.structure.main.querySelector('.library-header');
+	const legacy_header = page.structure.main!.querySelector('.library-header') as HTMLElement;
 
 	let type;
 	if (page.subpage.startsWith('library_artist')) type = 'artist';
 	else if (page.subpage.startsWith('library_album')) type = 'album';
 	else if (page.subpage.startsWith('library_track')) type = 'track';
 
-	let header_title = legacy_header.querySelector('.library-header-crumb'); // subpage
-	if (!header_title) {
-		header_title = legacy_header.querySelector('.library-header-title'); // main
+	let text = tl(trans.scrobbles);
+
+	if (type == 'artist') {
+		text = tl(trans.artist);
+	} else if (type == 'album') {
+		text = tl(trans.album);
+	} else if (type == 'track') {
+		text = tl(trans.track);
 	}
 
-	const duration = header_title.querySelector(
+	let header_title_elem = legacy_header.querySelector('.library-header-crumb')!; // subpage
+	if (!header_title_elem) {
+		header_title_elem = legacy_header.querySelector('.library-header-title')!; // main
+	}
+
+	const duration = header_title_elem.querySelector(
 		'.library-header-title-duration',
 	);
-	if (duration) header_title.removeChild(duration);
+	duration?.remove();
 
-	header_title = header_title.textContent.trim();
+	const header_title = header_title_elem.textContent.trim();
 
-	let artist = legacy_header.querySelector('.text-colour-link');
-	if (artist) artist = artist.textContent.trim();
+	const artist_elem = legacy_header.querySelector('.text-colour-link');
+	const artist = artist_elem?.textContent.trim();
 
-	const image = legacy_header.querySelector('.library-header-image img');
+	const image = legacy_header.querySelector('.library-header-image img') as HTMLImageElement;
 
 	let link = `${root}music/${redirect()}${sanitise(header_title)}`;
 	if (type == 'album') {
-		link = `${root}music/${redirect()}${sanitise(artist)}/${
-			sanitise(header_title)
-		}`;
+		link = `${root}music/${redirect()}${sanitise(artist)}/${sanitise(header_title)
+			}`;
 	} else if (type == 'track') {
-		link = `${root}music/${redirect()}${sanitise(artist)}/_/${
-			sanitise(header_title)
-		}`;
+		link = `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(header_title)
+			}`;
 	}
 
 	const header = document.createElement('section');
@@ -1463,56 +1452,78 @@ function bleh_glacier_library_focused() {
 		'glacier-library-focused-header',
 	);
 
-	const upper_wrap = document.createElement('div');
-	upper_wrap.classList.add('glacier-library-top-upper');
-
 	const current_suffix = window.location.search;
 
-	const metadata = html.node`
-        <div class="glacier-library-metadata">
-            <div class="glacier-library-metadata-avatar">
-                ${image}
-            </div>
-            <div class="glacier-library-metadata-item">
-                <div class="sub-text">
-                    ${tl(trans[type])}
-                </div>
-                <div class="glacier-library-metadata-item-value glacier-library-metadata-focus" data-type="${type}">
-                    <a href="${link}">${
-		type == 'artist'
-			? correct_artist(header_title)
-			: correct_item_by_artist(header_title, artist)
-	}</a>${
-		duration
-			? html
-				.node`<span class="glacier-library-track-duration">${duration.textContent}</span>`
-			: ''
-	}${
-		type != 'artist'
-			? html`${{
-				html: tl(trans.by_artist, {
-					a: `<a href="${root}user/${page.name}/library/music/+noredirect/${
-						sanitise(artist)
-					}${current_suffix}">${
-						sanitise_text(correct_artist(artist))
-					}</a>`,
-				}),
-			}}`
-			: ''
-	}
-                </div>
-            </div>
-        </div>
-    `;
+	const more = createRef();
 
-	upper_wrap.appendChild(metadata);
-	header.appendChild(upper_wrap);
+	const metadata = (
+		<>
+			<PanelTop>
+				<PanelHead icon={icons.library} top>
+					{tl(trans.library)}
+					<PanelHeadExtra>
+						{text}
+					</PanelHeadExtra>
+				</PanelHead>
+				<ViewButtons>
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={more}
+					>
+						{tl(trans.settings)}
+					</SeeMore>
+				</ViewButtons>
+			</PanelTop>
+			<div class='glacier-overview'>
+				<div class={['glacier-overview-avatar', 'cover-art']}>
+					{image}
+				</div>
+				<div class='glacier-overview-body'>
+					<a class='glacier-overview-title' href={link}>
+						{type == 'artist' ? correct_artist(header_title) : correct_item_by_artist(header_title, artist)}
+					</a>
+					{type != 'artist' && (
+						<a class='glacier-overview-artist' href={`${root}user/${page.name}/library/music/${redirect()}${sanitise(artist)}${current_suffix}`}>
+							{correct_artist(artist)}
+						</a>
+					)}
+					{duration && (
+						<span class='glacier-overview-duration'>{duration.textContent}</span>
+					)}
+				</div>
+			</div>
+		</>
+	);
 
-	const view_buttons = document.createElement('div');
-	view_buttons.classList.add('view-buttons', 'glacier-library-buttons');
+	menu_tooltip(
+		more.current,
+		<MenuContents>
+			<MenuCheckbox bind='format_guest_features' />
+			<MenuCheckbox bind='show_guest_features' />
+			<MenuSeparator />
+			<MenuRadio bind='count_bar_axis' />
+			<MenuRadio bind='count_bar_style' />
+			<MenuSeparator />
+			<MenuCheckbox bind='glacier_library_graphs' />
+		</MenuContents>
+	);
+
+	header.appendChild(metadata);
+
+	const components = (
+		<div class='glacier-components' />
+	);
+	header.appendChild(components);
+
+	const view_buttons = (
+		<div class='glacier-library-buttons' />
+	);
 
 	const cta = legacy_header.querySelector('.library-header-ctas');
 
+	// chore: this looks horror
 	const love_form = legacy_header.querySelector(
 		'.library-header-love-form:not(:has(button))',
 	);
@@ -1550,16 +1561,15 @@ function bleh_glacier_library_focused() {
 
 			button.classList.add(
 				'btn',
-				'view-item',
 				'icon',
 				'glacier-library-button',
 			);
 
-			let tooltips = wrapper.querySelectorAll(
+			const tooltips = wrapper.querySelectorAll(
 				'.user-library-controls-tooltip',
 			);
 			tooltips.forEach((tooltip) => {
-				tooltip.parentElement.removeChild(tooltip);
+				tooltip.remove();
 			});
 
 			view_buttons.appendChild(wrapper);
@@ -1567,120 +1577,45 @@ function bleh_glacier_library_focused() {
 			const action = button.getAttribute('data-analytics-action');
 			if (action) {
 				if (action == 'EditScrobbleOpen') {
-					button.textContent = tl(trans.edit);
-				} else if (action == 'UnloveTrack' || action == 'LoveTrack') {
-					const listen_divider = document.createElement('div');
-					listen_divider.classList.add('listen-divider');
-					view_buttons.appendChild(listen_divider);
-
-					// we need to target the other button too lol
-					button = wrapper.querySelector('button:not(.btn)');
-					if (button) {
-						button.classList.add(
-							'btn',
-							'view-item',
-							'icon',
-							'glacier-library-button',
-						);
-					}
+					button.textContent = tl(trans.edit) as string;
 				}
 			} else {
 				// have to read classlist
 				if (button.classList.contains('delete-icon')) {
-					button.classList.add('colourful');
-					button.textContent = tl(trans.delete);
+					button.classList.add('colourful', 'primary');
+					button.textContent = tl(trans.delete) as string;
 				}
 			}
 		});
 
-		if (wrappers.length > 0) {
-			const listen_divider = document.createElement('div');
-			listen_divider.classList.add('listen-divider');
-			view_buttons.appendChild(listen_divider);
+		const loved = view_buttons.querySelector('button[data-analytics-action="UnloveTrack"]');
+		if (loved) {
+			loved.classList.add('btn', 'icon', 'glacier-library-button', 'primary');
+			loved.textContent = tl(trans.loved) as string;
+		}
+
+		const unloved = view_buttons.querySelector('button[data-analytics-action="LoveTrack"]');
+		if (unloved) {
+			unloved.classList.add('btn', 'icon', 'glacier-library-button');
+			unloved.textContent = tl(trans.love) as string;
 		}
 	}
 
 	if (page.subpage == 'library_artist_overview' && auth.pro) {
-		const search = document.createElement('a');
-		search.classList.add(
-			'btn',
-			'view-item',
-			'icon',
-			'glacier-library-button',
-			'glacier-search-button',
+		view_buttons.insertBefore(
+			<Button href={`${root}user/${page.name}/library/tracks/search?query=${sanitise(correct_artist(header_title))}`}>
+				<Icon name={icons.search} />
+				{tl(trans.search)}
+			</Button>,
+			view_buttons.firstChild
 		);
-		search.textContent = tl(trans.search);
-		search.setAttribute(
-			'href',
-			`${root}user/${page.name}/library/tracks/search?query=${
-				sanitise(correct_artist(header_title))
-			}`,
-		);
-
-		tippy(search, {
-			content: tl(trans.search_guest),
-		});
-
-		const divider = view_buttons.querySelector('.listen-divider');
-		if (divider) view_buttons.insertBefore(search, divider);
 	}
 
-	const configure_button = document.createElement('button');
-	configure_button.classList.add(
-		'btn',
-		'view-item',
-		'icon',
-		'glacier-library-button',
-		'glacier-configure-button',
-		'panel-settings-button',
+	const lower_wrap = (
+		<ProfileSummaryBlocks large />
 	);
-	configure_button.textContent = tl(trans.settings);
 
-	tippy(configure_button, {
-		content: tl(trans.settings),
-	});
-
-	tippy(configure_button, {
-		theme: 'window',
-		content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${setting({ id: 'format_guest_features' })}
-                    ${setting({ id: 'show_guest_features' })}
-                    ${setting({ id: 'glacier_library_graphs' })}
-                </div>
-            </div>
-        `,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
-
-	view_buttons.appendChild(configure_button);
-
-	upper_wrap.appendChild(view_buttons);
-
-	let lower_metadata;
-	const lower_wrap = html.node`
-        <div class="glacier-library-top-lower">
-            <div class="glacier-library-metadata" ref=${(
-		el,
-	) => (lower_metadata = el)} />
-        </div>
-    `;
-
-	const legacy_meta_wrap = page.structure.main.querySelector(
+	const legacy_meta_wrap = page.structure.main!.querySelector(
 		'.metadata-list',
 	);
 	if (legacy_meta_wrap) {
@@ -1688,36 +1623,37 @@ function bleh_glacier_library_focused() {
 			'.metadata-item:not(.library-header-ctas__wrapper)',
 		);
 
-		metadatas.forEach((meta) => {
-			let glacier_meta_item = document.createElement('div');
-			glacier_meta_item.classList.add('glacier-library-metadata-item');
-			glacier_meta_item.innerHTML = `
-                <div class="sub-text">${
-				meta.querySelector('.metadata-title').textContent
-			}</div>
-                <div class="glacier-library-metadata-item-value">${
-				meta.querySelector('.metadata-display').textContent
-			}</div>
-            `;
+		metadatas.forEach((meta, i) => {
+			let type = 'scrobbles';
 
-			lower_metadata.appendChild(glacier_meta_item);
+			if (i == 1) {
+				type = 'albums';
+			} else if (i == 2) {
+				type = 'tracks';
+			}
+
+			lower_wrap.appendChild(
+				<ProfileSummaryBlock large counter type={type} value={clean_number(meta.querySelector('.metadata-display')!.textContent)} />
+			);
 		});
 
-		header.appendChild(lower_wrap);
+		components.appendChild(lower_wrap);
 	}
 
-	page.structure.main.insertBefore(
+	components.appendChild(view_buttons);
+
+	page.structure.main!.insertBefore(
 		header,
-		page.structure.main.firstElementChild,
+		page.structure.main!.firstElementChild,
 	);
 
-	let overview_headers = page.structure.main.querySelectorAll(
+	const overview_headers = page.structure.main!.querySelectorAll(
 		'.library-overview-header',
 	);
 	overview_headers.forEach((top) => {
 		top.classList = 'top-container';
 
-		const header = top.querySelector('h2');
+		const header = top.querySelector('h2') as HTMLElement;
 
 		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
@@ -1737,20 +1673,20 @@ function bleh_glacier_library_focused() {
 	});
 
 	// move random overview header into their section below
-	const overview_header = page.structure.main.querySelector(
+	const overview_header = page.structure.main!.querySelector(
 		':scope > .top-container',
 	);
 	if (!overview_header) return;
 
-	overview_header.nextElementSibling.insertBefore(
+	overview_header.nextElementSibling!.insertBefore(
 		overview_header,
-		overview_header.nextElementSibling.firstElementChild,
+		overview_header.nextElementSibling!.firstElementChild,
 	);
 }
 
 export function bleh_glacier_library_bulk_edit() {
 	// quick check to see if bulk edit is present
-	const library_header = page.structure.main.querySelector('.library-header');
+	const library_header = page.structure.main!.querySelector('.library-header');
 	if (!library_header) return;
 
 	const bulk_edit = library_header.querySelector(
@@ -1759,7 +1695,7 @@ export function bleh_glacier_library_bulk_edit() {
 	if (!bulk_edit) return;
 
 	// move to new area
-	const view_buttons = page.structure.main.querySelector(
+	const view_buttons = page.structure.main!.querySelector(
 		'.glacier-library-buttons',
 	);
 	if (!view_buttons) return;
@@ -1775,12 +1711,11 @@ export function bleh_glacier_library_bulk_edit() {
 
 	bulk_edit.classList.add(
 		'btn',
-		'view-item',
 		'icon',
 		'glacier-library-button',
 		'bulk-edit-button',
 	);
-	bulk_edit.textContent = tl(trans.bulk_edit);
+	bulk_edit.textContent = tl(trans.bulk_edit) as string;
 
 	if (!edit_form) view_buttons.insertBefore(bulk_edit, delete_button);
 	else view_buttons.insertBefore(bulk_edit, edit_form);

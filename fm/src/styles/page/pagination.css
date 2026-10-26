@@ -1,10 +1,11 @@
 .pagination {
 	margin-top: var(--card-gap);
 
-	.col-main > & {
+	.col-main>& {
 		margin: unset;
 	}
 }
+
 .pagination-list {
 	cursor: default;
 
@@ -19,7 +20,7 @@
 	display: flex;
 	line-height: inherit;
 
-	& > a {
+	&>a {
 		height: fit-content;
 	}
 }
@@ -31,7 +32,8 @@
 		display: none;
 	}
 }
-.pagination-page--ellipsis > span,
+
+.pagination-page--ellipsis>span,
 .pagination-page-link {
 	--bg: transparent !important;
 	--bg-hov: oklch(var(--b4) / 40%) !important;
@@ -46,6 +48,8 @@
 	margin: calc(-1 * var(--see-more-pad-v)) 0 !important;
 	--force-font-weight: var(--font-weight-medium);
 
+	min-height: unset !important;
+
 	&[aria-checked="true"] {
 		cursor: default;
 		--bg: oklch(var(--h4) / 20%) !important;
@@ -57,6 +61,13 @@
 
 .pagination-next,
 .pagination-previous {
-	top: 50%;
-	margin-top: -9px;
+	position: static;
+}
+
+.pagination-next {
+	margin-left: var(--card-gap);
+}
+
+.pagination-previous {
+	margin-right: var(--card-gap);
 }

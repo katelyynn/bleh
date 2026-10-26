@@ -35,7 +35,11 @@ import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
 import { beta_indicator, new_indicator } from '@/components/shared/indicator';
 import { version } from '@/main';
-import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
+import {
+	append_header,
+	PageHeader,
+	PageHeaderTitle,
+} from '@/components/page/header.tsx';
 
 export async function bleh_home() {
 	page.structure.container = document.body.querySelector('.page-content')!;
@@ -87,7 +91,7 @@ export async function bleh_home() {
 	}
 	log(`hour ${hour} time ${time}`, 'time');
 
-	const same_page = is_same_page();
+	//const same_page = is_same_page();
 
 	let welcome;
 	if (auth.name) {
@@ -119,15 +123,14 @@ export async function bleh_home() {
 		welcome = <div />;
 	}
 
-	page.structure.container!.insertBefore(
-		welcome,
-		page.structure.container!.firstElementChild,
-	);
+	append_header(welcome);
 
 	let nav;
 	if (auth.name) {
 		nav = html.node`
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+			ff('header_refresh') ? 'header-refresh' : ''
+		}">
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${
@@ -207,7 +210,9 @@ export async function bleh_home() {
         `;
 	} else {
 		nav = html.node`
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+			ff('header_refresh') ? 'header-refresh' : ''
+		}">
                 <ul class="navlist-items">
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${
@@ -241,7 +246,14 @@ export async function bleh_home() {
 	}
 
 	page.structure.nav = nav;
-	welcome.after(nav);
+	if (ff('header_refresh')) {
+		page.structure.container!.insertBefore(
+			nav,
+			page.structure.row!,
+		);
+	} else {
+		welcome.after(nav);
+	}
 	checkup_nav();
 
 	if (page.type == 'charts') {
@@ -291,7 +303,9 @@ export async function bleh_home() {
 		} else {
 			const toolbar = html.node`
                 <div class="toolbar">
-                    <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                    <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
+				ff('header_refresh') ? 'header-refresh' : ''
+			}">
                         <ul class="navlist-items">
                             <li class="navlist-item secondary-nav-item">
                                 <a href="${root}user/${auth.name}" data-type="mention" class="secondary-nav-item-link">

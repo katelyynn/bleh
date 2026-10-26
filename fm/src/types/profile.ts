@@ -16,6 +16,7 @@ export type profile_cache = {
 	username?: string;
 	aka?: string;
 	created?: string;
+	date?: string;
 };
 
 export type profile_cache_list = Record<string, profile_cache>;

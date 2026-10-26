@@ -5,12 +5,49 @@
  */
 
 import { WithChildren } from '@/types/generic.tsx';
+import { ReactNode } from 'jsx-dom';
 
-export function FormInner({
+export function ScrobbleForm({
 	children,
 }: WithChildren) {
 	return (
-		<div class='form-inner'>
+		<div class='new-scrobble-form'>
+			{children}
+		</div>
+	);
+}
+
+export function FormCombo({
+	children,
+}: WithChildren) {
+	return (
+		<div class='form-combo'>
+			{children}
+		</div>
+	);
+}
+
+export function FormActions({
+	children,
+}: WithChildren) {
+	return (
+		<div class='form-actions'>
+			{children}
+		</div>
+	);
+}
+
+interface FormInnerProps {
+	span?: boolean;
+	children: ReactNode;
+}
+
+export function FormInner({
+	span,
+	children,
+}: FormInnerProps) {
+	return (
+		<div class={['form-inner', span && 'span']}>
 			{children}
 		</div>
 	);

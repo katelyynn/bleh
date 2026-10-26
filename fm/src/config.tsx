@@ -18,8 +18,9 @@ import { load_chart_colours } from '@/components/music/chart';
 import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.tsx';
 import { compile_settings, save_setting } from '@/components/settings/settings';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { dark_themes, light_themes } from '@/build/theme.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 function parse_bleh_version(version: string) {
 	return parseFloat(version.substring(0, 7));
@@ -211,13 +212,17 @@ export function request_reload() {
 	notify({
 		title: tl(trans.refresh_pending.name),
 		body: tl(trans.refresh_pending.body),
-		icon: 'icon-16-settings',
+		icon: icons.settings,
 		persist: true,
 		actions: [
 			{
-				action: () => invoke_reload(),
-				text: tl(trans.refresh),
-				type: 'refresh',
+				onClick: () => invoke_reload(),
+				children: (
+					<>
+						<Icon name={icons.refresh} />
+						{tl(trans.refresh)}
+					</>
+				),
 			},
 		],
 	});
@@ -315,11 +320,11 @@ export function update_colour_swatches() {
 	let custom = null;
 	let seasonal = null;
 
-	let swatches = page.structure.main.querySelectorAll('.swatch');
+	const swatches = page.structure.main.querySelectorAll('.swatch');
 	swatches.forEach((swatch) => {
-		let h = swatch.style.getPropertyValue('--hue-over');
-		let s = swatch.style.getPropertyValue('--sat-over');
-		let l = swatch.style.getPropertyValue('--lit-over');
+		const h = swatch.style.getPropertyValue('--hue-over');
+		const s = swatch.style.getPropertyValue('--sat-over');
+		const l = swatch.style.getPropertyValue('--lit-over');
 
 		let parent = swatch.parentElement;
 		if (swatch.classList[0] == 'dropdown-menu-clickable-item') {
@@ -377,7 +382,7 @@ export function update_inbuilt_item(
 	//console.log('update item',item,value);
 	console.warn('update item', item, value, 'modify', modify);
 
-	let test_if_valid = element.querySelector(`#toggle-${item}`);
+	const test_if_valid = element.querySelector(`#toggle-${item}`);
 	console.warn(test_if_valid, `toggle-${item}`);
 	//console.info(test_if_valid, item, value, inbuilt_settings[item], 'modify', modify);
 	if (test_if_valid == undefined) return;

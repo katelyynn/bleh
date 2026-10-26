@@ -9,7 +9,7 @@ import tippy from 'tippy.js';
 import { tl, trans, translation_fallback } from '@/build/trans';
 import { notify } from './notify';
 import { log } from '@/build/log';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { Tooltip, TooltipInstance } from '@/components/shared/tooltips.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import {

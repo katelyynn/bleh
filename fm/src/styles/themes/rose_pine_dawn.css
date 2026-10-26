@@ -29,6 +29,7 @@ body,
 			inset 0 1px 3px oklch(0 0 0 / 2%);
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
+			0 0 2px 4px oklch(var(--l4-c) / 6%),
 			var(--input-shadow);
 		--group-shadow:
 			inset 0 0 0 1px oklch(var(--b4) / 0.6),
@@ -104,6 +105,7 @@ u,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
+
 	&[data-bleh--theme="rose_pine_dawn"],
 	body[data-bleh--theme="rose_pine_dawn"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.3164 0.0519 289.72;
@@ -131,6 +133,7 @@ u,
 		--f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.86) calc(clamp(min(0), var(--sat), max(2)) * 0.35) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.68) var(--hue);
 		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.79) calc(clamp(min(0), var(--sat), max(2)) * 0.26) var(--hue);
+		--x4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -144,7 +147,7 @@ u,
 
 		--badge: oklch(var(--f4) / 40%);
 		--badge-hov: oklch(var(--f4) / 60%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
+		--badge-shadow: 1px 1px 0 0 oklch(var(--l2-c) / 42%) inset, -1px -4px 8px 0 oklch(var(--h4) / 13%) inset;
 
 		--grid-colour-shadow: var(--grid-colour-shadow-override,
 				0 10px 30px oklch(var(--h4) / 30%));

@@ -11,22 +11,16 @@ import {
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import {
-	api_url,
 	auth,
-	bleh_url,
 	discord,
-	minis_url,
-	mualani_url,
 	page,
 	root,
-	setup_url,
 	shout_parse_queue,
-	sponsor_url,
 	urls,
 } from '@/build/page';
-import { new_season, Seasons, stored_season } from '@/build/seasonal';
+import { Seasons, stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
-import { dialog, load_dialogs } from '@/components/dialog/dialog';
+import { load_dialogs, modal } from '@/components/dialog/dialog';
 import {
 	correct_artist,
 	correct_generic_artist,
@@ -61,7 +55,6 @@ import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
-import { update_season_nav } from '@/components/seasonal';
 import {
 	parse_shout_queue,
 	patch_shouts,
@@ -100,15 +93,15 @@ import { tag_page } from '@/components/music/tags';
 import { clear_popup_queue } from '@/components/dialog/popup';
 import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
-import { icon, icons } from './components/shared/icon';
+import { Icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
-import { clean_storage, keys } from './components/settings/storage';
+import { clean_storage } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
 import { auth_page } from '@/pages/auth/main.tsx';
-import { seasonal } from '@/pages/bleh_settings/seasonal.tsx';
+import { copy } from '@/build/tools.ts';
 
 export const useSettings: Settings = new Settings();
 export let useSeasons: Seasons;
@@ -136,9 +129,9 @@ export function bleh() {
 				return;
 			}
 
-			page.state.colour_preview = html.node`
-                <div class="colour-preview colourful" />
-            `;
+			page.state.colour_preview = (
+				<div class={['colour-preview', 'colourful']} />
+			);
 			document.body.appendChild(page.state.colour_preview);
 
 			register_auth();
@@ -184,6 +177,7 @@ export function bleh() {
 			sponsors();
 
 			useSettings.on('branding_type', update_branding_type);
+			useSeasons.on(() => update_branding_type());
 		},
 		on_mutation: main_flow,
 		on_page_change: load_page,
@@ -212,7 +206,6 @@ export function bleh() {
 					id: 'now',
 					title: tl(trans.now_notice.name),
 					body: tl(trans.now_notice.body),
-					type: 'info',
 					persist: true,
 				});
 			}
@@ -221,81 +214,97 @@ export function bleh() {
 }
 
 function solarium() {
-	document.body.appendChild(html.node`
-        <svg style="position:absolute; width:0; height:0">
-            <filter id="solarium" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
-                <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.001 0.005"
-                    numOctaves="1"
-                    seed="17"
-                    result="turbulence"
-                />
-                <feGaussianBlur in="turbulence" stdDeviation="10" result="softMap" />
-                <feFlood flood-color="white" result="flood" />
-                <feComposite in="flood" in2="SourceAlpha" operator="in" result="circleBase" />
-                <feMorphology in="circleBase" operator="erode" radius="0" result="innerCircle" />
-                <feGaussianBlur in="innerCircle" stdDeviation="150" result="radialFade" />
-                <feComponentTransfer in="radialFade" result="edgeMask">
-                    <feFuncR type="table" tableValues="0 1" />
-                    <feFuncG type="table" tableValues="0 1" />
-                    <feFuncB type="table" tableValues="0 1" />
-                </feComponentTransfer>
-                <feBlend in="softMap" in2="edgeMask" mode="multiply" result="edgeDistortion" />
-                <feDisplacementMap
-                    in="SourceGraphic"
-                    in2="edgeDistortion"
-                    scale="200"
-                    xChannelSelector="R"
-                    yChannelSelector="G"
-                />
-            </filter>
-        </svg>
-    `);
+	document.body.appendChild(
+		<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute">
+			<filter id="solarium" x="-30%" y="-30%" width="160%" height="160%">
+				<feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="10" result="noise" />
+				<feDisplacementMap in="SourceGraphic" in2="noise" scale="61" />
+			</filter>
+		</svg>
+	);
 }
 
-function handle_error(e = null) {
+export function handle_error(e = null) {
 	document.body.classList.add('florence-loaded');
 
-	dialog({
+	let error_text = `${e}`;
+
+	if (e.name) {
+		error_text = `${e.name}: ${e.message}
+
+${e.stack}
+
+on: ${page.type}/${page.subpage}
+${window.location.pathname}
+${version.build} (${version.sku})`;
+	}
+
+	modal({
 		id: 'error',
-		title: 'An error has occurred',
-		body: html.node`
-            <div class="error-inner">
-                <div class="error-top">
-                    ${icon({ name: icons.error })}
-                    <div class="error-top-info">
-                        <h1 class="error-head">oops.. something broke</h1>
-                        <p class="error-body">An error prevented ${version.brand} from finishing loading</p>
-                    </div>
-                </div>
-                <pre class="error-info colourful">${
-			e
-				? html
-					.node`<span class="error-type">${e.name}</span>: ${e.message}`
-				: ''
-		}${
-			e.stack
-				? html.node`<br><span class="error-stack">${e.stack}</span>`
-				: ''
-		}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
-                <p class="error-summary">It would be helpful if you could report this bug, including the error message above and any steps you took.</p>
-            </div>
-            <div class="modal-footer">
-                <div class="fill"></div>
-                <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
-                    Report bug now
-                </a>
-                <a class="see-more" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js?${Math.random}" target="_blank">
-                    Check for updates
-                </a>
-                <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
-                    Join Discord
-                </a>
-                <div class="fill"></div>
-            </div>
-        `,
-		type: 'error',
+		title: 'Something went wrong',
+		body: (
+			<>
+				<pre class={['error-info', 'colourful']}>
+					{e && (
+						<>
+							<span class='error-type'>{e.name}</span>: {e.message}
+						</>
+					)}
+					{e.stack && (
+						<>
+							<br />
+							<span class='error-stack'>{e.stack}</span>
+						</>
+					)}
+					<br />
+					on: {page.type}/{page.subpage}
+					<br />
+					{window.location.pathname}
+					<br />
+					{version.build} ({version.sku})
+				</pre>
+				<p>Copy the error details below and report this as a bug.</p>
+			</>
+		),
+		actions: [
+			{
+				onClick: () => {
+					open(`https://bleh.yuzu.pet/download?${Math.random()}`);
+				},
+				children: (
+					<>
+						<Icon name={icons.update} />
+						Attempt update
+					</>
+				),
+			},
+			{
+				colourful: true,
+				className: 'discord',
+				onClick: () => {
+					open(`https://discord.gg/${discord}`);
+				},
+				children: (
+					<>
+						<Icon name={icons.discord} />
+						Join Discord
+					</>
+				),
+			},
+			{
+				primary: true,
+				onClick: () => {
+					copy(error_text);
+					open('https://bleh.yuzu.pet/issues');
+				},
+				children: (
+					<>
+						<Icon name={icons.debug} />
+						Copy & report
+					</>
+				),
+			},
+		],
 	});
 
 	if (e != null) {
@@ -413,7 +422,7 @@ function main_flow() {
 		}
 
 		if (page.type == 'overview' && page.subpage == 'music') {
-			let items = page.structure.main.querySelectorAll(
+			const items = page.structure.main.querySelectorAll(
 				'.music-featured-item:not(.music-featured-tag, [data-passed="true"])',
 			);
 			items.forEach((item) => {
@@ -426,8 +435,8 @@ function main_flow() {
 
 				let style = bg.style.getPropertyValue('background-image');
 				if (!style) style = bg.style.getPropertyValue('background');
-				let cover_substr = style.indexOf('url');
-				let cover = style.substring(cover_substr);
+				const cover_substr = style.indexOf('url');
+				const cover = style.substring(cover_substr);
 
 				bg.style.setProperty('background', cover);
 			});
@@ -485,11 +494,12 @@ function load_page(main_content?: HTMLElement) {
 	page.state.on_tour = false;
 
 	page.restricted = false;
+	page.continue = true;
 
 	if (main_content) {
 		const blacklist_level = Number(
 			main_content.getAttribute('data-page-resource-blacklist-level') ||
-				'0',
+			'0',
 		);
 		page.restricted = blacklist_level == 1;
 	}
@@ -631,28 +641,26 @@ function load_page(main_content?: HTMLElement) {
 		}
 
 		if (page.subpage == 'images_overview') {
-			let sort_button = page.structure.main.querySelector(
+			const sort_button = page.structure.main!.querySelector(
 				'.dropdown-menu-clickable-button',
-			);
-			let sort_menu = page.structure.main.querySelector(
+			) as HTMLButtonElement;
+			const sort_menu = page.structure.main!.querySelector(
 				'.dropdown-menu-clickable',
-			);
+			) as HTMLDivElement;
 
 			if (sort_button && sort_menu) {
-				page.structure.main.insertBefore(
-					html.node`
-                    <div class="dropdown-top-wrap">
-                        ${sort_button}
-                        ${sort_menu}
-                    </div>
-                `,
-					page.structure.main.firstElementChild,
+				page.structure.main!.insertBefore(
+					<div class='dropdown-top-wrap'>
+						{sort_button}
+						{sort_menu}
+					</div>,
+					page.structure.main!.firstChild,
 				);
 			}
 		}
 
 		if (page.subpage == 'image') {
-			const images = page.structure.row.querySelectorAll(
+			const images = page.structure.row!.querySelectorAll(
 				'.gallery-image',
 			);
 			images.forEach((image) => {
@@ -661,12 +669,11 @@ function load_page(main_content?: HTMLElement) {
 				);
 				if (!star) return;
 
-				render(
-					star,
-					html`
-						<div class="bleh-icon" />
-						${tl(trans.starred)}
-					`,
+				star.replaceChildren(
+					<>
+						<Icon />
+						{tl(trans.starred)}
+					</>,
 				);
 			});
 		}
@@ -750,7 +757,7 @@ function page_title() {
 		title = tl(trans.events);
 	} else if (page.type == 'bookmarks') title = tl(trans.bookmarks);
 	else if (page.type == 'charts') title = tl(trans.charts);
-	else if (page.type == 'labs') title = tl(trans.labs.name);
+	else if (page.type == 'labs') title = tl(trans.labs);
 	else if (page.type == 'minis') title = tl(trans.minis);
 
 	if (page.type == 'inbox') {
@@ -762,7 +769,7 @@ function page_title() {
 	if (page.subpage.replace('event_', '').startsWith('shoutbox')) {
 		title = tl(trans.shouts);
 	} else if (page.subpage.startsWith('library')) title = tl(trans.library);
-	else if (page.subpage == 'obsessions_overview') {
+	else if (['obsessions_overview', 'obsessions_set'].includes(page.subpage)) {
 		title = tl(trans.obsessions);
 	} else if (page.subpage == 'obsessions_obsession') {
 		title = tl(trans.obsession);
@@ -800,8 +807,8 @@ function page_title() {
 
 	if (page.state.error) title = tl(trans.error);
 
-	template = template
-		.replace('{page}', title)
+	template = (template as string)
+		.replace('{page}', title as string)
 		.replace('{name}', name)
 		.replace('{sister}', sister)
 		.replace('{build}', version.build)
@@ -816,7 +823,7 @@ function page_title() {
 		);
 	}
 
-	document.title = template;
+	document.title = template as string;
 
 	if (page.structure.indicator) page_indicator();
 }
@@ -825,14 +832,19 @@ function detect_mobile() {
 	if (window.innerWidth <= 980) {
 		page.mobile = true;
 
-		document.head.appendChild(html.node`
-            <meta name="theme-color" content="#000000" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <link rel="manifest" href="https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest" />
-        `);
+		document.head.appendChild(
+			<>
+				<meta name='theme-color' content='#000000' />
+				<meta name='apple-mobile-web-app-capable' content='yes' />
+				<link
+					rel='manifest'
+					href='https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest'
+				/>
+			</>,
+		);
 
-		let icon = document.head.querySelector('[rel="apple-touch-icon"]');
-		icon.setAttribute(
+		const icon = document.head.querySelector('[rel="apple-touch-icon"]');
+		icon?.setAttribute(
 			'href',
 			'https://github.com/katelyynn/bleh/raw/uwu/fm/app.png',
 		);
@@ -901,13 +913,19 @@ function page_indicator() {
 }
 
 export function update_page() {
+	if (!page.structure.container) return;
+
+	const refresh = ff('header_refresh');
+
 	page.structure.container.setAttribute('data-page-type', page.type);
 	page.structure.container.setAttribute('data-page-subpage', page.subpage);
 	page.structure.container.setAttribute('data-beret', ff('beret'));
 	page.structure.container.setAttribute('data-short', ff('short'));
-	page.structure.container.setAttribute('data-lacrimosa', ff('lacrimosa'));
+	page.structure.container.setAttribute('data-lacrimosa', String(ff('lacrimosa')));
 
-	page.structure.row?.setAttribute('data-lacrimosa', ff('lacrimosa'));
+	page.structure.row?.setAttribute('data-lacrimosa', String(ff('lacrimosa')));
+
+	page.structure.row?.setAttribute('data-refresh', String(refresh));
 }
 
 export async function register_background(
@@ -922,9 +940,9 @@ export async function register_background(
 	let background = page.structure.background;
 
 	if (!background) {
-		background = html.node`
-            <div class="bleh-background katsune-bleh-background" />
-        `;
+		background = (
+			<div class={['bleh-background', 'katsune-bleh-background']} />
+		);
 
 		document.body.appendChild(background);
 		page.structure.background = background;
@@ -946,28 +964,38 @@ export async function register_background(
 		background.setAttribute('data-page-type', page.type);
 		background.setAttribute('data-page-subpage', page.subpage);
 		background.setAttribute('data-background-origin', origin);
+		background.setAttribute('data-lacrimosa', String(ff('lacrimosa')));
 	}
 
 	if (url) {
 		url = avatar(url, 'avatar300s');
 
-		const img = html.node`
-            <img src=${url} crossorigin="anonymous" />
-        ` as HTMLImageElement;
+		const res = await GM.xmlHttpRequest({
+			method: 'GET',
+			url,
+			responseType: 'blob',
+		});
+
+		console.error(res, res.response);
+		const blob = URL.createObjectURL(res.response);
+
+		const img = (
+			<img src={blob} crossOrigin='anonymous' />
+		) as HTMLImageElement;
 
 		await img.decode();
 
 		const canvas = document.createElement('canvas');
 		const ctx = canvas.getContext('2d');
 
-		const scale = 400;
+		const scale = 1300;
 
 		canvas.width = scale;
 		canvas.height = scale;
 
 		ctx.imageSmoothingEnabled = true;
 		ctx.imageSmoothingQuality = 'high';
-		ctx.filter = 'blur(10px)';
+		ctx.filter = 'url(#solarium) blur(4px)';
 		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
 		url = canvas.toDataURL();
@@ -976,25 +1004,25 @@ export async function register_background(
 	background.classList.add('ready');
 
 	/*
-    if (settings.static_banners) {
-        try {
-            url = await convert_gif_to_png(url);
-        } catch(e) {
-            log('could not convert banner image to static', 'banner', 'error', {e});
-        }
-    }
-    */
+	if (settings.static_banners) {
+		try {
+			url = await convert_gif_to_png(url);
+		} catch(e) {
+			log('could not convert banner image to static', 'banner', 'error', {e});
+		}
+	}
+	*/
 
+	background.innerHTML = '';
 	render(background, html``);
 	if (url) {
-		render(
-			background,
-			html`
-				<div class="page-background-image">
-					<div class="page-background-image-inner"
-						style="background-image: url(${url})" />
-				</div>
-			`,
+		background.replaceChildren(
+			<div class='page-background-image'>
+				<div
+					class='page-background-image-inner'
+					style={{ backgroundImage: `url(${url})` }}
+				/>
+			</div>,
 		);
 	}
 
@@ -1015,9 +1043,9 @@ export function register_banner(url: string | null, origin = null) {
 	let background = page.structure.banner;
 
 	if (!background) {
-		background = html.node`
-            <div class="page-banner" />
-        `;
+		background = (
+			<div class='page-banner' />
+		);
 		document.body.appendChild(background);
 		page.structure.banner = background;
 	} else {
@@ -1039,25 +1067,17 @@ export function register_banner(url: string | null, origin = null) {
 	banner_props();
 
 	function banner_props() {
-		background.setAttribute('data-url', url);
 		background.setAttribute('data-page-type', page.type);
 		background.setAttribute('data-page-subpage', page.subpage);
 		background.setAttribute('data-background-origin', origin);
+		background.setAttribute('data-refresh', ff('header_refresh'));
 	}
 
-	let inner: HTMLSpanElement;
-
-	render(background, html``);
-	render(
-		background,
-		html`
-			<span class="background-inner" ref=${(el) => inner = el} />
-		`,
+	background.replaceChildren(
+		<span class='background-inner' style={{ backgroundImage: `url(${url})` }} />
 	);
 
-	if (url) {
-		inner.style.setProperty('background-image', `url(${url})`);
-	}
+	background.setAttribute('data-url', url);
 
 	if (page.type == 'user') {
 		if (page.name == auth.name) {
@@ -1071,14 +1091,15 @@ export function register_banner(url: string | null, origin = null) {
 }
 
 function favi() {
-	if (settings.branding_type && settings.branding_type != 'bleh') return;
+	const type = useSettings.get('branding_type');
+	if (type && type != 'bleh') return;
 
-	let light =
+	const light =
 		'data:image/png;base64,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';
-	let dark =
+	const dark =
 		'data:image/png;base64,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';
 
-	let favicon = document.querySelector('link[rel="icon"]');
+	const favicon = document.querySelector('link[rel="icon"]');
 	if (!favicon) return;
 
 	favicon.href = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -1087,7 +1108,7 @@ function favi() {
 
 	window
 		.matchMedia('(prefers-color-scheme: dark)')
-		.addEventListener('change', function () {
+		.addEventListener('change', function() {
 			favicon.href =
 				window.matchMedia('(prefers-color-scheme: dark)').matches
 					? dark

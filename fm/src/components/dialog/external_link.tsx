@@ -10,7 +10,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { toggle } from '@/components/settings/toggle.js';
 import { settings } from '@/build/config.ts';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { createRef } from 'jsx-dom';
 import { SeeMore } from '@/components/text/see_more.tsx';

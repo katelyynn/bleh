@@ -1,7 +1,5 @@
 .status-cafe {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
+	display: inline-flex;
 	cursor: pointer;
 
 	&:hover {
@@ -30,7 +28,7 @@
 		animation: spinner 1s linear infinite;
 	}
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon: var(--icon-16-x);
 	}
 }

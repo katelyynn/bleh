@@ -17,13 +17,13 @@ body,
 	--b9: var(--b6);
 
 	--card-border: inset 0 0 0 1px oklch(var(--b4) / 0.6);
-	--card-border-base: oklch(var(--b3) / 0.6);
+	--card-border-base: oklch(var(--b3) / 0.7);
 	--card-border-base-highlight: oklch(var(--b2) / 0.55);
 
 	--menu-border: oklch(var(--b3) / 0.6);
 
 	--separator: var(--separator-base);
-	--separator-base: oklch(var(--b3) / 0.8);
+	--separator-base: oklch(var(--b3) / 0.6);
 
 	--textarea: oklch(var(--b6) / 20%);
 	--textarea-hov: oklch(var(--b6) / 40%);
@@ -39,10 +39,11 @@ body,
 		inset 0 0 0 1px oklch(var(--b3) / 70%),
 		inset 0 1px 2px 1px oklch(var(--b6) / 80%);
 	--focused-input-shadow:
-		inset 0 0 0 1px oklch(var(--h3) / 0.4),
+		inset 0 0 0 1px oklch(var(--l3-c) / 40%),
+		0 0 2px 4px oklch(var(--l4-c) / 10%),
 		var(--input-shadow);
 	--group-shadow:
-		inset 0 0 0 1px oklch(var(--b2) / 0.36),
+		inset 0 0 0 1px oklch(var(--b2) / 0.35),
 		0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
 
 	--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.15);
@@ -64,6 +65,7 @@ body,
 	--nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));
 	--precise-filter-shadow: drop-shadow(0 0 2px oklch(var(--b6))) drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 12px oklch(var(--b6) / 60%));
 	--header-filter-shadow: drop-shadow(0 1px 3px oklch(var(--b6) / 80%)) drop-shadow(0 3px 10px oklch(var(--b6) / 60%));
+	--header-shadow: 0 1px 3px oklch(var(--b6) / 80%), 0 1px 6px oklch(var(--b6) / 80%);
 
 	--menu-item-hov: oklch(var(--b4) / 40%);
 	--menu-item-atv: oklch(var(--b4) / 60%);
@@ -151,12 +153,12 @@ u,
 	--l3: calc(var(--lit) * 0.7) calc(var(--sat) * 0.6) var(--hue);
 	--l4: calc(var(--lit) * 0.5) calc(var(--sat) * 0.7) var(--hue);
 
-	--l2-c: calc(var(--lit) * 0.92) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+	--l2-c: calc(clamp(min(0.75), var(--lit), max(2)) * 0.92) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 	--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
 	--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.49) calc(clamp(min(0), var(--sat), max(2)) * 0.46) var(--hue);
 
 	--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.46);
-	--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.72);
+	--l3-c-lit: calc(clamp(min(0.75), var(--lit), max(2)) * 0.72);
 
 	--h2: var(--l2-c);
 	--h3: var(--h3-lit) var(--h3-sat) var(--hue);
@@ -168,6 +170,7 @@ u,
 	--f4: calc(var(--lit) * 0.42) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 	--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 	--k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.38) var(--hue);
+	--x4: calc(var(--lit) * 0.2) calc(clamp(min(0), var(--sat), max(1)) * 0.24) var(--hue);
 	--g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
 	--s3: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
@@ -245,7 +248,7 @@ u,
 
 	--primary-glow: 0 3px 12px oklch(var(--h4) / 32%);
 
-	--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 40%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
+	--badge-shadow: 1px 1px 0 0 oklch(var(--h4) / 12%) inset, -1px -4px 8px 0 oklch(var(--h4) / 20%) inset;
 	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
 	--side-action-bg: oklch(var(--k4) / 5%);

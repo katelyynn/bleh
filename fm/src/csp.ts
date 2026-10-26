@@ -102,6 +102,7 @@ const CspPolicies: PolicyMap = {
 
 		// stuff that last.fm uses
 		'https://*.last.fm',
+		'blob:',
 		'https://lastfm-img.freetls.fastly.net',
 		'https://*.fastly.net',
 		'https://cdn.cookielaw.org',
@@ -143,6 +144,7 @@ const CspPolicies: PolicyMap = {
 		'https://*.github.io',
 		'https://ws.audioscrobbler.com',
 		'https://*.katelyn.moe',
+		'https://*.yuzu.pet',
 		'https://translate.googleapis.com',
 	],
 	'font-src': [

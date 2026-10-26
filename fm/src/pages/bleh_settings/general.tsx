@@ -12,7 +12,7 @@ import {
 } from './bleh_settings';
 import { api_key, auth, page, root } from '@/build/page';
 import { create_badge, load_badges } from '@/components/shared/badge';
-import { dialog } from '@/components/dialog/dialog';
+import { dialog, modal } from '@/components/dialog/dialog';
 import { lang_info, language, tl, trans } from '@/build/trans';
 import { DateTime } from 'luxon';
 import { version } from '@/main';
@@ -45,6 +45,7 @@ import { createRef } from 'jsx-dom';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { Brand } from '@/pages/brand/brand.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -72,8 +73,12 @@ export function general() {
 				<div class={['section-intro', 'less']}>
 					<SubText>{tl(trans.current_version)}</SubText>
 					<h1 class='setting-head'>
-						<i>{version.brand}</i>{' '}
-						<i class='highlight'>{version.build}</i>
+						<Brand className='setting-brand' />
+						<div class='setting-brand-version'>
+							<div class='setting-brand-version-text'>
+								{version.build}
+							</div>
+						</div>
 					</h1>
 				</div>
 				<SettingGroup>
@@ -83,7 +88,7 @@ export function general() {
 					<SubText>{tl(trans.issues_updating)}</SubText>
 					<SeeMoreGroup>
 						<SeeMore
-							href='https://github.com/katelyynn/bleh/issues/new/choose'
+							href='https://bleh.yuzu.pet/issues'
 							external
 						>
 							{tl(trans.report_issue)}
@@ -334,7 +339,7 @@ function update_setting() {
 									id: 'update',
 									title: tl(trans.updates),
 									body: tl(trans.checked_for_updates),
-									icon: 'icon-16-update',
+									icon: icons.update,
 								});
 								render_setting_page('general');
 							})}>${tl(trans.check)}</button>
@@ -388,7 +393,7 @@ function update_setting() {
 											id: 'update',
 											title: tl(trans.updates),
 											body: tl(trans.checked_for_updates),
-											icon: 'icon-16-update',
+											icon: icons.update,
 										});
 										render_setting_page('general');
 									},
@@ -423,7 +428,7 @@ function update_check_failed(e) {
 		id: 'update',
 		title: tl(trans.updates),
 		body: tl(trans.failed_to_check_for_updates),
-		icon: 'icon-16-update',
+		icon: icons.update,
 		type: 'error',
 	});
 
@@ -468,7 +473,7 @@ function update_check_failed(e) {
 }
 
 function badge_prompt(badges: badge[]) {
-	dialog({
+	modal({
 		id: 'badges',
 		title: auth.name!,
 		body: (
@@ -490,6 +495,7 @@ function badge_prompt(badges: badge[]) {
 				))}
 			</div>
 		),
+		close: 'done',
 	});
 }
 

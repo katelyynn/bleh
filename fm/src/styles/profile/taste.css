@@ -61,13 +61,11 @@
 	display: flex;
 	flex-direction: column;
 
-	padding: calc(var(--card-padding) * 3.5) var(--card-padding)
-		var(--card-padding) !important;
-	margin: calc(-1 * (var(--card-padding) * 3.5)) 0 calc(-1 *
-		var(--card-padding)) !important;
+	padding: calc(var(--card-padding) * 3.5) var(--card-padding) var(--card-padding) !important;
+	margin: calc(-1 * (var(--card-padding) * 3.5)) 0 calc(-1 * var(--card-padding)) !important;
 
 	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%),
-		transparent) !important;
+			transparent) !important;
 	overflow: hidden;
 }
 
@@ -105,66 +103,29 @@
 
 .profile-taste-top-badges {
 	display: flex;
-	gap: 5px;
+	gap: 6px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row-reverse;
 	margin: 0 auto;
 	z-index: 10;
+	color: oklch(var(--l3-c));
 	line-height: var(--line-height-subheading);
 	position: relative;
 
-	&:before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background-color: oklch(var(--f4) / 20%);
-		border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
-
-		--mask: url('data:image/webp;base64,UklGRn4DAABXRUJQVlA4WAoAAAAYAAAApgAAMQAAQUxQSEYCAAAJkGPbtmlbc1/72bZtpz98JfnMjNL86EeugG3j2cb12dlb66y3/4kjYgIAlfDhxNv5sPHJxL8a2H0Qw+d2CO5/e/0WqGceA2NPcHJrFsjz4cTZfNhZFKqG7dFopAWSexEDeQhAPYjZBaAEJ9+DPU3KPpT3uoVFeRoomUNa3J6cdkgYgLAIbRhAHeU4DpQSLHtUr4QyYT0qRiutAhooG3GghOCzBx0SyoXl1EZpGALqKX+OaTGbGiXUtMhCb4RhGMFygvUhRQvaVCWhzS0txjCEOkVIfbZodock1EFalGHQVQ/i8U9IE1lkgFhzA2Vzx0RhadVhBgzXUw4ygDKOSxrvEMkTAPJ8piHqu6djmBQpUSiB0X+ePTwVPXWU4g636d4s3TsV/iAlMhNGqdleu3pPBV01+lFiuNlWIyCZNpx+exlm3Igb7ufwgCFWM4Z7cwVm1LuW4bamTbGvDTcIU6ShjKZH2LLilMrzmewQ7G5pqhAlMHmET7zKcZtNmaPIVWo0cyq3KnFESGinZBU7o7iV44wSOq2dkD7GYtYZ6Xk4ogPsaEeUhFs5ISuha9xOSGfRrRxRBvVwyHFHpCysSdD/P61wICEpwjKb0nBLOOCI047Mpl0olbDFsUPbNYTFpSzkS1jh2KStGmKOCwppCQscq7QFURs2fGbT0AJS/ziWaL/5NMcDG96yKXgFzK1yzNO+8CmOf3f4nnPpFAoE/NlkSM+RNubYjsB66YDtdZwJ+ygR8HeD4fcBaW6JLc2zfJtt+x2TdQhWUDggMgAAAJADAJ0BKqcAMgAAGAAnpAADyWiY02iY02iY02iY02iY02iYywAA/v/e3PAAAAAAAAAARVhJRtgAAABJSSoACAAAAAYAEgEDAAEAAAABAAAAGgEFAAEAAABWAAAAGwEFAAEAAABeAAAAKAEDAAEAAAACAAAAMQECABEAAABmAAAAaYcEAAEAAAB4AAAAAAAAAGAAAAABAAAAYAAAAAEAAABQYWludC5ORVQgNS4xLjEyAAAFAACQBwAEAAAAMDIzMAGgAwABAAAAAQAAAAKgBAABAAAApwAAAAOgBAABAAAAMgAAAAWgBAABAAAAugAAAAAAAAACAAEAAgAEAAAAUjk4AAIABwAEAAAAMDEwMAAAAAA=');
-		mask-image: var(--mask);
-		-webkit-mask-image: var(--mask);
-		mask-size: contain;
-		-webkit-mask-size: contain;
-
-		animation: profile-taste-badge 6.5s var(--trans-function-ani) infinite;
-		rotate: -1deg;
-	}
-
-	padding: 0 7px;
-}
-
-@keyframes profile-taste-badge {
-	from,
-	to {
-		background-color: oklch(var(--f4) / 20%);
-		scale: 1;
-		transform: rotate(-1deg);
-	}
-
-	40% {
-		background-color: oklch(var(--f4) / 25%);
-		scale: 1.04;
-		transform: rotate(2deg);
-	}
+	padding: 0 5px;
 }
 
 .profile-taste-top-badge-formal {
-	font-family: var(--font-brand);
-	font-size: 18px;
-
-	color: oklch(var(--l2-c-theme-switch));
 	font-weight: var(--font-weight-bold);
-	text-transform: capitalize;
-
-	translate: 0 -3px;
-	rotate: 1deg;
+	text-transform: uppercase;
+	letter-spacing: 0.2px;
 }
 
 .profile-taste-top-badge-percent {
-	color: oklch(var(--l3-c));
+	font-size: var(--font-size-sm);
+	opacity: 0.7;
 	font-weight: var(--font-weight-medium);
-	rotate: 0deg;
 }
 
 .percent-marker {

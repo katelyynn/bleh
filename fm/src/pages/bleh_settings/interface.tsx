@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { dialog } from '@/components/dialog/dialog.tsx';
+import { dialog, modal } from '@/components/dialog/dialog.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { auth, page, root } from '@/build/page.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
@@ -260,7 +260,7 @@ interface TrackPreviewProps {
 	expand_tracks: string;
 }
 
-function TrackPreview({
+export function TrackPreview({
 	playing,
 	avatar,
 	album_name_location,
@@ -420,7 +420,7 @@ function ShoutPreview({
 }
 
 export function rabbit_keybinds() {
-	dialog({
+	modal({
 		id: 'rabbit_keybinds',
 		title: tl(trans.quick_switcher),
 		body: (
@@ -432,5 +432,6 @@ export function rabbit_keybinds() {
 				<SettingKeybind bind='rabbit_bleh_settings' />
 			</SettingGroup>
 		),
+		close: 'done',
 	});
 }

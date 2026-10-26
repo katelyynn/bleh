@@ -5,17 +5,20 @@
  */
 
 import { ReactNode } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
+import { useSettings } from '@/page.tsx';
+import { WithChildren } from '@/types/generic.tsx';
 
 interface SideActionsProps {
+	inset?: boolean;
 	children?: ReactNode;
 }
 
 export function SideActions({
+	inset = true,
 	children,
 }: SideActionsProps) {
 	const elem = (
-		<section class='side-actions'>
+		<section class={['side-actions', !inset && 'no-inset']}>
 			{children}
 		</section>
 	);
@@ -51,4 +54,16 @@ export function SideAction({
 			{children}
 		</button>
 	);
+}
+
+export function SideActionLabel({
+	children,
+}: WithChildren) {
+	return <label class='side-action-label'>{children}</label>;
+}
+
+export function SideActionContent({
+	children,
+}: WithChildren) {
+	return <p class='side-action-content'>{children}</p>;
 }

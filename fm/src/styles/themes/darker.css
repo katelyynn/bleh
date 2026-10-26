@@ -2,8 +2,8 @@ body,
 .theme-preview {
 	&[data-bleh--theme="darker"] {
 		/* any additional highlights */
-		--b2: 0.37 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
-		--b3: 0.31 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+		--b2: 0.36 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+		--b3: 0.29 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
 
 		/* card border */
 		--b4: 0.26 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
@@ -19,8 +19,6 @@ body,
 		--menu-item-hov: oklch(var(--b4) / 60%);
 		--menu-item-atv: oklch(var(--b4) / 80%);
 
-		--separator-base: oklch(var(--b3) / 0.7);
-
 		--setting-hover: oklch(var(--b4) / 30%);
 		--setting-active: oklch(var(--b4) / 40%);
 
@@ -31,9 +29,6 @@ body,
 		--toolbar-bg: oklch(var(--b6) / 70%);
 
 		--normal-shadow: 0 0 transparent;
-
-		--card-border-base: oklch(var(--b3) / 0.5);
-		--card-border-base-highlight: oklch(var(--b2) / 0.55);
 
 		--menu-border: oklch(var(--b3) / 0.5);
 

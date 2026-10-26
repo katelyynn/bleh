@@ -1,64 +1,84 @@
 .glacier-library-top {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+
+	padding-top: var(--card-padding) !important;
+	margin-top: calc(-1 * var(--card-padding)) !important;
+	margin-bottom: calc((-1 * var(--card-padding-v)) + var(--card-gap));
+
+	background: linear-gradient(180deg, var(--card-gradient), transparent) !important;
+
+	@media (max-width: 981px) {
+		border-top-left-radius: var(--card-radius) !important;
+	}
+
+	@media (max-width: 600px) {
+		margin-top: calc(-1 * calc(var(--card-padding) + var(--card-gap))) !important;
+	}
 
 	@media (max-width: 980px) {
 		flex-direction: column;
 		gap: var(--card-gap);
 		justify-content: unset;
 	}
+}
 
-	.glacier-library-buttons {
-		.glacier-view-button {
-			&[data-glacier-view="list"] {
-				--mask: var(--icon-16-list);
-			}
+.glacier-view-button {
+	&[data-glacier-view="list"] {
+		--mask: var(--icon-16-list);
+	}
 
-			&[data-glacier-view="grid"] {
-				--mask: var(--icon-16-grid);
-			}
-		}
+	&[data-glacier-view="grid"] {
+		--mask: var(--icon-16-grid);
+	}
+}
 
-		.glacier-library-button {
-			&.bulk-edit-button {
-				--mask: var(--icon-16-edit-bulk);
-			}
+.glacier-library-button {
+	&.bulk-edit-button {
+		--mask: var(--icon-16-edit-bulk);
+	}
 
-			&.edit-icon {
-				--mask: var(--icon-16-edit);
-			}
+	&.edit-icon {
+		--mask: var(--icon-16-edit);
+	}
 
-			&.delete-icon {
-				--mask: var(--icon-16-trash);
-				--bg-hov: oklch(var(--h4) / 10%);
-				--bg-atv: oklch(var(--h4) / 20%);
-				--hue-over: var(--hue-neg);
-				--sat-over: var(--sat-neg) !important;
-				--lit-over: var(--lit-neg) !important;
-			}
+	&.delete-icon {
+		--mask: var(--icon-16-trash);
+		--hue-over: var(--hue-neg) !important;
+		--sat-over: var(--sat-neg) !important;
+		--lit-over: var(--lit-neg) !important;
+	}
 
-			&.love-button {
-				--mask: var(--icon-16-heart);
-				--font-size: 0;
-				--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
-				--btn-left: 12px !important;
+	&.love-button {
+		--mask: var(--icon-16-heart);
 
-				&.love-button--loved {
-					--mask: var(--icon-16-heart-solid);
-				}
-			}
-
-			&.glacier-configure-button {
-				--font-size: 0;
-				--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
-				--btn-left: var(--button-sides) !important;
-			}
-
-			&.glacier-search-button {
-				--mask: var(--icon-16-search);
-			}
+		&.love-button--loved {
+			--mask: var(--icon-16-heart-solid);
 		}
 	}
+
+	&.glacier-configure-button {
+		--font-size: 0;
+		--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
+		--btn-left: var(--button-sides) !important;
+	}
+
+	&.glacier-search-button {
+		--mask: var(--icon-16-search);
+	}
+}
+
+.glacier-library-buttons {
+	display: flex;
+	align-items: center;
+	gap: var(--button-list-gap);
+	height: fit-content;
+}
+
+.glacier-components {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px var(--card-gap);
 }
 
 .glacier-library-metadata {
@@ -102,43 +122,59 @@
 			}
 		}
 	}
+}
 
-	.glacier-library-metadata-avatar {
-		position: relative;
-		width: 36px;
-		height: 36px;
-		background: var(--avatar-generic-background);
-		border-radius: var(--radius-s);
-		box-shadow: var(--interact-shadow);
-		overflow: hidden;
-		flex-shrink: 0;
+.glacier-overview {
+	display: flex;
+	align-items: center;
+	gap: var(--card-gap);
+	margin-bottom: var(--card-gap);
+}
 
-		& > img {
-			width: 36px;
-			height: 36px;
-		}
+.glacier-overview-avatar {
+	position: relative;
+	--w: 56px;
+	width: var(--w);
+	height: var(--w);
+	background: var(--avatar-generic-background);
+	border-radius: var(--radius-s);
+	box-shadow: var(--interact-shadow);
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.glacier-overview-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.glacier-overview-title {
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	font-weight: var(--font-weight-medium);
+	width: fit-content;
+
+	&:not(:hover) {
+		color: oklch(var(--c2));
 	}
 }
 
-.glacier-library-focused-header {
-	display: flex;
-	flex-direction: column;
-	gap: var(--card-gap);
+.glacier-overview-artist {
+	width: fit-content;
 
-	.glacier-library-top-upper {
-		display: flex;
-		justify-content: space-between;
-
-		@media (max-width: 980px) {
-			justify-content: unset;
-			flex-direction: column;
-			gap: var(--card-gap);
-		}
+	&:not(:hover) {
+		color: oklch(var(--c2) / 80%);
 	}
+}
+
+.glacier-overview-duration {
+	font-size: var(--font-size-sm);
+	color: oklch(var(--c3));
+	cursor: default;
 }
 
 .value-panel {
-	.glacier-library-metadata + h2 {
+	.glacier-library-metadata+h2 {
 		margin-top: var(--card-gap) !important;
 	}
 }
@@ -149,7 +185,7 @@
 }
 
 /* user did not scrobble album in date range */
-.library-header + .message {
+.library-header+.message {
 	color: oklch(var(--c3));
 	cursor: default;
 }

@@ -139,6 +139,12 @@ export const trans = {
 		de: ' und ',
 		pt: ' e ',
 	},
+	or: {
+		// this is within a sentence
+		// the spaces around it are intentional and should be
+		// there if the language puts spaces
+		en: ' or ',
+	},
 	page_templates: {
 		// these are used for browser tab titles
 		// {page} is something like 'Home' or 'Profile'
@@ -2284,8 +2290,10 @@ export const trans = {
 			graves: {
 				// a nod to the Deadlock character 'Graves'
 				// https://deadlock.wiki/Graves#Typography
+				// use the link above and check if there's already
+				// a translation of her that would work
 				en: 'Graves',
-				pt: 'Mortícia',  //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
+				pt: 'Mortícia', //translation from the deadlock wiki (https://deadlock.coach/pt-BR/heroes/graves)
 			},
 			gloom: {
 				en: 'Gloom',
@@ -6772,26 +6780,7 @@ export const trans = {
 		},
 	},
 	font_emoji: {
-		name: {
-			en: 'Emoji compatibility',
-			de: 'Emoji-Kompatibilität',
-			es: 'Compatibilidad de emojis',
-			it: 'Compatibilità con le emoji',
-			pt: 'Compatibilidade de emojis',
-			sv: 'Emoji-kompatibilitet',
-			ru: 'Совместимость с эмодзи',
-			pl: 'Kompatybilność emoji',
-		},
-		body: {
-			en: 'Required to render emoji properly before Windows 11',
-			de: 'Erforderlich, um Emojis vor Windows 11 richtig darzustellen',
-			es: 'Requerido para renderizar emojis correctamente antes de Windows 11',
-			it: 'Richiesto per visualizzare correttamente le emoji prima di Windows 11',
-			pt: 'Necessário para renderizar emojis corretamente antes do Windows 11',
-			sv: 'Krävs för att visa emojis korrekt innan Windows 11',
-			ru: 'Требуется для правильного отображения эмодзи до Windows 11',
-			pl: 'Wymagane do poprawnego renderowania emoji przed Windows 11',
-		},
+		en: 'Use a fallback font for emojis',
 	},
 	font_example: {
 		// the trans flag is used to demonstrate the improper
@@ -7515,15 +7504,15 @@ export const trans = {
 		},
 	},
 	welcome_to_bleh: {
-		// <br> is a line break
-		en: 'Welcome to {b}, thank you for installing!<br>You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3',
-		de: 'Willkommen bei {b}, danke für die Installation!<br>Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3',
-		es: '¡Bienvenido a {b}, gracias por instalar!<br>Puedes continuar con la instalación para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3',
-		it: 'Benvenuto in {b}, grazie per l’installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3',
-		pt: 'Bem-vindo ao {b}, obrigado por instalar!<br>Você pode seguir este rápido guia de configuração para começar, ou pular direto para seu perfil e descobrir tudo por conta própria <3',
-		sv: 'Välkommen till {b}, tack för att du har installerat!<br>Du kan fortsätta genom den här snabba setupen för att starta eller hoppa rakt till din profil och klura ut det helt själv <3',
-		ru: 'Добро пожаловать в {b}, спасибо за установку!<br>Вы можете пройти быструю первичную настройку или сразу перейти к своему профилю и разобраться во всем самостоятельно <3',
-		pl: 'Witaj w {b}, dziękuję za instalację!<br>Możesz przejść przez ten szybki kreator konfiguracji, aby rozpocząć, lub przejść od razu do swojego profilu i samodzielnie wszystko sprawdzić <3',
+		// {break} is a line break
+		en: 'Welcome to {b}, thank you for installing!{break}You can continue through this quick setup to get you started or skip right to your profile and figure it all out yourself <3',
+		de: 'Willkommen bei {b}, danke für die Installation!{break}Du kannst diesen schnellen Einrichtungsassistenten durchlaufen, um loszulegen, oder direkt zu deinem Profil springen und alles selbst herausfinden <3',
+		es: '¡Bienvenido a {b}, gracias por instalar!{break}Puedes continuar con la instalación para ayudarte a empezar o puedes saltar directamente a tu perfil y averiguar por ti mismo <3',
+		it: 'Benvenuto in {b}, grazie per l’installazione!{break}Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3',
+		pt: 'Bem-vindo ao {b}, obrigado por instalar!{break}Você pode seguir este rápido guia de configuração para começar, ou pular direto para seu perfil e descobrir tudo por conta própria <3',
+		sv: 'Välkommen till {b}, tack för att du har installerat!{break}Du kan fortsätta genom den här snabba setupen för att starta eller hoppa rakt till din profil och klura ut det helt själv <3',
+		ru: 'Добро пожаловать в {b}, спасибо за установку!{break}Вы можете пройти быструю первичную настройку или сразу перейти к своему профилю и разобраться во всем самостоятельно <3',
+		pl: 'Witaj w {b}, dziękuję za instalację!{break}Możesz przejść przez ten szybki kreator konfiguracji, aby rozpocząć, lub przejść od razu do swojego profilu i samodzielnie wszystko sprawdzić <3',
 	},
 	prev: {
 		// previous
@@ -7585,14 +7574,26 @@ export const trans = {
 		pl: 'Oferujemy wiele opcji, które pomogą Ci zarządzać biblioteką muzyczną.',
 	},
 	setup_end: {
-		en: 'That’s all for now, to configure your {b} installation in the future head to {a}the settings{/a} in your menu!',
-		de: 'Das war’s fürs Erste. Um deine {b}-Installation in Zukunft zu konfigurieren, gehe zu {a}den Einstellungen{/a} in deinem Menü!',
-		es: '¡Eso es todo por ahora, para modificar tu instalación de {b} en el futuro, ve a {a}la configuración{/a} en tu menú!',
-		it: 'È tutto per ora, per configurare la tua installazione di {b} in futuro vai alle {a}impostazioni{a} dal tuo menu!',
-		pt: 'Por enquanto isso é tudo, para configurar sua instalação do {b} futuramente, vá até {a}nas configurações{/a} no seu menu!',
-		sv: 'Det var allt just nu, för att konfigurera din {b}-installation i framtiden gå in på {a}inställningarna{/a} i menyn!',
-		ru: 'На этом пока всё; чтобы настроить вашу установку {b} в будущем, перейдите в {a}настройки{/a} в вашем меню!',
-		pl: 'To wszystko na teraz. Aby w przyszłości skonfigurować swoją instalację {b}, przejdź do {a}ustawień{/a} w menu!',
+		en: 'That’s all for now, to configure your {b} installation in the future head to {settings} in your menu!',
+		de: 'Das war’s fürs Erste. Um deine {b}-Installation in Zukunft zu konfigurieren, gehe zu {settings} in deinem Menü!',
+		es: '¡Eso es todo por ahora, para modificar tu instalación de {b} en el futuro, ve a {settings} en tu menú!',
+		it: 'È tutto per ora, per configurare la tua installazione di {b} in futuro vai alle {settings} dal tuo menu!',
+		pt: 'Por enquanto isso é tudo, para configurar sua instalação do {b} futuramente, vá até {settings} no seu menu!',
+		sv: 'Det var allt just nu, för att konfigurera din {b}-installation i framtiden gå in på {settings} i menyn!',
+		ru: 'На этом пока всё; чтобы настроить вашу установку {b} в будущем, перейдите в {settings} в вашем меню!',
+		pl: 'To wszystko na teraz. Aby w przyszłości skonfigurować swoją instalację {b}, przejdź do {settings} w menu!',
+
+		// sub-translation for 'settings' above
+		settings: {
+			en: 'the settings',
+			de: 'den Einstellungen',
+			es: 'la configuración',
+			it: 'impostazioni',
+			pt: 'nas configurações',
+			sv: 'inställningarna',
+			ru: 'настройки',
+			pl: 'ustawień',
+		},
 	},
 	seasonal_particles: {
 		name: {
@@ -7749,7 +7750,6 @@ export const trans = {
 		pt: 'Privacidade',
 		sv: 'Sekretess',
 		ru: 'Конфиденциальность',
-		pl: 'Prywatność',
 	},
 	recent_listening: {
 		name: {
@@ -8510,6 +8510,12 @@ export const trans = {
 		sv: 'Väntar på bilder',
 		ru: 'Ожидание изображений',
 		pl: 'Oczekiwanie na obrazy',
+	},
+	creating_collage_phase: {
+		en: 'Creating collage ({phase}), {progress}%',
+	},
+	collage_tip: {
+		en: 'Click the collage above or use the sidebar to download. Adjusting visual settings now will refresh faster.',
 	},
 	collage_title: {
 		name: {
@@ -10386,6 +10392,9 @@ export const trans = {
 		pl: 'Last.fm nie udało się załadować tego elementu',
 	},
 	last_scrobbled_replace: {
+		//
+		// DO NOT TRANSLATE
+		//
 		// dont translate this, its replaced
 		// literally word for word from the Last.fm text
 		// for use in code
@@ -10403,6 +10412,9 @@ export const trans = {
 		zh: '{u} 上次记录了...',
 	},
 	notification_replied_ctx: {
+		//
+		// DO NOT TRANSLATE
+		//
 		// notifications can include text with valuable info such as:
 		// and 7 others replied to your shout on
 		// this is searching for the word 'replied'
@@ -10752,6 +10764,7 @@ export const trans = {
 		},
 	},
 	leaving_site_checkbox: {
+		// v = url
 		en: 'Trust {v} links in the future',
 		de: '{v}-Links zukünftig vertrauen',
 		es: 'Confiar en los vínculos de {v} en el futuro',
@@ -11117,6 +11130,7 @@ export const trans = {
 		},
 	},
 	credits: {
+		// credit for a song/album/artist
 		en: 'Credits',
 		de: 'Credits',
 		es: 'Créditos',
@@ -11127,6 +11141,7 @@ export const trans = {
 		pl: 'Autorzy',
 	},
 	view_credits: {
+		// credit for a song/album/artist
 		en: 'View credits',
 		de: 'Credits ansehen',
 		es: 'Ver créditos',
@@ -11137,6 +11152,7 @@ export const trans = {
 		pl: 'Wyświetl autorów',
 	},
 	credits_for_value: {
+		// credit for a song/album/artist
 		en: 'Credits for {v}',
 		de: 'Credits für {v}',
 		es: 'Créditos para {v}',
@@ -11325,7 +11341,7 @@ export const trans = {
 		pl: 'Przetłumacz',
 	},
 	translation_key: {
-		// a key such as 'you_have_new_badges' above
+		// a key/identifier such as 'you_have_new_badges' above
 		en: 'Translation key',
 		de: 'Übersetzungsschlüssel',
 		es: 'Clave de traducción',
@@ -12180,13 +12196,13 @@ export const trans = {
 		pl: 'Napisane przez',
 	},
 	oracle_no_credits: {
-		en: 'nothing here... (๑/////๑ " )',
-		pt: 'nada aqui... (๑/////๑ " )',
-		de: 'hier gibt’s nichts zu sehen... (๑/////๑ " )',
-		es: 'Nada aquí... (๑/////๑ " )',
-		ru: 'ничего нет... (๑/////๑ " )',
-		it: 'Niente qui... (๑/////๑ " )',
-		pl: 'Nic tu nie ma... (๑/////๑ " )',
+		en: 'nothing here...',
+		pt: 'nada aqui...',
+		de: 'hier gibt’s nichts zu sehen...',
+		es: 'Nada aquí...',
+		ru: 'ничего нет...',
+		it: 'Niente qui...',
+		pl: 'Nic tu nie ma...',
 	},
 	born: {
 		en: 'Born',
@@ -12273,6 +12289,8 @@ export const trans = {
 		pl: 'Inni użytkownicy',
 	},
 	count_bar_right: {
+		// location of a play number
+		// either left or right
 		en: 'Text location',
 		pt: 'Posição do texto',
 		it: 'Posizione del testo',
@@ -12738,6 +12756,7 @@ export const trans = {
 	},
 	hover_to_view: {
 		// hover mouse
+		// used for listen leaderboards
 		en: 'Hover to view',
 		pt: 'Passe o mouse para visualizar',
 	},
@@ -12746,6 +12765,7 @@ export const trans = {
 		pt: 'Estilo colagem',
 	},
 	stack: {
+		// a collage style, stacks items behind eachother
 		en: 'Stack',
 		pt: 'Agrupar', //im not 100% sure on this cause idk the context of 'stack' but it should work on most cases -lagb2ck
 	},
@@ -12766,6 +12786,9 @@ export const trans = {
 		// used on profiles
 		en: 'Insight',
 		pt: 'Análise',
+	},
+	profile_summary_pie_chart: {
+		en: 'Show pie chart',
 	},
 } as const satisfies Record<string, any>;
 
