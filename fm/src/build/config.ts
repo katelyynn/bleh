@@ -15,16 +15,16 @@ export interface setting_instance {
 	css?: string;
 	default: setting_value;
 	type?:
-		| 'toggle'
-		| 'checkbox'
-		| 'range'
-		| 'select'
-		| 'radio'
-		| 'list'
-		| 'tabs'
-		| 'text'
-		| 'keybind'
-		| 'other';
+	| 'toggle'
+	| 'checkbox'
+	| 'range'
+	| 'select'
+	| 'radio'
+	| 'list'
+	| 'tabs'
+	| 'text'
+	| 'keybind'
+	| 'other';
 	title?: translation;
 	body?: translation;
 	incompatible?: Record<string, setting_value>;
@@ -394,6 +394,7 @@ export const settings_store: Record<string, setting_instance> = {
 		tags: [
 			'music',
 		],
+		require_reload: 'partial'
 	},
 	show_remaster_tags: {
 		default: true,

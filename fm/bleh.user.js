@@ -54153,7 +54153,8 @@ var bleh = (() => {
       body: trans.glacier_graphs.body,
       tags: [
         "music"
-      ]
+      ],
+      require_reload: "partial"
     },
     show_remaster_tags: {
       default: true,
@@ -93613,7 +93614,6 @@ var bleh = (() => {
 
   // src/components/track/bar.tsx
   function count_bar(bar) {
-    const season = page.state.seasons.current?.id || "none";
     const link = bar.querySelector(
       ".chartlist-count-bar-link"
     );
@@ -93624,8 +93624,9 @@ var bleh = (() => {
     const value = link.querySelector(
       ".chartlist-count-bar-value"
     );
-    bar.setAttribute("data-season", season);
     function update() {
+      const season = page.state.seasons.current?.id || "none";
+      bar.setAttribute("data-season", season);
       const v2 = useSettings.get("count_bar_style") == "minimal";
       bar.classList.toggle("v2", v2);
       link.classList.toggle("v2", v2);
@@ -93633,6 +93634,7 @@ var bleh = (() => {
       value?.classList.toggle("v2", v2);
     }
     useSettings.on("count_bar_style", update);
+    useSeasons.on(update);
     update();
   }
 
@@ -93830,9 +93832,8 @@ var bleh = (() => {
       });
       function smart_track(track, index3) {
         if (!track) return;
-        if (track.getAttribute("data-track-type")) return;
         if (track.classList[0] == "chartlist-row--interlist-ad") {
-          track.parentElement.removeChild(track);
+          track.remove();
           return;
         }
         track.style.setProperty("--delay", index3 * 0.04 + "s");
@@ -94034,7 +94035,7 @@ var bleh = (() => {
         }
         const album_link = track.querySelector(".chartlist-image a");
         const show_album_text = (is_active3 || settings.expand_tracks == "always") && settings.expand_tracks != "never" && useSettings.get("track_layout") == "column";
-        track.setAttribute("data-show-album-text", show_album_text);
+        track.setAttribute("data-show-album-text", String(show_album_text));
         const image_wrap = track.querySelector(".chartlist-image");
         let link;
         let image2;
@@ -94091,8 +94092,7 @@ var bleh = (() => {
             )
           );
           if (!song_artist_element && !is_user) {
-            song_artist_element = document.createElement("td");
-            song_artist_element.classList.add("chartlist-artist");
+            song_artist_element = /* @__PURE__ */ jsx("td", { class: "chartlist-artist" });
             track_info.appendChild(song_artist_element);
           }
           if (song_artist_element.textContent.replaceAll("+", " ").trim() === track_artist || song_artist_element.textContent.trim() === "") {
@@ -94881,10 +94881,10 @@ var bleh = (() => {
               /* @__PURE__ */ jsx("td", { class: ["chartlist-album", "custom-album-text"], children: /* @__PURE__ */ jsx("a", { href: link.getAttribute("href"), children: alt }) })
             );
           }
-          if (!settings.colourful_tracks && !settings.colourful_tracks_all) {
+          if (!useSettings.get("colourful_tracks") && !useSettings.get("colourful_tracks_all")) {
             return;
           }
-          if (!settings.colourful_tracks_all && !is_active3) return;
+          if (!useSettings.get("colourful_tracks_all") && !is_active3) return;
           image2.setAttribute("crossorigin", "anonymous");
           try {
             image2.onload = async () => {
