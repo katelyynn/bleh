@@ -803,14 +803,6 @@
 			display: block;
 			background: oklch(var(--chartlist-bar-bg, var(--b2) / 40%));
 			height: var(--bar-height);
-
-			--mask2: var(--interact-mask, none);
-			mask-image: var(--mask2) !important;
-			-webkit-mask-image: var(--mask2) !important;
-			mask-repeat: repeat !important;
-			-webkit-mask-repeat: repeat !important;
-			mask-size: contain !important;
-			-webkit-mask-size: contain !important;
 		}
 
 		&:hover {
@@ -852,8 +844,7 @@
 		transition-timing-function: var(--trans-function);
 
 		&.v2 {
-			background: linear-gradient(90deg, oklch(var(--l2-c-theme-switch)),
-					oklch(var(--l3-c)) 20%) !important;
+			background: transparent;
 			box-shadow: var(--bar-shadow), 0 2px 1px 0 oklch(var(--k4) / 60%), 0 2px 8px oklch(var(--h4) / 40%);
 			position: relative;
 			inset: unset !important;
@@ -861,6 +852,22 @@
 			height: var(--bar-height);
 			order: 1;
 			transition: none !important;
+
+			&:before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(90deg, oklch(var(--l2-c-theme-switch)),
+						oklch(var(--l3-c)) 20%) !important;
+
+				--mask2: var(--bar-loop-mask, none);
+				mask-image: var(--mask2) !important;
+				-webkit-mask-image: var(--mask2) !important;
+				mask-repeat: repeat-x !important;
+				-webkit-mask-repeat: repeat-x !important;
+				mask-size: contain !important;
+				-webkit-mask-size: contain !important;
+			}
 
 			&:after {
 				content: '';
@@ -975,6 +982,7 @@
 	display: none;
 }
 
+.chartlist-count-bar-slug:before,
 .chartlist-count-bar:before,
 .chartlist-count-bar,
 .chartlist-count-bar-slug {
