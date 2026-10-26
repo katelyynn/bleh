@@ -3,6 +3,9 @@
 }
 
 .artist-wordmark-image {
-	width: 160px;
+	width: 165px;
+	max-height: 50px;
+	object-fit: contain;
+	object-position: left center;
 	margin: 10px 0;
 }
