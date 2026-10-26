@@ -84,9 +84,8 @@ const bundle_css: esbuild.Plugin = {
 			});
 
 			return {
-				contents: `export default ${
-					JSON.stringify(result.outputFiles[0].text)
-				}`,
+				contents: `export default ${JSON.stringify(result.outputFiles[0].text)
+					}`,
 				loader: 'js',
 			};
 		});
@@ -150,21 +149,21 @@ if (process.argv[2] == 'serve') {
 	}
 } else {
 	build.built_on = new Date().toISOString();
-	await fs.writeFile(
+	fs.writeFileSync(
 		'./src/build/build.json',
 		JSON.stringify(build, null, '\t'),
 	);
 
 	await bundle(userscript);
 	const manifest = JSON.parse(
-		await fs.readFile('./ext/manifest.json'),
+		fs.readFileSync('./ext/manifest.json', 'utf8'),
 	);
 	manifest.name = build.brand;
 	manifest.version = build.build.split('.')
 		.map(part => parseInt(part, 10))
 		.join('.');
 	manifest.description = build.bio;
-	await fs.readFile(
+	fs.writeFileSync(
 		'./ext/manifest.json',
 		JSON.stringify(manifest, null, '\t'),
 	);

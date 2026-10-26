@@ -134076,7 +134076,7 @@ ${version2.build} (${version2.sku})`;
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://bleh.yuzu.pet/download",
-    built_on: "2026-10-02T17:12:51.723Z"
+    built_on: "2026-10-26T17:19:49.999Z"
   };
 
   // node_modules/.pnpm/chartjs-adapter-luxon@1.3.1_chart.js@4.5.1_luxon@3.7.2/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
