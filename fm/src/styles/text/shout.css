@@ -217,10 +217,6 @@
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
 
-	.shout-user-avatar-link {
-		display: none;
-	}
-
 	&:before {
 		--left: -41px;
 		--margin-top: -17px;
@@ -552,14 +548,22 @@
 	margin: unset;
 }
 
-.shout-user-avatar,
-.shout-user-avatar-link {
+.shout-user-avatar {
 	width: var(--shout-avatar-size);
 	height: var(--shout-avatar-size);
 	left: calc(-1 * (var(--shout-margin-left))) !important;
 	box-shadow: var(--interact-shadow);
 	border-radius: var(--avatar-radius);
 	display: flex !important;
+
+	position: relative;
+	inset: unset !important;
+
+	--icon-size: 20px;
+}
+
+.shout-user-avatar-link {
+	display: none;
 }
 
 .shout-avatar-action-opener {
@@ -567,13 +571,6 @@
 	top: calc(var(--shout-avatar-top) - 8px);
 	left: calc(-1 * (var(--shout-avatar-size) + 3px + 10px));
 	z-index: 20;
-}
-
-.shout-user-avatar {
-	position: relative;
-	inset: unset !important;
-
-	--icon-size: 20px;
 }
 
 .shout--deleted,
