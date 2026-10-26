@@ -46,7 +46,8 @@ export async function bleh_search() {
 		page.structure.main.removeChild(search_form);
 	}
 
-	page.name = (value != '') ? value : 'empty..';
+	page.sister = (value != '') ? value : 'empty..';
+	page.name = auth.name;
 
 	checkup_page_structure(false, content_top);
 	log('status is', 'page', 'info', page);
@@ -154,19 +155,16 @@ export async function bleh_search() {
 
 	tippy(explore, {
 		content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="artist" href="${root}user/${auth.name}/library/artists/search?query=${
-			sanitise(value)
-		}">
+            <a class="dropdown-menu-clickable-item" data-type="artist" href="${root}user/${auth.name}/library/artists/search?query=${sanitise(value)
+			}">
                 ${tl(trans.artists)}
             </a>
-            <a class="dropdown-menu-clickable-item" data-type="album" href="${root}user/${auth.name}/library/albums/search?query=${
-			sanitise(value)
-		}">
+            <a class="dropdown-menu-clickable-item" data-type="album" href="${root}user/${auth.name}/library/albums/search?query=${sanitise(value)
+			}">
                 ${tl(trans.albums)}
             </a>
-            <a class="dropdown-menu-clickable-item" data-type="track" href="${root}user/${auth.name}/library/tracks/search?query=${
-			sanitise(value)
-		}">
+            <a class="dropdown-menu-clickable-item" data-type="track" href="${root}user/${auth.name}/library/tracks/search?query=${sanitise(value)
+			}">
                 ${tl(trans.tracks)}
             </a>
         `,

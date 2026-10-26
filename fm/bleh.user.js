@@ -128747,7 +128747,8 @@ var bleh = (() => {
       site_search.focus();
       page.structure.main.removeChild(search_form);
     }
-    page.name = value != "" ? value : "empty..";
+    page.sister = value != "" ? value : "empty..";
+    page.name = auth.name;
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
