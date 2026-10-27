@@ -3,7 +3,7 @@
 }
 
 .artist-wordmark-image {
-	width: 165px;
+	max-width: 165px;
 	max-height: 50px;
 	object-fit: contain;
 	object-position: left center;
@@ -11,10 +11,16 @@
 	pointer-events: none;
 
 	&.is-long {
-		width: 280px;
+		max-width: 280px;
 		max-height: 60px;
 	}
 
 	user-select: none;
 	-webkit-user-drag: none;
+
+	&.prefer-smaller {
+		max-width: 120px;
+		max-height: 26px;
+		margin: 5px 0;
+	}
 }

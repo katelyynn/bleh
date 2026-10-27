@@ -36,10 +36,12 @@ export function retrieveWordmark(name: string) {
 
 interface WordmarkProps {
 	name: string;
+	small?: boolean;
 }
 
 export function Wordmark({
-	name
+	name,
+	small
 }: WordmarkProps) {
 	const wordmark = retrieveWordmark(name);
 
@@ -49,7 +51,7 @@ export function Wordmark({
 
 	return (
 		<div class='artist-wordmark'>
-			<img class={['artist-wordmark-image', long && 'is-long']} src={wordmark} alt={name} />
+			<img class={['artist-wordmark-image', long && 'is-long', small && 'prefer-smaller']} src={wordmark} alt={name} />
 		</div>
 	);
 }
