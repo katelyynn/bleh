@@ -15,7 +15,24 @@ export const validWordmarks: Record<string, string> = {
 	'glaive': 'glaive',
 	'sabrina carpenter': 'sabrina',
 	'playboi carti': 'carti',
-	'julie': 'julie'
+	'julie': 'julie',
+	'olivia rodrigo': 'olivia',
+	'chappell roan': 'chappell',
+	'tate mcrae': 'tate',
+	'harry styles': 'harry',
+	'jennie': 'jennie',
+	'tame impala': 'impala',
+	'bruno mars': 'bruno',
+	'jhené aiko': 'jheneaiko',
+	'justin bieber': 'justin',
+	'katseye': 'katseye',
+	'skepta': 'skepta',
+	'gunna': 'gunna',
+	'offset': 'offset',
+	'eminem': 'eminem',
+	'illit': 'illit',
+	'le sserafim': 'sserafim',
+	'bts': 'bts'
 }
 
 export const longWordmarks = [

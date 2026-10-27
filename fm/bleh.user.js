@@ -93286,7 +93286,24 @@ var bleh = (() => {
     "glaive": "glaive",
     "sabrina carpenter": "sabrina",
     "playboi carti": "carti",
-    "julie": "julie"
+    "julie": "julie",
+    "olivia rodrigo": "olivia",
+    "chappell roan": "chappell",
+    "tate mcrae": "tate",
+    "harry styles": "harry",
+    "jennie": "jennie",
+    "tame impala": "impala",
+    "bruno mars": "bruno",
+    "jhen\xE9 aiko": "jheneaiko",
+    "justin bieber": "justin",
+    "katseye": "katseye",
+    "skepta": "skepta",
+    "gunna": "gunna",
+    "offset": "offset",
+    "eminem": "eminem",
+    "illit": "illit",
+    "le sserafim": "sserafim",
+    "bts": "bts"
   };
   var longWordmarks = [
     "ariana",
