@@ -24,6 +24,8 @@ import { header_colour } from '@/components/page/colour';
 import { chart_top_tracks, chart_track } from '@/types/chart';
 import { error } from '@/types/api';
 import { romanise } from '@/build/tools';
+import { PageHeaderPosition } from '@/components/page/header';
+import { createRef } from 'jsx-dom';
 
 export function bleh_charts() {
 	if (page.type == 'explore_charts') {
@@ -37,38 +39,33 @@ export function bleh_charts() {
 	if (ff('aihara')) {
 		const new_nav = html.node`
             <div class="toolbar">
-                <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
-			ff('header_refresh') ? 'header-refresh' : ''
-		}">
+                <nav class="navlist secondary-nav navlist--more redesigned-navigation ${ff('header_refresh') ? 'header-refresh' : ''
+			}">
                     <ul class="navlist-items">
                         <li class="navlist-item secondary-nav-item secondary-nav-item--daily">
-                            <a href="${root}charts" class="secondary-nav-item-link ${
-			page.subpage == 'overview' ? 'secondary-nav-item-link--active' : ''
-		}">
+                            <a href="${root}charts" class="secondary-nav-item-link ${page.subpage == 'overview' ? 'secondary-nav-item-link--active' : ''
+			}">
                                 ${tl(trans.daily)}
                             </a>
                         </li>
                         <li class="navlist-item secondary-nav-item secondary-nav-item--weekly">
-                            <a href="${root}charts/weekly" class="secondary-nav-item-link ${
-			page.subpage == 'weekly' ? 'secondary-nav-item-link--active' : ''
-		}">
+                            <a href="${root}charts/weekly" class="secondary-nav-item-link ${page.subpage == 'weekly' ? 'secondary-nav-item-link--active' : ''
+			}">
                                 ${tl(trans.weekly)}
                             </a>
                         </li>
                         <li class="navlist-item secondary-nav-item secondary-nav-item--explore">
-                            <a href="${root}charts/explore" class="secondary-nav-item-link ${
-			page.type == 'explore_charts'
+                            <a href="${root}charts/explore" class="secondary-nav-item-link ${page.type == 'explore_charts'
 				? 'secondary-nav-item-link--active'
 				: ''
-		}">
+			}">
                                 ${tl(trans.explore)}
                                 ${new_indicator()}
                             </a>
                         </li>
                         <li class="navlist-item secondary-nav-item secondary-nav-item--geo">
-                            <a href="${root}charts/geo" class="secondary-nav-item-link ${
-			page.type == 'geo_charts' ? 'secondary-nav-item-link--active' : ''
-		}">
+                            <a href="${root}charts/geo" class="secondary-nav-item-link ${page.type == 'geo_charts' ? 'secondary-nav-item-link--active' : ''
+			}">
                                 ${tl(trans.country)}
                                 ${new_indicator()}
                             </a>
@@ -149,15 +146,14 @@ export function bleh_charts() {
             </div>
             <div class="middle">
                 <div class="sub-text">${tl(trans.charts_for)}</div>
-                <h2 class="chart-heading">${
-		DateTime.now().toLocaleString(DateTime.DATE_FULL)
-	}</h2>
+                <h2 class="chart-heading">${DateTime.now().toLocaleString(DateTime.DATE_FULL)
+		}</h2>
             </div>
             <div class="right">
                 <div class="view-buttons blend blend-v2">
                     <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
-		el,
-	) => settings_btn = el}>
+			el,
+		) => settings_btn = el}>
                         ${tl(trans.settings)}
                     </button>
                 </div>
@@ -212,9 +208,9 @@ export function bleh_charts() {
 		items.forEach((item, item_index) => {
 			let list_item;
 
-			const image = item.querySelector('.globalchart-image img');
-			const rank = item.querySelector('.globalchart-rank');
-			const name = item.querySelector('.globalchart-name a');
+			const image = item.querySelector('.globalchart-image img') as HTMLImageElement;
+			const rank = item.querySelector('.globalchart-rank') as HTMLElement;
+			const name = item.querySelector('.globalchart-name a') as HTMLAnchorElement;
 
 			const link = name.getAttribute('href');
 
@@ -226,73 +222,59 @@ export function bleh_charts() {
 				),
 			);
 
-			let link_block;
+			const link_block = createRef();
 
 			if (index == 1) {
 				name.textContent = correct_artist(name.textContent);
 
-				list_item = html.node`
-                    <li class="music-bookmarks-artists-item-wrap charts-list-item">
-                        <div class="music-bookmarks-artists-item charts-list-item-inner">
-                            <div class="charts-list-rank">${rank.textContent.trim()}</div>
-                            <h3 class="music-bookmarks-artists-item-name">
-                                ${name}
-                            </h3>
-                            <div class="media-item">
-                                <span class="music-bookmarks-albums-item-image cover-art">
-                                    ${image}
-                                </span>
-                                <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">
-                                        <span class="rank-overlay-text">${rank.textContent}</span>
-                                        <span class="rank-overlay-back">${rank.textContent}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="link-block-cover-link" ref=${(el) =>
-					link_block = el} href=${link}></a>
-                        </div>
-                    </li>
-                `;
+				list_item = (
+					<li class={['music-bookmarks-artists-item-wrap', 'charts-list-item']}>
+						<div class={['music-bookmarks-artists-item', 'charts-list-item-inner']}>
+							<h3 class='music-bookmarks-artists-item-name'>
+								{name}
+							</h3>
+							<div class='media-item'>
+								<span class={['music-bookmarks-albums-item-image', 'cover-art']}>
+									{image}
+								</span>
+								<PageHeaderPosition text={rank.textContent.trim()} />
+							</div>
+							<a class='link-block-cover-link' href={link} ref={link_block} />
+						</div>
+					</li>
+				);
 			} else {
 				const artist = item.querySelector(
 					'.globalchart-track-artist-name a',
-				);
+				) as HTMLAnchorElement;
 				artist.textContent = correct_artist(artist.textContent);
 				name.textContent = correct_item_by_artist(
 					name.textContent,
 					artist.textContent,
 				);
 
-				list_item = html.node`
-                    <li class="music-bookmarks-albums-item-wrap charts-list-item">
-                        <div class="music-bookmarks-albums-item charts-list-item-inner">
-                            <div class="charts-list-rank">${rank.textContent.trim()}</div>
-                            <h3 class="music-bookmarks-albums-item-name">
-                                ${name}
-                            </h3>
-                            <p class="music-bookmarks-albums-item-artist">
-                                ${artist}
-                            </p>
-                            <div class="media-item">
-                                <span class="music-bookmarks-albums-item-image cover-art">
-                                    ${image}
-                                </span>
-                                <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">
-                                        <span class="rank-overlay-text">${rank.textContent}</span>
-                                        <span class="rank-overlay-back">${rank.textContent}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="link-block-cover-link" ref=${(el) =>
-					link_block = el} href=${link}></a>
-                        </div>
-                    </li>
-                `;
+				list_item = (
+					<li class={['music-bookmarks-artists-item-wrap', 'charts-list-item']}>
+						<div class={['music-bookmarks-artists-item', 'charts-list-item-inner']}>
+							<h3 class='music-bookmarks-artists-item-name'>
+								{name}
+							</h3>
+							<p class='music-bookmarks-albums-item-artist'>
+								{artist}
+							</p>
+							<div class='media-item'>
+								<span class={['music-bookmarks-albums-item-image', 'cover-art']}>
+									{image}
+								</span>
+								<PageHeaderPosition text={rank.textContent.trim()} />
+							</div>
+							<a class='link-block-cover-link' href={link} ref={link_block} />
+						</div>
+					</li>
+				);
 			}
 
-			bind_link_block(link_block, list_item);
+			bind_link_block(link_block.current, list_item);
 
 			list.appendChild(list_item);
 		});
@@ -302,9 +284,9 @@ export function bleh_charts() {
 		new_panel.appendChild(chart_row);
 	});
 
-	page.structure.main.insertBefore(
+	page.structure.main!.insertBefore(
 		new_panel,
-		page.structure.main.firstElementChild,
+		page.structure.main!.firstElementChild,
 	);
 }
 
@@ -326,8 +308,8 @@ function bleh_explore_charts() {
             <div class="middle">
                 <div class="sub-text">${tl(trans.charts_for)}</div>
                 <h2 class="chart-heading">${{
-		html: tl(trans.hot_100, { b: '<i>bleh</i>' }),
-	}}${beta_indicator()}</h2>
+			html: tl(trans.hot_100, { b: '<i>bleh</i>' }),
+		}}${beta_indicator()}</h2>
             </div>
             <div class="right">
 
@@ -347,8 +329,8 @@ function bleh_explore_charts() {
 		html`
 			<div class="loading-data-container">
 				<div class="loading-data-text">${tl(
-					trans.gathering_plays,
-				)}</div>
+			trans.gathering_plays,
+		)}</div>
 			</div>
 		`,
 	);
@@ -388,8 +370,8 @@ function bleh_explore_charts() {
 						</thead>
 						<tbody>
 					        ${data.tracks.track.map((track, index) =>
-						chart_item(track, index)
-					)}
+					chart_item(track, index)
+				)}
 					    </tbody>
 					</table>
 				`,
@@ -399,27 +381,22 @@ function bleh_explore_charts() {
 	function chart_item(track: chart_track, index: number) {
 		return html.node`
             <tr class="weeklychart-item">
-                <td class="weeklychart-rank weeklychart-rank-bigger">${
-			index + 1
-		}</td>
+                <td class="weeklychart-rank weeklychart-rank-bigger">${index + 1
+			}</td>
                 <td class="weeklychart-track-info">
                     <div class="weeklychart-track-name">
-                        <a href=${track.url}>${
-			romanise(correct_item_by_artist(track.name, track.artist.name))
-		}</a>
+                        <a href=${track.url}>${romanise(correct_item_by_artist(track.name, track.artist.name))
+			}</a>
                     </div>
                     <div class="weeklychart-track-artist">
-                        <a href=${track.artist.url}>${
-			romanise(correct_artist(track.artist.name))
-		}</a>
+                        <a href=${track.artist.url}>${romanise(correct_artist(track.artist.name))
+			}</a>
                     </div>
                 </td>
-                <td class="weeklychart-listeners">${
-			Number(track.listeners).toLocaleString(lang)
-		}</td>
-                <td class="weeklychart-scrobblers">${
-			Number(track.playcount).toLocaleString(lang)
-		}</td>
+                <td class="weeklychart-listeners">${Number(track.listeners).toLocaleString(lang)
+			}</td>
+                <td class="weeklychart-scrobblers">${Number(track.playcount).toLocaleString(lang)
+			}</td>
             </tr>
         `;
 	}
@@ -528,8 +505,8 @@ function bleh_geo_charts() {
 		html`
 			<div class="loading-data-container">
 				<div class="loading-data-text">${tl(
-					trans.gathering_plays,
-				)}</div>
+			trans.gathering_plays,
+		)}</div>
 			</div>
 		`,
 	);

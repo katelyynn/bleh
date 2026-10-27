@@ -70,7 +70,9 @@ export const longWordmarks = [
 	'wallen',
 	'icespice',
 	'thug',
-	'cactusjack'
+	'cactusjack',
+	'scott',
+	'sserafim'
 ]
 
 export function retrieveWordmark(name: string) {
