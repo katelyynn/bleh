@@ -6337,7 +6337,7 @@ export const trans = {
 			string: {
 				en: '***slanted but bold***',
 				de: '***Fett UND kursiv gleichzeitig!***',
-				es: '**inclinado pero en negrita***',
+				es: '***inclinado pero en negrita***',
 				it: '***corsivo, ma in grassetto***',
 				pt: '***inclinado, mas em negrito***',
 				sv: '***fet och kursiv samtidigt***',
