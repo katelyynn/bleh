@@ -55,10 +55,10 @@ export function accessibility() {
 				</PanelHead>
 				<div class={['inner-preview', 'pad', 'flex']} ref={wordmarks} />
 				<SettingGroup>
-					<SettingSwitch bind='display_name_styles' />
 					<SettingSwitch bind='artist_wordmarks' />
 				</SettingGroup>
 				<SettingGroup>
+					<SettingSwitch bind='display_name_styles' />
 					<SettingSwitch bind='underline_links' />
 					<SettingSwitch bind='accessible_name_colours' />
 				</SettingGroup>

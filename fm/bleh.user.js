@@ -120608,11 +120608,9 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("section", { class: "bleh--panel", children: [
           /* @__PURE__ */ jsx(PanelHead, { icon: icons.text, children: tl2(trans.text) }),
           /* @__PURE__ */ jsx("div", { class: ["inner-preview", "pad", "flex"], ref: wordmarks }),
+          /* @__PURE__ */ jsx(SettingGroup, { children: /* @__PURE__ */ jsx(SettingSwitch, { bind: "artist_wordmarks" }) }),
           /* @__PURE__ */ jsx(SettingGroup, { children: [
             /* @__PURE__ */ jsx(SettingSwitch, { bind: "display_name_styles" }),
-            /* @__PURE__ */ jsx(SettingSwitch, { bind: "artist_wordmarks" })
-          ] }),
-          /* @__PURE__ */ jsx(SettingGroup, { children: [
             /* @__PURE__ */ jsx(SettingSwitch, { bind: "underline_links" }),
             /* @__PURE__ */ jsx(SettingSwitch, { bind: "accessible_name_colours" })
           ] })
