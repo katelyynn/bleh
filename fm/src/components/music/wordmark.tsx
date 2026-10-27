@@ -11,12 +11,26 @@ export const validWordmarks: Record<string, string> = {
 	'nirvana': 'nirvana',
 	'slayyyter': 'slayyyter',
 	'taylor swift': 'taylor',
-	'tiffany day': 'tiff'
+	'tiffany day': 'tiff',
+	'glaive': 'glaive',
+	'sabrina carpenter': 'sabrina',
+	'playboi carti': 'carti',
+	'julie': 'julie'
 }
+
+export const longWordmarks = [
+	'ariana',
+	'jcole',
+	'sabrina',
+	'carti',
+	'slayyyter',
+	'denzel',
+	'julie'
+]
 
 export function retrieveWordmark(name: string) {
 	if (name.toLowerCase() in validWordmarks) {
-		return `https://katelyynn.github.io/artist-wordmarks/${validWordmarks[name.toLowerCase()]}.webp`;
+		return `https://katelyynn.github.io/artist-wordmarks/${validWordmarks[name.toLowerCase()]}.webp?2`;
 	}
 }
 
@@ -31,9 +45,11 @@ export function Wordmark({
 
 	if (!wordmark) return name;
 
+	const long = longWordmarks.includes(validWordmarks[name.toLowerCase()]);
+
 	return (
 		<div class='artist-wordmark'>
-			<img class='artist-wordmark-image' src={wordmark} alt={name} />
+			<img class={['artist-wordmark-image', long && 'is-long']} src={wordmark} alt={name} />
 		</div>
 	);
 }

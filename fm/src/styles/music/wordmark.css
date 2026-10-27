@@ -8,4 +8,9 @@
 	object-fit: contain;
 	object-position: left center;
 	margin: 10px 0;
+
+	&.is-long {
+		width: 280px;
+		max-height: 65px;
+	}
 }
