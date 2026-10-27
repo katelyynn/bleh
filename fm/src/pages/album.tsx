@@ -151,6 +151,7 @@ export function bleh_albums() {
 						paint={useSettings.get('hue_from_album') as boolean}
 					/>
 				}
+				position={position?.textContent}
 			>
 				<PageHeaderTitle>
 					{title}
@@ -158,9 +159,6 @@ export function bleh_albums() {
 				<PageHeaderArtist type='album'>
 					{artist}
 				</PageHeaderArtist>
-				{position && (
-					<PageHeaderPosition text={position.textContent} />
-				)}
 			</PageHeader>
 		);
 

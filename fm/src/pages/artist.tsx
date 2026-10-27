@@ -166,13 +166,11 @@ export function bleh_artists() {
 					/>
 				}
 				combined={page.multi}
+				position={position?.textContent}
 			>
 				<PageHeaderTitle>
 					{title}
 				</PageHeaderTitle>
-				{position && (
-					<PageHeaderPosition text={position.textContent} />
-				)}
 			</PageHeader>
 		);
 

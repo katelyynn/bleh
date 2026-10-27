@@ -14,6 +14,7 @@ import { Icon } from '@/components/shared/icon.tsx';
 import { useSettings } from '@/page.tsx';
 import { ff } from '@/components/settings/sku.ts';
 import { page, root } from '@/build/page.ts';
+import { hover_tooltip, Tooltip } from '../shared/tooltips';
 
 interface PageHeaderProps {
 	icon?: string;
@@ -21,6 +22,7 @@ interface PageHeaderProps {
 	combined?: boolean;
 	name?: ReactNode;
 	avatar?: ReactNode;
+	position?: string;
 	children?: ReactNode;
 	extra?: ReactNode;
 }
@@ -35,6 +37,7 @@ export function PageHeader({
 	combined,
 	name,
 	avatar,
+	position,
 	children,
 	extra,
 }: PageHeaderProps) {
@@ -56,6 +59,9 @@ export function PageHeader({
 				>
 					{avatar}
 					{['album', 'track'].includes(type) && <PageHeaderDisc />}
+					{position && (
+						<PageHeaderPosition text={position} />
+					)}
 				</div>
 			)}
 			{icon && <PageHeaderIcon name={icon} />}
@@ -194,10 +200,41 @@ interface PageHeaderPositionProps {
 export function PageHeaderPosition({
 	text
 }: PageHeaderPositionProps) {
-	return (
+	const val = text.trim().replace('#', '');
+
+	const elem = (
 		<a class='chart-position' href={`${root}charts`}>
-			{tl(trans.chart_position, { v: text.trim() })}
+			<span class='chart-position-hash'>
+				#
+			</span>
+			<span class='chart-position-number'>
+				{val.split('').map(num => (
+					<PositionNumber number={Number(num)} />
+				))}
+			</span>
 		</a>
+	);
+
+	hover_tooltip(
+		elem,
+		<Tooltip>{tl(trans.chart_position, { v: `#${val}` })}</Tooltip>
+	);
+
+
+	return elem;
+}
+
+interface PositionNumberProps {
+	number: number;
+}
+
+export function PositionNumber({
+	number
+}: PositionNumberProps) {
+	return (
+		<span class={['position-number', 'colourful']} data-number={String(number)}>
+			{number}
+		</span>
 	)
 }
 

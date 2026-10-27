@@ -109,6 +109,7 @@ import { OracleCredits } from '@/components/oracle/credits';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
 import { validWordmarks, Wordmark } from '@/components/music/wordmark';
+import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1604,6 +1605,32 @@ export function mualani() {
 								<Wordmark name={val} />
 							);
 						}} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='chart'>
+				<DemoGrid>
+					<DemoItem label='Position'>
+						<PageHeaderPosition text='#30' />
+						<PageHeaderPosition text='#1' />
+						<PageHeaderPosition text='#2' />
+						<PageHeaderPosition text='#181' />
+						<PageHeaderPosition text='#150' />
+						<PageHeaderPosition text='#123' />
+						<PageHeaderPosition text='#65' />
+						<PageHeaderPosition text='#97' />
+					</DemoItem>
+					<DemoItem label='PositionNumber'>
+						<PositionNumber number={0} />
+						<PositionNumber number={1} />
+						<PositionNumber number={2} />
+						<PositionNumber number={3} />
+						<PositionNumber number={4} />
+						<PositionNumber number={5} />
+						<PositionNumber number={6} />
+						<PositionNumber number={7} />
+						<PositionNumber number={8} />
+						<PositionNumber number={9} />
 					</DemoItem>
 				</DemoGrid>
 			</section>
