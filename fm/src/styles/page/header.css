@@ -779,30 +779,47 @@
 	gap: 0;
 
 	--w: 44px;
-	--offset: 8px;
+	--offset: 0px;
 	aspect-ratio: 1 / 1;
 	width: var(--w);
 	border-radius: 50px;
-
-	background: oklch(var(--b6));
 	color: oklch(var(--l3-c));
 
 	&:after {
 		display: none;
 	}
 
+	scale: 1.5;
+
 	.page-header-avatar-list>& {
 		position: absolute;
 
-		top: calc(-1 * var(--offset));
+		top: -6px;
 		left: calc(var(--page-header-avatar-size) - (var(--w) / 2) + var(--offset));
 	}
 
 	rotate: 10deg;
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 16px 12px 12px 12px;
+		display: block;
+		background: oklch(var(--b6));
+
+		rotate: -20deg;
+	}
 }
 
 .chart-position-hash {
-	opacity: 0.7;
+	color: #fff;
+	font-weight: 900;
+
+	text-shadow: 1px 1px 0 oklch(var(--b6)), 1px -1px 0 oklch(var(--b6));
+
+	z-index: 10;
+
+	rotate: -22deg;
 }
 
 .chart-position-number {
@@ -820,6 +837,39 @@
 	line-height: 22px;
 	height: fit-content;
 	position: relative;
+
+	&[data-number="0"] {
+		--b: #8C8F97;
+		font-family: Single Day, var(--font);
+		background: transparent;
+		color: #fff;
+		padding: 0 1px;
+		font-size: 14px;
+		line-height: 18px;
+		height: 16px;
+		rotate: 5deg;
+		margin-left: 1px;
+
+		transform: scaleY(2);
+
+		&:before {
+			content: '0';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '0';
+			position: absolute;
+			display: block;
+			inset: 0;
+			text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
+		}
+	}
 
 	&[data-number="1"] {
 		--b: #9B659E;
@@ -851,7 +901,7 @@
 	}
 
 	&[data-number="2"] {
-		--b: #C1B5AE;
+		--b: #A59287;
 		font-family: Crimson Text, var(--font);
 		background: transparent;
 		color: #F3EF9A;
@@ -889,6 +939,7 @@
 		rotate: -5deg;
 		outline: 1px solid #fff;
 		box-shadow: 0 0 3px #000;
+		margin-left: 1px;
 	}
 
 	&[data-number="4"] {
@@ -911,6 +962,134 @@
 
 		&:after {
 			content: '4';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
+	}
+
+	&[data-number="8"] {
+		--b: #E1DDCC;
+		font-family: Love Ya Like A Sister, var(--font);
+		background: transparent;
+		color: #556B38;
+		line-height: 18px;
+		font-weight: 900;
+		margin-left: -1px;
+
+		&:before {
+			content: '8';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 3px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '8';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
+	}
+
+	&[data-number="9"] {
+		--b: #DCA2AA;
+		font-family: Rakkas, var(--font);
+		background: transparent;
+		color: #AABBC3;
+		line-height: 18px;
+		font-weight: 400;
+		margin-left: -1px;
+		rotate: -3deg;
+
+		&:before {
+			content: '9';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 5px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '9';
+			position: absolute;
+			display: block;
+			inset: 0;
+			text-shadow: 1px -1px 0 #2E3D95, 2px -1px 0 #2E3D95, 1px 0 0 #2E3D95;
+		}
+	}
+
+	&[data-number="7"] {
+		--b: #B5CBD1;
+		font-family: Bodoni Moda, var(--font);
+		background: transparent;
+		color: #902F35;
+		line-height: 18px;
+		font-weight: 400;
+		margin-left: -1px;
+
+		&:before {
+			content: '7';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '7';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
+	}
+
+	&[data-number="5"] {
+		font-family: Rokkitt, var(--font);
+		background: #F6D155;
+		color: #262618;
+		line-height: 14px;
+		font-weight: 900;
+		width: 12px;
+		height: 14px;
+
+		padding-top: 2px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		outline: 1px solid #fff;
+	}
+
+	&[data-number="6"] {
+		--b: #8A271B;
+		font-family: UnifrakturCook, var(--font);
+		background: transparent;
+		color: #F1CDD5;
+		line-height: 18px;
+		font-weight: 400;
+		margin-left: -1px;
+		margin-right: 1px;
+
+		&:before {
+			content: '6';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '6';
 			position: absolute;
 			display: block;
 			inset: 0;

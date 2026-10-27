@@ -215,11 +215,10 @@ export function PageHeaderPosition({
 		</a>
 	);
 
-	hover_tooltip(
+	/*hover_tooltip(
 		elem,
 		<Tooltip>{tl(trans.chart_position, { v: `#${val}` })}</Tooltip>
-	);
-
+	);*/
 
 	return elem;
 }
