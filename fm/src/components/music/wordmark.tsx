@@ -36,7 +36,18 @@ export const validWordmarks: Record<string, string> = {
 	'le sserafim': 'sserafim',
 	'bts': 'bts',
 	'lisa': 'lisa',
-	'ninajirachi': 'ninajirachi'
+	'ninajirachi': 'ninajirachi',
+	'a$ap rocky': 'rocky',
+	'21 savage': '21',
+	'billie eilish': 'billie',
+	'miley cyrus': 'miley',
+	'tyla': 'tyla',
+	'morgan wallen': 'wallen',
+	'ice spice': 'icespice',
+	'baby keem': 'keem',
+	'dababy': 'dababy',
+	'young thug': 'thug',
+	'dave': 'dave'
 }
 
 export const longWordmarks = [
@@ -50,7 +61,8 @@ export const longWordmarks = [
 	'justin',
 	'harry',
 	'chappell',
-	'olivia'
+	'olivia',
+	'billie'
 ]
 
 export function retrieveWordmark(name: string) {
