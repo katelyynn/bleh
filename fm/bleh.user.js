@@ -93343,7 +93343,8 @@ var bleh = (() => {
     "dababy": "dababy",
     "young thug": "thug",
     "dave": "dave",
-    "travi$ scott": "scott"
+    "travi$ scott": "scott",
+    "beabadoobee": "bea"
   };
   var longWordmarks = [
     "ariana",
