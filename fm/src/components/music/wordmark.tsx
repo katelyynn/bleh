@@ -25,7 +25,8 @@ export const longWordmarks = [
 	'carti',
 	'slayyyter',
 	'denzel',
-	'julie'
+	'julie',
+	'camila'
 ]
 
 export function retrieveWordmark(name: string) {

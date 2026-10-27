@@ -32,5 +32,6 @@
 	flex-basis: 100%;
 
 	background: oklch(var(--b6));
-	height: 70px;
+	height: 100px;
+	padding: 20px 0;
 }
