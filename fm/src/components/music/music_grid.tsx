@@ -286,6 +286,10 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 				name.replaceChildren(
 					<Wordmark name={name.textContent} small />
 				);
+			} else {
+				/*name.replaceChildren(
+					<Wordmark name={name.textContent} smallest />
+				);*/
 			}
 		} else {
 			artist = grid.querySelector('.grid-items-item-aux-block');

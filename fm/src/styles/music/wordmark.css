@@ -4,7 +4,7 @@
 
 .artist-wordmark-image {
 	max-width: 165px;
-	max-height: 50px;
+	max-height: 45px;
 	object-fit: contain;
 	object-position: left center;
 	margin: 10px 0;
@@ -19,9 +19,30 @@
 	-webkit-user-drag: none;
 
 	&.prefer-smaller {
-		max-width: 120px;
-		max-height: 26px;
-		margin: 5px 0;
+		max-width: 130px !important;
+		max-height: 26px !important;
+		margin: 5px 0 !important;
+
+		&.is-long {
+			max-width: 155px !important;
+			max-height: 44px !important;
+		}
+	}
+
+	&.prefer-smallest {
+		max-width: 100px !important;
+		max-height: 18px !important;
+		margin: 4px 0 !important;
+
+		&.is-long {
+			max-width: 150px !important;
+			max-height: 40px !important;
+		}
+	}
+
+	&.prefer-smaller,
+	&.prefer-smallest {
+		filter: brightness(150%) contrast(110%);
 	}
 }
 

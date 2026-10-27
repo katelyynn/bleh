@@ -32,7 +32,9 @@ export const validWordmarks: Record<string, string> = {
 	'eminem': 'eminem',
 	'illit': 'illit',
 	'le sserafim': 'sserafim',
-	'bts': 'bts'
+	'bts': 'bts',
+	'lisa': 'lisa',
+	'ninajirachi': 'ninajirachi'
 }
 
 export const longWordmarks = [
@@ -40,10 +42,13 @@ export const longWordmarks = [
 	'jcole',
 	'sabrina',
 	'carti',
-	'slayyyter',
 	'denzel',
 	'julie',
-	'camila'
+	'camila',
+	'justin',
+	'harry',
+	'chappell',
+	'olivia'
 ]
 
 export function retrieveWordmark(name: string) {
@@ -55,11 +60,13 @@ export function retrieveWordmark(name: string) {
 interface WordmarkProps {
 	name: string;
 	small?: boolean;
+	smallest?: boolean;
 }
 
 export function Wordmark({
 	name,
-	small
+	small,
+	smallest
 }: WordmarkProps) {
 	const wordmark = retrieveWordmark(name);
 
@@ -68,8 +75,8 @@ export function Wordmark({
 	const long = longWordmarks.includes(validWordmarks[name.toLowerCase()]);
 
 	return (
-		<div class='artist-wordmark'>
-			<img class={['artist-wordmark-image', long && 'is-long', small && 'prefer-smaller']} src={wordmark} alt={name} />
-		</div>
+		<span class='artist-wordmark'>
+			<img class={['artist-wordmark-image', long && 'is-long', small && 'prefer-smaller', smallest && 'prefer-smallest']} src={wordmark} alt={name} />
+		</span>
 	);
 }
