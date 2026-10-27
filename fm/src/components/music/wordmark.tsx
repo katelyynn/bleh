@@ -48,7 +48,6 @@ export const validWordmarks: Record<string, string> = {
 	'dababy': 'dababy',
 	'young thug': 'thug',
 	'dave': 'dave',
-	'travis scott': 'cactusjack',
 	'travi$ scott': 'scott'
 }
 
@@ -69,7 +68,8 @@ export const longWordmarks = [
 	'tyla',
 	'wallen',
 	'icespice',
-	'thug'
+	'thug',
+	'cactusjack'
 ]
 
 export function retrieveWordmark(name: string) {

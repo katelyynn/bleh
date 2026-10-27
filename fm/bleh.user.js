@@ -93331,7 +93331,6 @@ var bleh = (() => {
     "dababy": "dababy",
     "young thug": "thug",
     "dave": "dave",
-    "travis scott": "cactusjack",
     "travi$ scott": "scott"
   };
   var longWordmarks = [
@@ -93351,7 +93350,8 @@ var bleh = (() => {
     "tyla",
     "wallen",
     "icespice",
-    "thug"
+    "thug",
+    "cactusjack"
   ];
   function retrieveWordmark(name) {
     if (name.toLowerCase() in validWordmarks) {
