@@ -1154,4 +1154,10 @@ export const settings_store: Record<string, setting_instance> = {
 		default: false,
 		title: trans.profile_summary_pie_chart,
 	},
+	artist_wordmarks: {
+		default: true,
+		title: trans.artist_wordmarks.name,
+		body: trans.artist_wordmarks.body,
+		new_release: true
+	}
 };

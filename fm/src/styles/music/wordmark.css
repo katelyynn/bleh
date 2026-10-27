@@ -46,6 +46,23 @@
 	}
 }
 
+.sample-wordmarks {
+	display: flex;
+	gap: 30px;
+}
+
+.sample-wordmark-title {
+	color: oklch(var(--c1));
+	font-size: 22px;
+	line-height: 26px;
+	font-weight: var(--font-weight-bold);
+
+	height: 50px;
+
+	display: flex;
+	align-items: center;
+}
+
 .wordmarks-here {
 	display: flex;
 	justify-content: center;

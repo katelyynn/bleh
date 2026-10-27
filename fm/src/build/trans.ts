@@ -12794,6 +12794,14 @@ export const trans = {
 		// shown on artist/album pages
 		// v = the number placement
 		en: '#{v} in the world'
+	},
+	artist_wordmarks: {
+		name: {
+			en: 'Show stylised names for some artists'
+		},
+		body: {
+			en: 'Adds personalisation to each page, sourced from Apple Music and official websites'
+		}
 	}
 } as const satisfies Record<string, any>;
 

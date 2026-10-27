@@ -1,3 +1,5 @@
+import { useSettings } from "@/page";
+
 export const validWordmarks: Record<string, string> = {
 	'ariana grande': 'ariana',
 	'brakence': 'brakence',
@@ -69,8 +71,9 @@ export function Wordmark({
 	smallest
 }: WordmarkProps) {
 	const wordmark = retrieveWordmark(name);
+	const enabled = useSettings.get('artist_wordmarks');
 
-	if (!wordmark) return name;
+	if (!wordmark || !enabled) return name;
 
 	const long = longWordmarks.includes(validWordmarks[name.toLowerCase()]);
 
