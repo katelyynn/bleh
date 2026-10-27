@@ -12,7 +12,7 @@
 
 	&.is-long {
 		max-width: 280px;
-		max-height: 60px;
+		max-height: 38px;
 	}
 
 	user-select: none;
