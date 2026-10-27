@@ -956,7 +956,7 @@
 			display: block;
 			inset: 0;
 			color: var(--b);
-			-webkit-text-stroke: 8px var(--b);
+			-webkit-text-stroke: 5px var(--b);
 			z-index: 0;
 		}
 
