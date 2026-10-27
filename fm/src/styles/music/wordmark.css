@@ -24,3 +24,13 @@
 		margin: 5px 0;
 	}
 }
+
+.wordmarks-here {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-basis: 100%;
+
+	background: oklch(var(--b6));
+	height: 70px;
+}

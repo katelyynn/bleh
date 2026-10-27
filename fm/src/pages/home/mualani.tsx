@@ -40,7 +40,7 @@ import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { Select } from '@/components/select/select.tsx';
+import { Select, SelectOption } from '@/components/select/select.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
@@ -108,6 +108,7 @@ import { HeatmapDates } from '@/components/date/heatmap';
 import { OracleCredits } from '@/components/oracle/credits';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
+import { validWordmarks, Wordmark } from '@/components/music/wordmark';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -224,6 +225,8 @@ export function mualani() {
 
 	const c = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 	const avi = c.evangelicgirl.avatar;
+
+	const wordmarks = createRef();
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -1592,6 +1595,18 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section id='wordmark'>
+				<DemoGrid>
+					<DemoItem label='Wordmark'>
+						<div class='wordmarks-here' ref={wordmarks} />
+						<Select values={getWordmarks()} onChange={(val) => {
+							wordmarks.current.replaceChildren(
+								<Wordmark name={val} />
+							);
+						}} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
 
@@ -1930,4 +1945,18 @@ function DemoItem({ children, label }: { children: ReactNode; label: string }) {
 			</div>
 		</div>
 	);
+}
+
+function getWordmarks() {
+	const list = validWordmarks;
+	const new_list: SelectOption[] = [];
+
+	Object.keys(list).forEach((val) => {
+		new_list.push({
+			value: val,
+			text: val
+		});
+	});
+
+	return new_list;
 }
