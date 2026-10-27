@@ -4,7 +4,7 @@
 
 .artist-wordmark-image {
 	max-width: 165px;
-	max-height: 32px;
+	max-height: 26px;
 	object-fit: contain;
 	object-position: left center;
 	margin: 10px 0;
@@ -20,7 +20,7 @@
 
 	&.prefer-smaller {
 		max-width: 130px !important;
-		max-height: 26px !important;
+		max-height: 24px !important;
 		margin: 5px 0 !important;
 
 		&.is-long {
