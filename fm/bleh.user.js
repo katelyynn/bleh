@@ -53627,7 +53627,7 @@ var bleh = (() => {
     chart_position: {
       // shown on artist/album pages
       // v = the number placement
-      en: "#{v} in the world"
+      en: "{v} in the world"
     },
     artist_wordmarks: {
       name: {
@@ -64682,7 +64682,7 @@ var bleh = (() => {
   function PageHeaderPosition({
     text: text4
   }) {
-    return /* @__PURE__ */ jsx("a", { class: "chart-position", href: `${root}charts`, children: tl2(trans.chart_position, { v: text4.trim().replace("#", "") }) });
+    return /* @__PURE__ */ jsx("a", { class: "chart-position", href: `${root}charts`, children: tl2(trans.chart_position, { v: text4.trim() }) });
   }
   function PageHeaderArtist({
     type = "track",

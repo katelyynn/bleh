@@ -196,7 +196,7 @@ export function PageHeaderPosition({
 }: PageHeaderPositionProps) {
 	return (
 		<a class='chart-position' href={`${root}charts`}>
-			{tl(trans.chart_position, { v: text.trim().replace('#', '') })}
+			{tl(trans.chart_position, { v: text.trim() })}
 		</a>
 	)
 }

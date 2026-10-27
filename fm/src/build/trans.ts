@@ -12793,7 +12793,7 @@ export const trans = {
 	chart_position: {
 		// shown on artist/album pages
 		// v = the number placement
-		en: '#{v} in the world'
+		en: '{v} in the world'
 	},
 	artist_wordmarks: {
 		name: {
