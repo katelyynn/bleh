@@ -93344,7 +93344,12 @@ var bleh = (() => {
     "harry",
     "chappell",
     "olivia",
-    "billie"
+    "billie",
+    "21",
+    "tyla",
+    "wallen",
+    "icespice",
+    "thug"
   ];
   function retrieveWordmark(name) {
     if (name.toLowerCase() in validWordmarks) {
