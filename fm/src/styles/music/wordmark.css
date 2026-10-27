@@ -8,9 +8,13 @@
 	object-fit: contain;
 	object-position: left center;
 	margin: 10px 0;
+	pointer-events: none;
 
 	&.is-long {
 		width: 280px;
 		max-height: 65px;
 	}
+
+	user-select: none;
+	-webkit-user-drag: none;
 }
