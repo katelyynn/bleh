@@ -1,5 +1,5 @@
 {
-    version: "2026.1012",
+    version: "2026.1028",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -438,6 +438,7 @@
                     lit: 0.56
                 }
             ]
-		}
+		},
+		"casiarole": {}
     }
 }
