@@ -1,5 +1,5 @@
 .btn-labs-homepage:not(:hover),
-.jumbotron {
+.labs-splash {
 	color: oklch(var(--c2)) !important;
 }
 

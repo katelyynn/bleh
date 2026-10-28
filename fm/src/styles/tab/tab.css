@@ -1,4 +1,4 @@
-.secondary-nav {
+.secondary-nav:not(.ignore) {
 	box-shadow: unset;
 	padding-bottom: 1px;
 	margin: unset !important;
@@ -236,7 +236,7 @@ input::placeholder {
 	margin-left: unset !important;
 }
 
-.navlist-items {
+.navlist-items:not(.ignore) {
 	display: flex;
 	gap: var(--button-list-gap);
 	flex: 1;
@@ -244,6 +244,11 @@ input::placeholder {
 	&>.fill {
 		flex: 1;
 	}
+}
+
+.navlist-items.ignore {
+	--c2: 0 0 0;
+	--l3-c: 0 0 0;
 }
 
 /* navlist-more isnt contained in navlist-items */
