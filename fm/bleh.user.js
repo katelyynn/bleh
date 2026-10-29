@@ -112877,24 +112877,20 @@ var bleh = (() => {
     log(`saving ${id}`, "settings", "info", { value });
     const store = settings_store[id] || {};
     const type = store.type || "toggle";
-    settings[id] = value;
     if (!other_setting_types.includes(type) && store.bubble) {
       document.body.setAttribute(`data-bleh--${id}`, String(value));
     }
     if (id == "theme") {
-      settings.theme_type = getThemes()[value].type;
-      document.body.setAttribute(
-        `data-bleh--theme_type`,
-        settings.theme_type
-      );
+      useSettings.set("theme_type", getThemes()[value].type);
       chart_reflow();
     }
-    document.body.classList.toggle(
-      "increase-btn-contrast",
-      settings.lit <= 0.3
-    );
     if (["hue", "sat", "lit"].includes(id)) {
-      if (settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
+      document.body.classList.toggle(
+        "increase-btn-contrast",
+        useSettings.get("lit") <= 0.3
+      );
+      seasonal_colour_switch();
+      if (useSettings.get("hue") == settings_store.hue.default && useSettings.get("sat") == settings_store.sat.default && useSettings.get("lit") == settings_store.lit.default) {
         document.body.style.removeProperty(`--${settings_store.hue.css}`);
         document.body.style.removeProperty(`--${settings_store.sat.css}`);
         document.body.style.removeProperty(`--${settings_store.lit.css}`);
@@ -112902,26 +112898,27 @@ var bleh = (() => {
       } else {
         document.body.style.setProperty(
           `--${settings_store.hue.css}`,
-          settings.hue
+          useSettings.get("hue")
         );
         document.body.style.setProperty(
           `--${settings_store.sat.css}`,
-          settings.sat
+          useSettings.get("sat")
         );
         document.body.style.setProperty(
           `--${settings_store.lit.css}`,
-          settings.lit
+          useSettings.get("lit")
         );
       }
-    } else if (value == store.default) {
-      document.body.style.removeProperty(`--${store.css}`);
     } else if (store.css) {
-      document.body.style.setProperty(
-        `--${store.css}`,
-        `${value}${store.suffix || ""}`
-      );
+      if (value == store.default) {
+        document.body.style.removeProperty(`--${store.css}`);
+      } else {
+        document.body.style.setProperty(
+          `--${store.css}`,
+          `${value}${store.suffix || ""}`
+        );
+      }
     }
-    seasonal_colour_switch();
     if (store.require_reload == true || store.require_reload == "partial" && page.type != "bleh_settings") {
       request_reload();
     }
@@ -112935,7 +112932,7 @@ var bleh = (() => {
     const has_user_accent = document.body.style.getPropertyValue("--hue-album");
     document.body.setAttribute(
       "data-seasonal-accent",
-      settings.hue == 255 && settings.sat == 1 && settings.lit == 1 && !has_user_accent
+      useSettings.get("hue") == 255 && useSettings.get("sat") == 1 && useSettings.get("lit") == 1 && !has_user_accent
     );
   }
   function compile_settings() {
@@ -131776,7 +131773,8 @@ var bleh = (() => {
               step: 1
             }
           ) }) }),
-          /* @__PURE__ */ jsx(DemoItem, { label: "SettingRange (binded to gloss)", children: /* @__PURE__ */ jsx(SettingGroup, { children: /* @__PURE__ */ jsx(SettingRange, { bind: "gloss" }) }) })
+          /* @__PURE__ */ jsx(DemoItem, { label: "SettingRange (binded to gloss)", children: /* @__PURE__ */ jsx(SettingGroup, { children: /* @__PURE__ */ jsx(SettingRange, { bind: "gloss" }) }) }),
+          /* @__PURE__ */ jsx(DemoItem, { label: "SettingRange (binded to noise)", children: /* @__PURE__ */ jsx(SettingGroup, { children: /* @__PURE__ */ jsx(SettingRange, { bind: "noise" }) }) })
         ] }) }),
         /* @__PURE__ */ jsx("section", { children: /* @__PURE__ */ jsx(DemoGrid, { children: [
           /* @__PURE__ */ jsx(DemoItem, { label: "ColourSwatch", children: [

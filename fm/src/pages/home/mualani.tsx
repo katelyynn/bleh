@@ -586,6 +586,11 @@ export function mualani() {
 							<SettingRange bind='gloss' />
 						</SettingGroup>
 					</DemoItem>
+					<DemoItem label='SettingRange (binded to noise)'>
+						<SettingGroup>
+							<SettingRange bind='noise' />
+						</SettingGroup>
+					</DemoItem>
 				</DemoGrid>
 			</section>
 			<section>
