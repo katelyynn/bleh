@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.1029
+// @version      2026.1029.1
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -112879,6 +112879,7 @@ var bleh = (() => {
     log(`saving ${id}`, "settings", "info", { value });
     const store = settings_store[id] || {};
     const type = store.type || "toggle";
+    settings[id] = value;
     if (!other_setting_types.includes(type) && store.bubble) {
       document.body.setAttribute(`data-bleh--${id}`, String(value));
     }
@@ -134289,12 +134290,12 @@ ${version2.build} (${version2.sku})`;
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.1029",
+    build: "2026.1029.1",
     sku: "marroW",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://bleh.yuzu.pet/download",
-    built_on: "2026-10-29T18:11:07.930Z"
+    built_on: "2026-10-29T22:32:25.269Z"
   };
 
   // node_modules/.pnpm/chartjs-adapter-luxon@1.3.1_chart.js@4.5.1_luxon@3.7.2/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

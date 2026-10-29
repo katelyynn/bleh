@@ -1614,7 +1614,7 @@ export function save_setting(id: string, value: setting_value) {
 	const store = settings_store[id] || {};
 	const type = store.type || 'toggle';
 
-	//settings[id] = value;
+	settings[id] = value;
 
 	if (!other_setting_types.includes(type) && store.bubble) {
 		document.body.setAttribute(`data-bleh--${id}`, String(value));
