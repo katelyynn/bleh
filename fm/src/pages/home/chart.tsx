@@ -151,7 +151,7 @@ export function bleh_charts() {
             </div>
             <div class="right">
                 <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
+                    <button class="btn left-icon blend-v2-btn" data-type="settings" ref=${(
 			el,
 		) => settings_btn = el}>
                         ${tl(trans.settings)}

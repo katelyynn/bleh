@@ -370,15 +370,10 @@
 			var(--menu-shadow)) !important;
 	border: 1px solid var(--menu-border) !important;
 	color: oklch(var(--c2));
+	overflow: hidden;
 
-	&:not(.date-range-picker-content) {
-		overflow: hidden;
-	}
-
-	&:not(.date-range-picker-content, .modal-body) {
-		backdrop-filter: var(--solarium);
-		-webkit-backdrop-filter: var(--solarium);
-	}
+	backdrop-filter: var(--solarium);
+	-webkit-backdrop-filter: var(--solarium);
 
 	&:before {
 		content: "";
@@ -414,6 +409,12 @@
 		backdrop-filter: var(--solarium);
 		-webkit-backdrop-filter: var(--solarium);
 	}
+}
+
+.date-range-picker-content {
+	overflow: unset;
+	backdrop-filter: unset;
+	-webkit-backdrop-filter: unset;
 }
 
 .tippy-box[data-theme="popup"] {

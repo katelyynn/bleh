@@ -35,6 +35,7 @@
 	min-width: var(--button-height) !important;
 	--button-height: 24px;
 	width: fit-content;
+	text-transform: lowercase !important;
 
 	&:not(.tags-add-cta, .tags-add, .tags-view-all) {
 		font-size: calc(var(--font-size) - 1px) !important;
@@ -64,10 +65,6 @@
 		color: oklch(var(--l2-c-theme-switch)) !important;
 		/*box-shadow: 0 0 0 2px oklch(var(--h4), 30%) inset, var(--interact-shadow) !important;*/
 	}
-
-	&:not(.music-label) {
-		text-transform: lowercase !important;
-	}
 }
 
 .music-label {
@@ -81,7 +78,7 @@
 	}
 }
 
-.tag > a {
+.tag>a {
 	&:before {
 		content: '#' !important;
 		opacity: var(--tag-opacity);
@@ -158,7 +155,7 @@
 	}
 
 	&:hover {
-		& > .bleh-icon-arrow-right {
+		&>.bleh-icon-arrow-right {
 			translate: 2px 0;
 		}
 
@@ -166,12 +163,12 @@
 			translate: 120px 0;
 		}
 
-		& > .recommended-goto-bg {
+		&>.recommended-goto-bg {
 			translate: 10px 0;
 			scale: 1.03;
 		}
 
-		& > .recommended-goto-text > .recommended-goto-name {
+		&>.recommended-goto-text>.recommended-goto-name {
 			color: oklch(var(--l3-c));
 
 			&:after {
@@ -180,7 +177,7 @@
 		}
 	}
 
-	& > .bleh-icon-arrow-right {
+	&>.bleh-icon-arrow-right {
 		--icon-size: 16px;
 	}
 
@@ -189,8 +186,7 @@
 		position: absolute;
 		inset: 0;
 		display: block;
-		background: linear-gradient(90deg, transparent 20%, oklch(var(--h4))
-			90%);
+		background: linear-gradient(90deg, transparent 20%, oklch(var(--h4)) 90%);
 
 		translate: 150px 0;
 		opacity: 0.8;

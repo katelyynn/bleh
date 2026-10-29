@@ -236,7 +236,7 @@ function album_missing_a_tracklist() {
                 ${select_btn}
             </div>
             <div class="view-buttons blend blend-v2">
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
+                <button class="btn left-icon blend-v2-btn" data-type="settings" ref=${(
 			el,
 		) => (settings_btn = el)}>
                     ${tl(trans.settings)}
@@ -253,7 +253,7 @@ function album_missing_a_tracklist() {
             <div class="top-container">
                 <h3 class="text-18">${tl(trans.tracklist)}</h3>
                 <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
+                    <button class="btn left-icon blend-v2-btn" data-type="settings" ref=${(
 			el,
 		) => (settings_btn = el)}>
                         ${tl(trans.settings)}

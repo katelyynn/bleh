@@ -225,7 +225,7 @@ export function bleh_artists() {
 				'.section-playlink',
 			) as HTMLAnchorElement;
 			if (play) {
-				play.classList.add('blend-v2-btn', 'left-icon');
+				play.classList.add('btn', 'blend-v2-btn', 'left-icon');
 				play.classList.remove(
 					'section-playlink',
 					'hover-section-control',
@@ -517,7 +517,7 @@ function bleh_artist_tracks() {
                     ${select_btn}
                 </div>
                 <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
+                    <button class="btn left-icon blend-v2-btn" data-type="settings" ref=${(
 			el,
 		) => (settings_btn = el)}>
                         ${tl(trans.settings)}
