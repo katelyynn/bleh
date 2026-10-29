@@ -1,4 +1,10 @@
 {
+    "2026.1029": {
+        "type": "major",
+        "force": false,
+        "bio": "this update was not meant to release this early but my hand kinda got forced. please complain to last.fm about their new adblocker nonsense: https://support.last.fm/t/cant-access-site-requesting-ads/120804/5\n\nanyway, there’s other fixes along with the obvious.\n\n# General\n- __Fixed bleh triggering ad-block detections__\n    - This meant allowing all their weird, intrusive, URLs that they use for detecting ad-blockers and serving ads. They load even if you have Pro.\n\n# Artists\n- __Introduced artist wordmarks__\n    - Artists which have provided their own logos via Apple Music or their own websites can now be displayed within bleh. If you aren’t happy with the look, head to the *Accessibility* settings.\n    - The flow for submitting these was going to be more complete but again, this update got pushed forward.\n- __Stylised chart positions__\n    - They now use magazine-like number cut-outs. This was going to be more customisable but again, bla bla update early.\n\n# Profiles\n- __Introduced an updated look for user lists__\n    - Backgrounds are now coloured based on avatars and things should be a little more speedy hopefully.\n\n# Other\n- Introduced better compatibility for some Last.fm hero pages (About, Jobs)\n- Potentially improved performance with some CSS selectors used\n- Cleaned up legacy unused CSS\n- Delayed some style calculations to the next available frame",
+        "name": "marroW"
+    },
     "2026.1026": {
         "type": "major",
         "force": false,

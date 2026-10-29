@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.1026
+// @version      2026.1029
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -134289,12 +134289,12 @@ ${version2.build} (${version2.sku})`;
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.1026",
-    sku: "violet",
+    build: "2026.1029",
+    sku: "marroW",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://bleh.yuzu.pet/download",
-    built_on: "2026-10-26T17:19:49.999Z"
+    built_on: "2026-10-29T18:11:07.930Z"
   };
 
   // node_modules/.pnpm/chartjs-adapter-luxon@1.3.1_chart.js@4.5.1_luxon@3.7.2/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
