@@ -245,7 +245,7 @@ select,
 	--padding: 0 !important;
 
 	justify-content: center;
-	gap: 0;
+	gap: 0 !important;
 
 	&:before {
 		--left: calc((var(--button-width) - var(--icon-size)) / 2) !important;

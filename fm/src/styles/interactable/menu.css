@@ -67,6 +67,7 @@
 
 	&.chibi {
 		font-size: 0 !important;
+		min-width: var(--button-width) !important;
 	}
 
 	&[aria-checked="true"],

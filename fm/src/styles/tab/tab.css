@@ -293,6 +293,10 @@ button.navlist-more {
 			color: var(--mask-colour);
 		}
 	}
+
+	&.chibi {
+		width: var(--button-width) !important;
+	}
 }
 
 .toolbar {
