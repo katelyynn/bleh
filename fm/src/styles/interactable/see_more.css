@@ -72,7 +72,7 @@
 	&.left-icon {
 		&:after {
 			left: calc(var(--icon-size) + 4px);
-			right: none;
+			right: 0;
 		}
 	}
 
