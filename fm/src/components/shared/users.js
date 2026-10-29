@@ -15,6 +15,7 @@ import { correct_artist } from '@/components/music/lotus';
 import { log } from '@/build/log.ts';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
+import { header_colour } from '../page/colour';
 
 export function bleh_users() {
 	const users = page.structure.main?.querySelectorAll(
@@ -29,6 +30,7 @@ export function bleh_users() {
 }
 
 export function patch_user_list_item(user, index, cache = {}) {
+	user.classList.add('colourful');
 	user.style.setProperty('--delay', index * 0.04 + 's');
 
 	const avatar = user.querySelector('.user-list-avatar');
@@ -104,10 +106,11 @@ export function patch_user_list_item(user, index, cache = {}) {
 	const img = avatar.querySelector('img');
 	if (!img.src.endsWith('818148bf682d429dc215c1705eb27b98.png')) {
 		user.appendChild(html.node`
-            <div class="user-background" style="background-image: url(${
-			img.src.replace('/avatar70s/', '/avatar300s/')
-		})" />
+            <div class="user-background" style="background-image: url(${img.src.replace('/avatar70s/', '/avatar300s/')
+			})" />
         `);
+
+		header_colour(img, false, [user]);
 	}
 	img.src = img.src.replace('/avatar70s/', '/avatar170s/');
 

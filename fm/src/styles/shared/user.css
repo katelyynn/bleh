@@ -66,12 +66,17 @@
 	--follow-button-col: oklch(var(--c2));
 
 	&:not(:hover, :focus-within) {
-		--follow-button-opacity: 0.4;
+		--follow-button-opacity: 0.8;
 	}
 
 	animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
+
+	transition-property: background-color,
+	box-shadow;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }
 
 .user-background {
@@ -94,6 +99,7 @@
 	height: var(--button-height) !important;
 
 	opacity: var(--follow-button-opacity, 1);
+	--icon-size: 14px;
 }
 
 .user-list {
@@ -138,6 +144,24 @@
 				background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%,
 						transparent 28%);
 			}
+
+			&>.user-list-inner-wrap {
+				padding-right: calc(var(--follow-button-size) + var(--item-list-gap));
+
+				&>.user-follow {
+					order: 10;
+					flex-shrink: 0;
+				}
+
+				&>.user-list-name {
+					flex-shrink: 0;
+				}
+
+				&>.user-list-description {
+					flex: 1;
+					max-width: unset;
+				}
+			}
 		}
 
 		.user-list-avatar {
@@ -159,7 +183,6 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 		gap: var(--item-list-gap);
-		margin: 0 calc(-1 * var(--item-list-gap));
 
 		@media (max-width: 980px) {
 			grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -169,14 +192,29 @@
 		--user-list-item-radius: var(--item-big-radius);
 
 		.user-list-item {
+			background-color: transparent;
+			box-shadow: inset 0 0 0 1px var(--separator-base);
+
+			&:hover {
+				background-color: oklch(var(--h4) / 15%) !important;
+				box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 30%) !important;
+
+				transition: none;
+
+				--follow-button-bg: oklch(var(--h3) / 10%);
+				--follow-button-bg-hov: oklch(var(--h3) / 20%);
+				--follow-button-bg-atv: oklch(var(--h3) / 30%);
+				--follow-button-col: oklch(var(--l3-c));
+			}
 
 			&[data-is-followed="true"],
 			&[data-position="1"] {
-				background: oklch(var(--h4) / 15%);
-				--follow-button-bg: oklch(var(--h3) / 5%);
-				--follow-button-bg-hov: oklch(var(--h3) / 10%);
-				--follow-button-bg-atv: oklch(var(--h3) / 20%);
+				background-color: oklch(var(--h4) / 12%);
+				--follow-button-bg: oklch(var(--h3) / 10%);
+				--follow-button-bg-hov: oklch(var(--h3) / 20%);
+				--follow-button-bg-atv: oklch(var(--h3) / 30%);
 				--follow-button-col: oklch(var(--l3-c));
+				box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 12%);
 			}
 		}
 
@@ -246,19 +284,21 @@
 			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		}
 
-		--user-list-item-padding: var(--item-list-gap);
+		--user-list-item-padding: 20px var(--item-list-gap);
 		--user-list-item-radius: var(--item-med-radius);
 		--user-list-item-width: 100%;
 
 		.user-list-name {
 			min-width: unset;
 			max-width: 90%;
+			min-height: 36px;
+			/* column */
 		}
 
 		.user-list-item {
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
+			justify-content: end;
 			height: 280px;
 			overflow: hidden;
 
@@ -267,56 +307,50 @@
 				inset: 0;
 				display: block;
 				z-index: 0;
-				border-radius: var(--user-list-item-radius);
+				border-radius: unset;
 				background-size: cover;
 				background-position: center;
 
-				--mask: linear-gradient(0deg, transparent, white);
+				--mask: linear-gradient(0deg, transparent, white, transparent);
 				mask-image: var(--mask);
 				-webkit-mask-image: var(--mask);
 
-				opacity: 0.1;
-				scale: 1;
+				opacity: 0.2;
 
-				transition-property: scale, opacity;
-				transition-duration: 0.4s;
-				transition-timing-function: var(--trans-function-ani);
+				max-height: 200px;
 			}
 
 			&:hover {
-				.user-background {
-					scale: 1.1;
-					opacity: 0.6;
-				}
 
 				.user-list-avatar,
 				.user-follow {
-					scale: 0.9;
-					opacity: 0;
-				}
-
-				.listener-list-position,
-				.user-list-name,
-				.user-list-description {
-					translate: 0 40px !important;
-				}
-
-				.user-list-shared-artists,
-				.user-list-about-me:not(.has-featured-track) {
-					opacity: 0;
-					pointer-events: none;
+					scale: 1.1;
 				}
 			}
 
-			background-color: oklch(var(--b4) / 40%);
+			background-color: transparent;
+			box-shadow: inset 0 0 0 1px var(--separator-base);
 
-			&[data-is-followed="true"],
-			&[data-position="1"] {
-				background-color: oklch(var(--h4) / 20%);
+			&:hover {
+				background-color: oklch(var(--h4) / 15%) !important;
+				box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 30%) !important;
+
+				transition: none;
+
 				--follow-button-bg: oklch(var(--h3) / 10%);
 				--follow-button-bg-hov: oklch(var(--h3) / 20%);
 				--follow-button-bg-atv: oklch(var(--h3) / 30%);
 				--follow-button-col: oklch(var(--l3-c));
+			}
+
+			&[data-is-followed="true"],
+			&[data-position="1"] {
+				background-color: oklch(var(--h4) / 12%);
+				--follow-button-bg: oklch(var(--h3) / 10%);
+				--follow-button-bg-hov: oklch(var(--h3) / 20%);
+				--follow-button-bg-atv: oklch(var(--h3) / 30%);
+				--follow-button-col: oklch(var(--l3-c));
+				box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 12%);
 			}
 
 			.user-list-inner-wrap {
@@ -337,12 +371,53 @@
 					inset: -50px calc(-1 * var(--item-list-gap));
 				}
 
+				&>.user-list-description {
+					flex-direction: column;
+					padding: unset;
+					align-items: center;
+					gap: 0;
+					max-width: 100%;
+					height: 54px;
+
+					translate: 0;
+					transition-property: translate;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+					filter: var(--header-filter-shadow) !important;
+
+					z-index: 3;
+
+					&>p {
+						max-width: 100%;
+						overflow: hidden;
+
+						text-overflow: ellipsis;
+						-webkit-box-orient: vertical;
+						display: -webkit-box;
+						-webkit-line-clamp: 2;
+						white-space: wrap;
+
+						&>.markdown-body {
+							text-overflow: ellipsis;
+							-webkit-box-orient: vertical;
+							display: -webkit-box;
+							-webkit-line-clamp: 2;
+							white-space: wrap;
+						}
+
+						/* i have to override last.fm's :first-child thing :( */
+						p {
+							white-space: wrap;
+						}
+					}
+				}
+
 				.user-list-avatar {
 					width: var(--w);
 					height: var(--w);
 					--mask-size: var(--cover-size-100);
 
-					top: 36px;
+					top: 64px;
 					left: 50%;
 					margin-left: calc(-1 * (var(--w) / 2));
 
@@ -353,7 +428,7 @@
 
 				.user-follow {
 					position: absolute;
-					top: 36px;
+					top: 64px;
 					right: 50%;
 					margin-right: calc((-1 * var(--w)) + 25px);
 
@@ -377,39 +452,6 @@
 					transition-duration: 0.4s;
 					transition-timing-function: var(--trans-function-ani);
 					filter: var(--header-filter-shadow) !important;
-				}
-
-				.user-list-description {
-					flex-direction: column;
-					padding: unset;
-					align-items: center;
-					gap: 0;
-					max-width: 100%;
-					height: 72px;
-
-					translate: 0;
-					transition-property: translate;
-					transition-duration: 0.4s;
-					transition-timing-function: var(--trans-function-ani);
-					filter: var(--header-filter-shadow) !important;
-
-					z-index: 3;
-
-					&>p {
-						max-width: 100%;
-						overflow: hidden;
-
-						text-overflow: ellipsis;
-						-webkit-box-orient: vertical;
-						display: -webkit-box;
-						-webkit-line-clamp: 3;
-						white-space: wrap;
-
-						/* i have to override last.fm's :first-child thing :( */
-						p {
-							white-space: wrap;
-						}
-					}
 				}
 
 				.user-list-shared-artists,
@@ -559,6 +601,7 @@
 
 	div[data-toggle-button-current-state="followed"]>form>& {
 		--mask: var(--icon-16-check);
+		--icon-size: 12px;
 	}
 }
 
