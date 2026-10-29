@@ -30,11 +30,16 @@ const CspPolicies: PolicyMap = {
 		'https://*.youtube-nocookie.com',
 		'https://ws.audioscrobbler.com',
 		'https://translate.googleapis.com',
+		'https://*.html-load.com',
+		'https://*.error-report.com',
+		'https://*.html-load.cc',
+		'https://github.com'
 	],
 	'script-src': [
 		"'self'",
 		"'unsafe-inline'",
 		"'unsafe-eval'",
+		'blob:',
 
 		// stuff that last.fm uses
 		'https://cdn.jsdelivr.net',
@@ -50,15 +55,20 @@ const CspPolicies: PolicyMap = {
 		'https://*.newrelic.com',
 		'https://a.pub.network',
 		'https://tags.tiqcdn.com',
-		'https://html-load.cc',
 		'https://srv.tunefindforfans.com',
 		'https://ws.audioscrobbler.com',
 		'https://translate.googleapis.com',
+		'https://*.html-load.com',
+		'https://*.error-report.com',
+		'https://*.html-load.cc',
+		'https://*.googlesyndication.com',
+		'https://html-load.cc'
 	],
 	'script-src-elem': [
 		"'self'",
 		"'unsafe-inline'",
 		"'unsafe-eval'",
+		'blob:',
 
 		// stuff that last.fm uses
 		'https://cdn.jsdelivr.net',
@@ -75,10 +85,14 @@ const CspPolicies: PolicyMap = {
 		'https://*.newrelic.com',
 		'https://a.pub.network',
 		'https://tags.tiqcdn.com',
-		'https://html-load.cc',
 		'https://srv.tunefindforfans.com',
 		'https://ws.audioscrobbler.com',
 		'https://translate.googleapis.com',
+		'https://*.html-load.com',
+		'https://*.error-report.com',
+		'https://*.html-load.cc',
+		'https://*.googlesyndication.com',
+		'https://html-load.cc'
 	],
 	'style-src': [
 		"'self'",
@@ -133,12 +147,15 @@ const CspPolicies: PolicyMap = {
 
 		'https://i.pinimg.com',
 		'https://i.ibb.co',
+		'https://*.html-load.com'
 	],
 	'connect-src': [
 		"'self'",
 		'https://cdn.cookielaw.org',
 		'https://geolocation.onetrust.com',
-		'https://wss://html-load.cc',
+		'https://html-load.cc',
+		'https://*.html-load.cc',
+		'https://*.html-load.com',
 		'https://*.newrelic.com',
 		'https://status.cafe',
 		'https://*.github.io',
@@ -146,6 +163,13 @@ const CspPolicies: PolicyMap = {
 		'https://*.katelyn.moe',
 		'https://*.yuzu.pet',
 		'https://translate.googleapis.com',
+		'https://*.error-report.com',
+		'https://*.googlesyndication.com',
+		'https://*.criteo.net',
+		'https://*.google-analytics.com',
+		'https://*.adthrive.com',
+		'https://*.jsdelivfr.net',
+		'https://shrillypants.com'
 	],
 	'font-src': [
 		"'self'",
@@ -156,6 +180,8 @@ const CspPolicies: PolicyMap = {
 		"'self'",
 		'https://*.google.com',
 		'https://*.youtube-nocookie.com',
+		'https://*.error-report.com',
+		'https://*.html-load.com'
 	],
 };
 
