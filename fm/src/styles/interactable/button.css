@@ -133,7 +133,7 @@ select,
 	mask-size: contain !important;
 	-webkit-mask-size: contain !important;
 
-	&[aria-expanded="true"]:not(.delete-icon, .header-expand-button, .glacier-library-button),
+	&[aria-expanded="true"]:not(.delete-icon, .glacier-library-button),
 	&:is(.gallery-next, .gallery-previous):hover .arrow,
 	&:hover {
 		background: var(--bg-hov) !important;
@@ -199,7 +199,7 @@ select,
 	/*     STYLES     */
 
 	/*     PRIMARY     */
-	&:is(.danger, .btn-primary:is([type="submit"], .js-close), .inbox-delete-button:not([disabled]), #manage_data .btn-primary, .primary, .btn-subscribe, .view-item[aria-checked="true"], .user-now-empty-state-button, .gallery-image-preferred-on, .gallery-image-vote-up-on, .gallery-image-vote-down-on):not([data-has-file], .see-more) {
+	&:is(.danger, .btn-primary:is([type="submit"], .js-close), .primary, .btn-subscribe, .view-item[aria-checked="true"], .user-now-empty-state-button, .gallery-image-preferred-on, .gallery-image-vote-up-on, .gallery-image-vote-down-on):not([data-has-file], .see-more) {
 		--bg:
 			var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
 		--bg-hov:

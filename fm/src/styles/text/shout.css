@@ -45,28 +45,6 @@
 	}
 }
 
-.shout {
-	--comment-bg: color-mix(in oklch, oklch(var(--b5)), oklch(var(--k4)) 20%);
-	--comment-bg: transparent;
-	background-color: var(--comment-bg) !important;
-	border-radius: var(--radius-s) !important;
-
-	&:after {
-		content: '';
-		display: block;
-		position: absolute;
-
-		top: 0;
-		left: -6px;
-		width: 0;
-		height: 0;
-		border: 6px solid var(--comment-bg);
-		border-left-color: transparent;
-		border-bottom-color: transparent;
-		pointer-events: none;
-	}
-}
-
 .shout-form {
 	border: unset;
 	padding-top: unset !important;
@@ -228,6 +206,26 @@
 
 	&.hovering-avatar {
 		min-height: calc(var(--shout-avatar-size) + 6px + var(--shout-avatar-action) + 4px);
+	}
+
+	--comment-bg: color-mix(in oklch, oklch(var(--b5)), oklch(var(--k4)) 20%);
+	--comment-bg: transparent;
+	background-color: var(--comment-bg) !important;
+	border-radius: var(--radius-s) !important;
+
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+
+		top: 0;
+		left: -6px;
+		width: 0;
+		height: 0;
+		border: 6px solid var(--comment-bg);
+		border-left-color: transparent;
+		border-bottom-color: transparent;
+		pointer-events: none;
 	}
 }
 
