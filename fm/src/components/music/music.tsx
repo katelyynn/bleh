@@ -796,7 +796,7 @@ export function bleh_top_listeners() {
 			func: (val) => {
 				user_list.setAttribute('data-list-view', val);
 				items.forEach(item => {
-					item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+					item.setAttribute('data-list-view', val);
 				});
 			},
 		}),

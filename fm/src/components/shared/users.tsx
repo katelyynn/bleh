@@ -142,7 +142,7 @@ export function page_with_users() {
 				id: 'list_view', func: (val: string) => {
 					user_list?.setAttribute('data-list-view', val);
 					items.forEach(item => {
-						item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+						item.setAttribute('data-list-view', val);
 					});
 				}
 			})}

@@ -68144,7 +68144,7 @@ var bleh = (() => {
           func: (val) => {
             user_list?.setAttribute("data-list-view", val);
             items.forEach((item) => {
-              item.setAttribute("data-list-view", useSettings.get("list_view"));
+              item.setAttribute("data-list-view", val);
             });
           }
         }),
@@ -85907,7 +85907,7 @@ var bleh = (() => {
         func: (val) => {
           user_list.setAttribute("data-list-view", val);
           items.forEach((item) => {
-            item.setAttribute("data-list-view", useSettings.get("list_view"));
+            item.setAttribute("data-list-view", val);
           });
         }
       }),
