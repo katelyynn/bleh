@@ -6,12 +6,35 @@
 
 import { page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
+import { Wordmark } from '@/components/music/wordmark';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import { useSettings } from '@/page';
+import { createRef } from 'jsx-dom';
 
 export function accessibility() {
+	const wordmarks = createRef();
+
+	function update_wordmarks() {
+		wordmarks.current.replaceChildren(
+			<div class='sample-wordmarks'>
+				<h1 class='sample-wordmark-title'>
+					<Wordmark name='JENNIE' />
+				</h1>
+				<h1 class='sample-wordmark-title'>
+					<Wordmark name='Tiffany Day' />
+				</h1>
+				<h1 class='sample-wordmark-title'>
+					<Wordmark name='Nirvana' />
+				</h1>
+			</div>
+		);
+	}
+
+	useSettings.on('artist_wordmarks', update_wordmarks);
+
 	page.structure.main!.replaceChildren(
 		<>
 			<section class='bleh--panel'>
@@ -30,6 +53,10 @@ export function accessibility() {
 				<PanelHead icon={icons.text}>
 					{tl(trans.text)}
 				</PanelHead>
+				<div class={['inner-preview', 'pad', 'flex']} ref={wordmarks} />
+				<SettingGroup>
+					<SettingSwitch bind='artist_wordmarks' />
+				</SettingGroup>
 				<SettingGroup>
 					<SettingSwitch bind='display_name_styles' />
 					<SettingSwitch bind='underline_links' />
@@ -38,4 +65,6 @@ export function accessibility() {
 			</section>
 		</>,
 	);
+
+	update_wordmarks();
 }

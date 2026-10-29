@@ -12,7 +12,6 @@ import {
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
-import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Range } from '@/components/range/range.tsx';
 import { useSettings } from '@/page.tsx';
 

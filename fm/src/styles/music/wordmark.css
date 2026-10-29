@@ -1,0 +1,75 @@
+.artist-wordmark {
+	display: flex;
+}
+
+.artist-wordmark-image {
+	max-width: 165px;
+	max-height: 26px;
+	object-fit: contain;
+	object-position: left center;
+	margin: 10px 0;
+	pointer-events: none;
+
+	&.is-long {
+		max-width: 280px;
+		max-height: 38px;
+	}
+
+	user-select: none;
+	-webkit-user-drag: none;
+
+	&.prefer-smaller {
+		max-width: 130px !important;
+		max-height: 24px !important;
+		margin: 5px 0 !important;
+
+		&.is-long {
+			max-width: 155px !important;
+			max-height: 44px !important;
+		}
+	}
+
+	&.prefer-smallest {
+		max-width: 100px !important;
+		max-height: 18px !important;
+		margin: 4px 0 !important;
+
+		&.is-long {
+			max-width: 150px !important;
+			max-height: 40px !important;
+		}
+	}
+
+	&.prefer-smaller,
+	&.prefer-smallest {
+		filter: brightness(150%) contrast(110%);
+	}
+}
+
+.sample-wordmarks {
+	display: flex;
+	gap: 30px;
+}
+
+.sample-wordmark-title {
+	color: oklch(var(--c1));
+	font-size: 22px;
+	line-height: 26px;
+	font-weight: var(--font-weight-bold);
+
+	height: 50px;
+
+	display: flex;
+	align-items: center;
+}
+
+.wordmarks-here {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-basis: 100%;
+
+	background: oklch(var(--b6));
+	height: 100px;
+	padding: 20px 0;
+}

@@ -363,13 +363,13 @@ export function update_colour_swatches() {
 	} else if (seasonal) seasonal.setAttribute('aria-checked', 'true');
 }
 
-unsafeWindow._reset_inbuilt_item = function (item) {
+unsafeWindow._reset_inbuilt_item = function(item) {
 	reset_inbuilt_item(item);
 };
-unsafeWindow._update_inbuilt_params = function (params = {}) {
+unsafeWindow._update_inbuilt_params = function(params = {}) {
 	update_inbuilt_params(params);
 };
-unsafeWindow._update_inbuilt_item = function (item, value) {
+unsafeWindow._update_inbuilt_item = function(item, value) {
 	update_inbuilt_item(item, value);
 };
 

@@ -102,6 +102,7 @@ import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
 import { auth_page } from '@/pages/auth/main.tsx';
 import { copy } from '@/build/tools.ts';
+import { lastfm_generic_page } from './pages/home/lastfm_about';
 
 export const useSettings: Settings = new Settings();
 export let useSeasons: Seasons;
@@ -598,6 +599,7 @@ function load_page(main_content?: HTMLElement) {
 		} else if (page.type == 'api') bleh_api();
 		else if (page.type == 'labs') bleh_labs();
 		else if (page.type == 'auth') auth_page();
+		else if (['about', 'features'].includes(page.type)) lastfm_generic_page();
 
 		if (
 			['user', 'events'].includes(page.type) &&

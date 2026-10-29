@@ -1039,7 +1039,7 @@ export function similar_items() {
 		const controls = artists.querySelector('.section-controls');
 		const station = controls.querySelector('.stationlink');
 
-		station.classList = 'left-icon blend-v2-btn play-radio';
+		station.classList = 'btn left-icon blend-v2-btn play-radio';
 
 		controls.replaceWith(html.node`
             <div class="top-container">

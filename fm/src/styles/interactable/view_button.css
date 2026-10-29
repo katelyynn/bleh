@@ -48,7 +48,7 @@
 		width: fit-content;
 	}
 
-	& > form {
+	&>form {
 		display: flex;
 		align-items: center;
 		gap: inherit;
@@ -67,91 +67,6 @@
 	}
 
 	&:not(.blend) {
-		:is(.btn, a, button):not(.not-a-view-button, .toggle, .reset, .select-button, .btn-primary, .js-close, .blend-v2-btn, .dropdown-menu-clickable-item) {
-			--bg: var(--cards-overlay-image-subtlest, none), oklch(var(--h3));
-			--bg-hov:
-				var(--cards-overlay-image-subtlest, none),
-				color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%);
-			--bg-atv:
-				var(--cards-overlay-image-subtlest, none),
-				color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
-			--col: oklch(var(--b7));
-			--mask-colour: oklch(var(--b7) / 70%);
-			--shadow:
-				var(--primary-shadow), var(--primary-glow),
-				var(--interactable-outer);
-			--force-font-weight: var(--font-weight-medium);
-			text-shadow: var(--button-text-shadow-primary, none);
-			position: relative;
-		}
-
-		&.tab-container button:not(.tab--selected),
-		.footer-language .mimic-link,
-		.btn:not(.not-a-view-button, .toggle, [aria-checked="true"], .love-button--loved, [data-toggle-button-current-state="loved"] > form > .btn, [data-toggle-button-current-state="bookmarked"] > form > .btn, [data-analytics-action="UnfollowUser"], [data-is-shortcut="true"], .attendance-btn--turn-off) {
-			--bg: transparent;
-			--bg-hov: var(--view-buttons-hov);
-			--bg-atv: var(--view-buttons-atv);
-			--shadow: none;
-			--col: oklch(var(--c2));
-			--mask-colour: color-mix(in oklch,
-					oklch(var(--c2)),
-					oklch(var(--c3)) 50%);
-			--force-font-weight: var(--font-weight);
-			text-shadow: var(--button-text-shadow, none);
-
-			&.delete-icon {
-				--bg-hov: oklch(var(--h4) / 15%);
-				--bg-atv: oklch(var(--h4) / 25%);
-				--col: oklch(var(--l3-c));
-				--mask-colour: color-mix(in oklch,
-						oklch(var(--l3-c)),
-						oklch(var(--l4-c)) 30%);
-			}
-		}
-
-		.view-item:not(.blend-v2-btn) {
-			display: flex;
-			align-items: center;
-			position: relative;
-			margin: unset;
-			/*--font-size: 0;
-			--left: 7px;
-			width: 32px;*/
-
-			width: fit-content;
-			min-width: var(--button-height) !important;
-			height: var(--button-height);
-
-			.view-item-avatar {
-				width: 20px;
-				height: 20px;
-				border-radius: var(--avatar-radius);
-
-				--mask-size: var(--cover-size-32);
-
-				margin: -2px 0;
-				margin-right: 6px !important;
-
-				position: relative;
-				z-index: 10;
-
-				transition-property: margin-right;
-				transition-duration: var(--trans);
-				transition-timing-function: var(--trans-function);
-
-				& + .view-item-avatar {
-					margin-left: -12px;
-					border-left: 1px solid oklch(var(--b5));
-				}
-			}
-
-			&.dropdown-menu-clickable-button {
-				&:before {
-					--show-icon: none;
-				}
-			}
-		}
-
 		.video-item {
 			&.video-item--play {
 				--btn-left: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap));
@@ -171,46 +86,112 @@
 			margin: 0 2px;
 			background: var(--card-border-base);
 
-			& + .listen-divider {
+			&+.listen-divider {
 				display: none;
 			}
 		}
+	}
+}
 
-		&.user-buttons {
-			height: 100%;
-			justify-content: center;
-			align-items: unset;
-			padding: unset;
-			background: unset;
-			box-shadow: unset;
-			border-radius: unset;
-			margin: unset;
+.user-buttons {
+	height: 100%;
+	justify-content: center;
+	align-items: unset;
+	padding: unset;
+	background: unset;
+	box-shadow: unset;
+	border-radius: unset;
+	margin: unset;
 
-			.user-button {
-				/*&:not(:hover) {
+	.user-button {
+		/*&:not(:hover) {
 				    --btn-left: 12px !important;
 				    --font-size: 0;
 				}*/
 
-				--btn-left: var(--button-sides) !important;
-				--show-icon: block;
-				--font-size: 0;
-				color: inherit !important;
-				--left: 50%;
-				--margin-left: -10px;
+		--btn-left: var(--button-sides) !important;
+		--show-icon: block;
+		--font-size: 0;
+		color: inherit !important;
+		--left: 50%;
+		--margin-left: -10px;
 
-				&.view-profile-btn {
-					--mask: var(--icon-16-user);
-				}
-
-				&.view-library-btn {
-					--mask: var(--icon-16-library);
-				}
-
-				&.leave-shout-btn {
-					--mask: var(--icon-16-shoutbox);
-				}
-			}
+		&.view-profile-btn {
+			--mask: var(--icon-16-user);
 		}
+
+		&.view-library-btn {
+			--mask: var(--icon-16-library);
+		}
+
+		&.leave-shout-btn {
+			--mask: var(--icon-16-shoutbox);
+		}
+	}
+}
+
+.tab-container>li>button,
+.view-item {
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin: unset;
+	/*--font-size: 0;
+			--left: 7px;
+			width: 32px;*/
+
+	width: fit-content;
+	min-width: var(--button-height) !important;
+	height: var(--button-height);
+
+	--bg: var(--cards-overlay-image-subtlest, none),
+		oklch(var(--h3));
+	--bg-hov: var(--cards-overlay-image-subtlest, none),
+		color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%);
+	--bg-atv: var(--cards-overlay-image-subtlest, none),
+		color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
+	--col: oklch(var(--b7));
+	--mask-colour: oklch(var(--b7) / 70%);
+	--shadow: var(--primary-shadow),
+		var(--primary-glow),
+		var(--interactable-outer);
+	--force-font-weight: var(--font-weight-medium);
+	text-shadow: var(--button-text-shadow-primary, none);
+	position: relative;
+
+	&:not(.tab--selected, [aria-checked="true"]) {
+		--bg: transparent;
+		--bg-hov: var(--view-buttons-hov);
+		--bg-atv: var(--view-buttons-atv);
+		--shadow: none;
+		--col: oklch(var(--c2));
+		--mask-colour: color-mix(in oklch,
+				oklch(var(--c2)),
+				oklch(var(--c3)) 50%);
+		--force-font-weight: var(--font-weight);
+		text-shadow: var(--button-text-shadow, none);
+	}
+}
+
+.view-item-avatar {
+	width: 20px;
+	height: 20px;
+	border-radius: var(--avatar-radius);
+
+	--mask-size: var(--cover-size-32);
+
+	margin: -2px 0;
+	margin-right: 6px !important;
+
+	position: relative;
+	z-index: 10;
+
+	transition-property: margin-right;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&+.view-item-avatar {
+		margin-left: -12px;
+		border-left: 1px solid oklch(var(--b5));
 	}
 }

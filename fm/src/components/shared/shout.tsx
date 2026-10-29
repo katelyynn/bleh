@@ -222,7 +222,7 @@ export function patch_shouts() {
 			// that means the server gave us a shout that is ALREADY VOTED
 			const initial_is_voted =
 				voted_button.getAttribute('data-ajax-form-sets-state') ==
-					'modified-state';
+				'modified-state';
 
 			indicator.setAttribute('aria-checked', initial_is_voted.toString());
 
@@ -235,7 +235,7 @@ export function patch_shouts() {
 				setTimeout(() => {
 					const modified =
 						form.getAttribute('data-ajax-form-state') ==
-							'modified-state';
+						'modified-state';
 					const current_is_voted = initial_is_voted != modified;
 
 					indicator.setAttribute(
@@ -370,13 +370,13 @@ export function patch_shouts() {
 					v: page.type == 'artist'
 						? romanise(correct_artist(page.name))
 						: ['album', 'track'].includes(page.type)
-						? romanise(
-							correct_item_by_artist(
-								page.name,
-								page.sister,
-							),
-						)
-						: page.name,
+							? romanise(
+								correct_item_by_artist(
+									page.name,
+									page.sister,
+								),
+							)
+							: page.name,
 				});
 			}
 		}
@@ -414,7 +414,7 @@ export function patch_shouts() {
 			<>
 				{use_md && (
 					<div
-						class='tip preview'
+						class='tip preview icon-mask'
 						onClick={() => markdown_preview(legacy_textarea.value)}
 						ref={preview}
 						disabled
@@ -465,10 +465,10 @@ function shout_send(send_button) {
 
 	/* this is a joke */
 	/*button.parentElement.insertBefore(html.node`
-        <button class="btn icon primary" data-type="ai">
-            Write<span class="new-badge">PRO</span>
-        </button>
-    `, button);*/
+		<button class="btn icon primary" data-type="ai">
+			Write<span class="new-badge">PRO</span>
+		</button>
+	`, button);*/
 
 	if (page.mobile) return;
 

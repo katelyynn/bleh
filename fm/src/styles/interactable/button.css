@@ -41,7 +41,6 @@ select,
 .masthead-popup-close,
 .check>.box,
 .radio-cont>.radio,
-.blend-v2-btn,
 .notification,
 .user-now-empty-state-button,
 .report-dropdown-button,
@@ -133,7 +132,7 @@ select,
 	mask-size: contain !important;
 	-webkit-mask-size: contain !important;
 
-	&[aria-expanded="true"]:not(.delete-icon, .header-expand-button, .glacier-library-button),
+	&[aria-expanded="true"]:not(.delete-icon, .glacier-library-button),
 	&:is(.gallery-next, .gallery-previous):hover .arrow,
 	&:hover {
 		background: var(--bg-hov) !important;
@@ -198,53 +197,6 @@ select,
 
 	/*     STYLES     */
 
-	/*     PRIMARY     */
-	&:is(.danger, .btn-primary:is([type="submit"], .js-close), .inbox-delete-button:not([disabled]), #manage_data .btn-primary, .primary, .btn-subscribe, .view-item[aria-checked="true"], .user-now-empty-state-button, .gallery-image-preferred-on, .gallery-image-vote-up-on, .gallery-image-vote-down-on):not([data-has-file], .see-more) {
-		--bg:
-			var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
-		--bg-hov:
-			var(--cards-overlay-image-subtlest, none),
-			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
-		--bg-atv:
-			var(--cards-overlay-image-subtlest, none),
-			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
-		--col: oklch(var(--b7)) !important;
-		--force-font-weight: var(--font-weight-bold) !important;
-
-		&:not(.chibi) {
-			--mask-colour: oklch(var(--b7) / 0.8) !important;
-		}
-
-		--shadow: var(--primary-shadow),
-		var(--primary-glow),
-		var(--interactable-outer);
-		--shadow-hov: var(--interactable-outer),
-		var(--interactable-active-outer);
-
-		text-shadow: var(--button-text-shadow-primary, none);
-
-		[data-bleh--season="christmas"] & {
-			--hue-seasonal: 130;
-			--sat-seasonal: 0.45;
-			--lit-seasonal: 0.75;
-		}
-
-		[data-bleh--season="new_years"] & {
-			--hue-seasonal: 333;
-			--sat-seasonal: 1.1;
-			--lit-seasonal: 1;
-		}
-
-		.new-badge {
-			color: var(--mask-colour);
-		}
-
-		&.select-button:not(.link-select):before {
-			color: inherit;
-			opacity: 0.6;
-		}
-	}
-
 	/*     COVER LINK     */
 	&.link-block-cover-link {
 		--bg: transparent;
@@ -274,30 +226,85 @@ select,
 		--lit-over: 1;
 	}
 
-	&.lfmmaf-missing-artwork-button,
-	&.chibi {
-		--btn-left: var(--button-sides) !important;
-		--btn-right: var(--button-sides) !important;
-		--font-size: 0 !important;
-		--mask-colour: currentColor !important;
-		--button-width: var(--button-height);
-		min-width: var(--button-width) !important;
-		width: var(--button-width) !important;
-		height: var(--button-height) !important;
-		position: relative;
-		--padding: 0 !important;
-
-		justify-content: center;
-		gap: 0;
-
-		&:before {
-			--left: calc((var(--button-width) - var(--icon-size)) / 2) !important;
-			--right: none !important;
-		}
-	}
-
 	&[data-hidden="true"] {
 		display: none;
+	}
+}
+
+.lfmmaf-missing-artwork-button,
+.chibi {
+	--btn-left: var(--button-sides) !important;
+	--btn-right: var(--button-sides) !important;
+	--font-size: 0 !important;
+	--mask-colour: currentColor !important;
+	--button-width: var(--button-height);
+	min-width: var(--button-width) !important;
+	width: var(--button-width) !important;
+	height: var(--button-height) !important;
+	position: relative;
+	--padding: 0 !important;
+
+	justify-content: center;
+	gap: 0 !important;
+
+	&:before {
+		--left: calc((var(--button-width) - var(--icon-size)) / 2) !important;
+		--right: none !important;
+	}
+}
+
+.danger,
+.btn-primary:is([type="submit"], .js-close),
+.primary,
+.btn-subscribe,
+.view-item[aria-checked="true"],
+.user-now-empty-state-button,
+.gallery-image-preferred-on,
+.gallery-image-vote-up-on,
+.gallery-image-vote-down-on {
+	--bg:
+		var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
+	--bg-hov:
+		var(--cards-overlay-image-subtlest, none),
+		color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+	--bg-atv:
+		var(--cards-overlay-image-subtlest, none),
+		color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+	--col: oklch(var(--b7)) !important;
+	--mask-colour: oklch(var(--b7) / 0.8) !important;
+	--force-font-weight: var(--font-weight-bold) !important;
+
+	&.chibi {
+		--mask-colour: var(--col) !important;
+	}
+
+	--shadow: var(--primary-shadow),
+	var(--primary-glow),
+	var(--interactable-outer);
+	--shadow-hov: var(--interactable-outer),
+	var(--interactable-active-outer);
+
+	text-shadow: var(--button-text-shadow-primary, none);
+
+	[data-bleh--season="christmas"] & {
+		--hue-seasonal: 130;
+		--sat-seasonal: 0.45;
+		--lit-seasonal: 0.75;
+	}
+
+	[data-bleh--season="new_years"] & {
+		--hue-seasonal: 333;
+		--sat-seasonal: 1.1;
+		--lit-seasonal: 1;
+	}
+
+	.new-badge {
+		color: var(--mask-colour);
+	}
+
+	&.select-button:not(.link-select):before {
+		color: inherit;
+		opacity: 0.6;
 	}
 }
 
@@ -389,14 +396,6 @@ select,
 		flex-shrink: 0;
 	}
 
-	.button-combo-sep {
-		display: block;
-		width: 1px;
-		height: 10px;
-		margin: 0 4px;
-		background: var(--card-border-base);
-	}
-
 	&>form:not(.chibi) {
 		display: flex;
 		flex: 1;
@@ -405,6 +404,14 @@ select,
 			flex: 1;
 		}
 	}
+}
+
+.button-combo-sep {
+	display: block;
+	width: 1px;
+	height: 10px;
+	margin: 0 4px;
+	background: var(--card-border-base);
 }
 
 .subtle {
@@ -438,13 +445,10 @@ select,
 	--hue-over: var(--hue-neg);
 	--sat-over: var(--sat-neg);
 	--lit-over: var(--lit-neg);
-
-	&:not(.primary, .btn-primary) {
-		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(in oklch,
-				oklch(var(--l3-c)),
-				oklch(var(--l4-c)) 30%);
-	}
+	--col: oklch(var(--l3-c));
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
 }
 
 .danger,

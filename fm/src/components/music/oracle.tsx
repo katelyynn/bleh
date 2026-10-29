@@ -282,14 +282,14 @@ export function oracle_process() {
                     <div class="view-buttons blend blend-v2">
                         <p class="blend-text">${tl(trans.are_these_results_accurate)
 			}</p>
-                        <button class="left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
+                        <button class="btn left-icon blend-v2-btn mark-incorrect" data-type="dislike" onclick=${() => {
 				report_incorrect();
 			}}>
                             ${tl(trans.report_incorrect)}
                         </button>
                         ${() => {
 				const btn = html.node`
-                                <button class="left-icon blend-v2-btn" data-type="settings">
+                                <button class="btn left-icon blend-v2-btn" data-type="settings">
                                     ${tl(trans.settings)}
                                 </button>
                             `;
@@ -1603,7 +1603,7 @@ export function oracle_process() {
 								<p class="blend-text">${tl(
 						trans.are_these_results_accurate,
 					)}</p>
-								<button class="left-icon blend-v2-btn mark-incorrect"
+								<button class="btn left-icon blend-v2-btn mark-incorrect"
 									data-type="dislike" onclick=${() => {
 							report_incorrect();
 						}}>
@@ -1971,7 +1971,7 @@ export function oracle_process() {
 								<p class="blend-text">${tl(
 						trans.are_these_results_accurate,
 					)}</p>
-								<button class="left-icon blend-v2-btn mark-incorrect"
+								<button class="btn left-icon blend-v2-btn mark-incorrect"
 									data-type="dislike" onclick=${() => {
 							report_incorrect();
 						}}>

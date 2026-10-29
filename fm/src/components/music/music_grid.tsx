@@ -24,6 +24,7 @@ import { expand_avatar } from '@/components/shared/avatar';
 import { save_hoshino_artwork } from '@/components/music/hoshino';
 import { header_colour } from '../page/colour';
 import { useSettings } from '@/page.tsx';
+import { Wordmark } from './wordmark';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
 	if (!search) return;
@@ -90,9 +91,10 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 
 		const cover = grid.querySelector('.grid-items-cover-image');
 		const image_wrap = cover.querySelector('.grid-items-cover-image-image');
+		const large = grid.classList.contains('grid-items-item--big');
 		const image = image_wrap.querySelector('img');
 
-		if (grid.classList.contains('grid-items-item--big')) {
+		if (large) {
 			image.src = image.src.replace('/avatar300s/', '/500x500/');
 		}
 
@@ -279,6 +281,16 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 				correct_artist(name.textContent.trim()),
 			);
 			insights.artist.labels.push(name.textContent);
+
+			if (large) {
+				name.replaceChildren(
+					<Wordmark name={name.textContent} small />
+				);
+			} else {
+				/*name.replaceChildren(
+					<Wordmark name={name.textContent} smallest />
+				);*/
+			}
 		} else {
 			artist = grid.querySelector('.grid-items-item-aux-block');
 			if (!artist) {
@@ -311,9 +323,8 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 
 				artist_elem.replaceWith(html.node`
                     <span class="grid-items-item-aux-block grid-item-text grid-item-artist-no-link smart-artist">
-                        ${
-					smart_artists(formatted.song_artist, formatted.song_guests)
-				}
+                        ${smart_artists(formatted.song_artist, formatted.song_guests)
+					}
                     </span>
                 `);
 
@@ -337,150 +348,136 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		const menu = tippy(grid, {
 			theme: 'context-menu',
 			content: html.node`
-                ${
-				!is_obsession
+                ${!is_obsession
 					? html.node`
-                    ${
-						!is_album
+                    ${!is_album
 							? html.node`
                     <div class="button-combo">
                         ${() => {
-								return html.node`
-                                <a class="dropdown-menu-clickable-item" data-type="artist" href=${
-									name.getAttribute('href')
-								}>
+									return html.node`
+                                <a class="dropdown-menu-clickable-item" data-type="artist" href=${name.getAttribute('href')
+										}>
                                     ${tl(trans.artist)}
                                 </a>
                             `;
-							}}
+								}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								const button = html.node`
-                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
-									name.getAttribute('href')
-								}">
+									const button = html.node`
+                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${name.getAttribute('href')
+										}">
                                     ${tl(trans.explore_in_library)}
                                 </a>
                             `;
 
-								tippy(button, {
-									content: tl(trans.explore_in_library),
-									delay: [500, 0],
-									appendTo: document.body,
-								});
+									tippy(button, {
+										content: tl(trans.explore_in_library),
+										delay: [500, 0],
+										appendTo: document.body,
+									});
 
-								return button;
-							}}
+									return button;
+								}}
                     </div>
                     `
 							: html.node`
                     <div class="button-combo">
                         ${() => {
-								return html.node`
-                                <a class="dropdown-menu-clickable-item" data-type="album" href=${
-									name.getAttribute('href')
-								}>
+									return html.node`
+                                <a class="dropdown-menu-clickable-item" data-type="album" href=${name.getAttribute('href')
+										}>
                                     ${tl(trans.album)}
                                 </a>
                             `;
-							}}
+								}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								const button = html.node`
-                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
-									name.getAttribute('href')
-								}">
+									const button = html.node`
+                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${name.getAttribute('href')
+										}">
                                     ${tl(trans.explore_in_library)}
                                 </a>
                             `;
 
-								tippy(button, {
-									content: tl(trans.explore_in_library),
-									delay: [500, 0],
-									appendTo: document.body,
-								});
+									tippy(button, {
+										content: tl(trans.explore_in_library),
+										delay: [500, 0],
+										appendTo: document.body,
+									});
 
-								return button;
-							}}
+									return button;
+								}}
                     </div>
                     <div class="button-combo">
                         ${() => {
-								return html.node`
-                                <a class="dropdown-menu-clickable-item" data-type="artist" href=${
-									artist.getAttribute('href')
-								}>
+									return html.node`
+                                <a class="dropdown-menu-clickable-item" data-type="artist" href=${artist.getAttribute('href')
+										}>
                                     ${tl(trans.artist)}
                                 </a>
                             `;
-							}}
+								}}
                         <div class="button-combo-sep"/>
                         ${() => {
-								const button = html.node`
-                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${
-									artist.getAttribute('href')
-								}">
+									const button = html.node`
+                                <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${page.name}/library${artist.getAttribute('href')
+										}">
                                     ${tl(trans.explore_in_library)}
                                 </a>
                             `;
 
-								tippy(button, {
-									content: tl(trans.explore_in_library),
-									delay: [500, 0],
-									appendTo: document.body,
-								});
+									tippy(button, {
+										content: tl(trans.explore_in_library),
+										delay: [500, 0],
+										appendTo: document.body,
+									});
 
-								return button;
-							}}
+									return button;
+								}}
                     </div>
                     `
-					}
-                    <a class="dropdown-menu-clickable-item" data-type="gallery" href="${
-						name.getAttribute('href')
-					}/+images">
+						}
+                    <a class="dropdown-menu-clickable-item" data-type="gallery" href="${name.getAttribute('href')
+						}/+images">
                         ${is_album ? tl(trans.artwork) : tl(trans.photos)}
                     </a>
-                    <a class="dropdown-menu-clickable-item" data-type="wiki" href="${
-						name.getAttribute('href')
-					}/+wiki">
+                    <a class="dropdown-menu-clickable-item" data-type="wiki" href="${name.getAttribute('href')
+						}/+wiki">
                         ${is_album ? tl(trans.wiki) : tl(trans.biography)}
                     </a>
-                    ${
-						!is_album
+                    ${!is_album
 							? html.node`
-                    <a class="dropdown-menu-clickable-item" data-type="listeners" href="${
-								name.getAttribute('href')
-							}/+listeners/you-know">
+                    <a class="dropdown-menu-clickable-item" data-type="listeners" href="${name.getAttribute('href')
+								}/+listeners/you-know">
                         ${tl(trans.listeners)}
                     </a>
                     `
 							: ''
-					}
-                    <a class="dropdown-menu-clickable-item" data-type="shouts" href="${
-						name.getAttribute('href')
-					}/+shoutbox">
+						}
+                    <a class="dropdown-menu-clickable-item" data-type="shouts" href="${name.getAttribute('href')
+						}/+shoutbox">
                         ${tl(trans.shouts)}
                     </a>
-                    <a class="dropdown-menu-clickable-item" data-type="tags" href="${
-						name.getAttribute('href')
-					}/+tags">
+                    <a class="dropdown-menu-clickable-item" data-type="tags" href="${name.getAttribute('href')
+						}/+tags">
                         ${tl(trans.tags)}
                     </a>
                     <div class="sep" />
                 `
 					: ''
-			}
+				}
                 <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => {
-				expand_avatar(
-					image.src
-						.replace('/avatar300s/', '/ar0/')
-						.replace('/500x500/', 'ar0'),
-				);
-			}}>
+					expand_avatar(
+						image.src
+							.replace('/avatar300s/', '/ar0/')
+							.replace('/500x500/', 'ar0'),
+					);
+				}}>
                     ${tl(trans.expand)}
                 </button>
                 <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-				copy(name.href);
-			}}>
+					copy(name.href);
+				}}>
                     ${tl(trans.copy_link)}
                 </button>
             `,

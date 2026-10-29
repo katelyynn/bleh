@@ -254,6 +254,7 @@
 .page-header-avatar-list {
 	display: flex;
 	align-items: center;
+	position: relative;
 
 	&.header-refresh {
 		margin-top: calc(-1 * (var(--card-padding) + (var(--page-header-avatar-size) * 0.6)));
@@ -762,5 +763,352 @@
 
 	&>.cta {
 		margin: unset !important;
+	}
+}
+
+
+.chart-position {
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	font-weight: var(--font-weight);
+	cursor: default;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0;
+
+	--w: 44px;
+	--offset: -6px;
+	aspect-ratio: 1 / 1;
+	width: var(--w);
+	border-radius: 50px;
+	color: oklch(var(--l3-c));
+
+	&:after {
+		display: none;
+	}
+
+	.page-header-avatar-list>& {
+		position: absolute;
+
+		top: -6px;
+		left: calc(var(--page-header-avatar-size) - (var(--w) / 2) + var(--offset));
+
+		scale: 1.8;
+	}
+
+	rotate: 10deg;
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 16px 8px 12px 12px;
+		display: block;
+		background: #111;
+
+		rotate: -20deg;
+	}
+
+	transition-property: rotate,
+	scale,
+	filter;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&:hover {
+		scale: 1.9;
+		rotate: 2deg;
+		filter: brightness(110%);
+	}
+}
+
+.chart-position-hash {
+	color: #fff;
+	font-weight: 900;
+
+	text-shadow: 1px 1px 0 #222, 1px -1px 0 #222;
+
+	z-index: 10;
+
+	rotate: -22deg;
+}
+
+.chart-position-number {
+	font-family: Lilita One, var(--font);
+	font-size: 20px;
+	line-height: var(--line-height-subheading);
+
+	display: flex;
+	align-items: center;
+}
+
+.position-number {
+	font-family: Lilita One, var(--font);
+	font-size: 20px;
+	line-height: 22px;
+	height: fit-content;
+	position: relative;
+
+	&[data-number="0"] {
+		--b: #8C8F97;
+		font-family: Single Day, var(--font);
+		background: transparent;
+		color: #fff;
+		padding: 0 1px;
+		font-size: 14px;
+		line-height: 18px;
+		height: 16px;
+		rotate: 5deg;
+		margin-left: 1px;
+
+		transform: scaleY(2);
+
+		&:before {
+			content: '0';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '0';
+			position: absolute;
+			display: block;
+			inset: 0;
+			text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
+		}
+	}
+
+	&[data-number="1"] {
+		--b: #9B659E;
+		font-family: Rakkas, var(--font);
+		background: transparent;
+		color: #FFE9CA;
+		padding: 0 1px;
+		line-height: 18px;
+		height: 16px;
+		rotate: -2deg;
+
+		&:before {
+			content: '1';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '1';
+			position: absolute;
+			display: block;
+			inset: 0;
+			text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000;
+		}
+	}
+
+	&[data-number="2"] {
+		--b: #A59287;
+		font-family: Crimson Text, var(--font);
+		background: transparent;
+		color: #F3EF9A;
+		line-height: 18px;
+		font-weight: 900;
+		rotate: 1deg;
+
+		&:before {
+			content: '2';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 6px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '2';
+			position: absolute;
+			display: block;
+			inset: 0;
+			text-shadow: 0 1px 1px #918984;
+		}
+	}
+
+	&[data-number="3"] {
+		font-family: Instrument Serif, var(--font);
+		background: #BAD6EF;
+		color: #8A2F3E;
+		font-size: 18px;
+		line-height: 16px;
+		font-weight: 900;
+		padding: 1px 1px 0;
+		rotate: -5deg;
+		outline: 1px solid #fff;
+		box-shadow: 0 0 3px #000;
+		margin-left: 1px;
+	}
+
+	&[data-number="4"] {
+		--b: #809BB8;
+		font-family: Rakkas, var(--font);
+		background: transparent;
+		color: #414342;
+		line-height: 18px;
+		font-weight: 900;
+
+		&:before {
+			content: '4';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 5px var(--b);
+			z-index: 0;
+
+			transform: scaleX(0.9);
+		}
+
+		&:after {
+			content: '4';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
+	}
+
+	&[data-number="8"] {
+		--b: #E1DDCC;
+		font-family: Love Ya Like A Sister, var(--font);
+		background: transparent;
+		color: #556B38;
+		line-height: 18px;
+		font-weight: 900;
+		margin-left: -1px;
+
+		&:before {
+			content: '8';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 3px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '8';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
+	}
+
+	&[data-number="9"] {
+		--b: #DCA2AA;
+		font-family: Rakkas, var(--font);
+		background: transparent;
+		color: #AABBC3;
+		line-height: 18px;
+		font-weight: 400;
+		margin-left: -1px;
+		rotate: -3deg;
+
+		&:before {
+			content: '9';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 5px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '9';
+			position: absolute;
+			display: block;
+			inset: 0;
+			text-shadow: 1px -1px 0 #2E3D95, 2px -1px 0 #2E3D95, 1px 0 0 #2E3D95;
+		}
+	}
+
+	&[data-number="7"] {
+		--b: #B5CBD1;
+		font-family: Bodoni Moda, var(--font);
+		background: transparent;
+		color: #902F35;
+		line-height: 18px;
+		font-weight: 400;
+		margin-left: -2px;
+		margin-right: 1px;
+		rotate: -6deg;
+
+		&:before {
+			content: '7';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '7';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
+	}
+
+	&[data-number="5"] {
+		font-family: Rokkitt, var(--font);
+		background: #F6D155;
+		color: #262618;
+		line-height: 14px;
+		font-weight: 900;
+		width: 12px;
+		height: 14px;
+
+		padding-top: 2px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		outline: 1px solid #fff;
+	}
+
+	&[data-number="6"] {
+		--b: #8A271B;
+		font-family: UnifrakturCook, var(--font);
+		background: transparent;
+		color: #F1CDD5;
+		line-height: 18px;
+		font-weight: 400;
+		margin-left: -1px;
+		margin-right: 1px;
+
+		&:before {
+			content: '6';
+			position: absolute;
+			display: block;
+			inset: 0;
+			color: var(--b);
+			-webkit-text-stroke: 4px var(--b);
+			z-index: 0;
+		}
+
+		&:after {
+			content: '6';
+			position: absolute;
+			display: block;
+			inset: 0;
+		}
 	}
 }

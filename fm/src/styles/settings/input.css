@@ -23,11 +23,10 @@ input {
 .content-form input[type="url"],
 .content-form select,
 .content-form textarea {
-	--bg: oklch(var(--b4));
-	--bg-hov: var(--bg);
-	--bg-atv: var(--bg);
-	/* ^ on firefox (at least) transparent backgrounds get
-	overlayed over white, which is not readable at all */
+	--bg: var(--textarea);
+	--bg-hov: var(--textarea-hov);
+	--bg-atv: var(--textarea-hov);
+	--shadow: var(--input-shadow) !important;
 	--col: oklch(var(--c2));
 	--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
 	background-color: var(--bg) !important;
@@ -41,34 +40,12 @@ input {
 	border-radius: var(--radius, var(--input-radius)) !important;
 	box-shadow: var(--shadow, var(--interact-shadow)) !important;
 	border: unset !important;
+	outline: none !important;
 	height: var(--button-height);
 	transition-property: background-color, transform, box-shadow, color, border,
 		filter;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
-
-	&:not(select) {
-		--bg: var(--textarea);
-		--bg-hov: var(--textarea-hov);
-		--bg-atv: var(--textarea-hov);
-		--shadow: var(--input-shadow) !important;
-		outline: none !important;
-
-		&[aria-expanded="true"],
-		&:focus-visible:not([readonly]) {
-			--focus-outline: none !important;
-			--shadow: var(--focused-input-shadow) !important;
-		}
-
-		&[disabled]:not([disabled="false"]),
-		&[readonly] {
-			--bg-hov: var(--bg) !important;
-			--bg-atv: var(--bg) !important;
-			--focus-outline: none !important;
-			pointer-events: none;
-			--col: oklch(var(--c3));
-		}
-	}
 
 	&#id_email:not(:hover, :focus-visible) {
 		--col: transparent;
@@ -80,12 +57,21 @@ input {
 		transition: none !important;
 	}
 
+	&:focus-visible:not([readonly]),
 	&[aria-expanded="true"],
 	&:active {
 		background-color: var(--bg-atv) !important;
+		--focus-outline: none !important;
+		--shadow: var(--focused-input-shadow) !important;
 	}
 
-	&[disabled]:not([disabled="false"]) {
+	&[disabled]:not([disabled="false"]),
+	&[readonly] {
+		--bg-hov: var(--bg) !important;
+		--bg-atv: var(--bg) !important;
+		--focus-outline: none !important;
+		pointer-events: none;
+		--col: oklch(var(--c3));
 		opacity: 0.7 !important;
 	}
 

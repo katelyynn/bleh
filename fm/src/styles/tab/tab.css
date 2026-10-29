@@ -1,4 +1,4 @@
-.secondary-nav {
+.secondary-nav:not(.ignore) {
 	box-shadow: unset;
 	padding-bottom: 1px;
 	margin: unset !important;
@@ -236,7 +236,7 @@ input::placeholder {
 	margin-left: unset !important;
 }
 
-.navlist-items {
+.navlist-items:not(.ignore) {
 	display: flex;
 	gap: var(--button-list-gap);
 	flex: 1;
@@ -244,6 +244,11 @@ input::placeholder {
 	&>.fill {
 		flex: 1;
 	}
+}
+
+.navlist-items.ignore {
+	--c2: 0 0 0;
+	--l3-c: 0 0 0;
 }
 
 /* navlist-more isnt contained in navlist-items */
@@ -255,10 +260,10 @@ button.navlist-more {
 	width: unset !important;
 
 	/* left padding for icon, otherwise just 12px 16px */
-	--padding: var(--button-verts) var(--button-sides) !important;
+	--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 
-	&:not(.chibi) {
-		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
+	&.chibi {
+		--padding: var(--button-verts) var(--button-sides) !important;
 	}
 
 	z-index: 1;
@@ -287,6 +292,10 @@ button.navlist-more {
 		.new-badge {
 			color: var(--mask-colour);
 		}
+	}
+
+	&.chibi {
+		width: var(--button-width) !important;
 	}
 }
 

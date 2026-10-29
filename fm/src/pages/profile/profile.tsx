@@ -698,7 +698,7 @@ export function create_profile_note_panel(has_note?: string) {
             <div class="top-container">
                 <h2>${tl(trans.notes)}</h2>
                 <div class="view-buttons blend blend-v2">
-                    <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
+                    <button class="btn left-icon blend-v2-btn" data-type="delete" onclick=${() => {
 			const notes = JSON.parse(
 				localStorage.getItem('bleh_profile_notes') || '{}',
 			);
@@ -711,7 +711,7 @@ export function create_profile_note_panel(has_note?: string) {
 				title: tl(trans.cleared_note_for_user, { u: page.name }),
 			});
 		}}>${tl(trans.clear)}</button>
-                    <button class="see-more left-icon blend-v2-btn" data-type="save" onclick=${() => {
+                    <button class="btn left-icon blend-v2-btn" data-type="save" onclick=${() => {
 			const notes = JSON.parse(
 				localStorage.getItem('bleh_profile_notes'),
 			) || {};

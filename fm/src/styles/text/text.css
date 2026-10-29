@@ -46,39 +46,6 @@
 		font-weight: var(--font-weight-medium);
 	}
 
-	.wiki-edit-small {
-		--mask: var(--icon-16-edit-mini);
-		text-transform: lowercase;
-	}
-
-	.read-more {
-		--mask: var(--icon-16-arrow-right);
-	}
-
-	.wiki-edit-small,
-	.read-more {
-		position: relative;
-		--mask-size: 12px;
-		--margin-top: -6px;
-		padding-right: calc(12px + 4px);
-		--left: none;
-		--right: 0;
-
-		&:not(:hover) {
-			color: inherit;
-		}
-	}
-
-	.wiki-edit-small:not(:hover),
-	.read-more:not(:hover) {
-		color: inherit;
-	}
-
-	.right-links {
-		display: flex;
-		gap: var(--card-gap);
-	}
-
 	p {
 		margin: unset;
 	}
@@ -118,6 +85,11 @@
 			}
 		}
 	}
+}
+
+.right-links {
+	display: flex;
+	gap: var(--card-gap);
 }
 
 .sub-text.normal.disc-header {

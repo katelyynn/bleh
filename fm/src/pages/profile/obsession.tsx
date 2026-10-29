@@ -160,9 +160,8 @@ export function bleh_obsession() {
                 <div class="title-container">
                     <h1 class="header-new-title page-header-title"><a href="${link}">${track_title}</a></h1>
                 </div>
-                <h2 class="page-header-artist artist-for-track">${
-		html.node([track_artist.innerHTML])
-	}</h2>
+                <h2 class="page-header-artist artist-for-track">${html.node([track_artist.innerHTML])
+		}</h2>
             </div>
         </section>
     `;
@@ -206,8 +205,7 @@ export function bleh_obsession() {
 
 	const quote = html.node`
         <section class="obsession-quote sour">
-            ${
-		first
+            ${first
 			? () => {
 				const elem = html.node`
                     <div class="grid-item-icon grid-item-icon-first colourful obsession-first-icon">
@@ -222,9 +220,8 @@ export function bleh_obsession() {
 				return elem;
 			}
 			: ''
-	}
-            ${
-		obsession_reason
+		}
+            ${obsession_reason
 			? html.node`
             <div class="quote">
                 ${obsession_reason.textContent.trim()}
@@ -235,22 +232,21 @@ export function bleh_obsession() {
                 ...
             </div>
             `
-	}
+		}
             <div class="sub-text">
                 <div class="obsession-author">
                     ${obsession_avatar}
                     <strong class="name">${obsession_author}</strong>
                     <a class="link-block-cover-link" href="${root}user/${obsession_author}"></a>
                 </div>
-                ${
-		scrobbles
+                ${scrobbles
 			? html.node`
                 <div class="obsession-listens icon-mask">
                     ${html.node([scrobbles.innerHTML])}
                 </div>
                 `
 			: ''
-	}
+		}
                 <div class="obsession-date icon-mask">
                     ${date.textContent}
                 </div>
@@ -371,7 +367,7 @@ export function obsession_list() {
 		) as HTMLButtonElement;
 
 		if (play) {
-			play.classList = 'blend-v2-btn left-icon';
+			play.classList = 'btn blend-v2-btn left-icon';
 			play.insertBefore(
 				<Icon name={icons.play} />,
 				play.firstChild,
@@ -466,13 +462,12 @@ export function obsession_list() {
 		const cover_substr = bg.indexOf('url');
 		const cover = html.node`
             <img
-            src=${
-			bg
+            src=${bg
 				.substring(cover_substr)
 				.replace('url("', '')
 				.replace('")', '')
 				.trim()
-		}
+			}
             alt=${title} loading="lazy">
         `;
 
@@ -482,24 +477,21 @@ export function obsession_list() {
 			item.querySelector('.obsession-first') != null;
 
 		const grid_item = html.node`
-            <li class="grid-items-item obsessions-item ${
-			obsession_is_first ? 'first' : ''
-		}">
-                ${
-			obsession_is_first
+            <li class="grid-items-item obsessions-item ${obsession_is_first ? 'first' : ''
+			}">
+                ${obsession_is_first
 				? html.node`
                     <div class="grid-item-icon grid-item-icon-first colourful">
                         ${icon({ name: icons.star })}
                     </div>
                 `
 				: ''
-		}
+			}
                 <div class="grid-items-cover-image">
-                    <div class="grid-items-cover-image-image ${
-			cover.src.endsWith('4128a6eb29f94943c9d206c08e625904.jpg')
+                    <div class="grid-items-cover-image-image ${cover.src.endsWith('4128a6eb29f94943c9d206c08e625904.jpg')
 				? 'grid-items-cover-default'
 				: ''
-		}">
+			}">
                         ${cover}
                     </div>
                     <div class="grid-items-item-details">

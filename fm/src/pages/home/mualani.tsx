@@ -40,7 +40,7 @@ import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { Select } from '@/components/select/select.tsx';
+import { Select, SelectOption } from '@/components/select/select.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
@@ -108,6 +108,8 @@ import { HeatmapDates } from '@/components/date/heatmap';
 import { OracleCredits } from '@/components/oracle/credits';
 import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/block';
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
+import { validWordmarks, Wordmark } from '@/components/music/wordmark';
+import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -224,6 +226,8 @@ export function mualani() {
 
 	const c = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 	const avi = c.evangelicgirl.avatar;
+
+	const wordmarks = createRef();
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -580,6 +584,11 @@ export function mualani() {
 					<DemoItem label='SettingRange (binded to gloss)'>
 						<SettingGroup>
 							<SettingRange bind='gloss' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingRange (binded to noise)'>
+						<SettingGroup>
+							<SettingRange bind='noise' />
 						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
@@ -1592,6 +1601,44 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section id='wordmark'>
+				<DemoGrid>
+					<DemoItem label='Wordmark'>
+						<div class='wordmarks-here' ref={wordmarks} />
+						<Select values={getWordmarks()} onChange={(val) => {
+							wordmarks.current.replaceChildren(
+								<Wordmark name={val} />
+							);
+						}} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='chart'>
+				<DemoGrid>
+					<DemoItem label='Position'>
+						<PageHeaderPosition text='#30' />
+						<PageHeaderPosition text='#1' />
+						<PageHeaderPosition text='#2' />
+						<PageHeaderPosition text='#181' />
+						<PageHeaderPosition text='#150' />
+						<PageHeaderPosition text='#123' />
+						<PageHeaderPosition text='#65' />
+						<PageHeaderPosition text='#97' />
+					</DemoItem>
+					<DemoItem label='PositionNumber'>
+						<PositionNumber number={0} />
+						<PositionNumber number={1} />
+						<PositionNumber number={2} />
+						<PositionNumber number={3} />
+						<PositionNumber number={4} />
+						<PositionNumber number={5} />
+						<PositionNumber number={6} />
+						<PositionNumber number={7} />
+						<PositionNumber number={8} />
+						<PositionNumber number={9} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
 
@@ -1930,4 +1977,18 @@ function DemoItem({ children, label }: { children: ReactNode; label: string }) {
 			</div>
 		</div>
 	);
+}
+
+function getWordmarks() {
+	const list = validWordmarks;
+	const new_list: SelectOption[] = [];
+
+	Object.keys(list).forEach((val) => {
+		new_list.push({
+			value: val,
+			text: val
+		});
+	});
+
+	return new_list;
 }

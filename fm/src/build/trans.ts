@@ -6337,7 +6337,7 @@ export const trans = {
 			string: {
 				en: '***slanted but bold***',
 				de: '***Fett UND kursiv gleichzeitig!***',
-				es: '**inclinado pero en negrita***',
+				es: '***inclinado pero en negrita***',
 				it: '***corsivo, ma in grassetto***',
 				pt: '***inclinado, mas em negrito***',
 				sv: '***fet och kursiv samtidigt***',
@@ -12790,6 +12790,19 @@ export const trans = {
 	profile_summary_pie_chart: {
 		en: 'Show pie chart',
 	},
+	chart_position: {
+		// shown on artist/album pages
+		// v = the number placement
+		en: '{v} in the world'
+	},
+	artist_wordmarks: {
+		name: {
+			en: 'Show stylised names for some artists'
+		},
+		body: {
+			en: 'Adds personalisation to each page, sourced from Apple Music and official websites'
+		}
+	}
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

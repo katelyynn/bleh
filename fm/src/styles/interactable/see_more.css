@@ -43,7 +43,7 @@
 		display: none;
 	}
 
-	&:not(.chibi-see-more):after {
+	&:after {
 		content: '';
 		position: absolute;
 		display: block !important;
@@ -65,27 +65,15 @@
 		transition-timing-function: var(--trans-function-ani);
 	}
 
+	&:after {
+		right: calc(var(--icon-size) + 4px);
+	}
+
 	&.left-icon {
 		&:after {
 			left: calc(var(--icon-size) + 4px);
+			right: 0;
 		}
-	}
-
-	&:not(.left-icon) {
-		&:after {
-			right: calc(var(--icon-size) + 4px);
-		}
-
-		/*&:not([data-type]) {
-
-			&:hover,
-			&:active,
-			&[aria-expanded="true"] {
-				&:before {
-					--right: -1px;
-				}
-			}
-			}*/
 	}
 
 	&.shout-more-actions {

@@ -30,6 +30,7 @@ import { ff } from './sku';
 import { new_indicator } from '../shared/indicator';
 import { getThemes } from '@/build/theme.ts';
 import { icons } from '@/components/shared/icon.tsx';
+import { useSettings } from '@/page';
 
 interface setting {
 	id: string;
@@ -1613,7 +1614,7 @@ export function save_setting(id: string, value: setting_value) {
 	const store = settings_store[id] || {};
 	const type = store.type || 'toggle';
 
-	settings[id] = value;
+	//settings[id] = value;
 
 	if (!other_setting_types.includes(type) && store.bubble) {
 		document.body.setAttribute(`data-bleh--${id}`, String(value));
@@ -1621,57 +1622,55 @@ export function save_setting(id: string, value: setting_value) {
 
 	if (id == 'theme') {
 		// causing issues with loading
-		settings.theme_type = getThemes()[value as string].type;
-
-		document.body.setAttribute(
-			`data-bleh--theme_type`,
-			settings.theme_type as string,
-		);
-
+		useSettings.set('theme_type', getThemes()[value as string].type);
 		chart_reflow();
 	}
 
-	document.body.classList.toggle(
-		'increase-btn-contrast',
-		settings.lit <= 0.3,
-	);
-
 	// if using a seasonal default,
 	// do not apply the colour
-	if (['hue', 'sat', 'lit'].includes(id)) {
-		if (
-			settings.hue == settings_store.hue.default &&
-			settings.sat == settings_store.sat.default &&
-			settings.lit == settings_store.lit.default
-		) {
-			document.body.style.removeProperty(`--${settings_store.hue.css}`);
-			document.body.style.removeProperty(`--${settings_store.sat.css}`);
-			document.body.style.removeProperty(`--${settings_store.lit.css}`);
-			document.body.classList.remove('increase-btn-contrast');
-		} else {
-			document.body.style.setProperty(
-				`--${settings_store.hue.css}`,
-				settings.hue,
+	requestAnimationFrame(() => {
+		if (['hue', 'sat', 'lit'].includes(id)) {
+			document.body.classList.toggle(
+				'increase-btn-contrast',
+				useSettings.get('lit') <= 0.3,
 			);
-			document.body.style.setProperty(
-				`--${settings_store.sat.css}`,
-				settings.sat,
-			);
-			document.body.style.setProperty(
-				`--${settings_store.lit.css}`,
-				settings.lit,
-			);
-		}
-	} else if (value == store.default) {
-		document.body.style.removeProperty(`--${store.css}`);
-	} else if (store.css) {
-		document.body.style.setProperty(
-			`--${store.css}`,
-			`${value}${store.suffix || ''}`,
-		);
-	}
 
-	seasonal_colour_switch();
+			seasonal_colour_switch();
+
+			if (
+				useSettings.get('hue') == settings_store.hue.default &&
+				useSettings.get('sat') == settings_store.sat.default &&
+				useSettings.get('lit') == settings_store.lit.default
+			) {
+				document.body.style.removeProperty(`--${settings_store.hue.css}`);
+				document.body.style.removeProperty(`--${settings_store.sat.css}`);
+				document.body.style.removeProperty(`--${settings_store.lit.css}`);
+				document.body.classList.remove('increase-btn-contrast');
+			} else {
+				document.body.style.setProperty(
+					`--${settings_store.hue.css}`,
+					useSettings.get('hue'),
+				);
+				document.body.style.setProperty(
+					`--${settings_store.sat.css}`,
+					useSettings.get('sat'),
+				);
+				document.body.style.setProperty(
+					`--${settings_store.lit.css}`,
+					useSettings.get('lit'),
+				);
+			}
+		} else if (store.css) {
+			if (value == store.default) {
+				document.body.style.removeProperty(`--${store.css}`);
+			} else {
+				document.body.style.setProperty(
+					`--${store.css}`,
+					`${value}${store.suffix || ''}`,
+				);
+			}
+		}
+	});
 
 	if (
 		store.require_reload == true ||
@@ -1693,9 +1692,9 @@ export function seasonal_colour_switch() {
 
 	document.body.setAttribute(
 		'data-seasonal-accent',
-		settings.hue == 255 &&
-		settings.sat == 1 &&
-		settings.lit == 1 &&
+		useSettings.get('hue') == 255 &&
+		useSettings.get('sat') == 1 &&
+		useSettings.get('lit') == 1 &&
 		!has_user_accent,
 	);
 }
