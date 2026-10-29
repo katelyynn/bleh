@@ -1628,47 +1628,49 @@ export function save_setting(id: string, value: setting_value) {
 
 	// if using a seasonal default,
 	// do not apply the colour
-	if (['hue', 'sat', 'lit'].includes(id)) {
-		document.body.classList.toggle(
-			'increase-btn-contrast',
-			useSettings.get('lit') <= 0.3,
-		);
+	requestAnimationFrame(() => {
+		if (['hue', 'sat', 'lit'].includes(id)) {
+			document.body.classList.toggle(
+				'increase-btn-contrast',
+				useSettings.get('lit') <= 0.3,
+			);
 
-		seasonal_colour_switch();
+			seasonal_colour_switch();
 
-		if (
-			useSettings.get('hue') == settings_store.hue.default &&
-			useSettings.get('sat') == settings_store.sat.default &&
-			useSettings.get('lit') == settings_store.lit.default
-		) {
-			document.body.style.removeProperty(`--${settings_store.hue.css}`);
-			document.body.style.removeProperty(`--${settings_store.sat.css}`);
-			document.body.style.removeProperty(`--${settings_store.lit.css}`);
-			document.body.classList.remove('increase-btn-contrast');
-		} else {
-			document.body.style.setProperty(
-				`--${settings_store.hue.css}`,
-				useSettings.get('hue'),
-			);
-			document.body.style.setProperty(
-				`--${settings_store.sat.css}`,
-				useSettings.get('sat'),
-			);
-			document.body.style.setProperty(
-				`--${settings_store.lit.css}`,
-				useSettings.get('lit'),
-			);
+			if (
+				useSettings.get('hue') == settings_store.hue.default &&
+				useSettings.get('sat') == settings_store.sat.default &&
+				useSettings.get('lit') == settings_store.lit.default
+			) {
+				document.body.style.removeProperty(`--${settings_store.hue.css}`);
+				document.body.style.removeProperty(`--${settings_store.sat.css}`);
+				document.body.style.removeProperty(`--${settings_store.lit.css}`);
+				document.body.classList.remove('increase-btn-contrast');
+			} else {
+				document.body.style.setProperty(
+					`--${settings_store.hue.css}`,
+					useSettings.get('hue'),
+				);
+				document.body.style.setProperty(
+					`--${settings_store.sat.css}`,
+					useSettings.get('sat'),
+				);
+				document.body.style.setProperty(
+					`--${settings_store.lit.css}`,
+					useSettings.get('lit'),
+				);
+			}
+		} else if (store.css) {
+			if (value == store.default) {
+				document.body.style.removeProperty(`--${store.css}`);
+			} else {
+				document.body.style.setProperty(
+					`--${store.css}`,
+					`${value}${store.suffix || ''}`,
+				);
+			}
 		}
-	} else if (store.css) {
-		if (value == store.default) {
-			document.body.style.removeProperty(`--${store.css}`);
-		} else {
-			document.body.style.setProperty(
-				`--${store.css}`,
-				`${value}${store.suffix || ''}`,
-			);
-		}
-	}
+	});
 
 	if (
 		store.require_reload == true ||
