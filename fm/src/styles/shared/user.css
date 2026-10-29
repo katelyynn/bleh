@@ -102,6 +102,29 @@
 	--icon-size: 14px;
 }
 
+.user-follow {
+	--mask-size: 18px;
+	width: calc(18px + 2px) !important;
+	height: calc(18px + 2px) !important;
+	padding: 1px !important;
+	border-radius: 50px !important;
+
+	background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
+
+	min-width: unset;
+
+	--margin-top: -9px !important;
+	--left: 1px !important;
+}
+
+.user-list-inner-wrap {
+
+	&:before,
+	&:after {
+		display: none;
+	}
+}
+
 .user-list {
 	display: flex;
 	flex-direction: column;
@@ -112,31 +135,8 @@
 		display: none;
 	}
 
-	.user-follow {
-		--mask-size: 18px;
-		width: calc(18px + 2px) !important;
-		height: calc(18px + 2px) !important;
-		padding: 1px !important;
-		border-radius: 50px !important;
-
-		background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
-
-		min-width: unset;
-
-		--margin-top: -9px !important;
-		--left: 1px !important;
-	}
-
-	.user-list-inner-wrap {
-
-		&:before,
-		&:after {
-			display: none;
-		}
-	}
-
 	&[data-list-view="list"] {
-		.user-list-item {
+		&>.user-list-item {
 			border-bottom: 1px solid var(--separator-base);
 
 			&[data-is-followed="true"],
@@ -148,6 +148,11 @@
 			&>.user-list-inner-wrap {
 				padding-right: calc(var(--follow-button-size) + var(--item-list-gap));
 
+				&>.user-list-avatar {
+					top: var(--item-list-gap);
+					left: var(--item-list-gap);
+				}
+
 				&>.user-follow {
 					order: 10;
 					flex-shrink: 0;
@@ -155,6 +160,7 @@
 
 				&>.user-list-name {
 					flex-shrink: 0;
+					max-width: 200px;
 				}
 
 				&>.user-list-description {
@@ -164,18 +170,9 @@
 			}
 		}
 
-		.user-list-avatar {
-			top: var(--item-list-gap);
-			left: var(--item-list-gap);
-		}
-
 		.username-combo {
 			text-align: left;
 			flex-direction: row;
-		}
-
-		.user-list-name {
-			max-width: 200px;
 		}
 	}
 
@@ -191,7 +188,7 @@
 		--user-list-item-padding: var(--item-list-gap);
 		--user-list-item-radius: var(--item-big-radius);
 
-		.user-list-item {
+		&>.user-list-item {
 			background-color: transparent;
 			box-shadow: inset 0 0 0 1px var(--separator-base);
 
@@ -216,62 +213,57 @@
 				--follow-button-col: oklch(var(--l3-c));
 				box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 12%);
 			}
+
+			&>.user-list-inner-wrap {
+				flex-direction: column;
+				align-items: unset;
+				gap: 0;
+				margin: unset;
+				height: 56px;
+				padding-left: calc(56px + 10px);
+				padding-right: calc(var(--follow-button-size) + 10px);
+				position: relative;
+
+				&>.user-list-avatar {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 56px;
+					height: 56px;
+					--mask-size: var(--cover-size-50);
+					--icon-size: 18px;
+				}
+
+				&>.top-listeners-item-name,
+				&>.user-list-name {
+					margin: unset !important;
+				}
+
+				.top-listeners-track,
+				.user-list-description {
+					overflow: visible;
+					padding-right: unset;
+					flex-direction: column;
+					gap: 0;
+				}
+
+				&>.user-follow {
+					position: absolute;
+					bottom: calc(56px - 18px);
+					left: calc(56px - 18px);
+					z-index: 12;
+				}
+
+				.user-list-follower-btn {
+					top: 50%;
+					margin-top: calc(-1 * (var(--button-height) / 2));
+				}
+			}
 		}
 
 		.username-combo {
 			text-align: left;
 			flex-direction: row;
-		}
-
-		.user-list-inner-wrap {
-			flex-direction: column;
-			align-items: unset;
-			gap: 0;
-			margin: unset;
-			height: 56px;
-			padding-left: calc(56px + 10px);
-			padding-right: calc(var(--follow-button-size) + 10px);
-			position: relative;
-
-			.user-list-avatar {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 56px;
-				height: 56px;
-				--mask-size: var(--cover-size-50);
-
-				.avatar-status-dot {
-					width: 18px;
-					height: 18px;
-					--mask-size: 18px;
-				}
-			}
-
-			.top-listeners-item-name,
-			.user-list-name {
-				margin: unset !important;
-			}
-
-			.top-listeners-track,
-			.user-list-description {
-				overflow: visible;
-				padding-right: unset;
-				flex-direction: column;
-				gap: 0;
-			}
-
-			.user-follow {
-				position: absolute;
-				bottom: calc(56px - 18px);
-				left: calc(56px - 18px);
-				z-index: 12;
-			}
-
-			.user-list-follower-btn {
-				top: 50%;
-				margin-top: calc(-1 * (var(--button-height) / 2));
-			}
 		}
 	}
 
@@ -288,21 +280,14 @@
 		--user-list-item-radius: var(--item-med-radius);
 		--user-list-item-width: 100%;
 
-		.user-list-name {
-			min-width: unset;
-			max-width: 90%;
-			min-height: 36px;
-			/* column */
-		}
-
-		.user-list-item {
+		&>.user-list-item {
 			display: flex;
 			flex-direction: column;
 			justify-content: end;
 			height: 280px;
 			overflow: hidden;
 
-			.user-background {
+			&>.user-background {
 				position: absolute;
 				inset: 0;
 				display: block;
@@ -320,14 +305,6 @@
 				max-height: 200px;
 			}
 
-			&:hover {
-
-				.user-list-avatar,
-				.user-follow {
-					scale: 1.1;
-				}
-			}
-
 			background-color: transparent;
 			box-shadow: inset 0 0 0 1px var(--separator-base);
 
@@ -353,7 +330,7 @@
 				box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 12%);
 			}
 
-			.user-list-inner-wrap {
+			&>.user-list-inner-wrap {
 				flex-direction: column;
 				height: unset;
 				text-align: center;
@@ -383,7 +360,6 @@
 					transition-property: translate;
 					transition-duration: 0.4s;
 					transition-timing-function: var(--trans-function-ani);
-					filter: var(--header-filter-shadow) !important;
 
 					z-index: 3;
 
@@ -412,7 +388,7 @@
 					}
 				}
 
-				.user-list-avatar {
+				&>.user-list-avatar {
 					width: var(--w);
 					height: var(--w);
 					--mask-size: var(--cover-size-100);
@@ -426,7 +402,7 @@
 					transition-timing-function: var(--trans-function-ani);
 				}
 
-				.user-follow {
+				&>.user-follow {
 					position: absolute;
 					top: 64px;
 					right: 50%;
@@ -437,28 +413,12 @@
 					transition-timing-function: var(--trans-function-ani);
 				}
 
-				.user-list-name {
-					translate: 0;
-					transition-property: translate;
-					transition-duration: 0.4s;
-					transition-timing-function: var(--trans-function-ani);
-					filter: var(--header-filter-shadow) !important;
-
+				&>.user-list-name {
 					margin-right: unset;
-				}
-
-				.listener-list-position {
-					transition-property: translate;
-					transition-duration: 0.4s;
-					transition-timing-function: var(--trans-function-ani);
-					filter: var(--header-filter-shadow) !important;
-				}
-
-				.user-list-shared-artists,
-				.user-list-about-me {
-					transition-property: opacity;
-					transition-duration: 0.4s;
-					transition-timing-function: var(--trans-function-ani);
+					min-width: unset;
+					max-width: 90%;
+					min-height: 36px;
+					/* column */
 				}
 
 				.user-list-follower-btn {
