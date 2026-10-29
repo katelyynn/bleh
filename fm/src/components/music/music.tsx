@@ -795,6 +795,9 @@ export function bleh_top_listeners() {
 			id: 'list_view',
 			func: (val) => {
 				user_list.setAttribute('data-list-view', val);
+				items.forEach(item => {
+					item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+				});
 			},
 		}),
 		panel.firstElementChild,
@@ -815,6 +818,11 @@ export function bleh_top_listeners() {
 	});
 
 	legacy_top_listeners_container.replaceWith(user_list);
+
+	const items = user_list?.querySelectorAll('.user-list-item') || [];
+	items.forEach(item => {
+		item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+	});
 }
 
 export function convert_top_listener(listener, index, key = 'top-listeners') {

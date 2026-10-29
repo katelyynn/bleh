@@ -16,6 +16,8 @@ import { log } from '@/build/log.ts';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 import { header_colour } from '../page/colour';
+import { useSettings } from '@/page';
+import { setting } from '../settings/settings';
 
 export function bleh_users() {
 	const users = page.structure.main?.querySelectorAll(
@@ -115,4 +117,39 @@ export function patch_user_list_item(user, index, cache = {}) {
 	img.src = img.src.replace('/avatar70s/', '/avatar170s/');
 
 	return user;
+}
+
+export function page_with_users() {
+	const no_data = page.structure.main!.querySelector('.no-data-message') as HTMLElement;
+	const pagination = page.structure.main!.querySelector('.pagination') as HTMLElement;
+
+	let no_data_neighbours = page.structure.main!.querySelector(':scope > p') as HTMLElement | undefined;
+	if (no_data_neighbours) no_data_neighbours.classList.add('no-data-message');
+
+	const user_list = page.structure.main!.querySelector('.user-list') as HTMLElement;
+	user_list?.setAttribute('data-list-view', useSettings.get('list_view') as string);
+
+	const items = user_list?.querySelectorAll('.user-list-item') || [];
+	items.forEach(item => {
+		item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+	});
+
+	if (user_list) no_data_neighbours = undefined;
+
+	page.structure.main!.replaceChildren(
+		<section class='users'>
+			{(!no_data && !no_data_neighbours) && setting({
+				id: 'list_view', func: (val: string) => {
+					user_list?.setAttribute('data-list-view', val);
+					items.forEach(item => {
+						item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+					});
+				}
+			})}
+			{no_data}
+			{no_data_neighbours}
+			{user_list}
+			{pagination}
+		</section>
+	);
 }

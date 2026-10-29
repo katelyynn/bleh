@@ -24,6 +24,7 @@ import { icons } from '@/components/shared/icon';
 import { settings } from '@/build/config';
 import { setting } from '@/components/settings/settings';
 import { PageHeader } from '@/components/page/header';
+import { page_with_users } from '@/components/shared/users';
 
 export function bleh_events() {
 	if (page.subpage == 'overview') {
@@ -197,84 +198,73 @@ export function bleh_events() {
                 <div class="metadata-and-wiki-row full-w">
                     <div class="metadata-column">
                         <div class="metadata-group primary">
-                            <dt class="catalogue-metadata-heading">${
-			tl(trans.located)
-		}</dt>
+                            <dt class="catalogue-metadata-heading">${tl(trans.located)
+			}</dt>
                             <dd class="catalogue-metadata-description address">
                                 <strong>${address.head}</strong>
-                                <p>${
-			address.street ? `${address.street}, ` : ''
-		}${address.locality}</p>
-                                <p>${
-			address.postal ? `${address.postal}, ` : ''
-		}${address.country}</p>
+                                <p>${address.street ? `${address.street}, ` : ''
+			}${address.locality}</p>
+                                <p>${address.postal ? `${address.postal}, ` : ''
+			}${address.country}</p>
                             </dd>
                         </div>
                         <div class="metadata-group">
-                            <dt class="catalogue-metadata-heading">${
-			tl(trans.date)
-		}</dt>
+                            <dt class="catalogue-metadata-heading">${tl(trans.date)
+			}</dt>
                             <dd class="catalogue-metadata-description address">
                                 ${() => {
-			const date_object = DateTime.fromISO(date.getAttribute('content'));
+				const date_object = DateTime.fromISO(date.getAttribute('content'));
 
-			const values = date.querySelectorAll('strong');
-			let hour;
-			if (values.length > 1) {
-				hour = values[1];
-			}
+				const values = date.querySelectorAll('strong');
+				let hour;
+				if (values.length > 1) {
+					hour = values[1];
+				}
 
-			const elem = html.node`
-                                        <strong>${
-				date_object.toLocaleString(DateTime.DATE_FULL)
-			}</strong>
-                                        ${
-				hour ? html.node`<p>${hour.textContent}</p>` : ''
-			}
+				const elem = html.node`
+                                        <strong>${date_object.toLocaleString(DateTime.DATE_FULL)
+					}</strong>
+                                        ${hour ? html.node`<p>${hour.textContent}</p>` : ''
+					}
                                     `;
 
-			return elem;
-		}}
+				return elem;
+			}}
                             </dd>
                         </div>
-                        ${
-			tel
+                        ${tel
 				? html.node`
                             <div class="metadata-group">
-                                <dt class="catalogue-metadata-heading">${
-					tl(trans.contact)
-				}</dt>
+                                <dt class="catalogue-metadata-heading">${tl(trans.contact)
+					}</dt>
                                 <dd class="catalogue-metadata-description">${tel}</dd>
                             </div>
                         `
 				: ''
-		}
+			}
                     </div>
                 </div>
                 <div class="metadata-row">
                     <div class="metadata-group">
-                        <div class="sub-text music-small-header">${
-			tl(trans.find_on)
-		}</div>
+                        <div class="sub-text music-small-header">${tl(trans.find_on)
+			}</div>
                         <div class="music-links">
-                            ${
-			web
+                            ${web
 				? html.node`
                                 <a class="btn resource-external-link resource-external-link--homepage music-link colourful icon" href=${web} target="_blank">
                                     ${address.head}
                                 </a>
                             `
 				: ''
-		}
-                            ${
-			maps
+			}
+                            ${maps
 				? html.node`
                                 <a class="btn music-link colourful social-link icon" data-host="maps.google.com" data-host-unknown="false" href=${maps} target="_blank">
                                     ${tl(trans.show_on_map)}
                                 </a>
                             `
 				: ''
-		}
+			}
                         </div>
                     </div>
                 </div>
@@ -286,10 +276,10 @@ export function bleh_events() {
 			page.structure.side.appendChild(html.node`
                 <section>
                     <p class="card-tip">${{
-				html: tl(trans.added_by, {
-					u: `<a class="mention" href="${root}user/${added_by}">@${added_by}</a>`,
-				}),
-			}}</p>
+					html: tl(trans.added_by, {
+						u: `<a class="mention" href="${root}user/${added_by}">@${added_by}</a>`,
+					}),
+				}}</p>
                 </section>
             `);
 		}
@@ -317,8 +307,7 @@ export function bleh_events() {
 			);
 
 			poster_panel.innerHTML =
-				`${poster.outerHTML}<a onclick="_expand_avatar('${
-					poster.getAttribute('src')
+				`${poster.outerHTML}<a onclick="_expand_avatar('${poster.getAttribute('src')
 				}')" class="bleh--avatar-clickable-link"></a>`;
 
 			side_actions.after(poster_panel);
@@ -362,34 +351,7 @@ export function bleh_events() {
 		) {
 			convert_to_toolbar();
 
-			const no_data = page.structure.main.querySelector(
-				'.no-data-message',
-			);
-			const pagination = page.structure.main.querySelector('.pagination');
-
-			const user_list = page.structure.main.querySelector('.user-list');
-			user_list?.setAttribute('data-list-view', settings.list_view);
-
-			render(
-				page.structure.main,
-				html.node`
-                <section class="users">
-                    ${
-					!no_data
-						? setting({
-							id: 'list_view',
-							func: (val) => {
-								user_list?.setAttribute('data-list-view', val);
-							},
-						})
-						: ''
-				}
-                    ${no_data}
-                    ${user_list}
-                    ${pagination}
-                </section>
-            `,
-			);
+			page_with_users();
 		}
 	}
 
@@ -454,9 +416,8 @@ function bleh_events_edit() {
 	nav.insertBefore(
 		html.node`
         <li class="navlist-item secondary-nav-item secondary-nav-item--back">
-            <a class="secondary-nav-item-link" href="${
-			back.getAttribute('href')
-		}">
+            <a class="secondary-nav-item-link" href="${back.getAttribute('href')
+			}">
                 ${tl(trans.back)}
             </a>
         </li>
