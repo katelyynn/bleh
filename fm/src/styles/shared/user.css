@@ -14,10 +14,6 @@
 	background: var(--avatar-generic-background);
 }
 
-.col-main-is-primary>.col-main>.pagination {
-	margin-top: var(--card-gap);
-}
-
 .user-list-inner-wrap {
 	padding-left: calc(32px + var(--card-gap));
 	padding-right: unset;
@@ -25,14 +21,8 @@
 	min-height: unset;
 	height: 32px;
 
-	.link-block-cover-link {
+	&>.link-block-cover-link {
 		display: none;
-	}
-
-	&.staff-user {
-		--hue-over: 360;
-		--sat-over: 1.325;
-		--lit-over: 0.825;
 	}
 }
 

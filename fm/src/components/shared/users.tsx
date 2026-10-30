@@ -18,6 +18,7 @@ import { is_sponsor } from '../sponsor';
 import { header_colour } from '../page/colour';
 import { useSettings } from '@/page';
 import { setting } from '../settings/settings';
+import { settings } from '@/build/config';
 
 export function bleh_users() {
 	const users = page.structure.main?.querySelectorAll(
@@ -127,11 +128,11 @@ export function page_with_users() {
 	if (no_data_neighbours) no_data_neighbours.classList.add('no-data-message');
 
 	const user_list = page.structure.main!.querySelector('.user-list') as HTMLElement;
-	user_list?.setAttribute('data-list-view', useSettings.get('list_view') as string);
+	user_list?.setAttribute('data-list-view', settings.list_view as string);
 
 	const items = user_list?.querySelectorAll('.user-list-item') || [];
 	items.forEach(item => {
-		item.setAttribute('data-list-view', useSettings.get('list_view') as string);
+		item.setAttribute('data-list-view', settings.list_view as string);
 	});
 
 	if (user_list) no_data_neighbours = undefined;
