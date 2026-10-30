@@ -9,6 +9,7 @@
 
 	--left: 0;
 	margin: unset !important;
+	--mask2: unset !important;
 }
 
 .cta-copy {
@@ -19,10 +20,6 @@
 
 .cta-link {
 	--show-icon: none;
-
-	&:after {
-		display: none;
-	}
 }
 
 .coloured-cta--add-event-icon {

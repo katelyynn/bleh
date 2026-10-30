@@ -73,6 +73,10 @@ a {
 	}
 }
 
+.link-block--hover {
+	--underline-scale: 1;
+}
+
 a {
 	--icon-size: 12px;
 	--mask-colour: color-mix(in oklch,
