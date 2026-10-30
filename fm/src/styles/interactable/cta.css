@@ -10,6 +10,10 @@
 	--left: 0;
 	margin: unset !important;
 	--mask2: unset !important;
+
+	&.link-block--hover {
+		--underline-scale: 1;
+	}
 }
 
 .cta-copy {
