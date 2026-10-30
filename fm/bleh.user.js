@@ -41240,6 +41240,7 @@ var bleh = (() => {
         it: "Questo distintivo \xE8 riservato per {u}"
       },
       cute: {
+        // (female)
         en: "The creator of bleh",
         pt: "A criadora do bleh",
         pl: "Tw\xF3rca bleh",
@@ -49127,6 +49128,9 @@ var bleh = (() => {
       it: "{v} \xE8 disattivato",
       pt: "{v} est\xE1 desativado"
     },
+    value_is_value: {
+      en: "{v} is {v2}"
+    },
     bulk_edit_extension: {
       // yes the extension
       en: "Last.fm Bulk Edit",
@@ -56156,10 +56160,12 @@ var bleh = (() => {
         if (settings_store[key]?.title) {
           title = tl2(settings_store[key].title);
         }
-        if (val == true) {
+        if (val === true) {
           return tl2(trans.value_is_enabled, { v: title });
+        } else if (val === false) {
+          return tl2(trans.value_is_disabled, { v: title });
         }
-        return tl2(trans.value_is_disabled, { v: title });
+        return tl2(trans.value_is_value, { v: title, v2: val });
       }).join(", ") })
     ] });
   }

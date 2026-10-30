@@ -458,6 +458,7 @@ export const trans = {
 			it: 'Questo distintivo è riservato per {u}',
 		},
 		cute: {
+			// (female)
 			en: 'The creator of bleh',
 			pt: 'A criadora do bleh',
 			pl: 'Twórca bleh',
@@ -8313,6 +8314,9 @@ export const trans = {
 		en: '{v} is disabled',
 		it: '{v} è disattivato',
 		pt: '{v} está desativado',
+	},
+	value_is_value: {
+		en: '{v} is {v2}',
 	},
 	bulk_edit_extension: {
 		// yes the extension
