@@ -416,9 +416,10 @@ export function bleh_artists() {
 					tracks_seen.add(link.textContent.trim().toLowerCase());
 				}
 
-				listeners_section.appendChild(
-					convert_top_listener(listener, index, 'listeners-section'),
-				);
+				const elem = convert_top_listener(listener, index, 'listeners-section');
+				elem.setAttribute('data-list-view', 'grid');
+
+				listeners_section.appendChild(elem);
 			});
 		}
 

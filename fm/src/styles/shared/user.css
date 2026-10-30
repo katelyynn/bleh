@@ -35,6 +35,7 @@
 	padding: var(--user-list-item-padding, 0 var(--item-list-gap));
 	border-radius: var(--user-list-item-radius, unset);
 	margin: unset;
+	position: relative;
 
 	--follow-button-bg: oklch(var(--b4) / 40%);
 	--follow-button-bg-hov: oklch(var(--b4) / 60%);

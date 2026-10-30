@@ -35,7 +35,8 @@ a {
 	padding-left: calc(12px + 2px);
 	--left: 0;
 	--mask-size: 12px;
-	--margin-top: -6px;
+	--top: 1px;
+	--margin-top: 0;
 
 	--interact-mask: none !important;
 
@@ -62,6 +63,14 @@ a {
 
 	&[data-link-type="track"] {
 		--mask: var(--icon-16-track);
+	}
+
+	&:before {
+		height: calc(var(--line-height) + 2px) !important;
+		mask-position: center !important;
+		-webkit-mask-position: center !important;
+		mask-repeat: no-repeat !important;
+		-webkit-mask-repeat: no-repeat !important;
 	}
 }
 
