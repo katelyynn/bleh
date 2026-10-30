@@ -67,6 +67,7 @@ import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { convert_to_select } from '@/components/select/select.tsx';
 import { Wordmark } from '@/components/music/wordmark';
+import { artist_photos_sidebar } from './artist/photos';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -435,6 +436,7 @@ export function bleh_artists() {
 		}
 
 		artist_event_sidebar();
+		artist_photos_sidebar();
 	} else {
 		const btn_add = page.structure.side.querySelector('.add-button');
 		if (btn_add) btn_add.setAttribute('data-page-subpage', page.subpage);

@@ -123651,6 +123651,17 @@ var bleh = (() => {
     return elem;
   }
 
+  // src/pages/artist/photos.tsx
+  function artist_photos_sidebar() {
+    const list = page.structure.side.querySelector(".sidebar-image-list");
+    if (!list) return;
+    const panel = list.parentElement;
+    const head = panel.querySelector("h2");
+    head.replaceWith(
+      /* @__PURE__ */ jsx(PanelHead, { icon: icons.gallery, children: tl2(trans.photos) })
+    );
+  }
+
   // src/pages/artist.tsx
   function bleh_artists() {
     const artist_header = document.body.querySelector(
@@ -123937,6 +123948,7 @@ var bleh = (() => {
         });
       }
       artist_event_sidebar();
+      artist_photos_sidebar();
     } else {
       const btn_add = page.structure.side.querySelector(".add-button");
       if (btn_add) btn_add.setAttribute("data-page-subpage", page.subpage);
