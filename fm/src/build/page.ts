@@ -236,6 +236,7 @@ interface page {
 		avatar_side_override?: string;
 		colour_preview?: ReactElement;
 		home_link: ReactElement;
+		home_link_logo: ReactElement;
 	};
 	previous?: {
 		type: string;

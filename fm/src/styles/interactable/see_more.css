@@ -12,7 +12,7 @@
 
 	display: inline-flex !important;
 	align-items: center;
-	gap: 4px;
+	gap: 2px;
 
 	height: fit-content;
 	background: var(--bg) !important;
@@ -66,10 +66,12 @@
 	}
 
 	&:after {
-		right: calc(var(--icon-size) + 4px);
+		right: calc(var(--icon-size) + 2px);
 	}
 
 	&.left-icon {
+		gap: 4px;
+
 		&:after {
 			left: calc(var(--icon-size) + 4px);
 			right: 0;
@@ -84,6 +86,7 @@
 	}
 
 	&>.bleh-icon {
+		margin: unset;
 		transition-property: rotate, scale;
 		transition-duration: 0.2s;
 		transition-timing-function: var(--trans-function-ani);

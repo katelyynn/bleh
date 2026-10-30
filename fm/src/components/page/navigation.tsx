@@ -68,16 +68,17 @@ import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { MenuRadio } from '../settings/provider/menu/radio';
 
-const handle_update = (e: Event) => {
-	e.preventDefault();
-	prompt_for_update();
-};
-
 export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
 
+	const logo = (
+		<span class='home-logo-container' />
+	);
+
+	page.state.home_link.replaceChildren(logo);
+
 	if (state == 'bleh') {
-		page.state.home_link.replaceChildren(
+		logo.replaceChildren(
 			<div class={['home-logo', 'bleh-logo']} data-season={season}>
 				<div class='brand-inner' data-season={season}>
 					{version.brand}
@@ -85,7 +86,7 @@ export function update_branding_type(state = useSettings.get('branding_type')) {
 			</div>,
 		);
 	} else if (state == 'lastfm') {
-		page.state.home_link.replaceChildren(
+		logo.replaceChildren(
 			<div class={['home-logo', 'lastfm-logo']} data-season={season}>
 				<div class='brand-inner' data-season={season}>Last.fm</div>
 			</div>,
@@ -97,7 +98,7 @@ export function update_branding_type(state = useSettings.get('branding_type')) {
 	);
 
 	if (update_required) {
-		page.state.home_link.addEventListener('onclick', handle_update);
+		page.state.home_link.setAttribute('href', `${root}bleh?setting=update`);
 
 		page.state.home_link.appendChild(
 			<span class='home-version'>
@@ -112,7 +113,7 @@ export function update_branding_type(state = useSettings.get('branding_type')) {
 			<Tooltip>{tl(trans.update_available_to_install)}</Tooltip>,
 		);
 	} else {
-		page.state.home_link.removeEventListener('onclick', handle_update);
+		page.state.home_link.setAttribute('href', `${root}music`);
 	}
 }
 
@@ -286,7 +287,6 @@ export function append_nav() {
 	const masthead_logo = inner.querySelector('.masthead-logo')!;
 
 	const home_link = createRef();
-	const home_link_logo = createRef();
 
 	const search_wrap = createRef();
 
@@ -301,9 +301,7 @@ export function append_nav() {
 				class={['btn', 'navigation-item', 'home-link']}
 				href={`${root}music`}
 				ref={home_link}
-			>
-				<span class='home-logo-container' ref={home_link_logo} />
-			</a>
+			/>
 			<nav
 				class={[
 					'navlist',
@@ -335,7 +333,7 @@ export function append_nav() {
 		</>,
 	);
 
-	page.state.home_link = home_link_logo.current;
+	page.state.home_link = home_link.current;
 
 	update_branding_type();
 
@@ -1063,14 +1061,19 @@ export function append_nav() {
 						{bool(update_required) && (
 							<div
 								class='update-available-banner'
-								onClick={prompt_for_update}
+								onClick={() => {
+									prompt_for_update();
+									auth_menu.hide();
+								}}
 							>
-								<div class='update-container'>
-									<Icon name={icons.update} />
+								<div class='update-available-inner'>
+									<div class='update-container'>
+										<Icon name={icons.update} />
+									</div>
+									<span>
+										{tl(trans.update_available_to_install)}
+									</span>
 								</div>
-								<span>
-									{tl(trans.update_available_to_install)}
-								</span>
 							</div>
 						)}
 						<div

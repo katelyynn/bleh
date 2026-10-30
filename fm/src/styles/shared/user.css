@@ -41,6 +41,8 @@
 	--follow-button-bg-atv: oklch(var(--b4) / 80%);
 	--follow-button-col: oklch(var(--c2));
 
+	--line-clamp: 2;
+
 	&:not(:hover, :focus-within) {
 		--follow-button-opacity: 0.8;
 	}
@@ -62,6 +64,14 @@
 }
 
 .user-background {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	border-radius: unset;
+	background-size: cover;
+	background-position: center;
+	pointer-events: none;
+
 	display: none;
 }
 
@@ -174,6 +184,8 @@
 	&[data-list-view="list"] {
 		border-bottom: 1px solid var(--separator-base);
 
+		--line-clamp: 1;
+
 		&[data-is-followed="true"],
 		&[data-position="1"] {
 			background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%,
@@ -209,20 +221,16 @@
 		background-color: transparent;
 		box-shadow: inset 0 0 0 1px var(--separator-base);
 
+		--line-clamp: 1;
+
 		&>.user-background {
-			position: absolute;
-			inset: 0;
 			display: block;
-			z-index: 0;
-			border-radius: unset;
-			background-size: cover;
-			background-position: center;
 
 			--mask: linear-gradient(90deg, transparent, white, transparent);
 			mask-image: var(--mask);
 			-webkit-mask-image: var(--mask);
 
-			opacity: 0.1;
+			opacity: 0.07;
 
 			max-width: 90%;
 		}
@@ -299,21 +307,9 @@
 		overflow: hidden;
 
 		&>.user-background {
-			position: absolute;
-			inset: 0;
 			display: block;
-			z-index: 0;
-			border-radius: unset;
-			background-size: cover;
-			background-position: center;
 
-			--mask: linear-gradient(0deg, transparent, white, transparent);
-			mask-image: var(--mask);
-			-webkit-mask-image: var(--mask);
-
-			opacity: 0.2;
-
-			max-height: 200px;
+			opacity: 0.05;
 		}
 
 		background-color: transparent;
@@ -352,7 +348,7 @@
 			z-index: 1;
 			gap: 4px;
 
-			.link-block-cover-link {
+			&>.link-block-cover-link {
 				display: block;
 				width: unset;
 				height: unset;
@@ -367,36 +363,7 @@
 				max-width: 100%;
 				height: 54px;
 
-				translate: 0;
-				transition-property: translate;
-				transition-duration: 0.4s;
-				transition-timing-function: var(--trans-function-ani);
-
 				z-index: 3;
-
-				&>p {
-					max-width: 100%;
-					overflow: hidden;
-
-					text-overflow: ellipsis;
-					-webkit-box-orient: vertical;
-					display: -webkit-box;
-					-webkit-line-clamp: 2;
-					white-space: wrap;
-
-					&>.markdown-body {
-						text-overflow: ellipsis;
-						-webkit-box-orient: vertical;
-						display: -webkit-box;
-						-webkit-line-clamp: 2;
-						white-space: wrap;
-					}
-
-					/* i have to override last.fm's :first-child thing :( */
-					p {
-						white-space: wrap;
-					}
-				}
 			}
 
 			&>.user-list-avatar {
@@ -471,6 +438,32 @@
 	align-items: center;
 	gap: var(--card-gap);
 	position: static;
+}
+
+.user-list-description {
+	&>p {
+		max-width: 100%;
+		overflow: hidden;
+
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+		display: -webkit-box;
+		-webkit-line-clamp: var(--line-clamp);
+		white-space: wrap;
+
+		&>.markdown-body {
+			text-overflow: ellipsis;
+			-webkit-box-orient: vertical;
+			display: -webkit-box;
+			-webkit-line-clamp: var(--line-clamp);
+			white-space: wrap;
+		}
+
+		/* i have to override last.fm's :first-child thing :( */
+		p {
+			white-space: wrap !important;
+		}
+	}
 }
 
 .user-list-name {
