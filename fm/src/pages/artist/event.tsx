@@ -5,13 +5,16 @@
  */
 
 import { page } from '@/build/page.ts';
+import { tl, trans } from '@/build/trans';
 import {
 	attendance,
 	EventItem,
 	EventItemProps,
 	EventList,
 } from '@/components/event/item.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
+import { icons } from '@/components/shared/icon';
+import { PanelHead } from '@/components/text/head';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 
 export function bleh_event_artist() {
 	const upcoming_link = page.structure.main!.querySelector(
@@ -49,8 +52,8 @@ export function bleh_event_artist() {
 				item.classList.contains('events-list-item--attending')
 					? 'going'
 					: item.classList.contains('events-list-item--interested')
-					? 'maybe'
-					: undefined;
+						? 'maybe'
+						: undefined;
 
 			const count = item.querySelectorAll(
 				'.events-list-item-attendees-count',
@@ -105,4 +108,35 @@ export function bleh_event_artist() {
 			</EventList>,
 		);
 	});
+}
+
+export function artist_event_sidebar() {
+	const menu = page.structure.side!.querySelector('#events-select') as HTMLElement;
+	if (!menu) return;
+
+	const panel = menu.parentElement!;
+	panel.classList.add('artist-events-sidebar');
+
+	const select_btn = panel.querySelector('.dropdown-menu-clickable-button') as HTMLButtonElement;
+	select_btn.classList.remove('dropdown-menu-clickable-button', 'section-control');
+	select_btn.classList.add('btn', 'select-button', 'link-select', 'blend-v2-btn');
+
+	const head = panel.querySelector('h2')!;
+
+	head.replaceWith(
+		<PanelTop>
+			<PanelHead top icon={icons.events}>
+				{tl(trans.events)}
+			</PanelHead>
+			{select_btn && (
+				<ViewButtons blend blendV2 accompany>
+					{select_btn}
+					{menu}
+				</ViewButtons>
+			)}
+		</PanelTop>
+	);
+
+	const list = panel.querySelector(':scope > .buffer-standard') as HTMLElement;
+	list.classList.add('artist-events-list');
 }

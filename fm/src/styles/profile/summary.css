@@ -62,6 +62,10 @@
 	--hue-over: 11;
 	--sat-over: 1.53;
 	--lit-over: 0.93;
+
+	&:after {
+		display: none;
+	}
 }
 
 .summary-main {

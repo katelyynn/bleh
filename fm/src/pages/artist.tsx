@@ -43,7 +43,7 @@ import {
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
 import { useSettings } from '@/page.tsx';
-import { bleh_event_artist } from '@/pages/artist/event.tsx';
+import { artist_event_sidebar, bleh_event_artist } from '@/pages/artist/event.tsx';
 import {
 	append_header,
 	PageHeader,
@@ -433,6 +433,8 @@ export function bleh_artists() {
 				);
 			});
 		}
+
+		artist_event_sidebar();
 	} else {
 		const btn_add = page.structure.side.querySelector('.add-button');
 		if (btn_add) btn_add.setAttribute('data-page-subpage', page.subpage);

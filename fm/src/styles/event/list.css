@@ -1,6 +1,37 @@
+.artist-events-list {
+	&>p.buffer-standard {
+		cursor: default;
+		color: oklch(var(--c3));
+		font-weight: var(--font-weight) !important;
+		position: relative;
+		text-align: center;
+		z-index: 10;
+
+		&:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 50%;
+			height: 1px;
+			background: var(--separator-base);
+			z-index: -1;
+
+			--mask: linear-gradient(90deg, white, transparent 30%, transparent 70%, white);
+			mask-image: var(--mask);
+			-webkit-mask-image: var(--mask);
+		}
+	}
+
+	/* upcoming events */
+	&>p.buffer-standard.text-bold+.buffer-standard {
+		display: none;
+	}
+}
+
+
 .events-list-item-date-icon {
-	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4)
-		/ 40%) 60%) !important;
+	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4) / 40%) 60%) !important;
 	box-shadow: var(--group-shadow) !important;
 	color: oklch(var(--c2));
 	width: var(--calendar-width) !important;
@@ -61,11 +92,11 @@
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	color: oklch(var(--c3));
-	font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight);
 	margin-top: unset;
 	margin-bottom: var(--card-gap);
 
-	.events-list-sidebar + & {
+	.events-list-sidebar+& {
 		margin-top: var(--card-gap);
 	}
 }
@@ -155,35 +186,22 @@
 	}
 }
 
-[data-lazy-filter-options="events-select"] {
-	.text-bold {
-		font-weight: var(--font-weight-medium);
-		color: oklch(var(--c3));
-		position: relative;
-		width: fit-content;
-	}
-
-	/* upcoming events */
-	.buffer-standard.text-bold + .buffer-standard {
-		display: none;
-	}
-}
-
 :is(.events-list, .events-list-anhv1) {
 	margin: unset;
 }
 
 .sidebar-date-heading {
 	color: oklch(var(--c3));
+	font-weight: var(--font-weight);
 	margin-top: var(--card-gap);
-	margin-bottom: var(--card-gap);
+	margin-bottom: 10px;
 	text-align: left;
 
 	&:after {
 		display: none;
 	}
 
-	& + .events-list-sidebar {
+	&+.events-list-sidebar {
 		margin-top: unset;
 	}
 }
@@ -217,7 +235,7 @@
 	font-weight: var(--font-weight-medium) !important;
 	text-decoration: var(--force-underline, none) !important;
 
-	& > a {
+	&>a {
 		text-decoration: inherit !important;
 	}
 }
@@ -341,7 +359,7 @@
 .events-filter {
 	margin: unset;
 
-	& > button {
+	&>button {
 		&.date-picker-button {
 			--mask: var(--icon-16-calendar);
 		}
