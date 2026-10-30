@@ -103,17 +103,22 @@
 
 .user-follow {
 	--mask-size: 18px;
+	--mask-colour: oklch(var(--l3-c)) !important;
 	width: calc(18px + 2px) !important;
 	height: calc(18px + 2px) !important;
 	padding: 1px !important;
 	border-radius: 50px !important;
 
-	background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
+	--bg: oklch(var(--b6) / 80%) !important;
+	--bg-hov: var(--bg) !important;
 
 	min-width: unset;
 
 	--margin-top: -9px !important;
 	--left: 1px !important;
+
+	backdrop-filter: unset !important;
+	-webkit-backdrop-filter: unset !important;
 }
 
 .user-list-inner-wrap {
@@ -374,21 +379,14 @@
 				top: 64px;
 				left: 50%;
 				margin-left: calc(-1 * (var(--w) / 2));
-
-				transition-property: scale, opacity;
-				transition-duration: 0.4s;
-				transition-timing-function: var(--trans-function-ani);
 			}
 
 			&>.user-follow {
 				position: absolute;
-				top: 64px;
-				right: 50%;
-				margin-right: calc((-1 * var(--w)) + 25px);
-
-				transition-property: scale, opacity;
-				transition-duration: 0.4s;
-				transition-timing-function: var(--trans-function-ani);
+				top: var(--item-list-gap);
+				left: var(--item-list-gap);
+				right: unset;
+				margin-right: unset;
 			}
 
 			&>.user-list-name {
