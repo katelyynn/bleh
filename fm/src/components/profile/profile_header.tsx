@@ -23,7 +23,7 @@ import { save_setting } from '@/components/settings/settings';
 import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
-import { taste_artist, TasteArtist } from './taste';
+import { profileTaste, ProfileTaste, taste_artist, TasteArtist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
 import { useSettings } from '@/page.tsx';
 import { Button } from '@/components/button/button.tsx';
@@ -48,7 +48,7 @@ export function redesign_profile_header(
 	if (!base_header) return;
 
 	// taste
-	let taste = '';
+	let taste: profileTaste = '';
 	let taste_percentage = '';
 	const taste_artists: string[] = [];
 	let taste_formal = 'NONE';
@@ -57,7 +57,7 @@ export function redesign_profile_header(
 		const taste_meter = base_header.querySelector('.tasteometer');
 
 		if (taste_meter) {
-			taste = taste_meter.classList[1].replace('tasteometer-compat-', '');
+			taste = taste_meter.classList[1].replace('tasteometer-compat-', '') as profileTaste;
 
 			const artists = taste_meter.querySelectorAll('a');
 			artists.forEach((artist) => {
@@ -68,7 +68,7 @@ export function redesign_profile_header(
 
 			taste_formal = taste_meter.querySelector(
 				'span.tasteometer-compat-colour',
-			)?.textContent!;
+			)!.textContent;
 
 			taste_percentage = taste_meter
 				.querySelector('.tasteometer-viz')!
@@ -96,15 +96,15 @@ export function redesign_profile_header(
 			follow_button.classList.add('btn', 'side-action', 'icon-mask');
 			//follow_button.classList.remove('toggle-button', 'header-follower-btn');
 			follow_button.setAttribute('data-type', 'follow');
-			profile_header.appendChild(follow_wrap.parentElement);
+			profile_header.appendChild(follow_wrap.parentElement!);
 
 			if (is_following) {
 				follow_button.setAttribute('data-followed', 'true');
 			}
 
-			follow_button.appendChild(html.node`
-                <i>${tl(trans.following_mutuals)}</i>
-            `);
+			follow_button.appendChild(
+				<i>{tl(trans.following_mutuals)}</i>
+			);
 
 			follow_wrap.classList.add('follow-combo');
 
@@ -150,14 +150,13 @@ export function redesign_profile_header(
 			} else {
 				profile_header.appendChild(html.node`
                     <button class="btn side-action icon-mask sponsor colourful" onclick=${() =>
-					sponsor()} data-type="sponsor">
+						sponsor()} data-type="sponsor">
                         ${tl(trans.sponsor)}
                     </button>
                 `);
 				profile_header.appendChild(html.node`
-                    <a class="btn side-action icon-mask sponsor colourful" href=${
-					msg_button.getAttribute('href')
-				} data-type="message_sponsor">
+                    <a class="btn side-action icon-mask sponsor colourful" href=${msg_button.getAttribute('href')
+					} data-type="message_sponsor">
                         ${tl(trans.message_sponsor)}
                     </a>
                 `);
@@ -228,181 +227,25 @@ export function redesign_profile_header(
 		);
 	}
 
-	const summary = page.structure.main.querySelector('.profile-summary');
+	//const summary = page.structure.main!.querySelector('.profile-summary');
 
 	if (
 		!is_own_profile &&
 		page.name != sponsor_list.related.account_name &&
 		auth.name
 	) {
-		if (taste == '') {
-			profile_header.after(
-				<LoadingData type='failed'>
-					{tl(trans.missing_component)}
-				</LoadingData>,
-			);
-
-			return;
-		}
-
-		let details_btn;
-
-		const taste_menu = (
-			<MenuContents>
-				<Button
-					menu
-					href={`${root}user/${auth.name}/library/music/${redirect()}${
-						sanitise(taste_artists[0])
-					}`}
-				>
-					<Icon name={icons.user} />
-					{taste_artists[0]}
-					<SubText>({tl(trans.you)})</SubText>
-				</Button>
-				<Button
-					menu
-					href={`${root}user/${page.name}/library/music/${redirect()}${
-						sanitise(taste_artists[0])
-					}`}
-				>
-					<Icon name={icons.users} />
-					{taste_artists[0]}
-					<SubText>({tl(trans.other)})</SubText>
-				</Button>
-				{taste_artists[1] && (
-					<>
-						<Button
-							menu
-							href={`${root}user/${auth.name}/library/music/${redirect()}${
-								sanitise(taste_artists[1])
-							}`}
-						>
-							<Icon name={icons.user} />
-							{taste_artists[1]}
-							<SubText>({tl(trans.you)})</SubText>
-						</Button>
-						<Button
-							menu
-							href={`${root}user/${page.name}/library/music/${redirect()}${
-								sanitise(taste_artists[1])
-							}`}
-						>
-							<Icon name={icons.users} />
-							{taste_artists[1]}
-							<SubText>({tl(trans.other)})</SubText>
-						</Button>
-					</>
-				)}
-				{taste_artists[2] && (
-					<>
-						<Button
-							menu
-							href={`${root}user/${auth.name}/library/music/${redirect()}${
-								sanitise(taste_artists[2])
-							}`}
-						>
-							<Icon name={icons.user} />
-							{taste_artists[2]}
-							<SubText>({tl(trans.you)})</SubText>
-						</Button>
-						<Button
-							menu
-							href={`${root}user/${page.name}/library/music/${redirect()}${
-								sanitise(taste_artists[2])
-							}`}
-						>
-							<Icon name={icons.users} />
-							{taste_artists[2]}
-							<SubText>({tl(trans.other)})</SubText>
-						</Button>
-					</>
-				)}
-				<div class='sep' />
-				<Button
-					menu
-					onClick={() => {
-						copy(tl(trans.generic_lastfm_compatibility_message, {
-							u: page.name,
-							r: taste_formal,
-							a: taste_artists.join(tl(trans.comma) as string),
-						}));
-					}}
-				>
-					<Icon name={icons.copy} />
-					{tl(trans.copy)}
-				</Button>
-			</MenuContents>
-		);
-
-		const taste_wrap = (
-			<section class={['profile-taste', 'colourful']} data-taste={taste}>
-				<div class='profile-taste-texture'>
-					<Icon name={icons.taste} />
-					<Icon name={icons.taste} />
-					<Icon name={icons.taste} />
-				</div>
-				<div class='profile-taste-top'>
-					<div class={['profile-taste-top-badges']}>
-						<div class='profile-taste-top-badge-percent'>
-							{taste_percentage.slice(0, -1)}
-							<span class='percent-marker'>%</span>
-						</div>
-						<div class='profile-taste-top-badge-formal'>
-							{taste_formal}
-						</div>
-					</div>
-					<div class={['profile-taste-top-bar']}>
-						<div
-							class={['profile-taste-top-bar-fill']}
-							style={{ width: taste_percentage }}
-						/>
-					</div>
-				</div>
-				<div class='profile-taste-middle'>
-					<div class='profile-taste-artists'>
-						{tl(trans.you_share_artists_with, {
-							artists: (
-								<>
-									{taste_artists[0] && (
-										<TasteArtist
-											artist={taste_artists[0]}
-										/>
-									)}
-									{taste_artists[1] && (
-										<>
-											{tl(trans.comma)}
-											<TasteArtist
-												artist={taste_artists[1]}
-											/>
-										</>
-									)}
-									{taste_artists[2] && (
-										<>
-											{tl(trans.and)}
-											<TasteArtist
-												artist={taste_artists[2]}
-											/>
-										</>
-									)}
-								</>
-							),
-						})}
-					</div>
-				</div>
-				{taste_artists.length > 0 && (
-					<div class='profile-taste-lower'>
-						<Button outline opens={taste_menu}>
-							{tl(trans.view_your_compatibility)}
-						</Button>
-					</div>
-				)}
-			</section>
-		);
-
-		profile_header.after(taste_wrap);
-
 		const today = new Date();
 		const february = today.getMonth() == 1 && today.getDate() == 14;
+		const friended = (useSettings.get('friends') as string[]).includes(page.name);
+		const high_tier = ['super', 'very_high', 'high'].includes(taste);
+
+		const valentine = ff('sandrone') && february && friended && high_tier;
+
+		profile_header.after(
+			<ProfileTaste tier={taste} formal={taste_formal} percentage={taste_percentage} artists={taste_artists} valentine={valentine} />
+		);
+
+		return;
 
 		// TODO
 		if (
@@ -418,9 +261,9 @@ export function redesign_profile_header(
 					<div class="taste-pics valentine-pics">
 						<div class="taste-avatar avatar">
 							<img src=${avatar(
-								auth.avatar,
-								'avatar300s',
-							)} alt=${auth.name}>
+					auth.avatar,
+					'avatar300s',
+				)} alt=${auth.name}>
 						</div>
 						<div class="taste-icon colourful valentine" data-taste=${taste}>
 							<div class="bleh-icon" />
@@ -483,21 +326,20 @@ export function redesign_profile_header(
 					<div class="taste-interactions">
 						<button class="btn icon select-button taste-details outline-btn"
 							data-type="details" ref=${(el) =>
-								details_btn = el}>${tl(
-									trans.view_details,
-								)}</button>
+						details_btn = el}>${tl(
+							trans.view_details,
+						)}</button>
 						<button class="btn icon primary colourful" data-taste=${taste}
 							data-type="valentine" onclick=${() => {
-								open(
-									`${root}inbox/compose?to=${page.name}&subject=${
-										encodeURIComponent(
-											tl(trans.valentine, {
-												u: page.name,
-											}),
-										)
-									}`,
-								);
-							}}>${tl(trans.send_valentine)}</button>
+						open(
+							`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(
+								tl(trans.valentine, {
+									u: page.name,
+								}),
+							)
+							}`,
+						);
+					}}>${tl(trans.send_valentine)}</button>
 					</div>
 				`,
 			);
@@ -533,11 +375,10 @@ export function create_profile_top_item(
             >
                 ${text || tl(trans[type])}
                 ${new_release ? new_indicator() : ''}
-                ${
-			updated
+                ${updated
 				? html.node`<div class="new-badge">${tl(trans.updated)}</div>`
 				: ''
-		}
+			}
                 ${beta ? beta_indicator() : ''}
             </button>
         `;
@@ -550,11 +391,10 @@ export function create_profile_top_item(
             >
                 ${text || tl(trans[type])}
                 ${new_release ? new_indicator() : ''}
-                ${
-			updated
+                ${updated
 				? html.node`<div class="new-badge">${tl(trans.updated)}</div>`
 				: ''
-		}
+			}
                 ${beta ? beta_indicator() : ''}
             </a>
         `;
@@ -575,68 +415,68 @@ function friends_button(parent: ReactElement) {
 
 	const elem = html.node`
         <button class="btn side-action colourful icon-mask side-action-small" data-type="close_friends" type="button" onclick=${() => {
-		if (friend_state) {
-			dialog({
-				id: 'remove_friend',
-				title: tl(trans.remove_friend.name),
-				body: html.node`
+			if (friend_state) {
+				dialog({
+					id: 'remove_friend',
+					title: tl(trans.remove_friend.name),
+					body: html.node`
                         <p>${{
-					html: tl(trans.remove_friend.body, {
-						u: `<strong>${page.name}</strong>`,
-					}),
-				}}</p>
+							html: tl(trans.remove_friend.body, {
+								u: `<strong>${page.name}</strong>`,
+							}),
+						}}</p>
                         <div class="modal-footer">
                             <button class="see-more cancel left-icon" onclick=${() =>
-					dialog_rm({ id: 'remove_friend' })}>
+							dialog_rm({ id: 'remove_friend' })}>
                                 ${tl(trans.cancel)}
                             </button>
                             <div class="fill" />
                             <button class="btn primary icon danger" data-type="minus" onclick=${() => {
-					friend_state = false;
-					star_state = false;
+							friend_state = false;
+							star_state = false;
 
-					const new_list = settings.friends.filter(
-						(item) => item != page.name,
-					);
+							const new_list = settings.friends.filter(
+								(item) => item != page.name,
+							);
 
-					save_setting('friends', new_list);
-					if (page.name == useSettings.get('starred_friend')) {
-						save_setting('starred_friend', '');
-					}
+							save_setting('friends', new_list);
+							if (page.name == useSettings.get('starred_friend')) {
+								save_setting('starred_friend', '');
+							}
 
-					dialog_rm({ id: 'remove_friend' });
-					update_visual();
+							dialog_rm({ id: 'remove_friend' });
+							update_visual();
 
-					notify({
-						id: 'friends',
-						title: tl(trans.removed_friend),
-						body: page.name,
-						icon: icons.minus,
-						type: 'error',
-					});
-				}}>
+							notify({
+								id: 'friends',
+								title: tl(trans.removed_friend),
+								body: page.name,
+								icon: icons.minus,
+								type: 'error',
+							});
+						}}>
                                 ${tl(trans.remove)}
                             </button>
                         </div>
                     `,
-			});
-		} else {
-			friend_state = true;
+				});
+			} else {
+				friend_state = true;
 
-			const new_list = [...settings.friends, page.name];
+				const new_list = [...settings.friends, page.name];
 
-			save_setting('friends', new_list);
-			update_visual();
+				save_setting('friends', new_list);
+				update_visual();
 
-			notify({
-				id: 'friends',
-				title: tl(trans.added_as_friend),
-				body: page.name,
-				icon: icons.users,
-				type: 'success',
-			});
-		}
-	}} />
+				notify({
+					id: 'friends',
+					title: tl(trans.added_as_friend),
+					body: page.name,
+					icon: icons.users,
+					type: 'success',
+				});
+			}
+		}} />
     `;
 
 	const tip = tippy(elem, {
@@ -664,36 +504,35 @@ function friends_button(parent: ReactElement) {
 
 			instance.setContent(html.node`
                 <button class="dropdown-menu-clickable-item colourful" data-type="starred_friend" data-starred="true" onclick=${() => {
-				if (star_state) {
-					star_state = false;
-					save_setting('starred_friend', '');
-					update_visual();
+					if (star_state) {
+						star_state = false;
+						save_setting('starred_friend', '');
+						update_visual();
 
-					notify({
-						id: 'friends',
-						title: tl(trans.removed_star),
-						body: page.name,
-						icon: icons.minus,
-						type: 'error',
-					});
-				} else {
-					star_state = true;
-					save_setting('starred_friend', page.name);
-					update_visual();
+						notify({
+							id: 'friends',
+							title: tl(trans.removed_star),
+							body: page.name,
+							icon: icons.minus,
+							type: 'error',
+						});
+					} else {
+						star_state = true;
+						save_setting('starred_friend', page.name);
+						update_visual();
 
-					notify({
-						id: 'friends',
-						title: tl(trans.added_star),
-						body: page.name,
-						icon: icons.starred_friend,
-					});
-				}
-			}}>
-                    ${
-				star_state
+						notify({
+							id: 'friends',
+							title: tl(trans.added_star),
+							body: page.name,
+							icon: icons.starred_friend,
+						});
+					}
+				}}>
+                    ${star_state
 					? tl(trans.remove_as_star_friend)
 					: tl(trans.add_as_starred_friend)
-			}
+				}
                 </button>
             `);
 		},
@@ -716,9 +555,8 @@ function friends_button(parent: ReactElement) {
 		}
 
 		tip.setContent(html.node`
-            <span>${elem.textContent} (${
-			tl(trans.friend_difference_min)
-		})</span>
+            <span>${elem.textContent} (${tl(trans.friend_difference_min)
+			})</span>
             <div class="hint">${tl(trans.right_click_for_more_options)}</div>
         `);
 	}

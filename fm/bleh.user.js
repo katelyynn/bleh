@@ -8885,8 +8885,8 @@ var bleh = (() => {
       var assign = require_assign();
       var value = require_valid_value();
       module.exports = function(obj) {
-        var copy3 = Object(value(obj)), propertyNames = arguments[1], options = Object(arguments[2]);
-        if (copy3 !== obj && !propertyNames) return copy3;
+        var copy4 = Object(value(obj)), propertyNames = arguments[1], options = Object(arguments[2]);
+        if (copy4 !== obj && !propertyNames) return copy4;
         var result = {};
         if (propertyNames) {
           aFrom(propertyNames, function(propertyName) {
@@ -8962,7 +8962,7 @@ var bleh = (() => {
       var isValue = require_is();
       var ensureValue = require_ensure();
       var ensurePlainFunction = require_ensure2();
-      var copy3 = require_copy();
+      var copy4 = require_copy();
       var normalizeOptions = require_normalize_options();
       var map3 = require_map();
       var bind = Function.prototype.bind;
@@ -8971,7 +8971,7 @@ var bleh = (() => {
       var define2;
       define2 = function(name, desc, options) {
         var value = ensureValue(desc) && ensurePlainFunction(desc.value), dgs;
-        dgs = copy3(desc);
+        dgs = copy4(desc);
         delete dgs.writable;
         delete dgs.value;
         dgs.get = function() {
@@ -87346,6 +87346,22 @@ var bleh = (() => {
     );
   }
 
+  // src/components/loading/loading.tsx
+  function LoadingData({
+    ref: ref2,
+    type = "loading",
+    children
+  }) {
+    return /* @__PURE__ */ jsx("div", { class: "loading-data-container", children: /* @__PURE__ */ jsx(
+      "div",
+      {
+        class: ["loading-data-text", type != "loading" && type],
+        ref: ref2,
+        children
+      }
+    ) });
+  }
+
   // src/components/profile/taste.tsx
   function taste_artist(artist) {
     return `<a class="taste-artist" href="${root}music/${redirect()}${sanitise(artist)}">${artist}</a>`;
@@ -87362,21 +87378,189 @@ var bleh = (() => {
       }
     );
   }
-
-  // src/components/loading/loading.tsx
-  function LoadingData({
-    ref: ref2,
-    type = "loading",
-    children
+  function ProfileTaste({
+    tier,
+    formal,
+    percentage,
+    artists,
+    valentine
   }) {
-    return /* @__PURE__ */ jsx("div", { class: "loading-data-container", children: /* @__PURE__ */ jsx(
-      "div",
-      {
-        class: ["loading-data-text", type != "loading" && type],
-        ref: ref2,
-        children
-      }
-    ) });
+    if (tier == "") {
+      return /* @__PURE__ */ jsx(LoadingData, { type: "failed", children: tl2(trans.missing_component) });
+    }
+    const taste_menu = /* @__PURE__ */ jsx(MenuContents, { children: [
+      /* @__PURE__ */ jsx(
+        Button,
+        {
+          menu: true,
+          href: `${root}user/${auth.name}/library/music/${redirect()}${sanitise(artists[0])}`,
+          children: [
+            /* @__PURE__ */ jsx(Icon, { name: icons.user }),
+            artists[0],
+            /* @__PURE__ */ jsx(SubText, { children: [
+              "(",
+              tl2(trans.you),
+              ")"
+            ] })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        Button,
+        {
+          menu: true,
+          href: `${root}user/${page.name}/library/music/${redirect()}${sanitise(artists[0])}`,
+          children: [
+            /* @__PURE__ */ jsx(Icon, { name: icons.users }),
+            artists[0],
+            /* @__PURE__ */ jsx(SubText, { children: [
+              "(",
+              tl2(trans.other),
+              ")"
+            ] })
+          ]
+        }
+      ),
+      artists[1] && /* @__PURE__ */ jsx(Fragment, { children: [
+        /* @__PURE__ */ jsx(
+          Button,
+          {
+            menu: true,
+            href: `${root}user/${auth.name}/library/music/${redirect()}${sanitise(artists[1])}`,
+            children: [
+              /* @__PURE__ */ jsx(Icon, { name: icons.user }),
+              artists[1],
+              /* @__PURE__ */ jsx(SubText, { children: [
+                "(",
+                tl2(trans.you),
+                ")"
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          Button,
+          {
+            menu: true,
+            href: `${root}user/${page.name}/library/music/${redirect()}${sanitise(artists[1])}`,
+            children: [
+              /* @__PURE__ */ jsx(Icon, { name: icons.users }),
+              artists[1],
+              /* @__PURE__ */ jsx(SubText, { children: [
+                "(",
+                tl2(trans.other),
+                ")"
+              ] })
+            ]
+          }
+        )
+      ] }),
+      artists[2] && /* @__PURE__ */ jsx(Fragment, { children: [
+        /* @__PURE__ */ jsx(
+          Button,
+          {
+            menu: true,
+            href: `${root}user/${auth.name}/library/music/${redirect()}${sanitise(artists[2])}`,
+            children: [
+              /* @__PURE__ */ jsx(Icon, { name: icons.user }),
+              artists[2],
+              /* @__PURE__ */ jsx(SubText, { children: [
+                "(",
+                tl2(trans.you),
+                ")"
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          Button,
+          {
+            menu: true,
+            href: `${root}user/${page.name}/library/music/${redirect()}${sanitise(artists[2])}`,
+            children: [
+              /* @__PURE__ */ jsx(Icon, { name: icons.users }),
+              artists[2],
+              /* @__PURE__ */ jsx(SubText, { children: [
+                "(",
+                tl2(trans.other),
+                ")"
+              ] })
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsx("div", { class: "sep" }),
+      /* @__PURE__ */ jsx(
+        Button,
+        {
+          menu: true,
+          onClick: () => {
+            copy(tl2(trans.generic_lastfm_compatibility_message, {
+              u: page.name,
+              r: formal,
+              a: artists.join(tl2(trans.comma))
+            }));
+          },
+          children: [
+            /* @__PURE__ */ jsx(Icon, { name: icons.copy }),
+            tl2(trans.copy)
+          ]
+        }
+      )
+    ] });
+    const taste_wrap2 = /* @__PURE__ */ jsx("section", { class: ["profile-taste", "colourful"], "data-taste": tier, children: [
+      /* @__PURE__ */ jsx("div", { class: "profile-taste-texture", children: [
+        /* @__PURE__ */ jsx(Icon, { name: icons.taste }),
+        /* @__PURE__ */ jsx(Icon, { name: icons.taste }),
+        /* @__PURE__ */ jsx(Icon, { name: icons.taste })
+      ] }),
+      /* @__PURE__ */ jsx("div", { class: "profile-taste-top", children: [
+        /* @__PURE__ */ jsx("div", { class: ["profile-taste-top-badges"], children: [
+          /* @__PURE__ */ jsx("div", { class: "profile-taste-top-badge-percent", children: [
+            percentage.slice(0, -1),
+            /* @__PURE__ */ jsx("span", { class: "percent-marker", children: "%" })
+          ] }),
+          /* @__PURE__ */ jsx("div", { class: "profile-taste-top-badge-formal", children: formal })
+        ] }),
+        /* @__PURE__ */ jsx("div", { class: ["profile-taste-top-bar"], children: /* @__PURE__ */ jsx(
+          "div",
+          {
+            class: ["profile-taste-top-bar-fill"],
+            style: { width: percentage }
+          }
+        ) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { class: "profile-taste-middle", children: /* @__PURE__ */ jsx("div", { class: "profile-taste-artists", children: tl2(trans.you_share_artists_with, {
+        artists: /* @__PURE__ */ jsx(Fragment, { children: [
+          artists[0] && /* @__PURE__ */ jsx(
+            TasteArtist,
+            {
+              artist: artists[0]
+            }
+          ),
+          artists[1] && /* @__PURE__ */ jsx(Fragment, { children: [
+            tl2(trans.comma),
+            /* @__PURE__ */ jsx(
+              TasteArtist,
+              {
+                artist: artists[1]
+              }
+            )
+          ] }),
+          artists[2] && /* @__PURE__ */ jsx(Fragment, { children: [
+            tl2(trans.and),
+            /* @__PURE__ */ jsx(
+              TasteArtist,
+              {
+                artist: artists[2]
+              }
+            )
+          ] })
+        ] })
+      }) }) }),
+      artists.length > 0 && /* @__PURE__ */ jsx("div", { class: "profile-taste-lower", children: /* @__PURE__ */ jsx(Button, { outline: true, opens: taste_menu, children: tl2(trans.view_your_compatibility) }) })
+    ] });
+    return taste_wrap2;
   }
 
   // src/components/profile/profile_header.tsx
@@ -87402,7 +87586,7 @@ var bleh = (() => {
         });
         taste_formal = taste_meter.querySelector(
           "span.tasteometer-compat-colour"
-        )?.textContent;
+        ).textContent;
         taste_percentage = taste_meter.querySelector(".tasteometer-viz").getAttribute("title");
         if (taste_percentage == "99%") taste_percentage = "100%";
       }
@@ -87420,9 +87604,9 @@ var bleh = (() => {
         if (is_following) {
           follow_button.setAttribute("data-followed", "true");
         }
-        follow_button.appendChild(html.node`
-                <i>${tl2(trans.following_mutuals)}</i>
-            `);
+        follow_button.appendChild(
+          /* @__PURE__ */ jsx("i", { children: tl2(trans.following_mutuals) })
+        );
         follow_wrap.classList.add("follow-combo");
         const chibi_buttons = /* @__PURE__ */ jsx("div", { class: "chibi-side-buttons" });
         follow_wrap.appendChild(chibi_buttons);
@@ -87527,190 +87711,16 @@ var bleh = (() => {
         page.structure.main.firstElementChild
       );
     }
-    const summary = page.structure.main.querySelector(".profile-summary");
     if (!is_own_profile && page.name != sponsor_list.related.account_name && auth.name) {
-      if (taste == "") {
-        profile_header.after(
-          /* @__PURE__ */ jsx(LoadingData, { type: "failed", children: tl2(trans.missing_component) })
-        );
-        return;
-      }
-      let details_btn;
-      const taste_menu = /* @__PURE__ */ jsx(MenuContents, { children: [
-        /* @__PURE__ */ jsx(
-          Button,
-          {
-            menu: true,
-            href: `${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[0])}`,
-            children: [
-              /* @__PURE__ */ jsx(Icon, { name: icons.user }),
-              taste_artists[0],
-              /* @__PURE__ */ jsx(SubText, { children: [
-                "(",
-                tl2(trans.you),
-                ")"
-              ] })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsx(
-          Button,
-          {
-            menu: true,
-            href: `${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[0])}`,
-            children: [
-              /* @__PURE__ */ jsx(Icon, { name: icons.users }),
-              taste_artists[0],
-              /* @__PURE__ */ jsx(SubText, { children: [
-                "(",
-                tl2(trans.other),
-                ")"
-              ] })
-            ]
-          }
-        ),
-        taste_artists[1] && /* @__PURE__ */ jsx(Fragment, { children: [
-          /* @__PURE__ */ jsx(
-            Button,
-            {
-              menu: true,
-              href: `${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[1])}`,
-              children: [
-                /* @__PURE__ */ jsx(Icon, { name: icons.user }),
-                taste_artists[1],
-                /* @__PURE__ */ jsx(SubText, { children: [
-                  "(",
-                  tl2(trans.you),
-                  ")"
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            Button,
-            {
-              menu: true,
-              href: `${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[1])}`,
-              children: [
-                /* @__PURE__ */ jsx(Icon, { name: icons.users }),
-                taste_artists[1],
-                /* @__PURE__ */ jsx(SubText, { children: [
-                  "(",
-                  tl2(trans.other),
-                  ")"
-                ] })
-              ]
-            }
-          )
-        ] }),
-        taste_artists[2] && /* @__PURE__ */ jsx(Fragment, { children: [
-          /* @__PURE__ */ jsx(
-            Button,
-            {
-              menu: true,
-              href: `${root}user/${auth.name}/library/music/${redirect()}${sanitise(taste_artists[2])}`,
-              children: [
-                /* @__PURE__ */ jsx(Icon, { name: icons.user }),
-                taste_artists[2],
-                /* @__PURE__ */ jsx(SubText, { children: [
-                  "(",
-                  tl2(trans.you),
-                  ")"
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            Button,
-            {
-              menu: true,
-              href: `${root}user/${page.name}/library/music/${redirect()}${sanitise(taste_artists[2])}`,
-              children: [
-                /* @__PURE__ */ jsx(Icon, { name: icons.users }),
-                taste_artists[2],
-                /* @__PURE__ */ jsx(SubText, { children: [
-                  "(",
-                  tl2(trans.other),
-                  ")"
-                ] })
-              ]
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsx("div", { class: "sep" }),
-        /* @__PURE__ */ jsx(
-          Button,
-          {
-            menu: true,
-            onClick: () => {
-              copy(tl2(trans.generic_lastfm_compatibility_message, {
-                u: page.name,
-                r: taste_formal,
-                a: taste_artists.join(tl2(trans.comma))
-              }));
-            },
-            children: [
-              /* @__PURE__ */ jsx(Icon, { name: icons.copy }),
-              tl2(trans.copy)
-            ]
-          }
-        )
-      ] });
-      const taste_wrap = /* @__PURE__ */ jsx("section", { class: ["profile-taste", "colourful"], "data-taste": taste, children: [
-        /* @__PURE__ */ jsx("div", { class: "profile-taste-texture", children: [
-          /* @__PURE__ */ jsx(Icon, { name: icons.taste }),
-          /* @__PURE__ */ jsx(Icon, { name: icons.taste }),
-          /* @__PURE__ */ jsx(Icon, { name: icons.taste })
-        ] }),
-        /* @__PURE__ */ jsx("div", { class: "profile-taste-top", children: [
-          /* @__PURE__ */ jsx("div", { class: ["profile-taste-top-badges"], children: [
-            /* @__PURE__ */ jsx("div", { class: "profile-taste-top-badge-percent", children: [
-              taste_percentage.slice(0, -1),
-              /* @__PURE__ */ jsx("span", { class: "percent-marker", children: "%" })
-            ] }),
-            /* @__PURE__ */ jsx("div", { class: "profile-taste-top-badge-formal", children: taste_formal })
-          ] }),
-          /* @__PURE__ */ jsx("div", { class: ["profile-taste-top-bar"], children: /* @__PURE__ */ jsx(
-            "div",
-            {
-              class: ["profile-taste-top-bar-fill"],
-              style: { width: taste_percentage }
-            }
-          ) })
-        ] }),
-        /* @__PURE__ */ jsx("div", { class: "profile-taste-middle", children: /* @__PURE__ */ jsx("div", { class: "profile-taste-artists", children: tl2(trans.you_share_artists_with, {
-          artists: /* @__PURE__ */ jsx(Fragment, { children: [
-            taste_artists[0] && /* @__PURE__ */ jsx(
-              TasteArtist,
-              {
-                artist: taste_artists[0]
-              }
-            ),
-            taste_artists[1] && /* @__PURE__ */ jsx(Fragment, { children: [
-              tl2(trans.comma),
-              /* @__PURE__ */ jsx(
-                TasteArtist,
-                {
-                  artist: taste_artists[1]
-                }
-              )
-            ] }),
-            taste_artists[2] && /* @__PURE__ */ jsx(Fragment, { children: [
-              tl2(trans.and),
-              /* @__PURE__ */ jsx(
-                TasteArtist,
-                {
-                  artist: taste_artists[2]
-                }
-              )
-            ] })
-          ] })
-        }) }) }),
-        taste_artists.length > 0 && /* @__PURE__ */ jsx("div", { class: "profile-taste-lower", children: /* @__PURE__ */ jsx(Button, { outline: true, opens: taste_menu, children: tl2(trans.view_your_compatibility) }) })
-      ] });
-      profile_header.after(taste_wrap);
       const today = /* @__PURE__ */ new Date();
       const february = today.getMonth() == 1 && today.getDate() == 14;
+      const friended = useSettings.get("friends").includes(page.name);
+      const high_tier = ["super", "very_high", "high"].includes(taste);
+      const valentine = ff("sandrone") && february && friended && high_tier;
+      profile_header.after(
+        /* @__PURE__ */ jsx(ProfileTaste, { tier: taste, formal: taste_formal, percentage: taste_percentage, artists: taste_artists, valentine })
+      );
+      return;
       if (ff("sandrone") && february && settings.friends.includes(page.name) && ["super", "very_high", "high"].includes(taste)) {
         taste_wrap.classList.add("valentine");
         render(
@@ -125379,7 +125389,7 @@ var bleh = (() => {
       const sat = createRef();
       const lit = createRef();
       const current_preview = createRef();
-      const copy3 = createRef();
+      const copy4 = createRef();
       modal({
         id: "profile_accent",
         title: tl2(trans.profile_accent.name),
@@ -125463,7 +125473,7 @@ var bleh = (() => {
                       sat.current.value = useSettings.get("sat");
                       lit.current.value = useSettings.get("lit");
                       update_preview();
-                      copy3.current.menu.hide();
+                      copy4.current.menu.hide();
                     },
                     children: [
                       /* @__PURE__ */ jsx(
@@ -125529,7 +125539,7 @@ var bleh = (() => {
                         ],
                         persist: true
                       });
-                      copy3.current.menu.hide();
+                      copy4.current.menu.hide();
                     },
                     children: [
                       /* @__PURE__ */ jsx(
@@ -125555,7 +125565,7 @@ var bleh = (() => {
                   }
                 )
               ] }),
-              ref: copy3,
+              ref: copy4,
               children: [
                 /* @__PURE__ */ jsx(Icon, { name: icons.copy }),
                 tl2(trans.copy)
