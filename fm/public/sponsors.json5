@@ -1,5 +1,5 @@
 {
-    version: "2026.1028",
+    version: "2026.1031",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -177,7 +177,9 @@
         "myraisounds": {},
         "noapop": {},
         "celebrating": {},
-        "writtyn": {},
+        "writtyn": {
+			contributor: true
+		},
         "fourohclok": {},
         "satisfeita": {
             contributor: true,
@@ -439,6 +441,8 @@
                 }
             ]
 		},
-		"casiarole": {}
+		"casiarole": {
+			contributor: true
+		}
     }
 }
