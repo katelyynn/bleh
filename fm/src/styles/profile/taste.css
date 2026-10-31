@@ -117,7 +117,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: row-reverse;
-	margin: 0 auto 8px;
+	margin: 0 auto 10px;
 	z-index: 10;
 	/*background-color: oklch(var(--h4) / 20%);*/
 	color: oklch(var(--l3-c));
@@ -235,6 +235,49 @@
 .profile-taste-lower {
 	display: flex;
 	justify-content: center;
-	margin-top: 12px;
+	margin-top: 6px;
 	z-index: 10;
+}
+
+.profile-taste-valentine-top {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.profile-taste-avatar {
+	--w: 32px;
+	width: var(--w);
+	height: var(--w);
+}
+
+.profile-taste-heart {
+	display: flex;
+
+	--icon-colour: oklch(var(--l3-c));
+	--icon-size: 18px;
+	margin: unset;
+
+	animation: valentine 3s var(--trans-function-ani) infinite;
+	--mask: var(--icon-16-heart-solid);
+
+	z-index: 4;
+
+	filter: drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5)));
+}
+
+.profile-taste-valentine {
+	text-align: center;
+	cursor: default;
+	margin-top: 8px;
+
+	color: oklch(var(--l3-c));
+}
+
+.profile-taste-valentine-subtle {
+	font-style: normal;
+	font-weight: var(--font-weight-medium);
+	color: oklch(var(--l2-c-theme-switch));
 }

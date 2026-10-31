@@ -14,6 +14,7 @@ import { Button } from '../button/button';
 import { Icon, icons } from '../shared/icon';
 import { SubText } from '../text/sub';
 import { SeeMore } from '../text/see_more';
+import { avatar } from '../shared/avatar';
 
 export function taste_artist(artist: string) {
 	return `<a class="taste-artist" href="${root}music/${redirect()}${sanitise(artist)
@@ -174,6 +175,24 @@ export function ProfileTaste({
 				</div>
 			</div>
 			<div class='profile-taste-middle'>
+				{valentine && (
+					<>
+						<div class='profile-taste-valentine-top'>
+							<div class={['profile-taste-avatar', 'avatar']}>
+								<img src={avatar(auth.avatar!, 'avatar170s')} alt={auth.name!} />
+							</div>
+							<div class='profile-taste-heart'>
+								<Icon />
+							</div>
+							<div class={['profile-taste-avatar', 'avatar']}>
+								<img src={avatar(page.avatar, 'avatar170s')} alt={page.name} />
+							</div>
+						</div>
+						<div class='profile-taste-valentine'>
+							{tl(trans.valentine_header, { u: <i class='profile-taste-valentine-subtle'>{page.name}</i> })}
+						</div>
+					</>
+				)}
 				<div class='profile-taste-artists'>
 					{tl(trans.you_share_artists_with, {
 						artists: (

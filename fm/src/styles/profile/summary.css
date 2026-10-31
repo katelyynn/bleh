@@ -397,44 +397,6 @@
 	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }
 
-.taste-pics {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	&>.taste-avatar {
-		width: 32px;
-
-		&:first-child {
-			z-index: 2;
-		}
-
-		&:not(:first-child) {
-			margin-left: -16px;
-		}
-	}
-}
-
-.valentine-pics {
-	gap: unset;
-
-	&>.taste-icon {
-		position: static;
-		--icon-colour: currentColor;
-		--icon-size: 18px;
-		margin: unset;
-
-		animation: valentine 3s var(--trans-function-ani) infinite;
-		--icon: var(--icon-16-heart-solid);
-
-		margin: 0 -6px;
-
-		z-index: 4;
-
-		filter: drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5)));
-	}
-}
-
 .profile-summary {
 	.taste {
 		display: flex;

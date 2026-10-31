@@ -11690,6 +11690,9 @@ export const trans = {
 		pt: 'Ver detalhes',
 		pl: 'Wyświetl szczegóły',
 	},
+	valentine_header: {
+		en: 'You and {u} are a perfect match!'
+	},
 	valentine_info: {
 		en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!',
 		de: 'Du siehst das, weil {u} auf deiner bleh-Liste für enge Freunde steht, ihr eine hohe Kompatibilität habt, und es Valentinstag ist!',
