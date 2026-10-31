@@ -110,6 +110,7 @@ import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
 import { validWordmarks, Wordmark } from '@/components/music/wordmark';
 import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
+import { ProfileTaste } from '@/components/profile/taste';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1636,6 +1637,26 @@ export function mualani() {
 						<PositionNumber number={7} />
 						<PositionNumber number={8} />
 						<PositionNumber number={9} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='taste'>
+				<DemoGrid>
+					<DemoItem label='ProfileTaste'>
+						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='SUPER' />
+						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY HIGH' />
+						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='HIGH' />
+						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='MEDIUM' />
+						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='LOW' />
+						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY LOW' />
+					</DemoItem>
+					<DemoItem label='ProfileTaste (valentine)'>
+						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='SUPER' valentine />
+						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY HIGH' valentine />
+						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='HIGH' valentine />
+						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='MEDIUM' valentine />
+						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='LOW' valentine />
+						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY LOW' valentine />
 					</DemoItem>
 				</DemoGrid>
 			</section>
