@@ -13,7 +13,6 @@ import {
 	Tooltip,
 	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
-import { WithChildren } from '@/types/generic.tsx';
 
 type ButtonProps =
 	& {

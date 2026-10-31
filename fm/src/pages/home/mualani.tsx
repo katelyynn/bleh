@@ -1643,20 +1643,20 @@ export function mualani() {
 			<section id='taste'>
 				<DemoGrid>
 					<DemoItem label='ProfileTaste'>
-						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='SUPER' />
-						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY HIGH' />
-						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='HIGH' />
-						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='MEDIUM' />
-						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='LOW' />
-						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY LOW' />
+						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Super' />
+						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very High' />
+						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='High' />
+						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Medium' />
+						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Low' />
+						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very Low' />
 					</DemoItem>
 					<DemoItem label='ProfileTaste (valentine)'>
-						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='SUPER' valentine />
-						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY HIGH' valentine />
-						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='HIGH' valentine />
-						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='MEDIUM' valentine />
-						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='LOW' valentine />
-						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='VERY LOW' valentine />
+						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Super' valentine />
+						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very High' valentine />
+						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='High' valentine />
+						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Medium' valentine />
+						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Low' valentine />
+						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very Low' valentine />
 					</DemoItem>
 				</DemoGrid>
 			</section>

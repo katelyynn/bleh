@@ -2,7 +2,7 @@
 	--hue-over: 13;
 	--sat-over: 1.88;
 	--lit-over: 0.75;
-	--icon: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9ImN1cnJlbnRDb2xvciIgIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItY2lyY2xlLXBlcmNlbnRhZ2UiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMiAyYzUuNTIzIDAgMTAgNC40NzcgMTAgMTBhMTAgMTAgMCAwIDEgLTIwIDBsLjAwNCAtLjI4Yy4xNDggLTUuMzkzIDQuNTY2IC05LjcyIDkuOTk2IC05LjcybTMgMTIuMTJhMSAxIDAgMCAwIC0xIDF2LjAxNWExIDEgMCAwIDAgMiAwdi0uMDE1YTEgMSAwIDAgMCAtMSAtMW0uNzA3IC01Ljc1MmExIDEgMCAwIDAgLTEuNDE0IDBsLTYgNmExIDEgMCAwIDAgMS40MTQgMS40MTRsNiAtNmExIDEgMCAwIDAgMCAtMS40MTRtLTYuNzA3IC0uMjYzYTEgMSAwIDAgMCAtMSAxdi4wMTVhMSAxIDAgMSAwIDIgMHYtLjAxNWExIDEgMCAwIDAgLTEgLTEiIC8+PC9zdmc+");
+	--icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48ZyBmaWxsPSdub25lJz48cGF0aCBkPSdNMjQgMHYyNEgwVjB6TTEyLjU5MyAyMy4yNThsLS4wMTEuMDAyLS4wNzEuMDM1LS4wMi4wMDQtLjAxNC0uMDA0LS4wNzEtLjAzNWMtLjAxLS4wMDQtLjAxOS0uMDAxLS4wMjQuMDA1bC0uMDA0LjAxLS4wMTcuNDI4LjAwNS4wMi4wMS4wMTMuMTA0LjA3NC4wMTUuMDA0LjAxMi0uMDA0LjEwNC0uMDc0LjAxMi0uMDE2LjAwNC0uMDE3LS4wMTctLjQyN2MtLjAwMi0uMDEtLjAwOS0uMDE3LS4wMTctLjAxOG0uMjY1LS4xMTMtLjAxMy4wMDItLjE4NS4wOTMtLjAxLjAxLS4wMDMuMDExLjAxOC40My4wMDUuMDEyLjAwOC4wMDcuMjAxLjA5M2MuMDEyLjAwNC4wMjMgMCAuMDI5LS4wMDhsLjAwNC0uMDE0LS4wMzQtLjYxNGMtLjAwMy0uMDEyLS4wMS0uMDItLjAyLS4wMjJtLS43MTUuMDAyYS4wMjMuMDIzIDAgMCAwLS4wMjcuMDA2bC0uMDA2LjAxNC0uMDM0LjYxNGMwIC4wMTIuMDA3LjAyLjAxNy4wMjRsLjAxNS0uMDAyLjIwMS0uMDkzLjAxLS4wMDguMDA0LS4wMTEuMDE3LS40My0uMDAzLS4wMTItLjAxLS4wMXonLz48cGF0aCBmaWxsPScjMDkyNDRCRkYnIGQ9J00xMiAyYzUuNTIzIDAgMTAgNC40NzcgMTAgMTBzLTQuNDc3IDEwLTEwIDEwUzIgMTcuNTIzIDIgMTIgNi40NzcgMiAxMiAybTMuNTM1IDYuMzgxLTQuOTUgNC45NS0yLjEyLTIuMTIxYTEgMSAwIDAgMC0xLjQxNSAxLjQxNGwyLjc1OCAyLjc1OGExLjEgMS4xIDAgMCAwIDEuNTU2IDBsNS41ODYtNS41ODZhMSAxIDAgMCAwLTEuNDE1LTEuNDE1Jy8+PC9nPjwvc3ZnPg==');
 }
 
 [data-taste="very_high"] {
@@ -83,20 +83,22 @@
 
 	font-size: 120px;
 	color: oklch(var(--b5));
-	--icon-size: 130px;
+	--icon-size: 180px;
 	--icon-colour: currentColor;
 	opacity: 0.2;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 40px;
+	gap: 0px;
 	word-wrap: normal;
 	rotate: -6deg;
 
-	--mask: radial-gradient(at center, white, transparent);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
+	--texture: radial-gradient(at center, white, transparent);
+	mask-image: var(--texture);
+	-webkit-mask-image: var(--texture);
+
+	--mask: var(--icon-16-user);
 }
 
 .profile-taste-top {
@@ -105,39 +107,89 @@
 	position: relative;
 	cursor: default;
 	z-index: 10;
+
+	--mask: var(--icon);
 }
 
 .profile-taste-top-badges {
 	display: flex;
-	gap: 6px;
+	gap: 4px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row-reverse;
-	margin: 0 auto;
+	margin: 0 auto 8px;
 	z-index: 10;
+	/*background-color: oklch(var(--h4) / 20%);*/
 	color: oklch(var(--l3-c));
+	--mask-colour: oklch(var(--l3-c));
 	line-height: var(--line-height-subheading);
 	position: relative;
 
-	padding: 0 5px;
+	padding: 0 8px;
+
+	border-radius: var(--radius-xl);
+
+	&:after {
+		content: '';
+		position: absolute;
+		left: -15px;
+		right: -15px;
+		bottom: -8px;
+
+		margin-left: calc(-1 * (var(--w) / 2));
+
+		height: 1px;
+		background-color: oklch(var(--l3-c));
+
+		--mask: linear-gradient(90deg, transparent, white, transparent);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+
+		opacity: 0.4;
+	}
+}
+
+.profile-taste-top-icon {
+	order: 1;
+	display: flex;
+
+	--icon-size: 14px;
+
+	position: relative;
+
+	height: 100%;
+}
+
+.profile-taste-top-icon-back {
+	position: absolute;
+	inset: 0;
+	--mask: var(--icon-16-circle);
+
+	z-index: 0;
+	opacity: 0.4;
 }
 
 .profile-taste-top-badge-formal {
-	font-weight: var(--font-weight-bold);
-	text-transform: uppercase;
-	letter-spacing: 0.2px;
+	font-weight: var(--font-weight-medium);
 }
 
 .profile-taste-top-badge-percent {
+	display: flex;
+	align-items: center;
+
 	font-size: var(--font-size-sm);
+	height: fit-content;
 	opacity: 0.7;
-	font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight);
+
+	position: relative;
+	top: 1px;
 }
 
 .percent-marker {
 	font-size: var(--font-size-sm);
 	line-height: var(--line-height-sm);
-	opacity: 0.7;
+	opacity: 0.6;
 }
 
 .profile-taste-top-bar {
@@ -145,6 +197,7 @@
 	justify-content: center;
 	height: 4px;
 	border-radius: var(--radius-s);
+	display: none;
 
 	position: absolute;
 	top: 50%;

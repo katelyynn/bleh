@@ -13,6 +13,7 @@ import { MenuContents } from '../menu/menu';
 import { Button } from '../button/button';
 import { Icon, icons } from '../shared/icon';
 import { SubText } from '../text/sub';
+import { SeeMore } from '../text/see_more';
 
 export function taste_artist(artist: string) {
 	return `<a class="taste-artist" href="${root}music/${redirect()}${sanitise(artist)
@@ -145,12 +146,18 @@ export function ProfileTaste({
 	const taste_wrap = (
 		<section class={['profile-taste', 'colourful']} data-taste={tier}>
 			<div class='profile-taste-texture'>
-				<Icon name={icons.taste} />
-				<Icon name={icons.taste} />
-				<Icon name={icons.taste} />
+				<Icon />
+				<Icon />
+				<Icon />
 			</div>
 			<div class='profile-taste-top'>
 				<div class={['profile-taste-top-badges']}>
+					<div class='profile-taste-top-icon'>
+						<Icon />
+						{(!['super', 'very_low'].includes(tier) && (
+							<Icon className='profile-taste-top-icon-back' />
+						))}
+					</div>
 					<div class='profile-taste-top-badge-percent'>
 						{percentage.slice(0, -1)}
 						<span class='percent-marker'>%</span>
@@ -199,9 +206,9 @@ export function ProfileTaste({
 			</div>
 			{artists.length > 0 && (
 				<div class='profile-taste-lower'>
-					<Button outline opens={taste_menu}>
-						{tl(trans.view_your_compatibility)}
-					</Button>
+					<SeeMore opens={taste_menu}>
+						{tl(trans.view_details)}
+					</SeeMore>
 				</div>
 			)}
 		</section>
