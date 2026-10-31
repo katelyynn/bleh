@@ -205,7 +205,7 @@
 		}
 
 		&>.listen-board-item-bg {
-			translate: 54px 0;
+			translate: 66px 0;
 			scale: 1.03;
 		}
 
@@ -257,9 +257,9 @@
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 
-	opacity: 0.08;
+	opacity: 0.2;
 
-	translate: 40px 0;
+	translate: 70px 0;
 	scale: 1;
 
 	pointer-events: none;

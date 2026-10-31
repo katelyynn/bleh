@@ -111,6 +111,7 @@ import { MenuRadio } from '@/components/settings/provider/menu/radio';
 import { validWordmarks, Wordmark } from '@/components/music/wordmark';
 import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
 import { ProfileTaste } from '@/components/profile/taste';
+import { EventSmallCalendar } from '@/components/event/icon';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1657,6 +1658,24 @@ export function mualani() {
 						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Medium' valentine />
 						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Low' valentine />
 						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very Low' valentine />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='event'>
+				<DemoGrid>
+					<DemoItem label='EventSmallCalendar'>
+						<EventSmallCalendar month='Jan' day='21' />
+						<EventSmallCalendar month='Feb' day='2' />
+						<EventSmallCalendar month='Mar' day='7' />
+						<EventSmallCalendar month='Apr' day='11' />
+						<EventSmallCalendar month='May' day='13' />
+						<EventSmallCalendar month='Jun' day='29' />
+						<EventSmallCalendar month='Jul' day='6' />
+						<EventSmallCalendar month='Aug' day='27' />
+						<EventSmallCalendar month='Sep' day='28' />
+						<EventSmallCalendar month='Oct' day='20' />
+						<EventSmallCalendar month='Nov' day='16' />
+						<EventSmallCalendar month='Dec' day='31' />
 					</DemoItem>
 				</DemoGrid>
 			</section>

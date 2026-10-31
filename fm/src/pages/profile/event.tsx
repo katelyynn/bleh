@@ -5,12 +5,15 @@
  */
 
 import { page } from '@/build/page.ts';
+import { tl, trans } from '@/build/trans';
 import {
 	attendance,
 	EventItem,
 	EventItemProps,
 	EventList,
 } from '@/components/event/item.tsx';
+import { icons } from '@/components/shared/icon';
+import { PanelHead } from '@/components/text/head';
 import { SeeMore } from '@/components/text/see_more.tsx';
 
 export function bleh_event_profile() {
@@ -103,4 +106,16 @@ export function bleh_event_profile() {
 			</EventList>,
 		);
 	});
+}
+
+export function profile_event_list() {
+	const panel = page.structure.side!.querySelector('.user-events-sidebar') as HTMLElement;
+	if (!panel) return;
+
+	const head = panel.querySelector('h2')!;
+	head.replaceWith(
+		<PanelHead icon={icons.events}>
+			{tl(trans.events)}
+		</PanelHead>
+	);
 }

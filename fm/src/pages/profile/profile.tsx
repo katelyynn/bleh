@@ -45,7 +45,7 @@ import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
 import { useSettings } from '@/page.tsx';
-import { bleh_event_profile } from '@/pages/profile/event.tsx';
+import { bleh_event_profile, profile_event_list } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
@@ -552,6 +552,8 @@ export function bleh_profiles() {
 		}
 
 		redesign_profile_header(is_own_profile, is_following);
+
+		profile_event_list();
 	} else {
 		load_profile_cache(page.name, cache, profile_cache);
 
