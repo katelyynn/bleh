@@ -22,6 +22,7 @@ const proxy_free = [
 	'lastfm.freetls.fastly.net',
 	'lastfm-img.freetls.fastly.net',
 	'last.fm',
+	'files.catbox.moe'
 ];
 
 export function proxy_images(
@@ -67,9 +68,8 @@ export function proxy_image(url: string) {
 		const instance = new URL(url);
 
 		if (proxy_free.includes(instance.hostname)) return url;
-	} catch {}
+	} catch { }
 
-	return `https://images.weserv.nl/?url=${
-		encodeURIComponent(url)
-	}&output=webp&n=-1`;
+	return `https://images.weserv.nl/?url=${encodeURIComponent(url)
+		}&output=webp&n=-1`;
 }

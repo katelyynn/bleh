@@ -68363,7 +68363,8 @@ var bleh = (() => {
     "cdn.discordapp.com",
     "lastfm.freetls.fastly.net",
     "lastfm-img.freetls.fastly.net",
-    "last.fm"
+    "last.fm",
+    "files.catbox.moe"
   ];
   function proxy_images(body, line_breaks = true, in_dialog = false) {
     body.querySelectorAll("img").forEach((image2) => {
