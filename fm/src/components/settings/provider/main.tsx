@@ -198,11 +198,14 @@ export function SettingIncompatibleWith({
 						title = tl(settings_store[key].title) as string;
 					}
 
-					if (val == true) {
+					if (val === true) {
 						return tl(trans.value_is_enabled, { v: title });
+					} else if (val === false) {
+						return tl(trans.value_is_disabled, { v: title });
 					}
 
-					return tl(trans.value_is_disabled, { v: title });
+					//return tl(trans.value_is_value, { v: title, v2: settings_store[key]?.values?.[val].text || tl(settings_store[key]?.values?.[val].name) });
+					return tl(trans.value_is_value, { v: title, v2: val });
 				}).join(', ')}
 			</p>
 		</div>

@@ -1,5 +1,5 @@
 .pagination {
-	margin-top: var(--card-gap);
+	margin-top: var(--card-padding);
 
 	.col-main>& {
 		margin: unset;

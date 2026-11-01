@@ -45,7 +45,7 @@ import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
 import { useSettings } from '@/page.tsx';
-import { bleh_event_profile } from '@/pages/profile/event.tsx';
+import { bleh_event_profile, profile_event_list } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
@@ -79,6 +79,7 @@ import { ProfileBadges } from './badges.tsx';
 import { DateTime } from 'luxon';
 import { is_sponsor } from '@/components/sponsor.ts';
 import { set_obsession } from './set_obsession.tsx';
+import { page_with_users } from '@/components/shared/users.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -551,6 +552,8 @@ export function bleh_profiles() {
 		}
 
 		redesign_profile_header(is_own_profile, is_following);
+
+		profile_event_list();
 	} else {
 		load_profile_cache(page.name, cache, profile_cache);
 
@@ -839,37 +842,7 @@ function patch_profile_following() {
         `);
 	}
 
-	const no_data = page.structure.main.querySelector('.no-data-message');
-	const pagination = page.structure.main.querySelector('.pagination');
-
-	let no_data_neighbours = page.structure.main.querySelector(':scope > p');
-	if (no_data_neighbours) no_data_neighbours.classList.add('no-data-message');
-
-	const user_list = page.structure.main.querySelector('.user-list');
-	user_list?.setAttribute('data-list-view', settings.list_view);
-
-	if (user_list) no_data_neighbours = null;
-
-	render(
-		page.structure.main,
-		html.node`
-        <section class="users">
-            ${!no_data && !no_data_neighbours
-				? setting({
-					id: 'list_view',
-					func: (val) => {
-						user_list?.setAttribute('data-list-view', val);
-					},
-				})
-				: ''
-			}
-            ${no_data}
-            ${no_data_neighbours}
-            ${user_list}
-            ${pagination}
-        </section>
-    `,
-	);
+	page_with_users();
 }
 
 function bleh_featured_profile_track(object) {

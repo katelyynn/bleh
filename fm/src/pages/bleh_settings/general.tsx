@@ -288,7 +288,7 @@ function update_setting() {
 		null;
 
 	const cont = html.node`
-        <div class="setting" data-type="action" />
+        <div class="setting" data-type="action" id="setting_update" />
     `;
 
 	if (!update_required) {
@@ -311,13 +311,12 @@ function update_setting() {
 				    ${last_checked
 					? html.node`
                     <h5>${tl(trans.you_are_up_to_date)}</h5>
-                    <p class="last-checked">${
-						tl(trans.last_checked_date).replace(
-							'{d}',
-							DateTime.fromJSDate(new Date(last_checked))
-								.toRelative(),
-						)
-					}</p>
+                    <p class="last-checked">${tl(trans.last_checked_date).replace(
+						'{d}',
+						DateTime.fromJSDate(new Date(last_checked))
+							.toRelative(),
+					)
+						}</p>
                 `
 					: html.node`
                     <h5>${tl(trans.missing_updates)}</h5>
@@ -329,22 +328,22 @@ function update_setting() {
 						el,
 					) => (update_btn = el)}
 						onclick=${() =>
-							update_check(true, update_btn, (success, error) => {
-								if (!success) {
-									update_check_failed(error);
-									return;
-								}
+					update_check(true, update_btn, (success, error) => {
+						if (!success) {
+							update_check_failed(error);
+							return;
+						}
 
-								notify({
-									id: 'update',
-									title: tl(trans.updates),
-									body: tl(trans.checked_for_updates),
-									icon: icons.update,
-								});
-								render_setting_page('general');
-							})}>${tl(trans.check)}</button>
+						notify({
+							id: 'update',
+							title: tl(trans.updates),
+							body: tl(trans.checked_for_updates),
+							icon: icons.update,
+						});
+						render_setting_page('general');
+					})}>${tl(trans.check)}</button>
 					<button class="btn primary icon" data-type="news" onclick=${() =>
-						news()}>
+					news()}>
 				        ${tl(trans.news)}
 				    </button>
 				</div>
@@ -363,12 +362,11 @@ function update_setting() {
 				    <h5>${tl(trans.update_available_to_install)}</h5>
 				    ${last_checked
 					? html.node`
-                    <p class="last-checked">${
-						tl(trans.last_checked_date, {
-							d: DateTime.fromJSDate(new Date(last_checked))
-								.toRelative(),
-						})
-					}</p>
+                    <p class="last-checked">${tl(trans.last_checked_date, {
+						d: DateTime.fromJSDate(new Date(last_checked))
+							.toRelative(),
+					})
+						}</p>
                 `
 					: html.node`
                     <p class="last-checked">${tl(trans.never_checked)}</p>
@@ -377,33 +375,33 @@ function update_setting() {
 				<div class="toggle-wrap">
 					<div class="button-group">
 						<button class="btn icon" data-type="update" ref=${(
-							el,
-						) => (update_btn = el)}
+						el,
+					) => (update_btn = el)}
 							onclick=${() =>
-								update_check(
-									true,
-									update_btn,
-									(success, error) => {
-										if (!success) {
-											update_check_failed(error);
-											return;
-										}
+					update_check(
+						true,
+						update_btn,
+						(success, error) => {
+							if (!success) {
+								update_check_failed(error);
+								return;
+							}
 
-										notify({
-											id: 'update',
-											title: tl(trans.updates),
-											body: tl(trans.checked_for_updates),
-											icon: icons.update,
-										});
-										render_setting_page('general');
-									},
-								)}>${tl(trans.check)}</button>
+							notify({
+								id: 'update',
+								title: tl(trans.updates),
+								body: tl(trans.checked_for_updates),
+								icon: icons.update,
+							});
+							render_setting_page('general');
+						},
+					)}>${tl(trans.check)}</button>
 						<button class="btn primary icon" data-type="update" ref=${(
-							el,
-						) => (update_btn = el)}
+						el,
+					) => (update_btn = el)}
 							onclick=${() => start_update()}>${tl(
-								trans.install_now,
-							)}</button>
+						trans.install_now,
+					)}</button>
 					</div>
 				</div>
 			`,
@@ -440,22 +438,19 @@ function update_check_failed(e) {
                 <div class="error-top">
                     ${icon({ name: icons.error })}
                     <div class="error-top-info">
-                        <h1 class="error-head">${
-			tl(trans.failed_to_check_for_updates)
-		}</h1>
+                        <h1 class="error-head">${tl(trans.failed_to_check_for_updates)
+			}</h1>
                         <p class="error-body">Either the update files could not be found or there was an error in parsing them.</p>
                     </div>
                 </div>
-                <pre class="error-info colourful">${
-			e
+                <pre class="error-info colourful">${e
 				? html
 					.node`<span class="error-type">${e.name}</span>: ${e.message}`
 				: ''
-		}${
-			e.stack
+			}${e.stack
 				? html.node`<br><span class="error-stack">${e.stack}</span>`
 				: ''
-		}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
+			}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
             </div>
             <div class="modal-footer">
                 <div class="fill"></div>

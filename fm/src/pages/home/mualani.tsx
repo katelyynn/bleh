@@ -110,6 +110,8 @@ import { ProfileSummaryBlock, ProfileSummaryBlocks } from '@/components/summary/
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
 import { validWordmarks, Wordmark } from '@/components/music/wordmark';
 import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
+import { ProfileTaste } from '@/components/profile/taste';
+import { EventSmallCalendar } from '@/components/event/icon';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1636,6 +1638,44 @@ export function mualani() {
 						<PositionNumber number={7} />
 						<PositionNumber number={8} />
 						<PositionNumber number={9} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='taste'>
+				<DemoGrid>
+					<DemoItem label='ProfileTaste'>
+						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Super' />
+						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very High' />
+						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='High' />
+						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Medium' />
+						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Low' />
+						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very Low' />
+					</DemoItem>
+					<DemoItem label='ProfileTaste (valentine)'>
+						<ProfileTaste tier='super' percentage='100%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Super' valentine />
+						<ProfileTaste tier='very_high' percentage='80%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very High' valentine />
+						<ProfileTaste tier='high' percentage='65%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='High' valentine />
+						<ProfileTaste tier='medium' percentage='45%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Medium' valentine />
+						<ProfileTaste tier='low' percentage='25%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Low' valentine />
+						<ProfileTaste tier='very_low' percentage='5%' artists={['glaive', 'Tiffany Day', 'brakence']} formal='Very Low' valentine />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='event'>
+				<DemoGrid>
+					<DemoItem label='EventSmallCalendar'>
+						<EventSmallCalendar month='Jan' day='21' />
+						<EventSmallCalendar month='Feb' day='2' />
+						<EventSmallCalendar month='Mar' day='7' />
+						<EventSmallCalendar month='Apr' day='11' />
+						<EventSmallCalendar month='May' day='13' />
+						<EventSmallCalendar month='Jun' day='29' />
+						<EventSmallCalendar month='Jul' day='6' />
+						<EventSmallCalendar month='Aug' day='27' />
+						<EventSmallCalendar month='Sep' day='28' />
+						<EventSmallCalendar month='Oct' day='20' />
+						<EventSmallCalendar month='Nov' day='16' />
+						<EventSmallCalendar month='Dec' day='31' />
 					</DemoItem>
 				</DemoGrid>
 			</section>

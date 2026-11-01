@@ -9,6 +9,11 @@
 
 	--left: 0;
 	margin: unset !important;
+	--mask2: unset !important;
+
+	&.link-block--hover {
+		--underline-scale: 1;
+	}
 }
 
 .cta-copy {
@@ -19,10 +24,6 @@
 
 .cta-link {
 	--show-icon: none;
-
-	&:after {
-		display: none;
-	}
 }
 
 .coloured-cta--add-event-icon {

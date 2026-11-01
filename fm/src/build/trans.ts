@@ -458,6 +458,7 @@ export const trans = {
 			it: 'Questo distintivo è riservato per {u}',
 		},
 		cute: {
+			// (female)
 			en: 'The creator of bleh',
 			pt: 'A criadora do bleh',
 			pl: 'Twórca bleh',
@@ -8314,6 +8315,9 @@ export const trans = {
 		it: '{v} è disattivato',
 		pt: '{v} está desativado',
 	},
+	value_is_value: {
+		en: '{v} is {v2}',
+	},
 	bulk_edit_extension: {
 		// yes the extension
 		en: 'Last.fm Bulk Edit',
@@ -11685,6 +11689,9 @@ export const trans = {
 		it: 'Visualizza dettagli',
 		pt: 'Ver detalhes',
 		pl: 'Wyświetl szczegóły',
+	},
+	valentine_header: {
+		en: 'You and {u} are a perfect match!'
 	},
 	valentine_info: {
 		en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!',

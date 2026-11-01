@@ -550,10 +550,10 @@ body {
 	--playlist-cover-size: 230px;
 	--playlist-author-avatar-size: 36px;
 
-	--calendar-size: 46px;
-	--calendar-width: 40px;
+	--calendar-size: 40px;
+	--calendar-width: var(--calendar-size);
 	--calendar-height: var(--calendar-size);
-	--calendar-radius: 6px;
+	--calendar-radius: var(--radius-s);
 
 	--shout-avatar-size: 52px;
 	--shout-avatar-action: 14px;

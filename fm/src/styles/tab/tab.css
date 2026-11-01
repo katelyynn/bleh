@@ -356,7 +356,7 @@ button.navlist-more {
 		left: 0;
 		right: 0;
 		bottom: -1px;
-		background: var(--toolbar-border);
+		background: var(--separator-base);
 		height: 1px;
 	}
 }

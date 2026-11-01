@@ -289,9 +289,6 @@
 .label.user-follow {
 	--mask: var(--icon-follow);
 	order: 11;
-
-	--sat-over: 0;
-	--lit-over: 1;
 }
 
 .header-new-on-tour {

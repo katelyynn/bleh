@@ -9,7 +9,7 @@ import type { ClassNames, createRef, ReactElement } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
 import { useSettings } from '@/page.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { hover_tooltip, menu_tooltip, Tooltip, TooltipInstance } from '@/components/shared/tooltips.tsx';
 
 interface SeeMoreProps {
 	ref?: ReturnType<typeof createRef>;
@@ -23,6 +23,11 @@ interface SeeMoreProps {
 	blend?: boolean;
 	className?: string;
 	children: ReactNode;
+	opens?: ReactElement;
+}
+
+type SeeMoreElement = HTMLElement & {
+	menu?: TooltipInstance<ReactElement, ReactElement>;
 }
 
 export function SeeMore({
@@ -37,6 +42,7 @@ export function SeeMore({
 	blend,
 	className,
 	children,
+	opens,
 }: SeeMoreProps) {
 	const classes: ClassNames = [
 		!blend && 'see-more',
@@ -44,14 +50,27 @@ export function SeeMore({
 		blend && 'btn blend-v2-btn',
 		colourful && 'colourful',
 		chibi && 'chibi-see-more',
+		opens && 'select-button link-select',
 		className && className,
 	];
 
-	if (!icon && external) {
-		icon = icons.external;
+	if (opens) {
+		iconPlacement = 'left';
+	}
+
+	if (!icon && !opens) {
+		if (external) {
+			icon = icons.external;
+		} else if (iconPlacement == 'left') {
+			icon = icons.arrow_left;
+		} else if (iconPlacement == 'right') {
+			icon = icons.arrow_right;
+		}
 	}
 
 	let elem: ReactElement;
+
+	let instance: TooltipInstance<ReactElement, ReactElement>;
 
 	if (!href && onClick) {
 		elem = (
@@ -62,15 +81,15 @@ export function SeeMore({
 				data-see-more='true'
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
 			>
-				{iconPlacement == 'left' && (
-					<Icon name={icon || icons.arrow_left} />
+				{(iconPlacement == 'left' && icon) && (
+					<Icon name={icon} />
 				)}
 				{children}
-				{iconPlacement == 'right' && (
-					<Icon name={icon || icons.arrow_right} />
+				{(iconPlacement == 'right' && icon) && (
+					<Icon name={icon} />
 				)}
 			</button>
-		);
+		) as SeeMoreElement;
 	} else {
 		elem = (
 			<a
@@ -81,17 +100,15 @@ export function SeeMore({
 				data-see-more='true'
 				ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
 			>
-				{iconPlacement == 'left' && (
-					<Icon
-						name={icon || icons.arrow_left}
-					/>
+				{(iconPlacement == 'left' && icon) && (
+					<Icon name={icon} />
 				)}
 				{children}
-				{iconPlacement == 'right' && (
-					<Icon name={icon || icons.arrow_right} />
+				{(iconPlacement == 'right' && icon) && (
+					<Icon name={icon} />
 				)}
 			</a>
-		);
+		) as SeeMoreElement;
 	}
 
 	if (chibi) {
@@ -100,6 +117,19 @@ export function SeeMore({
 			<Tooltip>{children}</Tooltip>,
 		);
 	}
+
+	if (opens) {
+		instance = menu_tooltip(
+			elem,
+			opens,
+		);
+	}
+
+	Object.defineProperty(elem, 'menu', {
+		get() {
+			return instance;
+		},
+	});
 
 	return elem;
 }

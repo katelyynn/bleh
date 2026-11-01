@@ -1,4 +1,10 @@
 {
+    "2026.1101": {
+        "type": "major",
+        "force": false,
+        "bio": "# Profiles\n- __Improved the look of taste compatibility__\n    - There are also new colours for each tier.\n- __Optimised user lists__\n    - User backgrounds now also show in *Grid* view.\n- Improved the look of the event sidebar\n- Exempted `catbox.moe` as a URL\n\n# Seasonal\n- Adjusted some seasonal effects for later on\n\n# Settings\n- Adjusted how settings mark themselves as incompatible\n    - Noteable when you are making a Stack *Collage*.\n\n# Artists\n- Improved the look of the event sidebar\n- Improved the header of the photos sidebar\n\n# Other\n- Fixed some link underlines not showing\n- Fixed the footer when crediting languages",
+        "name": "yu"
+    },
     "2026.1029": {
         "type": "major",
         "force": false,

@@ -1,6 +1,39 @@
+.artist-events-list {
+
+	/* upcoming events */
+	&>p.buffer-standard.text-bold+.buffer-standard {
+		display: none;
+	}
+}
+
+.user-events-sidebar>h3,
+.artist-events-list>p.buffer-standard {
+	cursor: default;
+	color: oklch(var(--c3));
+	font-weight: var(--font-weight) !important;
+	position: relative;
+	text-align: center;
+	z-index: 10;
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 1px;
+		background: var(--separator-base);
+		z-index: -1;
+
+		--mask: linear-gradient(90deg, white, transparent 30%, transparent 70%, white);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+}
+
+
 .events-list-item-date-icon {
-	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4)
-		/ 40%) 60%) !important;
+	background: transparent !important;
 	box-shadow: var(--group-shadow) !important;
 	color: oklch(var(--c2));
 	width: var(--calendar-width) !important;
@@ -21,25 +54,28 @@
 	width: 100% !important;
 	color: oklch(var(--l3-c)) !important;
 	margin: unset !important;
+	text-align: center !important;
 
 	/* calendar-icon specific */
 	background: unset !important;
 
 	&.events-list-item-date-icon-month {
-		background: unset !important;
+		background: oklch(var(--h4) / 20%) !important;
 		box-shadow: unset !important;
-		padding: 0 !important;
+		padding: 0 6px !important;
 		font-size: var(--font-size-sm) !important;
-		padding-top: 4px !important;
-		margin-bottom: -4px !important;
+		line-height: var(--line-height-sm) !important;
 
 		font-weight: var(--font-weight-bold) !important;
 		letter-spacing: unset !important;
+
+		width: unset !important;
+		margin: 2px 2px -2px !important;
+
+		border-radius: calc(var(--calendar-radius) - 2px);
 	}
 
 	&.events-list-item-date-icon-day {
-		font-size: 16px !important;
-		line-height: 20px !important;
 		font-weight: var(--font-weight-bold) !important;
 		color: oklch(var(--c2)) !important;
 
@@ -61,11 +97,11 @@
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	color: oklch(var(--c3));
-	font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight);
 	margin-top: unset;
 	margin-bottom: var(--card-gap);
 
-	.events-list-sidebar + & {
+	.events-list-sidebar+& {
 		margin-top: var(--card-gap);
 	}
 }
@@ -141,7 +177,7 @@
 	.events-list-item {
 		min-height: unset;
 		margin: unset !important;
-		padding: 0 0 0 calc(var(--calendar-width) + var(--card-gap));
+		padding: 0 0 0 calc(var(--calendar-width) + 10px);
 		height: var(--calendar-height) !important;
 	}
 }
@@ -155,35 +191,22 @@
 	}
 }
 
-[data-lazy-filter-options="events-select"] {
-	.text-bold {
-		font-weight: var(--font-weight-medium);
-		color: oklch(var(--c3));
-		position: relative;
-		width: fit-content;
-	}
-
-	/* upcoming events */
-	.buffer-standard.text-bold + .buffer-standard {
-		display: none;
-	}
-}
-
 :is(.events-list, .events-list-anhv1) {
 	margin: unset;
 }
 
 .sidebar-date-heading {
 	color: oklch(var(--c3));
+	font-weight: var(--font-weight);
 	margin-top: var(--card-gap);
-	margin-bottom: var(--card-gap);
+	margin-bottom: 10px;
 	text-align: left;
 
 	&:after {
 		display: none;
 	}
 
-	& + .events-list-sidebar {
+	&+.events-list-sidebar {
 		margin-top: unset;
 	}
 }
@@ -217,7 +240,7 @@
 	font-weight: var(--font-weight-medium) !important;
 	text-decoration: var(--force-underline, none) !important;
 
-	& > a {
+	&>a {
 		text-decoration: inherit !important;
 	}
 }
@@ -341,7 +364,7 @@
 .events-filter {
 	margin: unset;
 
-	& > button {
+	&>button {
 		&.date-picker-button {
 			--mask: var(--icon-16-calendar);
 		}

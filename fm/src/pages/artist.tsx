@@ -43,7 +43,7 @@ import {
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
 import { useSettings } from '@/page.tsx';
-import { bleh_event_artist } from '@/pages/artist/event.tsx';
+import { artist_event_sidebar, bleh_event_artist } from '@/pages/artist/event.tsx';
 import {
 	append_header,
 	PageHeader,
@@ -67,6 +67,7 @@ import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { convert_to_select } from '@/components/select/select.tsx';
 import { Wordmark } from '@/components/music/wordmark';
+import { artist_photos_sidebar } from './artist/photos';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -415,9 +416,10 @@ export function bleh_artists() {
 					tracks_seen.add(link.textContent.trim().toLowerCase());
 				}
 
-				listeners_section.appendChild(
-					convert_top_listener(listener, index, 'listeners-section'),
-				);
+				const elem = convert_top_listener(listener, index, 'listeners-section');
+				elem.setAttribute('data-list-view', 'grid');
+
+				listeners_section.appendChild(elem);
 			});
 		}
 
@@ -433,6 +435,9 @@ export function bleh_artists() {
 				);
 			});
 		}
+
+		artist_event_sidebar();
+		artist_photos_sidebar();
 	} else {
 		const btn_add = page.structure.side.querySelector('.add-button');
 		if (btn_add) btn_add.setAttribute('data-page-subpage', page.subpage);

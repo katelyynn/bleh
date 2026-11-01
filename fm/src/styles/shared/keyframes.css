@@ -426,12 +426,12 @@
 
 	from,
 	to {
-		color: oklch(var(--l4-c));
+		opacity: 0.4;
 		scale: 1;
 	}
 
 	40% {
-		color: color-mix(in oklch, oklch(var(--l2-c)) 80%, oklch(var(--l3-c)));
+		opacity: 1;
 		scale: 1.3;
 	}
 }
