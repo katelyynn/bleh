@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.1030
+// @version      2026.1101
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -134342,7 +134342,7 @@ ${version2.build} (${version2.sku})`;
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://bleh.yuzu.pet/download",
-    built_on: "2026-10-29T22:32:25.269Z"
+    built_on: "2026-11-01T00:11:04.170Z"
   };
 
   // node_modules/.pnpm/chartjs-adapter-luxon@1.3.1_chart.js@4.5.1_luxon@3.7.2/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
@@ -135880,23 +135880,23 @@ chroma-js/chroma.js:
    * @license
    *
    * chroma.js - JavaScript library for color conversions
-   *
+   * 
    * Copyright (c) 2011-2017, Gregor Aisch
    * All rights reserved.
-   *
+   * 
    * Redistribution and use in source and binary forms, with or without
    * modification, are permitted provided that the following conditions are met:
-   *
+   * 
    * 1. Redistributions of source code must retain the above copyright notice, this
    *    list of conditions and the following disclaimer.
-   *
+   * 
    * 2. Redistributions in binary form must reproduce the above copyright notice,
    *    this list of conditions and the following disclaimer in the documentation
    *    and/or other materials provided with the distribution.
-   *
+   * 
    * 3. The name Gregor Aisch may not be used to endorse or promote products
    *    derived from this software without specific prior written permission.
-   *
+   * 
    * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -135911,20 +135911,20 @@ chroma-js/chroma.js:
    *)
   (**
   	ColorBrewer colors for chroma.js
-
-  	Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The
+  
+  	Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The 
   	Pennsylvania State University.
-
-  	Licensed under the Apache License, Version 2.0 (the "License");
+  
+  	Licensed under the Apache License, Version 2.0 (the "License"); 
   	you may not use this file except in compliance with the License.
-  	You may obtain a copy of the License at
+  	You may obtain a copy of the License at	
   	http://www.apache.org/licenses/LICENSE-2.0
-
+  
   	Unless required by applicable law or agreed to in writing, software distributed
   	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
   	CONDITIONS OF ANY KIND, either express or implied. See the License for the
   	specific language governing permissions and limitations under the License.
-
+  
       @preserve
    *)
 
