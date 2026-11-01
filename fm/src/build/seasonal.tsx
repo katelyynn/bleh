@@ -107,8 +107,7 @@ export const seasonal_events: season[] = [
 			day: 12,
 		},
 		snowflakes: {
-			state: true,
-			count: 12,
+			state: false,
 		},
 	},
 	{
@@ -119,18 +118,17 @@ export const seasonal_events: season[] = [
 		},
 		end: {
 			month: 11,
-			day: 22,
+			day: 24,
 		},
 		snowflakes: {
-			state: true,
-			count: 80,
+			state: false
 		},
 	},
 	{
 		id: 'christmas',
 		start: {
 			month: 11,
-			day: 23,
+			day: 25,
 		},
 		end: {
 			month: 12,
@@ -138,7 +136,7 @@ export const seasonal_events: season[] = [
 		},
 		snowflakes: {
 			state: true,
-			count: 160,
+			count: 140,
 		},
 	},
 ];
@@ -251,10 +249,16 @@ function apply_season(current?: processedSeason) {
 	log(`applying ${current.id}`, 'season', 'info', { current });
 	document.body.setAttribute('data-bleh--season', current.id);
 
+	if (page.state.snowflakes == current.snowflakes.count) {
+		return;
+	}
+
 	if (
 		current.snowflakes.state &&
 		useSettings.get('seasonal_particles') != 'none'
 	) {
+		page.state.snowflakes = current.snowflakes.count;
+
 		log('let the snow start!', 'season');
 		prep_snow();
 
