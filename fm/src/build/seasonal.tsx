@@ -104,7 +104,7 @@ export const seasonal_events: season[] = [
 		},
 		end: {
 			month: 11,
-			day: 12,
+			day: 14,
 		},
 		snowflakes: {
 			state: false,
@@ -114,11 +114,11 @@ export const seasonal_events: season[] = [
 		id: 'fall',
 		start: {
 			month: 11,
-			day: 13,
+			day: 15,
 		},
 		end: {
 			month: 11,
-			day: 24,
+			day: 27,
 		},
 		snowflakes: {
 			state: false
@@ -128,7 +128,7 @@ export const seasonal_events: season[] = [
 		id: 'christmas',
 		start: {
 			month: 11,
-			day: 25,
+			day: 28,
 		},
 		end: {
 			month: 12,
