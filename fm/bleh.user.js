@@ -134337,8 +134337,8 @@ ${version2.build} (${version2.sku})`;
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.1030",
-    sku: "marroW",
+    build: "2026.1101",
+    sku: "yu",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://bleh.yuzu.pet/download",
