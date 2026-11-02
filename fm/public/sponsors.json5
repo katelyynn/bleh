@@ -1,5 +1,5 @@
 {
-    version: "2026.1101",
+    version: "2026.1102",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -446,6 +446,8 @@
 		},
 		"SoGiveEmBlood": {
 			contributor: true
-		}
+		},
+		"ayayapop": {},
+		"bapycal": {}
     }
 }
