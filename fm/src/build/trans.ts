@@ -74,8 +74,9 @@ export const lang_info: Record<string, language> = {
 			'foognocchie',
 			'suburbanno',
 			'lagb2ck',
+			'lucraticc',
 		],
-		last_updated: '2026-10-02',
+		last_updated: '2026-11-03',
 	},
 	sv: {
 		name: get_language_name('sv'),
@@ -144,6 +145,7 @@ export const trans = {
 		// the spaces around it are intentional and should be
 		// there if the language puts spaces
 		en: ' or ',
+		pt: ' ou ',
 	},
 	page_templates: {
 		// these are used for browser tab titles
@@ -6782,6 +6784,7 @@ export const trans = {
 	},
 	font_emoji: {
 		en: 'Use a fallback font for emojis',
+		pt: 'Usar uma fonte reserva para emojis',
 	},
 	font_example: {
 		// the trans flag is used to demonstrate the improper
@@ -8317,6 +8320,7 @@ export const trans = {
 	},
 	value_is_value: {
 		en: '{v} is {v2}',
+		pt: '{v} é {v2}',
 	},
 	bulk_edit_extension: {
 		// yes the extension
@@ -8517,9 +8521,11 @@ export const trans = {
 	},
 	creating_collage_phase: {
 		en: 'Creating collage ({phase}), {progress}%',
+		pt: 'Criando colagem ({phase}), {progress}%',
 	},
 	collage_tip: {
 		en: 'Click the collage above or use the sidebar to download. Adjusting visual settings now will refresh faster.',
+		pt: 'Clique na colagem acima ou use a barra lateral para baixar. Ajustar as configurações visuais agora tornará a atualização mais rápida.',
 	},
 	collage_title: {
 		name: {
@@ -11691,7 +11697,8 @@ export const trans = {
 		pl: 'Wyświetl szczegóły',
 	},
 	valentine_header: {
-		en: 'You and {u} are a perfect match!'
+		en: 'You and {u} are a perfect match!',
+		pt: 'Você e {u} formam um par perfeito!',
 	},
 	valentine_info: {
 		en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!',
@@ -12796,18 +12803,22 @@ export const trans = {
 	},
 	profile_summary_pie_chart: {
 		en: 'Show pie chart',
+		pt: 'Exibir gráfico de pizza',
 	},
 	chart_position: {
 		// shown on artist/album pages
 		// v = the number placement
-		en: '{v} in the world'
+		en: '{v} in the world',
+		pt: '{v}º no mundo', // appended 'º' for ordinal ranking (e.g., 1st -> 1º)
 	},
 	artist_wordmarks: {
 		name: {
-			en: 'Show stylised names for some artists'
+			en: 'Show stylised names for some artists',
+			pt: 'Exibir nomes estilizados de alguns artistas',
 		},
 		body: {
-			en: 'Adds personalisation to each page, sourced from Apple Music and official websites'
+			en: 'Adds personalisation to each page, sourced from Apple Music and official websites',
+			pt: 'Adiciona personalização a cada página, com dados do Apple Music e sites oficiais',
 		}
 	}
 } as const satisfies Record<string, any>;
