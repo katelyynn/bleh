@@ -421,7 +421,7 @@ button.navlist-more {
 	&:after {
 		content: "";
 		position: absolute;
-		bottom: -2px !important;
+		bottom: var(--tab-line-offset, -2px) !important;
 		left: var(--button-sides-icon) !important;
 		right: var(--button-sides) !important;
 		border-radius: var(--item-big-radius) !important;
@@ -429,7 +429,7 @@ button.navlist-more {
 
 		display: block !important;
 		width: unset !important;
-		height: 3px !important;
+		height: var(--tab-line-height, 3px) !important;
 		margin: unset !important;
 		transform: translateY(2px);
 		transform-origin: bottom;

@@ -86,7 +86,7 @@ export const seasonal_events: season[] = [
 		id: 'halloween',
 		start: {
 			month: 9,
-			day: 24,
+			day: 26,
 		},
 		end: {
 			month: 10,
@@ -104,7 +104,7 @@ export const seasonal_events: season[] = [
 		},
 		end: {
 			month: 11,
-			day: 14,
+			day: 15,
 		},
 		snowflakes: {
 			state: false,
@@ -114,21 +114,22 @@ export const seasonal_events: season[] = [
 		id: 'fall',
 		start: {
 			month: 11,
-			day: 15,
+			day: 16,
 		},
 		end: {
 			month: 11,
-			day: 27,
+			day: 30,
 		},
 		snowflakes: {
-			state: false
+			state: true,
+			count: 70,
 		},
 	},
 	{
 		id: 'christmas',
 		start: {
-			month: 11,
-			day: 28,
+			month: 12,
+			day: 1,
 		},
 		end: {
 			month: 12,
@@ -423,7 +424,7 @@ function begin_snowflakes(enabled: boolean, count: number) {
 		const drift = (Math.random() * 40 - 10).toFixed(1);
 		const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
 		const size = 8 * scale;
-		const duration = (Math.random() * 64 + 20).toFixed(1);
+		const duration = (Math.random() * 20 + 20).toFixed(1);
 		const delay = (Math.random() * -30).toFixed(1);
 		const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
 
