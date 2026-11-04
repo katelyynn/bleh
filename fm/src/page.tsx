@@ -74,7 +74,7 @@ import { bleh_users } from '@/components/shared/users';
 import { html, render } from 'lighterhtml';
 import { bleh_footer } from '@/components/page/footer';
 import { register_rabbit } from '@/components/dialog/rabbit';
-import { dialog_extender } from '@/components/dialog/dialog_extender.js';
+import { dialog_extender } from '@/components/dialog/dialog_extender.tsx';
 import { bleh_auth } from '@/pages/home/auth';
 import { bleh_labs } from '@/pages/profile/labs';
 import { bleh_minis } from '@/pages/home/minis.js';

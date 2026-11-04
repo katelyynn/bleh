@@ -94561,7 +94561,7 @@ var bleh = (() => {
                             type: "hidden",
                             name: "album_artist_name_original",
                             value: track.getAttribute(
-                              "data-artist-name-original"
+                              "data-album-artist-name-original"
                             )
                           }
                         ),
@@ -129308,7 +129308,7 @@ var bleh = (() => {
     return /* @__PURE__ */ jsx("div", { class: "footer-dot" });
   }
 
-  // src/components/dialog/dialog_extender.js
+  // src/components/dialog/dialog_extender.tsx
   function dialog_extender() {
     const wrappers = document.body.querySelectorAll(
       ":scope > .popup_wrapper, :scope > div > .popup_wrapper"
@@ -129326,6 +129326,7 @@ var bleh = (() => {
       if (!body) return;
       const title = body.querySelector(".modal-title");
       const contents = body.querySelector(":scope > div");
+      if (!contents) return;
       const form = contents.querySelector("form");
       if (!form) return;
       const dismiss = modal_dialog.querySelector(".modal-dismiss");
@@ -129358,7 +129359,7 @@ var bleh = (() => {
                 method: "POST",
                 body: form_data
               }).then((res) => {
-                let data2 = res.json();
+                const data2 = res.json();
                 log("received response", "form", "info", {
                   data: data2
                 });

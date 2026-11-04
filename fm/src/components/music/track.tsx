@@ -881,7 +881,7 @@ export function patch_titles(search = page.structure.main) {
 															name='album_artist_name_original'
 															value={track
 																.getAttribute(
-																	'data-artist-name-original',
+																	'data-album-artist-name-original',
 																)}
 														/>
 														<input

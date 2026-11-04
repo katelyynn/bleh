@@ -39,6 +39,7 @@ export function dialog_extender() {
 		const title = body.querySelector('.modal-title');
 
 		const contents = body.querySelector(':scope > div');
+		if (!contents) return;
 
 		const form = contents.querySelector('form');
 		if (!form) return;
@@ -46,7 +47,7 @@ export function dialog_extender() {
 		const dismiss = modal_dialog.querySelector('.modal-dismiss');
 
 		const token = form.querySelector('[name="csrfmiddlewaretoken"]');
-		if (token) page.token = token.getAttribute('value');
+		if (token) page.token = token.getAttribute('value')!;
 
 		if (form.action && form.action.endsWith('+bookmarks/modal/added')) {
 			// bookmark added modal
@@ -61,8 +62,7 @@ export function dialog_extender() {
 					    ${{
 						html: tl(trans.bookmark_save_msg).replace(
 							'{link}',
-							`<a class="see-more" href="${root}music/+bookmarks">${
-								tl(trans.go_there_now_lower)
+							`<a class="see-more" href="${root}music/+bookmarks">${tl(trans.go_there_now_lower)
 							}</a>`,
 						),
 					}}
@@ -71,29 +71,29 @@ export function dialog_extender() {
 						method="post"
 						ref=${(el) => (new_form = el)}
 						onsubmit=${async (e) => {
-							e.preventDefault();
+						e.preventDefault();
 
-							const url = `${root}music/+bookmarks/modal/added`;
-							const form_data = new FormData(new_form);
+						const url = `${root}music/+bookmarks/modal/added`;
+						const form_data = new FormData(new_form);
 
-							console.info(form_data);
+						console.info(form_data);
 
-							try {
-								await fetch(url, {
-									method: 'POST',
-									body: form_data,
-								}).then((res) => {
-									let data = res.json();
+						try {
+							await fetch(url, {
+								method: 'POST',
+								body: form_data,
+							}).then((res) => {
+								const data = res.json();
 
-									log('received response', 'form', 'info', {
-										data: data,
-									});
-									dismiss.click();
+								log('received response', 'form', 'info', {
+									data: data,
 								});
-							} catch (e) {
-								console.error(e);
-							}
-						}}
+								dismiss.click();
+							});
+						} catch (e) {
+							console.error(e);
+						}
+					}}
 					>
 						<input
 							type="hidden"
@@ -141,13 +141,13 @@ export function dialog_extender() {
 					checkbox.parentElement,
 					html`
 						${toggle({
-							value: value,
-							type: 'checkbox',
-							name: name,
-							title: text,
-							disabled: disabled,
-							data: input_el.value,
-						})}
+						value: value,
+						type: 'checkbox',
+						name: name,
+						title: text,
+						disabled: disabled,
+						data: input_el.value,
+					})}
 					`,
 				);
 			});
@@ -189,15 +189,15 @@ export function dialog_extender() {
 					</button>
 					<button class="js-close" type="button" style="display: none !important"
 						onclick=${() => {
-							dismiss.click();
-						}} />
+						dismiss.click();
+					}} />
 					<div class="fill" />
 					<div class="button-group">
 					    ${delete_form
 						? html.node`
                         <button class="btn icon danger-subtle" data-type="delete" type="button" onclick=${() => {
-							delete_btn.click();
-						}}>
+								delete_btn.click();
+							}}>
                             ${tl(trans.delete)}
                         </button>
                         `
@@ -225,18 +225,18 @@ export function dialog_extender() {
 				disclaimer.after(html.node`
                     <div class="button-group">
                         <button class="btn flex-button" onclick=${() => {
-					checks.forEach((check) => {
-						check.check();
-					});
-				}} type="button">
+						checks.forEach((check) => {
+							check.check();
+						});
+					}} type="button">
                             ${icon({ name: icons.select_all })}
                             ${tl(trans.select_all)}
                         </button>
                         <button class="btn flex-button" onclick=${() => {
-					checks.forEach((check) => {
-						check.uncheck();
-					});
-				}} type="button">
+						checks.forEach((check) => {
+							check.uncheck();
+						});
+					}} type="button">
                             ${icon({ name: icons.deselect_all })}
                             ${tl(trans.deselect_all)}
                         </button>
@@ -270,15 +270,15 @@ export function dialog_extender() {
 					checkbox.parentElement,
 					html`
 						${toggle({
-							value: value,
-							type: 'checkbox',
-							name: name,
-							title: item_name +
-								tl(trans.by_artist).replace('{a}', item_artist),
-							body: item_scrobbles,
-							disabled: disabled,
-							data: data,
-						})}
+						value: value,
+						type: 'checkbox',
+						name: name,
+						title: item_name +
+							tl(trans.by_artist).replace('{a}', item_artist),
+						body: item_scrobbles,
+						disabled: disabled,
+						data: data,
+					})}
 					`,
 				);
 			});
