@@ -113624,7 +113624,6 @@ var bleh = (() => {
         if (sort_button) {
           sort_button.classList.add(
             "btn",
-            "view-item",
             "glacier-library-button"
           );
           const sort_menu = sort2.querySelector(
