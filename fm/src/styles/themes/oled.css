@@ -79,6 +79,10 @@ body,
 		--card-border-base-highlight: oklch(var(--b2) / 0.55);
 
 		--separator-base: oklch(var(--b3) / 0.5);
+
+		--navigation-item: transparent;
+		--navigation-item-hover: oklch(var(--b4) / 60%);
+		--navigation-item-active: oklch(var(--b4) / 80%);
 	}
 }
 

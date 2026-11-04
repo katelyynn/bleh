@@ -72,6 +72,10 @@ body,
 
 		--menu-bg: var(--b5);
 		--menu-opacity: 94%;
+
+		--navigation-item: transparent;
+		--navigation-item-hover: oklch(var(--b5) / 40%);
+		--navigation-item-active: oklch(var(--b5) / 60%);
 	}
 }
 
