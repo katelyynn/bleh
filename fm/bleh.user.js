@@ -55622,6 +55622,19 @@ var bleh = (() => {
             canClose && /* @__PURE__ */ jsx(Button, { className: "bleh-modal-v2-action", onClick: onClose, children: close }),
             actions.map((action, i2) => {
               if (canClose) i2++;
+              if (action.reference) {
+                action.reference.classList.add("btn", "flex-button", "bleh-modal-v2-action");
+                if (action.className) action.reference.classList.add(action.className);
+                if (action.colourful) action.reference.classList.add("colourful");
+                if (action.primary) action.reference.classList.add("action-primary");
+                action.reference.replaceChildren(
+                  /* @__PURE__ */ jsx(Fragment, { children: action.children })
+                );
+                return /* @__PURE__ */ jsx(Fragment, { children: [
+                  i2 > 0 && /* @__PURE__ */ jsx(ModalActionSeparator, {}),
+                  action.reference
+                ] });
+              }
               return /* @__PURE__ */ jsx(Fragment, { children: [
                 i2 > 0 && /* @__PURE__ */ jsx(ModalActionSeparator, {}),
                 /* @__PURE__ */ jsx(
@@ -132629,6 +132642,25 @@ var bleh = (() => {
                         body: "I am your new leader"
                       });
                     },
+                    children: /* @__PURE__ */ jsx(Fragment, { children: [
+                      /* @__PURE__ */ jsx(Icon, { name: icons.crown }),
+                      "Make her leader"
+                    ] })
+                  }
+                ],
+                children: "This action cannot be undone."
+              }
+            ) }),
+            /* @__PURE__ */ jsx(DemoItem, { label: "ModalV2 (with reference button)", children: /* @__PURE__ */ jsx(
+              Modal,
+              {
+                title: "Make mimi leader?",
+                canClose: false,
+                actions: [
+                  {
+                    reference: /* @__PURE__ */ jsx("button", { onClick: () => alert("hello"), children: "hello world" }),
+                    colourful: true,
+                    className: "delete",
                     children: /* @__PURE__ */ jsx(Fragment, { children: [
                       /* @__PURE__ */ jsx(Icon, { name: icons.crown }),
                       "Make her leader"

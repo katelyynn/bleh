@@ -1464,6 +1464,31 @@ export function mualani() {
 							This action cannot be undone.
 						</Modal>
 					</DemoItem>
+					<DemoItem label='ModalV2 (with reference button)'>
+						<Modal
+							title='Make mimi leader?'
+							canClose={false}
+							actions={[
+								{
+									reference: (
+										<button onClick={() => alert('hello')}>
+											hello world
+										</button>
+									),
+									colourful: true,
+									className: 'delete',
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
 				</DemoGrid>
 				<DemoGrid>
 					<DemoItem label='ModalV2 (opener)'>
