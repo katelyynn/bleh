@@ -34,6 +34,7 @@ type ButtonProps =
 		children?: ReactNode;
 		tooltip?: ReactNode;
 		opens?: ReactElement;
+		notSelect?: boolean;
 		onUpdate?: () => void;
 	}
 	& Omit<
@@ -72,6 +73,7 @@ export function Button({
 	children,
 	tooltip,
 	opens,
+	notSelect,
 	onUpdate,
 	...props
 }: ButtonProps) {
@@ -85,7 +87,7 @@ export function Button({
 		subtle && 'subtle',
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
-		(opens != null) && 'select-button',
+		(opens != null && !notSelect) && 'select-button',
 		className && className,
 	];
 

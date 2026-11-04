@@ -238,6 +238,7 @@ input::placeholder {
 
 .navlist-items:not(.ignore) {
 	display: flex;
+	align-items: center;
 	gap: var(--button-list-gap);
 	flex: 1;
 
@@ -262,6 +263,7 @@ button.navlist-more {
 	/* left padding for icon, otherwise just 12px 16px */
 	--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 
+	&.flex-button,
 	&.chibi {
 		--padding: var(--button-verts) var(--button-sides) !important;
 	}

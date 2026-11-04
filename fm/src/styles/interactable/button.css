@@ -136,7 +136,7 @@ select,
 	&:is(.gallery-next, .gallery-previous):hover .arrow,
 	&:hover {
 		background: var(--bg-hov) !important;
-		transition-property: padding, transform, filter !important;
+		transition-property: padding, transform, filter, max-width !important;
 		transition-duration: var(--trans) !important;
 		transition-timing-function: var(--trans-function) !important;
 		--transition-property: rotate, opacity, left, transform;

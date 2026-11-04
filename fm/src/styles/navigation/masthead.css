@@ -2,6 +2,10 @@
 @import './player.css';
 @import './item.css';
 
+:root {
+	--masthead-height: calc((10px * 2) + 32px);
+}
+
 /* a lot of these have to be !important due to new
 last.fm changes as of 2024-05-20 */
 .masthead {
@@ -10,7 +14,7 @@ last.fm changes as of 2024-05-20 */
 	right: 0;
 	top: 0 !important;
 	background: transparent !important;
-	height: calc(20px + var(--button-height)) !important;
+	height: var(--masthead-height) !important;
 	/* macOS */
 	display: flex !important;
 	justify-content: center;
@@ -34,7 +38,7 @@ last.fm changes as of 2024-05-20 */
 		left: 0;
 		top: 0;
 		right: 0;
-		height: calc(20px + var(--button-height));
+		height: var(--masthead-height);
 		z-index: 10;
 
 		/*background: oklch(var(--b6), 60%);
@@ -46,7 +50,7 @@ last.fm changes as of 2024-05-20 */
 
 		background: linear-gradient(180deg, oklch(var(--b6)), transparent);
 
-		opacity: 0.7;
+		opacity: 1;
 		translate: 0;
 
 		pointer-events: none;
@@ -250,11 +254,12 @@ last.fm changes as of 2024-05-20 */
 }
 
 .masthead-inner-wrap {
-	width: var(--cards-width) !important;
+	/*width: var(--cards-width) !important;*/
 	max-width: unset !important;
 	padding: 0 calc(var(--card-padding) - var(--button-sides)) !important;
 	float: unset !important;
 	display: flex;
+	align-items: center;
 	gap: var(--button-list-gap);
 	z-index: 20;
 	position: relative;
@@ -278,17 +283,6 @@ last.fm changes as of 2024-05-20 */
 		top: 46px;
 		right: 0;
 	}
-}
-
-.navlist-search-container {
-	width: var(--search-width);
-	max-width: var(--search-width);
-
-	translate: 0 0;
-
-	transition-property: translate, opacity, max-width;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function-ani);
 }
 
 .masthead-search-inner-wrap {

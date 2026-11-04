@@ -322,11 +322,74 @@ export function append_nav() {
 					</a>
 					<a
 						class={['btn', 'masthead-nav-control', 'icon']}
+						data-type='bookmark'
+						href={`${root}bookmarks`}
+					>
+						{tl(trans.bookmarks)}
+					</a>
+					<a
+						class={['btn', 'masthead-nav-control', 'icon']}
 						data-type='minis'
 						href={`${root}bleh/minis`}
 					>
 						{tl(trans.minis)}
 					</a>
+					<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)} notSelect opens={
+						<MenuContents>
+							<Button
+								menu
+								colourful
+								accented
+								href={`https://discord.gg/${discord}`}
+								external
+								data-type='discord'
+							>
+								<Icon />
+								{tl(trans.join_discord)}
+							</Button>
+							<Button
+								menu
+								colourful
+								accented
+								className='sponsor-related'
+								onClick={() => sponsor()}
+							>
+								<Icon name={icons.sponsor} />
+								{tl(trans.sponsor)}
+							</Button>
+							<Button
+								menu
+								colourful
+								accented
+								href='https://github.com/katelyynn/lotus/issues/new/choose'
+								external
+								className='lotus'
+							>
+								<Icon name={icons.lotus} />
+								{tl(trans.suggest_correction)}
+							</Button>
+							<div class='sep' />
+							<Button menu href={`${root}bleh/general`}>
+								<Icon name={icons.update} />
+								{tl(trans.updates)}
+							</Button>
+							<Button menu onClick={() => news()}>
+								<Icon name={icons.news} />
+								{tl(trans.news)}
+							</Button>
+							<Button
+								menu
+								href='https://bleh.yuzu.pet/issues'
+								external
+							>
+								<Icon name={icons.issue} />
+								{tl(trans.report_issue)}
+							</Button>
+						</MenuContents>
+					}>
+						<Icon name={icons.more} />
+						{tl(trans.more)}
+					</Button>
 					<span class='navlist-search' ref={search_wrap} />
 				</ul>
 			</nav>
@@ -443,9 +506,14 @@ export function append_nav() {
 	auth_link.classList.add('icon-r');
 
 	const name = html.node`
-        <p class="auth-link-name">${auth.name}</p>
-    `;
+		<p class="auth-link-name">${auth.name}</p>
+	`;
 	auth_link.appendChild(name);
+
+	/*hover_tooltip(
+		auth_link,
+		<Tooltip>{auth.name}</Tooltip>
+	);*/
 
 	queue_popup('navigation_menu', auth_link);
 
@@ -453,16 +521,18 @@ export function append_nav() {
 		if (cache.username) name.textContent = cache.username;
 	});
 
-	const badges = load_badges(auth.name, true);
+	/*const badges = load_badges(auth.name, true);
 
 	if (badges) {
 		auth_link.appendChild(create_badge(badges, false, false, true));
 	} else if (auth.pro) {
 		auth_link.appendChild(html.node`
-            <span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)
+			<span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)
 			}</span>
-        `);
-	}
+		`);
+	}*/
+
+	const badges = load_badges(auth.name, true);
 
 	/*let quick_switcher = html.node`
 		<li class="masthead-nav-item">
@@ -478,80 +548,16 @@ export function append_nav() {
 
 	links.appendChild(quick_switcher);*/
 
-	const more_button = (
-		<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)}>
-			<Icon name={icons.more} />
-			{tl(trans.more)}
-		</Button>
-	);
-
-	menu_tooltip(
-		more_button,
-		<MenuContents>
-			<Button
-				menu
-				colourful
-				accented
-				href={`https://discord.gg/${discord}`}
-				external
-				data-type='discord'
-			>
-				<Icon />
-				{tl(trans.join_discord)}
-			</Button>
-			<Button
-				menu
-				colourful
-				accented
-				className='sponsor-related'
-				onClick={() => sponsor()}
-			>
-				<Icon name={icons.sponsor} />
-				{tl(trans.sponsor)}
-			</Button>
-			<Button
-				menu
-				colourful
-				accented
-				href='https://github.com/katelyynn/lotus/issues/new/choose'
-				external
-				className='lotus'
-			>
-				<Icon name={icons.lotus} />
-				{tl(trans.suggest_correction)}
-			</Button>
-			<div class='sep' />
-			<Button menu href={`${root}bleh/general`}>
-				<Icon name={icons.update} />
-				{tl(trans.updates)}
-			</Button>
-			<Button menu onClick={() => news()}>
-				<Icon name={icons.news} />
-				{tl(trans.news)}
-			</Button>
-			<Button
-				menu
-				href='https://bleh.yuzu.pet/issues'
-				external
-			>
-				<Icon name={icons.issue} />
-				{tl(trans.report_issue)}
-			</Button>
-		</MenuContents>,
-	);
-
-	links!.appendChild(more_button);
-
 	// configure bleh
 	const bleh_container = (
-		<Button chibi className='masthead-nav-control' href={`${root}bleh`} />
+		<Button className='masthead-nav-control' href={`${root}bleh`} />
 	);
 	const bleh_container_tooltip = <Tooltip />;
 
-	hover_tooltip(
+	/*hover_tooltip(
 		bleh_container,
 		bleh_container_tooltip,
-	);
+	);*/
 
 	function update_bleh() {
 		const state = useSeasons.get();
@@ -612,9 +618,7 @@ export function append_nav() {
 	if (auth.pro) {
 		const music = (
 			<Button
-				chibi
 				className='masthead-nav-control'
-				tooltip={tl(trans.music)}
 			>
 				<Icon name={icons.now_playing} />
 				{tl(trans.music)}
@@ -704,15 +708,16 @@ export function append_nav() {
 
 	if (useSettings.get('hybrid_inbox')) {
 		const inbox = html.node`
-            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
+            <a class="btn masthead-nav-control icon inbox-item" data-type="inbox" href="${root}inbox/notifications">
+            	${tl(trans.inbox)}
                 <div class="counter" data-count=${count}>${count}</div>
             </a>
         `;
 
-		hover_tooltip(
+		/*hover_tooltip(
 			inbox,
 			<Tooltip>{tl(trans.inbox)}</Tooltip>,
-		);
+		);*/
 
 		inbox.addEventListener('click', (e) => {
 			const cmd = e.getModifierState('Control') ||
