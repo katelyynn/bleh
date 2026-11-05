@@ -237,8 +237,7 @@ select,
 
 .button-inner-content {
 	display: flex;
-	justify-content: inherit;
-	align-items: inherit;
+	align-items: center;
 	gap: 4px;
 }
 
