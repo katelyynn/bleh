@@ -1713,6 +1713,14 @@ export function mualani() {
 							<p>world</p>
 						]} />
 					</DemoItem>
+					<DemoItem label='TextFlip'>
+						<TextFlip items={[
+							<p>hello</p>,
+							<p>world</p>,
+							<p>2</p>,
+							<p>this is some really long text</p>
+						]} />
+					</DemoItem>
 				</DemoGrid>
 			</section>
 		</>,

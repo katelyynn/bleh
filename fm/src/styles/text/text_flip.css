@@ -14,11 +14,16 @@
 
 	&[data-visible="false"] {
 		position: absolute;
-		inset: 0;
+		top: 0;
+		left: 0;
+		bottom: 0;
 
 		opacity: 0;
 		translate: 0 -50%;
 		pointer-events: none;
+		width: fit-content;
+
+		white-space: nowrap;
 	}
 
 	&[data-visible="true"] {
