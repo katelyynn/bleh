@@ -8,7 +8,6 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	gap: 4px;
 
 	position: relative;
 
@@ -72,7 +71,9 @@
 		align-items: end;
 		gap: 6px;
 		cursor: default;
-		margin-top: 10px;
+		margin-top: 20px;
+		padding-top: 20px;
+		border-top: 1px solid var(--separator-base);
 	}
 
 	.footer-bleh-top {
