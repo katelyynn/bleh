@@ -1,0 +1,40 @@
+.text-flipper {
+	position: relative;
+}
+
+.text-flipper-inner {
+	display: inline-block;
+
+	position: relative;
+	opacity: 1;
+
+	transition-property: opacity, translate;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&[data-visible="false"] {
+		position: absolute;
+		inset: 0;
+
+		opacity: 0;
+		translate: 0 -50%;
+		pointer-events: none;
+	}
+
+	&[data-visible="true"] {
+		animation: flip var(--trans) var(--trans-function);
+		animation-fill-mode: backwards;
+	}
+}
+
+@keyframes flip {
+	from {
+		translate: 0 50%;
+		opacity: 0;
+	}
+
+	to {
+		translate: 0 0;
+		opacity: 1;
+	}
+}

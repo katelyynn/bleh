@@ -112,6 +112,7 @@ import { validWordmarks, Wordmark } from '@/components/music/wordmark';
 import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
 import { ProfileTaste } from '@/components/profile/taste';
 import { EventSmallCalendar } from '@/components/event/icon';
+import { TextFlip } from '@/components/text/text_flip';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1701,6 +1702,16 @@ export function mualani() {
 						<EventSmallCalendar month='Oct' day='20' />
 						<EventSmallCalendar month='Nov' day='16' />
 						<EventSmallCalendar month='Dec' day='31' />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='flip'>
+				<DemoGrid>
+					<DemoItem label='TextFlip'>
+						<TextFlip items={[
+							<p>hello</p>,
+							<p>world</p>
+						]} />
 					</DemoItem>
 				</DemoGrid>
 			</section>
