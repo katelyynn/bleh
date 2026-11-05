@@ -30,6 +30,7 @@ type TooltipConfig = Partial<
 		onShow: (element: ReactElement) => void;
 		onHide: () => void;
 		delay: [number, number];
+		menu?: TooltipInstance<ReactElement, ReactElement>
 	}
 >;
 
@@ -167,11 +168,13 @@ export class TooltipInstance<
 
 		this.current_animation = animation;
 
-		if (this.config.ariaEnabled) {
-			this.host.setAttribute('aria-expanded', 'false');
-		}
+		if (this.host.getAttribute('aria-describedby') == this.uuid) {
+			if (this.config.ariaEnabled) {
+				this.host.setAttribute('aria-expanded', 'false');
+			}
 
-		this.host.removeAttribute('aria-describedby');
+			this.host.removeAttribute('aria-describedby');
+		}
 
 		if (this.onHide) this.onHide();
 
@@ -181,7 +184,7 @@ export class TooltipInstance<
 				this.unmount();
 				this.current_animation = null;
 			}
-		}).catch(() => {});
+		}).catch(() => { });
 	}
 
 	private cancel_animation() {
@@ -265,6 +268,10 @@ export function hover_tooltip<
 		if (enter) clearTimeout(enter);
 		if (leave) clearTimeout(leave);
 
+		if (config.menu && config.menu.is_mounted) {
+			return;
+		}
+
 		if (!config.delay?.[0]) {
 			tooltip.show();
 			return;
@@ -277,6 +284,11 @@ export function hover_tooltip<
 	host.addEventListener('mouseleave', () => {
 		if (enter) clearTimeout(enter);
 		if (leave) clearTimeout(leave);
+
+		if (config.menu && config.menu.is_mounted) {
+			tooltip.hide();
+			return;
+		}
 
 		if (!config.delay?.[1]) {
 			tooltip.hide();
@@ -313,6 +325,12 @@ export function menu_tooltip<
 			}),
 			offsetMiddleware(6),
 		],
+		onShow: () => {
+			if (config.menu && config.menu.is_mounted) {
+				config.menu.hide();
+				return;
+			}
+		},
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
 			document.body.removeEventListener('contextmenu', listener);

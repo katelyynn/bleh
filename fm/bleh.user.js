@@ -35649,10 +35649,12 @@ var bleh = (() => {
       );
       const animation = this.element.animate(keyframes, options);
       this.current_animation = animation;
-      if (this.config.ariaEnabled) {
-        this.host.setAttribute("aria-expanded", "false");
+      if (this.host.getAttribute("aria-describedby") == this.uuid) {
+        if (this.config.ariaEnabled) {
+          this.host.setAttribute("aria-expanded", "false");
+        }
+        this.host.removeAttribute("aria-describedby");
       }
-      this.host.removeAttribute("aria-describedby");
       if (this.onHide) this.onHide();
       animation.finished.then(() => {
         if (this.current_animation === animation) {
@@ -35722,6 +35724,9 @@ var bleh = (() => {
     host.addEventListener("mouseenter", () => {
       if (enter) clearTimeout(enter);
       if (leave) clearTimeout(leave);
+      if (config.menu && config.menu.is_mounted) {
+        return;
+      }
       if (!config.delay?.[0]) {
         tooltip.show();
         return;
@@ -35733,6 +35738,10 @@ var bleh = (() => {
     host.addEventListener("mouseleave", () => {
       if (enter) clearTimeout(enter);
       if (leave) clearTimeout(leave);
+      if (config.menu && config.menu.is_mounted) {
+        tooltip.hide();
+        return;
+      }
       if (!config.delay?.[1]) {
         tooltip.hide();
         return;
@@ -35756,6 +35765,12 @@ var bleh = (() => {
         }),
         offset4(6)
       ],
+      onShow: () => {
+        if (config.menu && config.menu.is_mounted) {
+          config.menu.hide();
+          return;
+        }
+      },
       onHide: () => {
         document.body.removeEventListener("click", listener);
         document.body.removeEventListener("contextmenu", listener);
@@ -35887,6 +35902,7 @@ var bleh = (() => {
     ];
     let elem;
     let instance;
+    let tip;
     if (!href) {
       elem = /* @__PURE__ */ jsx(
         "button",
@@ -35911,17 +35927,25 @@ var bleh = (() => {
         }
       );
     }
-    if (tooltip) {
-      hover_tooltip(
-        elem,
-        /* @__PURE__ */ jsx(Tooltip, { children: tooltip })
-      );
-    }
     if (opens) {
       instance = menu_tooltip(
         elem,
         opens
       );
+    }
+    if (tooltip) {
+      tip = hover_tooltip(
+        elem,
+        /* @__PURE__ */ jsx(Tooltip, { children: tooltip }),
+        {
+          menu: opens ? instance : void 0
+        }
+      );
+      if (instance) {
+        instance.onShow = () => {
+          tip.hide();
+        };
+      }
     }
     function handleOnClick() {
       if (!onClick || disabled || loading) return;
@@ -117109,7 +117133,7 @@ var bleh = (() => {
                 {
                   class: ["btn", "masthead-nav-control", "icon"],
                   "data-type": "bookmark",
-                  href: `${root}bookmarks`,
+                  href: `${root}music/+bookmarks`,
                   children: tl2(trans.bookmarks)
                 }
               ),

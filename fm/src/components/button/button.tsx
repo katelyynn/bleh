@@ -94,6 +94,7 @@ export function Button({
 	let elem: ButtonElement | ButtonLinkElement;
 
 	let instance: TooltipInstance<ReactElement, ReactElement>;
+	let tip: TooltipInstance<ReactElement, ReactElement>;
 
 	if (!href) {
 		elem = (
@@ -118,18 +119,27 @@ export function Button({
 		) as ButtonLinkElement;
 	}
 
-	if (tooltip) {
-		hover_tooltip(
-			elem,
-			<Tooltip>{tooltip}</Tooltip>,
-		);
-	}
-
 	if (opens) {
 		instance = menu_tooltip(
 			elem,
-			opens,
+			opens
 		);
+	}
+
+	if (tooltip) {
+		tip = hover_tooltip(
+			elem,
+			<Tooltip>{tooltip}</Tooltip>,
+			{
+				menu: opens ? instance! : undefined
+			}
+		);
+
+		if (instance) {
+			instance.onShow = () => {
+				tip.hide();
+			};
+		}
 	}
 
 	function handleOnClick() {

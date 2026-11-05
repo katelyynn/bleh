@@ -324,7 +324,7 @@ export function append_nav() {
 					<a
 						class={['btn', 'masthead-nav-control', 'icon']}
 						data-type='bookmark'
-						href={`${root}bookmarks`}
+						href={`${root}music/+bookmarks`}
 					>
 						{tl(trans.bookmarks)}
 					</a>
