@@ -1,6 +1,7 @@
 @import './logo.css';
 @import './player.css';
 @import './item.css';
+@import './search.css';
 
 :root {
 	--masthead-height: calc((10px * 2) + 32px);

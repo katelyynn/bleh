@@ -146,14 +146,14 @@
 
 	&:hover,
 	&:focus-within {
-		max-width: 540px;
-
 		&:before {
 			background: oklch(var(--b5) / 80%);
 		}
 	}
 
 	&:focus-within {
+		max-width: 540px;
+
 		&:before {
 			box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 40%) !important;
 		}

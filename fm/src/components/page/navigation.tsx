@@ -67,6 +67,7 @@ import {
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { MenuRadio } from '../settings/provider/menu/radio';
+import { page_search } from './search';
 
 export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
@@ -417,9 +418,11 @@ export function append_nav() {
 
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
-	const search = inner.querySelector('.masthead-search-form');
-	const form = search.querySelector('.masthead-search-field');
-	form.placeholder = tl(trans.search);
+	const search = inner.querySelector('.masthead-search-form') as HTMLFormElement;
+	const form = search.querySelector('.masthead-search-field') as HTMLInputElement;
+	form.placeholder = tl(trans.search_for_anything) as string;
+
+	page_search(search, form);
 
 	const submit = search.querySelector('.masthead-search-submit');
 	submit.classList.add('btn', 'chibi', 'icon-mask');

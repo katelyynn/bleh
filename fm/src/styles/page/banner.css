@@ -109,7 +109,7 @@
 .page-banner,
 .bleh-background {
 	--header-size: var(--page-header-banner-size-default);
-	--h: calc(77px + var(--tab-size) + var(--header-size));
+	--h: calc(66px + var(--main-content-padding) + var(--tab-size) + var(--header-size));
 
 	&[data-page-type="events"],
 	&[data-page-type="festival"],

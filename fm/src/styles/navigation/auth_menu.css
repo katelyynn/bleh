@@ -1,5 +1,6 @@
 @import './mobile.css';
 
+.tippy-box[data-theme="search"],
 .tippy-box[data-theme="nav-window"],
 .tippy-box[data-theme="auth-menu-v2"] {
 	background: oklch(var(--menu-bg) / var(--solarium-opacity,
@@ -32,6 +33,11 @@
 			display: none;
 		}
 	}
+}
+
+.tippy-box[data-theme="search"] {
+	width: 500px;
+	max-width: 500px !important;
 }
 
 .tippy-box[data-theme="auth-menu-v2"] {
