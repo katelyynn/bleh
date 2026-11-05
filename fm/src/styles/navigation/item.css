@@ -364,7 +364,7 @@
 		--bg-atv: oklch(var(--h4) / 50%) !important;
 	}
 
-	--btn-right: calc(14px + 4px) !important;
+	/*--btn-right: calc(14px + 4px) !important;*/
 	--mask-size: 12px;
 	--margin-top: -6px;
 	--right: 0;

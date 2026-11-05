@@ -1,8 +1,8 @@
 .chartlist {
 	display: block;
-	--side-left: 12px;
+	--side-left: 10px;
 	--image-offset: 2px;
-	--track-gap: 2px;
+	--track-gap: 1px;
 	line-height: var(--line-height) !important;
 
 	&:not(.chartlist--with-image) {
@@ -52,7 +52,7 @@
 	max-height: fit-content;
 	border-radius: var(--track-radius);
 	box-shadow: var(--shadow);
-	margin: 0 -12px !important;
+	margin: 0 calc(-1 * var(--side-left)) !important;
 	/* calc(- 12 px - var(--chartlist-inner-gap) / 2) */
 	display: flex !important;
 	gap: var(--item-list-gap);
@@ -63,6 +63,9 @@
 	animation-fill-mode: backwards !important;
 
 	contain: layout;
+
+	--track-image-size: 38px;
+	--track-image-mask: var(--cover-size-32);
 
 	/*&:nth-child(even) {
 	    --bg: var(--tracklist-odd);
@@ -120,19 +123,11 @@
 	}
 
 	&[data-album-name-location="column"][data-show-album-text="true"][data-has-bar="false"] {
-		&>.chartlist-image {
-			width: 56px;
-			height: 56px;
-
-			&>.cover-art>img {
-				--mask-size: var(--cover-size-50);
-			}
-		}
+		--track-image-size: 56px;
+		--track-image-mask: var(--cover-size-50);
 
 		&[data-theme="yuzu"] {
-			&>.chartlist-image {
-				--w: 64px;
-			}
+			--track-image-size: 64px;
 		}
 	}
 
@@ -196,7 +191,19 @@
 
 	/* separators */
 	&:after {
-		display: none;
+		top: -1px;
+		bottom: unset;
+		display: block;
+		border-top: 1px solid var(--separator-base);
+		border-bottom: unset;
+		left: var(--side-left);
+		right: var(--side-left);
+	}
+
+	&:first-child {
+		&:after {
+			display: none;
+		}
 	}
 }
 
@@ -640,8 +647,8 @@
 .obsession-candidate-image,
 .column-tracks-item-image,
 .chartlist-image {
-	width: 38px;
-	height: 38px;
+	width: var(--track-image-size);
+	height: var(--track-image-size);
 	border-radius: var(--chart-cover-radius) !important;
 	box-shadow: var(--interact-shadow);
 	overflow: hidden;
@@ -660,7 +667,7 @@
 		-webkit-mask-size: contain !important;
 
 		&>img {
-			--mask-size: var(--cover-size-32);
+			--mask-size: var(--track-image-mask);
 			border-radius: inherit !important;
 			font-size: 0 !important;
 		}
@@ -688,14 +695,10 @@
 	overflow: unset !important;
 
 	transition-property: transform, filter;
-	transition-duration: 0.2s;
+	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
 	flex-shrink: 0;
-
-	&:hover {
-		transition-duration: 0.1s !important;
-	}
 
 	&:active {
 		transform: scale(0.98);

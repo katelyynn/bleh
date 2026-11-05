@@ -1,12 +1,16 @@
 .footer {
-	background: oklch(var(--b6));
+	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%));
 	color: oklch(var(--c3));
 	padding: 120px 0 120px 0;
+
+	margin-top: 20vh;
 
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	gap: 4px;
+
+	position: relative;
 
 	@media (max-width: 980px) {
 		width: unset;
@@ -76,6 +80,32 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 		gap: 4px var(--card-padding);
+	}
+
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: var(--cards-overlay-height);
+		max-height: 100%;
+		display: var(--cards-overlay-display) !important;
+
+		background-image: var(--cards-overlay-image-subtle, unset) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 0 !important;
+		opacity: 0.6;
+
+		pointer-events: none;
+
+		/* fix for no-data-message overriding and stuff */
+		margin: unset;
+		width: unset;
+
+		z-index: 50;
+
+		transform: rotate(180deg);
 	}
 }
 

@@ -191,7 +191,7 @@
 	border: 10px solid transparent;
 	border-bottom: unset;
 
-	z-index: 1;
+	z-index: 300;
 }
 
 .content:not(.cards-view) {

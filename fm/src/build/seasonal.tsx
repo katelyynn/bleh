@@ -104,7 +104,7 @@ export const seasonal_events: season[] = [
 		},
 		end: {
 			month: 11,
-			day: 15,
+			day: 19,
 		},
 		snowflakes: {
 			state: false,
@@ -114,7 +114,7 @@ export const seasonal_events: season[] = [
 		id: 'fall',
 		start: {
 			month: 11,
-			day: 16,
+			day: 20,
 		},
 		end: {
 			month: 11,
@@ -193,7 +193,7 @@ export class Seasons {
 		this.current = state.current;
 		this.next = state.next;
 
-		if (this.current == current) return;
+		if (this.current?.id == current?.id) return;
 
 		this.apply();
 	}
@@ -223,6 +223,8 @@ export class Seasons {
 			'';
 
 		if (!this.current) return;
+
+		console.error(this.current, this.current.id, last_season_seen);
 
 		if (this.current.id != last_season_seen) {
 			new_season(this.current, this.now);
