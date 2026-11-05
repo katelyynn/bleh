@@ -8,6 +8,8 @@
 	position: relative;
 	opacity: 1;
 
+	--trans: 0.6s;
+
 	transition-property: opacity, translate;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
@@ -19,11 +21,12 @@
 		bottom: 0;
 
 		opacity: 0;
-		translate: 0 -50%;
+		translate: 0 -25%;
 		pointer-events: none;
 		width: fit-content;
 
 		white-space: nowrap;
+		display: none;
 	}
 
 	&[data-visible="true"] {
@@ -34,7 +37,7 @@
 
 @keyframes flip {
 	from {
-		translate: 0 50%;
+		translate: 0 25%;
 		opacity: 0;
 	}
 

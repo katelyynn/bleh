@@ -36,7 +36,12 @@ export function TextFlip({
 
 	flip();
 
-	setInterval(() => {
+	const interv = setInterval(() => {
+		if (!wrapper.isConnected) {
+			clearInterval(interv);
+			return;
+		}
+
 		index++;
 
 		if (index > items.length - 1) {

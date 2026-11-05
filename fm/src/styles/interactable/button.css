@@ -235,6 +235,13 @@ select,
 	}
 }
 
+.button-inner-content {
+	display: flex;
+	justify-content: inherit;
+	align-items: inherit;
+	gap: 4px;
+}
+
 .lfmmaf-missing-artwork-button,
 .chibi {
 	--btn-left: var(--button-sides) !important;

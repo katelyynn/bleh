@@ -273,7 +273,9 @@
 
 .masthead-nav-wrap {
 	display: flex;
+	justify-content: end;
 	gap: var(--button-list-gap);
+	flex: 1;
 
 	.site-auth,
 	.masthead-nav {
@@ -345,8 +347,6 @@
 	height: var(--button-height) !important;
 	text-decoration: var(--force-underline, none) !important;
 	--mask: var(--icon-16-arrow-down) !important;
-
-	margin-left: var(--button-list-gap) !important;
 
 	/*--bg: transparent !important;
 	--bg-hov: transparent !important;

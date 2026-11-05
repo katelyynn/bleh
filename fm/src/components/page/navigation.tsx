@@ -50,6 +50,7 @@ import {
 	Button,
 	ButtonCombo,
 	ButtonComboSeparator,
+	ButtonInnerContent,
 } from '@/components/button/button.tsx';
 import {
 	context_menu_tooltip,
@@ -68,6 +69,7 @@ import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { MenuRadio } from '../settings/provider/menu/radio';
 import { page_search } from './search';
+import { TextFlip } from '../text/text_flip';
 
 export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
@@ -391,10 +393,12 @@ export function append_nav() {
 						<Icon name={icons.more} />
 						{tl(trans.more)}
 					</Button>
-					<span class='navlist-search' ref={search_wrap} />
 				</ul>
 			</nav>
 		</>,
+	);
+	masthead_logo.after(
+		<span class='navlist-search' ref={search_wrap} />
 	);
 
 	page.state.home_link = home_link.current;
@@ -565,14 +569,14 @@ export function append_nav() {
 	function update_bleh() {
 		const state = useSeasons.get();
 
-		bleh_container.setAttribute('data-hidden', String(!state.current));
+		/*bleh_container.setAttribute('data-hidden', String(!state.current));*/
 
 		if (!state.current) {
 			bleh_container.setAttribute('href', `${root}bleh`);
 			bleh_container.replaceChildren(
 				<>
 					<Icon name={icons.bleh_settings} />
-					{tl(trans.bleh_settings)}
+					{version.brand}
 				</>,
 			);
 			bleh_container_tooltip.textContent = tl(
@@ -582,15 +586,23 @@ export function append_nav() {
 			bleh_container.setAttribute('href', `${root}bleh/seasonal`);
 			bleh_container.replaceChildren(
 				<>
-					<Icon
-						className='bleh-seasonal-icon'
-						data-season={state.current ? state.current.id : 'none'}
-					/>
-					{tl(
-						trans.seasonal.listing[
-						state.current ? state.current.id : 'none'
-						],
-					)}
+					<TextFlip items={[
+						<ButtonInnerContent>
+							<Icon
+								className='bleh-seasonal-icon'
+								data-season={state.current ? state.current.id : 'none'}
+							/>
+							{tl(
+								trans.seasonal.listing[
+								state.current ? state.current.id : 'none'
+								],
+							)}
+						</ButtonInnerContent>,
+						<ButtonInnerContent>
+							<Icon name={icons.bleh_settings} />
+							{version.brand}
+						</ButtonInnerContent>
+					]} interval={5000} />
 				</>,
 			);
 			bleh_container_tooltip.replaceChildren(

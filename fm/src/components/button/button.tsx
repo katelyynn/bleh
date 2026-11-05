@@ -13,6 +13,7 @@ import {
 	Tooltip,
 	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
+import { WithChildren } from '@/types/generic';
 
 type ButtonProps =
 	& {
@@ -203,6 +204,16 @@ export function Button({
 	update();
 
 	return elem;
+}
+
+export function ButtonInnerContent({
+	children
+}: WithChildren) {
+	return (
+		<span class='button-inner-content'>
+			{children}
+		</span>
+	)
 }
 
 interface ButtonComboProps {
