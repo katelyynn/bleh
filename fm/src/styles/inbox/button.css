@@ -1,0 +1,40 @@
+.inbox-button-side {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+
+	--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 50%);
+
+	&[data-count="0"] {
+		--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
+	}
+}
+
+.inbox-button-dot {
+	display: block;
+	/*--w: 3px;
+	width: var(--w);
+	height: var(--w);
+	background: oklch(var(--c3) / 60%);
+	border-radius: 50px;
+	margin: 0 2px;*/
+}
+
+.inbox-button-counter {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-sm);
+	padding: 0 4px;
+	color: oklch(var(--l3-c));
+	font-weight: var(--font-weight-medium);
+	background: oklch(var(--k4) / 35%);
+	border-radius: var(--radius-s);
+
+	min-width: 16px;
+	text-align: center;
+
+	&[data-count="0"] {
+		color: oklch(var(--c2));
+		font-weight: var(--font-weight);
+		background: oklch(var(--c3) / 10%);
+	}
+}

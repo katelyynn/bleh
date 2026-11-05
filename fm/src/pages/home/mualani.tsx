@@ -113,6 +113,7 @@ import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
 import { ProfileTaste } from '@/components/profile/taste';
 import { EventSmallCalendar } from '@/components/event/icon';
 import { TextFlip } from '@/components/text/text_flip';
+import { InboxButton } from '@/components/button/inbox';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1720,6 +1721,16 @@ export function mualani() {
 							<p>2</p>,
 							<p>this is some really long text</p>
 						]} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='inbox'>
+				<DemoGrid>
+					<DemoItem label='InboxButton'>
+						<InboxButton notifications={24} messages={5} />
+						<InboxButton notifications={0} messages={0} />
+						<InboxButton notifications={0} messages={1} />
+						<InboxButton notifications={1} messages={0} />
 					</DemoItem>
 				</DemoGrid>
 			</section>

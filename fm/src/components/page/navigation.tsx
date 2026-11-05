@@ -70,6 +70,7 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { MenuRadio } from '../settings/provider/menu/radio';
 import { page_search } from './search';
 import { TextFlip } from '../text/text_flip';
+import { InboxButton } from '../button/inbox';
 
 export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
@@ -722,26 +723,14 @@ export function append_nav() {
 	const count = notif_count + messages_count;
 
 	if (useSettings.get('hybrid_inbox')) {
-		const inbox = html.node`
-            <a class="btn masthead-nav-control icon inbox-item" data-type="inbox" href="${root}inbox/notifications">
-            	${tl(trans.inbox)}
-                <div class="counter" data-count=${count}>${count}</div>
-            </a>
-        `;
+		const inbox = (
+			<InboxButton notifications={notif_count} messages={messages_count} />
+		);
 
 		/*hover_tooltip(
 			inbox,
 			<Tooltip>{tl(trans.inbox)}</Tooltip>,
 		);*/
-
-		inbox.addEventListener('click', (e) => {
-			const cmd = e.getModifierState('Control') ||
-				e.getModifierState('Meta');
-			const new_tab = e.button === 1 || cmd;
-
-			// only allow clicking link if new tab action
-			if (!new_tab) e.preventDefault();
-		});
 
 		const tabbed = createRef();
 		const pages = {
