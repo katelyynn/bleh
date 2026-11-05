@@ -37,6 +37,8 @@ export function TextFlip({
 	flip();
 
 	const interv = setInterval(() => {
+		if (!document.hasFocus()) return;
+
 		if (!wrapper.isConnected) {
 			clearInterval(interv);
 			return;

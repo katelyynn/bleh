@@ -116927,6 +116927,7 @@ var bleh = (() => {
     }
     flip4();
     const interv = setInterval(() => {
+      if (!document.hasFocus()) return;
       if (!wrapper.isConnected) {
         clearInterval(interv);
         return;
