@@ -207,10 +207,12 @@ export function Button({
 }
 
 export function ButtonInnerContent({
-	children
-}: WithChildren) {
+	className,
+	children,
+	...props
+}: WithChildren<'span'>) {
 	return (
-		<span class='button-inner-content'>
+		<span class={['button-inner-content', className]} {...props}>
 			{children}
 		</span>
 	)

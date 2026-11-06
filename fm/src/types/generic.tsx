@@ -6,7 +6,8 @@
 
 import { createRef, ReactNode } from 'jsx-dom';
 
-export type WithChildren = {
-	ref?: ReturnType<typeof createRef>;
+export type WithChildren<T extends keyof JSX.IntrinsicElements = 'div'> = {
+	className?: string;
+	ref?: ReturnType<typeof createRef<HTMLElement>>;
 	children?: ReactNode;
-};
+} & Omit<JSX.IntrinsicElements[T], 'ref'>;

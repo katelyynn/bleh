@@ -588,7 +588,7 @@ export function append_nav() {
 			bleh_container.replaceChildren(
 				<>
 					<TextFlip items={[
-						<ButtonInnerContent>
+						<ButtonInnerContent className='seasonal-inner-text colourful' data-season={state.current ? state.current.id : 'none'}>
 							<Icon
 								className='bleh-seasonal-icon'
 								data-season={state.current ? state.current.id : 'none'}
