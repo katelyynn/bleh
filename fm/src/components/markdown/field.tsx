@@ -25,6 +25,7 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { proxy_image } from '@/components/markdown/proxy.tsx';
 import { queue_popup } from '@/components/dialog/popup.tsx';
+import { CardTip } from '../text/tip';
 
 interface MarkdownFieldProps {
 	ref?: ReturnType<typeof createRef<MarkdownFieldElement>>;
@@ -292,7 +293,63 @@ export function MarkdownField({
 				start: '[links]',
 				end: '[/links]',
 				hide: !options.allow_links
-			}
+			},
+			{
+				icon: icons.statuscafe,
+				name: 'status.cafe',
+				func: () => {
+					return new Promise((resolve) => {
+						const user = createRef();
+
+						modal({
+							id: 'statuscafe',
+							title: 'status.cafe',
+							body: (
+								<>
+									<FormInner span>
+										<GenericLabel>
+											{tl(trans.username.name)}
+										</GenericLabel>
+										<Input
+											onSubmit={submit_link}
+											ref={user}
+										/>
+									</FormInner>
+									<CardTip minWidth>{tl(trans.status_cafe.body)}</CardTip>
+								</>
+							),
+							close: 'cancel',
+							actions: [
+								{
+									primary: true,
+									onClick: submit_link,
+									children: (
+										<>
+											<SaveIcon />
+											{tl(trans.save)}
+										</>
+									),
+								},
+							],
+							onClose: () => {
+								resolve(null);
+							},
+						});
+
+						user.current.focus();
+
+						function submit_link() {
+							const username = user.current.value;
+
+							if (!username) return;
+							dialog_rm({ id: 'statuscafe' });
+
+							resolve(`[status=${username}]`);
+						}
+					});
+				},
+				hide: !options.allow_links,
+			},
 		],
 		[
 			{
