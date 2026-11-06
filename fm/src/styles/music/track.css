@@ -2,7 +2,7 @@
 	display: block;
 	--side-left: 10px;
 	--image-offset: 2px;
-	--track-gap: 1px;
+	--track-gap: 2px;
 	line-height: var(--line-height) !important;
 
 	&:not(.chartlist--with-image) {
@@ -191,6 +191,8 @@
 
 	/* separators */
 	&:after {
+		display: none !important;
+
 		top: -1px;
 		bottom: unset;
 		display: block;
