@@ -29,7 +29,6 @@ body,
 
 body,
 .alert,
-.event-status,
 .big-modal-alert,
 .events-list-item-date-icon,
 .async-content-error-message,
@@ -38,11 +37,11 @@ body,
 .nag-bar--alert,
 .badge,
 u,
-.new-badge,
 .colourful,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
+
 	&[data-bleh--theme="rose_pine"],
 	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.9488 0.0299 289.97;

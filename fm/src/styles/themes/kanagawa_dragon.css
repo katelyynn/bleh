@@ -43,7 +43,6 @@ body,
 
 body,
 .alert,
-.event-status,
 .big-modal-alert,
 .events-list-item-date-icon,
 .async-content-error-message,
@@ -52,11 +51,11 @@ body,
 .nag-bar--alert,
 .badge,
 u,
-.new-badge,
 .colourful,
 .events-list-item-attendees,
 .attendance-btn,
 .gallery-image-preferred-container {
+
 	&[data-bleh--theme="kanagawa_dragon"],
 	body[data-bleh--theme="kanagawa_dragon"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.9255 0.0391 99.09;
