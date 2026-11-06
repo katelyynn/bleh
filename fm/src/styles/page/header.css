@@ -204,8 +204,8 @@
 	justify-content: center;
 	text-align: center;
 
-	&>.page-header-info {
-		&>.sub-text {
+	&>.page-header-info>.main-info {
+		&>.header-label {
 			width: fit-content;
 			margin: 0 auto;
 		}
