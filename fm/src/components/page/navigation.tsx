@@ -43,7 +43,7 @@ import { convert_lang_to_country, Flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
-import { createRef, ReactElement, RefObject } from 'jsx-dom';
+import { createRef, CSSProperties, ReactElement, RefObject } from 'jsx-dom';
 import { toggle_theme } from '@/config.tsx';
 import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import {
@@ -59,7 +59,7 @@ import {
 	Tooltip,
 	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
-import { MenuContents } from '@/components/menu/menu.tsx';
+import { MenuContents, MenuSeparator } from '@/components/menu/menu.tsx';
 import {
 	NavWindow,
 	NavWindowContents,
@@ -725,7 +725,7 @@ export function append_nav() {
 	if (useSettings.get('hybrid_inbox')) {
 		const inbox = (
 			<InboxButton notifications={notif_count} messages={messages_count} />
-		);
+		) as HTMLButtonElement;
 
 		/*hover_tooltip(
 			inbox,
@@ -746,7 +746,7 @@ export function append_nav() {
 			},
 		};
 
-		menu_tooltip(
+		const menu = menu_tooltip(
 			inbox,
 			<NavWindow>
 				<NavWindowContents>
@@ -799,6 +799,32 @@ export function append_nav() {
 					tabbed.current.update();
 				},
 			},
+		);
+
+		const ctx = context_menu_tooltip(
+			inbox,
+			<MenuContents>
+				<Button menu onClick={() => {
+					ctx.hide();
+					if (menu.is_mounted) return;
+
+					inbox.click();
+				}}>
+					<Icon name={icons.inbox} />
+					{tl(trans.open)}
+				</Button>
+				<MenuSeparator />
+				<Button menu href={`${root}inbox/notifications`}>
+					<Icon name={icons.notifications} />
+					{tl(trans.notifications)}
+					<Icon name={icons.external} indicator />
+				</Button>
+				<Button menu href={`${root}inbox`}>
+					<Icon name={icons.messages} />
+					{tl(trans.messages)}
+					<Icon name={icons.external} indicator />
+				</Button>
+			</MenuContents>
 		);
 
 		links.appendChild(inbox);
@@ -1087,7 +1113,7 @@ export function append_nav() {
 						)}
 						<div
 							class='auth-menu-v2'
-							style={{ '--page-height': `${height}px` }}
+							style={{ '--page-height': `${height}px` } as CSSProperties}
 						>
 							<div
 								class={['side', 'primary']}
@@ -1237,21 +1263,23 @@ export function append_nav() {
 					</>,
 				);
 
-				load_profile_cache_externally(auth.name).then((cache) => {
-					if (cache.banner) {
-						auth_bg.current.replaceChildren(
-							<div
-								class='bg'
-								style={{
-									backgroundImage: `url(${cache.banner})`,
-								}}
-							/>,
-						);
-					}
+				requestAnimationFrame(() => {
+					load_profile_cache_externally(auth.name!).then((cache) => {
+						if (cache.banner) {
+							auth_bg.current.replaceChildren(
+								<div
+									class='bg'
+									style={{
+										backgroundImage: `url(${cache.banner})`,
+									}}
+								/>,
+							);
+						}
 
-					if (cache.username) {
-						auth_header.current.textContent = cache.username;
-					}
+						if (cache.username) {
+							auth_header.current.textContent = cache.username;
+						}
+					});
 				});
 			},
 

@@ -15,7 +15,7 @@ import { avatar } from '@/components/shared/avatar';
 
 export async function bleh_api() {
 	if (page.subpage == 'docs') {
-		if (!page.disabled) window.location.reload();
+		//if (!page.disabled) window.location.reload();
 
 		const footer = document.body.querySelector('footer.footer');
 		footer?.remove();
@@ -73,15 +73,15 @@ export async function bleh_api() {
 				<section class="api-connector sour">
 					<div class="avatar">
 						<img src="${avatar(
-							auth.avatar,
-							'avatar170s',
-						)}" alt="${tl(trans.your_avatar)}">
+				auth.avatar,
+				'avatar170s',
+			)}" alt="${tl(trans.your_avatar)}">
 					</div>
 					<div class="info">
 						<h1>${page.name}</h1>
 						<div class="sub-text no-margin">${tl(
-							trans.app_would_like_to_connect,
-						)}</div>
+				trans.app_would_like_to_connect,
+			)}</div>
 						<div class="subtle">
 				            ${{
 					html: tl(trans.logged_in_as, {
@@ -94,8 +94,8 @@ export async function bleh_api() {
 					<div class="sep"></div>
 					<div class="description">${description}</div>
 					<div class="small-label with-icon" data-type="lock">${tl(
-						trans.ensure_you_trust,
-					)}</div>
+					trans.ensure_you_trust,
+				)}</div>
 					<div class="connector-footer">
 						<a class="see-more cancel left-icon" href="${cancel}">
 				            ${tl(trans.cancel)}
@@ -121,20 +121,20 @@ export async function bleh_api() {
 				<section class="api-connector sour">
 					<div class="avatar">
 						<img src="${avatar(
-							auth.avatar,
-							'avatar170s',
-						)}" alt="${tl(trans.your_avatar)}">
+				auth.avatar,
+				'avatar170s',
+			)}" alt="${tl(trans.your_avatar)}">
 					</div>
 					<div class="info">
 						<h1>${page.name}</h1>
 						<div class="sub-text no-margin">${tl(
-							trans.has_been_connected,
-						)}</div>
+				trans.has_been_connected,
+			)}</div>
 					</div>
 					<div class="sep"></div>
 					<div class="description">${tl(
-						trans.you_can_now_close_this_tab,
-					)}</div>
+				trans.you_can_now_close_this_tab,
+			)}</div>
 					<div class="connector-footer">
 						<div class="btn-fill" />
 						<a class="see-more" href="${root}settings/applications">

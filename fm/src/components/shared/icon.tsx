@@ -227,7 +227,8 @@ export const icons = {
 	discord: 'discord',
 	warning: 'warning',
 	crown: 'crown',
-	about: 'about'
+	about: 'about',
+	profile_links: 'profile-links'
 };
 
 interface icon {
@@ -239,9 +240,8 @@ interface icon {
 export function icon({ name, identifier, use_mask = true }: icon) {
 	return (
 		<span
-			className={`bleh-icon bleh-icon-${name} ${
-				use_mask ? 'use-mask' : ''
-			} ${identifier ? `bleh-icon-${identifier}` : ''}`}
+			className={`bleh-icon bleh-icon-${name} ${use_mask ? 'use-mask' : ''
+				} ${identifier ? `bleh-icon-${identifier}` : ''}`}
 			style={icon_mask({ name })}
 		>
 			{name} (icon)

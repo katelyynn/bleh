@@ -340,8 +340,8 @@
 	--mask-size: 16px;
 	border-radius: var(--avatar-radius);
 
-	--w: 26px;
-	margin-right: 4px;
+	--w: 28px;
+	/*margin-right: 4px;*/
 	/*outline: 2px solid var(--avatar-outline, var(--separator-base));*/
 
 	transition-property: outline;
@@ -437,7 +437,6 @@
 }
 
 .auth-link-name {
-	display: none;
 	margin-left: 2px;
 }
 
