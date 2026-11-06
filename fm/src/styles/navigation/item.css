@@ -369,6 +369,13 @@
 	--margin-top: -6px;
 	--right: 0;
 
+	transition-property: background-color,
+	transform,
+	box-shadow,
+	color,
+	opacity,
+	font-weight !important;
+
 	&[data-theme="yuzu"] {
 		--button-sides: 6px !important;
 		--btn-right: calc(6px + var(--mask-size) + 6px) !important;
