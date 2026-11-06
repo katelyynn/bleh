@@ -333,10 +333,20 @@
 }
 
 .auth-avatar-desktop {
-	width: 24px !important;
-	height: 24px !important;
+	--w: 24px;
+
+	width: var(--w) !important;
+	height: var(--w) !important;
 	--mask-size: 16px;
 	border-radius: var(--avatar-radius);
+
+	--w: 26px;
+	margin-right: 4px;
+	/*outline: 2px solid var(--avatar-outline, var(--separator-base));*/
+
+	transition-property: outline;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }
 
 .auth-link {
@@ -347,6 +357,8 @@
 	height: var(--button-height) !important;
 	text-decoration: var(--force-underline, none) !important;
 	--mask: var(--icon-16-arrow-down) !important;
+
+	--button-height: 32px;
 
 	/*--bg: transparent !important;
 	--bg-hov: transparent !important;
@@ -417,9 +429,15 @@
 			transform: unset !important;
 		}
 	}
+
+	&:hover,
+	&[aria-expanded="true"] {
+		--avatar-outline: oklch(var(--l3-c) / 50%);
+	}
 }
 
 .auth-link-name {
+	display: none;
 	margin-left: 2px;
 }
 
