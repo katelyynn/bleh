@@ -362,14 +362,27 @@ button.navlist-more {
 		height: 1px;
 	}
 
+	&[data-roxy],
 	&[data-lacrimosa] {
 		width: var(--cards-width);
 		margin-left: auto;
 		margin-right: auto;
+		background: unset;
+		border-radius: unset;
 
 		&:after {
 			left: var(--card-padding);
 			right: var(--card-padding);
+		}
+	}
+
+	&[data-roxy] {
+		margin-bottom: unset;
+		margin-top: var(--card-padding);
+		padding: unset;
+
+		&:after {
+			display: none;
 		}
 	}
 }

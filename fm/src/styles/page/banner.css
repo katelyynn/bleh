@@ -162,12 +162,7 @@
 	}
 
 	&[data-lacrimosa="true"] {
-		background-color: oklch(var(--b5)) !important;
-		height: var(--h);
-
-		&:after {
-			background-color: oklch(var(--b5)) !important;
-		}
+		height: 500px;
 	}
 
 	&[data-page-type="user"] {

@@ -11,6 +11,7 @@ import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
 import { useSettings } from '@/page.tsx';
+import { PageToolbar } from './toolbar';
 
 export function basic_page_structure() {
 	page.structure.container = document.body.querySelector('.page-content')!;
@@ -280,24 +281,10 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 					}
 
 					if (ff('mualani')) {
-						const toolbar = (
-							<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
-								{navlist}
-							</div>
-						);
-
-						function update() {
-							toolbar.setAttribute(
-								'data-theme',
-								useSettings.get('theme'),
-							);
-						}
-
-						update();
-						useSettings.on('theme', update);
-
 						page.structure.row.insertBefore(
-							toolbar,
+							<PageToolbar>
+								{navlist as HTMLUListElement}
+							</PageToolbar>,
 							page.structure.row.firstElementChild,
 						);
 					} else {
@@ -416,17 +403,10 @@ export function checkup_nav() {
 
 		if (ff('mualani')) {
 			const toolbar = (
-				<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
-					{nav}
-				</div>
+				<PageToolbar>
+					{nav as HTMLElement}
+				</PageToolbar>
 			);
-
-			function update() {
-				toolbar.setAttribute('data-theme', useSettings.get('theme'));
-			}
-
-			update();
-			useSettings.on('theme', update);
 
 			page.structure.row.insertBefore(toolbar, page.structure.content);
 			page.structure.toolbar = toolbar;
@@ -449,20 +429,10 @@ export function convert_to_toolbar() {
 	}
 
 	page.structure.toolbar = (
-		<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
-			{nav}
-		</div>
+		<PageToolbar>
+			{nav as HTMLElement}
+		</PageToolbar>
 	);
-
-	function update() {
-		page.structure.toolbar.setAttribute(
-			'data-theme',
-			useSettings.get('theme'),
-		);
-	}
-
-	update();
-	useSettings.on('theme', update);
 
 	page.structure.row.insertBefore(
 		page.structure.toolbar,

@@ -39,6 +39,7 @@ import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 import { Button } from '@/components/button/button';
 import { IconLabel } from '@/components/text/text';
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
+import { PageToolbar } from '@/components/page/toolbar';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -105,12 +106,12 @@ export function bleh_user_library() {
 	scrobbles?.classList.add('secondary-nav-item--scrobbles');
 
 	if (ff('mualani')) {
-		const toolbar = html.node`
-            <div class="toolbar">
-                ${search}
-                ${nav}
-            </div>
-        `;
+		const toolbar = (
+			<PageToolbar>
+				{search as HTMLElement}
+				{nav as HTMLElement}
+			</PageToolbar>
+		);
 
 		nav.classList.add(
 			'redesigned-navigation',

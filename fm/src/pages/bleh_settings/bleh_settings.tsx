@@ -54,6 +54,7 @@ import { Input } from '@/components/input/input.tsx';
 import { createRef } from 'jsx-dom';
 import { IconLabel } from '@/components/text/text.tsx';
 import { flags } from '@/build/flags.ts';
+import { PageToolbar } from '@/components/page/toolbar.tsx';
 
 export function bleh_settings() {
 	page.name = auth.name!;
@@ -206,7 +207,7 @@ export function bleh_settings() {
 
 	// go wild
 	const nav = (
-		<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
+		<PageToolbar>
 			<nav
 				class={[
 					'navlist',
@@ -247,15 +248,8 @@ export function bleh_settings() {
 					})}
 				</ul>
 			</nav>
-		</div>
+		</PageToolbar>
 	);
-
-	function update() {
-		nav.setAttribute('data-theme', useSettings.get('theme') as string);
-	}
-
-	update();
-	useSettings.on('theme', update);
 
 	page.structure.side!.replaceChildren(
 		<>

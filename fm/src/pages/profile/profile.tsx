@@ -80,6 +80,7 @@ import { DateTime } from 'luxon';
 import { is_sponsor } from '@/components/sponsor.ts';
 import { set_obsession } from './set_obsession.tsx';
 import { page_with_users } from '@/components/shared/users.tsx';
+import { PageToolbar } from '@/components/page/toolbar.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -776,7 +777,7 @@ function patch_profile_following() {
 
 	// create nav
 	const friends_nav = (
-		<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
+		<PageToolbar>
 			<nav
 				class={[
 					'navlist',
@@ -791,7 +792,7 @@ function patch_profile_following() {
 					{neighbours_tab?.cloneNode(true)}
 				</ul>
 			</nav>
-		</div>
+		</PageToolbar>
 	);
 
 	// we do this later to preserve the 'Following' text

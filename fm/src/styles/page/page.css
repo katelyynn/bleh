@@ -276,8 +276,6 @@
 	&[data-lacrimosa="true"] {
 		padding-top: var(--card-padding) !important;
 
-		background: oklch(var(--b5));
-
 		&>.content-main,
 		&>.content-side {
 			background: unset;
