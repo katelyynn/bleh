@@ -776,7 +776,7 @@ function patch_profile_following() {
 
 	// create nav
 	const friends_nav = (
-		<div class='toolbar'>
+		<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
 			<nav
 				class={[
 					'navlist',

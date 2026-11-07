@@ -101,9 +101,13 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 	}
 
 	page.structure.row.setAttribute('data-assigned', 'true');
+	page.structure.row.setAttribute('data-roxy', String(ff('roxy')));
 
 	page.structure.row.appendChild(
-		<div class='seasonal-decoration-top' />,
+		<div class='tab-line-helper' data-lacrimosa={ff('lacrimosa')} data-roxy={ff('roxy')} />,
+	);
+	page.structure.row.appendChild(
+		<div class='seasonal-decoration-top' data-lacrimosa={ff('lacrimosa')} data-roxy={ff('roxy')} />,
 	);
 
 	if (!page.structure.main || !document.body.contains(page.structure.main)) {
@@ -142,16 +146,16 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 	}
 
 	if (ff('short')) {
-		page.structure.content = html.node`
-            <main class="content" data-lacrimosa=${ff('lacrimosa')}>
-                <div class="content-main">
-                    ${page.structure.main}
-                </div>
-                <div class="content-side">
-                    ${page.structure.side}
-                </div>
-            </main>
-        `;
+		page.structure.content = (
+			<main class='content' data-lacrimosa={String(ff('lacrimosa'))} data-roxy={ff('roxy')}>
+				<div class='content-main' data-roxy={ff('roxy')}>
+					{page.structure.main}
+				</div>
+				<div class='content-side' data-roxy={ff('roxy')}>
+					{page.structure.side}
+				</div>
+			</main>
+		) as HTMLElement;
 		page.structure.row.appendChild(page.structure.content);
 
 		page.structure.main?.classList.add('in-content-view');
@@ -260,7 +264,7 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 
 					try {
 						page.structure.main.removeChild(subpage_title);
-					} catch (e) {}
+					} catch (e) { }
 				}
 
 				// is there another navlist?
@@ -276,11 +280,11 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 					}
 
 					if (ff('mualani')) {
-						const toolbar = html.node`
-                            <div class="toolbar">
-                                ${navlist}
-                            </div>
-                        `;
+						const toolbar = (
+							<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
+								{navlist}
+							</div>
+						);
 
 						function update() {
 							toolbar.setAttribute(
@@ -330,10 +334,12 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 							side_actions,
 							page.structure.side.firstElementChild,
 						);
-					} else {page.structure.main.insertBefore(
+					} else {
+						page.structure.main.insertBefore(
 							side_actions,
 							page.structure.main.firstElementChild,
-						);}
+						);
+					}
 				}
 
 				// is there a playlink?
@@ -368,10 +374,12 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 							side_actions,
 							page.structure.side.firstElementChild,
 						);
-					} else {page.structure.main.insertBefore(
+					} else {
+						page.structure.main.insertBefore(
 							side_actions,
 							page.structure.main.firstElementChild,
-						);}
+						);
+					}
 				}
 			}
 
@@ -407,11 +415,11 @@ export function checkup_nav() {
 		if (index < 1) return;
 
 		if (ff('mualani')) {
-			const toolbar = html.node`
-                <div class="toolbar">
-                    ${nav}
-                </div>
-            `;
+			const toolbar = (
+				<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
+					{nav}
+				</div>
+			);
 
 			function update() {
 				toolbar.setAttribute('data-theme', useSettings.get('theme'));
@@ -440,11 +448,11 @@ export function convert_to_toolbar() {
 		nav.classList.add('header-refresh');
 	}
 
-	page.structure.toolbar = html.node`
-        <div class="toolbar">
-            ${nav}
-        </div>
-    `;
+	page.structure.toolbar = (
+		<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
+			{nav}
+		</div>
+	);
 
 	function update() {
 		page.structure.toolbar.setAttribute(

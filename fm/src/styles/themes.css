@@ -519,6 +519,11 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+	&[data-ff--roxy="true"] {
+		--content-width: calc(var(--cards-main-width) + var(--cards-sidebar-width));
+		--cards-width: calc(var(--content-width));
+	}
+
 	&[data-ff--header_refresh="true"] {
 		--page-header-avatar-size-default: 150px;
 		--page-header-banner-size-default: 100px;

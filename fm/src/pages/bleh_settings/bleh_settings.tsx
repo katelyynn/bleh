@@ -206,7 +206,7 @@ export function bleh_settings() {
 
 	// go wild
 	const nav = (
-		<div class='toolbar'>
+		<div class='toolbar' data-lacrimosa={ff('lacrimosa')}>
 			<nav
 				class={[
 					'navlist',
@@ -342,8 +342,8 @@ export function page_error(e) {
 			<div class="bleh--panel">
 				<div class="loading-data-container">
 					<div class="alert alert-error">${e && e.message
-						? e.message
-						: e}</div>
+				? e.message
+				: e}</div>
 				</div>
 			</div>
 		`,
@@ -408,29 +408,28 @@ export async function render_setting_page(page_id) {
 				    </div>
 					<div class="sep"></div>
 					<button class="see-more" onclick=${() => {
-						if (settings.hu_tao == 'develop') {
-							change_settings_page('sku');
-						} else {
-							dialog({
+					if (settings.hu_tao == 'develop') {
+						change_settings_page('sku');
+					} else {
+						dialog({
+							id: 'hu_tao',
+							title: tl(trans.development),
+							body: html.node`
+                                    ${setting({
 								id: 'hu_tao',
-								title: tl(trans.development),
-								body: html.node`
-                                    ${
-									setting({
-										id: 'hu_tao',
-										text: false,
-										focus: true,
-									})
+								text: false,
+								focus: true,
+							})
 								}
                                 `,
-							});
-						}
-					}}>
+						});
+					}
+				}}>
 				        ${tl(trans.manage_feature_flags)}
 				    </button>
 					<button class="see-more" onclick=${() => {
-						save_setting('popups_seen', []);
-					}}>
+					save_setting('popups_seen', []);
+				}}>
 				        Forget which popups have been seen
 				    </button>
 				</section>
@@ -444,23 +443,22 @@ export async function render_setting_page(page_id) {
 			html`
 				<section class="bleh--panel">
 				    ${select({
-					values: select_prepare_convert_from_setting(lang_info),
-					initial: settings.translator_view,
-					func: translation_view,
-					title_func: (val) =>
-						html.node`
+				values: select_prepare_convert_from_setting(lang_info),
+				initial: settings.translator_view,
+				func: translation_view,
+				title_func: (val) =>
+					html.node`
                         <span class="language-header">
-                            ${
-							flag(
-								(convert_lang_to_country[val.value] ||
-									val.value).toUpperCase(),
-							)
+                            ${flag(
+						(convert_lang_to_country[val.value] ||
+							val.value).toUpperCase(),
+					)
 						}
                             <p>${val.text}</p>
                         </span>
                     `,
-					hide: true,
-				})}
+				hide: true,
+			})}
 				    <div class="translation-view" ref=${(el) =>
 					translation_view_container = el} />
 				</section>
@@ -475,22 +473,21 @@ export async function render_setting_page(page_id) {
 				html`
 					<div class="language-sub">
 					    <div class="language-info colourful translated"><span class="bleh-icon" />${tl(
-						trans.amount_translated,
-						{ c: language.translated },
-					)} (${language.percent}%)</div>
+					trans.amount_translated,
+					{ c: language.translated },
+				)} (${language.percent}%)</div>
 					    ${() => {
 						const btn = html.node`
                             <div class="language-info colourful missing" onclick=${() => {
-							copy(
-								language.missing_keys.map((key) =>
-									`${key}: ${get_trans_key(key).en}`
-								).join('\n'),
-							);
-						}}><span class="bleh-icon" />${
-							tl(trans.missing_translated, {
+								copy(
+									language.missing_keys.map((key) =>
+										`${key}: ${get_trans_key(key).en}`
+									).join('\n'),
+								);
+							}}><span class="bleh-icon" />${tl(trans.missing_translated, {
 								c: language.missing,
 							})
-						}</div>
+							}</div>
                         `;
 
 						tippy(btn, {
@@ -504,8 +501,8 @@ export async function render_setting_page(page_id) {
 						<thead>
 							<tr>
 								<th style="width: 35%">${tl(
-									trans.translation_key,
-								)}</th>
+						trans.translation_key,
+					)}</th>
 								<th>${tl(trans.original)}</th>
 							</tr>
 						</thead>
@@ -567,7 +564,7 @@ export function scroll_to_setting(id) {
 	}, 200);
 }
 
-unsafeWindow._change_settings_page = function (page, setting = null) {
+unsafeWindow._change_settings_page = function(page, setting = null) {
 	change_settings_page(page, setting);
 };
 
@@ -598,8 +595,8 @@ export function change_settings_page(page_id, setting = null) {
 					<div class="loading-data-container">
 						<div class="loading-data-text failed">
 				            ${tl(trans.value_failed_to_load, {
-					v: tl(trans.settings),
-				})}
+				v: tl(trans.settings),
+			})}
 				        </div>
 						<pre class="error-info colourful">
 				            ${e
@@ -647,7 +644,7 @@ export function load_skus() {
 	}
 }
 
-unsafeWindow._update_flag_toggle = function (flag, container) {
+unsafeWindow._update_flag_toggle = function(flag, container) {
 	update_flag_toggle(flag, container);
 };
 function update_flag_toggle(flag, container) {
@@ -689,39 +686,38 @@ function init_profile_notes() {
                     <a class="mention" href="${root}user/${user}">@${user}</a>
                 </div>
                 <div class="text preview">
-                    <p id="profile-note-row-preview--${user}">${
-			profile_notes[user]
-		}</p>
+                    <p id="profile-note-row-preview--${user}">${profile_notes[user]
+			}</p>
                 </div>
                 <div class="actions">
                     ${() => {
-			const btn = html.node`
+				const btn = html.node`
                             <button class="btn icon chibi list-action" data-type="edit" onclick=${() =>
-				edit_profile_note(user)}>
+						edit_profile_note(user)}>
                                 ${tl(trans.edit)}
                             </button>
                         `;
 
-			tippy(btn, {
-				content: btn.textContent,
-			});
+				tippy(btn, {
+					content: btn.textContent,
+				});
 
-			return btn;
-		}}
+				return btn;
+			}}
                     ${() => {
-			const btn = html.node`
+				const btn = html.node`
                             <button class="btn icon chibi danger-subtle list-action" data-type="delete" onclick=${() =>
-				delete_profile_note(user)}>
+						delete_profile_note(user)}>
                                 ${tl(trans.delete)}
                             </button>
                         `;
 
-			tippy(btn, {
-				content: btn.textContent,
-			});
+				tippy(btn, {
+					content: btn.textContent,
+				});
 
-			return btn;
-		}}
+				return btn;
+			}}
                 </div>
             </div>
         `);
@@ -747,17 +743,16 @@ function edit_profile_note(user) {
 		id: 'edit_profile_note',
 		title: tl(trans.edit_profile_note),
 		body: html.node`
-            <textarea class="modal-text" id="bleh--profile-note" placeholder=${
-			tl(trans.anything_you_can_imagine)
-		}>${profile_notes[user]}</textarea>
+            <textarea class="modal-text" id="bleh--profile-note" placeholder=${tl(trans.anything_you_can_imagine)
+			}>${profile_notes[user]}</textarea>
             <div class="modal-footer">
                 <button class="see-more cancel left-icon" onclick=${() =>
-			dialog_rm({ id: 'edit_profile_note' })}>
+				dialog_rm({ id: 'edit_profile_note' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill"></div>
                 <button class="btn primary save" onclick=${() =>
-			save_profile_note_in_window(modal, user)}>
+				save_profile_note_in_window(modal, user)}>
                     ${tl(trans.save)}
                 </button>
             </div>
@@ -1188,7 +1183,7 @@ function activity_preview() {
 	make_random_activity(preview, random_types, random_involved);
 	make_random_activity(preview, random_types, random_involved);
 
-	page.state.activity_preview_timer = setInterval(function () {
+	page.state.activity_preview_timer = setInterval(function() {
 		if (!preview) {
 			clearInterval(page.state.activity_preview_timer);
 			return;
@@ -1204,7 +1199,7 @@ function make_random_activity(preview, random_types, random_involved) {
 		date: new Date(),
 		involved: [
 			structuredClone(random_involved)[
-				Math.floor(Math.random() * random_involved.length)
+			Math.floor(Math.random() * random_involved.length)
 			],
 		],
 	});
@@ -1222,9 +1217,8 @@ export function theme_bubbles(func = null) {
 	const theme_preview = () =>
 		html.node`
         <div class="preview-inner">
-            <div class="preview-image" style="background-image: url(${
-			avatar(auth.avatar, 'avatar70s')
-		})" />
+            <div class="preview-image" style="background-image: url(${avatar(auth.avatar, 'avatar70s')
+			})" />
             <div class="preview-card">
                 <div class="preview-card-main">
                     <div class="preview-header">Aa</div>
@@ -1306,41 +1300,37 @@ export function theme_bubbles(func = null) {
 
 	const bubbles = html.node`
         <div class="theme-bubbles">
-            ${
-		themes.map((theme) => {
-			if (theme.hide) return html.node``;
+            ${themes.map((theme) => {
+		if (theme.hide) return html.node``;
 
-			if (theme.type == 'sep') {
-				return html.node`
+		if (theme.type == 'sep') {
+			return html.node`
                         <div class="sep theme-bubble-sep" />
                     `;
-			}
+		}
 
-			if (!theme.formal) theme.formal = theme.id;
+		if (!theme.formal) theme.formal = theme.id;
 
-			const bubble = html.node`
+		const bubble = html.node`
                     <button class="btn theme-bubble" data-theme-id=${theme.id} onclick=${() =>
 				update_theme_bubble(theme.id)}>
                         <div class="bubble">
-                            ${
-				theme.id == 'adaptive'
-					? html.node`
-                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${
-						['light', 'ink'].includes(settings.theme_day)
-							? 'light'
-							: 'dark'
+                            ${theme.id == 'adaptive'
+				? html.node`
+                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day)
+						? 'light'
+						: 'dark'
 					}>
                                     ${theme_preview()}
                                 </div>
-                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${
-						['light', 'ink'].includes(settings.theme_night)
-							? 'light'
-							: 'dark'
+                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night)
+						? 'light'
+						: 'dark'
 					}>
                                     ${theme_preview()}
                                 </div>
                             `
-					: html.node`
+				: html.node`
                                 <div class="inner theme-preview" data-bleh--theme=${theme.id} data-bleh--theme_type=${theme.type}>
                                     ${theme_preview()}
                                 </div>
@@ -1349,8 +1339,7 @@ export function theme_bubbles(func = null) {
                         </div>
                         <strong>
                             <span class="theme-name">
-                                ${
-				icon({ name: icons[`theme_${theme.id}`], identifier: 'theme' })
+                                ${icon({ name: icons[`theme_${theme.id}`], identifier: 'theme' })
 			}
                                 ${theme.name}
                             </span>
@@ -1359,11 +1348,11 @@ export function theme_bubbles(func = null) {
                     </button>
                 `;
 
-			buttons.push(bubble);
+		buttons.push(bubble);
 
-			return bubble;
-		})
-	}
+		return bubble;
+	})
+		}
         </div>
     `;
 
@@ -1380,19 +1369,19 @@ export function theme_bubbles(func = null) {
 				<div class="inner theme-preview" data-bleh--theme=${settings
 					.theme_day}
 					data-bleh--theme_type=${['light', 'ink'].includes(
-							settings.theme_day,
-						)
-						? 'light'
-						: 'dark'}>
+						settings.theme_day,
+					)
+					? 'light'
+					: 'dark'}>
 				    ${theme_preview()}
 				</div>
 				<div class="inner theme-preview" data-bleh--theme=${settings
 					.theme_night}
 					data-bleh--theme_type=${['light', 'ink'].includes(
-							settings.theme_night,
-						)
-						? 'light'
-						: 'dark'}>
+						settings.theme_night,
+					)
+					? 'light'
+					: 'dark'}>
 				    ${theme_preview()}
 				</div>
 			`,

@@ -45,10 +45,11 @@ export function PageHeader({
 	const label = tl(trans[type]);
 
 	const refresh = ff('header_refresh');
+	const lacrimosa = ff('lacrimosa');
 
 	const elem = (
 		<section
-			class={['page-header', `for-${type}`, refresh && 'header-refresh']}
+			class={['page-header', `for-${type}`, refresh && 'header-refresh', lacrimosa && 'lacrimosa']}
 		>
 			{avatar && (
 				<div

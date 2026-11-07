@@ -361,6 +361,17 @@ button.navlist-more {
 		background: var(--separator-base);
 		height: 1px;
 	}
+
+	&[data-lacrimosa] {
+		width: var(--cards-width);
+		margin-left: auto;
+		margin-right: auto;
+
+		&:after {
+			left: var(--card-padding);
+			right: var(--card-padding);
+		}
+	}
 }
 
 .library-controls>.secondary-nav,
