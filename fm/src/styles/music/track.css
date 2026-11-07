@@ -741,11 +741,12 @@
 	font-size: var(--font-size) !important;
 }
 
-[data-toggle-button-current-state="loved"] .chartlist-love-button {
+[data-toggle-button-current-state="loved"]>form>.chartlist-love-button {
 	--mask: var(--icon-16-heart-solid) !important;
+	--icon-size: 18px;
 }
 
-[data-toggle-button-current-state="unloved"] .chartlist-love-button:not(:hover) {
+[data-toggle-button-current-state="unloved"]>form>.chartlist-love-button:not(:hover) {
 	--col: oklch(var(--col-alt) / 40%) !important;
 }
 
