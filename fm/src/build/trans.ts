@@ -40,8 +40,8 @@ export const lang_info: Record<string, language> = {
 	},
 	de: {
 		name: get_language_name('de'),
-		by: ['evangelicgirl', 'myraisounds', 'dressupdarling'],
-		last_updated: '2026-04-20',
+		by: ['evangelicgirl', 'myraisounds', 'dressupdarling', 'zozoloft',],
+		last_updated: '2026-10-27',
 	},
 	es: {
 		name: get_language_name('es'),
@@ -458,6 +458,7 @@ export const trans = {
 			pt: 'Este emblema é especialmente reservado para {u}',
 			pl: 'Ta odznaka jest specjalnie dla Ciebie {u}',
 			it: 'Questo distintivo è riservato per {u}',
+			de: 'Dieses Abzeichen ist speziell für {u} reserviert.',
 		},
 		cute: {
 			// (female)
@@ -465,24 +466,28 @@ export const trans = {
 			pt: 'A criadora do bleh',
 			pl: 'Twórca bleh',
 			it: 'Ha creato bleh', // it is a bit different, more as "created bleh" but it is neutral ~cuto
+			de: 'Entwickler von bleh',
 		},
 		sponsor: {
 			en: '{u} sponsors the development of bleh',
 			pt: '{u} apoia o desenvolvimento do bleh',
 			pl: '{u} wspiera rozwój bleh',
 			it: '{u} sponsorizza lo sviluppo di bleh',
+			de: '{u} ist ein Sponsor von bleh',
 		},
 		contributor: {
 			en: '{u} contributed to the development of bleh',
 			pt: '{u} contribuiu para o desenvolvimento do bleh',
 			pl: '{u} przyczynili się do rozwoju bleh', //gonna try to correct the translations to they/them, also correcting any spelling errors i encounter
 			it: '{u} ha contribuito allo sviluppo di bleh',
+			de: '{u} hat bei der Entwicklung von bleh geholfen',
 		},
 		translation: {
 			en: '{u} helped in translating bleh',
 			pt: '{u} ajudou na tradução do bleh',
 			pl: '{u} pomogli tłumaczyć bleh',
 			it: '{u} ha aiutato a tradurre bleh',
+			de: '{u} hat bei der Übersetzung von bleh geholfen',
 		},
 	},
 	requires_higher_bleh_version: {
@@ -691,6 +696,7 @@ export const trans = {
 		es: 'Leer menos',
 		it: 'Leggi meno',
 		pl: 'Czytaj mniej',
+		de: 'Weniger anzeigen',
 	},
 	refresh: {
 		en: 'Refresh',
@@ -1660,6 +1666,7 @@ export const trans = {
 		en: 'Match system settings',
 		it: 'Segui le impostazioni di sistema',
 		pt: 'Seguir o padrão do sistema',
+		de: 'Systemeinstellungen Übernehmen',
 	},
 	theme_schedule: {
 		en: 'Choose which theme preference to apply based on your system theme.',
@@ -1750,24 +1757,28 @@ export const trans = {
 			en: 'Rosé Pine',
 			it: 'Rosé Pine',
 			pt: 'Rosé Pine',
+			de: 'Rosé Pine',
 		},
 		rose_pine_dawn: {
 			// https://rosepinetheme.com
 			en: 'Rosé Pine Dawn',
 			it: 'Rosé Pine Dawn',
 			pt: 'Rosé Pine Dawn',
+			de: 'Rosé Pine Dawn',
 		},
 		kanagawa: {
 			// https://github.com/rebelot/kanagawa.nvim
 			en: 'Kanagawa',
 			it: 'Kanagawa',
 			pt: 'Kanagawa',
+			de: 'Kanagawa',
 		},
 		kanagawa_dragon: {
 			// https://github.com/rebelot/kanagawa.nvim
 			en: 'Kanagawa Dragon',
 			it: 'Kanagawa Dragon',
 			pt: 'Kanagawa Dragon',
+			de: 'Kanagawa Dragon',
 		},
 	},
 	bright: {
@@ -1776,11 +1787,13 @@ export const trans = {
 			en: 'Bright',
 			pt: 'Claro',
 			it: 'Chiaro',
+			de: 'Hell',
 		},
 		body: {
 			en: 'Perfect for daylight',
 			pt: 'Perfeito para a luz do dia',
 			it: 'Perfetto per la luce del giorno',
+			de: 'Perfekt für Tageslicht',
 		},
 	},
 	moody: {
@@ -1812,6 +1825,7 @@ export const trans = {
 		en: 'Edit colour',
 		it: 'Modifica colore',
 		pt: 'Editar cor',
+		de: 'Farbe ändern',
 	},
 	adaptive: {
 		en: 'Adaptive',
@@ -2158,6 +2172,7 @@ export const trans = {
 				es: 'Verano',
 				pl: 'Lato',
 				it: 'Estate',
+				de: 'Sommer',
 			},
 			halloween: {
 				en: 'Halloween',
@@ -2305,6 +2320,7 @@ export const trans = {
 			smoke: {
 				en: 'Smoke',
 				pt: 'Fumaça',
+				de: 'Rauch',
 			},
 			burgundy: {
 				en: 'Burgundy',
@@ -2313,6 +2329,7 @@ export const trans = {
 			lantern: {
 				en: 'Lantern',
 				pt: 'Lanterna',
+				de: 'Laterne',
 			},
 		},
 		exclusive: {
@@ -2390,6 +2407,7 @@ export const trans = {
 		en: 'Particles',
 		it: 'Particelle',
 		pt: 'Partículas',
+		de: 'Partikel',
 	},
 	seasonal_particles_fps: {
 		name: {
@@ -2419,6 +2437,7 @@ export const trans = {
 		en: 'Effects',
 		it: 'Effetti',
 		pt: 'Efeitos',
+		de: 'Effekte',
 	},
 	seasonal_overlays: {
 		name: {
@@ -2435,16 +2454,19 @@ export const trans = {
 		body: {
 			en: 'Features image overlays like cobwebs and snow in certain seasons',
 			pt: 'Apresenta sobreposições de imagem, como teias de aranha e neve, em determinadas estações.',
+			de: 'Enthält Bildüberlagerungen zbsp. wie Spinnweben und Schnee, die je zur bestimmten Jahreszeit auftreten'
 		},
 	},
 	seasonal_masks: {
 		name: {
 			en: 'Change button and grid shapes',
 			pt: 'Alterar formatos de botões e grades',
+			de: 'Tasten und Rasterelemente ändern'
 		},
 		body: {
 			en: 'Seasons can choose a custom look for buttons, menus, and grids',
 			pt: 'As temporadas permitem escolher um visual personalizado para botões, menus e grades.',
+			de: 'Jahreszeiten können spezielle Tasten, Menus und Rasterelemente in einem saisonalen Erscheinungsbild darstellen', //Too long and weird?!?
 		},
 	},
 	seasonal_offset: {
@@ -2638,6 +2660,7 @@ export const trans = {
 		es: 'Marcar {v}',
 		it: 'Segnalibro {v}',
 		pl: 'Zakładka {v}',
+		de: 'als Lesezeichen speichern',
 	},
 	charts: {
 		en: 'Charts',
@@ -2658,6 +2681,7 @@ export const trans = {
 		es: 'Listas del',
 		pl: 'Rankingi dla',
 		it: 'Classifiche per',
+		de: 'Charts für',
 	},
 	weekly_charts: {
 		// dates will be directly below this text
@@ -2666,6 +2690,7 @@ export const trans = {
 		es: 'Listas semanales',
 		pl: 'Rankingi tygodniowe',
 		it: 'Classifiche settimanali',
+		de: 'Wöchentliche Charts',
 	},
 	view_the_charts: {
 		en: 'View the charts',
@@ -2770,6 +2795,7 @@ export const trans = {
 		pt: 'Olá {u}!',
 		es: '¡Hola {u}!',
 		pl: 'Hej {u}!',
+		de: 'Hallo {u}!',
 	},
 	bleh_setup_guide: {
 		en: 'It’s nice to see you here',
@@ -2777,6 +2803,7 @@ export const trans = {
 		pt: 'É bom ver você por aqui',
 		es: 'Es bueno verte aquí',
 		pl: 'Dobrze Cię tu widzieć',
+		de: 'Es ist schön, dich zu sehen',
 	},
 	import: {
 		en: 'Import',
@@ -3892,6 +3919,7 @@ export const trans = {
 		it: 'Recenti',
 		ja: '最近',
 		pl: 'Ostatnie',
+		de: 'Zuletzt',
 	},
 	recent_tracks: {
 		en: 'Recent Tracks',
@@ -3953,6 +3981,7 @@ export const trans = {
 		// you are {percentage%} compatible (in taste) {list of artists}
 		en: 'You share {artists} in common.',
 		pt: 'Vocês tem {artists} em comum.',
+		de: 'Ihr hört {artists} gemeinsam',
 	},
 	you_are_a_value_match: {
 		// valentines easter egg
@@ -4017,6 +4046,7 @@ export const trans = {
 		es: 'Enviar mensaje',
 		it: 'Invia messaggio',
 		pl: 'Wyślij wiadomość',
+		de: 'Nachricht schicken',
 	},
 	join_discord: {
 		en: 'Join Discord',
@@ -4035,6 +4065,7 @@ export const trans = {
 		es: 'Seguir a {u}',
 		pl: 'Obserwuj {u}',
 		it: 'Segui {u}',
+		de: 'Folge {u}',
 	},
 	sponsor_details: {
 		en: 'Sponsor and badge details',
@@ -4127,6 +4158,7 @@ export const trans = {
 		en: 'A sponsorship gives you awesome profile perks visible to all bleh users',
 		pt: 'Um patrocínio oferece vantagens incríveis para o seu perfil, visíveis a todos os usuários do bleh',
 		it: 'Una sponsorizzazione ti offre fantastici vantaggi del profilo visibili a tutti gli utenti di bleh',
+		de: 'Mit einem Sponsor erhältst du besondere Profil-Extras, die Jede Person auf bleh sehen kann'
 	},
 	sponsor_monthly: {
 		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
@@ -6482,18 +6514,21 @@ export const trans = {
 		pt: 'Circular',
 		pl: 'Okrągły',
 		it: 'Circolare',
+		de: 'Kreisförmig'
 	},
 	squircle: {
 		en: 'Rounded',
 		pt: 'Arredondado',
 		pl: 'Zaokrąglony kwadrat',
 		it: 'Arrotondato',
+		de: 'Abgerundet'
 	},
 	square: {
 		en: 'Square',
 		pt: 'Quadrado',
 		pl: 'Kwadratowy',
 		it: 'Quadrato',
+		de: 'Viereck',
 	},
 	notes: {
 		// profile notes
@@ -8305,6 +8340,7 @@ export const trans = {
 		en: 'Incompatible',
 		it: 'Incompatibile',
 		pt: 'Incompatível',
+		de: 'Inkompatibel',
 	},
 	value_is_enabled: {
 		// a setting is enabled
@@ -12315,6 +12351,7 @@ export const trans = {
 		es: 'La música es mejor con amigos, {a}añade a tu lista de amigos cercanos{/a}',
 		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {a}dodaj do listy bliskich przyjaciół{/a}',
 		it: 'La musica è migliore con gli amici, {a}aggiungi alla tua lista degli amici stretti{/a}',
+		de: 'Musik ist besser mit freunden, {a}Als engen Freund hinzufügen{/a}',
 	},
 	collage_cta: {
 		// used to 'advertise' collages
@@ -12324,6 +12361,7 @@ export const trans = {
 			es: 'Crear un collage',
 			pl: 'Stwórz kolaż',
 			it: 'Crea un collage',
+			de: 'Erstell eine Collage',
 		},
 		body: {
 			en: 'Featuring your favourite albums in the last month',
@@ -12331,6 +12369,7 @@ export const trans = {
 			es: 'Con tus álbumes favoritos en el último mes',
 			pl: 'Twoje ulubione albumy z ostatniego miesiąca',
 			it: 'Con i tuoi album preferiti dell’ultimo mese',
+			de: 'Inklusive deiner Lieblingsalben aus dem letzten Monat'
 		},
 	},
 	compare_cta: {
@@ -12341,6 +12380,7 @@ export const trans = {
 			es: 'Comparar con tus amigos',
 			pl: 'Porównaj ze swoimi znajomymi',
 			it: 'Confronta con i tuoi amici',
+			de: 'Mit Freunden vergleichen',
 		},
 		body: {
 			en: 'Which music do you have in common?',
@@ -12348,6 +12388,7 @@ export const trans = {
 			es: '¿Qué música tienen en común?',
 			pl: 'Jaka muzyka was łączy?',
 			it: 'Quale musica avete in comune?',
+			de: 'Welche Musik hört ihr Gemeinsam?',
 		},
 	},
 	sponsor_cta: {
@@ -12358,6 +12399,7 @@ export const trans = {
 			es: 'Ayuda al futuro de bleh',
 			pl: 'Pomóż w budowaniu przyszłości bleh',
 			it: 'Aiuta il futuro di bleh',
+			de: 'Helf mit bei der Zukunft von bleh',
 		},
 	},
 	add_new_data_point: {
@@ -12374,6 +12416,7 @@ export const trans = {
 		es: 'Preajustes',
 		pl: 'Presety',
 		it: 'Preimpostazioni',
+		de: 'Voreinstellung',
 	},
 	existing: {
 		// used as a header for existing items
@@ -12382,6 +12425,7 @@ export const trans = {
 		es: 'Actuales',
 		pl: 'Istniejące',
 		it: 'Esistenti',
+		de: 'Vorbestehend'
 	},
 	history: {
 		en: 'History',
@@ -12389,6 +12433,7 @@ export const trans = {
 		es: 'Historial',
 		pl: 'Historia',
 		it: 'Storico',
+		de: 'Verlauf', // as in "Browser History" - "Browserverlauf"
 	},
 	no_data_to_display: {
 		en: 'No data to display',
@@ -12396,6 +12441,7 @@ export const trans = {
 		es: 'No hay datos para mostrar',
 		pl: 'Brak danych do wyświetlenia',
 		it: 'Nessun dato da mostrare',
+		de: 'Keine Daten zum Anzeigen',
 	},
 	add_to_graph: {
 		en: 'Add to graph',
@@ -12455,6 +12501,7 @@ export const trans = {
 		es: 'Nombre del artista requerido',
 		pl: 'Nazwa artysty jest wymagana',
 		it: 'Nome dell’artista richiesto',
+		de: 'Künstlername erforderlich',
 	},
 	choose_either_an_album_or_track: {
 		en: 'Choose either an album or track only',
@@ -12476,6 +12523,7 @@ export const trans = {
 		es: 'Nombre de usuario requerido',
 		pl: 'Nazwa użytkownika jest wymagana',
 		it: 'Username richiesto',
+		de: 'Benutzername erforderlich',
 	},
 	already_a_close_friend: {
 		// user is already a friend
@@ -12484,6 +12532,7 @@ export const trans = {
 		es: 'Ya está en tus amigos cercanos',
 		pl: 'Już jest wśród bliskich znajomych',
 		it: 'Già aggiunto agli amici stretti',
+		de: 'Schon als engen Freund hinzugefügt',
 	},
 	plot_explain: {
 		// these are steps in order
@@ -12562,6 +12611,7 @@ export const trans = {
 		es: 'Desactiva los elementos visuales de bleh aquí',
 		pl: 'Wyłącz elementy wizualne bleh tutaj',
 		it: 'Disattiva gli elementi grafici di bleh qui',
+		de: 'Visuelle Elemente von bleh ausschalten',
 	},
 	you_have_disabled_bleh_visuals_for_settings: {
 		en: 'You have disabled bleh visuals for Last.fm settings, don’t expect this to look pretty',
@@ -12569,6 +12619,7 @@ export const trans = {
 		es: 'Has desactivado los elementos visuales de bleh en la configuración de Last.fm, no esperes que se vea bonito',
 		pl: 'Wyłączyłeś elementy wizualne „bleh” w ustawieniach Last.fm; nie oczekuj, że będzie to wyglądało pięknie',
 		it: 'Hai disattivato gli elementi grafici di bleh per le impostazioni di Last.fm, non aspettarti che sia bello da vedere',
+		de: 'Du hast die visuellen Elemente von bleh ausgeschaltet, erwarte lieber nicht dass das gut aussieht',
 	},
 	hide_unused_settings: {
 		en: 'Hide settings that have no effect',
@@ -12576,6 +12627,7 @@ export const trans = {
 		es: 'Ocultar opciones que no tienen efecto',
 		pl: 'Ukryj ustawienia które nie działają',
 		it: 'Nascondi impostazioni che non hanno effetto',
+		de: 'Unbenutzte Elemente verstecken',
 	},
 	edit_links: {
 		en: 'Edit links',
@@ -12583,24 +12635,28 @@ export const trans = {
 		es: 'Editar vínculos',
 		pl: 'Edytuj linki',
 		it: 'Modifica link',
+		de: 'Links bearbeiten',
 	},
 	daily: {
 		en: 'Daily',
 		pt: 'Diariamente',
 		pl: 'Dziennie',
 		it: 'Giornalmente',
+		de: 'Täglich',
 	},
 	weekly: {
 		en: 'Weekly',
 		pt: 'Semanalmente',
 		pl: 'Tygodniowo',
 		it: 'Settimanalmente',
+		de: 'Wochentlich',
 	},
 	explore: {
 		en: 'Explore',
 		pt: 'Explorar',
 		pl: 'Odkrywaj',
 		it: 'Esplora',
+		de: 'Erkunden',
 	},
 	hot_100: {
 		// b = bleh
@@ -12617,12 +12673,14 @@ export const trans = {
 			pt: 'Modo de desenvolvedor',
 			pl: 'Tryb deweloperski',
 			it: 'Modalità sviluppatore',
+			de: 'Entwicklermodus',
 		},
 		body: {
 			en: 'Enable developer-specific features used for debugging purposes',
 			pt: 'Ative recursos específicos de desenvolvedor usados para fins de depuração',
 			pl: 'Włącz określone funkcje dla programistów służące do debugowania',
 			it: 'Attiva funzioni per sviluppatori usate per il debug',
+			de: 'Schaltet bestimmte Entwickler bezogene features für Debugging an'
 		},
 	},
 	developer_setting_names: {
@@ -12641,16 +12699,19 @@ export const trans = {
 		en: 'Owned by 1 person',
 		pt: 'Pertence a 1 pessoa',
 		it: 'Assegnato a 1 persona', // translating "owned" to "assigned to" as it fits somewhat better i think ~cuto
+		de: 'Im Besitz von 1 Person',
 	},
 	badge_multiple_users: {
 		en: 'Owned by {c} people',
 		pt: 'Pertence a {c} pessoas',
 		it: 'Assegnato a {c} persone',
+		de: 'Im Besitz von {c} Personen',
 	},
 	miscellaneous: {
 		en: 'Miscellaneous',
 		pt: 'Diversos',
 		it: 'Altro',
+		de: 'Divers',
 	},
 	count_bar_style: {
 		en: 'Bar styling',
@@ -12661,11 +12722,13 @@ export const trans = {
 		en: 'Classic',
 		pt: 'Clássico(a)',
 		it: 'Classico',
+		de: 'Klassik',
 	},
 	minimal: {
 		en: 'Minimal',
 		pt: 'Mínimo',
 		it: 'Minimale',
+		de: 'Minimal',
 	},
 	motion: {
 		en: 'Motion',
@@ -12676,6 +12739,7 @@ export const trans = {
 		en: 'Top listened',
 		pt: 'Mais ouvidos',
 		it: 'Più ascoltata', // assuming singular "track" ("traccia"), which is feminine ~cuto
+		de: 'Meistgehört',
 	},
 	behaviour: {
 		en: 'Behaviour',
@@ -12698,6 +12762,7 @@ export const trans = {
 		en: '{v}x streak',
 		pt: '{v}x sequências',
 		it: '{v}x serie',
+		de: '{v}x serie',
 	},
 	streak_high: {
 		// a streak of artists, albums, or tracks
@@ -12706,12 +12771,14 @@ export const trans = {
 		en: '{v}+ streak or higher',
 		pt: '{v}+ sequência ou maior',
 		it: '{v}+ serie o più',
+		de: '{v}+ serie oder höher'
 	},
 	streak_started: {
 		// v = 2 days ago etc.
 		en: 'Streak started {v}',
 		pt: 'Sequência começou {v}',
 		it: 'Serie avviata {v}',
+		de: 'Serie vor {v} angefangen'
 	},
 	the_bleh_times: {
 		// newspaper title
@@ -12719,6 +12786,7 @@ export const trans = {
 		en: 'The {b} Times',
 		pt: 'O {b} Times',
 		it: 'La Gazzetta di {b}',
+		de: 'Die {b} Zeitung' // Could also just do "Times", but Zeitung sounds better imo -zozoloft
 	},
 	from: {
 		// timeframe
@@ -12726,6 +12794,7 @@ export const trans = {
 		en: 'From',
 		pt: 'Desde',
 		it: 'Da',
+		de: 'Von',
 	},
 	to: {
 		// timeframe
@@ -12733,31 +12802,37 @@ export const trans = {
 		en: 'To',
 		pt: 'a',
 		it: 'a',
+		de: 'An',
 	},
 	related_setting: {
 		en: 'Related setting: {v}',
 		pt: 'Configurações relacionadas {v}',
 		it: 'Impostazione correlata: {v}',
+		de: 'Verwandte Einstellung: {v}',
 	},
 	markdown_disabled_profile: {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
 		pt: 'O Markdown está desativado. O texto pode não ser exibido corretamente e as decorações de perfil não funcionarão. {v}',
 		it: 'Hai disattivato Markdown, il testo potrebbe non essere mostrato correttamente e le decorazioni del profilo non funzioneranno. {v}',
+		de: 'Markdown ist deaktiviert, es werden möglicherweise Textdarstellungs fehler erscheinen, und Profildekorationen können probleme darstellen. {v}',  '
 	},
 	empty_list: {
 		en: 'This list is empty',
 		pt: 'Esta lista está vazia',
 		it: 'Questa lista è vuota',
+		de: 'Diese Liste ist Leer',
 	},
 	on: {
 		// switch state
 		en: 'On',
 		pt: 'Ligado',
+		de: 'An',
 	},
 	off: {
 		// switch state
 		en: 'Off',
 		pt: 'Desligado',
+		de: 'Aus',
 	},
 	select_arbitrary: {
 		en: 'Type to add to this list',
@@ -12767,6 +12842,7 @@ export const trans = {
 		// keybind
 		en: '{v} to close',
 		pt: '{v} para fechar',
+		de: '{v} um zu Schließen'
 	},
 	hover_to_view: {
 		// hover mouse
@@ -12786,24 +12862,29 @@ export const trans = {
 	music_and_data: {
 		en: 'Music & Data',
 		pt: 'Música e Dados',
+		de: 'Musik & Daten',
 	},
 	streak_information: {
 		en: 'Streaks are calculated locally and max 100 at the moment.',
 		pt: 'As sequências são calculadas localmente e limitadas a um máximo de 100 no momento.',
+		de: 'Serien werden Lokal kalkuliert und sind derzeit maximal bis zu 100',
 	},
 	view_your_compatibility: {
 		// taste
 		en: 'View your compatibility',
 		pt: 'Veja sua compatibilidade',
+		de: 'Kompatibalität einsehen',
 	},
 	insight: {
 		// used on profiles
 		en: 'Insight',
 		pt: 'Análise',
+		de: 'Einblick',
 	},
 	profile_summary_pie_chart: {
 		en: 'Show pie chart',
 		pt: 'Exibir gráfico de pizza',
+		de: 'Kreisdiagramm zeigen',
 	},
 	chart_position: {
 		// shown on artist/album pages
