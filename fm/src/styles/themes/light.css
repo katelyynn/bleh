@@ -220,6 +220,10 @@ body,
 		--max-s: 2;
 
 		/* headers */
+		--c1: var(--c1-l) 0 var(--hue);
+		--c2: var(--c2-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue);
+		--c3: var(--c3-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue);
+
 		--c1-l: 0;
 		--c1-s: 0.06;
 
@@ -249,8 +253,8 @@ body,
 		--l4c-l: 0.35;
 		--l4c-s: 0.4;
 
-		--h2-l: 0.92;
-		--h2-s: 0.32;
+		--h2-l: 1;
+		--h2-s: 0.92;
 
 		--h3-l: 0.78;
 		--h3-s: 0.42;
