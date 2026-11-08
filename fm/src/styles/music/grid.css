@@ -147,6 +147,28 @@
 	outline: 2px solid transparent;
 	outline-offset: 3px;
 
+	--c1-o: var(--c1-l) 0 var(--hue) !important;
+	--c2-o: var(--c2-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue) !important;
+	--c3-o: var(--c3-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue) !important;
+
+	--c1-l: 2;
+	--c1-s: 0.07;
+
+	--c2-l: 0.87;
+	--c2-s: 0.07;
+
+	--c3-l: 0.6;
+	--c3-s: 0.07;
+
+	--l2c-l: 0.92;
+	--l2c-s: 0.4;
+
+	--l3c-l: 0.72;
+	--l3c-s: 0.46;
+
+	--l4c-l: 0.49;
+	--l4c-s: 0.46;
+
 	&:hover {
 		outline-color: oklch(var(--l3-c) / 60%);
 		outline-offset: 0px;

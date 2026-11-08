@@ -241,8 +241,8 @@ body,
 		--l4-s: 0.6;
 
 		/* colours */
-		--l2c-l: 0.98;
-		--l2c-s: 0.2;
+		--l2c-l: var(--l4c-l);
+		--l2c-s: var(--l4c-s);
 
 		--l3c-l: 0.51;
 		--l3c-s: 0.33;
