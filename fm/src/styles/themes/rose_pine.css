@@ -28,24 +28,10 @@ body,
 }
 
 body,
-.alert,
-.big-modal-alert,
-.events-list-item-date-icon,
-.async-content-error-message,
-.avatar-status-dot,
-.label,
-.nag-bar--alert,
-.badge,
-u,
-.colourful,
-.events-list-item-attendees,
-.attendance-btn,
-.gallery-image-preferred-container {
-
-	&[data-bleh--theme="rose_pine"],
-	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
-		--c1: 0.9488 0.0299 289.97;
-		--c2: 0.848 0.0299 289.97;
-		--c3: 0.6539 0.0444 291.23;
+.theme-preview {
+	&[data-bleh--theme="rose_pine"] {
+		--c1-o: 0.9488 0.0299 289.97;
+		--c2-o: 0.848 0.0299 289.97;
+		--c3-o: 0.6539 0.0444 291.23;
 	}
 }

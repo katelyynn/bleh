@@ -468,6 +468,7 @@ body {
 
 /* text */
 body,
+.theme-preview,
 .alert,
 .big-modal-alert,
 .events-list-item-date-icon,
@@ -485,8 +486,92 @@ u,
 	--sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, var(--default-sat)))));
 	--lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, var(--default-lit)))));
 
-	--sat: calc(var(--sat-raw) * var(--sat-multiply));
-	--lit: calc(var(--lit-raw) * var(--lit-multiply));
+	--sat: clamp(min(var(--min-s)), calc(var(--sat-raw) * var(--sat-multiply)), max(var(--max-s)));
+	--lit: clamp(min(var(--min-l)), calc(var(--lit-raw) * var(--lit-multiply)), max(var(--max-l)));
+
+	--c1: var(--c1-o, var(--c1-l) 0 var(--hue));
+	--c2: var(--c2-o, var(--c2-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue));
+	--c3: var(--c3-o, var(--c3-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue));
+	--ov-c1: var(--c1);
+
+	--l2: calc(var(--lit) * var(--l2-l)) calc(var(--sat) * var(--l2-s)) var(--hue);
+	--l3: calc(var(--lit) * var(--l3-l)) calc(var(--sat) * var(--l3-s)) var(--hue);
+	--l4: calc(var(--lit) * var(--l4-l)) calc(var(--sat) * var(--l4-s)) var(--hue);
+
+	--l2-c: calc(var(--lit) * var(--l2c-l)) calc(clamp(min(var(--min-s)), var(--sat), max(var(--max-s))) * var(--l2c-s)) var(--hue);
+	--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
+	--l4-c: calc(var(--lit) * var(--l4c-l)) calc(var(--sat) * var(--l4c-s)) var(--hue);
+
+	--l3-c-sat: calc(var(--sat) * var(--l3c-s));
+	--l3-c-lit: calc(var(--lit) * var(--l3c-l));
+
+	--h2: var(--l2-c);
+	--h3: var(--h3-lit) var(--h3-sat) var(--hue);
+	--h3-sat: calc(var(--sat) * var(--h3-s));
+	--h3-lit: calc(var(--lit) * var(--h3-l));
+	--h4: calc(var(--lit) * var(--h4-l)) calc(var(--sat) * var(--h4-s)) var(--hue);
+
+	--f4: calc(var(--lit) * var(--f4-l)) calc(var(--sat) * var(--f4-s)) var(--hue);
+	--f5: calc(var(--lit) * var(--f5-l)) calc(var(--sat) * var(--f5-s)) var(--hue);
+	--k4: calc(var(--lit) * var(--k4-l)) calc(var(--sat) * var(--k4-s)) var(--hue);
+	--x4: calc(var(--lit) * var(--x4-l)) calc(var(--sat) * var(--x4-s)) var(--hue);
+	--g4: calc(var(--lit) * var(--g4-l)) calc(var(--sat) * var(--g4-s)) var(--hue);
+
+	--s3: calc(var(--lit) * var(--s3-l)) calc(var(--sat) * var(--s3-s)) var(--hue);
+	--s4: calc(var(--lit) * var(--s4-l)) calc(var(--sat) * var(--s4-s)) var(--hue);
+
+	--p3: var(--s4);
+
+	/* l2-c in dark modes, l4-c in light modes */
+	--l2-c-theme-switch: var(--l2-c);
+	--l3-c-theme-switch: var(--l3-c);
+	--h3-theme-switch: var(--h3);
+
+	--grid-colour-shadow: var(--grid-colour-shadow-override,
+			0 10px 20px oklch(var(--h4) / var(--grid-colour-shadow-opacity)));
+
+	--opposite-text: var(--b6);
+
+	--avatar-generic-background: oklch(var(--b4));
+
+	--primary-shadow:
+		inset 0 0 0 1px oklch(var(--l2-c) / 10%),
+		inset 0 1px 0 1px oklch(var(--l2-c) / 15%);
+	--bar-shadow: 0 0 transparent;
+
+	--shout-vote-indicator: linear-gradient(90deg,
+			transparent 20%,
+			oklch(var(--h4) / 5%));
+
+	--glow: oklch(var(--h3) / 40%);
+
+	--badge: oklch(var(--f4) / 30%);
+	--badge-hov: oklch(var(--f4) / 50%);
+
+	--taste-glow: drop-shadow(0 0 15px oklch(var(--h4)));
+
+	--menu-item-accent-hov: oklch(var(--h4) / 12%);
+	--menu-item-accent-atv: oklch(var(--h4) / 22%);
+
+	--summary-block-0: oklch(calc(var(--lit) * 0.45) calc(var(--sat) * 0.76) var(--hue) / 20%);
+	--summary-block-1: oklch(calc(var(--lit) * 0.5) calc(var(--sat) * 0.72) var(--hue) / 35%);
+	--summary-block-2: oklch(calc(var(--lit) * 0.56) calc(var(--sat) * 0.64) var(--hue) / 50%);
+	--summary-block-3: oklch(calc(var(--lit) * 0.6) calc(var(--sat) * 0.62) var(--hue) / 60%);
+	--summary-block-4: oklch(calc(var(--lit) * 0.67) calc(var(--sat) * 0.56) var(--hue) / 80%);
+	--summary-block-5: oklch(calc(var(--lit) * 0.76) calc(var(--sat) * 0.53) var(--hue) / 90%);
+	--summary-block-6: oklch(calc(var(--lit) * 0.82) calc(var(--sat) * 0.48) var(--hue));
+	--summary-block-7: oklch(calc(var(--lit) * 0.9) calc(var(--sat) * 0.43) var(--hue));
+	--summary-block-8: oklch(calc(var(--lit) * 0.98) calc(var(--sat) * 0.37) var(--hue));
+	--summary-block-9: oklch(calc(var(--lit) * 1.12) calc(var(--sat) * 0.34) var(--hue));
+
+	--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(var(--sat) * 0.55) var(--hue) / 16%);
+
+	--white: 100% 0 0;
+
+	--primary-glow: 0 3px 12px oklch(var(--h4) / 32%);
+
+	--badge-shadow: 1px 1px 0 0 oklch(var(--h4) / 12%) inset, -1px -4px 8px 0 oklch(var(--h4) / 20%) inset;
+	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 }
 
 /* attributes */

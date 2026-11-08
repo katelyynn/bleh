@@ -332,7 +332,7 @@ function ThemePreview({
 	return (
 		<div class='bubble'>
 			<div
-				class={['inner', 'theme-preview', 'colourful']}
+				class={['inner', 'theme-preview']}
 				data-bleh--theme={id}
 				data-bleh--theme_type={type}
 			>
@@ -340,9 +340,8 @@ function ThemePreview({
 					<div
 						class='preview-image'
 						style={{
-							backgroundImage: `url(${
-								avatar(auth.avatar, 'avatar300s')
-							})`,
+							backgroundImage: `url(${avatar(auth.avatar, 'avatar300s')
+								})`,
 						}}
 					/>
 					<div class='preview-card'>
