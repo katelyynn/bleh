@@ -725,10 +725,12 @@
 .chartlist-love-button {
 	position: relative;
 	--left: calc((var(--button-height) - var(--icon-size)) / 2);
-	--mask: var(--icon-16-heart);
-	--col: oklch(var(--l3-c)) !important;
+	--mask: var(--heart-icon, var(--icon-16-heart));
+	--col: var(--heart-colour, oklch(var(--col-alt) / 40%)) !important;
 	--mask-colour: var(--col) !important;
 	color: var(--col);
+
+	--icon-size: var(--heart-icon-size, 16px);
 
 	display: flex !important;
 
@@ -739,20 +741,20 @@
 	overflow: unset !important;
 
 	font-size: var(--font-size) !important;
+
+	span& {
+		pointer-events: none !important;
+	}
+
+	&[data-analytics-action]:hover {
+		--col: oklch(var(--l3-c)) !important;
+	}
 }
 
-[data-toggle-button-current-state="loved"]>form>.chartlist-love-button {
-	--mask: var(--icon-16-heart-solid) !important;
-	--icon-size: 18px;
-}
-
-[data-toggle-button-current-state="unloved"]>form>.chartlist-love-button:not(:hover) {
-	--col: oklch(var(--col-alt) / 40%) !important;
-}
-
-/*     OTHER USER PROFILE     */
-[data-toggle-button-current-state="unloved"] span.chartlist-love-button {
-	--col: oklch(var(--col-alt) / 20%) !important;
+.chartlist-loved>[data-toggle-button-current-state="loved"] {
+	--heart-icon: var(--icon-16-heart-solid);
+	--heart-icon-size: 18px;
+	--heart-colour: oklch(var(--l3-c));
 }
 
 .chartlist-buylinks,
