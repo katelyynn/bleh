@@ -14,6 +14,7 @@ import {
 	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
 import { WithChildren } from '@/types/generic';
+import { ScreenSize, hideScreenSizeClasses, showScreenSizeClasses, shrinkScreenSizeClasses } from '../responsive/responsive';
 
 type ButtonProps =
 	& {
@@ -37,6 +38,9 @@ type ButtonProps =
 		opens?: ReactElement;
 		notSelect?: boolean;
 		onUpdate?: () => void;
+		hideBelow?: ScreenSize,
+		shrinkBelow?: ScreenSize,
+		showAbove?: ScreenSize
 	}
 	& Omit<
 		JSX.IntrinsicElements['button'],
@@ -76,6 +80,9 @@ export function Button({
 	opens,
 	notSelect,
 	onUpdate,
+	hideBelow,
+	shrinkBelow,
+	showAbove,
 	...props
 }: ButtonProps) {
 	const classes: ClassNames = [
@@ -89,6 +96,9 @@ export function Button({
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
 		(opens != null && !notSelect) && 'select-button',
+		hideBelow && hideScreenSizeClasses[hideBelow],
+		shrinkBelow && shrinkScreenSizeClasses[shrinkBelow],
+		showAbove && showScreenSizeClasses[showAbove],
 		className && className,
 	];
 
@@ -209,10 +219,19 @@ export function Button({
 export function ButtonInnerContent({
 	className,
 	children,
+	hideBelow,
+	shrinkBelow,
+	showAbove,
 	...props
 }: WithChildren<'span'>) {
 	return (
-		<span class={['button-inner-content', className]} {...props}>
+		<span class={[
+			'button-inner-content',
+			hideBelow && hideScreenSizeClasses[hideBelow],
+			shrinkBelow && shrinkScreenSizeClasses[shrinkBelow],
+			showAbove && showScreenSizeClasses[showAbove],
+			className
+		]} {...props}>
 			{children}
 		</span>
 	)

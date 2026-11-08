@@ -18,6 +18,10 @@ export function MenuContents({
 	);
 }
 
-export function MenuSeparator() {
-	return <Separator />;
+export function MenuSeparator({
+	hideBelow,
+	shrinkBelow,
+	showAbove
+}: WithChildren) {
+	return <Separator hideBelow={hideBelow} shrinkBelow={shrinkBelow} showAbove={showAbove} />;
 }

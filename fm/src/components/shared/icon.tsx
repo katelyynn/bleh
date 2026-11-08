@@ -229,7 +229,8 @@ export const icons = {
 	crown: 'crown',
 	about: 'about',
 	profile_links: 'profile-links',
-	statuscafe: 'statuscafe'
+	statuscafe: 'statuscafe',
+	charts: 'charts'
 };
 
 interface icon {

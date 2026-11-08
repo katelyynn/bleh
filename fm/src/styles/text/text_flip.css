@@ -1,5 +1,6 @@
 .text-flipper {
 	position: relative;
+	display: inline-flex;
 }
 
 .text-flipper-inner {

@@ -42,7 +42,7 @@ import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, Flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
-import { new_indicator } from '../shared/indicator';
+import { new_indicator, NewIndicator } from '../shared/indicator';
 import { createRef, CSSProperties, ReactElement, RefObject } from 'jsx-dom';
 import { toggle_theme } from '@/config.tsx';
 import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
@@ -316,30 +316,26 @@ export function append_nav() {
 				ref={new_links}
 			>
 				<ul class='navlist-items'>
-					<a
-						class={['btn', 'masthead-nav-control', 'icon']}
-						data-type='charts'
-						href={`${root}charts`}
-					>
+					<Button className='masthead-nav-control' href={`${root}charts`}>
+						<Icon name={icons.charts} />
 						{tl(trans.charts)}
-						{ff('aihara') && new_indicator()}
-					</a>
-					<a
-						class={['btn', 'masthead-nav-control', 'icon']}
-						data-type='bookmark'
-						href={`${root}music/+bookmarks`}
-					>
+						{ff('aihara') && <NewIndicator />}
+					</Button>
+					<Button className='masthead-nav-control' href={`${root}music/+bookmarks`} hideBelow='vertical'>
+						<Icon name={icons.bookmark} />
 						{tl(trans.bookmarks)}
-					</a>
-					<a
-						class={['btn', 'masthead-nav-control', 'icon']}
-						data-type='minis'
-						href={`${root}bleh/minis`}
-					>
+					</Button>
+					<Button className='masthead-nav-control' href={`${root}bleh/minis`}>
+						<Icon name={icons.minis} />
 						{tl(trans.minis)}
-					</a>
+					</Button>
 					<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)} notSelect opens={
 						<MenuContents>
+							<Button menu href={`${root}music/+bookmarks`} showAbove='vertical'>
+								<Icon name={icons.bookmark} />
+								{tl(trans.bookmarks)}
+							</Button>
+							<MenuSeparator showAbove='vertical' />
 							<Button
 								menu
 								colourful
@@ -372,7 +368,7 @@ export function append_nav() {
 								<Icon name={icons.lotus} />
 								{tl(trans.suggest_correction)}
 							</Button>
-							<div class='sep' />
+							<MenuSeparator />
 							<Button menu href={`${root}bleh/general`}>
 								<Icon name={icons.update} />
 								{tl(trans.updates)}
@@ -558,7 +554,7 @@ export function append_nav() {
 
 	// configure bleh
 	const bleh_container = (
-		<Button className='masthead-nav-control' href={`${root}bleh`} />
+		<Button className='masthead-nav-control' shrinkBelow='vertical' href={`${root}bleh`} />
 	);
 	const bleh_container_tooltip = <Tooltip />;
 
@@ -588,7 +584,7 @@ export function append_nav() {
 			bleh_container.replaceChildren(
 				<>
 					<TextFlip items={[
-						<ButtonInnerContent className='seasonal-inner-text colourful' data-season={state.current ? state.current.id : 'none'}>
+						<ButtonInnerContent className='seasonal-inner-text colourful' shrinkBelow='vertical' data-season={state.current ? state.current.id : 'none'}>
 							<Icon
 								className='bleh-seasonal-icon'
 								data-season={state.current ? state.current.id : 'none'}
@@ -599,7 +595,7 @@ export function append_nav() {
 								],
 							)}
 						</ButtonInnerContent>,
-						<ButtonInnerContent>
+						<ButtonInnerContent shrinkBelow='vertical'>
 							<Icon name={icons.bleh_settings} />
 							{version.brand}
 						</ButtonInnerContent>
@@ -635,6 +631,7 @@ export function append_nav() {
 		const music = (
 			<Button
 				className='masthead-nav-control'
+				shrinkBelow='vertical'
 			>
 				<Icon name={icons.now_playing} />
 				{tl(trans.music)}
