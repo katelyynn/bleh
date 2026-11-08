@@ -128,7 +128,8 @@ body,
 
 		--white: 84% 0 0;
 
-		--side-action-bg: oklch(var(--k4) / 20%);
+		--side-action-bg: oklch(var(--k4) / 6%);
+		--card-gradient: oklch(var(--h2) / 10%);
 	}
 }
 
@@ -204,8 +205,6 @@ u,
 		--taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
 		--glass-inset: 0 0 5px 2px oklch(var(--h4) / 60%) inset;
 
-		--card-gradient: oklch(var(--h2) / 6%);
-
 		--primary-shadow: 0 0 transparent;
 		--bar-shadow: 0 0 transparent;
 	}
@@ -249,6 +248,9 @@ body,
 
 		--l4c-l: 0.35;
 		--l4c-s: 0.4;
+
+		--h2-l: 0.92;
+		--h2-s: 0.32;
 
 		--h3-l: 0.78;
 		--h3-s: 0.42;

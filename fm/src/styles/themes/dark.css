@@ -180,6 +180,8 @@ body,
 	--graph-colour-8: oklch(80% 60% 290);
 	--graph-colour-9: oklch(80% 65% 310);
 	--graph-colour-10: oklch(80% 65% 360);
+
+	--shadow-orientation: 1;
 }
 
 body,
@@ -219,6 +221,9 @@ body,
 
 	--l4c-l: 0.49;
 	--l4c-s: 0.46;
+
+	--h2-l: var(--l2c-l);
+	--h2-s: var(--l2c-s);
 
 	--h3-l: 0.7;
 	--h3-s: var(--l3c-s);

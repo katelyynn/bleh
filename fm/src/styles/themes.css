@@ -505,7 +505,7 @@ u,
 	--l3-c-sat: calc(var(--sat) * var(--l3c-s));
 	--l3-c-lit: calc(var(--lit) * var(--l3c-l));
 
-	--h2: var(--l2-c);
+	--h2: calc(var(--lit) * var(--h2-l)) calc(var(--sat) * var(--h2-s)) var(--hue);
 	--h3: var(--h3-lit) var(--h3-sat) var(--hue);
 	--h3-sat: calc(var(--sat) * var(--h3-s));
 	--h3-lit: calc(var(--lit) * var(--h3-l));
@@ -535,8 +535,8 @@ u,
 	--avatar-generic-background: oklch(var(--b4));
 
 	--primary-shadow:
-		inset 0 0 0 1px oklch(var(--l2-c) / 10%),
-		inset 0 1px 0 1px oklch(var(--l2-c) / 15%);
+		inset 0 0 0 1px oklch(var(--h2) / 10%),
+		inset 0 calc(1px * var(--shadow-orientation)) 0 1px oklch(var(--h2) / 15%);
 	--bar-shadow: 0 0 transparent;
 
 	--shout-vote-indicator: linear-gradient(90deg,

@@ -216,8 +216,8 @@ select,
 	/* used for new last.fm follow button */
 	&[disabled]:not([disabled="false"]) {
 		opacity: 0.65 !important;
-		--col: oklch(var(--c3)) !important;
-		--mask-colour: oklch(var(--c3)) !important;
+		--col: oklch(var(--c3));
+		--mask-colour: oklch(var(--c3));
 		transform: unset !important;
 		--bg-hov: var(--bg) !important;
 		--bg-atv: var(--bg) !important;
