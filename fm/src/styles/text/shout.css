@@ -108,9 +108,6 @@
 	gap: var(--shout-padding);
 	padding-top: var(--shout-padding);
 
-	content-visibility: auto;
-	contain-intrinsic-size: auto 600px;
-
 	.shout-form+& {
 		padding-top: unset;
 	}
@@ -489,9 +486,6 @@
 .shout-body {
 	font-size: var(--font-size) !important;
 	line-height: var(--line-height) !important;
-
-	content-visibility: auto;
-	contain-intrinsic-size: auto 100px;
 
 	margin-top: 4px;
 	margin-right: 90px;

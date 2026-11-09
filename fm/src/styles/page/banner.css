@@ -28,8 +28,6 @@
 		justify-content: start;
 	}
 
-	content-visibility: auto;
-
 	overflow: hidden;
 
 	@media (max-width: 980px) {
