@@ -119087,8 +119087,7 @@ var bleh = (() => {
     }
     if (btn) btn.setAttribute("disabled", "");
     const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
-    download_with_progress(url, (percent) => {
-    }).then(async (blob) => {
+    download_with_progress(url).then(async (blob) => {
       const text4 = await blob.text();
       if (btn) btn.removeAttribute("disabled");
       try {
@@ -119101,21 +119100,20 @@ var bleh = (() => {
         if (update_required) {
           const last_checked = localStorage.getItem(keys3.update_checked_date);
           if (last_checked) {
-            const date = DateTime.fromJSDate(new Date(last_checked));
-            if (date.diffNow().months >= 1) {
+            const date = DateTime.fromISO(last_checked);
+            if (date.isValid && DateTime.now() >= date.plus({ months: 1 })) {
               prompt_for_update();
             }
           }
         }
         set_storage(keys3.update_required, update_required.toString());
         set_storage(keys3.update_to_version, data2.build);
-        set_storage(keys3.update_checked_date, (/* @__PURE__ */ new Date()).toString());
-        const next = /* @__PURE__ */ new Date();
-        next.setHours(next.getHours() + 2);
-        set_storage(keys3.update_next_check_date, next.toString());
+        set_storage(keys3.update_checked_date, DateTime.now().toISO());
+        const next = DateTime.now().plus({ hours: 2 });
+        set_storage(keys3.update_next_check_date, next.toISO());
         log("update check finished", "update", "info", {
           next_in: next,
-          current_time: /* @__PURE__ */ new Date()
+          current_time: DateTime.now()
         });
         update_branding_type();
         if (func) func(true);
