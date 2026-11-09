@@ -428,26 +428,38 @@
 		--sat-seasonal: 1.8;
 		--lit-seasonal: 0.925;
 	}
+}
+
+.chartlist-loved-form {
+	position: relative;
 
 	&:before {
-		content: "";
+		content: '';
 		position: absolute;
-		width: 10px;
-		height: 10px;
-		top: 50%;
-		right: 9px;
-		margin-top: -6px;
-		background: transparent !important;
+		background: transparent;
+
+		--w: 10px;
+		width: var(--w);
+		height: var(--w);
 		border-radius: 50px;
-		box-shadow: 0 0 30px 1px oklch(var(--h4));
+		box-shadow: 0 0 30px oklch(var(--h4));
+
+		top: 50%;
+		left: 50%;
+
+		margin-top: calc(-1 * (var(--w) / 2));
+		margin-left: calc(-1 * (var(--w) / 2));
+
 		transition-property: opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
 	}
-}
 
-.chartlist-loved:has(> [data-toggle-button-current-state="unloved"]):before {
-	opacity: 0;
+	&[data-toggle-button-current-state="unloved"] {
+		&:before {
+			opacity: 0;
+		}
+	}
 }
 
 .chartlist-timestamp {

@@ -1299,6 +1299,9 @@ export function patch_titles(search = page.structure.main) {
 				loved.classList.add('colourful');
 				loved.setAttribute('data-season', season);
 
+				const container = loved.firstElementChild;
+				container?.classList.add('chartlist-loved-form');
+
 				const love = loved.querySelector('.chartlist-love-button') as HTMLButtonElement;
 
 				love.classList.add('btn', 'icon-mask');
