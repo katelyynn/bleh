@@ -448,6 +448,18 @@
 			contributor: true
 		},
 		"ayayapop": {},
-		"bapycal": {}
+		"bapycal": {},
+		"aftons": {},
+		"dirtuniverse": {
+			badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJ1ZyBwcmV2aWV3LWljb24iPjxwYXRoIGQ9Ik0xMiAyMHYtOSIvPjxwYXRoIGQ9Ik0xNCA3YTQgNCAwIDAgMSA0IDR2M2E2IDYgMCAwIDEtMTIgMHYtM2E0IDQgMCAwIDEgNC00eiIvPjxwYXRoIGQ9Ik0xNC4xMiAzLjg4IDE2IDIiLz48cGF0aCBkPSJNMjEgMjFhNCA0IDAgMCAwLTMuODEtNCIvPjxwYXRoIGQ9Ik0yMSA1YTQgNCAwIDAgMS0zLjU1IDMuOTciLz48cGF0aCBkPSJNMjIgMTNoLTQiLz48cGF0aCBkPSJNMyAyMWE0IDQgMCAwIDEgMy44MS00Ii8+PHBhdGggZD0iTTMgNWE0IDQgMCAwIDAgMy41NSAzLjk3Ii8+PHBhdGggZD0iTTYgMTNIMiIvPjxwYXRoIGQ9Im04IDIgMS44OCAxLjg4Ii8+PHBhdGggZD0iTTkgNy4xM1Y2YTMgMyAwIDEgMSA2IDB2MS4xMyIvPjwvc3ZnPg==",
+                    name: "naturalist",
+                    hue: 125,
+                    sat: 0.79,
+                    lit: 0.84
+                }
+            ]
+		}
     }
 }
