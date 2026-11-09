@@ -12,7 +12,7 @@ body,
 		--b5: 1 0 0;
 
 		/* root */
-		--b6: 0.96 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+		--b6: 0.97 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 		--b8: 1 0 0;
 		--b7: 0 0 0;
 		--b9: 1 0 0;
@@ -24,7 +24,7 @@ body,
 		--card-border-base: oklch(0.87 0 0) !important;
 		--card-border-base-highlight: oklch(0.89 0 0);
 
-		--menu-border: oklch(0.87 0 0);
+		--menu-border: oklch(0.86 0 0);
 
 		--normal-shadow: 0 0 transparent;
 		--input-shadow:
@@ -130,6 +130,8 @@ body,
 
 		--side-action-bg: oklch(var(--k4) / 6%);
 		--card-gradient: oklch(var(--h2) / 10%);
+
+		--auth-bg-opacity: 0.5;
 	}
 }
 

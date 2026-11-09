@@ -75,6 +75,8 @@
 	}*/
 
 	&:hover {
+		--more-button-opacity: 1;
+
 		&:before {
 			background-color: var(--bg-hov);
 			transition: none !important;
@@ -103,20 +105,8 @@
 		-webkit-mask-size: contain !important;
 	}
 
-	&:not(:hover) {
-		&>.more-button-wrapper {
-			opacity: 0;
-		}
-	}
-
 	&[data-track-type="user"] {
 		--chart-cover-radius: var(--avatar-radius);
-	}
-
-	&>.kate-placeholder,
-	&>.chartlist-play,
-	&>.chartlist-more {
-		display: none !important;
 	}
 
 	&>td {
@@ -195,7 +185,9 @@
 	/* separators */
 	&:after {
 		display: none !important;
+	}
 
+	/*&:after {
 		top: -1px;
 		bottom: unset;
 		display: block;
@@ -209,6 +201,54 @@
 		&:after {
 			display: none;
 		}
+	}*/
+}
+
+.chartlist-name,
+.chartlist-artist,
+.chartlist-album {
+	margin: unset !important;
+	inset: unset !important;
+	position: relative !important;
+	width: fit-content !important;
+	flex: unset !important;
+}
+
+.chartlist-name {
+	order: 1;
+}
+
+.chartlist-artist {
+	font-size: var(--artist-name-size, var(--font-size));
+	line-height: var(--artist-name-height, var(--line-height));
+	order: 2;
+
+	display: flex !important;
+	color: oklch(var(--col-alt)) !important;
+	cursor: default;
+
+	&>a+a {
+		margin-left: 4px;
+	}
+}
+
+.chartlist-album {
+	color: oklch(var(--col-alt));
+	font-size: calc(var(--font-size) - 1px);
+	order: 3;
+
+	/* bulk edit fix */
+	width: 40% !important;
+	margin-bottom: unset !important;
+
+	/* fix weird hover effect */
+	&:before {
+		display: none !important;
+	}
+
+	/* fix duplication */
+	&+.chartlist-album {
+		display: none !important;
 	}
 }
 
@@ -217,32 +257,6 @@
 	flex-direction: column;
 	flex: 1;
 	overflow: hidden;
-
-	&>.chartlist-name,
-	&>.chartlist-artist,
-	&>.chartlist-album {
-		margin: unset !important;
-		inset: unset !important;
-		position: relative !important;
-		width: fit-content !important;
-		flex: unset !important;
-	}
-
-	&>.chartlist-name {
-		order: 1;
-	}
-
-	&>.chartlist-artist {
-		font-size: var(--artist-name-size, var(--font-size));
-		line-height: var(--artist-name-height, var(--line-height));
-		order: 2;
-	}
-
-	&>.chartlist-album {
-		color: oklch(var(--col-alt));
-		font-size: calc(var(--font-size) - 1px);
-		order: 3;
-	}
 
 	&[data-track-layout="column"][data-album-name-location="row"]:not([data-has-bar="true"]) {
 		display: grid !important;
@@ -292,7 +306,7 @@
 	}
 }
 
-.chartlist--wide-artist-column {
+/*.chartlist--wide-artist-column {
 	.chartlist-artist {
 		position: static !important;
 		display: none !important;
@@ -311,38 +325,12 @@
 		color: oklch(var(--col-alt));
 
 		/* no hover offset nonsense */
-		margin-right: unset !important;
+/*margin-right: unset !important;
 
 		width: unset !important;
 		flex: 1 !important;
 	}
-}
-
-.chartlist-artist {
-	display: flex !important;
-	color: oklch(var(--col-alt)) !important;
-	cursor: default;
-
-	&>a+a {
-		margin-left: 4px;
-	}
-}
-
-.chartlist-album {
-	/* bulk edit fix */
-	width: 40% !important;
-	margin-bottom: unset !important;
-
-	/* fix weird hover effect */
-	&:before {
-		display: none !important;
-	}
-
-	/* fix duplication */
-	&+.chartlist-album {
-		display: none !important;
-	}
-}
+}*/
 
 .chartlist-bar {
 	@media (max-width: 980px) {
@@ -1024,6 +1012,10 @@
 	gap: 0 !important;
 }
 
+.more-button-wrapper {
+	opacity: var(--more-button-opacity, 0);
+}
+
 .track-more-button {
 	--button-verts: 2px;
 	--button-sides: 8px;
@@ -1031,6 +1023,9 @@
 	--icon-size: 18px !important;
 }
 
+.kate-placeholder,
+.chartlist-play,
+.chartlist-more,
 .chartlist-break {
 	display: none !important;
 }

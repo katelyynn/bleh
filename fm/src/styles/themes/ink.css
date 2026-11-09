@@ -111,6 +111,8 @@ body,
 
 		--primary-shadow: 0 0 transparent;
 		--bar-shadow: 0 0 transparent;
+
+		--auth-bg-opacity: 0.5;
 	}
 }
 

@@ -86,6 +86,8 @@ body,
 		--button-outline: inset 0 0 0 1px oklch(var(--b2) / 50%);
 
 		--shout-tree: oklch(var(--b2) / 30%);
+
+		--auth-bg-opacity: 0.5;
 	}
 }
 

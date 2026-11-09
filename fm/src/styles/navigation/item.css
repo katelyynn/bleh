@@ -126,7 +126,7 @@
 	max-width: 500px;
 
 	transition-property: max-width !important;
-	transition-duration: var(--trans) !important;
+	transition-duration: var(--trans-long) !important;
 	transition-timing-function: var(--trans-function) !important;
 
 	&:before {
