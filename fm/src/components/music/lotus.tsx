@@ -128,12 +128,12 @@ export function lotus(force = false) {
 	}
 }
 
-function parse(value: {}, key: string, type: string) {
+function parse(value: {}, key: string, type: string, save = false) {
 	try {
 		const parsed = parse_object(type, key);
 
 		Object.assign(value, parsed);
-		set_storage(`lotus_${type}`, JSON5.stringify(parsed));
+		if (save) set_storage(`lotus_${type}`, JSON5.stringify(parsed));
 	} catch (e) {
 		notify({
 			title: `Loading of lotus ${type} data failed`,
@@ -173,11 +173,11 @@ function lotus_request(
 
 		if (xhr.status == 200) {
 			if (type == 'artist') {
-				parse(artist_corrections, this.response, 'artist');
+				parse(artist_corrections, this.response, 'artist', true);
 			} else if (type == 'album_track') {
-				parse(album_track_corrections, this.response, 'album_track');
+				parse(album_track_corrections, this.response, 'album_track', true);
 			} else {
-				parse(combined_artists, this.response, 'combined_artists');
+				parse(combined_artists, this.response, 'combined_artists', true);
 			}
 
 			if (send_notify) {

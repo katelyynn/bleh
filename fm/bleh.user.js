@@ -121719,11 +121719,11 @@ var bleh = (() => {
       }
     }
   }
-  function parse7(value, key, type) {
+  function parse7(value, key, type, save2 = false) {
     try {
       const parsed2 = parse_object(type, key);
       Object.assign(value, parsed2);
-      set_storage(`lotus_${type}`, import_json53.default.stringify(parsed2));
+      if (save2) set_storage(`lotus_${type}`, import_json53.default.stringify(parsed2));
     } catch (e4) {
       notify({
         title: `Loading of lotus ${type} data failed`,
@@ -121751,11 +121751,11 @@ var bleh = (() => {
       }
       if (xhr.status == 200) {
         if (type == "artist") {
-          parse7(artist_corrections, this.response, "artist");
+          parse7(artist_corrections, this.response, "artist", true);
         } else if (type == "album_track") {
-          parse7(album_track_corrections, this.response, "album_track");
+          parse7(album_track_corrections, this.response, "album_track", true);
         } else {
-          parse7(combined_artists, this.response, "combined_artists");
+          parse7(combined_artists, this.response, "combined_artists", true);
         }
         if (send_notify) {
           status({
