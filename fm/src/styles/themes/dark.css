@@ -169,17 +169,17 @@ body,
 	--g-blue: oklch(199, 79%, 80%);
 	--g-indigo: oklch(254, 46%, 80%);
 
-	--graph-colour-0: oklch(75% 61% 30);
-	--graph-colour-1: oklch(80% 50% 45);
+	--graph-colour-0: oklch(73% 61% 30);
+	--graph-colour-1: oklch(78% 52% 45);
 	--graph-colour-2: oklch(100% 54% 60);
 	--graph-colour-3: oklch(80% 50% 135);
 	--graph-colour-4: oklch(85% 60% 150);
 	--graph-colour-5: oklch(80% 77% 180);
 	--graph-colour-6: oklch(94% 31% 210);
 	--graph-colour-7: oklch(70% 61% 260);
-	--graph-colour-8: oklch(80% 60% 290);
+	--graph-colour-8: oklch(66% 76% 290);
 	--graph-colour-9: oklch(80% 65% 310);
-	--graph-colour-10: oklch(80% 65% 360);
+	--graph-colour-10: oklch(75% 65% 360);
 
 	--shadow-orientation: 1;
 }
