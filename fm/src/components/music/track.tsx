@@ -59,8 +59,6 @@ type TrackElement = HTMLElement & {
 }
 
 export function patch_titles(search = page.structure.main) {
-	if (page.subpage == 'tags_overview') return;
-
 	if (!search) {
 		log(
 			'tracks could not be searched as search was undefined',

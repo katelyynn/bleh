@@ -32,7 +32,6 @@ import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
-import { setting } from '@/components/settings/settings';
 import { avatar } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
