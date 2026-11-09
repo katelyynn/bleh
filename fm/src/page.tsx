@@ -120,66 +120,7 @@ export function bleh() {
 
 			applyCSP();
 		},
-		on_body_load: () => {
-			clean_storage();
-			favi();
-
-			const logo = document.querySelector('.masthead-logo a');
-			if (!logo) {
-				handle_error_500();
-				return;
-			}
-
-			page.state.colour_preview = (
-				<div class={['colour-preview', 'colourful']} />
-			);
-			document.body.appendChild(page.state.colour_preview);
-
-			register_auth();
-
-			load_settings();
-
-			dynamic_theming();
-			solarium();
-
-			translation_stats();
-
-			page_menu();
-
-			verified();
-
-			// messaging
-			load_dialogs();
-			register_rabbit();
-
-			notices();
-
-			remove_lastfm_styles();
-
-			update_check(false, null);
-
-			load_notifications();
-			load_status();
-			useSeasons = new Seasons();
-
-			checkup_friend_cache();
-
-			detect_mobile();
-			page.platform = detect_platform();
-
-			// load seasonal data
-			start_rain();
-
-			load_activities();
-			notify_if_new_update();
-
-			lotus();
-			oracle_data();
-			sponsors();
-
-			useSettings.on('branding_type', update_branding_type);
-			useSeasons.on(() => update_branding_type());
-		},
+		on_body_load: body,
 		on_mutation: main_flow,
 		on_page_change: load_page,
 		on_subpage_change: () => {
@@ -211,6 +152,72 @@ export function bleh() {
 				});
 			}
 		},
+	});
+}
+
+function body() {
+	clean_storage();
+	favi();
+
+	const logo = document.querySelector('.masthead-logo a');
+	if (!logo) {
+		handle_error_500();
+		return;
+	}
+
+	page.state.colour_preview = (
+		<div class={['colour-preview', 'colourful']} />
+	);
+	document.body.appendChild(page.state.colour_preview);
+
+	register_auth();
+
+	load_settings();
+
+	dynamic_theming();
+	solarium();
+
+	translation_stats();
+
+	page_menu();
+
+	verified();
+
+	// messaging
+	load_dialogs();
+	register_rabbit();
+
+	notices();
+
+	remove_lastfm_styles();
+
+	update_check(false, null);
+
+	load_notifications();
+	load_status();
+	useSeasons = new Seasons();
+
+	checkup_friend_cache();
+
+	detect_mobile();
+	page.platform = detect_platform();
+
+	// load seasonal data
+	start_rain();
+
+	load_activities();
+	notify_if_new_update();
+
+	lotus();
+	oracle_data();
+	sponsors();
+
+	useSettings.on('branding_type', update_branding_type);
+	useSeasons.on(() => update_branding_type());
+
+	document.documentElement.classList.toggle('show-scrollbar', useSettings.get('show_scroller') as boolean);
+	useSettings.on('show_scroller', (v) => {
+		document.documentElement.classList.toggle('show-scrollbar', v as boolean);
 	});
 }
 

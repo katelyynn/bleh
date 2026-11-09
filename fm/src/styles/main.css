@@ -19,7 +19,7 @@
 }
 
 /* wow this is a bad selector */
-html:has(> body[data-bleh--show_scroller="true"]) {
+.show-scrollbar {
 	scrollbar-width: thin;
 	scrollbar-gutter: unset;
 }
