@@ -1545,11 +1545,11 @@ var bleh = (() => {
             return final;
           }
         };
-        var JSON54 = {
+        var JSON55 = {
           parse: parse8,
           stringify
         };
-        var lib = JSON54;
+        var lib = JSON55;
         var es5 = lib;
         return es5;
       }));
@@ -121659,6 +121659,7 @@ var bleh = (() => {
   }
 
   // src/components/music/lotus.tsx
+  var import_json53 = __toESM(require_dist2(), 1);
   var flat_patterns = [];
   Object.entries(includes).forEach(([group, patterns]) => {
     patterns.forEach((pattern) => {
@@ -121677,25 +121678,19 @@ var bleh = (() => {
   log("finalised flat patterns", "lotus", "info", { flat_patterns });
   function lotus(force = false) {
     if (!useSettings.get("corrections")) return;
-    const lotus_artist = localStorage.getItem("lotus_artist");
-    const lotus_artist_expire = new Date(
-      localStorage.getItem("lotus_artist_expire")
-    );
-    const lotus_album_track = localStorage.getItem("lotus_album_track");
-    const lotus_album_track_expire = new Date(
-      localStorage.getItem("lotus_album_track_expire")
-    );
-    const lotus_combined_artists = localStorage.getItem("lotus_combined_artists");
-    const lotus_combined_artists_expire = new Date(
-      localStorage.getItem("lotus_combined_artists_expire")
-    );
-    const current_time = /* @__PURE__ */ new Date();
+    const lotus_artist = localStorage.getItem(keys3.lotus_artist);
+    const lotus_artist_expire = DateTime.fromISO(localStorage.getItem(keys3.lotus_artist_expire) || "");
+    const lotus_album_track = localStorage.getItem(keys3.lotus_album_track);
+    const lotus_album_track_expire = DateTime.fromISO(localStorage.getItem(keys3.lotus_album_track_expire) || "");
+    const lotus_combined_artists = localStorage.getItem(keys3.lotus_combined_artists);
+    const lotus_combined_artists_expire = DateTime.fromISO(localStorage.getItem(keys3.lotus_combined_artists_expire) || "");
+    const current_time = DateTime.now();
     if (!lotus_artist) {
       log("artist list is not cached, fetching", "lotus");
       lotus_request("artist", true);
     } else {
       parse7(artist_corrections, lotus_artist, "artist");
-      if (lotus_artist_expire < current_time && !force) {
+      if ((!lotus_artist_expire.isValid || lotus_artist_expire < current_time) && !force) {
         lotus_request();
       } else if (force) {
         lotus_request("artist", true);
@@ -121706,7 +121701,7 @@ var bleh = (() => {
       lotus_request("album_track", true);
     } else {
       parse7(album_track_corrections, lotus_album_track, "album_track");
-      if (lotus_album_track_expire < current_time && !force) {
+      if ((!lotus_album_track_expire.isValid || lotus_album_track_expire < current_time) && !force) {
         lotus_request("album_track");
       } else if (force) {
         lotus_request("album_track", true);
@@ -121717,7 +121712,7 @@ var bleh = (() => {
       lotus_request("combined_artists", true);
     } else {
       parse7(combined_artists, lotus_combined_artists, "combined_artists");
-      if (lotus_combined_artists_expire < current_time && !force) {
+      if ((!lotus_combined_artists_expire.isValid || lotus_combined_artists_expire < current_time) && !force) {
         lotus_request("combined_artists");
       } else if (force) {
         lotus_request("combined_artists", true, true);
@@ -121726,7 +121721,9 @@ var bleh = (() => {
   }
   function parse7(value, key, type) {
     try {
-      Object.assign(value, parse_object(type, key));
+      const parsed2 = parse_object(type, key);
+      Object.assign(value, parsed2);
+      set_storage(`lotus_${type}`, import_json53.default.stringify(parsed2));
     } catch (e4) {
       notify({
         title: `Loading of lotus ${type} data failed`,
@@ -121738,20 +121735,20 @@ var bleh = (() => {
   }
   function lotus_request(type = "artist", send_notify = false, refresh_page = false) {
     const button2 = document.body.querySelector('[onclick="_lotus_check()"]');
-    if (button2 != null) button2.setAttribute("disabled", "");
+    if (button2) button2.setAttribute("disabled", "");
     const xhr = new XMLHttpRequest();
     const url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
     xhr.open("GET", url, true);
     xhr.onload = function() {
       log(`${type} list responded with ${xhr.status}`, "lotus");
+      let api_expire = DateTime.now();
       if (xhr.status != 200) {
         log(
           "request has been cancelled, will request again in 1h",
           "lotus"
         );
-        api_expire.setHours(api_expire.getHours() + 1);
+        api_expire = api_expire.plus({ hours: 1 });
       }
-      const api_expire = /* @__PURE__ */ new Date();
       if (xhr.status == 200) {
         if (type == "artist") {
           parse7(artist_corrections, this.response, "artist");
@@ -121768,12 +121765,11 @@ var bleh = (() => {
             )
           });
         }
-        set_storage(`lotus_${type}`, this.response);
-        api_expire.setHours(api_expire.getHours() + 4);
+        api_expire = api_expire.plus({ days: 1 });
         log(`${type} list cached until ${api_expire}`, "lotus");
       }
-      set_storage(`lotus_${type}_expire`, api_expire);
-      if (button2 != null) button2.removeAttribute("disabled");
+      set_storage(`lotus_${type}_expire`, api_expire.toISO());
+      if (button2) button2.removeAttribute("disabled");
       if (refresh_page && page.type == "bleh_settings") {
         render_setting_page("playback");
       }
@@ -130340,7 +130336,7 @@ var bleh = (() => {
   }
 
   // src/components/minis/plot.ts
-  var import_json53 = __toESM(require_dist2(), 1);
+  var import_json54 = __toESM(require_dist2(), 1);
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
     const data_points = [];
@@ -130456,7 +130452,7 @@ var bleh = (() => {
       for (const point of previous_data_points) {
         await fetch_data_set(
           point.user,
-          import_json53.default.stringify(point.media),
+          import_json54.default.stringify(point.media),
           false
         );
       }
@@ -130467,7 +130463,7 @@ var bleh = (() => {
       check_if_allow();
     }
     function update_plot_options() {
-      const data_source_history = import_json53.default.parse(
+      const data_source_history = import_json54.default.parse(
         localStorage.getItem(keys3.plot_data_history) || "[]"
       );
       const unique_users = [...new Set(data_points.map((item) => item.user))];
@@ -130484,7 +130480,7 @@ var bleh = (() => {
         }
       ];
       data_points.forEach((point) => {
-        const media_string = import_json53.default.stringify(point.media);
+        const media_string = import_json54.default.stringify(point.media);
         if (!seen_media.has(media_string)) {
           seen_media.add(media_string);
           unique_media.push(point.media);
@@ -130493,15 +130489,15 @@ var bleh = (() => {
       const media = [];
       unique_media.forEach((item) => {
         media.push({
-          value: import_json53.default.stringify(item),
+          value: import_json54.default.stringify(item),
           text: plot_media_title(item, true)
         });
       });
       const media_history = [];
       data_source_history.forEach((point) => {
-        const media_point = import_json53.default.parse(point);
+        const media_point = import_json54.default.parse(point);
         if (media_point.artist == "" || media_point.artist != "" && (media_point.album == "" || media_point.track == "")) return;
-        const media_string = import_json53.default.stringify(media_point);
+        const media_string = import_json54.default.stringify(media_point);
         const existing = media.some((item) => item.value == media_string);
         if (!existing) {
           media_history.push({
@@ -130511,7 +130507,7 @@ var bleh = (() => {
         }
       });
       if (Object.keys(temporary_data_source).length > 0) {
-        const media_string = import_json53.default.stringify(temporary_data_source);
+        const media_string = import_json54.default.stringify(temporary_data_source);
         const existing = media.some((item) => item.value == media_string);
         if (!existing) {
           media.unshift({
@@ -130813,11 +130809,11 @@ var bleh = (() => {
     body.appendChild(scrobble_canvas_container);
     async function fetch_data_set(user2, media, change_history = true) {
       if (change_history) {
-        const data_source_history = import_json53.default.parse(
+        const data_source_history = import_json54.default.parse(
           localStorage.getItem(keys3.plot_data_history) || "[]"
         );
         if (!data_source_history.some(
-          (item) => import_json53.default.stringify(item) == import_json53.default.stringify(media)
+          (item) => import_json54.default.stringify(item) == import_json54.default.stringify(media)
         )) {
           data_source_history.push(media);
         } else {
@@ -130832,10 +130828,10 @@ var bleh = (() => {
         }
         localStorage.setItem(
           keys3.plot_data_history,
-          import_json53.default.stringify(data_source_history)
+          import_json54.default.stringify(data_source_history)
         );
       }
-      const data_point = import_json53.default.parse(media);
+      const data_point = import_json54.default.parse(media);
       let media_url;
       let type;
       if (data_point.album && data_point.artist) {
@@ -130909,7 +130905,7 @@ var bleh = (() => {
       const media = data_source.value;
       const user_name = user.value;
       const existing = data_points.find(
-        (point) => point.user == user_name && import_json53.default.stringify(point.media) == media
+        (point) => point.user == user_name && import_json54.default.stringify(point.media) == media
       );
       if (existing || !timeframe_matches || data_source.value == "" || user.value == "") {
         allow_adding = false;
@@ -131125,11 +131121,11 @@ var bleh = (() => {
         } else if (track.value) {
           temporary_data_source.track = track.value;
         }
-        const data_source_history = import_json53.default.parse(
+        const data_source_history = import_json54.default.parse(
           localStorage.getItem(keys3.plot_data_history) || "[]"
         );
         const existing = data_source_history.find(
-          (point) => point == import_json53.default.stringify(temporary_data_source)
+          (point) => point == import_json54.default.stringify(temporary_data_source)
         );
         if (existing) {
           notify({
@@ -131140,7 +131136,7 @@ var bleh = (() => {
           return;
         }
         dialog_rm({ id: "add_new_data_source" });
-        selected_data_source = import_json53.default.stringify(temporary_data_source);
+        selected_data_source = import_json54.default.stringify(temporary_data_source);
         update_plot_options();
       }
     }
