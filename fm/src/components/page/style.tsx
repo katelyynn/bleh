@@ -21,6 +21,7 @@ import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
 import { useSettings } from '@/page.tsx';
 import { update_branding_type } from '@/components/page/navigation.tsx';
+import { DateTime } from 'luxon';
 
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
@@ -103,12 +104,12 @@ export function update_check(force = false, btn, func) {
 	const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
 
 	/*let notification = notify({
-        id: 'updater',
-        title: 'Updater',
-        body: 'Downloading update information',
-        progress: true,
-        icon: 'icon-16-update'
-    });*/
+		id: 'updater',
+		title: 'Updater',
+		body: 'Downloading update information',
+		progress: true,
+		icon: 'icon-16-update'
+	});*/
 
 	download_with_progress(url, (percent) => {
 		//notification.set_body(`Downloading update information ${percent}%`);
@@ -127,6 +128,19 @@ export function update_check(force = false, btn, func) {
 					version.build,
 					data.build,
 				);
+
+				if (update_required) {
+					const last_checked = localStorage.getItem(keys.update_checked_date);
+
+					if (last_checked) {
+						const date = DateTime.fromJSDate(new Date(last_checked));
+
+						if (date.diffNow().months >= 1) {
+							prompt_for_update();
+						}
+					}
+				}
+
 				set_storage(keys.update_required, update_required.toString());
 				set_storage(keys.update_to_version, data.build);
 				set_storage(keys.update_checked_date, new Date().toString());
@@ -170,13 +184,13 @@ export function prompt_for_update() {
                 <div class="form">
                     <div class="form-group proceed">
                         <button class="btn primary icon" data-type="update" onclick=${() =>
-			start_update()}>${tl(trans.update_now)}</button>
+				start_update()}>${tl(trans.update_now)}</button>
                     </div>
                 </div>
                 <div class="form">
                     <div class="form-group deny">
                         <button class="btn icon" data-type="ignore" onclick=${() =>
-			ignore_update()}>${tl(trans.ignore_for_now)}</button>
+				ignore_update()}>${tl(trans.ignore_for_now)}</button>
                     </div>
                 </div>
             </div>
@@ -209,7 +223,7 @@ export function start_update() {
                 <div class="form">
                     <div class="form-group proceed">
                         <button class="btn primary icon" data-type="finish" onclick=${() =>
-			finish_update()}>${tl(trans.finish)}</button>
+				finish_update()}>${tl(trans.finish)}</button>
                     </div>
                 </div>
             </div>

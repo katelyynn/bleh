@@ -119098,6 +119098,15 @@ var bleh = (() => {
           version2.build,
           data2.build
         );
+        if (update_required) {
+          const last_checked = localStorage.getItem(keys3.update_checked_date);
+          if (last_checked) {
+            const date = DateTime.fromJSDate(new Date(last_checked));
+            if (date.diffNow().months >= 1) {
+              prompt_for_update();
+            }
+          }
+        }
         set_storage(keys3.update_required, update_required.toString());
         set_storage(keys3.update_to_version, data2.build);
         set_storage(keys3.update_checked_date, (/* @__PURE__ */ new Date()).toString());
