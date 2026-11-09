@@ -28,6 +28,8 @@
 		justify-content: start;
 	}
 
+	content-visibility: auto;
+
 	overflow: hidden;
 
 	@media (max-width: 980px) {
@@ -128,6 +130,7 @@
 	height: var(--banner-height);
 
 	contain: strict;
+	content-visibility: auto;
 
 	&.ready {
 		opacity: 0.4;

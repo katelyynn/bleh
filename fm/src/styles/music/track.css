@@ -67,6 +67,9 @@
 	--track-image-size: 38px;
 	--track-image-mask: var(--cover-size-32);
 
+	content-visibility: auto;
+	contain-intrinsic-size: auto 54px;
+
 	/*&:nth-child(even) {
 	    --bg: var(--tracklist-odd);
 	}*/

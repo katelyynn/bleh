@@ -210,6 +210,8 @@
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
 
+	content-visibility: auto;
+
 	--font-weight: var(--custom_font_weight, 400);
 	--font-weight-medium: var(--custom_font_weight_medium, 500);
 	--font-weight-bold: var(--custom_font_weight_bold, 600);

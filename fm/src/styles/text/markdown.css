@@ -55,6 +55,9 @@
 	display: block;
 	contain: content;
 
+	content-visibility: auto;
+	contain-intrinsic-size: auto 200px;
+
 	/* match default last.fm */
 	.text-center,
 	.text-left,

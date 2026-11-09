@@ -52,17 +52,18 @@
 	/* shout-form's get margin-top of 24px if on a subpage,
 	most noteably the "shouts" tab */
 	margin-top: unset !important;
+}
 
-	.content-form {
-		margin-left: 10px;
-	}
+/* the form */
+.js-post-shout {
+	margin-left: 10px !important;
 
-	.form-submit {
-		gap: var(--button-list-gap);
-	}
-
-	.form-group--submit {
+	&>.form-group--submit {
 		--override-margin-top: 8px !important;
+
+		&>.form-submit {
+			gap: var(--button-list-gap);
+		}
 	}
 }
 
@@ -92,8 +93,8 @@
 
 .shout-reply-ui {
 	margin-top: 10px;
+	margin-bottom: 10px;
 	margin-left: var(--shout-inset);
-	animation: fade_popup_reduced var(--trans) var(--trans-function);
 }
 
 .shout-container {
@@ -106,6 +107,9 @@
 	flex-direction: column;
 	gap: var(--shout-padding);
 	padding-top: var(--shout-padding);
+
+	content-visibility: auto;
+	contain-intrinsic-size: auto 600px;
 
 	.shout-form+& {
 		padding-top: unset;
@@ -261,6 +265,7 @@
 		&:before {
 			scale: 1;
 			opacity: 1;
+			animation: shout_avatar 3s var(--trans-function-ani) infinite;
 		}
 	}
 
@@ -295,8 +300,6 @@
 		transition-property: scale, opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
-
-		animation: shout_avatar 3s var(--trans-function-ani) infinite;
 	}
 }
 
@@ -304,11 +307,11 @@
 
 	from,
 	to {
-		border: 2px solid oklch(var(--l3-c) / 90%);
+		opacity: 1;
 	}
 
 	50% {
-		border: 2px solid oklch(var(--l4-c) / 40%);
+		opacity: 0.2;
 	}
 }
 
@@ -486,6 +489,9 @@
 .shout-body {
 	font-size: var(--font-size) !important;
 	line-height: var(--line-height) !important;
+
+	content-visibility: auto;
+	contain-intrinsic-size: auto 100px;
 
 	margin-top: 4px;
 	margin-right: 90px;
