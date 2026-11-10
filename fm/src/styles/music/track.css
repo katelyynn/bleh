@@ -212,6 +212,8 @@
 
 .chartlist-name {
 	order: 1;
+
+	max-width: 100%;
 }
 
 .chartlist-artist {
@@ -221,6 +223,8 @@
 
 	color: oklch(var(--col-alt)) !important;
 	cursor: default;
+
+	max-width: 100%;
 }
 
 .chartlist-album {
@@ -259,13 +263,11 @@
 		&>.chartlist-name {
 			grid-column: 1 / 2;
 			grid-row: 1 / 2;
-			max-width: 100%;
 		}
 
 		&>.chartlist-artist {
 			grid-column: 1 / 2;
 			grid-row: 2 / 3;
-			max-width: 100%;
 		}
 
 		&>.chartlist-album {
