@@ -109,11 +109,11 @@ export let useSeasons: Seasons;
 
 export function bleh() {
 	page.continue = true;
+	append_style();
 
 	florence({
 		page,
 		on_head_load: () => {
-			append_style();
 			favi();
 			page.state.previous_title = document.title;
 			document.title = '...';

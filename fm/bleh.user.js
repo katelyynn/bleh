@@ -245,13 +245,13 @@ var bleh = (() => {
           throw TypeError("Can't convert object to primitive value");
         };
         var dP = Object.defineProperty;
-        var f3 = _descriptors2 ? Object.defineProperty : function defineProperty(O2, P, Attributes) {
-          _anObject(O2);
+        var f3 = _descriptors2 ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+          _anObject(O);
           P = _toPrimitive2(P, true);
           _anObject(Attributes);
           if (_ie8DomDefine) {
             try {
-              return dP(O2, P, Attributes);
+              return dP(O, P, Attributes);
             } catch (e4) {
             }
           }
@@ -259,9 +259,9 @@ var bleh = (() => {
             throw TypeError("Accessors not supported!");
           }
           if ("value" in Attributes) {
-            O2[P] = Attributes.value;
+            O[P] = Attributes.value;
           }
-          return O2;
+          return O;
         };
         var _objectDp = {
           f: f3
@@ -309,26 +309,26 @@ var bleh = (() => {
           _core.inspectSource = function(it) {
             return _functionToString.call(it);
           };
-          (module2.exports = function(O2, key2, val, safe) {
+          (module2.exports = function(O, key2, val, safe) {
             var isFunction3 = typeof val == "function";
             if (isFunction3) {
               _has(val, "name") || _hide(val, "name", key2);
             }
-            if (O2[key2] === val) {
+            if (O[key2] === val) {
               return;
             }
             if (isFunction3) {
-              _has(val, SRC) || _hide(val, SRC, O2[key2] ? "" + O2[key2] : TPL.join(String(key2)));
+              _has(val, SRC) || _hide(val, SRC, O[key2] ? "" + O[key2] : TPL.join(String(key2)));
             }
-            if (O2 === _global) {
-              O2[key2] = val;
+            if (O === _global) {
+              O[key2] = val;
             } else if (!safe) {
-              delete O2[key2];
-              _hide(O2, key2, val);
-            } else if (O2[key2]) {
-              O2[key2] = val;
+              delete O[key2];
+              _hide(O, key2, val);
+            } else if (O[key2]) {
+              O[key2] = val;
             } else {
-              _hide(O2, key2, val);
+              _hide(O, key2, val);
             }
           })(Function.prototype, TO_STRING, function toString() {
             return typeof this == "function" && this[SRC] || _functionToString.call(this);
@@ -6751,13 +6751,13 @@ var bleh = (() => {
           }
           return Math.sqrt(sum_sq);
         };
-        chroma.deltaE = function(a, b, L, C) {
+        chroma.deltaE = function(a, b, L, C4) {
           var L1, L2, a1, a2, b1, b2, c1, c2, c4, dH2, delA, delB, delC, delL, f3, h12, ref2, ref1, ref22, ref3, sc, sh, sl, t2, v1, v2, v3;
           if (L == null) {
             L = 1;
           }
-          if (C == null) {
-            C = 1;
+          if (C4 == null) {
+            C4 = 1;
           }
           if ((ref2 = type(a)) === "string" || ref2 === "number") {
             a = new Color2(a);
@@ -6788,7 +6788,7 @@ var bleh = (() => {
           delB = b1 - b2;
           dH2 = delA * delA + delB * delB - delC * delC;
           v1 = delL / (L * sl);
-          v2 = delC / (C * sc);
+          v2 = delC / (C4 * sc);
           v3 = sh;
           return sqrt(v1 * v1 + v2 * v2 + dH2 / (v3 * v3));
         };
@@ -21605,14 +21605,14 @@ var bleh = (() => {
   var { indexOf, slice } = [];
 
   // node_modules/.pnpm/umap@1.0.2/node_modules/umap/esm/index.js
-  var esm_default3 = (_2) => ({
+  var esm_default3 = (_) => ({
     // About: get: _.get.bind(_)
     // It looks like WebKit/Safari didn't optimize bind at all,
     // so that using bind slows it down by 60%.
     // Firefox and Chrome are just fine in both cases,
     // so let's use the approach that works fast everywhere 👍
-    get: (key) => _2.get(key),
-    set: (key, value) => (_2.set(key, value), value)
+    get: (key) => _.get(key),
+    set: (key, value) => (_.set(key, value), value)
   });
 
   // node_modules/.pnpm/uwire@1.1.0/node_modules/uwire/esm/index.js
@@ -34966,10 +34966,10 @@ var bleh = (() => {
     const {
       width,
       height,
-      $
+      $: $2
     } = getCssDimensions(domElement);
-    let x = ($ ? round2(rect.width) : rect.width) / width;
-    let y = ($ ? round2(rect.height) : rect.height) / height;
+    let x = ($2 ? round2(rect.width) : rect.width) / width;
+    let y = ($2 ? round2(rect.height) : rect.height) / height;
     if (!x || !Number.isFinite(x)) {
       x = 1;
     }
@@ -38397,14 +38397,14 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let M3 = Math.max(r3, g, b), m = Math.min(r3, g, b);
+    let M4 = Math.max(r3, g, b), m = Math.min(r3, g, b);
     let res = {
       mode: "hsi",
       s: r3 + g + b === 0 ? 0 : 1 - 3 * m / (r3 + g + b),
       i: (r3 + g + b) / 3
     };
-    if (M3 - m !== 0)
-      res.h = (M3 === r3 ? (g - b) / (M3 - m) + (g < b) * 6 : M3 === g ? (b - r3) / (M3 - m) + 2 : (r3 - g) / (M3 - m) + 4) * 60;
+    if (M4 - m !== 0)
+      res.h = (M4 === r3 ? (g - b) / (M4 - m) + (g < b) * 6 : M4 === g ? (b - r3) / (M4 - m) + 2 : (r3 - g) / (M4 - m) + 4) * 60;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   }
@@ -38480,14 +38480,14 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let M3 = Math.max(r3, g, b), m = Math.min(r3, g, b);
+    let M4 = Math.max(r3, g, b), m = Math.min(r3, g, b);
     let res = {
       mode: "hsl",
-      s: M3 === m ? 0 : (M3 - m) / (1 - Math.abs(M3 + m - 1)),
-      l: 0.5 * (M3 + m)
+      s: M4 === m ? 0 : (M4 - m) / (1 - Math.abs(M4 + m - 1)),
+      l: 0.5 * (M4 + m)
     };
-    if (M3 - m !== 0)
-      res.h = (M3 === r3 ? (g - b) / (M3 - m) + (g < b) * 6 : M3 === g ? (b - r3) / (M3 - m) + 2 : (r3 - g) / (M3 - m) + 4) * 60;
+    if (M4 - m !== 0)
+      res.h = (M4 === r3 ? (g - b) / (M4 - m) + (g < b) * 6 : M4 === g ? (b - r3) / (M4 - m) + 2 : (r3 - g) / (M4 - m) + 4) * 60;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   }
@@ -38643,14 +38643,14 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let M3 = Math.max(r3, g, b), m = Math.min(r3, g, b);
+    let M4 = Math.max(r3, g, b), m = Math.min(r3, g, b);
     let res = {
       mode: "hsv",
-      s: M3 === 0 ? 0 : 1 - m / M3,
-      v: M3
+      s: M4 === 0 ? 0 : 1 - m / M4,
+      v: M4
     };
-    if (M3 - m !== 0)
-      res.h = (M3 === r3 ? (g - b) / (M3 - m) + (g < b) * 6 : M3 === g ? (b - r3) / (M3 - m) + 2 : (r3 - g) / (M3 - m) + 4) * 60;
+    if (M4 - m !== 0)
+      res.h = (M4 === r3 ? (g - b) / (M4 - m) + (g < b) * 6 : M4 === g ? (b - r3) / (M4 - m) + 2 : (r3 - g) / (M4 - m) + 4) * 60;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   }
@@ -39523,7 +39523,7 @@ var bleh = (() => {
     let L = Math.cbrt(
       0.412221469470763 * r3 + 0.5363325372617348 * g + 0.0514459932675022 * b
     );
-    let M3 = Math.cbrt(
+    let M4 = Math.cbrt(
       0.2119034958178252 * r3 + 0.6806995506452344 * g + 0.1073969535369406 * b
     );
     let S2 = Math.cbrt(
@@ -39531,9 +39531,9 @@ var bleh = (() => {
     );
     let res = {
       mode: "oklab",
-      l: 0.210454268309314 * L + 0.7936177747023054 * M3 - 0.0040720430116193 * S2,
-      a: 1.9779985324311684 * L - 2.42859224204858 * M3 + 0.450593709617411 * S2,
-      b: 0.0259040424655478 * L + 0.7827717124575296 * M3 - 0.8086757549230774 * S2
+      l: 0.210454268309314 * L + 0.7936177747023054 * M4 - 0.0040720430116193 * S2,
+      a: 1.9779985324311684 * L - 2.42859224204858 * M4 + 0.450593709617411 * S2,
+      b: 0.0259040424655478 * L + 0.7827717124575296 * M4 - 0.8086757549230774 * S2
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -39558,13 +39558,13 @@ var bleh = (() => {
     if (a === void 0) a = 0;
     if (b === void 0) b = 0;
     let L = Math.pow(l2 + 0.3963377773761749 * a + 0.2158037573099136 * b, 3);
-    let M3 = Math.pow(l2 - 0.1055613458156586 * a - 0.0638541728258133 * b, 3);
+    let M4 = Math.pow(l2 - 0.1055613458156586 * a - 0.0638541728258133 * b, 3);
     let S2 = Math.pow(l2 - 0.0894841775298119 * a - 1.2914855480194092 * b, 3);
     let res = {
       mode: "lrgb",
-      r: 4.076741636075957 * L - 3.3077115392580616 * M3 + 0.2309699031821044 * S2,
-      g: -1.2684379732850317 * L + 2.6097573492876887 * M3 - 0.3413193760026573 * S2,
-      b: -0.0041960761386756 * L - 0.7034186179359362 * M3 + 1.7076146940746117 * S2
+      r: 4.076741636075957 * L - 3.3077115392580616 * M4 + 0.2309699031821044 * S2,
+      g: -1.2684379732850317 * L + 2.6097573492876887 * M4 - 0.3413193760026573 * S2,
+      b: -0.0041960761386756 * L - 0.7034186179359362 * M4 + 1.7076146940746117 * S2
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -39671,10 +39671,10 @@ var bleh = (() => {
         let s_dt = dL + dC * k_s;
         {
           let L = L0 * (1 - t2) + t2 * L1;
-          let C = t2 * C12;
-          let l_ = L + C * k_l;
-          let m_ = L + C * k_m;
-          let s_ = L + C * k_s;
+          let C4 = t2 * C12;
+          let l_ = L + C4 * k_l;
+          let m_ = L + C4 * k_m;
+          let s_ = L + C4 * k_s;
           let l2 = l_ * l_ * l_;
           let m = m_ * m_ * m_;
           let s2 = s_ * s_ * s_;
@@ -39713,8 +39713,8 @@ var bleh = (() => {
       cusp = find_cusp(a_, b_);
     }
     let L = cusp[0];
-    let C = cusp[1];
-    return [C / L, C / (1 - L)];
+    let C4 = cusp[1];
+    return [C4 / L, C4 / (1 - L)];
   }
   function get_Cs(L, a_, b_) {
     let cusp = find_cusp(a_, b_);
@@ -39800,9 +39800,9 @@ var bleh = (() => {
       k_1 = 0.2 * C_mid * C_mid * 1.25 * 1.25 / C_0;
       k_2 = 1 - k_1 / (C_max - C_mid);
     }
-    let C = k_0 + t2 * k_1 / (1 - k_2 * t2);
-    ret.a = C * a_;
-    ret.b = C * b_;
+    let C4 = k_0 + t2 * k_1 / (1 - k_2 * t2);
+    ret.a = C4 * a_;
+    ret.b = C4 * b_;
     return ret;
   }
 
@@ -39888,10 +39888,10 @@ var bleh = (() => {
       1 / Math.max(rgb_scale.r, rgb_scale.g, rgb_scale.b, 0)
     );
     const L_new = toe_inv(v * L_v);
-    const C = C_v * L_new / L_v;
+    const C4 = C_v * L_new / L_v;
     ret.l = L_new * scale_L;
-    ret.a = C * a_ * scale_L;
-    ret.b = C * b_ * scale_L;
+    ret.a = C4 * a_ * scale_L;
+    ret.b = C4 * b_ * scale_L;
     return ret;
   }
 
@@ -56964,13 +56964,13 @@ var bleh = (() => {
     const locale = lang;
     const months2 = Array.from(
       { length: 12 },
-      (_2, i2) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
+      (_, i2) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
         new Date(2e3, i2, 1)
       )
     );
     const raw_weekdays = Array.from(
       { length: 7 },
-      (_2, i2) => new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+      (_, i2) => new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
         new Date(1970, 0, 4 + i2)
       )
     );
@@ -57241,7 +57241,7 @@ var bleh = (() => {
                 </button>
             </div>
             <div class="years calendar-view">
-                ${Array.from({ length: 10 }, (_2, i2) => decade_start + i2).map(
+                ${Array.from({ length: 10 }, (_, i2) => decade_start + i2).map(
         (yr) => {
           return html.node`
                         <button class="btn year calendar-entry" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
@@ -57260,7 +57260,7 @@ var bleh = (() => {
     function validate_text_date(value2) {
       const m = value2.match(/^(\d{4})-(\d{2})-(\d{2})$/);
       if (!m) return null;
-      const [_2, ys, ms, ds] = m;
+      const [_, ys, ms, ds] = m;
       const date = /* @__PURE__ */ new Date(`${ys}-${ms}-${ds}T00:00:00`);
       if (date.getFullYear() !== +ys || date.getMonth() + 1 !== +ms || date.getDate() !== +ds) {
         return null;
@@ -59076,7 +59076,7 @@ var bleh = (() => {
           return scriptUrl;
         }
       });
-    } catch (_2) {
+    } catch (_) {
       console.warn("TrustedTypes policy " + policyName + " could not be created.");
       return null;
     }
@@ -59515,7 +59515,7 @@ var bleh = (() => {
       arrayPush(DOMPurify.removed, { element: node });
       try {
         getParentNode3(node).removeChild(node);
-      } catch (_2) {
+      } catch (_) {
         remove2(node);
         if (!getParentNode3(node)) throw typeErrorCreate("a node selected for removal could not be detached from its tree and cannot be safely returned; refusing to sanitize in place");
       }
@@ -59523,10 +59523,10 @@ var bleh = (() => {
     const _stripAttributeNode = function _stripAttributeNode2(element, attribute3, name) {
       try {
         removeAttributeNode(element, attribute3);
-      } catch (_2) {
+      } catch (_) {
         try {
           element.removeAttribute(name);
-        } catch (_3) {
+        } catch (_2) {
         }
       }
     };
@@ -59536,7 +59536,7 @@ var bleh = (() => {
       if (childNodes) arrayForEach(arraySlice(childNodes), (child) => {
         try {
           remove2(child);
-        } catch (_2) {
+        } catch (_) {
         }
       });
       const attributes2 = _readNodeType(root3) === NODE_TYPE.element ? getAttributes(root3) : null;
@@ -59549,7 +59549,7 @@ var bleh = (() => {
     const _removeAttribute = function _removeAttribute2(name, element, attr2) {
       if (!attr2) try {
         attr2 = element.getAttributeNode(name);
-      } catch (_2) {
+      } catch (_) {
         attr2 = null;
       }
       arrayPush(DOMPurify.removed, {
@@ -59559,20 +59559,20 @@ var bleh = (() => {
       try {
         if (attr2) removeAttributeNode(element, attr2);
         else element.removeAttribute(name);
-      } catch (_2) {
+      } catch (_) {
         try {
           element.removeAttribute(name);
-        } catch (_3) {
+        } catch (_2) {
         }
       }
       if (name === "is") {
         if (RETURN_DOM || RETURN_DOM_FRAGMENT) try {
           _forceRemove(element);
-        } catch (_2) {
+        } catch (_) {
         }
         else try {
           element.setAttribute(name, "");
-        } catch (_2) {
+        } catch (_) {
         }
       }
     };
@@ -59686,7 +59686,7 @@ var bleh = (() => {
         if (nodeType2 === NODE_TYPE.processingInstruction || nodeType2 === NODE_TYPE.comment && regExpTest(COMMENT_MARKUP_PROBE, node.data)) {
           try {
             remove2(node);
-          } catch (_2) {
+          } catch (_) {
           }
           return false;
         }
@@ -59696,7 +59696,7 @@ var bleh = (() => {
           try {
             if (element.hasAttribute && element.hasAttribute("patchsrc")) element.removeAttribute("patchsrc");
             if (element.hasAttribute && element.hasAttribute("for") && _isPatchLinkageAttribute("for", lcTag)) element.removeAttribute("for");
-          } catch (_2) {
+          } catch (_) {
           }
         }
         return true;
@@ -59714,13 +59714,13 @@ var bleh = (() => {
       const dirtyPayload = trustedTypesPolicy ? _createTrustedHTML(dirty) : dirty;
       if (NAMESPACE === HTML_NAMESPACE) try {
         doc = new DOMParser2().parseFromString(dirtyPayload, PARSER_MEDIA_TYPE);
-      } catch (_2) {
+      } catch (_) {
       }
       if (!doc || !doc.documentElement) {
         doc = implementation.createDocument(NAMESPACE, "template", null);
         try {
           doc.documentElement.innerHTML = IS_EMPTY_INPUT ? emptyHTML : dirtyPayload;
-        } catch (_2) {
+        } catch (_) {
         }
       }
       const body2 = doc.body || doc.documentElement;
@@ -59766,7 +59766,7 @@ var bleh = (() => {
       if (!getNodeType || typeof value !== "object" || value === null) return false;
       try {
         return getNodeType(value) === NODE_TYPE.documentFragment;
-      } catch (_2) {
+      } catch (_) {
         return false;
       }
     };
@@ -59774,7 +59774,7 @@ var bleh = (() => {
       if (!getNodeType || typeof value !== "object" || value === null) return false;
       try {
         return typeof getNodeType(value) === "number";
-      } catch (_2) {
+      } catch (_) {
         return false;
       }
     };
@@ -59914,7 +59914,7 @@ var bleh = (() => {
           return false;
         }
         return true;
-      } catch (_2) {
+      } catch (_) {
         _removeAttribute(name, currentNode);
         return false;
       }
@@ -60579,7 +60579,7 @@ var bleh = (() => {
         } else if (el.webkitMatchesSelector) {
           return el.webkitMatchesSelector(selector);
         }
-      } catch (_2) {
+      } catch (_) {
         return false;
       }
     }
@@ -60840,11 +60840,11 @@ var bleh = (() => {
   }
   function clone3(el) {
     var Polymer = window.Polymer;
-    var $ = window.jQuery || window.Zepto;
+    var $2 = window.jQuery || window.Zepto;
     if (Polymer && Polymer.dom) {
       return Polymer.dom(el).cloneNode(true);
-    } else if ($) {
-      return $(el).clone(true)[0];
+    } else if ($2) {
+      return $2(el).clone(true)[0];
     } else {
       return el.cloneNode(true);
     }
@@ -62906,7 +62906,7 @@ var bleh = (() => {
     {
       type: "lang",
       regex: /\[links\]([\s\S]*?)\[\/links\]/g,
-      replace: (_2, content2) => {
+      replace: (_, content2) => {
         const lines = content2.trim().split(/\n+/);
         lines.forEach((line) => {
           line = line.trim();
@@ -84686,7 +84686,7 @@ var bleh = (() => {
   function HeatmapDates() {
     let days = Array.from(
       { length: 7 },
-      (_2, i2) => new Intl.DateTimeFormat(lang, { weekday: "short" }).format(
+      (_, i2) => new Intl.DateTimeFormat(lang, { weekday: "short" }).format(
         new Date(1970, 0, 4 + i2)
       )
     );
@@ -84725,7 +84725,7 @@ var bleh = (() => {
                 <div class="summary-aside">
                     <div class="graph-container">
                         <div class="graph-blocks">
-                            ${Array.from({ length: 3 * 10 }).map((_2, i2) => {
+                            ${Array.from({ length: 3 * 10 }).map((_, i2) => {
       const elem = create_graph_block(i2 + 1);
       graph_blocks.push(elem);
       return elem;
@@ -86557,7 +86557,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[banner=([^\]]+)\]/g,
-        replace: (_2, url) => {
+        replace: (_, url) => {
           delete cache2.banner;
           delete cache2.banner_orig;
           try {
@@ -86576,12 +86576,12 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[(center|left|right)]\s*([\s\S]*?)\s*\[\/\1]/g,
-        replace: (_2, align, content2, offset5, text5) => {
+        replace: (_, align, content2, offset5, text5) => {
           let backticks = 0;
           for (let i2 = 0; i2 < offset5; i2++) {
             if (text5[i2] == "`") backticks++;
           }
-          if (backticks % 2 == 1) return _2;
+          if (backticks % 2 == 1) return _;
           const inner = converter2.makeHtml(content2.trim());
           const clean2 = purify_default.sanitize(inner, {
             ALLOWED_TAGS,
@@ -86611,7 +86611,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/,
-        replace: (_2, h, s2, l2) => {
+        replace: (_, h, s2, l2) => {
           hue4 = Math.min(
             settings_store.hue.max,
             Math.max(settings_store.hue.min, parseInt(h, 10))
@@ -86632,7 +86632,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[font=([^\]]+)\]/g,
-        replace: (_2, family) => {
+        replace: (_, family) => {
           delete cache2.font;
           delete cache2.font_style;
           if (is_sponsor(name)) {
@@ -86648,7 +86648,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[name=([^\]]+)\]/g,
-        replace: (_2, username2) => {
+        replace: (_, username2) => {
           delete cache2.username;
           if (is_sponsor(name)) {
             cache2.username = username2;
@@ -86661,7 +86661,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[status=([^\]]+)\]/g,
-        replace: (_2, user) => {
+        replace: (_, user) => {
           status_cafe_user = encodeURIComponent(user);
           return '<div class="status-cafe-host"></div>';
         }
@@ -86671,7 +86671,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
-        replace: (_2, time3, flag2) => {
+        replace: (_, time3, flag2) => {
           return `<t data-flag="${flag2 || "F"}">${time3}</t>`;
         }
       }
@@ -86687,7 +86687,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /(?<=^|[\s([{.,])@([a-z0-9_]+?)(?!@)(?=$|[^a-z0-9_]|__)/gi,
-        replace: (_2, username2) => {
+        replace: (_, username2) => {
           return `<a class="mention" href="${root}user/${username2}" target="_blank">@${username2}</a>`;
         }
       }
@@ -89086,7 +89086,7 @@ var bleh = (() => {
         ] })
       ] }),
       /* @__PURE__ */ jsx(ProfileSummaryMain, { children: [
-        /* @__PURE__ */ jsx(GraphBlocks, { children: Array.from({ length: 30 }).map((_2, i2) => {
+        /* @__PURE__ */ jsx(GraphBlocks, { children: Array.from({ length: 30 }).map((_, i2) => {
           const elem = /* @__PURE__ */ jsx(GraphBlock, { index: i2 + 1 });
           graph_blocks.push(elem);
           return elem;
@@ -95616,7 +95616,7 @@ var bleh = (() => {
       const buttons = [];
       const years = Array.from({
         length: (/* @__PURE__ */ new Date()).getFullYear() - 2002
-      }, (_2, i2) => 2003 + i2).reverse();
+      }, (_, i2) => 2003 + i2).reverse();
       const elem2 = /* @__PURE__ */ jsx("div", { class: "timeframe-menu-content", children: [
         /* @__PURE__ */ jsx("div", { class: "date-range-picker-presets-wrap", children: [
           /* @__PURE__ */ jsx("ul", { class: ["date-range-picker-presets"], children: [
@@ -95905,7 +95905,7 @@ var bleh = (() => {
       if (page2 == "preset") {
         const years = Array.from({
           length: (/* @__PURE__ */ new Date()).getFullYear() - 2002
-        }, (_2, i2) => 2003 + i2).reverse();
+        }, (_, i2) => 2003 + i2).reverse();
         render(
           content2,
           html`
@@ -109366,7 +109366,7 @@ var bleh = (() => {
         const limit = Math.max(1, Math.min(concurrency, 100));
         this.context.logger.debug(`Preloading ${urls2.length} image(s) with concurrency ${limit}`);
         let settled = 0;
-        const abortPromise = signal ? new Promise((_2, reject) => {
+        const abortPromise = signal ? new Promise((_, reject) => {
           const onAbort = () => reject(new DOMException("The operation was aborted.", "AbortError"));
           if (signal.aborted) onAbort();
           else signal.addEventListener("abort", onAbort, { once: true });
@@ -109431,7 +109431,7 @@ var bleh = (() => {
     withTimeout(promise, timeoutMs, message) {
       if (timeoutMs <= 0) return promise;
       let timeoutId;
-      const timeout = new Promise((_2, reject) => {
+      const timeout = new Promise((_, reject) => {
         timeoutId = setTimeout(() => reject(new Error(message)), timeoutMs);
       });
       return Promise.race([promise, timeout]).finally(() => {
@@ -109927,7 +109927,7 @@ var bleh = (() => {
     }
     const grid_preview = createRef();
     const range = [];
-    Array.from({ length: 20 }).forEach((_2, i2) => {
+    Array.from({ length: 20 }).forEach((_, i2) => {
       range.push({
         value: String(i2 + 1),
         text: String(i2 + 1)
@@ -113509,7 +113509,7 @@ var bleh = (() => {
       const current_year = (/* @__PURE__ */ new Date()).getFullYear();
       const years = Array.from(
         { length: current_year - year + 1 },
-        (_2, i2) => year + i2
+        (_, i2) => year + i2
       );
       years.forEach((year2, index3) => {
         const selected = page.requested.from == `${year2}-01-01` && (page.requested.to == `${year2}-12-31` || page.requested.rangetype == "year");
@@ -115097,7 +115097,7 @@ var bleh = (() => {
     }
   }
 
-  // node_modules/.pnpm/@tealmiku+florence@2026.1110.0/node_modules/@tealmiku/florence/dist/florence.js
+  // node_modules/.pnpm/@tealmiku+florence@2026.1110.1/node_modules/@tealmiku/florence/dist/florence.js
   function r2(e4, s2, i2 = "info", c2 = {}) {
     let n2;
     switch (s2) {
@@ -115134,31 +115134,34 @@ var bleh = (() => {
     }
     Object.keys(c2).length > 0 ? console[i2](`%c${s2}%c ${e4}`, `background: ${n2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", c2) : console[i2](`%c${s2}%c ${e4}`, `background: ${n2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
   }
-  var O = "2026.1110";
-  var _ = {};
-  var E = {};
-  function S({ page: e4, on_head_load: s2, on_body_load: i2, on_mutation: c2, on_page_change: n2, on_subpage_change: u, on_error: a, on_dedicated_page: f3 }) {
+  var S = "2026.1110.1";
+  var M3 = {};
+  var $ = {};
+  function C({ page: e4, on_head_load: s2, on_body_load: i2, on_mutation: c2, on_page_change: n2, on_subpage_change: f3, on_error: a, on_dedicated_page: p4 }) {
     let g = false, v = true;
-    r2(`starting florence ${O}`, "load", "info", { page: e4, on_head_load: s2, on_body_load: i2, on_mutation: c2, on_page_change: n2, on_subpage_change: u, on_error: a, on_dedicated_page: f3 });
-    let p4 = new MutationObserver(() => {
-      if (!document.head) return;
+    r2(`starting florence ${S}`, "load", "info", { page: e4, on_head_load: s2, on_body_load: i2, on_mutation: c2, on_page_change: n2, on_subpage_change: f3, on_error: a, on_dedicated_page: p4 });
+    let m = new MutationObserver(() => {
+      w(), m.disconnect();
+    });
+    function w() {
+      if (!document.head) return false;
       let t2 = window.location.pathname.split("/"), o = t2.length - 1;
       if (t2[o] == "playback" && t2[o - 3] == "listening-report" || t2[0] == "pro" || t2[1] == "pro") {
-        p4.disconnect(), g = true;
+        m.disconnect(), g = true;
         return;
       }
-      document.documentElement.classList.add("florence-supports-loading"), s2 && s2(), p4.disconnect();
-    });
-    p4.observe(document.documentElement, { childList: true });
-    let m = new MutationObserver((t2) => {
+      return document.documentElement.classList.add("florence-supports-loading"), s2 && s2(), true;
+    }
+    w() || m.observe(document.documentElement, { childList: true });
+    let d = new MutationObserver((t2) => {
       if (g) {
-        m.disconnect();
+        d.disconnect();
         return;
       }
-      r2("awaiting a body element", "load", "info", { mutations: t2 }), document.body && (r2(`located: ${JSON.stringify(document.body.classList)}`, "load"), document.body.classList.add("florence"), document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer") ? (M3(), m.disconnect()) : (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now")) && (document.body.classList.add("florence-loaded"), document.body.querySelector(":scope > .container") ? f3?.("503") : document.body.classList.contains("namespace--user_now") && f3?.("now")));
+      r2("awaiting a body element", "load", "info", { mutations: t2 }), document.body && (r2(`located: ${JSON.stringify(document.body.classList)}`, "load"), document.body.classList.add("florence"), document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer") ? (D(), d.disconnect()) : (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now")) && (document.body.classList.add("florence-loaded"), document.body.querySelector(":scope > .container") ? p4?.("503") : document.body.classList.contains("namespace--user_now") && p4?.("now"), d.disconnect()));
     });
-    m.observe(document.documentElement, { childList: true });
-    function M3() {
+    d.observe(document.documentElement, { childList: true });
+    function D() {
       r2("main thread starting", "page", "log", { document, body: document.body });
       let t2 = performance.now();
       try {
@@ -115168,55 +115171,55 @@ var bleh = (() => {
             o.disconnect();
             return;
           }
-          !y[0] || y.every((h) => {
-            let k4 = [...h.addedNodes, ...h.removedNodes];
-            return k4.length > 0 && k4.every((L) => L.nodeType == 1 && L.className == "tippy-box");
-          }) || (r2("loop", "mutation", "log", { mutations: y }), $(o));
+          !y[0] || y.every((L) => {
+            let _ = [...L.addedNodes, ...L.removedNodes];
+            return _.length > 0 && _.every((E) => E.nodeType == 1 && E.className == "tippy-box");
+          }) || (r2("loop", "mutation", "log", { mutations: y }), h(o));
         });
-        o.observe(document.body, { childList: true, subtree: true });
+        o.observe(document.body, { childList: true, subtree: true }), h(o);
         let l2 = performance.now();
         r2(`finished in ${(l2 - t2) / 1e3} seconds`, "load");
       } catch (o) {
         v = false, r2("florence ran into an error", "load", "error", { e: o }), a && a(o);
       }
     }
-    let d = false, b = false;
-    function $(t2) {
-      d || b || (b = true, r2("scheduled response to loop", "load"), queueMicrotask(() => {
-        b = false, D(t2);
+    let u = false, b = false;
+    function h(t2) {
+      u || b || (b = true, r2("scheduled response to loop", "load"), queueMicrotask(() => {
+        b = false, q(t2);
       }));
     }
-    function D(t2) {
-      if (!d) {
-        d = true;
+    function q(t2) {
+      if (!u) {
+        u = true;
         try {
           let o = performance.now();
-          if (q(), e4.state.error) return;
+          if (x(), e4.state.error) return;
           c2 && c2();
           let l2 = performance.now();
           r2(`finished in ${(l2 - o) / 1e3} seconds`, "loop");
         } catch (o) {
           r2("flow error", "loop", "error", { e: o }), t2 && t2.disconnect(), a && a(o);
         } finally {
-          d = false;
+          u = false;
         }
       }
     }
-    function q() {
+    function x() {
       document.documentElement.classList.add("florence-supports-loading"), e4.structure.wrapper || (e4.structure.wrapper = document.body.querySelector(".main-content"));
       let t2 = e4.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
-      t2 ? (x(), n2 && n2(t2), t2.setAttribute("data-florence", "true")) : w(), document.body.classList.add("florence-loaded");
+      t2 ? (O(), n2 && n2(t2), t2.setAttribute("data-florence", "true")) : k4(), document.body.classList.add("florence-loaded");
     }
-    function x() {
+    function O() {
       e4.previous = { type: e4.type, name: e4.name };
       let t2 = [...document.body.classList].find((l2) => l2.startsWith("namespace"));
       if (!t2) return;
       e4.initial = t2.replace("namespace--", "");
       let o = e4.initial.split("_");
-      e4.type = o[0], e4.type == "music" && (e4.type = o[1]), e4.type != _.state && (_.state = e4.type, r2(e4.type, "page")), w();
+      e4.type = o[0], e4.type == "music" && (e4.type = o[1]), e4.type != M3.state && (M3.state = e4.type, r2(e4.type, "page")), k4();
     }
-    function w() {
-      e4.subpage = e4.initial.replace(e4.type, "").replace("_", "").replace("music_", "").replace("festival_", "event_"), E.state != e4.subpage && (E.state = e4.subpage, r2(`subpage of ${e4.subpage}`, "page"), u && u());
+    function k4() {
+      e4.subpage = e4.initial.replace(e4.type, "").replace("_", "").replace("music_", "").replace("festival_", "event_"), $.state != e4.subpage && ($.state = e4.subpage, r2(`subpage of ${e4.subpage}`, "page"), f3 && f3());
     }
   }
 
@@ -120230,7 +120233,7 @@ var bleh = (() => {
       bar_preview.current.replaceChildren(
         /* @__PURE__ */ jsx("div", { class: ["bars", v2 && "v2"], children: Array.from(
           { length: Math.floor(max3 / addition) + 1 },
-          (_2, i2) => {
+          (_, i2) => {
             const value = i2 * addition;
             return /* @__PURE__ */ jsx(
               BarPreview,
@@ -121211,7 +121214,7 @@ var bleh = (() => {
             version2.sku,
             "\u2019 - florence",
             " ",
-            O
+            S
           ] }),
           /* @__PURE__ */ jsx(CardTip, { children: DateTime.fromISO(version2.built_on).toLocaleString(
             DateTime.DATETIME_MED
@@ -130892,11 +130895,11 @@ var bleh = (() => {
       const computed = getComputedStyle(document.body);
       const graph_colours = Array.from(
         { length: graph_colour_length },
-        (_2, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`)}`
+        (_, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`)}`
       );
       const graph_colour_gradient = Array.from(
         { length: graph_colour_length },
-        (_2, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`).slice(
+        (_, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`).slice(
           0,
           -1
         )} / 10%)`
@@ -131479,7 +131482,7 @@ var bleh = (() => {
 			<section class="summary">
 				<h2>${tl2(trans.how_to_plot)}</h2>
 				<div class="step-list">
-			        ${Array.from({ length: 4 }, (_2, i2) => {
+			        ${Array.from({ length: 4 }, (_, i2) => {
         return html.node`
                             <div class="step">
                                 <div class="step-number">${i2 + 1}</div>
@@ -133253,7 +133256,7 @@ var bleh = (() => {
 			<section class="flexy">
 				<h2>Graph colours</h2>
 				<div style="display: flex; flex-wrap: wrap; gap: 8px">
-			        ${Array.from({ length: 13 }, (_2, i2) => {
+			        ${Array.from({ length: 13 }, (_, i2) => {
         return html.node`
                             <div style="display: flex; flex-direction: column; gap: 10px">
                                 <div style="width: 40px; height: 40px; background-color: var(--graph-colour-${i2})" />
@@ -133926,10 +133929,10 @@ var bleh = (() => {
   var useSeasons;
   function bleh() {
     page.continue = true;
-    S({
+    append_style();
+    C({
       page,
       on_head_load: () => {
-        append_style();
         favi();
         page.state.previous_title = document.title;
         document.title = "...";
