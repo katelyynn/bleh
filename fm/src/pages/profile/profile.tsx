@@ -9,7 +9,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log.ts';
 import { auth, page, root } from '@/build/page';
 import { sponsor_list } from '@/build/sponsor';
-import { clean_number, romanise, set_storage } from '@/build/tools';
+import { clean_number, romanise, sanitise, set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
@@ -48,7 +48,7 @@ import { bleh_event_profile, profile_event_list } from '@/pages/profile/event.ts
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
-import { SeeMore, SeeMoreContainer } from '@/components/text/see_more.tsx';
+import { PanelTop, SeeMore, SeeMoreContainer, ViewButtons } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SubTextDot, SubTextPair } from '@/components/profile/sub.tsx';
@@ -80,6 +80,9 @@ import { is_sponsor } from '@/components/sponsor.ts';
 import { set_obsession } from './set_obsession.tsx';
 import { page_with_users } from '@/components/shared/users.tsx';
 import { PageToolbar } from '@/components/page/toolbar.tsx';
+import { IconLabel } from '@/components/text/text.tsx';
+import { Track, Tracklist } from '@/components/track/track.tsx';
+import { redirect } from '@/components/music/music.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -858,7 +861,7 @@ function patch_profile_following() {
 function bleh_featured_profile_track(object) {
 	const art = object.querySelector('.featured-item-art');
 	const details = object.querySelector('.featured-item-details');
-	const form = document.body.querySelector('.header-info-primary form');
+	const form = document.body.querySelector('.header-info-primary form') as HTMLFormElement;
 
 	const heading = details.querySelector('.featured-item-heading');
 	const link = heading.querySelector('a')?.getAttribute('href');
@@ -867,93 +870,60 @@ function bleh_featured_profile_track(object) {
 	const name_elem = details.querySelector('.featured-item-name');
 	const artist_elem = details.querySelector('.featured-item-artist');
 
-	name_elem.classList = '';
-	artist_elem.classList = 'source-album-artist';
+	const artist_elem_full = artist_elem;
 
-	let artist_elem_full = artist_elem;
-
-	const img = art.querySelector('.cover-art');
-	hoshino(
+	const img = art.querySelector('.cover-art>img') as HTMLImageElement;
+	/*hoshino(
 		img.querySelector(':scope > img'),
 		name_elem.textContent.trim(),
 		artist_elem.textContent.trim(),
-	);
-
-	if (useSettings.get('format_guest_features')) {
-		const song_title = name_elem.textContent;
-
-		const formatted = name_includes(
-			song_title,
-			artist_elem.textContent,
-		);
-
-		// combine
-		name_elem.classList.add('smart-title');
-		render(
-			name_elem,
-			smart_title(formatted.song_title, formatted.song_tags),
-		);
-
-		artist_elem_full = html.node`
-            <div class="source-album-artist">
-                ${smart_artists(formatted.song_artist, formatted.song_guests)}
-            </div>
-        `;
-	} else if (useSettings.get('corrections')) {
-		name_elem.textContent = romanise(
-			correct_item_by_artist(
-				name_elem.textContent.trim(),
-				artist_elem.textContent.trim(),
-			),
-		);
-		artist_elem.textContent = romanise(
-			correct_artist(artist_elem.textContent.trim()),
-		);
-	}
+	);*/
 
 	if (form) {
-		const button = form.querySelector('button');
-		button.classList = 'see-more featured-item-manage icon';
-		button.setAttribute('data-type', 'delete');
-		button.textContent = tl(trans.remove);
+		const button = form.querySelector('button') as HTMLButtonElement;
+		button.classList = 'left-icon btn blend-v2-btn';
+		button.replaceChildren(
+			<IconLabel icon={icons.trash}>
+				{tl(trans.remove)}
+			</IconLabel>
+		);
 	}
 
-	const panel = html.node`
-        <section class="featured-item-panel">
-            <div class="sub-text">
-                ${form
-			? html.node`
-                <a class="has-icon" data-type="obsession" href=${link}>
-                    <div class="bleh-icon" style="--icon: var(--mask)" />
-                    ${tl(trans.obsession)}
-                </a>
-                ${form}
-                `
-			: html.node`
-                <div class="has-icon" data-type="track">
-                    <div class="bleh-icon" style="--icon: var(--mask)" />
-                    ${tl(trans.top_track)}
-                </div>
-                `
-		}
-            </div>
-            <div class="source-album js-link-block link-block featured-item">
-                <div class="source-album-art small">
-                    ${img}
-                </div>
-                <div class="source-album-details">
-                    <h4 class="source-album-name">${name_elem}</h4>
-                    ${artist_elem_full}
-                </div>
-                <a class="js-link-block-cover-link link-block-cover-link" href=${name_elem.getAttribute('href')
-		} />
-            </div>
-        </section>
-    `;
+	const name = name_elem.textContent.trim();
+	const artist = artist_elem.textContent.trim();
 
-	page.structure.side.insertBefore(
+	const panel = (
+		<section class='featured-item-panel'>
+			<PanelTop>
+				{form ? (
+					<PanelHead icon={icons.obsession} top>
+						{tl(trans.obsession)}
+					</PanelHead>
+				) : (
+					<PanelHead icon={icons.track} top>
+						{tl(trans.top_track)}
+					</PanelHead>
+				)}
+				{form && (
+					<ViewButtons>
+						{form}
+					</ViewButtons>
+				)}
+			</PanelTop>
+			<Tracklist>
+				<Track
+					name={name}
+					artist={artist}
+					url={form ? link : `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(name)}`}
+					art={img.src}
+				/>
+			</Tracklist>
+		</section>
+	)
+
+	page.structure.side!.insertBefore(
 		panel,
-		page.structure.side.firstElementChild,
+		page.structure.side!.firstElementChild,
 	);
 }
 
