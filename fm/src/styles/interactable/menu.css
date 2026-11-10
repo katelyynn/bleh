@@ -45,7 +45,7 @@
 	--radius: var(--menu-item-radius);
 	font-size: var(--menu-item-font-size, var(--font-size)) !important;
 	position: relative !important;
-	min-width: 170px !important;
+	min-width: 190px !important;
 	--show-icon: block;
 
 	--button-height: var(--menu-item-height);
