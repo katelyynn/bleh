@@ -22,14 +22,14 @@
 	white-space: nowrap;
 	flex-shrink: 1;
 
-	& > a {
+	&>a {
 		cursor: pointer;
 		overflow: hidden;
 	}
 
-	& > a + a {
+	/*& > a + a {
 		margin-left: 4px;
-	}
+		}*/
 }
 
 .title {

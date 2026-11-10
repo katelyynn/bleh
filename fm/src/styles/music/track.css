@@ -219,13 +219,8 @@
 	line-height: var(--artist-name-height, var(--line-height));
 	order: 2;
 
-	display: flex !important;
 	color: oklch(var(--col-alt)) !important;
 	cursor: default;
-
-	&>a+a {
-		margin-left: 4px;
-	}
 }
 
 .chartlist-album {

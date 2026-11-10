@@ -114,6 +114,7 @@ import { ProfileTaste } from '@/components/profile/taste';
 import { EventSmallCalendar } from '@/components/event/icon';
 import { TextFlip } from '@/components/text/text_flip';
 import { InboxButton } from '@/components/button/inbox';
+import { Track, Tracklist } from '@/components/track/track';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1731,6 +1732,25 @@ export function mualani() {
 						<InboxButton notifications={0} messages={0} />
 						<InboxButton notifications={0} messages={1} />
 						<InboxButton notifications={1} messages={0} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='track'>
+				<DemoGrid>
+					<DemoItem label='Track'>
+						<Tracklist>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+								art='https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg'
+							/>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+							/>
+						</Tracklist>
 					</DemoItem>
 				</DemoGrid>
 			</section>
