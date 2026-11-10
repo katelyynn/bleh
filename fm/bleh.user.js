@@ -228,30 +228,30 @@ var bleh = (() => {
             return 7;
           } }).a != 7;
         });
-        var _toPrimitive2 = function(it, S) {
+        var _toPrimitive2 = function(it, S2) {
           if (!_isObject(it)) {
             return it;
           }
           var fn6, val;
-          if (S && typeof (fn6 = it.toString) == "function" && !_isObject(val = fn6.call(it))) {
+          if (S2 && typeof (fn6 = it.toString) == "function" && !_isObject(val = fn6.call(it))) {
             return val;
           }
           if (typeof (fn6 = it.valueOf) == "function" && !_isObject(val = fn6.call(it))) {
             return val;
           }
-          if (!S && typeof (fn6 = it.toString) == "function" && !_isObject(val = fn6.call(it))) {
+          if (!S2 && typeof (fn6 = it.toString) == "function" && !_isObject(val = fn6.call(it))) {
             return val;
           }
           throw TypeError("Can't convert object to primitive value");
         };
         var dP = Object.defineProperty;
-        var f3 = _descriptors2 ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-          _anObject(O);
+        var f3 = _descriptors2 ? Object.defineProperty : function defineProperty(O2, P, Attributes) {
+          _anObject(O2);
           P = _toPrimitive2(P, true);
           _anObject(Attributes);
           if (_ie8DomDefine) {
             try {
-              return dP(O, P, Attributes);
+              return dP(O2, P, Attributes);
             } catch (e4) {
             }
           }
@@ -259,9 +259,9 @@ var bleh = (() => {
             throw TypeError("Accessors not supported!");
           }
           if ("value" in Attributes) {
-            O[P] = Attributes.value;
+            O2[P] = Attributes.value;
           }
-          return O;
+          return O2;
         };
         var _objectDp = {
           f: f3
@@ -309,26 +309,26 @@ var bleh = (() => {
           _core.inspectSource = function(it) {
             return _functionToString.call(it);
           };
-          (module2.exports = function(O, key2, val, safe) {
+          (module2.exports = function(O2, key2, val, safe) {
             var isFunction3 = typeof val == "function";
             if (isFunction3) {
               _has(val, "name") || _hide(val, "name", key2);
             }
-            if (O[key2] === val) {
+            if (O2[key2] === val) {
               return;
             }
             if (isFunction3) {
-              _has(val, SRC) || _hide(val, SRC, O[key2] ? "" + O[key2] : TPL.join(String(key2)));
+              _has(val, SRC) || _hide(val, SRC, O2[key2] ? "" + O2[key2] : TPL.join(String(key2)));
             }
-            if (O === _global) {
-              O[key2] = val;
+            if (O2 === _global) {
+              O2[key2] = val;
             } else if (!safe) {
-              delete O[key2];
-              _hide(O, key2, val);
-            } else if (O[key2]) {
-              O[key2] = val;
+              delete O2[key2];
+              _hide(O2, key2, val);
+            } else if (O2[key2]) {
+              O2[key2] = val;
             } else {
-              _hide(O, key2, val);
+              _hide(O2, key2, val);
             }
           })(Function.prototype, TO_STRING, function toString() {
             return typeof this == "function" && this[SRC] || _functionToString.call(this);
@@ -444,7 +444,7 @@ var bleh = (() => {
         var $fromCodePoint = String.fromCodePoint;
         _export(_export.S + _export.F * (!!$fromCodePoint && $fromCodePoint.length != 1), "String", {
           // 21.1.2.2 String.fromCodePoint(...codePoints)
-          fromCodePoint: function fromCodePoint2(x2) {
+          fromCodePoint: function fromCodePoint2(x) {
             var arguments$1 = arguments;
             var res = [];
             var aLen = arguments.length;
@@ -2061,13 +2061,13 @@ var bleh = (() => {
         };
         var rgxFindMatchPos = function(str, left2, right2, flags2) {
           "use strict";
-          var f3 = flags2 || "", g = f3.indexOf("g") > -1, x2 = new RegExp(left2 + "|" + right2, "g" + f3.replace(/g/g, "")), l2 = new RegExp(left2, f3.replace(/g/g, "")), pos = [], t2, s2, m, start2, end2;
+          var f3 = flags2 || "", g = f3.indexOf("g") > -1, x = new RegExp(left2 + "|" + right2, "g" + f3.replace(/g/g, "")), l2 = new RegExp(left2, f3.replace(/g/g, "")), pos = [], t2, s2, m, start2, end2;
           do {
             t2 = 0;
-            while (m = x2.exec(str)) {
+            while (m = x.exec(str)) {
               if (l2.test(m[0])) {
                 if (!t2++) {
-                  s2 = x2.lastIndex;
+                  s2 = x.lastIndex;
                   start2 = s2 - m[0].length;
                 }
               } else if (t2) {
@@ -2086,7 +2086,7 @@ var bleh = (() => {
                 }
               }
             }
-          } while (t2 && (x2.lastIndex = s2));
+          } while (t2 && (x.lastIndex = s2));
           return pos;
         };
         showdown2.helper.matchRecursiveRegExp = function(str, left2, right2, flags2) {
@@ -5210,20 +5210,20 @@ var bleh = (() => {
             return classToType[strType] || "object";
           };
         })();
-        limit = function(x2, min3, max4) {
+        limit = function(x, min3, max4) {
           if (min3 == null) {
             min3 = 0;
           }
           if (max4 == null) {
             max4 = 1;
           }
-          if (x2 < min3) {
-            x2 = min3;
+          if (x < min3) {
+            x = min3;
           }
-          if (x2 > max4) {
-            x2 = max4;
+          if (x > max4) {
+            x = max4;
           }
-          return x2;
+          return x;
         };
         unpack2 = function(args) {
           if (args.length >= 3) {
@@ -5549,18 +5549,18 @@ var bleh = (() => {
         };
         chroma.colors = colors2 = w3cx11;
         lab2rgb = function() {
-          var a, args, b, g, l2, r3, x2, y, z;
+          var a, args, b, g, l2, r3, x, y, z;
           args = unpack2(arguments);
           l2 = args[0], a = args[1], b = args[2];
           y = (l2 + 16) / 116;
-          x2 = isNaN(a) ? y : y + a / 500;
+          x = isNaN(a) ? y : y + a / 500;
           z = isNaN(b) ? y : y - b / 200;
           y = LAB_CONSTANTS.Yn * lab_xyz(y);
-          x2 = LAB_CONSTANTS.Xn * lab_xyz(x2);
+          x = LAB_CONSTANTS.Xn * lab_xyz(x);
           z = LAB_CONSTANTS.Zn * lab_xyz(z);
-          r3 = xyz_rgb(3.2404542 * x2 - 1.5371385 * y - 0.4985314 * z);
-          g = xyz_rgb(-0.969266 * x2 + 1.8760108 * y + 0.041556 * z);
-          b = xyz_rgb(0.0556434 * x2 - 0.2040259 * y + 1.0572252 * z);
+          r3 = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);
+          g = xyz_rgb(-0.969266 * x + 1.8760108 * y + 0.041556 * z);
+          b = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
           return [r3, g, b, args.length > 3 ? args[3] : 1];
         };
         xyz_rgb = function(r3) {
@@ -5584,10 +5584,10 @@ var bleh = (() => {
           t3: 8856452e-9
         };
         rgb2lab = function() {
-          var b, g, r3, ref2, ref1, x2, y, z;
+          var b, g, r3, ref2, ref1, x, y, z;
           ref2 = unpack2(arguments), r3 = ref2[0], g = ref2[1], b = ref2[2];
-          ref1 = rgb2xyz(r3, g, b), x2 = ref1[0], y = ref1[1], z = ref1[2];
-          return [116 * y - 16, 500 * (x2 - y), 200 * (y - z)];
+          ref1 = rgb2xyz(r3, g, b), x = ref1[0], y = ref1[1], z = ref1[2];
+          return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
         };
         rgb_xyz = function(r3) {
           if ((r3 /= 255) <= 0.04045) {
@@ -5604,15 +5604,15 @@ var bleh = (() => {
           }
         };
         rgb2xyz = function() {
-          var b, g, r3, ref2, x2, y, z;
+          var b, g, r3, ref2, x, y, z;
           ref2 = unpack2(arguments), r3 = ref2[0], g = ref2[1], b = ref2[2];
           r3 = rgb_xyz(r3);
           g = rgb_xyz(g);
           b = rgb_xyz(b);
-          x2 = xyz_lab((0.4124564 * r3 + 0.3575761 * g + 0.1804375 * b) / LAB_CONSTANTS.Xn);
+          x = xyz_lab((0.4124564 * r3 + 0.3575761 * g + 0.1804375 * b) / LAB_CONSTANTS.Xn);
           y = xyz_lab((0.2126729 * r3 + 0.7151522 * g + 0.072175 * b) / LAB_CONSTANTS.Yn);
           z = xyz_lab((0.0193339 * r3 + 0.119192 * g + 0.9503041 * b) / LAB_CONSTANTS.Zn);
-          return [x2, y, z];
+          return [x, y, z];
         };
         chroma.lab = function() {
           return (function(func, args, ctor) {
@@ -5859,11 +5859,11 @@ var bleh = (() => {
         chroma.mix = interpolate3;
         Color2.prototype.mix = Color2.prototype.interpolate;
         _input.rgb = function() {
-          var k5, ref2, results, v;
+          var k4, ref2, results, v;
           ref2 = unpack2(arguments);
           results = [];
-          for (k5 in ref2) {
-            v = ref2[k5];
+          for (k4 in ref2) {
+            v = ref2[k4];
             results.push(v);
           }
           return results;
@@ -6470,7 +6470,7 @@ var bleh = (() => {
           }
         });
         Color2.prototype.name = function(n2) {
-          var h, k5;
+          var h, k4;
           if (arguments.length) {
             if (w3cx11[n2]) {
               this._rgb = hex2rgb(w3cx11[n2]);
@@ -6479,9 +6479,9 @@ var bleh = (() => {
             this;
           }
           h = this.hex("rgb");
-          for (k5 in w3cx11) {
-            if (h === w3cx11[k5]) {
-              return k5;
+          for (k4 in w3cx11) {
+            if (h === w3cx11[k4]) {
+              return k4;
             }
           }
           return h;
@@ -6493,11 +6493,11 @@ var bleh = (() => {
           return [l2, cos(h) * c2, sin(h) * c2];
         };
         lch2rgb = function() {
-          var L2, a, args, b, c2, g, h, l2, r3, ref2, ref1;
+          var L, a, args, b, c2, g, h, l2, r3, ref2, ref1;
           args = unpack2(arguments);
           l2 = args[0], c2 = args[1], h = args[2];
-          ref2 = lch2lab2(l2, c2, h), L2 = ref2[0], a = ref2[1], b = ref2[2];
-          ref1 = lab2rgb(L2, a, b), r3 = ref1[0], g = ref1[1], b = ref1[2];
+          ref2 = lch2lab2(l2, c2, h), L = ref2[0], a = ref2[1], b = ref2[2];
+          ref1 = lab2rgb(L, a, b), r3 = ref1[0], g = ref1[1], b = ref1[2];
           return [r3, g, b, args.length > 3 ? args[3] : 1];
         };
         lab2lch = function() {
@@ -6539,7 +6539,7 @@ var bleh = (() => {
           return rgb2lch(this._rgb).reverse();
         };
         rgb2cmyk = function(mode) {
-          var b, c2, f3, g, k5, m2, r3, ref2, y;
+          var b, c2, f3, g, k4, m2, r3, ref2, y;
           if (mode == null) {
             mode = "rgb";
           }
@@ -6547,24 +6547,24 @@ var bleh = (() => {
           r3 = r3 / 255;
           g = g / 255;
           b = b / 255;
-          k5 = 1 - Math.max(r3, Math.max(g, b));
-          f3 = k5 < 1 ? 1 / (1 - k5) : 0;
-          c2 = (1 - r3 - k5) * f3;
-          m2 = (1 - g - k5) * f3;
-          y = (1 - b - k5) * f3;
-          return [c2, m2, y, k5];
+          k4 = 1 - Math.max(r3, Math.max(g, b));
+          f3 = k4 < 1 ? 1 / (1 - k4) : 0;
+          c2 = (1 - r3 - k4) * f3;
+          m2 = (1 - g - k4) * f3;
+          y = (1 - b - k4) * f3;
+          return [c2, m2, y, k4];
         };
         cmyk2rgb = function() {
-          var alpha2, args, b, c2, g, k5, m2, r3, y;
+          var alpha2, args, b, c2, g, k4, m2, r3, y;
           args = unpack2(arguments);
-          c2 = args[0], m2 = args[1], y = args[2], k5 = args[3];
+          c2 = args[0], m2 = args[1], y = args[2], k4 = args[3];
           alpha2 = args.length > 4 ? args[4] : 1;
-          if (k5 === 1) {
+          if (k4 === 1) {
             return [0, 0, 0, alpha2];
           }
-          r3 = c2 >= 1 ? 0 : 255 * (1 - c2) * (1 - k5);
-          g = m2 >= 1 ? 0 : 255 * (1 - m2) * (1 - k5);
-          b = y >= 1 ? 0 : 255 * (1 - y) * (1 - k5);
+          r3 = c2 >= 1 ? 0 : 255 * (1 - c2) * (1 - k4);
+          g = m2 >= 1 ? 0 : 255 * (1 - m2) * (1 - k4);
+          b = y >= 1 ? 0 : 255 * (1 - y) * (1 - k4);
           return [r3, g, b, alpha2];
         };
         _input.cmyk = function() {
@@ -6582,13 +6582,13 @@ var bleh = (() => {
           return rgb2cmyk(this._rgb);
         };
         _input.gl = function() {
-          var i2, k5, o, rgb4, v;
+          var i2, k4, o, rgb4, v;
           rgb4 = (function() {
             var ref2, results;
             ref2 = unpack2(arguments);
             results = [];
-            for (k5 in ref2) {
-              v = ref2[k5];
+            for (k4 in ref2) {
+              v = ref2[k4];
               results.push(v);
             }
             return results;
@@ -6619,12 +6619,12 @@ var bleh = (() => {
           b = luminance_x(b);
           return 0.2126 * r3 + 0.7152 * g + 0.0722 * b;
         };
-        luminance_x = function(x2) {
-          x2 /= 255;
-          if (x2 <= 0.03928) {
-            return x2 / 12.92;
+        luminance_x = function(x) {
+          x /= 255;
+          if (x <= 0.03928) {
+            return x / 12.92;
           } else {
-            return pow((x2 + 0.055) / 1.055, 2.4);
+            return pow((x + 0.055) / 1.055, 2.4);
           }
         };
         interpolate_rgb = function(col1, col2, f3, m2) {
@@ -6751,10 +6751,10 @@ var bleh = (() => {
           }
           return Math.sqrt(sum_sq);
         };
-        chroma.deltaE = function(a, b, L2, C) {
-          var L1, L22, a1, a2, b1, b2, c1, c2, c4, dH2, delA, delB, delC, delL, f3, h12, ref2, ref1, ref22, ref3, sc, sh, sl, t2, v1, v2, v3;
-          if (L2 == null) {
-            L2 = 1;
+        chroma.deltaE = function(a, b, L, C) {
+          var L1, L2, a1, a2, b1, b2, c1, c2, c4, dH2, delA, delB, delC, delL, f3, h12, ref2, ref1, ref22, ref3, sc, sh, sl, t2, v1, v2, v3;
+          if (L == null) {
+            L = 1;
           }
           if (C == null) {
             C = 1;
@@ -6766,7 +6766,7 @@ var bleh = (() => {
             b = new Color2(b);
           }
           ref22 = a.lab(), L1 = ref22[0], a1 = ref22[1], b1 = ref22[2];
-          ref3 = b.lab(), L22 = ref3[0], a2 = ref3[1], b2 = ref3[2];
+          ref3 = b.lab(), L2 = ref3[0], a2 = ref3[1], b2 = ref3[2];
           c1 = sqrt(a1 * a1 + b1 * b1);
           c2 = sqrt(a2 * a2 + b2 * b2);
           sl = L1 < 16 ? 0.511 : 0.040975 * L1 / (1 + 0.01765 * L1);
@@ -6782,12 +6782,12 @@ var bleh = (() => {
           c4 = c1 * c1 * c1 * c1;
           f3 = sqrt(c4 / (c4 + 1900));
           sh = sc * (f3 * t2 + 1 - f3);
-          delL = L1 - L22;
+          delL = L1 - L2;
           delC = c1 - c2;
           delA = a1 - a2;
           delB = b1 - b2;
           dH2 = delA * delA + delB * delB - delC * delC;
-          v1 = delL / (L2 * sl);
+          v1 = delL / (L * sl);
           v2 = delC / (C * sc);
           v3 = sh;
           return sqrt(v1 * v1 + v2 * v2 + dH2 / (v3 * v3));
@@ -7075,7 +7075,7 @@ var bleh = (() => {
             return val;
           };
           getColor = function(val, bypassMap) {
-            var c2, col, i2, k5, o, p4, ref2, t2;
+            var c2, col, i2, k4, o, p4, ref2, t2;
             if (bypassMap == null) {
               bypassMap = false;
             }
@@ -7102,9 +7102,9 @@ var bleh = (() => {
             }
             t2 = _padding[0] + t2 * (1 - _padding[0] - _padding[1]);
             t2 = Math.min(1, Math.max(0, t2));
-            k5 = Math.floor(t2 * 1e4);
-            if (_useCache && _colorCache[k5]) {
-              col = _colorCache[k5];
+            k4 = Math.floor(t2 * 1e4);
+            if (_useCache && _colorCache[k4]) {
+              col = _colorCache[k4];
             } else {
               if (type(_colors) === "array") {
                 for (i2 = o = 0, ref2 = _pos.length - 1; 0 <= ref2 ? o <= ref2 : o >= ref2; i2 = 0 <= ref2 ? ++o : --o) {
@@ -7127,7 +7127,7 @@ var bleh = (() => {
                 col = _colors(t2);
               }
               if (_useCache) {
-                _colorCache[k5] = col;
+                _colorCache[k4] = col;
               }
             }
             return col;
@@ -7164,22 +7164,22 @@ var bleh = (() => {
             return _classes;
           };
           f3.domain = function(domain) {
-            var c2, d, k5, len, o, ref2, w;
+            var c2, d, k4, len, o, ref2, w;
             if (!arguments.length) {
               return _domain;
             }
             _min = domain[0];
             _max = domain[domain.length - 1];
             _pos = [];
-            k5 = _colors.length;
-            if (domain.length === k5 && _min !== _max) {
+            k4 = _colors.length;
+            if (domain.length === k4 && _min !== _max) {
               for (o = 0, len = domain.length; o < len; o++) {
                 d = domain[o];
                 _pos.push((d - _min) / (_max - _min));
               }
             } else {
-              for (c2 = w = 0, ref2 = k5 - 1; 0 <= ref2 ? w <= ref2 : w >= ref2; c2 = 0 <= ref2 ? ++w : --w) {
-                _pos.push(c2 / (k5 - 1));
+              for (c2 = w = 0, ref2 = k4 - 1; 0 <= ref2 ? w <= ref2 : w >= ref2; c2 = 0 <= ref2 ? ++w : --w) {
+                _pos.push(c2 / (k4 - 1));
               }
             }
             _domain = [_min, _max];
@@ -7341,7 +7341,7 @@ var bleh = (() => {
           return chroma.scale(["#000", "#f00", "#ff0", "#fff"], [0, 0.25, 0.75, 1]).mode("rgb");
         };
         chroma.analyze = function(data2, key, filter2) {
-          var add, k5, len, o, r3, val, visit;
+          var add, k4, len, o, r3, val, visit;
           r3 = {
             min: Number.MAX_VALUE,
             max: Number.MAX_VALUE * -1,
@@ -7367,8 +7367,8 @@ var bleh = (() => {
               r3.count += 1;
             }
           };
-          visit = function(val2, k6) {
-            if (filter2(val2, k6)) {
+          visit = function(val2, k5) {
+            if (filter2(val2, k5)) {
               if (key != null && type(key) === "function") {
                 return add(key(val2));
               } else if (key != null && type(key) === "string" || type(key) === "number") {
@@ -7384,9 +7384,9 @@ var bleh = (() => {
               visit(val);
             }
           } else {
-            for (k5 in data2) {
-              val = data2[k5];
-              visit(val, k5);
+            for (k4 in data2) {
+              val = data2[k4];
+              visit(val, k4);
             }
           }
           r3.domain = [r3.min, r3.max];
@@ -18077,9 +18077,9 @@ var bleh = (() => {
           }];
           var radiusScale = Math.min(1, width / (radii[0].x + radii[1].x || 1), width / (radii[3].x + radii[2].x || 1), height / (radii[0].y + radii[3].y || 1), height / (radii[1].y + radii[2].y || 1));
           return radii.map(function(_ref2) {
-            var x2 = _ref2.x, y = _ref2.y;
+            var x = _ref2.x, y = _ref2.y;
             return {
-              x: x2 * radiusScale,
+              x: x * radiusScale,
               y: y * radiusScale
             };
           });
@@ -18280,15 +18280,15 @@ var bleh = (() => {
            * @param {number} [y=x] - The y-axis coordinate.
            * @returns {Cropper} this
            */
-          moveTo: function moveTo(x2) {
-            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : x2;
+          moveTo: function moveTo(x) {
+            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : x;
             var canvasData = this.canvasData;
             var changed = false;
-            x2 = Number(x2);
+            x = Number(x);
             y = Number(y);
             if (this.ready && !this.disabled && this.options.movable) {
-              if (isNumber4(x2)) {
-                canvasData.left = x2;
+              if (isNumber4(x)) {
+                canvasData.left = x;
                 changed = true;
               }
               if (isNumber4(y)) {
@@ -20110,29 +20110,29 @@ var bleh = (() => {
               y: round5(pointers[0].clientY)
             };
           }
-          var x2 = 0, y = 0, i2 = 0;
+          var x = 0, y = 0, i2 = 0;
           while (i2 < pointersLength) {
-            x2 += pointers[i2].clientX;
+            x += pointers[i2].clientX;
             y += pointers[i2].clientY;
             i2++;
           }
           return {
-            x: round5(x2 / pointersLength),
+            x: round5(x / pointersLength),
             y: round5(y / pointersLength)
           };
         }
-        function getVelocity(deltaTime, x2, y) {
+        function getVelocity(deltaTime, x, y) {
           return {
-            x: x2 / deltaTime || 0,
+            x: x / deltaTime || 0,
             y: y / deltaTime || 0
           };
         }
-        function getDirection(x2, y) {
-          if (x2 === y) {
+        function getDirection(x, y) {
+          if (x === y) {
             return DIRECTION_NONE;
           }
-          if (abs2(x2) >= abs2(y)) {
-            return x2 < 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
+          if (abs2(x) >= abs2(y)) {
+            return x < 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
           }
           return y < 0 ? DIRECTION_UP : DIRECTION_DOWN;
         }
@@ -20140,15 +20140,15 @@ var bleh = (() => {
           if (!props) {
             props = PROPS_XY;
           }
-          var x2 = p22[props[0]] - p1[props[0]], y = p22[props[1]] - p1[props[1]];
-          return Math.sqrt(x2 * x2 + y * y);
+          var x = p22[props[0]] - p1[props[0]], y = p22[props[1]] - p1[props[1]];
+          return Math.sqrt(x * x + y * y);
         }
         function getAngle(p1, p22, props) {
           if (!props) {
             props = PROPS_XY;
           }
-          var x2 = p22[props[0]] - p1[props[0]], y = p22[props[1]] - p1[props[1]];
-          return Math.atan2(y, x2) * 180 / Math.PI;
+          var x = p22[props[0]] - p1[props[0]], y = p22[props[1]] - p1[props[1]];
+          return Math.atan2(y, x) * 180 / Math.PI;
         }
         function getRotation(start2, end2) {
           return getAngle(end2[1], end2[0], PROPS_CLIENT_XY) + getAngle(start2[1], start2[0], PROPS_CLIENT_XY);
@@ -20426,10 +20426,10 @@ var bleh = (() => {
           }
         }
         function isSyntheticEvent(eventData) {
-          var x2 = eventData.srcEvent.clientX, y = eventData.srcEvent.clientY;
+          var x = eventData.srcEvent.clientX, y = eventData.srcEvent.clientY;
           for (var i2 = 0; i2 < this.lastTouches.length; i2++) {
             var t2 = this.lastTouches[i2];
-            var dx = Math.abs(x2 - t2.x), dy = Math.abs(y - t2.y);
+            var dx = Math.abs(x - t2.x), dy = Math.abs(y - t2.y);
             if (dx <= DEDUP_DISTANCE && dy <= DEDUP_DISTANCE) {
               return true;
             }
@@ -20863,12 +20863,12 @@ var bleh = (() => {
             var hasMoved = true;
             var distance2 = input2.distance;
             var direction2 = input2.direction;
-            var x2 = input2.deltaX;
+            var x = input2.deltaX;
             var y = input2.deltaY;
             if (!(direction2 & options.direction)) {
               if (options.direction & DIRECTION_HORIZONTAL) {
-                direction2 = x2 === 0 ? DIRECTION_NONE : x2 < 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
-                hasMoved = x2 != this.pX;
+                direction2 = x === 0 ? DIRECTION_NONE : x < 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
+                hasMoved = x != this.pX;
                 distance2 = Math.abs(input2.deltaX);
               } else {
                 direction2 = y === 0 ? DIRECTION_NONE : y < 0 ? DIRECTION_UP : DIRECTION_DOWN;
@@ -21605,14 +21605,14 @@ var bleh = (() => {
   var { indexOf, slice } = [];
 
   // node_modules/.pnpm/umap@1.0.2/node_modules/umap/esm/index.js
-  var esm_default3 = (_) => ({
+  var esm_default3 = (_2) => ({
     // About: get: _.get.bind(_)
     // It looks like WebKit/Safari didn't optimize bind at all,
     // so that using bind slows it down by 60%.
     // Firefox and Chrome are just fine in both cases,
     // so let's use the approach that works fast everywhere 👍
-    get: (key) => _.get(key),
-    set: (key, value) => (_.set(key, value), value)
+    get: (key) => _2.get(key),
+    set: (key, value) => (_2.set(key, value), value)
   });
 
   // node_modules/.pnpm/uwire@1.1.0/node_modules/uwire/esm/index.js
@@ -22676,7 +22676,7 @@ var bleh = (() => {
     }
     var _ref2 = isElement(element) ? getWindow(element) : window, visualViewport = _ref2.visualViewport;
     var addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
-    var x2 = (clientRect.left + (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) / scaleX;
+    var x = (clientRect.left + (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) / scaleX;
     var y = (clientRect.top + (addVisualOffsets && visualViewport ? visualViewport.offsetTop : 0)) / scaleY;
     var width = clientRect.width / scaleX;
     var height = clientRect.height / scaleY;
@@ -22684,10 +22684,10 @@ var bleh = (() => {
       width,
       height,
       top: y,
-      right: x2 + width,
+      right: x + width,
       bottom: y + height,
-      left: x2,
-      x: x2,
+      left: x,
+      x,
       y
     };
   }
@@ -22918,25 +22918,25 @@ var bleh = (() => {
     left: "auto"
   };
   function roundOffsetsByDPR(_ref2, win) {
-    var x2 = _ref2.x, y = _ref2.y;
+    var x = _ref2.x, y = _ref2.y;
     var dpr = win.devicePixelRatio || 1;
     return {
-      x: round(x2 * dpr) / dpr || 0,
+      x: round(x * dpr) / dpr || 0,
       y: round(y * dpr) / dpr || 0
     };
   }
   function mapToStyles(_ref2) {
     var _Object$assign2;
     var popper2 = _ref2.popper, popperRect = _ref2.popperRect, placement = _ref2.placement, variation = _ref2.variation, offsets = _ref2.offsets, position2 = _ref2.position, gpuAcceleration = _ref2.gpuAcceleration, adaptive = _ref2.adaptive, roundOffsets = _ref2.roundOffsets, isFixed = _ref2.isFixed;
-    var _offsets$x = offsets.x, x2 = _offsets$x === void 0 ? 0 : _offsets$x, _offsets$y = offsets.y, y = _offsets$y === void 0 ? 0 : _offsets$y;
+    var _offsets$x = offsets.x, x = _offsets$x === void 0 ? 0 : _offsets$x, _offsets$y = offsets.y, y = _offsets$y === void 0 ? 0 : _offsets$y;
     var _ref3 = typeof roundOffsets === "function" ? roundOffsets({
-      x: x2,
+      x,
       y
     }) : {
-      x: x2,
+      x,
       y
     };
-    x2 = _ref3.x;
+    x = _ref3.x;
     y = _ref3.y;
     var hasX = offsets.hasOwnProperty("x");
     var hasY = offsets.hasOwnProperty("y");
@@ -22970,27 +22970,27 @@ var bleh = (() => {
           // $FlowFixMe[prop-missing]
           offsetParent[widthProp]
         );
-        x2 -= offsetX - popperRect.width;
-        x2 *= gpuAcceleration ? 1 : -1;
+        x -= offsetX - popperRect.width;
+        x *= gpuAcceleration ? 1 : -1;
       }
     }
     var commonStyles = Object.assign({
       position: position2
     }, adaptive && unsetSides);
     var _ref4 = roundOffsets === true ? roundOffsetsByDPR({
-      x: x2,
+      x,
       y
     }, getWindow(popper2)) : {
-      x: x2,
+      x,
       y
     };
-    x2 = _ref4.x;
+    x = _ref4.x;
     y = _ref4.y;
     if (gpuAcceleration) {
       var _Object$assign;
-      return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x2 + "px, " + y + "px)" : "translate3d(" + x2 + "px, " + y + "px, 0)", _Object$assign));
+      return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? "0" : "", _Object$assign[sideX] = hasX ? "0" : "", _Object$assign.transform = (win.devicePixelRatio || 1) <= 1 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
     }
-    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "", _Object$assign2[sideX] = hasX ? x2 + "px" : "", _Object$assign2.transform = "", _Object$assign2));
+    return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : "", _Object$assign2[sideX] = hasX ? x + "px" : "", _Object$assign2.transform = "", _Object$assign2));
   }
   function computeStyles(_ref5) {
     var state = _ref5.state, options = _ref5.options;
@@ -23116,21 +23116,21 @@ var bleh = (() => {
     var visualViewport = win.visualViewport;
     var width = html3.clientWidth;
     var height = html3.clientHeight;
-    var x2 = 0;
+    var x = 0;
     var y = 0;
     if (visualViewport) {
       width = visualViewport.width;
       height = visualViewport.height;
       var layoutViewport = isLayoutViewport();
       if (layoutViewport || !layoutViewport && strategy === "fixed") {
-        x2 = visualViewport.offsetLeft;
+        x = visualViewport.offsetLeft;
         y = visualViewport.offsetTop;
       }
     }
     return {
       width,
       height,
-      x: x2 + getWindowScrollBarX(element),
+      x: x + getWindowScrollBarX(element),
       y
     };
   }
@@ -23143,15 +23143,15 @@ var bleh = (() => {
     var body2 = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
     var width = max(html3.scrollWidth, html3.clientWidth, body2 ? body2.scrollWidth : 0, body2 ? body2.clientWidth : 0);
     var height = max(html3.scrollHeight, html3.clientHeight, body2 ? body2.scrollHeight : 0, body2 ? body2.clientHeight : 0);
-    var x2 = -winScroll.scrollLeft + getWindowScrollBarX(element);
+    var x = -winScroll.scrollLeft + getWindowScrollBarX(element);
     var y = -winScroll.scrollTop;
     if (getComputedStyle2(body2 || html3).direction === "rtl") {
-      x2 += max(html3.clientWidth, body2 ? body2.clientWidth : 0) - width;
+      x += max(html3.clientWidth, body2 ? body2.clientWidth : 0) - width;
     }
     return {
       width,
       height,
-      x: x2,
+      x,
       y
     };
   }
@@ -23552,9 +23552,9 @@ var bleh = (() => {
       acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset5);
       return acc;
     }, {});
-    var _data$state$placement = data2[state.placement], x2 = _data$state$placement.x, y = _data$state$placement.y;
+    var _data$state$placement = data2[state.placement], x = _data$state$placement.x, y = _data$state$placement.y;
     if (state.modifiersData.popperOffsets != null) {
-      state.modifiersData.popperOffsets.x += x2;
+      state.modifiersData.popperOffsets.x += x;
       state.modifiersData.popperOffsets.y += y;
     }
     state.modifiersData[name] = data2;
@@ -26805,8 +26805,8 @@ var bleh = (() => {
     }, null)[1];
   }
   function pick(obj, keys4) {
-    return keys4.reduce((a, k5) => {
-      a[k5] = obj[k5];
+    return keys4.reduce((a, k4) => {
+      a[k4] = obj[k4];
       return a;
     }, {});
   }
@@ -26832,8 +26832,8 @@ var bleh = (() => {
   function integerBetween(thing, bottom2, top2) {
     return isInteger(thing) && thing >= bottom2 && thing <= top2;
   }
-  function floorMod(x2, n2) {
-    return x2 - n2 * Math.floor(x2 / n2);
+  function floorMod(x, n2) {
+    return x - n2 * Math.floor(x / n2);
   }
   function padStart(input2, n2 = 2) {
     const isNeg = input2 < 0;
@@ -28189,9 +28189,9 @@ var bleh = (() => {
     plus(duration2) {
       if (!this.isValid) return this;
       const dur = _Duration.fromDurationLike(duration2), result = {};
-      for (const k5 of orderedUnits$1) {
-        if (hasOwnProperty3(dur.values, k5) || hasOwnProperty3(this.values, k5)) {
-          result[k5] = dur.get(k5) + this.get(k5);
+      for (const k4 of orderedUnits$1) {
+        if (hasOwnProperty3(dur.values, k4) || hasOwnProperty3(this.values, k4)) {
+          result[k4] = dur.get(k4) + this.get(k4);
         }
       }
       return clone$1(this, { values: result }, true);
@@ -28216,8 +28216,8 @@ var bleh = (() => {
     mapUnits(fn6) {
       if (!this.isValid) return this;
       const result = {};
-      for (const k5 of Object.keys(this.values)) {
-        result[k5] = asNumber(fn6(this.values[k5], k5));
+      for (const k4 of Object.keys(this.values)) {
+        result[k4] = asNumber(fn6(this.values[k4], k4));
       }
       return clone$1(this, { values: result }, true);
     }
@@ -28309,22 +28309,22 @@ var bleh = (() => {
       units = units.map((u) => _Duration.normalizeUnit(u));
       const built = {}, accumulated = {}, vals = this.toObject();
       let lastUnit;
-      for (const k5 of orderedUnits$1) {
-        if (units.indexOf(k5) >= 0) {
-          lastUnit = k5;
+      for (const k4 of orderedUnits$1) {
+        if (units.indexOf(k4) >= 0) {
+          lastUnit = k4;
           let own = 0;
           for (const ak in accumulated) {
-            own += this.matrix[ak][k5] * accumulated[ak];
+            own += this.matrix[ak][k4] * accumulated[ak];
             accumulated[ak] = 0;
           }
-          if (isNumber(vals[k5])) {
-            own += vals[k5];
+          if (isNumber(vals[k4])) {
+            own += vals[k4];
           }
           const i2 = Math.trunc(own);
-          built[k5] = i2;
-          accumulated[k5] = (own * 1e3 - i2 * 1e3) / 1e3;
-        } else if (isNumber(vals[k5])) {
-          accumulated[k5] = vals[k5];
+          built[k4] = i2;
+          accumulated[k4] = (own * 1e3 - i2 * 1e3) / 1e3;
+        } else if (isNumber(vals[k4])) {
+          accumulated[k4] = vals[k4];
         }
       }
       for (const key in accumulated) {
@@ -28361,8 +28361,8 @@ var bleh = (() => {
     negate() {
       if (!this.isValid) return this;
       const negated = {};
-      for (const k5 of Object.keys(this.values)) {
-        negated[k5] = this.values[k5] === 0 ? 0 : -this.values[k5];
+      for (const k4 of Object.keys(this.values)) {
+        negated[k4] = this.values[k4] === 0 ? 0 : -this.values[k4];
       }
       return clone$1(this, { values: negated }, true);
     }
@@ -28772,7 +28772,7 @@ var bleh = (() => {
       let { s: s2 } = this, idx = 1, next;
       const results = [];
       while (s2 < this.e) {
-        const added = this.start.plus(dur.mapUnits((x2) => x2 * idx));
+        const added = this.start.plus(dur.mapUnits((x) => x * idx));
         next = +added > +this.e ? this.e : added;
         results.push(_Interval.fromDateTimes(s2, next));
         s2 = next;
@@ -29592,10 +29592,10 @@ var bleh = (() => {
     if (!isUndefined(matches2.u)) {
       matches2.S = parseMillis(matches2.u);
     }
-    const vals = Object.keys(matches2).reduce((r3, k5) => {
-      const f3 = toField(k5);
+    const vals = Object.keys(matches2).reduce((r3, k4) => {
+      const f3 = toField(k4);
       if (f3) {
-        r3[f3] = matches2[k5];
+        r3[f3] = matches2[k4];
       }
       return r3;
     }, {});
@@ -33470,7 +33470,7 @@ var bleh = (() => {
       if (Symbol.iterator in value) {
         return className(Array.from(value));
       }
-      return keys2(value).filter((k5) => value[k5]).join(" ");
+      return keys2(value).filter((k4) => value[k4]).join(" ");
     } else if (isVisibleChild(value)) {
       return "" + value;
     } else {
@@ -34218,7 +34218,7 @@ var bleh = (() => {
   }
   function rectToClientRect2(rect) {
     const {
-      x: x2,
+      x,
       y,
       width,
       height
@@ -34227,10 +34227,10 @@ var bleh = (() => {
       width,
       height,
       top: y,
-      left: x2,
-      right: x2 + width,
+      left: x,
+      right: x + width,
       bottom: y + height,
-      x: x2,
+      x,
       y
     };
   }
@@ -34293,7 +34293,7 @@ var bleh = (() => {
       options = {};
     }
     const {
-      x: x2,
+      x,
       y,
       platform: platform2,
       rects,
@@ -34317,7 +34317,7 @@ var bleh = (() => {
       strategy
     }));
     const rect = elementContext === "floating" ? {
-      x: x2,
+      x,
       y,
       width: rects.floating.width,
       height: rects.floating.height
@@ -34359,7 +34359,7 @@ var bleh = (() => {
       strategy
     });
     let {
-      x: x2,
+      x,
       y
     } = computeCoordsFromPlacement(rects, placement, rtl);
     let statefulPlacement = placement;
@@ -34380,7 +34380,7 @@ var bleh = (() => {
         data: data2,
         reset
       } = await fn6({
-        x: x2,
+        x,
         y,
         initialPlacement: placement,
         placement: statefulPlacement,
@@ -34393,7 +34393,7 @@ var bleh = (() => {
           floating
         }
       });
-      x2 = nextX != null ? nextX : x2;
+      x = nextX != null ? nextX : x;
       y = nextY != null ? nextY : y;
       middlewareData[name] = {
         ...middlewareData[name],
@@ -34413,7 +34413,7 @@ var bleh = (() => {
             }) : reset.rects;
           }
           ({
-            x: x2,
+            x,
             y
           } = computeCoordsFromPlacement(rects, statefulPlacement, rtl));
         }
@@ -34421,7 +34421,7 @@ var bleh = (() => {
       }
     }
     return {
-      x: x2,
+      x,
       y,
       placement: statefulPlacement,
       strategy,
@@ -34581,7 +34581,7 @@ var bleh = (() => {
         } = state;
         const {
           padding = 2,
-          x: x2,
+          x,
           y
         } = evaluate(options, state);
         const nativeClientRects = Array.from(await (platform2.getClientRects == null ? void 0 : platform2.getClientRects(elements2.reference)) || []);
@@ -34592,8 +34592,8 @@ var bleh = (() => {
         const fallback = rectToClientRect2(getBoundingRect(nativeClientRects));
         const paddingObject = getPaddingObject(padding);
         function getBoundingClientRect3() {
-          if (clientRects.length === 2 && (clientRects[0].left > clientRects[1].right || clientRects[1].left > clientRects[0].right) && x2 != null && y != null) {
-            return clientRects.find((rect) => x2 > rect.left - paddingObject.left && x2 < rect.right + paddingObject.right && y > rect.top - paddingObject.top && y < rect.bottom + paddingObject.bottom) || fallback;
+          if (clientRects.length === 2 && (clientRects[0].left > clientRects[1].right || clientRects[1].left > clientRects[0].right) && x != null && y != null) {
+            return clientRects.find((rect) => x > rect.left - paddingObject.left && x < rect.right + paddingObject.right && y > rect.top - paddingObject.top && y < rect.bottom + paddingObject.bottom) || fallback;
           }
           if (clientRects.length >= 2) {
             if (getSideAxis(placement) === "y") {
@@ -34692,7 +34692,7 @@ var bleh = (() => {
       async fn(state) {
         var _middlewareData$offse, _middlewareData$arrow;
         const {
-          x: x2,
+          x,
           y,
           placement,
           middlewareData
@@ -34702,7 +34702,7 @@ var bleh = (() => {
           return {};
         }
         return {
-          x: x2 + diffCoords.x,
+          x: x + diffCoords.x,
           y: y + diffCoords.y,
           data: {
             ...diffCoords,
@@ -34721,7 +34721,7 @@ var bleh = (() => {
       options,
       async fn(state) {
         const {
-          x: x2,
+          x,
           y,
           placement,
           platform: platform2
@@ -34732,11 +34732,11 @@ var bleh = (() => {
           limiter = {
             fn: (_ref2) => {
               let {
-                x: x3,
+                x: x2,
                 y: y2
               } = _ref2;
               return {
-                x: x3,
+                x: x2,
                 y: y2
               };
             }
@@ -34744,7 +34744,7 @@ var bleh = (() => {
           ...detectOverflowOptions
         } = evaluate(options, state);
         const coords = {
-          x: x2,
+          x,
           y
         };
         const overflow2 = await platform2.detectOverflow(state, detectOverflowOptions);
@@ -34767,7 +34767,7 @@ var bleh = (() => {
         return {
           ...limitedCoords,
           data: {
-            x: limitedCoords.x - x2,
+            x: limitedCoords.x - x,
             y: limitedCoords.y - y,
             enabled: {
               [mainAxis]: checkMainAxis,
@@ -34968,16 +34968,16 @@ var bleh = (() => {
       height,
       $
     } = getCssDimensions(domElement);
-    let x2 = ($ ? round2(rect.width) : rect.width) / width;
+    let x = ($ ? round2(rect.width) : rect.width) / width;
     let y = ($ ? round2(rect.height) : rect.height) / height;
-    if (!x2 || !Number.isFinite(x2)) {
-      x2 = 1;
+    if (!x || !Number.isFinite(x)) {
+      x = 1;
     }
     if (!y || !Number.isFinite(y)) {
       y = 1;
     }
     return {
-      x: x2,
+      x,
       y
     };
   }
@@ -35018,7 +35018,7 @@ var bleh = (() => {
       }
     }
     const visualOffsets = shouldAddVisualOffsets(domElement, isFixedStrategy, offsetParent) ? getVisualOffsets(domElement) : createCoords(0);
-    let x2 = (clientRect.left + visualOffsets.x) / scale2.x;
+    let x = (clientRect.left + visualOffsets.x) / scale2.x;
     let y = (clientRect.top + visualOffsets.y) / scale2.y;
     let width = clientRect.width / scale2.x;
     let height = clientRect.height / scale2.y;
@@ -35033,11 +35033,11 @@ var bleh = (() => {
         const css2 = getComputedStyle3(currentIFrame);
         const left2 = iframeRect.left + (currentIFrame.clientLeft + parseFloat(css2.paddingLeft)) * iframeScale.x;
         const top2 = iframeRect.top + (currentIFrame.clientTop + parseFloat(css2.paddingTop)) * iframeScale.y;
-        x2 *= iframeScale.x;
+        x *= iframeScale.x;
         y *= iframeScale.y;
         width *= iframeScale.x;
         height *= iframeScale.y;
-        x2 += left2;
+        x += left2;
         y += top2;
         currentWin = getWindow2(currentIFrame);
         currentIFrame = getFrameElement(currentWin);
@@ -35046,7 +35046,7 @@ var bleh = (() => {
     return rectToClientRect2({
       width,
       height,
-      x: x2,
+      x,
       y
     });
   }
@@ -35059,10 +35059,10 @@ var bleh = (() => {
   }
   function getHTMLOffset(documentElement, scroll) {
     const htmlRect = documentElement.getBoundingClientRect();
-    const x2 = htmlRect.left + scroll.scrollLeft - getWindowScrollBarX2(documentElement, htmlRect);
+    const x = htmlRect.left + scroll.scrollLeft - getWindowScrollBarX2(documentElement, htmlRect);
     const y = htmlRect.top + scroll.scrollTop;
     return {
-      x: x2,
+      x,
       y
     };
   }
@@ -35113,15 +35113,15 @@ var bleh = (() => {
     const body2 = html3.ownerDocument.body;
     const width = max2(html3.scrollWidth, html3.clientWidth, body2.scrollWidth, body2.clientWidth);
     const height = max2(html3.scrollHeight, html3.clientHeight, body2.scrollHeight, body2.clientHeight);
-    let x2 = -scroll.scrollLeft + getWindowScrollBarX2(html3);
+    let x = -scroll.scrollLeft + getWindowScrollBarX2(html3);
     const y = -scroll.scrollTop;
     if (getComputedStyle3(body2).direction === "rtl") {
-      x2 += max2(html3.clientWidth, body2.clientWidth) - width;
+      x += max2(html3.clientWidth, body2.clientWidth) - width;
     }
     return {
       width,
       height,
-      x: x2,
+      x,
       y
     };
   }
@@ -35136,20 +35136,20 @@ var bleh = (() => {
     const visualViewport = win.visualViewport;
     let width = html3.clientWidth;
     let height = html3.clientHeight;
-    let x2 = 0;
+    let x = 0;
     let y = 0;
     if (visualViewport) {
       const layoutRelativeClientCoords = !isWebKit() || strategy === "fixed";
       if (isLayoutViewport2) {
         if (!layoutRelativeClientCoords) {
-          x2 = -visualViewport.offsetLeft;
+          x = -visualViewport.offsetLeft;
           y = -visualViewport.offsetTop;
         }
       } else {
         width = visualViewport.width;
         height = visualViewport.height;
         if (layoutRelativeClientCoords) {
-          x2 = visualViewport.offsetLeft;
+          x = visualViewport.offsetLeft;
           y = visualViewport.offsetTop;
         }
       }
@@ -35169,7 +35169,7 @@ var bleh = (() => {
     return {
       width,
       height,
-      x: x2,
+      x,
       y
     };
   }
@@ -35180,12 +35180,12 @@ var bleh = (() => {
     const scale2 = getScale(element);
     const width = element.clientWidth * scale2.x;
     const height = element.clientHeight * scale2.y;
-    const x2 = left2 * scale2.x;
+    const x = left2 * scale2.x;
     const y = top2 * scale2.y;
     return {
       width,
       height,
-      x: x2,
+      x,
       y
     };
   }
@@ -35294,10 +35294,10 @@ var bleh = (() => {
       offsets.x = getWindowScrollBarX2(documentElement);
     }
     const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll) : createCoords(0);
-    const x2 = rect.left + scroll.scrollLeft - offsets.x - htmlOffset.x;
+    const x = rect.left + scroll.scrollLeft - offsets.x - htmlOffset.x;
     const y = rect.top + scroll.scrollTop - offsets.y - htmlOffset.y;
     return {
-      x: x2,
+      x,
       y,
       width: rect.width,
       height: rect.height
@@ -35709,10 +35709,10 @@ var bleh = (() => {
       }
       if (this.config.strategy != "fixed") {
         computePosition2(this.host, this.element, this.config).then(
-          ({ strategy, x: x2, y }) => {
+          ({ strategy, x, y }) => {
             Object.assign(this.element.style, {
               position: strategy,
-              left: `${x2}px`,
+              left: `${x}px`,
               top: `${y}px`
             });
           }
@@ -37382,11 +37382,11 @@ var bleh = (() => {
       ...converters[definition29.mode],
       ...definition29.toMode
     };
-    Object.keys(definition29.fromMode || {}).forEach((k5) => {
-      if (!converters[k5]) {
-        converters[k5] = {};
+    Object.keys(definition29.fromMode || {}).forEach((k4) => {
+      if (!converters[k4]) {
+        converters[k4] = {};
       }
-      converters[k5][definition29.mode] = definition29.fromMode[k5];
+      converters[k4][definition29.mode] = definition29.fromMode[k4];
     });
     if (!definition29.ranges) {
       definition29.ranges = {};
@@ -37841,20 +37841,20 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/a98/convertXyz65ToA98.js
   var gamma = (v) => Math.pow(Math.abs(v), 256 / 563) * Math.sign(v);
-  var convertXyz65ToA98 = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz65ToA98 = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = {
       mode: "a98",
       r: gamma(
-        x2 * 2.0415879038107465 - y * 0.5650069742788597 - 0.3447313507783297 * z
+        x * 2.0415879038107465 - y * 0.5650069742788597 - 0.3447313507783297 * z
       ),
       g: gamma(
-        x2 * -0.9692436362808798 + y * 1.8759675015077206 + 0.0415550574071756 * z
+        x * -0.9692436362808798 + y * 1.8759675015077206 + 0.0415550574071756 * z
       ),
       b: gamma(
-        x2 * 0.0134442806320312 - y * 0.1183623922310184 + 1.0151749943912058 * z
+        x * 0.0134442806320312 - y * 0.1183623922310184 + 1.0151749943912058 * z
       )
     };
     if (alpha2 !== void 0) {
@@ -37921,14 +37921,14 @@ var bleh = (() => {
   var convertLrgbToRgb_default = convertLrgbToRgb;
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/xyz65/convertXyz65ToRgb.js
-  var convertXyz65ToRgb = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz65ToRgb = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = convertLrgbToRgb_default({
-      r: x2 * 3.2409699419045226 - y * 1.537383177570094 - 0.4986107602930034 * z,
-      g: x2 * -0.9692436362808796 + y * 1.8759675015077204 + 0.0415550574071756 * z,
-      b: x2 * 0.0556300796969936 - y * 0.2039769588889765 + 1.0569715142428784 * z
+      r: x * 3.2409699419045226 - y * 1.537383177570094 - 0.4986107602930034 * z,
+      g: x * -0.9692436362808796 + y * 1.8759675015077204 + 0.0415550574071756 * z,
+      b: x * 0.0556300796969936 - y * 0.2039769588889765 + 1.0569715142428784 * z
     });
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -37994,14 +37994,14 @@ var bleh = (() => {
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
     let l2 = (BCAD * b + r3 * DE - g * BE) / (BCAD + DE - BE);
-    let x2 = b - l2;
-    let y = (M[4] * (g - l2) - M[2] * x2) / M[3];
+    let x = b - l2;
+    let y = (M[4] * (g - l2) - M[2] * x) / M[3];
     let res = {
       mode: "cubehelix",
       l: l2,
-      s: l2 === 0 || l2 === 1 ? void 0 : Math.sqrt(x2 * x2 + y * y) / (M[4] * l2 * (1 - l2))
+      s: l2 === 0 || l2 === 1 ? void 0 : Math.sqrt(x * x + y * y) / (M[4] * l2 * (1 - l2))
     };
-    if (res.s) res.h = Math.atan2(y, x2) * radToDeg - 120;
+    if (res.s) res.h = Math.atan2(y, x) * radToDeg - 120;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   };
@@ -38181,11 +38181,11 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/lab65/convertXyz65ToLab65.js
   var f = (value) => value > e ? Math.cbrt(value) : (k * value + 16) / 116;
-  var convertXyz65ToLab65 = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz65ToLab65 = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
-    let f0 = f(x2 / D65.X);
+    let f0 = f(x / D65.X);
     let f1 = f(y / D65.Y);
     let f22 = f(z / D65.Z);
     let res = {
@@ -38397,14 +38397,14 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let M4 = Math.max(r3, g, b), m = Math.min(r3, g, b);
+    let M3 = Math.max(r3, g, b), m = Math.min(r3, g, b);
     let res = {
       mode: "hsi",
       s: r3 + g + b === 0 ? 0 : 1 - 3 * m / (r3 + g + b),
       i: (r3 + g + b) / 3
     };
-    if (M4 - m !== 0)
-      res.h = (M4 === r3 ? (g - b) / (M4 - m) + (g < b) * 6 : M4 === g ? (b - r3) / (M4 - m) + 2 : (r3 - g) / (M4 - m) + 4) * 60;
+    if (M3 - m !== 0)
+      res.h = (M3 === r3 ? (g - b) / (M3 - m) + (g < b) * 6 : M3 === g ? (b - r3) / (M3 - m) + 2 : (r3 - g) / (M3 - m) + 4) * 60;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   }
@@ -38480,14 +38480,14 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let M4 = Math.max(r3, g, b), m = Math.min(r3, g, b);
+    let M3 = Math.max(r3, g, b), m = Math.min(r3, g, b);
     let res = {
       mode: "hsl",
-      s: M4 === m ? 0 : (M4 - m) / (1 - Math.abs(M4 + m - 1)),
-      l: 0.5 * (M4 + m)
+      s: M3 === m ? 0 : (M3 - m) / (1 - Math.abs(M3 + m - 1)),
+      l: 0.5 * (M3 + m)
     };
-    if (M4 - m !== 0)
-      res.h = (M4 === r3 ? (g - b) / (M4 - m) + (g < b) * 6 : M4 === g ? (b - r3) / (M4 - m) + 2 : (r3 - g) / (M4 - m) + 4) * 60;
+    if (M3 - m !== 0)
+      res.h = (M3 === r3 ? (g - b) / (M3 - m) + (g < b) * 6 : M3 === g ? (b - r3) / (M3 - m) + 2 : (r3 - g) / (M3 - m) + 4) * 60;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   }
@@ -38643,14 +38643,14 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let M4 = Math.max(r3, g, b), m = Math.min(r3, g, b);
+    let M3 = Math.max(r3, g, b), m = Math.min(r3, g, b);
     let res = {
       mode: "hsv",
-      s: M4 === 0 ? 0 : 1 - m / M4,
-      v: M4
+      s: M3 === 0 ? 0 : 1 - m / M3,
+      v: M3
     };
-    if (M4 - m !== 0)
-      res.h = (M4 === r3 ? (g - b) / (M4 - m) + (g < b) * 6 : M4 === g ? (b - r3) / (M4 - m) + 2 : (r3 - g) / (M4 - m) + 4) * 60;
+    if (M3 - m !== 0)
+      res.h = (M3 === r3 ? (g - b) / (M3 - m) + (g < b) * 6 : M3 === g ? (b - r3) / (M3 - m) + 2 : (r3 - g) / (M3 - m) + 4) * 60;
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
   }
@@ -38844,8 +38844,8 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/itp/convertXyz65ToItp.js
   var toAbs = (c2 = 0) => Math.max(c2 * YW, 0);
-  var convertXyz65ToItp = ({ x: x2, y, z, alpha: alpha2 }) => {
-    const absX = toAbs(x2);
+  var convertXyz65ToItp = ({ x, y, z, alpha: alpha2 }) => {
+    const absX = toAbs(x);
     const absY = toAbs(y);
     const absZ = toAbs(z);
     const l2 = transferPqEncode(
@@ -38905,12 +38905,12 @@ var bleh = (() => {
     return Math.pow((C1 + C2 * vn3) / (1 + C3 * vn3), p);
   };
   var abs = (v = 0) => Math.max(v * 203, 0);
-  var convertXyz65ToJab = ({ x: x2, y, z, alpha: alpha2 }) => {
-    x2 = abs(x2);
+  var convertXyz65ToJab = ({ x, y, z, alpha: alpha2 }) => {
+    x = abs(x);
     y = abs(y);
     z = abs(z);
-    let xp = 1.15 * x2 - 0.15 * z;
-    let yp = 0.66 * y + 0.34 * x2;
+    let xp = 1.15 * x - 0.15 * z;
+    let yp = 0.66 * y + 0.34 * x;
     let l2 = jabPqEncode(0.41478972 * xp + 0.579999 * yp + 0.014648 * z);
     let m = jabPqEncode(-0.20151 * xp + 1.120649 * yp + 0.0531008 * z);
     let s2 = jabPqEncode(-0.0166008 * xp + 0.2648 * yp + 0.6684799 * z);
@@ -39099,14 +39099,14 @@ var bleh = (() => {
   var convertLabToXyz50_default = convertLabToXyz50;
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/xyz50/convertXyz50ToRgb.js
-  var convertXyz50ToRgb = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz50ToRgb = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = convertLrgbToRgb_default({
-      r: x2 * 3.1341359569958707 - y * 1.6173863321612538 - 0.4906619460083532 * z,
-      g: x2 * -0.978795502912089 + y * 1.916254567259524 + 0.03344273116131949 * z,
-      b: x2 * 0.07195537988411677 - y * 0.2289768264158322 + 1.405386058324125 * z
+      r: x * 3.1341359569958707 - y * 1.6173863321612538 - 0.4906619460083532 * z,
+      g: x * -0.978795502912089 + y * 1.916254567259524 + 0.03344273116131949 * z,
+      b: x * 0.07195537988411677 - y * 0.2289768264158322 + 1.405386058324125 * z
     });
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -39137,11 +39137,11 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/lab/convertXyz50ToLab.js
   var f2 = (value) => value > e3 ? Math.cbrt(value) : (k3 * value + 16) / 116;
-  var convertXyz50ToLab = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz50ToLab = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
-    let f0 = f2(x2 / D50.X);
+    let f0 = f2(x / D50.X);
     let f1 = f2(y / D50.Y);
     let f22 = f2(z / D50.Z);
     let res = {
@@ -39380,18 +39380,18 @@ var bleh = (() => {
   var convertLchuvToLuv_default = convertLchuvToLuv;
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/luv/convertXyz50ToLuv.js
-  var u_fn = (x2, y, z) => 4 * x2 / (x2 + 15 * y + 3 * z);
-  var v_fn = (x2, y, z) => 9 * y / (x2 + 15 * y + 3 * z);
+  var u_fn = (x, y, z) => 4 * x / (x + 15 * y + 3 * z);
+  var v_fn = (x, y, z) => 9 * y / (x + 15 * y + 3 * z);
   var un = u_fn(D50.X, D50.Y, D50.Z);
   var vn = v_fn(D50.X, D50.Y, D50.Z);
   var l_fn = (value) => value <= e3 ? k3 * value : 116 * Math.cbrt(value) - 16;
-  var convertXyz50ToLuv = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz50ToLuv = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let l2 = l_fn(y / D50.Y);
-    let u = u_fn(x2, y, z);
-    let v = v_fn(x2, y, z);
+    let u = u_fn(x, y, z);
+    let v = v_fn(x, y, z);
     if (!isFinite(u) || !isFinite(v)) {
       l2 = u = v = 0;
     } else {
@@ -39412,8 +39412,8 @@ var bleh = (() => {
   var convertXyz50ToLuv_default = convertXyz50ToLuv;
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/luv/convertLuvToXyz50.js
-  var u_fn2 = (x2, y, z) => 4 * x2 / (x2 + 15 * y + 3 * z);
-  var v_fn2 = (x2, y, z) => 9 * y / (x2 + 15 * y + 3 * z);
+  var u_fn2 = (x, y, z) => 4 * x / (x + 15 * y + 3 * z);
+  var v_fn2 = (x, y, z) => 9 * y / (x + 15 * y + 3 * z);
   var un2 = u_fn2(D50.X, D50.Y, D50.Z);
   var vn2 = v_fn2(D50.X, D50.Y, D50.Z);
   var convertLuvToXyz50 = ({ l: l2, u, v, alpha: alpha2 }) => {
@@ -39426,9 +39426,9 @@ var bleh = (() => {
     let up = u / (13 * l2) + un2;
     let vp = v / (13 * l2) + vn2;
     let y = D50.Y * (l2 <= 8 ? l2 / k3 : Math.pow((l2 + 16) / 116, 3));
-    let x2 = y * (9 * up) / (4 * vp);
+    let x = y * (9 * up) / (4 * vp);
     let z = y * (12 - 3 * up - 20 * vp) / (4 * vp);
-    let res = { mode: "xyz50", x: x2, y, z };
+    let res = { mode: "xyz50", x, y, z };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
     }
@@ -39520,20 +39520,20 @@ var bleh = (() => {
     if (r3 === void 0) r3 = 0;
     if (g === void 0) g = 0;
     if (b === void 0) b = 0;
-    let L2 = Math.cbrt(
+    let L = Math.cbrt(
       0.412221469470763 * r3 + 0.5363325372617348 * g + 0.0514459932675022 * b
     );
-    let M4 = Math.cbrt(
+    let M3 = Math.cbrt(
       0.2119034958178252 * r3 + 0.6806995506452344 * g + 0.1073969535369406 * b
     );
-    let S = Math.cbrt(
+    let S2 = Math.cbrt(
       0.0883024591900564 * r3 + 0.2817188391361215 * g + 0.6299787016738222 * b
     );
     let res = {
       mode: "oklab",
-      l: 0.210454268309314 * L2 + 0.7936177747023054 * M4 - 0.0040720430116193 * S,
-      a: 1.9779985324311684 * L2 - 2.42859224204858 * M4 + 0.450593709617411 * S,
-      b: 0.0259040424655478 * L2 + 0.7827717124575296 * M4 - 0.8086757549230774 * S
+      l: 0.210454268309314 * L + 0.7936177747023054 * M3 - 0.0040720430116193 * S2,
+      a: 1.9779985324311684 * L - 2.42859224204858 * M3 + 0.450593709617411 * S2,
+      b: 0.0259040424655478 * L + 0.7827717124575296 * M3 - 0.8086757549230774 * S2
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -39557,14 +39557,14 @@ var bleh = (() => {
     if (l2 === void 0) l2 = 0;
     if (a === void 0) a = 0;
     if (b === void 0) b = 0;
-    let L2 = Math.pow(l2 + 0.3963377773761749 * a + 0.2158037573099136 * b, 3);
-    let M4 = Math.pow(l2 - 0.1055613458156586 * a - 0.0638541728258133 * b, 3);
-    let S = Math.pow(l2 - 0.0894841775298119 * a - 1.2914855480194092 * b, 3);
+    let L = Math.pow(l2 + 0.3963377773761749 * a + 0.2158037573099136 * b, 3);
+    let M3 = Math.pow(l2 - 0.1055613458156586 * a - 0.0638541728258133 * b, 3);
+    let S2 = Math.pow(l2 - 0.0894841775298119 * a - 1.2914855480194092 * b, 3);
     let res = {
       mode: "lrgb",
-      r: 4.076741636075957 * L2 - 3.3077115392580616 * M4 + 0.2309699031821044 * S,
-      g: -1.2684379732850317 * L2 + 2.6097573492876887 * M4 - 0.3413193760026573 * S,
-      b: -0.0041960761386756 * L2 - 0.7034186179359362 * M4 + 1.7076146940746117 * S
+      r: 4.076741636075957 * L - 3.3077115392580616 * M3 + 0.2309699031821044 * S2,
+      g: -1.2684379732850317 * L + 2.6097573492876887 * M3 - 0.3413193760026573 * S2,
+      b: -0.0041960761386756 * L - 0.7034186179359362 * M3 + 1.7076146940746117 * S2
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -39578,26 +39578,26 @@ var bleh = (() => {
   var convertOklabToRgb_default = convertOklabToRgb;
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/okhsl/helpers.js
-  function toe(x2) {
+  function toe(x) {
     const k_1 = 0.206;
     const k_2 = 0.03;
     const k_3 = (1 + k_1) / (1 + k_2);
-    return 0.5 * (k_3 * x2 - k_1 + Math.sqrt((k_3 * x2 - k_1) * (k_3 * x2 - k_1) + 4 * k_2 * k_3 * x2));
+    return 0.5 * (k_3 * x - k_1 + Math.sqrt((k_3 * x - k_1) * (k_3 * x - k_1) + 4 * k_2 * k_3 * x));
   }
-  function toe_inv(x2) {
+  function toe_inv(x) {
     const k_1 = 0.206;
     const k_2 = 0.03;
     const k_3 = (1 + k_1) / (1 + k_2);
-    return (x2 * x2 + k_1 * x2) / (k_3 * (x2 + k_2));
+    return (x * x + k_1 * x) / (k_3 * (x + k_2));
   }
   function compute_max_saturation(a, b) {
-    let k0, k1, k22, k32, k42, wl, wm, ws;
+    let k0, k1, k22, k32, k4, wl, wm, ws;
     if (-1.88170328 * a - 0.80936493 * b > 1) {
       k0 = 1.19086277;
       k1 = 1.76576728;
       k22 = 0.59662641;
       k32 = 0.75515197;
-      k42 = 0.56771245;
+      k4 = 0.56771245;
       wl = 4.0767416621;
       wm = -3.3077115913;
       ws = 0.2309699292;
@@ -39606,7 +39606,7 @@ var bleh = (() => {
       k1 = -0.45954404;
       k22 = 0.08285427;
       k32 = 0.1254107;
-      k42 = 0.14503204;
+      k4 = 0.14503204;
       wl = -1.2684380046;
       wm = 2.6097574011;
       ws = -0.3413193965;
@@ -39615,19 +39615,19 @@ var bleh = (() => {
       k1 = -915799e-8;
       k22 = -1.1513021;
       k32 = -0.50559606;
-      k42 = 692167e-8;
+      k4 = 692167e-8;
       wl = -0.0041960863;
       wm = -0.7034186147;
       ws = 1.707614701;
     }
-    let S = k0 + k1 * a + k22 * b + k32 * a * a + k42 * a * b;
+    let S2 = k0 + k1 * a + k22 * b + k32 * a * a + k4 * a * b;
     let k_l = 0.3963377774 * a + 0.2158037573 * b;
     let k_m = -0.1055613458 * a - 0.0638541728 * b;
     let k_s = -0.0894841775 * a - 1.291485548 * b;
     {
-      let l_ = 1 + S * k_l;
-      let m_ = 1 + S * k_m;
-      let s_ = 1 + S * k_s;
+      let l_ = 1 + S2 * k_l;
+      let m_ = 1 + S2 * k_m;
+      let s_ = 1 + S2 * k_s;
       let l2 = l_ * l_ * l_;
       let m = m_ * m_ * m_;
       let s2 = s_ * s_ * s_;
@@ -39640,9 +39640,9 @@ var bleh = (() => {
       let f3 = wl * l2 + wm * m + ws * s2;
       let f1 = wl * l_dS + wm * m_dS + ws * s_dS;
       let f22 = wl * l_dS2 + wm * m_dS2 + ws * s_dS2;
-      S = S - f3 * f1 / (f1 * f1 - 0.5 * f3 * f22);
+      S2 = S2 - f3 * f1 / (f1 * f1 - 0.5 * f3 * f22);
     }
-    return S;
+    return S2;
   }
   function find_cusp(a, b) {
     let S_cusp = compute_max_saturation(a, b);
@@ -39670,11 +39670,11 @@ var bleh = (() => {
         let m_dt = dL + dC * k_m;
         let s_dt = dL + dC * k_s;
         {
-          let L2 = L0 * (1 - t2) + t2 * L1;
+          let L = L0 * (1 - t2) + t2 * L1;
           let C = t2 * C12;
-          let l_ = L2 + C * k_l;
-          let m_ = L2 + C * k_m;
-          let s_ = L2 + C * k_s;
+          let l_ = L + C * k_l;
+          let m_ = L + C * k_m;
+          let s_ = L + C * k_s;
           let l2 = l_ * l_ * l_;
           let m = m_ * m_ * m_;
           let s2 = s_ * s_ * s_;
@@ -39712,26 +39712,26 @@ var bleh = (() => {
     if (!cusp) {
       cusp = find_cusp(a_, b_);
     }
-    let L2 = cusp[0];
+    let L = cusp[0];
     let C = cusp[1];
-    return [C / L2, C / (1 - L2)];
+    return [C / L, C / (1 - L)];
   }
-  function get_Cs(L2, a_, b_) {
+  function get_Cs(L, a_, b_) {
     let cusp = find_cusp(a_, b_);
-    let C_max = find_gamut_intersection(a_, b_, L2, 1, L2, cusp);
+    let C_max = find_gamut_intersection(a_, b_, L, 1, L, cusp);
     let ST_max = get_ST_max(a_, b_, cusp);
     let S_mid = 0.11516993 + 1 / (7.4477897 + 4.1590124 * b_ + a_ * (-2.19557347 + 1.75198401 * b_ + a_ * (-2.13704948 - 10.02301043 * b_ + a_ * (-4.24894561 + 5.38770819 * b_ + 4.69891013 * a_))));
     let T_mid = 0.11239642 + 1 / (1.6132032 - 0.68124379 * b_ + a_ * (0.40370612 + 0.90148123 * b_ + a_ * (-0.27087943 + 0.6122399 * b_ + a_ * (299215e-8 - 0.45399568 * b_ - 0.14661872 * a_))));
-    let k5 = C_max / Math.min(L2 * ST_max[0], (1 - L2) * ST_max[1]);
-    let C_a = L2 * S_mid;
-    let C_b = (1 - L2) * T_mid;
-    let C_mid = 0.9 * k5 * Math.sqrt(
+    let k4 = C_max / Math.min(L * ST_max[0], (1 - L) * ST_max[1]);
+    let C_a = L * S_mid;
+    let C_b = (1 - L) * T_mid;
+    let C_mid = 0.9 * k4 * Math.sqrt(
       Math.sqrt(
         1 / (1 / (C_a * C_a * C_a * C_a) + 1 / (C_b * C_b * C_b * C_b))
       )
     );
-    C_a = L2 * 0.4;
-    C_b = (1 - L2) * 0.8;
+    C_a = L * 0.4;
+    C_b = (1 - L) * 0.8;
     let C_0 = Math.sqrt(1 / (1 / (C_a * C_a) + 1 / (C_b * C_b)));
     return [C_0, C_mid, C_max];
   }
@@ -39834,7 +39834,7 @@ var bleh = (() => {
     let b_ = c2 ? b / c2 : 1;
     let [S_max, T] = get_ST_max(a_, b_);
     let S_0 = 0.5;
-    let k5 = 1 - S_0 / S_max;
+    let k4 = 1 - S_0 / S_max;
     let t2 = T / (c2 + l2 * T);
     let L_v = t2 * l2;
     let C_v = t2 * c2;
@@ -39849,7 +39849,7 @@ var bleh = (() => {
     l2 = toe(l2);
     const ret = {
       mode: "okhsv",
-      s: c2 ? (S_0 + T) * C_v / (T * S_0 + T * k5 * C_v) : 0,
+      s: c2 ? (S_0 + T) * C_v / (T * S_0 + T * k4 * C_v) : 0,
       v: l2 ? l2 / L_v : 0
     };
     if (ret.s) {
@@ -39874,9 +39874,9 @@ var bleh = (() => {
     const b_ = Math.sin(h / 180 * Math.PI);
     const [S_max, T] = get_ST_max(a_, b_);
     const S_0 = 0.5;
-    const k5 = 1 - S_0 / S_max;
-    const L_v = 1 - s2 * S_0 / (S_0 + T - T * k5 * s2);
-    const C_v = s2 * T * S_0 / (S_0 + T - T * k5 * s2);
+    const k4 = 1 - S_0 / S_max;
+    const L_v = 1 - s2 * S_0 / (S_0 + T - T * k4 * s2);
+    const C_v = s2 * T * S_0 / (S_0 + T - T * k4 * s2);
     const L_vt = toe_inv(L_v);
     const C_vt = C_v * L_vt / L_v;
     const rgb_scale = convertOklabToLrgb_default({
@@ -40050,15 +40050,15 @@ var bleh = (() => {
   var convertP3ToXyz65_default = convertP3ToXyz65;
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/p3/convertXyz65ToP3.js
-  var convertXyz65ToP3 = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz65ToP3 = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = convertLrgbToRgb_default(
       {
-        r: x2 * 2.4934969119414263 - y * 0.9313836179191242 - 0.402710784450717 * z,
-        g: x2 * -0.8294889695615749 + y * 1.7626640603183465 + 0.0236246858419436 * z,
-        b: x2 * 0.0358458302437845 - y * 0.0761723892680418 + 0.9568845240076871 * z
+        r: x * 2.4934969119414263 - y * 0.9313836179191242 - 0.402710784450717 * z,
+        g: x * -0.8294889695615749 + y * 1.7626640603183465 + 0.0236246858419436 * z,
+        b: x * 0.0358458302437845 - y * 0.0761723892680418 + 0.9568845240076871 * z
       },
       "p3"
     );
@@ -40094,19 +40094,19 @@ var bleh = (() => {
     }
     return 16 * v;
   };
-  var convertXyz50ToProphoto = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz50ToProphoto = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = {
       mode: "prophoto",
       r: gamma2(
-        x2 * 1.3457868816471585 - y * 0.2555720873797946 - 0.0511018649755453 * z
+        x * 1.3457868816471585 - y * 0.2555720873797946 - 0.0511018649755453 * z
       ),
       g: gamma2(
-        x2 * -0.5446307051249019 + y * 1.5082477428451466 + 0.0205274474364214 * z
+        x * -0.5446307051249019 + y * 1.5082477428451466 + 0.0205274474364214 * z
       ),
-      b: gamma2(x2 * 0 + y * 0 + 1.2119675456389452 * z)
+      b: gamma2(x * 0 + y * 0 + 1.2119675456389452 * z)
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -40167,20 +40167,20 @@ var bleh = (() => {
     }
     return 4.5 * v;
   };
-  var convertXyz65ToRec2020 = ({ x: x2, y, z, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXyz65ToRec2020 = ({ x, y, z, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = {
       mode: "rec2020",
       r: gamma3(
-        x2 * 1.7166511879712683 - y * 0.3556707837763925 - 0.2533662813736599 * z
+        x * 1.7166511879712683 - y * 0.3556707837763925 - 0.2533662813736599 * z
       ),
       g: gamma3(
-        x2 * -0.6666843518324893 + y * 1.6164812366349395 + 0.0157685458139111 * z
+        x * -0.6666843518324893 + y * 1.6164812366349395 + 0.0157685458139111 * z
       ),
       b: gamma3(
-        x2 * 0.0176398574453108 - y * 0.0427706132578085 + 0.9421031212354739 * z
+        x * 0.0176398574453108 - y * 0.0427706132578085 + 0.9421031212354739 * z
       )
     };
     if (alpha2 !== void 0) {
@@ -40261,12 +40261,12 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/xyb/convertXybToRgb.js
   var transfer2 = (v) => Math.pow(v + bias_cbrt, 3);
-  var convertXybToRgb = ({ x: x2, y, b, alpha: alpha2 }) => {
-    if (x2 === void 0) x2 = 0;
+  var convertXybToRgb = ({ x, y, b, alpha: alpha2 }) => {
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (b === void 0) b = 0;
-    const l2 = transfer2(x2 + y) - bias;
-    const m = transfer2(y - x2) - bias;
+    const l2 = transfer2(x + y) - bias;
+    const m = transfer2(y - x) - bias;
     const s2 = transfer2(b + y) - bias;
     const res = convertLrgbToRgb_default({
       r: 11.031566904639861 * l2 - 9.866943908131562 * m - 0.16462299650829934 * s2,
@@ -40334,15 +40334,15 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/xyz65/convertXyz65ToXyz50.js
   var convertXyz65ToXyz50 = (xyz652) => {
-    let { x: x2, y, z, alpha: alpha2 } = xyz652;
-    if (x2 === void 0) x2 = 0;
+    let { x, y, z, alpha: alpha2 } = xyz652;
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = {
       mode: "xyz50",
-      x: 1.0479298208405488 * x2 + 0.0229467933410191 * y - 0.0501922295431356 * z,
-      y: 0.0296278156881593 * x2 + 0.990434484573249 * y - 0.0170738250293851 * z,
-      z: -0.0092430581525912 * x2 + 0.0150551448965779 * y + 0.7518742899580008 * z
+      x: 1.0479298208405488 * x + 0.0229467933410191 * y - 0.0501922295431356 * z,
+      y: 0.0296278156881593 * x + 0.990434484573249 * y - 0.0170738250293851 * z,
+      z: -0.0092430581525912 * x + 0.0150551448965779 * y + 0.7518742899580008 * z
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -40353,15 +40353,15 @@ var bleh = (() => {
 
   // node_modules/.pnpm/culori@4.0.2/node_modules/culori/src/xyz65/convertXyz50ToXyz65.js
   var convertXyz50ToXyz65 = (xyz502) => {
-    let { x: x2, y, z, alpha: alpha2 } = xyz502;
-    if (x2 === void 0) x2 = 0;
+    let { x, y, z, alpha: alpha2 } = xyz502;
+    if (x === void 0) x = 0;
     if (y === void 0) y = 0;
     if (z === void 0) z = 0;
     let res = {
       mode: "xyz65",
-      x: 0.9554734527042182 * x2 - 0.0230985368742614 * y + 0.0632593086610217 * z,
-      y: -0.0283697069632081 * x2 + 1.0099954580058226 * y + 0.021041398966943 * z,
-      z: 0.0123140016883199 * x2 - 0.0205076964334779 * y + 1.3303659366080753 * z
+      x: 0.9554734527042182 * x - 0.0230985368742614 * y + 0.0632593086610217 * z,
+      y: -0.0283697069632081 * x + 1.0099954580058226 * y + 0.021041398966943 * z,
+      z: 0.0123140016883199 * x - 0.0205076964334779 * y + 1.3303659366080753 * z
     };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
@@ -40514,7 +40514,7 @@ var bleh = (() => {
   function hex_to_oklch(hex3) {
     hex3 = hex3.replace("#", "");
     if (hex3.length == 3) {
-      hex3 = hex3.split("").map((x2) => x2 + x2).join("");
+      hex3 = hex3.split("").map((x) => x + x).join("");
     }
     const r3 = parseInt(hex3.slice(0, 2), 16);
     const g = parseInt(hex3.slice(2, 4), 16);
@@ -40523,12 +40523,12 @@ var bleh = (() => {
   }
   function rgb_to_oklch(r3, g, b) {
     const result = oklch({ mode: "rgb", r: r3 / 255, g: g / 255, b: b / 255 });
-    const L2 = result.l ?? 0;
+    const L = result.l ?? 0;
     const c2 = result.c ?? 0;
     const h = result.h ?? 0;
     const max_chroma = 0.4;
     const sat = Math.min(c2 / max_chroma, 1);
-    return { l: L2 * 100 * 0.92 - 21, s: sat * 158, h: Math.round(h) };
+    return { l: L * 100 * 0.92 - 21, s: sat * 158, h: Math.round(h) };
   }
   function rgb_to_hsl(r3, g, b) {
     const hex3 = rgb_to_hex(r3, g, b);
@@ -53753,9 +53753,9 @@ var bleh = (() => {
     });
   }
   function collect_keys(object, prefix, out = []) {
-    for (const k5 in object) {
-      const val = object[k5];
-      const key = prefix ? `${prefix}.${k5}` : k5;
+    for (const k4 in object) {
+      const val = object[k4];
+      const key = prefix ? `${prefix}.${k4}` : k4;
       if (typeof val == "object" && !Object.keys(lang_info).some((lang2) => lang2 in val)) {
         collect_keys(val, key, out);
       } else {
@@ -56959,13 +56959,13 @@ var bleh = (() => {
     const locale = lang;
     const months2 = Array.from(
       { length: 12 },
-      (_, i2) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
+      (_2, i2) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
         new Date(2e3, i2, 1)
       )
     );
     const raw_weekdays = Array.from(
       { length: 7 },
-      (_, i2) => new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+      (_2, i2) => new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
         new Date(1970, 0, 4 + i2)
       )
     );
@@ -57236,7 +57236,7 @@ var bleh = (() => {
                 </button>
             </div>
             <div class="years calendar-view">
-                ${Array.from({ length: 10 }, (_, i2) => decade_start + i2).map(
+                ${Array.from({ length: 10 }, (_2, i2) => decade_start + i2).map(
         (yr) => {
           return html.node`
                         <button class="btn year calendar-entry" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
@@ -57255,7 +57255,7 @@ var bleh = (() => {
     function validate_text_date(value2) {
       const m = value2.match(/^(\d{4})-(\d{2})-(\d{2})$/);
       if (!m) return null;
-      const [_, ys, ms, ds] = m;
+      const [_2, ys, ms, ds] = m;
       const date = /* @__PURE__ */ new Date(`${ys}-${ms}-${ds}T00:00:00`);
       if (date.getFullYear() !== +ys || date.getMonth() + 1 !== +ms || date.getDate() !== +ds) {
         return null;
@@ -58220,11 +58220,11 @@ var bleh = (() => {
   var _ref = typeof Reflect !== "undefined" && Reflect;
   var apply = _ref.apply;
   var construct = _ref.construct;
-  if (!freeze2) freeze2 = function freeze3(x2) {
-    return x2;
+  if (!freeze2) freeze2 = function freeze3(x) {
+    return x;
   };
-  if (!seal) seal = function seal2(x2) {
-    return x2;
+  if (!seal) seal = function seal2(x) {
+    return x;
   };
   if (!apply) apply = function apply2(func, thisArg) {
     for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) args[_key - 2] = arguments[_key];
@@ -59071,7 +59071,7 @@ var bleh = (() => {
           return scriptUrl;
         }
       });
-    } catch (_) {
+    } catch (_2) {
       console.warn("TrustedTypes policy " + policyName + " could not be created.");
       return null;
     }
@@ -59510,7 +59510,7 @@ var bleh = (() => {
       arrayPush(DOMPurify.removed, { element: node });
       try {
         getParentNode3(node).removeChild(node);
-      } catch (_) {
+      } catch (_2) {
         remove2(node);
         if (!getParentNode3(node)) throw typeErrorCreate("a node selected for removal could not be detached from its tree and cannot be safely returned; refusing to sanitize in place");
       }
@@ -59518,10 +59518,10 @@ var bleh = (() => {
     const _stripAttributeNode = function _stripAttributeNode2(element, attribute3, name) {
       try {
         removeAttributeNode(element, attribute3);
-      } catch (_) {
+      } catch (_2) {
         try {
           element.removeAttribute(name);
-        } catch (_2) {
+        } catch (_3) {
         }
       }
     };
@@ -59531,7 +59531,7 @@ var bleh = (() => {
       if (childNodes) arrayForEach(arraySlice(childNodes), (child) => {
         try {
           remove2(child);
-        } catch (_) {
+        } catch (_2) {
         }
       });
       const attributes2 = _readNodeType(root3) === NODE_TYPE.element ? getAttributes(root3) : null;
@@ -59544,7 +59544,7 @@ var bleh = (() => {
     const _removeAttribute = function _removeAttribute2(name, element, attr2) {
       if (!attr2) try {
         attr2 = element.getAttributeNode(name);
-      } catch (_) {
+      } catch (_2) {
         attr2 = null;
       }
       arrayPush(DOMPurify.removed, {
@@ -59554,20 +59554,20 @@ var bleh = (() => {
       try {
         if (attr2) removeAttributeNode(element, attr2);
         else element.removeAttribute(name);
-      } catch (_) {
+      } catch (_2) {
         try {
           element.removeAttribute(name);
-        } catch (_2) {
+        } catch (_3) {
         }
       }
       if (name === "is") {
         if (RETURN_DOM || RETURN_DOM_FRAGMENT) try {
           _forceRemove(element);
-        } catch (_) {
+        } catch (_2) {
         }
         else try {
           element.setAttribute(name, "");
-        } catch (_) {
+        } catch (_2) {
         }
       }
     };
@@ -59681,7 +59681,7 @@ var bleh = (() => {
         if (nodeType2 === NODE_TYPE.processingInstruction || nodeType2 === NODE_TYPE.comment && regExpTest(COMMENT_MARKUP_PROBE, node.data)) {
           try {
             remove2(node);
-          } catch (_) {
+          } catch (_2) {
           }
           return false;
         }
@@ -59691,7 +59691,7 @@ var bleh = (() => {
           try {
             if (element.hasAttribute && element.hasAttribute("patchsrc")) element.removeAttribute("patchsrc");
             if (element.hasAttribute && element.hasAttribute("for") && _isPatchLinkageAttribute("for", lcTag)) element.removeAttribute("for");
-          } catch (_) {
+          } catch (_2) {
           }
         }
         return true;
@@ -59709,13 +59709,13 @@ var bleh = (() => {
       const dirtyPayload = trustedTypesPolicy ? _createTrustedHTML(dirty) : dirty;
       if (NAMESPACE === HTML_NAMESPACE) try {
         doc = new DOMParser2().parseFromString(dirtyPayload, PARSER_MEDIA_TYPE);
-      } catch (_) {
+      } catch (_2) {
       }
       if (!doc || !doc.documentElement) {
         doc = implementation.createDocument(NAMESPACE, "template", null);
         try {
           doc.documentElement.innerHTML = IS_EMPTY_INPUT ? emptyHTML : dirtyPayload;
-        } catch (_) {
+        } catch (_2) {
         }
       }
       const body2 = doc.body || doc.documentElement;
@@ -59761,7 +59761,7 @@ var bleh = (() => {
       if (!getNodeType || typeof value !== "object" || value === null) return false;
       try {
         return getNodeType(value) === NODE_TYPE.documentFragment;
-      } catch (_) {
+      } catch (_2) {
         return false;
       }
     };
@@ -59769,7 +59769,7 @@ var bleh = (() => {
       if (!getNodeType || typeof value !== "object" || value === null) return false;
       try {
         return typeof getNodeType(value) === "number";
-      } catch (_) {
+      } catch (_2) {
         return false;
       }
     };
@@ -59909,7 +59909,7 @@ var bleh = (() => {
           return false;
         }
         return true;
-      } catch (_) {
+      } catch (_2) {
         _removeAttribute(name, currentNode);
         return false;
       }
@@ -60574,7 +60574,7 @@ var bleh = (() => {
         } else if (el.webkitMatchesSelector) {
           return el.webkitMatchesSelector(selector);
         }
-      } catch (_) {
+      } catch (_2) {
         return false;
       }
     }
@@ -60829,8 +60829,8 @@ var bleh = (() => {
     clearTimeout(_throttleTimeout);
     _throttleTimeout = void 0;
   }
-  function scrollBy(el, x2, y) {
-    el.scrollLeft += x2;
+  function scrollBy(el, x, y) {
+    el.scrollLeft += x;
     el.scrollTop += y;
   }
   function clone3(el) {
@@ -61200,12 +61200,12 @@ var bleh = (() => {
     var dragElS1Opp = vertical ? dragRect.left : dragRect.top, dragElS2Opp = vertical ? dragRect.right : dragRect.bottom, dragElOppLength = vertical ? dragRect.width : dragRect.height, targetS1Opp = vertical ? targetRect.left : targetRect.top, targetS2Opp = vertical ? targetRect.right : targetRect.bottom, targetOppLength = vertical ? targetRect.width : targetRect.height;
     return dragElS1Opp === targetS1Opp || dragElS2Opp === targetS2Opp || dragElS1Opp + dragElOppLength / 2 === targetS1Opp + targetOppLength / 2;
   };
-  var _detectNearestEmptySortable = function _detectNearestEmptySortable2(x2, y) {
+  var _detectNearestEmptySortable = function _detectNearestEmptySortable2(x, y) {
     var ret;
     sortables.some(function(sortable) {
       var threshold = sortable[expando].options.emptyInsertThreshold;
       if (!threshold || lastChild(sortable)) return;
-      var rect = getRect(sortable), insideHorizontally = x2 >= rect.left - threshold && x2 <= rect.right + threshold, insideVertically = y >= rect.top - threshold && y <= rect.bottom + threshold;
+      var rect = getRect(sortable), insideHorizontally = x >= rect.left - threshold && x <= rect.right + threshold, insideVertically = y >= rect.top - threshold && y <= rect.bottom + threshold;
       if (insideHorizontally && insideVertically) {
         return ret = sortable;
       }
@@ -62483,22 +62483,22 @@ var bleh = (() => {
       },
       _handleAutoScroll: function _handleAutoScroll(evt, fallback) {
         var _this = this;
-        var x2 = (evt.touches ? evt.touches[0] : evt).clientX, y = (evt.touches ? evt.touches[0] : evt).clientY, elem = document.elementFromPoint(x2, y);
+        var x = (evt.touches ? evt.touches[0] : evt).clientX, y = (evt.touches ? evt.touches[0] : evt).clientY, elem = document.elementFromPoint(x, y);
         touchEvt$1 = evt;
         if (fallback || this.options.forceAutoScrollFallback || Edge || IE11OrLess || Safari) {
           autoScroll(evt, this.options, elem, fallback);
           var ogElemScroller = getParentAutoScrollElement(elem, true);
-          if (scrolling && (!pointerElemChangedInterval || x2 !== lastAutoScrollX || y !== lastAutoScrollY)) {
+          if (scrolling && (!pointerElemChangedInterval || x !== lastAutoScrollX || y !== lastAutoScrollY)) {
             pointerElemChangedInterval && clearPointerElemChangedInterval();
             pointerElemChangedInterval = setInterval(function() {
-              var newElem = getParentAutoScrollElement(document.elementFromPoint(x2, y), true);
+              var newElem = getParentAutoScrollElement(document.elementFromPoint(x, y), true);
               if (newElem !== ogElemScroller) {
                 ogElemScroller = newElem;
                 clearAutoScrolls();
               }
               autoScroll(evt, _this.options, newElem, fallback);
             }, 10);
-            lastAutoScrollX = x2;
+            lastAutoScrollX = x;
             lastAutoScrollY = y;
           }
         } else {
@@ -62526,7 +62526,7 @@ var bleh = (() => {
   }
   var autoScroll = throttle(function(evt, options, rootEl2, isFallback) {
     if (!options.scroll) return;
-    var x2 = (evt.touches ? evt.touches[0] : evt).clientX, y = (evt.touches ? evt.touches[0] : evt).clientY, sens = options.scrollSensitivity, speed = options.scrollSpeed, winScroller = getWindowScrollingElement();
+    var x = (evt.touches ? evt.touches[0] : evt).clientX, y = (evt.touches ? evt.touches[0] : evt).clientY, sens = options.scrollSensitivity, speed = options.scrollSpeed, winScroller = getWindowScrollingElement();
     var scrollThisInstance = false, scrollCustomFn;
     if (scrollRootEl !== rootEl2) {
       scrollRootEl = rootEl2;
@@ -62548,7 +62548,7 @@ var bleh = (() => {
         canScrollX = width < scrollWidth && (elCSS.overflowX === "auto" || elCSS.overflowX === "scroll");
         canScrollY = height < scrollHeight && (elCSS.overflowY === "auto" || elCSS.overflowY === "scroll");
       }
-      var vx = canScrollX && (Math.abs(right2 - x2) <= sens && scrollPosX + width < scrollWidth) - (Math.abs(left2 - x2) <= sens && !!scrollPosX);
+      var vx = canScrollX && (Math.abs(right2 - x) <= sens && scrollPosX + width < scrollWidth) - (Math.abs(left2 - x) <= sens && !!scrollPosX);
       var vy = canScrollY && (Math.abs(bottom2 - y) <= sens && scrollPosY + height < scrollHeight) - (Math.abs(top2 - y) <= sens && !!scrollPosY);
       if (!autoScrolls[layersOut]) {
         for (var i2 = 0; i2 <= layersOut; i2++) {
@@ -62901,7 +62901,7 @@ var bleh = (() => {
     {
       type: "lang",
       regex: /\[links\]([\s\S]*?)\[\/links\]/g,
-      replace: (_, content2) => {
+      replace: (_2, content2) => {
         const lines = content2.trim().split(/\n+/);
         lines.forEach((line) => {
           line = line.trim();
@@ -70244,11 +70244,11 @@ var bleh = (() => {
   var HUE_RE = /^(hsla?|hwb|hsv)\(\s*([-+.e\d]+)(?:deg)?[\s,]+([-+.e\d]+)%[\s,]+([-+.e\d]+)%(?:[\s,]+([-+.e\d]+)(%)?)?\s*\)$/;
   function hsl2rgbn(h, s2, l2) {
     const a = s2 * Math.min(l2, 1 - l2);
-    const f3 = (n2, k5 = (n2 + h / 30) % 12) => l2 - a * Math.max(Math.min(k5 - 3, 9 - k5, 1), -1);
+    const f3 = (n2, k4 = (n2 + h / 30) % 12) => l2 - a * Math.max(Math.min(k4 - 3, 9 - k4, 1), -1);
     return [f3(0), f3(8), f3(4)];
   }
   function hsv2rgbn(h, s2, v) {
-    const f3 = (n2, k5 = (n2 + h / 60) % 6) => v - v * s2 * Math.max(Math.min(k5, 4 - k5, 1), 0);
+    const f3 = (n2, k4 = (n2 + h / 60) % 6) => v - v * s2 * Math.max(Math.min(k4, 4 - k4, 1), 0);
     return [f3(5), f3(3), f3(1)];
   }
   function hwb2rgbn(h, w, b) {
@@ -70534,15 +70534,15 @@ var bleh = (() => {
     const unpacked = {};
     const keys4 = Object.keys(names$1);
     const tkeys = Object.keys(map);
-    let i2, j, k5, ok, nk;
+    let i2, j, k4, ok, nk;
     for (i2 = 0; i2 < keys4.length; i2++) {
       ok = nk = keys4[i2];
       for (j = 0; j < tkeys.length; j++) {
-        k5 = tkeys[j];
-        nk = nk.replace(k5, map[k5]);
+        k4 = tkeys[j];
+        nk = nk.replace(k4, map[k4]);
       }
-      k5 = parseInt(names$1[ok], 16);
-      unpacked[nk] = [k5 >> 16 & 255, k5 >> 8 & 255, k5 & 255];
+      k4 = parseInt(names$1[ok], 16);
+      unpacked[nk] = [k4 >> 16 & 255, k4 >> 8 & 255, k4 & 255];
     }
     return unpacked;
   }
@@ -70830,9 +70830,9 @@ var bleh = (() => {
       const target = /* @__PURE__ */ Object.create(null);
       const keys4 = Object.keys(source);
       const klen = keys4.length;
-      let k5 = 0;
-      for (; k5 < klen; ++k5) {
-        target[keys4[k5]] = clone5(source[keys4[k5]]);
+      let k4 = 0;
+      for (; k4 < klen; ++k4) {
+        target[keys4[k4]] = clone5(source[keys4[k4]]);
       }
       return target;
     }
@@ -70874,8 +70874,8 @@ var bleh = (() => {
         continue;
       }
       const keys4 = Object.keys(current);
-      for (let k5 = 0, klen = keys4.length; k5 < klen; ++k5) {
-        merger(keys4[k5], target, current, options);
+      for (let k4 = 0, klen = keys4.length; k4 < klen; ++k4) {
+        merger(keys4[k4], target, current, options);
       }
     }
     return target;
@@ -70922,11 +70922,11 @@ var bleh = (() => {
   function _getKeyResolver(key) {
     const keys4 = _splitKey(key);
     return (obj) => {
-      for (const k5 of keys4) {
-        if (k5 === "") {
+      for (const k4 of keys4) {
+        if (k4 === "") {
           break;
         }
-        obj = obj && obj[k5];
+        obj = obj && obj[k4];
       }
       return obj;
     };
@@ -70964,8 +70964,8 @@ var bleh = (() => {
   var TWO_THIRDS_PI = PI * 2 / 3;
   var log10 = Math.log10;
   var sign = Math.sign;
-  function almostEquals(x2, y, epsilon) {
-    return Math.abs(x2 - y) < epsilon;
+  function almostEquals(x, y, epsilon) {
+    return Math.abs(x - y) < epsilon;
   }
   function niceNum(range) {
     const roundedRange = Math.round(range);
@@ -70997,9 +70997,9 @@ var bleh = (() => {
   function isNumber3(n2) {
     return !isNonPrimitive(n2) && !isNaN(parseFloat(n2)) && isFinite(n2);
   }
-  function almostWhole(x2, epsilon) {
-    const rounded = Math.round(x2);
-    return rounded - epsilon <= x2 && rounded + epsilon >= x2;
+  function almostWhole(x, epsilon) {
+    const rounded = Math.round(x);
+    return rounded - epsilon <= x && rounded + epsilon >= x;
   }
   function _setMinAndMaxByKey(array, target, property) {
     let i2, ilen, value;
@@ -71017,13 +71017,13 @@ var bleh = (() => {
   function toDegrees(radians) {
     return radians * (180 / PI);
   }
-  function _decimalPlaces(x2) {
-    if (!isNumberFinite(x2)) {
+  function _decimalPlaces(x) {
+    if (!isNumberFinite(x)) {
       return;
     }
     let e4 = 1;
     let p4 = 0;
-    while (Math.round(x2 * e4) / e4 !== x2) {
+    while (Math.round(x * e4) / e4 !== x) {
       e4 *= 10;
       p4++;
     }
@@ -71582,8 +71582,8 @@ var bleh = (() => {
     }
     const keys4 = key.split(".");
     for (let i2 = 0, n2 = keys4.length; i2 < n2; ++i2) {
-      const k5 = keys4[i2];
-      node = node[k5] || (node[k5] = /* @__PURE__ */ Object.create(null));
+      const k4 = keys4[i2];
+      node = node[k4] || (node[k4] = /* @__PURE__ */ Object.create(null));
     }
     return node;
   }
@@ -71764,10 +71764,10 @@ var bleh = (() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.restore();
   }
-  function drawPoint(ctx, options, x2, y) {
-    drawPointLegend(ctx, options, x2, y, null);
+  function drawPoint(ctx, options, x, y) {
+    drawPointLegend(ctx, options, x, y, null);
   }
-  function drawPointLegend(ctx, options, x2, y, w) {
+  function drawPointLegend(ctx, options, x, y, w) {
     let type, xOffset, yOffset, size2, cornerRadius, width, xOffsetW, yOffsetW;
     const style2 = options.pointStyle;
     const rotation = options.rotation;
@@ -71777,7 +71777,7 @@ var bleh = (() => {
       type = style2.toString();
       if (type === "[object HTMLImageElement]" || type === "[object HTMLCanvasElement]") {
         ctx.save();
-        ctx.translate(x2, y);
+        ctx.translate(x, y);
         ctx.rotate(rad);
         ctx.drawImage(style2, -style2.width / 2, -style2.height / 2, style2.width, style2.height);
         ctx.restore();
@@ -71792,19 +71792,19 @@ var bleh = (() => {
       // Default includes circle
       default:
         if (w) {
-          ctx.ellipse(x2, y, w / 2, radius, 0, 0, TAU);
+          ctx.ellipse(x, y, w / 2, radius, 0, 0, TAU);
         } else {
-          ctx.arc(x2, y, radius, 0, TAU);
+          ctx.arc(x, y, radius, 0, TAU);
         }
         ctx.closePath();
         break;
       case "triangle":
         width = w ? w / 2 : radius;
-        ctx.moveTo(x2 + Math.sin(rad) * width, y - Math.cos(rad) * radius);
+        ctx.moveTo(x + Math.sin(rad) * width, y - Math.cos(rad) * radius);
         rad += TWO_THIRDS_PI;
-        ctx.lineTo(x2 + Math.sin(rad) * width, y - Math.cos(rad) * radius);
+        ctx.lineTo(x + Math.sin(rad) * width, y - Math.cos(rad) * radius);
         rad += TWO_THIRDS_PI;
-        ctx.lineTo(x2 + Math.sin(rad) * width, y - Math.cos(rad) * radius);
+        ctx.lineTo(x + Math.sin(rad) * width, y - Math.cos(rad) * radius);
         ctx.closePath();
         break;
       case "rectRounded":
@@ -71814,17 +71814,17 @@ var bleh = (() => {
         xOffsetW = Math.cos(rad + QUARTER_PI) * (w ? w / 2 - cornerRadius : size2);
         yOffset = Math.sin(rad + QUARTER_PI) * size2;
         yOffsetW = Math.sin(rad + QUARTER_PI) * (w ? w / 2 - cornerRadius : size2);
-        ctx.arc(x2 - xOffsetW, y - yOffset, cornerRadius, rad - PI, rad - HALF_PI);
-        ctx.arc(x2 + yOffsetW, y - xOffset, cornerRadius, rad - HALF_PI, rad);
-        ctx.arc(x2 + xOffsetW, y + yOffset, cornerRadius, rad, rad + HALF_PI);
-        ctx.arc(x2 - yOffsetW, y + xOffset, cornerRadius, rad + HALF_PI, rad + PI);
+        ctx.arc(x - xOffsetW, y - yOffset, cornerRadius, rad - PI, rad - HALF_PI);
+        ctx.arc(x + yOffsetW, y - xOffset, cornerRadius, rad - HALF_PI, rad);
+        ctx.arc(x + xOffsetW, y + yOffset, cornerRadius, rad, rad + HALF_PI);
+        ctx.arc(x - yOffsetW, y + xOffset, cornerRadius, rad + HALF_PI, rad + PI);
         ctx.closePath();
         break;
       case "rect":
         if (!rotation) {
           size2 = Math.SQRT1_2 * radius;
           width = w ? w / 2 : size2;
-          ctx.rect(x2 - width, y - size2, 2 * width, 2 * size2);
+          ctx.rect(x - width, y - size2, 2 * width, 2 * size2);
           break;
         }
         rad += QUARTER_PI;
@@ -71834,10 +71834,10 @@ var bleh = (() => {
         xOffset = Math.cos(rad) * radius;
         yOffset = Math.sin(rad) * radius;
         yOffsetW = Math.sin(rad) * (w ? w / 2 : radius);
-        ctx.moveTo(x2 - xOffsetW, y - yOffset);
-        ctx.lineTo(x2 + yOffsetW, y - xOffset);
-        ctx.lineTo(x2 + xOffsetW, y + yOffset);
-        ctx.lineTo(x2 - yOffsetW, y + xOffset);
+        ctx.moveTo(x - xOffsetW, y - yOffset);
+        ctx.lineTo(x + yOffsetW, y - xOffset);
+        ctx.lineTo(x + xOffsetW, y + yOffset);
+        ctx.lineTo(x - yOffsetW, y + xOffset);
         ctx.closePath();
         break;
       case "crossRot":
@@ -71848,39 +71848,39 @@ var bleh = (() => {
         xOffset = Math.cos(rad) * radius;
         yOffset = Math.sin(rad) * radius;
         yOffsetW = Math.sin(rad) * (w ? w / 2 : radius);
-        ctx.moveTo(x2 - xOffsetW, y - yOffset);
-        ctx.lineTo(x2 + xOffsetW, y + yOffset);
-        ctx.moveTo(x2 + yOffsetW, y - xOffset);
-        ctx.lineTo(x2 - yOffsetW, y + xOffset);
+        ctx.moveTo(x - xOffsetW, y - yOffset);
+        ctx.lineTo(x + xOffsetW, y + yOffset);
+        ctx.moveTo(x + yOffsetW, y - xOffset);
+        ctx.lineTo(x - yOffsetW, y + xOffset);
         break;
       case "star":
         xOffsetW = Math.cos(rad) * (w ? w / 2 : radius);
         xOffset = Math.cos(rad) * radius;
         yOffset = Math.sin(rad) * radius;
         yOffsetW = Math.sin(rad) * (w ? w / 2 : radius);
-        ctx.moveTo(x2 - xOffsetW, y - yOffset);
-        ctx.lineTo(x2 + xOffsetW, y + yOffset);
-        ctx.moveTo(x2 + yOffsetW, y - xOffset);
-        ctx.lineTo(x2 - yOffsetW, y + xOffset);
+        ctx.moveTo(x - xOffsetW, y - yOffset);
+        ctx.lineTo(x + xOffsetW, y + yOffset);
+        ctx.moveTo(x + yOffsetW, y - xOffset);
+        ctx.lineTo(x - yOffsetW, y + xOffset);
         rad += QUARTER_PI;
         xOffsetW = Math.cos(rad) * (w ? w / 2 : radius);
         xOffset = Math.cos(rad) * radius;
         yOffset = Math.sin(rad) * radius;
         yOffsetW = Math.sin(rad) * (w ? w / 2 : radius);
-        ctx.moveTo(x2 - xOffsetW, y - yOffset);
-        ctx.lineTo(x2 + xOffsetW, y + yOffset);
-        ctx.moveTo(x2 + yOffsetW, y - xOffset);
-        ctx.lineTo(x2 - yOffsetW, y + xOffset);
+        ctx.moveTo(x - xOffsetW, y - yOffset);
+        ctx.lineTo(x + xOffsetW, y + yOffset);
+        ctx.moveTo(x + yOffsetW, y - xOffset);
+        ctx.lineTo(x - yOffsetW, y + xOffset);
         break;
       case "line":
         xOffset = w ? w / 2 : Math.cos(rad) * radius;
         yOffset = Math.sin(rad) * radius;
-        ctx.moveTo(x2 - xOffset, y - yOffset);
-        ctx.lineTo(x2 + xOffset, y + yOffset);
+        ctx.moveTo(x - xOffset, y - yOffset);
+        ctx.lineTo(x + xOffset, y + yOffset);
         break;
       case "dash":
-        ctx.moveTo(x2, y);
-        ctx.lineTo(x2 + Math.cos(rad) * (w ? w / 2 : radius), y + Math.sin(rad) * radius);
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + Math.cos(rad) * (w ? w / 2 : radius), y + Math.sin(rad) * radius);
         break;
       case false:
         ctx.closePath();
@@ -71942,11 +71942,11 @@ var bleh = (() => {
       ctx.textBaseline = opts.textBaseline;
     }
   }
-  function decorateText(ctx, x2, y, line, opts) {
+  function decorateText(ctx, x, y, line, opts) {
     if (opts.strikethrough || opts.underline) {
       const metrics = ctx.measureText(line);
-      const left2 = x2 - metrics.actualBoundingBoxLeft;
-      const right2 = x2 + metrics.actualBoundingBoxRight;
+      const left2 = x - metrics.actualBoundingBoxLeft;
+      const right2 = x + metrics.actualBoundingBoxRight;
       const top2 = y - metrics.actualBoundingBoxAscent;
       const bottom2 = y + metrics.actualBoundingBoxDescent;
       const yDecoration = opts.strikethrough ? (top2 + bottom2) / 2 : bottom2;
@@ -71964,7 +71964,7 @@ var bleh = (() => {
     ctx.fillRect(opts.left, opts.top, opts.width, opts.height);
     ctx.fillStyle = oldColor;
   }
-  function renderText(ctx, text4, x2, y, font, opts = {}) {
+  function renderText(ctx, text4, x, y, font, opts = {}) {
     const lines = isArray2(text4) ? text4 : [
       text4
     ];
@@ -71985,24 +71985,24 @@ var bleh = (() => {
         if (!isNullOrUndef(opts.strokeWidth)) {
           ctx.lineWidth = opts.strokeWidth;
         }
-        ctx.strokeText(line, x2, y, opts.maxWidth);
+        ctx.strokeText(line, x, y, opts.maxWidth);
       }
-      ctx.fillText(line, x2, y, opts.maxWidth);
-      decorateText(ctx, x2, y, line, opts);
+      ctx.fillText(line, x, y, opts.maxWidth);
+      decorateText(ctx, x, y, line, opts);
       y += Number(font.lineHeight);
     }
     ctx.restore();
   }
   function addRoundedRectPath(ctx, rect) {
-    const { x: x2, y, w, h, radius } = rect;
-    ctx.arc(x2 + radius.topLeft, y + radius.topLeft, radius.topLeft, 1.5 * PI, PI, true);
-    ctx.lineTo(x2, y + h - radius.bottomLeft);
-    ctx.arc(x2 + radius.bottomLeft, y + h - radius.bottomLeft, radius.bottomLeft, PI, HALF_PI, true);
-    ctx.lineTo(x2 + w - radius.bottomRight, y + h);
-    ctx.arc(x2 + w - radius.bottomRight, y + h - radius.bottomRight, radius.bottomRight, HALF_PI, 0, true);
-    ctx.lineTo(x2 + w, y + radius.topRight);
-    ctx.arc(x2 + w - radius.topRight, y + radius.topRight, radius.topRight, 0, -HALF_PI, true);
-    ctx.lineTo(x2 + radius.topLeft, y);
+    const { x, y, w, h, radius } = rect;
+    ctx.arc(x + radius.topLeft, y + radius.topLeft, radius.topLeft, 1.5 * PI, PI, true);
+    ctx.lineTo(x, y + h - radius.bottomLeft);
+    ctx.arc(x + radius.bottomLeft, y + h - radius.bottomLeft, radius.bottomLeft, PI, HALF_PI, true);
+    ctx.lineTo(x + w - radius.bottomRight, y + h);
+    ctx.arc(x + w - radius.bottomRight, y + h - radius.bottomRight, radius.bottomRight, HALF_PI, 0, true);
+    ctx.lineTo(x + w, y + radius.topRight);
+    ctx.arc(x + w - radius.topRight, y + radius.topRight, radius.topRight, 0, -HALF_PI, true);
+    ctx.lineTo(x + radius.topLeft, y);
   }
   var LINE_HEIGHT = /^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/;
   var FONT_STYLE = /^(normal|italic|initial|inherit|unset|(oblique( -?[0-9]?[0-9]deg)?))$/;
@@ -72402,7 +72402,7 @@ var bleh = (() => {
   function resolveKeysFromAllScopes(scopes) {
     const set2 = /* @__PURE__ */ new Set();
     for (const scope of scopes) {
-      for (const key of Object.keys(scope).filter((k5) => !k5.startsWith("_"))) {
+      for (const key of Object.keys(scope).filter((k4) => !k4.startsWith("_"))) {
         set2.add(key);
       }
     }
@@ -72612,24 +72612,24 @@ var bleh = (() => {
     result.height = result.top + result.bottom;
     return result;
   }
-  var useOffsetPos = (x2, y, target) => (x2 > 0 || y > 0) && (!target || !target.shadowRoot);
+  var useOffsetPos = (x, y, target) => (x > 0 || y > 0) && (!target || !target.shadowRoot);
   function getCanvasPosition(e4, canvas) {
     const touches = e4.touches;
     const source = touches && touches.length ? touches[0] : e4;
     const { offsetX, offsetY } = source;
     let box = false;
-    let x2, y;
+    let x, y;
     if (useOffsetPos(offsetX, offsetY, e4.target)) {
-      x2 = offsetX;
+      x = offsetX;
       y = offsetY;
     } else {
       const rect = canvas.getBoundingClientRect();
-      x2 = source.clientX - rect.left;
+      x = source.clientX - rect.left;
       y = source.clientY - rect.top;
       box = true;
     }
     return {
-      x: x2,
+      x,
       y,
       box
     };
@@ -72643,7 +72643,7 @@ var bleh = (() => {
     const borderBox = style2.boxSizing === "border-box";
     const paddings = getPositionedStyle(style2, "padding");
     const borders = getPositionedStyle(style2, "border", "width");
-    const { x: x2, y, box } = getCanvasPosition(event3, canvas);
+    const { x, y, box } = getCanvasPosition(event3, canvas);
     const xOffset = paddings.left + (box && borders.left);
     const yOffset = paddings.top + (box && borders.top);
     let { width, height } = chart;
@@ -72652,7 +72652,7 @@ var bleh = (() => {
       height -= paddings.height + borders.height;
     }
     return {
-      x: Math.round((x2 - xOffset) / width * canvas.width / currentDevicePixelRatio),
+      x: Math.round((x - xOffset) / width * canvas.width / currentDevicePixelRatio),
       y: Math.round((y - yOffset) / height * canvas.height / currentDevicePixelRatio)
     };
   }
@@ -72784,8 +72784,8 @@ var bleh = (() => {
   }
   var getRightToLeftAdapter = function(rectX, width) {
     return {
-      x(x2) {
-        return rectX + rectX + width - x2;
+      x(x) {
+        return rectX + rectX + width - x;
       },
       setWidth(w) {
         width = w;
@@ -72796,29 +72796,29 @@ var bleh = (() => {
         }
         return align === "right" ? "left" : "right";
       },
-      xPlus(x2, value) {
-        return x2 - value;
+      xPlus(x, value) {
+        return x - value;
       },
-      leftForLtr(x2, itemWidth) {
-        return x2 - itemWidth;
+      leftForLtr(x, itemWidth) {
+        return x - itemWidth;
       }
     };
   };
   var getLeftToRightAdapter = function() {
     return {
-      x(x2) {
-        return x2;
+      x(x) {
+        return x;
       },
       setWidth(w) {
       },
       textAlign(align) {
         return align;
       },
-      xPlus(x2, value) {
-        return x2 + value;
+      xPlus(x, value) {
+        return x + value;
       },
-      leftForLtr(x2, _itemWidth) {
-        return x2;
+      leftForLtr(x, _itemWidth) {
+        return x;
       }
     };
   };
@@ -72854,7 +72854,7 @@ var bleh = (() => {
     return {
       between: _isBetween,
       compare: (a, b) => a - b,
-      normalize: (x2) => x2
+      normalize: (x) => x
     };
   }
   function normalizeSegment({ start: start2, end: end2, count, loop, style: style2 }) {
@@ -73546,13 +73546,13 @@ var bleh = (() => {
     if (allowedOverflow === false) {
       return false;
     }
-    const x2 = scaleClip(xScale, allowedOverflow);
+    const x = scaleClip(xScale, allowedOverflow);
     const y = scaleClip(yScale, allowedOverflow);
     return {
       top: y.end,
-      right: x2.end,
+      right: x.end,
       bottom: y.start,
-      left: x2.start
+      left: x.start
     };
   }
   function toClip(value) {
@@ -73769,7 +73769,7 @@ var bleh = (() => {
       const chart = this.chart;
       const meta = this._cachedMeta;
       const dataset = this.getDataset();
-      const chooseId = (axis, x2, y, r3) => axis === "x" ? x2 : axis === "r" ? r3 : y;
+      const chooseId = (axis, x, y, r3) => axis === "x" ? x : axis === "r" ? r3 : y;
       const xid = meta.xAxisID = valueOrDefault(dataset.xAxisID, getFirstScaleId(chart, "x"));
       const yid = meta.yAxisID = valueOrDefault(dataset.yAxisID, getFirstScaleId(chart, "y"));
       const rid = meta.rAxisID = valueOrDefault(dataset.rAxisID, getFirstScaleId(chart, "r"));
@@ -74880,12 +74880,12 @@ var bleh = (() => {
       const labels = this.chart.data.labels || [];
       const { xScale, yScale } = meta;
       const parsed2 = this.getParsed(index3);
-      const x2 = xScale.getLabelForValue(parsed2.x);
+      const x = xScale.getLabelForValue(parsed2.x);
       const y = yScale.getLabelForValue(parsed2.y);
       const r3 = parsed2._custom;
       return {
         label: labels[index3] || "",
-        value: "(" + x2 + ", " + y + (r3 ? ", " + r3 : "") + ")"
+        value: "(" + x + ", " + y + (r3 ? ", " + r3 : "") + ")"
       };
     }
     update(mode) {
@@ -75589,13 +75589,13 @@ var bleh = (() => {
         const point = points[i2];
         const options = this.resolveDataElementOptions(i2, point.active ? "active" : mode);
         const pointPosition = scale2.getPointPositionForValue(i2, this.getParsed(i2).r);
-        const x2 = reset ? scale2.xCenter : pointPosition.x;
+        const x = reset ? scale2.xCenter : pointPosition.x;
         const y = reset ? scale2.yCenter : pointPosition.y;
         const properties = {
-          x: x2,
+          x,
           y,
           angle: pointPosition.angle,
-          skip: isNaN(x2) || isNaN(y),
+          skip: isNaN(x) || isNaN(y),
           options
         };
         this.updateElement(point, i2, properties, mode);
@@ -75628,11 +75628,11 @@ var bleh = (() => {
       const labels = this.chart.data.labels || [];
       const { xScale, yScale } = meta;
       const parsed2 = this.getParsed(index3);
-      const x2 = xScale.getLabelForValue(parsed2.x);
+      const x = xScale.getLabelForValue(parsed2.x);
       const y = yScale.getLabelForValue(parsed2.y);
       return {
         label: labels[index3] || "",
-        value: "(" + x2 + ", " + y + ")"
+        value: "(" + x + ", " + y + ")"
       };
     }
     update(mode) {
@@ -76208,7 +76208,7 @@ var bleh = (() => {
   }
   function placeBoxes(boxes, chartArea, params, stacks) {
     const userPadding = params.padding;
-    let { x: x2, y } = chartArea;
+    let { x, y } = chartArea;
     for (const layout of boxes) {
       const box = layout.box;
       const stack = stacks[layout.stack] || {
@@ -76235,19 +76235,19 @@ var bleh = (() => {
         const height = chartArea.h * weight;
         const width = stack.size || box.width;
         if (defined(stack.start)) {
-          x2 = stack.start;
+          x = stack.start;
         }
         if (box.fullSize) {
-          setBoxDims(box, x2, userPadding.top, width, params.outerHeight - userPadding.bottom - userPadding.top);
+          setBoxDims(box, x, userPadding.top, width, params.outerHeight - userPadding.bottom - userPadding.top);
         } else {
-          setBoxDims(box, x2, chartArea.top + stack.placed, width, height);
+          setBoxDims(box, x, chartArea.top + stack.placed, width, height);
         }
-        stack.start = x2;
+        stack.start = x;
         stack.placed += height;
-        x2 = box.right;
+        x = box.right;
       }
     }
-    chartArea.x = x2;
+    chartArea.x = x;
     chartArea.y = y;
   }
   var layouts = {
@@ -76444,12 +76444,12 @@ var bleh = (() => {
   }
   function fromNativeEvent(event3, chart) {
     const type = EVENT_TYPES[event3.type] || event3.type;
-    const { x: x2, y } = getRelativePosition(event3, chart);
+    const { x, y } = getRelativePosition(event3, chart);
     return {
       type,
       chart,
       native: event3,
-      x: x2 !== void 0 ? x2 : null,
+      x: x !== void 0 ? x : null,
       y: y !== void 0 ? y : null
     };
   }
@@ -76652,12 +76652,12 @@ var bleh = (() => {
     options;
     $animations;
     tooltipPosition(useFinalPosition) {
-      const { x: x2, y } = this.getProps([
+      const { x, y } = this.getProps([
         "x",
         "y"
       ], useFinalPosition);
       return {
-        x: x2,
+        x,
         y
       };
     }
@@ -77582,7 +77582,7 @@ var bleh = (() => {
       const hTickAndPadding = mirror ? -padding : tickAndPadding;
       const rotation = -toRadians(this.labelRotation);
       const items = [];
-      let i2, ilen, tick, label, x2, y, textAlign2, pixel2, font, lineHeight2, lineCount, textOffset;
+      let i2, ilen, tick, label, x, y, textAlign2, pixel2, font, lineHeight2, lineCount, textOffset;
       let textBaseline = "middle";
       if (position2 === "top") {
         y = this.bottom - hTickAndPadding;
@@ -77593,11 +77593,11 @@ var bleh = (() => {
       } else if (position2 === "left") {
         const ret = this._getYAxisLabelAlignment(tl3);
         textAlign2 = ret.textAlign;
-        x2 = ret.x;
+        x = ret.x;
       } else if (position2 === "right") {
         const ret = this._getYAxisLabelAlignment(tl3);
         textAlign2 = ret.textAlign;
-        x2 = ret.x;
+        x = ret.x;
       } else if (axis === "x") {
         if (position2 === "center") {
           y = (chartArea.top + chartArea.bottom) / 2 + tickAndPadding;
@@ -77609,11 +77609,11 @@ var bleh = (() => {
         textAlign2 = this._getXAxisLabelAlignment();
       } else if (axis === "y") {
         if (position2 === "center") {
-          x2 = (chartArea.left + chartArea.right) / 2 - tickAndPadding;
+          x = (chartArea.left + chartArea.right) / 2 - tickAndPadding;
         } else if (isObject2(position2)) {
           const positionAxisID = Object.keys(position2)[0];
           const value = position2[positionAxisID];
-          x2 = this.chart.scales[positionAxisID].getPixelForValue(value);
+          x = this.chart.scales[positionAxisID].getPixelForValue(value);
         }
         textAlign2 = this._getYAxisLabelAlignment(tl3).textAlign;
       }
@@ -77639,7 +77639,7 @@ var bleh = (() => {
         const strokeWidth = optsAtIndex.textStrokeWidth;
         let tickTextAlign = textAlign2;
         if (isHorizontal) {
-          x2 = pixel2;
+          x = pixel2;
           if (textAlign2 === "inner") {
             if (i2 === ilen - 1) {
               tickTextAlign = !this.options.reverse ? "right" : "left";
@@ -77670,7 +77670,7 @@ var bleh = (() => {
             textOffset *= -1;
           }
           if (rotation !== 0 && !optsAtIndex.showLabelBackdrop) {
-            x2 += lineHeight2 / 2 * Math.sin(rotation);
+            x += lineHeight2 / 2 * Math.sin(rotation);
           }
         } else {
           y = pixel2;
@@ -77726,7 +77726,7 @@ var bleh = (() => {
             textAlign: tickTextAlign,
             textBaseline,
             translation: [
-              x2,
+              x,
               y
             ],
             backdrop
@@ -77757,53 +77757,53 @@ var bleh = (() => {
       const tickAndPadding = tl3 + padding;
       const widest = labelSizes.widest.width;
       let textAlign2;
-      let x2;
+      let x;
       if (position2 === "left") {
         if (mirror) {
-          x2 = this.right + padding;
+          x = this.right + padding;
           if (crossAlign === "near") {
             textAlign2 = "left";
           } else if (crossAlign === "center") {
             textAlign2 = "center";
-            x2 += widest / 2;
+            x += widest / 2;
           } else {
             textAlign2 = "right";
-            x2 += widest;
+            x += widest;
           }
         } else {
-          x2 = this.right - tickAndPadding;
+          x = this.right - tickAndPadding;
           if (crossAlign === "near") {
             textAlign2 = "right";
           } else if (crossAlign === "center") {
             textAlign2 = "center";
-            x2 -= widest / 2;
+            x -= widest / 2;
           } else {
             textAlign2 = "left";
-            x2 = this.left;
+            x = this.left;
           }
         }
       } else if (position2 === "right") {
         if (mirror) {
-          x2 = this.left + padding;
+          x = this.left + padding;
           if (crossAlign === "near") {
             textAlign2 = "right";
           } else if (crossAlign === "center") {
             textAlign2 = "center";
-            x2 -= widest / 2;
+            x -= widest / 2;
           } else {
             textAlign2 = "left";
-            x2 -= widest;
+            x -= widest;
           }
         } else {
-          x2 = this.left + tickAndPadding;
+          x = this.left + tickAndPadding;
           if (crossAlign === "near") {
             textAlign2 = "left";
           } else if (crossAlign === "center") {
             textAlign2 = "center";
-            x2 += widest / 2;
+            x += widest / 2;
           } else {
             textAlign2 = "right";
-            x2 = this.right;
+            x = this.right;
           }
         }
       } else {
@@ -77811,7 +77811,7 @@ var bleh = (() => {
       }
       return {
         textAlign: textAlign2,
-        x: x2
+        x
       };
     }
     _computeLabelArea() {
@@ -78291,7 +78291,7 @@ var bleh = (() => {
     _notifyStateChanges(chart) {
       const previousDescriptors = this._oldCache || [];
       const descriptors2 = this._cache;
-      const diff2 = (a, b) => a.filter((x2) => !b.some((y) => x2.plugin.id === y.plugin.id));
+      const diff2 = (a, b) => a.filter((x) => !b.some((y) => x.plugin.id === y.plugin.id));
       this._notify(diff2(previousDescriptors, descriptors2), chart, "stop");
       this._notify(diff2(descriptors2, previousDescriptors), chart, "start");
     }
@@ -78988,7 +78988,7 @@ var bleh = (() => {
         delete this._stacks;
       }
       metasets.forEach((meta, index3) => {
-        if (datasets.filter((x2) => x2 === meta._dataset).length === 0) {
+        if (datasets.filter((x) => x === meta._dataset).length === 0) {
           this._destroyDatasetMeta(index3);
         }
       });
@@ -79288,7 +79288,7 @@ var bleh = (() => {
     getDatasetMeta(datasetIndex) {
       const dataset = this.data.datasets[datasetIndex];
       const metasets = this._metasets;
-      let meta = metasets.filter((x2) => x2 && x2._dataset === dataset).pop();
+      let meta = metasets.filter((x) => x && x._dataset === dataset).pop();
       if (!meta) {
         meta = {
           type: null,
@@ -79404,8 +79404,8 @@ var bleh = (() => {
         platform2.addEventListener(this, type, listener2);
         listeners[type] = listener2;
       };
-      const listener = (e4, x2, y) => {
-        e4.offsetX = x2;
+      const listener = (e4, x, y) => {
+        e4.offsetX = x;
         e4.offsetY = y;
         this._eventHandler(e4);
       };
@@ -79509,7 +79509,7 @@ var bleh = (() => {
     }
     _updateHoverStyles(active, lastActive, replay) {
       const hoverOptions = this.options.hover;
-      const diff2 = (a, b) => a.filter((x2) => !b.some((y) => x2.datasetIndex === y.datasetIndex && x2.index === y.index));
+      const diff2 = (a, b) => a.filter((x) => !b.some((y) => x.datasetIndex === y.datasetIndex && x.index === y.index));
       const deactivated = diff2(lastActive, active);
       const activated = replay ? active : diff2(active, lastActive);
       if (deactivated.length) {
@@ -79582,23 +79582,23 @@ var bleh = (() => {
     return each(Chart.instances, (chart) => chart._plugins.invalidate());
   }
   function clipSelf(ctx, element, endAngle) {
-    const { startAngle, x: x2, y, outerRadius, innerRadius, options } = element;
+    const { startAngle, x, y, outerRadius, innerRadius, options } = element;
     const { borderWidth, borderJoinStyle } = options;
     const outerAngleClip = Math.min(borderWidth / outerRadius, _normalizeAngle(startAngle - endAngle));
     ctx.beginPath();
-    ctx.arc(x2, y, outerRadius - borderWidth / 2, startAngle + outerAngleClip / 2, endAngle - outerAngleClip / 2);
+    ctx.arc(x, y, outerRadius - borderWidth / 2, startAngle + outerAngleClip / 2, endAngle - outerAngleClip / 2);
     if (innerRadius > 0) {
       const innerAngleClip = Math.min(borderWidth / innerRadius, _normalizeAngle(startAngle - endAngle));
-      ctx.arc(x2, y, innerRadius + borderWidth / 2, endAngle - innerAngleClip / 2, startAngle + innerAngleClip / 2, true);
+      ctx.arc(x, y, innerRadius + borderWidth / 2, endAngle - innerAngleClip / 2, startAngle + innerAngleClip / 2, true);
     } else {
       const clipWidth = Math.min(borderWidth / 2, outerRadius * _normalizeAngle(startAngle - endAngle));
       if (borderJoinStyle === "round") {
-        ctx.arc(x2, y, clipWidth, endAngle - PI / 2, startAngle + PI / 2, true);
+        ctx.arc(x, y, clipWidth, endAngle - PI / 2, startAngle + PI / 2, true);
       } else if (borderJoinStyle === "bevel") {
         const r3 = 2 * clipWidth * clipWidth;
-        const endX = -r3 * Math.cos(endAngle + PI / 2) + x2;
+        const endX = -r3 * Math.cos(endAngle + PI / 2) + x;
         const endY = -r3 * Math.sin(endAngle + PI / 2) + y;
-        const startX = r3 * Math.cos(startAngle + PI / 2) + x2;
+        const startX = r3 * Math.cos(startAngle + PI / 2) + x;
         const startY = r3 * Math.sin(startAngle + PI / 2) + y;
         ctx.lineTo(endX, endY);
         ctx.lineTo(startX, startY);
@@ -79610,15 +79610,15 @@ var bleh = (() => {
     ctx.clip("evenodd");
   }
   function clipArc(ctx, element, endAngle) {
-    const { startAngle, pixelMargin, x: x2, y, outerRadius, innerRadius } = element;
+    const { startAngle, pixelMargin, x, y, outerRadius, innerRadius } = element;
     let angleMargin = pixelMargin / outerRadius;
     ctx.beginPath();
-    ctx.arc(x2, y, outerRadius, startAngle - angleMargin, endAngle + angleMargin);
+    ctx.arc(x, y, outerRadius, startAngle - angleMargin, endAngle + angleMargin);
     if (innerRadius > pixelMargin) {
       angleMargin = pixelMargin / innerRadius;
-      ctx.arc(x2, y, innerRadius, endAngle + angleMargin, startAngle - angleMargin, true);
+      ctx.arc(x, y, innerRadius, endAngle + angleMargin, startAngle - angleMargin, true);
     } else {
-      ctx.arc(x2, y, pixelMargin, endAngle + HALF_PI, startAngle - HALF_PI);
+      ctx.arc(x, y, pixelMargin, endAngle + HALF_PI, startAngle - HALF_PI);
     }
     ctx.closePath();
     ctx.clip();
@@ -79646,14 +79646,14 @@ var bleh = (() => {
       innerEnd: _limitValue(o.innerEnd, 0, innerLimit)
     };
   }
-  function rThetaToXY(r3, theta, x2, y) {
+  function rThetaToXY(r3, theta, x, y) {
     return {
-      x: x2 + r3 * Math.cos(theta),
+      x: x + r3 * Math.cos(theta),
       y: y + r3 * Math.sin(theta)
     };
   }
   function pathArc(ctx, element, offset5, spacing, end2, circular) {
-    const { x: x2, y, startAngle: start2, pixelMargin, innerRadius: innerR } = element;
+    const { x, y, startAngle: start2, pixelMargin, innerRadius: innerR } = element;
     const outerRadius = Math.max(element.outerRadius + spacing + offset5 - pixelMargin, 0);
     const innerRadius = innerR > 0 ? innerR + spacing + offset5 + pixelMargin : 0;
     let spacingOffset = 0;
@@ -79681,37 +79681,37 @@ var bleh = (() => {
     ctx.beginPath();
     if (circular) {
       const outerMidAdjustedAngle = (outerStartAdjustedAngle + outerEndAdjustedAngle) / 2;
-      ctx.arc(x2, y, outerRadius, outerStartAdjustedAngle, outerMidAdjustedAngle);
-      ctx.arc(x2, y, outerRadius, outerMidAdjustedAngle, outerEndAdjustedAngle);
+      ctx.arc(x, y, outerRadius, outerStartAdjustedAngle, outerMidAdjustedAngle);
+      ctx.arc(x, y, outerRadius, outerMidAdjustedAngle, outerEndAdjustedAngle);
       if (outerEnd > 0) {
-        const pCenter = rThetaToXY(outerEndAdjustedRadius, outerEndAdjustedAngle, x2, y);
+        const pCenter = rThetaToXY(outerEndAdjustedRadius, outerEndAdjustedAngle, x, y);
         ctx.arc(pCenter.x, pCenter.y, outerEnd, outerEndAdjustedAngle, endAngle + HALF_PI);
       }
-      const p4 = rThetaToXY(innerEndAdjustedRadius, endAngle, x2, y);
+      const p4 = rThetaToXY(innerEndAdjustedRadius, endAngle, x, y);
       ctx.lineTo(p4.x, p4.y);
       if (innerEnd > 0) {
-        const pCenter = rThetaToXY(innerEndAdjustedRadius, innerEndAdjustedAngle, x2, y);
+        const pCenter = rThetaToXY(innerEndAdjustedRadius, innerEndAdjustedAngle, x, y);
         ctx.arc(pCenter.x, pCenter.y, innerEnd, endAngle + HALF_PI, innerEndAdjustedAngle + Math.PI);
       }
       const innerMidAdjustedAngle = (endAngle - innerEnd / innerRadius + (startAngle + innerStart / innerRadius)) / 2;
-      ctx.arc(x2, y, innerRadius, endAngle - innerEnd / innerRadius, innerMidAdjustedAngle, true);
-      ctx.arc(x2, y, innerRadius, innerMidAdjustedAngle, startAngle + innerStart / innerRadius, true);
+      ctx.arc(x, y, innerRadius, endAngle - innerEnd / innerRadius, innerMidAdjustedAngle, true);
+      ctx.arc(x, y, innerRadius, innerMidAdjustedAngle, startAngle + innerStart / innerRadius, true);
       if (innerStart > 0) {
-        const pCenter = rThetaToXY(innerStartAdjustedRadius, innerStartAdjustedAngle, x2, y);
+        const pCenter = rThetaToXY(innerStartAdjustedRadius, innerStartAdjustedAngle, x, y);
         ctx.arc(pCenter.x, pCenter.y, innerStart, innerStartAdjustedAngle + Math.PI, startAngle - HALF_PI);
       }
-      const p8 = rThetaToXY(outerStartAdjustedRadius, startAngle, x2, y);
+      const p8 = rThetaToXY(outerStartAdjustedRadius, startAngle, x, y);
       ctx.lineTo(p8.x, p8.y);
       if (outerStart > 0) {
-        const pCenter = rThetaToXY(outerStartAdjustedRadius, outerStartAdjustedAngle, x2, y);
+        const pCenter = rThetaToXY(outerStartAdjustedRadius, outerStartAdjustedAngle, x, y);
         ctx.arc(pCenter.x, pCenter.y, outerStart, startAngle - HALF_PI, outerStartAdjustedAngle);
       }
     } else {
-      ctx.moveTo(x2, y);
-      const outerStartX = Math.cos(outerStartAdjustedAngle) * outerRadius + x2;
+      ctx.moveTo(x, y);
+      const outerStartX = Math.cos(outerStartAdjustedAngle) * outerRadius + x;
       const outerStartY = Math.sin(outerStartAdjustedAngle) * outerRadius + y;
       ctx.lineTo(outerStartX, outerStartY);
-      const outerEndX = Math.cos(outerEndAdjustedAngle) * outerRadius + x2;
+      const outerEndX = Math.cos(outerEndAdjustedAngle) * outerRadius + x;
       const outerEndY = Math.sin(outerEndAdjustedAngle) * outerRadius + y;
       ctx.lineTo(outerEndX, outerEndY);
     }
@@ -79838,7 +79838,7 @@ var bleh = (() => {
       return betweenAngles && withinRadius;
     }
     getCenterPoint(useFinalPosition) {
-      const { x: x2, y, startAngle, endAngle, innerRadius, outerRadius } = this.getProps([
+      const { x, y, startAngle, endAngle, innerRadius, outerRadius } = this.getProps([
         "x",
         "y",
         "startAngle",
@@ -79850,7 +79850,7 @@ var bleh = (() => {
       const halfAngle = (startAngle + endAngle) / 2;
       const halfRadius = (innerRadius + outerRadius + spacing + offset5) / 2;
       return {
-        x: x2 + Math.cos(halfAngle) * halfRadius,
+        x: x + Math.cos(halfAngle) * halfRadius,
         y: y + Math.sin(halfAngle) * halfRadius
       };
     }
@@ -79961,19 +79961,19 @@ var bleh = (() => {
       if (point.skip) {
         continue;
       }
-      const x2 = point.x;
+      const x = point.x;
       const y = point.y;
-      const truncX = x2 | 0;
+      const truncX = x | 0;
       if (truncX === prevX) {
         if (y < minY) {
           minY = y;
         } else if (y > maxY) {
           maxY = y;
         }
-        avgX = (countX * avgX + x2) / ++countX;
+        avgX = (countX * avgX + x) / ++countX;
       } else {
         drawX();
-        ctx.lineTo(x2, y);
+        ctx.lineTo(x, y);
         prevX = truncX;
         countX = 0;
         minY = maxY = y;
@@ -80207,11 +80207,11 @@ var bleh = (() => {
     }
     inRange(mouseX, mouseY, useFinalPosition) {
       const options = this.options;
-      const { x: x2, y } = this.getProps([
+      const { x, y } = this.getProps([
         "x",
         "y"
       ], useFinalPosition);
-      return Math.pow(mouseX - x2, 2) + Math.pow(mouseY - y, 2) < Math.pow(options.hitRadius + options.radius, 2);
+      return Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2) < Math.pow(options.hitRadius + options.radius, 2);
     }
     inXRange(mouseX, useFinalPosition) {
       return inRange$1(this, mouseX, "x", useFinalPosition);
@@ -80220,12 +80220,12 @@ var bleh = (() => {
       return inRange$1(this, mouseY, "y", useFinalPosition);
     }
     getCenterPoint(useFinalPosition) {
-      const { x: x2, y } = this.getProps([
+      const { x, y } = this.getProps([
         "x",
         "y"
       ], useFinalPosition);
       return {
-        x: x2,
+        x,
         y
       };
     }
@@ -80252,7 +80252,7 @@ var bleh = (() => {
     }
   };
   function getBarBounds(bar, useFinalPosition) {
-    const { x: x2, y, base, width, height } = bar.getProps([
+    const { x, y, base, width, height } = bar.getProps([
       "x",
       "y",
       "base",
@@ -80262,14 +80262,14 @@ var bleh = (() => {
     let left2, right2, top2, bottom2, half;
     if (bar.horizontal) {
       half = height / 2;
-      left2 = Math.min(x2, base);
-      right2 = Math.max(x2, base);
+      left2 = Math.min(x, base);
+      right2 = Math.max(x, base);
       top2 = y - half;
       bottom2 = y + half;
     } else {
       half = width / 2;
-      left2 = x2 - half;
-      right2 = x2 + half;
+      left2 = x - half;
+      right2 = x + half;
       top2 = Math.min(y, base);
       bottom2 = Math.max(y, base);
     }
@@ -80338,12 +80338,12 @@ var bleh = (() => {
       }
     };
   }
-  function inRange(bar, x2, y, useFinalPosition) {
-    const skipX = x2 === null;
+  function inRange(bar, x, y, useFinalPosition) {
+    const skipX = x === null;
     const skipY = y === null;
     const skipBoth = skipX && skipY;
     const bounds = bar && !skipBoth && getBarBounds(bar, useFinalPosition);
-    return bounds && (skipX || _isBetween(x2, bounds.left, bounds.right)) && (skipY || _isBetween(y, bounds.top, bounds.bottom));
+    return bounds && (skipX || _isBetween(x, bounds.left, bounds.right)) && (skipY || _isBetween(y, bounds.top, bounds.bottom));
   }
   function hasRadius(radius) {
     return radius.topLeft || radius.topRight || radius.bottomLeft || radius.bottomRight;
@@ -80352,12 +80352,12 @@ var bleh = (() => {
     ctx.rect(rect.x, rect.y, rect.w, rect.h);
   }
   function inflateRect(rect, amount, refRect = {}) {
-    const x2 = rect.x !== refRect.x ? -amount : 0;
+    const x = rect.x !== refRect.x ? -amount : 0;
     const y = rect.y !== refRect.y ? -amount : 0;
-    const w = (rect.x + rect.w !== refRect.x + refRect.w ? amount : 0) - x2;
+    const w = (rect.x + rect.w !== refRect.x + refRect.w ? amount : 0) - x;
     const h = (rect.y + rect.h !== refRect.y + refRect.h ? amount : 0) - y;
     return {
-      x: rect.x + x2,
+      x: rect.x + x,
       y: rect.y + y,
       w: rect.w + w,
       h: rect.h + h,
@@ -80418,14 +80418,14 @@ var bleh = (() => {
       return inRange(this, null, mouseY, useFinalPosition);
     }
     getCenterPoint(useFinalPosition) {
-      const { x: x2, y, base, horizontal } = this.getProps([
+      const { x, y, base, horizontal } = this.getProps([
         "x",
         "y",
         "base",
         "horizontal"
       ], useFinalPosition);
       return {
-        x: horizontal ? (x2 + base) / 2 : x2,
+        x: horizontal ? (x + base) / 2 : x,
         y: horizontal ? y : (y + base) / 2
       };
     }
@@ -80484,9 +80484,9 @@ var bleh = (() => {
     };
   }
   function containsColorsDefinitions(descriptors2) {
-    let k5;
-    for (k5 in descriptors2) {
-      if (descriptors2[k5].borderColor || descriptors2[k5].backgroundColor) {
+    let k4;
+    for (k4 in descriptors2) {
+      if (descriptors2[k4].borderColor || descriptors2[k4].backgroundColor) {
         return true;
       }
     }
@@ -80564,7 +80564,7 @@ var bleh = (() => {
   function minMaxDecimation(data2, start2, count, availableWidth) {
     let avgX = 0;
     let countX = 0;
-    let i2, point, x2, y, prevX, minIndex, maxIndex, startIndex, minY, maxY;
+    let i2, point, x, y, prevX, minIndex, maxIndex, startIndex, minY, maxY;
     const decimated = [];
     const endIndex = start2 + count - 1;
     const xMin = data2[start2].x;
@@ -80572,9 +80572,9 @@ var bleh = (() => {
     const dx = xMax - xMin;
     for (i2 = start2; i2 < start2 + count; ++i2) {
       point = data2[i2];
-      x2 = (point.x - xMin) / dx * availableWidth;
+      x = (point.x - xMin) / dx * availableWidth;
       y = point.y;
-      const truncX = x2 | 0;
+      const truncX = x | 0;
       if (truncX === prevX) {
         if (y < minY) {
           minY = y;
@@ -80776,7 +80776,7 @@ var bleh = (() => {
     };
   }
   function _pointsFromSegments(boundary, line) {
-    const { x: x2 = null, y = null } = boundary || {};
+    const { x = null, y = null } = boundary || {};
     const linePoints = line.points;
     const points = [];
     line.segments.forEach(({ start: start2, end: end2 }) => {
@@ -80792,13 +80792,13 @@ var bleh = (() => {
           x: last.x,
           y
         });
-      } else if (x2 !== null) {
+      } else if (x !== null) {
         points.push({
-          x: x2,
+          x,
           y: first.y
         });
         points.push({
-          x: x2,
+          x,
           y: last.y
         });
       }
@@ -81021,19 +81021,19 @@ var bleh = (() => {
       this.radius = opts.radius;
     }
     pathSegment(ctx, bounds, opts) {
-      const { x: x2, y, radius } = this;
+      const { x, y, radius } = this;
       bounds = bounds || {
         start: 0,
         end: TAU
       };
-      ctx.arc(x2, y, radius, bounds.end, bounds.start, true);
+      ctx.arc(x, y, radius, bounds.end, bounds.start, true);
       return !opts.bounds;
     }
     interpolate(point) {
-      const { x: x2, y, radius } = this;
+      const { x, y, radius } = this;
       const angle2 = point.angle;
       return {
-        x: x2 + Math.cos(angle2) * radius,
+        x: x + Math.cos(angle2) * radius,
         y: y + Math.sin(angle2) * radius,
         angle: angle2
       };
@@ -81591,7 +81591,7 @@ var bleh = (() => {
       ctx.lineWidth = 0.5;
       ctx.font = labelFont.string;
       const { boxWidth, boxHeight, itemHeight } = getBoxSize(labelOpts, fontSize2);
-      const drawLegendBox = function(x2, y, legendItem) {
+      const drawLegendBox = function(x, y, legendItem) {
         if (isNaN(boxWidth) || boxWidth <= 0 || isNaN(boxHeight) || boxHeight < 0) {
           return;
         }
@@ -81611,12 +81611,12 @@ var bleh = (() => {
             rotation: legendItem.rotation,
             borderWidth: lineWidth
           };
-          const centerX = rtlHelper.xPlus(x2, boxWidth / 2);
+          const centerX = rtlHelper.xPlus(x, boxWidth / 2);
           const centerY = y + halfFontSize;
           drawPointLegend(ctx, drawOptions, centerX, centerY, labelOpts.pointStyleWidth && boxWidth);
         } else {
           const yBoxTop = y + Math.max((fontSize2 - boxHeight) / 2, 0);
-          const xBoxLeft = rtlHelper.leftForLtr(x2, boxWidth);
+          const xBoxLeft = rtlHelper.leftForLtr(x, boxWidth);
           const borderRadius = toTRBLCorners(legendItem.borderRadius);
           ctx.beginPath();
           if (Object.values(borderRadius).some((v) => v !== 0)) {
@@ -81637,8 +81637,8 @@ var bleh = (() => {
         }
         ctx.restore();
       };
-      const fillText = function(x2, y, legendItem) {
-        renderText(ctx, legendItem.text, x2, y + itemHeight / 2, labelFont, {
+      const fillText = function(x, y, legendItem) {
+        renderText(ctx, legendItem.text, x, y + itemHeight / 2, labelFont, {
           strikethrough: legendItem.hidden,
           textAlign: rtlHelper.textAlign(legendItem.textAlign)
         });
@@ -81666,24 +81666,24 @@ var bleh = (() => {
         const textWidth = ctx.measureText(legendItem.text).width;
         const textAlign2 = rtlHelper.textAlign(legendItem.textAlign || (legendItem.textAlign = labelOpts.textAlign));
         const width = boxWidth + halfFontSize + textWidth;
-        let x2 = cursor.x;
+        let x = cursor.x;
         let y = cursor.y;
         rtlHelper.setWidth(this.width);
         if (isHorizontal) {
-          if (i2 > 0 && x2 + width + padding > this.right) {
+          if (i2 > 0 && x + width + padding > this.right) {
             y = cursor.y += lineHeight2;
             cursor.line++;
-            x2 = cursor.x = _alignStartEnd(align, this.left + padding, this.right - lineWidths[cursor.line]);
+            x = cursor.x = _alignStartEnd(align, this.left + padding, this.right - lineWidths[cursor.line]);
           }
         } else if (i2 > 0 && y + lineHeight2 > this.bottom) {
-          x2 = cursor.x = x2 + columnSizes[cursor.line].width + padding;
+          x = cursor.x = x + columnSizes[cursor.line].width + padding;
           cursor.line++;
           y = cursor.y = _alignStartEnd(align, this.top + titleHeight + padding, this.bottom - columnSizes[cursor.line].height);
         }
-        const realX = rtlHelper.x(x2);
+        const realX = rtlHelper.x(x);
         drawLegendBox(realX, y, legendItem);
-        x2 = _textX(textAlign2, x2 + boxWidth + halfFontSize, isHorizontal ? x2 + width : this.right, opts.rtl);
-        fillText(rtlHelper.x(x2), y, legendItem);
+        x = _textX(textAlign2, x + boxWidth + halfFontSize, isHorizontal ? x + width : this.right, opts.rtl);
+        fillText(rtlHelper.x(x), y, legendItem);
         if (isHorizontal) {
           cursor.x += width + padding;
         } else if (typeof legendItem.text !== "string") {
@@ -81719,13 +81719,13 @@ var bleh = (() => {
         const maxHeight = this.columnSizes.reduce((acc, size2) => Math.max(acc, size2.height), 0);
         y = topPaddingPlusHalfFontSize + _alignStartEnd(opts.align, this.top, this.bottom - maxHeight - opts.labels.padding - this._computeTitleHeight());
       }
-      const x2 = _alignStartEnd(position2, left2, left2 + maxWidth);
+      const x = _alignStartEnd(position2, left2, left2 + maxWidth);
       ctx.textAlign = rtlHelper.textAlign(_toLeftRightCenter(position2));
       ctx.textBaseline = "middle";
       ctx.strokeStyle = titleOpts.color;
       ctx.fillStyle = titleOpts.color;
       ctx.font = titleFont.string;
-      renderText(ctx, titleOpts.text, x2, y, titleFont);
+      renderText(ctx, titleOpts.text, x, y, titleFont);
     }
     _computeTitleHeight() {
       const titleOpts = this.options.title;
@@ -81733,13 +81733,13 @@ var bleh = (() => {
       const titlePadding = toPadding(titleOpts.padding);
       return titleOpts.display ? titleFont.lineHeight + titlePadding.height : 0;
     }
-    _getLegendItemAt(x2, y) {
+    _getLegendItemAt(x, y) {
       let i2, hitBox, lh;
-      if (_isBetween(x2, this.left, this.right) && _isBetween(y, this.top, this.bottom)) {
+      if (_isBetween(x, this.left, this.right) && _isBetween(y, this.top, this.bottom)) {
         lh = this.legendHitBoxes;
         for (i2 = 0; i2 < lh.length; ++i2) {
           hitBox = lh[i2];
-          if (_isBetween(x2, hitBox.left, hitBox.left + hitBox.width) && _isBetween(y, hitBox.top, hitBox.top + hitBox.height)) {
+          if (_isBetween(x, hitBox.left, hitBox.left + hitBox.width) && _isBetween(y, hitBox.top, hitBox.top + hitBox.height)) {
             return this.legendItems[i2];
           }
         }
@@ -82125,7 +82125,7 @@ var bleh = (() => {
       if (!items.length) {
         return false;
       }
-      let x2 = eventPosition.x;
+      let x = eventPosition.x;
       let y = eventPosition.y;
       let minDistance = Number.POSITIVE_INFINITY;
       let i2, len, nearestElement;
@@ -82142,11 +82142,11 @@ var bleh = (() => {
       }
       if (nearestElement) {
         const tp = nearestElement.tooltipPosition();
-        x2 = tp.x;
+        x = tp.x;
         y = tp.y;
       }
       return {
-        x: x2,
+        x,
         y
       };
     }
@@ -82243,24 +82243,24 @@ var bleh = (() => {
     return "center";
   }
   function doesNotFitWithAlign(xAlign, chart, options, size2) {
-    const { x: x2, width } = size2;
+    const { x, width } = size2;
     const caret = options.caretSize + options.caretPadding;
-    if (xAlign === "left" && x2 + width + caret > chart.width) {
+    if (xAlign === "left" && x + width + caret > chart.width) {
       return true;
     }
-    if (xAlign === "right" && x2 - width - caret < 0) {
+    if (xAlign === "right" && x - width - caret < 0) {
       return true;
     }
   }
   function determineXAlign(chart, options, size2, yAlign) {
-    const { x: x2, width } = size2;
+    const { x, width } = size2;
     const { width: chartWidth, chartArea: { left: left2, right: right2 } } = chart;
     let xAlign = "center";
     if (yAlign === "center") {
-      xAlign = x2 <= (left2 + right2) / 2 ? "left" : "right";
-    } else if (x2 <= width / 2) {
+      xAlign = x <= (left2 + right2) / 2 ? "left" : "right";
+    } else if (x <= width / 2) {
       xAlign = "left";
-    } else if (x2 >= chartWidth - width / 2) {
+    } else if (x >= chartWidth - width / 2) {
       xAlign = "right";
     }
     if (doesNotFitWithAlign(xAlign, chart, options, size2)) {
@@ -82276,13 +82276,13 @@ var bleh = (() => {
     };
   }
   function alignX(size2, xAlign) {
-    let { x: x2, width } = size2;
+    let { x, width } = size2;
     if (xAlign === "right") {
-      x2 -= width;
+      x -= width;
     } else if (xAlign === "center") {
-      x2 -= width / 2;
+      x -= width / 2;
     }
-    return x2;
+    return x;
   }
   function alignY(size2, yAlign, paddingAndSize) {
     let { y, height } = size2;
@@ -82300,21 +82300,21 @@ var bleh = (() => {
     const { xAlign, yAlign } = alignment;
     const paddingAndSize = caretSize + caretPadding;
     const { topLeft, topRight, bottomLeft, bottomRight } = toTRBLCorners(cornerRadius);
-    let x2 = alignX(size2, xAlign);
+    let x = alignX(size2, xAlign);
     const y = alignY(size2, yAlign, paddingAndSize);
     if (yAlign === "center") {
       if (xAlign === "left") {
-        x2 += paddingAndSize;
+        x += paddingAndSize;
       } else if (xAlign === "right") {
-        x2 -= paddingAndSize;
+        x -= paddingAndSize;
       }
     } else if (xAlign === "left") {
-      x2 -= Math.max(topLeft, bottomLeft) + caretSize;
+      x -= Math.max(topLeft, bottomLeft) + caretSize;
     } else if (xAlign === "right") {
-      x2 += Math.max(topRight, bottomRight) + caretSize;
+      x += Math.max(topRight, bottomRight) + caretSize;
     }
     return {
-      x: _limitValue(x2, 0, chart.width - size2.width),
+      x: _limitValue(x, 0, chart.width - size2.width),
       y: _limitValue(y, 0, chart.height - size2.height)
     };
   }
@@ -82787,34 +82787,34 @@ var bleh = (() => {
     }
     drawBackground(pt, ctx, tooltipSize, options) {
       const { xAlign, yAlign } = this;
-      const { x: x2, y } = pt;
+      const { x, y } = pt;
       const { width, height } = tooltipSize;
       const { topLeft, topRight, bottomLeft, bottomRight } = toTRBLCorners(options.cornerRadius);
       ctx.fillStyle = options.backgroundColor;
       ctx.strokeStyle = options.borderColor;
       ctx.lineWidth = options.borderWidth;
       ctx.beginPath();
-      ctx.moveTo(x2 + topLeft, y);
+      ctx.moveTo(x + topLeft, y);
       if (yAlign === "top") {
         this.drawCaret(pt, ctx, tooltipSize, options);
       }
-      ctx.lineTo(x2 + width - topRight, y);
-      ctx.quadraticCurveTo(x2 + width, y, x2 + width, y + topRight);
+      ctx.lineTo(x + width - topRight, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + topRight);
       if (yAlign === "center" && xAlign === "right") {
         this.drawCaret(pt, ctx, tooltipSize, options);
       }
-      ctx.lineTo(x2 + width, y + height - bottomRight);
-      ctx.quadraticCurveTo(x2 + width, y + height, x2 + width - bottomRight, y + height);
+      ctx.lineTo(x + width, y + height - bottomRight);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - bottomRight, y + height);
       if (yAlign === "bottom") {
         this.drawCaret(pt, ctx, tooltipSize, options);
       }
-      ctx.lineTo(x2 + bottomLeft, y + height);
-      ctx.quadraticCurveTo(x2, y + height, x2, y + height - bottomLeft);
+      ctx.lineTo(x + bottomLeft, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - bottomLeft);
       if (yAlign === "center" && xAlign === "left") {
         this.drawCaret(pt, ctx, tooltipSize, options);
       }
-      ctx.lineTo(x2, y + topLeft);
-      ctx.quadraticCurveTo(x2, y, x2 + topLeft, y);
+      ctx.lineTo(x, y + topLeft);
+      ctx.quadraticCurveTo(x, y, x + topLeft, y);
       ctx.closePath();
       ctx.fill();
       if (options.borderWidth > 0) {
@@ -83688,14 +83688,14 @@ var bleh = (() => {
   function updateLimits(limits, orig, angle2, hLimits, vLimits) {
     const sin = Math.abs(Math.sin(angle2));
     const cos = Math.abs(Math.cos(angle2));
-    let x2 = 0;
+    let x = 0;
     let y = 0;
     if (hLimits.start < orig.l) {
-      x2 = (orig.l - hLimits.start) / sin;
-      limits.l = Math.min(limits.l, orig.l - x2);
+      x = (orig.l - hLimits.start) / sin;
+      limits.l = Math.min(limits.l, orig.l - x);
     } else if (hLimits.end > orig.r) {
-      x2 = (hLimits.end - orig.r) / sin;
-      limits.r = Math.max(limits.r, orig.r + x2);
+      x = (hLimits.end - orig.r) / sin;
+      limits.r = Math.max(limits.r, orig.r + x);
     }
     if (vLimits.start < orig.t) {
       y = (orig.t - vLimits.start) / cos;
@@ -83776,13 +83776,13 @@ var bleh = (() => {
     }
     return "right";
   }
-  function leftForTextAlign(x2, w, align) {
+  function leftForTextAlign(x, w, align) {
     if (align === "right") {
-      x2 -= w;
+      x -= w;
     } else if (align === "center") {
-      x2 -= w / 2;
+      x -= w / 2;
     }
-    return x2;
+    return x;
   }
   function yForAngle(y, h, angle2) {
     if (angle2 === 90 || angle2 === 270) {
@@ -83828,8 +83828,8 @@ var bleh = (() => {
       const optsAtIndex = pointLabels.setContext(scale2.getPointLabelContext(i2));
       drawPointLabelBox(ctx, optsAtIndex, item);
       const plFont = toFont(optsAtIndex.font);
-      const { x: x2, y, textAlign: textAlign2 } = item;
-      renderText(ctx, scale2._pointLabels[i2], x2, y + plFont.lineHeight / 2, plFont, {
+      const { x, y, textAlign: textAlign2 } = item;
+      renderText(ctx, scale2._pointLabels[i2], x, y + plFont.lineHeight / 2, plFont, {
         color: optsAtIndex.color,
         textAlign: textAlign2,
         textBaseline: "middle"
@@ -84426,7 +84426,7 @@ var bleh = (() => {
       if (time3 === max3 || options.bounds === "ticks" || count === 1) {
         addTick(ticks, time3, timestamps);
       }
-      return Object.keys(ticks).sort(sorter).map((x2) => +x2);
+      return Object.keys(ticks).sort(sorter).map((x) => +x);
     }
     getLabelForValue(value) {
       const adapter = this._adapter;
@@ -84677,7 +84677,7 @@ var bleh = (() => {
   function HeatmapDates() {
     let days = Array.from(
       { length: 7 },
-      (_, i2) => new Intl.DateTimeFormat(lang, { weekday: "short" }).format(
+      (_2, i2) => new Intl.DateTimeFormat(lang, { weekday: "short" }).format(
         new Date(1970, 0, 4 + i2)
       )
     );
@@ -84716,7 +84716,7 @@ var bleh = (() => {
                 <div class="summary-aside">
                     <div class="graph-container">
                         <div class="graph-blocks">
-                            ${Array.from({ length: 3 * 10 }).map((_, i2) => {
+                            ${Array.from({ length: 3 * 10 }).map((_2, i2) => {
       const elem = create_graph_block(i2 + 1);
       graph_blocks.push(elem);
       return elem;
@@ -86548,7 +86548,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[banner=([^\]]+)\]/g,
-        replace: (_, url) => {
+        replace: (_2, url) => {
           delete cache2.banner;
           delete cache2.banner_orig;
           try {
@@ -86567,12 +86567,12 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[(center|left|right)]\s*([\s\S]*?)\s*\[\/\1]/g,
-        replace: (_, align, content2, offset5, text5) => {
+        replace: (_2, align, content2, offset5, text5) => {
           let backticks = 0;
           for (let i2 = 0; i2 < offset5; i2++) {
             if (text5[i2] == "`") backticks++;
           }
-          if (backticks % 2 == 1) return _;
+          if (backticks % 2 == 1) return _2;
           const inner = converter2.makeHtml(content2.trim());
           const clean2 = purify_default.sanitize(inner, {
             ALLOWED_TAGS,
@@ -86602,7 +86602,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/,
-        replace: (_, h, s2, l2) => {
+        replace: (_2, h, s2, l2) => {
           hue4 = Math.min(
             settings_store.hue.max,
             Math.max(settings_store.hue.min, parseInt(h, 10))
@@ -86623,7 +86623,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[font=([^\]]+)\]/g,
-        replace: (_, family) => {
+        replace: (_2, family) => {
           delete cache2.font;
           delete cache2.font_style;
           if (is_sponsor(name)) {
@@ -86639,7 +86639,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[name=([^\]]+)\]/g,
-        replace: (_, username2) => {
+        replace: (_2, username2) => {
           delete cache2.username;
           if (is_sponsor(name)) {
             cache2.username = username2;
@@ -86652,7 +86652,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /\[status=([^\]]+)\]/g,
-        replace: (_, user) => {
+        replace: (_2, user) => {
           status_cafe_user = encodeURIComponent(user);
           return '<div class="status-cafe-host"></div>';
         }
@@ -86662,7 +86662,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
-        replace: (_, time3, flag2) => {
+        replace: (_2, time3, flag2) => {
           return `<t data-flag="${flag2 || "F"}">${time3}</t>`;
         }
       }
@@ -86678,7 +86678,7 @@ var bleh = (() => {
       {
         type: "lang",
         regex: /(?<=^|[\s([{.,])@([a-z0-9_]+?)(?!@)(?=$|[^a-z0-9_]|__)/gi,
-        replace: (_, username2) => {
+        replace: (_2, username2) => {
           return `<a class="mention" href="${root}user/${username2}" target="_blank">@${username2}</a>`;
         }
       }
@@ -89077,7 +89077,7 @@ var bleh = (() => {
         ] })
       ] }),
       /* @__PURE__ */ jsx(ProfileSummaryMain, { children: [
-        /* @__PURE__ */ jsx(GraphBlocks, { children: Array.from({ length: 30 }).map((_, i2) => {
+        /* @__PURE__ */ jsx(GraphBlocks, { children: Array.from({ length: 30 }).map((_2, i2) => {
           const elem = /* @__PURE__ */ jsx(GraphBlock, { index: i2 + 1 });
           graph_blocks.push(elem);
           return elem;
@@ -95607,7 +95607,7 @@ var bleh = (() => {
       const buttons = [];
       const years = Array.from({
         length: (/* @__PURE__ */ new Date()).getFullYear() - 2002
-      }, (_, i2) => 2003 + i2).reverse();
+      }, (_2, i2) => 2003 + i2).reverse();
       const elem2 = /* @__PURE__ */ jsx("div", { class: "timeframe-menu-content", children: [
         /* @__PURE__ */ jsx("div", { class: "date-range-picker-presets-wrap", children: [
           /* @__PURE__ */ jsx("ul", { class: ["date-range-picker-presets"], children: [
@@ -95896,7 +95896,7 @@ var bleh = (() => {
       if (page2 == "preset") {
         const years = Array.from({
           length: (/* @__PURE__ */ new Date()).getFullYear() - 2002
-        }, (_, i2) => 2003 + i2).reverse();
+        }, (_2, i2) => 2003 + i2).reverse();
         render(
           content2,
           html`
@@ -97214,8 +97214,8 @@ var bleh = (() => {
       this.width = width;
       this.height = height;
     }
-    add(x2, y, w, h) {
-      return new Bounds2(this.left + x2, this.top + y, this.width + w, this.height + h);
+    add(x, y, w, h) {
+      return new Bounds2(this.left + x, this.top + y, this.width + w, this.height + h);
     }
     static fromClientRect(context, clientRect) {
       return new Bounds2(clientRect.left + context.windowBounds.left, clientRect.top + context.windowBounds.top, clientRect.width, clientRect.height);
@@ -98127,8 +98127,8 @@ var bleh = (() => {
     flags: 4
   };
   var getAbsoluteValueForTuple = (tuple, width, height) => {
-    const [x2, y] = tuple;
-    return [getAbsoluteValue(x2, width), getAbsoluteValue(typeof y !== "undefined" ? y : x2, height)];
+    const [x, y] = tuple;
+    return [getAbsoluteValue(x, width), getAbsoluteValue(typeof y !== "undefined" ? y : x, height)];
   };
   var getAbsoluteValue = (token, parent) => {
     if (isCalcWithPercentage(token)) return token._calcPercentage / 100 * parent + token._calcPixelOffset;
@@ -98422,10 +98422,10 @@ var bleh = (() => {
     ], LMS);
   };
   var lab2xyz = (lab2) => {
-    const fy = (lab2[0] + 16) / 116, fx = lab2[1] / 500 + fy, fz = fy - lab2[2] / 200, k5 = 24389 / 27, e4 = 24 / 116, xyz = [
-      (fx > e4 ? fx ** 3 : (116 * fx - 16) / k5) * 0.3457 / 0.3585,
-      lab2[0] > 8 ? fy ** 3 : lab2[0] / k5,
-      (fz > e4 ? fz ** 3 : (116 * fz - 16) / k5) * 0.2958 / 0.3585
+    const fy = (lab2[0] + 16) / 116, fx = lab2[1] / 500 + fy, fz = fy - lab2[2] / 200, k4 = 24389 / 27, e4 = 24 / 116, xyz = [
+      (fx > e4 ? fx ** 3 : (116 * fx - 16) / k4) * 0.3457 / 0.3585,
+      lab2[0] > 8 ? fy ** 3 : lab2[0] / k4,
+      (fz > e4 ? fz ** 3 : (116 * fz - 16) / k4) * 0.2958 / 0.3585
     ];
     return d50toD65([
       xyz[0],
@@ -98440,13 +98440,13 @@ var bleh = (() => {
         r3 / 255,
         g / 255,
         b / 255
-      ]), [x2, y, z] = rgbLinear2xyz([
+      ]), [x, y, z] = rgbLinear2xyz([
         rgb_linear[0],
         rgb_linear[1],
         rgb_linear[2]
       ]);
       return [
-        x2,
+        x,
         y,
         z,
         a
@@ -98464,65 +98464,65 @@ var bleh = (() => {
       h,
       s2,
       l2
-    ])), [x2, y, z] = rgbLinear2xyz([
+    ])), [x, y, z] = rgbLinear2xyz([
       rgb_linear[0],
       rgb_linear[1],
       rgb_linear[2]
     ]);
     return [
-      x2,
+      x,
       y,
       z,
       a
     ];
   };
   var labToXyz = (_context, args) => {
-    const [l2, a, b, alpha2] = extractLabComponents(args), [x2, y, z] = lab2xyz([
+    const [l2, a, b, alpha2] = extractLabComponents(args), [x, y, z] = lab2xyz([
       l2,
       a,
       b
     ]);
     return [
-      x2,
+      x,
       y,
       z,
       alpha2
     ];
   };
   var lchToXyz = (_context, args) => {
-    const [l2, c2, h, alpha2] = extractLchComponents(args), [x2, y, z] = lab2xyz(lch2lab([
+    const [l2, c2, h, alpha2] = extractLchComponents(args), [x, y, z] = lab2xyz(lch2lab([
       l2,
       c2,
       h
     ]));
     return [
-      x2,
+      x,
       y,
       z,
       alpha2
     ];
   };
   var oklchToXyz = (_context, args) => {
-    const [l2, c2, h, alpha2] = extractOkLchComponents(args), [x2, y, z] = oklab2xyz(lch2lab([
+    const [l2, c2, h, alpha2] = extractOkLchComponents(args), [x, y, z] = oklab2xyz(lch2lab([
       l2,
       c2,
       h
     ]));
     return [
-      x2,
+      x,
       y,
       z,
       alpha2
     ];
   };
   var oklabToXyz = (_context, args) => {
-    const [l2, c2, h, alpha2] = extractLabComponents(args), [x2, y, z] = oklab2xyz([
+    const [l2, c2, h, alpha2] = extractLabComponents(args), [x, y, z] = oklab2xyz([
       l2,
       c2,
       h
     ]);
     return [
-      x2,
+      x,
       y,
       z,
       alpha2
@@ -98539,13 +98539,13 @@ var bleh = (() => {
     return args;
   };
   var xyz50FromXYZ = (args) => {
-    const [x2, y, z] = d65toD50([
+    const [x, y, z] = d65toD50([
       args[0],
       args[2],
       args[3]
     ]);
     return [
-      x2,
+      x,
       y,
       z,
       args[3]
@@ -100603,9 +100603,9 @@ var bleh = (() => {
   var getAngleFromCorner = (corner, width, height) => {
     const centerX = width / 2;
     const centerY = height / 2;
-    const x2 = getAbsoluteValue(corner[0], width) - centerX;
+    const x = getAbsoluteValue(corner[0], width) - centerX;
     const y = centerY - getAbsoluteValue(corner[1], height);
-    return (Math.atan2(y, x2) + Math.PI * 2) % (Math.PI * 2);
+    return (Math.atan2(y, x) + Math.PI * 2) % (Math.PI * 2);
   };
   var calculateGradientDirection = (angle2, width, height) => {
     const radian = typeof angle2 === "number" ? angle2 : getAngleFromCorner(angle2, width, height);
@@ -100624,7 +100624,7 @@ var bleh = (() => {
     ];
   };
   var distance = (a, b) => Math.sqrt(a * a + b * b);
-  var findCorner = (width, height, x2, y, closest2) => {
+  var findCorner = (width, height, x, y, closest2) => {
     return [
       [0, 0],
       [0, height],
@@ -100632,7 +100632,7 @@ var bleh = (() => {
       [width, height]
     ].reduce((stat, corner) => {
       const [cx, cy] = corner;
-      const d = distance(x2 - cx, y - cy);
+      const d = distance(x - cx, y - cy);
       if (closest2 ? d < stat.optimumDistance : d > stat.optimumDistance) return {
         optimumCorner: corner,
         optimumDistance: d
@@ -100643,39 +100643,39 @@ var bleh = (() => {
       optimumCorner: null
     }).optimumCorner;
   };
-  var calculateRadius = (gradient, x2, y, width, height) => {
+  var calculateRadius = (gradient, x, y, width, height) => {
     let rx = 0;
     let ry = 0;
     switch (gradient.size) {
       case 0:
-        if (gradient.shape === 0) rx = ry = Math.min(Math.abs(x2), Math.abs(x2 - width), Math.abs(y), Math.abs(y - height));
+        if (gradient.shape === 0) rx = ry = Math.min(Math.abs(x), Math.abs(x - width), Math.abs(y), Math.abs(y - height));
         else if (gradient.shape === 1) {
-          rx = Math.min(Math.abs(x2), Math.abs(x2 - width));
+          rx = Math.min(Math.abs(x), Math.abs(x - width));
           ry = Math.min(Math.abs(y), Math.abs(y - height));
         }
         break;
       case 2:
-        if (gradient.shape === 0) rx = ry = Math.min(distance(x2, y), distance(x2, y - height), distance(x2 - width, y), distance(x2 - width, y - height));
+        if (gradient.shape === 0) rx = ry = Math.min(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
         else if (gradient.shape === 1) {
-          const c2 = Math.min(Math.abs(y), Math.abs(y - height)) / Math.min(Math.abs(x2), Math.abs(x2 - width));
-          const [cx, cy] = findCorner(width, height, x2, y, true);
-          rx = distance(cx - x2, (cy - y) / c2);
+          const c2 = Math.min(Math.abs(y), Math.abs(y - height)) / Math.min(Math.abs(x), Math.abs(x - width));
+          const [cx, cy] = findCorner(width, height, x, y, true);
+          rx = distance(cx - x, (cy - y) / c2);
           ry = c2 * rx;
         }
         break;
       case 1:
-        if (gradient.shape === 0) rx = ry = Math.max(Math.abs(x2), Math.abs(x2 - width), Math.abs(y), Math.abs(y - height));
+        if (gradient.shape === 0) rx = ry = Math.max(Math.abs(x), Math.abs(x - width), Math.abs(y), Math.abs(y - height));
         else if (gradient.shape === 1) {
-          rx = Math.max(Math.abs(x2), Math.abs(x2 - width));
+          rx = Math.max(Math.abs(x), Math.abs(x - width));
           ry = Math.max(Math.abs(y), Math.abs(y - height));
         }
         break;
       case 3:
-        if (gradient.shape === 0) rx = ry = Math.max(distance(x2, y), distance(x2, y - height), distance(x2 - width, y), distance(x2 - width, y - height));
+        if (gradient.shape === 0) rx = ry = Math.max(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
         else if (gradient.shape === 1) {
-          const c2 = Math.max(Math.abs(y), Math.abs(y - height)) / Math.max(Math.abs(x2), Math.abs(x2 - width));
-          const [cx, cy] = findCorner(width, height, x2, y, false);
-          rx = distance(cx - x2, (cy - y) / c2);
+          const c2 = Math.max(Math.abs(y), Math.abs(y - height)) / Math.max(Math.abs(x), Math.abs(x - width));
+          const [cx, cy] = findCorner(width, height, x, y, false);
+          rx = distance(cx - x, (cy - y) / c2);
           ry = c2 * rx;
         }
     }
@@ -104186,11 +104186,11 @@ var bleh = (() => {
     }
     return str;
   };
-  var restoreOwnerScroll = (ownerDocument, x2, y) => {
-    if (ownerDocument && ownerDocument.defaultView && (x2 !== ownerDocument.defaultView.pageXOffset || y !== ownerDocument.defaultView.pageYOffset)) ownerDocument.defaultView.scrollTo(x2, y);
+  var restoreOwnerScroll = (ownerDocument, x, y) => {
+    if (ownerDocument && ownerDocument.defaultView && (x !== ownerDocument.defaultView.pageXOffset || y !== ownerDocument.defaultView.pageYOffset)) ownerDocument.defaultView.scrollTo(x, y);
   };
-  var restoreNodeScroll = ([element, x2, y]) => {
-    element.scrollLeft = x2;
+  var restoreNodeScroll = ([element, x, y]) => {
+    element.scrollLeft = x;
     element.scrollTop = y;
   };
   var addBase = (targetELement, baseUri) => {
@@ -104645,7 +104645,7 @@ var bleh = (() => {
     }
     return true;
   };
-  var createForeignObjectSVG = (width, height, x2, y, node) => {
+  var createForeignObjectSVG = (width, height, x, y, node) => {
     const xmlns = "http://www.w3.org/2000/svg";
     const svg4 = document.createElementNS(xmlns, "svg");
     const foreignObject = document.createElementNS(xmlns, "foreignObject");
@@ -104653,7 +104653,7 @@ var bleh = (() => {
     svg4.setAttributeNS(null, "height", height.toString());
     foreignObject.setAttributeNS(null, "width", "100%");
     foreignObject.setAttributeNS(null, "height", "100%");
-    foreignObject.setAttributeNS(null, "x", x2.toString());
+    foreignObject.setAttributeNS(null, "x", x.toString());
     foreignObject.setAttributeNS(null, "y", y.toString());
     foreignObject.setAttributeNS(null, "externalResourcesRequired", "true");
     svg4.appendChild(foreignObject);
@@ -105063,9 +105063,9 @@ var bleh = (() => {
     type;
     x;
     y;
-    constructor(x2, y) {
+    constructor(x, y) {
       this.type = 0;
-      this.x = x2;
+      this.x = x;
       this.y = y;
     }
     add(deltaX, deltaY) {
@@ -105191,21 +105191,21 @@ var bleh = (() => {
       this.bottomLeftContentBox = blh > 0 || blv > 0 ? getCurvePoints(bounds.left + borderLeftWidth2 + paddingLeft2, bounds.top + leftHeight, Math.max(0, blh - (borderLeftWidth2 + paddingLeft2)), blv - (borderBottomWidth2 + paddingBottom2), 3) : new Vector(bounds.left + borderLeftWidth2 + paddingLeft2, bounds.top + bounds.height - (borderBottomWidth2 + paddingBottom2));
     }
   };
-  var getCurvePoints = (x2, y, r1, r22, position2) => {
+  var getCurvePoints = (x, y, r1, r22, position2) => {
     const kappa = 4 * ((Math.sqrt(2) - 1) / 3);
     const ox = r1 * kappa;
     const oy = r22 * kappa;
-    const xm = x2 + r1;
+    const xm = x + r1;
     const ym = y + r22;
     switch (position2) {
       case 0:
-        return new BezierCurve(new Vector(x2, ym), new Vector(x2, ym - oy), new Vector(xm - ox, y), new Vector(xm, y));
+        return new BezierCurve(new Vector(x, ym), new Vector(x, ym - oy), new Vector(xm - ox, y), new Vector(xm, y));
       case 1:
-        return new BezierCurve(new Vector(x2, y), new Vector(x2 + ox, y), new Vector(xm, ym - oy), new Vector(xm, ym));
+        return new BezierCurve(new Vector(x, y), new Vector(x + ox, y), new Vector(xm, ym - oy), new Vector(xm, ym));
       case 2:
-        return new BezierCurve(new Vector(xm, y), new Vector(xm, y + oy), new Vector(x2 + ox, ym), new Vector(x2, ym));
+        return new BezierCurve(new Vector(xm, y), new Vector(xm, y + oy), new Vector(x + ox, ym), new Vector(x, ym));
       default:
-        return new BezierCurve(new Vector(xm, ym), new Vector(xm - ox, ym), new Vector(x2, y + oy), new Vector(x2, y));
+        return new BezierCurve(new Vector(xm, ym), new Vector(xm - ox, ym), new Vector(x, y + oy), new Vector(x, y));
     }
   };
   var calculateBorderBoxPath = (curves) => {
@@ -105593,13 +105593,13 @@ var bleh = (() => {
       case 1: {
         const iLeft = getAbsoluteValue(clipPath2.left, bWidth);
         const iTop = getAbsoluteValue(clipPath2.top, bHeight);
-        const x2 = bLeft + iLeft;
+        const x = bLeft + iLeft;
         const y = bTop + iTop;
         const w = Math.max(0, bWidth - iLeft - getAbsoluteValue(clipPath2.right, bWidth));
         const h = Math.max(0, bHeight - iTop - getAbsoluteValue(clipPath2.bottom, bHeight));
         return new ClipPathEffect((ctx) => {
           ctx.beginPath();
-          ctx.rect(x2, y, w, h);
+          ctx.rect(x, y, w, h);
           ctx.clip();
         });
       }
@@ -105654,13 +105654,13 @@ var bleh = (() => {
         });
       }
       case 6: {
-        const x2 = bLeft + getAbsoluteValue(clipPath2.x, bWidth);
+        const x = bLeft + getAbsoluteValue(clipPath2.x, bWidth);
         const y = bTop + getAbsoluteValue(clipPath2.y, bHeight);
         const w = Math.max(0, getAbsoluteValue(clipPath2.width, bWidth));
         const h = Math.max(0, getAbsoluteValue(clipPath2.height, bHeight));
         return new ClipPathEffect((ctx) => {
           ctx.beginPath();
-          ctx.rect(x2, y, w, h);
+          ctx.rect(x, y, w, h);
           ctx.clip();
         });
       }
@@ -105740,8 +105740,8 @@ var bleh = (() => {
     const period = Math.max(last.stop - first.stop, 0.01);
     const stops = [];
     const cycles = Math.ceil(1 / period);
-    for (let k5 = 0; k5 < cycles; k5++) for (const s2 of processed) {
-      const stop = k5 * period + (s2.stop - first.stop);
+    for (let k4 = 0; k4 < cycles; k4++) for (const s2 of processed) {
+      const stop = k4 * period + (s2.stop - first.stop);
       if (stop > 1) break;
       stops.push({
         stop,
@@ -105881,7 +105881,7 @@ var bleh = (() => {
     if (typeof value === "undefined") return at(values, 0);
     return value;
   };
-  var calculateBackgroundRepeatPath = (repeat, [x2, y], [width, height], backgroundPositioningArea, backgroundPaintingArea) => {
+  var calculateBackgroundRepeatPath = (repeat, [x, y], [width, height], backgroundPositioningArea, backgroundPaintingArea) => {
     switch (repeat) {
       case 2:
         return [
@@ -105892,17 +105892,17 @@ var bleh = (() => {
         ];
       case 3:
         return [
-          new Vector(Math.round(backgroundPositioningArea.left + x2), Math.round(backgroundPositioningArea.top)),
-          new Vector(Math.round(backgroundPositioningArea.left + x2 + width), Math.round(backgroundPositioningArea.top)),
-          new Vector(Math.round(backgroundPositioningArea.left + x2 + width), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top)),
-          new Vector(Math.round(backgroundPositioningArea.left + x2), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top))
+          new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top)),
+          new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top)),
+          new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top)),
+          new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top))
         ];
       case 1:
         return [
-          new Vector(Math.round(backgroundPositioningArea.left + x2), Math.round(backgroundPositioningArea.top + y)),
-          new Vector(Math.round(backgroundPositioningArea.left + x2 + width), Math.round(backgroundPositioningArea.top + y)),
-          new Vector(Math.round(backgroundPositioningArea.left + x2 + width), Math.round(backgroundPositioningArea.top + y + height)),
-          new Vector(Math.round(backgroundPositioningArea.left + x2), Math.round(backgroundPositioningArea.top + y + height))
+          new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top + y)),
+          new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top + y)),
+          new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top + y + height)),
+          new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top + y + height))
         ];
       default:
         return [
@@ -106350,56 +106350,56 @@ var bleh = (() => {
         this.draw(bounds.left, y, bounds.width, thickness, decorationStyle);
       });
     }
-    draw(x2, y, width, thickness, style2) {
+    draw(x, y, width, thickness, style2) {
       switch (style2) {
         case 0:
-          this.ctx.fillRect(x2, y, width, thickness);
+          this.ctx.fillRect(x, y, width, thickness);
           break;
         case 1: {
           const gap = Math.max(1, thickness);
-          this.ctx.fillRect(x2, y, width, thickness);
-          this.ctx.fillRect(x2, y + thickness + gap, width, thickness);
+          this.ctx.fillRect(x, y, width, thickness);
+          this.ctx.fillRect(x, y + thickness + gap, width, thickness);
           break;
         }
         case 2:
-          this.drawPattern(x2, y, width, thickness, [thickness, thickness * 2]);
+          this.drawPattern(x, y, width, thickness, [thickness, thickness * 2]);
           break;
         case 3:
-          this.drawPattern(x2, y, width, thickness, [thickness * 3, thickness * 2]);
+          this.drawPattern(x, y, width, thickness, [thickness * 3, thickness * 2]);
           break;
         case 4:
-          this.drawWavy(x2, y, width, thickness);
+          this.drawWavy(x, y, width, thickness);
           break;
         default:
-          this.ctx.fillRect(x2, y, width, thickness);
+          this.ctx.fillRect(x, y, width, thickness);
       }
     }
-    drawPattern(x2, y, width, thickness, dash) {
+    drawPattern(x, y, width, thickness, dash) {
       this.ctx.save();
       this.ctx.beginPath();
       this.ctx.setLineDash(dash);
       this.ctx.lineWidth = thickness;
       this.ctx.strokeStyle = this.ctx.fillStyle;
-      this.ctx.moveTo(x2, y + thickness / 2);
-      this.ctx.lineTo(x2 + width, y + thickness / 2);
+      this.ctx.moveTo(x, y + thickness / 2);
+      this.ctx.lineTo(x + width, y + thickness / 2);
       this.ctx.stroke();
       this.ctx.restore();
     }
-    drawWavy(x2, y, width, thickness) {
+    drawWavy(x, y, width, thickness) {
       this.ctx.save();
       this.ctx.beginPath();
       this.ctx.lineWidth = thickness;
       this.ctx.strokeStyle = this.ctx.fillStyle;
       const amplitude = thickness * 2;
       const wavelength = thickness * 4;
-      let currentX = x2;
+      let currentX = x;
       this.ctx.moveTo(currentX, y + thickness / 2);
-      while (currentX < x2 + width) {
-        const nextX = Math.min(currentX + wavelength / 2, x2 + width);
+      while (currentX < x + width) {
+        const nextX = Math.min(currentX + wavelength / 2, x + width);
         this.ctx.quadraticCurveTo(currentX + wavelength / 4, y + thickness / 2 - amplitude, nextX, y + thickness / 2);
         currentX = nextX;
-        if (currentX < x2 + width) {
-          const nextX2 = Math.min(currentX + wavelength / 2, x2 + width);
+        if (currentX < x + width) {
+          const nextX2 = Math.min(currentX + wavelength / 2, x + width);
           this.ctx.quadraticCurveTo(currentX + wavelength / 4, y + thickness / 2 + amplitude, nextX2, y + thickness / 2);
           currentX = nextX2;
         }
@@ -106551,14 +106551,14 @@ var bleh = (() => {
     }
     renderFillText(text4, letterSpacing2, baseline, writingMode2) {
       if (this.canRenderWholeText(letterSpacing2, writingMode2)) this.ctx.fillText(text4.text, text4.bounds.left, text4.bounds.top + baseline);
-      else this.iterateLettersWithLetterSpacing(text4, letterSpacing2, baseline, writingMode2, (letter, x2, y) => {
-        this.ctx.fillText(letter, x2, y);
+      else this.iterateLettersWithLetterSpacing(text4, letterSpacing2, baseline, writingMode2, (letter, x, y) => {
+        this.ctx.fillText(letter, x, y);
       });
     }
     renderStrokeText(text4, letterSpacing2, baseline, writingMode2) {
       if (this.canRenderWholeText(letterSpacing2, writingMode2)) this.ctx.strokeText(text4.text, text4.bounds.left, text4.bounds.top + baseline);
-      else this.iterateLettersWithLetterSpacing(text4, letterSpacing2, baseline, writingMode2, (letter, x2, y) => {
-        this.ctx.strokeText(letter, x2, y);
+      else this.iterateLettersWithLetterSpacing(text4, letterSpacing2, baseline, writingMode2, (letter, x, y) => {
+        this.ctx.strokeText(letter, x, y);
       });
     }
     renderTextStrokeWithStyle(text4, styles, baseline) {
@@ -106936,7 +106936,7 @@ var bleh = (() => {
       if (image2) {
         const imageWidth = isNaN(image2.width) || image2.width === 0 ? 1 : image2.width;
         const imageHeight = isNaN(image2.height) || image2.height === 0 ? 1 : image2.height;
-        const [path, x2, y, width, height] = calculateBackgroundRendering(container, index3, [
+        const [path, x, y, width, height] = calculateBackgroundRendering(container, index3, [
           imageWidth,
           imageHeight,
           imageWidth / imageHeight
@@ -106950,7 +106950,7 @@ var bleh = (() => {
           pattern = this.ctx.createPattern(resized, repeatMode);
           this.patternCache.set(cacheKey, pattern);
         }
-        this.renderRepeat(path, pattern, x2, y);
+        this.renderRepeat(path, pattern, x, y);
       }
     }
     /**
@@ -106959,14 +106959,14 @@ var bleh = (() => {
     * the background area using createPattern('repeat').
     */
     renderRepeatingLinearGradient(container, backgroundImage2, index3) {
-      const [path, x2, y, width, height] = calculateBackgroundRendering(container, index3, [
+      const [path, x, y, width, height] = calculateBackgroundRendering(container, index3, [
         null,
         null,
         null
       ]);
       const [lineLength, lx0, lx1, ly0, ly1] = calculateGradientDirection(backgroundImage2.angle, width, height);
-      const gx0 = x2 + lx0;
-      const gx1 = x2 + lx1;
+      const gx0 = x + lx0;
+      const gx1 = x + lx1;
       const gy0 = y + ly0;
       const gy1 = y + ly1;
       const processedStops = processColorStops(backgroundImage2.stops, lineLength || 1);
@@ -106985,7 +106985,7 @@ var bleh = (() => {
     * Render a linear gradient background
     */
     renderLinearGradient(container, backgroundImage2, index3) {
-      const [path, x2, y, width, height] = calculateBackgroundRendering(container, index3, [
+      const [path, x, y, width, height] = calculateBackgroundRendering(container, index3, [
         null,
         null,
         null
@@ -107008,7 +107008,7 @@ var bleh = (() => {
           this.patternCache.set(cacheKey, pattern);
         }
       }
-      if (pattern) this.renderRepeat(path, pattern, x2, y);
+      if (pattern) this.renderRepeat(path, pattern, x, y);
     }
     /**
     * Render a radial gradient background
@@ -107020,15 +107020,15 @@ var bleh = (() => {
         null
       ]);
       const position2 = backgroundImage2.position.length === 0 ? [FIFTY_PERCENT] : backgroundImage2.position;
-      const x2 = getAbsoluteValue(at(position2, 0), width);
+      const x = getAbsoluteValue(at(position2, 0), width);
       const y = getAbsoluteValue(at(position2, position2.length - 1), height);
-      let [rx, ry] = calculateRadius(backgroundImage2, x2, y, width, height);
+      let [rx, ry] = calculateRadius(backgroundImage2, x, y, width, height);
       if (rx === 0 || ry === 0) {
         rx = Math.max(rx, 0.01);
         ry = Math.max(ry, 0.01);
       }
       if (rx > 0 && ry > 0) {
-        const cacheKey = `rg|${Math.round(x2)}x${Math.round(y)}|${Math.round(rx)}x${Math.round(ry)}|${JSON.stringify(backgroundImage2.stops)}`;
+        const cacheKey = `rg|${Math.round(x)}x${Math.round(y)}|${Math.round(rx)}x${Math.round(ry)}|${JSON.stringify(backgroundImage2.stops)}`;
         const processed = processColorStops(backgroundImage2.stops, rx);
         const lastColor = asString(at(processed, processed.length - 1).color);
         let pattern = this.patternCache.get(cacheKey);
@@ -107044,7 +107044,7 @@ var bleh = (() => {
         this.ctx.clip();
         this.ctx.fillStyle = lastColor;
         this.ctx.fill();
-        this.ctx.translate(left2 + x2 - rx, top2 + y - ry);
+        this.ctx.translate(left2 + x - rx, top2 + y - ry);
         this.ctx.fillStyle = pattern;
         this.ctx.fillRect(0, 0, rx * 2, ry * 2);
         this.ctx.restore();
@@ -107066,15 +107066,15 @@ var bleh = (() => {
         null
       ]);
       const position2 = backgroundImage2.position.length === 0 ? [FIFTY_PERCENT] : backgroundImage2.position;
-      const x2 = getAbsoluteValue(at(position2, 0), width);
+      const x = getAbsoluteValue(at(position2, 0), width);
       const y = getAbsoluteValue(at(position2, position2.length - 1), height);
-      let [rx, ry] = calculateRadius(backgroundImage2, x2, y, width, height);
+      let [rx, ry] = calculateRadius(backgroundImage2, x, y, width, height);
       if (rx === 0 || ry === 0) {
         rx = Math.max(rx, 0.01);
         ry = Math.max(ry, 0.01);
       }
       if (!(rx > 0 && ry > 0)) return;
-      const cacheKey = `rrg|${Math.round(x2)}x${Math.round(y)}|${Math.round(rx)}x${Math.round(ry)}|${JSON.stringify(backgroundImage2.stops)}`;
+      const cacheKey = `rrg|${Math.round(x)}x${Math.round(y)}|${Math.round(rx)}x${Math.round(ry)}|${JSON.stringify(backgroundImage2.stops)}`;
       let pattern = this.patternCache.get(cacheKey);
       if (!pattern) {
         const ownerDocument = this.canvas.ownerDocument ?? document;
@@ -107087,7 +107087,7 @@ var bleh = (() => {
         this.path(path);
         this.ctx.save();
         this.ctx.clip();
-        this.ctx.translate(left2 + x2 - rx, top2 + y - ry);
+        this.ctx.translate(left2 + x - rx, top2 + y - ry);
         this.ctx.fillStyle = pattern;
         this.ctx.fillRect(0, 0, rx * 2, ry * 2);
         this.ctx.restore();
@@ -107156,8 +107156,8 @@ var bleh = (() => {
       }
       const stops = [];
       const cycles = Math.ceil(1 / period);
-      for (let k5 = 0; k5 < cycles; k5++) for (const s2 of processedStops) {
-        const stop = k5 * period + (s2.stop - firstStop.stop);
+      for (let k4 = 0; k4 < cycles; k4++) for (const s2 of processedStops) {
+        const stop = k4 * period + (s2.stop - firstStop.stop);
         if (stop > 1) break;
         stops.push({
           stop,
@@ -107987,17 +107987,17 @@ var bleh = (() => {
       ctx.textAlign = canvasTextAlign(container.styles.textAlign);
       const bounds = contentBox(container);
       const clipBounds2 = container instanceof InputElementContainer ? inputTextClipBounds(bounds, paddingBox(container), fontHeight) : bounds;
-      let x2 = 0;
+      let x = 0;
       switch (container.styles.textAlign) {
         case 1:
-          x2 += bounds.width / 2;
+          x += bounds.width / 2;
           break;
         case 2:
-          x2 += bounds.width;
+          x += bounds.width;
       }
       let verticalOffset = 0;
       if (container instanceof InputElementContainer) verticalOffset = (bounds.height - fontHeight) / 2;
-      const textBounds = bounds.add(x2, verticalOffset, 0, 0);
+      const textBounds = bounds.add(x, verticalOffset, 0, 0);
       ctx.save();
       pathFn([
         new Vector(clipBounds2.left, clipBounds2.top),
@@ -108150,15 +108150,15 @@ var bleh = (() => {
     const factor2 = Math.min(1, ratio(width, at(radii, 0).x + at(radii, 1).x), ratio(width, at(radii, 3).x + at(radii, 2).x), ratio(height, at(radii, 0).y + at(radii, 3).y), ratio(height, at(radii, 1).y + at(radii, 2).y));
     return paths.map((point, index3) => {
       const corner = at(corners, index3);
-      const x2 = corner.x + (index3 === 1 || index3 === 2 ? spread : -spread);
+      const x = corner.x + (index3 === 1 || index3 === 2 ? spread : -spread);
       const y = corner.y + (index3 >= 2 ? spread : -spread);
-      if (!isBezierCurve(point)) return new Vector(x2, y);
+      if (!isBezierCurve(point)) return new Vector(x, y);
       const rx = at(radii, index3).x * factor2;
       const ry = at(radii, index3).y * factor2;
-      if (!rx || !ry) return new Vector(x2, y);
+      if (!rx || !ry) return new Vector(x, y);
       const sx = rx / corner.rx;
       const sy = ry / corner.ry;
-      const resize = (v) => new Vector(x2 + (v.x - corner.x) * sx, y + (v.y - corner.y) * sy);
+      const resize = (v) => new Vector(x + (v.x - corner.x) * sx, y + (v.y - corner.y) * sy);
       return new BezierCurve(resize(point.start), resize(point.startControl), resize(point.endControl), resize(point.end));
     });
   };
@@ -108176,9 +108176,9 @@ var bleh = (() => {
     ].every(Number.isFinite)) return null;
     const determinant = a * d - b * c2;
     if (!Number.isFinite(determinant) || determinant === 0) return null;
-    const inversePoint = (x2, y) => ({
-      x: (d * (x2 - e4) - c2 * (y - f3)) / determinant,
-      y: (-b * (x2 - e4) + a * (y - f3)) / determinant
+    const inversePoint = (x, y) => ({
+      x: (d * (x - e4) - c2 * (y - f3)) / determinant,
+      y: (-b * (x - e4) + a * (y - f3)) / determinant
     });
     const corners = [
       inversePoint(0, 0),
@@ -108398,9 +108398,9 @@ var bleh = (() => {
           mask.ctx.lineWidth = styles.webkitTextStrokeWidth;
           mask.ctx.lineJoin = getTextStrokeLineJoin();
         }
-        for (const textNode of container.textNodes) for (const textBound of textNode.textBounds) this.drawGlyphs(mask, textBound, drawOptions, (ctx, text4, x2, y) => {
-          ctx.fillText(text4, x2, y);
-          if (hasStroke) ctx.strokeText(text4, x2, y);
+        for (const textNode of container.textNodes) for (const textBound of textNode.textBounds) this.drawGlyphs(mask, textBound, drawOptions, (ctx, text4, x, y) => {
+          ctx.fillText(text4, x, y);
+          if (hasStroke) ctx.strokeText(text4, x, y);
         });
         offscreen.ctx.globalCompositeOperation = "destination-in";
         offscreen.ctx.drawImage(mask.canvas, 0, 0, width, height);
@@ -108447,18 +108447,18 @@ var bleh = (() => {
     * renderer. Vertical writing modes fall back to a single draw call.
     */
     drawGlyphs(layer, textBound, drawOptions, draw3) {
-      const x2 = textBound.bounds.left - drawOptions.bounds.left;
+      const x = textBound.bounds.left - drawOptions.bounds.left;
       const y = textBound.bounds.top - drawOptions.bounds.top + drawOptions.baseline;
       const { letterSpacing: letterSpacing2, writingMode: writingMode2 } = drawOptions;
       if (letterSpacing2 <= 0) {
-        draw3(layer.ctx, textBound.text, x2, y);
+        draw3(layer.ctx, textBound.text, x, y);
         return;
       }
       if (isVerticalWritingMode(writingMode2)) {
-        draw3(layer.ctx, textBound.text, x2, y);
+        draw3(layer.ctx, textBound.text, x, y);
         return;
       }
-      let offset5 = x2;
+      let offset5 = x;
       for (const letter of segmentGraphemes(textBound.text)) {
         draw3(layer.ctx, letter, offset5, y);
         offset5 += layer.ctx.measureText(letter).width + letterSpacing2;
@@ -108482,8 +108482,8 @@ var bleh = (() => {
         layer.ctx.shadowOffsetY = textShadow2.offsetY.number * this.scale;
         layer.ctx.shadowBlur = textShadow2.blur.number * this.scale;
         layer.ctx.fillStyle = asString(textShadow2.color);
-        for (const textNode of paint.container.textNodes) for (const textBound of textNode.textBounds) this.drawGlyphs(layer, textBound, drawOptions, (ctx, text4, x2, y) => {
-          ctx.fillText(text4, x2, y);
+        for (const textNode of paint.container.textNodes) for (const textBound of textNode.textBounds) this.drawGlyphs(layer, textBound, drawOptions, (ctx, text4, x, y) => {
+          ctx.fillText(text4, x, y);
         });
         canvases.push(layer.canvas);
       }
@@ -108749,16 +108749,16 @@ var bleh = (() => {
           }
         }
         const offset5 = reflect.offset;
-        let x2 = elementBounds.left;
+        let x = elementBounds.left;
         let y = elementBounds.top;
         if (reflect.direction === "below") y = elementBounds.top + elementBounds.height + offset5;
         else if (reflect.direction === "above") y = elementBounds.top - elementBounds.height - offset5;
-        else if (reflect.direction === "right") x2 = elementBounds.left + elementBounds.width + offset5;
-        else x2 = elementBounds.left - elementBounds.width - offset5;
+        else if (reflect.direction === "right") x = elementBounds.left + elementBounds.width + offset5;
+        else x = elementBounds.left - elementBounds.width - offset5;
         this.ctx.save();
         try {
           this.ctx.filter = "none";
-          this.ctx.drawImage(refCanvas, x2, y, elementBounds.width, elementBounds.height);
+          this.ctx.drawImage(refCanvas, x, y, elementBounds.width, elementBounds.height);
         } finally {
           this.ctx.restore();
         }
@@ -109096,8 +109096,8 @@ var bleh = (() => {
           const period = Math.max(last.stop - first.stop, 0.01);
           stops = [];
           const cycles = Math.ceil(1 / period);
-          for (let k5 = 0; k5 < cycles; k5++) for (const s2 of processed) {
-            const stop = k5 * period + (s2.stop - first.stop);
+          for (let k4 = 0; k4 < cycles; k4++) for (const s2 of processed) {
+            const stop = k4 * period + (s2.stop - first.stop);
             if (stop > 1) break;
             stops.push({
               stop,
@@ -109357,7 +109357,7 @@ var bleh = (() => {
         const limit = Math.max(1, Math.min(concurrency, 100));
         this.context.logger.debug(`Preloading ${urls2.length} image(s) with concurrency ${limit}`);
         let settled = 0;
-        const abortPromise = signal ? new Promise((_, reject) => {
+        const abortPromise = signal ? new Promise((_2, reject) => {
           const onAbort = () => reject(new DOMException("The operation was aborted.", "AbortError"));
           if (signal.aborted) onAbort();
           else signal.addEventListener("abort", onAbort, { once: true });
@@ -109422,7 +109422,7 @@ var bleh = (() => {
     withTimeout(promise, timeoutMs, message) {
       if (timeoutMs <= 0) return promise;
       let timeoutId;
-      const timeout = new Promise((_, reject) => {
+      const timeout = new Promise((_2, reject) => {
         timeoutId = setTimeout(() => reject(new Error(message)), timeoutMs);
       });
       return Promise.race([promise, timeout]).finally(() => {
@@ -109918,7 +109918,7 @@ var bleh = (() => {
     }
     const grid_preview = createRef();
     const range = [];
-    Array.from({ length: 20 }).forEach((_, i2) => {
+    Array.from({ length: 20 }).forEach((_2, i2) => {
       range.push({
         value: String(i2 + 1),
         text: String(i2 + 1)
@@ -113500,7 +113500,7 @@ var bleh = (() => {
       const current_year = (/* @__PURE__ */ new Date()).getFullYear();
       const years = Array.from(
         { length: current_year - year + 1 },
-        (_, i2) => year + i2
+        (_2, i2) => year + i2
       );
       years.forEach((year2, index3) => {
         const selected = page.requested.from == `${year2}-01-01` && (page.requested.to == `${year2}-12-31` || page.requested.rangetype == "year");
@@ -115088,10 +115088,10 @@ var bleh = (() => {
     }
   }
 
-  // node_modules/.pnpm/@tealmiku+florence@2026.1021.0/node_modules/@tealmiku/florence/dist/florence.js
-  function r2(e4, i2, c2 = "info", a = {}) {
+  // node_modules/.pnpm/@tealmiku+florence@2026.1110.0/node_modules/@tealmiku/florence/dist/florence.js
+  function r2(e4, s2, i2 = "info", c2 = {}) {
     let n2;
-    switch (i2) {
+    switch (s2) {
       case "load":
         n2 = "#8CB9D9";
         break;
@@ -115123,23 +115123,22 @@ var bleh = (() => {
         n2 = "#C8DD88";
         break;
     }
-    Object.keys(a).length > 0 ? console[c2](`%c${i2}%c ${e4}`, `background: ${n2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", a) : console[c2](`%c${i2}%c ${e4}`, `background: ${n2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
+    Object.keys(c2).length > 0 ? console[i2](`%c${s2}%c ${e4}`, `background: ${n2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", c2) : console[i2](`%c${s2}%c ${e4}`, `background: ${n2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
   }
-  var x = "2026.1021";
-  var k4 = {};
-  var L = {};
-  function M3({ page: e4, on_head_load: i2, on_body_load: c2, on_mutation: a, on_page_change: n2, on_subpage_change: f3, on_error: l2, on_dedicated_page: d }) {
+  var O = "2026.1110";
+  var _ = {};
+  var E = {};
+  function S({ page: e4, on_head_load: s2, on_body_load: i2, on_mutation: c2, on_page_change: n2, on_subpage_change: u, on_error: a, on_dedicated_page: f3 }) {
     let g = false, v = true;
-    r2(`starting florence ${x}`, "load", "info", { page: e4, on_head_load: i2, on_body_load: c2, on_mutation: a, on_page_change: n2, on_subpage_change: f3, on_error: l2, on_dedicated_page: d });
+    r2(`starting florence ${O}`, "load", "info", { page: e4, on_head_load: s2, on_body_load: i2, on_mutation: c2, on_page_change: n2, on_subpage_change: u, on_error: a, on_dedicated_page: f3 });
     let p4 = new MutationObserver(() => {
-      if (document.head) {
-        let t2 = window.location.pathname.split("/"), o = t2.length - 1;
-        if (t2[o] == "playback" && t2[o - 3] == "listening-report" || t2[0] == "pro" || t2[1] == "pro") {
-          p4.disconnect(), g = true;
-          return;
-        }
-        document.documentElement.classList.add("florence-supports-loading"), i2 && i2(), p4.disconnect();
+      if (!document.head) return;
+      let t2 = window.location.pathname.split("/"), o = t2.length - 1;
+      if (t2[o] == "playback" && t2[o - 3] == "listening-report" || t2[0] == "pro" || t2[1] == "pro") {
+        p4.disconnect(), g = true;
+        return;
       }
+      document.documentElement.classList.add("florence-supports-loading"), s2 && s2(), p4.disconnect();
     });
     p4.observe(document.documentElement, { childList: true });
     let m = new MutationObserver((t2) => {
@@ -115147,69 +115146,68 @@ var bleh = (() => {
         m.disconnect();
         return;
       }
-      r2("pre", "load", "info", { mutations: t2 }), document.body && (r2(`${JSON.stringify(document.body.classList)}`, "load"), document.body.classList.add("florence")), document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer") ? (E(), m.disconnect()) : document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now")) && (document.body.classList.add("florence-loaded"), document.body.querySelector(":scope > .container") ? d && d("503") : document.body.classList.contains("namespace--user_now") && d && d("now"));
+      r2("awaiting a body element", "load", "info", { mutations: t2 }), document.body && (r2(`located: ${JSON.stringify(document.body.classList)}`, "load"), document.body.classList.add("florence"), document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer") ? (M3(), m.disconnect()) : (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now")) && (document.body.classList.add("florence-loaded"), document.body.querySelector(":scope > .container") ? f3?.("503") : document.body.classList.contains("namespace--user_now") && f3?.("now")));
     });
     m.observe(document.documentElement, { childList: true });
-    function E() {
+    function M3() {
       r2("main thread starting", "page", "log", { document, body: document.body });
       let t2 = performance.now();
       try {
-        c2 && c2();
-        let o = new MutationObserver((s2) => {
+        i2 && i2();
+        let o = new MutationObserver((y) => {
           if (!v) {
             o.disconnect();
             return;
           }
-          if (!s2[0]) return;
-          let h = [...s2[0].addedNodes, ...s2[0].removedNodes];
-          if (h.length && h.every((y) => y.nodeType == 1 && y.className && y.className == "tippy-box")) {
-            r2("ignored", "mutation", "log", { mutations: s2 });
-            return;
-          }
-          r2("loop", "mutation", "log", { mutations: s2 }), _(o);
+          !y[0] || y.every((h) => {
+            let k4 = [...h.addedNodes, ...h.removedNodes];
+            return k4.length > 0 && k4.every((L) => L.nodeType == 1 && L.className == "tippy-box");
+          }) || (r2("loop", "mutation", "log", { mutations: y }), $(o));
         });
         o.observe(document.body, { childList: true, subtree: true });
-        let u = performance.now();
-        r2(`finished in ${(u - t2) / 1e3} seconds`, "load");
+        let l2 = performance.now();
+        r2(`finished in ${(l2 - t2) / 1e3} seconds`, "load");
       } catch (o) {
-        v = false, r2("florence ran into an error", "load", "error", { e: o }), l2 && l2(o);
+        v = false, r2("florence ran into an error", "load", "error", { e: o }), a && a(o);
       }
     }
-    let b = false;
-    function _(t2) {
-      if (!b) {
-        b = true;
+    let d = false, b = false;
+    function $(t2) {
+      d || b || (b = true, r2("scheduled response to loop", "load"), queueMicrotask(() => {
+        b = false, D(t2);
+      }));
+    }
+    function D(t2) {
+      if (!d) {
+        d = true;
         try {
           let o = performance.now();
-          if ($(), e4.state.error) return;
-          a && a();
-          let u = performance.now();
-          r2(`finished in ${(u - o) / 1e3} seconds`, "loop");
+          if (q(), e4.state.error) return;
+          c2 && c2();
+          let l2 = performance.now();
+          r2(`finished in ${(l2 - o) / 1e3} seconds`, "loop");
         } catch (o) {
-          r2("flow error", "loop", "error", { e: o }), t2 && t2.disconnect(), l2 && l2(o);
+          r2("flow error", "loop", "error", { e: o }), t2 && t2.disconnect(), a && a(o);
         } finally {
-          b = false;
+          d = false;
         }
       }
     }
-    function $() {
+    function q() {
       document.documentElement.classList.add("florence-supports-loading"), e4.structure.wrapper || (e4.structure.wrapper = document.body.querySelector(".main-content"));
       let t2 = e4.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
-      t2 ? (D(), n2 && n2(t2), t2.setAttribute("data-florence", "true")) : w(), document.body.classList.add("florence-loaded");
+      t2 ? (x(), n2 && n2(t2), t2.setAttribute("data-florence", "true")) : w(), document.body.classList.add("florence-loaded");
     }
-    function D() {
-      e4.previous = { type: e4.type, name: e4.name }, document.body.classList.forEach((o, u) => {
-        if (o.startsWith("namespace")) {
-          e4.initial = o.replace("namespace--", "");
-          let s2 = e4.initial.split("_");
-          e4.type = s2[0], e4.type == "music" && (e4.type = s2[1]), e4.type != k4.state && (k4.state = e4.type, r2(e4.type, "page")), w();
-          return;
-        }
-        u > 4;
-      });
+    function x() {
+      e4.previous = { type: e4.type, name: e4.name };
+      let t2 = [...document.body.classList].find((l2) => l2.startsWith("namespace"));
+      if (!t2) return;
+      e4.initial = t2.replace("namespace--", "");
+      let o = e4.initial.split("_");
+      e4.type = o[0], e4.type == "music" && (e4.type = o[1]), e4.type != _.state && (_.state = e4.type, r2(e4.type, "page")), w();
     }
     function w() {
-      e4.subpage = e4.initial.replace(e4.type, "").replace("_", "").replace("music_", "").replace("festival_", "event_"), L.state != e4.subpage && (L.state = e4.subpage, r2(`subpage of ${e4.subpage}`, "page"), f3 && f3());
+      e4.subpage = e4.initial.replace(e4.type, "").replace("_", "").replace("music_", "").replace("festival_", "event_"), E.state != e4.subpage && (E.state = e4.subpage, r2(`subpage of ${e4.subpage}`, "page"), u && u());
     }
   }
 
@@ -120223,7 +120221,7 @@ var bleh = (() => {
       bar_preview.current.replaceChildren(
         /* @__PURE__ */ jsx("div", { class: ["bars", v2 && "v2"], children: Array.from(
           { length: Math.floor(max3 / addition) + 1 },
-          (_, i2) => {
+          (_2, i2) => {
             const value = i2 * addition;
             return /* @__PURE__ */ jsx(
               BarPreview,
@@ -121204,7 +121202,7 @@ var bleh = (() => {
             version2.sku,
             "\u2019 - florence",
             " ",
-            x
+            O
           ] }),
           /* @__PURE__ */ jsx(CardTip, { children: DateTime.fromISO(version2.built_on).toLocaleString(
             DateTime.DATETIME_MED
@@ -122792,14 +122790,14 @@ var bleh = (() => {
       return;
     }
     const flakes = Array.from({ length: count * 0.7 }, () => {
-      const x2 = (Math.random() * 100).toFixed(1);
+      const x = (Math.random() * 100).toFixed(1);
       const drift = (Math.random() * 40 - 10).toFixed(1);
       const scale2 = (Math.random() * 0.9 + 0.4).toFixed(1);
       const size2 = 8 * scale2;
       const duration2 = (Math.random() * 20 + 20).toFixed(1);
       const delay = (Math.random() * -30).toFixed(1);
       const opacity2 = (Math.random() * 0.7 + 0.2).toFixed(1);
-      return { x: x2, drift, scale: scale2, size: size2, duration: duration2, delay, opacity: opacity2 };
+      return { x, drift, scale: scale2, size: size2, duration: duration2, delay, opacity: opacity2 };
     });
     page.state.snow.replaceChildren(
       /* @__PURE__ */ jsx(Fragment, { children: flakes.map((flake) => /* @__PURE__ */ jsx(
@@ -130885,11 +130883,11 @@ var bleh = (() => {
       const computed = getComputedStyle(document.body);
       const graph_colours = Array.from(
         { length: graph_colour_length },
-        (_, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`)}`
+        (_2, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`)}`
       );
       const graph_colour_gradient = Array.from(
         { length: graph_colour_length },
-        (_, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`).slice(
+        (_2, i2) => `${computed.getPropertyValue(`--graph-colour-${i2}`).slice(
           0,
           -1
         )} / 10%)`
@@ -131472,7 +131470,7 @@ var bleh = (() => {
 			<section class="summary">
 				<h2>${tl2(trans.how_to_plot)}</h2>
 				<div class="step-list">
-			        ${Array.from({ length: 4 }, (_, i2) => {
+			        ${Array.from({ length: 4 }, (_2, i2) => {
         return html.node`
                             <div class="step">
                                 <div class="step-number">${i2 + 1}</div>
@@ -133246,7 +133244,7 @@ var bleh = (() => {
 			<section class="flexy">
 				<h2>Graph colours</h2>
 				<div style="display: flex; flex-wrap: wrap; gap: 8px">
-			        ${Array.from({ length: 13 }, (_, i2) => {
+			        ${Array.from({ length: 13 }, (_2, i2) => {
         return html.node`
                             <div style="display: flex; flex-direction: column; gap: 10px">
                                 <div style="width: 40px; height: 40px; background-color: var(--graph-colour-${i2})" />
@@ -133919,7 +133917,7 @@ var bleh = (() => {
   var useSeasons;
   function bleh() {
     page.continue = true;
-    M3({
+    S({
       page,
       on_head_load: () => {
         append_style();
@@ -134763,12 +134761,12 @@ ${version2.build} (${version2.sku})`;
       return delay;
     };
   }
-  function getScaleUnderPoint({ x: x2, y }, chart) {
+  function getScaleUnderPoint({ x, y }, chart) {
     const scales2 = chart.scales;
     const scaleIds = Object.keys(scales2);
     for (let i2 = 0; i2 < scaleIds.length; i2++) {
       const scale2 = scales2[scaleIds[i2]];
-      if (y >= scale2.top && y <= scale2.bottom && x2 >= scale2.left && x2 <= scale2.right) {
+      if (y >= scale2.top && y <= scale2.bottom && x >= scale2.left && x <= scale2.right) {
         return scale2;
       }
     }
@@ -135051,16 +135049,16 @@ ${version2.build} (${version2.sku})`;
     };
   }
   function zoom2(chart, amount, transition = "none", trigger = "api") {
-    const { x: x2 = 1, y = 1, focalPoint = getCenter(chart) } = typeof amount === "number" ? { x: amount, y: amount } : amount;
+    const { x = 1, y = 1, focalPoint = getCenter(chart) } = typeof amount === "number" ? { x: amount, y: amount } : amount;
     const state = getState(chart);
     const { options: { limits, zoom: zoomOptions } } = state;
     storeOriginalScaleLimits(chart, state);
-    const xEnabled = x2 !== 1;
+    const xEnabled = x !== 1;
     const yEnabled = y !== 1;
     const enabledScales = getEnabledScalesByPoint(zoomOptions, focalPoint, chart);
     each(enabledScales || chart.scales, function(scale2) {
       if (scale2.isHorizontal() && xEnabled) {
-        doZoom(scale2, x2, focalPoint, limits);
+        doZoom(scale2, x, focalPoint, limits);
       } else if (!scale2.isHorizontal() && yEnabled) {
         doZoom(scale2, y, focalPoint, limits);
       }
@@ -135146,16 +135144,16 @@ ${version2.build} (${version2.sku})`;
     }
   }
   function pan(chart, delta, enabledScales, transition = "none") {
-    const { x: x2 = 0, y = 0 } = typeof delta === "number" ? { x: delta, y: delta } : delta;
+    const { x = 0, y = 0 } = typeof delta === "number" ? { x: delta, y: delta } : delta;
     const state = getState(chart);
     const { options: { pan: panOptions, limits } } = state;
     const { onPan } = panOptions || {};
     storeOriginalScaleLimits(chart, state);
-    const xEnabled = x2 !== 0;
+    const xEnabled = x !== 0;
     const yEnabled = y !== 0;
     each(enabledScales || chart.scales, function(scale2) {
       if (scale2.isHorizontal() && xEnabled) {
-        panScale(scale2, x2, limits, state);
+        panScale(scale2, x, limits, state);
       } else if (!scale2.isHorizontal() && yEnabled) {
         panScale(scale2, y, limits, state);
       }
@@ -135198,7 +135196,7 @@ ${version2.build} (${version2.sku})`;
     const state = getState(chart);
     return state.panning || state.dragging;
   }
-  var clamp4 = (x2, from2, to2) => Math.min(to2, Math.max(from2, x2));
+  var clamp4 = (x, from2, to2) => Math.min(to2, Math.max(from2, x));
   function removeHandler(chart, type) {
     const { handlers } = getState(chart);
     const handler = handlers[type];
@@ -135435,15 +135433,15 @@ ${version2.build} (${version2.sku})`;
     const pinchX = Math.abs(p0.clientX - p1.clientX);
     const pinchY = Math.abs(p0.clientY - p1.clientY);
     const p4 = pinchX / pinchY;
-    let x2, y;
+    let x, y;
     if (p4 > 0.3 && p4 < 1.7) {
-      x2 = y = true;
+      x = y = true;
     } else if (pinchX > pinchY) {
-      x2 = true;
+      x = true;
     } else {
       y = true;
     }
-    return { x: x2, y };
+    return { x, y };
   }
   function handlePinch(chart, state, e4) {
     if (state.scale) {
