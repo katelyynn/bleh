@@ -12,7 +12,7 @@
 	&:before {
 		content: '';
 		position: absolute;
-		background: linear-gradient(0deg, oklch(var(--b6) / 75%) 20%,
+		background: linear-gradient(0deg, oklch(var(--b6) / 55%) 20%,
 				transparent 90%);
 		inset: 0 var(--card-padding) -1px;
 
@@ -282,20 +282,6 @@ button.navlist-more {
 	display: flex;
 	align-items: center;
 
-	&.live {
-		--bg: oklch(var(--h4) / 10%) !important;
-		--bg-hov: oklch(var(--h4) / 16%) !important;
-		--bg-atv: oklch(var(--h4) / 26%) !important;
-		--col: oklch(var(--l3-c)) !important;
-		--mask-colour: color-mix(in oklch,
-				oklch(var(--l3-c)),
-				oklch(var(--l4-c)) 40%);
-
-		.new-badge {
-			color: var(--mask-colour);
-		}
-	}
-
 	&.chibi {
 		width: var(--button-width) !important;
 	}
@@ -464,7 +450,7 @@ button.navlist-more {
 		box-shadow: 0 -8px 20px 2px oklch(var(--l4-c) / 90%) !important;
 
 		transition-property: transform, opacity !important;
-		transition-duration: var(--trans) !important;
+		transition-duration: var(--trans-long) !important;
 		transition-timing-function: var(--trans-function) !important;
 	}
 
@@ -473,6 +459,7 @@ button.navlist-more {
 		&:after {
 			transform: translateY(0);
 			opacity: 0.6;
+			transition: none !important;
 		}
 	}
 
