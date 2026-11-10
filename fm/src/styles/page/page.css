@@ -340,8 +340,6 @@
 
 		&[data-ifrita] {
 			background: unset;
-			border-radius: unset;
-			box-shadow: unset;
 		}
 	}
 
@@ -741,4 +739,24 @@
 	.flex-button {
 		justify-content: center;
 	}
+}
+
+.trending-tracks-section-wrapper {
+	display: flex;
+	justify-content: center;
+
+	display: none;
+}
+
+.trending-tracks-section {
+	background-color: unset;
+	color: oklch(var(--c2));
+
+	padding: var(--card-padding) 0;
+	margin-top: var(--card-padding);
+
+	border-top: 1px solid var(--separator-base);
+	border-bottom: 1px solid var(--separator-base);
+
+	width: fit-content;
 }
