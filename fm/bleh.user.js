@@ -92699,11 +92699,12 @@ var bleh = (() => {
         /* @__PURE__ */ jsx(IconLabel, { icon: icons.trash, children: tl2(trans.remove) })
       );
     }
+    const obsession = name_elem.getAttribute("data-analytics-action") == "ObsessionTrackName";
     const name = name_elem.textContent.trim();
     const artist = artist_elem.textContent.trim();
     const panel = /* @__PURE__ */ jsx("section", { class: "featured-item-panel", children: [
       /* @__PURE__ */ jsx(PanelTop, { children: [
-        form ? /* @__PURE__ */ jsx(PanelHead, { icon: icons.obsession, top: true, children: tl2(trans.obsession) }) : /* @__PURE__ */ jsx(PanelHead, { icon: icons.track, top: true, children: tl2(trans.top_track) }),
+        obsession ? /* @__PURE__ */ jsx(PanelHead, { icon: icons.obsession, top: true, children: tl2(trans.obsession) }) : /* @__PURE__ */ jsx(PanelHead, { icon: icons.track, top: true, children: tl2(trans.top_track) }),
         form && /* @__PURE__ */ jsx(ViewButtons, { children: form })
       ] }),
       /* @__PURE__ */ jsx(Tracklist, { children: /* @__PURE__ */ jsx(
@@ -92711,7 +92712,7 @@ var bleh = (() => {
         {
           name,
           artist,
-          url: form ? link : `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(name)}`,
+          url: obsession ? link : `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(name)}`,
           art: img.src
         }
       ) })

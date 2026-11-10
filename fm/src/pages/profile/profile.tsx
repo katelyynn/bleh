@@ -889,13 +889,15 @@ function bleh_featured_profile_track(object) {
 		);
 	}
 
+	const obsession = name_elem.getAttribute('data-analytics-action') == 'ObsessionTrackName';
+
 	const name = name_elem.textContent.trim();
 	const artist = artist_elem.textContent.trim();
 
 	const panel = (
 		<section class='featured-item-panel'>
 			<PanelTop>
-				{form ? (
+				{obsession ? (
 					<PanelHead icon={icons.obsession} top>
 						{tl(trans.obsession)}
 					</PanelHead>
@@ -914,7 +916,7 @@ function bleh_featured_profile_track(object) {
 				<Track
 					name={name}
 					artist={artist}
-					url={form ? link : `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(name)}`}
+					url={obsession ? link : `${root}music/${redirect()}${sanitise(artist)}/_/${sanitise(name)}`}
 					art={img.src}
 				/>
 			</Tracklist>
