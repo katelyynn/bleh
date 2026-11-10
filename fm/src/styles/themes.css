@@ -404,8 +404,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 
 	&[data-ff--roxy="true"] {
-		--content-width: calc(var(--cards-main-width) + var(--cards-sidebar-width));
+		--content-width: calc(var(--cards-main-width) + var(--card-gap) + var(--cards-sidebar-width));
 		--cards-width: calc(var(--content-width));
+
+		--banner-height: 400px;
 	}
 
 	&[data-ff--header_refresh="true"] {

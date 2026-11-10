@@ -12,7 +12,7 @@ body,
 		--b5: 1 0 0;
 
 		/* root */
-		--b6: 0.97 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+		--b6: 0.98 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 		--b8: 1 0 0;
 		--b7: 0 0 0;
 		--b9: 1 0 0;

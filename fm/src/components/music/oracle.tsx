@@ -350,6 +350,10 @@ export function oracle_process() {
         `;
 		info_panel.appendChild(label_panel);
 
+		if (settings.tracklist_source == 'own' && !tracklist_own_loaded) {
+			source_own_tracklist();
+		}
+
 		function source_own_tracklist() {
 			fetch(
 				`${root}user/${auth.name}/library/music/${page.sister}/${page.name}`,
