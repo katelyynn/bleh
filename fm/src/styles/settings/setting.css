@@ -71,11 +71,11 @@
 		max-height: 100%;
 		display: var(--cards-overlay-display);
 
-		background-image: var(--cards-overlay-image,
+		background-image: var(--cards-overlay-image-subtle,
 				unset) !important;
 		background-repeat: repeat-x !important;
-		background-position: 0 -67px !important;
-		opacity: 0.8;
+		background-position: 0 -7px !important;
+		opacity: 0.4;
 		pointer-events: none;
 
 		z-index: 20;

@@ -187,8 +187,8 @@ body {
 	--tab-size: 46px;
 
 	&[data-bleh--theme="light"] {
-		--snow: #FFF;
-		--snow-glow: #CECECE;
+		--snow: #DCE2F2;
+		--snow-glow: #9BADC5;
 
 		--hide-light-pointer: none;
 		--hide-light-opacity: 0.4;

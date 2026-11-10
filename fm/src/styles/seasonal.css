@@ -70,10 +70,11 @@ body {
 
 		--page-overlay: var(--cards-overlay);
 
+		&[data-bleh--season="christmas"],
 		&[data-bleh--season="fall"] {
 			--cards-overlay: linear-gradient(
                180deg,
-               rgba(255, 255, 255, 0.2) 10%,
+               rgba(210, 225, 232, 0.2) 10%,
                rgba(0, 0, 0, 0) 100%
            );
 			--cards-overlay-mini: linear-gradient(
@@ -85,24 +86,7 @@ body {
 			--cards-overlay-image-subtle: var(--overlay-ice-subtle);
 			--cards-overlay-image-subtlest: var(--overlay-ice-subtlest);
 			--cards-overlay-image-spikes: var(--overlay-ice-spikes);
-			--cards-overlay-height: 90px;
-		}
-		&[data-bleh--season="christmas"] {
-			--cards-overlay: linear-gradient(
-               180deg,
-               rgba(255, 255, 255, 0.2) 10%,
-               rgba(0, 0, 0, 0) 100%
-           );
-			--cards-overlay-mini: linear-gradient(
-               180deg,
-               rgba(255, 255, 255, 0.1) 5%,
-               rgba(0, 0, 0, 0) 30%
-           );
-			--cards-overlay-image: var(--overlay-ice);
-			--cards-overlay-image-subtle: var(--overlay-ice-subtle);
-			--cards-overlay-image-subtlest: var(--overlay-ice-subtlest);
-			--cards-overlay-image-spikes: var(--overlay-ice-spikes);
-			--cards-overlay-height: 110px;
+			--cards-overlay-height: 160px;
 		}
 		&[data-bleh--season="new_years"] {
 			--cards-overlay: linear-gradient(

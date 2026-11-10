@@ -298,7 +298,7 @@ export function new_season(current: season, now: DateTime) {
 }
 
 function get_season_state(now = DateTime.local()) {
-	//now = DateTime.fromISO('2026-12-25');
+	//now = DateTime.fromISO('2026-11-25');
 	const year = now.year;
 
 	const seasons = resolve_seasons(now);
@@ -425,7 +425,7 @@ function begin_snowflakes(enabled: boolean, count: number) {
 		const x = (Math.random() * 100).toFixed(1);
 		const drift = (Math.random() * 40 - 10).toFixed(1);
 		const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
-		const size = 8 * scale;
+		const size = 9 * scale;
 		const duration = (Math.random() * 20 + 20).toFixed(1);
 		const delay = (Math.random() * -30).toFixed(1);
 		const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
