@@ -677,6 +677,16 @@ export function bleh_profiles() {
 				.appendChild(
 					<div class={['new-badge', 'count-badge']}>{count}</div>,
 				);
+
+			const panel = page.structure.main!.firstElementChild!;
+
+			panel.insertBefore(
+				<PanelHead icon={icons.loved}>
+					{tl(trans.loved)}
+					<div class={['new-badge', 'count-badge']}>{count}</div>
+				</PanelHead>,
+				panel.firstElementChild
+			);
 		}
 	}
 
@@ -801,11 +811,11 @@ function patch_profile_following() {
 	link.href = `${root}user/${page.name}/friends`;
 	link.textContent = tl(trans.friends);
 
-	page.structure.row.insertBefore(
+	page.structure.row!.insertBefore(
 		friends_nav,
-		page.structure.row.firstElementChild,
+		page.structure.content!,
 	);
-	page.structure.row.classList.add('col-main-is-primary');
+	page.structure.row!.classList.add('col-main-is-primary');
 
 	following_tab = friends_nav.querySelector(
 		'.secondary-nav-item--following a',

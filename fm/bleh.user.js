@@ -68799,7 +68799,7 @@ var bleh = (() => {
           name: tl2(trans.links),
           start: "[links]",
           end: "[/links]",
-          hide: !options.allow_links
+          hide: !options.allow_socials
         },
         {
           icon: icons.statuscafe,
@@ -68847,7 +68847,7 @@ var bleh = (() => {
               }
             });
           },
-          hide: !options.allow_links
+          hide: !options.allow_socials
         }
       ],
       [
@@ -86869,7 +86869,7 @@ var bleh = (() => {
       text4.classList.add("local-restriction");
     }
   }
-  function markdown_field2(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true) {
+  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true) {
     const use_md = mini ? useSettings.get("shout_markdown") : useSettings.get("bio_markdown");
     options = {
       allow_headers: false,
@@ -92410,6 +92410,14 @@ var bleh = (() => {
         page.structure.nav.querySelector(".secondary-nav-item--loved a").appendChild(
           /* @__PURE__ */ jsx("div", { class: ["new-badge", "count-badge"], children: count })
         );
+        const panel = page.structure.main.firstElementChild;
+        panel.insertBefore(
+          /* @__PURE__ */ jsx(PanelHead, { icon: icons.loved, children: [
+            tl2(trans.loved),
+            /* @__PURE__ */ jsx("div", { class: ["new-badge", "count-badge"], children: count })
+          ] }),
+          panel.firstElementChild
+        );
       }
     }
     log("status is", "page", "info", page);
@@ -92504,7 +92512,7 @@ var bleh = (() => {
     link.textContent = tl2(trans.friends);
     page.structure.row.insertBefore(
       friends_nav,
-      page.structure.row.firstElementChild
+      page.structure.content
     );
     page.structure.row.classList.add("col-main-is-primary");
     following_tab = friends_nav.querySelector(
@@ -126483,7 +126491,7 @@ var bleh = (() => {
       allow_alignment: true,
       allow_lists: true
     };
-    const about = markdown_field2(
+    const about = markdown_field(
       update_about,
       markdown_settings,
       form_about_me.textContent,
@@ -133197,7 +133205,7 @@ var bleh = (() => {
 			</section>
 			<section class="flexy">
 			    <h2>Markdown (with bio settings)</h2>
-			    ${markdown_field2((val) => {
+			    ${markdown_field((val) => {
         render(md_body, markdown(val, md_options));
       }, md_options)}
 			    <div class="sep" />
@@ -133205,7 +133213,7 @@ var bleh = (() => {
 			</section>
 			<section class="flexy">
 			    <h2>Markdown (with defaults)</h2>
-			    ${markdown_field2((val) => {
+			    ${markdown_field((val) => {
         render(md_body_default, markdown(val));
       })}
 			    <div class="sep" />

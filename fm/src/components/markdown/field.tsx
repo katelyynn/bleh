@@ -292,7 +292,7 @@ export function MarkdownField({
 				name: tl(trans.links),
 				start: '[links]',
 				end: '[/links]',
-				hide: !options.allow_links
+				hide: !options.allow_socials
 			},
 			{
 				icon: icons.statuscafe,
@@ -348,7 +348,7 @@ export function MarkdownField({
 						}
 					});
 				},
-				hide: !options.allow_links,
+				hide: !options.allow_socials,
 			},
 		],
 		[
