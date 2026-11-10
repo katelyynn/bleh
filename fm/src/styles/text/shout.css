@@ -416,9 +416,6 @@
 	flex-shrink: 0;
 
 	opacity: var(--shout-actions-opacity, 0.7);
-	transition-property: opacity;
-	transition-duration: var(--shout-actions-duration, var(--trans));
-	transition-timing-function: var(--trans-function);
 
 	display: flex;
 	flex-direction: row-reverse;

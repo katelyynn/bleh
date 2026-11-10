@@ -1,4 +1,5 @@
 import { useSettings } from "@/page";
+import { createRef } from "jsx-dom";
 
 export const validWordmarks: Record<string, string> = {
 	'ariana grande': 'ariana',
@@ -60,7 +61,7 @@ export const validWordmarks: Record<string, string> = {
 	'pearl jam': 'pearl',
 	'green day': 'green',
 	'the smashing pumpkins': 'pumpkins'
-}
+};
 
 export const longWordmarks = [
 	'ariana',
@@ -85,7 +86,18 @@ export const longWordmarks = [
 	'sserafim',
 	'jennie',
 	'girlinred'
-]
+];
+
+// these are excluded from inversion in light theme
+const colouredWordmarks = [
+	'travi$',
+	'nirvana',
+	'slayyyter',
+	'jennie',
+	'ninajirachi',
+	'icespice',
+	'sabrina'
+];
 
 export function retrieveWordmark(name: string) {
 	if (name.toLowerCase() in validWordmarks) {
@@ -110,10 +122,29 @@ export function Wordmark({
 	if (!wordmark || !enabled) return name;
 
 	const long = longWordmarks.includes(validWordmarks[name.toLowerCase()]);
+	const coloured = colouredWordmarks.includes(validWordmarks[name.toLowerCase()]);
 
-	return (
+	const image = createRef();
+
+	const elem = (
 		<span class='artist-wordmark'>
-			<img class={['artist-wordmark-image', long && 'is-long', small && 'prefer-smaller', smallest && 'prefer-smallest']} src={wordmark} alt={name} />
+			<img class={[
+				'artist-wordmark-image',
+				long && 'is-long',
+				small && 'prefer-smaller',
+				smallest && 'prefer-smallest',
+				coloured && 'is-coloured'
+			]} src={wordmark} ref={image} alt={name} />
 		</span>
 	);
+
+	function update() {
+		elem.setAttribute('data-theme-type', useSettings.get('theme_type') as string);
+		image.current.setAttribute('data-theme-type', useSettings.get('theme_type') as string);
+	}
+
+	update();
+	useSettings.on('theme_type', update);
+
+	return elem;
 }

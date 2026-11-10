@@ -658,10 +658,6 @@
 	margin-top: var(--card-gap) !important;
 }
 
-.trending-tracks-section-wrapper {
-	display: none;
-}
-
 @media (max-width: 1360px) {
 	body {
 		--cards-main-width: calc(100vw - ((var(--card-padding)) * 2 + var(--cards-sidebar-width))) !important;
