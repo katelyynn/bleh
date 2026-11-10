@@ -102,6 +102,7 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 
 	page.structure.row.setAttribute('data-assigned', 'true');
 	page.structure.row.setAttribute('data-roxy', String(ff('roxy')));
+	page.structure.row.setAttribute('data-ifrita', String(ff('ifrita')));
 
 	page.structure.row.appendChild(
 		<div class='tab-line-helper' data-lacrimosa={ff('lacrimosa')} data-roxy={ff('roxy')} />,
@@ -147,11 +148,11 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 
 	if (ff('short')) {
 		page.structure.content = (
-			<main class='content' data-lacrimosa={String(ff('lacrimosa'))} data-roxy={ff('roxy')}>
-				<div class='content-main' data-roxy={ff('roxy')}>
+			<main class='content' data-lacrimosa={String(ff('lacrimosa'))} data-roxy={ff('roxy')} data-ifrita={ff('ifrita')}>
+				<div class='content-main' data-roxy={ff('roxy')} data-ifrita={ff('ifrita')}>
 					{page.structure.main}
 				</div>
-				<div class='content-side' data-roxy={ff('roxy')}>
+				<div class='content-side' data-roxy={ff('roxy')} data-ifrita={ff('ifrita')}>
 					{page.structure.side}
 				</div>
 			</main>

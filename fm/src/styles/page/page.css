@@ -169,6 +169,12 @@
 		background: unset;
 		border: unset !important;
 		box-shadow: unset;
+
+		&[data-ifrita="true"] {
+			background: var(--card-blur-bg);
+			box-shadow: inset 0 0 0 1px var(--separator-base);
+			padding: 0 10px 10px 10px !important;
+		}
 	}
 }
 
@@ -287,8 +293,8 @@
 	}
 
 	&[data-roxy] {
-		padding-top: var(--card-padding) !important;
-		gap: var(--card-gap);
+		padding-top: 10px !important;
+		gap: 10px;
 	}
 }
 
@@ -323,15 +329,19 @@
 	margin-left: var(--page-sidebar-margin-left, unset) !important;
 
 	&[data-roxy] {
-		background: unset;
 		border-radius: var(--card-radius);
 		box-shadow: inset 0 0 0 1px var(--separator-base);
 
-		transition: none;
 		margin-left: unset !important;
 
 		&:after {
 			display: none;
+		}
+
+		&[data-ifrita] {
+			background: unset;
+			border-radius: unset;
+			box-shadow: unset;
 		}
 	}
 

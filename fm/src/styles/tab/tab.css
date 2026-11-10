@@ -364,7 +364,7 @@ button.navlist-more {
 
 	&[data-roxy] {
 		margin-bottom: unset;
-		margin-top: var(--card-padding);
+		margin-top: 10px;
 		padding: unset;
 
 		&:after {

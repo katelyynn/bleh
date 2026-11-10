@@ -306,5 +306,10 @@ export const flags: Record<string, flag> = {
 		enabled: false,
 		name: 'Refreshed page layout',
 		date: '2026-11-07'
+	},
+	ifrita: {
+		enabled: false,
+		name: 'Refreshed page layout - unified version',
+		date: '2026-11-10'
 	}
 };
