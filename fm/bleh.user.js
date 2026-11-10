@@ -131672,15 +131672,20 @@ var bleh = (() => {
     artist,
     album,
     art,
-    url
+    url,
+    active
   }) {
     const track_name = createRef();
     const artists = createRef();
-    const elem = /* @__PURE__ */ jsx("tr", { class: ["chartlist-row"], children: [
+    const elem = /* @__PURE__ */ jsx("tr", { class: [
+      "chartlist-row",
+      active && "chartlist-row--now-scrobbling"
+    ], children: [
       /* @__PURE__ */ jsx("td", { class: "chartlist-image", children: /* @__PURE__ */ jsx("a", { href: url, class: "cover-art", children: art ? /* @__PURE__ */ jsx("img", { src: art, alt: name, loading: "lazy" }) : /* @__PURE__ */ jsx("img", { class: "missing-track" }) }) }),
       /* @__PURE__ */ jsx("div", { class: "track-info", "data-track-layout": "column", "data-album-name-location": "column", children: [
         /* @__PURE__ */ jsx("td", { class: "chartlist-name", children: /* @__PURE__ */ jsx("a", { href: url, ref: track_name, children: romanise(correct_item_by_artist(name, artist)) }) }),
-        /* @__PURE__ */ jsx("td", { class: "chartlist-artist", ref: artists, children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}`, children: romanise(correct_artist(artist)) }) })
+        /* @__PURE__ */ jsx("td", { class: "chartlist-artist", ref: artists, children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}`, children: romanise(correct_artist(artist)) }) }),
+        album && /* @__PURE__ */ jsx("td", { class: ["chartlist-album", "custom-album-text"], children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}/${sanitise(album)}`, children: romanise(correct_item_by_artist(album, artist)) }) })
       ] })
     ] });
     elem[symbol] = true;
@@ -133169,25 +133174,69 @@ var bleh = (() => {
           /* @__PURE__ */ jsx(InboxButton, { notifications: 0, messages: 1 }),
           /* @__PURE__ */ jsx(InboxButton, { notifications: 1, messages: 0 })
         ] }) }) }),
-        /* @__PURE__ */ jsx("section", { id: "track", children: /* @__PURE__ */ jsx(DemoGrid, { children: /* @__PURE__ */ jsx(DemoItem, { label: "Track", children: /* @__PURE__ */ jsx(Tracklist, { children: [
-          /* @__PURE__ */ jsx(
-            Track,
-            {
-              name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
-              artist: "A$AP Rocky",
-              url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)",
-              art: "https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg"
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            Track,
-            {
-              name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
-              artist: "A$AP Rocky",
-              url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)"
-            }
-          )
-        ] }) }) }) })
+        /* @__PURE__ */ jsx("section", { id: "track", children: /* @__PURE__ */ jsx(DemoGrid, { children: /* @__PURE__ */ jsx(DemoItem, { label: "Track", children: [
+          /* @__PURE__ */ jsx(Tracklist, { children: [
+            /* @__PURE__ */ jsx(
+              Track,
+              {
+                name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
+                artist: "A$AP Rocky",
+                url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)",
+                art: "https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg",
+                active: true
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              Track,
+              {
+                name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
+                artist: "A$AP Rocky",
+                url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)",
+                art: "https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg"
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              Track,
+              {
+                name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
+                artist: "A$AP Rocky",
+                url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsx(Tracklist, { children: [
+            /* @__PURE__ */ jsx(
+              Track,
+              {
+                name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
+                artist: "A$AP Rocky",
+                album: "HEROES & VILLAINS",
+                url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)",
+                art: "https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg",
+                active: true
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              Track,
+              {
+                name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
+                artist: "A$AP Rocky",
+                album: "HEROES & VILLAINS",
+                url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)",
+                art: "https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg"
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              Track,
+              {
+                name: "Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)",
+                artist: "A$AP Rocky",
+                album: "HEROES & VILLAINS",
+                url: "/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)"
+              }
+            )
+          ] })
+        ] }) }) })
       ] })
     );
     textcontent.current.textContent = tl2(trans.page_templates.type, {

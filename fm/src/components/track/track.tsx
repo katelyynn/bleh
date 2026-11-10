@@ -35,6 +35,7 @@ interface TrackProps {
 	album?: string;
 	art?: string;
 	url: string;
+	active?: boolean;
 }
 
 export function Track({
@@ -42,13 +43,17 @@ export function Track({
 	artist,
 	album,
 	art,
-	url
+	url,
+	active
 }: TrackProps) {
 	const track_name = createRef();
 	const artists = createRef();
 
 	const elem = (
-		<tr class={['chartlist-row']}>
+		<tr class={[
+			'chartlist-row',
+			active && 'chartlist-row--now-scrobbling'
+		]}>
 			<td class='chartlist-image'>
 				<a href={url} class='cover-art'>
 					{art ? (
@@ -69,6 +74,13 @@ export function Track({
 						{romanise(correct_artist(artist))}
 					</a>
 				</td>
+				{album && (
+					<td class={['chartlist-album', 'custom-album-text']}>
+						<a href={`${root}music/${redirect()}${sanitise(artist)}/${sanitise(album)}`}>
+							{romanise(correct_item_by_artist(album, artist))}
+						</a>
+					</td>
+				)}
 			</div>
 		</tr>
 	);
