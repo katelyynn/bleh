@@ -145,7 +145,6 @@
 	--lit-over: 0.5;
 
 	outline: 2px solid transparent;
-	outline-offset: 3px;
 
 	--c1-o: var(--c1-l) 0 var(--hue) !important;
 	--c2-o: var(--c2-l) calc(clamp(min(0), var(--sat), max(1)) * var(--c2-s)) var(--hue) !important;
@@ -171,7 +170,6 @@
 
 	&:hover {
 		outline-color: oklch(var(--l3-c) / 60%);
-		outline-offset: 0px;
 		transition-property: transform, translate, scale, opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function-ani);
@@ -201,8 +199,7 @@
 	translate,
 	scale,
 	opacity,
-	outline-color,
-	outline-offset;
+	outline-color;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function-ani);
 
@@ -277,8 +274,6 @@
 	top: 0;
 	width: 100%;
 
-	content-visibility: auto;
-
 	&>.link-block-cover-link {
 		z-index: 20;
 	}
@@ -310,10 +305,6 @@
 
 	filter: var(--grid-cover-image-filter, unset);
 	transition: var(--grid-cover-image-transition, unset);
-
-	transition-property: filter;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
 
 	--mask2: var(--grid-mask, none);
 	mask-image: var(--mask2) !important;
@@ -426,6 +417,8 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
+
+	content-visibility: auto;
 
 	&:hover {
 		--grid-line-clamp: 3;
