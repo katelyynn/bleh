@@ -5,7 +5,7 @@
 				"eslint",
 				"typescript-language-server",
 				"!deno",
-				"!vtsls",
+				"vtsls",
 			],
 			"code_actions_on_format": {
 				"source.fixAll.eslint": true
@@ -16,7 +16,7 @@
 				"eslint",
 				"typescript-language-server",
 				"!deno",
-				"!vtsls",
+				"vtsls",
 			],
 			"code_actions_on_format": {
 				"source.fixAll.eslint": true
@@ -27,7 +27,7 @@
 				"eslint",
 				"typescript-language-server",
 				"!deno",
-				"!vtsls",
+				"vtsls",
 			],
 			"code_actions_on_format": {
 				"source.fixAll.eslint": true
