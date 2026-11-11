@@ -46731,6 +46731,9 @@ var bleh = (() => {
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
       pl: "Podaj nazw\u0119 u\u017Cytkownika"
     },
+    enter_link: {
+      en: "Enter a URL"
+    },
     block: {
       en: "Block",
       de: "Blockieren",
@@ -125561,6 +125564,7 @@ var bleh = (() => {
           {
             className: "profile-banner-input",
             onChange: (v) => set2(String(v)),
+            placeholder: tl2(trans.enter_link),
             ref: input2
           }
         ),
@@ -126540,6 +126544,7 @@ var bleh = (() => {
     const form_about_me = document.getElementById(
       "id_about_me"
     );
+    form_about_me.placeholder = tl2(trans.anything_you_can_imagine);
     const profile_cache = JSON.parse(
       localStorage.getItem(keys3.profile_cache) || "{}"
     );
@@ -126557,26 +126562,7 @@ var bleh = (() => {
       allow_alignment: true,
       allow_lists: true
     };
-    const about = markdown_field(
-      update_about,
-      markdown_settings,
-      form_about_me.textContent,
-      "about_me",
-      40,
-      10,
-      tl2(trans.anything_you_can_imagine),
-      null,
-      false,
-      false,
-      false
-    );
     const preview = createRef();
-    const accent_setting = html.node`
-        <div class="setting" data-type="info" disabled=${!auth.sponsor} />
-    `;
-    const font_setting = html.node`
-        <p class="card-tip" />
-    `;
     page.structure.side.replaceChildren(
       /* @__PURE__ */ jsx("section", { class: "about-me-preview", children: [
         /* @__PURE__ */ jsx("h2", { children: tl2(trans.about_me_preview) }),

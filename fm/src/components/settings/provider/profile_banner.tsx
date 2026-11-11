@@ -52,6 +52,7 @@ export function ProfileBanner({
 				<Input
 					className='profile-banner-input'
 					onChange={(v) => set(String(v))}
+					placeholder={tl(trans.enter_link) as string}
 					ref={input}
 				/>
 				<div class='banner-image' ref={preview} />

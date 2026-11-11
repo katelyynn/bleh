@@ -5855,6 +5855,9 @@ export const trans = {
 		ru: 'Введите имя пользователя',
 		pl: 'Podaj nazwę użytkownika',
 	},
+	enter_link: {
+		en: 'Enter a URL',
+	},
 	block: {
 		en: 'Block',
 		de: 'Blockieren',
