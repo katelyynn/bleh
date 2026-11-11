@@ -443,7 +443,7 @@
 .page-header-avatar-glow {
 	position: absolute;
 	inset: -6px;
-	border-radius: calc(var(--page-header-avatar-radius) + 6px);
+	border-radius: calc(var(--page-header-avatar-radius) + 3px);
 
 	border: 3px solid oklch(var(--l3-c) / 90%);
 
