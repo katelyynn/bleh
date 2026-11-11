@@ -436,7 +436,7 @@ button.navlist-more {
 		transform-origin: bottom;
 
 		background: oklch(var(--l3-c-theme-switch)) !important;
-		box-shadow: 0 -8px 20px 2px oklch(var(--l4-c) / 90%) !important;
+		box-shadow: 0 -8px 20px 2px oklch(var(--h3) / 60%) !important;
 
 		transition-property: transform, opacity !important;
 		transition-duration: var(--trans-long) !important;
