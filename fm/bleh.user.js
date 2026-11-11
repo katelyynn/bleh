@@ -92861,11 +92861,12 @@ var bleh = (() => {
       const sat = cache2.sat;
       const lit = cache2.lit;
       const banner = cache2.banner;
-      if (hue4) document.body.style.setProperty("--hue-album", hue4);
-      if (sat) document.body.style.setProperty("--sat-album", sat);
-      if (lit) document.body.style.setProperty("--lit-album", lit);
+      if (hue4 != void 0) document.body.style.setProperty("--hue-album", hue4);
+      if (sat != void 0) document.body.style.setProperty("--sat-album", sat);
+      if (lit != void 0) document.body.style.setProperty("--lit-album", lit);
       if (banner) register_background(banner, "bio");
-      if (hue4 || sat || lit) {
+      log("saved subpage profile settings", "cache", "info", { cache: cache2, hue: hue4, sat, lit });
+      if (hue4 != void 0 || sat != void 0 || lit != void 0) {
         page.state.replaced_accent = true;
         load_chart_colours();
       }

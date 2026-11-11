@@ -1109,12 +1109,14 @@ function load_profile_cache(
 		const lit = cache.lit;
 		const banner = cache.banner;
 
-		if (hue) document.body.style.setProperty('--hue-album', hue);
-		if (sat) document.body.style.setProperty('--sat-album', sat);
-		if (lit) document.body.style.setProperty('--lit-album', lit);
+		if (hue != undefined) document.body.style.setProperty('--hue-album', hue);
+		if (sat != undefined) document.body.style.setProperty('--sat-album', sat);
+		if (lit != undefined) document.body.style.setProperty('--lit-album', lit);
 		if (banner) register_background(banner, 'bio');
 
-		if (hue || sat || lit) {
+		log('saved subpage profile settings', 'cache', 'info', { cache, hue, sat, lit });
+
+		if (hue != undefined || sat != undefined || lit != undefined) {
 			page.state.replaced_accent = true;
 			load_chart_colours();
 		}
