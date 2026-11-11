@@ -114,6 +114,8 @@ body,
 
 		--auth-bg-opacity: 0.5;
 		--snowflake-opacity: 0.9;
+
+		--card-gradient: oklch(var(--k4) / 12%);
 	}
 }
 
