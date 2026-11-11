@@ -3,9 +3,10 @@
 	gap: 1px;
 	position: relative;
 
-	border-radius: inherit;
+	border-radius: var(--card-radius);
 	border-bottom-left-radius: unset;
 	border-bottom-right-radius: unset;
+	margin-top: calc(-1 * var(--card-padding));
 
 	background-color: oklch(var(--b5));
 
@@ -19,8 +20,12 @@
 	}
 }
 
+.campfire-wrapper {
+	order: -50;
+}
+
 .campfire-panel-main {
-	width: var(--cards-main-width);
+	flex: 1;
 
 	z-index: 3;
 
@@ -31,6 +36,7 @@
 
 .campfire-panel-side {
 	width: var(--cards-sidebar-width);
+	flex-shrink: 0;
 	background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5) / 60%));
 	padding: var(--card-padding) 0;
 
@@ -51,7 +57,6 @@
 
 	position: absolute;
 	inset: 0;
-	background-color: oklch(var(--b4));
 	background-size: 120%;
 	background-position: right center;
 

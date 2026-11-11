@@ -125,12 +125,18 @@ export function bleh_minis(skip = false) {
 	if (page.name == auth.name) page.avatar = auth.avatar;
 
 	if (mini) {
+		page.structure.content.classList.remove('single-column');
+		page.structure.main.classList.remove('in-content-view');
+
 		page.structure.container.setAttribute('data-mini', mini);
 		page.mini = mini;
 
 		valid_minis[mini].func();
 		return;
 	}
+
+	page.structure.content.classList.add('single-column');
+	page.structure.main.classList.add('in-content-view');
 
 	render(
 		page.structure.main,
@@ -140,27 +146,32 @@ export function bleh_minis(skip = false) {
 					<div class="minis-header-vertical">
 						<h2 class="minis-header-text">${tl(trans.minis)}</h2>
 						<p class="minis-header-body">${tl(
-							trans.minis_description,
-						)}</p>
+			trans.minis_description,
+		)}</p>
 					</div>
 					<div class="minis-header-bg" />
 				</div>
 				<div class="mini-list">
 			        ${Object.entries(valid_minis).map(([id, mini]) => {
-				if (mini.hide_if) return html.node``;
+			if (mini.hide_if) return html.node``;
 
-				return html.node`
+			return html.node`
                             <button class="btn mini" data-type=${id} data-mini=${id} onclick=${() => {
 					window.history.replaceState(
 						id,
 						'',
 						`${root}bleh/minis/${id}`,
 					);
+
+					page.structure.content.classList.remove('single-column');
+					page.structure.main.classList.remove('in-content-view');
+
 					page.structure.container.setAttribute(
 						'data-mini',
 						id,
 					);
 					page.mini = id;
+
 					render(page.structure.main, html``);
 					valid_minis[id].func();
 				}}>
@@ -168,15 +179,14 @@ export function bleh_minis(skip = false) {
                                     <div class="bleh-icon" />
                                 </div>
                                 <div class="mini-info">
-                                    <h5>${mini.name}${
-					mini.new_release ? new_indicator() : ''
+                                    <h5>${mini.name}${mini.new_release ? new_indicator() : ''
 				}</h5>
                                     <p>${mini.body}</p>
                                 </div>
                                 <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
                             </button>
                         `;
-			})}
+		})}
 			    </div>
 				<p class="card-tip">
 			        ${{
@@ -197,16 +207,15 @@ function return_to_minis(mini = '') {
 	return html.node`
         <div class="minis-header">
             <button class="btn news-update-action chibi icon-mask" data-type="prev" onclick=${() => {
-		window.history.replaceState(null, '', `${root}bleh/minis`);
-		bleh_minis(true);
-	}}>
+			window.history.replaceState(null, '', `${root}bleh/minis`);
+			bleh_minis(true);
+		}}>
                 ${tl(trans.prev)}
             </button>
             <div class="minis-header-vertical">
                 <h2 class="minis-header-text previous">${tl(trans.minis)}</h2>
-                <h2 class="minis-header-text">${
-		mini ? valid_minis[mini].name : tl(trans.error)
-	}</h2>
+                <h2 class="minis-header-text">${mini ? valid_minis[mini].name : tl(trans.error)
+		}</h2>
             </div>
             <div class="minis-header-bg colourful" data-mini=${mini} />
         </div>
@@ -237,9 +246,9 @@ function bleh_minis_collage() {
 			<section class="mini-faq">
 				<p class="card-tip">
 			        ${tl(trans.value_by_user, {
-				v: valid_minis.collage.name,
-				u: valid_minis.collage.by.join(','),
-			})}
+			v: valid_minis.collage.name,
+			u: valid_minis.collage.by.join(','),
+		})}
 			    </p>
 			</section>
 		`,
@@ -275,9 +284,9 @@ function bleh_minis_compare() {
 			<section class="mini-faq">
 				<p class="card-tip">
 			        ${tl(trans.value_by_user, {
-				v: valid_minis.compare.name,
-				u: valid_minis.compare.by.join(','),
-			})}
+			v: valid_minis.compare.name,
+			u: valid_minis.compare.by.join(','),
+		})}
 			    </p>
 			</section>
 		`,
@@ -310,15 +319,14 @@ function bleh_minis_plot() {
 				<h2>${tl(trans.how_to_plot)}</h2>
 				<div class="step-list">
 			        ${Array.from({ length: 4 }, (_, i) => {
-				return html.node`
+			return html.node`
                             <div class="step">
                                 <div class="step-number">${i + 1}</div>
-                                <div class="step-text">${
-					tl(trans.plot_explain[i])
+                                <div class="step-text">${tl(trans.plot_explain[i])
 				}</div>
                             </div>
                         `;
-			})}
+		})}
 			    </div>
 			</section>
 			<section
@@ -328,9 +336,9 @@ function bleh_minis_plot() {
 			<section class="mini-faq">
 				<p class="card-tip">
 			        ${tl(trans.value_by_user, {
-				v: valid_minis.plot.name,
-				u: valid_minis.plot.by.join(','),
-			})}
+			v: valid_minis.plot.name,
+			u: valid_minis.plot.by.join(','),
+		})}
 			    </p>
 			</section>
 		`,
@@ -366,9 +374,9 @@ function bleh_minis_card() {
 			<section class="mini-faq">
 				<p class="card-tip">
 			        ${tl(trans.value_by_user, {
-				v: valid_minis.card.name,
-				u: valid_minis.card.by.join(','),
-			})}
+			v: valid_minis.card.name,
+			u: valid_minis.card.by.join(','),
+		})}
 			    </p>
 			</section>
 		`,
@@ -407,9 +415,9 @@ function bleh_minis_pixel() {
 			<section class="mini-faq">
 				<p class="card-tip">
 			        ${tl(trans.value_by_user, {
-				v: valid_minis.pixel.name,
-				u: valid_minis.pixel.by.join(','),
-			})}
+			v: valid_minis.pixel.name,
+			u: valid_minis.pixel.by.join(','),
+		})}
 			    </p>
 			</section>
 		`,
@@ -460,12 +468,12 @@ function bleh_minis_receipt() {
 export function render_user(name, avatar, user, replace_page = false) {
 	if (avatar == '' && name != '') {
 		fetch(`${root}user/${name}/tags`)
-			.then(function (response) {
+			.then(function(response) {
 				console.log('returned', response, response.text);
 
 				return response.text();
 			})
-			.then(function (dom) {
+			.then(function(dom) {
 				let doc = new DOMParser().parseFromString(dom, 'text/html');
 				console.log('DOC', doc);
 
