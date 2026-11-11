@@ -1,22 +1,11 @@
 .gallery-section {
 	padding: 0 var(--card-padding) !important;
-	margin: 0 0 1px 0 !important;
-	box-shadow: unset !important;
+	margin: 10px 0 0 0 !important;
+	box-shadow: inset 0 0 0 1px var(--separator-base) !important;
 	border-radius: unset;
 
 	background: var(--card-blur-bg-alt) !important;
-	border-top-left-radius: var(--card-radius);
-	border-top-right-radius: var(--card-radius);
-
-	&:after {
-		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: -1px;
-		background: var(--toolbar-border);
-		height: 1px;
-	}
+	border-radius: var(--card-radius);
 
 	position: relative;
 
