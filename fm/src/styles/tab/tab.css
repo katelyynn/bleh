@@ -479,6 +479,7 @@ button.navlist-more {
 		--col: var(--toolbar-tab-colour) !important;
 		--mask-colour: var(--toolbar-tab-icon) !important;
 		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
+		--shadow: inset 0 0 0 1px oklch(var(--l3-c) / 10%) !important;
 		filter: none !important;
 
 		--top: 50%;
@@ -534,6 +535,7 @@ button.navlist-more {
 			--bg-atv: var(--toolbar-tab-selected-active) !important;
 			--col: var(--toolbar-tab-selected-colour) !important;
 			--mask-colour: var(--toolbar-tab-selected-icon) !important;
+			--shadow: inset 0 0 0 1px transparent !important;
 		}
 	}
 
