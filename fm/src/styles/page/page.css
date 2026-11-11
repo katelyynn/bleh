@@ -175,6 +175,11 @@
 			box-shadow: inset 0 0 0 1px var(--separator-base);
 			padding: 0 10px 10px 10px !important;
 		}
+
+		&:before,
+		&:after {
+			display: none !important;
+		}
 	}
 }
 
@@ -212,6 +217,10 @@
 
 		--w: calc(var(--cards-width) - (var(--card-padding) * 2));
 		--side: calc((100vw - var(--w)) / 2);
+	}
+
+	&[data-roxy] {
+		display: none;
 	}
 }
 
@@ -377,6 +386,97 @@
 		background: var(--sidebar-border);
 		box-shadow: var(--sidebar-shadow);
 	}
+}
+
+.content-main,
+.content-side {
+	&[data-roxy] {
+		position: relative;
+
+		&:before {
+			/* mimics seasonal-decoration-top */
+
+			content: '';
+			--height: 40px;
+
+			position: absolute;
+			top: calc(-1 * ((var(--height) - 12px) + 1px));
+			left: -2px;
+			right: -2px;
+			height: var(--height);
+			background-position: bottom;
+			background-size: contain;
+			background-repeat: repeat-x;
+			background-image: var(--seasonal-decoration-top, unset);
+			pointer-events: none;
+			border-top-left-radius: 46px;
+			border-top-right-radius: 46px;
+
+			opacity: var(--seasonal-decoration-top-opacity, 0.4);
+
+			z-index: 300;
+		}
+	}
+}
+
+.seasonal-overlay {
+	position: absolute;
+	inset: 0;
+	display: block;
+	border-radius: var(--card-radius);
+
+	&:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		border-top-right-radius: var(--card-radius);
+		pointer-events: none;
+		display: var(--cards-overlay-corner-display, none) !important;
+		width: 800px;
+		height: 400px;
+		z-index: 100;
+
+		filter: var(--card-overlay-filter);
+		opacity: var(--card-overlay-opacity);
+		mix-blend-mode: var(--card-overlay-mix-mode);
+
+		background-image: var(--cards-overlay-corner-image);
+		background-repeat: var(--cards-overlay-corner-repeat);
+		background-position: var(--cards-overlay-corner-position);
+	}
+
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: var(--cards-overlay-height);
+		max-height: 100%;
+		display: var(--cards-overlay-display, none) !important;
+
+		background-image: var(--cards-overlay-image, unset),
+			var(--cards-overlay, transparent) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 -60px !important;
+		opacity: 0.9;
+
+		@media (min-width: 981px) {
+			border-top-left-radius: var(--card-radius);
+			border-top-right-radius: var(--card-radius);
+		}
+
+		pointer-events: none;
+
+		/* fix for no-data-message overriding and stuff */
+		margin: unset;
+		width: unset;
+
+		z-index: 50;
+	}
+
+	pointer-events: none;
 }
 
 .col-sidebar.in-content-view {

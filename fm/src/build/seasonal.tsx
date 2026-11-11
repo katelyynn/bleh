@@ -171,8 +171,8 @@ export class Seasons {
 		this.rebuild();
 
 		useSettings.on('seasonal', () => this.rebuild());
-		useSettings.on('seasonal_particles', () => this.rebuild());
-		useSettings.on('seasonal_particles_fps', () => this.rebuild());
+		useSettings.on('seasonal_particles', () => this.apply());
+		//useSettings.on('seasonal_particles_fps', () => this.rebuild());
 
 		setInterval(() => {
 			this.rebuild();
@@ -252,7 +252,9 @@ function apply_season(current?: processedSeason) {
 	log(`applying ${current.id}`, 'season', 'info', { current });
 	document.body.setAttribute('data-bleh--season', current.id);
 
-	if (page.state.snowflakes == current.snowflakes.count) {
+	const decrease = useSettings.get('seasonal_particles') == 'less';
+
+	if (page.state.snowflakes == current.snowflakes.count && page.state.snowflakes_decrease == decrease && page.state.snow?.hasChildNodes()) {
 		return;
 	}
 
@@ -261,6 +263,7 @@ function apply_season(current?: processedSeason) {
 		useSettings.get('seasonal_particles') != 'none'
 	) {
 		page.state.snowflakes = current.snowflakes.count;
+		page.state.snowflakes_decrease = decrease;
 
 		log('let the snow start!', 'season');
 		prep_snow();
@@ -269,7 +272,7 @@ function apply_season(current?: processedSeason) {
 		let snowflakes_count = current.snowflakes.count || 0;
 
 		if (
-			useSettings.get('seasonal_particles') == 'less' &&
+			decrease &&
 			snowflakes_count > 10
 		) {
 			snowflakes_count *= 0.45;
@@ -298,7 +301,7 @@ export function new_season(current: season, now: DateTime) {
 }
 
 function get_season_state(now = DateTime.local()) {
-	//now = DateTime.fromISO('2026-11-25');
+	now = DateTime.fromISO('2026-11-25');
 	const year = now.year;
 
 	const seasons = resolve_seasons(now);
@@ -424,13 +427,14 @@ function begin_snowflakes(enabled: boolean, count: number) {
 	const flakes = Array.from({ length: count * 0.7 }, () => {
 		const x = (Math.random() * 100).toFixed(1);
 		const drift = (Math.random() * 40 - 10).toFixed(1);
-		const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
-		const size = 9 * scale;
+		const scale = (Math.pow(Math.random(), 0.5) * 1.1 + 0.4).toFixed(1);
+		const size = 15 * scale;
+		const rotation = (Math.random() * 40 - 14).toFixed(1);
 		const duration = (Math.random() * 20 + 20).toFixed(1);
 		const delay = (Math.random() * -30).toFixed(1);
 		const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
 
-		return { x, drift, scale, size, duration, delay, opacity };
+		return { x, drift, scale, size, duration, delay, opacity, rotation };
 	});
 
 	page.state.snow!.replaceChildren(
@@ -447,6 +451,7 @@ function begin_snowflakes(enabled: boolean, count: number) {
 						animationDuration: `${flake.duration}s`,
 						animationDelay: `${flake.delay}s`,
 						opacity: flake.opacity,
+						rotate: `${flake.rotation}deg`
 					} as CSSProperties}
 				/>
 			))}

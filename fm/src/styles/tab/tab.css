@@ -367,6 +367,7 @@ button.navlist-more {
 		margin-top: 10px;
 		padding: unset;
 
+		&:before,
 		&:after {
 			display: none;
 		}

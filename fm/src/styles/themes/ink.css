@@ -4,17 +4,17 @@ body,
 		--b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
 		--b3: 0.94 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
 		--b4: 0.85 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
-		--b5: 0.92 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
-		--b6: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
+		--b5: 0.93 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
+		--b6: 0.91 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
 		--b8: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
 		--b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
 		--b9: 0.84 0 0;
 
 		--tooltip: 0.92 calc(var(--sat) * 0.07 * var(--sat-bg, 1)) var(--hue);
 
-		--separator-base: oklch(var(--b2) / 0.2);
+		--separator-base: oklch(var(--b2) / 30%);
 
-		--card-border-base: oklch(0.79 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
+		--card-border-base: oklch(0.83 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
 		--card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
 
 		--menu-border: oklch(0.78 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue));
@@ -42,7 +42,7 @@ body,
 		--nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
 		--header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-		--card-blur-bg: oklch(0.91 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 63%));
+		--card-blur-bg: oklch(0.93 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 63%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
 		--banner-overlay: oklch(var(--b5) / 30%);
@@ -64,7 +64,7 @@ body,
 
 		--header-disc-filter: brightness(0.9);
 
-		--card-shadow: 0 2px 10px oklch(0.3 calc(var(--sat) * 0.72 * var(--sat-bg, 1)) var(--hue) / 0.08);
+		--card-shadow: 0 4px 15px oklch(0.3 calc(var(--sat) * 0.72 * var(--sat-bg, 1)) var(--hue) / 6%);
 
 		--view-buttons: oklch(var(--b6) / 10%);
 		--view-buttons-hov: oklch(var(--b4) / 40%);
@@ -113,6 +113,7 @@ body,
 		--bar-shadow: 0 0 transparent;
 
 		--auth-bg-opacity: 0.5;
+		--snowflake-opacity: 0.9;
 	}
 }
 

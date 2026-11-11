@@ -151,9 +151,15 @@ export function checkup_page_structure(is_subpage = false, header?: Element) {
 			<main class='content' data-lacrimosa={String(ff('lacrimosa'))} data-roxy={ff('roxy')} data-ifrita={ff('ifrita')}>
 				<div class='content-main' data-roxy={ff('roxy')} data-ifrita={ff('ifrita')}>
 					{page.structure.main}
+					{ff('roxy') && (
+						<div class={['seasonal-overlay', 'seasonal-overlay-main']} />
+					)}
 				</div>
 				<div class='content-side' data-roxy={ff('roxy')} data-ifrita={ff('ifrita')}>
 					{page.structure.side}
+					{ff('roxy') && (
+						<div class={['seasonal-overlay', 'seasonal-overlay-side']} />
+					)}
 				</div>
 			</main>
 		) as HTMLElement;

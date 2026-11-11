@@ -237,6 +237,8 @@ interface page {
 		colour_preview?: ReactElement;
 		home_link: ReactElement;
 		home_link_logo: ReactElement;
+		snowflakes?: number;
+		snowflakes_decrease?: boolean;
 	};
 	previous?: {
 		type: string;
