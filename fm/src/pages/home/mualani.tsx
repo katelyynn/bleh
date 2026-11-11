@@ -230,7 +230,7 @@ export function mualani() {
 	const textcontent = createRef();
 
 	const c = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
-	const avi = c.evangelicgirl.avatar;
+	const avi = c.evangelicgirl?.avatar;
 
 	const wordmarks = createRef();
 
@@ -1160,6 +1160,9 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='UserSelect'>
 						<UserSelect />
+					</DemoItem>
+					<DemoItem label='UserSelect (no auth)'>
+						<UserSelect showAuth={false} />
 					</DemoItem>
 				</DemoGrid>
 			</section>

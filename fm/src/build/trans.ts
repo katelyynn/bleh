@@ -12306,11 +12306,15 @@ export const trans = {
 		it: 'Posizione del testo',
 	},
 	better_with_friends: {
-		en: 'Music is better with friends, {a}add to your close friends list{/a}',
-		pt: 'Música é melhor com amigos, {a}adicione à sua lista de amigos próximos{/a}',
-		es: 'La música es mejor con amigos, {a}añade a tu lista de amigos cercanos{/a}',
-		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {a}dodaj do listy bliskich przyjaciół{/a}',
-		it: 'La musica è migliore con gli amici, {a}aggiungi alla tua lista degli amici stretti{/a}',
+		en: 'Music is better with friends, {add_friend}',
+		pt: 'Música é melhor com amigos, {add_friend}',
+		es: 'La música es mejor con amigos, {add_friend}',
+		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {add_friend}',
+		it: 'La musica è migliore con gli amici, {add_friend}',
+
+		add_friend: {
+			en: 'add a close friend'
+		}
 	},
 	collage_cta: {
 		// used to 'advertise' collages

@@ -303,6 +303,7 @@ function campfire_extended(container: HTMLElement) {
 
 	let summary;
 
+	// TODO: replace
 	container.appendChild(html.node`
         <section class="friends-panel">
             <h2>${tl(trans.scrobbling_now)}</h2>

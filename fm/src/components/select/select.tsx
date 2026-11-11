@@ -385,11 +385,16 @@ export function Select({
 		);
 
 		// fallback
-		indicator.current.replaceChildren(value);
+		if (value != undefined) {
+			indicator.current.replaceChildren(value);
+		} else {
+			indicator.current.replaceChildren('...');
+		}
 
 		const val = values.find((v) => v.value == value) || { text: value };
+		if (val?.text) indicator.current.replaceChildren(select_text(val.text));
 
-		indicator.current.replaceChildren(select_text(val.text));
+		console.error(value, val);
 
 		select.current.value = value;
 
