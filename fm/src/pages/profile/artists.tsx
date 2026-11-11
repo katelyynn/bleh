@@ -82,7 +82,7 @@ export function profile_artists() {
 						);
 
 						window.location.href =
-							`${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}`;
+							`${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}&profile=${page.name}`;
 					}}
 				>
 					{tl(trans.collage)}

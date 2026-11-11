@@ -59,6 +59,8 @@
 		border-top-right-radius: 0;
 		--c3: 0.8 0 0;
 
+		content-visibility: unset;
+
 		.grid-items-item-main-text {
 			color: #fff;
 		}
