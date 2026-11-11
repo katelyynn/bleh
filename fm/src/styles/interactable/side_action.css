@@ -127,6 +127,8 @@
 
 	--interact-mask: none !important;
 
+	transform: unset !important;
+
 	&:not(.stationlink, .listening-report-promo) {
 		height: var(--side-action-height) !important;
 
@@ -215,6 +217,10 @@
 	&:active {
 		--col: var(--side-action-selected-colour);
 		--mask-colour: var(--side-action-selected-icon);
+	}
+
+	&:active {
+		transform: translateY(1px) !important;
 	}
 }
 
