@@ -30,7 +30,7 @@ body,
 
 		--menu-border: oklch(var(--b2) / 0.6);
 
-		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 60%));
+		--card-blur-bg: oklch(0.2134 0.0059 91.62 / var(--solarium-opacity, 60%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
 		--toolbar-bg: oklch(0.2064 0.0039 91.62 / 60%);

@@ -303,7 +303,7 @@ export const flags: Record<string, flag> = {
 		date: '2026-10-12',
 	},
 	roxy: {
-		enabled: false,
+		enabled: true,
 		name: 'Refreshed page layout',
 		date: '2026-11-07'
 	},

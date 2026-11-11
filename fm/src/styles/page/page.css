@@ -250,7 +250,7 @@
 		left: var(--card-padding);
 		right: var(--card-padding);
 		height: 1px;
-		background: var(--card-border-base);
+		background: oklch(var(--c3) / 15%);
 	}
 }
 

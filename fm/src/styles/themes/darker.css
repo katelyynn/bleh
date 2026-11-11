@@ -24,7 +24,7 @@ body,
 
 		--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 25%);
 
-		--card-blur-bg: oklch(0.21 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
+		--card-blur-bg: oklch(0.19 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 		--toolbar-bg: oklch(var(--b6) / 70%);
 

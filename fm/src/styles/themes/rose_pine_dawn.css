@@ -45,7 +45,7 @@ body,
 		--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 59%) 10%, oklch(var(--l3-c) / 25%), oklch(var(--b4) / 59%) 90%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
-		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
+		--card-blur-bg: oklch(0.97 0.0107 76.6 / var(--solarium-opacity, 70%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
 		--menu-item-hov: oklch(var(--b4) / 60%);

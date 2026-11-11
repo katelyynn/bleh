@@ -30,6 +30,10 @@
 
 	overflow: hidden;
 
+	--mask: linear-gradient(180deg, white 80%, transparent) !important;
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
+
 	@media (max-width: 980px) {
 		--w: var(--cards-width);
 		--header-size: 80px;

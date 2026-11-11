@@ -37,7 +37,7 @@ body,
 
 		--normal-shadow: none;
 
-		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
+		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 45%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
 		--setting-hover: oklch(var(--b2) / 16%);

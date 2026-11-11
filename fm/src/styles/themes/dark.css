@@ -59,7 +59,7 @@ body,
 	--toolbar-border: linear-gradient(90deg, oklch(var(--b4) / 75%) 10%, oklch(var(--l3-c) / 35%), oklch(var(--b4) / 75%) 90%);
 	--subtle-border: 1px solid oklch(var(--b4) / 55%);
 
-	--card-blur-bg: oklch(0.3 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 60%));
+	--card-blur-bg: oklch(0.28 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 60%));
 	--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
 	--nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));

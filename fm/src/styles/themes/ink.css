@@ -42,7 +42,7 @@ body,
 		--nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
 		--header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-		--card-blur-bg: oklch(0.93 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 63%));
+		--card-blur-bg: oklch(0.91 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 63%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
 		--banner-overlay: oklch(var(--b5) / 30%);
