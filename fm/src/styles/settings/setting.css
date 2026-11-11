@@ -1179,6 +1179,10 @@
 	cursor: pointer;
 
 	aspect-ratio: 1300 / 325;
+
+	&.empty {
+		pointer-events: none;
+	}
 }
 
 .setting-body,
