@@ -418,9 +418,9 @@ body {
 
 	@media (max-width: 980px) {
 		--card-padding: 15px;
-		--cards-width: 100vw;
-		--cards-main-width: 100vw;
-		--cards-sidebar-width: 100vw;
+		--cards-width: 100vw !important;
+		--cards-main-width: 100vw !important;
+		--cards-sidebar-width: 100vw !important;
 		--card-shadow: unset;
 
 		--header-avatar-size: 140px;
