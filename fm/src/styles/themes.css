@@ -194,10 +194,6 @@ body {
 		--hide-light-opacity: 0.4;
 	}
 
-	transition-property: background, color, box-shadow;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
-
 	&[data-bleh--underline_links="true"] {
 		--force-underline: underline;
 		--underline-scale: scaleX(1);

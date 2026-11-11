@@ -53,10 +53,6 @@
 
 		background: oklch(var(--b6));
 
-		transition-property: background;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-
 		--mask: linear-gradient(90deg, transparent 0%, white 50%, white 70%, transparent 100%);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
@@ -158,10 +154,6 @@
 		--mask: linear-gradient(180deg, transparent, white);
 		mask-image: var(--mask);
 		-webkit-mask: var(--mask);
-
-		transition-property: background-color;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
 
 		z-index: 20;
 	}

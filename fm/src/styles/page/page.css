@@ -310,10 +310,6 @@
 .content-main {
 	background: oklch(var(--b5));
 
-	transition-property: background;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
-
 	display: flex;
 	justify-content: end;
 	width: calc(((100vw - var(--cards-width)) / 2) + var(--cards-main-width));
@@ -327,10 +323,6 @@
 .content-side {
 	position: relative;
 	background: var(--card-blur-bg);
-
-	transition-property: background;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
 
 	display: flex;
 	justify-content: start;
