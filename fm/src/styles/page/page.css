@@ -137,13 +137,8 @@
 	}
 
 	&.listening-report {
-		padding-bottom: unset !important;
+		padding-bottom: 10px !important;
 		border-bottom: unset !important;
-
-		&>.report-box-container--overview {
-			margin-top: unset;
-			margin-bottom: unset;
-		}
 
 		&>.content {
 			display: none;
@@ -181,6 +176,11 @@
 			display: none !important;
 		}
 	}
+}
+
+.report-box-container--overview {
+	margin-top: unset;
+	margin-bottom: unset;
 }
 
 .seasonal-decoration-top {
