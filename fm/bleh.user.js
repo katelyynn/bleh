@@ -35717,6 +35717,34 @@ var bleh = (() => {
             });
           }
         );
+      } else {
+        const virtual = {
+          getBoundingClientRect: () => ({
+            x: this.config.mouse.x,
+            y: this.config.mouse.y,
+            top: this.config.mouse.y,
+            right: this.config.mouse.x,
+            bottom: this.config.mouse.y,
+            left: this.config.mouse.x,
+            width: 0,
+            height: 0
+          })
+        };
+        computePosition2(virtual, this.element, {
+          placement: "bottom-start",
+          ariaEnabled: true,
+          strategy: "fixed",
+          middleware: [
+            flip3()
+          ],
+          ...this.config
+        }).then(({ x, y }) => {
+          Object.assign(this.element.style, {
+            position: "fixed",
+            left: `${x}px`,
+            top: `${y}px`
+          });
+        });
       }
     }
   };
@@ -35810,14 +35838,19 @@ var bleh = (() => {
     return tooltip;
   }
   function context_menu_tooltip(host, element, config = {}) {
+    const mouse = {
+      x: 0,
+      y: 0
+    };
     const tooltip = new TooltipInstance(host, element, {
-      placement: "bottom",
+      placement: "bottom-start",
       ariaEnabled: true,
       strategy: "fixed",
       onHide: () => {
         document.body.removeEventListener("click", listener);
         document.body.removeEventListener("contextmenu", listener);
       },
+      mouse,
       ...config
     });
     let cancel_close = false;
@@ -35831,20 +35864,14 @@ var bleh = (() => {
         tooltip.hide();
       }
     };
-    host.addEventListener("contextmenu", (e4) => {
+    host.addEventListener("contextmenu", async (e4) => {
       e4.preventDefault();
       cancel_close = true;
-      Object.assign(element.style, {
-        position: "fixed",
-        left: `${e4.clientX}px`,
-        top: `${e4.clientY}px`
-      });
+      mouse.x = e4.clientX;
+      mouse.y = e4.clientY;
       setTimeout(() => {
         cancel_close = false;
       }, 0);
-      if (tooltip.is_mounted) {
-        return;
-      }
       log("showing (ctx)", "tooltip", "info");
       tooltip.show();
       setTimeout(() => {
