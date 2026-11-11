@@ -130,13 +130,13 @@ export function append_nav() {
 	}
 
 	if (!page.structure.loader) {
-		const loader = html.node`
-            <div class="loader">
-                <div class="loader-bar">
-                    <div class="loader-bar-fill" />
-                </div>
-            </div>
-        `;
+		const loader = (
+			<div class='page-loader'>
+				<div class='page-loader-bar'>
+					<div class='page-loader-bar-fill' />
+				</div>
+			</div>
+		);
 		document.body.appendChild(loader);
 		page.structure.loader = loader;
 	}

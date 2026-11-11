@@ -4,12 +4,12 @@
 	animation: spinner 1.2s linear infinite;
 }
 
-.your-progress-component:has(.loading) {
+/*.your-progress-component:has(.loading) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 285px;
-}
+	}*/
 
 .lazy-shoutbox.async-content-loading {
 	background-image: none !important;
@@ -78,7 +78,7 @@
 
 	margin-top: unset;
 
-	& > p,
+	&>p,
 	.loading-data-text {
 		color: oklch(var(--c3));
 		user-select: none;

@@ -94,7 +94,7 @@ body {
 	}
 }
 
-.loader {
+.page-loader {
 	position: fixed;
 	inset: 0;
 	/*background: oklch(var(--b6), 20%);*/
@@ -110,24 +110,24 @@ body {
 	transition-property: opacity;
 	transition-duration: 0.4s;
 	transition-timing-function: var(--trans-function);
+}
 
-	&>.loader-bar {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		padding: 2px;
+.page-loader-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 2px;
+}
 
-		&>.loader-bar-fill {
-			background-color: oklch(var(--h3));
-			box-shadow: 0 6px 20px oklch(var(--h4));
-			border-radius: var(--item-big-radius);
-			height: 4px;
-			width: 100%;
+.page-loader-bar-fill {
+	background-color: oklch(var(--h3));
+	box-shadow: 0 6px 20px oklch(var(--h4));
+	border-radius: var(--item-big-radius);
+	height: 4px;
+	width: 100%;
 
-			animation: var(--loader-animation);
-		}
-	}
+	animation: var(--loader-animation);
 }
 
 address,
