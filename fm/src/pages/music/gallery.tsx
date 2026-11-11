@@ -18,6 +18,7 @@ import {
 	correct_item_by_artist,
 } from '@/components/music/lotus';
 import { set_storage } from '@/build/tools';
+import { PageToolbar } from '@/components/page/toolbar';
 
 export function bleh_gallery() {
 	if (page.subpage != 'image') return;
@@ -26,7 +27,7 @@ export function bleh_gallery() {
 
 	gallery_arrows();
 
-	let image_sidebar = page.structure.side.querySelector(
+	const image_sidebar = page.structure.side!.querySelector(
 		'.js-gallery-image-details > div',
 	);
 	if (!image_sidebar) return;
@@ -39,21 +40,21 @@ export function bleh_gallery() {
 	let gallery_section;
 	let first = false;
 	try {
-		gallery_section = page.structure.main.querySelector('.gallery-section');
+		gallery_section = page.structure.main!.querySelector('.gallery-section');
 		if (gallery_section) {
 			first = true;
 
 			if (ff('short')) {
-				page.structure.row.insertBefore(
+				page.structure.row!.insertBefore(
 					gallery_section,
-					page.structure.content,
+					page.structure.content!,
 				);
-			} else page.structure.nav.after(gallery_section);
+			} else page.structure.nav!.after(gallery_section);
 
 			// move image details to main column
-			image_details = html.node`
-                <section class="image-details" />
-            `;
+			image_details = (
+				<section class='image-details' />
+			);
 		} else {
 			image_details = page.structure.main.querySelector('.image-details');
 			image_details.innerHTML = '';
@@ -178,24 +179,21 @@ export function bleh_gallery() {
 
 	const vote_bar = html.node`
         <div class="vote-bar">
-            <div class="vote-bar-fill colourful upvoted ${
-		!is_negative ? 'primary-bar' : ''
-	}" style="width: ${upvote_percent}%" />
-            <div class="vote-bar-fill colourful downvoted ${
-		is_negative ? 'primary-bar' : ''
-	}" style="width: ${downvote_percent}%" />
+            <div class="vote-bar-fill colourful upvoted ${!is_negative ? 'primary-bar' : ''
+		}" style="width: ${upvote_percent}%" />
+            <div class="vote-bar-fill colourful downvoted ${is_negative ? 'primary-bar' : ''
+		}" style="width: ${downvote_percent}%" />
         </div>
     `;
 	vote_button_container.appendChild(vote_bar);
 
 	vote_bar.after(html.node`
-        <label class="vote-bar-number colourful ${
-		is_negative ? 'downvoted' : 'upvoted'
-	}">${is_negative ? '' : '+'}${positive - negative}</label>
+        <label class="vote-bar-number colourful ${is_negative ? 'downvoted' : 'upvoted'
+		}">${is_negative ? '' : '+'}${positive - negative}</label>
     `);
 
 	// 2nd side
-	let buttons_extra = document.createElement('div');
+	const buttons_extra = document.createElement('div');
 	buttons_extra.classList.add(
 		'gallery-image-buttons',
 		'gallery-image-buttons-extra',
@@ -208,7 +206,7 @@ export function bleh_gallery() {
 	// open in a new tab button
 	const open_button = html.node`
         <button class="btn image-open-button icon gallery-btn gallery-btn-bland" onclick=${() =>
-		expand_gallery_image()}>
+			expand_gallery_image()}>
             ${tl(trans.expand)}
         </button>
     `;
@@ -221,7 +219,7 @@ export function bleh_gallery() {
 	// share button
 	const share_button = html.node`
         <button class="btn image-share-button icon gallery-btn gallery-btn-bland" onclick=${() =>
-		share(window.location.href)}>
+			share(window.location.href)}>
             ${tl(trans.share)}
         </button>
     `;
@@ -269,8 +267,8 @@ export function bleh_gallery() {
 		);
 
 		/*tippy(star_button, {
-            content: star_button.textContent
-        });*/
+			content: star_button.textContent
+		});*/
 		text.textContent = tl(trans.star);
 	});
 
@@ -310,10 +308,12 @@ export function bleh_gallery() {
 				side_actions,
 				page.structure.side.firstElementChild,
 			);
-		} else {page.structure.main.insertBefore(
+		} else {
+			page.structure.main.insertBefore(
 				side_actions,
 				page.structure.main.firstElementChild,
-			);}
+			);
+		}
 	}
 
 	// bookmark-related info
@@ -441,9 +441,8 @@ export function bleh_gallery_upload() {
         <section class="gallery-upload-panel bleh--panel">
             <h4>${tl(trans.image_details)}</h4>
             ${alert}
-            <form method="post" action=${form.getAttribute('action')} enctype=${
-		form.getAttribute('enctype')
-	}>
+            <form method="post" action=${form.getAttribute('action')} enctype=${form.getAttribute('enctype')
+		}>
                 ${token}
                 <div class="hidden-file-input">
                     ${file_input}
@@ -580,12 +579,12 @@ export function bleh_gallery_upload_check() {
                 <div class="setting" data-type="info">
                     <div class="heading">
                         <h5>${{
-					html: artwork_finder.querySelector('label').innerHTML,
-				}}</h5>
+						html: artwork_finder.querySelector('label').innerHTML,
+					}}</h5>
                     </div>
                     <div class="info artwork-finder-info" ref=${(
-					el,
-				) => (info = el)} />
+						el,
+					) => (info = el)} />
                 </div>
             `,
 				group.firstElementChild,
@@ -646,30 +645,27 @@ function patch_gallery_image_listing() {
 	}
 
 	// create nav
-	const nav = html.node`
-        <div class="toolbar">
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${
-		ff('header_refresh') ? 'header-refresh' : ''
-	}">
-                <ul class="navlist-items">
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-overview">
-                        <a class="secondary-nav-item-link" onclick=${() =>
-		gallery_tab('all')}>
-                            ${tl(trans.photos)}
-                        </a>
-                    </li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-bookmarks">
-                        <a class="secondary-nav-item-link" onclick=${() =>
-		gallery_tab('saved')}>
-                            ${tl(trans.saved)}
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    `;
+	// TODO: re-make in a much better system, will fix active state too
+	const nav = (
+		<PageToolbar>
+			<nav class={['navlist', 'secondary-nav', 'navlist--more', 'redesigned-navigation', ff('header-refresh') && 'header-refresh']}>
+				<ul class='navlist-items'>
+					<li class={['navlist-item', 'secondary-nav-item', 'secondary-nav-item--gallery-overview']}>
+						<a class='secondary-nav-item-link' onClick={() => gallery_tab('all')}>
+							{tl(trans.photos)}
+						</a>
+					</li>
+					<li class={['navlist-item', 'secondary-nav-item', 'secondary-nav-item--gallery-bookmarks']}>
+						<a class='secondary-nav-item-link' onClick={() => gallery_tab('saved')}>
+							{tl(trans.saved)}
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</PageToolbar>
+	);
 
-	page.structure.row.insertBefore(nav, page.structure.content);
+	page.structure.row!.insertBefore(nav, page.structure.content!);
 
 	// content
 	let bookmarks_panel;
@@ -704,11 +700,11 @@ function patch_gallery_image_listing() {
 					theme: 'context-menu',
 					content: html.node`
                         <button class="dropdown-menu-clickable-item" onclick=${() =>
-						update_image_bookmark(
-							image_element,
-							image,
-							false,
-						)} data-menu-item="remove-bookmark" data-bleh--image-is-bookmarked="true">
+							update_image_bookmark(
+								image_element,
+								image,
+								false,
+							)} data-menu-item="remove-bookmark" data-bleh--image-is-bookmarked="true">
                             ${tl(trans.remove_save)}
                         </button>
                     `,
@@ -763,12 +759,12 @@ function gallery_tab(id) {
 
 	// remove ?tab=saved
 	/*if (page.requested.tab == 'saved') {
-        let params = new URLSearchParams(document.location.search);
-        params.delete('tab');
-        // https://stackoverflow.com/a/43440356
-        // location.hash preserves #
-        history.replaceState(null, '', '?' + params + location.hash);
-    }*/
+		let params = new URLSearchParams(document.location.search);
+		params.delete('tab');
+		// https://stackoverflow.com/a/43440356
+		// location.hash preserves #
+		history.replaceState(null, '', '?' + params + location.hash);
+	}*/
 }
 
 // gallery focused image
@@ -795,9 +791,8 @@ function patch_gallery_focused_image(
 
 	// append a bookmark button
 	const save_btn = html.node`
-        <button class="btn bleh--gallery-bookmark-image-btn icon gallery-btn ${
-		image_is_bookmarked ? 'primary' : ''
-	}" onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
+        <button class="btn bleh--gallery-bookmark-image-btn icon gallery-btn ${image_is_bookmarked ? 'primary' : ''
+		}" onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
             ${tl(trans.save)}
         </button>
     `;

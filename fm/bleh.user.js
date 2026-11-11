@@ -122876,12 +122876,12 @@ var bleh = (() => {
     });
   }
 
-  // src/pages/music/gallery.js
+  // src/pages/music/gallery.tsx
   function bleh_gallery() {
     if (page.subpage != "image") return;
     log("focusing on image", "gallery");
     gallery_arrows();
-    let image_sidebar = page.structure.side.querySelector(
+    const image_sidebar = page.structure.side.querySelector(
       ".js-gallery-image-details > div"
     );
     if (!image_sidebar) return;
@@ -122900,9 +122900,7 @@ var bleh = (() => {
             page.structure.content
           );
         } else page.structure.nav.after(gallery_section);
-        image_details = html.node`
-                <section class="image-details" />
-            `;
+        image_details = /* @__PURE__ */ jsx("section", { class: "image-details" });
       } else {
         image_details = page.structure.main.querySelector(".image-details");
         image_details.innerHTML = "";
@@ -123000,7 +122998,7 @@ var bleh = (() => {
     vote_bar.after(html.node`
         <label class="vote-bar-number colourful ${is_negative ? "downvoted" : "upvoted"}">${is_negative ? "" : "+"}${positive - negative}</label>
     `);
-    let buttons_extra = document.createElement("div");
+    const buttons_extra = document.createElement("div");
     buttons_extra.classList.add(
       "gallery-image-buttons",
       "gallery-image-buttons-extra"
@@ -123339,24 +123337,10 @@ var bleh = (() => {
         "saved"
       );
     }
-    const nav = html.node`
-        <div class="toolbar">
-            <nav class="navlist secondary-nav navlist--more redesigned-navigation ${ff("header_refresh") ? "header-refresh" : ""}">
-                <ul class="navlist-items">
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-overview">
-                        <a class="secondary-nav-item-link" onclick=${() => gallery_tab("all")}>
-                            ${tl2(trans.photos)}
-                        </a>
-                    </li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--gallery-bookmarks">
-                        <a class="secondary-nav-item-link" onclick=${() => gallery_tab("saved")}>
-                            ${tl2(trans.saved)}
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    `;
+    const nav = /* @__PURE__ */ jsx(PageToolbar, { children: /* @__PURE__ */ jsx("nav", { class: ["navlist", "secondary-nav", "navlist--more", "redesigned-navigation", ff("header-refresh") && "header-refresh"], children: /* @__PURE__ */ jsx("ul", { class: "navlist-items", children: [
+      /* @__PURE__ */ jsx("li", { class: ["navlist-item", "secondary-nav-item", "secondary-nav-item--gallery-overview"], children: /* @__PURE__ */ jsx("a", { class: "secondary-nav-item-link", onClick: () => gallery_tab("all"), children: tl2(trans.photos) }) }),
+      /* @__PURE__ */ jsx("li", { class: ["navlist-item", "secondary-nav-item", "secondary-nav-item--gallery-bookmarks"], children: /* @__PURE__ */ jsx("a", { class: "secondary-nav-item-link", onClick: () => gallery_tab("saved"), children: tl2(trans.saved) }) })
+    ] }) }) });
     page.structure.row.insertBefore(nav, page.structure.content);
     let bookmarks_panel;
     page.structure.main.after(html.node`
