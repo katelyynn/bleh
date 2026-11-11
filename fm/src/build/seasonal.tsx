@@ -301,7 +301,7 @@ export function new_season(current: season, now: DateTime) {
 }
 
 function get_season_state(now = DateTime.local()) {
-	now = DateTime.fromISO('2026-11-25');
+	//now = DateTime.fromISO('2026-10-25');
 	const year = now.year;
 
 	const seasons = resolve_seasons(now);

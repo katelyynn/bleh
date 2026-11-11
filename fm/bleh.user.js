@@ -122734,7 +122734,6 @@ var bleh = (() => {
     });
   }
   function get_season_state(now2 = DateTime.local()) {
-    now2 = DateTime.fromISO("2026-11-25");
     const year = now2.year;
     const seasons = resolve_seasons(now2);
     seasons.sort((a, b) => a.start.toMillis() - b.start.toMillis());
