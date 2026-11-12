@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { icons } from '@/components/shared/icon.tsx';
@@ -33,8 +33,11 @@ interface InputProps {
 	onChange?: (val: string | number) => void;
 	onSubmit?: (val: string | number) => void;
 	saveManually?: boolean;
-	saveText?: string;
+	saveIcon?: string;
+	saveText?: ReactNode;
 	readOnly?: boolean;
+	required?: boolean;
+	submit?: boolean;
 }
 
 type InputElement = HTMLDivElement & {
@@ -55,8 +58,11 @@ export function Input({
 	onChange,
 	onSubmit,
 	saveManually = false,
+	saveIcon,
 	saveText,
 	readOnly,
+	required,
+	submit
 }: InputProps) {
 	const input = createRef();
 	const colour_block = createRef();
@@ -116,6 +122,7 @@ export function Input({
 							value = input.current.value;
 							update(true);
 						}}
+						required={required}
 					/>
 				)
 				: (
@@ -144,12 +151,13 @@ export function Input({
 				)}
 			{saveManually && (
 				<SeeMore
-					icon={icons.save}
+					icon={saveIcon || icons.save}
 					iconPlacement='left'
 					onClick={() => {
 						update(true);
-						if (onSubmit) onSubmit(input.current.value);
+						onSubmit?.(input.current.value);
 					}}
+					type={submit ? 'submit' : 'button'}
 				>
 					{saveText || tl(trans.save)}
 				</SeeMore>

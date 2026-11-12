@@ -33,6 +33,7 @@ interface SettingInputProps {
 	onMouseLeave?: () => void;
 	saveManually?: boolean;
 	saveText?: ReactNode;
+	required?: boolean;
 }
 
 type SettingInputElement = HTMLDivElement & {
@@ -57,6 +58,7 @@ export function SettingInput({
 	onMouseLeave,
 	saveManually = true,
 	saveText,
+	required,
 }: SettingInputProps) {
 	if (bind) value = settings[bind] as string | number;
 
@@ -125,6 +127,7 @@ export function SettingInput({
 					ref={input}
 					saveManually={saveManually}
 					saveText={saveText}
+					required={required}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith list={incompatible_list} />

@@ -987,7 +987,7 @@
 }
 
 .switch-label {
-	display: var(--switch-label, none);
+	display: var(--switch-label, none) !important;
 }
 
 .checkbox-wrap {

@@ -24,6 +24,7 @@ interface SeeMoreProps {
 	className?: string;
 	children: ReactNode;
 	opens?: ReactElement;
+	type?: 'submit' | 'button';
 }
 
 type SeeMoreElement = HTMLElement & {
@@ -43,6 +44,7 @@ export function SeeMore({
 	className,
 	children,
 	opens,
+	type = 'button',
 }: SeeMoreProps) {
 	const classes: ClassNames = [
 		!blend && 'see-more',
@@ -75,7 +77,7 @@ export function SeeMore({
 	if (!href && onClick) {
 		elem = (
 			<button
-				type='button'
+				type={type}
 				class={classes}
 				onClick={onClick}
 				data-see-more='true'

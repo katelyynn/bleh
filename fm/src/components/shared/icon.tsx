@@ -230,7 +230,8 @@ export const icons = {
 	about: 'about',
 	profile_links: 'profile-links',
 	statuscafe: 'statuscafe',
-	charts: 'charts'
+	charts: 'charts',
+	password: 'password'
 };
 
 interface icon {
