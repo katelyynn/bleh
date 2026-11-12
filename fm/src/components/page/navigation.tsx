@@ -415,8 +415,6 @@ export function append_nav() {
 		</MenuContents>
 	);
 
-	useSettings.on('branding_type', update_branding_type);
-
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
 	const search = inner.querySelector('.masthead-search-form') as HTMLFormElement;
@@ -462,6 +460,7 @@ export function append_nav() {
 
 	update();
 
+	// TODO: move this to global scope to reduce duplicates
 	useSettings.on('theme', update);
 
 	if (!auth_link) {

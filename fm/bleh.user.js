@@ -118088,7 +118088,6 @@ var bleh = (() => {
         ] })
       ] })
     );
-    useSettings.on("branding_type", update_branding_type);
     const navs = inner.querySelector(".masthead-nav-wrap");
     const search = inner.querySelector(".masthead-search-form");
     const form = search.querySelector(".masthead-search-field");
