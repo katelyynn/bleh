@@ -60,7 +60,6 @@ export function create_music_links(col_main: HTMLElement) {
 
 			link.classList.remove('play-this-track-playlink');
 			link.classList.add(
-				'btn',
 				'music-link',
 				'social-link',
 				'colourful',
@@ -107,45 +106,39 @@ export function create_music_links(col_main: HTMLElement) {
 
 		link_types.genius = (
 			<SocialLink
-				href={`https://genius.com/search?q=${sanitise(page.sister)}+${
-					sanitise(page.name)
-				}`}
+				href={`https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)
+					}`}
 			/>
 		);
 		link_types.tidal = (
 			<SocialLink
-				href={`https://listen.tidal.com/search?q=${
-					sanitise(page.sister, ' ')
-				}%20${sanitise(page.name, ' ')}`}
+				href={`https://listen.tidal.com/search?q=${sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
 			/>
 		);
 		link_types.qobuz = (
 			<SocialLink
-				href={`https://www.qobuz.com/gb-en/search/albums/${
-					sanitise(page.name, ' ')
-				}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}`}
+				href={`https://www.qobuz.com/gb-en/search/albums/${sanitise(page.name, ' ')
+					}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}`}
 			/>
 		);
 		link_types.deezer = (
 			<SocialLink
-				href={`https://www.deezer.com/search/${
-					sanitise(page.sister, ' ')
-				}%20${sanitise(page.name, ' ')}`}
+				href={`https://www.deezer.com/search/${sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}`}
 			/>
 		);
 		link_types.record_club = (
 			<SocialLink
-				href={`https://record.club/search?query=${
-					sanitise(page.sister, ' ')
-				}%20${sanitise(page.name, ' ')}&facet=releases`}
+				href={`https://record.club/search?query=${sanitise(page.sister, ' ')
+					}%20${sanitise(page.name, ' ')}&facet=releases`}
 			/>
 		);
 		link_types.search = (
 			<SocialLink
 				className='search-similar'
-				href={`${root}search/${page.type}s?q=${sanitise(page.sister)}+${
-					sanitise(page.name)
-				}`}
+				href={`${root}search/${page.type}s?q=${sanitise(page.sister)}+${sanitise(page.name)
+					}`}
 			>
 				{tl(trans.search)}
 			</SocialLink>
@@ -154,90 +147,77 @@ export function create_music_links(col_main: HTMLElement) {
 		if (page.type == 'album') {
 			link_types.genius = (
 				<SocialLink
-					href={`https://genius.com/search?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
+					href={`https://genius.com/search?q=${sanitise(page.sister)
+						}+${sanitise(page.name)}`}
 				/>
 			);
 			link_types.tidal = (
 				<SocialLink
-					href={`https://listen.tidal.com/search?q=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
+					href={`https://listen.tidal.com/search?q=${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
 			link_types.qobuz = (
 				<SocialLink
-					href={`https://www.qobuz.com/gb-en/search/tracks/${
-						sanitise(page.name, ' ')
-					}?ssf[s]=main_catalog&ssf[f][an]=${
-						sanitise(page.sister, ' ')
-					}`}
+					href={`https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, ' ')
+						}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')
+						}`}
 				/>
 			);
 			link_types.deezer = (
 				<SocialLink
-					href={`https://www.deezer.com/search/${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
+					href={`https://www.deezer.com/search/${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
 
 			link_types.spotify = (
 				<SocialLink
-					href={`https://open.spotify.com/search/${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
+					href={`https://open.spotify.com/search/${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
 			link_types.itunes = (
 				<SocialLink
-					href={`https://music.apple.com/gb/search?term=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
+					href={`https://music.apple.com/gb/search?term=${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
 			link_types.youtube = (
 				<SocialLink
-					href={`https://music.youtube.com/search?q=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
+					href={`https://music.youtube.com/search?q=${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
 			link_types.discogs = (
 				<SocialLink
-					href={`https://www.discogs.com/search?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
+					href={`https://www.discogs.com/search?q=${sanitise(page.sister)
+						}+${sanitise(page.name)}`}
 				/>
 			);
 			link_types.aoty = (
 				<SocialLink
-					href={`https://www.albumoftheyear.org/search/?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
+					href={`https://www.albumoftheyear.org/search/?q=${sanitise(page.sister)
+						}+${sanitise(page.name)}`}
 				/>
 			);
 			link_types.rym = (
 				<SocialLink
-					href={`https://rateyourmusic.com/search?searchterm=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}`}
+					href={`https://rateyourmusic.com/search?searchterm=${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}`}
 				/>
 			);
 			link_types.record_club = (
 				<SocialLink
-					href={`https://record.club/search?query=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}&facet=releases`}
+					href={`https://record.club/search?query=${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}&facet=releases`}
 				/>
 			);
 			link_types.search = (
 				<SocialLink
 					className='search-similar'
-					href={`${root}search/${page.type}s?q=${
-						sanitise(page.sister)
-					}+${sanitise(page.name)}`}
+					href={`${root}search/${page.type}s?q=${sanitise(page.sister)
+						}+${sanitise(page.name)}`}
 				>
 					{tl(trans.search)}
 				</SocialLink>
@@ -250,81 +230,70 @@ export function create_music_links(col_main: HTMLElement) {
 			);
 			link_types.tidal = (
 				<SocialLink
-					href={`https://listen.tidal.com/search?q=${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://listen.tidal.com/search?q=${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 			link_types.qobuz = (
 				<SocialLink
-					href={`https://www.qobuz.com/gb-en/search/artists/${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://www.qobuz.com/gb-en/search/artists/${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 			link_types.deezer = (
 				<SocialLink
-					href={`https://www.deezer.com/search/${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://www.deezer.com/search/${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 
 			link_types.spotify = (
 				<SocialLink
-					href={`https://open.spotify.com/search/${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://open.spotify.com/search/${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 			link_types.itunes = (
 				<SocialLink
-					href={`https://music.apple.com/gb/search?term=${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://music.apple.com/gb/search?term=${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 			link_types.youtube = (
 				<SocialLink
-					href={`https://music.youtube.com/search?q=${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://music.youtube.com/search?q=${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 			link_types.discogs = (
 				<SocialLink
-					href={`https://www.discogs.com/search?q=${
-						sanitise(page.name)
-					}`}
+					href={`https://www.discogs.com/search?q=${sanitise(page.name)
+						}`}
 				/>
 			);
 			link_types.aoty = (
 				<SocialLink
-					href={`https://www.albumoftheyear.org/search/?q=${
-						sanitise(page.name)
-					}`}
+					href={`https://www.albumoftheyear.org/search/?q=${sanitise(page.name)
+						}`}
 				/>
 			);
 			link_types.rym = (
 				<SocialLink
-					href={`https://rateyourmusic.com/search?searchterm=${
-						sanitise(page.name, ' ')
-					}`}
+					href={`https://rateyourmusic.com/search?searchterm=${sanitise(page.name, ' ')
+						}`}
 				/>
 			);
 			link_types.record_club = (
 				<SocialLink
-					href={`https://record.club/search?query=${
-						sanitise(page.sister, ' ')
-					}%20${sanitise(page.name, ' ')}&facet=artists&entities=`}
+					href={`https://record.club/search?query=${sanitise(page.sister, ' ')
+						}%20${sanitise(page.name, ' ')}&facet=artists&entities=`}
 				/>
 			);
 			link_types.search = (
 				<SocialLink
 					className='search-similar'
-					href={`${root}search/${page.type}s?q=${
-						sanitise(page.name)
-					}`}
+					href={`${root}search/${page.type}s?q=${sanitise(page.name)
+						}`}
 				>
 					{tl(trans.search)}
 				</SocialLink>
@@ -341,7 +310,6 @@ export function create_music_links(col_main: HTMLElement) {
 				);
 				externals_links.forEach((link) => {
 					link.classList.add(
-						'btn',
 						'music-link',
 						'colourful',
 						'icon',

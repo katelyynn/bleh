@@ -218,10 +218,6 @@
 		--col: var(--side-action-selected-colour);
 		--mask-colour: var(--side-action-selected-icon);
 	}
-
-	&:active {
-		transform: translateY(1px) !important;
-	}
 }
 
 .stationlink {
