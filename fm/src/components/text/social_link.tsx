@@ -50,7 +50,6 @@ export function SocialLink({
 	return (
 		<a
 			class={[
-				'btn',
 				'music-link',
 				'social-link',
 				'colourful',

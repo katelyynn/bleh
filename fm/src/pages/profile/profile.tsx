@@ -881,7 +881,7 @@ function bleh_featured_profile_track(object) {
 
 	if (form) {
 		const button = form.querySelector('button') as HTMLButtonElement;
-		button.classList = 'left-icon btn blend-v2-btn';
+		button.classList = 'left-icon blend-v2-btn';
 		button.replaceChildren(
 			<IconLabel icon={icons.trash}>
 				{tl(trans.remove)}

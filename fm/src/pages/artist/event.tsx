@@ -119,7 +119,7 @@ export function artist_event_sidebar() {
 
 	const select_btn = panel.querySelector('.dropdown-menu-clickable-button') as HTMLButtonElement;
 	select_btn.classList.remove('dropdown-menu-clickable-button', 'section-control');
-	select_btn.classList.add('btn', 'select-button', 'link-select', 'blend-v2-btn');
+	select_btn.classList.add('select-button', 'link-select', 'blend-v2-btn');
 
 	const head = panel.querySelector('h2')!;
 

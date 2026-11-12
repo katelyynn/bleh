@@ -424,7 +424,8 @@ function select_text(text: ReactNode | (() => ReactNode)) {
 export function convert_to_select(button: Element | null) {
 	if (!button) return;
 
-	button.classList.add('btn', 'select-button', 'link-select', 'blend-v2-btn');
+	button.classList.add('select-button', 'link-select', 'blend-v2-btn');
+	button.classList.remove('dropdown-menu-clickable-button');
 
 	return;
 

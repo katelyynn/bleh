@@ -47,7 +47,7 @@ export function SeeMore({
 	const classes: ClassNames = [
 		!blend && 'see-more',
 		iconPlacement == 'left' && 'left-icon',
-		blend && 'btn blend-v2-btn',
+		blend && 'blend-v2-btn',
 		colourful && 'colourful',
 		chibi && 'chibi-see-more',
 		opens && 'select-button link-select',

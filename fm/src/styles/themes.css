@@ -65,7 +65,7 @@ body {
 	--lit-oracle: 0.8;
 
 	--trans-short: 0.2s;
-	--trans: 0.1s;
+	--trans: 0.15s;
 	--trans-long: 0.3s;
 	--trans-function: cubic-bezier(0.59, 0.01, 0.1, 1);
 	--trans-function-ani: cubic-bezier(0.205, 0.060, 0.050, 0.965);

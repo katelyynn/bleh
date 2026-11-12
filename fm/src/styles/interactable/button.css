@@ -5,7 +5,6 @@
 select,
 .dropdown-menu-clickable-item,
 .display-options-clickable-item,
-.select-button,
 .dropdown-menu-item-dark,
 .dropdown-menu-clickable-button,
 .dropdown-menu-clickable-button-js-only,
@@ -44,7 +43,6 @@ select,
 .notification,
 .user-now-empty-state-button,
 .report-dropdown-button,
-.see-more,
 .music-bookmarks-artists-item-toggle,
 .music-bookmarks-albums-item-toggle,
 .music-bookmarks-tags-item-toggle,
@@ -104,8 +102,8 @@ select,
 
 	--icon-size: 16px;
 
-	background-repeat: repeat-x !important;
-	background-position: unset !important;
+	background-repeat: repeat-x;
+	background-position: unset;
 
 	position: relative;
 
@@ -142,8 +140,8 @@ select,
 		--transition-property: rotate, opacity, left, transform;
 		/*box-shadow: var(--shadow-hov) !important;*/
 
-		background-repeat: repeat-x !important;
-		background-position: unset !important;
+		background-repeat: repeat-x;
+		background-position: unset;
 	}
 
 	&:is(.gallery-next, .gallery-previous):active .arrow,
@@ -151,8 +149,8 @@ select,
 		background: var(--bg-atv) !important;
 		transform: var(--button-click, scale(0.98));
 
-		background-repeat: repeat-x !important;
-		background-position: unset !important;
+		background-repeat: repeat-x;
+		background-position: unset;
 	}
 
 	kbd,

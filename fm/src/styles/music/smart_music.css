@@ -5,7 +5,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 100%;
+	width: fit-content;
+	max-width: 100%;
 
 	&.top-track {
 		display: inline;

@@ -367,7 +367,7 @@ export function obsession_list() {
 		) as HTMLButtonElement;
 
 		if (play) {
-			play.classList = 'btn blend-v2-btn left-icon';
+			play.classList = 'blend-v2-btn left-icon';
 			play.insertBefore(
 				<Icon name={icons.play} />,
 				play.firstChild,

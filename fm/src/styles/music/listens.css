@@ -216,9 +216,7 @@
 		&>.listen-board-item-info>.listen-board-item-name {
 			color: oklch(var(--l3-c));
 
-			&:after {
-				transform: scaleX(1);
-			}
+			background-size: 100% var(--line-thickness), 100% var(--line-thickness);
 		}
 	}
 
@@ -309,27 +307,14 @@
 
 	width: fit-content;
 
-	transition-property: color;
-	transition-duration: 0.2s;
-	transition-timing-function: var(--trans-function-ani);
+	background-image: linear-gradient(to right, var(--mask-colour), var(--mask-colour)), linear-gradient(to right, transparent, transparent);
+	background-repeat: no-repeat;
+	background-size: 0% var(--line-thickness), 100% var(--line-thickness);
+	background-position: 0 calc(100% - var(--line-inset));
 
-	&:after {
-		content: '';
-		position: absolute;
-		display: block;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 1px;
-		background: var(--mask-colour);
-		transform: var(--underline-scale, scaleX(0));
-		transform-origin: bottom left;
-		opacity: 0.6;
-
-		transition-property: transform;
-		transition-duration: 0.2s;
-		transition-timing-function: var(--trans-function-ani);
-	}
+	transition-property: color, background-size;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }
 
 .listen-board-item-plays {

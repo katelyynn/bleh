@@ -226,7 +226,7 @@ export function bleh_artists() {
 				'.section-playlink',
 			) as HTMLAnchorElement;
 			if (play) {
-				play.classList.add('btn', 'blend-v2-btn', 'left-icon');
+				play.classList.add('blend-v2-btn', 'left-icon');
 				play.classList.remove(
 					'section-playlink',
 					'hover-section-control',
