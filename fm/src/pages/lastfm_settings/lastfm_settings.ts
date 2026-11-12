@@ -30,9 +30,8 @@ export function bleh_native_settings() {
 		page.structure.main.insertBefore(
 			html.node`
             <section class="loading-disabled">
-                <div class="alert alert-warning">${
-				tl(trans.you_have_disabled_bleh_visuals_for_settings)
-			}</div>
+                <div class="alert alert-warning">${tl(trans.you_have_disabled_bleh_visuals_for_settings)
+				}</div>
             </section>
         `,
 			page.structure.main.firstElementChild,
@@ -104,9 +103,8 @@ export function bleh_native_settings() {
 			html.node`
             <div class="bleh--panel">
                 <div class="loading-data-container">
-                    <div class="alert alert-error">${
-				e && e.message ? e.message : e
-			}</div>
+                    <div class="alert alert-error">${e && e.message ? e.message : e
+				}</div>
                 </div>
             </div>
         `,
@@ -187,15 +185,14 @@ function bleh_communication_panel(token) {
                     <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
                 </div>
                 <div class="text preview">
-                    ${
-			profile_notes.hasOwnProperty(name)
+                    ${profile_notes.hasOwnProperty(name)
 				? html.node`
                         <p id="profile-note-row-preview--${name}">${{
-					html: profile_notes[name],
-				}}</p>
+						html: profile_notes[name],
+					}}</p>
                     `
 				: ''
-		}
+			}
                 </div>
                 <div class="actions">
                     ${form}
@@ -219,12 +216,11 @@ function bleh_communication_panel(token) {
 
 		const expand = html.node`
             <button class="see-more expand-down left-icon" onclick=${() => {
-			expand.style.display = 'none';
-			new_list.setAttribute('data-expanded', 'true');
-		}}>
-                ${
-			tl(trans.view_count_more).replace('{c}', remainder.toString())
-		}
+				expand.style.display = 'none';
+				new_list.setAttribute('data-expanded', 'true');
+			}}>
+                ${tl(trans.view_count_more).replace('{c}', remainder.toString())
+			}
             </button>
         `;
 
@@ -260,7 +256,7 @@ function bleh_communication_panel(token) {
 			<form action="${root}settings/privacy#ignorelist" name="ignorelist"
 				method="post">
 				<input type="hidden" name="csrfmiddlewaretoken" value=${page
-					.token} />
+				.token} />
 				<div class="setting-group">
 					<div class="setting v" data-type="text">
 						<div class="heading">
@@ -343,59 +339,59 @@ function patch_settings_privacy_panel(token, privacy_panel) {
 			<form action="${root}settings/privacy" name="privacy" method="post">
 				<input type="hidden" name="csrfmiddlewaretoken" value=${token}>
 				<div class="inner-preview pad" ref=${(el) =>
-					recent_listening_preview = el}>
+				recent_listening_preview = el}>
 			        ${render_track_preview(
-				original_privacy_settings.recent_listening.checked,
-				false,
-				true,
-				true,
-			)}
+					original_privacy_settings.recent_listening.checked,
+					false,
+					true,
+					true,
+				)}
 			    </div>
 				<div class="setting-group">
 			        ${toggle({
-				value: original_privacy_settings.recent_listening.checked,
-				name: original_privacy_settings.recent_listening.name,
-				title: tl(trans.recent_listening.name),
-				body: tl(trans.recent_listening.body),
-				standalone: false,
-				func: (val: boolean) => {
-					render(
-						recent_listening_preview,
-						render_track_preview(val, false, true, true),
-					);
-				},
-			})}
+					value: original_privacy_settings.recent_listening.checked,
+					name: original_privacy_settings.recent_listening.name,
+					title: tl(trans.recent_listening.name),
+					body: tl(trans.recent_listening.body),
+					standalone: false,
+					func: (val: boolean) => {
+						render(
+							recent_listening_preview,
+							render_track_preview(val, false, true, true),
+						);
+					},
+				})}
 			        <div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.allow_messages_from)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(
-					original_privacy_settings.receiving_msgs,
-				),
-				initial: original_privacy_settings.receiving_msgs.value,
-				name: original_privacy_settings.receiving_msgs.name,
-				in_settings: true,
-			})}
+					values: select_prepare(
+						original_privacy_settings.receiving_msgs,
+					),
+					initial: original_privacy_settings.receiving_msgs.value,
+					name: original_privacy_settings.receiving_msgs.name,
+					in_settings: true,
+				})}
 			        </div>
 			    </div>
 				<div class="inner-preview pad" ref=${(el) =>
-					shoutbox_preview = el}>
+				shoutbox_preview = el}>
 			        ${render_shoutbox_preview(
-				original_privacy_settings.disable_shoutbox.checked,
-			)}
+					original_privacy_settings.disable_shoutbox.checked,
+				)}
 			    </div>
 				<div class="setting-group">
 			        ${toggle({
-				value: original_privacy_settings.disable_shoutbox.checked,
-				name: original_privacy_settings.disable_shoutbox.name,
-				title: tl(trans.close_shouts.name),
-				body: tl(trans.close_shouts.body),
-				standalone: false,
-				func: (val: boolean) => {
-					render(shoutbox_preview, render_shoutbox_preview(val));
-				},
-			})}
+					value: original_privacy_settings.disable_shoutbox.checked,
+					name: original_privacy_settings.disable_shoutbox.name,
+					title: tl(trans.close_shouts.name),
+					body: tl(trans.close_shouts.body),
+					standalone: false,
+					func: (val: boolean) => {
+						render(shoutbox_preview, render_shoutbox_preview(val));
+					},
+				})}
 			    </div>
 				<div class="settings-footer">
 					<button type="submit" class="btn-primary save">
@@ -634,7 +630,7 @@ function bleh_accounts() {
 							</div>
 							<div class="toggle-wrap">
 								<a
-									class="see-more danger left-icon colourful"
+									class="see-more danger-subtle left-icon colourful"
 									href="${root}settings/account/logout-everywhere"
 									data-type="logout"
 								>
@@ -649,7 +645,7 @@ function bleh_accounts() {
 							</div>
 							<div class="toggle-wrap">
 								<a
-									class="see-more danger left-icon colourful"
+									class="see-more danger-subtle left-icon colourful"
 									href="${root}settings/account/delete"
 									data-type="delete"
 								>
@@ -702,13 +698,11 @@ function bleh_website() {
                     <div class="setting-group">
                         <div class="setting v2" data-type="options">
                             <div class="heading">
-                                <h5>${
-			tl(trans.auto_correct_scrobbles.name)
-		}</h5>
+                                <h5>${tl(trans.auto_correct_scrobbles.name)
+			}</h5>
                                 <p>${tl(trans.auto_correct_scrobbles.body)}</p>
                             </div>
-                            ${
-			radio({
+                            ${radio({
 				name: auto_correct.name,
 				value: auto_correct.value,
 				values: {
@@ -724,7 +718,7 @@ function bleh_website() {
 					},
 				},
 			})
-		}
+			}
                         </div>
                     </div>
                     <div class="alert alert-danger">
@@ -738,11 +732,10 @@ function bleh_website() {
                             <div class="heading">
                                 <h5>${tl(trans.timezone)}</h5>
                                 <p ref=${(
-			el,
-		) => (timezone_text = el)}>${help_text.textContent.trim()}</p>
+				el,
+			) => (timezone_text = el)}>${help_text.textContent.trim()}</p>
                             </div>
-                            ${
-			select({
+                            ${select({
 				values: select_prepare(timezone),
 				initial: timezone.value,
 				name: timezone.name,
@@ -774,7 +767,7 @@ function bleh_website() {
 				},
 				in_settings: true,
 			})
-		}
+			}
                         </div>
                         <div class="setting v2" data-type="action">
                             <div class="heading">
@@ -789,14 +782,13 @@ function bleh_website() {
                             <div class="heading">
                                 <h5>${tl(trans.event_radius)}</h5>
                             </div>
-                            ${
-			select({
+                            ${select({
 				values: select_prepare(radius),
 				initial: radius.value,
 				name: radius.name,
 				in_settings: true,
 			})
-		}
+			}
                         </div>
                     </div>
                     <div class="settings-footer end">
@@ -817,8 +809,7 @@ function bleh_website() {
                                 <h5>${tl(trans.preferred_affiliate.name)}</h5>
                                 <p>${tl(trans.preferred_affiliate.body)}</p>
                             </div>
-                            ${
-			radio({
+                            ${radio({
 				name: preferred_affiliate.name,
 				value: preferred_affiliate.value,
 				values: radio_convert(
@@ -827,7 +818,7 @@ function bleh_website() {
 					),
 				),
 			})
-		}
+			}
                         </div>
                     </div>
                     <div class="settings-footer end">

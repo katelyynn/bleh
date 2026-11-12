@@ -1,6 +1,7 @@
 .footer {
 	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%));
 	color: oklch(var(--c3));
+	--mask-colour: oklch(var(--c3));
 	padding: 120px 0 120px 0;
 
 	margin-top: 20vh;
@@ -117,6 +118,8 @@
 	width: calc(var(--content-width) - (var(--card-padding) * 2));
 }
 
+/* TODO: investigate performance of this selector */
+.footer-legal-item>a,
 .footer-link {
 	color: oklch(var(--c3)) !important;
 	--mask-colour: oklch(var(--c3) / 80%) !important;

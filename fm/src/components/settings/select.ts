@@ -10,7 +10,7 @@ import tippy from 'tippy.js';
 import { setting_value } from '@/build/config';
 import { SelectOption } from '@/components/select/select.tsx';
 
-unsafeWindow._update_inbuilt_select = function (id: string, value: string) {
+unsafeWindow._update_inbuilt_select = function(id: string, value: string) {
 	update_inbuilt_select(id, value);
 };
 export function update_inbuilt_select(id: string, value: string) {
@@ -70,27 +70,23 @@ export function select({
             <select ref=${(
 		el: HTMLSelectElement,
 	) => (select = el)} name=${name}>
-                ${
-		values.map((value) => {
-			if (value.value == null) return html.node``;
+                ${values.map((value) => {
+		if (value.value == null) return html.node``;
 
-			return html.node`
-                        <option value=${value.value} selected=${
-				value.value == initial
+		return html.node`
+                        <option value=${value.value} selected=${value.value == initial
 			}>${value.text}</option>
                     `;
-		})
-	}
+	})
+		}
             </select>
-            <button class="select-button ${
-		blend ? 'link-select blend-v2-btn' : ''
-	} ${
-		in_settings
+            <button class="btn select-button ${blend ? 'link-select blend-v2-btn' : ''
+		} ${in_settings
 			? 'select-in-settings'
 			: ''
-	}" data-hide=${hide} type="button" ref=${(
-		el: HTMLButtonElement,
-	) => (button = el)} />
+		}" data-hide=${hide} type="button" ref=${(
+			el: HTMLButtonElement,
+		) => (button = el)} />
         </div>
     `;
 
@@ -172,11 +168,10 @@ export function select({
 
 		setTimeout(() => {
 			menu.setContent(html.node`
-                ${
-				values.map((value) => {
-					if (value.value == null) {
-						if (value.action) {
-							return html.node`
+                ${values.map((value) => {
+				if (value.value == null) {
+					if (value.action) {
+						return html.node`
                                 <button class="btn dropdown-menu-clickable-item icon-mask" data-type=${value.type} onclick=${() => {
 								menu.hide();
 								value.action!();
@@ -184,30 +179,29 @@ export function select({
                                     ${value.text}
                                 </button>
                             `;
-						}
+					}
 
-						if (value.text == 'sep') {
-							return html.node`
+					if (value.text == 'sep') {
+						return html.node`
                                 <div class="sep" />
                             `;
-						}
+					}
 
-						return html.node`
+					return html.node`
                             <div class="select-header">
                                 ${value.text}
                             </div>
                         `;
-					}
+				}
 
-					return html.node`
-                        <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${
-						selected == value.value
+				return html.node`
+                        <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value
 					} onclick=${() => set_select(value.value)}>
                             ${value.text}
                         </button>
                     `;
-				})
-			}
+			})
+				}
             `);
 		}, 300);
 	}
@@ -293,7 +287,7 @@ export function custom_select(select, element_to_append) {
 	element_to_append.appendChild(button);
 }
 
-unsafeWindow._set_custom_select_value = function (
+unsafeWindow._set_custom_select_value = function(
 	select_id: string,
 	value: string,
 ) {
@@ -327,10 +321,10 @@ function update_custom_select(
 			//btn.scrollIntoView(true);
 
 			/*let y = btn.getBoundingClientRect().top + element.scrollY;
-            element.scroll({
-                top: y,
-                behavior: 'smooth'
-            });*/
+			element.scroll({
+				top: y,
+				behavior: 'smooth'
+			});*/
 
 			const sel_button = document.body.querySelector(
 				`#select-${select_id}`,
@@ -344,7 +338,7 @@ function update_custom_select(
 	});
 }
 
-unsafeWindow._update_inbuilt_selection = function (id: string, index: number) {
+unsafeWindow._update_inbuilt_selection = function(id: string, index: number) {
 	const select = document.getElementById(id)! as HTMLSelectElement;
 	select.selectedIndex = index;
 	update_inbuilt_select(id, select.value);
