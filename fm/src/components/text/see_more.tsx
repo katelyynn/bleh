@@ -51,7 +51,7 @@ export function SeeMore({
 		iconPlacement == 'left' && 'left-icon',
 		blend && 'blend-v2-btn',
 		colourful && 'colourful',
-		chibi && 'chibi-see-more',
+		chibi && 'btn chibi-see-more',
 		opens && 'select-button link-select',
 		className && className,
 	];
