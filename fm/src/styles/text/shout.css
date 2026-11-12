@@ -443,7 +443,7 @@
 }
 
 .shout-action-button {
-	height: fit-content !important;
+	height: var(--line-height) !important;
 	font-size: var(--font-size) !important;
 
 	&:not(:hover, :focus-visible, .vote-button--voted, .shout-reply--open) {
@@ -463,6 +463,11 @@
 			oklch(var(--l3-c)),
 			oklch(var(--l4-c)) 30%);
 	--force-font-weight: var(--font-weight-medium) !important;
+}
+
+.shout-action,
+.vote-button-wrapper {
+	height: var(--line-height);
 }
 
 .shout-user,

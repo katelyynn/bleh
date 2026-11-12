@@ -161,7 +161,6 @@ export function patch_shouts() {
 				const buttons = action.querySelectorAll('button, a');
 				buttons.forEach((button) => {
 					button.classList.add(
-						'btn',
 						'shout-action-button',
 						'see-more',
 					);
@@ -194,7 +193,6 @@ export function patch_shouts() {
 			const more_button = shout.querySelector('.shout-more-actions');
 			if (more_button) {
 				more_button.classList?.add(
-					'btn',
 					'see-more',
 					'shout-action-button',
 				);

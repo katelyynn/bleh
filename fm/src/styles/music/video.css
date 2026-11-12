@@ -2,15 +2,16 @@
 .album-artwork-upload-cta-container {
 	display: none !important;
 }
+
 .track-overview-video-column {
 	position: relative;
-	margin-bottom: var(--card-padding);
-	margin: 0 var(--card-padding) var(--card-padding);
+	margin: unset;
 
 	&.visible-xs {
 		display: none !important;
 	}
 }
+
 .video-preview,
 .video-preview-upload-cta {
 	--bg: transparent !important;
@@ -30,7 +31,7 @@
 			display: none !important;
 		}
 
-		& > .cta-link {
+		&>.cta-link {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 			color: oklch(var(--c2)) !important;
@@ -51,8 +52,8 @@
 		aspect-ratio: 16 / 9;
 	}
 
-	& > .link-block-cover-link,
-	& > .cta-link {
+	&>.link-block-cover-link,
+	&>.cta-link {
 		position: absolute;
 		inset: 0;
 	}
@@ -64,6 +65,7 @@
 		position: static !important;
 	}
 }
+
 .video-actions {
 	gap: var(--card-gap) !important;
 	margin: var(--card-gap) 0 0 0 !important;

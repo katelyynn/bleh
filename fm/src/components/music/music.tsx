@@ -25,16 +25,18 @@ import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
-import { icons } from '../shared/icon';
+import { Icon, icons } from '../shared/icon';
 import { BetaIndicator } from '../shared/indicator';
 import { useSettings } from '@/page.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { ReactNode } from 'jsx-dom';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { SideAction, SideActions } from '@/components/button/side.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { create_music_links } from '@/components/music/link_types.tsx';
+import { PanelHead } from '../text/head';
+import { IconLabel } from '../text/text';
 
 export function show_your_scrobbles() {
 	show_numbers_on_side(page.type);
@@ -713,18 +715,12 @@ function show_numbers_on_side(header_type) {
 	if (page.type == 'track') {
 		const video_col = document.body.querySelector(
 			'.track-overview-video-column.col-sidebar',
-		);
+		) as HTMLElement;
 
 		if (!video_col) {
 			video_unavailable(video_col);
 			return;
 		}
-
-		video_col.classList.remove('col-sidebar');
-		page.structure.side.insertBefore(
-			video_col,
-			page.structure.side.firstElementChild,
-		);
 
 		const video = video_col.querySelector('.video-preview');
 
@@ -734,32 +730,46 @@ function show_numbers_on_side(header_type) {
 		}
 
 		video_col.classList.remove('col-sidebar');
-		page.structure.side.insertBefore(
-			video_col,
-			page.structure.side.firstElementChild,
+
+		const playlink = video.querySelector('.video-preview-playlink a') as HTMLAnchorElement;
+		playlink?.remove();
+
+		const replace = video_col.querySelector('.video-preview-replace a') as HTMLAnchorElement;
+
+		playlink.classList = 'blend-v2-btn';
+		replace.classList = 'blend-v2-btn left-icon';
+		replace.replaceChildren(
+			<IconLabel icon={icons.edit}>
+				{tl(trans.edit)}
+			</IconLabel>
 		);
 
-		const playlink = video.querySelector('.video-preview-playlink a');
-		const replace = video_col.querySelector('.video-preview-replace a');
+		const panel = (
+			<section class='track-video'>
+				<PanelTop>
+					<PanelHead icon={icons.video} top>
+						{tl(trans.watch)}
+					</PanelHead>
+					<ViewButtons>
+						{replace}
+					</ViewButtons>
+				</PanelTop>
+				{video_col}
+			</section>
+		);
 
-		video.appendChild(html.node`
-            <a class="link-block-cover-link" href=${playlink.href} target="_blank" />
-        `);
+		page.structure.side!.insertBefore(
+			panel,
+			page.structure.side!.firstElementChild,
+		);
 
-		playlink.classList = 'see-more';
-		replace.classList = 'see-more add left-icon';
-
-		video.after(html.node`
-            <div class="video-actions sub-text">
-                ${replace}
-                ${playlink}
-            </div>
-        `);
-
-		playlink.textContent = tl(trans.watch_video);
-		playlink.removeAttribute('title');
-
-		replace.textContent = tl(trans.replace);
+		video.appendChild(
+			<a class={['link-block-cover-link', 'track-video-cover']} href={playlink.href} target='_blank'>
+				<span class='track-video-play'>
+					<Icon name={icons.play} />
+				</span>
+			</a>
+		);
 	}
 }
 
@@ -767,7 +777,7 @@ function video_unavailable(video_col = null) {
 	const cta = page.structure.side.querySelector('.video-preview-upload-cta');
 	if (cta) return;
 
-	if (video_col) page.structure.side.removeChild(video_col);
+	//if (video_col) page.structure.side.removeChild(video_col);
 
 	page.structure.side.insertBefore(
 		html.node`
