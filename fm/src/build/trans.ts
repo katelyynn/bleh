@@ -5889,6 +5889,9 @@ export const trans = {
 		ru: 'Введите имя пользователя',
 		pl: 'Podaj nazwę użytkownika',
 	},
+	enter_link: {
+		en: 'Enter a URL',
+	},
 	block: {
 		en: 'Block',
 		de: 'Blockieren',
@@ -7080,14 +7083,25 @@ export const trans = {
 			pl: 'Nazwa użytkownika',
 		},
 		body: {
-			en: 'To change your username hit the button to send an email. Having problems? {a}contact support{/a}.',
-			de: 'Um deinen Benutzernamen zu ändern, klicke auf die Schaltfläche „E-Mail senden“. Gibt es Probleme? {a}Kontaktiere den Support{/a}.',
-			es: 'Para cambiar tu nombre de usuario, haz clic al botón para enviar un correo electrónico. ¿Algún problema? {a}contacta a soporte{/a}.',
-			it: 'Per cambiare il tuo nome utente, premi il pulsante per inviare una email. Ci sono problemi? {a}contatta il supporto{/a}',
-			pt: 'Para alterar seu nome de usuário, clique no botão para enviar um e-mail. Está com problemas? {a}contact support{/a}.',
-			sv: 'För att ändra ditt användarnamn, tryck på knappen för att skicka mejl. Har du ett problem? {a}Kontakta support{/a}.',
-			ru: 'Чтобы изменить имя пользователя, нажмите кнопку для отправки электронного письма. Возникли проблемы? {a}Свяжитесь со службой поддержки{/a}.',
-			pl: 'Aby zmienić swoją nazwę użytkownika, kliknij przycisk aby wysłać email. Masz problemy? {a}Napisz do Supportu{/a}',
+			en: 'To change your username hit the button to send an email. Having problems? {contact_support}.',
+			de: 'Um deinen Benutzernamen zu ändern, klicke auf die Schaltfläche „E-Mail senden“. Gibt es Probleme? {contact_support}.',
+			es: 'Para cambiar tu nombre de usuario, haz clic al botón para enviar un correo electrónico. ¿Algún problema? {contact_support}.',
+			it: 'Per cambiare il tuo nome utente, premi il pulsante per inviare una email. Ci sono problemi? {contact_support}.',
+			pt: 'Para alterar seu nome de usuário, clique no botão para enviar um e-mail. Está com problemas? {contact_support}.',
+			sv: 'För att ändra ditt användarnamn, tryck på knappen för att skicka mejl. Har du ett problem? {contact_support}.',
+			ru: 'Чтобы изменить имя пользователя, нажмите кнопку для отправки электронного письма. Возникли проблемы? {contact_support}.',
+			pl: 'Aby zmienić swoją nazwę użytkownika, kliknij przycisk aby wysłać email. Masz problemy? {contact_support}.',
+		},
+
+		contact_support: {
+			en: 'contact support',
+			de: 'Kontaktiere den Support',
+			es: 'contacta a soporte',
+			it: 'contatta il supporto',
+			pt: 'contact support',
+			sv: 'Kontakta support',
+			ru: 'Свяжитесь со службой поддержки',
+			pl: 'Napisz do Supportu',
 		},
 	},
 	email: {
@@ -12346,12 +12360,16 @@ export const trans = {
 		it: 'Posizione del testo',
 	},
 	better_with_friends: {
-		en: 'Music is better with friends, {a}add to your close friends list{/a}',
-		pt: 'Música é melhor com amigos, {a}adicione à sua lista de amigos próximos{/a}',
-		es: 'La música es mejor con amigos, {a}añade a tu lista de amigos cercanos{/a}',
-		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {a}dodaj do listy bliskich przyjaciół{/a}',
-		it: 'La musica è migliore con gli amici, {a}aggiungi alla tua lista degli amici stretti{/a}',
-		de: 'Musik ist besser mit freunden, {a}Als engen Freund hinzufügen{/a}',
+		en: 'Music is better with friends, {add_friend}',
+		de: 'Musik ist besser mit freunden, {add_friend}',
+		pt: 'Música é melhor com amigos, {add_friend}',
+		es: 'La música es mejor con amigos, {add_friend}',
+		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {add_friend}',
+		it: 'La musica è migliore con gli amici, {add_friend}',
+
+		add_friend: {
+			en: 'add a close friend',
+		},
 	},
 	collage_cta: {
 		// used to 'advertise' collages
@@ -12814,7 +12832,7 @@ export const trans = {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
 		pt: 'O Markdown está desativado. O texto pode não ser exibido corretamente e as decorações de perfil não funcionarão. {v}',
 		it: 'Hai disattivato Markdown, il testo potrebbe non essere mostrato correttamente e le decorazioni del profilo non funzioneranno. {v}',
-		de: 'Markdown ist deaktiviert, es werden möglicherweise Textdarstellungs fehler erscheinen, und Profildekorationen können probleme darstellen. {v}',  '
+		de: 'Markdown ist deaktiviert, es werden möglicherweise Textdarstellungs fehler erscheinen, und Profildekorationen können probleme darstellen. {v}',
 	},
 	empty_list: {
 		en: 'This list is empty',

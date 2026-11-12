@@ -111,8 +111,8 @@ export function bleh_footer() {
 													{user}
 												</a>
 												{i <
-														lang_info[lang].by
-																.length - 1 &&
+													lang_info[lang].by
+														.length - 1 &&
 													', '}
 											</>
 										))}
@@ -140,7 +140,7 @@ function FooterLink({
 }: FooterLinkProps) {
 	return (
 		<a
-			class={['btn', 'music-link', 'footer-link', 'icon']}
+			class={['music-link', 'footer-link', 'icon']}
 			data-type={type}
 			href={href}
 			target='_blank'

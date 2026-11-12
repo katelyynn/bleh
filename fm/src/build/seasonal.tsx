@@ -86,7 +86,7 @@ export const seasonal_events: season[] = [
 		id: 'halloween',
 		start: {
 			month: 9,
-			day: 24,
+			day: 26,
 		},
 		end: {
 			month: 10,
@@ -104,7 +104,7 @@ export const seasonal_events: season[] = [
 		},
 		end: {
 			month: 11,
-			day: 14,
+			day: 19,
 		},
 		snowflakes: {
 			state: false,
@@ -114,21 +114,22 @@ export const seasonal_events: season[] = [
 		id: 'fall',
 		start: {
 			month: 11,
-			day: 15,
+			day: 20,
 		},
 		end: {
 			month: 11,
-			day: 27,
+			day: 30,
 		},
 		snowflakes: {
-			state: false
+			state: true,
+			count: 70,
 		},
 	},
 	{
 		id: 'christmas',
 		start: {
-			month: 11,
-			day: 28,
+			month: 12,
+			day: 1,
 		},
 		end: {
 			month: 12,
@@ -170,8 +171,8 @@ export class Seasons {
 		this.rebuild();
 
 		useSettings.on('seasonal', () => this.rebuild());
-		useSettings.on('seasonal_particles', () => this.rebuild());
-		useSettings.on('seasonal_particles_fps', () => this.rebuild());
+		useSettings.on('seasonal_particles', () => this.apply());
+		//useSettings.on('seasonal_particles_fps', () => this.rebuild());
 
 		setInterval(() => {
 			this.rebuild();
@@ -192,7 +193,7 @@ export class Seasons {
 		this.current = state.current;
 		this.next = state.next;
 
-		if (this.current == current) return;
+		if (this.current?.id == current?.id) return;
 
 		this.apply();
 	}
@@ -223,6 +224,8 @@ export class Seasons {
 
 		if (!this.current) return;
 
+		console.error(this.current, this.current.id, last_season_seen);
+
 		if (this.current.id != last_season_seen) {
 			new_season(this.current, this.now);
 		}
@@ -249,7 +252,9 @@ function apply_season(current?: processedSeason) {
 	log(`applying ${current.id}`, 'season', 'info', { current });
 	document.body.setAttribute('data-bleh--season', current.id);
 
-	if (page.state.snowflakes == current.snowflakes.count) {
+	const decrease = useSettings.get('seasonal_particles') == 'less';
+
+	if (page.state.snowflakes == current.snowflakes.count && page.state.snowflakes_decrease == decrease && page.state.snow?.hasChildNodes()) {
 		return;
 	}
 
@@ -258,6 +263,7 @@ function apply_season(current?: processedSeason) {
 		useSettings.get('seasonal_particles') != 'none'
 	) {
 		page.state.snowflakes = current.snowflakes.count;
+		page.state.snowflakes_decrease = decrease;
 
 		log('let the snow start!', 'season');
 		prep_snow();
@@ -266,7 +272,7 @@ function apply_season(current?: processedSeason) {
 		let snowflakes_count = current.snowflakes.count || 0;
 
 		if (
-			useSettings.get('seasonal_particles') == 'less' &&
+			decrease &&
 			snowflakes_count > 10
 		) {
 			snowflakes_count *= 0.45;
@@ -295,7 +301,7 @@ export function new_season(current: season, now: DateTime) {
 }
 
 function get_season_state(now = DateTime.local()) {
-	//now = DateTime.fromISO('2026-12-25');
+	//now = DateTime.fromISO('2026-10-25');
 	const year = now.year;
 
 	const seasons = resolve_seasons(now);
@@ -421,13 +427,14 @@ function begin_snowflakes(enabled: boolean, count: number) {
 	const flakes = Array.from({ length: count * 0.7 }, () => {
 		const x = (Math.random() * 100).toFixed(1);
 		const drift = (Math.random() * 40 - 10).toFixed(1);
-		const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
-		const size = 8 * scale;
-		const duration = (Math.random() * 64 + 20).toFixed(1);
+		const scale = (Math.pow(Math.random(), 0.5) * 1.1 + 0.4).toFixed(1);
+		const size = 15 * scale;
+		const rotation = (Math.random() * 40 - 14).toFixed(1);
+		const duration = (Math.random() * 20 + 20).toFixed(1);
 		const delay = (Math.random() * -30).toFixed(1);
 		const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
 
-		return { x, drift, scale, size, duration, delay, opacity };
+		return { x, drift, scale, size, duration, delay, opacity, rotation };
 	});
 
 	page.state.snow!.replaceChildren(
@@ -444,6 +451,7 @@ function begin_snowflakes(enabled: boolean, count: number) {
 						animationDuration: `${flake.duration}s`,
 						animationDelay: `${flake.delay}s`,
 						opacity: flake.opacity,
+						rotate: `${flake.rotation}deg`
 					} as CSSProperties}
 				/>
 			))}

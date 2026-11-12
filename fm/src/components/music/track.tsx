@@ -48,7 +48,7 @@ import { TrackMenuPreview } from '@/components/track/preview.tsx';
 import { GenericUsername } from '@/components/user/name.tsx';
 import { Token } from '@/components/form/token.tsx';
 import { createRef, ReactElement } from 'jsx-dom';
-import { SmartTitle } from '@/components/music/smart_title.tsx';
+import { SmartArtist, SmartTitle } from '@/components/music/smart_title.tsx';
 import { ff } from '@/components/settings/sku.ts';
 import { non_pro_edit } from '@/components/music/non_pro_edit.tsx';
 import { queue_popup } from '@/components/dialog/popup.tsx';
@@ -59,8 +59,6 @@ type TrackElement = HTMLElement & {
 }
 
 export function patch_titles(search = page.structure.main) {
-	if (page.subpage == 'tags_overview') return;
-
 	if (!search) {
 		log(
 			'tracks could not be searched as search was undefined',
@@ -507,12 +505,9 @@ export function patch_titles(search = page.structure.main) {
 						'log',
 					);
 					// replaces with corrected artist if applicable
-					render(
-						song_artist_element,
-						smart_artists(
-							formatted.song_artist,
-							formatted.song_guests,
-						),
+					song_artist_element.classList.add('smart-artist');
+					song_artist_element.replaceChildren(
+						<SmartArtist artist={formatted.song_artist} guests={formatted.song_guests} />
 					);
 				}
 
@@ -881,7 +876,7 @@ export function patch_titles(search = page.structure.main) {
 															name='album_artist_name_original'
 															value={track
 																.getAttribute(
-																	'data-artist-name-original',
+																	'data-album-artist-name-original',
 																)}
 														/>
 														<input
@@ -1298,6 +1293,9 @@ export function patch_titles(search = page.structure.main) {
 			if (loved) {
 				loved.classList.add('colourful');
 				loved.setAttribute('data-season', season);
+
+				const container = loved.firstElementChild;
+				container?.classList.add('chartlist-loved-form');
 
 				const love = loved.querySelector('.chartlist-love-button') as HTMLButtonElement;
 

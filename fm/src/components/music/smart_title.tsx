@@ -6,8 +6,9 @@
 
 import { song_tag, SongTag } from '@/components/track/song_tag.tsx';
 import { useSettings } from '@/page.tsx';
-import { romanise } from '@/build/tools.ts';
-import { page } from '@/build/page.ts';
+import { romanise, sanitise } from '@/build/tools.ts';
+import { page, root } from '@/build/page.ts';
+import { redirect } from './music';
 
 interface SmartTitleProps {
 	title: string;
@@ -62,4 +63,39 @@ export function FancyTitle({
 	}
 
 	return elem;
+}
+
+interface SmartArtistProps {
+	artist: string;
+	guests: string[];
+}
+
+export function SmartArtist({
+	artist,
+	guests
+}: SmartArtistProps) {
+	return (
+		<>
+			<Artist name={artist} />
+			{guests.map(guest => (
+				<>
+					, <Artist name={guest} />
+				</>
+			))}
+		</>
+	)
+}
+
+interface ArtistProps {
+	name: string;
+}
+
+function Artist({
+	name
+}: ArtistProps) {
+	return (
+		<a href={`${root}music/${redirect()}${sanitise(name)}`}>
+			{romanise(name)}
+		</a>
+	)
 }

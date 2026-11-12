@@ -25,6 +25,7 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { proxy_image } from '@/components/markdown/proxy.tsx';
 import { queue_popup } from '@/components/dialog/popup.tsx';
+import { CardTip } from '../text/tip';
 
 interface MarkdownFieldProps {
 	ref?: ReturnType<typeof createRef<MarkdownFieldElement>>;
@@ -116,40 +117,38 @@ export function MarkdownField({
 							title: tl(trans.create_link),
 							body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">${
-								tl(trans.link)
-							}</p>
+                                    <p class="generic-label">${tl(trans.link)
+								}</p>
                                     ${link = input({
-								type: 'text',
-								placeholder: tl(trans.example, {
-									v: 'https://katelyn.moe',
-								}),
-								func: () => {
-									submit_link();
-								},
-								focus: true,
-							})}
-                                    <p class="generic-label">${
-								tl(trans.text)
-							}</p>
+									type: 'text',
+									placeholder: tl(trans.example, {
+										v: 'https://katelyn.moe',
+									}),
+									func: () => {
+										submit_link();
+									},
+									focus: true,
+								})}
+                                    <p class="generic-label">${tl(trans.text)
+								}</p>
                                     ${alt = input({
-								type: 'text',
-								func: () => {
-									submit_link();
-								},
-							})}
+									type: 'text',
+									func: () => {
+										submit_link();
+									},
+								})}
                                 </div>
                                 <div class="modal-footer">
                                 <button class="see-more cancel left-icon" onclick=${() => {
-								dialog_rm({ id: 'link' });
-								resolve(null);
-							}}>
+									dialog_rm({ id: 'link' });
+									resolve(null);
+								}}>
                                     ${tl(trans.cancel)}
                                 </button>
                                 <div class="fill" />
                                 <button class="btn primary continue" onclick=${() => {
-								submit_link();
-							}}>
+									submit_link();
+								}}>
                                     ${tl(trans.finish)}
                                 </button>
                                 </div>
@@ -228,10 +227,9 @@ export function MarkdownField({
 												preview.current.style
 													.setProperty(
 														'background-image',
-														`url(${
-															proxy_image(
-																v as string,
-															)
+														`url(${proxy_image(
+															v as string,
+														)
 														})`,
 													);
 											}}
@@ -288,6 +286,69 @@ export function MarkdownField({
 					});
 				},
 				hide: !options.allow_links,
+			},
+			{
+				icon: icons.profile_links,
+				name: tl(trans.links),
+				start: '[links]',
+				end: '[/links]',
+				hide: !options.allow_socials
+			},
+			{
+				icon: icons.statuscafe,
+				name: 'status.cafe',
+				func: () => {
+					return new Promise((resolve) => {
+						const user = createRef();
+
+						modal({
+							id: 'statuscafe',
+							title: 'status.cafe',
+							body: (
+								<>
+									<FormInner span>
+										<GenericLabel>
+											{tl(trans.username.name)}
+										</GenericLabel>
+										<Input
+											onSubmit={submit_link}
+											ref={user}
+										/>
+									</FormInner>
+									<CardTip minWidth>{tl(trans.status_cafe.body)}</CardTip>
+								</>
+							),
+							close: 'cancel',
+							actions: [
+								{
+									primary: true,
+									onClick: submit_link,
+									children: (
+										<>
+											<SaveIcon />
+											{tl(trans.save)}
+										</>
+									),
+								},
+							],
+							onClose: () => {
+								resolve(null);
+							},
+						});
+
+						user.current.focus();
+
+						function submit_link() {
+							const username = user.current.value;
+
+							if (!username) return;
+							dialog_rm({ id: 'statuscafe' });
+
+							resolve(`[status=${username}]`);
+						}
+					});
+				},
+				hide: !options.allow_socials,
 			},
 		],
 		[
@@ -346,6 +407,7 @@ export function MarkdownField({
 									const button = (
 										<MarkdownAction
 											type={item.type}
+											icon={item.icon}
 											name={item.name}
 											hide={item.hide}
 											onClick={() => {
@@ -378,8 +440,8 @@ export function MarkdownField({
 															elem.setSelectionRange(
 																sel_start,
 																sel_start +
-																	replacement
-																		.length,
+																replacement
+																	.length,
 															);
 
 															update();
@@ -448,7 +510,7 @@ export function MarkdownField({
 													elem.setSelectionRange(
 														sel_start,
 														sel_start +
-															replacement.length,
+														replacement.length,
 													);
 
 													update();
@@ -588,13 +650,10 @@ export function MarkdownField({
 							parseFloat(split[1]) >= 0 &&
 							parseFloat(split[2]) >= 0
 						) {
-							return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${
-								parseFloat(split[0])
-							}; --sat-over: ${
-								parseFloat(split[1])
-							}; --lit-over: ${
-								parseFloat(split[2])
-							}">${val}</span>]</span>`;
+							return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])
+								}; --sat-over: ${parseFloat(split[1])
+								}; --lit-over: ${parseFloat(split[2])
+								}">${val}</span>]</span>`;
 						} else {
 							return match;
 						}
@@ -676,7 +735,8 @@ export function MarkdownField({
 }
 
 interface Action {
-	type: string;
+	type?: string;
+	icon?: string;
 	name: ReactNode;
 	start?: string;
 	end?: string;
@@ -686,7 +746,8 @@ interface Action {
 }
 
 interface MarkdownActionProps {
-	type: string;
+	type?: string;
+	icon?: string;
 	name: ReactNode;
 	onClick: () => void;
 	hide?: boolean;
@@ -698,6 +759,7 @@ type MarkdownActionElement = HTMLButtonElement & {
 
 function MarkdownAction({
 	type,
+	icon,
 	name,
 	onClick,
 	hide,
@@ -708,7 +770,11 @@ function MarkdownAction({
 
 	const button = (
 		<Button chibi className='markdown-action' onClick={onClick}>
-			<Icon name={icons[type]} />
+			{type ? (
+				<Icon name={icons[type]} />
+			) : icon ? (
+				<Icon name={icon} />
+			) : ''}
 			{name}
 		</Button>
 	) as MarkdownActionElement;

@@ -302,4 +302,14 @@ export const flags: Record<string, flag> = {
 		name: 'Refresh header location',
 		date: '2026-10-12',
 	},
+	roxy: {
+		enabled: true,
+		name: 'Refreshed page layout',
+		date: '2026-11-07'
+	},
+	ifrita: {
+		enabled: false,
+		name: 'Refreshed page layout - unified version',
+		date: '2026-11-10'
+	}
 };

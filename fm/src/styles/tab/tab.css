@@ -9,18 +9,6 @@
 
 	--button-sides: 9px;
 
-	&:before {
-		content: '';
-		position: absolute;
-		background: linear-gradient(0deg, oklch(var(--b6) / 75%) 20%,
-				transparent 90%);
-		inset: 0 var(--card-padding) -1px;
-
-		--mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-		mask-image: var(--mask);
-		-webkit-mask-image: var(--mask);
-	}
-
 	&:after {
 		content: "";
 		position: absolute;
@@ -238,6 +226,7 @@ input::placeholder {
 
 .navlist-items:not(.ignore) {
 	display: flex;
+	align-items: center;
 	gap: var(--button-list-gap);
 	flex: 1;
 
@@ -262,6 +251,7 @@ button.navlist-more {
 	/* left padding for icon, otherwise just 12px 16px */
 	--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 
+	&.flex-button,
 	&.chibi {
 		--padding: var(--button-verts) var(--button-sides) !important;
 	}
@@ -279,20 +269,6 @@ button.navlist-more {
 
 	display: flex;
 	align-items: center;
-
-	&.live {
-		--bg: oklch(var(--h4) / 10%) !important;
-		--bg-hov: oklch(var(--h4) / 16%) !important;
-		--bg-atv: oklch(var(--h4) / 26%) !important;
-		--col: oklch(var(--l3-c)) !important;
-		--mask-colour: color-mix(in oklch,
-				oklch(var(--l3-c)),
-				oklch(var(--l4-c)) 40%);
-
-		.new-badge {
-			color: var(--mask-colour);
-		}
-	}
 
 	&.chibi {
 		width: var(--button-width) !important;
@@ -359,6 +335,31 @@ button.navlist-more {
 		background: var(--separator-base);
 		height: 1px;
 	}
+
+	&[data-roxy],
+	&[data-lacrimosa] {
+		width: var(--cards-width);
+		margin-left: auto;
+		margin-right: auto;
+		background: unset;
+		border-radius: unset;
+
+		&:after {
+			left: var(--card-padding);
+			right: var(--card-padding);
+		}
+	}
+
+	&[data-roxy] {
+		margin-bottom: unset;
+		margin-top: 10px;
+		padding: unset;
+
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
 }
 
 .library-controls>.secondary-nav,
@@ -421,7 +422,7 @@ button.navlist-more {
 	&:after {
 		content: "";
 		position: absolute;
-		bottom: -2px !important;
+		bottom: var(--tab-line-offset, -2px) !important;
 		left: var(--button-sides-icon) !important;
 		right: var(--button-sides) !important;
 		border-radius: var(--item-big-radius) !important;
@@ -429,16 +430,16 @@ button.navlist-more {
 
 		display: block !important;
 		width: unset !important;
-		height: 3px !important;
+		height: var(--tab-line-height, 3px) !important;
 		margin: unset !important;
 		transform: translateY(2px);
 		transform-origin: bottom;
 
 		background: oklch(var(--l3-c-theme-switch)) !important;
-		box-shadow: 0 -8px 20px 2px oklch(var(--l4-c) / 90%) !important;
+		box-shadow: 0 -8px 20px 2px oklch(var(--h3) / 60%) !important;
 
 		transition-property: transform, opacity !important;
-		transition-duration: var(--trans) !important;
+		transition-duration: var(--trans-long) !important;
 		transition-timing-function: var(--trans-function) !important;
 	}
 
@@ -447,6 +448,7 @@ button.navlist-more {
 		&:after {
 			transform: translateY(0);
 			opacity: 0.6;
+			transition: none !important;
 		}
 	}
 
@@ -477,6 +479,7 @@ button.navlist-more {
 		--col: var(--toolbar-tab-colour) !important;
 		--mask-colour: var(--toolbar-tab-icon) !important;
 		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
+		--shadow: inset 0 0 0 1px oklch(var(--l3-c) / 10%) !important;
 		filter: none !important;
 
 		--top: 50%;
@@ -532,6 +535,7 @@ button.navlist-more {
 			--bg-atv: var(--toolbar-tab-selected-active) !important;
 			--col: var(--toolbar-tab-selected-colour) !important;
 			--mask-colour: var(--toolbar-tab-selected-icon) !important;
+			--shadow: inset 0 0 0 1px transparent !important;
 		}
 	}
 

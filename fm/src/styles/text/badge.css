@@ -60,6 +60,13 @@
 	}
 }
 
+.count-badge {
+	line-height: var(--line-height-sm);
+	margin-left: 2px;
+
+	border-radius: var(--radius-m);
+}
+
 .theme-bubble-new,
 .new-badge.new {
 	--hue-over: 317;

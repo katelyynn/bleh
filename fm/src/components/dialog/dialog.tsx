@@ -218,7 +218,7 @@ export function dialog_rm({
 
 		dialog.instance.classList.add('to-remove');
 
-		setTimeout(function () {
+		setTimeout(function() {
 			page.structure.dialogs.removeChild(dialog.instance);
 		}, 400);
 
@@ -306,6 +306,7 @@ export function modal({
 }
 
 interface ModalAction {
+	reference?: HTMLElement | ReactElement;
 	onClick?: () => void;
 	className?: string;
 	colourful?: boolean;
@@ -391,13 +392,32 @@ export function Modal({
 				{actions.map((action, i) => {
 					if (canClose) i++;
 
+					if (action.reference) {
+						action.reference.classList.add('btn', 'flex-button', 'bleh-modal-v2-action');
+						if (action.className) action.reference.classList.add(action.className);
+						if (action.colourful) action.reference.classList.add('colourful');
+						if (action.primary) action.reference.classList.add('action-primary');
+
+						action.reference.replaceChildren(
+							<>
+								{action.children}
+							</>
+						);
+
+						return (
+							<>
+								{i > 0 && <ModalActionSeparator />}
+								{action.reference}
+							</>
+						)
+					}
+
 					return (
 						<>
 							{i > 0 && <ModalActionSeparator />}
 							<Button
-								className={`bleh-modal-v2-action ${action.className} ${
-									action.colourful && 'colourful'
-								} ${action.primary && 'action-primary'}`}
+								className={`bleh-modal-v2-action ${action.className} ${action.colourful && 'colourful'
+									} ${action.primary && 'action-primary'}`}
 								onClick={action.onClick}
 							>
 								{action.children}

@@ -385,11 +385,16 @@ export function Select({
 		);
 
 		// fallback
-		indicator.current.replaceChildren(value);
+		if (value != undefined) {
+			indicator.current.replaceChildren(value);
+		} else {
+			indicator.current.replaceChildren('...');
+		}
 
 		const val = values.find((v) => v.value == value) || { text: value };
+		if (val?.text) indicator.current.replaceChildren(select_text(val.text));
 
-		indicator.current.replaceChildren(select_text(val.text));
+		console.error(value, val);
 
 		select.current.value = value;
 
@@ -419,7 +424,8 @@ function select_text(text: ReactNode | (() => ReactNode)) {
 export function convert_to_select(button: Element | null) {
 	if (!button) return;
 
-	button.classList.add('btn', 'select-button', 'link-select', 'blend-v2-btn');
+	button.classList.add('select-button', 'link-select', 'blend-v2-btn');
+	button.classList.remove('dropdown-menu-clickable-button');
 
 	return;
 

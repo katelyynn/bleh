@@ -47,6 +47,9 @@
 	backdrop-filter: var(--solarium);
 	-webkit-backdrop-filter: var(--solarium);
 
+	content-visibility: auto;
+	contain-intrinsic-size: auto 20px;
+
 	&:hover {
 		background-color: var(--bg-hov) !important;
 		transition-property: scale;

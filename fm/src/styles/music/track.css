@@ -1,6 +1,6 @@
 .chartlist {
 	display: block;
-	--side-left: 12px;
+	--side-left: 10px;
 	--image-offset: 2px;
 	--track-gap: 2px;
 	line-height: var(--line-height) !important;
@@ -52,7 +52,7 @@
 	max-height: fit-content;
 	border-radius: var(--track-radius);
 	box-shadow: var(--shadow);
-	margin: 0 -12px !important;
+	margin: 0 calc(-1 * var(--side-left)) !important;
 	/* calc(- 12 px - var(--chartlist-inner-gap) / 2) */
 	display: flex !important;
 	gap: var(--item-list-gap);
@@ -64,11 +64,19 @@
 
 	contain: layout;
 
+	--track-image-size: 38px;
+	--track-image-mask: var(--cover-size-32);
+
+	content-visibility: auto;
+	contain-intrinsic-size: auto 54px;
+
 	/*&:nth-child(even) {
 	    --bg: var(--tracklist-odd);
 	}*/
 
 	&:hover {
+		--more-button-opacity: 1;
+
 		&:before {
 			background-color: var(--bg-hov);
 			transition: none !important;
@@ -84,10 +92,6 @@
 		border-radius: var(--track-radius);
 		background-color: var(--bg);
 
-		transition-property: background-color;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-
 		--mask2: var(--interact-mask, none);
 		mask-image: var(--mask2) !important;
 		-webkit-mask-image: var(--mask2) !important;
@@ -97,20 +101,8 @@
 		-webkit-mask-size: contain !important;
 	}
 
-	&:not(:hover) {
-		&>.more-button-wrapper {
-			opacity: 0;
-		}
-	}
-
 	&[data-track-type="user"] {
 		--chart-cover-radius: var(--avatar-radius);
-	}
-
-	&>.kate-placeholder,
-	&>.chartlist-play,
-	&>.chartlist-more {
-		display: none !important;
 	}
 
 	&>td {
@@ -120,19 +112,11 @@
 	}
 
 	&[data-album-name-location="column"][data-show-album-text="true"][data-has-bar="false"] {
-		&>.chartlist-image {
-			width: 56px;
-			height: 56px;
-
-			&>.cover-art>img {
-				--mask-size: var(--cover-size-50);
-			}
-		}
+		--track-image-size: 56px;
+		--track-image-mask: var(--cover-size-50);
 
 		&[data-theme="yuzu"] {
-			&>.chartlist-image {
-				--w: 64px;
-			}
+			--track-image-size: 64px;
 		}
 	}
 
@@ -196,7 +180,70 @@
 
 	/* separators */
 	&:after {
-		display: none;
+		display: none !important;
+	}
+
+	/*&:after {
+		top: -1px;
+		bottom: unset;
+		display: block;
+		border-top: 1px solid var(--separator-base);
+		border-bottom: unset;
+		left: var(--side-left);
+		right: var(--side-left);
+	}
+
+	&:first-child {
+		&:after {
+			display: none;
+		}
+	}*/
+}
+
+.chartlist-name,
+.chartlist-artist,
+.chartlist-album {
+	margin: unset !important;
+	inset: unset !important;
+	position: relative !important;
+	width: fit-content !important;
+	flex: unset !important;
+}
+
+.chartlist-name {
+	order: 1;
+
+	max-width: 100%;
+}
+
+.chartlist-artist {
+	font-size: var(--artist-name-size, var(--font-size));
+	line-height: var(--artist-name-height, var(--line-height));
+	order: 2;
+
+	color: oklch(var(--col-alt)) !important;
+	cursor: default;
+
+	max-width: 100%;
+}
+
+.chartlist-album {
+	color: oklch(var(--col-alt));
+	font-size: calc(var(--font-size) - 1px);
+	order: 3;
+
+	/* bulk edit fix */
+	width: 40% !important;
+	margin-bottom: unset !important;
+
+	/* fix weird hover effect */
+	&:before {
+		display: none !important;
+	}
+
+	/* fix duplication */
+	&+.chartlist-album {
+		display: none !important;
 	}
 }
 
@@ -205,32 +252,6 @@
 	flex-direction: column;
 	flex: 1;
 	overflow: hidden;
-
-	&>.chartlist-name,
-	&>.chartlist-artist,
-	&>.chartlist-album {
-		margin: unset !important;
-		inset: unset !important;
-		position: relative !important;
-		width: fit-content !important;
-		flex: unset !important;
-	}
-
-	&>.chartlist-name {
-		order: 1;
-	}
-
-	&>.chartlist-artist {
-		font-size: var(--artist-name-size, var(--font-size));
-		line-height: var(--artist-name-height, var(--line-height));
-		order: 2;
-	}
-
-	&>.chartlist-album {
-		color: oklch(var(--col-alt));
-		font-size: calc(var(--font-size) - 1px);
-		order: 3;
-	}
 
 	&[data-track-layout="column"][data-album-name-location="row"]:not([data-has-bar="true"]) {
 		display: grid !important;
@@ -242,13 +263,11 @@
 		&>.chartlist-name {
 			grid-column: 1 / 2;
 			grid-row: 1 / 2;
-			max-width: 100%;
 		}
 
 		&>.chartlist-artist {
 			grid-column: 1 / 2;
 			grid-row: 2 / 3;
-			max-width: 100%;
 		}
 
 		&>.chartlist-album {
@@ -280,7 +299,7 @@
 	}
 }
 
-.chartlist--wide-artist-column {
+/*.chartlist--wide-artist-column {
 	.chartlist-artist {
 		position: static !important;
 		display: none !important;
@@ -299,38 +318,12 @@
 		color: oklch(var(--col-alt));
 
 		/* no hover offset nonsense */
-		margin-right: unset !important;
+/*margin-right: unset !important;
 
 		width: unset !important;
 		flex: 1 !important;
 	}
-}
-
-.chartlist-artist {
-	display: flex !important;
-	color: oklch(var(--col-alt)) !important;
-	cursor: default;
-
-	&>a+a {
-		margin-left: 4px;
-	}
-}
-
-.chartlist-album {
-	/* bulk edit fix */
-	width: 40% !important;
-	margin-bottom: unset !important;
-
-	/* fix weird hover effect */
-	&:before {
-		display: none !important;
-	}
-
-	/* fix duplication */
-	&+.chartlist-album {
-		display: none !important;
-	}
-}
+}*/
 
 .chartlist-bar {
 	@media (max-width: 980px) {
@@ -419,26 +412,38 @@
 		--sat-seasonal: 1.8;
 		--lit-seasonal: 0.925;
 	}
+}
+
+.chartlist-loved-form {
+	position: relative;
 
 	&:before {
-		content: "";
+		content: '';
 		position: absolute;
-		width: 10px;
-		height: 10px;
-		top: 50%;
-		right: 9px;
-		margin-top: -6px;
-		background: transparent !important;
+		background: transparent;
+
+		--w: 10px;
+		width: var(--w);
+		height: var(--w);
 		border-radius: 50px;
-		box-shadow: 0 0 30px 1px oklch(var(--h4));
+		box-shadow: 0 0 30px oklch(var(--h4));
+
+		top: 50%;
+		left: 50%;
+
+		margin-top: calc(-1 * (var(--w) / 2));
+		margin-left: calc(-1 * (var(--w) / 2));
+
 		transition-property: opacity;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
 	}
-}
 
-.chartlist-loved:has(> [data-toggle-button-current-state="unloved"]):before {
-	opacity: 0;
+	&[data-toggle-button-current-state="unloved"] {
+		&:before {
+			opacity: 0;
+		}
+	}
 }
 
 .chartlist-timestamp {
@@ -640,8 +645,8 @@
 .obsession-candidate-image,
 .column-tracks-item-image,
 .chartlist-image {
-	width: 38px;
-	height: 38px;
+	width: var(--track-image-size);
+	height: var(--track-image-size);
 	border-radius: var(--chart-cover-radius) !important;
 	box-shadow: var(--interact-shadow);
 	overflow: hidden;
@@ -660,7 +665,7 @@
 		-webkit-mask-size: contain !important;
 
 		&>img {
-			--mask-size: var(--cover-size-32);
+			--mask-size: var(--track-image-mask);
 			border-radius: inherit !important;
 			font-size: 0 !important;
 		}
@@ -688,14 +693,10 @@
 	overflow: unset !important;
 
 	transition-property: transform, filter;
-	transition-duration: 0.2s;
+	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
 	flex-shrink: 0;
-
-	&:hover {
-		transition-duration: 0.1s !important;
-	}
 
 	&:active {
 		transform: scale(0.98);
@@ -720,10 +721,12 @@
 .chartlist-love-button {
 	position: relative;
 	--left: calc((var(--button-height) - var(--icon-size)) / 2);
-	--mask: var(--icon-16-heart);
-	--col: oklch(var(--l3-c)) !important;
+	--mask: var(--heart-icon, var(--icon-16-heart));
+	--col: var(--heart-colour, oklch(var(--col-alt) / 40%)) !important;
 	--mask-colour: var(--col) !important;
 	color: var(--col);
+
+	--icon-size: var(--heart-icon-size, 16px);
 
 	display: flex !important;
 
@@ -734,19 +737,20 @@
 	overflow: unset !important;
 
 	font-size: var(--font-size) !important;
+
+	span& {
+		pointer-events: none !important;
+	}
+
+	&[data-analytics-action]:hover {
+		--col: oklch(var(--l3-c)) !important;
+	}
 }
 
-[data-toggle-button-current-state="loved"] .chartlist-love-button {
-	--mask: var(--icon-16-heart-solid) !important;
-}
-
-[data-toggle-button-current-state="unloved"] .chartlist-love-button:not(:hover) {
-	--col: oklch(var(--col-alt) / 40%) !important;
-}
-
-/*     OTHER USER PROFILE     */
-[data-toggle-button-current-state="unloved"] span.chartlist-love-button {
-	--col: oklch(var(--col-alt) / 20%) !important;
+.chartlist-loved>[data-toggle-button-current-state="loved"] {
+	--heart-icon: var(--icon-16-heart-solid);
+	--heart-icon-size: 18px;
+	--heart-colour: oklch(var(--l3-c));
 }
 
 .chartlist-buylinks,
@@ -963,6 +967,8 @@
 	flex: 1;
 	text-align: var(--count-bar-align);
 
+	background-image: unset;
+
 	&.v2 {
 		padding: 10px 0 !important;
 		margin: -10px 0 !important;
@@ -1001,6 +1007,10 @@
 	gap: 0 !important;
 }
 
+.more-button-wrapper {
+	opacity: var(--more-button-opacity, 0);
+}
+
 .track-more-button {
 	--button-verts: 2px;
 	--button-sides: 8px;
@@ -1008,6 +1018,9 @@
 	--icon-size: 18px !important;
 }
 
+.kate-placeholder,
+.chartlist-play,
+.chartlist-more,
 .chartlist-break {
 	display: none !important;
 }

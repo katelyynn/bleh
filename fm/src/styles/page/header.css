@@ -91,6 +91,24 @@
 			border-top-right-radius: var(--card-radius);
 			pointer-events: none;
 		}
+
+		&.lacrimosa {
+			margin-bottom: 0 !important;
+
+			&:before {
+				display: none;
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				left: var(--card-padding);
+				right: var(--card-padding);
+				bottom: -1px;
+				height: 1px;
+				background: var(--card-border-base);
+			}
+		}
 	}
 
 	@media (max-width: 980px) {
@@ -204,8 +222,8 @@
 	justify-content: center;
 	text-align: center;
 
-	&>.page-header-info {
-		&>.sub-text {
+	&>.page-header-info>.main-info {
+		&>.header-label {
 			width: fit-content;
 			margin: 0 auto;
 		}
@@ -424,10 +442,11 @@
 
 .page-header-avatar-glow {
 	position: absolute;
-	inset: -6px;
-	border-radius: calc(var(--page-header-avatar-radius) + 6px);
+	inset: 0;
+	border-radius: var(--page-header-avatar-radius);
 
-	border: 3px solid oklch(var(--l3-c) / 90%);
+	outline: 3px solid oklch(var(--l3-c) / 90%);
+	outline-offset: 3px;
 
 	scale: 1.06;
 	opacity: 0;

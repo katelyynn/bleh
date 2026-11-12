@@ -12,8 +12,8 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       '@tealmiku/florence':
-        specifier: ^2026.1021.0
-        version: 2026.1021.0
+        specifier: ^2026.1110.1
+        version: 2026.1110.1
       '@types/luxon':
         specifier: ^3.7.6
         version: 3.7.6
@@ -60,8 +60,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       html2canvas-pro:
-        specifier: ^2.5.1
-        version: 2.5.2
+        specifier: ^2.6.4
+        version: 2.6.4
       json5:
         specifier: ^2.2.3
         version: 2.2.3
@@ -402,8 +402,8 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
-  '@tealmiku/florence@2026.1021.0':
-    resolution: {integrity: sha512-KBfNoI9/igvCpD1W4lxNkXZ4ZlVWN1c4K5RbbBxuPo9HcCLa8tXuiCQ0pfrl41ytR6cT1e0MjQna0qn0D0R+Ow==}
+  '@tealmiku/florence@2026.1110.1':
+    resolution: {integrity: sha512-A6AFQ21JyJz2DkB5QUz+ppTJ5mDWH605zx1hRD/TOH4DV2DwFuIxNIQuF9eRBl6F+O0NaHIWvqxZzgQ3lU0NDw==}
 
   '@types/eslint-plugin-promise@7.3.0':
     resolution: {integrity: sha512-ewgA05z38/jROcbOEs1VFZ5A5rEOYxSQvsWl1xALLUAvwEEdHO7xHS0Y1UQrOgh1w05CUaRIxXyM1HkjeeG5Iw==}
@@ -852,8 +852,8 @@ packages:
   hookified@2.2.0:
     resolution: {integrity: sha512-p/LgFzRN5FeoD3DLS6bkUapeye6E4SI6yJs6KetENd18S+FBthqYq2amJUWpt5z0EQwwHemidjY5OqJGEKm5uA==}
 
-  html2canvas-pro@2.5.2:
-    resolution: {integrity: sha512-uka+0oVG/yB4B7U9M/+aJFF0aKZVmMWZKi4unemkQh537cLu3jXPvZtXakTuPl3taOI+O43RhuV6kn2igk1Z6g==}
+  html2canvas-pro@2.6.4:
+    resolution: {integrity: sha512-1SMOfXwMACgQPt1wcKOtuRnBxkcREiJQdOyVpgp6a4/z9Rb/v7QPcvyu5GlxdDDiMznLwKxX5KwvtSlNlZJ7Wg==}
     engines: {node: '>=24.0.0'}
 
   hyperhtml-style@0.1.3:
@@ -1492,7 +1492,7 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.7
 
-  '@tealmiku/florence@2026.1021.0': {}
+  '@tealmiku/florence@2026.1110.1': {}
 
   '@types/eslint-plugin-promise@7.3.0':
     dependencies:
@@ -2042,7 +2042,7 @@ snapshots:
 
   hookified@2.2.0: {}
 
-  html2canvas-pro@2.5.2: {}
+  html2canvas-pro@2.6.4: {}
 
   hyperhtml-style@0.1.3: {}
 

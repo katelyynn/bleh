@@ -74,7 +74,7 @@ import { bleh_users } from '@/components/shared/users';
 import { html, render } from 'lighterhtml';
 import { bleh_footer } from '@/components/page/footer';
 import { register_rabbit } from '@/components/dialog/rabbit';
-import { dialog_extender } from '@/components/dialog/dialog_extender.js';
+import { dialog_extender } from '@/components/dialog/dialog_extender.tsx';
 import { bleh_auth } from '@/pages/home/auth';
 import { bleh_labs } from '@/pages/profile/labs';
 import { bleh_minis } from '@/pages/home/minis.js';
@@ -109,77 +109,18 @@ export let useSeasons: Seasons;
 
 export function bleh() {
 	page.continue = true;
+	append_style();
 
 	florence({
 		page,
 		on_head_load: () => {
-			append_style();
 			favi();
 			page.state.previous_title = document.title;
 			document.title = '...';
 
 			applyCSP();
 		},
-		on_body_load: () => {
-			clean_storage();
-			favi();
-
-			const logo = document.querySelector('.masthead-logo a');
-			if (!logo) {
-				handle_error_500();
-				return;
-			}
-
-			page.state.colour_preview = (
-				<div class={['colour-preview', 'colourful']} />
-			);
-			document.body.appendChild(page.state.colour_preview);
-
-			register_auth();
-
-			load_settings();
-
-			dynamic_theming();
-			solarium();
-
-			translation_stats();
-
-			page_menu();
-
-			verified();
-
-			// messaging
-			load_dialogs();
-			register_rabbit();
-
-			notices();
-
-			remove_lastfm_styles();
-
-			update_check(false, null);
-
-			load_notifications();
-			load_status();
-			useSeasons = new Seasons();
-
-			checkup_friend_cache();
-
-			detect_mobile();
-			page.platform = detect_platform();
-
-			// load seasonal data
-			start_rain();
-
-			load_activities();
-			notify_if_new_update();
-
-			lotus();
-			oracle_data();
-			sponsors();
-
-			useSettings.on('branding_type', update_branding_type);
-			useSeasons.on(() => update_branding_type());
-		},
+		on_body_load: body,
 		on_mutation: main_flow,
 		on_page_change: load_page,
 		on_subpage_change: () => {
@@ -211,6 +152,72 @@ export function bleh() {
 				});
 			}
 		},
+	});
+}
+
+function body() {
+	clean_storage();
+	favi();
+
+	const logo = document.querySelector('.masthead-logo a');
+	if (!logo) {
+		handle_error_500();
+		return;
+	}
+
+	page.state.colour_preview = (
+		<div class={['colour-preview', 'colourful']} />
+	);
+	document.body.appendChild(page.state.colour_preview);
+
+	register_auth();
+
+	load_settings();
+
+	dynamic_theming();
+	solarium();
+
+	translation_stats();
+
+	page_menu();
+
+	verified();
+
+	// messaging
+	load_dialogs();
+	register_rabbit();
+
+	notices();
+
+	remove_lastfm_styles();
+
+	update_check(false, null);
+
+	load_notifications();
+	load_status();
+	useSeasons = new Seasons();
+
+	checkup_friend_cache();
+
+	detect_mobile();
+	page.platform = detect_platform();
+
+	// load seasonal data
+	start_rain();
+
+	load_activities();
+	notify_if_new_update();
+
+	lotus();
+	oracle_data();
+	sponsors();
+
+	useSettings.on('branding_type', update_branding_type);
+	useSeasons.on(() => update_branding_type());
+
+	document.documentElement.classList.toggle('show-scrollbar', useSettings.get('show_scroller') as boolean);
+	useSettings.on('show_scroller', (v) => {
+		document.documentElement.classList.toggle('show-scrollbar', v as boolean);
 	});
 }
 

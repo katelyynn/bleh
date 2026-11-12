@@ -329,7 +329,7 @@ export function bleh_events() {
 		});
 
 		// cancelled
-		const cancelled = page.structure.main.querySelector(
+		const cancelled = page.structure.main!.querySelector(
 			'.event-status--cancelled',
 		);
 		if (cancelled) {

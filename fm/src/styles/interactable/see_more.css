@@ -15,14 +15,15 @@
 	gap: 2px;
 
 	height: fit-content;
-	background: var(--bg) !important;
+	background-image: var(--bg);
 	--bg: transparent;
-	--bg-hov: transparent;
-	--bg-atv: transparent;
+	--bg-hov: var(--bg);
+	--bg-atv: var(--bg);
 	--radius: 0;
 	border-radius: var(--radius) !important;
 	--shadow: none;
 	--col: oklch(var(--l3-c));
+	color: var(--col);
 	--mask-colour: color-mix(in oklch,
 			oklch(var(--l3-c)),
 			oklch(var(--l4-c)) 30%);
@@ -43,39 +44,21 @@
 		display: none;
 	}
 
-	&:after {
-		content: '';
-		position: absolute;
-		display: block !important;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 1px;
-		background: var(--mask-colour);
-		transform: var(--underline-scale, scaleX(0));
-		transform-origin: bottom left;
-		opacity: 0.6;
+	--line-thickness: 0.08em;
+	--line-inset: 0.04em;
 
-		width: unset !important;
-		top: unset !important;
-		margin: unset !important;
+	--bg: linear-gradient(to right, var(--mask-colour), var(--mask-colour)),
+	linear-gradient(to right, transparent, transparent) !important;
+	background-repeat: no-repeat !important;
+	background-size: 0% var(--line-thickness),
+	100% var(--line-thickness) !important;
+	background-position: calc(-1 * (var(--icon-size) + 2px)) 100% !important;
 
-		transition-property: transform;
-		transition-duration: 0.2s;
-		transition-timing-function: var(--trans-function-ani);
-	}
-
-	&:after {
-		right: calc(var(--icon-size) + 2px);
-	}
 
 	&.left-icon {
 		gap: 4px;
 
-		&:after {
-			left: calc(var(--icon-size) + 4px);
-			right: 0;
-		}
+		background-position: calc(var(--icon-size) + 2px) 100% !important;
 	}
 
 	&.shout-more-actions {
@@ -95,9 +78,7 @@
 	&:hover,
 	&:active,
 	&[aria-expanded="true"] {
-		&:after {
-			transform: scaleX(1);
-		}
+		background-size: 100% var(--line-thickness), 100% var(--line-thickness) !important;
 
 		&>.bleh-icon-arrow-up {
 			translate: 0 calc(-1 * var(--icon-transform));
@@ -136,17 +117,15 @@
 
 	transition-property: rotate,
 	transform,
-	color;
+	color,
+	background-size;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
 	&:not([disabled]) {
 		&:hover {
-			background: var(--bg-hov) !important;
+			background-image: var(--bg-hov);
 			text-decoration: var(--underline, none) !important;
-
-			transition-property: transform;
-			transition-duration: 0.1s;
 		}
 
 		&:focus:not(:hover, :active) {
@@ -154,7 +133,7 @@
 		}
 
 		&:active {
-			background: var(--bg-atv) !important;
+			background-image: var(--bg-atv);
 			transform: unset !important;
 			text-decoration: var(--underline, none) !important;
 		}

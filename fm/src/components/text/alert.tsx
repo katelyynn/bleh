@@ -9,25 +9,27 @@ import { createRef, ReactNode } from 'jsx-dom';
 interface AlertProps {
 	ref?: ReturnType<typeof createRef<HTMLLabelElement>>;
 	type?: 'info' | 'danger' | 'error' | 'success';
+	className?: string;
 	hidden?: boolean;
 	margin?: boolean;
 	children?: ReactNode;
 }
 
-type AlertElement = HTMLLabelElement & {
+export type AlertElement = HTMLLabelElement & {
 	hidden: boolean;
 };
 
 export function Alert({
 	ref,
 	type = 'info',
+	className,
 	hidden,
 	margin,
 	children,
 }: AlertProps) {
 	const elem = (
 		<label
-			class={['alert', `alert-${type}`, !margin && 'no-margin']}
+			class={['alert', `alert-${type}`, !margin && 'no-margin', className]}
 			ref={ref}
 		>
 			{children}

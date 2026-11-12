@@ -5,7 +5,6 @@
 select,
 .dropdown-menu-clickable-item,
 .display-options-clickable-item,
-.select-button,
 .dropdown-menu-item-dark,
 .dropdown-menu-clickable-button,
 .dropdown-menu-clickable-button-js-only,
@@ -44,7 +43,6 @@ select,
 .notification,
 .user-now-empty-state-button,
 .report-dropdown-button,
-.see-more,
 .music-bookmarks-artists-item-toggle,
 .music-bookmarks-albums-item-toggle,
 .music-bookmarks-tags-item-toggle,
@@ -104,8 +102,8 @@ select,
 
 	--icon-size: 16px;
 
-	background-repeat: repeat-x !important;
-	background-position: unset !important;
+	background-repeat: repeat-x;
+	background-position: unset;
 
 	position: relative;
 
@@ -136,14 +134,14 @@ select,
 	&:is(.gallery-next, .gallery-previous):hover .arrow,
 	&:hover {
 		background: var(--bg-hov) !important;
-		transition-property: padding, transform, filter !important;
+		transition-property: padding, transform, filter, max-width !important;
 		transition-duration: var(--trans) !important;
 		transition-timing-function: var(--trans-function) !important;
 		--transition-property: rotate, opacity, left, transform;
 		/*box-shadow: var(--shadow-hov) !important;*/
 
-		background-repeat: repeat-x !important;
-		background-position: unset !important;
+		background-repeat: repeat-x;
+		background-position: unset;
 	}
 
 	&:is(.gallery-next, .gallery-previous):active .arrow,
@@ -151,8 +149,8 @@ select,
 		background: var(--bg-atv) !important;
 		transform: var(--button-click, scale(0.98));
 
-		background-repeat: repeat-x !important;
-		background-position: unset !important;
+		background-repeat: repeat-x;
+		background-position: unset;
 	}
 
 	kbd,
@@ -216,8 +214,8 @@ select,
 	/* used for new last.fm follow button */
 	&[disabled]:not([disabled="false"]) {
 		opacity: 0.65 !important;
-		--col: oklch(var(--c3)) !important;
-		--mask-colour: oklch(var(--c3)) !important;
+		--col: oklch(var(--c3));
+		--mask-colour: oklch(var(--c3));
 		transform: unset !important;
 		--bg-hov: var(--bg) !important;
 		--bg-atv: var(--bg) !important;
@@ -233,6 +231,12 @@ select,
 	&[data-hidden="true"] {
 		display: none;
 	}
+}
+
+.button-inner-content {
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }
 
 .lfmmaf-missing-artwork-button,

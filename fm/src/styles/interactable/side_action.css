@@ -127,6 +127,8 @@
 
 	--interact-mask: none !important;
 
+	transform: unset !important;
+
 	&:not(.stationlink, .listening-report-promo) {
 		height: var(--side-action-height) !important;
 

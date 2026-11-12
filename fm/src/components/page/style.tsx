@@ -21,6 +21,7 @@ import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
 import { useSettings } from '@/page.tsx';
 import { update_branding_type } from '@/components/page/navigation.tsx';
+import { DateTime } from 'luxon';
 
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
@@ -79,6 +80,7 @@ export function update_comparison(current: string, latest: string) {
 	return compare_versions(latest, current) === 1;
 }
 
+// TODO: refactor
 export function update_check(force = false, btn, func) {
 	if (!force) {
 		const last_checked = localStorage.getItem('bleh_update_checked') ||
@@ -102,18 +104,8 @@ export function update_check(force = false, btn, func) {
 
 	const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
 
-	/*let notification = notify({
-        id: 'updater',
-        title: 'Updater',
-        body: 'Downloading update information',
-        progress: true,
-        icon: 'icon-16-update'
-    });*/
-
-	download_with_progress(url, (percent) => {
-		//notification.set_body(`Downloading update information ${percent}%`);
-		//notification.set(percent);
-	})
+	// TODO: the rest here is pretty much fine
+	download_with_progress(url)
 		.then(async (blob) => {
 			const text = await blob.text();
 
@@ -127,17 +119,30 @@ export function update_check(force = false, btn, func) {
 					version.build,
 					data.build,
 				);
+
+				// if the user hasnt logged in for ages
+				if (update_required) {
+					const last_checked = localStorage.getItem(keys.update_checked_date);
+
+					if (last_checked) {
+						const date = DateTime.fromISO(last_checked);
+
+						if (date.isValid && DateTime.now() >= date.plus({ months: 1 })) {
+							prompt_for_update();
+						}
+					}
+				}
+
 				set_storage(keys.update_required, update_required.toString());
 				set_storage(keys.update_to_version, data.build);
-				set_storage(keys.update_checked_date, new Date().toString());
+				set_storage(keys.update_checked_date, DateTime.now().toISO());
 
-				const next = new Date();
-				next.setHours(next.getHours() + 2);
+				const next = DateTime.now().plus({ hours: 2 });
 
-				set_storage(keys.update_next_check_date, next.toString());
+				set_storage(keys.update_next_check_date, next.toISO());
 				log('update check finished', 'update', 'info', {
 					next_in: next,
-					current_time: new Date(),
+					current_time: DateTime.now(),
 				});
 
 				update_branding_type();
@@ -157,6 +162,7 @@ export function update_check(force = false, btn, func) {
 		});
 }
 
+// TODO: update dialog, design uncertain
 export function prompt_for_update() {
 	// prompt the user
 	dialog({
@@ -170,13 +176,13 @@ export function prompt_for_update() {
                 <div class="form">
                     <div class="form-group proceed">
                         <button class="btn primary icon" data-type="update" onclick=${() =>
-			start_update()}>${tl(trans.update_now)}</button>
+				start_update()}>${tl(trans.update_now)}</button>
                     </div>
                 </div>
                 <div class="form">
                     <div class="form-group deny">
                         <button class="btn icon" data-type="ignore" onclick=${() =>
-			ignore_update()}>${tl(trans.ignore_for_now)}</button>
+				ignore_update()}>${tl(trans.ignore_for_now)}</button>
                     </div>
                 </div>
             </div>
@@ -193,6 +199,7 @@ function ignore_update() {
 	});
 }
 
+// TODO: update dialog, design uncertain
 export function start_update() {
 	open(
 		`https://bleh.yuzu.pet/download?${Math.random()}`,
@@ -209,7 +216,7 @@ export function start_update() {
                 <div class="form">
                     <div class="form-group proceed">
                         <button class="btn primary icon" data-type="finish" onclick=${() =>
-			finish_update()}>${tl(trans.finish)}</button>
+				finish_update()}>${tl(trans.finish)}</button>
                     </div>
                 </div>
             </div>

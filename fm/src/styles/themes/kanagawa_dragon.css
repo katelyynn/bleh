@@ -30,7 +30,7 @@ body,
 
 		--menu-border: oklch(var(--b2) / 0.6);
 
-		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 60%));
+		--card-blur-bg: oklch(0.2134 0.0059 91.62 / var(--solarium-opacity, 60%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
 		--toolbar-bg: oklch(0.2064 0.0039 91.62 / 60%);
@@ -42,32 +42,16 @@ body,
 }
 
 body,
-.alert,
-.event-status,
-.big-modal-alert,
-.events-list-item-date-icon,
-.async-content-error-message,
-.avatar-status-dot,
-.label,
-.nag-bar--alert,
-.badge,
-u,
-.new-badge,
-.colourful,
-.events-list-item-attendees,
-.attendance-btn,
-.gallery-image-preferred-container {
-	&[data-bleh--theme="kanagawa_dragon"],
-	body[data-bleh--theme="kanagawa_dragon"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
-		--c1: 0.9255 0.0391 99.09;
-		--c2: 0.8755 0.0391 99.09;
-		--c3: 0.537 0.02 96.31;
+.theme-preview {
+	&[data-bleh--theme="kanagawa_dragon"] {
+		--c1-o: 0.9255 0.0391 99.09;
+		--c2-o: 0.8755 0.0391 99.09;
+		--c3-o: 0.537 0.02 96.31;
 
-		--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.46);
-		--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.72);
+		--l3c-l: 0.72;
+		--l3c-s: 0.46;
 
-		--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.53) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
-
-		--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.53) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / 13%);
+		--l4c-l: 0.63;
+		--l4c-s: 0.42;
 	}
 }

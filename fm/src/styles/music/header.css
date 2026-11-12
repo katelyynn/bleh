@@ -23,7 +23,7 @@
 	--bg: transparent;
 	--bg-hov: transparent;
 	--bg-atv: transparent;
-	--padding: 0 0 0 calc(var(--icon-size) + 4px);
+	padding: 0 0 0 calc(var(--icon-size) + 4px);
 	--col: oklch(var(--l3-c));
 	--mask-colour: color-mix(in oklch,
 			oklch(var(--l3-c)),
@@ -63,9 +63,22 @@
 	}
 
 	&:after {
-		display: block !important;
-		border: unset !important;
-		right: calc(var(--icon-size) + 4px);
+		display: none !important;
+	}
+
+	background-image: linear-gradient(to right, var(--mask-colour), var(--mask-colour)),
+	linear-gradient(to right, transparent, transparent);
+	background-repeat: no-repeat;
+	background-size: 0% var(--line-thickness),
+	100% var(--line-thickness);
+	background-position: calc(-1 * (12px + 2px)) 100%;
+
+	transition-property: background-size;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&:hover {
+		background-size: 100% var(--line-thickness), 100% var(--line-thickness);
 	}
 }
 

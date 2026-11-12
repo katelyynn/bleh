@@ -37,11 +37,12 @@ import { Placeholder } from '@/components/loading/placeholder.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingStub } from '@/components/settings/provider/stub.tsx';
-import { UserSelect } from '@/components/select/user.tsx';
+import { NoFriendsAlert, UserSelect } from '@/components/select/user.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { header_colour } from '@/components/page/colour.ts';
+import { Alert } from '../text/alert';
 
 export function compare({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -103,6 +104,7 @@ export function compare({ host, sidebar } = {}) {
 					/>
 				</CompareUsers>
 			</div>
+			<NoFriendsAlert />
 			<SettingGroup ref={group} gap>
 				<SettingStub name={tl(trans.compare_with)} type='select'>
 					<UserSelect
@@ -283,12 +285,12 @@ export function compare({ host, sidebar } = {}) {
 		fetch(
 			`${root}user/${user}/library/${type.current.value}?format=list&${timeframe.current.value}&page=${current_page}&ajax=1`,
 		)
-			.then(function (response) {
+			.then(function(response) {
 				console.log('returned', response, response.text);
 
 				return response.text();
 			})
-			.then(function (dom) {
+			.then(function(dom) {
 				const doc = new DOMParser().parseFromString(dom, 'text/html');
 				console.log('DOC', doc);
 
@@ -438,9 +440,8 @@ export function compare({ host, sidebar } = {}) {
 				if (type.current.value == 'artists') {
 					template = sanitise(data.name);
 				} else {
-					template = `${sanitise(data.sister)}/${
-						sanitise(data.name)
-					}`;
+					template = `${sanitise(data.sister)}/${sanitise(data.name)
+						}`;
 				}
 
 				grid.appendChild(
@@ -536,9 +537,8 @@ export function compare({ host, sidebar } = {}) {
 			});
 
 			page.state.compare.shared.forEach((data, index) => {
-				const template = `${sanitise(data.sister)}/_/${
-					sanitise(data.name)
-				}`;
+				const template = `${sanitise(data.sister)}/_/${sanitise(data.name)
+					}`;
 
 				tbody.appendChild(html.node`
                     <tr class="chartlist-row chartlist-row--with-artist compare-item">
@@ -561,28 +561,24 @@ export function compare({ host, sidebar } = {}) {
                         <td class="chartlist-bar with-multiple">
                             <span class="chartlist-count-bar">
                                 <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
-                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.you}" style="width: ${
-					(data.plays.you / max) * 100
-				}%;"></span>
+                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.you}" style="width: ${(data.plays.you / max) * 100
+					}%;"></span>
                                     <span class="chartlist-count-bar-value">${data.plays.you}</span>
                                 </a>
                                 <span class="avatar">
-                                    <img src="${auth.avatar}" alt="${
-					tl(trans.your_avatar)
-				}">
+                                    <img src="${auth.avatar}" alt="${tl(trans.your_avatar)
+					}">
                                 </span>
                             </span>
                             <span class="chartlist-count-bar">
                                 <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.current.value}" target="_blank">
-                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.other}" style="width: ${
-					(data.plays.other / max) * 100
-				}%;"></span>
+                                    <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.other}" style="width: ${(data.plays.other / max) * 100
+					}%;"></span>
                                     <span class="chartlist-count-bar-value">${data.plays.other}</span>
                                 </a>
                                 <span class="avatar">
-                                    <img src="${page.avatar}" alt="${
-					tl(trans.avatar_for_user).replace('{u}', page.name)
-				}">
+                                    <img src="${page.avatar}" alt="${tl(trans.avatar_for_user).replace('{u}', page.name)
+					}">
                                 </span>
                             </span>
                         </td>

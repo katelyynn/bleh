@@ -1,0 +1,49 @@
+.text-flipper {
+	position: relative;
+	display: inline-flex;
+}
+
+.text-flipper-inner {
+	display: inline-block;
+
+	position: relative;
+	opacity: 1;
+
+	--trans: 0.6s;
+
+	transition-property: opacity, translate;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&[data-visible="false"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+
+		opacity: 0;
+		translate: 0 -15%;
+		pointer-events: none;
+		width: fit-content;
+
+		white-space: nowrap;
+		display: none;
+	}
+
+	&[data-visible="true"] {
+		animation: flip var(--trans) var(--trans-function);
+		animation-fill-mode: backwards;
+	}
+}
+
+@keyframes flip {
+	from {
+		translate: 0 15%;
+		opacity: 0;
+	}
+
+	to {
+		translate: 0 0;
+		opacity: 1;
+	}
+}

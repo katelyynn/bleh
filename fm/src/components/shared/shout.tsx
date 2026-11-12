@@ -16,22 +16,18 @@ import {
 } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
-import { keybind } from '@/components/dialog/rabbit';
 import {
 	correct_artist,
 	correct_item_by_artist,
 } from '@/components/music/lotus';
-import { setting } from '@/components/settings/settings';
 import {
 	patch_avatar,
 	style_name_from_badge,
 } from '@/components/shared/avatar';
 import {
 	markdown,
-	markdown_field,
 	markdown_preview,
 } from '@/components/markdown/markdown';
-import tippy from 'tippy.js';
 import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';
 import { createRef } from 'jsx-dom';
@@ -156,7 +152,7 @@ export function patch_shouts() {
 				).toRelative();
 			}
 
-			const action_list = shout.querySelector('.shout-actions')!;
+			const action_list = shout.querySelector('.shout-actions') as HTMLElement;
 
 			const actions = action_list.querySelectorAll(
 				'.shout-actions .shout-action',

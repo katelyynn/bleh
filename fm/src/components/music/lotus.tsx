@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { settings } from '@/build/config';
 import { log } from '@/build/log.ts';
 import {
 	album_track_corrections,
@@ -33,6 +32,9 @@ import { useSettings } from '@/page.tsx';
 import { ReactElement } from 'jsx-dom';
 import { song_tag } from '@/components/track/song_tag.tsx';
 import { SmartTitle } from '@/components/music/smart_title.tsx';
+import { DateTime } from 'luxon';
+import { keys } from '../settings/storage';
+import JSON5 from 'json5';
 
 const flat_patterns: flat_pattern[] = [];
 
@@ -69,22 +71,16 @@ log('finalised flat patterns', 'lotus', 'info', { flat_patterns });
 export function lotus(force = false) {
 	if (!useSettings.get('corrections')) return;
 
-	const lotus_artist = localStorage.getItem('lotus_artist');
-	const lotus_artist_expire = new Date(
-		localStorage.getItem('lotus_artist_expire'),
-	);
+	const lotus_artist = localStorage.getItem(keys.lotus_artist);
+	const lotus_artist_expire = DateTime.fromISO(localStorage.getItem(keys.lotus_artist_expire) || '');
 
-	const lotus_album_track = localStorage.getItem('lotus_album_track');
-	const lotus_album_track_expire = new Date(
-		localStorage.getItem('lotus_album_track_expire'),
-	);
+	const lotus_album_track = localStorage.getItem(keys.lotus_album_track);
+	const lotus_album_track_expire = DateTime.fromISO(localStorage.getItem(keys.lotus_album_track_expire) || '');
 
-	const lotus_combined_artists = localStorage.getItem('lotus_combined_artists');
-	const lotus_combined_artists_expire = new Date(
-		localStorage.getItem('lotus_combined_artists_expire'),
-	);
+	const lotus_combined_artists = localStorage.getItem(keys.lotus_combined_artists);
+	const lotus_combined_artists_expire = DateTime.fromISO(localStorage.getItem(keys.lotus_combined_artists_expire) || '');
 
-	const current_time = new Date();
+	const current_time = DateTime.now();
 
 	if (!lotus_artist) {
 		log('artist list is not cached, fetching', 'lotus');
@@ -94,7 +90,7 @@ export function lotus(force = false) {
 		parse(artist_corrections, lotus_artist, 'artist');
 
 		// is it valid?
-		if (lotus_artist_expire < current_time && !force) {
+		if ((!lotus_artist_expire.isValid || lotus_artist_expire < current_time) && !force) {
 			lotus_request();
 		} else if (force) {
 			lotus_request('artist', true);
@@ -109,7 +105,7 @@ export function lotus(force = false) {
 		parse(album_track_corrections, lotus_album_track, 'album_track');
 
 		// is it valid?
-		if (lotus_album_track_expire < current_time && !force) {
+		if ((!lotus_album_track_expire.isValid || lotus_album_track_expire < current_time) && !force) {
 			lotus_request('album_track');
 		} else if (force) {
 			lotus_request('album_track', true);
@@ -124,7 +120,7 @@ export function lotus(force = false) {
 		parse(combined_artists, lotus_combined_artists, 'combined_artists');
 
 		// is it valid?
-		if (lotus_combined_artists_expire < current_time && !force) {
+		if ((!lotus_combined_artists_expire.isValid || lotus_combined_artists_expire < current_time) && !force) {
 			lotus_request('combined_artists');
 		} else if (force) {
 			lotus_request('combined_artists', true, true);
@@ -132,9 +128,12 @@ export function lotus(force = false) {
 	}
 }
 
-function parse(value: {}, key: string, type: string) {
+function parse(value: {}, key: string, type: string, save = false) {
 	try {
-		Object.assign(value, parse_object(type, key));
+		const parsed = parse_object(type, key);
+
+		Object.assign(value, parsed);
+		if (save) set_storage(`lotus_${type}`, JSON5.stringify(parsed));
 	} catch (e) {
 		notify({
 			title: `Loading of lotus ${type} data failed`,
@@ -151,33 +150,34 @@ function lotus_request(
 	refresh_page = false,
 ) {
 	const button = document.body.querySelector('[onclick="_lotus_check()"]');
-	if (button != null) button.setAttribute('disabled', '');
+	if (button) button.setAttribute('disabled', '');
 
 	const xhr = new XMLHttpRequest();
 	const url = `https://katelyynn.github.io/lotus/${type}.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
-	xhr.onload = function () {
+	xhr.onload = function() {
 		log(`${type} list responded with ${xhr.status}`, 'lotus');
+
+		// set expire date
+		let api_expire = DateTime.now();
 
 		if (xhr.status != 200) {
 			log(
 				'request has been cancelled, will request again in 1h',
 				'lotus',
 			);
-			api_expire.setHours(api_expire.getHours() + 1);
+			api_expire = api_expire.plus({ hours: 1 });
 		}
 
-		// set expire date
-		const api_expire = new Date();
 
 		if (xhr.status == 200) {
 			if (type == 'artist') {
-				parse(artist_corrections, this.response, 'artist');
+				parse(artist_corrections, this.response, 'artist', true);
 			} else if (type == 'album_track') {
-				parse(album_track_corrections, this.response, 'album_track');
+				parse(album_track_corrections, this.response, 'album_track', true);
 			} else {
-				parse(combined_artists, this.response, 'combined_artists');
+				parse(combined_artists, this.response, 'combined_artists', true);
 			}
 
 			if (send_notify) {
@@ -190,14 +190,13 @@ function lotus_request(
 			}
 
 			// save to cache for next page load
-			set_storage(`lotus_${type}`, this.response);
-			api_expire.setHours(api_expire.getHours() + 4);
+			api_expire = api_expire.plus({ days: 1 });
 			log(`${type} list cached until ${api_expire}`, 'lotus');
 		}
 
-		set_storage(`lotus_${type}_expire`, api_expire);
+		set_storage(`lotus_${type}_expire`, api_expire.toISO());
 
-		if (button != null) button.removeAttribute('disabled');
+		if (button) button.removeAttribute('disabled');
 
 		if (refresh_page && page.type == 'bleh_settings') {
 			render_setting_page('playback');
@@ -207,7 +206,7 @@ function lotus_request(
 	xhr.send();
 }
 
-unsafeWindow._lotus_check = function () {
+unsafeWindow._lotus_check = function() {
 	lotus(true);
 };
 
@@ -224,11 +223,10 @@ export function lotus_modal() {
                     </tr>
                 </thead>
                 <tbody>
-                    ${
-			Object.entries(artist_corrections).map(([key, value]) => {
-				if (key == 'version') return html.node``;
+                    ${Object.entries(artist_corrections).map(([key, value]) => {
+			if (key == 'version') return html.node``;
 
-				return html.node`
+			return html.node`
                             <tr>
                                 <td>
                                     ${key}
@@ -238,8 +236,8 @@ export function lotus_modal() {
                                 </td>
                             </tr>
                         `;
-			})
-		}
+		})
+			}
                 </tbody>
             </table>
             <table class="responsive-table">
@@ -250,8 +248,7 @@ export function lotus_modal() {
                     </tr>
                 </thead>
                 <tbody>
-                    ${
-			Object.entries(album_track_corrections).flatMap(
+                    ${Object.entries(album_track_corrections).flatMap(
 				([artist, items]) => {
 					if (artist == 'version') return html.node``;
 
@@ -269,7 +266,7 @@ export function lotus_modal() {
 					);
 				},
 			)
-		}
+			}
                 </tbody>
             </table>
         `,
@@ -474,8 +471,7 @@ export function correct_item_by_artist(item, artist) {
 		if (album_track_corrections.hasOwnProperty(artist)) {
 			if (album_track_corrections[artist].hasOwnProperty(item)) {
 				log(
-					`corrected ${item} by ${artist} as ${
-						album_track_corrections[artist][item]
+					`corrected ${item} by ${artist} as ${album_track_corrections[artist][item]
 					}`,
 					'lotus',
 				);
@@ -706,23 +702,22 @@ export function smart_title(
 
 	return html`
 		<span class="title">${fancy_title(
-			romanise(song_title.trim()),
-			in_header,
-		)}</span>
+		romanise(song_title.trim()),
+		in_header,
+	)}</span>
 		${song_tags.map((tag) => {
-			if (
-				(!show_features && tag.group == 'guests') ||
-				(!show_remaster && tag.group == 'remasters')
-			) {
-				return html.node``;
-			}
+		if (
+			(!show_features && tag.group == 'guests') ||
+			(!show_remaster && tag.group == 'remasters')
+		) {
+			return html.node``;
+		}
 
-			return html.node`
-                <span class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${
-				romanise(tag.text)
+		return html.node`
+                <span class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)
 			}</span>
             `;
-		})}
+	})}
 	`;
 }
 
@@ -761,13 +756,12 @@ export function smart_artists(song_artist, song_guests) {
 	// scuffed but if its on one line the comma wont be fucked up
 	return html`
 		<a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(
-			song_artist,
-		)}</a>${song_guests.map((guest) =>
-			html.node`,<a href="${root}music/${redirect()}${sanitise(guest)}">${
-				romanise(guest)
+		song_artist,
+	)}</a>${song_guests.map((guest) =>
+		html.node`,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)
 			}</a>
         `
-		)}
+	)}
 	`;
 }
 
@@ -805,57 +799,52 @@ export function create_correction(
 		id: 'lotus_correction',
 		title: tl(trans.suggest_correction),
 		body: html.node`
-            ${
-			existing
+            ${existing
 				? html.node`
                 <div class="alert alert-warning">
                     <p>${tl(trans.alert_of_correction, { t: capitalised })}</p>
                 </div>
             `
 				: ''
-		}
+			}
             <div class="new-scrobble-form">
                 <p class="generic-label">${tl(trans.current)}</p>
-                ${
-			input({
+                ${input({
 				type: 'text',
 				value: current,
 				disabled: true,
 			})
-		}
+			}
                 <p class="form-tip">${tl(trans.current_tip)}</p>
                 <p class="generic-label">${tl(trans.correction)}</p>
                 ${(correction = input({
-			type: 'text',
-			value: current,
-			placeholder: current,
-			warn_if_empty: true,
-			warn_if_not_matching_lower: current.toLowerCase(),
-		}))}
+				type: 'text',
+				value: current,
+				placeholder: current,
+				warn_if_empty: true,
+				warn_if_not_matching_lower: current.toLowerCase(),
+			}))}
                 <p class="form-tip">${tl(trans.correction_tip)}</p>
                 <p class="generic-label">${tl(trans.sources)}</p>
                 ${(sources = input({
-			type: 'textarea',
-		}))}
+				type: 'textarea',
+			}))}
                 <p class="form-tip">${tl(trans.sources_tip)}</p>
             </div>
             <div class="modal-footer">
                 <button class="see-more cancel left-icon" onclick=${() =>
-			dialog_rm({ id: 'lotus_correction' })}>
+				dialog_rm({ id: 'lotus_correction' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill" />
                 <button class="btn primary continue" onclick=${() => {
-			open(
-				`https://github.com/katelyynn/lotus/issues/new?template=${template}&title=${
-					sanitise(title, ' ')
-				}&current=${sanitise(current, ' ')}&correction=${
-					sanitise(correction.value, ' ')
-				}&link=${encodeURIComponent(link)}&sources=${
-					sanitise(sources.value, ' ')
-				}`,
-			);
-		}}>
+				open(
+					`https://github.com/katelyynn/lotus/issues/new?template=${template}&title=${sanitise(title, ' ')
+					}&current=${sanitise(current, ' ')}&correction=${sanitise(correction.value, ' ')
+					}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value, ' ')
+					}`,
+				);
+			}}>
                     ${tl(trans.suggest)}
                 </button>
             </div>

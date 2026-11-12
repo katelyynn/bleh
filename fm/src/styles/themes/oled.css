@@ -37,7 +37,7 @@ body,
 
 		--normal-shadow: none;
 
-		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
+		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 45%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
 		--setting-hover: oklch(var(--b2) / 16%);
@@ -79,47 +79,33 @@ body,
 		--card-border-base-highlight: oklch(var(--b2) / 0.55);
 
 		--separator-base: oklch(var(--b3) / 0.5);
+
+		--navigation-item: transparent;
+		--navigation-item-hover: oklch(var(--b4) / 60%);
+		--navigation-item-active: oklch(var(--b4) / 80%);
 	}
 }
 
 body,
-.alert,
-.event-status,
-.big-modal-alert,
-.events-list-item-date-icon,
-.async-content-error-message,
-.avatar-status-dot,
-.label,
-.nag-bar--alert,
-.badge,
-u,
-.new-badge,
-.colourful,
-.events-list-item-attendees,
-.attendance-btn,
-.gallery-image-preferred-container {
+.theme-preview {
+	&[data-bleh--theme="oled"] {
+		/* legacy colours */
+		--l3-l: 0.75;
+		--l3-s: 0.5;
 
-	&[data-bleh--theme="oled"],
-	body[data-bleh--theme="oled"] &:not(.theme-preview) {
-		--c1: 0.98 0 var(--hue);
-		--c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
-		--c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+		--l4-l: 0.45;
+		--l4-s: 0.6;
 
-		--l3: calc(var(--lit) * 0.75) calc(var(--sat) * 0.5) var(--hue);
-		--l4: calc(var(--lit) * 0.45) calc(var(--sat) * 0.6) var(--hue);
+		/* colours */
+		--f4-l: 0.4;
+		--f4-s: 0.32;
 
-		--f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
-		--k4: calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
-		--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
-		--g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+		--k4-l: 0.5;
+		--k4-s: 0.5;
 
-		--shout-vote-indicator: linear-gradient(90deg,
-				transparent 20%,
-				oklch(var(--h4) / 8%));
+		--g4-l: 0.1;
+		--g4-s: 0.6;
 
-		--grid-colour-shadow: var(--grid-colour-shadow-override,
-				0 10px 30px oklch(var(--h4) / 40%));
-
-		--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
+		--grid-colour-shadow-opacity: 40%;
 	}
 }

@@ -33,6 +33,11 @@
 	}
 }
 
+.pagination-page--ellipsis {
+	pointer-events: none;
+	--c2: var(--c3);
+}
+
 .pagination-page--ellipsis>span,
 .pagination-page-link {
 	--bg: transparent !important;

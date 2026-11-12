@@ -1,5 +1,6 @@
 @import './messages.css';
 @import './notifications.css';
+@import './button.css';
 
 .inbox .inbox-buttons {
 	padding-top: unset;
@@ -12,10 +13,10 @@
 
 	position: relative;
 
-	& > .setting {
+	&>.setting {
 		width: 16px;
 
-		& > .heading {
+		&>.heading {
 			display: none;
 		}
 	}
@@ -50,9 +51,11 @@
 	display: flex;
 	margin: unset !important;
 }
+
 .back-button {
 	--mask: var(--icon-16-arrow-left);
 }
+
 .delete-button {
 	--mask: var(--icon-16-trash);
 	--hue-over: var(--hue-neg);

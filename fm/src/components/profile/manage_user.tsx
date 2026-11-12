@@ -22,7 +22,7 @@ export function manage_user(button) {
 	const can_block_or_report = (can_block || can_report) &&
 		page.name != auth.name;
 
-	menu_tooltip(
+	const menu = menu_tooltip(
 		button,
 		<MenuContents>
 			<Button
@@ -38,6 +38,7 @@ export function manage_user(button) {
 				menu
 				onClick={() => {
 					share(window.location.href);
+					menu.hide();
 				}}
 			>
 				<Icon name={icons.share} />

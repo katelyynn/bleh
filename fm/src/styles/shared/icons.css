@@ -85,7 +85,6 @@
 .masthead-search-submit:before,
 /*     ALERT/INFO     */
 .alert:before,
-.event-status:before,
 .async-content-error-message:before,
 /*     USER NAME LABELS     */
 .label:before,
@@ -265,6 +264,15 @@ span.bleh-icon {
 		color: oklch(var(--l3-c));
 		font-weight: var(--font-weight-medium);
 	}
+}
+
+.seasonal-inner-text {
+	color: oklch(var(--l3-c));
+	--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 50%);
+
+	--hue-over: var(--hue-seasonal);
+	--sat-over: var(--sat-seasonal);
+	--lit-over: var(--lit-seasonal);
 }
 
 .bleh-icon-animated-dots {

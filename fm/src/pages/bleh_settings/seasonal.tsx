@@ -52,7 +52,7 @@ export function seasonal() {
 				<p>
 					{tl(
 						trans.seasonal.listing[
-							state.current ? state.current.id : 'none'
+						state.current ? state.current.id : 'none'
 						],
 					)}
 				</p>
@@ -128,7 +128,6 @@ export function seasonal() {
 				</PanelHead>
 				<SettingGroup>
 					<SettingRadio bind='seasonal_particles' />
-					<SettingCheckbox bind='seasonal_particles_fps' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>

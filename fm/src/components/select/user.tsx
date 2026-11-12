@@ -6,9 +6,11 @@
 
 import { Select, SelectOption } from '@/components/select/select.tsx';
 import { useSettings } from '@/page.tsx';
-import { auth } from '@/build/page.ts';
+import { auth, root } from '@/build/page.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { createRef } from 'jsx-dom';
+import { Alert, AlertElement } from '../text/alert';
+import { tl, trans } from '@/build/trans';
 
 interface UserSelectProps {
 	ref?: ReturnType<typeof createRef<UserSelectElement>>;
@@ -101,6 +103,25 @@ export function UserSelect({
 
 	useSettings.on('friends', update);
 	useSettings.on('starred_friend', update);
+
+	return elem;
+}
+
+export function NoFriendsAlert() {
+	const elem = (
+		<Alert className='no-friends-alert' type='info'>
+			{tl(trans.better_with_friends, { add_friend: <a href={`${root}bleh/profile?setting=friends`}>{tl(trans.better_with_friends.add_friend)}</a> })}
+		</Alert>
+	) as AlertElement;
+
+	function update() {
+		const friends = useSettings.get('friends') as string[];
+
+		elem.hidden = friends.length > 0;
+	}
+
+	update();
+	useSettings.on('friends', update);
 
 	return elem;
 }

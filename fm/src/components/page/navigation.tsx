@@ -42,14 +42,15 @@ import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, Flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
-import { new_indicator } from '../shared/indicator';
-import { createRef, ReactElement, RefObject } from 'jsx-dom';
+import { new_indicator, NewIndicator } from '../shared/indicator';
+import { createRef, CSSProperties, ReactElement, RefObject } from 'jsx-dom';
 import { toggle_theme } from '@/config.tsx';
 import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import {
 	Button,
 	ButtonCombo,
 	ButtonComboSeparator,
+	ButtonInnerContent,
 } from '@/components/button/button.tsx';
 import {
 	context_menu_tooltip,
@@ -58,7 +59,7 @@ import {
 	Tooltip,
 	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
-import { MenuContents } from '@/components/menu/menu.tsx';
+import { MenuContents, MenuSeparator } from '@/components/menu/menu.tsx';
 import {
 	NavWindow,
 	NavWindowContents,
@@ -67,6 +68,9 @@ import {
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { MenuRadio } from '../settings/provider/menu/radio';
+import { page_search } from './search';
+import { TextFlip } from '../text/text_flip';
+import { InboxButton } from '../button/inbox';
 
 export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
@@ -126,13 +130,13 @@ export function append_nav() {
 	}
 
 	if (!page.structure.loader) {
-		const loader = html.node`
-            <div class="loader">
-                <div class="loader-bar">
-                    <div class="loader-bar-fill" />
-                </div>
-            </div>
-        `;
+		const loader = (
+			<div class='page-loader'>
+				<div class='page-loader-bar'>
+					<div class='page-loader-bar-fill' />
+				</div>
+			</div>
+		);
 		document.body.appendChild(loader);
 		page.structure.loader = loader;
 	}
@@ -312,25 +316,86 @@ export function append_nav() {
 				ref={new_links}
 			>
 				<ul class='navlist-items'>
-					<a
-						class={['btn', 'masthead-nav-control', 'icon']}
-						data-type='charts'
-						href={`${root}charts`}
-					>
+					<Button className='masthead-nav-control' href={`${root}charts`}>
+						<Icon name={icons.charts} />
 						{tl(trans.charts)}
-						{ff('aihara') && new_indicator()}
-					</a>
-					<a
-						class={['btn', 'masthead-nav-control', 'icon']}
-						data-type='minis'
-						href={`${root}bleh/minis`}
-					>
+						{ff('aihara') && <NewIndicator />}
+					</Button>
+					<Button className='masthead-nav-control' href={`${root}music/+bookmarks`} hideBelow='vertical'>
+						<Icon name={icons.bookmark} />
+						{tl(trans.bookmarks)}
+					</Button>
+					<Button className='masthead-nav-control' href={`${root}bleh/minis`}>
+						<Icon name={icons.minis} />
 						{tl(trans.minis)}
-					</a>
-					<span class='navlist-search' ref={search_wrap} />
+					</Button>
+					<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)} notSelect opens={
+						<MenuContents>
+							<Button menu href={`${root}music/+bookmarks`} showAbove='vertical'>
+								<Icon name={icons.bookmark} />
+								{tl(trans.bookmarks)}
+							</Button>
+							<MenuSeparator showAbove='vertical' />
+							<Button
+								menu
+								colourful
+								accented
+								href={`https://discord.gg/${discord}`}
+								external
+								data-type='discord'
+							>
+								<Icon />
+								{tl(trans.join_discord)}
+							</Button>
+							<Button
+								menu
+								colourful
+								accented
+								className='sponsor-related'
+								onClick={() => sponsor()}
+							>
+								<Icon name={icons.sponsor} />
+								{tl(trans.sponsor)}
+							</Button>
+							<Button
+								menu
+								colourful
+								accented
+								href='https://github.com/katelyynn/lotus/issues/new/choose'
+								external
+								className='lotus'
+							>
+								<Icon name={icons.lotus} />
+								{tl(trans.suggest_correction)}
+							</Button>
+							<MenuSeparator />
+							<Button menu href={`${root}bleh/general`}>
+								<Icon name={icons.update} />
+								{tl(trans.updates)}
+							</Button>
+							<Button menu onClick={() => news()}>
+								<Icon name={icons.news} />
+								{tl(trans.news)}
+							</Button>
+							<Button
+								menu
+								href='https://bleh.yuzu.pet/issues'
+								external
+							>
+								<Icon name={icons.issue} />
+								{tl(trans.report_issue)}
+							</Button>
+						</MenuContents>
+					}>
+						<Icon name={icons.more} />
+						{tl(trans.more)}
+					</Button>
 				</ul>
 			</nav>
 		</>,
+	);
+	masthead_logo.after(
+		<span class='navlist-search' ref={search_wrap} />
 	);
 
 	page.state.home_link = home_link.current;
@@ -350,13 +415,13 @@ export function append_nav() {
 		</MenuContents>
 	);
 
-	useSettings.on('branding_type', update_branding_type);
-
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
-	const search = inner.querySelector('.masthead-search-form');
-	const form = search.querySelector('.masthead-search-field');
-	form.placeholder = tl(trans.search);
+	const search = inner.querySelector('.masthead-search-form') as HTMLFormElement;
+	const form = search.querySelector('.masthead-search-field') as HTMLInputElement;
+	form.placeholder = tl(trans.search_for_anything) as string;
+
+	page_search(search, form);
 
 	const submit = search.querySelector('.masthead-search-submit');
 	submit.classList.add('btn', 'chibi', 'icon-mask');
@@ -395,6 +460,7 @@ export function append_nav() {
 
 	update();
 
+	// TODO: move this to global scope to reduce duplicates
 	useSettings.on('theme', update);
 
 	if (!auth_link) {
@@ -443,9 +509,14 @@ export function append_nav() {
 	auth_link.classList.add('icon-r');
 
 	const name = html.node`
-        <p class="auth-link-name">${auth.name}</p>
-    `;
+		<p class="auth-link-name">${auth.name}</p>
+	`;
 	auth_link.appendChild(name);
+
+	/*hover_tooltip(
+		auth_link,
+		<Tooltip>{auth.name}</Tooltip>
+	);*/
 
 	queue_popup('navigation_menu', auth_link);
 
@@ -453,16 +524,18 @@ export function append_nav() {
 		if (cache.username) name.textContent = cache.username;
 	});
 
-	const badges = load_badges(auth.name, true);
+	/*const badges = load_badges(auth.name, true);
 
 	if (badges) {
 		auth_link.appendChild(create_badge(badges, false, false, true));
 	} else if (auth.pro) {
 		auth_link.appendChild(html.node`
-            <span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)
+			<span class="label user-status-subscriber auth-badge">${tl(trans.badges['user-status-subscriber'].name)
 			}</span>
-        `);
-	}
+		`);
+	}*/
+
+	const badges = load_badges(auth.name, true);
 
 	/*let quick_switcher = html.node`
 		<li class="masthead-nav-item">
@@ -478,92 +551,28 @@ export function append_nav() {
 
 	links.appendChild(quick_switcher);*/
 
-	const more_button = (
-		<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)}>
-			<Icon name={icons.more} />
-			{tl(trans.more)}
-		</Button>
-	);
-
-	menu_tooltip(
-		more_button,
-		<MenuContents>
-			<Button
-				menu
-				colourful
-				accented
-				href={`https://discord.gg/${discord}`}
-				external
-				data-type='discord'
-			>
-				<Icon />
-				{tl(trans.join_discord)}
-			</Button>
-			<Button
-				menu
-				colourful
-				accented
-				className='sponsor-related'
-				onClick={() => sponsor()}
-			>
-				<Icon name={icons.sponsor} />
-				{tl(trans.sponsor)}
-			</Button>
-			<Button
-				menu
-				colourful
-				accented
-				href='https://github.com/katelyynn/lotus/issues/new/choose'
-				external
-				className='lotus'
-			>
-				<Icon name={icons.lotus} />
-				{tl(trans.suggest_correction)}
-			</Button>
-			<div class='sep' />
-			<Button menu href={`${root}bleh/general`}>
-				<Icon name={icons.update} />
-				{tl(trans.updates)}
-			</Button>
-			<Button menu onClick={() => news()}>
-				<Icon name={icons.news} />
-				{tl(trans.news)}
-			</Button>
-			<Button
-				menu
-				href='https://bleh.yuzu.pet/issues'
-				external
-			>
-				<Icon name={icons.issue} />
-				{tl(trans.report_issue)}
-			</Button>
-		</MenuContents>,
-	);
-
-	links!.appendChild(more_button);
-
 	// configure bleh
 	const bleh_container = (
-		<Button chibi className='masthead-nav-control' href={`${root}bleh`} />
+		<Button className='masthead-nav-control' shrinkBelow='vertical' href={`${root}bleh`} />
 	);
 	const bleh_container_tooltip = <Tooltip />;
 
-	hover_tooltip(
+	/*hover_tooltip(
 		bleh_container,
 		bleh_container_tooltip,
-	);
+	);*/
 
 	function update_bleh() {
 		const state = useSeasons.get();
 
-		bleh_container.setAttribute('data-hidden', String(!state.current));
+		/*bleh_container.setAttribute('data-hidden', String(!state.current));*/
 
 		if (!state.current) {
 			bleh_container.setAttribute('href', `${root}bleh`);
 			bleh_container.replaceChildren(
 				<>
 					<Icon name={icons.bleh_settings} />
-					{tl(trans.bleh_settings)}
+					{version.brand}
 				</>,
 			);
 			bleh_container_tooltip.textContent = tl(
@@ -573,15 +582,23 @@ export function append_nav() {
 			bleh_container.setAttribute('href', `${root}bleh/seasonal`);
 			bleh_container.replaceChildren(
 				<>
-					<Icon
-						className='bleh-seasonal-icon'
-						data-season={state.current ? state.current.id : 'none'}
-					/>
-					{tl(
-						trans.seasonal.listing[
-						state.current ? state.current.id : 'none'
-						],
-					)}
+					<TextFlip items={[
+						<ButtonInnerContent className='seasonal-inner-text colourful' shrinkBelow='vertical' data-season={state.current ? state.current.id : 'none'}>
+							<Icon
+								className='bleh-seasonal-icon'
+								data-season={state.current ? state.current.id : 'none'}
+							/>
+							{tl(
+								trans.seasonal.listing[
+								state.current ? state.current.id : 'none'
+								],
+							)}
+						</ButtonInnerContent>,
+						<ButtonInnerContent shrinkBelow='vertical'>
+							<Icon name={icons.bleh_settings} />
+							{version.brand}
+						</ButtonInnerContent>
+					]} interval={7000} />
 				</>,
 			);
 			bleh_container_tooltip.replaceChildren(
@@ -612,9 +629,8 @@ export function append_nav() {
 	if (auth.pro) {
 		const music = (
 			<Button
-				chibi
 				className='masthead-nav-control'
-				tooltip={tl(trans.music)}
+				shrinkBelow='vertical'
 			>
 				<Icon name={icons.now_playing} />
 				{tl(trans.music)}
@@ -703,25 +719,14 @@ export function append_nav() {
 	const count = notif_count + messages_count;
 
 	if (useSettings.get('hybrid_inbox')) {
-		const inbox = html.node`
-            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
-                <div class="counter" data-count=${count}>${count}</div>
-            </a>
-        `;
+		const inbox = (
+			<InboxButton notifications={notif_count} messages={messages_count} />
+		) as HTMLButtonElement;
 
-		hover_tooltip(
+		/*hover_tooltip(
 			inbox,
 			<Tooltip>{tl(trans.inbox)}</Tooltip>,
-		);
-
-		inbox.addEventListener('click', (e) => {
-			const cmd = e.getModifierState('Control') ||
-				e.getModifierState('Meta');
-			const new_tab = e.button === 1 || cmd;
-
-			// only allow clicking link if new tab action
-			if (!new_tab) e.preventDefault();
-		});
+		);*/
 
 		const tabbed = createRef();
 		const pages = {
@@ -737,7 +742,7 @@ export function append_nav() {
 			},
 		};
 
-		menu_tooltip(
+		const menu = menu_tooltip(
 			inbox,
 			<NavWindow>
 				<NavWindowContents>
@@ -790,6 +795,32 @@ export function append_nav() {
 					tabbed.current.update();
 				},
 			},
+		);
+
+		const ctx = context_menu_tooltip(
+			inbox,
+			<MenuContents>
+				<Button menu onClick={() => {
+					ctx.hide();
+					if (menu.is_mounted) return;
+
+					inbox.click();
+				}}>
+					<Icon name={icons.inbox} />
+					{tl(trans.open)}
+				</Button>
+				<MenuSeparator />
+				<Button menu href={`${root}inbox/notifications`}>
+					<Icon name={icons.notifications} />
+					{tl(trans.notifications)}
+					<Icon name={icons.external} indicator />
+				</Button>
+				<Button menu href={`${root}inbox`}>
+					<Icon name={icons.messages} />
+					{tl(trans.messages)}
+					<Icon name={icons.external} indicator />
+				</Button>
+			</MenuContents>
 		);
 
 		links.appendChild(inbox);
@@ -1078,7 +1109,7 @@ export function append_nav() {
 						)}
 						<div
 							class='auth-menu-v2'
-							style={{ '--page-height': `${height}px` }}
+							style={{ '--page-height': `${height}px` } as CSSProperties}
 						>
 							<div
 								class={['side', 'primary']}
@@ -1228,21 +1259,23 @@ export function append_nav() {
 					</>,
 				);
 
-				load_profile_cache_externally(auth.name).then((cache) => {
-					if (cache.banner) {
-						auth_bg.current.replaceChildren(
-							<div
-								class='bg'
-								style={{
-									backgroundImage: `url(${cache.banner})`,
-								}}
-							/>,
-						);
-					}
+				requestAnimationFrame(() => {
+					load_profile_cache_externally(auth.name!).then((cache) => {
+						if (cache.banner) {
+							auth_bg.current.replaceChildren(
+								<div
+									class='bg'
+									style={{
+										backgroundImage: `url(${cache.banner})`,
+									}}
+								/>,
+							);
+						}
 
-					if (cache.username) {
-						auth_header.current.textContent = cache.username;
-					}
+						if (cache.username) {
+							auth_header.current.textContent = cache.username;
+						}
+					});
 				});
 			},
 

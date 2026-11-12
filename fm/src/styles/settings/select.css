@@ -228,7 +228,7 @@
 }
 
 .link-select {
-	padding-right: calc(var(--select-arrow-icon-size) + 4px) !important;
+	padding-right: calc(var(--select-arrow-icon-size) + 2px) !important;
 
 	&:before {
 		--right: 0 !important;

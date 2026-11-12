@@ -42,7 +42,15 @@
 
 	&.prefer-smaller,
 	&.prefer-smallest {
-		filter: brightness(150%) contrast(110%);
+		filter: brightness(150%) contrast(110%) !important;
+	}
+
+	&[data-theme-type="light"]:not(.prefer-smaller, .prefer-smallest) {
+		filter: invert(1);
+
+		&.is-coloured {
+			filter: brightness(60%) contrast(130%);
+		}
 	}
 }
 

@@ -39,6 +39,7 @@ import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 import { Button } from '@/components/button/button';
 import { IconLabel } from '@/components/text/text';
 import { MenuRadio } from '@/components/settings/provider/menu/radio';
+import { PageToolbar } from '@/components/page/toolbar';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
@@ -105,12 +106,12 @@ export function bleh_user_library() {
 	scrobbles?.classList.add('secondary-nav-item--scrobbles');
 
 	if (ff('mualani')) {
-		const toolbar = html.node`
-            <div class="toolbar">
-                ${search}
-                ${nav}
-            </div>
-        `;
+		const toolbar = (
+			<PageToolbar>
+				{search as HTMLElement}
+				{nav as HTMLElement}
+			</PageToolbar>
+		);
 
 		nav.classList.add(
 			'redesigned-navigation',
@@ -659,7 +660,6 @@ function bleh_glacier_library_top(static_page = false) {
 			if (sort_button) {
 				sort_button.classList.add(
 					'btn',
-					'view-item',
 					'glacier-library-button',
 				);
 				const sort_menu = sort.querySelector(
@@ -941,7 +941,7 @@ function bleh_glacier_insights_generate(type, item) {
 	Chart.defaults.font.family = page.state.chart_colours.font;
 	if (settings.chart_insights_view == 'line') {
 		let gradient = scrobble_canvas
-			.getContext('2d')
+			.getContext('2d')!
 			.createLinearGradient(0, 0, 0, 160);
 		try {
 			gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
@@ -950,7 +950,7 @@ function bleh_glacier_insights_generate(type, item) {
 			gradient = page.state.chart_colours.link_bg_col;
 		}
 
-		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'line',
 			data: {
 				labels: item.labels,
@@ -970,7 +970,7 @@ function bleh_glacier_insights_generate(type, item) {
 			options: page.state.chart_library_line_options_no_click,
 		});
 	} else if (settings.chart_insights_view == 'pie') {
-		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'pie',
 			data: {
 				labels: item.labels,
@@ -978,108 +978,7 @@ function bleh_glacier_insights_generate(type, item) {
 					{
 						data: item.values,
 						borderWidth: 2,
-						backgroundColor: [
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'360',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'340',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'320',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'300',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'280',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'270',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'255',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'235',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'220',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'208',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'200',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'180',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'160',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'140',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'120',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'100',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'80',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'60',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'40',
-							)
-							})`,
-							`hsl(${page.state.chart_colours.link_h_col.replace(
-								page.state.chart_colours.hue,
-								'20',
-							)
-							})`,
-						],
+						backgroundColor: page.state.chart_colours.colours,
 						borderColor: page.state.chart_colours.bg_col,
 						pointRadius: 0,
 						pointHitRadius: 20,
@@ -1090,7 +989,7 @@ function bleh_glacier_insights_generate(type, item) {
 			options: page.state.chart_library_pie_options_no_click,
 		});
 	} else if (settings.chart_insights_view == 'bar') {
-		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+		const scrobble_chart = new Chart(scrobble_canvas.getContext('2d')!, {
 			type: 'bar',
 			data: {
 				labels: item.labels,

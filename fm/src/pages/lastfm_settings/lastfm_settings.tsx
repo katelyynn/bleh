@@ -8,7 +8,7 @@ import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { bleh_auto_edits } from '@/components/dialog/auto_edit';
 import { select, select_prepare } from '@/components/settings/select';
-import { update_inbuilt_item } from '../../config';
+import { update_inbuilt_item } from '../../config.tsx';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import { setting } from '@/components/settings/settings';
@@ -17,12 +17,26 @@ import { log } from '@/build/log';
 import { toggle } from '@/components/settings/toggle';
 import { radio, radio_convert } from '@/components/radio/radio_toggle';
 import { avatar } from '@/components/shared/avatar';
-import { lastfm_settings_profile } from './profile';
+import { lastfm_settings_profile } from './profile.tsx';
 import {
 	render_shoutbox_preview,
 	render_track_preview,
 } from '@/components/settings/preview';
 import { bleh_name_change } from './name_change.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { Token } from '@/components/form/token.tsx';
+import { SettingLabel } from '@/components/settings/provider/main.tsx';
+import { Input } from '@/components/input/input.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { createRef } from 'jsx-dom';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
+import { SettingsFooter } from '@/components/form/footer.tsx';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { SettingAction } from '@/components/settings/provider/action.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
 
 // patch last.fm settings
 export function bleh_native_settings() {
@@ -30,9 +44,8 @@ export function bleh_native_settings() {
 		page.structure.main.insertBefore(
 			html.node`
             <section class="loading-disabled">
-                <div class="alert alert-warning">${
-				tl(trans.you_have_disabled_bleh_visuals_for_settings)
-			}</div>
+                <div class="alert alert-warning">${tl(trans.you_have_disabled_bleh_visuals_for_settings)
+				}</div>
             </section>
         `,
 			page.structure.main.firstElementChild,
@@ -104,9 +117,8 @@ export function bleh_native_settings() {
 			html.node`
             <div class="bleh--panel">
                 <div class="loading-data-container">
-                    <div class="alert alert-error">${
-				e && e.message ? e.message : e
-			}</div>
+                    <div class="alert alert-error">${e && e.message ? e.message : e
+				}</div>
                 </div>
             </div>
         `,
@@ -187,15 +199,14 @@ function bleh_communication_panel(token) {
                     <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
                 </div>
                 <div class="text preview">
-                    ${
-			profile_notes.hasOwnProperty(name)
+                    ${profile_notes.hasOwnProperty(name)
 				? html.node`
                         <p id="profile-note-row-preview--${name}">${{
-					html: profile_notes[name],
-				}}</p>
+						html: profile_notes[name],
+					}}</p>
                     `
 				: ''
-		}
+			}
                 </div>
                 <div class="actions">
                     ${form}
@@ -219,12 +230,11 @@ function bleh_communication_panel(token) {
 
 		const expand = html.node`
             <button class="see-more expand-down left-icon" onclick=${() => {
-			expand.style.display = 'none';
-			new_list.setAttribute('data-expanded', 'true');
-		}}>
-                ${
-			tl(trans.view_count_more).replace('{c}', remainder.toString())
-		}
+				expand.style.display = 'none';
+				new_list.setAttribute('data-expanded', 'true');
+			}}>
+                ${tl(trans.view_count_more).replace('{c}', remainder.toString())
+			}
             </button>
         `;
 
@@ -260,7 +270,7 @@ function bleh_communication_panel(token) {
 			<form action="${root}settings/privacy#ignorelist" name="ignorelist"
 				method="post">
 				<input type="hidden" name="csrfmiddlewaretoken" value=${page
-					.token} />
+				.token} />
 				<div class="setting-group">
 					<div class="setting v" data-type="text">
 						<div class="heading">
@@ -343,59 +353,59 @@ function patch_settings_privacy_panel(token, privacy_panel) {
 			<form action="${root}settings/privacy" name="privacy" method="post">
 				<input type="hidden" name="csrfmiddlewaretoken" value=${token}>
 				<div class="inner-preview pad" ref=${(el) =>
-					recent_listening_preview = el}>
+				recent_listening_preview = el}>
 			        ${render_track_preview(
-				original_privacy_settings.recent_listening.checked,
-				false,
-				true,
-				true,
-			)}
+					original_privacy_settings.recent_listening.checked,
+					false,
+					true,
+					true,
+				)}
 			    </div>
 				<div class="setting-group">
 			        ${toggle({
-				value: original_privacy_settings.recent_listening.checked,
-				name: original_privacy_settings.recent_listening.name,
-				title: tl(trans.recent_listening.name),
-				body: tl(trans.recent_listening.body),
-				standalone: false,
-				func: (val: boolean) => {
-					render(
-						recent_listening_preview,
-						render_track_preview(val, false, true, true),
-					);
-				},
-			})}
+					value: original_privacy_settings.recent_listening.checked,
+					name: original_privacy_settings.recent_listening.name,
+					title: tl(trans.recent_listening.name),
+					body: tl(trans.recent_listening.body),
+					standalone: false,
+					func: (val: boolean) => {
+						render(
+							recent_listening_preview,
+							render_track_preview(val, false, true, true),
+						);
+					},
+				})}
 			        <div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.allow_messages_from)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(
-					original_privacy_settings.receiving_msgs,
-				),
-				initial: original_privacy_settings.receiving_msgs.value,
-				name: original_privacy_settings.receiving_msgs.name,
-				in_settings: true,
-			})}
+					values: select_prepare(
+						original_privacy_settings.receiving_msgs,
+					),
+					initial: original_privacy_settings.receiving_msgs.value,
+					name: original_privacy_settings.receiving_msgs.name,
+					in_settings: true,
+				})}
 			        </div>
 			    </div>
 				<div class="inner-preview pad" ref=${(el) =>
-					shoutbox_preview = el}>
+				shoutbox_preview = el}>
 			        ${render_shoutbox_preview(
-				original_privacy_settings.disable_shoutbox.checked,
-			)}
+					original_privacy_settings.disable_shoutbox.checked,
+				)}
 			    </div>
 				<div class="setting-group">
 			        ${toggle({
-				value: original_privacy_settings.disable_shoutbox.checked,
-				name: original_privacy_settings.disable_shoutbox.name,
-				title: tl(trans.close_shouts.name),
-				body: tl(trans.close_shouts.body),
-				standalone: false,
-				func: (val: boolean) => {
-					render(shoutbox_preview, render_shoutbox_preview(val));
-				},
-			})}
+					value: original_privacy_settings.disable_shoutbox.checked,
+					name: original_privacy_settings.disable_shoutbox.name,
+					title: tl(trans.close_shouts.name),
+					body: tl(trans.close_shouts.body),
+					standalone: false,
+					func: (val: boolean) => {
+						render(shoutbox_preview, render_shoutbox_preview(val));
+					},
+				})}
 			    </div>
 				<div class="settings-footer">
 					<button type="submit" class="btn-primary save">
@@ -409,265 +419,109 @@ function patch_settings_privacy_panel(token, privacy_panel) {
 }
 
 function bleh_accounts() {
-	const token = page.structure.main
-		.querySelector('[name="csrfmiddlewaretoken"]')
-		.getAttribute('value');
+	const token = page.structure.main!
+		.querySelector('[name="csrfmiddlewaretoken"]')!
+		.getAttribute('value')!;
 
-	// get info before destroying
-	const original_settings = {
-		email_language: page.structure.main.querySelector('[name="language"]'),
-		marketing_emails: page.structure.main.querySelector(
-			'[name="opt_in_marketing"]',
-		),
-		email: page.structure.main.querySelector('[name="email"]').value,
-		captcha: page.structure.main.querySelector('.lfm-recaptcha'),
-	};
+	const email_language = page.structure.main!.querySelector('[name="language"]') as HTMLSelectElement;
+	const marketing_emails = page.structure.main!.querySelector('[name="opt_in_marketing"]') as HTMLInputElement;
+	const email = (page.structure.main!.querySelector('[name="email"]') as HTMLInputElement).value;
+	const captcha = page.structure.main!.querySelector('.lfm-recaptcha') as HTMLElement;
 
-	const alert = page.structure.main.querySelector('.alert-success');
+	const alert = page.structure.main!.querySelector('.alert-success') as HTMLElement;
 
-	render(
-		page.structure.main,
-		html`
-			<section class="bleh--panel">
-			    <h4>${tl(trans.information)}</h4>
-			    ${alert}
-			    <div class="setting-group">
-			        <form
-			            action="${root}settings/change-username/send-email"
-			            method="post"
-			        >
-			            <input
-			                type="hidden"
-			                name="csrfmiddlewaretoken"
-			                value="${token}"
-			            />
-			            <div class="setting" data-type="text">
-			                <div class="heading">
-			                    <h5>${tl(trans.username.name)}</h5>
-			                    <p>
-			                        ${{
-				html: tl(trans.username.body)
-					.replace(
-						'{a}',
-						`<a href="https://support.last.fm/" target="_blank">`,
-					)
-					.replace('{/a}', '</a>'),
-			}}
-			                    </p>
-			                </div>
-			                <div class="input-container content-form">
-			                    <input
-			                        id="id_current_username"
-			                        type="text"
-			                        name="current_username"
-			                        value="${auth.name}"
-			                        disabled
-			                        required
-			                    />
-			                    <button class="btn chibi icon primary submit">
-			                        ${tl(trans.send)}
-			                    </button>
-			                    <input
-			                        type="hidden"
-			                        value="change_username"
-			                        name="submit"
-			                    />
-			                </div>
-			            </div>
-			        </form>
-			        <form
-			            action="${root}settings/account"
-			            name="change-email"
-			            method="post"
-			        >
-			            <input
-			                type="hidden"
-			                name="csrfmiddlewaretoken"
-			                value="${token}"
-			            />
-			            <div class="setting" data-type="text">
-			                <div class="heading">
-			                    <h5>${tl(trans.email)}</h5>
-			                </div>
-			                <div class="input-container content-form">
-			                    <input
-			                        id="id_email"
-			                        type="text"
-			                        name="email"
-			                        value="${original_settings.email}"
-			                        required
-			                    />
-			                    <button class="btn chibi icon primary submit">
-			                        ${tl(trans.save)}
-			                    </button>
-			                    <input
-			                        type="hidden"
-			                        value="email_update"
-			                        name="submit"
-			                    />
-			                </div>
-			            </div>
-			        </form>
-			    </div>
-			    <form
-			        class="password-container"
-			        action="${root}settings/account/password#change-password"
-			        name="change-password"
-			        method="post"
-			    >
-			        <input
-			            type="hidden"
-			            name="csrfmiddlewaretoken"
-			            value="${token}"
-			        />
-			        <div class="setting-group">
-			            <div class="setting" data-type="text">
-			                <div class="heading">
-			                    <h5>${tl(trans.password)}</h5>
-			                </div>
-			                <div class="input-container content-form">
-			                    <input
-			                        id="id_password"
-			                        type="password"
-			                        name="password"
-			                        required
-			                    />
-			                </div>
-			            </div>
-			            <div class="setting" data-type="text">
-			                <div class="heading">
-			                    <h5>${tl(trans.new_password)}</h5>
-			                </div>
-			                <div class="input-container content-form">
-			                    <input
-			                        id="id_new_password"
-			                        type="password"
-			                        name="new_password"
-			                        required
-			                    />
-			                </div>
-			            </div>
-			            <div class="setting" data-type="text">
-			                <div class="heading">
-			                    <h5>${tl(trans.confirm_password)}</h5>
-			                </div>
-			                <div class="input-container content-form">
-			                    <input
-			                        id="id_new_password_confirmation"
-			                        type="password"
-			                        name="new_password_confirmation"
-			                        required
-			                    />
-			                </div>
-			            </div>
-			            ${original_settings.captcha}
-			        </div>
-			        <div class="settings-footer end">
-			            <button class="btn-primary save" type="submit">
-			                ${tl(trans.change)}
-			            </button>
-			        </div>
-			    </form>
+	page.structure.main!.replaceChildren(
+		<>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.user}>
+					{tl(trans.information)}
+				</PanelHead>
+				{alert}
+				<SettingGroup>
+					<form action={`${root}settings/change-username/send-email`} method='post'>
+						<Token value={token} />
+						<div class='setting' data-type='text'>
+							<SettingLabel name={tl(trans.username.name)} body={tl(trans.username.body, {
+								contact_support: (
+									<a href='https://support.last.fm' target='_blank'>
+										{tl(trans.username.contact_support)}
+									</a>
+								)
+							})} />
+							<Input type='text' name='current_username' value={auth.name!} disabled required saveManually saveIcon={icons.message} saveText={tl(trans.send)} submit />
+							<input type='hidden' value='change_username' name='submit' />
+						</div>
+					</form>
+				</SettingGroup>
+				<SettingGroup>
+					<form action={`${root}settings/account`} name='change-email' method='post'>
+						<Token value={token} />
+						<div class='setting' data-type='text'>
+							<SettingLabel name={tl(trans.email)} />
+							<Input type='text' name='email' value={email} required saveManually submit />
+							<input type='hidden' value='email_update' name='submit' />
+						</div>
+					</form>
+				</SettingGroup>
 			</section>
-			<section class="bleh--panel">
-				<h4>${tl(trans.communication)}</h4>
-				<form
-					action="${root}settings/account"
-					name="email-settings"
-					method="post"
-				>
-					<input
-						type="hidden"
-						name="csrfmiddlewaretoken"
-						value="${token}"
-					/>
-					<div class="setting-group">
-			            <div class="setting" data-type="select">
-			                <div class="heading">
-			                    <h5>${tl(trans.email_language)}</h5>
-			                </div>
-			                <div class="select-wrap custom-selector">
-			                    ${select({
-				values: select_prepare(original_settings.email_language),
-				initial: original_settings.email_language.value,
-				name: original_settings.email_language.name,
-				in_settings: true,
-			})}
-			                </div>
-			            </div>
-			            ${toggle({
-				value: original_settings.marketing_emails.checked,
-				name: original_settings.marketing_emails.name,
-				title: tl(trans.marketing_emails.name),
-				body: tl(trans.marketing_emails.body),
-				standalone: false,
-			})}
-			        </div>
-					<div class="settings-footer end">
-						<button class="btn-primary save" type="submit">
-			                ${tl(trans.save)}
-			            </button>
-						<input
-							type="hidden"
-							value="email_settings"
-							name="submit"
-						/>
-					</div>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.password}>
+					{tl(trans.password)}
+				</PanelHead>
+				<form action={`${root}settings/account/password`} name='change-password' method='post'>
+					<Token value={token} />
+					<SettingGroup>
+						<SettingInput name={tl(trans.password)} type='password' id='password' required saveManually={false} />
+						<SettingInput name={tl(trans.new_password)} type='password' id='new_password' required saveManually={false} />
+						<SettingInput name={tl(trans.confirm_password)} type='password' id='new_password_confirmation' required saveManually={false} />
+						{captcha}
+					</SettingGroup>
+					<SettingsFooter>
+						<Button primary type='submit'>
+							<SaveIcon />
+							{tl(trans.save)}
+						</Button>
+					</SettingsFooter>
 				</form>
 			</section>
-			<section class="bleh--panel">
-				<h4>${tl(trans.security)}</h4>
-				<form
-					action="${root}settings/account"
-					name="email-settings"
-					method="post"
-				>
-					<input
-						type="hidden"
-						name="csrfmiddlewaretoken"
-						value="${token}"
-					/>
-					<div class="setting-group">
-						<div class="setting" data-type="action">
-							<div class="heading">
-								<h5>${tl(trans.logout_everywhere)}</h5>
-							</div>
-							<div class="toggle-wrap">
-								<a
-									class="see-more danger left-icon colourful"
-									href="${root}settings/account/logout-everywhere"
-									data-type="logout"
-								>
-			                        ${tl(trans.logout)}
-			                    </a>
-							</div>
-						</div>
-						<div class="setting" data-type="action">
-							<div class="heading">
-								<h5>${tl(trans.delete_account.name)}</h5>
-								<p>${tl(trans.delete_account.body)}</p>
-							</div>
-							<div class="toggle-wrap">
-								<a
-									class="see-more danger left-icon colourful"
-									href="${root}settings/account/delete"
-									data-type="delete"
-								>
-			                        ${tl(
-				trans.delete_account_permanently,
-			).replace('{u}', auth.name)}
-			                    </a>
-							</div>
-						</div>
-					</div>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.shoutbox}>
+					{tl(trans.communication)}
+				</PanelHead>
+				<form action={`${root}settings/account`} name='email-settings' method='post'>
+					<Token value={token} />
+					<SettingGroup>
+						<SettingSelect name={tl(trans.email_language)} values={select_prepare(email_language)} value={email_language.value} id={email_language.name} />
+						<SettingSwitch name={tl(trans.marketing_emails.name)} body={tl(trans.marketing_emails.body)} value={marketing_emails.checked} id={marketing_emails.name} />
+					</SettingGroup>
+					<SettingsFooter>
+						<Button primary type='submit'>
+							<SaveIcon />
+							{tl(trans.save)}
+						</Button>
+						<input type='hidden' value='email_settings' name='submit' />
+					</SettingsFooter>
 				</form>
 			</section>
-		`,
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.lock}>
+					{tl(trans.security)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingAction name={tl(trans.logout_everywhere)}>
+						<SeeMore icon={icons.logout} iconPlacement='left' colourful className='danger-subtle' href={`${root}settings/account/logout-everywhere`}>
+							{tl(trans.logout)}
+						</SeeMore>
+					</SettingAction>
+					<SettingAction name={tl(trans.delete_account.name)} body={tl(trans.delete_account.body)}>
+						<SeeMore icon={icons.trash} iconPlacement='left' colourful className='danger-subtle' href={`${root}settings/account/delete`}>
+							{tl(trans.delete_account_permanently, { u: auth.name })}
+						</SeeMore>
+					</SettingAction>
+				</SettingGroup>
+			</section>
+		</>
 	);
-
-	for (const setting in original_settings) {
-		update_inbuilt_item(setting, original_settings[setting], false);
-	}
 }
 
 function bleh_website() {
@@ -702,13 +556,11 @@ function bleh_website() {
                     <div class="setting-group">
                         <div class="setting v2" data-type="options">
                             <div class="heading">
-                                <h5>${
-			tl(trans.auto_correct_scrobbles.name)
-		}</h5>
+                                <h5>${tl(trans.auto_correct_scrobbles.name)
+			}</h5>
                                 <p>${tl(trans.auto_correct_scrobbles.body)}</p>
                             </div>
-                            ${
-			radio({
+                            ${radio({
 				name: auto_correct.name,
 				value: auto_correct.value,
 				values: {
@@ -724,7 +576,7 @@ function bleh_website() {
 					},
 				},
 			})
-		}
+			}
                         </div>
                     </div>
                     <div class="alert alert-danger">
@@ -738,11 +590,10 @@ function bleh_website() {
                             <div class="heading">
                                 <h5>${tl(trans.timezone)}</h5>
                                 <p ref=${(
-			el,
-		) => (timezone_text = el)}>${help_text.textContent.trim()}</p>
+				el,
+			) => (timezone_text = el)}>${help_text.textContent.trim()}</p>
                             </div>
-                            ${
-			select({
+                            ${select({
 				values: select_prepare(timezone),
 				initial: timezone.value,
 				name: timezone.name,
@@ -774,7 +625,7 @@ function bleh_website() {
 				},
 				in_settings: true,
 			})
-		}
+			}
                         </div>
                         <div class="setting v2" data-type="action">
                             <div class="heading">
@@ -789,14 +640,13 @@ function bleh_website() {
                             <div class="heading">
                                 <h5>${tl(trans.event_radius)}</h5>
                             </div>
-                            ${
-			select({
+                            ${select({
 				values: select_prepare(radius),
 				initial: radius.value,
 				name: radius.name,
 				in_settings: true,
 			})
-		}
+			}
                         </div>
                     </div>
                     <div class="settings-footer end">
@@ -817,8 +667,7 @@ function bleh_website() {
                                 <h5>${tl(trans.preferred_affiliate.name)}</h5>
                                 <p>${tl(trans.preferred_affiliate.body)}</p>
                             </div>
-                            ${
-			radio({
+                            ${radio({
 				name: preferred_affiliate.name,
 				value: preferred_affiliate.value,
 				values: radio_convert(
@@ -827,7 +676,7 @@ function bleh_website() {
 					),
 				),
 			})
-		}
+			}
                         </div>
                     </div>
                     <div class="settings-footer end">

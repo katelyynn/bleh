@@ -112,6 +112,9 @@ import { validWordmarks, Wordmark } from '@/components/music/wordmark';
 import { PageHeaderPosition, PositionNumber } from '@/components/page/header';
 import { ProfileTaste } from '@/components/profile/taste';
 import { EventSmallCalendar } from '@/components/event/icon';
+import { TextFlip } from '@/components/text/text_flip';
+import { InboxButton } from '@/components/button/inbox';
+import { Track, Tracklist } from '@/components/track/track';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -227,7 +230,7 @@ export function mualani() {
 	const textcontent = createRef();
 
 	const c = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
-	const avi = c.evangelicgirl.avatar;
+	const avi = c.evangelicgirl?.avatar;
 
 	const wordmarks = createRef();
 
@@ -1158,6 +1161,9 @@ export function mualani() {
 					<DemoItem label='UserSelect'>
 						<UserSelect />
 					</DemoItem>
+					<DemoItem label='UserSelect (no auth)'>
+						<UserSelect showAuth={false} />
+					</DemoItem>
 				</DemoGrid>
 			</section>
 			<section>
@@ -1464,6 +1470,31 @@ export function mualani() {
 							This action cannot be undone.
 						</Modal>
 					</DemoItem>
+					<DemoItem label='ModalV2 (with reference button)'>
+						<Modal
+							title='Make mimi leader?'
+							canClose={false}
+							actions={[
+								{
+									reference: (
+										<button onClick={() => alert('hello')}>
+											hello world
+										</button>
+									),
+									colourful: true,
+									className: 'delete',
+									children: (
+										<>
+											<Icon name={icons.crown} />
+											Make her leader
+										</>
+									),
+								},
+							]}
+						>
+							This action cannot be undone.
+						</Modal>
+					</DemoItem>
 				</DemoGrid>
 				<DemoGrid>
 					<DemoItem label='ModalV2 (opener)'>
@@ -1676,6 +1707,83 @@ export function mualani() {
 						<EventSmallCalendar month='Oct' day='20' />
 						<EventSmallCalendar month='Nov' day='16' />
 						<EventSmallCalendar month='Dec' day='31' />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='flip'>
+				<DemoGrid>
+					<DemoItem label='TextFlip'>
+						<TextFlip items={[
+							<p>hello</p>,
+							<p>world</p>
+						]} />
+					</DemoItem>
+					<DemoItem label='TextFlip'>
+						<TextFlip items={[
+							<p>hello</p>,
+							<p>world</p>,
+							<p>2</p>,
+							<p>this is some really long text</p>
+						]} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='inbox'>
+				<DemoGrid>
+					<DemoItem label='InboxButton'>
+						<InboxButton notifications={24} messages={5} />
+						<InboxButton notifications={0} messages={0} />
+						<InboxButton notifications={0} messages={1} />
+						<InboxButton notifications={1} messages={0} />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='track'>
+				<DemoGrid>
+					<DemoItem label='Track'>
+						<Tracklist>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+								art='https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg'
+								active
+							/>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+								art='https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg'
+							/>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+							/>
+						</Tracklist>
+						<Tracklist>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								album='HEROES & VILLAINS'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+								art='https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg'
+								active
+							/>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								album='HEROES & VILLAINS'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+								art='https://lastfm-img.freetls.fastly.net/i/u/64s/1240a338ee297d49b02b8f4e608ae49c.jpg'
+							/>
+							<Track
+								name='Feel the Fiyaaaah (with A$AP Rocky & feat. Takeoff)'
+								artist='A$AP Rocky'
+								album='HEROES & VILLAINS'
+								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
+							/>
+						</Tracklist>
 					</DemoItem>
 				</DemoGrid>
 			</section>

@@ -51,11 +51,6 @@
 	animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
-
-	transition-property: background-color,
-	box-shadow;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
 }
 
 .listener-list-position {

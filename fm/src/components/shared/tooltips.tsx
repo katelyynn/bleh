@@ -30,6 +30,7 @@ type TooltipConfig = Partial<
 		onShow: (element: ReactElement) => void;
 		onHide: () => void;
 		delay: [number, number];
+		menu?: TooltipInstance<ReactElement, ReactElement>
 	}
 >;
 
@@ -167,11 +168,13 @@ export class TooltipInstance<
 
 		this.current_animation = animation;
 
-		if (this.config.ariaEnabled) {
-			this.host.setAttribute('aria-expanded', 'false');
-		}
+		if (this.host.getAttribute('aria-describedby') == this.uuid) {
+			if (this.config.ariaEnabled) {
+				this.host.setAttribute('aria-expanded', 'false');
+			}
 
-		this.host.removeAttribute('aria-describedby');
+			this.host.removeAttribute('aria-describedby');
+		}
 
 		if (this.onHide) this.onHide();
 
@@ -181,7 +184,7 @@ export class TooltipInstance<
 				this.unmount();
 				this.current_animation = null;
 			}
-		}).catch(() => {});
+		}).catch(() => { });
 	}
 
 	private cancel_animation() {
@@ -241,6 +244,35 @@ export class TooltipInstance<
 						});
 					},
 				);
+		} else {
+			const virtual = {
+				getBoundingClientRect: () => ({
+					x: this.config.mouse.x,
+					y: this.config.mouse.y,
+					top: this.config.mouse.y,
+					right: this.config.mouse.x,
+					bottom: this.config.mouse.y,
+					left: this.config.mouse.x,
+					width: 0,
+					height: 0
+				})
+			};
+
+			computePosition(virtual, this.element as HTMLElement, {
+				placement: 'bottom-start',
+				ariaEnabled: true,
+				strategy: 'fixed',
+				middleware: [
+					flip()
+				],
+				...this.config
+			}).then(({ x, y }) => {
+				Object.assign(this.element.style, {
+					position: 'fixed',
+					left: `${x}px`,
+					top: `${y}px`,
+				});
+			});
 		}
 	}
 }
@@ -265,6 +297,10 @@ export function hover_tooltip<
 		if (enter) clearTimeout(enter);
 		if (leave) clearTimeout(leave);
 
+		if (config.menu && config.menu.is_mounted) {
+			return;
+		}
+
 		if (!config.delay?.[0]) {
 			tooltip.show();
 			return;
@@ -277,6 +313,11 @@ export function hover_tooltip<
 	host.addEventListener('mouseleave', () => {
 		if (enter) clearTimeout(enter);
 		if (leave) clearTimeout(leave);
+
+		if (config.menu && config.menu.is_mounted) {
+			tooltip.hide();
+			return;
+		}
 
 		if (!config.delay?.[1]) {
 			tooltip.hide();
@@ -313,6 +354,12 @@ export function menu_tooltip<
 			}),
 			offsetMiddleware(6),
 		],
+		onShow: () => {
+			if (config.menu && config.menu.is_mounted) {
+				config.menu.hide();
+				return;
+			}
+		},
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
 			document.body.removeEventListener('contextmenu', listener);
@@ -379,14 +426,20 @@ export function context_menu_tooltip<
 	element: E,
 	config: TooltipConfig = {},
 ) {
+	const mouse = {
+		x: 0,
+		y: 0
+	};
+
 	const tooltip = new TooltipInstance(host, element, {
-		placement: 'bottom',
+		placement: 'bottom-start',
 		ariaEnabled: true,
 		strategy: 'fixed',
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
 			document.body.removeEventListener('contextmenu', listener);
 		},
+		mouse,
 		...config,
 	});
 
@@ -410,24 +463,16 @@ export function context_menu_tooltip<
 		}
 	};
 
-	host.addEventListener('contextmenu', (e) => {
+	host.addEventListener('contextmenu', async (e) => {
 		e.preventDefault();
 		cancel_close = true;
 
-		Object.assign(element.style, {
-			position: 'fixed',
-			left: `${e.clientX}px`,
-			top: `${e.clientY}px`,
-		});
+		mouse.x = e.clientX;
+		mouse.y = e.clientY;
 
 		setTimeout(() => {
 			cancel_close = false;
 		}, 0);
-
-		// close when clicking again
-		if (tooltip.is_mounted) {
-			return;
-		}
 
 		log('showing (ctx)', 'tooltip', 'info');
 		tooltip.show();

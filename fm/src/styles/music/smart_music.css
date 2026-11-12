@@ -5,7 +5,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 100%;
+	width: fit-content;
+	max-width: 100%;
 
 	&.top-track {
 		display: inline;
@@ -22,14 +23,14 @@
 	white-space: nowrap;
 	flex-shrink: 1;
 
-	& > a {
+	&>a {
 		cursor: pointer;
 		overflow: hidden;
 	}
 
-	& > a + a {
+	/*& > a + a {
 		margin-left: 4px;
-	}
+		}*/
 }
 
 .title {

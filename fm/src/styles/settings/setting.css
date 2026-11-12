@@ -19,6 +19,8 @@
 		width: 400px !important;
 	}
 
+	position: relative;
+
 	&:not(.blend) {
 		background: color-mix(in oklch, var(--setting-group), oklch(var(--b5)) 20%);
 		border-radius: var(--radius-m);
@@ -57,6 +59,26 @@
 
 	&.with-gap {
 		margin-top: var(--card-padding);
+	}
+
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: var(--cards-overlay-height);
+		max-height: 100%;
+		display: var(--cards-overlay-display);
+
+		background-image: var(--cards-overlay-image-subtle,
+				unset) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 -7px !important;
+		opacity: 0.4;
+		pointer-events: none;
+
+		z-index: 20;
 	}
 }
 
@@ -965,7 +987,7 @@
 }
 
 .switch-label {
-	display: var(--switch-label, none);
+	display: var(--switch-label, none) !important;
 }
 
 .checkbox-wrap {
@@ -1157,6 +1179,10 @@
 	cursor: pointer;
 
 	aspect-ratio: 1300 / 325;
+
+	&.empty {
+		pointer-events: none;
+	}
 }
 
 .setting-body,

@@ -40,22 +40,42 @@
 		align-items: center;
 	}
 
-	& > .sep {
+	&>.sep {
 		margin: var(--card-gap) 0 !important;
 	}
 
-	& > .shout-preview {
+	&>.shout-preview {
 		position: relative;
 
-		& > .shout-user-preview {
+		&>.shout-user-preview {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 		}
 
-		& > .shout-timestamp-preview {
+		&>.shout-timestamp-preview {
 			line-height: inherit;
 			position: absolute;
 			height: fit-content;
 		}
+	}
+
+	position: relative;
+
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: var(--cards-overlay-height);
+		max-height: 100%;
+		display: var(--cards-overlay-display);
+
+		background-image: var(--cards-overlay-image,
+				unset) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 -67px !important;
+		opacity: 0.5;
+		pointer-events: none;
 	}
 }

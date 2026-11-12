@@ -53,40 +53,45 @@ export function campfire() {
 	let campfire_main;
 	let campfire_side;
 	const container = html.node`
-    <div class="campfire-panels">
-      <div class="campfire-bg current" ref=${(el) => current_bg = el} />
-      <div class="campfire-panel-main" ref=${(el) => campfire_main = el}>
-        <div class="campfire" ref=${(el) => campfire_top = el}>
-          <div class="campfire-intro">
-            <h2 class="music-section-heading">${
-		tl(trans.your_recent_30_days)
-	}</h2>
-          </div>
-          <div class="campfire-items" ref=${(el) => items_container = el} />
-          <div class="campfire-details" ref=${(el) => item_details = el} />
-          <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
-        </div>
-      </div>
-      <div class="campfire-panel-side" ref=${(el) => campfire_side = el}>
-        <section class="side-actions">
-          <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}">
-            ${tl(trans.profile)}
-          </a>
-          <a class="btn side-action icon-mask" data-type="library" href="${root}user/${auth.name}/library">
-            ${tl(trans.library)}
-          </a>
-          <a class="btn side-action icon-mask" data-type="friends" href="${root}user/${auth.name}/friends">
-            ${tl(trans.friends)}
-          </a>
-          <a class="btn side-action icon-mask" data-type="shouts" href="${root}user/${auth.name}/shoutbox">
-            ${tl(trans.shouts)}
-          </a>
-        </section>
-      </div>
-    </div>
-  `;
+	    <div class="campfire-panels">
+	      <div class="campfire-bg current" ref=${(el) => current_bg = el} />
+	      <div class="campfire-panel-main" ref=${(el) => campfire_main = el}>
+	        <div class="campfire" ref=${(el) => campfire_top = el}>
+	          <div class="campfire-intro">
+	            <h2 class="music-section-heading">${tl(trans.your_recent_30_days)
+		}</h2>
+	          </div>
+	          <div class="campfire-items" ref=${(el) => items_container = el} />
+	          <div class="campfire-details" ref=${(el) => item_details = el} />
+	          <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
+	        </div>
+	      </div>
+	      <div class="campfire-panel-side" ref=${(el) => campfire_side = el}>
+	        <section class="side-actions">
+	          <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}">
+	            ${tl(trans.profile)}
+	          </a>
+	          <a class="btn side-action icon-mask" data-type="library" href="${root}user/${auth.name}/library">
+	            ${tl(trans.library)}
+	          </a>
+	          <a class="btn side-action icon-mask" data-type="friends" href="${root}user/${auth.name}/friends">
+	            ${tl(trans.friends)}
+	          </a>
+	          <a class="btn side-action icon-mask" data-type="shouts" href="${root}user/${auth.name}/shoutbox">
+	            ${tl(trans.shouts)}
+	          </a>
+	        </section>
+	      </div>
+	    </div>
+	  `;
 
-	page.structure.row!.insertBefore(container, page.structure.content);
+	const wrapper = (
+		<div class='campfire-wrapper' />
+	);
+
+	page.structure.main!.insertBefore(wrapper, page.structure.main.firstChild);
+
+	wrapper.appendChild(container);
 
 	campfire_extended(campfire_side);
 	campfire_cta(container);
@@ -97,12 +102,12 @@ export function campfire() {
 	fetch(
 		`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`,
 	)
-		.then(function (response) {
+		.then(function(response) {
 			console.log('returned', response, response.text);
 
 			return response.text();
 		})
-		.then(function (dom) {
+		.then(function(dom) {
 			const doc = new DOMParser().parseFromString(dom, 'text/html');
 			console.log('DOC', doc);
 
@@ -147,11 +152,11 @@ export function campfire() {
 				items_container,
 				html`
 					${cloned_albums.map((album, index) => {
-						const item_index =
-							((index % albums.length) + albums.length) %
-							albums.length;
+					const item_index =
+						((index % albums.length) + albums.length) %
+						albums.length;
 
-						const elem = html.node`
+					const elem = html.node`
             <div class="campfire-item" style="--index: ${index}" onclick=${() => {
 							if (is_wrapping) return;
 
@@ -173,10 +178,10 @@ export function campfire() {
             </div>
           `;
 
-						album_elements.push({ elem, index: item_index });
+					album_elements.push({ elem, index: item_index });
 
-						return elem;
-					})}
+					return elem;
+				})}
 				`,
 			);
 
@@ -272,22 +277,21 @@ export function campfire() {
 			html`
 				<a class="campfire-title smart-title"
 					href="${root}music/${sanitise(album.artist)}/${sanitise(
-						album.title,
-					)}" target="_blank">
+				album.title,
+			)}" target="_blank">
 				  ${formatted_title}
 				</a>
 				<span class="campfire-artist">
 				  ${useSettings.get('format_guest_features')
 					? formatted_artist
 					: html
-						.node`<a class="campfire-artist" href="${root}music/${redirect()}${
-						sanitise(album.artist)
-					}" target="_blank">${album.corrected_artist}</a>`}
+						.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)
+						}" target="_blank">${album.corrected_artist}</a>`}
 				</span>
 				<div class="campfire-plays">
 				  ${tl(trans.count_plays, {
-					c: album.plays.toLocaleString(lang),
-				})}
+							c: album.plays.toLocaleString(lang),
+						})}
 				</div>
 			`,
 		);
@@ -299,11 +303,11 @@ function campfire_extended(container: HTMLElement) {
 
 	let summary;
 
+	// TODO: replace
 	container.appendChild(html.node`
         <section class="friends-panel">
             <h2>${tl(trans.scrobbling_now)}</h2>
-            ${
-		friends.length > 0
+            ${friends.length > 0
 			? html.node`
                 <div class="friends">
                   ${campfire_friend(auth.name, true)}
@@ -317,12 +321,12 @@ function campfire_extended(container: HTMLElement) {
                 <div class="placeholder-block">
                   <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
                   <div class="placeholder-summary" ref=${(el) =>
-				summary = el}>${{
-				html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }),
-			}}</div>
+					summary = el}>${{
+						html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }),
+					}}</div>
                 </div>
             `
-	}
+		}
         </section>
     `);
 
@@ -353,7 +357,7 @@ function campfire_friend(friend: string, own = false) {
 		el,
 	) => user_name = el}>@${friend}</a>
                     <span class="track-time icon-mask" ref=${(el) =>
-		track_time = el} />
+			track_time = el} />
                 </div>
                 <div class="user-about track" ref=${(el) => track_info = el}>
                   <div class="status">
@@ -386,15 +390,13 @@ function campfire_friend(friend: string, own = false) {
 				if (useSettings.get('format_guest_features')) {
 					const formatted = name_includes(name, sister);
 
-					name = html.node`${
-						smart_title(formatted.song_title, formatted.song_tags)
-					}`;
-					sister = html.node`${
-						smart_artists(
-							formatted.song_artist,
-							formatted.song_guests,
-						)
-					}`;
+					name = html.node`${smart_title(formatted.song_title, formatted.song_tags)
+						}`;
+					sister = html.node`${smart_artists(
+						formatted.song_artist,
+						formatted.song_guests,
+					)
+						}`;
 				} else if (useSettings.get('corrections')) {
 					sister = romanise(correct_artist(item.sister));
 					name = romanise(
@@ -410,7 +412,7 @@ function campfire_friend(friend: string, own = false) {
 						html`
 							<strong class="username-combo">
 								<span class="username-custom">${cache
-									.username}</span>
+								.username}</span>
 								<span class="username-original">
 							        <span class="at">@</span>${friend}
 							    </span>
@@ -442,16 +444,16 @@ function campfire_friend(friend: string, own = false) {
 					html`
 						<div class="status">
 							<div class="status-image smaller" data-live=${item
-								.live}>
+							.live}>
 								<img src=${item.avatar} alt=${name}>
 							</div>
 							<div class="status-info">
 								<strong
 									class="status-text status-title smaller"><a class="smart-title" href="${root}music/${redirect()}${sanitise(
-										item.sister,
-									)}/_/${sanitise(
-										item.name,
-									)}">${name}</a></strong>
+								item.sister,
+							)}/_/${sanitise(
+								item.name,
+							)}">${name}</a></strong>
 								<p
 									class="status-text status-artist smaller"><span class="artist">${sister}</span></p>
 							</div>
@@ -482,12 +484,10 @@ function campfire_cta(container: Element) {
                     ${icon({ name: icons.collage })}
                 </div>
                 <div class="campfire-cta-text">
-                    <strong class="campfire-cta-text-head">${
-		tl(trans.collage_cta.name)
-	}</strong>
-                    <p class="campfire-cta-text-sub">${
-		tl(trans.collage_cta.body)
-	}</p>
+                    <strong class="campfire-cta-text-head">${tl(trans.collage_cta.name)
+		}</strong>
+                    <p class="campfire-cta-text-sub">${tl(trans.collage_cta.body)
+		}</p>
                 </div>
             </a>
             <a class="btn campfire-cta-btn" href="${root}bleh/minis/compare">
@@ -495,12 +495,10 @@ function campfire_cta(container: Element) {
                     ${icon({ name: icons.compare })}
                 </div>
                 <div class="campfire-cta-text">
-                    <strong class="campfire-cta-text-head">${
-		tl(trans.compare_cta.name)
-	}</strong>
-                    <p class="campfire-cta-text-sub">${
-		tl(trans.compare_cta.body)
-	}</p>
+                    <strong class="campfire-cta-text-head">${tl(trans.compare_cta.name)
+		}</strong>
+                    <p class="campfire-cta-text-sub">${tl(trans.compare_cta.body)
+		}</p>
                 </div>
             </a>
             <button class="btn campfire-cta-btn" onclick=${() => sponsor()}>
@@ -508,12 +506,10 @@ function campfire_cta(container: Element) {
                     ${icon({ name: icons.sponsor })}
                 </div>
                 <div class="campfire-cta-text">
-                    <strong class="campfire-cta-text-head">${
-		tl(trans.sponsor)
-	}</strong>
-                    <p class="campfire-cta-text-sub">${
-		tl(trans.sponsor_cta.body)
-	}</p>
+                    <strong class="campfire-cta-text-head">${tl(trans.sponsor)
+		}</strong>
+                    <p class="campfire-cta-text-sub">${tl(trans.sponsor_cta.body)
+		}</p>
                 </div>
             </button>
         </div>

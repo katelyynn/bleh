@@ -13,6 +13,8 @@ import {
 	Tooltip,
 	TooltipInstance,
 } from '@/components/shared/tooltips.tsx';
+import { WithChildren } from '@/types/generic';
+import { ScreenSize, hideScreenSizeClasses, showScreenSizeClasses, shrinkScreenSizeClasses } from '../responsive/responsive';
 
 type ButtonProps =
 	& {
@@ -34,7 +36,11 @@ type ButtonProps =
 		children?: ReactNode;
 		tooltip?: ReactNode;
 		opens?: ReactElement;
+		notSelect?: boolean;
 		onUpdate?: () => void;
+		hideBelow?: ScreenSize,
+		shrinkBelow?: ScreenSize,
+		showAbove?: ScreenSize
 	}
 	& Omit<
 		JSX.IntrinsicElements['button'],
@@ -72,7 +78,11 @@ export function Button({
 	children,
 	tooltip,
 	opens,
+	notSelect,
 	onUpdate,
+	hideBelow,
+	shrinkBelow,
+	showAbove,
 	...props
 }: ButtonProps) {
 	const classes: ClassNames = [
@@ -85,13 +95,17 @@ export function Button({
 		subtle && 'subtle',
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
-		(opens != null) && 'select-button',
+		(opens != null && !notSelect) && 'select-button',
+		hideBelow && hideScreenSizeClasses[hideBelow],
+		shrinkBelow && shrinkScreenSizeClasses[shrinkBelow],
+		showAbove && showScreenSizeClasses[showAbove],
 		className && className,
 	];
 
 	let elem: ButtonElement | ButtonLinkElement;
 
 	let instance: TooltipInstance<ReactElement, ReactElement>;
+	let tip: TooltipInstance<ReactElement, ReactElement>;
 
 	if (!href) {
 		elem = (
@@ -116,18 +130,27 @@ export function Button({
 		) as ButtonLinkElement;
 	}
 
-	if (tooltip) {
-		hover_tooltip(
-			elem,
-			<Tooltip>{tooltip}</Tooltip>,
-		);
-	}
-
 	if (opens) {
 		instance = menu_tooltip(
 			elem,
-			opens,
+			opens
 		);
+	}
+
+	if (tooltip) {
+		tip = hover_tooltip(
+			elem,
+			<Tooltip>{tooltip}</Tooltip>,
+			{
+				menu: opens ? instance! : undefined
+			}
+		);
+
+		if (instance) {
+			instance.onShow = () => {
+				tip.hide();
+			};
+		}
 	}
 
 	function handleOnClick() {
@@ -191,6 +214,27 @@ export function Button({
 	update();
 
 	return elem;
+}
+
+export function ButtonInnerContent({
+	className,
+	children,
+	hideBelow,
+	shrinkBelow,
+	showAbove,
+	...props
+}: WithChildren<'span'>) {
+	return (
+		<span class={[
+			'button-inner-content',
+			hideBelow && hideScreenSizeClasses[hideBelow],
+			shrinkBelow && shrinkScreenSizeClasses[shrinkBelow],
+			showAbove && showScreenSizeClasses[showAbove],
+			className
+		]} {...props}>
+			{children}
+		</span>
+	)
 }
 
 interface ButtonComboProps {

@@ -71,7 +71,7 @@ export function SettingLabel({
 				{name}
 				{new_release && <NewIndicator />}
 				{sponsorOnly && (
-					<label class={['new-badge', 'sponsor-related']}>
+					<label class={['new-badge', 'colourful', 'sponsor-related']}>
 						{tl(trans.sponsors_only)}
 					</label>
 				)}

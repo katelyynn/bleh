@@ -128,14 +128,14 @@ function charts_panel() {
 			${alert}
 			<form action="${root}settings#update-chart" name="chart-form" method="post">
 				<input type="hidden" name="csrfmiddlewaretoken" value=${page
-					.token}>
+				.token}>
 				<div class="inner-preview pad" ref=${(el) =>
-					recent_listening_preview = el}>
+				recent_listening_preview = el}>
 			        ${render_track_preview(
-				false,
-				false,
-				original_chart_settings.recent.recent_artwork.checked,
-			)}
+					false,
+					false,
+					original_chart_settings.recent.recent_artwork.checked,
+				)}
 			    </div>
 				<div class="setting-group">
 			        <div class="setting" data-type="select">
@@ -143,39 +143,39 @@ function charts_panel() {
 			                <h5>${tl(trans.amount_to_display)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(original_chart_settings.recent.count),
-				initial: original_chart_settings.recent.count.value,
-				name: original_chart_settings.recent.count.name,
-				in_settings: true,
-			})}
+					values: select_prepare(original_chart_settings.recent.count),
+					initial: original_chart_settings.recent.count.value,
+					name: original_chart_settings.recent.count.name,
+					in_settings: true,
+				})}
 			        </div>
 			        ${toggle({
-				title: tl(trans.recent_artwork),
-				value: original_chart_settings.recent.recent_artwork.checked,
-				name: original_chart_settings.recent.recent_artwork.name,
-				standalone: false,
-				func: (val: boolean) => {
-					render(
-						recent_listening_preview,
-						render_track_preview(false, false, val),
-					);
-				},
-			})}
+					title: tl(trans.recent_artwork),
+					value: original_chart_settings.recent.recent_artwork.checked,
+					name: original_chart_settings.recent.recent_artwork.name,
+					standalone: false,
+					func: (val: boolean) => {
+						render(
+							recent_listening_preview,
+							render_track_preview(false, false, val),
+						);
+					},
+				})}
 			        ${toggle({
-				title: tl(trans.recent_realtime.name),
-				body: tl(trans.recent_realtime.body),
-				value: original_chart_settings.recent.recent_realtime.checked,
-				name: original_chart_settings.recent.recent_realtime.name,
-				standalone: false,
-			})}
+					title: tl(trans.recent_realtime.name),
+					body: tl(trans.recent_realtime.body),
+					value: original_chart_settings.recent.recent_realtime.checked,
+					name: original_chart_settings.recent.recent_realtime.name,
+					standalone: false,
+				})}
 			    </div>
 				<h4>${tl(trans.top_artists)}</h4>
 				<div class="inner-preview pad" ref=${(el) =>
-					top_artists_preview = el}>
+				top_artists_preview = el}>
 			        ${render_chart(
-				'artist',
-				original_chart_settings.artists.style.value,
-			)}
+					'artist',
+					original_chart_settings.artists.style.value,
+				)}
 			    </div>
 				<div class="setting-group">
 					<div class="setting" data-type="select">
@@ -183,36 +183,36 @@ function charts_panel() {
 			                <h5>${tl(trans.default_timeframe)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(
-					original_chart_settings.artists.timeframe,
-				),
-				initial: original_chart_settings.artists.timeframe.value,
-				name: original_chart_settings.artists.timeframe.name,
-				in_settings: true,
-			})}
+					values: select_prepare(
+						original_chart_settings.artists.timeframe,
+					),
+					initial: original_chart_settings.artists.timeframe.value,
+					name: original_chart_settings.artists.timeframe.name,
+					in_settings: true,
+				})}
 			        </div>
 					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.chart_style)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(original_chart_settings.artists.style),
-				initial: original_chart_settings.artists.style.value,
-				name: original_chart_settings.artists.style.name,
-				in_settings: true,
-				func: (val: string) => {
-					render(top_artists_preview, render_chart('artist', val));
-				},
-			})}
+					values: select_prepare(original_chart_settings.artists.style),
+					initial: original_chart_settings.artists.style.value,
+					name: original_chart_settings.artists.style.name,
+					in_settings: true,
+					func: (val: string) => {
+						render(top_artists_preview, render_chart('artist', val));
+					},
+				})}
 			        </div>
 				</div>
 				<h4>${tl(trans.top_albums)}</h4>
 				<div class="inner-preview pad" ref=${(el) =>
-					top_albums_preview = el}>
+				top_albums_preview = el}>
 			        ${render_chart(
-				'album',
-				original_chart_settings.albums.style.value,
-			)}
+					'album',
+					original_chart_settings.albums.style.value,
+				)}
 			    </div>
 				<div class="setting-group">
 					<div class="setting" data-type="select">
@@ -220,27 +220,27 @@ function charts_panel() {
 			                <h5>${tl(trans.default_timeframe)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(
-					original_chart_settings.albums.timeframe,
-				),
-				initial: original_chart_settings.albums.timeframe.value,
-				name: original_chart_settings.albums.timeframe.name,
-				in_settings: true,
-			})}
+					values: select_prepare(
+						original_chart_settings.albums.timeframe,
+					),
+					initial: original_chart_settings.albums.timeframe.value,
+					name: original_chart_settings.albums.timeframe.name,
+					in_settings: true,
+				})}
 			        </div>
 					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.chart_style)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(original_chart_settings.albums.style),
-				initial: original_chart_settings.albums.style.value,
-				name: original_chart_settings.albums.style.name,
-				in_settings: true,
-				func: (val: string) => {
-					render(top_albums_preview, render_chart('album', val));
-				},
-			})}
+					values: select_prepare(original_chart_settings.albums.style),
+					initial: original_chart_settings.albums.style.value,
+					name: original_chart_settings.albums.style.name,
+					in_settings: true,
+					func: (val: string) => {
+						render(top_albums_preview, render_chart('album', val));
+					},
+				})}
 			        </div>
 				</div>
 				<h4>${tl(trans.top_tracks)}</h4>
@@ -253,24 +253,24 @@ function charts_panel() {
 			                <h5>${tl(trans.default_timeframe)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(
-					original_chart_settings.tracks.timeframe,
-				),
-				initial: original_chart_settings.tracks.timeframe.value,
-				name: original_chart_settings.tracks.timeframe.name,
-				in_settings: true,
-			})}
+					values: select_prepare(
+						original_chart_settings.tracks.timeframe,
+					),
+					initial: original_chart_settings.tracks.timeframe.value,
+					name: original_chart_settings.tracks.timeframe.name,
+					in_settings: true,
+				})}
 			        </div>
 					<div class="setting" data-type="select">
 			            <div class="heading">
 			                <h5>${tl(trans.amount_to_display)}</h5>
 			            </div>
 			            ${select({
-				values: select_prepare(original_chart_settings.tracks.count),
-				initial: original_chart_settings.tracks.count.value,
-				name: original_chart_settings.tracks.count.name,
-				in_settings: true,
-			})}
+					values: select_prepare(original_chart_settings.tracks.count),
+					initial: original_chart_settings.tracks.count.value,
+					name: original_chart_settings.tracks.count.name,
+					in_settings: true,
+				})}
 			        </div>
 				</div>
 				<div class="settings-footer">
@@ -321,6 +321,8 @@ function profile_panel() {
 		'id_about_me',
 	) as HTMLTextAreaElement;
 
+	form_about_me.placeholder = tl(trans.anything_you_can_imagine) as string;
+
 	const profile_cache = JSON.parse(
 		localStorage.getItem(keys.profile_cache) || '{}',
 	);
@@ -341,27 +343,7 @@ function profile_panel() {
 		allow_lists: true,
 	};
 
-	const about = markdown_field(
-		update_about,
-		markdown_settings,
-		form_about_me.textContent,
-		'about_me',
-		40,
-		10,
-		tl(trans.anything_you_can_imagine),
-		null,
-		false,
-		false,
-		false,
-	);
 	const preview = createRef();
-
-	const accent_setting = html.node`
-        <div class="setting" data-type="info" disabled=${!auth.sponsor} />
-    `;
-	const font_setting = html.node`
-        <p class="card-tip" />
-    `;
 
 	page.structure.side!.replaceChildren(
 		<section class='about-me-preview'>
@@ -633,7 +615,7 @@ function avatar() {
 		}
 
 		const reader = new FileReader();
-		reader.onload = function () {
+		reader.onload = function() {
 			crop(reader.result);
 		};
 		reader.readAsDataURL(e.target.files[0]);

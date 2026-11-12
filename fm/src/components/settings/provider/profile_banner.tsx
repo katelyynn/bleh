@@ -52,6 +52,7 @@ export function ProfileBanner({
 				<Input
 					className='profile-banner-input'
 					onChange={(v) => set(String(v))}
+					placeholder={tl(trans.enter_link) as string}
 					ref={input}
 				/>
 				<div class='banner-image' ref={preview} />
@@ -60,15 +61,21 @@ export function ProfileBanner({
 	) as ProfileBannerElement;
 
 	function update(val: string) {
-		const sanitised = proxy_image(val);
+		if (val) {
+			const sanitised = proxy_image(val);
 
-		preview.current.style.setProperty(
-			'background-image',
-			`url(${sanitised})`,
-		);
-		preview.current.onclick = () => {
-			expand_avatar(sanitised);
-		};
+			preview.current.classList.remove('empty');
+			preview.current.style.setProperty(
+				'background-image',
+				`url(${sanitised})`,
+			);
+			preview.current.onclick = () => {
+				expand_avatar(sanitised);
+			};
+		} else {
+			preview.current.classList.add('empty');
+			preview.current.style.removeProperty('background-image');
+		}
 
 		input.current.value = val;
 	}
