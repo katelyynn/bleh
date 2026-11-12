@@ -598,7 +598,7 @@ export function append_nav() {
 							<Icon name={icons.bleh_settings} />
 							{version.brand}
 						</ButtonInnerContent>
-					]} interval={5000} />
+					]} interval={7000} />
 				</>,
 			);
 			bleh_container_tooltip.replaceChildren(
