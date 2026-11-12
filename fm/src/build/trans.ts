@@ -12361,7 +12361,7 @@ export const trans = {
 	},
 	better_with_friends: {
 		en: 'Music is better with friends, {add_friend}',
-    de: 'Musik ist besser mit freunden, {add_friend}',
+		de: 'Musik ist besser mit freunden, {add_friend}',
 		pt: 'Música é melhor com amigos, {add_friend}',
 		es: 'La música es mejor con amigos, {add_friend}',
 		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {add_friend}',
@@ -12832,7 +12832,7 @@ export const trans = {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
 		pt: 'O Markdown está desativado. O texto pode não ser exibido corretamente e as decorações de perfil não funcionarão. {v}',
 		it: 'Hai disattivato Markdown, il testo potrebbe non essere mostrato correttamente e le decorazioni del profilo non funzioneranno. {v}',
-		de: 'Markdown ist deaktiviert, es werden möglicherweise Textdarstellungs fehler erscheinen, und Profildekorationen können probleme darstellen. {v}',  '
+		de: 'Markdown ist deaktiviert, es werden möglicherweise Textdarstellungs fehler erscheinen, und Profildekorationen können probleme darstellen. {v}',
 	},
 	empty_list: {
 		en: 'This list is empty',

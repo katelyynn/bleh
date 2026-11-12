@@ -40924,8 +40924,8 @@ var bleh = (() => {
     },
     de: {
       name: get_language_name("de"),
-      by: ["evangelicgirl", "myraisounds", "dressupdarling"],
-      last_updated: "2026-04-20"
+      by: ["evangelicgirl", "myraisounds", "dressupdarling", "zozoloft"],
+      last_updated: "2026-10-27"
     },
     es: {
       name: get_language_name("es"),
@@ -40957,9 +40957,10 @@ var bleh = (() => {
         "anjoskron",
         "foognocchie",
         "suburbanno",
-        "lagb2ck"
+        "lagb2ck",
+        "lucraticc"
       ],
-      last_updated: "2026-10-02"
+      last_updated: "2026-11-03"
     },
     sv: {
       name: get_language_name("sv"),
@@ -41015,7 +41016,8 @@ var bleh = (() => {
       // this is within a sentence
       // the spaces around it are intentional and should be
       // there if the language puts spaces
-      en: " or "
+      en: " or ",
+      pt: " ou "
     },
     page_templates: {
       // these are used for browser tab titles
@@ -41329,34 +41331,39 @@ var bleh = (() => {
         en: "This badge is specially reserved for {u}",
         pt: "Este emblema \xE9 especialmente reservado para {u}",
         pl: "Ta odznaka jest specjalnie dla Ciebie {u}",
-        it: "Questo distintivo \xE8 riservato per {u}"
+        it: "Questo distintivo \xE8 riservato per {u}",
+        de: "Dieses Abzeichen ist speziell f\xFCr {u} reserviert."
       },
       cute: {
         // (female)
         en: "The creator of bleh",
         pt: "A criadora do bleh",
         pl: "Tw\xF3rca bleh",
-        it: "Ha creato bleh"
+        it: "Ha creato bleh",
         // it is a bit different, more as "created bleh" but it is neutral ~cuto
+        de: "Entwickler von bleh"
       },
       sponsor: {
         en: "{u} sponsors the development of bleh",
         pt: "{u} apoia o desenvolvimento do bleh",
         pl: "{u} wspiera rozw\xF3j bleh",
-        it: "{u} sponsorizza lo sviluppo di bleh"
+        it: "{u} sponsorizza lo sviluppo di bleh",
+        de: "{u} ist ein Sponsor von bleh"
       },
       contributor: {
         en: "{u} contributed to the development of bleh",
         pt: "{u} contribuiu para o desenvolvimento do bleh",
         pl: "{u} przyczynili si\u0119 do rozwoju bleh",
         //gonna try to correct the translations to they/them, also correcting any spelling errors i encounter
-        it: "{u} ha contribuito allo sviluppo di bleh"
+        it: "{u} ha contribuito allo sviluppo di bleh",
+        de: "{u} hat bei der Entwicklung von bleh geholfen"
       },
       translation: {
         en: "{u} helped in translating bleh",
         pt: "{u} ajudou na tradu\xE7\xE3o do bleh",
         pl: "{u} pomogli t\u0142umaczy\u0107 bleh",
-        it: "{u} ha aiutato a tradurre bleh"
+        it: "{u} ha aiutato a tradurre bleh",
+        de: "{u} hat bei der \xDCbersetzung von bleh geholfen"
       }
     },
     requires_higher_bleh_version: {
@@ -41570,7 +41577,8 @@ var bleh = (() => {
       pt: "Ler menos",
       es: "Leer menos",
       it: "Leggi meno",
-      pl: "Czytaj mniej"
+      pl: "Czytaj mniej",
+      de: "Weniger anzeigen"
     },
     refresh: {
       en: "Refresh",
@@ -42547,7 +42555,8 @@ var bleh = (() => {
       // matches your theme to your system theme
       en: "Match system settings",
       it: "Segui le impostazioni di sistema",
-      pt: "Seguir o padr\xE3o do sistema"
+      pt: "Seguir o padr\xE3o do sistema",
+      de: "Systemeinstellungen \xDCbernehmen"
     },
     theme_schedule: {
       en: "Choose which theme preference to apply based on your system theme.",
@@ -42639,25 +42648,29 @@ var bleh = (() => {
         // https://rosepinetheme.com
         en: "Ros\xE9 Pine",
         it: "Ros\xE9 Pine",
-        pt: "Ros\xE9 Pine"
+        pt: "Ros\xE9 Pine",
+        de: "Ros\xE9 Pine"
       },
       rose_pine_dawn: {
         // https://rosepinetheme.com
         en: "Ros\xE9 Pine Dawn",
         it: "Ros\xE9 Pine Dawn",
-        pt: "Ros\xE9 Pine Dawn"
+        pt: "Ros\xE9 Pine Dawn",
+        de: "Ros\xE9 Pine Dawn"
       },
       kanagawa: {
         // https://github.com/rebelot/kanagawa.nvim
         en: "Kanagawa",
         it: "Kanagawa",
-        pt: "Kanagawa"
+        pt: "Kanagawa",
+        de: "Kanagawa"
       },
       kanagawa_dragon: {
         // https://github.com/rebelot/kanagawa.nvim
         en: "Kanagawa Dragon",
         it: "Kanagawa Dragon",
-        pt: "Kanagawa Dragon"
+        pt: "Kanagawa Dragon",
+        de: "Kanagawa Dragon"
       }
     },
     bright: {
@@ -42665,12 +42678,14 @@ var bleh = (() => {
       name: {
         en: "Bright",
         pt: "Claro",
-        it: "Chiaro"
+        it: "Chiaro",
+        de: "Hell"
       },
       body: {
         en: "Perfect for daylight",
         pt: "Perfeito para a luz do dia",
-        it: "Perfetto per la luce del giorno"
+        it: "Perfetto per la luce del giorno",
+        de: "Perfekt f\xFCr Tageslicht"
       }
     },
     moody: {
@@ -42701,7 +42716,8 @@ var bleh = (() => {
     edit_colour: {
       en: "Edit colour",
       it: "Modifica colore",
-      pt: "Editar cor"
+      pt: "Editar cor",
+      de: "Farbe \xE4ndern"
     },
     adaptive: {
       en: "Adaptive",
@@ -43047,7 +43063,8 @@ var bleh = (() => {
           pt: "Ver\xE3o",
           es: "Verano",
           pl: "Lato",
-          it: "Estate"
+          it: "Estate",
+          de: "Sommer"
         },
         halloween: {
           en: "Halloween",
@@ -43195,7 +43212,8 @@ var bleh = (() => {
         },
         smoke: {
           en: "Smoke",
-          pt: "Fuma\xE7a"
+          pt: "Fuma\xE7a",
+          de: "Rauch"
         },
         burgundy: {
           en: "Burgundy",
@@ -43203,7 +43221,8 @@ var bleh = (() => {
         },
         lantern: {
           en: "Lantern",
-          pt: "Lanterna"
+          pt: "Lanterna",
+          de: "Laterne"
         }
       },
       exclusive: {
@@ -43280,7 +43299,8 @@ var bleh = (() => {
     particles: {
       en: "Particles",
       it: "Particelle",
-      pt: "Part\xEDculas"
+      pt: "Part\xEDculas",
+      de: "Partikel"
     },
     seasonal_particles_fps: {
       name: {
@@ -43309,7 +43329,8 @@ var bleh = (() => {
     effects: {
       en: "Effects",
       it: "Effetti",
-      pt: "Efeitos"
+      pt: "Efeitos",
+      de: "Effekte"
     },
     seasonal_overlays: {
       name: {
@@ -43325,17 +43346,21 @@ var bleh = (() => {
       },
       body: {
         en: "Features image overlays like cobwebs and snow in certain seasons",
-        pt: "Apresenta sobreposi\xE7\xF5es de imagem, como teias de aranha e neve, em determinadas esta\xE7\xF5es."
+        pt: "Apresenta sobreposi\xE7\xF5es de imagem, como teias de aranha e neve, em determinadas esta\xE7\xF5es.",
+        de: "Enth\xE4lt Bild\xFCberlagerungen zbsp. wie Spinnweben und Schnee, die je zur bestimmten Jahreszeit auftreten"
       }
     },
     seasonal_masks: {
       name: {
         en: "Change button and grid shapes",
-        pt: "Alterar formatos de bot\xF5es e grades"
+        pt: "Alterar formatos de bot\xF5es e grades",
+        de: "Tasten und Rasterelemente \xE4ndern"
       },
       body: {
         en: "Seasons can choose a custom look for buttons, menus, and grids",
-        pt: "As temporadas permitem escolher um visual personalizado para bot\xF5es, menus e grades."
+        pt: "As temporadas permitem escolher um visual personalizado para bot\xF5es, menus e grades.",
+        de: "Jahreszeiten k\xF6nnen spezielle Tasten, Menus und Rasterelemente in einem saisonalen Erscheinungsbild darstellen"
+        //Too long and weird?!?
       }
     },
     seasonal_offset: {
@@ -43528,7 +43553,8 @@ var bleh = (() => {
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C {v} \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
       es: "Marcar {v}",
       it: "Segnalibro {v}",
-      pl: "Zak\u0142adka {v}"
+      pl: "Zak\u0142adka {v}",
+      de: "als Lesezeichen speichern"
     },
     charts: {
       en: "Charts",
@@ -43548,7 +43574,8 @@ var bleh = (() => {
       pt: "Paradas de",
       es: "Listas del",
       pl: "Rankingi dla",
-      it: "Classifiche per"
+      it: "Classifiche per",
+      de: "Charts f\xFCr"
     },
     weekly_charts: {
       // dates will be directly below this text
@@ -43556,7 +43583,8 @@ var bleh = (() => {
       pt: "Paradas semanais",
       es: "Listas semanales",
       pl: "Rankingi tygodniowe",
-      it: "Classifiche settimanali"
+      it: "Classifiche settimanali",
+      de: "W\xF6chentliche Charts"
     },
     view_the_charts: {
       en: "View the charts",
@@ -43660,14 +43688,16 @@ var bleh = (() => {
       it: "Ciao {u}!",
       pt: "Ol\xE1 {u}!",
       es: "\xA1Hola {u}!",
-      pl: "Hej {u}!"
+      pl: "Hej {u}!",
+      de: "Hallo {u}!"
     },
     bleh_setup_guide: {
       en: "It\u2019s nice to see you here",
       it: "\xC8 bello vederti qui",
       pt: "\xC9 bom ver voc\xEA por aqui",
       es: "Es bueno verte aqu\xED",
-      pl: "Dobrze Ci\u0119 tu widzie\u0107"
+      pl: "Dobrze Ci\u0119 tu widzie\u0107",
+      de: "Es ist sch\xF6n, dich zu sehen"
     },
     import: {
       en: "Import",
@@ -44788,7 +44818,8 @@ var bleh = (() => {
       es: "Recientes",
       it: "Recenti",
       ja: "\u6700\u8FD1",
-      pl: "Ostatnie"
+      pl: "Ostatnie",
+      de: "Zuletzt"
     },
     recent_tracks: {
       en: "Recent Tracks",
@@ -44849,7 +44880,8 @@ var bleh = (() => {
       // as in your musical taste % between you and someone else
       // you are {percentage%} compatible (in taste) {list of artists}
       en: "You share {artists} in common.",
-      pt: "Voc\xEAs tem {artists} em comum."
+      pt: "Voc\xEAs tem {artists} em comum.",
+      de: "Ihr h\xF6rt {artists} gemeinsam"
     },
     you_are_a_value_match: {
       // valentines easter egg
@@ -44913,7 +44945,8 @@ var bleh = (() => {
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
       es: "Enviar mensaje",
       it: "Invia messaggio",
-      pl: "Wy\u015Blij wiadomo\u015B\u0107"
+      pl: "Wy\u015Blij wiadomo\u015B\u0107",
+      de: "Nachricht schicken"
     },
     join_discord: {
       en: "Join Discord",
@@ -44931,7 +44964,8 @@ var bleh = (() => {
       pt: "Seguir {u}",
       es: "Seguir a {u}",
       pl: "Obserwuj {u}",
-      it: "Segui {u}"
+      it: "Segui {u}",
+      de: "Folge {u}"
     },
     sponsor_details: {
       en: "Sponsor and badge details",
@@ -45023,7 +45057,8 @@ var bleh = (() => {
     sponsor_get_badge: {
       en: "A sponsorship gives you awesome profile perks visible to all bleh users",
       pt: "Um patroc\xEDnio oferece vantagens incr\xEDveis para o seu perfil, vis\xEDveis a todos os usu\xE1rios do bleh",
-      it: "Una sponsorizzazione ti offre fantastici vantaggi del profilo visibili a tutti gli utenti di bleh"
+      it: "Una sponsorizzazione ti offre fantastici vantaggi del profilo visibili a tutti gli utenti di bleh",
+      de: "Mit einem Sponsor erh\xE4ltst du besondere Profil-Extras, die Jede Person auf bleh sehen kann"
     },
     sponsor_monthly: {
       en: "If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.",
@@ -47386,19 +47421,22 @@ var bleh = (() => {
       en: "Circular",
       pt: "Circular",
       pl: "Okr\u0105g\u0142y",
-      it: "Circolare"
+      it: "Circolare",
+      de: "Kreisf\xF6rmig"
     },
     squircle: {
       en: "Rounded",
       pt: "Arredondado",
       pl: "Zaokr\u0105glony kwadrat",
-      it: "Arrotondato"
+      it: "Arrotondato",
+      de: "Abgerundet"
     },
     square: {
       en: "Square",
       pt: "Quadrado",
       pl: "Kwadratowy",
-      it: "Quadrato"
+      it: "Quadrato",
+      de: "Viereck"
     },
     notes: {
       // profile notes
@@ -47688,7 +47726,8 @@ var bleh = (() => {
       }
     },
     font_emoji: {
-      en: "Use a fallback font for emojis"
+      en: "Use a fallback font for emojis",
+      pt: "Usar uma fonte reserva para emojis"
     },
     font_example: {
       // the trans flag is used to demonstrate the improper
@@ -49218,7 +49257,8 @@ var bleh = (() => {
     incompatible: {
       en: "Incompatible",
       it: "Incompatibile",
-      pt: "Incompat\xEDvel"
+      pt: "Incompat\xEDvel",
+      de: "Inkompatibel"
     },
     value_is_enabled: {
       // a setting is enabled
@@ -49234,7 +49274,8 @@ var bleh = (() => {
       pt: "{v} est\xE1 desativado"
     },
     value_is_value: {
-      en: "{v} is {v2}"
+      en: "{v} is {v2}",
+      pt: "{v} \xE9 {v2}"
     },
     bulk_edit_extension: {
       // yes the extension
@@ -49434,10 +49475,12 @@ var bleh = (() => {
       pl: "Oczekiwanie na obrazy"
     },
     creating_collage_phase: {
-      en: "Creating collage ({phase}), {progress}%"
+      en: "Creating collage ({phase}), {progress}%",
+      pt: "Criando colagem ({phase}), {progress}%"
     },
     collage_tip: {
-      en: "Click the collage above or use the sidebar to download. Adjusting visual settings now will refresh faster."
+      en: "Click the collage above or use the sidebar to download. Adjusting visual settings now will refresh faster.",
+      pt: "Clique na colagem acima ou use a barra lateral para baixar. Ajustar as configura\xE7\xF5es visuais agora tornar\xE1 a atualiza\xE7\xE3o mais r\xE1pida."
     },
     collage_title: {
       name: {
@@ -52619,7 +52662,8 @@ var bleh = (() => {
       pl: "Wy\u015Bwietl szczeg\xF3\u0142y"
     },
     valentine_header: {
-      en: "You and {u} are a perfect match!"
+      en: "You and {u} are a perfect match!",
+      pt: "Voc\xEA e {u} formam um par perfeito!"
     },
     valentine_info: {
       en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!",
@@ -53239,6 +53283,7 @@ var bleh = (() => {
     },
     better_with_friends: {
       en: "Music is better with friends, {add_friend}",
+      de: "Musik ist besser mit freunden, {add_friend}",
       pt: "M\xFAsica \xE9 melhor com amigos, {add_friend}",
       es: "La m\xFAsica es mejor con amigos, {add_friend}",
       pl: "Muzyka brzmi lepiej w gronie przyjaci\xF3\u0142, {add_friend}",
@@ -53254,14 +53299,16 @@ var bleh = (() => {
         pt: "Criar uma colagem",
         es: "Crear un collage",
         pl: "Stw\xF3rz kola\u017C",
-        it: "Crea un collage"
+        it: "Crea un collage",
+        de: "Erstell eine Collage"
       },
       body: {
         en: "Featuring your favourite albums in the last month",
         pt: "Com seus \xE1lbuns favoritos do \xFAltimo m\xEAs",
         es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes",
         pl: "Twoje ulubione albumy z ostatniego miesi\u0105ca",
-        it: "Con i tuoi album preferiti dell\u2019ultimo mese"
+        it: "Con i tuoi album preferiti dell\u2019ultimo mese",
+        de: "Inklusive deiner Lieblingsalben aus dem letzten Monat"
       }
     },
     compare_cta: {
@@ -53271,14 +53318,16 @@ var bleh = (() => {
         pt: "Comparar com seus amigos",
         es: "Comparar con tus amigos",
         pl: "Por\xF3wnaj ze swoimi znajomymi",
-        it: "Confronta con i tuoi amici"
+        it: "Confronta con i tuoi amici",
+        de: "Mit Freunden vergleichen"
       },
       body: {
         en: "Which music do you have in common?",
         pt: "Quais m\xFAsicas voc\xEAs t\xEAm em comum?",
         es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?",
         pl: "Jaka muzyka was \u0142\u0105czy?",
-        it: "Quale musica avete in comune?"
+        it: "Quale musica avete in comune?",
+        de: "Welche Musik h\xF6rt ihr Gemeinsam?"
       }
     },
     sponsor_cta: {
@@ -53288,7 +53337,8 @@ var bleh = (() => {
         pt: "Ajude o futuro do bleh",
         es: "Ayuda al futuro de bleh",
         pl: "Pom\xF3\u017C w budowaniu przysz\u0142o\u015Bci bleh",
-        it: "Aiuta il futuro di bleh"
+        it: "Aiuta il futuro di bleh",
+        de: "Helf mit bei der Zukunft von bleh"
       }
     },
     add_new_data_point: {
@@ -53304,7 +53354,8 @@ var bleh = (() => {
       pt: "Predefini\xE7\xF5es",
       es: "Preajustes",
       pl: "Presety",
-      it: "Preimpostazioni"
+      it: "Preimpostazioni",
+      de: "Voreinstellung"
     },
     existing: {
       // used as a header for existing items
@@ -53312,21 +53363,25 @@ var bleh = (() => {
       pt: "Existentes",
       es: "Actuales",
       pl: "Istniej\u0105ce",
-      it: "Esistenti"
+      it: "Esistenti",
+      de: "Vorbestehend"
     },
     history: {
       en: "History",
       pt: "Hist\xF3rico",
       es: "Historial",
       pl: "Historia",
-      it: "Storico"
+      it: "Storico",
+      de: "Verlauf"
+      // as in "Browser History" - "Browserverlauf"
     },
     no_data_to_display: {
       en: "No data to display",
       pt: "Nenhum dado para exibir",
       es: "No hay datos para mostrar",
       pl: "Brak danych do wy\u015Bwietlenia",
-      it: "Nessun dato da mostrare"
+      it: "Nessun dato da mostrare",
+      de: "Keine Daten zum Anzeigen"
     },
     add_to_graph: {
       en: "Add to graph",
@@ -53385,7 +53440,8 @@ var bleh = (() => {
       pt: "Nome do artista obrigat\xF3rio",
       es: "Nombre del artista requerido",
       pl: "Nazwa artysty jest wymagana",
-      it: "Nome dell\u2019artista richiesto"
+      it: "Nome dell\u2019artista richiesto",
+      de: "K\xFCnstlername erforderlich"
     },
     choose_either_an_album_or_track: {
       en: "Choose either an album or track only",
@@ -53406,7 +53462,8 @@ var bleh = (() => {
       pt: "Nome de usu\xE1rio obrigat\xF3rio",
       es: "Nombre de usuario requerido",
       pl: "Nazwa u\u017Cytkownika jest wymagana",
-      it: "Username richiesto"
+      it: "Username richiesto",
+      de: "Benutzername erforderlich"
     },
     already_a_close_friend: {
       // user is already a friend
@@ -53414,7 +53471,8 @@ var bleh = (() => {
       pt: "J\xE1 adicionado aos amigos pr\xF3ximos",
       es: "Ya est\xE1 en tus amigos cercanos",
       pl: "Ju\u017C jest w\u015Br\xF3d bliskich znajomych",
-      it: "Gi\xE0 aggiunto agli amici stretti"
+      it: "Gi\xE0 aggiunto agli amici stretti",
+      de: "Schon als engen Freund hinzugef\xFCgt"
     },
     plot_explain: {
       // these are steps in order
@@ -53492,46 +53550,53 @@ var bleh = (() => {
       pt: "Desativar os elementos visuais do bleh aqui",
       es: "Desactiva los elementos visuales de bleh aqu\xED",
       pl: "Wy\u0142\u0105cz elementy wizualne bleh tutaj",
-      it: "Disattiva gli elementi grafici di bleh qui"
+      it: "Disattiva gli elementi grafici di bleh qui",
+      de: "Visuelle Elemente von bleh ausschalten"
     },
     you_have_disabled_bleh_visuals_for_settings: {
       en: "You have disabled bleh visuals for Last.fm settings, don\u2019t expect this to look pretty",
       pt: "Voc\xEA desativou os elementos visuais do bleh nas configura\xE7\xF5es do Last.fm; n\xE3o espere que isto fique bonito",
       es: "Has desactivado los elementos visuales de bleh en la configuraci\xF3n de Last.fm, no esperes que se vea bonito",
       pl: "Wy\u0142\u0105czy\u0142e\u015B elementy wizualne \u201Ebleh\u201D w ustawieniach Last.fm; nie oczekuj, \u017Ce b\u0119dzie to wygl\u0105da\u0142o pi\u0119knie",
-      it: "Hai disattivato gli elementi grafici di bleh per le impostazioni di Last.fm, non aspettarti che sia bello da vedere"
+      it: "Hai disattivato gli elementi grafici di bleh per le impostazioni di Last.fm, non aspettarti che sia bello da vedere",
+      de: "Du hast die visuellen Elemente von bleh ausgeschaltet, erwarte lieber nicht dass das gut aussieht"
     },
     hide_unused_settings: {
       en: "Hide settings that have no effect",
       pt: "Ocultar configura\xE7\xF5es que n\xE3o t\xEAm efeito",
       es: "Ocultar opciones que no tienen efecto",
       pl: "Ukryj ustawienia kt\xF3re nie dzia\u0142aj\u0105",
-      it: "Nascondi impostazioni che non hanno effetto"
+      it: "Nascondi impostazioni che non hanno effetto",
+      de: "Unbenutzte Elemente verstecken"
     },
     edit_links: {
       en: "Edit links",
       pt: "Editar links",
       es: "Editar v\xEDnculos",
       pl: "Edytuj linki",
-      it: "Modifica link"
+      it: "Modifica link",
+      de: "Links bearbeiten"
     },
     daily: {
       en: "Daily",
       pt: "Diariamente",
       pl: "Dziennie",
-      it: "Giornalmente"
+      it: "Giornalmente",
+      de: "T\xE4glich"
     },
     weekly: {
       en: "Weekly",
       pt: "Semanalmente",
       pl: "Tygodniowo",
-      it: "Settimanalmente"
+      it: "Settimanalmente",
+      de: "Wochentlich"
     },
     explore: {
       en: "Explore",
       pt: "Explorar",
       pl: "Odkrywaj",
-      it: "Esplora"
+      it: "Esplora",
+      de: "Erkunden"
     },
     hot_100: {
       // b = bleh
@@ -53547,13 +53612,15 @@ var bleh = (() => {
         en: "Developer mode",
         pt: "Modo de desenvolvedor",
         pl: "Tryb deweloperski",
-        it: "Modalit\xE0 sviluppatore"
+        it: "Modalit\xE0 sviluppatore",
+        de: "Entwicklermodus"
       },
       body: {
         en: "Enable developer-specific features used for debugging purposes",
         pt: "Ative recursos espec\xEDficos de desenvolvedor usados para fins de depura\xE7\xE3o",
         pl: "W\u0142\u0105cz okre\u015Blone funkcje dla programist\xF3w s\u0142u\u017C\u0105ce do debugowania",
-        it: "Attiva funzioni per sviluppatori usate per il debug"
+        it: "Attiva funzioni per sviluppatori usate per il debug",
+        de: "Schaltet bestimmte Entwickler bezogene features f\xFCr Debugging an"
       }
     },
     developer_setting_names: {
@@ -53571,18 +53638,21 @@ var bleh = (() => {
     badge_only_user: {
       en: "Owned by 1 person",
       pt: "Pertence a 1 pessoa",
-      it: "Assegnato a 1 persona"
+      it: "Assegnato a 1 persona",
       // translating "owned" to "assigned to" as it fits somewhat better i think ~cuto
+      de: "Im Besitz von 1 Person"
     },
     badge_multiple_users: {
       en: "Owned by {c} people",
       pt: "Pertence a {c} pessoas",
-      it: "Assegnato a {c} persone"
+      it: "Assegnato a {c} persone",
+      de: "Im Besitz von {c} Personen"
     },
     miscellaneous: {
       en: "Miscellaneous",
       pt: "Diversos",
-      it: "Altro"
+      it: "Altro",
+      de: "Divers"
     },
     count_bar_style: {
       en: "Bar styling",
@@ -53592,12 +53662,14 @@ var bleh = (() => {
     classic: {
       en: "Classic",
       pt: "Cl\xE1ssico(a)",
-      it: "Classico"
+      it: "Classico",
+      de: "Klassik"
     },
     minimal: {
       en: "Minimal",
       pt: "M\xEDnimo",
-      it: "Minimale"
+      it: "Minimale",
+      de: "Minimal"
     },
     motion: {
       en: "Motion",
@@ -53607,8 +53679,9 @@ var bleh = (() => {
     track_in_top_listeners: {
       en: "Top listened",
       pt: "Mais ouvidos",
-      it: "Pi\xF9 ascoltata"
+      it: "Pi\xF9 ascoltata",
       // assuming singular "track" ("traccia"), which is feminine ~cuto
+      de: "Meistgeh\xF6rt"
     },
     behaviour: {
       en: "Behaviour",
@@ -53631,7 +53704,8 @@ var bleh = (() => {
       // on a profile
       en: "{v}x streak",
       pt: "{v}x sequ\xEAncias",
-      it: "{v}x serie"
+      it: "{v}x serie",
+      de: "{v}x serie"
     },
     streak_high: {
       // a streak of artists, albums, or tracks
@@ -53639,59 +53713,70 @@ var bleh = (() => {
       // 100 or over
       en: "{v}+ streak or higher",
       pt: "{v}+ sequ\xEAncia ou maior",
-      it: "{v}+ serie o pi\xF9"
+      it: "{v}+ serie o pi\xF9",
+      de: "{v}+ serie oder h\xF6her"
     },
     streak_started: {
       // v = 2 days ago etc.
       en: "Streak started {v}",
       pt: "Sequ\xEAncia come\xE7ou {v}",
-      it: "Serie avviata {v}"
+      it: "Serie avviata {v}",
+      de: "Serie vor {v} angefangen"
     },
     the_bleh_times: {
       // newspaper title
       // i guess like the NY times?
       en: "The {b} Times",
       pt: "O {b} Times",
-      it: "La Gazzetta di {b}"
+      it: "La Gazzetta di {b}",
+      de: "Die {b} Zeitung"
+      // Could also just do "Times", but Zeitung sounds better imo -zozoloft
     },
     from: {
       // timeframe
       // from date to date
       en: "From",
       pt: "Desde",
-      it: "Da"
+      it: "Da",
+      de: "Von"
     },
     to: {
       // timeframe
       // from date to date
       en: "To",
       pt: "a",
-      it: "a"
+      it: "a",
+      de: "An"
     },
     related_setting: {
       en: "Related setting: {v}",
       pt: "Configura\xE7\xF5es relacionadas {v}",
-      it: "Impostazione correlata: {v}"
+      it: "Impostazione correlata: {v}",
+      de: "Verwandte Einstellung: {v}"
     },
     markdown_disabled_profile: {
       en: "You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}",
       pt: "O Markdown est\xE1 desativado. O texto pode n\xE3o ser exibido corretamente e as decora\xE7\xF5es de perfil n\xE3o funcionar\xE3o. {v}",
-      it: "Hai disattivato Markdown, il testo potrebbe non essere mostrato correttamente e le decorazioni del profilo non funzioneranno. {v}"
+      it: "Hai disattivato Markdown, il testo potrebbe non essere mostrato correttamente e le decorazioni del profilo non funzioneranno. {v}",
+      de: "Markdown ist deaktiviert, es werden m\xF6glicherweise Textdarstellungs fehler erscheinen, und Profildekorationen k\xF6nnen probleme darstellen. {v}"
     },
     empty_list: {
       en: "This list is empty",
       pt: "Esta lista est\xE1 vazia",
-      it: "Questa lista \xE8 vuota"
+      it: "Questa lista \xE8 vuota",
+      de: "Diese Liste ist Leer"
     },
     on: {
       // switch state
       en: "On",
-      pt: "Ligado"
+      pt: "Ligado",
+      de: "An"
     },
     off: {
       // switch state
       en: "Off",
-      pt: "Desligado"
+      pt: "Desligado",
+      de: "Aus"
     },
     select_arbitrary: {
       en: "Type to add to this list",
@@ -53700,7 +53785,8 @@ var bleh = (() => {
     value_to_close: {
       // keybind
       en: "{v} to close",
-      pt: "{v} para fechar"
+      pt: "{v} para fechar",
+      de: "{v} um zu Schlie\xDFen"
     },
     hover_to_view: {
       // hover mouse
@@ -53720,36 +53806,46 @@ var bleh = (() => {
     },
     music_and_data: {
       en: "Music & Data",
-      pt: "M\xFAsica e Dados"
+      pt: "M\xFAsica e Dados",
+      de: "Musik & Daten"
     },
     streak_information: {
       en: "Streaks are calculated locally and max 100 at the moment.",
-      pt: "As sequ\xEAncias s\xE3o calculadas localmente e limitadas a um m\xE1ximo de 100 no momento."
+      pt: "As sequ\xEAncias s\xE3o calculadas localmente e limitadas a um m\xE1ximo de 100 no momento.",
+      de: "Serien werden Lokal kalkuliert und sind derzeit maximal bis zu 100"
     },
     view_your_compatibility: {
       // taste
       en: "View your compatibility",
-      pt: "Veja sua compatibilidade"
+      pt: "Veja sua compatibilidade",
+      de: "Kompatibalit\xE4t einsehen"
     },
     insight: {
       // used on profiles
       en: "Insight",
-      pt: "An\xE1lise"
+      pt: "An\xE1lise",
+      de: "Einblick"
     },
     profile_summary_pie_chart: {
-      en: "Show pie chart"
+      en: "Show pie chart",
+      pt: "Exibir gr\xE1fico de pizza",
+      de: "Kreisdiagramm zeigen"
     },
     chart_position: {
       // shown on artist/album pages
       // v = the number placement
-      en: "{v} in the world"
+      en: "{v} in the world",
+      pt: "{v}\xBA no mundo"
+      // appended 'º' for ordinal ranking (e.g., 1st -> 1º)
     },
     artist_wordmarks: {
       name: {
-        en: "Show stylised names for some artists"
+        en: "Show stylised names for some artists",
+        pt: "Exibir nomes estilizados de alguns artistas"
       },
       body: {
-        en: "Adds personalisation to each page, sourced from Apple Music and official websites"
+        en: "Adds personalisation to each page, sourced from Apple Music and official websites",
+        pt: "Adiciona personaliza\xE7\xE3o a cada p\xE1gina, com dados do Apple Music e sites oficiais"
       }
     }
   };
