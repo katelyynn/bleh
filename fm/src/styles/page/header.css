@@ -442,10 +442,11 @@
 
 .page-header-avatar-glow {
 	position: absolute;
-	inset: -6px;
-	border-radius: calc(var(--page-header-avatar-radius) + 3px);
+	inset: 0;
+	border-radius: var(--page-header-avatar-radius);
 
-	border: 3px solid oklch(var(--l3-c) / 90%);
+	outline: 3px solid oklch(var(--l3-c) / 90%);
+	outline-offset: 3px;
 
 	scale: 1.06;
 	opacity: 0;
