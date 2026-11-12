@@ -118198,7 +118198,7 @@ var bleh = (() => {
               /* @__PURE__ */ jsx(Icon, { name: icons.bleh_settings }),
               version2.brand
             ] })
-          ], interval: 5e3 }) })
+          ], interval: 7e3 }) })
         );
         bleh_container_tooltip.replaceChildren(
           /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
