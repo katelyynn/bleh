@@ -115,7 +115,7 @@ import { EventSmallCalendar } from '@/components/event/icon';
 import { TextFlip } from '@/components/text/text_flip';
 import { InboxButton } from '@/components/button/inbox';
 import { Track, Tracklist } from '@/components/track/track';
-import { LyricsSnippet } from '@/components/lyrics/lyrics';
+import { LyricsSnippet, LyricsSnippetPlaceholder } from '@/components/lyrics/lyrics';
 import { PanelHead } from '@/components/text/head';
 
 export function mualani() {
@@ -1798,12 +1798,12 @@ export function mualani() {
 			<section id='lyrics'>
 				<DemoGrid>
 					<DemoItem label='LyricsSnippet'>
-						<PanelHead icon={icons.lyrics}>
-							{tl(trans.lyrics)}
-						</PanelHead>
 						<LyricsSnippet lyrics={lyricSamples[0]} />
 						<LyricsSnippet lyrics={lyricSamples[1]} />
 						<LyricsSnippet lyrics={lyricSamples[2]} />
+					</DemoItem>
+					<DemoItem label='LyricsSnippet (loading)'>
+						<LyricsSnippetPlaceholder />
 					</DemoItem>
 				</DemoGrid>
 			</section>

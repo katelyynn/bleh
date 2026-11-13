@@ -49,6 +49,22 @@
 	padding: 1px 0;
 }
 
+.lyrics-snippet-placeholder {
+	padding: 15px 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	height: 100%;
+
+	font-size: var(--font-size-subheading);
+	line-height: var(--line-height-subheading);
+	font-weight: var(--font-weight-medium);
+
+	opacity: 0.6;
+}
+
 
 .lyric-segments {
 	display: flex;

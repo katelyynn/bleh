@@ -1,9 +1,21 @@
 import { tl, trans } from "@/build/trans";
 import { modal } from "../dialog/dialog";
+import { Icon, icons } from "../shared/icon";
 
 interface LyricsSnippetProps {
 	lyrics: string;
 	art?: string;
+}
+
+export function LyricsSnippetPlaceholder() {
+	return (
+		<div class='lyrics-snippet-btn'>
+			<div class='lyrics-snippet-placeholder'>
+				<Icon name={icons.spinner} />
+				{tl(trans.loading_lyrics)}
+			</div>
+		</div>
+	);
 }
 
 export function LyricsSnippet({

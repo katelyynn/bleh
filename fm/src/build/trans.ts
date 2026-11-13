@@ -12918,8 +12918,11 @@ export const trans = {
 		body: {
 			en: 'Adds personalisation to each page, sourced from Apple Music and official websites',
 			pt: 'Adiciona personalização a cada página, com dados do Apple Music e sites oficiais',
-		}
-	}
+		},
+	},
+	loading_lyrics: {
+		en: 'Figuring out the words',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
