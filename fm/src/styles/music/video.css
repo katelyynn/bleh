@@ -24,6 +24,10 @@
 	box-shadow: var(--shadow) !important;
 	position: relative;
 
+	transition-property: transform;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
 	&.video-preview-upload-cta {
 		&:before {
 			display: none !important;
@@ -62,7 +66,7 @@
 	}
 }
 
-.video-preview {
+img.video-preview {
 	scale: 1.02;
 }
 
@@ -75,7 +79,7 @@
 
 	opacity: 0;
 	background-color: oklch(var(--b6) / 50%);
-	box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 60%);
+	box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 40%);
 	border-radius: var(--radius-s);
 
 	transition-property: opacity, scale;

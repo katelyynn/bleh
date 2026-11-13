@@ -19,9 +19,9 @@ export async function getLyrics(): Promise<LrcLibResponse> {
 	const url = `https://lrclib.net/api/get?artist_name=${sanitise(page.sister, '+')}&track_name=${sanitise(page.name, '+')}`;
 
 	try {
-		const res = await download_with_progress(url, 'json');
+		const res = await download_with_progress(url, 'text');
 
-		return res;
+		return JSON.parse(res.responseText);
 	} catch (e) {
 		console.error(e);
 		throw e;

@@ -107,7 +107,7 @@ export function update_check(force = false, btn, func) {
 	// TODO: the rest here is pretty much fine
 	download_with_progress(url, 'blob')
 		.then(async (blob) => {
-			const text = await blob.text();
+			const text = await blob.response.text();
 
 			if (btn) btn.removeAttribute('disabled');
 

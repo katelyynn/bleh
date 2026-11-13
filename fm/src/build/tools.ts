@@ -365,12 +365,13 @@ export function download_with_progress<T extends keyof responseTypes>(
 
 			onload: (res) => {
 				if (res.status == 200) {
-					resolve(res.response as responseTypes[T]);
-					log(`downloaded ${url}`, 'download');
+					resolve(res as responseTypes[T]);
+					log(`downloaded ${url}`, 'download', 'info', { res });
 				} else {
 					reject(new Error(`download failed: ${res.status}`));
 					log(`download failed: ${res.status}`, 'download', 'error', {
-						url: url,
+						url,
+						res
 					});
 				}
 			},

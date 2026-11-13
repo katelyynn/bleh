@@ -6,6 +6,7 @@ import { createRef, ReactElement } from "jsx-dom";
 import { PanelHead } from "../text/head";
 import { icons } from "../shared/icon";
 import { tl, trans } from "@/build/trans";
+import { lazy } from "@/build/tools";
 
 export async function showLyrics() {
 	const saved = page.state.lyrics;
@@ -28,19 +29,23 @@ export async function showLyrics() {
 		}
 	}
 
-	try {
-		const res = await getLyrics();
+	lazy(panel, async () => {
+		try {
+			log('requesting', 'lyrics');
+			const res = await getLyrics();
 
-		finishLyrics(inner.current, res);
+			finishLyrics(inner.current, res);
 
-		page.state.lyrics = {
-			name: page.name,
-			sister: page.sister,
-			res
+			page.state.lyrics = {
+				name: page.name,
+				sister: page.sister,
+				res
+			}
+		} catch (e) {
+			log('failed', 'lyrics', 'error');
+			console.error(e);
 		}
-	} catch {
-		log('failed', 'lyrics', 'error');
-	}
+	});
 }
 
 function finishLyrics(panel: ReactElement, res: LrcLibResponse) {

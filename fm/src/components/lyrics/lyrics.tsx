@@ -26,21 +26,14 @@ export function LyricsSnippet({
 	lyrics,
 	art
 }: LyricsSnippetProps) {
-	let segments = lyrics.trim().split('\n\n').map(segment => segment.split('\n'));
-	const lines = lyrics.trim().split('\n\n').flatMap(segment => segment.split('\n'));
+	lyrics = lyrics.replace(/^\[offset:-\d+\]\s*/, '').trim();
+
+	const segments = lyrics.split('\n\n').map(segment => segment.split('\n'));
+	const lines = lyrics.split('\n\n').flatMap(segment => segment.split('\n'));
 
 	const frequencies: Record<string, number[]> = {};
 
-	segments = segments.map(segment =>
-		segment
-			.map(line => line.replace(/[^\w\s]/g, '').trim())
-			.filter(Boolean)
-	);
-
 	lines.forEach((line, i) => {
-		line = line.replace(/[^\w\s]/g, '').trim();
-		if (!line) return;
-
 		frequencies[line] ??= [];
 		frequencies[line].push(i);
 	});
