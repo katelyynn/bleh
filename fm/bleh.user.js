@@ -85678,16 +85678,29 @@ var bleh = (() => {
       repeatedIndex + 2
     );
     function open2() {
-      modal({
-        id: "lyrics",
-        title: tl2(trans.lyrics),
-        body: /* @__PURE__ */ jsx(Fragment, { children: [
-          /* @__PURE__ */ jsx("div", { class: "lyric-segments", children: segments.map((segment) => /* @__PURE__ */ jsx(LyricSegment, { lines: segment })) }),
-          id && /* @__PURE__ */ jsx(CardTip, { gap: false, children: tl2(trans.sourced_from, { v: /* @__PURE__ */ jsx("a", { href: `https://lrclib.net/tracks/${id}`, children: "LRCLIB" }) }) })
-        ] })
-      });
+      lyricsModal(segments, id);
     }
     return /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", onClick: open2, children: /* @__PURE__ */ jsx("div", { class: "lyric-segment-snippet", children: result.map((result2) => /* @__PURE__ */ jsx("p", { class: "lyric-line-snippet", children: result2 })) }) });
+  }
+  function lyricsModal(segments, id) {
+    const container = createRef();
+    modal({
+      id: "lyrics",
+      title: tl2(trans.lyrics),
+      body: /* @__PURE__ */ jsx(Fragment, { children: [
+        /* @__PURE__ */ jsx("div", { class: "lyric-segments", ref: container }),
+        id && /* @__PURE__ */ jsx(CardTip, { gap: false, children: tl2(trans.sourced_from, { v: /* @__PURE__ */ jsx("a", { href: `https://lrclib.net/tracks/${id}`, children: "LRCLIB" }) }) })
+      ] })
+    });
+    function render7(query = "") {
+      if (!query) {
+        container.current.replaceChildren(
+          segments.map((segment) => /* @__PURE__ */ jsx(LyricSegment, { lines: segment }))
+        );
+        return;
+      }
+    }
+    render7();
   }
   function LyricSegment({
     lines

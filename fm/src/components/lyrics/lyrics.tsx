@@ -2,7 +2,7 @@ import { tl, trans } from "@/build/trans";
 import { modal } from "../dialog/dialog";
 import { Icon, icons } from "../shared/icon";
 import { WithChildren } from "@/types/generic";
-import { Ref } from "jsx-dom";
+import { createRef, Ref } from "jsx-dom";
 import { CardTip } from "../text/tip";
 
 interface LyricsSnippetProps {
@@ -62,24 +62,7 @@ export function LyricsSnippet({
 		);
 
 	function open() {
-		modal({
-			id: 'lyrics',
-			title: tl(trans.lyrics),
-			body: (
-				<>
-					<div class='lyric-segments'>
-						{segments.map(segment => (
-							<LyricSegment lines={segment} />
-						))}
-					</div>
-					{id && (
-						<CardTip gap={false}>
-							{tl(trans.sourced_from, { v: <a href={`https://lrclib.net/tracks/${id}`}>LRCLIB</a> })}
-						</CardTip>
-					)}
-				</>
-			)
-		});
+		lyricsModal(segments, id);
 	}
 
 	return (
@@ -91,6 +74,39 @@ export function LyricsSnippet({
 			</div>
 		</div>
 	)
+}
+
+function lyricsModal(segments: string[][], id?: number) {
+	const container = createRef();
+
+	modal({
+		id: 'lyrics',
+		title: tl(trans.lyrics),
+		body: (
+			<>
+				<div class='lyric-segments' ref={container} />
+				{id && (
+					<CardTip gap={false}>
+						{tl(trans.sourced_from, { v: <a href={`https://lrclib.net/tracks/${id}`}>LRCLIB</a> })}
+					</CardTip>
+				)}
+			</>
+		)
+	});
+
+	function render(query = '') {
+		if (!query) {
+			container.current.replaceChildren(
+				segments.map(segment => (
+					<LyricSegment lines={segment} />
+				))
+			);
+
+			return;
+		}
+	}
+
+	render();
 }
 
 interface LyricSegmentProps {
