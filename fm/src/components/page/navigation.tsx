@@ -31,7 +31,7 @@ import {
 } from '@/pages/profile/profile';
 import { is_sponsor, sponsor } from '@/components/sponsor';
 import { GenericLinkMenu, register_menu } from '@/components/menu';
-import { bool, copy, get_language_name, romanise } from '@/build/tools';
+import { bool, copy, get_language_name, romanise, sanitise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
@@ -71,6 +71,9 @@ import { MenuRadio } from '../settings/provider/menu/radio';
 import { page_search } from './search';
 import { TextFlip } from '../text/text_flip';
 import { InboxButton } from '../button/inbox';
+import { LoadingData } from '../loading/loading';
+import { Track, Tracklist } from '../track/track';
+import { redirect } from '../music/music';
 
 export function update_branding_type(state = useSettings.get('branding_type')) {
 	const season = useSeasons.get().current?.id || '';
@@ -650,9 +653,9 @@ export function append_nav() {
 					className='music-status'
 					ref={status_container}
 				>
-					<div class='loading-data-container'>
-						<div class='loading-data-text'>{tl(trans.loading)}</div>
-					</div>
+					<LoadingData>
+						{tl(trans.loading)}
+					</LoadingData>
 				</NavWindowContents>
 			</NavWindow>,
 			{
@@ -669,36 +672,31 @@ export function append_nav() {
 		function render_status_container(status: music_status) {
 			if (!status) return;
 
-			render(
-				status_container.current,
-				html`
-					<div class="status">
-						<div class="status-image">
-							<img src=${status.avatar} alt=${status.album}>
-						</div>
-						<div class="status-info">
-							<strong class="status-text status-title">${status
-						.name}</strong>
-							<p class="status-text status-artist">${status
-						.artist}</p>
-							<p class="status-text status-album">${status
-						.album}</p>
-						</div>
+			status_container.current.replaceChildren(
+				<>
+					<Tracklist>
+						<Track
+							art={status.avatar}
+							name={status.name}
+							artist={status.artist}
+							album={status.album}
+							url={`${root}music/${redirect()}${sanitise(status.artist)}/_/${sanitise(status.name)}`}
+							active={status.active}
+							margin={false}
+						/>
+					</Tracklist>
+					<div class='status-time'>
+						{status.active ? (
+							<p class={['status-text', 'status-time-text', 'chartlist-now-scrobbling']}>
+								{tl(trans.scrobbling_now)}
+							</p>
+						) : (
+							<p class={['status-text', 'status-time-text', 'inactive']}>
+								{tl(trans.recent_scrobble)}
+							</p>
+						)}
 					</div>
-					<div class="status-time">
-					    ${status.active
-						? html.node`
-                        <p class="status-text status-time-text chartlist-now-scrobbling">
-                            ${tl(trans.scrobbling_now)}
-                        </p>
-                    `
-						: html.node`
-                        <p class="status-text status-time-text inactive">
-                            ${tl(trans.recent_scrobble)}
-                        </p>
-                    `}
-					</div>
-				`,
+				</>
 			);
 		}
 
@@ -1552,9 +1550,9 @@ export function append_nav() {
 
 interface music_status {
 	next_fetch: Date;
-	name: Element;
-	artist: Element;
-	album: Element;
+	name: string;
+	artist: string;
+	album: string;
 	avatar: string;
 	active: boolean;
 }
@@ -1588,50 +1586,18 @@ export async function live_status() {
 		const track = doc.querySelector('.user-now-track a');
 		const links = doc.querySelectorAll('.user-now-artist-and-album a');
 
-		let artist = links[0];
+		const artist = links[0];
 		const album = links[1];
 		const avatar = doc.querySelector('.cover-art img')?.src;
-
-		// keep them in the same tab
-		track.removeAttribute('target');
-		artist.removeAttribute('target');
-		album.removeAttribute('target');
 
 		const next = new Date();
 		next.setMinutes(next.getMinutes() + 1);
 
-		if (useSettings.get('format_guest_features')) {
-			album.textContent = romanise(
-				correct_item_by_artist(album.textContent, artist.textContent),
-			);
-
-			const formatted = name_includes(
-				track.textContent,
-				artist.textContent,
-			);
-
-			track.classList.add('smart-title');
-			render(
-				track,
-				smart_title(formatted.song_title, formatted.song_tags),
-			);
-			artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)
-				}</span>`;
-		} else if (useSettings.get('corrections')) {
-			album.textContent = romanise(
-				correct_item_by_artist(album.textContent, artist.textContent),
-			);
-			track.textContent = romanise(
-				correct_item_by_artist(track.textContent, artist.textContent),
-			);
-			artist.textContent = romanise(correct_artist(artist.textContent));
-		}
-
 		page.now = {
 			next_fetch: next,
-			name: track,
-			artist,
-			album,
+			name: track.textContent.trim(),
+			artist: artist.textContent.trim(),
+			album: album.textContent.trim(),
 			avatar,
 			active,
 		} as music_status;

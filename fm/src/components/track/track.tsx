@@ -36,6 +36,7 @@ interface TrackProps {
 	art?: string;
 	url: string;
 	active?: boolean;
+	margin?: boolean;
 }
 
 export function Track({
@@ -44,7 +45,8 @@ export function Track({
 	album,
 	art,
 	url,
-	active
+	active,
+	margin = true
 }: TrackProps) {
 	const track_name = createRef();
 	const artists = createRef();
@@ -52,8 +54,9 @@ export function Track({
 	const elem = (
 		<tr class={[
 			'chartlist-row',
-			active && 'chartlist-row--now-scrobbling'
-		]}>
+			active && 'chartlist-row--now-scrobbling',
+			!margin && 'no-side-margin'
+		]} data-show-album-text='true' data-album-name-location='column' data-has-bar='false'>
 			<td class='chartlist-image'>
 				<a href={url} class='cover-art'>
 					{art ? (
