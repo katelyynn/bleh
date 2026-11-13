@@ -16,7 +16,7 @@ export interface LrcLibResponse {
 }
 
 export async function getLyrics(): Promise<LrcLibResponse> {
-	const url = `https://lrclib.net/api/get?artist_name=${sanitise(page.sister, '+')}&track_name=${sanitise(page.name, '+')}`;
+	const url = `https://lrclib.net/api/get?artist_name=${sanitise(page.sister, '+').replaceAll('%252B', '%25')}&track_name=${sanitise(page.name, '+').replaceAll('%252B', '%25')}`;
 
 	try {
 		const res = await download_with_progress(url, 'text');

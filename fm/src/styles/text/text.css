@@ -301,7 +301,7 @@ pre {
 
 .card-tip {
 	display: inline-block;
-	margin-top: var(--card-gap);
+	margin-top: unset;
 	font-weight: var(--font-weight) !important;
 	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));

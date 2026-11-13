@@ -23,7 +23,7 @@ export function CardTip({
 	minWidth,
 	className,
 	center,
-	gap,
+	gap = true,
 	children,
 }: CardTipProps) {
 	return (

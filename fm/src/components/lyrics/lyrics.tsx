@@ -3,9 +3,11 @@ import { modal } from "../dialog/dialog";
 import { Icon, icons } from "../shared/icon";
 import { WithChildren } from "@/types/generic";
 import { Ref } from "jsx-dom";
+import { CardTip } from "../text/tip";
 
 interface LyricsSnippetProps {
 	lyrics: string;
+	id?: number;
 	art?: string;
 }
 
@@ -29,6 +31,7 @@ export function LyricsSnippetPlaceholder({
 
 export function LyricsSnippet({
 	lyrics,
+	id,
 	art
 }: LyricsSnippetProps) {
 	lyrics = lyrics.replace(/^\[offset:-?\d+\]\s*/, '').trim();
@@ -63,11 +66,18 @@ export function LyricsSnippet({
 			id: 'lyrics',
 			title: tl(trans.lyrics),
 			body: (
-				<div class='lyric-segments'>
-					{segments.map(segment => (
-						<LyricSegment lines={segment} />
-					))}
-				</div>
+				<>
+					<div class='lyric-segments'>
+						{segments.map(segment => (
+							<LyricSegment lines={segment} />
+						))}
+					</div>
+					{id && (
+						<CardTip gap={false}>
+							{tl(trans.sourced_from, { v: <a href={`https://lrclib.net/tracks/${id}`}>LRCLIB</a> })}
+						</CardTip>
+					)}
+				</>
 			)
 		});
 	}

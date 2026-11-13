@@ -12906,7 +12906,7 @@ export const trans = {
 	},
 	chart_position: {
 		// shown on artist/album pages
-		// v = the number placement
+		// v = the number placement with a leading #
 		en: '{v} in the world',
 		pt: '{v}º no mundo', // appended 'º' for ordinal ranking (e.g., 1st -> 1º)
 	},
@@ -12924,9 +12924,17 @@ export const trans = {
 		en: 'Figuring out the words',
 	},
 	no_lyrics: {
-		en: 'No lyrics found',
+		en: 'Couldn’t find this song',
+	},
+	lyrics_instrumental: {
+		en: 'This song has no lyrics',
+	},
+	sourced_from: {
+		en: 'Sourced from {v}',
 	},
 } as const satisfies Record<string, any>;
+
+// ’
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
 

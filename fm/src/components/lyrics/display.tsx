@@ -68,7 +68,16 @@ function finishLyrics(panel: ReactElement, res: LrcLibResponse | undefined) {
 		);
 	}
 
+	if (res.plainLyrics == 'x') {
+		panel.replaceWith(
+			<LyricsSnippetPlaceholder>
+				<Icon name={icons.track} />
+				{tl(trans.lyrics_instrumental)}
+			</LyricsSnippetPlaceholder>
+		);
+	}
+
 	panel.replaceWith(
-		<LyricsSnippet lyrics={res.plainLyrics} />
+		<LyricsSnippet lyrics={res.plainLyrics} id={res.id} />
 	);
 }
