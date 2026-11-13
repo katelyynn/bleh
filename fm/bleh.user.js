@@ -21520,7 +21520,7 @@ var bleh = (() => {
     Chart: () => Chart,
     fac: () => fac,
     symbol: () => symbol,
-    version: () => version2
+    version: () => version
   });
 
   // node_modules/.pnpm/@ungap+weakmap@0.2.1/node_modules/@ungap/weakmap/esm/index.js
@@ -40707,12 +40707,16 @@ var bleh = (() => {
       }
     }
   }
-  function download_with_progress(url, func) {
+  function download_with_progress(url, responseType, func) {
     return new Promise((resolve2, reject) => {
       GM_xmlhttpRequest({
         method: "GET",
         url,
-        responseType: "blob",
+        responseType,
+        headers: {
+          "User-Agent": `bleh/${version.build} <https://bleh.yuzu.pet>`,
+          Accept: "application/json"
+        },
         onprogress: (e4) => {
           if (e4.lengthComputable) {
             const percent = Math.round(e4.loaded / e4.total * 100);
@@ -60695,7 +60699,7 @@ var bleh = (() => {
       return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
     }, _typeof(o);
   }
-  var version = "1.15.7";
+  var version2 = "1.15.7";
   function userAgent(pattern) {
     if (typeof window !== "undefined" && window.navigator) {
       return !!/* @__PURE__ */ navigator.userAgent.match(pattern);
@@ -62572,7 +62576,7 @@ var bleh = (() => {
   Sortable.create = function(el, options) {
     return new Sortable(el, options);
   };
-  Sortable.version = version;
+  Sortable.version = version2;
   var autoScrolls = [];
   var scrollEl;
   var scrollRootEl;
@@ -66264,7 +66268,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
+          "User-Agent": `bleh/${version.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -66410,7 +66414,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
+          "User-Agent": `bleh/${version.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -66477,7 +66481,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
+          "User-Agent": `bleh/${version.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -66692,7 +66696,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
+          "User-Agent": `bleh/${version.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -67611,7 +67615,7 @@ var bleh = (() => {
         method: "GET",
         url,
         headers: {
-          "User-Agent": `bleh/${version2.build} <https://bleh.yuzu.pet>`,
+          "User-Agent": `bleh/${version.build} <https://bleh.yuzu.pet>`,
           Accept: "application/json"
         },
         onload: function(response) {
@@ -85632,6 +85636,98 @@ var bleh = (() => {
     return link_group;
   }
 
+  // src/components/lyrics/lyrics.tsx
+  function LyricsSnippetPlaceholder({
+    ref: ref2
+  }) {
+    return /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", ref: ref2, children: /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-placeholder", children: [
+      /* @__PURE__ */ jsx(Icon, { name: icons.spinner }),
+      tl2(trans.loading_lyrics)
+    ] }) });
+  }
+  function LyricsSnippet({
+    lyrics,
+    art
+  }) {
+    let segments = lyrics.trim().split("\n\n").map((segment) => segment.split("\n"));
+    const lines = lyrics.trim().split("\n\n").flatMap((segment) => segment.split("\n"));
+    const frequencies = {};
+    segments = segments.map(
+      (segment) => segment.map((line) => line.replace(/[^\w\s]/g, "").trim()).filter(Boolean)
+    );
+    lines.forEach((line, i2) => {
+      line = line.replace(/[^\w\s]/g, "").trim();
+      if (!line) return;
+      frequencies[line] ??= [];
+      frequencies[line].push(i2);
+    });
+    console.info("lyrics", segments, lines);
+    const repeated = Object.entries(frequencies).filter(([line, i2]) => i2.length > 1).sort((a, b) => b[1].length - a[1].length);
+    const repeatedIndex = repeated[0]?.[1][0];
+    const result = repeatedIndex == null ? lines.slice(Math.floor(lines.length / 2) - 1, Math.floor(lines.length / 2) + 2) : lines.slice(
+      Math.max(0, repeatedIndex - 1),
+      repeatedIndex + 2
+    );
+    function open2() {
+      modal({
+        id: "lyrics",
+        title: tl2(trans.lyrics),
+        body: /* @__PURE__ */ jsx("div", { class: "lyric-segments", children: segments.map((segment) => /* @__PURE__ */ jsx(LyricSegment, { lines: segment })) })
+      });
+    }
+    return /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", onClick: open2, children: /* @__PURE__ */ jsx("div", { class: "lyric-segment-snippet", children: result.map((result2) => /* @__PURE__ */ jsx("p", { class: "lyric-line-snippet", children: result2 })) }) });
+  }
+  function LyricSegment({
+    lines
+  }) {
+    return /* @__PURE__ */ jsx("div", { class: "lyric-segment", children: lines.map((line) => /* @__PURE__ */ jsx("p", { class: "lyric-line", children: line })) });
+  }
+
+  // src/components/lyrics/retrieve.tsx
+  async function getLyrics() {
+    const url = `https://lrclib.net/api/get?artist_name=${sanitise(page.sister, "+")}&track_name=${sanitise(page.name, "+")}`;
+    try {
+      const res = await download_with_progress(url, "json");
+      return res;
+    } catch (e4) {
+      console.error(e4);
+      throw e4;
+    }
+  }
+
+  // src/components/lyrics/display.tsx
+  async function showLyrics() {
+    const saved = page.state.lyrics;
+    const inner = createRef();
+    const panel = /* @__PURE__ */ jsx("section", { class: "page-lyrics", children: [
+      /* @__PURE__ */ jsx(PanelHead, { icon: icons.lyrics, children: tl2(trans.lyrics) }),
+      /* @__PURE__ */ jsx(LyricsSnippetPlaceholder, { ref: inner })
+    ] });
+    page.structure.side.appendChild(panel);
+    if (saved) {
+      if (saved.name == page.name && saved.sister == page.sister) {
+        return finishLyrics(inner.current, saved.res);
+      }
+    }
+    try {
+      const res = await getLyrics();
+      finishLyrics(inner.current, res);
+      page.state.lyrics = {
+        name: page.name,
+        sister: page.sister,
+        res
+      };
+    } catch {
+      log("failed", "lyrics", "error");
+    }
+  }
+  function finishLyrics(panel, res) {
+    log("rendering", "lyrics", "info", { res });
+    panel.replaceWith(
+      /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: res.plainLyrics })
+    );
+  }
+
   // src/components/music/music.tsx
   function show_your_scrobbles() {
     show_numbers_on_side(page.type);
@@ -86202,6 +86298,7 @@ var bleh = (() => {
       video.appendChild(
         /* @__PURE__ */ jsx("a", { class: ["link-block-cover-link", "track-video-cover"], href: playlink.href, target: "_blank", children: /* @__PURE__ */ jsx("span", { class: "track-video-play", children: /* @__PURE__ */ jsx(Icon, { name: icons.play }) }) })
       );
+      showLyrics();
     }
   }
   function video_unavailable(video_col = null) {
@@ -88772,7 +88869,7 @@ var bleh = (() => {
             buttons.insertBefore(
               html.node`
                         <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
-                            ${tl2(trans.collage)} (${version2.brand})
+                            ${tl2(trans.collage)} (${version.brand})
                         </a>
                     `,
               buttons.firstElementChild
@@ -111279,7 +111376,7 @@ var bleh = (() => {
                 user: page.name,
                 type: tl2(trans[type.current.value]),
                 size: `${width.current.value}\xD7${rows}`,
-                brand: version2.brand,
+                brand: version.brand,
                 date: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
               });
               body2.current.replaceChildren(
@@ -111324,7 +111421,7 @@ var bleh = (() => {
   // src/components/news/news.tsx
   function NewsTitle() {
     return /* @__PURE__ */ jsx("h1", { class: ["news-title"], children: tl2(trans.the_bleh_times, {
-      b: /* @__PURE__ */ jsx("i", { class: ["news-title-label"], children: version2.brand })
+      b: /* @__PURE__ */ jsx("i", { class: ["news-title-label"], children: version.brand })
     }) });
   }
   function NewsDate({
@@ -113942,7 +114039,7 @@ var bleh = (() => {
         delete clone6[setting2];
       }
     }
-    clone6.version = version2.build;
+    clone6.version = version.build;
     set_storage("bleh", JSON.stringify(clone6));
     return clone6;
   }
@@ -117270,25 +117367,25 @@ var bleh = (() => {
     const last_version_used = localStorage.getItem(keys3.last_version_used) || "";
     if (last_version_used == "") {
       window.location.href = `${root}bleh/setup`;
-      set_storage(keys3.last_version_used, version2.build);
+      set_storage(keys3.last_version_used, version.build);
       register_activity("install_bleh", [], `${root}bleh`);
       return;
     }
-    if (last_version_used != version2.build) {
+    if (last_version_used != version.build) {
       notify({
         title: tl2(trans.you_are_up_to_date),
         body: tl2(trans.updated.notification, {
-          v: `${version2.build}.${version2.sku}`
+          v: `${version.build}.${version.sku}`
         }),
         persist: true,
         icon: icons.update
       });
       register_activity(
         "update_bleh",
-        [{ name: version2.build, type: "bleh" }],
+        [{ name: version.build, type: "bleh" }],
         `${root}bleh`
       );
-      set_storage(keys3.last_version_used, version2.build);
+      set_storage(keys3.last_version_used, version.build);
       reset_update_status();
       request_changelog();
     }
@@ -117872,7 +117969,7 @@ var bleh = (() => {
     page.state.home_link.replaceChildren(logo);
     if (state == "bleh") {
       logo.replaceChildren(
-        /* @__PURE__ */ jsx("div", { class: ["home-logo", "bleh-logo"], "data-season": season, children: /* @__PURE__ */ jsx("div", { class: "brand-inner", "data-season": season, children: version2.brand }) })
+        /* @__PURE__ */ jsx("div", { class: ["home-logo", "bleh-logo"], "data-season": season, children: /* @__PURE__ */ jsx("div", { class: "brand-inner", "data-season": season, children: version.brand }) })
       );
     } else if (state == "lastfm") {
       logo.replaceChildren(
@@ -118266,7 +118363,7 @@ var bleh = (() => {
         bleh_container.replaceChildren(
           /* @__PURE__ */ jsx(Fragment, { children: [
             /* @__PURE__ */ jsx(Icon, { name: icons.bleh_settings }),
-            version2.brand
+            version.brand
           ] })
         );
         bleh_container_tooltip.textContent = tl2(
@@ -118290,7 +118387,7 @@ var bleh = (() => {
             ] }),
             /* @__PURE__ */ jsx(ButtonInnerContent, { shrinkBelow: "vertical", children: [
               /* @__PURE__ */ jsx(Icon, { name: icons.bleh_settings }),
-              version2.brand
+              version.brand
             ] })
           ], interval: 7e3 }) })
         );
@@ -119061,7 +119158,7 @@ var bleh = (() => {
         })}
                             <a class="btn window-menu-item icon-r" aria-checked=${page.type == "bleh_settings"} href="${root}bleh">
                                 ${icon({ name: icons.bleh_settings })}
-                                ${version2.brand}
+                                ${version.brand}
                             </a>
                             <a class="btn window-menu-item icon-r" aria-checked=${page.type == "settings"} href="${root}settings">
                                 ${icon({ name: icons.settings })}
@@ -119874,14 +119971,14 @@ var bleh = (() => {
     }
     if (btn) btn.setAttribute("disabled", "");
     const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
-    download_with_progress(url).then(async (blob) => {
+    download_with_progress(url, "blob").then(async (blob) => {
       const text4 = await blob.text();
       if (btn) btn.removeAttribute("disabled");
       try {
         const data2 = JSON.parse(text4);
         console.log(data2);
         const update_required = update_comparison(
-          version2.build,
+          version.build,
           data2.build
         );
         if (update_required) {
@@ -120105,7 +120202,7 @@ var bleh = (() => {
             /* @__PURE__ */ jsx(SubText, { children: tl2(trans.current_version) }),
             /* @__PURE__ */ jsx("h1", { class: "setting-head", children: [
               /* @__PURE__ */ jsx(Brand, { className: "setting-brand" }),
-              /* @__PURE__ */ jsx("div", { class: "setting-brand-version", children: /* @__PURE__ */ jsx("div", { class: "setting-brand-version-text", children: version2.build }) })
+              /* @__PURE__ */ jsx("div", { class: "setting-brand-version", children: /* @__PURE__ */ jsx("div", { class: "setting-brand-version-text", children: version.build }) })
             ] })
           ] }),
           /* @__PURE__ */ jsx(SettingGroup, { children: update_setting() }),
@@ -120438,11 +120535,11 @@ var bleh = (() => {
                         <p class="error-body">Either the update files could not be found or there was an error in parsing them.</p>
                     </div>
                 </div>
-                <pre class="error-info colourful">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version2.build} (${version2.sku})</pre>
+                <pre class="error-info colourful">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
             </div>
             <div class="modal-footer">
                 <div class="fill"></div>
-                <a class="see-more" href=${version2.url} target="_blank">
+                <a class="see-more" href=${version.url} target="_blank">
                     Try update manually
                 </a>
                 <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
@@ -122029,16 +122126,16 @@ var bleh = (() => {
         ] }),
         /* @__PURE__ */ jsx("section", { children: [
           /* @__PURE__ */ jsx(CardTip, { children: [
-            version2.brand,
+            version.brand,
             " ",
-            version2.build,
+            version.build,
             " \u2018",
-            version2.sku,
+            version.sku,
             "\u2019 - florence",
             " ",
             S
           ] }),
-          /* @__PURE__ */ jsx(CardTip, { children: DateTime.fromISO(version2.built_on).toLocaleString(
+          /* @__PURE__ */ jsx(CardTip, { children: DateTime.fromISO(version.built_on).toLocaleString(
             DateTime.DATETIME_MED
           ) })
         ] })
@@ -125344,7 +125441,7 @@ var bleh = (() => {
       {
         id: "start",
         content: () => /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("p", { children: tl2(trans.welcome_to_bleh, {
-          b: version2.brand,
+          b: version.brand,
           break: /* @__PURE__ */ jsx("br", {})
         }) }) })
       },
@@ -125486,7 +125583,7 @@ var bleh = (() => {
           const katelyn = sponsor_list.related.special[0] || "dressupdarling";
           return /* @__PURE__ */ jsx(Fragment, { children: [
             /* @__PURE__ */ jsx("p", { children: tl2(trans.setup_end, {
-              b: version2.brand,
+              b: version.brand,
               settings: /* @__PURE__ */ jsx("a", { href: `${root}bleh`, children: tl2(trans.setup_end.settings) })
             }) }),
             /* @__PURE__ */ jsx("div", { class: ["campfire-cta", "standalone"], children: [
@@ -128877,7 +128974,7 @@ var bleh = (() => {
                     <li class="fill"></li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--bleh">
                         <a href="${root}bleh" class="secondary-nav-item-link ${page.type == "bleh_settings" ? "secondary-nav-item-link--active" : ""}">
-                            ${version2.brand}
+                            ${version.brand}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
@@ -130127,12 +130224,12 @@ var bleh = (() => {
               class: ["bleh-logo-footer", "b"],
               href: bleh_website2,
               target: "_blank",
-              children: version2.brand
+              children: version.brand
             }
           ),
-          /* @__PURE__ */ jsx("span", { class: "footer-version", children: version2.build }),
+          /* @__PURE__ */ jsx("span", { class: "footer-version", children: version.build }),
           /* @__PURE__ */ jsx("div", { class: ["new-badge", "sku", "spacing"], children: [
-            version2.sku,
+            version.sku,
             useSettings.get("dev") && /* @__PURE__ */ jsx("span", { class: "bleh-icon-container", children: /* @__PURE__ */ jsx(Icon, { name: icons.dev }) })
           ] }),
           /* @__PURE__ */ jsx(FooterDot, {}),
@@ -132270,45 +132367,6 @@ var bleh = (() => {
     ] });
   }
 
-  // src/components/lyrics/lyrics.tsx
-  function LyricsSnippetPlaceholder() {
-    return /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", children: /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-placeholder", children: [
-      /* @__PURE__ */ jsx(Icon, { name: icons.spinner }),
-      tl2(trans.loading_lyrics)
-    ] }) });
-  }
-  function LyricsSnippet({
-    lyrics,
-    art
-  }) {
-    const segments = lyrics.split("\n\n").map((segment) => segment.split("\n"));
-    const lines = lyrics.split("\n\n").flatMap((segment) => segment.split("\n"));
-    const frequencies = {};
-    lines.forEach((line, i2) => {
-      frequencies[line] ??= [];
-      frequencies[line].push(i2);
-    });
-    const repeated = Object.entries(frequencies).filter(([line, i2]) => i2.length > 1).sort((a, b) => b[1].length - a[1].length);
-    const repeatedIndex = repeated[0]?.[1][0];
-    const result = repeatedIndex == null ? lines.slice(Math.floor(lines.length / 2) - 1, Math.floor(lines.length / 2) + 2) : lines.slice(
-      Math.max(0, repeatedIndex - 1),
-      repeatedIndex + 2
-    );
-    function open2() {
-      modal({
-        id: "lyrics",
-        title: tl2(trans.lyrics),
-        body: /* @__PURE__ */ jsx("div", { class: "lyric-segments", children: segments.map((segment) => /* @__PURE__ */ jsx(LyricSegment, { lines: segment })) })
-      });
-    }
-    return /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", onClick: open2, children: /* @__PURE__ */ jsx("div", { class: "lyric-segment-snippet", children: result.map((result2) => /* @__PURE__ */ jsx("p", { class: "lyric-line-snippet", children: result2 })) }) });
-  }
-  function LyricSegment({
-    lines
-  }) {
-    return /* @__PURE__ */ jsx("div", { class: "lyric-segment", children: lines.map((line) => /* @__PURE__ */ jsx("p", { class: "lyric-line", children: line })) });
-  }
-
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -133954,7 +134012,33 @@ Ya feel me?`
           /* @__PURE__ */ jsx(DemoItem, { label: "LyricsSnippet", children: [
             /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[0] }),
             /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[1] }),
-            /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[2] })
+            /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[2] }),
+            /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: `
+
+
+
+
+Asheville flight to Austin, bluebirds fly in flocks
+And I'm one call away if you need to talk
+And I understand in whatever way I can
+Don't let things you've lost define the things you have
+It sounds strange, but you've had a hell of a time, are you feeling alright?
+As things change, you'll start to realize it gets better with time
+I will say that she ain't the love of your life if it's only sometimes
+Either way, you've had one hell of a night, are you feeling alright?
+Warsaw to London, Warsaw from Prague
+I understand, man, I've felt it all
+The person that you love ain't the person that they are
+The person that you love ain't the person that they are
+What else can I say except some played-out clich\xE9
+About how right now it's hard, but it gets better every day?
+And what else can I say except some played-out clich\xE9
+About how right now it's hard, but it gets better if you wait? So just wait
+It sounds strange, but you've had a hell of a time, are you feeling alright?
+As things change, you'll start to realize it gets better with time
+I will say that she ain't the love of your life if it's only sometimes
+Either way, you've had one hell of a night, are you feeling alright?
+` })
           ] }),
           /* @__PURE__ */ jsx(DemoItem, { label: "LyricsSnippet (loading)", children: /* @__PURE__ */ jsx(LyricsSnippetPlaceholder, {}) })
         ] }) })
@@ -134868,7 +134952,7 @@ ${e4.stack}
 
 on: ${page.type}/${page.subpage}
 ${window.location.pathname}
-${version2.build} (${version2.sku})`;
+${version.build} (${version.sku})`;
     }
     modal({
       id: "error",
@@ -134892,9 +134976,9 @@ ${version2.build} (${version2.sku})`;
           /* @__PURE__ */ jsx("br", {}),
           window.location.pathname,
           /* @__PURE__ */ jsx("br", {}),
-          version2.build,
+          version.build,
           " (",
-          version2.sku,
+          version.sku,
           ")"
         ] }),
         /* @__PURE__ */ jsx("p", { children: "Copy the error details below and report this as a bug." })
@@ -135265,13 +135349,13 @@ ${version2.build} (${version2.sku})`;
       else if (page.type == "tag") title = tl2(trans.tag);
     }
     if (page.state.error) title = tl2(trans.error);
-    template = template.replace("{page}", title).replace("{name}", name).replace("{sister}", sister).replace("{build}", version2.build).replace("{sku}", version2.sku);
+    template = template.replace("{page}", title).replace("{name}", name).replace("{sister}", sister).replace("{build}", version.build).replace("{sku}", version.sku);
     if (settings.branding_type == "bleh") {
-      template = template.replace("{brand}", version2.brand);
+      template = template.replace("{brand}", version.brand);
     } else if (settings.branding_type == "lastfm") {
       template = template.replace(
         "{brand}",
-        `Last.fm (${version2.brand})`
+        `Last.fm (${version.brand})`
       );
     }
     document.title = template;
@@ -135325,9 +135409,9 @@ ${version2.build} (${version2.sku})`;
       html`
 			<div class="page-indicator-elem bleh">
 				<strong class="page-indicator-sub page-indicator-head">ver</strong>
-				<span class="page-indicator-sub">${version2.brand}</span>
-				<span class="page-indicator-sub">${version2.build}</span>
-				<span class="page-indicator-sub">${version2.sku}</span>
+				<span class="page-indicator-sub">${version.brand}</span>
+				<span class="page-indicator-sub">${version.build}</span>
+				<span class="page-indicator-sub">${version.sku}</span>
 			</div>
 			<div class="page-indicator-elem page">
 				<strong class="page-indicator-sub page-indicator-head">auth</strong>
@@ -137024,8 +137108,8 @@ ${version2.build} (${version2.sku})`;
   Chart.register(plugin);
   var fac = new FastAverageColor();
   var symbol = /* @__PURE__ */ Symbol("generic");
-  var version2 = build_default;
-  log(`starting ${version2.build}.${version2.sku}`, "load");
+  var version = build_default;
+  log(`starting ${version.build}.${version.sku}`, "load");
   bleh();
   return __toCommonJS(main_exports);
 })();

@@ -17,6 +17,7 @@ import { root } from '@/build/page';
 import { hsl, oklch } from 'culori';
 import JSON5 from 'json5';
 import { useSettings } from '@/page.tsx';
+import { version } from '@/main';
 
 export function hex_to_hsl(hex: string) {
 	return hsl(hex);
@@ -331,15 +332,26 @@ export async function paste(elem = null, silent = false) {
 	}
 }
 
-export function download_with_progress(
+type responseTypes = {
+	blob: Blob;
+	json: unknown;
+	text: string;
+}
+
+export function download_with_progress<T extends keyof responseTypes>(
 	url: string,
+	responseType: T,
 	func?: (percent: number) => void,
-) {
+): Promise<responseTypes[T]> {
 	return new Promise((resolve, reject) => {
 		GM_xmlhttpRequest({
 			method: 'GET',
 			url,
-			responseType: 'blob',
+			responseType,
+			headers: {
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
+				Accept: 'application/json',
+			},
 
 			onprogress: (e) => {
 				if (e.lengthComputable) {
@@ -353,7 +365,7 @@ export function download_with_progress(
 
 			onload: (res) => {
 				if (res.status == 200) {
-					resolve(res.response);
+					resolve(res.response as responseTypes[T]);
 					log(`downloaded ${url}`, 'download');
 				} else {
 					reject(new Error(`download failed: ${res.status}`));
@@ -542,8 +554,7 @@ export async function translate(text: string, lang = 'en') {
 	}
 
 	const url =
-		`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${
-			encodeURIComponent(text)
+		`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)
 		}`;
 
 	const res = await fetch(url);

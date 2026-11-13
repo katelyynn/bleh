@@ -3,7 +3,7 @@
 		"JavaScript": {
 			"language_servers": [
 				"eslint",
-				"typescript-language-server",
+				"!typescript-language-server",
 				"!deno",
 				"vtsls",
 			],
@@ -14,7 +14,7 @@
 		"TypeScript": {
 			"language_servers": [
 				"eslint",
-				"typescript-language-server",
+				"!typescript-language-server",
 				"!deno",
 				"vtsls",
 			],
@@ -25,7 +25,7 @@
 		"TSX": {
 			"language_servers": [
 				"eslint",
-				"typescript-language-server",
+				"!typescript-language-server",
 				"!deno",
 				"vtsls",
 			],

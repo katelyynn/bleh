@@ -1801,6 +1801,7 @@ export function mualani() {
 						<LyricsSnippet lyrics={lyricSamples[0]} />
 						<LyricsSnippet lyrics={lyricSamples[1]} />
 						<LyricsSnippet lyrics={lyricSamples[2]} />
+						<LyricsSnippet lyrics={`\n\n\n\n\nAsheville flight to Austin, bluebirds fly in flocks\nAnd I'm one call away if you need to talk\nAnd I understand in whatever way I can\nDon't let things you've lost define the things you have\nIt sounds strange, but you've had a hell of a time, are you feeling alright?\nAs things change, you'll start to realize it gets better with time\nI will say that she ain't the love of your life if it's only sometimes\nEither way, you've had one hell of a night, are you feeling alright?\nWarsaw to London, Warsaw from Prague\nI understand, man, I've felt it all\nThe person that you love ain't the person that they are\nThe person that you love ain't the person that they are\nWhat else can I say except some played-out cliché\nAbout how right now it's hard, but it gets better every day?\nAnd what else can I say except some played-out cliché\nAbout how right now it's hard, but it gets better if you wait? So just wait\nIt sounds strange, but you've had a hell of a time, are you feeling alright?\nAs things change, you'll start to realize it gets better with time\nI will say that she ain't the love of your life if it's only sometimes\nEither way, you've had one hell of a night, are you feeling alright?\n`} />
 					</DemoItem>
 					<DemoItem label='LyricsSnippet (loading)'>
 						<LyricsSnippetPlaceholder />

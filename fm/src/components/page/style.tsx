@@ -105,7 +105,7 @@ export function update_check(force = false, btn, func) {
 	const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
 
 	// TODO: the rest here is pretty much fine
-	download_with_progress(url)
+	download_with_progress(url, 'blob')
 		.then(async (blob) => {
 			const text = await blob.text();
 

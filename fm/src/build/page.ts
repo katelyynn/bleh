@@ -8,6 +8,7 @@ import tippy from 'tippy.js';
 import { season } from '@/components/seasonal';
 import { DateTime } from 'luxon';
 import { ReactElement, ReactNode, RefObject } from 'jsx-dom';
+import { LrcLibResponse } from '@/components/lyrics/retrieve';
 // require page reload
 export const reload_pending = {
 	state: false,
@@ -239,6 +240,11 @@ interface page {
 		home_link_logo: ReactElement;
 		snowflakes?: number;
 		snowflakes_decrease?: boolean;
+		lyrics?: {
+			name: string;
+			sister: string;
+			res: LrcLibResponse;
+		}
 	};
 	previous?: {
 		type: string;

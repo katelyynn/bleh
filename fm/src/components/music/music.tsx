@@ -37,6 +37,7 @@ import { Cta } from '@/components/cta/cta.tsx';
 import { create_music_links } from '@/components/music/link_types.tsx';
 import { PanelHead } from '../text/head';
 import { IconLabel } from '../text/text';
+import { showLyrics } from '../lyrics/display';
 
 export function show_your_scrobbles() {
 	show_numbers_on_side(page.type);
@@ -770,6 +771,8 @@ function show_numbers_on_side(header_type) {
 				</span>
 			</a>
 		);
+
+		showLyrics();
 	}
 }
 

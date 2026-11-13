@@ -1,15 +1,19 @@
 import { tl, trans } from "@/build/trans";
 import { modal } from "../dialog/dialog";
 import { Icon, icons } from "../shared/icon";
+import { WithChildren } from "@/types/generic";
+import { Ref } from "jsx-dom";
 
 interface LyricsSnippetProps {
 	lyrics: string;
 	art?: string;
 }
 
-export function LyricsSnippetPlaceholder() {
+export function LyricsSnippetPlaceholder({
+	ref
+}: WithChildren) {
 	return (
-		<div class='lyrics-snippet-btn'>
+		<div class='lyrics-snippet-btn' ref={ref as Ref<HTMLDivElement>}>
 			<div class='lyrics-snippet-placeholder'>
 				<Icon name={icons.spinner} />
 				{tl(trans.loading_lyrics)}
@@ -22,15 +26,26 @@ export function LyricsSnippet({
 	lyrics,
 	art
 }: LyricsSnippetProps) {
-	const segments = lyrics.split('\n\n').map(segment => segment.split('\n'));
-	const lines = lyrics.split('\n\n').flatMap(segment => segment.split('\n'));
+	let segments = lyrics.trim().split('\n\n').map(segment => segment.split('\n'));
+	const lines = lyrics.trim().split('\n\n').flatMap(segment => segment.split('\n'));
 
 	const frequencies: Record<string, number[]> = {};
 
+	segments = segments.map(segment =>
+		segment
+			.map(line => line.replace(/[^\w\s]/g, '').trim())
+			.filter(Boolean)
+	);
+
 	lines.forEach((line, i) => {
+		line = line.replace(/[^\w\s]/g, '').trim();
+		if (!line) return;
+
 		frequencies[line] ??= [];
 		frequencies[line].push(i);
 	});
+
+	console.info('lyrics', segments, lines);
 
 	const repeated = Object.entries(frequencies)
 		.filter(([line, i]) => i.length > 1)
