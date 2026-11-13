@@ -1,3 +1,6 @@
+import { tl, trans } from "@/build/trans";
+import { modal } from "../dialog/dialog";
+
 interface LyricsSnippetProps {
 	lyrics: string;
 	art?: string;
@@ -7,6 +10,7 @@ export function LyricsSnippet({
 	lyrics,
 	art
 }: LyricsSnippetProps) {
+	const segments = lyrics.split('\n\n').map(segment => segment.split('\n'));
 	const lines = lyrics.split('\n\n').flatMap(segment => segment.split('\n'));
 
 	const frequencies: Record<string, number[]> = {};
@@ -29,10 +33,44 @@ export function LyricsSnippet({
 			repeatedIndex + 2
 		);
 
+	function open() {
+		modal({
+			id: 'lyrics',
+			title: tl(trans.lyrics),
+			body: (
+				<div class='lyric-segments'>
+					{segments.map(segment => (
+						<LyricSegment lines={segment} />
+					))}
+				</div>
+			)
+		});
+	}
+
 	return (
-		<div class='lyrics-snippet'>
-			{result.map(result => (
-				<p>{result}</p>
+		<div class='lyrics-snippet-btn' onClick={open}>
+			<div class='lyric-segment-snippet'>
+				{result.map(result => (
+					<p class='lyric-line-snippet'>{result}</p>
+				))}
+			</div>
+		</div>
+	)
+}
+
+interface LyricSegmentProps {
+	lines: string[];
+}
+
+function LyricSegment({
+	lines
+}: LyricSegmentProps) {
+	return (
+		<div class='lyric-segment'>
+			{lines.map(line => (
+				<p class='lyric-line'>
+					{line}
+				</p>
 			))}
 		</div>
 	)

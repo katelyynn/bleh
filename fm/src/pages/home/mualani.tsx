@@ -116,6 +116,7 @@ import { TextFlip } from '@/components/text/text_flip';
 import { InboxButton } from '@/components/button/inbox';
 import { Track, Tracklist } from '@/components/track/track';
 import { LyricsSnippet } from '@/components/lyrics/lyrics';
+import { PanelHead } from '@/components/text/head';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1797,6 +1798,9 @@ export function mualani() {
 			<section id='lyrics'>
 				<DemoGrid>
 					<DemoItem label='LyricsSnippet'>
+						<PanelHead icon={icons.lyrics}>
+							{tl(trans.lyrics)}
+						</PanelHead>
 						<LyricsSnippet lyrics={lyricSamples[0]} />
 						<LyricsSnippet lyrics={lyricSamples[1]} />
 						<LyricsSnippet lyrics={lyricSamples[2]} />

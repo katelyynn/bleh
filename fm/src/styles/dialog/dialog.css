@@ -357,6 +357,7 @@
 	border-bottom-right-radius: var(--radius-m);
 
 	z-index: 10;
+	flex-shrink: 0;
 }
 
 .bleh-modal-v2-action {
@@ -414,6 +415,8 @@
 	cursor: default;
 
 	z-index: 10;
+	max-height: 100%;
+	overflow: hidden;
 }
 
 .bleh-modal-v2-body {
@@ -422,6 +425,8 @@
 	align-items: center;
 	text-align: center;
 	gap: calc(var(--modal-verts) / 2);
+	max-height: 100%;
+	overflow: hidden;
 }
 
 .bleh-modal-v2-title {
