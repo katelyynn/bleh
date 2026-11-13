@@ -26,7 +26,7 @@ export function LyricsSnippet({
 	lyrics,
 	art
 }: LyricsSnippetProps) {
-	lyrics = lyrics.replace(/^\[offset:-\d+\]\s*/, '').trim();
+	lyrics = lyrics.replace(/^\[offset:-?\d+\]\s*/, '').trim();
 
 	const segments = lyrics.split('\n\n').map(segment => segment.split('\n'));
 	const lines = lyrics.split('\n\n').flatMap(segment => segment.split('\n'));
