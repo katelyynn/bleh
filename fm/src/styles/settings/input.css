@@ -288,6 +288,8 @@ input {
 	gap: 0 !important;
 	justify-content: center;
 
+	--icon-size: 14px !important;
+
 	&.confirm-search {
 		--button-width: 32px;
 

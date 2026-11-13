@@ -6,28 +6,27 @@
 
 import { settings_store } from '@/build/config';
 import { tl, trans } from '@/build/trans';
-import { input } from '@/components/settings/input';
 import { html, render } from 'lighterhtml';
-import { change_settings_page, scroll_to_setting } from './bleh_settings';
+import { change_settings_page, scroll_to_setting, SettingTab } from './bleh_settings';
 import { page } from '@/build/page';
-import { icons } from '@/components/shared/icon';
+import { Input } from '@/components/input/input';
 
-export function settings_search(tabs) {
-	return html.node`
-        <section class="settings-search">
-            ${
-		input({
-			placeholder: tl(trans.search_for_settings),
-			func: (query: string) => {
+interface SettingsSearchProps {
+	tabs: Record<string, SettingTab>;
+}
+
+export function SettingsSearch({
+	tabs
+}: SettingsSearchProps) {
+	return (
+		<section class='settings-search'>
+			<Input placeholder={tl(trans.search_for_settings) as string} search onSubmit={(query: string) => {
 				const results = make_search(tabs, query);
 				change_settings_page('search');
 				search_results(tabs, query, results);
-			},
-			icon: icons.search,
-		})
-	}
-        </section>
-    `;
+			}} />
+		</section>
+	)
 }
 
 function make_search(tabs, query: string) {
@@ -84,36 +83,33 @@ function search_results(tabs, query: string, results: search_result[]) {
 		html`
 			<section class="search-result-container">
 				<p class="setting-search-results-count">${tl(
-					trans.found_value_results,
-					{ c: results.length },
-				)}</p>
+			trans.found_value_results,
+			{ c: results.length },
+		)}</p>
 				<div class="setting-search-results">
 			        ${results.map((result) => {
-				const tab = tabs[result.tab];
-				const formal = settings_store[result.id];
+			const tab = tabs[result.tab];
+			const formal = settings_store[result.id];
 
-				return html.node`
+			return html.node`
                         <button class="btn setting-search-result" onclick=${() =>
 					finalise_result(result)}>
                             <div class="bleh-icon" style="--icon: var(--mask)" data-bleh-page=${result.tab} data-type=${tab.icon} />
                             <div class="setting-search-result-info">
-                                <strong class="setting-search-result-header">${
-					tl(formal.title)
+                                <strong class="setting-search-result-header">${tl(formal.title)
 				}</strong>
-                                ${
-					formal.body
-						? html.node`
-                                    <p class="setting-search-result-body">${
-							tl(formal.body)
+                                ${formal.body
+					? html.node`
+                                    <p class="setting-search-result-body">${tl(formal.body)
 						}</p>
                                 `
-						: ''
+					: ''
 				}
                             </div>
                             <p class="setting-search-result-context">${tab.name}</p>
                         </button>
                     `;
-			})}
+		})}
 			    </div>
 			</section>
 		`,
