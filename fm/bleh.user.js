@@ -132267,6 +132267,26 @@ var bleh = (() => {
     ] });
   }
 
+  // src/components/lyrics/lyrics.tsx
+  function LyricsSnippet({
+    lyrics,
+    art
+  }) {
+    const lines = lyrics.split("\n\n").flatMap((segment) => segment.split("\n"));
+    const frequencies = {};
+    lines.forEach((line, i2) => {
+      frequencies[line] ??= [];
+      frequencies[line].push(i2);
+    });
+    const repeated = Object.entries(frequencies).filter(([line, i2]) => i2.length > 1).sort((a, b) => b[1].length - a[1].length);
+    const repeatedIndex = repeated[0]?.[1][0];
+    const result = repeatedIndex == null ? lines.slice(Math.floor(lines.length / 2) - 1, Math.floor(lines.length / 2) + 2) : lines.slice(
+      Math.max(0, repeatedIndex - 1),
+      repeatedIndex + 2
+    );
+    return /* @__PURE__ */ jsx("div", { class: "lyrics-snippet", children: result.map((result2) => /* @__PURE__ */ jsx("p", { children: result2 })) });
+  }
+
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -132365,6 +132385,110 @@ var bleh = (() => {
     const c2 = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
     const avi = c2.evangelicgirl?.avatar;
     const wordmarks = createRef();
+    const lyricSamples = [
+      `Dayglow
+She doesn't notice much
+Talk slow
+Break the bottom out love
+It's so cold
+I want to follow you home
+
+Dayglow
+She doesn't notice much
+Bread molds
+Pass the spoons around love
+It's so cold
+I want to follow you home
+
+Down and again
+Take him off me
+Read and pretend
+Pretty soon I'll be there soon
+I'll be there soon
+
+Dayglow
+She doesn't notice much
+Wind blows
+She takes time to come find
+It's so cold
+I want to follow you home
+
+Dayglow
+She doesn't notice much
+Talk slow
+Pass the spoons around
+Bread molds
+Dolls and pine needles
+Wind blows
+She takes time to come find
+It's so cold
+I want to follow you home
+I want to follow you home`,
+      `Look at ya, look at ya, look at ya, look at ya
+Look at ya, look at ya, look at ya, look at ya
+Look at ya, look at ya, look at ya, look at ya
+Look at ya, look at ya, look at ya, look at ya
+Ladies and gentlemen, ladies-ladies and gentlemen
+
+And I always find, yeah, I always find somethin' wrong`,
+      `Yeah
+Rollin', rollin', rollin', got me stargazin' (Yeah)
+Sippin' on purp, feelin' like the Barre Baby (It's lit)
+Whatever I downed, it got me goin' crazy (Yah)
+Psychedelics got me goin' crazy (Alright)
+I was always high up on the lean (yeah, yeah)
+Then this girl came here to save my life
+Girl, look to the sky, down on my knees (Straight up)
+Out of nowhere, you came here to stay the night, in the night-time (Woo, yeah)
+
+Rollin', rollin', rollin', got me stargazin' (Roll)
+Psychedelics got me goin' crazy (Oh no)
+Niggas femalin', they excellin' (Yeah)
+Are they intellin'? (What you tellin'?)
+We propellin', up top with Ellen, uh (With the choppers)
+Kill the jealous with propane repellent
+Got me goin' crazy (It's lit)
+On tour, we'll tell 'em, we brought the section (Gang)
+They keep on callin' up, it's getting hectic (Brrt)
+Like we projected
+So we cut the plug, he's interjected (Got me goin' crazy)
+Rollin', rollin', rollin', got me stargazin' (Yeah)
+Sippin' on purp, feelin' like the Barre Baby (It's lit)
+Whatever I downed, it got me goin' crazy (Yah)
+Psychedelics got me goin' crazy (Alright)
+I was always high up on the lean (yeah, yeah)
+Then this girl came here to save my life
+Girl, look to the sky, down on my knees (Straight up)
+Out of nowhere, you came here to stay the night, in the night-time (Woo, yeah)
+
+Got me goin' crazy
+
+Okay, I been up for some days, I ain't got time to lay
+Just to drown out all these thoughts, I tried all kind of things
+If I take you to my past you will be traumatized
+Got a thousand kids outside that's tryna come alive
+'99, took AstroWorld, it had to relocate
+Told the dawgs I'd bring it back, it was a seal of faith
+Before no car notes, baby girl, she played the tourist guide
+Got the keys into my city, now she know the rides
+Got new money, got new problems, got new enemies
+When you make it to the top, that's the amenities
+Packin' out Toyota like I'm in the league
+And it ain't a mosh pit if ain't no injuries
+I got 'em stage divin' out the nosebleeds (Alright, alright, alright)
+And she hit that booger sugar 'til her nose bleed (Alright, alright, alright)
+Bounce that shit forever, she on both knees
+She was talkin' 'bout forever, got a whole week (Alright, alright, alright)
+Plus she know my baby mama is a trophy
+She be throwing up them B's, feel like we both bleed
+She keep my dick jumpin' up, I feel like I'm Moby
+I'm way too gold for this beef, feel like I'm Kobe, yeah
+This right here is astronomical
+I see you picked up all my ways, I feel responsible
+They tryna say that all my problems is improbable
+They keep itching at my spirit, I'm diabolical
+Ya feel me?`
+    ];
     page.structure.main.replaceChildren(
       /* @__PURE__ */ jsx(Fragment, { children: [
         /* @__PURE__ */ jsx("section", { children: /* @__PURE__ */ jsx(DemoGrid, { children: [
@@ -133803,6 +133927,11 @@ var bleh = (() => {
               }
             )
           ] })
+        ] }) }) }),
+        /* @__PURE__ */ jsx("section", { id: "lyrics", children: /* @__PURE__ */ jsx(DemoGrid, { children: /* @__PURE__ */ jsx(DemoItem, { label: "LyricsSnippet", children: [
+          /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[0] }),
+          /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[1] }),
+          /* @__PURE__ */ jsx(LyricsSnippet, { lyrics: lyricSamples[2] })
         ] }) }) })
       ] })
     );
