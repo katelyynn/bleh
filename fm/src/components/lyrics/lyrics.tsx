@@ -10,13 +10,18 @@ interface LyricsSnippetProps {
 }
 
 export function LyricsSnippetPlaceholder({
+	children,
 	ref
 }: WithChildren) {
 	return (
 		<div class='lyrics-snippet-btn' ref={ref as Ref<HTMLDivElement>}>
 			<div class='lyrics-snippet-placeholder'>
-				<Icon name={icons.spinner} />
-				{tl(trans.loading_lyrics)}
+				{!children ? (
+					<>
+						<Icon name={icons.spinner} />
+						{tl(trans.loading_lyrics)}
+					</>
+				) : children}
 			</div>
 		</div>
 	);

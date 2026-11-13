@@ -82,10 +82,14 @@
 	gap: var(--card-padding);
 	text-align: left;
 
-	max-height: 500px;
+	max-height: 600px;
 	overflow-y: auto;
 	width: 650px;
 	max-width: 100%;
+
+	background-color: oklch(var(--h4) / 15%);
+	padding: 10px 15px;
+	border-radius: var(--radius-s);
 }
 
 .lyric-segment {
@@ -93,7 +97,7 @@
 	flex-direction: column;
 
 	padding-bottom: var(--card-padding);
-	border-bottom: 1px solid var(--separator-base);
+	border-bottom: 1px solid oklch(var(--l3-c) / 20%);
 
 	&:last-child {
 		padding-bottom: unset;
@@ -102,8 +106,8 @@
 }
 
 .lyric-line {
-	font-size: var(--font-size-subheading);
-	line-height: calc(var(--line-height-subheading) + 4px);
+	font-size: 20px;
+	line-height: 32px;
 	font-weight: var(--font-weight-medium);
 	cursor: default;
 	margin: unset;

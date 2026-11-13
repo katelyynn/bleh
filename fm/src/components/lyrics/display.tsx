@@ -4,7 +4,7 @@ import { getLyrics, LrcLibResponse } from "./retrieve";
 import { log } from "@/build/log";
 import { createRef, ReactElement } from "jsx-dom";
 import { PanelHead } from "../text/head";
-import { icons } from "../shared/icon";
+import { Icon, icons } from "../shared/icon";
 import { tl, trans } from "@/build/trans";
 import { lazy } from "@/build/tools";
 
@@ -44,12 +44,29 @@ export async function showLyrics() {
 		} catch (e) {
 			log('failed', 'lyrics', 'error');
 			console.error(e);
+
+			finishLyrics(inner.current, undefined);
+
+			page.state.lyrics = {
+				name: page.name,
+				sister: page.sister,
+				res: undefined
+			}
 		}
 	});
 }
 
-function finishLyrics(panel: ReactElement, res: LrcLibResponse) {
+function finishLyrics(panel: ReactElement, res: LrcLibResponse | undefined) {
 	log('rendering', 'lyrics', 'info', { res });
+
+	if (!res) {
+		panel.replaceWith(
+			<LyricsSnippetPlaceholder>
+				<Icon name={icons.x} />
+				{tl(trans.no_lyrics)}
+			</LyricsSnippetPlaceholder>
+		);
+	}
 
 	panel.replaceWith(
 		<LyricsSnippet lyrics={res.plainLyrics} />
