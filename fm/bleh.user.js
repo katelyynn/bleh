@@ -92342,30 +92342,37 @@ var bleh = (() => {
     active,
     margin = true
   }) {
-    const track_name = createRef();
+    const trackName = createRef();
     const artists = createRef();
+    const coverArt = createRef();
     const elem = /* @__PURE__ */ jsx("tr", { class: [
       "chartlist-row",
       active && "chartlist-row--now-scrobbling",
       !margin && "no-side-margin"
     ], "data-show-album-text": "true", "data-album-name-location": "column", "data-has-bar": "false", children: [
-      /* @__PURE__ */ jsx("td", { class: "chartlist-image", children: /* @__PURE__ */ jsx("a", { href: url, class: "cover-art", children: art ? /* @__PURE__ */ jsx("img", { src: art, alt: name, loading: "lazy" }) : /* @__PURE__ */ jsx("img", { class: "missing-track" }) }) }),
+      /* @__PURE__ */ jsx("td", { class: "chartlist-image", children: /* @__PURE__ */ jsx("a", { href: url, class: "cover-art", ref: coverArt, children: art ? /* @__PURE__ */ jsx("img", { src: art, alt: name, loading: "lazy" }) : /* @__PURE__ */ jsx("img", { class: "missing-track" }) }) }),
       /* @__PURE__ */ jsx("div", { class: "track-info", "data-track-layout": "column", "data-album-name-location": "column", children: [
-        /* @__PURE__ */ jsx("td", { class: "chartlist-name", children: /* @__PURE__ */ jsx("a", { href: url, ref: track_name, children: romanise(correct_item_by_artist(name, artist)) }) }),
+        /* @__PURE__ */ jsx("td", { class: "chartlist-name", children: /* @__PURE__ */ jsx("a", { href: url, ref: trackName, children: romanise(correct_item_by_artist(name, artist)) }) }),
         /* @__PURE__ */ jsx("td", { class: "chartlist-artist", ref: artists, children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}`, children: romanise(correct_artist(artist)) }) }),
         album && /* @__PURE__ */ jsx("td", { class: ["chartlist-album", "custom-album-text"], children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}/${sanitise(album)}`, children: romanise(correct_item_by_artist(album, artist)) }) })
       ] })
     ] });
     elem[symbol] = true;
     if (useSettings.get("format_guest_features")) {
-      track_name.current.classList.add("smart-title");
+      trackName.current.classList.add("smart-title");
       artists.current.classList.add("smart-artist");
       const formatted = name_includes(name, artist);
-      track_name.current.replaceChildren(
+      trackName.current.replaceChildren(
         /* @__PURE__ */ jsx(SmartTitle, { title: formatted.song_title, tags: formatted.song_tags })
       );
       artists.current.replaceChildren(
         /* @__PURE__ */ jsx(SmartArtist, { artist: formatted.song_artist, guests: formatted.song_guests })
+      );
+    }
+    if (art) {
+      hover_tooltip(
+        coverArt.current,
+        /* @__PURE__ */ jsx(Tooltip, { children: romanise(correct_item_by_artist(album, artist)) })
       );
     }
     return elem;

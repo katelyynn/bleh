@@ -6,6 +6,7 @@ import { root } from "@/build/page";
 import { redirect } from "../music/music";
 import { romanise, sanitise } from "@/build/tools";
 import { symbol } from "@/main";
+import { hover_tooltip, Tooltip } from "../shared/tooltips";
 
 interface TracklistProps {
 	art?: boolean;
@@ -48,8 +49,10 @@ export function Track({
 	active,
 	margin = true
 }: TrackProps) {
-	const track_name = createRef();
+	const trackName = createRef();
 	const artists = createRef();
+
+	const coverArt = createRef();
 
 	const elem = (
 		<tr class={[
@@ -58,7 +61,7 @@ export function Track({
 			!margin && 'no-side-margin'
 		]} data-show-album-text='true' data-album-name-location='column' data-has-bar='false'>
 			<td class='chartlist-image'>
-				<a href={url} class='cover-art'>
+				<a href={url} class='cover-art' ref={coverArt}>
 					{art ? (
 						<img src={art} alt={name} loading='lazy' />
 					) : (
@@ -68,7 +71,7 @@ export function Track({
 			</td>
 			<div class='track-info' data-track-layout='column' data-album-name-location='column'>
 				<td class='chartlist-name'>
-					<a href={url} ref={track_name}>
+					<a href={url} ref={trackName}>
 						{romanise(correct_item_by_artist(name, artist))}
 					</a>
 				</td>
@@ -92,16 +95,23 @@ export function Track({
 	elem[symbol] = true;
 
 	if (useSettings.get('format_guest_features')) {
-		track_name.current.classList.add('smart-title');
+		trackName.current.classList.add('smart-title');
 		artists.current.classList.add('smart-artist');
 
 		const formatted = name_includes(name, artist);
 
-		track_name.current.replaceChildren(
+		trackName.current.replaceChildren(
 			<SmartTitle title={formatted.song_title} tags={formatted.song_tags} />
 		);
 		artists.current.replaceChildren(
 			<SmartArtist artist={formatted.song_artist} guests={formatted.song_guests} />
+		);
+	}
+
+	if (art) {
+		hover_tooltip(
+			coverArt.current,
+			<Tooltip>{romanise(correct_item_by_artist(album, artist))}</Tooltip>
 		);
 	}
 
