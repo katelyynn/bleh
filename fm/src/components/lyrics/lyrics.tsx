@@ -49,7 +49,7 @@ export function LyricsSnippet({
 		.filter(([line, i]) => i.length > 1)
 		.sort((a, b) => b[1].length - a[1].length);
 
-	const repeatedIndex = repeated[0]?.[1][0];
+	const repeatedIndex = repeated[0]?.[1][1] || repeated[0]?.[1][0];
 
 	const result = repeatedIndex == null
 		? lines.slice(Math.floor(lines.length / 2) - 1, Math.floor(lines.length / 2) + 2)

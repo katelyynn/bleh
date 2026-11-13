@@ -232,7 +232,8 @@ export const icons = {
 	statuscafe: 'statuscafe',
 	charts: 'charts',
 	password: 'password',
-	video: 'video'
+	video: 'video',
+	video_broken: 'video-broken'
 };
 
 interface icon {
