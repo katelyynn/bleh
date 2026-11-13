@@ -7,8 +7,9 @@
 import { createRef, ReactNode } from 'jsx-dom';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { icons } from '@/components/shared/icon.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { WithChildren } from '@/types/generic.tsx';
+import { Button } from '../button/button';
 
 export type InputType =
 	| 'text'
@@ -38,6 +39,7 @@ interface InputProps {
 	readOnly?: boolean;
 	required?: boolean;
 	submit?: boolean;
+	search?: boolean;
 }
 
 type InputElement = HTMLDivElement & {
@@ -62,7 +64,8 @@ export function Input({
 	saveText,
 	readOnly,
 	required,
-	submit
+	submit,
+	search
 }: InputProps) {
 	const input = createRef();
 	const colour_block = createRef();
@@ -76,6 +79,7 @@ export function Input({
 				type == 'textarea' && 'textarea',
 				className && className,
 				saveManually && 'save-manually',
+				search && 'is-search'
 			]}
 			data-type={type}
 			ref={ref}
@@ -149,6 +153,24 @@ export function Input({
 						}}
 					/>
 				)}
+			{search && (
+				<div class='input-actions'>
+					<Button className='input-action' onClick={() => {
+						input.current.value = '';
+
+						if (onSubmit) onSubmit(input.current.value);
+					}}>
+						<Icon name={icons.x} />
+						{tl(trans.clear)}
+					</Button>
+					<Button className='input-action confirm-search' onClick={() => {
+						if (onSubmit) onSubmit(input.current.value);
+					}}>
+						<Icon name={icons.search} />
+						{tl(trans.search)}
+					</Button>
+				</div>
+			)}
 			{saveManually && (
 				<SeeMore
 					icon={saveIcon || icons.save}

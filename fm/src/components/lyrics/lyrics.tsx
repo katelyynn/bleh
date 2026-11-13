@@ -4,6 +4,7 @@ import { Icon, icons } from "../shared/icon";
 import { WithChildren } from "@/types/generic";
 import { createRef, Ref } from "jsx-dom";
 import { CardTip } from "../text/tip";
+import { Input } from "../input/input";
 
 interface LyricsSnippetProps {
 	lyrics: string;
@@ -84,6 +85,9 @@ function lyricsModal(segments: string[][], id?: number) {
 		title: tl(trans.lyrics),
 		body: (
 			<>
+				<div class='lyric-search'>
+					<Input placeholder={tl(trans.search_lyrics) as string} search onSubmit={render} onChange={render} />
+				</div>
 				<div class='lyric-segments' ref={container} />
 				{id && (
 					<CardTip gap={false}>
@@ -95,15 +99,33 @@ function lyricsModal(segments: string[][], id?: number) {
 	});
 
 	function render(query = '') {
+		query = query.trim().toLowerCase();
+
 		if (!query) {
 			container.current.replaceChildren(
-				segments.map(segment => (
-					<LyricSegment lines={segment} />
-				))
+				<>
+					{segments.map(segment => (
+						<LyricSegment lines={segment} />
+					))}
+				</>
 			);
 
 			return;
 		}
+
+		const filtered = segments.filter(segment => (
+			segment.some(line => (
+				line.toLowerCase().includes(query)
+			))
+		));
+
+		container.current.replaceChildren(
+			<>
+				{filtered.map(segment => (
+					<LyricSegment lines={segment} />
+				))}
+			</>
+		);
 	}
 
 	render();

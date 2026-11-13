@@ -12932,6 +12932,9 @@ export const trans = {
 	sourced_from: {
 		en: 'Sourced from {v}',
 	},
+	search_lyrics: {
+		en: 'Search for a lyric',
+	},
 } as const satisfies Record<string, any>;
 
 // ’

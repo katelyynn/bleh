@@ -252,6 +252,49 @@ input {
 			padding-right: calc(var(--button-sides) + var(--icon-size) + var(--button-sides)) !important;
 		}
 	}
+
+	&.is-search {
+		&>.modern-input {
+			padding-right: calc(var(--button-sides) + calc(var(--button-height) * 2)) !important;
+		}
+	}
+}
+
+.input-actions {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+
+	display: flex;
+}
+
+.input-action {
+	--bg: transparent;
+	--bg-hov: oklch(var(--b2) / 40%);
+	--bg-atv: oklch(var(--b2) / 60%);
+	--shadow: none;
+
+	--btn-left: var(--button-sides) !important;
+	--btn-right: var(--button-sides) !important;
+	--mask-colour: currentColor !important;
+	--padding: 0 !important;
+
+	--button-width: var(--button-height);
+	min-width: var(--button-width) !important;
+	width: var(--button-width) !important;
+
+	--font-size: 0;
+	gap: 0 !important;
+	justify-content: center;
+
+	&.confirm-search {
+		--button-width: 32px;
+
+		--bg-hov: oklch(var(--h4) / 20%);
+		--bg-atv: oklch(var(--h4) / 40%);
+		--col: oklch(var(--l3-c));
+	}
 }
 
 .input-icons {

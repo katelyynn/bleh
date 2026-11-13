@@ -111,12 +111,15 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--card-padding);
+	justify-content: center;
 	text-align: center;
 
 	max-height: 600px;
 	overflow-y: auto;
 	width: 650px;
 	max-width: 100%;
+
+	min-height: 600px;
 }
 
 .lyric-segment {
@@ -137,4 +140,11 @@
 	font-weight: var(--font-weight-medium);
 	cursor: default;
 	margin: unset;
+}
+
+.lyric-search {
+	padding: 4px;
+	background: oklch(var(--b4) / 20%);
+	border-radius: var(--radius-s);
+	margin-bottom: 10px;
 }
