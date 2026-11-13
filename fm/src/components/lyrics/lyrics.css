@@ -4,7 +4,7 @@
 	--g: oklch(var(--h3) / 10%);
 
 	background-color: oklch(var(--h4) / 10%);
-	color: oklch(var(--l3-c));
+	color: oklch(var(--l2-c-theme-switch));
 	box-shadow: inset 0 0 0 1px transparent;
 
 	border-radius: var(--radius-s);
