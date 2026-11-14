@@ -79,6 +79,7 @@ img.video-preview {
 	z-index: 20;
 
 	opacity: 0;
+	scale: 1.1;
 	background-color: oklch(var(--b6) / 50%);
 	box-shadow: inset 0 0 0 1px oklch(var(--l3-c) / 40%);
 	border-radius: var(--radius-s);
@@ -92,6 +93,7 @@ img.video-preview {
 
 	&:hover {
 		opacity: 1;
+		scale: 1;
 		transition: none;
 	}
 }

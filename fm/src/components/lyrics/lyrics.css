@@ -119,6 +119,8 @@
 	max-width: 100%;
 
 	min-height: 600px;
+
+	padding-bottom: 40px;
 }
 
 .lyric-segment {
@@ -141,10 +143,6 @@
 	cursor: pointer;
 	margin: unset;
 
-	transition-property: color, background-color, border-radius, padding, margin;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
-
 	width: fit-content;
 
 	&:hover {
@@ -153,11 +151,9 @@
 		background-color: oklch(var(--h4) / 10%);
 		border-radius: var(--radius-m);
 		color: oklch(var(--l3-c));
-		transition: none;
 
 		&>.lyric-line-copy {
 			opacity: 0.6;
-			transition: none;
 		}
 	}
 }
@@ -170,10 +166,9 @@
 	--icon-size: 14px;
 
 	opacity: 0;
+	transition: none;
 
-	transition-property: opacity;
-	transition-duration: var(--trans);
-	transition-timing-function: var(--trans-function);
+	display: none !important;
 }
 
 .lyric-search {
