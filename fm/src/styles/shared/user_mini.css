@@ -18,9 +18,9 @@
 		transition: none;
 	}
 
-	&[data-live="true"] {
+	/*&[data-live="true"] {
 		order: -1;
-	}
+		}*/
 
 	&[data-own="true"] {
 		order: -2 !important;
@@ -35,7 +35,7 @@
 		}
 	}
 
-	& > .user-avatar {
+	&>.user-avatar {
 		--w: 40px;
 		width: var(--w);
 		height: var(--w);
@@ -54,20 +54,20 @@
 			border-radius: var(--item-med-radius);
 		}
 
-		& > img {
+		&>img {
 			width: var(--w);
 			height: var(--w);
 		}
 	}
 
-	& > .user-info {
+	&>.user-info {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
 		flex: 1;
 		overflow: hidden;
 
-		& > .user-name {
+		&>.user-name {
 			display: flex;
 			align-items: center;
 			gap: 6px;
@@ -75,17 +75,19 @@
 			cursor: default;
 			position: relative;
 
-			& > .user-name-inner {
-				flex: 1;
+			&>.user-name-inner {
 				color: oklch(var(--l3-c) / 80%);
 
-				& > strong {
+				width: fit-content;
+				flex-shrink: 0;
+
+				&>strong {
 					color: oklch(var(--l3-c));
 					font-weight: var(--font-weight-medium);
 				}
 			}
 
-			& > .avatar {
+			&>.avatar {
 				display: flex;
 				width: var(--w);
 				height: var(--w);
@@ -95,7 +97,7 @@
 			margin-bottom: 4px;
 		}
 
-		& > .user-about {
+		&>.user-about {
 			display: flex;
 			align-items: center;
 			gap: 4px;
@@ -103,7 +105,7 @@
 			cursor: default;
 			font-weight: var(--font-weight-medium);
 
-			& > .bleh-icon {
+			&>.bleh-icon {
 				--icon-size: 14px;
 			}
 		}
@@ -115,22 +117,10 @@
 	color: oklch(var(--c3));
 	cursor: default;
 	flex-shrink: 0;
+	text-align: right;
 
 	--show-icon: none;
 	position: relative;
 
-	&[data-live="true"] {
-		font-weight: var(--font-weight-medium);
-
-		--show-icon: block;
-		padding-left: 16px;
-
-		&:before {
-			--mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9hZGVyLWNpcmNsZSI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2Ii8+PC9zdmc+");
-			--mask-size: 12px;
-			--margin-top: -6px;
-			--left: 0;
-			animation: spinner 1s linear infinite;
-		}
-	}
+	flex: 1;
 }

@@ -140,10 +140,8 @@
 			transform: var(--offset) scale(0.6) var(--rotate);
 		}
 
-		&>.campfire-item-cover {
-			opacity: 0.6;
-			box-shadow: var(--card-shadow);
-		}
+		--campfire-cover-opacity: 0.4;
+		--campfire-cover-shadow: var(--card-shadow);
 	}
 
 	&[aria-checked="true"] {
@@ -154,12 +152,13 @@
 	opacity,
 	filter;
 	transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
-	transition-timing-function: var(--trans-function);
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .campfire-details {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 5px;
 	text-align: center;
 	z-index: 21;
@@ -199,6 +198,16 @@
 	}
 }
 
+.campfire-item-cover-backing {
+	opacity: var(--campfire-cover-opacity, 1);
+	box-shadow: var(--campfire-cover-shadow, unset);
+	border-radius: inherit;
+
+	transition-property: box-shadow, opacity;
+	transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
+	transition-timing-function: var(--trans-function-ani);
+}
+
 .campfire-item-cover {
 	width: var(--w);
 	height: var(--w);
@@ -207,11 +216,7 @@
 
 	position: relative;
 
-	transition-property: box-shadow, opacity;
-	transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
-	transition-timing-function: var(--trans-function);
-
-	&>img {
+	&>.campfire-item-cover-backing>img {
 		width: 100%;
 		--mask-size: var(--cover-size-400);
 		border-radius: inherit;
