@@ -5,7 +5,9 @@ import { WithChildren } from "@/types/generic";
 import { createRef, Ref } from "jsx-dom";
 import { CardTip } from "../text/tip";
 import { Input } from "../input/input";
-import { copy, sanitise } from "@/build/tools";
+import { copy, romanise, sanitise } from "@/build/tools";
+import { SettingCheckbox } from "../settings/provider/checkbox";
+import { useSettings } from "@/page";
 
 interface LyricsSnippetProps {
 	lyrics: string;
@@ -67,15 +69,33 @@ export function LyricsSnippet({
 		lyricsModal(segments, id);
 	}
 
-	return (
+	const inner = createRef();
+	const elem = (
 		<div class='lyrics-snippet-btn' onClick={open}>
-			<div class='lyric-segment-snippet'>
-				{result.map(result => (
-					<p class='lyric-line-snippet'>{result}</p>
-				))}
-			</div>
+			<div class='lyric-segment-snippet' ref={inner} />
 		</div>
-	)
+	);
+
+	function render() {
+		inner.current.replaceChildren(
+			<>
+				{result.map(line => {
+					if (useSettings.get('romanise_lyrics')) {
+						line = romanise(line, true);
+					}
+
+					return (
+						<p class='lyric-line-snippet'>{line}</p>
+					);
+				})}
+			</>
+		);
+	}
+
+	render();
+	useSettings.on('romanise_lyrics', () => render());
+
+	return elem;
 }
 
 function lyricsModal(segments: string[][], id?: number) {
@@ -87,7 +107,8 @@ function lyricsModal(segments: string[][], id?: number) {
 		body: (
 			<>
 				<div class='lyric-search'>
-					<Input placeholder={tl(trans.search_lyrics) as string} search onSubmit={render} onChange={render} />
+					<Input className='lyrics-search-input' placeholder={tl(trans.search_lyrics) as string} search onSubmit={render} onChange={render} />
+					<SettingCheckbox bind='romanise_lyrics' standalone />
 				</div>
 				<div class='lyric-segments' ref={container} />
 				{id && (
@@ -130,6 +151,7 @@ function lyricsModal(segments: string[][], id?: number) {
 	}
 
 	render();
+	useSettings.on('romanise_lyrics', () => render());
 }
 
 interface LyricSegmentProps {
@@ -142,6 +164,10 @@ function LyricSegment({
 	return (
 		<div class='lyric-segment'>
 			{lines.map(line => {
+				if (useSettings.get('romanise_lyrics')) {
+					line = romanise(line, true);
+				}
+
 				const elem = (
 					<p class='lyric-line' onClick={() => {
 						elem.scrollIntoView({

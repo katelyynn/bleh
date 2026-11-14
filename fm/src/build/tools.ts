@@ -467,17 +467,17 @@ export function is_link_external(url) {
 	}
 }
 
-export function romanise(text) {
+export function romanise(text: string, bypass?: boolean) {
 	// japanese
 	if (
 		/[\u30A0-\u30FF\u3040-\u309F]/.test(text) &&
-		useSettings.get('romanise_jp')
+		(useSettings.get('romanise_jp') || bypass)
 	) {
 		return title_case(wanakana.toRomaji(text));
 	}
 
 	// korean
-	if (/[\uAC00-\uD7AF]/.test(text) && useSettings.get('romanise_ko')) {
+	if (/[\uAC00-\uD7AF]/.test(text) && (useSettings.get('romanise_ko') || bypass)) {
 		return title_case(hangulRomanization.convert(text));
 	}
 

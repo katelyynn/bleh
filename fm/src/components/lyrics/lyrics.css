@@ -172,8 +172,18 @@
 }
 
 .lyric-search {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--card-gap);
+
+	width: 100%;
+
 	padding: 4px;
-	background: oklch(var(--b4) / 20%);
-	border-radius: var(--radius-s);
 	margin-bottom: 10px;
+}
+
+.lyrics-search-input {
+	width: 100%;
+	max-width: 300px;
 }

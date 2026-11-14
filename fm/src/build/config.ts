@@ -1008,6 +1008,10 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.romanise_ko,
 		incompatible: { format_guest_features: false, corrections: false },
 	},
+	romanise_lyrics: {
+		default: true,
+		title: trans.romanise_lyrics
+	},
 	music_links: {
 		default: [
 			'spotify',

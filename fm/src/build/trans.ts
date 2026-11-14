@@ -11093,6 +11093,9 @@ export const trans = {
 		ru: '한국어 (Корейский)',
 		pl: '한국어 (Koreański)',
 	},
+	romanise_lyrics: {
+		en: 'Romanise lyrics',
+	},
 	romanise_require: {
 		en: 'Romanisation requires either lotus corrections or smart song tags be enabled',
 		de: 'Die Romanisierung erfordert, dass entweder lotus-Korrekturen oder intelligente Song-Tags aktiviert sind',
