@@ -1004,7 +1004,7 @@ export async function register_background(
 
 		ctx.imageSmoothingEnabled = true;
 		ctx.imageSmoothingQuality = 'high';
-		ctx.filter = 'url(#solarium) blur(4px)';
+		ctx.filter = 'url(#solarium) blur(6px) contrast(130%)';
 		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
 		url = canvas.toDataURL();
@@ -1117,7 +1117,7 @@ function favi() {
 
 	window
 		.matchMedia('(prefers-color-scheme: dark)')
-		.addEventListener('change', function() {
+		.addEventListener('change', function () {
 			favicon.href =
 				window.matchMedia('(prefers-color-scheme: dark)').matches
 					? dark

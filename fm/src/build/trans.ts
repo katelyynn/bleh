@@ -9127,6 +9127,12 @@ export const trans = {
 		ru: 'Редактировать скроббл',
 		pl: 'Edytuj scrobble',
 	},
+	copy_scrobble: {
+		en: 'Copy scrobble',
+	},
+	replace_scrobble: {
+		en: 'Replace scrobble',
+	},
 	edit_scrobbles_in_bulk: {
 		en: 'Edit scrobbles in bulk',
 		de: 'Mehrere Scrobbles bearbeiten',
@@ -12937,6 +12943,9 @@ export const trans = {
 	},
 	search_lyrics: {
 		en: 'Search for a lyric',
+	},
+	view_lyrics: {
+		en: 'View lyrics',
 	},
 } as const satisfies Record<string, any>;
 

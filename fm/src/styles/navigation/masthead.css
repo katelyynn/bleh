@@ -51,7 +51,7 @@ last.fm changes as of 2024-05-20 */
 
 		background: linear-gradient(180deg, oklch(var(--b6)), transparent);
 
-		opacity: 1;
+		opacity: 0.8;
 		translate: 0;
 
 		pointer-events: none;

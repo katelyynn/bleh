@@ -131,7 +131,7 @@
 	content-visibility: auto;
 
 	&.ready {
-		opacity: 0.4;
+		opacity: 0.5;
 		animation: banner 0.5s var(--trans-function-ani);
 		transition: none !important;
 

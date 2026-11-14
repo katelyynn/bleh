@@ -8,6 +8,9 @@ import { Input } from "../input/input";
 import { copy, romanise, sanitise } from "@/build/tools";
 import { SettingCheckbox } from "../settings/provider/checkbox";
 import { useSettings } from "@/page";
+import { log } from "@/build/log";
+import { getLyrics } from "./retrieve";
+import { Alert } from "../text/alert";
 
 interface LyricsSnippetProps {
 	lyrics: string;
@@ -33,15 +36,21 @@ export function LyricsSnippetPlaceholder({
 	);
 }
 
+function handleLyrics(lyrics: string) {
+	lyrics = lyrics.replace(/^\[offset:-?\d+\]\s*/, '').trim();
+
+	const segments = lyrics.split('\n\n').map(segment => segment.split('\n'));
+	const lines = lyrics.split('\n\n').flatMap(segment => segment.split('\n'));
+
+	return { segments, lines };
+}
+
 export function LyricsSnippet({
 	lyrics,
 	id,
 	art
 }: LyricsSnippetProps) {
-	lyrics = lyrics.replace(/^\[offset:-?\d+\]\s*/, '').trim();
-
-	const segments = lyrics.split('\n\n').map(segment => segment.split('\n'));
-	const lines = lyrics.split('\n\n').flatMap(segment => segment.split('\n'));
+	const { segments, lines } = handleLyrics(lyrics);
 
 	const frequencies: Record<string, number[]> = {};
 
@@ -96,6 +105,50 @@ export function LyricsSnippet({
 	useSettings.on('romanise_lyrics', () => render());
 
 	return elem;
+}
+
+export async function lyricsFromMenu(name: string, artist: string) {
+	try {
+		log('requesting', 'lyrics');
+		const res = await getLyrics(name, artist);
+
+		if (!res) {
+			modal({
+				id: 'lyrics',
+				title: tl(trans.lyrics),
+				body: (
+					<Alert type='error'>{tl(trans.no_lyrics)}</Alert>
+				)
+			});
+			return;
+		}
+
+		if (res.plainLyrics == 'x') {
+			modal({
+				id: 'lyrics',
+				title: tl(trans.lyrics),
+				body: (
+					<Alert type='error'>{tl(trans.lyrics_instrumental)}</Alert>
+				)
+			});
+			return;
+		}
+
+		const { segments } = handleLyrics(res.plainLyrics);
+
+		lyricsModal(segments, res.id);
+	} catch (e) {
+		log('failed', 'lyrics', 'error');
+		console.error(e);
+
+		modal({
+			id: 'lyrics',
+			title: tl(trans.lyrics),
+			body: (
+				<Alert type='error'>{tl(trans.no_lyrics)}</Alert>
+			)
+		});
+	}
 }
 
 function lyricsModal(segments: string[][], id?: number) {

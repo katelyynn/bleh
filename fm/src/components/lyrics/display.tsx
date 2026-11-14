@@ -32,7 +32,7 @@ export async function showLyrics() {
 	lazy(panel, async () => {
 		try {
 			log('requesting', 'lyrics');
-			const res = await getLyrics();
+			const res = await getLyrics(page.name, page.sister);
 
 			finishLyrics(inner.current, res);
 
@@ -66,6 +66,7 @@ function finishLyrics(panel: ReactElement, res: LrcLibResponse | undefined) {
 				{tl(trans.no_lyrics)}
 			</LyricsSnippetPlaceholder>
 		);
+		return;
 	}
 
 	if (res.plainLyrics == 'x') {
@@ -75,6 +76,7 @@ function finishLyrics(panel: ReactElement, res: LrcLibResponse | undefined) {
 				{tl(trans.lyrics_instrumental)}
 			</LyricsSnippetPlaceholder>
 		);
+		return;
 	}
 
 	panel.replaceWith(
