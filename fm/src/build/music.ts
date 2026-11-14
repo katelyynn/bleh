@@ -322,6 +322,7 @@ export const includes = {
 		/[-\(]theme from/i,
 		/[-\(]skit/i,
 		/(?:-\s?|\(|\[)original/i,
+		/(?:-\s?|\(|\[)continued/i, // carly rae jepsen day and night
 		/(?:-\s?|\(|\[)deluxe/i,
 		/(?:-\s?|\(|\[)digital deluxe/i,
 		'd.l.x.', // https://www.last.fm/music/taylor+swift/1989+d.l.x.
