@@ -5,6 +5,7 @@ import { WithChildren } from "@/types/generic";
 import { createRef, Ref } from "jsx-dom";
 import { CardTip } from "../text/tip";
 import { Input } from "../input/input";
+import { copy, sanitise } from "@/build/tools";
 
 interface LyricsSnippetProps {
 	lyrics: string;
@@ -140,11 +141,24 @@ function LyricSegment({
 }: LyricSegmentProps) {
 	return (
 		<div class='lyric-segment'>
-			{lines.map(line => (
-				<p class='lyric-line'>
-					{line}
-				</p>
-			))}
+			{lines.map(line => {
+				const elem = (
+					<p class='lyric-line' onClick={() => {
+						elem.scrollIntoView({
+							behavior: 'smooth',
+							block: 'center',
+							container: 'nearest'
+						});
+
+						copy(line);
+					}}>
+						{line}
+						<Icon name={icons.copy} className='lyric-line-copy' />
+					</p>
+				);
+
+				return elem;
+			})}
 		</div>
 	)
 }

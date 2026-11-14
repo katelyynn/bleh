@@ -125,6 +125,7 @@
 	display: flex;
 	flex-direction: column;
 
+	padding: 0 10px;
 	padding-bottom: var(--card-padding);
 
 	&:last-child {
@@ -135,10 +136,44 @@
 
 .lyric-line {
 	font-size: 20px;
-	line-height: 32px;
+	line-height: 36px;
 	font-weight: var(--font-weight-medium);
-	cursor: default;
+	cursor: pointer;
 	margin: unset;
+
+	transition-property: color, background-color, border-radius, padding, margin;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	width: fit-content;
+
+	&:hover {
+		padding: 0 8px;
+		margin: 0 -8px;
+		background-color: oklch(var(--h4) / 10%);
+		border-radius: var(--radius-m);
+		color: oklch(var(--l3-c));
+		transition: none;
+
+		&>.lyric-line-copy {
+			opacity: 0.6;
+			transition: none;
+		}
+	}
+}
+
+.lyric-line-copy {
+	height: 26px !important;
+	vertical-align: text-top;
+	margin-left: 6px;
+
+	--icon-size: 14px;
+
+	opacity: 0;
+
+	transition-property: opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }
 
 .lyric-search {
