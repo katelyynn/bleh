@@ -34,22 +34,6 @@
 	}
 }
 
-.campfire-panel-side {
-	width: var(--cards-sidebar-width);
-	flex-shrink: 0;
-	background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5) / 60%));
-	padding: var(--card-padding) 0;
-
-	z-index: 3;
-
-	overflow-y: auto;
-
-	@media (max-width: 980px) {
-		width: unset;
-		max-height: 500px;
-	}
-}
-
 .campfire-bg {
 	&.previous {
 		display: none;
@@ -58,13 +42,15 @@
 	position: absolute;
 	inset: 0;
 	background-size: 120%;
-	background-position: right center;
+	background-position: center;
 
-	--mask: linear-gradient(180deg, transparent, white, transparent);
+	max-height: 300px;
+
+	--mask: linear-gradient(0deg, transparent, white);
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
-	opacity: 0.1;
+	opacity: 0.2;
 }
 
 .campfire {
@@ -84,9 +70,6 @@
 		padding: 40px 0;
 		--w: 210px;
 	}
-
-	background: linear-gradient(90deg, oklch(var(--b5)), transparent 5%,
-		transparent 95%, oklch(var(--b5)));
 }
 
 .campfire-intro {
@@ -306,12 +289,11 @@
 }
 
 .campfire-cta {
-	padding: var(--card-padding) calc(var(--card-padding) - 12px);
-	background: linear-gradient(180deg, oklch(var(--b5)), color-mix(in oklch,
-				oklch(var(--b4)) 40%, oklch(var(--b5))));
+	padding: var(--card-padding);
+	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 15%));
 
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	gap: var(--card-gap);
 
 	&.standalone {
@@ -321,34 +303,62 @@
 	}
 }
 
+.campfire-cta-btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+
+	--bg: transparent;
+	--bg-hov: transparent;
+	--bg-atv: transparent;
+	--padding: var(--verts) 8px;
+	--shadow: none;
+
+	text-align: center;
+
+	--verts: 10px;
+
+	&:hover {
+		&>.campfire-cta-text>.campfire-cta-text-head {
+			color: oklch(var(--l3-c));
+			background-size: 100% var(--line-thickness), 100% var(--line-thickness);
+		}
+	}
+}
+
 .campfire-cta-icon {
-	width: 34px;
-	height: 34px;
-	background: oklch(var(--h4) / 20%);
-	border-radius: 50px;
+	--w: var(--icon-size);
+
+	width: var(--w);
+	height: var(--w);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: oklch(var(--l3-c));
 	--mask-colour: currentColor;
 	--icon: var(--mask);
-	--icon-size: 16px;
-}
-
-.campfire-cta-btn {
-	display: flex;
-	gap: 10px;
-
-	--bg: transparent;
-	--bg-hov: oklch(var(--b4) / 60%);
-	--bg-atv: oklch(var(--b4) / 80%);
-	--padding: 10px 12px;
-	--shadow: none;
-
-	text-align: left;
+	--icon-size: 20px;
 }
 
 .campfire-cta-text-sub {
 	font-size: calc(var(--font-size) - 1px);
 	color: oklch(var(--c3));
+
+	max-width: 170px;
+	margin-top: 2px;
+}
+
+.campfire-cta-text-head {
+	--line-thickness: 0.08em;
+	--line-inset: 0.04em;
+
+	background-image: linear-gradient(to right, var(--mask-colour), var(--mask-colour)), linear-gradient(to right, transparent, transparent);
+	background-repeat: no-repeat;
+	background-size: 0% var(--line-thickness), 100% var(--line-thickness);
+	background-position: 0 100%;
+
+	transition-property: background-size;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 }

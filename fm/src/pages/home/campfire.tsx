@@ -31,6 +31,9 @@ import { CampfireItem } from '@/components/campfire/item';
 import { ReactNode } from 'jsx-dom';
 import { SmartArtist, SmartTitle } from '@/components/music/smart_title';
 import { SideAction, SideActions } from '@/components/button/side';
+import { Separator } from '@/components/divider/separator';
+import { Input } from '@/components/input/input';
+import { PanelHead } from '@/components/text/head';
 
 interface album {
 	image: string;
@@ -100,6 +103,20 @@ export function campfire() {
 
 	campfire_extended();
 	campfire_cta(container);
+
+	page.structure.side.appendChild(
+		<>
+			<Separator />
+			<section class='home-search'>
+				<PanelHead icon={icons.search}>
+					{tl(trans.search)}
+				</PanelHead>
+				<Input search placeholder={tl(trans.search_for_anything) as string} onSubmit={(v) => {
+					window.location.href = `${root}search?q=${v}`;
+				}} />
+			</section>
+		</>
+	);
 
 	const albums: album[] = [];
 	const album_elements: { elem: HTMLElement; index: number }[] = [];
