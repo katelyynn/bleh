@@ -191,10 +191,13 @@ export function playback() {
 					<SettingSwitch bind='format_guest_features' />
 					<SettingSwitch bind='show_guest_features' />
 					<SettingSwitch bind='show_remaster_tags' />
+				</SettingGroup>
+				<SettingGroup>
 					<SettingOptions name={tl(trans.romanise_titles)}>
 						<SettingCheckbox bind='romanise_jp' standalone />
 						<SettingCheckbox bind='romanise_ko' standalone />
 					</SettingOptions>
+					<SettingCheckbox bind='romanise_lyrics' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>

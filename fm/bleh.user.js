@@ -121531,11 +121531,14 @@ var bleh = (() => {
           /* @__PURE__ */ jsx(SettingGroup, { children: [
             /* @__PURE__ */ jsx(SettingSwitch, { bind: "format_guest_features" }),
             /* @__PURE__ */ jsx(SettingSwitch, { bind: "show_guest_features" }),
-            /* @__PURE__ */ jsx(SettingSwitch, { bind: "show_remaster_tags" }),
+            /* @__PURE__ */ jsx(SettingSwitch, { bind: "show_remaster_tags" })
+          ] }),
+          /* @__PURE__ */ jsx(SettingGroup, { children: [
             /* @__PURE__ */ jsx(SettingOptions, { name: tl2(trans.romanise_titles), children: [
               /* @__PURE__ */ jsx(SettingCheckbox, { bind: "romanise_jp", standalone: true }),
               /* @__PURE__ */ jsx(SettingCheckbox, { bind: "romanise_ko", standalone: true })
-            ] })
+            ] }),
+            /* @__PURE__ */ jsx(SettingCheckbox, { bind: "romanise_lyrics" })
           ] })
         ] }),
         /* @__PURE__ */ jsx("section", { class: "bleh--panel", children: [
