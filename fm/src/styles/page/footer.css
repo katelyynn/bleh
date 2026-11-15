@@ -117,6 +117,10 @@
 .footer-bottom,
 .footer-bleh {
 	width: calc(var(--content-width) - (var(--card-padding) * 2));
+
+	@media (max-width: 980px) {
+		width: 100%;
+	}
 }
 
 /* TODO: investigate performance of this selector */
