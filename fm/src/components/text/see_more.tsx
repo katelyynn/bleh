@@ -212,3 +212,13 @@ export function ViewButtons({
 		</div>
 	);
 }
+
+export function BlendText({
+	children
+}: WithChildren) {
+	return (
+		<p class='blend-text'>
+			{children}
+		</p>
+	);
+}
