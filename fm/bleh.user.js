@@ -53881,6 +53881,9 @@ var bleh = (() => {
     },
     view_lyrics: {
       en: "View lyrics"
+    },
+    lyrics_for_value: {
+      en: "Lyrics for {v}"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -85777,7 +85780,7 @@ var bleh = (() => {
       repeatedIndex + 2
     );
     function open2() {
-      lyricsModal(segments, id);
+      lyricsModal(segments, page.name, page.sister, id);
     }
     const inner = createRef();
     const elem = /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", onClick: open2, children: /* @__PURE__ */ jsx("div", { class: "lyric-segment-snippet", ref: inner }) });
@@ -85816,7 +85819,7 @@ var bleh = (() => {
         return;
       }
       const { segments } = handleLyrics(res.plainLyrics);
-      lyricsModal(segments, res.id);
+      lyricsModal(segments, name, artist, res.id);
     } catch (e4) {
       log("failed", "lyrics", "error");
       console.error(e4);
@@ -85827,11 +85830,11 @@ var bleh = (() => {
       });
     }
   }
-  function lyricsModal(segments, id) {
+  function lyricsModal(segments, name, artist, id) {
     const container = createRef();
     modal({
       id: "lyrics",
-      title: tl2(trans.lyrics),
+      title: tl2(trans.lyrics_for_value, { v: /* @__PURE__ */ jsx("i", { children: romanise(correct_item_by_artist(name, artist)) }) }),
       body: /* @__PURE__ */ jsx(Fragment, { children: [
         /* @__PURE__ */ jsx("div", { class: "lyric-search", children: [
           /* @__PURE__ */ jsx(Input, { className: "lyrics-search-input", placeholder: tl2(trans.search_lyrics), search: true, onSubmit: render7, onChange: render7 }),

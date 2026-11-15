@@ -12947,6 +12947,9 @@ export const trans = {
 	view_lyrics: {
 		en: 'View lyrics',
 	},
+	lyrics_for_value: {
+		en: 'Lyrics for {v}',
+	},
 } as const satisfies Record<string, any>;
 
 // ’

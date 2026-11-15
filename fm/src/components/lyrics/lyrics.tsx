@@ -11,6 +11,8 @@ import { useSettings } from "@/page";
 import { log } from "@/build/log";
 import { getLyrics } from "./retrieve";
 import { Alert } from "../text/alert";
+import { page } from "@/build/page";
+import { correct_item_by_artist } from "../music/lotus";
 
 interface LyricsSnippetProps {
 	lyrics: string;
@@ -75,7 +77,7 @@ export function LyricsSnippet({
 		);
 
 	function open() {
-		lyricsModal(segments, id);
+		lyricsModal(segments, page.name, page.sister, id);
 	}
 
 	const inner = createRef();
@@ -136,7 +138,7 @@ export async function lyricsFromMenu(name: string, artist: string) {
 
 		const { segments } = handleLyrics(res.plainLyrics);
 
-		lyricsModal(segments, res.id);
+		lyricsModal(segments, name, artist, res.id);
 	} catch (e) {
 		log('failed', 'lyrics', 'error');
 		console.error(e);
@@ -151,12 +153,12 @@ export async function lyricsFromMenu(name: string, artist: string) {
 	}
 }
 
-function lyricsModal(segments: string[][], id?: number) {
+function lyricsModal(segments: string[][], name?: string, artist?: string, id?: number) {
 	const container = createRef();
 
 	modal({
 		id: 'lyrics',
-		title: tl(trans.lyrics),
+		title: tl(trans.lyrics_for_value, { v: <i>{romanise(correct_item_by_artist(name, artist))}</i> }),
 		body: (
 			<>
 				<div class='lyric-search'>
