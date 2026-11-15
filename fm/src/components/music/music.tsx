@@ -520,7 +520,7 @@ export function show_your_scrobbles() {
 		metadata.replaceChildren(
 			<>
 				{groups.map((group) => {
-					if (group.value.querySelector('.lyrics-snippet')) return;
+					if (group.value.querySelector('.lyrics-snippet') || group.value.querySelector('[href*="musixmatch.com"]')) return;
 
 					return (
 						<div class='metadata-group'>

@@ -416,7 +416,6 @@
 
 	z-index: 10;
 	max-height: 100%;
-	overflow: hidden;
 }
 
 .bleh-modal-v2-body {
@@ -427,6 +426,9 @@
 	gap: calc(var(--modal-verts) / 2);
 	max-height: 100%;
 	overflow: hidden;
+
+	padding: 4px;
+	margin: -4px;
 }
 
 .bleh-modal-v2-title {
