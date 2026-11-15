@@ -54,7 +54,7 @@ import { non_pro_edit } from '@/components/music/non_pro_edit.tsx';
 import { queue_popup } from '@/components/dialog/popup.tsx';
 import { lyricsFromMenu } from '../lyrics/lyrics';
 
-type TrackElement = HTMLElement & {
+export type TrackElement = HTMLElement & {
 	symbol: symbol;
 	preview?: ReactElement;
 }
@@ -1222,7 +1222,7 @@ interface TrackMenuProps {
 	requestClose: () => void;
 }
 
-function TrackMenu({
+export function TrackMenu({
 	track,
 	name,
 	artist,

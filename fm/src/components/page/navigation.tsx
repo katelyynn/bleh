@@ -642,7 +642,7 @@ export function append_nav() {
 
 		const status_container = createRef();
 
-		menu_tooltip(
+		const musicMenu = menu_tooltip(
 			music,
 			<NavWindow>
 				<NavWindowHeader
@@ -683,6 +683,9 @@ export function append_nav() {
 							url={`${root}music/${redirect()}${sanitise(status.artist)}/_/${sanitise(status.name)}`}
 							active={status.active}
 							margin={false}
+							requestClose={() => {
+								musicMenu.hide();
+							}}
 						/>
 					</Tracklist>
 					<div class='status-time'>
