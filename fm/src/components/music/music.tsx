@@ -519,12 +519,16 @@ export function show_your_scrobbles() {
 
 		metadata.replaceChildren(
 			<>
-				{groups.map((group) => (
-					<div class='metadata-group'>
-						{group.header as ReactNode}
-						{group.value as ReactNode}
-					</div>
-				))}
+				{groups.map((group) => {
+					if (group.value.querySelector('.lyrics-snippet')) return;
+
+					return (
+						<div class='metadata-group'>
+							{group.header as ReactNode}
+							{group.value as ReactNode}
+						</div>
+					);
+				})}
 			</>,
 		);
 	}

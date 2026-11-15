@@ -12,7 +12,9 @@ import { icons } from '@/components/shared/icon.tsx';
 export function bleh_name_change() {
 	const token = get_token(page.structure.row!);
 
-	const head = page.structure.row!.querySelector('.content-top-header')!;
+	const head = page.structure.row!.querySelector('.content-top-header');
+	if (!head) return;
+
 	const para = page.structure.row!.querySelector('p');
 
 	const form = page.structure.row!.querySelector('form');

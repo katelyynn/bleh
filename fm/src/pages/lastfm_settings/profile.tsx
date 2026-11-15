@@ -385,7 +385,7 @@ function profile_panel() {
 					<SettingInfo
 						name={tl(trans.avatar)}
 						body={tl(trans.avatar_desc)}
-						icon={icons.image}
+						icon={icons.profile}
 					>
 						<div
 							class={['avatar', 'image-uploader']}
