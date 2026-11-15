@@ -291,7 +291,7 @@
 		border-radius: calc(var(--avatar-radius) + 3px);
 		border: 2px solid oklch(var(--l3-c));
 
-		scale: 0.8;
+		scale: 1.1;
 		opacity: 0;
 
 		transition-property: scale, opacity;

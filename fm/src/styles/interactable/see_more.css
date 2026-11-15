@@ -40,6 +40,8 @@
 
 	--interact-mask: none !important;
 
+	user-select: none;
+
 	&:before {
 		display: none;
 	}
