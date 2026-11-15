@@ -120120,7 +120120,7 @@ var bleh = (() => {
     document.documentElement.classList.add("florence-supports-loading");
     const split = window.location.pathname.replace(root, "").split("/");
     const length = split.length - 1;
-    if (split[0] == "labs" && split[length] != "labs" || split[0] == "api" && !split[length].includes("account")) {
+    if (split[0] == "labs" && split[length] != "labs" || split[0] == "api" && (!split[length].includes("account") && !split[length].includes("auth"))) {
       log("disabled loading for special interface", "style");
       page.disabled = true;
       return;

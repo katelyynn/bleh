@@ -32,7 +32,7 @@ export function append_style() {
 	// style is neither fetched nor applied in these interfaces
 	if (
 		(split[0] == 'labs' && split[length] != 'labs') || (
-			split[0] == 'api' && !split[length].includes('account')
+			split[0] == 'api' && (!split[length].includes('account') && !split[length].includes('auth'))
 		)
 	) {
 		log('disabled loading for special interface', 'style');
