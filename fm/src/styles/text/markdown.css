@@ -325,13 +325,14 @@ t {
 	background-color: oklch(var(--k4) / 20%);
 	border-radius: var(--radius-s);
 
-	transition-property: background-color;
+	transition-property: background-color, background-size;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
 	&:hover,
 	&:focus-visible {
-		transition: none;
+		transition-property: background-size;
+
 		background-color: oklch(var(--k4) / 30%);
 	}
 

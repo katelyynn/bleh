@@ -18,7 +18,7 @@ import { hover_tooltip, Tooltip } from '../shared/tooltips';
 
 interface PageHeaderProps {
 	icon?: string;
-	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home' | 'event';
+	type: 'artist' | 'album' | 'track' | 'profile' | 'search' | 'tag' | 'home' | 'event' | 'obsession';
 	combined?: boolean;
 	name?: ReactNode;
 	avatar?: ReactNode;
@@ -41,7 +41,7 @@ export function PageHeader({
 	children,
 	extra,
 }: PageHeaderProps) {
-	const generic = !!avatar;
+	const generic = !!avatar || type == 'obsession';
 	const label = tl(trans[type]);
 
 	const refresh = ff('header_refresh');

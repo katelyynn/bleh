@@ -68,18 +68,20 @@ export function FancyTitle({
 interface SmartArtistProps {
 	artist: string;
 	guests: string[];
+	className?: string;
 }
 
 export function SmartArtist({
 	artist,
-	guests
+	guests,
+	className
 }: SmartArtistProps) {
 	return (
 		<>
-			<Artist name={artist} />
+			<Artist name={artist} className={className} />
 			{guests.map(guest => (
 				<>
-					, <Artist name={guest} />
+					, <Artist name={guest} className={className} />
 				</>
 			))}
 		</>
@@ -88,13 +90,15 @@ export function SmartArtist({
 
 interface ArtistProps {
 	name: string;
+	className?: string;
 }
 
 function Artist({
-	name
+	name,
+	className
 }: ArtistProps) {
 	return (
-		<a href={`${root}music/${redirect()}${sanitise(name)}`}>
+		<a className={className} href={`${root}music/${redirect()}${sanitise(name)}`}>
 			{romanise(name)}
 		</a>
 	)

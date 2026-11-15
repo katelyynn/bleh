@@ -194,17 +194,6 @@
 			-webkit-box-orient: vertical;
 			font-size: var(--page-header-font-size);
 			line-height: var(--page-header-line-height);
-
-			.feat {
-				padding: 0 0 0 10px;
-				background-color: oklch(var(--b5), 40%);
-				border-radius: var(--item-med-radius);
-				font-size: var(--page-header-font-size-sub);
-				line-height: 27px;
-				display: inline-flex;
-				position: relative;
-				bottom: 1px;
-			}
 		}
 
 		.page-header-artist {
@@ -649,11 +638,6 @@
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
 	position: relative;
-
-	.header-new-crumb {
-		font-size: inherit;
-		line-height: inherit;
-	}
 }
 
 .title-container {
@@ -673,11 +657,6 @@
 
 		display: flex;
 		gap: var(--item-list-gap);
-
-		&>.feat {
-			font-size: 18px;
-			color: oklch(var(--c2) / 70%);
-		}
 	}
 
 	@media (max-width: 980px) {
@@ -742,29 +721,24 @@
 	line-height: 22px;
 }
 
-.artist-for-album,
-.artist-for-track {
-	display: flex;
-	color: oklch(var(--c1), 0.8);
+.header-new-crumb {
+	color: inherit !important;
+	opacity: unset;
+	font-size: inherit;
+	line-height: inherit;
+	font-weight: var(--font-weight-medium);
+	transition-property: color;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+	--mask-colour: oklch(var(--c3));
 
-	.header-new-crumb {
-		color: inherit;
-		opacity: unset;
-		font-weight: var(--font-weight-medium);
-		transition-property: color;
-		transition-duration: var(--trans);
-		transition-timing-function: var(--trans-function);
-		margin-left: 4px;
-		--mask-colour: oklch(var(--c3));
+	&:hover {
+		color: oklch(var(--c1));
+		transition: none;
+	}
 
-		&:hover {
-			color: oklch(var(--c1));
-			transition: none;
-		}
-
-		&:first-child {
-			margin-left: unset;
-		}
+	&:first-child {
+		margin-left: unset;
 	}
 }
 

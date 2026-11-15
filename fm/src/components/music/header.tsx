@@ -25,6 +25,7 @@ import { context_menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SmartArtist, SmartTitle } from './smart_title';
 
 type PageHeaderAvatarElement = HTMLDivElement & {
 	image: HTMLImageElement;
@@ -265,107 +266,39 @@ export function page_header_title(header = document.body) {
 
 	const track_title = header.querySelector('.header-new-title');
 	const track_artist = header.querySelector('.header-new-crumb span');
+	const artists = track_artist.parentElement.parentElement; // jesus
 
 	if (!track_title) return;
 
 	track_title.classList.add('page-header-title');
+	track_title.textContent = romanise(correct_item_by_artist(track_title.textContent, track_artist.textContent));
 
 	// correct artist
 	if (track_artist) {
-		// album/track page
-		if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
-			const corrected_artist =
-				artist_corrections[track_artist.textContent];
-			log(
-				`corrected ${track_artist.textContent} as ${corrected_artist}`,
-				'lotus',
-			);
-
-			track_artist.parentElement.setAttribute(
-				'href',
-				`${root}music/${redirect()}${
-					sanitise(track_artist.textContent)
-				}`,
-			);
-			track_artist.textContent = romanise(corrected_artist);
-		} else {
-			track_artist.parentElement.setAttribute(
-				'href',
-				`${root}music/${redirect()}${
-					sanitise(track_artist.textContent)
-				}`,
-			);
-			track_artist.textContent = romanise(track_artist.textContent);
-		}
+		track_artist.parentElement!.setAttribute('href', `${root}music/${redirect()}${sanitise(track_artist.textContent)}`);
+		track_artist.textContent = romanise(correct_artist(track_artist.textContent));
 	}
 
 	if (useSettings.get('format_guest_features')) {
-		try {
-			if (!track_title.hasAttribute('data-kate-processed')) {
-				track_title.setAttribute('data-kate-processed', 'true');
+		const formatted = name_includes(
+			track_title.textContent,
+			track_artist.textContent,
+		);
 
-				const formatted = name_includes(
-					track_title.textContent,
-					track_artist.textContent,
-				);
+		page.corrected =
+			formatted.corrected_title != track_title.textContent;
 
-				page.corrected =
-					formatted.corrected_title != track_title.textContent;
+		// combine
+		track_title.replaceChildren(
+			<SmartTitle title={formatted.song_title} tags={formatted.song_tags} />
+		);
+		artists.replaceChildren(
+			<SmartArtist artist={formatted.song_artist} guests={formatted.song_guests} className='header-new-crumb' />
+		);
 
-				// combine
-				render(
-					track_title,
-					smart_title(
-						formatted.song_title,
-						formatted.song_tags,
-						true,
-					),
-				);
-
-				// (spotify) / (explicit) / (clean) in title
-				if (formatted.song_tags.some((tag) => tag.group == 'form')) {
-					page.suggest = sanitise(formatted.song_title.trim());
-				}
-
-				const song_artist_element = document.body.querySelector(
-					'span[itemprop="byArtist"]',
-				);
-				const song_guests = formatted.song_guests;
-				page.sister_others = song_guests;
-				song_artist_element.innerHTML = song_artist_element.innerHTML
-					.trim();
-				for (const guest in song_guests) {
-					// &
-					song_artist_element.innerHTML =
-						`${song_artist_element.innerHTML},`;
-
-					// no whitespace to make sure it looks correct
-					song_artist_element.appendChild(html.node`
-                    <a class="header-new-crumb" href="${root}music/${redirect()}${
-						sanitise(song_guests[guest])
-					}">${romanise(song_guests[guest])}</a>
-                `);
-				}
-			}
-		} catch (e) {}
-	} else {
-		if (!track_title.hasAttribute('data-kate-processed')) {
-			track_title.setAttribute('data-kate-processed', 'true');
-
-			const corrected_title = correct_item_by_artist(
-				track_title.textContent,
-				track_artist.textContent,
-			);
-			log(
-				`corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`,
-				'lotus',
-			);
-
-			if (corrected_title != track_title.textContent) {
-				page.corrected = true;
-			}
-
-			track_title.textContent = romanise(corrected_title);
+		// (spotify) / (explicit) / (clean) in title
+		if (formatted.song_tags.some((tag) => tag.group == 'form')) {
+			page.suggest = sanitise(formatted.song_title.trim());
 		}
 	}
 }
