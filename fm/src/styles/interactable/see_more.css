@@ -52,7 +52,7 @@
 	--bg: linear-gradient(to right, var(--mask-colour), var(--mask-colour)),
 	linear-gradient(to right, transparent, transparent) !important;
 	background-repeat: no-repeat !important;
-	background-size: 0% var(--line-thickness),
+	background-size: var(--link-underline-size, 0%) var(--line-thickness),
 	100% var(--line-thickness) !important;
 	background-position: calc(-1 * (var(--icon-size) + 2px)) 100% !important;
 
