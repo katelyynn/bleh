@@ -84,7 +84,7 @@
 
 	img {
 		object-fit: cover;
-		--mask-size: var(--cover-size-50);
+		--mask-size: var(--cover-size-100);
 	}
 
 	--avatar-generic-background: oklch(var(--b4));

@@ -36,6 +36,7 @@
 				--icon: var(--icon-16-heart-solid);
 				--icon-size: 14px;
 				color: oklch(var(--l3-c));
+				--mask-colour: currentColor !important;
 				vertical-align: middle;
 				margin: 0 2px;
 
