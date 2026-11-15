@@ -138,7 +138,7 @@ export function SettingList({
 
 		if (predefined) {
 			available = Object.fromEntries(
-				Object.entries(values).filter(([key]) => !value!.includes(key)),
+				Object.entries(values).filter(([key]) => !(value || []).includes(key)),
 			);
 		}
 

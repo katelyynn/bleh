@@ -25,16 +25,20 @@ import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
-import { icons } from '../shared/icon';
+import { Icon, icons } from '../shared/icon';
 import { BetaIndicator } from '../shared/indicator';
 import { useSettings } from '@/page.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { ReactNode } from 'jsx-dom';
 import { Listen, ListenBoard } from '@/components/music/listen.tsx';
 import { SideAction, SideActions } from '@/components/button/side.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
 import { create_music_links } from '@/components/music/link_types.tsx';
+import { PanelHead } from '../text/head';
+import { IconLabel } from '../text/text';
+import { showLyrics } from '../lyrics/display';
+import { trackVideo } from './video';
 
 export function show_your_scrobbles() {
 	show_numbers_on_side(page.type);
@@ -515,12 +519,16 @@ export function show_your_scrobbles() {
 
 		metadata.replaceChildren(
 			<>
-				{groups.map((group) => (
-					<div class='metadata-group'>
-						{group.header as ReactNode}
-						{group.value as ReactNode}
-					</div>
-				))}
+				{groups.map((group) => {
+					if (group.value.querySelector('.lyrics-snippet') || group.value.querySelector('[href*="musixmatch.com"]')) return;
+
+					return (
+						<div class='metadata-group'>
+							{group.header as ReactNode}
+							{group.value as ReactNode}
+						</div>
+					);
+				})}
 			</>,
 		);
 	}
@@ -711,73 +719,10 @@ function show_numbers_on_side(header_type) {
 
 	// is there a video?
 	if (page.type == 'track') {
-		const video_col = document.body.querySelector(
-			'.track-overview-video-column.col-sidebar',
-		);
+		trackVideo();
 
-		if (!video_col) {
-			video_unavailable(video_col);
-			return;
-		}
-
-		video_col.classList.remove('col-sidebar');
-		page.structure.side.insertBefore(
-			video_col,
-			page.structure.side.firstElementChild,
-		);
-
-		const video = video_col.querySelector('.video-preview');
-
-		if (!video) {
-			video_unavailable(video_col);
-			return;
-		}
-
-		video_col.classList.remove('col-sidebar');
-		page.structure.side.insertBefore(
-			video_col,
-			page.structure.side.firstElementChild,
-		);
-
-		const playlink = video.querySelector('.video-preview-playlink a');
-		const replace = video_col.querySelector('.video-preview-replace a');
-
-		video.appendChild(html.node`
-            <a class="link-block-cover-link" href=${playlink.href} target="_blank" />
-        `);
-
-		playlink.classList = 'see-more';
-		replace.classList = 'see-more add left-icon';
-
-		video.after(html.node`
-            <div class="video-actions sub-text">
-                ${replace}
-                ${playlink}
-            </div>
-        `);
-
-		playlink.textContent = tl(trans.watch_video);
-		playlink.removeAttribute('title');
-
-		replace.textContent = tl(trans.replace);
+		showLyrics();
 	}
-}
-
-function video_unavailable(video_col = null) {
-	const cta = page.structure.side.querySelector('.video-preview-upload-cta');
-	if (cta) return;
-
-	if (video_col) page.structure.side.removeChild(video_col);
-
-	page.structure.side.insertBefore(
-		html.node`
-        <section class="video-placeholder">
-            <div class="bleh-icon" style="--icon: var(--icon-16-video-broken)"></div>
-            ${tl(trans.video_removed)}
-        </section>
-    `,
-		page.structure.side.firstElementChild,
-	);
 }
 
 export function bleh_music_page_charts() {

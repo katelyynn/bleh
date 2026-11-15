@@ -17,6 +17,7 @@ import { root } from '@/build/page';
 import { hsl, oklch } from 'culori';
 import JSON5 from 'json5';
 import { useSettings } from '@/page.tsx';
+import { version } from '@/main';
 
 export function hex_to_hsl(hex: string) {
 	return hsl(hex);
@@ -331,15 +332,26 @@ export async function paste(elem = null, silent = false) {
 	}
 }
 
-export function download_with_progress(
+type responseTypes = {
+	blob: Blob;
+	json: unknown;
+	text: string;
+}
+
+export function download_with_progress<T extends keyof responseTypes>(
 	url: string,
+	responseType: T,
 	func?: (percent: number) => void,
-) {
+): Promise<responseTypes[T]> {
 	return new Promise((resolve, reject) => {
 		GM_xmlhttpRequest({
 			method: 'GET',
 			url,
-			responseType: 'blob',
+			responseType,
+			headers: {
+				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
+				Accept: 'application/json',
+			},
 
 			onprogress: (e) => {
 				if (e.lengthComputable) {
@@ -353,12 +365,13 @@ export function download_with_progress(
 
 			onload: (res) => {
 				if (res.status == 200) {
-					resolve(res.response);
-					log(`downloaded ${url}`, 'download');
+					resolve(res as responseTypes[T]);
+					log(`downloaded ${url}`, 'download', 'info', { res });
 				} else {
 					reject(new Error(`download failed: ${res.status}`));
 					log(`download failed: ${res.status}`, 'download', 'error', {
-						url: url,
+						url,
+						res
 					});
 				}
 			},
@@ -454,17 +467,17 @@ export function is_link_external(url) {
 	}
 }
 
-export function romanise(text) {
+export function romanise(text: string, bypass?: boolean) {
 	// japanese
 	if (
 		/[\u30A0-\u30FF\u3040-\u309F]/.test(text) &&
-		useSettings.get('romanise_jp')
+		(useSettings.get('romanise_jp') || bypass)
 	) {
 		return title_case(wanakana.toRomaji(text));
 	}
 
 	// korean
-	if (/[\uAC00-\uD7AF]/.test(text) && useSettings.get('romanise_ko')) {
+	if (/[\uAC00-\uD7AF]/.test(text) && (useSettings.get('romanise_ko') || bypass)) {
 		return title_case(hangulRomanization.convert(text));
 	}
 
@@ -542,8 +555,7 @@ export async function translate(text: string, lang = 'en') {
 	}
 
 	const url =
-		`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${
-			encodeURIComponent(text)
+		`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)
 		}`;
 
 	const res = await fetch(url);

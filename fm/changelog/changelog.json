@@ -1,4 +1,10 @@
 {
+    "2026.1115": {
+        "type": "major",
+        "force": false,
+        "bio": "# Music\n- __Integrated LRCLIB for much better Lyrics support__\n    - Lyrics are now requested by bleh super fast and displayed in a small preview on the right sidebar of track pages. Click this snippet to open a full dialog containing all lyrics, clicking a lyric copies it to your clipboard and scrolls down automatically. You can search for a specific lyric and toggle romanisation for japanese/korean scripts.\n    - Additionally, you can right-click any track and hit *View lyrics* to open this same dialog from anywhere on the site.\n    - The native Last.fm lyrics are now hidden as they became redundant. They’re still technically accessible if you append /+lyrics to a URL though.\n- Refreshed the look of track videos\n- Updated the *Albums* section to half use TSX\n    - This fixes the header being broken, along with refreshing the design of it a little bit. Still pending a full rewrite to be component-based.\n- Migrated some of the campfire *Home* page to use TSX\n    - This is pending a rewrite too to support trackpad scrolling better etc.\n- Fixed empty music links causing an error (I think)\n- Migrated the track/album page headers to use TSX components\n- Right-click menus now exist for your Top track/obsession and top-right Music status (Pro only)\n\n# Obsession\n- __Fixed the broken page header__\n\n# Design\n- Fixed link underlines being broken in a few locations\n- Fixed some music links losing colour\n- Added icons to the *Profile* settings for clarity\n- Adjusted the opacity of banners and backgrounds\n- Introduced a new search input component now used in *Lyrics* and *bleh Settings*\n- Fixed the footer causing page overflow on mobile\n\n# Other\n- Fixed the connect application page disabling styling\n- Fixed underline links basics",
+        "name": "yuzucchi"
+    },
     "2026.1112": {
         "type": "major",
         "force": false,

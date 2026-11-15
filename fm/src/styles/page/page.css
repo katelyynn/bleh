@@ -57,6 +57,10 @@
 	gap: var(--card-gap);
 }
 
+.has-cards-view {
+	--tab-line-helper: none;
+}
+
 .container:not(.has-cards-view)>.row[data-assigned] {
 	display: flex;
 	flex-direction: column;
@@ -229,7 +233,7 @@
 
 	&[data-lacrimosa] {
 		position: absolute;
-		display: block;
+		display: var(--tab-line-helper, block);
 
 		top: -1px;
 		left: var(--side);
@@ -244,7 +248,7 @@
 
 	&[data-roxy] {
 		position: absolute;
-		display: block;
+		display: var(--tab-line-helper, block);
 
 		top: 0;
 		left: var(--card-padding);
@@ -409,6 +413,8 @@
 			opacity: var(--seasonal-decoration-top-opacity, 0.4);
 
 			z-index: 300;
+
+			display: var(--tab-line-helper, block);
 		}
 
 		&:after {
@@ -421,6 +427,8 @@
 
 			z-index: 290;
 			pointer-events: none;
+
+			display: var(--tab-line-helper, block);
 		}
 	}
 }

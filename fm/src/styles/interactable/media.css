@@ -261,11 +261,6 @@
 		grid-template-columns: repeat(4, minmax(var(--grid-item-size), 1fr));
 	}
 
-	&.music-more-artists,
-	&.music-releases {
-		grid-template-columns: repeat(6, minmax(var(--grid-item-size), 1fr));
-	}
-
 	&.resource-list--release-list,
 	&.artist-top-albums {
 		gap: var(--card-padding) var(--item-list-gap);

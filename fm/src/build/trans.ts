@@ -9127,6 +9127,12 @@ export const trans = {
 		ru: 'Редактировать скроббл',
 		pl: 'Edytuj scrobble',
 	},
+	copy_scrobble: {
+		en: 'Copy scrobble',
+	},
+	replace_scrobble: {
+		en: 'Replace scrobble',
+	},
 	edit_scrobbles_in_bulk: {
 		en: 'Edit scrobbles in bulk',
 		de: 'Mehrere Scrobbles bearbeiten',
@@ -11093,6 +11099,9 @@ export const trans = {
 		ru: '한국어 (Корейский)',
 		pl: '한국어 (Koreański)',
 	},
+	romanise_lyrics: {
+		en: 'Romanise lyrics',
+	},
 	romanise_require: {
 		en: 'Romanisation requires either lotus corrections or smart song tags be enabled',
 		de: 'Die Romanisierung erfordert, dass entweder lotus-Korrekturen oder intelligente Song-Tags aktiviert sind',
@@ -12906,7 +12915,7 @@ export const trans = {
 	},
 	chart_position: {
 		// shown on artist/album pages
-		// v = the number placement
+		// v = the number placement with a leading #
 		en: '{v} in the world',
 		pt: '{v}º no mundo', // appended 'º' for ordinal ranking (e.g., 1st -> 1º)
 	},
@@ -12918,9 +12927,32 @@ export const trans = {
 		body: {
 			en: 'Adds personalisation to each page, sourced from Apple Music and official websites',
 			pt: 'Adiciona personalização a cada página, com dados do Apple Music e sites oficiais',
-		}
-	}
+		},
+	},
+	loading_lyrics: {
+		en: 'Figuring out the words',
+	},
+	no_lyrics: {
+		en: 'Couldn’t find this song',
+	},
+	lyrics_instrumental: {
+		en: 'This song has no lyrics',
+	},
+	sourced_from: {
+		en: 'Sourced from {v}',
+	},
+	search_lyrics: {
+		en: 'Search for a lyric',
+	},
+	view_lyrics: {
+		en: 'View lyrics',
+	},
+	lyrics_for_value: {
+		en: 'Lyrics for {v}',
+	},
 } as const satisfies Record<string, any>;
+
+// ’
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
 

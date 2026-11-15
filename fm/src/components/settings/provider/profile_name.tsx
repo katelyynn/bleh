@@ -5,7 +5,7 @@
  */
 
 import { tl, trans } from '@/build/trans.ts';
-import { SaveIcon } from '@/components/shared/icon.tsx';
+import { icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
@@ -52,6 +52,7 @@ export function ProfileName({
 			<SettingLabel
 				name={tl(trans.display_name.name)}
 				body={tl(trans.display_name.body)}
+				icon={icons.username}
 				sponsorOnly
 			/>
 			<div class={['info', 'v', 'setting-inner']}>

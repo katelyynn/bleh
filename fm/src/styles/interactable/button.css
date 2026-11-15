@@ -1,6 +1,6 @@
 .btn,
 .btn-primary,
-.btn-cancel,
+/*.btn-cancel,*/
 .btn-secondary,
 select,
 .dropdown-menu-clickable-item,
@@ -90,7 +90,7 @@ select,
 	text-decoration: var(--force-underline, none) !important;
 	text-align: inherit;
 	transition-property:
-		background-color, transform, box-shadow, color, opacity, padding,
+		background-color, transform, box-shadow, color, opacity,
 		font-weight !important;
 	transition-duration: var(--trans) !important;
 	transition-timing-function: var(--trans-function) !important;

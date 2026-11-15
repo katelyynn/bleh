@@ -68,6 +68,7 @@ export function ProfileAccent({
 			<SettingLabel
 				name={tl(trans.profile_accent.name)}
 				body={tl(trans.profile_accent.body)}
+				icon={icons.accent}
 				sponsorOnly
 			/>
 			<div class={['info', 'setting-inner']}>

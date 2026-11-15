@@ -231,7 +231,9 @@ export const icons = {
 	profile_links: 'profile-links',
 	statuscafe: 'statuscafe',
 	charts: 'charts',
-	password: 'password'
+	password: 'password',
+	video: 'video',
+	video_broken: 'video-broken'
 };
 
 interface icon {

@@ -55,6 +55,10 @@ import { status } from '../dialog/status';
 import { useSettings } from '@/page.tsx';
 import { OracleNotice } from '@/components/oracle/notice.tsx';
 import { FormattedOracleCredits, OracleCredits } from '../oracle/credits';
+import { BlendText, PanelTop, SeeMore, ViewButtons } from '../text/see_more';
+import { PanelHead } from '../text/head';
+import { BetaIndicator } from '../shared/indicator';
+import { LoadingData } from '../loading/loading';
 
 export function oracle_process() {
 	log('beginning', 'oracle');
@@ -179,37 +183,44 @@ export function oracle_process() {
 	let label_panel;
 
 	if (page.type == 'track' && page.subpage == 'overview') {
-		releases_panel = html.node`
-            <section class="oracle-releases">
-                <h3 class="text-18">${tl(trans.albums)}</h3>
-                <div class="source-albums">
-                    <div class="source-album oracle-loading">
-                        <div class="source-album-art">
-                            <span class="cover-art oracle-loading">
-                                <img class="empty">
-                            </span>
-                        </div>
-                        <div class="source-album-details" data-kate-processed="true">
-                            <h4 class="source-album-name placeholder-text">Album name</h4>
-                            <p class="source-album-artist placeholder-text">Artist name</p>
-                            <p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
-                        </div>
-                    </div>
-                    <div class="source-album oracle-loading">
-                        <div class="source-album-art">
-                            <span class="cover-art oracle-loading">
-                                <img class="empty">
-                            </span>
-                        </div>
-                        <div class="source-album-details" data-kate-processed="true">
-                            <h4 class="source-album-name placeholder-text">Album name</h4>
-                            <p class="source-album-artist placeholder-text">Artist name</p>
-                            <p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
+		// TODO: can u tell the rest of this is copied lighterhtml?
+		releases_panel = (
+			<section class='oracle-releases'>
+				<PanelTop>
+					<PanelHead icon={icons.albums} top>
+						{tl(trans.albums)}
+						<BetaIndicator />
+					</PanelHead>
+				</PanelTop>
+				<div class="source-albums">
+					<div class="source-album oracle-loading">
+						<div class="source-album-art">
+							<span class="cover-art oracle-loading">
+								<img class="empty" />
+							</span>
+						</div>
+						<div class="source-album-details" data-kate-processed="true">
+							<h4 class="source-album-name placeholder-text">Album name</h4>
+							<p class="source-album-artist placeholder-text">Artist name</p>
+							<p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
+						</div>
+					</div>
+					<div class="source-album oracle-loading">
+						<div class="source-album-art">
+							<span class="cover-art oracle-loading">
+								<img class="empty" />
+							</span>
+						</div>
+						<div class="source-album-details" data-kate-processed="true">
+							<h4 class="source-album-name placeholder-text">Album name</h4>
+							<p class="source-album-artist placeholder-text">Artist name</p>
+							<p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		);
+
 		info_panel.after(releases_panel);
 	} else if (page.type == 'track' && page.subpage == 'albums') {
 		const no_data = page.structure.main.querySelector('.no-data-message');
@@ -577,7 +588,7 @@ export function oracle_process() {
 				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function(response) {
+			onload: function (response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching artist data', 'oracle', 'error', {
 						response,
@@ -630,7 +641,7 @@ export function oracle_process() {
 					}, mb_delay);
 				}
 			},
-			onerror: function(err) {
+			onerror: function (err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -768,7 +779,7 @@ export function oracle_process() {
 				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function(response) {
+			onload: function (response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -793,7 +804,7 @@ export function oracle_process() {
 
 				oracle(data);
 			},
-			onerror: function(err) {
+			onerror: function (err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -856,7 +867,7 @@ export function oracle_process() {
 				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function(response) {
+			onload: function (response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -895,7 +906,7 @@ export function oracle_process() {
 
 				oracle_track_releases(data);
 			},
-			onerror: function(err) {
+			onerror: function (err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -1172,7 +1183,7 @@ export function oracle_process() {
 				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function(response) {
+			onload: function (response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -1216,7 +1227,7 @@ export function oracle_process() {
 
 				oracle_album(data);
 			},
-			onerror: function(err) {
+			onerror: function (err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -1594,33 +1605,26 @@ export function oracle_process() {
 
 		if (!recording) {
 			if (releases_panel) {
-				render(
-					releases_panel,
-					html`
-						<div class="top-container">
-							<h3 class="text-18">
-						        ${tl(
-						trans.albums,
-					)}<span class="new-badge beta">${tl(trans.beta)}</span>
-						    </h3>
-							<div class="view-buttons blend blend-v2">
-								<p class="blend-text">${tl(
-						trans.are_these_results_accurate,
-					)}</p>
-								<button class="btn left-icon blend-v2-btn mark-incorrect"
-									data-type="dislike" onclick=${() => {
-							report_incorrect();
-						}}>
-						            ${tl(trans.report_incorrect)}
-						        </button>
-							</div>
-						</div>
-						<div class="loading-data-container">
-							<div class="loading-data-text failed">
-						        ${tl(trans.no_releases_found)}
-						    </div>
-						</div>
-					`,
+				releases_panel.replaceChildren(
+					<>
+						<PanelTop>
+							<PanelHead icon={icons.albums} top>
+								{tl(trans.albums)}
+								<BetaIndicator />
+							</PanelHead>
+							<ViewButtons>
+								<BlendText>
+									{tl(trans.are_these_results_accurate)}
+								</BlendText>
+								<SeeMore blend iconPlacement='left' icon={icons.dislike} className='mark-incorrect' onClick={report_incorrect}>
+									{tl(trans.report_incorrect)}
+								</SeeMore>
+							</ViewButtons>
+						</PanelTop>
+						<LoadingData type='failed'>
+							{tl(trans.no_releases_found)}
+						</LoadingData>
+					</>
 				);
 			}
 			return;
@@ -1962,217 +1966,213 @@ export function oracle_process() {
 
 			let source_albums;
 			if (releases_panel) {
-				render(
-					releases_panel,
-					html`
-						<div class="top-container">
-							<h3 class="text-18">
-						        ${tl(
-						trans.albums,
-					)}<span class="new-badge beta">${tl(trans.beta)}</span>
-						    </h3>
-							<div class="view-buttons blend blend-v2">
-								<p class="blend-text">${tl(
-						trans.are_these_results_accurate,
-					)}</p>
-								<button class="btn left-icon blend-v2-btn mark-incorrect"
-									data-type="dislike" onclick=${() => {
-							report_incorrect();
-						}}>
-						            ${tl(trans.report_incorrect)}
-						        </button>
-							</div>
-						</div>
+				// TODO: this needs migrating from mostly lighterhtml
+				releases_panel.replaceChildren(
+					<>
+						<PanelTop>
+							<PanelHead icon={icons.albums} top>
+								{tl(trans.albums)}
+								<BetaIndicator />
+							</PanelHead>
+							<ViewButtons>
+								<BlendText>
+									{tl(trans.are_these_results_accurate)}
+								</BlendText>
+								<SeeMore blend iconPlacement='left' icon={icons.dislike} className='mark-incorrect' onClick={report_incorrect}>
+									{tl(trans.report_incorrect)}
+								</SeeMore>
+							</ViewButtons>
+						</PanelTop>
 						<div class="${page.subpage == 'overview'
 							? 'source-albums-container'
 							: 'resource-list-container'}">
 							<div class="${page.subpage == 'overview'
 							? 'source-albums'
 							: 'resource-list--release-list'}">
-						        ${releases.map((release, index) => {
-								log('release', 'oracle', 'log', {
-									release,
-								});
-								const title = release.title;
-								const artist = fix_title(
-									oracle_aliases(
-										release['artist-credit']?.[0] ||
-										recording['artist-credit'][0],
-										page.sister,
-									),
-								);
-
-								const types = {
-									album: tl(trans.album),
-									single: tl(trans.single),
-									ep: 'EP',
-									other: tl(trans.other),
-								};
-
-								let type = release['release-group']['primary-type'];
-								if (type && type.toLowerCase() in types) {
-									type = types[type.toLowerCase()];
-								}
-
-								// is there a matching last.fm entry available atm?
-								const match = lastfm_releases.find(
-									(r) =>
-										r.title == title &&
-										r.artist == artist,
-								);
-
-								let plays = 0;
-								let artwork;
-								if (match) {
-									plays = match.plays;
-									artwork = match.artwork;
-								}
-
-								let artwork_container;
-								let stats;
-
-								let title_elem;
-								let artist_elem;
-								if (useSettings.get('format_guest_features')) {
-									const formatted = name_includes(
-										title,
-										artist,
-									);
-
-									title_elem = html.node`<a class="smart-title">${smart_title(
-										formatted.song_title,
-										formatted.song_tags,
-									)
-										}</a>`;
-									artist_elem = html.node`${smart_artists(
-										formatted.song_artist,
-										formatted.song_guests,
-									)
-										}`;
-								} else {
-									title_elem = romanise(
-										correct_item_by_artist(
-											title,
-											artist,
+								{releases.map((release, index) => {
+									log('release', 'oracle', 'log', {
+										release,
+									});
+									const title = release.title;
+									const artist = fix_title(
+										oracle_aliases(
+											release['artist-credit']?.[0] ||
+											recording['artist-credit'][0],
+											page.sister,
 										),
 									);
-									artist_elem = romanise(
-										correct_artist(artist),
+
+									const types = {
+										album: tl(trans.album),
+										single: tl(trans.single),
+										ep: 'EP',
+										other: tl(trans.other),
+									};
+
+									let type = release['release-group']['primary-type'];
+									if (type && type.toLowerCase() in types) {
+										type = types[type.toLowerCase()];
+									}
+
+									// is there a matching last.fm entry available atm?
+									const match = lastfm_releases.find(
+										(r) =>
+											r.title == title &&
+											r.artist == artist,
 									);
-								}
 
-								let elem;
+									let plays = 0;
+									let artwork;
+									if (match) {
+										plays = match.plays;
+										artwork = match.artwork;
+									}
 
-								if (page.subpage == 'overview') {
-									elem = html.node`
+									let artwork_container;
+									let stats;
+
+									let title_elem;
+									let artist_elem;
+									if (useSettings.get('format_guest_features')) {
+										const formatted = name_includes(
+											title,
+											artist,
+										);
+
+										title_elem = html.node`<a class="smart-title">${smart_title(
+											formatted.song_title,
+											formatted.song_tags,
+										)
+											}</a>`;
+										artist_elem = html.node`${smart_artists(
+											formatted.song_artist,
+											formatted.song_guests,
+										)
+											}`;
+									} else {
+										title_elem = romanise(
+											correct_item_by_artist(
+												title,
+												artist,
+											),
+										);
+										artist_elem = romanise(
+											correct_artist(artist),
+										);
+									}
+
+									let elem;
+
+									if (page.subpage == 'overview') {
+										elem = html.node`
                                         <div class="source-album js-link-block link-block-cover-link">
                                             <div class="source-album-art" ref=${(
-										el,
-									) => artwork_container = el}>
+											el,
+										) => artwork_container = el}>
                                                 ${artwork
-											? html.node`
+												? html.node`
                                                     <span class="cover-art">
                                                         <img src=${artwork} alt=${title} loading="lazy">
                                                     </span>
                                                 `
-											: html.node`
+												: html.node`
                                                     <span class="cover-art">
                                                         <img class="missing-album" />
                                                     </span>
                                                 `
-										}
+											}
                                             </div>
                                             <div class="source-album-details" data-kate-processed="true">
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(
-											el,
-										) => (stats = el)}>
+												el,
+											) => (stats = el)}>
                                                     <span class="oracle-stat type">${type}</span>
                                                     ${match
-											? html.node`
+												? html.node`
                                                         <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)
-												}
+													}
                                                         </span>
                                                     `
-											: ''
-										}
+												: ''
+											}
                                                 </p>
                                                 <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist)
-										}/${sanitise(title)
-										}" tabindex="-1" aria-hidden="true" />
+											}/${sanitise(title)
+											}" tabindex="-1" aria-hidden="true" />
                                             </div>
                                         </div>
                                     `;
-								} else {
-									elem = html.node`
+									} else {
+										elem = html.node`
                                         <div class="resource-list--release-list-item-wrap">
                                             <div class="resource-list--release-list-item js-link-block">
                                                 <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
                                                 <p class="resource-list--release-list-item-artist">${artist_elem}</p>
                                                 <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(
-										el,
-									) => stats = el}>
+											el,
+										) => stats = el}>
                                                     <span class="oracle-stat type">${type}</span>
                                                     ${match
-											? html.node`
+												? html.node`
                                                         <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)
-												}
+													}
                                                         </span>
                                                     `
-											: ''
-										}
+												: ''
+											}
                                                 </p>
                                                 <p class="resource-list--release-list-item-aux-text">
                                                     ${tl(trans.count_tracks, {
-											c: release['track-count'],
-										})
-										}
+												c: release['track-count'],
+											})
+											}
                                                 </p>
                                                 <div class="media-item" ref=${(
-											el,
-										) => artwork_container = el}>
+												el,
+											) => artwork_container = el}>
                                                     ${artwork
-											? html.node`
+												? html.node`
                                                         <span class="resource-list--release-list-item-image cover-art">
                                                             <img src=${artwork} alt=${title}>
                                                         </span>
                                                     `
-											: html.node`
+												: html.node`
                                                         <span class="resource-list--release-list-item-image cover-art">
                                                             <img class="missing-album" />
                                                         </span>
                                                     `
-										}
+											}
                                                 </div>
                                                 <a class="js-link-block-cover-link link-block-cover-link" href="${root}music/${sanitise(artist)
-										}/${sanitise(title)
-										}" tabindex="-1" aria-hidden="true" />
+											}/${sanitise(title)
+											}" tabindex="-1" aria-hidden="true" />
                                             </div>
                                         </div>
                                     `;
-								}
+									}
 
-								if (!artwork && index < 2) {
-									load_cover_art(
-										artwork_container,
-										title,
-										artist,
-										stats,
-										type,
-										index,
-									);
-								}
+									if (!artwork && index < 2) {
+										load_cover_art(
+											artwork_container,
+											title,
+											artist,
+											stats,
+											type,
+											index,
+										);
+									}
 
-								return elem;
-							})}
-						    </div>
+									return elem;
+								})}
+							</div>
 						</div>
-					`,
+					</>
 				);
 			}
 
@@ -2401,7 +2401,7 @@ export function oracle_process() {
 				'User-Agent': `bleh/${version.build} <https://bleh.yuzu.pet>`,
 				Accept: 'application/json',
 			},
-			onload: function(response) {
+			onload: function (response) {
 				if (response.status < 200 || response.status >= 300) {
 					log('error fetching connect data', 'oracle', 'error', {
 						response,
@@ -2440,7 +2440,7 @@ export function oracle_process() {
 
 				oracle_artist(data);
 			},
-			onerror: function(err) {
+			onerror: function (err) {
 				console.error('oracle', err);
 
 				setTimeout(() => {
@@ -2799,7 +2799,7 @@ function oracle_request(type = 'albums', send_notify = false) {
 		`https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
-	xhr.onload = function() {
+	xhr.onload = function () {
 		log(`${type} list responded with ${xhr.status}`, 'oracle');
 
 		if (xhr.status != 200) {

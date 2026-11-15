@@ -9,9 +9,10 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
 import { auth, page, root } from '@/build/page';
-import { sanitise } from '@/build/tools';
+import { romanise, sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
+	correct_artist,
 	correct_item_by_artist,
 	name_includes,
 	smart_title,
@@ -27,6 +28,8 @@ import { Icon, icon, icons } from '@/components/shared/icon';
 import { useSettings } from '@/page.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import { PageHeader, PageHeaderArtist, PageHeaderTitle } from '@/components/page/header';
+import { SmartArtist, SmartTitle } from '@/components/music/smart_title';
 
 export function bleh_obsession() {
 	const obsession_container = document.querySelector('.obsession-container');
@@ -64,7 +67,7 @@ export function bleh_obsession() {
 		register_background(background);
 
 		header_colour(
-			html.node`<img src=${avatar(background, 'avatar300s')} />`,
+			<img src={avatar(background, 'avatar300s')} /> as HTMLImageElement,
 			true,
 		);
 	} else {
@@ -83,88 +86,54 @@ export function bleh_obsession() {
 
 	const link = track_title.querySelector('a').getAttribute('href');
 
-	const by = track_artist.querySelector('.obsession-meta-artist-by');
-	track_artist.removeChild(by);
-
 	// correct artist
 	const artist_name = track_artist.querySelector('a');
-	if (artist_corrections.hasOwnProperty(artist_name.textContent)) {
-		const corrected_artist = artist_corrections[artist_name.textContent];
-		log(
-			`corrected ${artist_name.textContent} as ${corrected_artist}`,
-			'lotus',
-		);
-		artist_name.textContent = corrected_artist;
-	}
 
-	artist_name.classList.add('header-new-crumb');
+	const name = (
+		<a href={link} />
+	);
+	const artist = (
+		<span>
+			<a class='header-new-crumb'>
+				{romanise(correct_artist(artist_name.textContent.trim()))}
+			</a>
+		</span>
+	);
 
 	if (useSettings.get('format_guest_features')) {
 		const formatted = name_includes(
 			track_title.textContent.trim(),
-			artist_name.textContent,
+			artist_name.textContent.trim(),
 		);
 
-		page.corrected = formatted.corrected_title;
+		//page.corrected = formatted.corrected_title;
 
 		// combine
-		track_title.classList.add('smart-title');
-		render(
-			track_title,
-			smart_title(formatted.song_title, formatted.song_tags),
+		name.classList.add('smart-title');
+		name.replaceChildren(
+			<SmartTitle title={formatted.song_title} tags={formatted.song_tags} />
 		);
 
-		const song_guests = formatted.song_guests;
-		page.sister_others = song_guests;
-		for (const guest in song_guests) {
-			// &
-			track_artist.innerHTML = `${track_artist.innerHTML},`;
-
-			const guest_element = document.createElement('a');
-			guest_element.classList.add('header-new-crumb');
-			guest_element.setAttribute(
-				'href',
-				`${root}music/${redirect()}${sanitise(song_guests[guest])}`,
-			);
-			guest_element.textContent = song_guests[guest];
-
-			track_artist.appendChild(guest_element);
-		}
-	} else {
-		if (!track_title.hasAttribute('data-kate-processed')) {
-			track_title.setAttribute('data-kate-processed', 'true');
-
-			const corrected_title = correct_item_by_artist(
-				track_title.textContent.trim(),
-				artist_name.textContent,
-			);
-			log(
-				`corrected ${track_title.textContent} by ${artist_name.textContent} as ${corrected_title}`,
-				'lotus',
-			);
-
-			if (corrected_title != track_title.textContent) {
-				page.corrected = true;
-			}
-
-			track_title.textContent = corrected_title;
-		}
+		artist.classList.add('smart-artist');
+		artist.replaceChildren(
+			<SmartArtist artist={formatted.song_artist} guests={formatted.song_guests} className='header-new-crumb' />
+		);
 	}
 
-	track_title.classList.remove('obsession-meta-track');
-
-	const track_header = html.node`
-        <section class="page-header for-track for-obsession">
-            <div class="page-header-info">
-                <div class="sub-text">${tl(trans.obsession)}</div>
-                <div class="title-container">
-                    <h1 class="header-new-title page-header-title"><a href="${link}">${track_title}</a></h1>
-                </div>
-                <h2 class="page-header-artist artist-for-track">${html.node([track_artist.innerHTML])
-		}</h2>
-            </div>
-        </section>
-    `;
+	const track_header = (
+		<PageHeader
+			type='obsession'
+		>
+			<PageHeaderTitle>
+				<h1 class={['header-new-title', 'page-header-title']}>
+					{name}
+				</h1>
+			</PageHeaderTitle>
+			<PageHeaderArtist type='track'>
+				{artist}
+			</PageHeaderArtist>
+		</PageHeader>
+	);
 
 	page.structure.container.insertBefore(
 		track_header,

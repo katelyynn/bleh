@@ -23,7 +23,7 @@
 	border-radius: var(--radius) !important;
 	--shadow: none;
 	--col: oklch(var(--l3-c));
-	color: var(--col);
+	color: var(--col) !important;
 	--mask-colour: color-mix(in oklch,
 			oklch(var(--l3-c)),
 			oklch(var(--l4-c)) 30%);
@@ -40,6 +40,8 @@
 
 	--interact-mask: none !important;
 
+	user-select: none;
+
 	&:before {
 		display: none;
 	}
@@ -50,7 +52,7 @@
 	--bg: linear-gradient(to right, var(--mask-colour), var(--mask-colour)),
 	linear-gradient(to right, transparent, transparent) !important;
 	background-repeat: no-repeat !important;
-	background-size: 0% var(--line-thickness),
+	background-size: var(--link-underline-size, 0%) var(--line-thickness),
 	100% var(--line-thickness) !important;
 	background-position: calc(-1 * (var(--icon-size) + 2px)) 100% !important;
 
@@ -58,7 +60,7 @@
 	&.left-icon {
 		gap: 4px;
 
-		background-position: calc(var(--icon-size) + 2px) 100% !important;
+		background-position: calc(var(--icon-size) + 4px) 100% !important;
 	}
 
 	&.shout-more-actions {

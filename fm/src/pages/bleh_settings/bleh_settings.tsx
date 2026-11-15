@@ -20,7 +20,6 @@ import {
 	save_setting,
 	setting,
 } from '@/components/settings/settings';
-import { share } from '@/components/dialog/share';
 import tippy from 'tippy.js';
 import {
 	select,
@@ -34,7 +33,6 @@ import { queue_popup } from '@/components/dialog/popup';
 import { visual } from '@/pages/bleh_settings/visual';
 import { general } from '@/pages/bleh_settings/general.tsx';
 import { seasonal } from './seasonal';
-import { settings_search } from './search.js';
 import { icon, icons } from '@/components/shared/icon.js';
 import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
@@ -51,10 +49,20 @@ import { LoadingData } from '@/components/loading/loading.tsx';
 import { flags_page } from '@/pages/bleh_settings/flags.tsx';
 import { Alert } from '@/components/text/alert.tsx';
 import { Input } from '@/components/input/input.tsx';
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { IconLabel } from '@/components/text/text.tsx';
 import { flags } from '@/build/flags.ts';
 import { PageToolbar } from '@/components/page/toolbar.tsx';
+import { SettingsSearch } from './search.tsx';
+
+export interface SettingTab {
+	name?: ReactNode;
+	icon?: string;
+	settings?: string[];
+	type?: string;
+	hide?: boolean;
+	password?: string;
+}
 
 export function bleh_settings() {
 	page.name = auth.name!;
@@ -77,7 +85,7 @@ export function bleh_settings() {
 
 	if (page.requested.tab && !tab) tab = page.requested.tab;
 
-	const tabs = {
+	const tabs: Record<string, SettingTab> = {
 		general: {
 			name: tl(trans.general),
 			icon: 'general',
@@ -201,7 +209,7 @@ export function bleh_settings() {
 		sku: {
 			name: tl(trans.flags),
 			icon: 'feature_flag',
-			password: settings.hu_tao,
+			password: settings.hu_tao as string,
 		},
 	};
 
@@ -253,7 +261,7 @@ export function bleh_settings() {
 
 	page.structure.side!.replaceChildren(
 		<>
-			{settings_search(tabs)}
+			<SettingsSearch tabs={tabs} />
 			<Cta
 				icon={icons.sponsor}
 				label={auth.sponsor
@@ -558,7 +566,7 @@ export function scroll_to_setting(id) {
 	}, 200);
 }
 
-unsafeWindow._change_settings_page = function(page, setting = null) {
+unsafeWindow._change_settings_page = function (page, setting = null) {
 	change_settings_page(page, setting);
 };
 
@@ -638,7 +646,7 @@ export function load_skus() {
 	}
 }
 
-unsafeWindow._update_flag_toggle = function(flag, container) {
+unsafeWindow._update_flag_toggle = function (flag, container) {
 	update_flag_toggle(flag, container);
 };
 function update_flag_toggle(flag, container) {
@@ -1177,7 +1185,7 @@ function activity_preview() {
 	make_random_activity(preview, random_types, random_involved);
 	make_random_activity(preview, random_types, random_involved);
 
-	page.state.activity_preview_timer = setInterval(function() {
+	page.state.activity_preview_timer = setInterval(function () {
 		if (!preview) {
 			clearInterval(page.state.activity_preview_timer);
 			return;

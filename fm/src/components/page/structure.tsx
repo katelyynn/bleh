@@ -467,7 +467,6 @@ function single_column() {
 		].includes(page.subpage) || [
 			'charts',
 			'inbox',
-			'overview',
 			'releases',
 			'recommended',
 			'bookmarks',

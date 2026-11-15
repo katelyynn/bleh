@@ -1,0 +1,29 @@
+import { page } from "@/build/page";
+import { download_with_progress, sanitise } from "@/build/tools";
+
+export interface LrcLibResponse {
+	id: number;
+	name: string;
+	trackName: string;
+	artistName: string;
+	albumName: string;
+	duration: number;
+	instrumental: boolean;
+	hasWordSync: boolean;
+	plainLyrics: string;
+	syncedLyrics: string;
+	lyricsfile: string;
+}
+
+export async function getLyrics(name: string, artist: string): Promise<LrcLibResponse> {
+	const url = `https://lrclib.net/api/get?artist_name=${sanitise(artist, '+').replaceAll('%252B', '%25')}&track_name=${sanitise(name, '+').replaceAll('%252B', '%25')}`;
+
+	try {
+		const res = await download_with_progress(url, 'text');
+
+		return JSON.parse(res.responseText);
+	} catch (e) {
+		console.error(e);
+		throw e;
+	}
+}

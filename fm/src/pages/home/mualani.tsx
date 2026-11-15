@@ -115,6 +115,8 @@ import { EventSmallCalendar } from '@/components/event/icon';
 import { TextFlip } from '@/components/text/text_flip';
 import { InboxButton } from '@/components/button/inbox';
 import { Track, Tracklist } from '@/components/track/track';
+import { LyricsSnippet, LyricsSnippetPlaceholder } from '@/components/lyrics/lyrics';
+import { PanelHead } from '@/components/text/head';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -233,6 +235,12 @@ export function mualani() {
 	const avi = c.evangelicgirl?.avatar;
 
 	const wordmarks = createRef();
+
+	const lyricSamples = [
+		`Dayglow\nShe doesn't notice much\nTalk slow\nBreak the bottom out love\nIt's so cold\nI want to follow you home\n\nDayglow\nShe doesn't notice much\nBread molds\nPass the spoons around love\nIt's so cold\nI want to follow you home\n\nDown and again\nTake him off me\nRead and pretend\nPretty soon I'll be there soon\nI'll be there soon\n\nDayglow\nShe doesn't notice much\nWind blows\nShe takes time to come find\nIt's so cold\nI want to follow you home\n\nDayglow\nShe doesn't notice much\nTalk slow\nPass the spoons around\nBread molds\nDolls and pine needles\nWind blows\nShe takes time to come find\nIt's so cold\nI want to follow you home\nI want to follow you home`,
+		`Look at ya, look at ya, look at ya, look at ya\nLook at ya, look at ya, look at ya, look at ya\nLook at ya, look at ya, look at ya, look at ya\nLook at ya, look at ya, look at ya, look at ya\nLadies and gentlemen, ladies-ladies and gentlemen\n\nAnd I always find, yeah, I always find somethin' wrong`,
+		`Yeah\nRollin', rollin', rollin', got me stargazin' (Yeah)\nSippin' on purp, feelin' like the Barre Baby (It's lit)\nWhatever I downed, it got me goin' crazy (Yah)\nPsychedelics got me goin' crazy (Alright)\nI was always high up on the lean (yeah, yeah)\nThen this girl came here to save my life\nGirl, look to the sky, down on my knees (Straight up)\nOut of nowhere, you came here to stay the night, in the night-time (Woo, yeah)\n\nRollin', rollin', rollin', got me stargazin' (Roll)\nPsychedelics got me goin' crazy (Oh no)\nNiggas femalin', they excellin' (Yeah)\nAre they intellin'? (What you tellin'?)\nWe propellin', up top with Ellen, uh (With the choppers)\nKill the jealous with propane repellent\nGot me goin' crazy (It's lit)\nOn tour, we'll tell 'em, we brought the section (Gang)\nThey keep on callin' up, it's getting hectic (Brrt)\nLike we projected\nSo we cut the plug, he's interjected (Got me goin' crazy)\nRollin', rollin', rollin', got me stargazin' (Yeah)\nSippin' on purp, feelin' like the Barre Baby (It's lit)\nWhatever I downed, it got me goin' crazy (Yah)\nPsychedelics got me goin' crazy (Alright)\nI was always high up on the lean (yeah, yeah)\nThen this girl came here to save my life\nGirl, look to the sky, down on my knees (Straight up)\nOut of nowhere, you came here to stay the night, in the night-time (Woo, yeah)\n\nGot me goin' crazy\n\nOkay, I been up for some days, I ain't got time to lay\nJust to drown out all these thoughts, I tried all kind of things\nIf I take you to my past you will be traumatized\nGot a thousand kids outside that's tryna come alive\n'99, took AstroWorld, it had to relocate\nTold the dawgs I'd bring it back, it was a seal of faith\nBefore no car notes, baby girl, she played the tourist guide\nGot the keys into my city, now she know the rides\nGot new money, got new problems, got new enemies\nWhen you make it to the top, that's the amenities\nPackin' out Toyota like I'm in the league\nAnd it ain't a mosh pit if ain't no injuries\nI got 'em stage divin' out the nosebleeds (Alright, alright, alright)\nAnd she hit that booger sugar 'til her nose bleed (Alright, alright, alright)\nBounce that shit forever, she on both knees\nShe was talkin' 'bout forever, got a whole week (Alright, alright, alright)\nPlus she know my baby mama is a trophy\nShe be throwing up them B's, feel like we both bleed\nShe keep my dick jumpin' up, I feel like I'm Moby\nI'm way too gold for this beef, feel like I'm Kobe, yeah\nThis right here is astronomical\nI see you picked up all my ways, I feel responsible\nThey tryna say that all my problems is improbable\nThey keep itching at my spirit, I'm diabolical\nYa feel me?`
+	]
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -1784,6 +1792,19 @@ export function mualani() {
 								url='/music/Metro+Boomin/_/Feel+the+Fiyaaaah+(with+A$AP+Rocky+&+feat.+Takeoff)'
 							/>
 						</Tracklist>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section id='lyrics'>
+				<DemoGrid>
+					<DemoItem label='LyricsSnippet'>
+						<LyricsSnippet lyrics={lyricSamples[0]} />
+						<LyricsSnippet lyrics={lyricSamples[1]} />
+						<LyricsSnippet lyrics={lyricSamples[2]} />
+						<LyricsSnippet lyrics={`\n\n\n\n\nAsheville flight to Austin, bluebirds fly in flocks\nAnd I'm one call away if you need to talk\nAnd I understand in whatever way I can\nDon't let things you've lost define the things you have\nIt sounds strange, but you've had a hell of a time, are you feeling alright?\nAs things change, you'll start to realize it gets better with time\nI will say that she ain't the love of your life if it's only sometimes\nEither way, you've had one hell of a night, are you feeling alright?\nWarsaw to London, Warsaw from Prague\nI understand, man, I've felt it all\nThe person that you love ain't the person that they are\nThe person that you love ain't the person that they are\nWhat else can I say except some played-out cliché\nAbout how right now it's hard, but it gets better every day?\nAnd what else can I say except some played-out cliché\nAbout how right now it's hard, but it gets better if you wait? So just wait\nIt sounds strange, but you've had a hell of a time, are you feeling alright?\nAs things change, you'll start to realize it gets better with time\nI will say that she ain't the love of your life if it's only sometimes\nEither way, you've had one hell of a night, are you feeling alright?\n`} />
+					</DemoItem>
+					<DemoItem label='LyricsSnippet (loading)'>
+						<LyricsSnippetPlaceholder />
 					</DemoItem>
 				</DemoGrid>
 			</section>

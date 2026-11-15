@@ -86,7 +86,7 @@
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
-	opacity: 0.6;
+	opacity: 0.7;
 
 	will-change: opacity;
 
@@ -131,7 +131,7 @@
 	content-visibility: auto;
 
 	&.ready {
-		opacity: 0.4;
+		opacity: 0.5;
 		animation: banner 0.5s var(--trans-function-ani);
 		transition: none !important;
 

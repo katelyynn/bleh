@@ -48,135 +48,166 @@
 		animation: oracle 2.4s linear infinite;
 	}
 
-	.source-album-art {
-		margin: unset;
-		flex-shrink: 0;
-		width: 64px;
-		margin-right: 14px;
-
-		box-shadow: var(--subtle-shadow);
-
-		position: relative;
-
-		& > .cover-art {
-			border-radius: var(--radius-s);
-		}
-
-		&.small {
-			width: 48px;
-		}
-
-		img {
-			object-fit: cover;
-			--mask-size: var(--cover-size-50);
-		}
-
-		--avatar-generic-background: oklch(var(--b4));
-
-		transition-property: filter;
-		transition-duration: 0.2s;
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-
-		& > .cover-art > .loading-spinner {
-			position: absolute;
-			inset: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			--icon: var(--icon-16-spinner);
-			--icon-colour: oklch(var(--c3));
-			animation: spinner 1.2s linear infinite;
-		}
-
-		&:before {
-			content: '';
-			position: absolute;
-			inset: 5px -14px 5px 0;
-			background-image: var(--disc);
-			background-size: 54px;
-			background-position: right;
-			background-repeat: no-repeat;
-			display: block;
-
-			opacity: 0.8;
-		}
-
-		&.small {
-			&:before {
-				inset: 5px -8px 5px 0;
-				background-size: 38px;
-			}
-
-			margin-right: 8px;
-		}
-	}
-
-	.source-album-details {
-		overflow: hidden;
-
-		.source-album-name {
-			font-weight: var(--font-weight-medium) !important;
-			margin: unset;
-			-webkit-line-clamp: 1;
-
-			& > a {
-				display: flex;
-				gap: 6px;
-				color: inherit;
-				--mask-colour: currentColor;
-			}
-
-			&.oracle-loading {
-				height: 18px;
-				width: 260px;
-			}
-		}
-
-		.source-album-artist {
-			display: flex !important;
-			font-weight: var(--font-weight);
-			color: oklch(var(--c3)) !important;
-			margin-top: 2px;
-
-			&.oracle-loading {
-				height: 18px;
-				width: 130px;
-			}
-
-			& > a {
-				color: oklch(var(--c2) / 80%);
-				--mask-colour: currentColor;
-			}
-
-			& > a + a {
-				margin-left: 4px;
-			}
-		}
-
-		.source-album-stats {
-			color: oklch(var(--c3));
-			font-size: calc(var(--font-size) - 1px);
-			font-weight: var(--font-weight);
-			margin: unset;
-			margin-top: 4px;
-
-			&.oracle-loading {
-				height: 16px;
-				width: 90px;
-			}
-		}
-
-		& > .oracle-loading {
-			background-color: currentColor;
-			border-radius: var(--item-med-radius);
-			opacity: 0.17;
-		}
-	}
-
 	&:hover {
-		.source-album-art {
+		&>.source-album-art {
 			filter: brightness(110%);
+			outline: 2px solid oklch(var(--l3-c) / 60%);
 		}
+
+		&>.source-album-details {
+			&>.source-album-name {
+				color: oklch(var(--l3-c)) !important;
+				background-size: 100% var(--line-thickness), 100% var(--line-thickness);
+			}
+		}
+	}
+}
+
+.source-album-art {
+	margin: unset;
+	flex-shrink: 0;
+	width: 72px;
+	/*margin-right: 14px;*/
+
+	box-shadow: var(--subtle-shadow);
+	border-radius: var(--radius-s) !important;
+
+	position: relative;
+
+	&>.cover-art {
+		border-radius: var(--radius-s) !important;
+	}
+
+	&.small {
+		width: 48px;
+	}
+
+	img {
+		object-fit: cover;
+		--mask-size: var(--cover-size-100);
+	}
+
+	--avatar-generic-background: oklch(var(--b4));
+
+	outline: 2px solid transparent;
+
+	transition-property: filter,
+	outline;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&>.cover-art>.loading-spinner {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		--icon: var(--icon-16-spinner);
+		--icon-colour: oklch(var(--c3));
+		animation: spinner 1.2s linear infinite;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 5px -14px 5px 0;
+		background-image: var(--disc);
+		background-size: 54px;
+		background-position: right;
+		background-repeat: no-repeat;
+		display: block;
+
+		opacity: 0.8;
+
+		display: none;
+	}
+
+	&.small {
+		&:before {
+			inset: 5px -8px 5px 0;
+			background-size: 38px;
+		}
+
+		margin-right: 8px;
+	}
+}
+
+.source-album-details {
+	overflow: hidden;
+
+	.source-album-artist {
+		display: flex !important;
+		font-weight: var(--font-weight);
+		color: oklch(var(--c3)) !important;
+
+		&.oracle-loading {
+			height: 18px;
+			width: 130px;
+		}
+
+		&>a {
+			color: oklch(var(--c2) / 80%);
+			--mask-colour: currentColor;
+		}
+
+		&>a+a {
+			margin-left: 4px;
+		}
+	}
+
+	.source-album-stats {
+		color: oklch(var(--c3));
+		font-size: calc(var(--font-size) - 1px);
+		font-weight: var(--font-weight);
+		margin: unset;
+		margin-top: 3px;
+
+		&.oracle-loading {
+			height: 16px;
+			width: 90px;
+		}
+	}
+
+	&>.oracle-loading {
+		background-color: currentColor;
+		border-radius: var(--item-med-radius);
+		opacity: 0.17;
+	}
+}
+
+.source-album-name {
+	width: fit-content;
+
+	--line-thickness: 0.08em;
+	--line-inset: 0.04em;
+
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
+
+	background-image: linear-gradient(to right, var(--mask-colour), var(--mask-colour)), linear-gradient(to right, transparent, transparent);
+	background-repeat: no-repeat;
+	background-size: 0% var(--line-thickness), 100% var(--line-thickness);
+	background-position: 0 100%;
+
+	transition-property: background-size;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	font-weight: var(--font-weight-medium) !important;
+	margin: unset;
+	-webkit-line-clamp: 1;
+
+	&>a {
+		display: flex;
+		gap: 6px;
+		color: inherit;
+		--mask-colour: currentColor;
+	}
+
+	&.oracle-loading {
+		height: 18px;
+		width: 260px;
 	}
 }
 

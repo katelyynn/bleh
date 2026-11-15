@@ -14,9 +14,7 @@
 
 	animation: activity 0.35s var(--trans-function);
 
-	&:after {
-		display: none;
-	}
+	background-image: unset;
 }
 
 .activity-icon {

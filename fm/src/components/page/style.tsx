@@ -32,7 +32,7 @@ export function append_style() {
 	// style is neither fetched nor applied in these interfaces
 	if (
 		(split[0] == 'labs' && split[length] != 'labs') || (
-			split[0] == 'api' && !split[length].includes('account')
+			split[0] == 'api' && (!split[length].includes('account') && !split[length].includes('auth'))
 		)
 	) {
 		log('disabled loading for special interface', 'style');
@@ -105,9 +105,9 @@ export function update_check(force = false, btn, func) {
 	const url = `https://bleh.yuzu.pet/info?${Date.now()}`;
 
 	// TODO: the rest here is pretty much fine
-	download_with_progress(url)
+	download_with_progress(url, 'blob')
 		.then(async (blob) => {
-			const text = await blob.text();
+			const text = await blob.response.text();
 
 			if (btn) btn.removeAttribute('disabled');
 

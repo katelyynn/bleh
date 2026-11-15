@@ -11,6 +11,7 @@ interface SettingInfoProps {
 	ref?: ReturnType<typeof createRef<SettingInfoElement>>;
 	name: ReactNode;
 	body?: ReactNode;
+	icon?: string;
 	hidden?: boolean;
 	children?: ReactNode;
 }
@@ -24,6 +25,7 @@ export function SettingInfo({
 	ref,
 	name,
 	body,
+	icon,
 	hidden,
 	children,
 }: SettingInfoProps) {
@@ -31,7 +33,7 @@ export function SettingInfo({
 
 	const elem = (
 		<div class='setting' data-type='info' ref={ref}>
-			<SettingLabel name={name} body={body} />
+			<SettingLabel name={name} body={body} icon={icon} />
 			<div class='info' ref={info} />
 		</div>
 	) as SettingInfoElement;

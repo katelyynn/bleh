@@ -6,7 +6,7 @@
 
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
-import { romanise, sanitise } from '@/build/tools';
+import { lazy, romanise, sanitise } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
 import {
 	correct_artist,
@@ -27,6 +27,13 @@ import { DateTime } from 'luxon';
 import { icon, icons } from '@/components/shared/icon';
 import { UnderConstruction } from '@/components/shared/construction.tsx';
 import { useSettings } from '@/page.tsx';
+import { CampfireItem } from '@/components/campfire/item';
+import { ReactNode } from 'jsx-dom';
+import { SmartArtist, SmartTitle } from '@/components/music/smart_title';
+import { SideAction, SideActions } from '@/components/button/side';
+import { Separator } from '@/components/divider/separator';
+import { Input } from '@/components/input/input';
+import { PanelHead } from '@/components/text/head';
 
 interface album {
 	image: string;
@@ -66,24 +73,25 @@ export function campfire() {
 	          <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
 	        </div>
 	      </div>
-	      <div class="campfire-panel-side" ref=${(el) => campfire_side = el}>
-	        <section class="side-actions">
-	          <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}">
-	            ${tl(trans.profile)}
-	          </a>
-	          <a class="btn side-action icon-mask" data-type="library" href="${root}user/${auth.name}/library">
-	            ${tl(trans.library)}
-	          </a>
-	          <a class="btn side-action icon-mask" data-type="friends" href="${root}user/${auth.name}/friends">
-	            ${tl(trans.friends)}
-	          </a>
-	          <a class="btn side-action icon-mask" data-type="shouts" href="${root}user/${auth.name}/shoutbox">
-	            ${tl(trans.shouts)}
-	          </a>
-	        </section>
-	      </div>
 	    </div>
 	  `;
+
+	page.structure.side.appendChild(
+		<SideActions>
+			<SideAction type='profile' href={`${root}user/${auth.name}`}>
+				{tl(trans.profile)}
+			</SideAction>
+			<SideAction type='library' href={`${root}user/${auth.name}/library`}>
+				{tl(trans.library)}
+			</SideAction>
+			<SideAction type='friends' href={`${root}user/${auth.name}/friends`}>
+				{tl(trans.friends)}
+			</SideAction>
+			<SideAction type='shouts' href={`${root}user/${auth.name}/shoutbox`}>
+				{tl(trans.shouts)}
+			</SideAction>
+		</SideActions>
+	);
 
 	const wrapper = (
 		<div class='campfire-wrapper' />
@@ -93,8 +101,22 @@ export function campfire() {
 
 	wrapper.appendChild(container);
 
-	campfire_extended(campfire_side);
+	campfire_extended();
 	campfire_cta(container);
+
+	page.structure.side.appendChild(
+		<>
+			<Separator />
+			<section class='home-search'>
+				<PanelHead icon={icons.search}>
+					{tl(trans.search)}
+				</PanelHead>
+				<Input search placeholder={tl(trans.search_for_anything) as string} onSubmit={(v) => {
+					window.location.href = `${root}search?q=${v}`;
+				}} />
+			</section>
+		</>
+	);
 
 	const albums: album[] = [];
 	const album_elements: { elem: HTMLElement; index: number }[] = [];
@@ -102,12 +124,12 @@ export function campfire() {
 	fetch(
 		`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`,
 	)
-		.then(function(response) {
+		.then(function (response) {
 			console.log('returned', response, response.text);
 
 			return response.text();
 		})
-		.then(function(dom) {
+		.then(function (dom) {
 			const doc = new DOMParser().parseFromString(dom, 'text/html');
 			console.log('DOC', doc);
 
@@ -148,41 +170,35 @@ export function campfire() {
 
 			const cloned_albums = [...albums, ...albums, ...albums];
 
-			render(
-				items_container,
-				html`
-					${cloned_albums.map((album, index) => {
-					const item_index =
-						((index % albums.length) + albums.length) %
-						albums.length;
+			items_container.replaceChildren(
+				<>
+					{cloned_albums.map((album, i) => {
+						const item_index =
+							((i % albums.length) + albums.length) %
+							albums.length;
 
-					const elem = html.node`
-            <div class="campfire-item" style="--index: ${index}" onclick=${() => {
-							if (is_wrapping) return;
+						const elem = (
+							<CampfireItem art={album.image} name={album.corrected_title} index={i} onClick={() => {
+								if (is_wrapping) return;
 
-							if (item_index != real_index) {
-								let diff = item_index - real_index;
-								if (diff > (max_index + 1) / 2) {
-									diff -= max_index + 1;
-								} else if (diff < -(max_index + 1) / 2) {
-									diff += max_index + 1;
+								if (item_index != real_index) {
+									let diff = item_index - real_index;
+									if (diff > (max_index + 1) / 2) {
+										diff -= max_index + 1;
+									} else if (diff < -(max_index + 1) / 2) {
+										diff += max_index + 1;
+									}
+
+									set_index(visual_index + diff);
 								}
+							}} />
+						) as HTMLElement
 
-								set_index(visual_index + diff);
-							}
-						}}>
-              <div class="campfire-item-cover">
-                <img src=${album.image} alt=${album.corrected_title} />
-                <div class="campfire-item-cover-reflection" style="background-image: url(${album.image})" />
-              </div>
-            </div>
-          `;
+						album_elements.push({ elem, index: item_index });
 
-					album_elements.push({ elem, index: item_index });
-
-					return elem;
-				})}
-				`,
+						return elem;
+					})}
+				</>
 			);
 
 			let timeout;
@@ -255,56 +271,47 @@ export function campfire() {
 
 		console.info('album', album);
 
-		let formatted_title: string | Hole = album.corrected_title;
-		let formatted_artist: string | Hole = album.corrected_artist;
+		let formatted_title: ReactNode = album.corrected_title;
+		let formatted_artist: ReactNode = album.corrected_artist;
 
 		if (useSettings.get('format_guest_features')) {
 			const formatted = name_includes(album.title, album.artist);
 
-			formatted_title = smart_title(
-				formatted.song_title,
-				formatted.song_tags,
+			formatted_title = (
+				<SmartTitle title={formatted.song_title} tags={formatted.song_tags} />
 			);
-			formatted_artist = smart_artists(
-				formatted.song_artist,
-				formatted.song_guests,
+			formatted_artist = (
+				<SmartArtist artist={formatted.song_artist} guests={formatted.song_guests} />
 			);
 		}
 
-		render(item_details, html``);
-		render(
-			item_details,
-			html`
-				<a class="campfire-title smart-title"
-					href="${root}music/${sanitise(album.artist)}/${sanitise(
-				album.title,
-			)}" target="_blank">
-				  ${formatted_title}
+		item_details.replaceChildren(
+			<>
+				<a class={['campfire-title', 'smart-title']} href={`${root}music/${sanitise(album.artist)}/${sanitise(album.title)}`} target='_blank'>
+					{formatted_title}
 				</a>
-				<span class="campfire-artist">
-				  ${useSettings.get('format_guest_features')
-					? formatted_artist
-					: html
-						.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)
-						}" target="_blank">${album.corrected_artist}</a>`}
+				<span class={['campfire-artist', 'smart-artist']}>
+					{useSettings.get('format_guest_features') ? formatted_artist : (
+						<a href={`${root}music/${redirect()}${sanitise(album.artist)}`} target='_blank'>
+							{album.corrected_artist}
+						</a>
+					)}
 				</span>
-				<div class="campfire-plays">
-				  ${tl(trans.count_plays, {
-							c: album.plays.toLocaleString(lang),
-						})}
+				<div class='campfire-plays'>
+					{tl(trans.count_plays, { c: album.plays.toLocaleString() })}
 				</div>
-			`,
+			</>
 		);
 	}
 }
 
-function campfire_extended(container: HTMLElement) {
+function campfire_extended() {
 	const friends = settings.friends as string[];
 
 	let summary;
 
 	// TODO: replace
-	container.appendChild(html.node`
+	page.structure.side.appendChild(html.node`
         <section class="friends-panel">
             <h2>${tl(trans.scrobbling_now)}</h2>
             ${friends.length > 0
@@ -368,99 +375,101 @@ function campfire_friend(friend: string, own = false) {
         </div>
     `;
 
-	load_profile_cache_externally(friend).then((cache) => {
-		render(
-			user_avatar,
-			html`
-				<img src=${own ? auth.avatar : cache.avatar} alt=${friend}>
-			`,
-		);
+	lazy(elem, () => {
+		load_profile_cache_externally(friend).then((cache) => {
+			render(
+				user_avatar,
+				html`
+					<img src=${own ? auth.avatar : cache.avatar} alt=${friend}>
+				`,
+			);
 
-		if (cache.username) {
-			user_name.textContent = cache.username;
-		}
-
-		load_recent_tracks(friend).then((tracks) => {
-			const item = tracks[0];
-
-			if (item) {
-				let sister = item.sister;
-				let name = item.name;
-
-				if (useSettings.get('format_guest_features')) {
-					const formatted = name_includes(name, sister);
-
-					name = html.node`${smart_title(formatted.song_title, formatted.song_tags)
-						}`;
-					sister = html.node`${smart_artists(
-						formatted.song_artist,
-						formatted.song_guests,
-					)
-						}`;
-				} else if (useSettings.get('corrections')) {
-					sister = romanise(correct_artist(item.sister));
-					name = romanise(
-						correct_item_by_artist(item.name, item.sister),
-					);
-				}
-
-				const valid = is_sponsor(friend);
-
-				if (cache.username && valid) {
-					render(
-						user_name,
-						html`
-							<strong class="username-combo">
-								<span class="username-custom">${cache
-								.username}</span>
-								<span class="username-original">
-							        <span class="at">@</span>${friend}
-							    </span>
-							</strong>
-						`,
-					);
-				} else {
-					render(
-						user_name,
-						html`
-							<strong><span class="at">@</span>${friend}</strong>
-						`,
-					);
-				}
-
-				if (!item.live) {
-					track_time.textContent = DateTime.fromSeconds(item.time)
-						.toRelative();
-				} else {
-					elem.classList.remove('hidden-user');
-					track_time.textContent = tl(trans.scrobbling_now);
-					track_time.setAttribute('data-live', 'true');
-
-					elem.setAttribute('data-live', 'true');
-				}
-
-				render(
-					track_info,
-					html`
-						<div class="status">
-							<div class="status-image smaller" data-live=${item
-							.live}>
-								<img src=${item.avatar} alt=${name}>
-							</div>
-							<div class="status-info">
-								<strong
-									class="status-text status-title smaller"><a class="smart-title" href="${root}music/${redirect()}${sanitise(
-								item.sister,
-							)}/_/${sanitise(
-								item.name,
-							)}">${name}</a></strong>
-								<p
-									class="status-text status-artist smaller"><span class="artist">${sister}</span></p>
-							</div>
-						</div>
-					`,
-				);
+			if (cache.username) {
+				user_name.textContent = cache.username;
 			}
+
+			load_recent_tracks(friend).then((tracks) => {
+				const item = tracks[0];
+
+				if (item) {
+					let sister = item.sister;
+					let name = item.name;
+
+					if (useSettings.get('format_guest_features')) {
+						const formatted = name_includes(name, sister);
+
+						name = html.node`${smart_title(formatted.song_title, formatted.song_tags)
+							}`;
+						sister = html.node`${smart_artists(
+							formatted.song_artist,
+							formatted.song_guests,
+						)
+							}`;
+					} else if (useSettings.get('corrections')) {
+						sister = romanise(correct_artist(item.sister));
+						name = romanise(
+							correct_item_by_artist(item.name, item.sister),
+						);
+					}
+
+					const valid = is_sponsor(friend);
+
+					if (cache.username && valid) {
+						render(
+							user_name,
+							html`
+								<strong class="username-combo">
+									<span class="username-custom">${cache
+									.username}</span>
+									<span class="username-original">
+								        <span class="at">@</span>${friend}
+								    </span>
+								</strong>
+							`,
+						);
+					} else {
+						render(
+							user_name,
+							html`
+								<strong><span class="at">@</span>${friend}</strong>
+							`,
+						);
+					}
+
+					if (!item.live) {
+						track_time.textContent = DateTime.fromSeconds(item.time)
+							.toRelative();
+					} else {
+						elem.classList.remove('hidden-user');
+						track_time.textContent = tl(trans.scrobbling_now);
+						track_time.setAttribute('data-live', 'true');
+
+						elem.setAttribute('data-live', 'true');
+					}
+
+					render(
+						track_info,
+						html`
+							<div class="status">
+								<div class="status-image smaller" data-live=${item
+								.live}>
+									<img src=${item.avatar} alt=${name}>
+								</div>
+								<div class="status-info">
+									<strong
+										class="status-text status-title smaller"><a class="smart-title" href="${root}music/${redirect()}${sanitise(
+									item.sister,
+								)}/_/${sanitise(
+									item.name,
+								)}">${name}</a></strong>
+									<p
+										class="status-text status-artist smaller"><span class="artist">${sister}</span></p>
+								</div>
+							</div>
+						`,
+					);
+				}
+			});
 		});
 	});
 

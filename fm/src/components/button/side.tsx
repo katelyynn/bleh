@@ -35,19 +35,37 @@ export function SideActions({
 
 interface SideActionProps {
 	type: string;
+	href?: string;
 	onClick?: () => void;
 	children: ReactNode;
 }
 
 export function SideAction({
 	type,
+	href,
 	onClick,
 	children,
 }: SideActionProps) {
+	const classes = ['btn', 'side-action', 'icon-mask'];
+
+	if (href) {
+		return (
+			<a
+				type='button'
+				class={classes}
+				data-type={type}
+				href={href}
+				onClick={onClick}
+			>
+				{children}
+			</a>
+		)
+	}
+
 	return (
 		<button
 			type='button'
-			class={['btn', 'side-action', 'icon-mask']}
+			class={classes}
 			data-type={type}
 			onClick={onClick}
 		>

@@ -43,7 +43,7 @@ import {
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import { MenuContents } from '@/components/menu/menu.tsx';
+import { MenuContents, MenuSeparator } from '@/components/menu/menu.tsx';
 import { TrackMenuPreview } from '@/components/track/preview.tsx';
 import { GenericUsername } from '@/components/user/name.tsx';
 import { Token } from '@/components/form/token.tsx';
@@ -52,8 +52,9 @@ import { SmartArtist, SmartTitle } from '@/components/music/smart_title.tsx';
 import { ff } from '@/components/settings/sku.ts';
 import { non_pro_edit } from '@/components/music/non_pro_edit.tsx';
 import { queue_popup } from '@/components/dialog/popup.tsx';
+import { lyricsFromMenu } from '../lyrics/lyrics';
 
-type TrackElement = HTMLElement & {
+export type TrackElement = HTMLElement & {
 	symbol: symbol;
 	preview?: ReactElement;
 }
@@ -816,422 +817,30 @@ export function patch_titles(search = page.structure.main) {
 
 					const play_container = track.querySelector(
 						'.chartlist-play',
-					);
+					) as HTMLButtonElement;
 
 					const menu_contents = (
 						<MenuContents>
 							{track.preview}
-							{(can_edit && auth.pro)
-								? (
-									<>
-										<ButtonCombo>
-											{is_album
-												? (
-													<form
-														style={{ margin: '0' }}
-														method='post'
-														action={track
-															.getAttribute(
-																'data-action',
-															)}
-														data-edit-scrobble
-													>
-														<Token
-															value={page.token}
-														/>
-														<input
-															type='hidden'
-															name='album_name'
-															value={track
-																.getAttribute(
-																	'data-album-name',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='album_artist_name'
-															value={track
-																.getAttribute(
-																	'data-album-artist-name',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='album_image'
-															value={track
-																.getAttribute(
-																	'data-album-image',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='album_name_original'
-															value={track
-																.getAttribute(
-																	'data-album-name-original',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='album_artist_name_original'
-															value={track
-																.getAttribute(
-																	'data-album-artist-name-original',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='count'
-															value={track
-																.getAttribute(
-																	'data-count',
-																)}
-														/>
-														<Button
-															type='submit'
-															menu
-															onClick={close_menus}
-														>
-															<Icon
-																name={icons
-																	.edit}
-															/>
-															{tl(trans.edit)}
-														</Button>
-													</form>
-												)
-												: (
-													<form
-														style={{ margin: '0' }}
-														method='post'
-														action={track
-															.getAttribute(
-																'data-action',
-															)}
-														data-edit-scrobble
-													>
-														<Token
-															value={page.token}
-														/>
-														<input
-															type='hidden'
-															name='artist_name'
-															value={track
-																.getAttribute(
-																	'data-artist-name',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='track_name'
-															value={track
-																.getAttribute(
-																	'data-track-name',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='album_name'
-															value={track
-																.getAttribute(
-																	'data-album-name',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='album_artist_name'
-															value={track
-																.getAttribute(
-																	'data-artist-name',
-																)}
-														/>
-														<input
-															type='hidden'
-															name='timestamp'
-															value={track
-																.getAttribute(
-																	'data-timestamp',
-																)}
-														/>
-														<Button
-															type='submit'
-															menu
-															onClick={close_menus}
-														>
-															<Icon
-																name={icons
-																	.edit}
-															/>
-															{tl(trans.edit)}
-														</Button>
-													</form>
-												)}
-											{bulk_edit_button && (
-												<>
-													<ButtonComboSeparator />
-													<BulkEditButton
-														chibi
-														button={bulk_edit_button}
-														onClick={close_menus}
-													/>
-												</>
-											)}
-										</ButtonCombo>
-										<div class='sep' />
-										{can_copy_scrobble && (
-											<Button
-												menu
-												onClick={() => {
-													close_menus();
-													submit_scrobble({
-														pre_track: track_title
-															.getAttribute(
-																'data-name',
-															),
-														pre_artist:
-															track_artist,
-														pre_album: alt,
-														pre_album_artist:
-															album_artist,
-														pre_timestamp:
-															timestamp,
-													});
-												}}
-											>
-												<Icon
-													name={icons.copy_scrobble}
-												/>
-												{tl(trans.copy)}
-											</Button>
-										)}
-									</>
-								)
-								: (can_edit && !auth.pro)
-									? (
-										<>
-											<Button
-												menu
-												onClick={() => {
-													close_menus();
-													non_pro_edit({
-														pre_track: track_title
-															.getAttribute(
-																'data-name',
-															),
-														pre_artist: track_artist,
-														pre_album: alt,
-														pre_album_artist:
-															album_artist,
-														timestamp: timestamp,
-													});
-												}}
-											>
-												<Icon
-													name={icons
-														.edit}
-												/>
-												{tl(trans.edit)}
-											</Button>
-											<div class='sep' />
-											{can_copy_scrobble && (
-												<Button
-													menu
-													onClick={() => {
-														close_menus();
-														submit_scrobble({
-															pre_track: track_title
-																.getAttribute(
-																	'data-name',
-																),
-															pre_artist:
-																track_artist,
-															pre_album: alt,
-															pre_album_artist:
-																album_artist,
-															pre_timestamp:
-																timestamp,
-														});
-													}}
-												>
-													<Icon
-														name={icons.copy_scrobble}
-													/>
-													{tl(trans.copy)}
-												</Button>
-											)}
-										</>
-									)
-									: can_copy_scrobble
-										? (
-											<>
-												<Button
-													menu
-													onClick={() => {
-														close_menus();
-														submit_scrobble({
-															pre_track: track_title
-																.getAttribute(
-																	'data-name',
-																),
-															pre_artist: track_artist,
-															pre_album: alt,
-															pre_album_artist:
-																album_artist,
-															pre_timestamp: timestamp,
-														});
-													}}
-												>
-													<Icon name={icons.copy_scrobble} />
-													{tl(trans.copy)}
-												</Button>
-												<div class='sep' />
-											</>
-										)
-										: bulk_edit_button && (
-											<>
-												<BulkEditButton
-													button={bulk_edit_button}
-													onClick={close_menus}
-												/>
-												<div class='sep' />
-											</>
-										)}
-							{play_container && (
-								<PlayButton container={play_container} />
-							)}
-							{!is_album && (
-								<ButtonCombo>
-									<Button
-										menu
-										onClick={close_menus}
-										href={track_title.getAttribute('href')}
-									>
-										<Icon name={icons.track} />
-										{tl(trans.track)}
-									</Button>
-									<ButtonComboSeparator />
-									<Button
-										menu
-										chibi
-										onClick={close_menus}
-										tooltip={tl(
-											trans.explore_in_library,
-										)}
-										href={`${root}user/${user}/library${track_title.getAttribute('href')
-											}`}
-									>
-										<Icon name={icons.arrow_right} />
-										{tl(trans.explore_in_library)}
-									</Button>
-								</ButtonCombo>
-							)}
-							{(album_name && album_link)
-								? (
-									<ButtonCombo>
-										<Button
-											menu
-											onClick={close_menus}
-											href={album_link.getAttribute(
-												'href',
-											)}
-										>
-											<Icon name={icons.album} />
-											{tl(trans.album)}
-										</Button>
-										<ButtonComboSeparator />
-										<Button
-											menu
-											chibi
-											onClick={close_menus}
-											tooltip={tl(
-												trans.explore_in_library,
-											)}
-											href={`${root}user/${user}/library${album_link.getAttribute('href')
-												}`}
-										>
-											<Icon name={icons.arrow_right} />
-											{tl(trans.explore_in_library)}
-										</Button>
-									</ButtonCombo>
-								)
-								: is_album && (
-									<ButtonCombo>
-										<Button
-											menu
-											onClick={close_menus}
-											href={track_title.getAttribute(
-												'href',
-											)}
-										>
-											<Icon name={icons.album} />
-											{tl(trans.album)}
-										</Button>
-										<ButtonComboSeparator />
-										<Button
-											menu
-											chibi
-											onClick={close_menus}
-											tooltip={tl(
-												trans.explore_in_library,
-											)}
-											href={`${root}user/${user}/library${track_title.getAttribute('href')
-												}`}
-										>
-											<Icon name={icons.arrow_right} />
-											{tl(trans.explore_in_library)}
-										</Button>
-									</ButtonCombo>
-								)}
-							<ButtonCombo>
-								<Button
-									menu
-									onClick={close_menus}
-									href={`${root}music/${redirect()}${sanitise(track_artist)
-										}`}
-								>
-									<Icon name={icons.artist} />
-									{tl(trans.artist)}
-								</Button>
-								<ButtonComboSeparator />
-								<Button
-									menu
-									chibi
-									onClick={close_menus}
-									tooltip={tl(
-										trans.explore_in_library,
-									)}
-									href={`${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)
-										}`}
-								>
-									<Icon name={icons.arrow_right} />
-									{tl(trans.explore_in_library)}
-								</Button>
-							</ButtonCombo>
-							{(is_own_profile && !is_album) && (
-								<ObsessButton
-									track={track}
-									track_title={track_title}
-									track_artist={track_artist}
-									onClick={close_menus}
-								/>
-							)}
-							<Button
-								menu
-								onClick={() => {
-									copy(track_title.href);
-									close_menus();
-								}}
-							>
-								<Icon name={icons.link} />
-								{tl(trans.copy_link)}
-							</Button>
-							{(is_own_profile && can_delete) && (
-								<DeleteButton
-									track={track}
-									track_title={track_title}
-									onClick={close_menus}
-								/>
-							)}
+							<TrackMenu
+								track={track}
+								name={track_title as HTMLAnchorElement}
+								artist={track_artist}
+								album={album_name}
+								albumArtist={album_artist}
+								alt={alt}
+								timestamp={timestamp}
+								albumLink={album_link as HTMLAnchorElement}
+								isAlbum={is_album}
+								canEdit={can_edit}
+								canCopyScrobble={can_copy_scrobble}
+								canDelete={can_delete}
+								isOwnProfile={is_own_profile}
+								user={user}
+								playContainer={play_container}
+								bulkEdit={bulk_edit_button as HTMLButtonElement}
+								requestClose={close_menus}
+							/>
 						</MenuContents>
 					);
 
@@ -1589,6 +1198,479 @@ function DeleteButton({
 				/>
 				{button}
 			</form>
+		</>
+	);
+}
+
+interface TrackMenuProps {
+	track: TrackElement;
+	name: HTMLAnchorElement;
+	artist: string;
+	album: string;
+	albumArtist: string;
+	alt: string;
+	timestamp: number;
+	albumLink: HTMLAnchorElement;
+	isAlbum: boolean;
+	canEdit: boolean;
+	canCopyScrobble: boolean;
+	canDelete: boolean;
+	isOwnProfile: boolean;
+	user: string;
+	playContainer: HTMLElement;
+	bulkEdit?: HTMLButtonElement;
+	requestClose: () => void;
+}
+
+export function TrackMenu({
+	track,
+	name,
+	artist,
+	album,
+	albumArtist,
+	alt,
+	timestamp,
+	albumLink,
+	isAlbum,
+	canEdit,
+	canCopyScrobble,
+	canDelete,
+	isOwnProfile,
+	user,
+	playContainer,
+	bulkEdit,
+	requestClose
+}: TrackMenuProps) {
+	return (
+		<>
+			{(canEdit && auth.pro)
+				? (
+					<>
+						<ButtonCombo>
+							{isAlbum
+								? (
+									<form
+										style={{ margin: '0' }}
+										method='post'
+										action={track
+											.getAttribute(
+												'data-action',
+											)}
+										data-edit-scrobble
+									>
+										<Token
+											value={page.token}
+										/>
+										<input
+											type='hidden'
+											name='album_name'
+											value={track
+												.getAttribute(
+													'data-album-name',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='album_artist_name'
+											value={track
+												.getAttribute(
+													'data-album-artist-name',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='album_image'
+											value={track
+												.getAttribute(
+													'data-album-image',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='album_name_original'
+											value={track
+												.getAttribute(
+													'data-album-name-original',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='album_artist_name_original'
+											value={track
+												.getAttribute(
+													'data-album-artist-name-original',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='count'
+											value={track
+												.getAttribute(
+													'data-count',
+												)}
+										/>
+										<Button
+											type='submit'
+											menu
+											onClick={requestClose}
+										>
+											<Icon
+												name={icons
+													.edit}
+											/>
+											{tl(trans.edit_scrobble)}
+										</Button>
+									</form>
+								)
+								: (
+									<form
+										style={{ margin: '0' }}
+										method='post'
+										action={track
+											.getAttribute(
+												'data-action',
+											)}
+										data-edit-scrobble
+									>
+										<Token
+											value={page.token}
+										/>
+										<input
+											type='hidden'
+											name='artist_name'
+											value={track
+												.getAttribute(
+													'data-artist-name',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='track_name'
+											value={track
+												.getAttribute(
+													'data-track-name',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='album_name'
+											value={track
+												.getAttribute(
+													'data-album-name',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='album_artist_name'
+											value={track
+												.getAttribute(
+													'data-artist-name',
+												)}
+										/>
+										<input
+											type='hidden'
+											name='timestamp'
+											value={track
+												.getAttribute(
+													'data-timestamp',
+												)}
+										/>
+										<Button
+											type='submit'
+											menu
+											onClick={requestClose}
+										>
+											<Icon
+												name={icons
+													.edit}
+											/>
+											{tl(trans.edit_scrobble)}
+										</Button>
+									</form>
+								)}
+							{bulkEdit && (
+								<>
+									<ButtonComboSeparator />
+									<BulkEditButton
+										chibi
+										button={bulkEdit}
+										onClick={requestClose}
+									/>
+								</>
+							)}
+						</ButtonCombo>
+						{canCopyScrobble && (
+							<>
+								<Button
+									menu
+									onClick={() => {
+										requestClose();
+										submit_scrobble({
+											pre_track: name
+												.getAttribute(
+													'data-name',
+												),
+											pre_artist:
+												artist,
+											pre_album: alt,
+											pre_album_artist:
+												albumArtist,
+											pre_timestamp:
+												timestamp,
+										});
+									}}
+								>
+									<Icon
+										name={icons.copy_scrobble}
+									/>
+									{tl(trans.copy_scrobble)}
+								</Button>
+								<MenuSeparator />
+							</>
+						)}
+					</>
+				)
+				: (canEdit && !auth.pro)
+					? (
+						<>
+							<Button
+								menu
+								onClick={() => {
+									requestClose();
+									non_pro_edit({
+										pre_track: name
+											.getAttribute(
+												'data-name',
+											),
+										pre_artist: artist,
+										pre_album: alt,
+										pre_album_artist:
+											albumArtist,
+										timestamp: timestamp,
+									});
+								}}
+							>
+								<Icon
+									name={icons
+										.edit}
+								/>
+								{tl(trans.edit_scrobble)}
+							</Button>
+							{canCopyScrobble && (
+								<>
+									<Button
+										menu
+										onClick={() => {
+											requestClose();
+											submit_scrobble({
+												pre_track: name
+													.getAttribute(
+														'data-name',
+													),
+												pre_artist:
+													artist,
+												pre_album: alt,
+												pre_album_artist:
+													albumArtist,
+												pre_timestamp:
+													timestamp,
+											});
+										}}
+									>
+										<Icon
+											name={icons.copy_scrobble}
+										/>
+										{tl(trans.copy_scrobble)}
+									</Button>
+									<MenuSeparator />
+								</>
+							)}
+						</>
+					)
+					: canCopyScrobble
+						? (
+							<>
+								<Button
+									menu
+									onClick={() => {
+										requestClose();
+										submit_scrobble({
+											pre_track: name
+												.getAttribute(
+													'data-name',
+												),
+											pre_artist: artist,
+											pre_album: alt,
+											pre_album_artist:
+												albumArtist,
+											pre_timestamp: timestamp,
+										});
+									}}
+								>
+									<Icon name={icons.copy_scrobble} />
+									{tl(trans.copy_scrobble)}
+								</Button>
+								<MenuSeparator />
+							</>
+						)
+						: bulkEdit && (
+							<>
+								<BulkEditButton
+									button={bulkEdit}
+									onClick={requestClose}
+								/>
+								<MenuSeparator />
+							</>
+						)}
+			{playContainer && (
+				<PlayButton container={playContainer} />
+			)}
+			{!isAlbum && (
+				<ButtonCombo>
+					<Button
+						menu
+						onClick={requestClose}
+						href={name.getAttribute('href')}
+					>
+						<Icon name={icons.track} />
+						{tl(trans.track)}
+					</Button>
+					<ButtonComboSeparator />
+					<Button
+						menu
+						chibi
+						onClick={requestClose}
+						tooltip={tl(
+							trans.explore_in_library,
+						)}
+						href={`${root}user/${user}/library${name.getAttribute('href')
+							}`}
+					>
+						<Icon name={icons.arrow_right} />
+						{tl(trans.explore_in_library)}
+					</Button>
+				</ButtonCombo>
+			)}
+			{(album && albumLink)
+				? (
+					<ButtonCombo>
+						<Button
+							menu
+							onClick={requestClose}
+							href={albumLink.getAttribute(
+								'href',
+							)}
+						>
+							<Icon name={icons.album} />
+							{tl(trans.album)}
+						</Button>
+						<ButtonComboSeparator />
+						<Button
+							menu
+							chibi
+							onClick={requestClose}
+							tooltip={tl(
+								trans.explore_in_library,
+							)}
+							href={`${root}user/${user}/library${albumLink.getAttribute('href')
+								}`}
+						>
+							<Icon name={icons.arrow_right} />
+							{tl(trans.explore_in_library)}
+						</Button>
+					</ButtonCombo>
+				)
+				: isAlbum && (
+					<ButtonCombo>
+						<Button
+							menu
+							onClick={requestClose}
+							href={name.getAttribute(
+								'href',
+							)}
+						>
+							<Icon name={icons.album} />
+							{tl(trans.album)}
+						</Button>
+						<ButtonComboSeparator />
+						<Button
+							menu
+							chibi
+							onClick={requestClose}
+							tooltip={tl(
+								trans.explore_in_library,
+							)}
+							href={`${root}user/${user}/library${name.getAttribute('href')
+								}`}
+						>
+							<Icon name={icons.arrow_right} />
+							{tl(trans.explore_in_library)}
+						</Button>
+					</ButtonCombo>
+				)}
+			<ButtonCombo>
+				<Button
+					menu
+					onClick={requestClose}
+					href={`${root}music/${redirect()}${sanitise(artist)
+						}`}
+				>
+					<Icon name={icons.artist} />
+					{tl(trans.artist)}
+				</Button>
+				<ButtonComboSeparator />
+				<Button
+					menu
+					chibi
+					onClick={requestClose}
+					tooltip={tl(
+						trans.explore_in_library,
+					)}
+					href={`${root}user/${user}/library/music/${redirect()}${sanitise(artist)
+						}`}
+				>
+					<Icon name={icons.arrow_right} />
+					{tl(trans.explore_in_library)}
+				</Button>
+			</ButtonCombo>
+			{(isOwnProfile && !isAlbum) && (
+				<ObsessButton
+					track={track}
+					track_title={name}
+					track_artist={artist}
+					onClick={requestClose}
+				/>
+			)}
+			<MenuSeparator />
+			{!isAlbum && (
+				<Button
+					menu
+					onClick={() => {
+						lyricsFromMenu(name.textContent.trim(), artist)
+						requestClose();
+					}}
+				>
+					<Icon name={icons.lyrics} />
+					{tl(trans.view_lyrics)}
+				</Button>
+			)}
+			<Button
+				menu
+				onClick={() => {
+					copy(name.href);
+					requestClose();
+				}}
+			>
+				<Icon name={icons.link} />
+				{tl(trans.copy_link)}
+			</Button>
+			{(isOwnProfile && canDelete) && (
+				<DeleteButton
+					track={track}
+					track_title={name}
+					onClick={requestClose}
+				/>
+			)}
 		</>
 	);
 }

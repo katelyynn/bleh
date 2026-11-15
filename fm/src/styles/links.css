@@ -101,7 +101,7 @@ a {
 
 	background-image: linear-gradient(to right, var(--mask-colour), var(--mask-colour)), linear-gradient(to right, transparent, transparent);
 	background-repeat: no-repeat;
-	background-size: 0% var(--line-thickness), 100% var(--line-thickness);
+	background-size: var(--link-underline-size, 0%) var(--line-thickness), 100% var(--line-thickness);
 	background-position: 0 100%;
 
 	transition-property: background-size;
@@ -139,4 +139,8 @@ a {
 .avatar,
 .link-block-cover-link {
 	background-image: unset !important;
+}
+
+.link-block-cover-link {
+	user-select: none;
 }
