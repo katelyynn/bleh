@@ -348,7 +348,7 @@ export function create_music_links(col_main: HTMLElement) {
 	}
 
 	function update_links() {
-		const music_links = useSettings.get('music_links') as string[];
+		const music_links = useSettings.get('music_links') as string[] || [];
 
 		link_container.current.replaceChildren(
 			<>

@@ -62932,7 +62932,7 @@ var bleh = (() => {
       let available = {};
       if (predefined) {
         available = Object.fromEntries(
-          Object.entries(values).filter(([key]) => !value.includes(key))
+          Object.entries(values).filter(([key]) => !(value || []).includes(key))
         );
       }
       const inner_list = createRef();
@@ -85709,7 +85709,7 @@ var bleh = (() => {
       }
     }
     function update_links() {
-      const music_links = useSettings.get("music_links");
+      const music_links = useSettings.get("music_links") || [];
       link_container.current.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: music_links.map((link) => {
           if (link_types[link]) return link_types[link];
