@@ -417,7 +417,7 @@
 		&>.page-header-avatar-glow {
 			scale: 1;
 			opacity: 0.6;
-			animation: page_avatar 3s var(--trans-function-ani) infinite;
+			/*animation: page_avatar 3s var(--trans-function-ani) infinite;*/
 		}
 	}
 

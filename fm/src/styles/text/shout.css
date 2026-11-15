@@ -261,8 +261,8 @@
 
 		&:before {
 			scale: 1;
-			opacity: 1;
-			animation: shout_avatar 3s var(--trans-function-ani) infinite;
+			opacity: 0.4;
+			/*animation: shout_avatar 3s var(--trans-function-ani) infinite;*/
 		}
 	}
 
@@ -282,14 +282,15 @@
 
 		--outset: 3px;
 
-		width: calc(var(--shout-avatar-size) + (var(--outset) * 2));
-		height: calc(var(--shout-avatar-size) + (var(--outset) * 2));
-		top: calc((-1 * var(--outset)) + 6px);
-		left: calc((-1 * var(--outset)) + 10px);
-		right: calc(-1 * var(--outset));
+		width: var(--shout-avatar-size);
+		height: var(--shout-avatar-size);
+		top: 6px;
+		left: 10px;
+		right: 0;
 
-		border-radius: calc(var(--avatar-radius) + 3px);
-		border: 2px solid oklch(var(--l3-c));
+		border-radius: var(--avatar-radius);
+		outline: 2px solid oklch(var(--l3-c));
+		outline-offset: 3px;
 
 		scale: 1.1;
 		opacity: 0;
