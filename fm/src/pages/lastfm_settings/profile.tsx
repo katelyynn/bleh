@@ -385,6 +385,7 @@ function profile_panel() {
 					<SettingInfo
 						name={tl(trans.avatar)}
 						body={tl(trans.avatar_desc)}
+						icon={icons.image}
 					>
 						<div
 							class={['avatar', 'image-uploader']}
@@ -406,6 +407,7 @@ function profile_panel() {
 					<SettingInput
 						name={tl(trans.profile_title)}
 						body={tl(trans.pronoun_tip)}
+						icon={icons.aka}
 						id='full_name'
 						value={form_display_name}
 						saveManually={false}
@@ -413,6 +415,7 @@ function profile_panel() {
 					/>
 					<SettingInput
 						name={tl(trans.website)}
+						icon={icons.link}
 						id='homepage'
 						value={form_website}
 						ref={website}
@@ -421,6 +424,7 @@ function profile_panel() {
 					/>
 					<SettingSelect
 						name={tl(trans.country)}
+						icon={icons.global}
 						id={form_country.name}
 						values={select_prepare(form_country)}
 						value={form_country.value}
@@ -444,7 +448,7 @@ function profile_panel() {
 						ref={accent}
 					/>
 					<div class='setting' data-type='text'>
-						<SettingLabel name={tl(trans.about)}>
+						<SettingLabel name={tl(trans.about)} icon={icons.about}>
 							<p
 								class={['tip', 'characters', 'colourful']}
 								ref={chars}
@@ -615,7 +619,7 @@ function avatar() {
 		}
 
 		const reader = new FileReader();
-		reader.onload = function() {
+		reader.onload = function () {
 			crop(reader.result);
 		};
 		reader.readAsDataURL(e.target.files[0]);

@@ -44,6 +44,7 @@ export function ProfileBanner({
 			<SettingLabel
 				name={tl(trans.profile_banner.name)}
 				body={tl(trans.profile_banner.body)}
+				icon={icons.banner}
 				sub={tl(trans.aspect_ratio_banner, {
 					v: <strong>1300 / 325</strong>,
 				})}

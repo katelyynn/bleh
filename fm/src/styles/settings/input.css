@@ -237,6 +237,10 @@ input {
 		}
 	}
 
+	&[data-type="text"] {
+		min-width: 240px;
+	}
+
 	&>.modern-input {
 		width: 100% !important;
 	}
