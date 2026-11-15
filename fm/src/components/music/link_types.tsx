@@ -311,6 +311,7 @@ export function create_music_links(col_main: HTMLElement) {
 				externals_links.forEach((link) => {
 					link.classList.add(
 						'music-link',
+						'social-link',
 						'colourful',
 						'icon',
 					);
