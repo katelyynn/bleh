@@ -96,7 +96,9 @@ export function LyricsSnippet({
 					}
 
 					return (
-						<p class='lyric-line-snippet'>{line}</p>
+						<p class='lyric-line-snippet'>
+							<LyricLineInner line={line} />
+						</p>
 					);
 				})}
 			</>
@@ -233,7 +235,7 @@ function LyricSegment({
 
 						copy(line);
 					}}>
-						{line}
+						<LyricLineInner line={line} />
 						<Icon name={icons.copy} className='lyric-line-copy' />
 					</p>
 				);
@@ -241,5 +243,35 @@ function LyricSegment({
 				return elem;
 			})}
 		</div>
+	)
+}
+
+interface LyricLineInnerProps {
+	line: string;
+}
+
+function LyricLineInner({
+	line
+}: LyricLineInnerProps) {
+	const regex = /^(.*?)\s*\(([^()]*)\)(.*)$/;
+
+	const match = line.match(regex);
+
+	if (!match) return line;
+
+	return (
+		<>
+			{match[1]}
+			{match[2] && (
+				<>
+					{' '}<span class='lyric-line-adlib'>({match[2]})</span>
+				</>
+			)}
+			{match[3] && (
+				<>
+					{' '}{match[3]}
+				</>
+			)}
+		</>
 	)
 }

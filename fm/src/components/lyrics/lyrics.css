@@ -158,6 +158,11 @@
 	}
 }
 
+.lyric-line-adlib {
+	font-size: 0.8em;
+	opacity: 0.7;
+}
+
 .lyric-line-copy {
 	height: 26px !important;
 	vertical-align: text-top;
