@@ -182,7 +182,7 @@ export function Track({
 		requestClose?.();
 	}
 
-	if (art) {
+	if (art && album) {
 		hover_tooltip(
 			coverArt.current,
 			<Tooltip>{romanise(correct_item_by_artist(album, artist))}</Tooltip>

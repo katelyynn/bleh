@@ -94155,7 +94155,7 @@ var bleh = (() => {
       if (ctx_menu.is_mounted) ctx_menu.hide();
       requestClose?.();
     }
-    if (art) {
+    if (art && album) {
       hover_tooltip(
         coverArt.current,
         /* @__PURE__ */ jsx(Tooltip, { children: romanise(correct_item_by_artist(album, artist)) })
