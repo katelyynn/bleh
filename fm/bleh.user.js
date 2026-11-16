@@ -95535,7 +95535,19 @@ var bleh = (() => {
     "red hot chili peppers": "peppers",
     "pearl jam": "pearl",
     "green day": "green",
-    "the smashing pumpkins": "pumpkins"
+    "the smashing pumpkins": "pumpkins",
+    "american football": "americanfootball",
+    "beyonc\xE9": "beyonce",
+    "britney spears": "britney",
+    "cardi b": "cardi",
+    "destiny's child": "destinyschild",
+    "doja cat": "dojacat",
+    "jade": "jadethirwall",
+    "linkin park": "linkinpark",
+    "mariah carey": "mariah",
+    "twenty one pilots": "top",
+    "zara larsson": "zara",
+    "pinkpantheress": "pink"
   };
   var longWordmarks = [
     "ariana",
@@ -95559,7 +95571,8 @@ var bleh = (() => {
     "scott",
     "sserafim",
     "jennie",
-    "girlinred"
+    "girlinred",
+    "mariah"
   ];
   var colouredWordmarks = [
     "travi$",

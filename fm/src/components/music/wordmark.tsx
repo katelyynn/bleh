@@ -60,7 +60,19 @@ export const validWordmarks: Record<string, string> = {
 	'red hot chili peppers': 'peppers',
 	'pearl jam': 'pearl',
 	'green day': 'green',
-	'the smashing pumpkins': 'pumpkins'
+	'the smashing pumpkins': 'pumpkins',
+	'american football': 'americanfootball',
+	'beyoncé': 'beyonce',
+	'britney spears': 'britney',
+	'cardi b': 'cardi',
+	'destiny\'s child': 'destinyschild',
+	'doja cat': 'dojacat',
+	'jade': 'jadethirwall',
+	'linkin park': 'linkinpark',
+	'mariah carey': 'mariah',
+	'twenty one pilots': 'top',
+	'zara larsson': 'zara',
+	'pinkpantheress': 'pink'
 };
 
 export const longWordmarks = [
@@ -85,7 +97,8 @@ export const longWordmarks = [
 	'scott',
 	'sserafim',
 	'jennie',
-	'girlinred'
+	'girlinred',
+	'mariah'
 ];
 
 // these are excluded from inversion in light theme
