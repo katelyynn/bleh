@@ -42,7 +42,7 @@ import { playback } from '@/pages/bleh_settings/playback.tsx';
 import { profile } from '@/pages/bleh_settings/profile.tsx';
 import { accessibility } from '@/pages/bleh_settings/accessibility.tsx';
 import { Cta } from '@/components/cta/cta.tsx';
-import { SeeMore } from '@/components/text/see_more.tsx';
+import { PanelTop, SeeMore } from '@/components/text/see_more.tsx';
 import { SideAction, SideActions } from '@/components/button/side.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
@@ -54,6 +54,11 @@ import { IconLabel } from '@/components/text/text.tsx';
 import { flags } from '@/build/flags.ts';
 import { PageToolbar } from '@/components/page/toolbar.tsx';
 import { SettingsSearch } from './search.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { Separator } from '@/components/divider/separator.tsx';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export interface SettingTab {
 	name?: ReactNode;
@@ -394,48 +399,43 @@ export async function render_setting_page(page_id) {
 			});
 		}
 
-		render(
-			page.structure.main,
-			html`
-				<section class="bleh--panel">
-					<div class="alert alert-danger">
-				        ${tl(trans.beware_notice)}
-				    </div>
-					<div class="setting-group">
-				        ${setting({ id: 'dev' })}
-				    </div>
-					<div class="setting-group">
-				        ${setting({ id: 'developer' })}
-				        ${setting({ id: 'developer_setting_names' })}
-				    </div>
-					<div class="sep"></div>
-					<button class="see-more" onclick=${() => {
-					if (settings.hu_tao == 'develop') {
+		page.structure.main!.replaceChildren(
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.advanced}>
+					{tl(trans.troubleshooting)}
+				</PanelHead>
+				<Alert type='danger'>
+					{tl(trans.beware_notice)}
+				</Alert>
+				<SettingGroup>
+					<SettingSwitch bind='dev' />
+				</SettingGroup>
+				<SettingGroup>
+					<SettingSwitch bind='developer' />
+					<SettingSwitch bind='developer_setting_names' />
+				</SettingGroup>
+				<Separator />
+				<SeeMore onClick={() => {
+					if (useSettings.get('hu_tao') == 'develop') {
 						change_settings_page('sku');
 					} else {
-						dialog({
+						modal({
 							id: 'hu_tao',
 							title: tl(trans.development),
-							body: html.node`
-                                    ${setting({
-								id: 'hu_tao',
-								text: false,
-								focus: true,
-							})
-								}
-                                `,
+							body: (
+								<SettingInput bind='hu_tao' showLabel={false} />
+							)
 						});
 					}
 				}}>
-				        ${tl(trans.manage_feature_flags)}
-				    </button>
-					<button class="see-more" onclick=${() => {
-					save_setting('popups_seen', []);
+					{tl(trans.manage_feature_flags)}
+				</SeeMore>
+				<SeeMore onClick={() => {
+					useSettings.set('popups_seen', []);
 				}}>
-				        Forget which popups have been seen
-				    </button>
-				</section>
-			`,
+					Forget which popups have been seen
+				</SeeMore>
+			</section>
 		);
 	} else if (page_id == 'translate') {
 		let translation_view_container;

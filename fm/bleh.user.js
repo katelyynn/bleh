@@ -40779,12 +40779,12 @@ var bleh = (() => {
     const processed = image2.getAttribute("data-gif-pause");
     if (processed) return;
     image2.setAttribute("data-gif-pause", "true");
-    let setting2 = settings.static_gifs;
-    if (override) setting2 = "never";
-    if (setting2 == "always") return;
+    let setting3 = settings.static_gifs;
+    if (override) setting3 = "never";
+    if (setting3 == "always") return;
     const original = image2.src;
     convert_gif_to_png(original).then((paused) => {
-      if (setting2 == "never") {
+      if (setting3 == "never") {
         image2.src = paused;
         return;
       }
@@ -55461,6 +55461,8 @@ var bleh = (() => {
       /[-\(]theme from/i,
       /[-\(]skit/i,
       /(?:-\s?|\(|\[)original/i,
+      /(?:-\s?|\(|\[)continued/i,
+      // carly rae jepsen day and night
       /(?:-\s?|\(|\[)deluxe/i,
       /(?:-\s?|\(|\[)digital deluxe/i,
       "d.l.x.",
@@ -114263,9 +114265,9 @@ var bleh = (() => {
   }
   function compile_settings() {
     const clone6 = structuredClone(settings);
-    for (const setting2 in clone6) {
-      if (settings_store[setting2] && JSON.stringify(clone6[setting2]) === JSON.stringify(settings_store[setting2].default) && setting2 != "version") {
-        delete clone6[setting2];
+    for (const setting3 in clone6) {
+      if (settings_store[setting3] && JSON.stringify(clone6[setting3]) === JSON.stringify(settings_store[setting3].default) && setting3 != "version") {
+        delete clone6[setting3];
       }
     }
     clone6.version = version.build;
@@ -115995,11 +115997,11 @@ var bleh = (() => {
     log("loading...", "settings");
     if (!settings.version) settings.version = "10000000";
     migrations(parse_bleh_version(settings.version));
-    for (const setting2 in settings_store) {
-      const value = useSettings.get(setting2);
-      const store = settings_store[setting2];
+    for (const setting3 in settings_store) {
+      const value = useSettings.get(setting3);
+      const store = settings_store[setting3];
       const type = store.type || "toggle";
-      if (["hue", "sat", "lit"].includes(setting2)) {
+      if (["hue", "sat", "lit"].includes(setting3)) {
         document.body.classList.toggle(
           "increase-btn-contrast",
           useSettings.get("lit") <= 0.3
@@ -116016,7 +116018,7 @@ var bleh = (() => {
         );
       }
       if (!other_setting_types.includes(type) && store.bubble) {
-        document.body.setAttribute(`data-bleh--${setting2}`, String(value));
+        document.body.setAttribute(`data-bleh--${setting3}`, String(value));
       }
     }
     load_skus();
@@ -122059,8 +122061,8 @@ var bleh = (() => {
     const results = [];
     Object.entries(tabs).forEach(([key, tab]) => {
       if (!tab.settings) return;
-      tab.settings.forEach((setting2) => {
-        const formal = settings_store[setting2];
+      tab.settings.forEach((setting3) => {
+        const formal = settings_store[setting3];
         if (!formal) return;
         let match3 = false;
         const name = tl2(formal.title).toLowerCase() || "";
@@ -122080,7 +122082,7 @@ var bleh = (() => {
         }
         if (match3) {
           results.push({
-            id: setting2,
+            id: setting3,
             tab: key
           });
         }
@@ -122407,47 +122409,31 @@ var bleh = (() => {
           theme: "error"
         });
       }
-      render(
-        page.structure.main,
-        html`
-				<section class="bleh--panel">
-					<div class="alert alert-danger">
-				        ${tl2(trans.beware_notice)}
-				    </div>
-					<div class="setting-group">
-				        ${setting({ id: "dev" })}
-				    </div>
-					<div class="setting-group">
-				        ${setting({ id: "developer" })}
-				        ${setting({ id: "developer_setting_names" })}
-				    </div>
-					<div class="sep"></div>
-					<button class="see-more" onclick=${() => {
-          if (settings.hu_tao == "develop") {
-            change_settings_page("sku");
-          } else {
-            dialog({
-              id: "hu_tao",
-              title: tl2(trans.development),
-              body: html.node`
-                                    ${setting({
+      page.structure.main.replaceChildren(
+        /* @__PURE__ */ jsx("section", { class: "bleh--panel", children: [
+          /* @__PURE__ */ jsx(PanelHead, { icon: icons.advanced, children: tl2(trans.troubleshooting) }),
+          /* @__PURE__ */ jsx(Alert, { type: "danger", children: tl2(trans.beware_notice) }),
+          /* @__PURE__ */ jsx(SettingGroup, { children: /* @__PURE__ */ jsx(SettingSwitch, { bind: "dev" }) }),
+          /* @__PURE__ */ jsx(SettingGroup, { children: [
+            /* @__PURE__ */ jsx(SettingSwitch, { bind: "developer" }),
+            /* @__PURE__ */ jsx(SettingSwitch, { bind: "developer_setting_names" })
+          ] }),
+          /* @__PURE__ */ jsx(Separator, {}),
+          /* @__PURE__ */ jsx(SeeMore, { onClick: () => {
+            if (useSettings.get("hu_tao") == "develop") {
+              change_settings_page("sku");
+            } else {
+              modal({
                 id: "hu_tao",
-                text: false,
-                focus: true
-              })}
-                                `
-            });
-          }
-        }}>
-				        ${tl2(trans.manage_feature_flags)}
-				    </button>
-					<button class="see-more" onclick=${() => {
-          save_setting("popups_seen", []);
-        }}>
-				        Forget which popups have been seen
-				    </button>
-				</section>
-			`
+                title: tl2(trans.development),
+                body: /* @__PURE__ */ jsx(SettingInput, { bind: "hu_tao", showLabel: false })
+              });
+            }
+          }, children: tl2(trans.manage_feature_flags) }),
+          /* @__PURE__ */ jsx(SeeMore, { onClick: () => {
+            useSettings.set("popups_seen", []);
+          }, children: "Forget which popups have been seen" })
+        ] })
       );
     } else if (page_id == "translate") {
       let translation_view = function(lang3) {
@@ -122543,20 +122529,20 @@ var bleh = (() => {
     });
   }
   function scroll_to_setting(id) {
-    const setting2 = page.structure.main.querySelector(`#setting_${id}`);
-    if (!setting2) return;
-    setting2.scrollIntoView({
+    const setting3 = page.structure.main.querySelector(`#setting_${id}`);
+    if (!setting3) return;
+    setting3.scrollIntoView({
       behavior: "smooth",
       block: "center"
     });
     setTimeout(() => {
-      setting2.classList.add("setting-highlight");
+      setting3.classList.add("setting-highlight");
     }, 200);
   }
-  unsafeWindow._change_settings_page = function(page2, setting2 = null) {
-    change_settings_page(page2, setting2);
+  unsafeWindow._change_settings_page = function(page2, setting3 = null) {
+    change_settings_page(page2, setting3);
   };
-  function change_settings_page(page_id, setting2 = null) {
+  function change_settings_page(page_id, setting3 = null) {
     if (page_id == page.state.settings_page) return;
     window.history.pushState(page_id, "", `${root}bleh/${page_id}`);
     page.state.settings_page = page_id;
@@ -122588,9 +122574,9 @@ var bleh = (() => {
 			`
       );
     }
-    if (setting2 != null) {
+    if (setting3 != null) {
       const setting_container = page.structure.main.querySelector(
-        `.setting[data-id="${setting2}"]`
+        `.setting[data-id="${setting3}"]`
       );
       if (setting_container != null) {
         const y = setting_container.getBoundingClientRect().top + window.scrollY - 300;
