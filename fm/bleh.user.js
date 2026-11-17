@@ -88809,6 +88809,7 @@ var bleh = (() => {
       ".section-controls"
     );
     let play;
+    let count = "0";
     if (section_controls) {
       section_controls.classList.add("legacy-section-controls");
       play = section_controls.querySelector(
@@ -88821,15 +88822,14 @@ var bleh = (() => {
           play.firstChild
         );
       }
-    }
-    const header = page.structure.container.querySelector(
-      ".content-top-header"
-    );
-    const count_text = header?.querySelector("h1")?.textContent.trim() || "";
-    const chr = count_text.indexOf("(");
-    let count = "0";
-    if (chr != -1) {
-      count = count_text.substring(chr).replace("(", "").replace(")", "");
+      const header = section_controls.querySelector(
+        ".content-top-header"
+      );
+      const count_text = header.textContent.trim() || "";
+      const chr = count_text.indexOf("(");
+      if (chr != -1) {
+        count = count_text.substring(chr).replace("(", "").replace(")", "");
+      }
     }
     page.structure.nav.querySelector(
       ".secondary-nav-item--obsessions > a"
