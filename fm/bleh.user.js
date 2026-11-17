@@ -96341,7 +96341,7 @@ var bleh = (() => {
     if (initial) value = initial;
     let disabled = false;
     const elem = html.node`
-        <button class="select-button timeframe-picker-button" type="button">
+        <button class="btn select-button timeframe-picker-button" type="button">
             ${timeframe_text(value)}
         </button>
     `;

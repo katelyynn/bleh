@@ -383,7 +383,7 @@ export function hybrid_timeframe_picker({
 	let disabled = false;
 
 	const elem = html.node`
-        <button class="select-button timeframe-picker-button" type="button">
+        <button class="btn select-button timeframe-picker-button" type="button">
             ${timeframe_text(value)}
         </button>
     `;
@@ -460,17 +460,16 @@ export function hybrid_timeframe_picker({
 		if (update) {
 			menu.setContent(html.node`
                 <div class="timeframe-menu">
-                    ${
-				setting({
-					id: 'date_selector',
-					func: (val: string) => render_page(val),
-				})
-			}
+                    ${setting({
+				id: 'date_selector',
+				func: (val: string) => render_page(val),
+			})
+				}
                     <div class="timeframe-menu-content" ref=${(el) =>
-				content = el} />
+					content = el} />
                     <div class="alert alert-error timeframe-error" data-hidden="true" ref=${(
-				el,
-			) => alert = el} />
+						el,
+					) => alert = el} />
                 </div>
             `);
 
@@ -500,31 +499,31 @@ export function hybrid_timeframe_picker({
 					<div class="date-range-picker-presets-wrap">
 						<ul class="date-range-picker-presets">
 					        ${render_timeframe_preset(
-						'date_preset=LAST_7_DAYS',
-					)}
+					'date_preset=LAST_7_DAYS',
+				)}
 					        ${render_timeframe_preset(
-						'date_preset=LAST_30_DAYS',
-					)}
+					'date_preset=LAST_30_DAYS',
+				)}
 					        ${render_timeframe_preset(
-						'date_preset=LAST_90_DAYS',
-					)}
+					'date_preset=LAST_90_DAYS',
+				)}
 					    </ul>
 						<ul class="date-range-picker-presets date-range-picker-presets--col-2">
 					        ${render_timeframe_preset(
-						'date_preset=LAST_180_DAYS',
-					)}
+					'date_preset=LAST_180_DAYS',
+				)}
 					        ${render_timeframe_preset(
-						'date_preset=LAST_365_DAYS',
-					)}
+					'date_preset=LAST_365_DAYS',
+				)}
 					        ${render_timeframe_preset('date_preset=ALL')}
 					    </ul>
 					</div>
 					<div class="date-range-picker-years">
 					    ${years.map((year: number) =>
-						render_timeframe_preset(
-							`from=${year}-01-01&rangetype=year`,
-						)
-					)}
+					render_timeframe_preset(
+						`from=${year}-01-01&rangetype=year`,
+					)
+				)}
 					</div>
 				`,
 			);
@@ -547,36 +546,36 @@ export function hybrid_timeframe_picker({
 						<div class="timeframe-picker-item">
 					        <label class="timeframe-picker-label">From</label>
 					        ${from = input({
-						type: 'date',
-						min: '2003-01-01',
-						max: date,
-						value: time_from || date,
-						show_time: false,
-						func: (val: string) => {
-							time_from = val;
-							console.info('timeframe from', time_from);
-							check_timeframe_valid();
-							update_range();
-						},
-						hide_on_change: true,
-					})}
+					type: 'date',
+					min: '2003-01-01',
+					max: date,
+					value: time_from || date,
+					show_time: false,
+					func: (val: string) => {
+						time_from = val;
+						console.info('timeframe from', time_from);
+						check_timeframe_valid();
+						update_range();
+					},
+					hide_on_change: true,
+				})}
 					    </div>
 						<div class="timeframe-picker-item">
 					        <label class="timeframe-picker-label">To</label>
 					        ${to = input({
-						type: 'date',
-						min: '2003-01-01',
-						max: date,
-						value: time_to || date,
-						show_time: false,
-						func: (val: string) => {
-							time_to = val;
-							console.info('timeframe to', time_to);
-							check_timeframe_valid();
-							update_range();
-						},
-						hide_on_change: true,
-					})}
+					type: 'date',
+					min: '2003-01-01',
+					max: date,
+					value: time_to || date,
+					show_time: false,
+					func: (val: string) => {
+						time_to = val;
+						console.info('timeframe to', time_to);
+						check_timeframe_valid();
+						update_range();
+					},
+					hide_on_change: true,
+				})}
 					    </div>
 					</div>
 				`,
@@ -617,15 +616,14 @@ export function hybrid_timeframe_picker({
 		const current = type == value;
 
 		return html.node`
-            <li class="date-range-picker-preset ${
-			current ? 'date-range-picker-preset--selected' : ''
-		}">
+            <li class="date-range-picker-preset ${current ? 'date-range-picker-preset--selected' : ''
+			}">
                 <button class="btn date-picker-preset-item" onclick=${() => {
-			alert.setAttribute('data-hidden', 'true');
-			timeframe_valid = true;
+				alert.setAttribute('data-hidden', 'true');
+				timeframe_valid = true;
 
-			set_value(type);
-		}}>${timeframe_text(type)}</button>
+				set_value(type);
+			}}>${timeframe_text(type)}</button>
             </li>
         `;
 	}
@@ -649,14 +647,12 @@ export function timeframe_text(value: string) {
 
 		console.info('timeframe text', value, params, from, to);
 
-		return `${DateTime.fromISO(from).toLocaleString(DateTime.DATE_MED)} - ${
-			DateTime.fromISO(to).toLocaleString(DateTime.DATE_MED)
-		}`;
+		return `${DateTime.fromISO(from).toLocaleString(DateTime.DATE_MED)} - ${DateTime.fromISO(to).toLocaleString(DateTime.DATE_MED)
+			}`;
 	}
 }
 
 function date_to_iso(date: Date) {
-	return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${
-		pad2(date.getDate())
-	}`;
+	return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())
+		}`;
 }
