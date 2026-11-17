@@ -2334,6 +2334,13 @@ export const trans = {
 				pt: 'Lanterna',
 				de: 'Laterne',
 			},
+			chestnut: {
+				en: 'Chestnut',
+			},
+			pine: {
+				// like the tree
+				en: 'Pine',
+			},
 		},
 		exclusive: {
 			// used as a tooltip for colours only available in certain seasons

@@ -233,8 +233,27 @@ export const icons = {
 	charts: 'charts',
 	password: 'password',
 	video: 'video',
-	video_broken: 'video-broken'
+	video_broken: 'video-broken',
+	egg: 'egg',
+	pride: 'pride',
+	summer: 'summer',
+	pumpkin: 'pumpkin',
+	fall: 'fall',
+	christmas: 'christmas',
+	new_years: 'new-years'
 };
+
+export const seasonalIcons = {
+	none: icons.seasonal,
+	easter: icons.egg,
+	pride: icons.pride,
+	summer: icons.summer,
+	halloween: icons.pumpkin,
+	pre_fall: icons.fall,
+	fall: icons.snow,
+	christmas: icons.christmas,
+	new_years: icons.new_years
+}
 
 interface icon {
 	name?: string;

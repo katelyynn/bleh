@@ -191,8 +191,8 @@ body,
 
 body,
 .theme-preview {
-	--min-l: 0.75;
-	--max-l: 2;
+	--min-l: 0.45;
+	--max-l: 3;
 
 	--min-s: 0;
 	--max-s: 2;

@@ -8,7 +8,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { createRef, ReactNode, Ref } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { Icon } from '@/components/shared/icon.tsx';
+import { Icon, icons, seasonalIcons } from '@/components/shared/icon.tsx';
 import {
 	colour,
 	colour_set,
@@ -217,18 +217,18 @@ export function SettingColour({
 				type: 'season',
 				label: trans.seasonal.presets.nonsense,
 				sets: {
-					hue: 352,
-					sat: 1.8,
-					lit: 0.925,
+					hue: 18,
+					sat: 1.9,
+					lit: 0.61,
 				},
 			},
 			{
 				type: 'season',
 				label: trans.seasonal.presets.fruitcake,
 				sets: {
-					hue: 24,
-					sat: 0.93,
-					lit: 1,
+					hue: 38,
+					sat: 1.24,
+					lit: 0.72,
 				},
 			},
 			{
@@ -242,11 +242,47 @@ export function SettingColour({
 			},
 			{
 				type: 'season',
+				label: trans.seasonal.presets.pine,
+				sets: {
+					hue: 143,
+					sat: 0.78,
+					lit: 0.55,
+				},
+			},
+			{
+				type: 'season',
+				label: 'Mei',
+				sets: {
+					hue: 25,
+					sat: 1.49,
+					lit: 0.75,
+				},
+			},
+			{
+				type: 'season',
+				label: 'Yuzu',
+				sets: {
+					hue: 67,
+					sat: 1.35,
+					lit: 0.96,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.chestnut,
+				sets: {
+					hue: 14,
+					sat: 1.03,
+					lit: 0.57,
+				},
+			},
+			{
+				type: 'season',
 				label: trans.seasonal.presets.festival,
 				sets: {
-					hue: 240,
-					sat: 1.4,
-					lit: 0.875,
+					hue: 253,
+					sat: 2.24,
+					lit: 0.46,
 				},
 			},
 		],
@@ -493,9 +529,10 @@ export function SettingColour({
 		seasonalPresets.current.setAttribute('data-hidden', String(seasonal.length == 0 || !season));
 
 		if (seasonal.length > 0 && season) {
+			seasonalPresets.current.setAttribute('data-season', season.id);
 			seasonalPresets.current.replaceChildren(
 				<>
-					<SettingLabel name={tl(trans.seasonal.listing[season.id])} body={tl(trans.seasonal.exclusive)} />
+					<SettingLabel icon={seasonalIcons[season.id]} name={tl(trans.seasonal.listing[season.id])} body={tl(trans.seasonal.exclusive)} />
 					<div
 						class={['info', 'swatch-info']}
 						ref={seasonalInfo}
@@ -589,10 +626,13 @@ export function SettingColour({
 		useSettings.set('accent_type', colour.type, uuid);
 
 		const preview = page.state.colour_preview;
-		const bg_colour = window.getComputedStyle(preview).backgroundColor;
 
-		const final = formatHex(bg_colour);
-		convert.current.value = final;
+		setTimeout(() => {
+			const bg_colour = window.getComputedStyle(preview).backgroundColor;
+
+			const final = formatHex(bg_colour);
+			convert.current.value = final;
+		}, 0);
 	}
 }
 

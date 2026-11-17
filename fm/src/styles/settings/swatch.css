@@ -34,7 +34,8 @@
 		}
 	}
 
-	min-width: 396px;
+	width: 100%;
+	max-width: 396px;
 	--swatch-height: 49px;
 }
 

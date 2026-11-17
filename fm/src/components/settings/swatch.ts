@@ -22,7 +22,7 @@ export interface colour {
 	sets?: colour_set;
 	displays?: display_set;
 	requires_flag?: string;
-	label?: translation;
+	label?: translation | string;
 	seasonal?: string;
 }
 

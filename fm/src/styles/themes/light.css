@@ -216,7 +216,7 @@ u,
 body,
 .theme-preview {
 	&[data-bleh--theme="light"] {
-		--min-l: 0.75;
+		--min-l: 0.45;
 		--max-l: 2;
 
 		--min-s: 0;
