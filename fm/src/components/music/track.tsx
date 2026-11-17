@@ -1646,7 +1646,7 @@ export function TrackMenu({
 				<Button
 					menu
 					onClick={() => {
-						lyricsFromMenu(name.textContent.trim(), artist)
+						lyricsFromMenu(name.getAttribute('data-name'), artist)
 						requestClose();
 					}}
 				>
