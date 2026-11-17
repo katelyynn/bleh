@@ -1,5 +1,6 @@
 import { page } from "@/build/page";
 import { download_with_progress, sanitise } from "@/build/tools";
+import { name_includes } from "../music/lotus";
 
 export interface LrcLibResponse {
 	id: number;
@@ -16,7 +17,10 @@ export interface LrcLibResponse {
 }
 
 export async function getLyrics(name: string, artist: string): Promise<LrcLibResponse> {
-	const url = `https://lrclib.net/api/get?artist_name=${sanitise(artist, '+').replaceAll('%252B', '%25')}&track_name=${sanitise(name, '+').replaceAll('%252B', '%25')}`;
+	// remove tags
+	const formatted = name_includes(name, artist);
+
+	const url = `https://lrclib.net/api/get?artist_name=${sanitise(artist, '+').replaceAll('%252B', '%25')}&track_name=${sanitise(formatted.song_title, '+').replaceAll('%252B', '%25')}`;
 
 	try {
 		const res = await download_with_progress(url, 'text');

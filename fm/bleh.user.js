@@ -85729,7 +85729,8 @@ var bleh = (() => {
 
   // src/components/lyrics/retrieve.tsx
   async function getLyrics(name, artist) {
-    const url = `https://lrclib.net/api/get?artist_name=${sanitise(artist, "+").replaceAll("%252B", "%25")}&track_name=${sanitise(name, "+").replaceAll("%252B", "%25")}`;
+    const formatted = name_includes(name, artist);
+    const url = `https://lrclib.net/api/get?artist_name=${sanitise(artist, "+").replaceAll("%252B", "%25")}&track_name=${sanitise(formatted.song_title, "+").replaceAll("%252B", "%25")}`;
     try {
       const res = await download_with_progress(url, "text");
       return JSON.parse(res.responseText);
@@ -93893,7 +93894,7 @@ var bleh = (() => {
         {
           menu: true,
           onClick: () => {
-            lyricsFromMenu(name.textContent.trim(), artist);
+            lyricsFromMenu(name.getAttribute("data-name"), artist);
             requestClose();
           },
           children: [
