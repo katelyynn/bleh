@@ -11,7 +11,7 @@ export function see_more() {
 	if (!page.structure.container) return;
 
 	const links = page.structure.container.querySelectorAll(
-		':is(.more-link, .more-link-with-action, .more-link-fullwidth-right, .more-link-fullwidth-right-flush-top, .more-link-fullwidth, .show-more, .music-more-link, .pagination-next, .pagination-previous) > a:not([data-see-more])',
+		':is(.more-link, .more-link-with-action, .more-link-fullwidth-right, .more-link-fullwidth-right-flush-top, .more-link-fullwidth, .show-more, .music-more-link, .pagination-next, .pagination-previous) > a:not([data-see-more]), :is(.shout-more-replies-before, .shout-more-replies-after):not([data-see-more])',
 	);
 	links.forEach((link: HTMLLinkElement) => {
 		link.setAttribute('data-see-more', 'true');
@@ -31,6 +31,18 @@ export function see_more() {
 			link.classList.add('left-icon');
 			link.insertBefore(
 				<Icon name={icons.plus} />,
+				link.firstChild,
+			);
+		} else if (link.classList.contains('shout-more-replies-before')) {
+			link.classList.add('left-icon');
+			link.insertBefore(
+				<Icon name={icons.arrow_up} />,
+				link.firstChild,
+			);
+		} else if (link.classList.contains('shout-more-replies-after')) {
+			link.classList.add('left-icon');
+			link.insertBefore(
+				<Icon name={icons.arrow_down} />,
 				link.firstChild,
 			);
 		} else {

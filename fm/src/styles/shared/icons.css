@@ -75,9 +75,7 @@
 .section-playlink:before,
 .inline-section-control:before,
 .header-new-playlink:before,
-/*     SHOUT     */
-.shout-more-replies-after:before,
-.shout-more-replies-before:before,
+
 /*     EVENTS     */
 .event-detail:before,
 .event-metadata:not(:last-child):before,

@@ -1,8 +1,6 @@
 .shout-action-button,
 .blend-v2-btn,
 .js-disclose-close.btn-cancel,
-.shout-more-replies-after,
-.shout-more-replies-before,
 .modal-body .btn-cancel.js-close,
 .masthead-popup-text .btn-primary,
 .more-items,
@@ -30,7 +28,8 @@
 	--icon-colour: var(--mask-colour);
 	font-size: var(--see-more-font-size, inherit) !important;
 	--force-font-weight: var(--font-weight-medium);
-	font-weight: var(--force-font-weight);
+	font-family: var(--font) !important;
+	font-weight: var(--force-font-weight, var(--font-weight)) !important;
 	min-height: unset !important;
 	position: relative;
 	--icon-size: 12px;
@@ -239,7 +238,7 @@
 		position: absolute;
 		left: calc(-1 * ((var(--shout-avatar-size) - (var(--shout-tree-size) / 2)) / 2));
 		top: 0;
-		bottom: calc(-1 * var(--shout-padding));
+		bottom: calc(-1 * (var(--shout-padding) * 3));
 
 		width: var(--shout-tree-size);
 		background: var(--shout-tree);
