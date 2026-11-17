@@ -116998,12 +116998,21 @@ var bleh = (() => {
     seasonal_colours.new_years = seasonal_colours.christmas;
     let list = [];
     let seasonal2 = [];
-    if (season?.id && seasonal_colours[season.id]) {
-      seasonal2 = seasonal_colours[season.id];
-      seasonal2.forEach((col) => {
-        col.seasonal = season.id;
-      });
+    function update_season() {
+      seasonal2 = [];
+      season = useSeasons.get().current;
+      if (season?.id && seasonal_colours[season.id]) {
+        seasonal2 = seasonal_colours[season.id];
+        seasonal2.forEach((col) => {
+          col.seasonal = season.id;
+        });
+      }
     }
+    update_season();
+    useSeasons.on(() => {
+      update_season();
+      update();
+    });
     let custom_swatches = [];
     const recent_swatches = [
       ...recents.map((recent) => ({
@@ -123803,6 +123812,7 @@ var bleh = (() => {
     });
   }
   function get_season_state(now2 = DateTime.local()) {
+    now2 = DateTime.fromISO("2026-12-25");
     const year = now2.year;
     const seasons = resolve_seasons(now2);
     seasons.sort((a, b) => a.start.toMillis() - b.start.toMillis());
@@ -133186,17 +133196,10 @@ Ya feel me?`
                   hue: useSettings.get("hue"),
                   sat: useSettings.get("sat"),
                   lit: useSettings.get("lit")
-                },
-                season: {
-                  id: "christmas",
-                  start: DateTime.fromISO("2026-08-05"),
-                  end: DateTime.fromISO("2026-08-05"),
-                  snowflakes: {
-                    state: false
-                  }
                 }
               }
-            )
+            ),
+            /* @__PURE__ */ jsx(SettingSwitch, { bind: "seasonal" })
           ] })
         ] }) }),
         /* @__PURE__ */ jsx("section", { children: /* @__PURE__ */ jsx(DemoGrid, { children: [

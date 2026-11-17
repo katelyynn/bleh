@@ -711,15 +711,8 @@ export function mualani() {
 								sat: useSettings.get('sat') as number,
 								lit: useSettings.get('lit') as number,
 							}}
-							season={{
-								id: 'christmas',
-								start: DateTime.fromISO('2026-08-05'),
-								end: DateTime.fromISO('2026-08-05'),
-								snowflakes: {
-									state: false,
-								},
-							}}
 						/>
+						<SettingSwitch bind='seasonal' />
 					</DemoItem>
 				</DemoGrid>
 			</section>

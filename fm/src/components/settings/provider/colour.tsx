@@ -21,7 +21,7 @@ import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { auth, page } from '@/build/page.ts';
-import { useSettings } from '@/page.tsx';
+import { useSeasons, useSettings } from '@/page.tsx';
 import { settings_store } from '@/build/config.ts';
 import { WithChildren } from '@/types/generic.tsx';
 
@@ -256,13 +256,25 @@ export function SettingColour({
 	let list: ColourSwatchElement[] = [];
 
 	let seasonal: colour[] = [];
-	if (season?.id && seasonal_colours[season.id]) {
-		seasonal = seasonal_colours[season.id];
 
-		seasonal.forEach((col) => {
-			col.seasonal = season.id;
-		});
+	function update_season() {
+		seasonal = [];
+		season = useSeasons.get().current;
+
+		if (season?.id && seasonal_colours[season.id]) {
+			seasonal = seasonal_colours[season.id];
+
+			seasonal.forEach((col) => {
+				col.seasonal = season.id;
+			});
+		}
 	}
+
+	update_season();
+	useSeasons.on(() => {
+		update_season();
+		update();
+	});
 
 	let custom_swatches: colour[] = [];
 
@@ -614,11 +626,11 @@ export function ColourSwatch({
 				data-bleh--theme='oled'
 				data-bleh--theme_type='dark'
 				style={displays &&
-					{
-						'--hue-over': displays.hue,
-						'--sat-over': displays.sat,
-						'--lit-over': displays.lit,
-					}}
+				{
+					'--hue-over': displays.hue,
+					'--sat-over': displays.sat,
+					'--lit-over': displays.lit,
+				}}
 			/>
 		);
 
@@ -655,11 +667,11 @@ export function ColourSwatch({
 				class={['swatch', 'colourful']}
 				data-swatch-type={colour.type}
 				style={displays &&
-					{
-						'--hue-over': displays.hue,
-						'--sat-over': displays.sat,
-						'--lit-over': displays.lit,
-					}}
+				{
+					'--hue-over': displays.hue,
+					'--sat-over': displays.sat,
+					'--lit-over': displays.lit,
+				}}
 			>
 				<span
 					class='swatch-icon-container'
@@ -672,11 +684,11 @@ export function ColourSwatch({
 				<strong
 					class={['swatch-name', 'colourful']}
 					style={displays &&
-						{
-							'--hue-over': displays.hue,
-							'--sat-over': displays.sat,
-							'--lit-over': displays.lit,
-						}}
+					{
+						'--hue-over': displays.hue,
+						'--sat-over': displays.sat,
+						'--lit-over': displays.lit,
+					}}
 				>
 					{colour.label && tl(colour.label)}
 				</strong>
