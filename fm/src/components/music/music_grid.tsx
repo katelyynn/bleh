@@ -25,6 +25,7 @@ import { save_hoshino_artwork } from '@/components/music/hoshino';
 import { header_colour } from '../page/colour';
 import { useSettings } from '@/page.tsx';
 import { Wordmark } from './wordmark';
+import { SmartArtist, SmartTitle } from './smart_title';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
 	if (!search) return;
@@ -316,17 +317,15 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 				);
 
 				name_elem.classList.add('smart-title');
-				render(
-					name_elem,
-					smart_title(formatted.song_title, formatted.song_tags),
+				name_elem.replaceChildren(
+					<SmartTitle title={formatted.song_title} tags={formatted.song_tags} grid />
 				);
 
-				artist_elem.replaceWith(html.node`
-                    <span class="grid-items-item-aux-block grid-item-text grid-item-artist-no-link smart-artist">
-                        ${smart_artists(formatted.song_artist, formatted.song_guests)
-					}
-                    </span>
-                `);
+				artist_elem.replaceWith(
+					<span class={['grid-items-item-aux-block', 'grid-item-text', 'grid-item-artist-no-link', 'smart-artist']}>
+						<SmartArtist artist={formatted.song_artist} guests={formatted.song_guests} />
+					</span>
+				);
 
 				insights.album.labels.push(formatted.corrected_title);
 			} else {

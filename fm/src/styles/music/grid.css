@@ -597,13 +597,15 @@
 	&.grid-item-plays,
 	.grid-item-plays {
 		position: relative;
-		padding-left: calc(14px + 4px);
+		padding-left: calc(var(--mask-size) + 4px);
 		--top: 50%;
 		--margin-top: calc(-1 * (var(--mask-size) / 2));
 		--left: 0;
 		--mask-size: 14px;
 		--mask: var(--icon-16-play);
 		cursor: pointer;
+
+		background-position: calc(var(--mask-size) + 4px) 100% !important;
 
 		&.grid-item-listeners {
 			--mask: var(--icon-16-user);

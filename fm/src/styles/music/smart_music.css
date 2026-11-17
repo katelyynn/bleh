@@ -53,4 +53,8 @@
 	&.hidden-feat {
 		display: none;
 	}
+
+	&.in-grid {
+		color: oklch(var(--l3-c));
+	}
 }

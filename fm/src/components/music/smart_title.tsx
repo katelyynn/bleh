@@ -15,20 +15,22 @@ interface SmartTitleProps {
 	tags: song_tag[];
 	features?: boolean;
 	header?: boolean;
+	grid?: boolean;
 }
 
 export function SmartTitle({
 	title,
 	tags,
 	features,
-	header = false,
+	header,
+	grid,
 }: SmartTitleProps) {
 	return (
 		<>
 			<span class='title'>
 				<FancyTitle title={romanise(title.trim())} header={header} />
 			</span>
-			{tags.map((tag) => <SongTag tag={tag} features={features} />)}
+			{tags.map((tag) => <SongTag tag={tag} features={features} grid={grid} />)}
 		</>
 	);
 }

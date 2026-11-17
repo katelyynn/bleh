@@ -30,14 +30,16 @@ export function SongTags({
 interface SongTagProps {
 	tag: song_tag;
 	features?: boolean;
+	grid?: boolean;
 }
 
 export function SongTag({
 	tag,
 	features,
+	grid,
 }: SongTagProps) {
 	const elem = (
-		<div class='feat' data-tag-type={tag.type} data-tag-group={tag.group}>
+		<div class={['feat', grid && 'in-grid']} data-tag-type={tag.type} data-tag-group={tag.group}>
 			{romanise(tag.text)}
 		</div>
 	);
