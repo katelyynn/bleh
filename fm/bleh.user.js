@@ -17546,8 +17546,8 @@ var bleh = (() => {
             scaleY
           };
         }
-        var render8 = {
-          render: function render9() {
+        var render7 = {
+          render: function render8() {
             this.initContainer();
             this.initCanvas();
             this.initCropBox();
@@ -19712,7 +19712,7 @@ var bleh = (() => {
             }
           }]);
         })();
-        assign(Cropper2.prototype, render8, preview, events, handlers, change, methods);
+        assign(Cropper2.prototype, render7, preview, events, handlers, change, methods);
         return Cropper2;
       }));
     }
@@ -41664,6 +41664,9 @@ var bleh = (() => {
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u043A\u0430\u043A \u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0441\u0442\u044C",
       pl: "Ustaw jako obsesj\u0119",
       tr: "Tutkunu ayarla"
+    },
+    delete_obsession: {
+      en: "Delete obsession"
     },
     obsession_first: {
       en: "First to claim this obsession!",
@@ -85808,7 +85811,7 @@ var bleh = (() => {
     }
     const inner = createRef();
     const elem = /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", onClick: open2, children: /* @__PURE__ */ jsx("div", { class: "lyric-segment-snippet", ref: inner }) });
-    function render8() {
+    function render7() {
       inner.current.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: result.map((line) => {
           if (useSettings.get("romanise_lyrics")) {
@@ -85818,8 +85821,8 @@ var bleh = (() => {
         }) })
       );
     }
-    render8();
-    useSettings.on("romanise_lyrics", () => render8());
+    render7();
+    useSettings.on("romanise_lyrics", () => render7());
     return elem;
   }
   async function lyricsFromMenu(name, artist) {
@@ -85861,14 +85864,14 @@ var bleh = (() => {
       title: tl2(trans.lyrics_for_value, { v: /* @__PURE__ */ jsx("i", { children: romanise(correct_item_by_artist(name, artist)) }) }),
       body: /* @__PURE__ */ jsx(Fragment, { children: [
         /* @__PURE__ */ jsx("div", { class: "lyric-search", children: [
-          /* @__PURE__ */ jsx(Input, { className: "lyrics-search-input", placeholder: tl2(trans.search_lyrics), search: true, onSubmit: render8, onChange: render8 }),
+          /* @__PURE__ */ jsx(Input, { className: "lyrics-search-input", placeholder: tl2(trans.search_lyrics), search: true, onSubmit: render7, onChange: render7 }),
           /* @__PURE__ */ jsx(SettingCheckbox, { bind: "romanise_lyrics", standalone: true })
         ] }),
         /* @__PURE__ */ jsx("div", { class: "lyric-segments", ref: container }),
         id && /* @__PURE__ */ jsx(CardTip, { gap: false, children: tl2(trans.sourced_from, { v: /* @__PURE__ */ jsx("a", { href: `https://lrclib.net/tracks/${id}`, children: "LRCLIB" }) }) })
       ] })
     });
-    function render8(query = "") {
+    function render7(query = "") {
       query = query.trim().toLowerCase();
       if (!query) {
         container.current.replaceChildren(
@@ -85881,8 +85884,8 @@ var bleh = (() => {
         /* @__PURE__ */ jsx(Fragment, { children: filtered.map((segment) => /* @__PURE__ */ jsx(LyricSegment, { lines: segment })) })
       );
     }
-    render8();
-    useSettings.on("romanise_lyrics", () => render8());
+    render7();
+    useSettings.on("romanise_lyrics", () => render7());
   }
   function LyricSegment({
     lines
@@ -88590,6 +88593,16 @@ var bleh = (() => {
     parent.appendChild(elem);
   }
 
+  // src/components/text/mention.tsx
+  function Mention({
+    user
+  }) {
+    return /* @__PURE__ */ jsx("a", { class: "mention", href: `${root}user/${user}`, children: [
+      /* @__PURE__ */ jsx("span", { class: "at", children: "@" }),
+      user
+    ] });
+  }
+
   // src/pages/profile/obsession.tsx
   function bleh_obsession() {
     const obsession_container = document.querySelector(".obsession-container");
@@ -88601,7 +88614,7 @@ var bleh = (() => {
       page.structure.row = page.structure.container.querySelector(".row");
       page.structure.main = page.structure.row.querySelector(".col-main");
       page.structure.side = page.structure.row.querySelector(".col-sidebar");
-    } catch (e4) {
+    } catch {
       log("unable to find elements", "page structure");
     }
     const content_top = document.body.querySelector(".content-top");
@@ -88686,45 +88699,31 @@ var bleh = (() => {
       ".obsession-details-date-short"
     );
     const first = obsession_container.querySelector(".obsession-first");
-    const quote = html.node`
-        <section class="obsession-quote sour">
-            ${first ? () => {
-      const elem = html.node`
-                    <div class="grid-item-icon grid-item-icon-first colourful obsession-first-icon">
-                        ${icon({ name: icons.star })}
-                    </div>
-                    `;
-      tippy_esm_default(elem, {
-        content: tl2(trans.obsession_first)
-      });
-      return elem;
-    } : ""}
-            ${obsession_reason ? html.node`
-            <div class="quote">
-                ${obsession_reason.textContent.trim()}
-            </div>
-            ` : html.node`
-            <div class="quote no-quote">
-                ...
-            </div>
-            `}
-            <div class="sub-text">
-                <div class="obsession-author">
-                    ${obsession_avatar}
-                    <strong class="name">${obsession_author}</strong>
-                    <a class="link-block-cover-link" href="${root}user/${obsession_author}"></a>
-                </div>
-                ${scrobbles ? html.node`
-                <div class="obsession-listens icon-mask">
-                    ${html.node([scrobbles.innerHTML])}
-                </div>
-                ` : ""}
-                <div class="obsession-date icon-mask">
-                    ${date.textContent}
-                </div>
-            </div>
-        </section>
-    `;
+    const firstStar = createRef();
+    const quote = /* @__PURE__ */ jsx("section", { class: ["obsession-quote", "sour"], children: [
+      first && /* @__PURE__ */ jsx("div", { class: [
+        "grid-item-icon",
+        "grid-item-icon-first",
+        "colourful",
+        "obsession-first-icon"
+      ], ref: firstStar, children: /* @__PURE__ */ jsx(Icon, { name: icons.star }) }),
+      obsession_reason ? /* @__PURE__ */ jsx("div", { class: "quote", children: obsession_reason.textContent.trim() }) : /* @__PURE__ */ jsx("div", { class: ["quote", "no-quote"], children: "..." }),
+      /* @__PURE__ */ jsx(SubText, { children: [
+        /* @__PURE__ */ jsx("div", { class: "obsession-author", children: [
+          obsession_avatar,
+          /* @__PURE__ */ jsx("strong", { class: "name", children: obsession_author }),
+          /* @__PURE__ */ jsx("a", { class: "link-block-cover-link", href: `${root}user/${obsession_author}` })
+        ] }),
+        scrobbles && /* @__PURE__ */ jsx(SeeMore, { iconPlacement: "left", icon: icons.play, href: scrobbles.getAttribute("href"), children: scrobbles.textContent.trim() }),
+        /* @__PURE__ */ jsx("div", { class: "obsession-date", children: date.textContent })
+      ] })
+    ] });
+    if (firstStar.current) {
+      hover_tooltip(
+        firstStar.current,
+        /* @__PURE__ */ jsx(Tooltip, { children: tl2(trans.obsession_first) })
+      );
+    }
     const manage = obsession_container.querySelector("form");
     if (manage) {
       quote.appendChild(manage);
@@ -88735,8 +88734,9 @@ var bleh = (() => {
         "danger-subtle",
         "colourful"
       );
-      trash.setAttribute("data-type", "delete");
-      trash.textContent = tl2(trans.delete);
+      trash.replaceChildren(
+        /* @__PURE__ */ jsx(IconLabel, { icon: icons.trash, children: tl2(trans.delete_obsession) })
+      );
     }
     page.structure.main.insertBefore(
       quote,
@@ -88757,17 +88757,12 @@ var bleh = (() => {
         `user-status--bleh-user-${obsession_author}`
       );
     }
-    const related = html.node`
-        <section class="obsession-related sour" />
-    `;
+    const related = /* @__PURE__ */ jsx("section", { class: ["obsession-related", "sour"] });
     const other_tracks = document.body.querySelector(".other-obsessions");
     if (other_tracks) {
-      const header = document.createElement("h2");
-      header.textContent = tl2(trans.others_from_profile).replace(
-        "{user}",
-        obsession_author
+      related.appendChild(
+        /* @__PURE__ */ jsx(PanelHead, { icon: icons.profile, children: tl2(trans.others_from_profile, { user: /* @__PURE__ */ jsx(Mention, { user: obsession_author }) }) })
       );
-      related.appendChild(header);
       const see_more2 = other_tracks.nextElementSibling;
       related.appendChild(other_tracks);
       if (see_more2) {
@@ -88780,13 +88775,13 @@ var bleh = (() => {
     const shared_users = document.body.querySelector(".fellow-obsessors");
     if (shared_users) {
       if (other_tracks) {
-        const sep = document.createElement("div");
-        sep.classList.add("sep");
-        related.appendChild(sep);
+        related.appendChild(
+          /* @__PURE__ */ jsx(Separator, {})
+        );
       }
-      const header = document.createElement("h2");
-      header.textContent = tl2(trans.shared_with_others);
-      related.appendChild(header);
+      related.appendChild(
+        /* @__PURE__ */ jsx(PanelHead, { icon: icons.users, children: tl2(trans.shared_with_others) })
+      );
       const users = shared_users.querySelectorAll(".avatar");
       users.forEach((user) => {
         const name2 = user.querySelector("img").getAttribute("alt");

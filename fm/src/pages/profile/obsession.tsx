@@ -5,22 +5,17 @@
  */
 
 import { avatar, patch_avatar } from '@/components/shared/avatar';
-import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { artist_corrections } from '@/build/music';
 import { auth, page, root } from '@/build/page';
-import { romanise, sanitise } from '@/build/tools';
+import { romanise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
 	correct_artist,
-	correct_item_by_artist,
 	name_includes,
-	smart_title,
 } from '@/components/music/lotus';
 import { checkup_page_structure } from '@/components/page/structure';
 import { register_background, update_page } from '@/page';
-import { html, render } from 'lighterhtml';
-import { redirect } from '@/components/music/music';
+import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { header_colour } from '@/components/page/colour';
@@ -30,6 +25,12 @@ import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { PageHeader, PageHeaderArtist, PageHeaderTitle } from '@/components/page/header';
 import { SmartArtist, SmartTitle } from '@/components/music/smart_title';
+import { Separator } from '@/components/divider/separator';
+import { Mention } from '@/components/text/mention';
+import { IconLabel } from '@/components/text/text';
+import { SubText } from '@/components/text/sub';
+import { createRef } from 'jsx-dom';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips';
 
 export function bleh_obsession() {
 	const obsession_container = document.querySelector('.obsession-container');
@@ -42,7 +43,7 @@ export function bleh_obsession() {
 		page.structure.row = page.structure.container.querySelector('.row');
 		page.structure.main = page.structure.row.querySelector('.col-main');
 		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+	} catch {
 		log('unable to find elements', 'page structure');
 	}
 
@@ -162,7 +163,7 @@ export function bleh_obsession() {
 	).textContent;
 	const obsession_avatar = document.querySelector(
 		'.obsession-details-intro-avatar-wrap .avatar',
-	);
+	) as HTMLElement;
 
 	page.name = obsession_author;
 
@@ -171,57 +172,53 @@ export function bleh_obsession() {
 	);
 
 	const first = obsession_container.querySelector('.obsession-first');
+	const firstStar = createRef();
 
-	const quote = html.node`
-        <section class="obsession-quote sour">
-            ${first
-			? () => {
-				const elem = html.node`
-                    <div class="grid-item-icon grid-item-icon-first colourful obsession-first-icon">
-                        ${icon({ name: icons.star })}
-                    </div>
-                    `;
+	const quote = (
+		<section class={['obsession-quote', 'sour']}>
+			{first && (
+				<div class={[
+					'grid-item-icon',
+					'grid-item-icon-first',
+					'colourful',
+					'obsession-first-icon'
+				]} ref={firstStar}>
+					<Icon name={icons.star} />
+				</div>
+			)}
+			{obsession_reason ? (
+				<div class='quote'>
+					{obsession_reason.textContent.trim()}
+				</div>
+			) : (
+				<div class={['quote', 'no-quote']}>
+					...
+				</div>
+			)}
+			<SubText>
+				<div class='obsession-author'>
+					{obsession_avatar}
+					<strong class='name'>{obsession_author}</strong>
+					<a class='link-block-cover-link' href={`${root}user/${obsession_author}`} />
+				</div>
+				{scrobbles && (
+					<SeeMore iconPlacement='left' icon={icons.play} href={scrobbles.getAttribute('href')}>
+						{scrobbles.textContent.trim()}
+					</SeeMore>
+				)}
+				<div class='obsession-date'>
+					{date.textContent}
+				</div>
+			</SubText>
+		</section>
+	);
 
-				tippy(elem, {
-					content: tl(trans.obsession_first),
-				});
-
-				return elem;
-			}
-			: ''
-		}
-            ${obsession_reason
-			? html.node`
-            <div class="quote">
-                ${obsession_reason.textContent.trim()}
-            </div>
-            `
-			: html.node`
-            <div class="quote no-quote">
-                ...
-            </div>
-            `
-		}
-            <div class="sub-text">
-                <div class="obsession-author">
-                    ${obsession_avatar}
-                    <strong class="name">${obsession_author}</strong>
-                    <a class="link-block-cover-link" href="${root}user/${obsession_author}"></a>
-                </div>
-                ${scrobbles
-			? html.node`
-                <div class="obsession-listens icon-mask">
-                    ${html.node([scrobbles.innerHTML])}
-                </div>
-                `
-			: ''
-		}
-                <div class="obsession-date icon-mask">
-                    ${date.textContent}
-                </div>
-            </div>
-        </section>
-    `;
+	if (firstStar.current) {
+		hover_tooltip(
+			firstStar.current,
+			<Tooltip>{tl(trans.obsession_first)}</Tooltip>
+		);
+	}
 
 	const manage = obsession_container.querySelector('form');
 	if (manage) {
@@ -234,8 +231,11 @@ export function bleh_obsession() {
 			'danger-subtle',
 			'colourful',
 		);
-		trash.setAttribute('data-type', 'delete');
-		trash.textContent = tl(trans.delete);
+		trash.replaceChildren(
+			<IconLabel icon={icons.trash}>
+				{tl(trans.delete_obsession)}
+			</IconLabel>
+		);
 	}
 
 	page.structure.main.insertBefore(
@@ -252,6 +252,7 @@ export function bleh_obsession() {
 		'bottom',
 	);
 
+	// TODO: probably broken, reference ListenBoardItem
 	if (badge.type) {
 		author.classList.add('colourful');
 		author.classList.add(
@@ -260,19 +261,18 @@ export function bleh_obsession() {
 		);
 	}
 
-	const related = html.node`
-        <section class="obsession-related sour" />
-    `;
+	const related = (
+		<section class={['obsession-related', 'sour']} />
+	);
 
 	const other_tracks = document.body.querySelector('.other-obsessions');
 
 	if (other_tracks) {
-		const header = document.createElement('h2');
-		header.textContent = tl(trans.others_from_profile).replace(
-			'{user}',
-			obsession_author,
+		related.appendChild(
+			<PanelHead icon={icons.profile}>
+				{tl(trans.others_from_profile, { user: <Mention user={obsession_author} /> })}
+			</PanelHead>
 		);
-		related.appendChild(header);
 
 		const see_more = other_tracks.nextElementSibling;
 
@@ -290,14 +290,16 @@ export function bleh_obsession() {
 
 	if (shared_users) {
 		if (other_tracks) {
-			const sep = document.createElement('div');
-			sep.classList.add('sep');
-			related.appendChild(sep);
+			related.appendChild(
+				<Separator />
+			);
 		}
 
-		const header = document.createElement('h2');
-		header.textContent = tl(trans.shared_with_others);
-		related.appendChild(header);
+		related.appendChild(
+			<PanelHead icon={icons.users}>
+				{tl(trans.shared_with_others)}
+			</PanelHead>
+		);
 
 		const users = shared_users.querySelectorAll('.avatar');
 		users.forEach((user) => {

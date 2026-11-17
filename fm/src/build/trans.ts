@@ -774,6 +774,9 @@ export const trans = {
 		pl: 'Ustaw jako obsesję',
 		tr: 'Tutkunu ayarla',
 	},
+	delete_obsession: {
+		en: 'Delete obsession',
+	},
 	obsession_first: {
 		en: 'First to claim this obsession!',
 		de: 'Die erste Person, die sich diese Obsession für sich beansprucht!',
