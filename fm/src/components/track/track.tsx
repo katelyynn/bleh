@@ -81,7 +81,7 @@ export function Track({
 			</td>
 			<div class='track-info' data-track-layout='column' data-album-name-location='column'>
 				<td class='chartlist-name'>
-					<a href={url} ref={trackName}>
+					<a href={url} ref={trackName} data-name={name}>
 						{romanise(correct_item_by_artist(name, artist))}
 					</a>
 				</td>

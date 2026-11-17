@@ -93961,7 +93961,7 @@ var bleh = (() => {
     ], "data-show-album-text": String(album && active), "data-album-name-location": "column", "data-has-bar": "false", children: [
       /* @__PURE__ */ jsx("td", { class: "chartlist-image", children: /* @__PURE__ */ jsx("a", { href: url, class: "cover-art", ref: coverArt, children: art ? /* @__PURE__ */ jsx("img", { src: art, alt: name, loading: "lazy" }) : /* @__PURE__ */ jsx("img", { class: "missing-track" }) }) }),
       /* @__PURE__ */ jsx("div", { class: "track-info", "data-track-layout": "column", "data-album-name-location": "column", children: [
-        /* @__PURE__ */ jsx("td", { class: "chartlist-name", children: /* @__PURE__ */ jsx("a", { href: url, ref: trackName, children: romanise(correct_item_by_artist(name, artist)) }) }),
+        /* @__PURE__ */ jsx("td", { class: "chartlist-name", children: /* @__PURE__ */ jsx("a", { href: url, ref: trackName, "data-name": name, children: romanise(correct_item_by_artist(name, artist)) }) }),
         /* @__PURE__ */ jsx("td", { class: "chartlist-artist", ref: artists, children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}`, children: romanise(correct_artist(artist)) }) }),
         album && /* @__PURE__ */ jsx("td", { class: ["chartlist-album", "custom-album-text"], children: /* @__PURE__ */ jsx("a", { href: `${root}music/${redirect()}${sanitise(artist)}/${sanitise(album)}`, ref: albumLink, children: romanise(correct_item_by_artist(album, artist)) }) })
       ] }),
