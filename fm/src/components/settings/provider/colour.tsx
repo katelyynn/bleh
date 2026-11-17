@@ -296,6 +296,9 @@ export function SettingColour({
 	const info = createRef();
 	const presets = createRef();
 
+	const seasonalPresets = createRef();
+	const seasonalInfo = createRef();
+
 	const convert = createRef();
 	const hue = createRef();
 	const sat = createRef();
@@ -330,6 +333,7 @@ export function SettingColour({
 	const wrap = (
 		<SettingGroup ref={ref}>
 			<div class='setting' data-type='action' ref={presets} />
+			<div class='setting' data-type='action' ref={seasonalPresets} />
 			<SettingInput
 				name={tl(trans.convert_from_hex)}
 				type='colour'
@@ -410,7 +414,6 @@ export function SettingColour({
 
 		custom_swatches = [
 			default_colour,
-			...seasonal,
 			avatar_colour,
 			{
 				type: 'placeholder',
@@ -486,6 +489,45 @@ export function SettingColour({
 				</div>
 			</>,
 		);
+
+		seasonalPresets.current.setAttribute('data-hidden', String(seasonal.length == 0 || !season));
+
+		if (seasonal.length > 0 && season) {
+			seasonalPresets.current.replaceChildren(
+				<>
+					<SettingLabel name={tl(trans.seasonal.listing[season.id])} body={tl(trans.seasonal.exclusive)} />
+					<div
+						class={['info', 'swatch-info']}
+						ref={seasonalInfo}
+						onMouseEnter={() => {
+							seasonalInfo.current.classList.add('has-hover');
+						}}
+						onMouseLeave={() => {
+							seasonalInfo.current.classList.remove('has-hover');
+						}}
+					>
+						<SwatchGroup>
+							{seasonal.map((col, i) => {
+								const elem = (
+									<ColourSwatch
+										colour={col}
+										active={is_active(col, colour)}
+										key={i}
+										onChange={(val: colour) => {
+											set(val);
+										}}
+									/>
+								) as ColourSwatchElement;
+
+								list.push(elem);
+
+								return elem;
+							})}
+						</SwatchGroup>
+					</div>
+				</>,
+			);
+		}
 	}
 
 	update();
@@ -692,11 +734,6 @@ export function ColourSwatch({
 				>
 					{colour.label && tl(colour.label)}
 				</strong>
-				{colour.seasonal && (
-					<p class={['swatch-desc']}>
-						{tl(trans.seasonal.exclusive)}
-					</p>
-				)}
 			</div>
 		</button>
 	) as ColourSwatchElement;
