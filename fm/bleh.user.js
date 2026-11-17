@@ -135763,6 +135763,7 @@ ${version.build} (${version.sku})`;
     }
     if (url) {
       url = avatar(url, "avatar300s");
+      const currentPage = `${page.type}-${page.subpage}`;
       const res = await GM.xmlHttpRequest({
         method: "GET",
         url,
@@ -135782,6 +135783,7 @@ ${version.build} (${version.sku})`;
       ctx.filter = "url(#solarium) blur(6px) contrast(130%)";
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       url = canvas.toDataURL();
+      if (`${page.type}-${page.subpage}` != currentPage) return;
     }
     background.classList.add("ready");
     background.innerHTML = "";

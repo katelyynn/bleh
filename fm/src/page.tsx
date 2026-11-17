@@ -979,6 +979,8 @@ export async function register_background(
 	if (url) {
 		url = avatar(url, 'avatar300s');
 
+		const currentPage = `${page.type}-${page.subpage}`;
+
 		const res = await GM.xmlHttpRequest({
 			method: 'GET',
 			url,
@@ -1008,6 +1010,8 @@ export async function register_background(
 		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
 		url = canvas.toDataURL();
+
+		if (`${page.type}-${page.subpage}` != currentPage) return;
 	}
 
 	background.classList.add('ready');
