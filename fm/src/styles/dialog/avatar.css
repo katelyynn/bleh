@@ -1,6 +1,7 @@
 .full-avatar-wrapper {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 
 	&>.modal-footer {
 		background: unset;
@@ -24,8 +25,6 @@
 
 	min-width: calc((var(--button-gap) * 2) + var(--button-height) + 100px);
 	min-height: calc((var(--button-gap) * 2) + var(--button-height) + 100px);
-
-	z-index: 3;
 
 	&>img {
 		display: block;
@@ -62,6 +61,18 @@
 	z-index: 4;
 }
 
+.avatar-see-more {
+	margin-top: var(--card-gap) !important;
+}
+
 .quotation {
 	color: oklch(var(--c3));
+}
+
+.avatar-hyper-card {
+	display: flex;
+	border-radius: var(--card-radius);
+
+	--hypercard-glow-opacity: 0.15;
+	--hypercard-scale: 1.02;
 }

@@ -20,6 +20,7 @@ import { log } from '@/build/log';
 import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { createRef } from 'jsx-dom';
+import { SeeMore } from '../text/see_more';
 
 export function patch_avatar(
 	avatar,
@@ -189,21 +190,12 @@ export function expand_avatar(src: string, alt?: string) {
 		id: 'avatar',
 		body: (
 			<div class='full-avatar-wrapper'>
-				<div class='full-avatar'>
-					<img src={src} alt={alt} />
-					<div class='full-avatar-buttons'>
-						<Button
-							chibi
-							className='full-avatar-btn'
-							href={src}
-							external
-							tooltip={tl(trans.open_new_tab)}
-						>
-							<Icon name={icons.external} />
-							{tl(trans.open_new_tab)}
-						</Button>
+				<hyper-card className='avatar-hyper-card'>
+					<div class='full-avatar'>
+
+						<img src={src} alt={alt} />
 					</div>
-				</div>
+				</hyper-card>
 				{alt && (
 					<div class='full-avatar-alt-text'>
 						<span class='quotation'>“</span>
@@ -211,6 +203,9 @@ export function expand_avatar(src: string, alt?: string) {
 						<span class='quotation'>”</span>
 					</div>
 				)}
+				<SeeMore className='avatar-see-more' external href={src}>
+					{tl(trans.open_new_tab)}
+				</SeeMore>
 			</div>
 		),
 		type: 'avatar',
