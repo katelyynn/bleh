@@ -17546,8 +17546,8 @@ var bleh = (() => {
             scaleY
           };
         }
-        var render8 = {
-          render: function render9() {
+        var render7 = {
+          render: function render8() {
             this.initContainer();
             this.initCanvas();
             this.initCropBox();
@@ -19712,7 +19712,7 @@ var bleh = (() => {
             }
           }]);
         })();
-        assign(Cropper2.prototype, render8, preview, events, handlers, change, methods);
+        assign(Cropper2.prototype, render7, preview, events, handlers, change, methods);
         return Cropper2;
       }));
     }
@@ -85814,7 +85814,7 @@ var bleh = (() => {
     }
     const inner = createRef();
     const elem = /* @__PURE__ */ jsx("div", { class: "lyrics-snippet-btn", onClick: open2, children: /* @__PURE__ */ jsx("div", { class: "lyric-segment-snippet", ref: inner }) });
-    function render8() {
+    function render7() {
       inner.current.replaceChildren(
         /* @__PURE__ */ jsx(Fragment, { children: result.map((line) => {
           if (useSettings.get("romanise_lyrics")) {
@@ -85824,8 +85824,8 @@ var bleh = (() => {
         }) })
       );
     }
-    render8();
-    useSettings.on("romanise_lyrics", () => render8());
+    render7();
+    useSettings.on("romanise_lyrics", () => render7());
     return elem;
   }
   async function lyricsFromMenu(name, artist) {
@@ -85867,14 +85867,14 @@ var bleh = (() => {
       title: tl2(trans.lyrics_for_value, { v: /* @__PURE__ */ jsx("i", { children: romanise(correct_item_by_artist(name, artist)) }) }),
       body: /* @__PURE__ */ jsx(Fragment, { children: [
         /* @__PURE__ */ jsx("div", { class: "lyric-search", children: [
-          /* @__PURE__ */ jsx(Input, { className: "lyrics-search-input", placeholder: tl2(trans.search_lyrics), search: true, onSubmit: render8, onChange: render8 }),
+          /* @__PURE__ */ jsx(Input, { className: "lyrics-search-input", placeholder: tl2(trans.search_lyrics), search: true, onSubmit: render7, onChange: render7 }),
           /* @__PURE__ */ jsx(SettingCheckbox, { bind: "romanise_lyrics", standalone: true })
         ] }),
         /* @__PURE__ */ jsx("div", { class: "lyric-segments", ref: container }),
         id && /* @__PURE__ */ jsx(CardTip, { gap: false, children: tl2(trans.sourced_from, { v: /* @__PURE__ */ jsx("a", { href: `https://lrclib.net/tracks/${id}`, children: "LRCLIB" }) }) })
       ] })
     });
-    function render8(query = "") {
+    function render7(query = "") {
       query = query.trim().toLowerCase();
       if (!query) {
         container.current.replaceChildren(
@@ -85887,8 +85887,8 @@ var bleh = (() => {
         /* @__PURE__ */ jsx(Fragment, { children: filtered.map((segment) => /* @__PURE__ */ jsx(LyricSegment, { lines: segment })) })
       );
     }
-    render8();
-    useSettings.on("romanise_lyrics", () => render8());
+    render7();
+    useSettings.on("romanise_lyrics", () => render7());
   }
   function LyricSegment({
     lines
@@ -95661,10 +95661,8 @@ var bleh = (() => {
       }
       if (image2 && !image_wrap.classList.contains("grid-items-cover-default") && use_colour) {
         grid.classList.add("colourful");
-        const grid_colour = html.node`
-                <div class="grid-item-colour-bg" />
-            `;
-        image_wrap.appendChild(grid_colour);
+        const gridColour = /* @__PURE__ */ jsx("div", { class: "grid-item-colour-bg" });
+        image_wrap.appendChild(gridColour);
         image2.setAttribute("crossorigin", "anonymous");
         lazy(grid, () => {
           console.info("scrolled", grid, "into view");

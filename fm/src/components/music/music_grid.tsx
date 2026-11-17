@@ -14,10 +14,8 @@ import {
 	correct_artist,
 	correct_item_by_artist,
 	name_includes,
-	smart_artists,
-	smart_title,
 } from '@/components/music/lotus';
-import { html, render } from 'lighterhtml';
+import { html } from 'lighterhtml';
 import { register_menu } from '@/components/menu';
 import tippy from 'tippy.js';
 import { expand_avatar } from '@/components/shared/avatar';
@@ -106,10 +104,10 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		) {
 			grid.classList.add('colourful');
 
-			const grid_colour = html.node`
-                <div class="grid-item-colour-bg" />
-            `;
-			image_wrap.appendChild(grid_colour);
+			const gridColour = (
+				<div class='grid-item-colour-bg' />
+			);
+			image_wrap.appendChild(gridColour);
 
 			image.setAttribute('crossorigin', 'anonymous');
 
