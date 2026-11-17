@@ -18,6 +18,7 @@ import { SubText } from '@/components/text/sub.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { createRef } from 'jsx-dom';
+import { link_strings } from '../markdown/links';
 
 export function create_music_links(col_main: HTMLElement) {
 	let play_on;
@@ -71,21 +72,21 @@ export function create_music_links(col_main: HTMLElement) {
 			) as HTMLAnchorElement;
 
 			if (link.classList.contains('play-this-track-playlink--youtube')) {
-				link.textContent = 'YouTube';
+				link.textContent = link_strings['youtube.com'];
 				link.appendChild(<Icon name={icons.external} />);
 
 				link_types.youtube = link;
 			} else if (
 				link.classList.contains('play-this-track-playlink--spotify')
 			) {
-				link.textContent = 'Spotify';
+				link.textContent = link_strings['spotify.com'];
 				link.appendChild(<Icon name={icons.external} />);
 
 				link_types.spotify = link;
 			} else if (
 				link.classList.contains('play-this-track-playlink--itunes')
 			) {
-				link.textContent = 'Apple';
+				link.textContent = link_strings['music.apple.com'];
 				link.appendChild(<Icon name={icons.external} />);
 
 				link_types.itunes = link;

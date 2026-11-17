@@ -25,7 +25,7 @@
 	--bg-atv: transparent;
 	padding: 0 0 0 calc(var(--icon-size) + 4px);
 	--col: oklch(var(--l3-c));
-	color: var(--col);
+	color: var(--col) !important;
 	--mask-colour: color-mix(in oklch,
 			oklch(var(--l3-c)),
 			oklch(var(--l4-c)) 30%);
