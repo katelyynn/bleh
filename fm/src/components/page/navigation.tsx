@@ -679,7 +679,7 @@ export function append_nav() {
 							art={status.avatar}
 							name={status.name}
 							artist={status.artist}
-							album={status.album}
+							album={status.active ? status.album : undefined}
 							url={`${root}music/${redirect()}${sanitise(status.artist)}/_/${sanitise(status.name)}`}
 							active={status.active}
 							margin={false}

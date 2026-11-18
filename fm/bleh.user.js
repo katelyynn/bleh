@@ -118752,7 +118752,7 @@ var bleh = (() => {
                 art: status2.avatar,
                 name: status2.name,
                 artist: status2.artist,
-                album: status2.album,
+                album: status2.active ? status2.album : void 0,
                 url: `${root}music/${redirect()}${sanitise(status2.artist)}/_/${sanitise(status2.name)}`,
                 active: status2.active,
                 margin: false,
