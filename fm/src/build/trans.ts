@@ -5891,6 +5891,7 @@ export const trans = {
 	},
 	enter_link: {
 		en: 'Enter a URL',
+		pt: 'Insira uma URL',
 	},
 	block: {
 		en: 'Block',
@@ -9129,9 +9130,11 @@ export const trans = {
 	},
 	copy_scrobble: {
 		en: 'Copy scrobble',
+		pt: 'Copiar scrobble',
 	},
 	replace_scrobble: {
 		en: 'Replace scrobble',
+		pt: 'Substituir scrobble',
 	},
 	edit_scrobbles_in_bulk: {
 		en: 'Edit scrobbles in bulk',
@@ -11101,6 +11104,7 @@ export const trans = {
 	},
 	romanise_lyrics: {
 		en: 'Romanise lyrics',
+		pt: 'Romanizar letras',
 	},
 	romanise_require: {
 		en: 'Romanisation requires either lotus corrections or smart song tags be enabled',
@@ -12931,24 +12935,31 @@ export const trans = {
 	},
 	loading_lyrics: {
 		en: 'Figuring out the words',
+		pt: 'Buscando a letra',
 	},
 	no_lyrics: {
 		en: 'Couldn’t find this song',
+		pt: 'Não encontramos a letra desta música',
 	},
 	lyrics_instrumental: {
 		en: 'This song has no lyrics',
+		pt: 'Esta música não tem letra'
 	},
 	sourced_from: {
 		en: 'Sourced from {v}',
+		pt: 'Fonte: {v}',
 	},
 	search_lyrics: {
 		en: 'Search for a lyric',
+		pt: 'Buscar uma letra',
 	},
 	view_lyrics: {
 		en: 'View lyrics',
+		pt: 'Ver letra',
 	},
 	lyrics_for_value: {
 		en: 'Lyrics for {v}',
+		pt: 'Letra de {v}',
 	},
 } as const satisfies Record<string, any>;
 
