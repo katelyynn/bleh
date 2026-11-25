@@ -869,7 +869,7 @@ export function prepare_music() {
 			host: 'spotify.com',
 		},
 		itunes: {
-			name: 'Apple',
+			name: 'Apple Music',
 			icon: '',
 			host: 'music.apple.com',
 		},
