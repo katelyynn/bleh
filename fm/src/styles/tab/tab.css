@@ -105,6 +105,10 @@ input::placeholder {
 	box-shadow: unset !important;
 }
 
+.library-search {
+	z-index: 1000;
+}
+
 /*     LIBRARY SEARCH RESULTS     */
 .library-search-results {
 	position: absolute !important;
