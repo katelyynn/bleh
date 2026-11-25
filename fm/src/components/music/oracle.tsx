@@ -1983,12 +1983,12 @@ export function oracle_process() {
 								</SeeMore>
 							</ViewButtons>
 						</PanelTop>
-						<div class="${page.subpage == 'overview'
+						<div class={page.subpage == 'overview'
 							? 'source-albums-container'
-							: 'resource-list-container'}">
-							<div class="${page.subpage == 'overview'
-							? 'source-albums'
-							: 'resource-list--release-list'}">
+							: 'resource-list-container'}>
+							<div class={page.subpage == 'overview'
+								? 'source-albums'
+								: 'resource-list--release-list'}>
 								{releases.map((release, index) => {
 									log('release', 'oracle', 'log', {
 										release,
@@ -2188,20 +2188,15 @@ export function oracle_process() {
 			}
 		} else {
 			if (releases_panel) {
-				render(
-					releases_panel,
-					html`
-						<h3 class="text-18">
-						    ${tl(trans.albums)}<span class="new-badge beta"
-						        >${tl(trans.beta)}</span
-						    >
-						</h3>
-						<div class="loading-data-container">
-							<div class="loading-data-text failed">
-						        ${tl(trans.no_releases_found)}
-						    </div>
-						</div>
-					`,
+				releases_panel.replaceChildren(
+					<>
+						<PanelHead icon={icons.albums}>
+							{tl(trans.albums)}
+						</PanelHead>
+						<LoadingData type='failed'>
+							{tl(trans.no_releases_found)}
+						</LoadingData>
+					</>
 				);
 			}
 		}

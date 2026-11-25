@@ -67414,7 +67414,7 @@ var bleh = (() => {
                   /* @__PURE__ */ jsx(SeeMore, { blend: true, iconPlacement: "left", icon: icons.dislike, className: "mark-incorrect", onClick: report_incorrect, children: tl2(trans.report_incorrect) })
                 ] })
               ] }),
-              /* @__PURE__ */ jsx("div", { class: "${page.subpage == 'overview'\n							? 'source-albums-container'\n							: 'resource-list-container'}", children: /* @__PURE__ */ jsx("div", { class: "${page.subpage == 'overview'\n							? 'source-albums'\n							: 'resource-list--release-list'}", children: releases.map((release, index3) => {
+              /* @__PURE__ */ jsx("div", { class: page.subpage == "overview" ? "source-albums-container" : "resource-list-container", children: /* @__PURE__ */ jsx("div", { class: page.subpage == "overview" ? "source-albums" : "resource-list--release-list", children: releases.map((release, index3) => {
                 log("release", "oracle", "log", {
                   release
                 });
@@ -67565,20 +67565,11 @@ var bleh = (() => {
         }
       } else {
         if (releases_panel) {
-          render(
-            releases_panel,
-            html`
-						<h3 class="text-18">
-						    ${tl2(trans.albums)}<span class="new-badge beta"
-						        >${tl2(trans.beta)}</span
-						    >
-						</h3>
-						<div class="loading-data-container">
-							<div class="loading-data-text failed">
-						        ${tl2(trans.no_releases_found)}
-						    </div>
-						</div>
-					`
+          releases_panel.replaceChildren(
+            /* @__PURE__ */ jsx(Fragment, { children: [
+              /* @__PURE__ */ jsx(PanelHead, { icon: icons.albums, children: tl2(trans.albums) }),
+              /* @__PURE__ */ jsx(LoadingData, { type: "failed", children: tl2(trans.no_releases_found) })
+            ] })
           );
         }
       }
