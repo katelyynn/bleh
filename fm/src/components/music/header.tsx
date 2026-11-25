@@ -266,7 +266,7 @@ export function page_header_title(header = document.body) {
 
 	const track_title = header.querySelector('.header-new-title');
 	const track_artist = header.querySelector('.header-new-crumb span');
-	const artists = track_artist.parentElement.parentElement; // jesus
+	const artists = track_artist?.parentElement?.parentElement; // jesus
 
 	if (!track_title) return;
 

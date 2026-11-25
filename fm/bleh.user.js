@@ -64827,7 +64827,7 @@ var bleh = (() => {
     page.corrected = false;
     const track_title = header.querySelector(".header-new-title");
     const track_artist = header.querySelector(".header-new-crumb span");
-    const artists = track_artist.parentElement.parentElement;
+    const artists = track_artist?.parentElement?.parentElement;
     if (!track_title) return;
     track_title.classList.add("page-header-title");
     track_title.textContent = romanise(correct_item_by_artist(track_title.textContent, track_artist.textContent));
