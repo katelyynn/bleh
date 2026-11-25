@@ -199,8 +199,9 @@ input::placeholder {
 }
 
 .library-search-results .media-item {
-	width: fit-content !important;
-	height: fit-content !important;
+	width: 38px !important;
+	height: 38px !important;
+	--mask-size: 20px;
 }
 
 .column-tracks-item-image {
