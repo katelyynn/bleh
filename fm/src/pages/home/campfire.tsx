@@ -215,7 +215,7 @@ export function campfire() {
 					</>
 				);
 
-				let timeout;
+				let timeout: NodeJS.Timeout;
 				top.current.addEventListener('wheel', (e) => {
 					e.preventDefault();
 					if (timeout) return;
@@ -224,8 +224,15 @@ export function campfire() {
 						timeout = null;
 					}, 20);
 
-					const direction = Math.sign(e.deltaY);
+					const delta =
+						Math.abs(e.deltaX) > Math.abs(e.deltaY)
+							? e.deltaX
+							: e.deltaY;
+
+					const direction = Math.sign(delta);
+
 					if (direction == 0) return;
+
 					set_index(visual_index + direction);
 				}, { passive: false });
 
