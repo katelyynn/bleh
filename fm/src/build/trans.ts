@@ -459,6 +459,7 @@ export const trans = {
 			pl: 'Ta odznaka jest specjalnie dla Ciebie {u}',
 			it: 'Questo distintivo è riservato per {u}',
 			de: 'Dieses Abzeichen ist speziell für {u} reserviert.',
+			ru: 'Этот значок зарезервирован специально для {u}',
 		},
 		cute: {
 			// (female)
@@ -467,6 +468,7 @@ export const trans = {
 			pl: 'Twórca bleh',
 			it: 'Ha creato bleh', // it is a bit different, more as "created bleh" but it is neutral ~cuto
 			de: 'Entwickler von bleh',
+			ru: 'Создательница bleh',
 		},
 		sponsor: {
 			en: '{u} sponsors the development of bleh',
@@ -474,6 +476,7 @@ export const trans = {
 			pl: '{u} wspiera rozwój bleh',
 			it: '{u} sponsorizza lo sviluppo di bleh',
 			de: '{u} ist ein Sponsor von bleh',
+			ru: '{u} спонсирует разработку bleh',
 		},
 		contributor: {
 			en: '{u} contributed to the development of bleh',
@@ -481,6 +484,7 @@ export const trans = {
 			pl: '{u} przyczynili się do rozwoju bleh', //gonna try to correct the translations to they/them, also correcting any spelling errors i encounter
 			it: '{u} ha contribuito allo sviluppo di bleh',
 			de: '{u} hat bei der Entwicklung von bleh geholfen',
+			ru: '{u} помогали в разработке bleh',
 		},
 		translation: {
 			en: '{u} helped in translating bleh',
@@ -488,6 +492,7 @@ export const trans = {
 			pl: '{u} pomogli tłumaczyć bleh',
 			it: '{u} ha aiutato a tradurre bleh',
 			de: '{u} hat bei der Übersetzung von bleh geholfen',
+			ru: '{u} помогали в переводе bleh',
 		},
 	},
 	requires_higher_bleh_version: {
@@ -12183,6 +12188,7 @@ export const trans = {
 		en: '{v} listeners recently',
 		it: '{v} ascoltatori recenti',
 		pt: '{v} ouvintes recentemente',
+		ru: '{v} слушателей за последнее время'
 	},
 	on_tour: {
 		en: 'On tour',
@@ -12371,6 +12377,7 @@ export const trans = {
 		en: 'Text location',
 		pt: 'Posição do texto',
 		it: 'Posizione del testo',
+		ru: 'Положение текста',
 	},
 	better_with_friends: {
 		en: 'Music is better with friends, {add_friend}',
@@ -12379,9 +12386,11 @@ export const trans = {
 		es: 'La música es mejor con amigos, {add_friend}',
 		pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {add_friend}',
 		it: 'La musica è migliore con gli amici, {add_friend}',
+		ru: 'Музыка звучит лучше с друзьями, {add_friend}',
 
 		add_friend: {
 			en: 'add a close friend',
+			ru: 'добавьте близкого друга',
 		},
 	},
 	collage_cta: {
@@ -12393,6 +12402,7 @@ export const trans = {
 			pl: 'Stwórz kolaż',
 			it: 'Crea un collage',
 			de: 'Erstell eine Collage',
+			ru: 'Создайте коллаж',
 		},
 		body: {
 			en: 'Featuring your favourite albums in the last month',
@@ -12400,7 +12410,8 @@ export const trans = {
 			es: 'Con tus álbumes favoritos en el último mes',
 			pl: 'Twoje ulubione albumy z ostatniego miesiąca',
 			it: 'Con i tuoi album preferiti dell’ultimo mese',
-			de: 'Inklusive deiner Lieblingsalben aus dem letzten Monat'
+			de: 'Inklusive deiner Lieblingsalben aus dem letzten Monat',
+			ru: 'Ваши любимые альбомы за последний месяц',
 		},
 	},
 	compare_cta: {
@@ -12412,6 +12423,7 @@ export const trans = {
 			pl: 'Porównaj ze swoimi znajomymi',
 			it: 'Confronta con i tuoi amici',
 			de: 'Mit Freunden vergleichen',
+			ru: 'Сравнитесь со своими друзьями',
 		},
 		body: {
 			en: 'Which music do you have in common?',
@@ -12420,6 +12432,7 @@ export const trans = {
 			pl: 'Jaka muzyka was łączy?',
 			it: 'Quale musica avete in comune?',
 			de: 'Welche Musik hört ihr Gemeinsam?',
+			ru: 'Что у вас общего в музыке?',
 		},
 	},
 	sponsor_cta: {
@@ -12431,6 +12444,7 @@ export const trans = {
 			pl: 'Pomóż w budowaniu przyszłości bleh',
 			it: 'Aiuta il futuro di bleh',
 			de: 'Helf mit bei der Zukunft von bleh',
+			ru: 'Поддержите будущее bleh',
 		},
 	},
 	add_new_data_point: {
@@ -12439,6 +12453,7 @@ export const trans = {
 		es: 'Añadir nuevo dato',
 		pl: 'Dodaj nowe dane',
 		it: 'Aggiungi un nuovo dato',
+		ru: 'Добавить новые данные',
 	},
 	presets: {
 		// used in reference to timeframe presets or colour presets
@@ -12448,6 +12463,7 @@ export const trans = {
 		pl: 'Presety',
 		it: 'Preimpostazioni',
 		de: 'Voreinstellung',
+		ru: 'Пресеты',
 	},
 	existing: {
 		// used as a header for existing items
@@ -12456,7 +12472,8 @@ export const trans = {
 		es: 'Actuales',
 		pl: 'Istniejące',
 		it: 'Esistenti',
-		de: 'Vorbestehend'
+		de: 'Vorbestehend',
+		ru: 'Существующие',
 	},
 	history: {
 		en: 'History',
@@ -12465,6 +12482,7 @@ export const trans = {
 		pl: 'Historia',
 		it: 'Storico',
 		de: 'Verlauf', // as in "Browser History" - "Browserverlauf"
+		ru: 'История',
 	},
 	no_data_to_display: {
 		en: 'No data to display',
@@ -12473,6 +12491,7 @@ export const trans = {
 		pl: 'Brak danych do wyświetlenia',
 		it: 'Nessun dato da mostrare',
 		de: 'Keine Daten zum Anzeigen',
+		ru: 'Нет данных для отображения',
 	},
 	add_to_graph: {
 		en: 'Add to graph',
@@ -12480,6 +12499,7 @@ export const trans = {
 		es: 'Añadir al gráfico',
 		pl: 'Dodaj do wykresu',
 		it: 'Aggiungi al grafico',
+		ru: 'Добавить на график',
 	},
 	graph_options: {
 		en: 'Graph options',
@@ -12487,6 +12507,7 @@ export const trans = {
 		es: 'Opciones del gráfico',
 		pl: 'Opcje wykresu',
 		it: 'Opzioni del grafico',
+		ru: 'Настройки графика',
 	},
 	refresh_plot_notice: {
 		// once you edit the graph, it will display this tooltip as a warning
@@ -12495,6 +12516,7 @@ export const trans = {
 		es: 'Esto volverá a recopilar todos los datos',
 		pl: 'Spowoduje to ponowne pobranie wszystkich danych',
 		it: 'Questo recupererà nuovamente tutti i dati',
+		ru: 'Данные будут загружены заново',
 	},
 	refresh_plot_alert: {
 		// this is linked to the above
@@ -12503,6 +12525,7 @@ export const trans = {
 		es: 'El periodo que seleccionaste no coincide con el gráfico actual, puedes recargar los datos para solucionarlo',
 		pl: 'Wybrany przedział czasowy różni się od tego na bieżącym wykresie. Odśwież dane, aby zaktualizować wykres.',
 		it: 'Il periodo di tempo selezionato non corrisponde al grafico corrente, puoi ricaricare i dati per risolvere il problema.',
+		ru: 'Выбранный временной период не соответствует текущему графику, вы можете исправить это, обновив данные.',
 	},
 	under_construction: {
 		en: 'This page is under construction, please give feedback and suggestions if you have any!',
@@ -12510,6 +12533,7 @@ export const trans = {
 		es: 'Esta página está en construcción, ¡por favor da feedback y sugerencias si tienes alguna!',
 		pl: 'Ta strona jest w budowie, jeśli masz jakieś uwagi lub sugestie, podziel się nimi z nami!',
 		it: 'Questa pagina è in costruzione, invia feedback e suggerimenti se ne hai!',
+		ru: 'Эта страница находится в разработке. Если у вас есть комментарии или предложения, расскажите нам!',
 	},
 	data_source: {
 		en: 'Data source',
@@ -12517,6 +12541,7 @@ export const trans = {
 		es: 'Fuente de datos',
 		pl: 'Źródło danych',
 		it: 'Fonte dati',
+		ru: 'Источник данных',
 	},
 	data_source_explain: {
 		// used in the dialog for adding a data source
@@ -12525,6 +12550,7 @@ export const trans = {
 		es: 'Aquí puedes añadir multimedia a tu gráfico, por ejemplo un artista o un álbum/tema. Añadir un álbum o tema es opcional, ya que puedes añadir un artista entero.',
 		pl: 'Tutaj możesz dodać dane do swojego wykresu, na przykład artystę, album lub utwór. Dodanie albumu lub utworu jest opcjonalne — możesz zamiast tego dodać całego artystę.',
 		it: 'Qui puoi aggiungere musica al tuo grafico, per esempio un artista o un album/traccia. Selezionare un album o traccia è opzionale, puoi anche aggiungere un intero artista.',
+		ru: 'Здесь вы можете добавить на график исполнителя или альбом/трек. Добавлять альбом или трек необязательно: можно добавить всего исполнителя сразу.',
 	},
 	artist_required: {
 		en: 'Artist name required',
@@ -12533,6 +12559,7 @@ export const trans = {
 		pl: 'Nazwa artysty jest wymagana',
 		it: 'Nome dell’artista richiesto',
 		de: 'Künstlername erforderlich',
+		ru: 'Имя исполнителя обязательно',
 	},
 	choose_either_an_album_or_track: {
 		en: 'Choose either an album or track only',
@@ -12540,6 +12567,7 @@ export const trans = {
 		es: 'Elige solo un álbum o un tema',
 		pl: 'Wybierz tylko album lub utwór',
 		it: 'Seleziona solo un album o una traccia',
+		ru: 'Выберите только альбом или только трек',
 	},
 	already_exists: {
 		en: 'This data source already exists',
@@ -12547,6 +12575,7 @@ export const trans = {
 		es: 'Esta fuente de datos ya existe',
 		pl: 'To źródło danych już istnieje',
 		it: 'Questa sorgente dati esiste già',
+		ru: 'Этот источник данных уже существует',
 	},
 	username_required: {
 		en: 'Username required',
@@ -12555,6 +12584,7 @@ export const trans = {
 		pl: 'Nazwa użytkownika jest wymagana',
 		it: 'Username richiesto',
 		de: 'Benutzername erforderlich',
+		ru: 'Имя пользователя обязательно',
 	},
 	already_a_close_friend: {
 		// user is already a friend
@@ -12564,6 +12594,7 @@ export const trans = {
 		pl: 'Już jest wśród bliskich znajomych',
 		it: 'Già aggiunto agli amici stretti',
 		de: 'Schon als engen Freund hinzugefügt',
+		ru: 'Уже являются близким другом', // something like "[they are] already a close friend" sounds more natural here -eldritchT
 	},
 	plot_explain: {
 		// these are steps in order
@@ -12573,6 +12604,7 @@ export const trans = {
 			es: 'Elige un periodo para tu gráfico',
 			pl: 'Wybierz przedział czasowy dla wykresu',
 			it: 'Seleziona un periodo per il tuo grafico',
+			ru: 'Выберите временной период для графика',
 		},
 		1: {
 			en: 'Choose a data source (an artist, album, or track)',
@@ -12580,6 +12612,7 @@ export const trans = {
 			es: 'Elige una fuente de datos (un artista, álbum, o tema)',
 			pl: 'Wybierz źródło danych (artystę, album lub utwór)',
 			it: 'Seleziona una sorgente dati (un artista, album o traccia)',
+			ru: 'Выберите источник данных (исполнителя, альбом или трек)',
 		},
 		2: {
 			en: 'Choose a user to add',
@@ -12587,6 +12620,7 @@ export const trans = {
 			es: 'Elige un usuario a añadir',
 			pl: 'Wybierz użytkownika do dodania',
 			it: 'Seleziona un utente da aggiungere',
+			ru: 'Выберите пользователя, которого хотите добавить',
 		},
 		3: {
 			en: 'Add to your graph',
@@ -12594,6 +12628,7 @@ export const trans = {
 			es: 'Añade a tu gráfico',
 			pl: 'Dodaj do swojego wykresu',
 			it: 'Aggiungi al tuo grafico',
+			ru: 'Добавить на график',
 		},
 	},
 	how_to_plot: {
@@ -12603,6 +12638,7 @@ export const trans = {
 		es: 'Explicando Plot',
 		pl: 'Jak utworzyć wykres',
 		it: 'Come funziona il grafico',
+		ru: 'Как создать График',
 	},
 	plotting_your_data: {
 		// loading message
@@ -12611,6 +12647,7 @@ export const trans = {
 		es: 'Graficando tus datos',
 		pl: 'Tworzenie wykresu',
 		it: 'Disegnando i tuoi dati',
+		ru: 'Строим ваш график',
 	},
 	issues_updating: {
 		// there are then links after this
@@ -12619,6 +12656,7 @@ export const trans = {
 		es: '¿Tienes problemas al actualizar o necesitas soporte en general?',
 		pl: 'Masz problemy z aktualizacją lub potrzebujesz pomocy?',
 		it: 'Stai avendo dei problemi ad aggiornare o hai bisogno di supporto in generale?',
+		ru: 'Проблемы с обновлением или просто нужна помощь?',
 	},
 	hybrid_inbox: {
 		name: {
@@ -12627,6 +12665,7 @@ export const trans = {
 			es: 'Usar un buzón híbrido',
 			pl: 'Użyj skrzynki hybrydowej',
 			it: 'Usa una casella ibrida',
+			ru: 'Использовать гибридные входящие',
 		},
 		body: {
 			en: 'Group your messages and notifications into a single counter',
@@ -12634,6 +12673,7 @@ export const trans = {
 			es: 'Agrupa tus mensajes y notificaciones en un solo contador',
 			pl: 'Zgrupuj swoje wiadomości i powiadomienia w jednym liczniku',
 			it: 'Raggruppa i tuoi messaggi e le tue notifiche in un solo contatore',
+			ru: 'Объединить ваши сообщения и уведомления в один счетчик',
 		},
 	},
 	skip_patching_lastfm_settings: {
@@ -12643,6 +12683,7 @@ export const trans = {
 		pl: 'Wyłącz elementy wizualne bleh tutaj',
 		it: 'Disattiva gli elementi grafici di bleh qui',
 		de: 'Visuelle Elemente von bleh ausschalten',
+		ru: 'Отключить визуальные элементы bleh здесь',
 	},
 	you_have_disabled_bleh_visuals_for_settings: {
 		en: 'You have disabled bleh visuals for Last.fm settings, don’t expect this to look pretty',
@@ -12651,6 +12692,7 @@ export const trans = {
 		pl: 'Wyłączyłeś elementy wizualne „bleh” w ustawieniach Last.fm; nie oczekuj, że będzie to wyglądało pięknie',
 		it: 'Hai disattivato gli elementi grafici di bleh per le impostazioni di Last.fm, non aspettarti che sia bello da vedere',
 		de: 'Du hast die visuellen Elemente von bleh ausgeschaltet, erwarte lieber nicht dass das gut aussieht',
+		ru: 'Вы отключили визуальные элементы bleh для настроек Last.fm, на красоту не надейтесь',
 	},
 	hide_unused_settings: {
 		en: 'Hide settings that have no effect',
@@ -12659,6 +12701,7 @@ export const trans = {
 		pl: 'Ukryj ustawienia które nie działają',
 		it: 'Nascondi impostazioni che non hanno effetto',
 		de: 'Unbenutzte Elemente verstecken',
+		ru: 'Скрыть неработающие настройки',
 	},
 	edit_links: {
 		en: 'Edit links',
@@ -12667,6 +12710,7 @@ export const trans = {
 		pl: 'Edytuj linki',
 		it: 'Modifica link',
 		de: 'Links bearbeiten',
+		ru: 'Редактировать ссылки',
 	},
 	daily: {
 		en: 'Daily',
@@ -12674,6 +12718,7 @@ export const trans = {
 		pl: 'Dziennie',
 		it: 'Giornalmente',
 		de: 'Täglich',
+		ru: 'Ежедневно', // not sure in which context this is used, may change later -eldritchT
 	},
 	weekly: {
 		en: 'Weekly',
@@ -12681,6 +12726,7 @@ export const trans = {
 		pl: 'Tygodniowo',
 		it: 'Settimanalmente',
 		de: 'Wochentlich',
+		ru: 'Еженедельно', // same as above -eldritchT
 	},
 	explore: {
 		en: 'Explore',
@@ -12688,6 +12734,7 @@ export const trans = {
 		pl: 'Odkrywaj',
 		it: 'Esplora',
 		de: 'Erkunden',
+		ru: 'Исследовать', // same as above -eldritchT
 	},
 	hot_100: {
 		// b = bleh
@@ -12697,6 +12744,7 @@ export const trans = {
 		pt: 'As 100 mais populares do {b}',
 		pl: 'Hot 100 utworów {b}',
 		it: 'Le 100 più popolari di {b}',
+		ru: 'Топ-100 от {b}',
 	},
 	developer_mode: {
 		name: {
@@ -12705,13 +12753,15 @@ export const trans = {
 			pl: 'Tryb deweloperski',
 			it: 'Modalità sviluppatore',
 			de: 'Entwicklermodus',
+			ru: 'Режим разработчика',
 		},
 		body: {
 			en: 'Enable developer-specific features used for debugging purposes',
 			pt: 'Ative recursos específicos de desenvolvedor usados para fins de depuração',
 			pl: 'Włącz określone funkcje dla programistów służące do debugowania',
 			it: 'Attiva funzioni per sviluppatori usate per il debug',
-			de: 'Schaltet bestimmte Entwickler bezogene features für Debugging an'
+			de: 'Schaltet bestimmte Entwickler bezogene features für Debugging an',
+			ru: 'Включить функции, используемые для разработки и отладки',
 		},
 	},
 	developer_setting_names: {
@@ -12731,18 +12781,21 @@ export const trans = {
 		pt: 'Pertence a 1 pessoa',
 		it: 'Assegnato a 1 persona', // translating "owned" to "assigned to" as it fits somewhat better i think ~cuto
 		de: 'Im Besitz von 1 Person',
+		ru: 'Есть у 1 человека', // "1 person has [the badge]" -eldritchT
 	},
 	badge_multiple_users: {
 		en: 'Owned by {c} people',
 		pt: 'Pertence a {c} pessoas',
 		it: 'Assegnato a {c} persone',
 		de: 'Im Besitz von {c} Personen',
+		ru: 'Есть у {c} человек',
 	},
 	miscellaneous: {
 		en: 'Miscellaneous',
 		pt: 'Diversos',
 		it: 'Altro',
 		de: 'Divers',
+		ru: 'Прочее',
 	},
 	count_bar_style: {
 		en: 'Bar styling',
@@ -12781,11 +12834,13 @@ export const trans = {
 		en: 'These settings apply to your device and are bleh-only',
 		pt: 'Essas configurações se aplicam ao seu dispositivo e são exclusivas do bleh',
 		it: 'Queste impostazioni si applicano al tuo dispositivo e sono solamente su bleh',
+		ru: 'Эти настройки применяются только к вашему устройству и есть только в bleh',
 	},
 	start_streak: {
 		en: 'Start a streak to see your profile update live',
 		pt: 'Comece uma sequência para ver seu perfil ser atualizado em tempo real',
 		it: 'Avvia una serie per vedere il tuo profilo aggiornarsi in tempo reale', // it's either "series" or "sequence", series sounds a bit better, to me at least ~cuto
+		ru: 'Начните серию, чтобы видеть обновления в реальном времени', // same as italian, "steak" is translates as "series" here -eldritchT
 	},
 	streak: {
 		// a streak of artists, albums, or tracks
@@ -12794,6 +12849,7 @@ export const trans = {
 		pt: '{v}x sequências',
 		it: '{v}x serie',
 		de: '{v}x serie',
+		ru: '{v}x серия',
 	},
 	streak_high: {
 		// a streak of artists, albums, or tracks
@@ -12802,14 +12858,16 @@ export const trans = {
 		en: '{v}+ streak or higher',
 		pt: '{v}+ sequência ou maior',
 		it: '{v}+ serie o più',
-		de: '{v}+ serie oder höher'
+		de: '{v}+ serie oder höher',
+		ru: '{v}+ серия или больше',
 	},
 	streak_started: {
 		// v = 2 days ago etc.
 		en: 'Streak started {v}',
 		pt: 'Sequência começou {v}',
 		it: 'Serie avviata {v}',
-		de: 'Serie vor {v} angefangen'
+		de: 'Serie vor {v} angefangen',
+		ru: 'Серия начата {v}',
 	},
 	the_bleh_times: {
 		// newspaper title
@@ -12818,6 +12876,7 @@ export const trans = {
 		pt: 'O {b} Times',
 		it: 'La Gazzetta di {b}',
 		de: 'Die {b} Zeitung' // Could also just do "Times", but Zeitung sounds better imo -zozoloft
+		ru: 'Вести {b}', // "bleh News". initially came up with a funny reference but realized it doesn't fit here -eldritchT
 	},
 	from: {
 		// timeframe
@@ -12826,6 +12885,7 @@ export const trans = {
 		pt: 'Desde',
 		it: 'Da',
 		de: 'Von',
+		ru: 'С',
 	},
 	to: {
 		// timeframe
@@ -12834,71 +12894,84 @@ export const trans = {
 		pt: 'a',
 		it: 'a',
 		de: 'An',
+		ru: 'До',
 	},
 	related_setting: {
 		en: 'Related setting: {v}',
 		pt: 'Configurações relacionadas {v}',
 		it: 'Impostazione correlata: {v}',
 		de: 'Verwandte Einstellung: {v}',
+		ru: 'Связанная настройка: {v}',
 	},
 	markdown_disabled_profile: {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
 		pt: 'O Markdown está desativado. O texto pode não ser exibido corretamente e as decorações de perfil não funcionarão. {v}',
 		it: 'Hai disattivato Markdown, il testo potrebbe non essere mostrato correttamente e le decorazioni del profilo non funzioneranno. {v}',
 		de: 'Markdown ist deaktiviert, es werden möglicherweise Textdarstellungs fehler erscheinen, und Profildekorationen können probleme darstellen. {v}',
+		ru: 'У вас отключен Markdown. Текст может отображаться неправильно и декорации профиля не будут работать. {v}',
 	},
 	empty_list: {
 		en: 'This list is empty',
 		pt: 'Esta lista está vazia',
 		it: 'Questa lista è vuota',
 		de: 'Diese Liste ist Leer',
+		ru: 'Этот список пуст',
 	},
 	on: {
 		// switch state
 		en: 'On',
 		pt: 'Ligado',
 		de: 'An',
+		ru: 'Вкл',
 	},
 	off: {
 		// switch state
 		en: 'Off',
 		pt: 'Desligado',
 		de: 'Aus',
+		ru: 'Выкл',
 	},
 	select_arbitrary: {
 		en: 'Type to add to this list',
 		pt: 'Digite para adicionar a esta lista',
+		ru: 'Начните печатать', // "Start typing". since this is used in the context of an arbitrary selection box, i think it's unneccessary to repeat. -eldritchT
 	},
 	value_to_close: {
 		// keybind
 		en: '{v} to close',
 		pt: '{v} para fechar',
-		de: '{v} um zu Schließen'
+		de: '{v} um zu Schließen',
+		ru: '{v}, чтобы закрыть',
 	},
 	hover_to_view: {
 		// hover mouse
 		// used for listen leaderboards
 		en: 'Hover to view',
 		pt: 'Passe o mouse para visualizar',
+		ru: 'Наведите курсор для просмотра',
 	},
 	collage_style: {
 		en: 'Collage style',
 		pt: 'Estilo colagem',
+		ru: 'Стиль коллажа',
 	},
 	stack: {
 		// a collage style, stacks items behind eachother
 		en: 'Stack',
 		pt: 'Agrupar', //im not 100% sure on this cause idk the context of 'stack' but it should work on most cases -lagb2ck
+		ru: 'Полка', // "a shelf", as if items were vinyl recordings in the boxes, stacked on a shelf -eldritchT
 	},
 	music_and_data: {
 		en: 'Music & Data',
 		pt: 'Música e Dados',
 		de: 'Musik & Daten',
+		ru: 'Музыка и данные',
 	},
 	streak_information: {
 		en: 'Streaks are calculated locally and max 100 at the moment.',
 		pt: 'As sequências são calculadas localmente e limitadas a um máximo de 100 no momento.',
 		de: 'Serien werden Lokal kalkuliert und sind derzeit maximal bis zu 100',
+		ru: 'Серии обрабатываются локально и на данный момент не могут превышать 100.',
 	},
 	view_your_compatibility: {
 		// taste
@@ -12911,55 +12984,67 @@ export const trans = {
 		en: 'Insight',
 		pt: 'Análise',
 		de: 'Einblick',
+		ru: 'Обзор', // translates back to english as "overview" in this context -eldritchT
 	},
 	profile_summary_pie_chart: {
 		en: 'Show pie chart',
 		pt: 'Exibir gráfico de pizza',
 		de: 'Kreisdiagramm zeigen',
+		ru: 'Показать круговую диаграмму',
 	},
 	chart_position: {
 		// shown on artist/album pages
 		// v = the number placement with a leading #
 		en: '{v} in the world',
 		pt: '{v}º no mundo', // appended 'º' for ordinal ranking (e.g., 1st -> 1º)
+		ru: '{v} в мире',
 	},
 	artist_wordmarks: {
 		name: {
 			en: 'Show stylised names for some artists',
 			pt: 'Exibir nomes estilizados de alguns artistas',
+			ru: 'Показывать стилизованные имена для некоторых исполнителей',
 		},
 		body: {
 			en: 'Adds personalisation to each page, sourced from Apple Music and official websites',
 			pt: 'Adiciona personalização a cada página, com dados do Apple Music e sites oficiais',
+			ru: 'Добавляет персонализацию на каждую страницу на основе информации из Apple Music и официальных сайтов',
 		},
 	},
 	loading_lyrics: {
 		en: 'Figuring out the words',
 		pt: 'Buscando a letra',
+		ru: 'Вслушиваемся в слова', // "[we are] listening closely to the lyrics". sounds more casual, informal and natural -eldritchT
 	},
 	no_lyrics: {
 		en: 'Couldn’t find this song',
 		pt: 'Não encontramos a letra desta música',
+		ru: 'Не нашли эту песню', // "[we] haven't found this song". same as above -eldritchT
 	},
 	lyrics_instrumental: {
 		en: 'This song has no lyrics',
-		pt: 'Esta música não tem letra'
+		pt: 'Esta música não tem letra',
+		ru: 'В этой песне нет слов',
 	},
 	sourced_from: {
 		en: 'Sourced from {v}',
 		pt: 'Fonte: {v}',
+		ru: 'Источник: {v}',
 	},
 	search_lyrics: {
 		en: 'Search for a lyric',
 		pt: 'Buscar uma letra',
+		ru: 'Найти слова',
 	},
 	view_lyrics: {
 		en: 'View lyrics',
 		pt: 'Ver letra',
+		ru: 'Просмотреть текст'
 	},
 	lyrics_for_value: {
 		en: 'Lyrics for {v}',
 		pt: 'Letra de {v}',
+		ru: 'Текст для {v}',
 	},
 } as const satisfies Record<string, any>;
 
