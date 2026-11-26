@@ -169,7 +169,8 @@ const CspPolicies: PolicyMap = {
 		'https://*.google-analytics.com',
 		'https://*.adthrive.com',
 		'https://*.jsdelivfr.net',
-		'https://shrillypants.com'
+		'https://shrillypants.com',
+		'https://api.spotify.com'
 	],
 	'font-src': [
 		"'self'",

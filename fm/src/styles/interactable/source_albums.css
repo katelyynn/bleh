@@ -57,7 +57,7 @@
 		&>.source-album-details {
 			&>.source-album-name {
 				color: oklch(var(--l3-c)) !important;
-				background-size: 100% var(--line-thickness), 100% var(--line-thickness);
+				--link-underline-size: 100%;
 			}
 		}
 	}
@@ -178,16 +178,15 @@
 .source-album-name {
 	width: fit-content;
 
-	--line-thickness: 0.08em;
+	--line-thickness: 0.06em;
 	--line-inset: 0.04em;
+	/*--line-colour: color-mix(in oklch, transparent 70%, currentColor);*/
+	--line-colour: transparent;
+	--line-colour-active: currentColor;
 
-	--mask-colour: color-mix(in oklch,
-			oklch(var(--l3-c)),
-			oklch(var(--l4-c)) 30%);
-
-	background-image: linear-gradient(to right, var(--mask-colour), var(--mask-colour)), linear-gradient(to right, transparent, transparent);
+	background-image: linear-gradient(to right, var(--line-colour-active), var(--line-colour-active)), linear-gradient(to right, var(--line-colour), var(--line-colour));
 	background-repeat: no-repeat;
-	background-size: 0% var(--line-thickness), 100% var(--line-thickness);
+	background-size: var(--link-underline-size, 0%) var(--line-thickness), 100% var(--line-thickness);
 	background-position: 0 100%;
 
 	transition-property: background-size;
