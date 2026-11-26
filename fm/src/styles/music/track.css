@@ -562,11 +562,6 @@
 	--bg-hov: oklch(var(--h4) / 17%) !important;
 
 	--chartlist-bar-bg: var(--b3) / 60%;
-
-	/* not theme_type on purpose */
-	[data-bleh--theme="light"] & {
-		--chartlist-bar-bg: var(--b5) / 80%;
-	}
 }
 
 /*     INFO     */
@@ -875,13 +870,13 @@
 				background: linear-gradient(90deg, oklch(var(--l2-c-theme-switch)),
 						oklch(var(--l3-c)) 20%) !important;
 
-				--mask2: var(--bar-loop-mask, none);
+				/*--mask2: var(--bar-loop-mask, none);
 				mask-image: var(--mask2) !important;
 				-webkit-mask-image: var(--mask2) !important;
 				mask-repeat: repeat-x !important;
 				-webkit-mask-repeat: repeat-x !important;
 				mask-size: contain !important;
-				-webkit-mask-size: contain !important;
+				-webkit-mask-size: contain !important;*/
 			}
 
 			&:after {

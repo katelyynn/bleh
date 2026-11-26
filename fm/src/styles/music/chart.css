@@ -102,9 +102,9 @@
 	.weeklychart-name {
 		display: flex;
 
-		.link-block-target {
+		&>.link-block-target {
 			text-decoration: none;
-			flex: 1;
+			width: fit-content;
 			font-weight: var(--font-weight-medium);
 		}
 	}

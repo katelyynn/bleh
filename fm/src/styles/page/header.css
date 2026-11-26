@@ -443,14 +443,6 @@
 	transition-property: scale, opacity;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
-
-	--mask2: var(--grid-mask, none);
-	mask-image: var(--mask2) !important;
-	-webkit-mask-image: var(--mask2) !important;
-	mask-repeat: repeat !important;
-	-webkit-mask-repeat: repeat !important;
-	mask-size: contain !important;
-	-webkit-mask-size: contain !important;
 }
 
 @keyframes page_avatar {

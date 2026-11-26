@@ -146,7 +146,7 @@
 	will-change: transform;
 
 	--extra-trans: 0%;
-	--extra-white: 0%;
+	--extra-white: 6%;
 
 	--hue-over: 0;
 	--sat-over: 0;
@@ -200,7 +200,7 @@
 	--shadow: rgba(0, 0, 0, 0.0);
 
 	&.colourful {
-		--shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 50%);
+		--shadow: color-mix(in oklch, oklch(var(--k4)) 100%, black 40%);
 	}
 
 	transition-property: transform,
@@ -312,7 +312,6 @@
 	animation: fade 0.2s ease;
 
 	filter: var(--grid-cover-image-filter, unset);
-	transition: var(--grid-cover-image-transition, unset);
 
 	--mask2: var(--grid-mask, none);
 	mask-image: var(--mask2) !important;
@@ -323,10 +322,16 @@
 	-webkit-mask-size: contain !important;
 
 	&>img {
-		height: 100%;
+		height: var(--grid-cover-height, 100%);
+		transform: var(--grid-cover-transform, unset);
+		opacity: var(--grid-cover-opacity, 1);
 		object-fit: cover;
 		/* for some reason i have to hardcode this for html2canvas */
 		border-radius: var(--radius-s);
+
+		transition-property: height, transform;
+		transition-duration: 0.8s;
+		transition-timing-function: var(--trans-function-ani);
 	}
 
 	&:after {
@@ -401,7 +406,7 @@
 	inset: 0;
 	z-index: 9;
 
-	background: color-mix(in oklch, oklch(var(--h4)) 70%, black);
+	background: color-mix(in oklch, oklch(var(--k4)) 75%, black);
 
 	transition-property: background;
 	transition-duration: var(--trans);
@@ -419,9 +424,9 @@
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	text-shadow: none;
-	filter: drop-shadow(0 0 10px var(--shadow)) drop-shadow(0 0 4px var(--shadow));
+	filter: drop-shadow(0 0 8px var(--shadow)) drop-shadow(0 1px 2px var(--shadow));
 	overflow: hidden;
-	padding: 10px;
+	padding: 8px;
 	left: 0;
 	bottom: 0;
 	right: 0;
@@ -597,15 +602,16 @@
 	&.grid-item-plays,
 	.grid-item-plays {
 		position: relative;
-		padding-left: calc(var(--mask-size) + 4px);
+		padding-left: calc(var(--mask-size) + 2px);
 		--top: 50%;
 		--margin-top: calc(-1 * (var(--mask-size) / 2));
 		--left: 0;
 		--mask-size: 14px;
+		--mask-colour: color-mix(in oklch, currentColor 60%, transparent);
 		--mask: var(--icon-16-play);
 		cursor: pointer;
 
-		background-position: calc(var(--mask-size) + 4px) 100% !important;
+		background-position: calc(var(--mask-size) + 2px) 100% !important;
 
 		&.grid-item-listeners {
 			--mask: var(--icon-16-user);
@@ -617,8 +623,7 @@
 		}
 
 		&[data-bleh--scrobble-milestone] {
-			color: oklch(var(--l2-c));
-			filter: drop-shadow(0 0 8px oklch(var(--l4-c) / 60%));
+			color: color-mix(in oklch, oklch(var(--l2-c)), oklch(var(--l3-c)));
 
 			&.plays-contrast {
 				color: oklch(var(--l2-c));
@@ -635,10 +640,6 @@
 			align-items: center;
 			gap: 6px;
 			margin-top: 2px;
-		}
-
-		&:after {
-			left: calc(var(--icon-size) + 4px);
 		}
 	}
 }
