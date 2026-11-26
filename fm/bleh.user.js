@@ -56692,7 +56692,7 @@ var bleh = (() => {
       blend && "blend-v2-btn",
       colourful && "colourful",
       chibi && "btn chibi-see-more",
-      opens && "select-button link-select",
+      opens && !icon4 && "select-button link-select",
       className2 && className2
     ];
     if (opens) {
@@ -91151,81 +91151,8 @@ var bleh = (() => {
     if (head) head.remove();
     const can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
     const submit_btn = createRef();
-    const settings_btn = createRef();
     const refresh_btn = createRef();
     const streak = createRef();
-    panel.insertBefore(
-      /* @__PURE__ */ jsx(PanelTop, { children: [
-        /* @__PURE__ */ jsx(PanelHead, { top: true, icon: icons.recent, children: tl2(trans.recents) }),
-        ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, { accompany: true, children: /* @__PURE__ */ jsx(ProfileStreak, { loading: true, ref: streak }) }),
-        /* @__PURE__ */ jsx(ViewButtons, { children: [
-          can_scrobble && /* @__PURE__ */ jsx(
-            SeeMore,
-            {
-              blend: true,
-              iconPlacement: "left",
-              icon: icons.plus,
-              ref: submit_btn,
-              onClick: () => {
-                submit_scrobble({
-                  can_api,
-                  func: () => {
-                    setTimeout(() => {
-                      refresh_tracks(refresh_btn.current, {
-                        quiet: true
-                      });
-                    }, 200);
-                  }
-                });
-              },
-              children: tl2(trans.scrobble)
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            SeeMore,
-            {
-              blend: true,
-              iconPlacement: "left",
-              icon: icons.refresh,
-              ref: refresh_btn,
-              onClick: () => {
-                refresh_tracks(refresh_btn.current, {}, () => {
-                  streak.current.replaceWith(
-                    /* @__PURE__ */ jsx(ProfileStreak, { loading: true, ref: streak })
-                  );
-                  if (ff("yuzu")) {
-                    get_profile_streak(
-                      streak,
-                      panel
-                    );
-                  }
-                });
-              },
-              children: tl2(trans.refresh)
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            SeeMore,
-            {
-              blend: true,
-              iconPlacement: "left",
-              icon: icons.settings,
-              onClick: () => {
-              },
-              ref: settings_btn,
-              children: tl2(trans.settings)
-            }
-          )
-        ] })
-      ] }),
-      panel.firstElementChild
-    );
-    if (!can_api && submit_btn.current) {
-      hover_tooltip(
-        submit_btn.current,
-        /* @__PURE__ */ jsx(Tooltip, { children: tl2(trans.requires_api_in_settings) })
-      );
-    }
     let pages = {
       visual: {
         icon: icons.visual,
@@ -91309,10 +91236,76 @@ var bleh = (() => {
       };
       form.remove();
     }
-    menu_tooltip(
-      settings_btn.current,
-      /* @__PURE__ */ jsx(FloatingWindow, { children: /* @__PURE__ */ jsx(FloatingWindowContents, { children: /* @__PURE__ */ jsx(Tabbed, { pages }) }) })
+    panel.insertBefore(
+      /* @__PURE__ */ jsx(PanelTop, { children: [
+        /* @__PURE__ */ jsx(PanelHead, { top: true, icon: icons.recent, children: tl2(trans.recents) }),
+        ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, { accompany: true, children: /* @__PURE__ */ jsx(ProfileStreak, { loading: true, ref: streak }) }),
+        /* @__PURE__ */ jsx(ViewButtons, { children: [
+          can_scrobble && /* @__PURE__ */ jsx(
+            SeeMore,
+            {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.plus,
+              ref: submit_btn,
+              onClick: () => {
+                submit_scrobble({
+                  can_api,
+                  func: () => {
+                    setTimeout(() => {
+                      refresh_tracks(refresh_btn.current, {
+                        quiet: true
+                      });
+                    }, 200);
+                  }
+                });
+              },
+              children: tl2(trans.scrobble)
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            SeeMore,
+            {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.refresh,
+              ref: refresh_btn,
+              onClick: () => {
+                refresh_tracks(refresh_btn.current, {}, () => {
+                  streak.current.replaceWith(
+                    /* @__PURE__ */ jsx(ProfileStreak, { loading: true, ref: streak })
+                  );
+                  if (ff("yuzu")) {
+                    get_profile_streak(
+                      streak,
+                      panel
+                    );
+                  }
+                });
+              },
+              children: tl2(trans.refresh)
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            SeeMore,
+            {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.settings,
+              opens: /* @__PURE__ */ jsx(FloatingWindow, { children: /* @__PURE__ */ jsx(FloatingWindowContents, { children: /* @__PURE__ */ jsx(Tabbed, { pages }) }) }),
+              children: tl2(trans.settings)
+            }
+          )
+        ] })
+      ] }),
+      panel.firstElementChild
     );
+    if (!can_api && submit_btn.current) {
+      hover_tooltip(
+        submit_btn.current,
+        /* @__PURE__ */ jsx(Tooltip, { children: tl2(trans.requires_api_in_settings) })
+      );
+    }
     if (ff("yuzu")) {
       get_profile_streak(streak, panel);
     }
@@ -126157,21 +126150,17 @@ var bleh = (() => {
     if (page.subpage == "weekly") {
       const head = charts.querySelector(":scope > h3");
       if (!head) return;
-      head.replaceWith(html.node`
-            <div class="charts-header top-header">
-                <div class="left">
-
-                </div>
-                <div class="middle">
-                    <div class="sub-text">${tl2(trans.weekly_charts)}</div>
-                    <h2 class="chart-heading">${head.textContent.trim()}</h2>
-                </div>
-                <div class="right">
-
-                </div>
-                <div class="charts-header-bg" />
-            </div>
-        `);
+      head.replaceWith(
+        /* @__PURE__ */ jsx("div", { class: ["charts-header", "top-header"], children: [
+          /* @__PURE__ */ jsx("div", { class: "left" }),
+          /* @__PURE__ */ jsx("div", { class: "middle", children: [
+            /* @__PURE__ */ jsx("div", { class: "sub-text", children: tl2(trans.weekly_charts) }),
+            /* @__PURE__ */ jsx("h2", { class: "chart-heading", children: head.textContent.trim() })
+          ] }),
+          /* @__PURE__ */ jsx("div", { class: "right" }),
+          /* @__PURE__ */ jsx("div", { class: "charts-header-bg" })
+        ] })
+      );
       const items = page.structure.main.querySelectorAll(".weeklychart-item");
       items.forEach((item) => {
         const change = item.querySelector(".weeklychart-change");
@@ -126185,42 +126174,20 @@ var bleh = (() => {
     const chart_rows = charts.querySelectorAll(
       ".charts-col:not(.charts-col--mobile-ad)"
     );
-    const new_panel = document.createElement("section");
-    new_panel.classList.add("charts-panel");
     const out_now = page.structure.side.querySelector(
       ".more-link-fullwidth-right a"
     );
     if (out_now) out_now.classList.add("btn", "out-now-btn", "icon", "icon-r");
     let settings_btn;
-    new_panel.appendChild(html.node`
-        <div class="charts-header top-header">
-            <div class="left">
-
-            </div>
-            <div class="middle">
-                <div class="sub-text">${tl2(trans.charts_for)}</div>
-                <h2 class="chart-heading">${DateTime.now().toLocaleString(DateTime.DATE_FULL)}</h2>
-            </div>
-            <div class="right">
-                <div class="view-buttons blend blend-v2">
-                    <button class="btn left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                        ${tl2(trans.settings)}
-                    </button>
-                </div>
-            </div>
-            <div class="charts-header-bg" />
-        </div>
-    `);
-    tippy_esm_default(settings_btn, {
-      theme: "context-menu",
-      content: html.node`
-            ${setting({ id: "simulate_scroll", in_menu: true })}
-        `,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click"
-    });
+    const new_panel = /* @__PURE__ */ jsx("section", { class: "charts-panel", children: /* @__PURE__ */ jsx("div", { class: ["charts-header", "top-header"], children: [
+      /* @__PURE__ */ jsx("div", { class: "left" }),
+      /* @__PURE__ */ jsx("div", { class: "middle", children: [
+        /* @__PURE__ */ jsx("div", { class: "sub-text", children: tl2(trans.charts_for) }),
+        /* @__PURE__ */ jsx("h2", { class: "chart-heading", children: DateTime.now().toLocaleString(DateTime.DATE_FULL) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { class: "right", children: /* @__PURE__ */ jsx(ViewButtons, { children: /* @__PURE__ */ jsx(SeeMore, { blend: true, iconPlacement: "left", icon: icons.settings, opens: /* @__PURE__ */ jsx(MenuContents, { children: /* @__PURE__ */ jsx(MenuCheckbox, { bind: "simulate_scroll" }) }), children: tl2(trans.settings) }) }) }),
+      /* @__PURE__ */ jsx("div", { class: "charts-header-bg" })
+    ] }) });
     chart_rows.forEach((row, index3) => {
       const chart_row = html.node`
             <div class="charts-new-row" data-index=${index3}>
@@ -126230,24 +126197,23 @@ var bleh = (() => {
       const list = html.node`
             <ol class="music-bookmarks-artists charts-list" />
         `;
-      if (settings.simulate_scroll) {
-        list.addEventListener("wheel", (e4) => {
-          e4.preventDefault();
-          if (e4.deltaY > 0) {
-            list.scrollBy({
-              top: 0,
-              left: 600,
-              behavior: "smooth"
-            });
-          } else {
-            list.scrollBy({
-              top: 0,
-              left: -600,
-              behavior: "smooth"
-            });
-          }
-        });
-      }
+      list.addEventListener("wheel", (e4) => {
+        if (!useSettings.get("simulate_scroll")) return;
+        e4.preventDefault();
+        if (e4.deltaY > 0) {
+          list.scrollBy({
+            top: 0,
+            left: 600,
+            behavior: "smooth"
+          });
+        } else {
+          list.scrollBy({
+            top: 0,
+            left: -600,
+            behavior: "smooth"
+          });
+        }
+      });
       const items = row.querySelectorAll(".globalchart-item");
       items.forEach((item, item_index) => {
         let list_item;

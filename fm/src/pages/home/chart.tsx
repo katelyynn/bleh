@@ -26,6 +26,11 @@ import { error } from '@/types/api';
 import { romanise } from '@/build/tools';
 import { PageHeaderPosition } from '@/components/page/header';
 import { createRef } from 'jsx-dom';
+import { SeeMore, ViewButtons } from '@/components/text/see_more';
+import { icons } from '@/components/shared/icon';
+import { MenuContents } from '@/components/menu/menu';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
+import { useSettings } from '@/page';
 
 export function bleh_charts() {
 	if (page.type == 'explore_charts') {
@@ -95,21 +100,17 @@ export function bleh_charts() {
 		const head = charts.querySelector(':scope > h3');
 		if (!head) return;
 
-		head.replaceWith(html.node`
-            <div class="charts-header top-header">
-                <div class="left">
-
-                </div>
-                <div class="middle">
-                    <div class="sub-text">${tl(trans.weekly_charts)}</div>
-                    <h2 class="chart-heading">${head.textContent.trim()}</h2>
-                </div>
-                <div class="right">
-
-                </div>
-                <div class="charts-header-bg" />
-            </div>
-        `);
+		head.replaceWith(
+			<div class={['charts-header', 'top-header']}>
+				<div class='left' />
+				<div class='middle'>
+					<div class='sub-text'>{tl(trans.weekly_charts)}</div>
+					<h2 class='chart-heading'>{head.textContent.trim()}</h2>
+				</div>
+				<div class='right' />
+				<div class='charts-header-bg' />
+			</div>
+		);
 
 		const items = page.structure.main.querySelectorAll('.weeklychart-item');
 		items.forEach((item) => {
@@ -129,9 +130,6 @@ export function bleh_charts() {
 		'.charts-col:not(.charts-col--mobile-ad)',
 	);
 
-	const new_panel = document.createElement('section');
-	new_panel.classList.add('charts-panel');
-
 	const out_now = page.structure.side.querySelector(
 		'.more-link-fullwidth-right a',
 	);
@@ -139,39 +137,29 @@ export function bleh_charts() {
 
 	let settings_btn;
 
-	new_panel.appendChild(html.node`
-        <div class="charts-header top-header">
-            <div class="left">
-
-            </div>
-            <div class="middle">
-                <div class="sub-text">${tl(trans.charts_for)}</div>
-                <h2 class="chart-heading">${DateTime.now().toLocaleString(DateTime.DATE_FULL)
-		}</h2>
-            </div>
-            <div class="right">
-                <div class="view-buttons blend blend-v2">
-                    <button class="btn left-icon blend-v2-btn" data-type="settings" ref=${(
-			el,
-		) => settings_btn = el}>
-                        ${tl(trans.settings)}
-                    </button>
-                </div>
-            </div>
-            <div class="charts-header-bg" />
-        </div>
-    `);
-
-	tippy(settings_btn, {
-		theme: 'context-menu',
-		content: html.node`
-            ${setting({ id: 'simulate_scroll', in_menu: true })}
-        `,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-	});
+	const new_panel = (
+		<section class='charts-panel'>
+			<div class={['charts-header', 'top-header']}>
+				<div class='left' />
+				<div class='middle'>
+					<div class='sub-text'>{tl(trans.charts_for)}</div>
+					<h2 class='chart-heading'>{DateTime.now().toLocaleString(DateTime.DATE_FULL)}</h2>
+				</div>
+				<div class='right'>
+					<ViewButtons>
+						<SeeMore blend iconPlacement='left' icon={icons.settings} opens={(
+							<MenuContents>
+								<MenuCheckbox bind='simulate_scroll' />
+							</MenuContents>
+						)}>
+							{tl(trans.settings)}
+						</SeeMore>
+					</ViewButtons>
+				</div>
+				<div class='charts-header-bg' />
+			</div>
+		</section>
+	);
 
 	chart_rows.forEach((row, index) => {
 		const chart_row = html.node`
@@ -184,25 +172,25 @@ export function bleh_charts() {
             <ol class="music-bookmarks-artists charts-list" />
         `;
 
-		if (settings.simulate_scroll) {
-			list.addEventListener('wheel', (e) => {
-				e.preventDefault();
+		list.addEventListener('wheel', (e) => {
+			if (!useSettings.get('simulate_scroll')) return;
 
-				if (e.deltaY > 0) {
-					list.scrollBy({
-						top: 0,
-						left: +600,
-						behavior: 'smooth',
-					});
-				} else {
-					list.scrollBy({
-						top: 0,
-						left: -600,
-						behavior: 'smooth',
-					});
-				}
-			});
-		}
+			e.preventDefault();
+
+			if (e.deltaY > 0) {
+				list.scrollBy({
+					top: 0,
+					left: +600,
+					behavior: 'smooth',
+				});
+			} else {
+				list.scrollBy({
+					top: 0,
+					left: -600,
+					behavior: 'smooth',
+				});
+			}
+		});
 
 		const items = row.querySelectorAll('.globalchart-item');
 		items.forEach((item, item_index) => {

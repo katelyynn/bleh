@@ -54,94 +54,10 @@ export function profile_recents() {
 		localStorage.getItem('bleh_auth_valid') === 'true';
 
 	const submit_btn = createRef();
-	const settings_btn = createRef();
 	const refresh_btn = createRef();
 	const streak = createRef();
 
 	//const modal_id = 'profile_settings';
-
-	panel.insertBefore(
-		<PanelTop>
-			<PanelHead top icon={icons.recent}>
-				{tl(trans.recents)}
-			</PanelHead>
-			{ff('yuzu') && (
-				<ViewButtons accompany>
-					<ProfileStreak loading ref={streak} />
-				</ViewButtons>
-			)}
-			<ViewButtons>
-				{can_scrobble && (
-					<SeeMore
-						blend
-						iconPlacement='left'
-						icon={icons.plus}
-						ref={submit_btn}
-						onClick={() => {
-							submit_scrobble({
-								can_api,
-								func: () => {
-									setTimeout(() => {
-										refresh_tracks(refresh_btn.current, {
-											quiet: true,
-										});
-									}, 200);
-								},
-							});
-						}}
-					>
-						{tl(trans.scrobble)}
-					</SeeMore>
-				)}
-				<SeeMore
-					blend
-					iconPlacement='left'
-					icon={icons.refresh}
-					ref={refresh_btn}
-					onClick={() => {
-						refresh_tracks(refresh_btn.current, {}, () => {
-							streak.current.replaceWith(
-								<ProfileStreak loading ref={streak} />,
-							);
-
-							if (ff('yuzu')) {
-								get_profile_streak(
-									streak,
-									panel as HTMLDivElement,
-								);
-							}
-						});
-					}}
-				>
-					{tl(trans.refresh)}
-				</SeeMore>
-				<SeeMore
-					blend
-					iconPlacement='left'
-					icon={icons.settings}
-					onClick={() => {
-						/*dialog({
-							id: modal_id,
-							icon: icons.recent,
-							title: tl(trans.recents),
-							body: <Tabbed pages={pages} />,
-						});*/
-					}}
-					ref={settings_btn}
-				>
-					{tl(trans.settings)}
-				</SeeMore>
-			</ViewButtons>
-		</PanelTop>,
-		panel.firstElementChild,
-	);
-
-	if (!can_api && submit_btn.current) {
-		hover_tooltip(
-			submit_btn.current,
-			<Tooltip>{tl(trans.requires_api_in_settings)}</Tooltip>,
-		);
-	}
 
 	let pages: Record<string, TabbedPage> = {
 		visual: {
@@ -224,14 +140,86 @@ export function profile_recents() {
 		form.remove();
 	}
 
-	menu_tooltip(
-		settings_btn.current,
-		<FloatingWindow>
-			<FloatingWindowContents>
-				<Tabbed pages={pages} />
-			</FloatingWindowContents>
-		</FloatingWindow>,
+	panel.insertBefore(
+		<PanelTop>
+			<PanelHead top icon={icons.recent}>
+				{tl(trans.recents)}
+			</PanelHead>
+			{ff('yuzu') && (
+				<ViewButtons accompany>
+					<ProfileStreak loading ref={streak} />
+				</ViewButtons>
+			)}
+			<ViewButtons>
+				{can_scrobble && (
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.plus}
+						ref={submit_btn}
+						onClick={() => {
+							submit_scrobble({
+								can_api,
+								func: () => {
+									setTimeout(() => {
+										refresh_tracks(refresh_btn.current, {
+											quiet: true,
+										});
+									}, 200);
+								},
+							});
+						}}
+					>
+						{tl(trans.scrobble)}
+					</SeeMore>
+				)}
+				<SeeMore
+					blend
+					iconPlacement='left'
+					icon={icons.refresh}
+					ref={refresh_btn}
+					onClick={() => {
+						refresh_tracks(refresh_btn.current, {}, () => {
+							streak.current.replaceWith(
+								<ProfileStreak loading ref={streak} />,
+							);
+
+							if (ff('yuzu')) {
+								get_profile_streak(
+									streak,
+									panel as HTMLDivElement,
+								);
+							}
+						});
+					}}
+				>
+					{tl(trans.refresh)}
+				</SeeMore>
+				<SeeMore
+					blend
+					iconPlacement='left'
+					icon={icons.settings}
+					opens={(
+						<FloatingWindow>
+							<FloatingWindowContents>
+								<Tabbed pages={pages} />
+							</FloatingWindowContents>
+						</FloatingWindow>
+					)}
+				>
+					{tl(trans.settings)}
+				</SeeMore>
+			</ViewButtons>
+		</PanelTop>,
+		panel.firstElementChild,
 	);
+
+	if (!can_api && submit_btn.current) {
+		hover_tooltip(
+			submit_btn.current,
+			<Tooltip>{tl(trans.requires_api_in_settings)}</Tooltip>,
+		);
+	}
 
 	if (ff('yuzu')) {
 		get_profile_streak(streak, panel as HTMLDivElement);

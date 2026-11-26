@@ -52,7 +52,7 @@ export function SeeMore({
 		blend && 'blend-v2-btn',
 		colourful && 'colourful',
 		chibi && 'btn chibi-see-more',
-		opens && 'select-button link-select',
+		(opens && !icon) && 'select-button link-select',
 		className && className,
 	];
 
