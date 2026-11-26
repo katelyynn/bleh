@@ -367,11 +367,13 @@
 }
 
 .summary-line-value {
-	opacity: 0.5;
+	color: oklch(var(--l3-c));
+	font-weight: var(--font-weight-medium);
 
-	&:not(.minimum) {
-		font-weight: var(--font-weight-medium);
-		opacity: 1;
+	&.minimum {
+		color: oklch(var(--c3));
+		opacity: 0.8;
+		font-weight: var(--font-weight);
 	}
 }
 
