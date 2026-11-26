@@ -22,29 +22,16 @@
 
 	--interact-mask: none !important;
 
-	&:not(.profile-streak-empty) {
-		&:after {
-			content: '';
-			position: absolute;
-			display: block !important;
-			bottom: 0;
-			left: calc(var(--icon-size) + 4px);
-			right: 0;
-			height: 1px;
-			background: var(--mask-colour);
-			transform: var(--underline-scale, scaleX(0));
-			transform-origin: bottom left;
-			opacity: 0.6;
+	--line-thickness: 0.06em;
+	--line-inset: 0.04em;
+	/*--line-colour: color-mix(in oklch, transparent 70%, currentColor);*/
+	--line-colour: transparent;
+	--line-colour-active: currentColor;
 
-			width: unset !important;
-			top: unset !important;
-			margin: unset !important;
-
-			transition-property: transform;
-			transition-duration: 0.2s;
-			transition-timing-function: var(--trans-function-ani);
-		}
-	}
+	background-image: linear-gradient(to right, var(--line-colour-active), var(--line-colour-active)), linear-gradient(to right, var(--line-colour), var(--line-colour)) !important;
+	background-repeat: no-repeat !important;
+	background-size: var(--link-underline-size, 0%) var(--line-thickness), 100% var(--line-thickness) !important;
+	background-position: calc(var(--icon-size) + 4px) 100% !important;
 
 	&.profile-streak-empty {
 		font-weight: var(--font-weight) !important;
@@ -57,10 +44,9 @@
 		animation: show_streak 0.5s var(--trans-function-ani);
 
 		&[data-streak-high] {
-			filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px
-				oklch(var(--k4)));
+			filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px oklch(var(--k4)));
 
-			& > .streak-icon {
+			&>.streak-icon {
 				animation: streak 3s var(--trans-function-ani) infinite;
 			}
 		}
@@ -78,9 +64,7 @@
 		}
 
 		&:hover {
-			&:after {
-				transform: scaleX(1);
-			}
+			--link-underline-size: 100%;
 		}
 	}
 
@@ -106,6 +90,7 @@
 }
 
 @keyframes streak {
+
 	from,
 	20%,
 	to {
@@ -132,7 +117,7 @@
 	display: block;
 	border-radius: var(--card-radius) !important;
 	box-shadow: var(--override-full-shadow,
-		var(--overlay-shadow));
+			var(--overlay-shadow));
 
 	--hypercard-glow-color: oklch(var(--l4-c));
 	--hypercard-glow-opacity: 0.15;
@@ -161,7 +146,7 @@
 		inset: 0 -100px;
 		pointer-events: none;
 		background: radial-gradient(at center top, oklch(var(--f4) / 70%),
-			oklch(var(--f5) / 10%) 67%);
+				oklch(var(--f5) / 10%) 67%);
 		border-radius: inherit;
 
 		z-index: 1;
@@ -193,8 +178,7 @@
 	--col: oklch(var(--l3-c));
 	opacity: 0.05;
 	filter:
-		drop-shadow(1px 0 0 var(--col)) drop-shadow(-1px 0 0 var(--col))
-		drop-shadow(0 1px 0 var(--col)) drop-shadow(0 -1px 0 var(--col));
+		drop-shadow(1px 0 0 var(--col)) drop-shadow(-1px 0 0 var(--col)) drop-shadow(0 1px 0 var(--col)) drop-shadow(0 -1px 0 var(--col));
 }
 
 .streak-avatar {

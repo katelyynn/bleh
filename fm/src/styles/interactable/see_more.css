@@ -45,11 +45,14 @@
 		display: none;
 	}
 
-	--line-thickness: 0.08em;
+	--line-thickness: 0.06em;
 	--line-inset: 0.04em;
+	/*--line-colour: color-mix(in oklch, transparent 70%, currentColor);*/
+	--line-colour: transparent;
+	--line-colour-active: currentColor;
 
-	--bg: linear-gradient(to right, var(--mask-colour), var(--mask-colour)),
-	linear-gradient(to right, transparent, transparent) !important;
+	--bg: linear-gradient(to right, var(--line-colour-active), var(--line-colour-active)),
+	linear-gradient(to right, var(--line-colour), var(--line-colour)) !important;
 	background-repeat: no-repeat !important;
 	background-size: var(--link-underline-size, 0%) var(--line-thickness),
 	100% var(--line-thickness) !important;
@@ -79,7 +82,7 @@
 	&:hover,
 	&:active,
 	&[aria-expanded="true"] {
-		background-size: 100% var(--line-thickness), 100% var(--line-thickness) !important;
+		--link-underline-size: 100%;
 
 		&>.bleh-icon-arrow-up {
 			translate: 0 calc(-1 * var(--icon-transform));
