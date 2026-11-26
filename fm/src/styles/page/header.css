@@ -274,6 +274,7 @@
 		--disc-move: 16px;
 		--disc-opacity: 1;
 		--disc-rotate: 45deg;
+		--disc-play: paused;
 	}
 }
 
@@ -300,7 +301,7 @@
 	transition-duration: 0.4s;
 	transition-timing-function: var(--trans-function-ani);
 
-	filter: var(--header-disc-filter, brightness(0.92));
+	filter: var(--header-disc-filter, brightness(0.94));
 
 	transform: rotate(var(--disc-rotate, 0deg));
 
@@ -312,6 +313,7 @@
 
 	&.motion {
 		animation: disc 8s linear infinite;
+		animation-play-state: var(--disc-play, running);
 	}
 }
 
