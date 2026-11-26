@@ -1163,5 +1163,11 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.artist_wordmarks.name,
 		body: trans.artist_wordmarks.body,
 		new_release: true
+	},
+	campfire_minimise: {
+		default: false,
+		title: trans.minimise_until_open,
+		new_release: true,
+		require_reload: 'partial'
 	}
 };

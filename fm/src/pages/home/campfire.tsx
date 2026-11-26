@@ -24,16 +24,19 @@ import {
 import { load_recent_tracks } from '../home';
 import { is_sponsor, sponsor } from '@/components/sponsor';
 import { DateTime } from 'luxon';
-import { icon, icons } from '@/components/shared/icon';
+import { Icon, icon, icons } from '@/components/shared/icon';
 import { UnderConstruction } from '@/components/shared/construction.tsx';
 import { useSettings } from '@/page.tsx';
 import { CampfireItem } from '@/components/campfire/item';
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { SmartArtist, SmartTitle } from '@/components/music/smart_title';
 import { SideAction, SideActions } from '@/components/button/side';
 import { Separator } from '@/components/divider/separator';
 import { Input } from '@/components/input/input';
 import { PanelHead } from '@/components/text/head';
+import { SeeMore, ViewButtons } from '@/components/text/see_more';
+import { MenuContents } from '@/components/menu/menu';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox';
 
 interface album {
 	image: string;
@@ -47,34 +50,44 @@ interface album {
 export function campfire() {
 	let previous_index = 0;
 	let max_index = 0;
-	let items_container: HTMLElement;
-	let item_details: HTMLElement;
-	let current_bg: HTMLElement;
-	let previous_bg: HTMLElement;
+	const itemsContainer = createRef();
+	const itemDetails = createRef();
+	const background = createRef();
 
 	let visual_index = 0;
 	let real_index = 0;
 	let is_wrapping = false;
 
-	let campfire_top;
-	let campfire_main;
-	let campfire_side;
-	const container = html.node`
-	    <div class="campfire-panels">
-	      <div class="campfire-bg current" ref=${(el) => current_bg = el} />
-	      <div class="campfire-panel-main" ref=${(el) => campfire_main = el}>
-	        <div class="campfire" ref=${(el) => campfire_top = el}>
-	          <div class="campfire-intro">
-	            <h2 class="music-section-heading">${tl(trans.your_recent_30_days)
-		}</h2>
-	          </div>
-	          <div class="campfire-items" ref=${(el) => items_container = el} />
-	          <div class="campfire-details" ref=${(el) => item_details = el} />
-	          <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
-	        </div>
-	      </div>
-	    </div>
-	  `;
+	const top = createRef();
+
+	const container = (
+		<div class='campfire-panels'>
+			<div class={['campfire-bg', 'current']} ref={background} />
+			<div class='campfire-panel-main'>
+				<div class='campfire' ref={top}>
+					<div class='campfire-intro'>
+						<div class='campfire-intro-span' />
+						<h2 class='music-section-heading'>
+							{tl(trans.your_recent_30_days)}
+						</h2>
+						<div class='campfire-intro-span'>
+							<ViewButtons>
+								<SeeMore blend iconPlacement='left' icon={icons.settings} opens={(
+									<MenuContents>
+										<MenuCheckbox bind='campfire_minimise' />
+									</MenuContents>
+								)}>
+									{tl(trans.settings)}
+								</SeeMore>
+							</ViewButtons>
+						</div>
+					</div>
+					<div class='campfire-items' ref={itemsContainer} />
+					<div class='campfire-details' ref={itemDetails} />
+				</div>
+			</div>
+		</div>
+	);
 
 	page.structure.side.appendChild(
 		<SideActions>
@@ -121,102 +134,118 @@ export function campfire() {
 	const albums: album[] = [];
 	const album_elements: { elem: HTMLElement; index: number }[] = [];
 
-	fetch(
-		`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`,
-	)
-		.then(function (response) {
-			console.log('returned', response, response.text);
+	function open() {
+		fetch(
+			`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`,
+		)
+			.then(function (response) {
+				console.log('returned', response, response.text);
 
-			return response.text();
-		})
-		.then(function (dom) {
-			const doc = new DOMParser().parseFromString(dom, 'text/html');
-			console.log('DOC', doc);
+				return response.text();
+			})
+			.then(function (dom) {
+				const doc = new DOMParser().parseFromString(dom, 'text/html');
+				console.log('DOC', doc);
 
-			const items = doc.querySelectorAll('.chartlist-row');
-			items.forEach((item) => {
-				const image = item.querySelector('.cover-art > img').src;
-				const title =
-					item.querySelector('.chartlist-name > a').textContent;
-				const artist =
-					item.querySelector('.chartlist-artist > a').textContent;
-				const plays = item.querySelector('.chartlist-count-bar-slug')
-					.getAttribute('data-stat-value');
+				const items = doc.querySelectorAll('.chartlist-row');
+				items.forEach((item) => {
+					const image = item.querySelector('.cover-art > img').src;
+					const title =
+						item.querySelector('.chartlist-name > a').textContent;
+					const artist =
+						item.querySelector('.chartlist-artist > a').textContent;
+					const plays = item.querySelector('.chartlist-count-bar-slug')
+						.getAttribute('data-stat-value');
 
-				const corrected_title = romanise(
-					correct_item_by_artist(title, artist),
-				);
-				const corrected_artist = romanise(correct_artist(artist));
+					const corrected_title = romanise(
+						correct_item_by_artist(title, artist),
+					);
+					const corrected_artist = romanise(correct_artist(artist));
 
-				albums.push({
-					image: image.replace('/64s/', '/500x500/'),
-					title,
-					artist,
-					plays,
-					corrected_title,
-					corrected_artist,
+					albums.push({
+						image: image.replace('/64s/', '/500x500/'),
+						title,
+						artist,
+						plays,
+						corrected_title,
+						corrected_artist,
+					});
 				});
-			});
 
-			max_index = albums.length - 1;
+				max_index = albums.length - 1;
 
-			visual_index = max_index + 1;
-			real_index = 0;
+				visual_index = max_index + 1;
+				real_index = 0;
 
-			items_container.style.setProperty(
-				'--max-index',
-				max_index.toString(),
-			);
+				itemsContainer.current.style.setProperty(
+					'--max-index',
+					max_index.toString(),
+				);
 
-			const cloned_albums = [...albums, ...albums, ...albums];
+				const cloned_albums = [...albums, ...albums, ...albums];
 
-			items_container.replaceChildren(
-				<>
-					{cloned_albums.map((album, i) => {
-						const item_index =
-							((i % albums.length) + albums.length) %
-							albums.length;
+				itemsContainer.current.replaceChildren(
+					<>
+						{cloned_albums.map((album, i) => {
+							const item_index =
+								((i % albums.length) + albums.length) %
+								albums.length;
 
-						const elem = (
-							<CampfireItem art={album.image} name={album.corrected_title} index={i} onClick={() => {
-								if (is_wrapping) return;
+							const elem = (
+								<CampfireItem art={album.image} name={album.corrected_title} index={i} onClick={() => {
+									if (is_wrapping) return;
 
-								if (item_index != real_index) {
-									let diff = item_index - real_index;
-									if (diff > (max_index + 1) / 2) {
-										diff -= max_index + 1;
-									} else if (diff < -(max_index + 1) / 2) {
-										diff += max_index + 1;
+									if (item_index != real_index) {
+										let diff = item_index - real_index;
+										if (diff > (max_index + 1) / 2) {
+											diff -= max_index + 1;
+										} else if (diff < -(max_index + 1) / 2) {
+											diff += max_index + 1;
+										}
+
+										set_index(visual_index + diff);
 									}
+								}} />
+							) as HTMLElement
 
-									set_index(visual_index + diff);
-								}
-							}} />
-						) as HTMLElement
+							album_elements.push({ elem, index: item_index });
 
-						album_elements.push({ elem, index: item_index });
+							return elem;
+						})}
+					</>
+				);
 
-						return elem;
-					})}
-				</>
-			);
+				let timeout;
+				top.current.addEventListener('wheel', (e) => {
+					e.preventDefault();
+					if (timeout) return;
 
-			let timeout;
-			campfire_top.addEventListener('wheel', (e) => {
-				e.preventDefault();
-				if (timeout) return;
+					timeout = setTimeout(() => {
+						timeout = null;
+					}, 20);
 
-				timeout = setTimeout(() => {
-					timeout = null;
-				}, 0.15);
+					const direction = Math.sign(e.deltaY);
+					if (direction == 0) return;
+					set_index(visual_index + direction);
+				}, { passive: false });
 
-				const direction = Math.sign(e.deltaY);
-				if (direction == 0) return;
-				set_index(visual_index + direction);
-			}, { passive: false });
+				set_index(visual_index);
+			});
+	}
 
-			set_index(visual_index);
-		});
+	if (useSettings.get('campfire_minimise')) {
+		itemsContainer.current.replaceChildren(
+			<div class='campfire-stub' onClick={() => {
+				itemsContainer.current.innerHTML = '';
+				open();
+			}}>
+				<Icon name={icons.mouse} />
+				<p class='campfire-stub-text'>{tl(trans.click_to_view)}</p>
+			</div>
+		);
+	} else {
+		open();
+	}
 
 	function set_index(index: number) {
 		if (is_wrapping) return;
@@ -226,7 +255,7 @@ export function campfire() {
 		previous_index = visual_index;
 		visual_index = index;
 
-		items_container.style.setProperty(
+		itemsContainer.current.style.setProperty(
 			'--selected-index',
 			visual_index.toString(),
 		);
@@ -250,24 +279,24 @@ export function campfire() {
 			is_wrapping = true;
 
 			setTimeout(() => {
-				items_container.style.setProperty('--trans-toggle', '0');
+				itemsContainer.current.style.setProperty('--trans-toggle', '0');
 
 				visual_index = real_index + max_index + 1;
-				items_container.style.setProperty(
+				itemsContainer.current.style.setProperty(
 					'--selected-index',
 					visual_index.toString(),
 				);
 
-				void items_container.offsetWidth;
+				void itemsContainer.current.offsetWidth;
 
-				items_container.style.setProperty('--trans-toggle', '1');
+				itemsContainer.current.style.setProperty('--trans-toggle', '1');
 				is_wrapping = false;
 			}, 500);
 		}
 
 		const album = albums[real_index];
 
-		current_bg.style.setProperty('background-image', `url(${album.image})`);
+		background.current.style.setProperty('background-image', `url(${album.image})`);
 
 		console.info('album', album);
 
@@ -285,7 +314,7 @@ export function campfire() {
 			);
 		}
 
-		item_details.replaceChildren(
+		itemDetails.current.replaceChildren(
 			<>
 				<a class={['campfire-title', 'smart-title']} href={`${root}music/${sanitise(album.artist)}/${sanitise(album.title)}`} target='_blank'>
 					{formatted_title}

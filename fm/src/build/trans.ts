@@ -12887,6 +12887,9 @@ export const trans = {
 		en: 'Hover to view',
 		pt: 'Passe o mouse para visualizar',
 	},
+	click_to_view: {
+		en: 'Click to view',
+	},
 	collage_style: {
 		en: 'Collage style',
 		pt: 'Estilo colagem',
@@ -12959,6 +12962,9 @@ export const trans = {
 	},
 	lyrics_for_value: {
 		en: 'Lyrics for {v}',
+	},
+	minimise_until_open: {
+		en: 'Open minimised by default',
 	},
 } as const satisfies Record<string, any>;
 
