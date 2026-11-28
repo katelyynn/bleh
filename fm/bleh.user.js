@@ -55716,8 +55716,8 @@ var bleh = (() => {
     if (replace && replace_if_possible) replace_if_possible = false;
     if (replace_if_possible && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (const dialog7 in dialogs) {
-        replace_id = dialog7;
+      for (const dialog8 in dialogs) {
+        replace_id = dialog8;
         break;
       }
     }
@@ -55791,9 +55791,9 @@ var bleh = (() => {
     }
     if (all) {
       log("requested kill all", "window", "info", { dialogs });
-      for (const dialog7 in dialogs) {
+      for (const dialog8 in dialogs) {
         dialog_rm({
-          id: dialog7
+          id: dialog8
         });
       }
       return;
@@ -55801,12 +55801,12 @@ var bleh = (() => {
     if (!id) return;
     if (!page.structure.dialogs) return;
     if (dialogs.hasOwnProperty(id)) {
-      const dialog7 = dialogs[id];
-      if (!page.structure.dialogs.contains(dialog7.instance)) return;
+      const dialog8 = dialogs[id];
+      if (!page.structure.dialogs.contains(dialog8.instance)) return;
       log(`queuing ${id} to kill`, "window");
-      dialog7.instance.classList.add("to-remove");
+      dialog8.instance.classList.add("to-remove");
       setTimeout(function() {
-        page.structure.dialogs.removeChild(dialog7.instance);
+        page.structure.dialogs.removeChild(dialog8.instance);
       }, 400);
       delete dialogs[id];
       if (JSON.stringify(dialogs) == "{}") {
@@ -55850,8 +55850,8 @@ var bleh = (() => {
     let replace_id = "";
     if (replace && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (const dialog7 in dialogs) {
-        replace_id = dialog7;
+      for (const dialog8 in dialogs) {
+        replace_id = dialog8;
         break;
       }
     }
@@ -56682,145 +56682,6 @@ var bleh = (() => {
     return elem;
   }
 
-  // src/components/text/see_more.tsx
-  function SeeMore({
-    ref: ref2,
-    chibi,
-    href,
-    icon: icon4,
-    external = false,
-    onClick,
-    iconPlacement = "right",
-    colourful,
-    blend,
-    className: className2,
-    children,
-    opens,
-    type = "button"
-  }) {
-    const classes = [
-      !blend && "see-more",
-      iconPlacement == "left" && "left-icon",
-      blend && "blend-v2-btn",
-      colourful && "colourful",
-      chibi && "btn chibi-see-more",
-      opens && !icon4 && "select-button link-select",
-      className2 && className2
-    ];
-    if (opens) {
-      iconPlacement = "left";
-    }
-    if (!icon4 && !opens) {
-      if (external) {
-        icon4 = icons.external;
-      } else if (iconPlacement == "left") {
-        icon4 = icons.arrow_left;
-      } else if (iconPlacement == "right") {
-        icon4 = icons.arrow_right;
-      }
-    }
-    let elem;
-    let instance;
-    if (!href && onClick) {
-      elem = /* @__PURE__ */ jsx(
-        "button",
-        {
-          type,
-          class: classes,
-          onClick,
-          "data-see-more": "true",
-          ref: ref2,
-          children: [
-            iconPlacement == "left" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 }),
-            children,
-            iconPlacement == "right" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 })
-          ]
-        }
-      );
-    } else {
-      elem = /* @__PURE__ */ jsx(
-        "a",
-        {
-          class: classes,
-          href,
-          target: external ? "_blank" : void 0,
-          onClick,
-          "data-see-more": "true",
-          ref: ref2,
-          children: [
-            iconPlacement == "left" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 }),
-            children,
-            iconPlacement == "right" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 })
-          ]
-        }
-      );
-    }
-    if (chibi) {
-      hover_tooltip(
-        elem,
-        /* @__PURE__ */ jsx(Tooltip, { children })
-      );
-    }
-    if (opens) {
-      instance = menu_tooltip(
-        elem,
-        opens
-      );
-    }
-    Object.defineProperty(elem, "menu", {
-      get() {
-        return instance;
-      }
-    });
-    return elem;
-  }
-  function SeeMoreGroup({
-    children
-  }) {
-    return /* @__PURE__ */ jsx("div", { class: "see-more-row", children });
-  }
-  function SeeMoreContainer({
-    children
-  }) {
-    return /* @__PURE__ */ jsx("div", { class: "see-more-cont", children });
-  }
-  function PanelTop({
-    margin = true,
-    children
-  }) {
-    const elem = /* @__PURE__ */ jsx("div", { class: ["top-container", !margin && "no-margin"], children });
-    function update() {
-      elem.setAttribute("data-theme", useSettings.get("theme"));
-    }
-    update();
-    useSettings.on("theme", update);
-    return elem;
-  }
-  function ViewButtons({
-    accompany,
-    blend = true,
-    blendV2 = true,
-    children
-  }) {
-    return /* @__PURE__ */ jsx(
-      "div",
-      {
-        class: [
-          "view-buttons",
-          blend && "blend",
-          blendV2 && "blend-v2",
-          accompany && "accompany"
-        ],
-        children
-      }
-    );
-  }
-  function BlendText({
-    children
-  }) {
-    return /* @__PURE__ */ jsx("p", { class: "blend-text", children });
-  }
-
   // src/components/dialog/external_link.tsx
   function external_url_prompt(url, dangerous = false) {
     log(
@@ -56832,77 +56693,57 @@ var bleh = (() => {
     const hostname = link.hostname;
     const path = link.pathname + link.search + link.hash;
     const trust_site = createRef();
-    dialog({
+    modal({
       id: "external_url",
-      type: "leaving_site",
+      title: !dangerous ? tl2(trans.leaving_site.name) : tl2(trans.leaving_site_dangerous.name),
       body: /* @__PURE__ */ jsx(Fragment, { children: [
-        /* @__PURE__ */ jsx("div", { class: ["modal-vertical-inner", "leaving-site-inner"], children: [
-          !dangerous ? /* @__PURE__ */ jsx(Fragment, { children: [
-            /* @__PURE__ */ jsx("h1", { children: tl2(trans.leaving_site.name) }),
-            /* @__PURE__ */ jsx("p", { children: tl2(trans.leaving_site.body) })
-          ] }) : /* @__PURE__ */ jsx(Fragment, { children: [
-            /* @__PURE__ */ jsx("h1", { children: tl2(trans.leaving_site_dangerous.name) }),
-            /* @__PURE__ */ jsx("p", { children: tl2(trans.leaving_site_dangerous.body) })
-          ] }),
-          /* @__PURE__ */ jsx(
-            "div",
-            {
-              class: ["external-warn-input"],
-              "data-dangerous": String(dangerous),
-              children: [
-                /* @__PURE__ */ jsx("span", { class: "scheme", children: [
-                  scheme,
-                  "//"
-                ] }),
-                /* @__PURE__ */ jsx("span", { class: "hostname", children: hostname || path }),
-                path != "/" && hostname ? /* @__PURE__ */ jsx("span", { class: "path", children: path }) : ""
-              ]
+        /* @__PURE__ */ jsx("p", { children: tl2(trans.leaving_site.body) }),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            class: ["external-warn-input"],
+            "data-dangerous": String(dangerous),
+            children: [
+              /* @__PURE__ */ jsx("span", { class: "scheme", children: [
+                scheme,
+                "//"
+              ] }),
+              /* @__PURE__ */ jsx("span", { class: "hostname", children: hostname || path }),
+              path != "/" && hostname ? /* @__PURE__ */ jsx("span", { class: "path", children: path }) : ""
+            ]
+          }
+        ),
+        hostname != "" && /* @__PURE__ */ jsx(
+          SettingCheckbox,
+          {
+            name: tl2(trans.leaving_site_checkbox, {
+              v: hostname
+            }),
+            standalone: true,
+            ref: trust_site
+          }
+        )
+      ] }),
+      actions: [
+        {
+          primary: true,
+          onClick: () => {
+            if (trust_site.current.value) {
+              useSettings.append("trusted_sites", hostname);
+              log(
+                `added ${hostname} to trusted sites`,
+                "markdown"
+              );
             }
-          ),
-          hostname != "" && /* @__PURE__ */ jsx(
-            SettingCheckbox,
-            {
-              name: tl2(trans.leaving_site_checkbox, {
-                v: hostname
-              }),
-              standalone: true,
-              ref: trust_site
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsx(ModalFooter, { children: [
-          /* @__PURE__ */ jsx(
-            SeeMore,
-            {
-              iconPlacement: "left",
-              icon: icons.x,
-              onClick: () => dialog_rm({ id: "external_url" }),
-              children: tl2(trans.cancel)
-            }
-          ),
-          /* @__PURE__ */ jsx(
-            Button,
-            {
-              primary: true,
-              onClick: () => {
-                if (trust_site.current.value) {
-                  useSettings.append("trusted_sites", hostname);
-                  log(
-                    `added ${hostname} to trusted sites`,
-                    "markdown"
-                  );
-                }
-                open(url, "_blank");
-                dialog_rm({ id: "external_url" });
-              },
-              children: [
-                !dangerous ? tl2(trans.visit) : tl2(trans.open),
-                /* @__PURE__ */ jsx(Icon, { name: icons.external })
-              ]
-            }
-          )
-        ] })
-      ] })
+            open(url, "_blank");
+            dialog_rm({ id: "external_url" });
+          },
+          children: /* @__PURE__ */ jsx(Fragment, { children: [
+            !dangerous ? tl2(trans.visit) : tl2(trans.open),
+            /* @__PURE__ */ jsx(Icon, { name: icons.external })
+          ] })
+        }
+      ]
     });
   }
 
@@ -58340,6 +58181,145 @@ var bleh = (() => {
       hostname ? /* @__PURE__ */ jsx("span", { class: "hostname", children: hostname }) : /* @__PURE__ */ jsx("span", { class: "hostname", children: path }),
       path != "/" && hostname && /* @__PURE__ */ jsx("span", { class: "path", children: path })
     ] }) });
+  }
+
+  // src/components/text/see_more.tsx
+  function SeeMore({
+    ref: ref2,
+    chibi,
+    href,
+    icon: icon4,
+    external = false,
+    onClick,
+    iconPlacement = "right",
+    colourful,
+    blend,
+    className: className2,
+    children,
+    opens,
+    type = "button"
+  }) {
+    const classes = [
+      !blend && "see-more",
+      iconPlacement == "left" && "left-icon",
+      blend && "blend-v2-btn",
+      colourful && "colourful",
+      chibi && "btn chibi-see-more",
+      opens && !icon4 && "select-button link-select",
+      className2 && className2
+    ];
+    if (opens) {
+      iconPlacement = "left";
+    }
+    if (!icon4 && !opens) {
+      if (external) {
+        icon4 = icons.external;
+      } else if (iconPlacement == "left") {
+        icon4 = icons.arrow_left;
+      } else if (iconPlacement == "right") {
+        icon4 = icons.arrow_right;
+      }
+    }
+    let elem;
+    let instance;
+    if (!href && onClick) {
+      elem = /* @__PURE__ */ jsx(
+        "button",
+        {
+          type,
+          class: classes,
+          onClick,
+          "data-see-more": "true",
+          ref: ref2,
+          children: [
+            iconPlacement == "left" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 }),
+            children,
+            iconPlacement == "right" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 })
+          ]
+        }
+      );
+    } else {
+      elem = /* @__PURE__ */ jsx(
+        "a",
+        {
+          class: classes,
+          href,
+          target: external ? "_blank" : void 0,
+          onClick,
+          "data-see-more": "true",
+          ref: ref2,
+          children: [
+            iconPlacement == "left" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 }),
+            children,
+            iconPlacement == "right" && icon4 && /* @__PURE__ */ jsx(Icon, { name: icon4 })
+          ]
+        }
+      );
+    }
+    if (chibi) {
+      hover_tooltip(
+        elem,
+        /* @__PURE__ */ jsx(Tooltip, { children })
+      );
+    }
+    if (opens) {
+      instance = menu_tooltip(
+        elem,
+        opens
+      );
+    }
+    Object.defineProperty(elem, "menu", {
+      get() {
+        return instance;
+      }
+    });
+    return elem;
+  }
+  function SeeMoreGroup({
+    children
+  }) {
+    return /* @__PURE__ */ jsx("div", { class: "see-more-row", children });
+  }
+  function SeeMoreContainer({
+    children
+  }) {
+    return /* @__PURE__ */ jsx("div", { class: "see-more-cont", children });
+  }
+  function PanelTop({
+    margin = true,
+    children
+  }) {
+    const elem = /* @__PURE__ */ jsx("div", { class: ["top-container", !margin && "no-margin"], children });
+    function update() {
+      elem.setAttribute("data-theme", useSettings.get("theme"));
+    }
+    update();
+    useSettings.on("theme", update);
+    return elem;
+  }
+  function ViewButtons({
+    accompany,
+    blend = true,
+    blendV2 = true,
+    children
+  }) {
+    return /* @__PURE__ */ jsx(
+      "div",
+      {
+        class: [
+          "view-buttons",
+          blend && "blend",
+          blendV2 && "blend-v2",
+          accompany && "accompany"
+        ],
+        children
+      }
+    );
+  }
+  function BlendText({
+    children
+  }) {
+    return /* @__PURE__ */ jsx("p", { class: "blend-text", children });
   }
 
   // src/components/text/sub.tsx
